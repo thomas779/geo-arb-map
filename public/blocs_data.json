@@ -576,7 +576,8 @@
       ],
       "grants": "Ages 18-35 (vs 18-30 standard), 3 years (vs 2), no ballot/cap for AU-CA-NZ, work in almost any job, no sponsor. Reciprocal: UK citizens get Australia's Working Holiday to 35, 3 yrs, no farm-work requirement.",
       "limits": "YMS time does NOT count toward Indefinite Leave to Remain; one use per lifetime; no dependants. This is the closest existing thing to 'CANZUK', which remains an advocacy proposal with no treaty.",
-      "leads_to_settlement": false
+      "leads_to_settlement": false,
+      "allocation": "right"
     },
     {
       "id": "uk_ancestry",
