@@ -117,8 +117,8 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className={cn(rowBase, state.bloc === b.id && rowSelected)}
-                  onClick={() => onBloc(state.bloc === b.id ? null : b.id)}
+                  className={cn(rowBase, state.blocs.includes(b.id) && rowSelected)}
+                  onClick={() => onBloc(b.id)}
                 >
                   <span className="chip" style={{ background: displayColor(b.color, dark) }} />
                   <span className="min-w-0 flex-1 truncate">{b.name}</span>
@@ -170,7 +170,7 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
         className="mx-1.5 mt-4 text-muted-foreground"
         onClick={() => onBloc(null)}
       >
-        Show all (count overlay)
+        Clear selection (count overlay)
       </Button>
     </aside>
   );

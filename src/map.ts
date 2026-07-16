@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import type { BlocsData, AppState, Bloc } from './types';
-import { displayColor, isDarkTheme } from './lib/color';
+import { blendColors, displayColor, isDarkTheme } from './lib/color';
 
 interface MicroState {
   iso: string;
@@ -243,17 +243,19 @@ function resetZoom(): void {
 
 /** Frame the current selection; called by render() when focus changes. */
 function frameSelection(state: AppState, data: BlocsData): void {
-  const focus = state.bloc ?? (state.lane ? `lane:${state.lane}` : null);
+  const focus = state.blocs.length
+    ? state.blocs.join(',')
+    : (state.lane ? `lane:${state.lane}` : null);
   if (focus === _lastFocus) return;
   _lastFocus = focus;
 
-  if (state.bloc) {
-    const b = data.blocs.find(x => x.id === state.bloc);
-    if (!b) return resetZoom();
-    zoomToIsos([
+  if (state.blocs.length) {
+    const selected = data.blocs.filter(x => state.blocs.includes(x.id));
+    if (!selected.length) return resetZoom();
+    zoomToIsos(selected.flatMap(b => [
       ...b.members.map(m => m.iso_n3),
       ...(b.former_members ?? []).map(m => m.iso_n3),
-    ]);
+    ]));
   } else if (state.lane) {
     const l = data.bilateral_lanes.find(x => x.id === state.lane);
     if (!l) return resetZoom();
@@ -299,18 +301,30 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
     }
     return 'var(--map-land)';
   }
-  if (state.bloc) {
-    const ab = data.blocs.find(b => b.id === state.bloc);
-    if (!ab) return 'var(--map-land)';
-    const blocColor = displayColor(ab.color, dark);
-    if (ab.sub_bloc?.members_iso.includes(iso)) {
-      const c = d3.color(blocColor);
-      return (dark ? c?.brighter(0.7) : c?.brighter(0.4))?.formatHex() ?? blocColor;
+  if (state.blocs.length) {
+    const selected = data.blocs.filter(b => state.blocs.includes(b.id));
+    const containing = selected.filter(b => b.members.some(m => m.iso_n3 === iso));
+
+    if (containing.length >= 2) {
+      // Overlap country: Lab-blend of every containing bloc's color
+      return blendColors(containing.map(b => displayColor(b.color, dark)));
     }
-    if (ab.members.some(m => m.iso_n3 === iso)) return blocColor;
-    if (ab.former_members?.some(m => m.iso_n3 === iso)) {
-      const c = d3.color(blocColor);
-      return (dark ? c?.darker(1.6) : c?.brighter(1.1))?.formatHex() ?? '#888';
+    if (containing.length === 1) {
+      const ab = containing[0];
+      const blocColor = displayColor(ab.color, dark);
+      if (ab.sub_bloc?.members_iso.includes(iso)) {
+        const c = d3.color(blocColor);
+        return (dark ? c?.brighter(0.7) : c?.brighter(0.4))?.formatHex() ?? blocColor;
+      }
+      return blocColor;
+    }
+    // Former members only render in single-bloc focus (avoids ambiguity in compare mode)
+    if (selected.length === 1) {
+      const ab = selected[0];
+      if (ab.former_members?.some(m => m.iso_n3 === iso)) {
+        const c = d3.color(displayColor(ab.color, dark));
+        return (dark ? c?.darker(1.6) : c?.brighter(1.1))?.formatHex() ?? '#888';
+      }
     }
     return 'var(--map-land)';
   }
@@ -331,11 +345,10 @@ function paintAll(state: AppState, data: BlocsData): void {
   _gDots.selectAll<SVGCircleElement, MicroState>('.micro-dot')
     .attr('fill', d => colorForIso(d.iso, state, data))
     .attr('stroke', d => {
-      if (!state.bloc) return 'none';
-      const ab = data.blocs.find(b => b.id === state.bloc);
-      return (ab && ab.members.some(m => m.iso_n3 === d.iso))
-        ? 'var(--map-accent)'
-        : 'none';
+      if (!state.blocs.length) return 'none';
+      const inSelected = data.blocs.some(b =>
+        state.blocs.includes(b.id) && b.members.some(m => m.iso_n3 === d.iso));
+      return inSelected ? 'var(--map-accent)' : 'none';
     });
 }
 

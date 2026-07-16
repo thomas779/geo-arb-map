@@ -110,7 +110,8 @@ export interface BlocsData {
 
 export interface AppState {
   view: 'map' | 'stacking';
-  bloc: string | null;
+  /** Multi-select compare: countries in 2+ selected blocs render blended. */
+  blocs: string[];
   lane: string | null;
   country: string | null;
   countryName: string | null;

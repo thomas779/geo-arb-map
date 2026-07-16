@@ -13,7 +13,7 @@ import { useTheme } from '@/components/theme-provider';
 
 const initialState: AppState = {
   view: 'map',
-  bloc: null,
+  blocs: [],
   lane: null,
   country: null,
   countryName: null,
@@ -40,10 +40,20 @@ export default function App() {
     setState(s => ({ ...s, ...p }));
   }, []);
 
-  const selectBloc = useCallback((id: string | null) =>
-    patch({ bloc: id, lane: null, country: null, countryName: null }), [patch]);
+  /** Toggle a bloc in the compare set; null clears the whole selection. */
+  const toggleBloc = useCallback((id: string | null) => {
+    setState(s => ({
+      ...s,
+      blocs: id === null
+        ? []
+        : s.blocs.includes(id) ? s.blocs.filter(b => b !== id) : [...s.blocs, id],
+      lane: null,
+      country: null,
+      countryName: null,
+    }));
+  }, []);
   const selectLane = useCallback((id: string | null) =>
-    patch({ lane: id, bloc: null, country: null, countryName: null }), [patch]);
+    patch({ lane: id, blocs: [], country: null, countryName: null }), [patch]);
   const selectView = useCallback((v: 'map' | 'stacking') =>
     patch({ view: v }), [patch]);
   const selectCountry = useCallback((iso: string, name: string) =>
@@ -54,7 +64,7 @@ export default function App() {
     if (blocId === null) {
       patch({ view: 'map' });
     } else {
-      patch({ view: 'map', bloc: blocId, lane: null, country: null, countryName: null });
+      patch({ view: 'map', blocs: [blocId], lane: null, country: null, countryName: null });
     }
   }, [patch]);
 
@@ -115,7 +125,7 @@ export default function App() {
           <Sidebar
             data={data}
             state={state}
-            onBloc={selectBloc}
+            onBloc={toggleBloc}
             onLane={selectLane}
             onView={selectView}
           />
