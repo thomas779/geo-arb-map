@@ -3,6 +3,8 @@ import { Moon, Sun } from 'lucide-react';
 import type { AppState, BlocsData } from './types';
 import * as url from './url';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
@@ -58,25 +60,55 @@ export default function App() {
 
   return (
     <div className="flex h-screen flex-col overflow-hidden">
-      <header className="flex shrink-0 flex-wrap items-baseline gap-4 border-b px-5 py-3">
-        <h1 className="text-[22px] font-bold tracking-[0.2px]">Settlement Blocs</h1>
-        <span className="text-xs text-muted-foreground">
-          Where one status unlocks many countries — TR / PR / CIT rights per bloc.
+      <header className="flex shrink-0 items-center gap-4 border-b px-5 py-3">
+        <div className="flex min-w-0 items-baseline gap-3">
+          <h1 className="whitespace-nowrap text-[22px] font-bold tracking-[0.2px]">Settlement Blocs</h1>
+          <span className="hidden truncate text-xs text-muted-foreground md:inline">
+            Where one status unlocks many countries
+          </span>
+        </div>
+        <div className="ml-auto flex shrink-0 items-center gap-2">
           {data && (
-            <span className="ml-1.5 text-[11px] opacity-80">
-              Last verified <span className="font-mono">{data.meta.last_verified}</span> · {data.meta.disclaimer}
-            </span>
+            <>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Badge variant="outline" className="cursor-help text-[10px] text-muted-foreground">
+                    TR · PR · CIT
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className="max-w-[300px]">
+                  <div className="flex flex-col gap-1 text-xs">
+                    <span><b>TR</b> — {data.meta.tier_legend.TR}</span>
+                    <span><b>PR</b> — {data.meta.tier_legend.PR}</span>
+                    <span><b>CIT</b> — {data.meta.tier_legend.CIT}</span>
+                  </div>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Badge variant="destructive" className="cursor-help text-[10px]">
+                    ⚠ Not legal advice
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent side="bottom" className="max-w-[300px] text-xs">
+                  {data.meta.disclaimer}
+                </TooltipContent>
+              </Tooltip>
+              <span className="hidden font-mono text-[10.5px] text-muted-foreground lg:inline">
+                verified {data.meta.last_verified}
+              </span>
+            </>
           )}
-        </span>
-        <Button
-          variant="ghost"
-          size="icon-sm"
-          className="ml-auto self-center text-muted-foreground"
-          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-        >
-          {theme === 'dark' ? <Sun /> : <Moon />}
-        </Button>
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            className="text-muted-foreground"
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          >
+            {theme === 'dark' ? <Sun /> : <Moon />}
+          </Button>
+        </div>
       </header>
       <main className="flex min-h-0 flex-1">
         {data && (
