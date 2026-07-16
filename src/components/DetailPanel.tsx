@@ -143,7 +143,7 @@ export function DetailPanel({ data, state, onClose }: Props) {
     : 'No mapped bloc membership';
 
   return (
-    <section className="w-[330px] shrink-0 overflow-y-auto border-l px-4 pt-4 pb-8">
+    <section className="max-md:bg-background max-md:absolute max-md:inset-y-0 max-md:right-0 max-md:z-20 w-full overflow-y-auto border-l px-4 pt-4 pb-8 max-md:max-w-[360px] md:w-[330px] md:shrink-0">
       <div className="flex items-start justify-between gap-2">
         <h2 className="text-xl font-semibold">{countryName}</h2>
         <Button variant="ghost" size="sm" className="text-muted-foreground" onClick={onClose}>

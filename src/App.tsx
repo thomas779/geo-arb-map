@@ -1,10 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+import { Info, Menu, Moon, Sun } from 'lucide-react';
 import type { AppState, BlocsData } from './types';
 import * as url from './url';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
@@ -127,11 +128,30 @@ export default function App() {
 
   return (
     <div className="flex h-screen flex-col overflow-hidden">
-      <header className="flex shrink-0 items-center gap-4 border-b px-5 py-3">
+      <header className="flex shrink-0 items-center gap-3 border-b px-3 py-3 sm:px-5">
+        {data && (
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon-sm" className="md:hidden" aria-label="Open bloc list">
+                <Menu />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[300px] p-0">
+              <SheetTitle className="sr-only">Blocs and lanes</SheetTitle>
+              <Sidebar
+                data={data}
+                state={state}
+                onBloc={toggleBloc}
+                onLane={selectLane}
+                onView={selectView}
+              />
+            </SheetContent>
+          </Sheet>
+        )}
         <div className="flex min-w-0 items-baseline gap-3">
           <h1 className="whitespace-nowrap text-[22px] font-bold tracking-[0.2px]">Settlement Blocs</h1>
           <span className="hidden truncate text-xs text-muted-foreground md:inline">
-            Where one status unlocks many countries
+            One flag, many countries
           </span>
         </div>
         <div className="ml-auto flex shrink-0 items-center gap-2">
@@ -139,7 +159,7 @@ export default function App() {
             <>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Badge variant="outline" className="cursor-help text-[10px] text-muted-foreground">
+                  <Badge variant="outline" className="hidden cursor-help text-[10px] text-muted-foreground sm:inline-flex">
                     TR · PR · CIT
                   </Badge>
                 </TooltipTrigger>
@@ -153,17 +173,16 @@ export default function App() {
               </Tooltip>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Badge variant="destructive" className="cursor-help text-[10px]">
-                    ⚠ Not legal advice
+                  <Badge variant="outline" className="cursor-help gap-1 text-[10px] text-muted-foreground">
+                    <Info className="size-3" aria-hidden />
+                    <span className="hidden sm:inline">Research atlas — not legal advice</span>
+                    <span className="sm:hidden">Not legal advice</span>
                   </Badge>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="max-w-[300px] text-xs">
                   {data.meta.disclaimer}
                 </TooltipContent>
               </Tooltip>
-              <span className="hidden font-mono text-[10.5px] text-muted-foreground lg:inline">
-                verified {data.meta.last_verified}
-              </span>
             </>
           )}
           <Button
@@ -179,18 +198,36 @@ export default function App() {
       </header>
       <main className="flex min-h-0 flex-1">
         {data && (
-          <Sidebar
-            data={data}
-            state={state}
-            onBloc={toggleBloc}
-            onLane={selectLane}
-            onView={selectView}
-          />
+          <div className="hidden w-[265px] shrink-0 border-r md:block">
+            <Sidebar
+              data={data}
+              state={state}
+              onBloc={toggleBloc}
+              onLane={selectLane}
+              onView={selectView}
+            />
+          </div>
         )}
         <div id="map-wrap" className="relative min-w-0 flex-1 overflow-hidden">
           <WorldMap data={data} state={state} theme={theme} profile={profile} onSelect={selectCountry} />
           {data && state.view === 'stacking' && (
             <StackingView data={data} onBlocSelect={backToMapWithBloc} profile={profile} onProfileChange={changeProfile} />
+          )}
+          {data && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  className="absolute right-3 bottom-3 z-10 flex size-5 cursor-help items-center justify-center"
+                  aria-label={`Dataset verified ${data.meta.last_verified}`}
+                >
+                  <span className="absolute size-2.5 rounded-full bg-emerald-500/40 motion-safe:animate-ping" />
+                  <span className="relative size-2 rounded-full bg-emerald-500" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="left" className="text-xs">
+                Dataset verified {data.meta.last_verified}
+              </TooltipContent>
+            </Tooltip>
           )}
         </div>
         {data && state.country && (

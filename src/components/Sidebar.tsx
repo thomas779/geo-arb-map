@@ -5,6 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 import { cn } from '@/lib/utils';
 import { displayColor } from '@/lib/color';
 import { useTheme } from '@/components/theme-provider';
@@ -56,23 +62,20 @@ interface Props {
 }
 
 function Swatch({ color, selected }: { color: string; selected: boolean }) {
+  // Own layout classes (no .chip): inline-block + fixed w/h fought the flex
+  // centering, leaving the check pinned to a corner.
   return (
     <span
-      className="chip flex items-center justify-center transition-transform duration-150"
-      style={{ background: color, transform: selected ? 'scale(1.15)' : undefined }}
+      className="inline-flex size-3.5 shrink-0 items-center justify-center rounded-[4px] transition-transform duration-150"
+      style={{ background: color, transform: selected ? 'scale(1.12)' : undefined }}
     >
-      {selected && <Check className="size-2.5 text-white" strokeWidth={3.5} />}
+      {selected && <Check className="size-2.5 text-white" strokeWidth={3.5} aria-hidden />}
     </span>
   );
 }
 
-function CatLabel({ children }: { children: string }) {
-  return (
-    <div className="mx-1.5 mt-4 mb-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-      {children}
-    </div>
-  );
-}
+const catTrigger =
+  'px-1.5 py-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground hover:no-underline hover:text-foreground';
 
 function RowTooltip({ label, children }: { label: string; children: React.ReactNode }) {
   return (
@@ -95,8 +98,13 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
     ['Ancestry & diaspora routes', data.bilateral_lanes.filter(l => l.beneficiaries.length === 0 && matches(l.name))],
   ];
 
+  // Bloc categories open by default; lane groups collapsed (they're the long
+  // tail). An active search force-opens everything so matches are visible.
+  const allSections = [...CATEGORIES.map(([c]) => c as string), ...laneGroups.map(([label]) => label)];
+  const [openSections, setOpenSections] = useState<string[]>(CATEGORIES.map(([c]) => c));
+
   return (
-    <aside className="w-[265px] shrink-0 overflow-y-auto border-r px-3 pt-3 pb-6">
+    <aside className="h-full w-full overflow-y-auto px-3 pt-3 pb-6">
       <Button
         variant="ghost"
         className={cn(rowBase, 'h-9', state.view === 'stacking' && rowSelected)}
@@ -118,55 +126,70 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
         />
       </div>
 
-      {CATEGORIES.map(([cat, label]) => {
-        const blocs = data.blocs.filter(b => b.category === cat && matches(b.name));
-        if (!blocs.length) return null;
-        return (
-          <div key={cat}>
-            <CatLabel>{label}</CatLabel>
-            {blocs.map(b => (
-              <RowTooltip key={b.id} label={b.name}>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={cn(rowBase, state.blocs.includes(b.id) && rowSelected)}
-                  onClick={() => onBloc(b.id)}
-                >
-                  <Swatch color={displayColor(b.color, dark)} selected={state.blocs.includes(b.id)} />
-                  <span className="min-w-0 flex-1 truncate">{b.name}</span>
-                  <Badge variant="outline" className="text-[10px] tabular-nums text-muted-foreground">
-                    {b.members.length}
-                  </Badge>
-                </Button>
-              </RowTooltip>
-            ))}
-          </div>
-        );
-      })}
+      <Accordion
+        type="multiple"
+        value={q ? allSections : openSections}
+        onValueChange={setOpenSections}
+        className="w-full"
+      >
+        {CATEGORIES.map(([cat, label]) => {
+          const blocs = data.blocs.filter(b => b.category === cat && matches(b.name));
+          if (!blocs.length) return null;
+          return (
+            <AccordionItem key={cat} value={cat} className="border-b-0">
+              <AccordionTrigger className={catTrigger}>
+                {label} ({blocs.length})
+              </AccordionTrigger>
+              <AccordionContent className="pb-1">
+                {blocs.map(b => (
+                  <RowTooltip key={b.id} label={b.name}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className={cn(rowBase, state.blocs.includes(b.id) && rowSelected)}
+                      onClick={() => onBloc(b.id)}
+                    >
+                      <Swatch color={displayColor(b.color, dark)} selected={state.blocs.includes(b.id)} />
+                      <span className="min-w-0 flex-1 truncate">{b.name}</span>
+                      <Badge variant="outline" className="text-[10px] tabular-nums text-muted-foreground">
+                        {b.members.length}
+                      </Badge>
+                    </Button>
+                  </RowTooltip>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          );
+        })}
 
-      {laneGroups.map(([label, lanes]) =>
-        lanes.length ? (
-          <div key={label}>
-            <CatLabel>{label}</CatLabel>
-            {lanes.map(l => (
-              <RowTooltip key={l.id} label={`${l.name} → ${l.destination.name}`}>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={cn(rowBase, state.lane === l.id && rowSelected)}
-                  onClick={() => onLane(state.lane === l.id ? null : l.id)}
-                >
-                  <Swatch color={displayColor(l.color, dark)} selected={state.lane === l.id} />
-                  <span className="min-w-0 flex-1 truncate">{l.name}</span>
-                  <Badge variant="outline" className="whitespace-nowrap text-[10px] text-muted-foreground">
-                    → {destShort(l)}
-                  </Badge>
-                </Button>
-              </RowTooltip>
-            ))}
-          </div>
-        ) : null,
-      )}
+        {laneGroups.map(([label, lanes]) =>
+          lanes.length ? (
+            <AccordionItem key={label} value={label} className="border-b-0">
+              <AccordionTrigger className={catTrigger}>
+                {label} ({lanes.length})
+              </AccordionTrigger>
+              <AccordionContent className="pb-1">
+                {lanes.map(l => (
+                  <RowTooltip key={l.id} label={`${l.name} → ${l.destination.name}`}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className={cn(rowBase, state.lane === l.id && rowSelected)}
+                      onClick={() => onLane(state.lane === l.id ? null : l.id)}
+                    >
+                      <Swatch color={displayColor(l.color, dark)} selected={state.lane === l.id} />
+                      <span className="min-w-0 flex-1 truncate">{l.name}</span>
+                      <Badge variant="outline" className="whitespace-nowrap text-[10px] text-muted-foreground">
+                        → {destShort(l)}
+                      </Badge>
+                    </Button>
+                  </RowTooltip>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          ) : null,
+        )}
+      </Accordion>
 
       {q &&
         !CATEGORIES.some(([cat]) => data.blocs.some(b => b.category === cat && matches(b.name))) &&
