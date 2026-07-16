@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settlement Blocs — Global Mobility Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>Settlement Blocs</h1>
+    <span id="header-meta" class="sub">Where one status unlocks many countries — TR / PR / CIT rights per bloc.</span>
+  </header>
+  <main>
+    <aside id="sidebar"></aside>
+    <div id="map-wrap">
+      <svg id="map"></svg>
+      <div id="stacking-view"></div>
+      <div id="hint">scroll to zoom · drag to pan · click a country</div>
+      <div id="tooltip"></div>
+    </div>
+    <section id="detail"></section>
+  </main>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
