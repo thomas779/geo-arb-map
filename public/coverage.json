@@ -1,6 +1,6 @@
 {
   "meta": {
-    "description": "Research-coverage matrix: which countries have been checked for privileged settlement arrangements. States: verified | verified_none | partial | unchecked.",
+    "description": "Research-coverage matrix over the canonical registry (M49-style sovereigns + territory supplement): which jurisdictions have been checked for privileged settlement arrangements. States: verified | verified_none | partial | unchecked.",
     "last_updated": "2026-07-16",
     "counts": {
       "unchecked": 69,
@@ -10,26 +10,30 @@
   },
   "rows": [
     {
+      "iso_n3": "000",
+      "name": "Somaliland",
+      "type": "sovereign",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
       "iso_n3": "004",
       "name": "Afghanistan",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "008",
       "name": "Albania",
-      "state": "unchecked",
-      "last_checked": null
-    },
-    {
-      "iso_n3": "010",
-      "name": "Antarctica",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "012",
       "name": "Algeria",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -37,12 +41,14 @@
     {
       "iso_n3": "016",
       "name": "American Samoa",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "020",
       "name": "Andorra",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -50,6 +56,7 @@
     {
       "iso_n3": "024",
       "name": "Angola",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -57,6 +64,7 @@
     {
       "iso_n3": "028",
       "name": "Antigua and Barb.",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -64,6 +72,7 @@
     {
       "iso_n3": "031",
       "name": "Azerbaijan",
+      "type": "sovereign",
       "state": "verified_none",
       "last_checked": "2026-07-16",
       "note": "Azerbaijan: Turkey-Azerbaijan is visa-free/ID-card travel only; no settlement lane verified. No Turan visa instrument in force.",
@@ -74,6 +83,7 @@
     {
       "iso_n3": "032",
       "name": "Argentina",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -81,6 +91,7 @@
     {
       "iso_n3": "036",
       "name": "Australia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -88,6 +99,7 @@
     {
       "iso_n3": "040",
       "name": "Austria",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -95,12 +107,14 @@
     {
       "iso_n3": "044",
       "name": "Bahamas",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "048",
       "name": "Bahrain",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -108,12 +122,14 @@
     {
       "iso_n3": "050",
       "name": "Bangladesh",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "051",
       "name": "Armenia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -121,6 +137,7 @@
     {
       "iso_n3": "052",
       "name": "Barbados",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -128,6 +145,7 @@
     {
       "iso_n3": "056",
       "name": "Belgium",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -135,6 +153,7 @@
     {
       "iso_n3": "060",
       "name": "Bermuda",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -142,6 +161,7 @@
     {
       "iso_n3": "064",
       "name": "Bhutan",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -149,6 +169,7 @@
     {
       "iso_n3": "068",
       "name": "Bolivia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -156,18 +177,21 @@
     {
       "iso_n3": "070",
       "name": "Bosnia and Herz.",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "072",
       "name": "Botswana",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "076",
       "name": "Brazil",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -175,6 +199,7 @@
     {
       "iso_n3": "084",
       "name": "Belize",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -182,12 +207,14 @@
     {
       "iso_n3": "086",
       "name": "Br. Indian Ocean Ter.",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "090",
       "name": "Solomon Is.",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -195,6 +222,7 @@
     {
       "iso_n3": "092",
       "name": "British Virgin Is.",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -202,6 +230,7 @@
     {
       "iso_n3": "096",
       "name": "Brunei",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -209,6 +238,7 @@
     {
       "iso_n3": "100",
       "name": "Bulgaria",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -216,6 +246,7 @@
     {
       "iso_n3": "104",
       "name": "Myanmar",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -223,6 +254,7 @@
     {
       "iso_n3": "108",
       "name": "Burundi",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -230,6 +262,7 @@
     {
       "iso_n3": "112",
       "name": "Belarus",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -237,6 +270,7 @@
     {
       "iso_n3": "116",
       "name": "Cambodia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -244,6 +278,7 @@
     {
       "iso_n3": "120",
       "name": "Cameroon",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Cameroon: France package real but 2009 accord narrower (pending_verification). CEMAC travel implemented; residence/establishment not.",
@@ -254,6 +289,7 @@
     {
       "iso_n3": "124",
       "name": "Canada",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -261,6 +297,7 @@
     {
       "iso_n3": "132",
       "name": "Cabo Verde",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -268,6 +305,7 @@
     {
       "iso_n3": "136",
       "name": "Cayman Is.",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -275,6 +313,7 @@
     {
       "iso_n3": "140",
       "name": "Central African Rep.",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Central African Republic: CEMAC biometric-passport travel partially implemented; no settlement rights in force.",
@@ -285,12 +324,14 @@
     {
       "iso_n3": "144",
       "name": "Sri Lanka",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "148",
       "name": "Chad",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Chad: CEMAC travel partially implemented; no settlement rights in force.",
@@ -301,6 +342,7 @@
     {
       "iso_n3": "152",
       "name": "Chile",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -308,6 +350,7 @@
     {
       "iso_n3": "156",
       "name": "China",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -315,6 +358,7 @@
     {
       "iso_n3": "158",
       "name": "Taiwan",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party). Taiwan: HK/Macau and Mainland-spouse channels confirmed in primary law, but post-2020 operational tightening imprecise (pending_verification).",
@@ -325,6 +369,7 @@
     {
       "iso_n3": "170",
       "name": "Colombia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -332,12 +377,14 @@
     {
       "iso_n3": "174",
       "name": "Comoros",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "178",
       "name": "Congo",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Congo: France-Congo accords could not be verified at settlement grade in this sweep; may exist as narrower labor channels.",
@@ -348,6 +395,7 @@
     {
       "iso_n3": "180",
       "name": "Dem. Rep. Congo",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -355,6 +403,7 @@
     {
       "iso_n3": "184",
       "name": "Cook Is.",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -362,12 +411,14 @@
     {
       "iso_n3": "188",
       "name": "Costa Rica",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "191",
       "name": "Croatia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -375,12 +426,14 @@
     {
       "iso_n3": "192",
       "name": "Cuba",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "196",
       "name": "Cyprus",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -388,6 +441,7 @@
     {
       "iso_n3": "203",
       "name": "Czechia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -395,6 +449,7 @@
     {
       "iso_n3": "204",
       "name": "Benin",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party). Benin: 2007 France accord derogates from CESEDA but covers work/study channels, not settlement-grade rights.",
@@ -405,6 +460,7 @@
     {
       "iso_n3": "208",
       "name": "Denmark",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -412,6 +468,7 @@
     {
       "iso_n3": "212",
       "name": "Dominica",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -419,12 +476,14 @@
     {
       "iso_n3": "214",
       "name": "Dominican Rep.",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "218",
       "name": "Ecuador",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -432,6 +491,7 @@
     {
       "iso_n3": "222",
       "name": "El Salvador",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -439,6 +499,7 @@
     {
       "iso_n3": "226",
       "name": "Eq. Guinea",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party). Equatorial Guinea: accepted CEMAC biometric-passport circulation 2017 with continued border controls.",
@@ -449,18 +510,21 @@
     {
       "iso_n3": "231",
       "name": "Ethiopia",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "232",
       "name": "Eritrea",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "233",
       "name": "Estonia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -468,6 +532,7 @@
     {
       "iso_n3": "234",
       "name": "Faeroe Is.",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -475,6 +540,7 @@
     {
       "iso_n3": "238",
       "name": "Falkland Is.",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -482,12 +548,14 @@
     {
       "iso_n3": "239",
       "name": "S. Geo. and the Is.",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "242",
       "name": "Fiji",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -495,6 +563,7 @@
     {
       "iso_n3": "246",
       "name": "Finland",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -502,12 +571,14 @@
     {
       "iso_n3": "248",
       "name": "Åland",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "250",
       "name": "France",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -515,24 +586,28 @@
     {
       "iso_n3": "258",
       "name": "Fr. Polynesia",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "260",
       "name": "Fr. S. Antarctic Lands",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "262",
       "name": "Djibouti",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "266",
       "name": "Gabon",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -540,6 +615,7 @@
     {
       "iso_n3": "268",
       "name": "Georgia",
+      "type": "sovereign",
       "state": "verified_none",
       "last_checked": "2026-07-16",
       "note": "Georgia: 1-yr visa-free stay is generous but unilateral visa policy, not a settlement privilege.",
@@ -550,6 +626,7 @@
     {
       "iso_n3": "270",
       "name": "Gambia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -557,12 +634,14 @@
     {
       "iso_n3": "275",
       "name": "Palestine",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "276",
       "name": "Germany",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -570,6 +649,7 @@
     {
       "iso_n3": "288",
       "name": "Ghana",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -577,13 +657,15 @@
     {
       "iso_n3": "292",
       "name": "Gibraltar",
+      "type": "territory",
       "state": "partial",
-      "note": "In dataset; not a world-atlas 50m feature (micro-territory).",
-      "last_checked": "2026-07-16"
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "296",
       "name": "Kiribati",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -591,6 +673,7 @@
     {
       "iso_n3": "300",
       "name": "Greece",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -598,6 +681,7 @@
     {
       "iso_n3": "304",
       "name": "Greenland",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -605,6 +689,7 @@
     {
       "iso_n3": "308",
       "name": "Grenada",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -612,12 +697,14 @@
     {
       "iso_n3": "316",
       "name": "Guam",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "320",
       "name": "Guatemala",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -625,6 +712,7 @@
     {
       "iso_n3": "324",
       "name": "Guinea",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -632,6 +720,7 @@
     {
       "iso_n3": "328",
       "name": "Guyana",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -639,18 +728,21 @@
     {
       "iso_n3": "332",
       "name": "Haiti",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "334",
       "name": "Heard I. and McDonald Is.",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "336",
       "name": "Vatican",
+      "type": "sovereign",
       "state": "verified_none",
       "last_checked": "2026-07-16",
       "note": "Vatican: citizenship is office-functional, not a settlement lane.",
@@ -661,6 +753,7 @@
     {
       "iso_n3": "340",
       "name": "Honduras",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -668,6 +761,7 @@
     {
       "iso_n3": "344",
       "name": "Hong Kong",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -675,6 +769,7 @@
     {
       "iso_n3": "348",
       "name": "Hungary",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -682,6 +777,7 @@
     {
       "iso_n3": "352",
       "name": "Iceland",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -689,6 +785,7 @@
     {
       "iso_n3": "356",
       "name": "India",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -696,6 +793,7 @@
     {
       "iso_n3": "360",
       "name": "Indonesia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -703,18 +801,21 @@
     {
       "iso_n3": "364",
       "name": "Iran",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "368",
       "name": "Iraq",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "372",
       "name": "Ireland",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -722,6 +823,7 @@
     {
       "iso_n3": "376",
       "name": "Israel",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -729,6 +831,7 @@
     {
       "iso_n3": "380",
       "name": "Italy",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -736,6 +839,7 @@
     {
       "iso_n3": "384",
       "name": "Côte d'Ivoire",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party). Cote d'Ivoire: France-CIV accord not verified at settlement grade in batch-2 sweep.",
@@ -746,6 +850,7 @@
     {
       "iso_n3": "388",
       "name": "Jamaica",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -753,6 +858,7 @@
     {
       "iso_n3": "392",
       "name": "Japan",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -760,6 +866,7 @@
     {
       "iso_n3": "398",
       "name": "Kazakhstan",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -767,12 +874,14 @@
     {
       "iso_n3": "400",
       "name": "Jordan",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "404",
       "name": "Kenya",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -780,12 +889,14 @@
     {
       "iso_n3": "408",
       "name": "North Korea",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "410",
       "name": "South Korea",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -793,6 +904,7 @@
     {
       "iso_n3": "414",
       "name": "Kuwait",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -800,6 +912,7 @@
     {
       "iso_n3": "417",
       "name": "Kyrgyzstan",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -807,6 +920,7 @@
     {
       "iso_n3": "418",
       "name": "Laos",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -814,18 +928,21 @@
     {
       "iso_n3": "422",
       "name": "Lebanon",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "426",
       "name": "Lesotho",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "428",
       "name": "Latvia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -833,6 +950,7 @@
     {
       "iso_n3": "430",
       "name": "Liberia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -840,12 +958,14 @@
     {
       "iso_n3": "434",
       "name": "Libya",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "438",
       "name": "Liechtenstein",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -853,6 +973,7 @@
     {
       "iso_n3": "440",
       "name": "Lithuania",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -860,6 +981,7 @@
     {
       "iso_n3": "442",
       "name": "Luxembourg",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -867,6 +989,7 @@
     {
       "iso_n3": "446",
       "name": "Macao",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -874,18 +997,21 @@
     {
       "iso_n3": "450",
       "name": "Madagascar",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "454",
       "name": "Malawi",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "458",
       "name": "Malaysia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -893,12 +1019,14 @@
     {
       "iso_n3": "462",
       "name": "Maldives",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "466",
       "name": "Mali",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -906,6 +1034,7 @@
     {
       "iso_n3": "470",
       "name": "Malta",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -913,18 +1042,21 @@
     {
       "iso_n3": "478",
       "name": "Mauritania",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "480",
       "name": "Mauritius",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "484",
       "name": "Mexico",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -932,6 +1064,7 @@
     {
       "iso_n3": "492",
       "name": "Monaco",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -939,6 +1072,7 @@
     {
       "iso_n3": "496",
       "name": "Mongolia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Mongolia: ethnic-return process fragments found, but no clean primary-law text comparable to Kazakhstan kandas.",
@@ -949,18 +1083,21 @@
     {
       "iso_n3": "498",
       "name": "Moldova",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "499",
       "name": "Montenegro",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "500",
       "name": "Montserrat",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -968,6 +1105,7 @@
     {
       "iso_n3": "504",
       "name": "Morocco",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -975,6 +1113,7 @@
     {
       "iso_n3": "508",
       "name": "Mozambique",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -982,6 +1121,7 @@
     {
       "iso_n3": "512",
       "name": "Oman",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -989,12 +1129,14 @@
     {
       "iso_n3": "516",
       "name": "Namibia",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "520",
       "name": "Nauru",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1002,6 +1144,7 @@
     {
       "iso_n3": "524",
       "name": "Nepal",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1009,6 +1152,7 @@
     {
       "iso_n3": "528",
       "name": "Netherlands",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1016,30 +1160,35 @@
     {
       "iso_n3": "531",
       "name": "Curaçao",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "533",
       "name": "Aruba",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "534",
       "name": "Sint Maarten",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "540",
       "name": "New Caledonia",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "548",
       "name": "Vanuatu",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1047,6 +1196,7 @@
     {
       "iso_n3": "554",
       "name": "New Zealand",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1054,6 +1204,7 @@
     {
       "iso_n3": "558",
       "name": "Nicaragua",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1061,6 +1212,7 @@
     {
       "iso_n3": "562",
       "name": "Niger",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1068,6 +1220,7 @@
     {
       "iso_n3": "566",
       "name": "Nigeria",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1075,6 +1228,7 @@
     {
       "iso_n3": "570",
       "name": "Niue",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1082,12 +1236,14 @@
     {
       "iso_n3": "574",
       "name": "Norfolk Island",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "578",
       "name": "Norway",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1095,12 +1251,14 @@
     {
       "iso_n3": "580",
       "name": "N. Mariana Is.",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "583",
       "name": "Micronesia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1108,6 +1266,7 @@
     {
       "iso_n3": "584",
       "name": "Marshall Is.",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1115,6 +1274,7 @@
     {
       "iso_n3": "585",
       "name": "Palau",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1122,18 +1282,21 @@
     {
       "iso_n3": "586",
       "name": "Pakistan",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "591",
       "name": "Panama",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "598",
       "name": "Papua New Guinea",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1141,6 +1304,7 @@
     {
       "iso_n3": "600",
       "name": "Paraguay",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1148,6 +1312,7 @@
     {
       "iso_n3": "604",
       "name": "Peru",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1155,6 +1320,7 @@
     {
       "iso_n3": "608",
       "name": "Philippines",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1162,6 +1328,7 @@
     {
       "iso_n3": "612",
       "name": "Pitcairn Is.",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1169,6 +1336,7 @@
     {
       "iso_n3": "616",
       "name": "Poland",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1176,6 +1344,7 @@
     {
       "iso_n3": "620",
       "name": "Portugal",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1183,6 +1352,7 @@
     {
       "iso_n3": "624",
       "name": "Guinea-Bissau",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1190,6 +1360,7 @@
     {
       "iso_n3": "626",
       "name": "Timor-Leste",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1197,12 +1368,14 @@
     {
       "iso_n3": "630",
       "name": "Puerto Rico",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "634",
       "name": "Qatar",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1210,6 +1383,7 @@
     {
       "iso_n3": "642",
       "name": "Romania",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1217,6 +1391,7 @@
     {
       "iso_n3": "643",
       "name": "Russia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1224,6 +1399,7 @@
     {
       "iso_n3": "646",
       "name": "Rwanda",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1231,12 +1407,14 @@
     {
       "iso_n3": "652",
       "name": "St-Barthélemy",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "654",
       "name": "Saint Helena",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1244,6 +1422,7 @@
     {
       "iso_n3": "659",
       "name": "St. Kitts and Nevis",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1251,6 +1430,7 @@
     {
       "iso_n3": "660",
       "name": "Anguilla",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1258,6 +1438,7 @@
     {
       "iso_n3": "662",
       "name": "Saint Lucia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1265,18 +1446,21 @@
     {
       "iso_n3": "663",
       "name": "St-Martin",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "666",
       "name": "St. Pierre and Miquelon",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "670",
       "name": "St. Vin. and Gren.",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1284,6 +1468,7 @@
     {
       "iso_n3": "674",
       "name": "San Marino",
+      "type": "sovereign",
       "state": "verified_none",
       "last_checked": "2026-07-16",
       "note": "San Marino: 1939/1980 conventions confirmed, but open-ended reciprocal residence/work rights with Italy not proven in primary law.",
@@ -1295,6 +1480,7 @@
     {
       "iso_n3": "678",
       "name": "São Tomé and Principe",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1302,6 +1488,7 @@
     {
       "iso_n3": "682",
       "name": "Saudi Arabia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1309,6 +1496,7 @@
     {
       "iso_n3": "686",
       "name": "Senegal",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1316,18 +1504,21 @@
     {
       "iso_n3": "688",
       "name": "Serbia",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "690",
       "name": "Seychelles",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "694",
       "name": "Sierra Leone",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1335,6 +1526,7 @@
     {
       "iso_n3": "702",
       "name": "Singapore",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1342,6 +1534,7 @@
     {
       "iso_n3": "703",
       "name": "Slovakia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1349,6 +1542,7 @@
     {
       "iso_n3": "704",
       "name": "Vietnam",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1356,6 +1550,7 @@
     {
       "iso_n3": "705",
       "name": "Slovenia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1363,6 +1558,7 @@
     {
       "iso_n3": "706",
       "name": "Somalia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1370,18 +1566,21 @@
     {
       "iso_n3": "710",
       "name": "South Africa",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "716",
       "name": "Zimbabwe",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "724",
       "name": "Spain",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1389,6 +1588,7 @@
     {
       "iso_n3": "728",
       "name": "S. Sudan",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1396,18 +1596,22 @@
     {
       "iso_n3": "729",
       "name": "Sudan",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "732",
       "name": "W. Sahara",
+      "type": "special",
       "state": "unchecked",
-      "last_checked": null
+      "last_checked": null,
+      "note": "Western Sahara: disputed territory (M49 special handling)"
     },
     {
       "iso_n3": "740",
       "name": "Suriname",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1415,12 +1619,14 @@
     {
       "iso_n3": "748",
       "name": "eSwatini",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "752",
       "name": "Sweden",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1428,6 +1634,7 @@
     {
       "iso_n3": "756",
       "name": "Switzerland",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1435,12 +1642,14 @@
     {
       "iso_n3": "760",
       "name": "Syria",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "762",
       "name": "Tajikistan",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Tajikistan: Russia recruitment lane is temporary-only; the 1995 dual-citizenship treaty is recorded under dual_citizenship.",
@@ -1452,6 +1661,7 @@
     {
       "iso_n3": "764",
       "name": "Thailand",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1459,6 +1669,7 @@
     {
       "iso_n3": "768",
       "name": "Togo",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party). Togo: France-Togo accord not verified at settlement grade in batch-2 sweep.",
@@ -1469,13 +1680,15 @@
     {
       "iso_n3": "772",
       "name": "Tokelau",
+      "type": "territory",
       "state": "partial",
-      "note": "In dataset; not a world-atlas 50m feature (micro-territory).",
-      "last_checked": "2026-07-16"
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "776",
       "name": "Tonga",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1483,6 +1696,7 @@
     {
       "iso_n3": "780",
       "name": "Trinidad and Tobago",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1490,6 +1704,7 @@
     {
       "iso_n3": "784",
       "name": "United Arab Emirates",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1497,6 +1712,7 @@
     {
       "iso_n3": "788",
       "name": "Tunisia",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1504,6 +1720,7 @@
     {
       "iso_n3": "792",
       "name": "Turkey",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party). Turkey: TRNC-side facilitation exists (property, company formation) but no blanket Turkey-side residence/work right verified.",
@@ -1514,12 +1731,14 @@
     {
       "iso_n3": "795",
       "name": "Turkmenistan",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "796",
       "name": "Turks and Caicos Is.",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1527,13 +1746,15 @@
     {
       "iso_n3": "798",
       "name": "Tuvalu",
+      "type": "sovereign",
       "state": "partial",
-      "note": "In dataset; not a world-atlas 50m feature (micro-territory).",
-      "last_checked": "2026-07-16"
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "800",
       "name": "Uganda",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1541,24 +1762,28 @@
     {
       "iso_n3": "804",
       "name": "Ukraine",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "807",
       "name": "Macedonia",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "818",
       "name": "Egypt",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "826",
       "name": "United Kingdom",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1566,6 +1791,7 @@
     {
       "iso_n3": "831",
       "name": "Guernsey",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1573,6 +1799,7 @@
     {
       "iso_n3": "832",
       "name": "Jersey",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1580,6 +1807,7 @@
     {
       "iso_n3": "833",
       "name": "Isle of Man",
+      "type": "territory",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1587,6 +1815,7 @@
     {
       "iso_n3": "834",
       "name": "Tanzania",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1594,6 +1823,7 @@
     {
       "iso_n3": "840",
       "name": "United States of America",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1601,12 +1831,14 @@
     {
       "iso_n3": "850",
       "name": "U.S. Virgin Is.",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "854",
       "name": "Burkina Faso",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1614,6 +1846,7 @@
     {
       "iso_n3": "858",
       "name": "Uruguay",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1621,6 +1854,7 @@
     {
       "iso_n3": "860",
       "name": "Uzbekistan",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Uzbekistan: Russia recruitment lane (2017) is temporary-labor only - out of settlement scope.",
@@ -1631,6 +1865,7 @@
     {
       "iso_n3": "862",
       "name": "Venezuela",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1638,12 +1873,14 @@
     {
       "iso_n3": "876",
       "name": "Wallis and Futuna Is.",
+      "type": "territory",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "882",
       "name": "Samoa",
+      "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
       "note": "Appears in blocs_data.json (bloc member and/or lane party)."
@@ -1651,20 +1888,24 @@
     {
       "iso_n3": "887",
       "name": "Yemen",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
       "iso_n3": "894",
       "name": "Zambia",
+      "type": "sovereign",
       "state": "unchecked",
       "last_checked": null
     },
     {
-      "iso_n3": "undefined",
-      "name": "Somaliland",
+      "iso_n3": "XKX",
+      "name": "Kosovo",
+      "type": "special",
       "state": "unchecked",
-      "last_checked": null
+      "last_checked": null,
+      "note": "No M49 numeric code; tracked per the locked registry decision."
     }
   ]
 }

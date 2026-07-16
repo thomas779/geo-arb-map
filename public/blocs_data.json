@@ -111,7 +111,7 @@
         "CIT": "Citizenship of any member = work rights across all five."
       },
       "fastest_entry": "Armenia: 3 yrs holding a residence permit, no minimum physical presence, dual citizenship allowed.",
-      "notes": "Russia generally requires renunciation for naturalization, making Armenia the practical entry point."
+      "notes": "Russia's renunciation requirement was eliminated in 2020; the 2023 law (138-FZ) requires only an unverified declaration of intent. Armenia remains the practical EAEU entry point for other reasons: no physical-presence requirement and a stable dual-citizenship regime."
     },
     {
       "id": "union_state",
@@ -127,7 +127,7 @@
         "PR": "Permanent residence permit granted on the basis of citizenship alone; document review reduced to 2 months.",
         "CIT": "Full mutual rights to live, work, settle, and own property. Belarusians explicitly exempt from Russia's 2025-26 naturalization restrictions."
       },
-      "fastest_entry": "Belarus: ~7 yrs standard naturalization. Russia generally requires renunciation for foreigners (Belarusians exempt).",
+      "fastest_entry": "Belarus: ~7 yrs standard naturalization. Russia: no renunciation required since 2020 (138-FZ declaration only), but naturalized citizens face broad revocation grounds and Belarusians get the simplest track.",
       "notes": "Both members also in EAEU - Union State stacks deeper settlement rights on top of EAEU labor mobility."
     },
     {
@@ -1079,7 +1079,7 @@
       "398": {"status": "banned", "note": "Kazakhstan: dual citizenship prohibited, incl. for kandas.", "sources": ["eGov.kz citizenship guidance"]},
       "180": {"status": "banned", "note": "DR Congo: dual citizenship banned.", "sources": ["DRC nationality law"]},
       "156": {"status": "banned", "note": "China (PRC): dual nationality not recognized.", "sources": ["PRC Nationality Law Art. 3"]},
-      "643": {"status": "conditional", "note": "Russia: renunciation required for most naturalizers, with treaty exceptions (see treaty_exceptions) and exemptions for Belarusians.", "sources": ["Russian citizenship law", "2026 restriction carve-outs"]}
+      "643": {"status": "allowed", "volatility": "high", "note": "Russia: renunciation requirement eliminated in 2020; 138-FZ (2023) requires only an unverified declaration of intent. Caveat: naturalized citizens face broad revocation grounds (138-FZ art. 22-24, expanded July 2025) - acquired citizenship is legally weaker than birth citizenship.", "sources": ["138-FZ (2023)", "Russian MFA dual-citizenship guidance", "Constitutional Court 2025 statement"]}
     },
     "treaty_exceptions": [
       {
@@ -1088,7 +1088,7 @@
         "parties": [
           {"name": "Russia", "iso_n3": "643"}, {"name": "Tajikistan", "iso_n3": "762"}
         ],
-        "effect": "Keep-both exception: citizens may acquire the other state's citizenship under domestic law while retaining their original one - the sole surviving Russian dual-citizenship treaty. Not a mobility lane; it removes the renunciation obstacle to settlement/naturalization.",
+        "effect": "The sole surviving Russian dual-citizenship treaty: changes conflict-of-laws treatment (military service, consular protection, document recognition) for Russia-Tajikistan dual citizens. Not a mobility lane - and NOT what permits keeping both citizenships (general Russian law already allows that since 2020).",
         "status": "operative",
         "confidence": "high",
         "sources": ["1995 treaty text", "Russian ratification act"],

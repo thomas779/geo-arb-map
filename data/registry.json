@@ -1,0 +1,975 @@
+{
+  "meta": {
+    "description": "Canonical jurisdiction registry: M49-style core sovereigns + supplemental territory registry. Coverage and future graph layers span both tiers.",
+    "last_updated": "2026-07-16",
+    "counts": {
+      "sovereigns": 200,
+      "territories": 37,
+      "special": 2
+    }
+  },
+  "sovereigns": [
+    {
+      "iso_n3": "000",
+      "name": "Somaliland"
+    },
+    {
+      "iso_n3": "004",
+      "name": "Afghanistan"
+    },
+    {
+      "iso_n3": "008",
+      "name": "Albania"
+    },
+    {
+      "iso_n3": "012",
+      "name": "Algeria"
+    },
+    {
+      "iso_n3": "020",
+      "name": "Andorra"
+    },
+    {
+      "iso_n3": "024",
+      "name": "Angola"
+    },
+    {
+      "iso_n3": "028",
+      "name": "Antigua and Barb."
+    },
+    {
+      "iso_n3": "031",
+      "name": "Azerbaijan"
+    },
+    {
+      "iso_n3": "032",
+      "name": "Argentina"
+    },
+    {
+      "iso_n3": "036",
+      "name": "Australia"
+    },
+    {
+      "iso_n3": "040",
+      "name": "Austria"
+    },
+    {
+      "iso_n3": "044",
+      "name": "Bahamas"
+    },
+    {
+      "iso_n3": "048",
+      "name": "Bahrain"
+    },
+    {
+      "iso_n3": "050",
+      "name": "Bangladesh"
+    },
+    {
+      "iso_n3": "051",
+      "name": "Armenia"
+    },
+    {
+      "iso_n3": "052",
+      "name": "Barbados"
+    },
+    {
+      "iso_n3": "056",
+      "name": "Belgium"
+    },
+    {
+      "iso_n3": "064",
+      "name": "Bhutan"
+    },
+    {
+      "iso_n3": "068",
+      "name": "Bolivia"
+    },
+    {
+      "iso_n3": "070",
+      "name": "Bosnia and Herz."
+    },
+    {
+      "iso_n3": "072",
+      "name": "Botswana"
+    },
+    {
+      "iso_n3": "076",
+      "name": "Brazil"
+    },
+    {
+      "iso_n3": "084",
+      "name": "Belize"
+    },
+    {
+      "iso_n3": "086",
+      "name": "Br. Indian Ocean Ter."
+    },
+    {
+      "iso_n3": "090",
+      "name": "Solomon Is."
+    },
+    {
+      "iso_n3": "096",
+      "name": "Brunei"
+    },
+    {
+      "iso_n3": "100",
+      "name": "Bulgaria"
+    },
+    {
+      "iso_n3": "104",
+      "name": "Myanmar"
+    },
+    {
+      "iso_n3": "108",
+      "name": "Burundi"
+    },
+    {
+      "iso_n3": "112",
+      "name": "Belarus"
+    },
+    {
+      "iso_n3": "116",
+      "name": "Cambodia"
+    },
+    {
+      "iso_n3": "120",
+      "name": "Cameroon"
+    },
+    {
+      "iso_n3": "124",
+      "name": "Canada"
+    },
+    {
+      "iso_n3": "132",
+      "name": "Cabo Verde"
+    },
+    {
+      "iso_n3": "140",
+      "name": "Central African Rep."
+    },
+    {
+      "iso_n3": "144",
+      "name": "Sri Lanka"
+    },
+    {
+      "iso_n3": "148",
+      "name": "Chad"
+    },
+    {
+      "iso_n3": "152",
+      "name": "Chile"
+    },
+    {
+      "iso_n3": "156",
+      "name": "China"
+    },
+    {
+      "iso_n3": "170",
+      "name": "Colombia"
+    },
+    {
+      "iso_n3": "174",
+      "name": "Comoros"
+    },
+    {
+      "iso_n3": "178",
+      "name": "Congo"
+    },
+    {
+      "iso_n3": "180",
+      "name": "Dem. Rep. Congo"
+    },
+    {
+      "iso_n3": "188",
+      "name": "Costa Rica"
+    },
+    {
+      "iso_n3": "191",
+      "name": "Croatia"
+    },
+    {
+      "iso_n3": "192",
+      "name": "Cuba"
+    },
+    {
+      "iso_n3": "196",
+      "name": "Cyprus"
+    },
+    {
+      "iso_n3": "203",
+      "name": "Czechia"
+    },
+    {
+      "iso_n3": "204",
+      "name": "Benin"
+    },
+    {
+      "iso_n3": "208",
+      "name": "Denmark"
+    },
+    {
+      "iso_n3": "212",
+      "name": "Dominica"
+    },
+    {
+      "iso_n3": "214",
+      "name": "Dominican Rep."
+    },
+    {
+      "iso_n3": "218",
+      "name": "Ecuador"
+    },
+    {
+      "iso_n3": "222",
+      "name": "El Salvador"
+    },
+    {
+      "iso_n3": "226",
+      "name": "Eq. Guinea"
+    },
+    {
+      "iso_n3": "231",
+      "name": "Ethiopia"
+    },
+    {
+      "iso_n3": "232",
+      "name": "Eritrea"
+    },
+    {
+      "iso_n3": "233",
+      "name": "Estonia"
+    },
+    {
+      "iso_n3": "239",
+      "name": "S. Geo. and the Is."
+    },
+    {
+      "iso_n3": "242",
+      "name": "Fiji"
+    },
+    {
+      "iso_n3": "246",
+      "name": "Finland"
+    },
+    {
+      "iso_n3": "248",
+      "name": "Åland"
+    },
+    {
+      "iso_n3": "250",
+      "name": "France"
+    },
+    {
+      "iso_n3": "262",
+      "name": "Djibouti"
+    },
+    {
+      "iso_n3": "266",
+      "name": "Gabon"
+    },
+    {
+      "iso_n3": "268",
+      "name": "Georgia"
+    },
+    {
+      "iso_n3": "270",
+      "name": "Gambia"
+    },
+    {
+      "iso_n3": "275",
+      "name": "Palestine"
+    },
+    {
+      "iso_n3": "276",
+      "name": "Germany"
+    },
+    {
+      "iso_n3": "288",
+      "name": "Ghana"
+    },
+    {
+      "iso_n3": "296",
+      "name": "Kiribati"
+    },
+    {
+      "iso_n3": "300",
+      "name": "Greece"
+    },
+    {
+      "iso_n3": "308",
+      "name": "Grenada"
+    },
+    {
+      "iso_n3": "320",
+      "name": "Guatemala"
+    },
+    {
+      "iso_n3": "324",
+      "name": "Guinea"
+    },
+    {
+      "iso_n3": "328",
+      "name": "Guyana"
+    },
+    {
+      "iso_n3": "332",
+      "name": "Haiti"
+    },
+    {
+      "iso_n3": "334",
+      "name": "Heard I. and McDonald Is."
+    },
+    {
+      "iso_n3": "336",
+      "name": "Vatican"
+    },
+    {
+      "iso_n3": "340",
+      "name": "Honduras"
+    },
+    {
+      "iso_n3": "348",
+      "name": "Hungary"
+    },
+    {
+      "iso_n3": "352",
+      "name": "Iceland"
+    },
+    {
+      "iso_n3": "356",
+      "name": "India"
+    },
+    {
+      "iso_n3": "360",
+      "name": "Indonesia"
+    },
+    {
+      "iso_n3": "364",
+      "name": "Iran"
+    },
+    {
+      "iso_n3": "368",
+      "name": "Iraq"
+    },
+    {
+      "iso_n3": "372",
+      "name": "Ireland"
+    },
+    {
+      "iso_n3": "376",
+      "name": "Israel"
+    },
+    {
+      "iso_n3": "380",
+      "name": "Italy"
+    },
+    {
+      "iso_n3": "384",
+      "name": "Côte d'Ivoire"
+    },
+    {
+      "iso_n3": "388",
+      "name": "Jamaica"
+    },
+    {
+      "iso_n3": "392",
+      "name": "Japan"
+    },
+    {
+      "iso_n3": "398",
+      "name": "Kazakhstan"
+    },
+    {
+      "iso_n3": "400",
+      "name": "Jordan"
+    },
+    {
+      "iso_n3": "404",
+      "name": "Kenya"
+    },
+    {
+      "iso_n3": "408",
+      "name": "North Korea"
+    },
+    {
+      "iso_n3": "410",
+      "name": "South Korea"
+    },
+    {
+      "iso_n3": "414",
+      "name": "Kuwait"
+    },
+    {
+      "iso_n3": "417",
+      "name": "Kyrgyzstan"
+    },
+    {
+      "iso_n3": "418",
+      "name": "Laos"
+    },
+    {
+      "iso_n3": "422",
+      "name": "Lebanon"
+    },
+    {
+      "iso_n3": "426",
+      "name": "Lesotho"
+    },
+    {
+      "iso_n3": "428",
+      "name": "Latvia"
+    },
+    {
+      "iso_n3": "430",
+      "name": "Liberia"
+    },
+    {
+      "iso_n3": "434",
+      "name": "Libya"
+    },
+    {
+      "iso_n3": "438",
+      "name": "Liechtenstein"
+    },
+    {
+      "iso_n3": "440",
+      "name": "Lithuania"
+    },
+    {
+      "iso_n3": "442",
+      "name": "Luxembourg"
+    },
+    {
+      "iso_n3": "450",
+      "name": "Madagascar"
+    },
+    {
+      "iso_n3": "454",
+      "name": "Malawi"
+    },
+    {
+      "iso_n3": "458",
+      "name": "Malaysia"
+    },
+    {
+      "iso_n3": "462",
+      "name": "Maldives"
+    },
+    {
+      "iso_n3": "466",
+      "name": "Mali"
+    },
+    {
+      "iso_n3": "470",
+      "name": "Malta"
+    },
+    {
+      "iso_n3": "478",
+      "name": "Mauritania"
+    },
+    {
+      "iso_n3": "480",
+      "name": "Mauritius"
+    },
+    {
+      "iso_n3": "484",
+      "name": "Mexico"
+    },
+    {
+      "iso_n3": "492",
+      "name": "Monaco"
+    },
+    {
+      "iso_n3": "496",
+      "name": "Mongolia"
+    },
+    {
+      "iso_n3": "498",
+      "name": "Moldova"
+    },
+    {
+      "iso_n3": "499",
+      "name": "Montenegro"
+    },
+    {
+      "iso_n3": "504",
+      "name": "Morocco"
+    },
+    {
+      "iso_n3": "508",
+      "name": "Mozambique"
+    },
+    {
+      "iso_n3": "512",
+      "name": "Oman"
+    },
+    {
+      "iso_n3": "516",
+      "name": "Namibia"
+    },
+    {
+      "iso_n3": "520",
+      "name": "Nauru"
+    },
+    {
+      "iso_n3": "524",
+      "name": "Nepal"
+    },
+    {
+      "iso_n3": "528",
+      "name": "Netherlands"
+    },
+    {
+      "iso_n3": "548",
+      "name": "Vanuatu"
+    },
+    {
+      "iso_n3": "554",
+      "name": "New Zealand"
+    },
+    {
+      "iso_n3": "558",
+      "name": "Nicaragua"
+    },
+    {
+      "iso_n3": "562",
+      "name": "Niger"
+    },
+    {
+      "iso_n3": "566",
+      "name": "Nigeria"
+    },
+    {
+      "iso_n3": "578",
+      "name": "Norway"
+    },
+    {
+      "iso_n3": "583",
+      "name": "Micronesia"
+    },
+    {
+      "iso_n3": "584",
+      "name": "Marshall Is."
+    },
+    {
+      "iso_n3": "585",
+      "name": "Palau"
+    },
+    {
+      "iso_n3": "586",
+      "name": "Pakistan"
+    },
+    {
+      "iso_n3": "591",
+      "name": "Panama"
+    },
+    {
+      "iso_n3": "598",
+      "name": "Papua New Guinea"
+    },
+    {
+      "iso_n3": "600",
+      "name": "Paraguay"
+    },
+    {
+      "iso_n3": "604",
+      "name": "Peru"
+    },
+    {
+      "iso_n3": "608",
+      "name": "Philippines"
+    },
+    {
+      "iso_n3": "616",
+      "name": "Poland"
+    },
+    {
+      "iso_n3": "620",
+      "name": "Portugal"
+    },
+    {
+      "iso_n3": "624",
+      "name": "Guinea-Bissau"
+    },
+    {
+      "iso_n3": "626",
+      "name": "Timor-Leste"
+    },
+    {
+      "iso_n3": "634",
+      "name": "Qatar"
+    },
+    {
+      "iso_n3": "642",
+      "name": "Romania"
+    },
+    {
+      "iso_n3": "643",
+      "name": "Russia"
+    },
+    {
+      "iso_n3": "646",
+      "name": "Rwanda"
+    },
+    {
+      "iso_n3": "659",
+      "name": "St. Kitts and Nevis"
+    },
+    {
+      "iso_n3": "662",
+      "name": "Saint Lucia"
+    },
+    {
+      "iso_n3": "670",
+      "name": "St. Vin. and Gren."
+    },
+    {
+      "iso_n3": "674",
+      "name": "San Marino"
+    },
+    {
+      "iso_n3": "678",
+      "name": "São Tomé and Principe"
+    },
+    {
+      "iso_n3": "682",
+      "name": "Saudi Arabia"
+    },
+    {
+      "iso_n3": "686",
+      "name": "Senegal"
+    },
+    {
+      "iso_n3": "688",
+      "name": "Serbia"
+    },
+    {
+      "iso_n3": "690",
+      "name": "Seychelles"
+    },
+    {
+      "iso_n3": "694",
+      "name": "Sierra Leone"
+    },
+    {
+      "iso_n3": "702",
+      "name": "Singapore"
+    },
+    {
+      "iso_n3": "703",
+      "name": "Slovakia"
+    },
+    {
+      "iso_n3": "704",
+      "name": "Vietnam"
+    },
+    {
+      "iso_n3": "705",
+      "name": "Slovenia"
+    },
+    {
+      "iso_n3": "706",
+      "name": "Somalia"
+    },
+    {
+      "iso_n3": "710",
+      "name": "South Africa"
+    },
+    {
+      "iso_n3": "716",
+      "name": "Zimbabwe"
+    },
+    {
+      "iso_n3": "724",
+      "name": "Spain"
+    },
+    {
+      "iso_n3": "728",
+      "name": "S. Sudan"
+    },
+    {
+      "iso_n3": "729",
+      "name": "Sudan"
+    },
+    {
+      "iso_n3": "740",
+      "name": "Suriname"
+    },
+    {
+      "iso_n3": "748",
+      "name": "eSwatini"
+    },
+    {
+      "iso_n3": "752",
+      "name": "Sweden"
+    },
+    {
+      "iso_n3": "756",
+      "name": "Switzerland"
+    },
+    {
+      "iso_n3": "760",
+      "name": "Syria"
+    },
+    {
+      "iso_n3": "762",
+      "name": "Tajikistan"
+    },
+    {
+      "iso_n3": "764",
+      "name": "Thailand"
+    },
+    {
+      "iso_n3": "768",
+      "name": "Togo"
+    },
+    {
+      "iso_n3": "776",
+      "name": "Tonga"
+    },
+    {
+      "iso_n3": "780",
+      "name": "Trinidad and Tobago"
+    },
+    {
+      "iso_n3": "784",
+      "name": "United Arab Emirates"
+    },
+    {
+      "iso_n3": "788",
+      "name": "Tunisia"
+    },
+    {
+      "iso_n3": "792",
+      "name": "Turkey"
+    },
+    {
+      "iso_n3": "795",
+      "name": "Turkmenistan"
+    },
+    {
+      "iso_n3": "798",
+      "name": "Tuvalu"
+    },
+    {
+      "iso_n3": "800",
+      "name": "Uganda"
+    },
+    {
+      "iso_n3": "804",
+      "name": "Ukraine"
+    },
+    {
+      "iso_n3": "807",
+      "name": "Macedonia"
+    },
+    {
+      "iso_n3": "818",
+      "name": "Egypt"
+    },
+    {
+      "iso_n3": "826",
+      "name": "United Kingdom"
+    },
+    {
+      "iso_n3": "834",
+      "name": "Tanzania"
+    },
+    {
+      "iso_n3": "840",
+      "name": "United States of America"
+    },
+    {
+      "iso_n3": "854",
+      "name": "Burkina Faso"
+    },
+    {
+      "iso_n3": "858",
+      "name": "Uruguay"
+    },
+    {
+      "iso_n3": "860",
+      "name": "Uzbekistan"
+    },
+    {
+      "iso_n3": "862",
+      "name": "Venezuela"
+    },
+    {
+      "iso_n3": "882",
+      "name": "Samoa"
+    },
+    {
+      "iso_n3": "887",
+      "name": "Yemen"
+    },
+    {
+      "iso_n3": "894",
+      "name": "Zambia"
+    }
+  ],
+  "territories": [
+    {
+      "iso_n3": "016",
+      "name": "American Samoa"
+    },
+    {
+      "iso_n3": "060",
+      "name": "Bermuda"
+    },
+    {
+      "iso_n3": "092",
+      "name": "British Virgin Is."
+    },
+    {
+      "iso_n3": "136",
+      "name": "Cayman Is."
+    },
+    {
+      "iso_n3": "158",
+      "name": "Taiwan"
+    },
+    {
+      "iso_n3": "184",
+      "name": "Cook Is."
+    },
+    {
+      "iso_n3": "234",
+      "name": "Faeroe Is."
+    },
+    {
+      "iso_n3": "238",
+      "name": "Falkland Is."
+    },
+    {
+      "iso_n3": "258",
+      "name": "Fr. Polynesia"
+    },
+    {
+      "iso_n3": "260",
+      "name": "Fr. S. Antarctic Lands"
+    },
+    {
+      "iso_n3": "292",
+      "name": "Gibraltar"
+    },
+    {
+      "iso_n3": "304",
+      "name": "Greenland"
+    },
+    {
+      "iso_n3": "316",
+      "name": "Guam"
+    },
+    {
+      "iso_n3": "344",
+      "name": "Hong Kong"
+    },
+    {
+      "iso_n3": "446",
+      "name": "Macao"
+    },
+    {
+      "iso_n3": "500",
+      "name": "Montserrat"
+    },
+    {
+      "iso_n3": "531",
+      "name": "Curaçao"
+    },
+    {
+      "iso_n3": "533",
+      "name": "Aruba"
+    },
+    {
+      "iso_n3": "534",
+      "name": "Sint Maarten"
+    },
+    {
+      "iso_n3": "540",
+      "name": "New Caledonia"
+    },
+    {
+      "iso_n3": "570",
+      "name": "Niue"
+    },
+    {
+      "iso_n3": "574",
+      "name": "Norfolk Island"
+    },
+    {
+      "iso_n3": "580",
+      "name": "N. Mariana Is."
+    },
+    {
+      "iso_n3": "612",
+      "name": "Pitcairn Is."
+    },
+    {
+      "iso_n3": "630",
+      "name": "Puerto Rico"
+    },
+    {
+      "iso_n3": "652",
+      "name": "St-Barthélemy"
+    },
+    {
+      "iso_n3": "654",
+      "name": "Saint Helena"
+    },
+    {
+      "iso_n3": "660",
+      "name": "Anguilla"
+    },
+    {
+      "iso_n3": "663",
+      "name": "St-Martin"
+    },
+    {
+      "iso_n3": "666",
+      "name": "St. Pierre and Miquelon"
+    },
+    {
+      "iso_n3": "772",
+      "name": "Tokelau"
+    },
+    {
+      "iso_n3": "796",
+      "name": "Turks and Caicos Is."
+    },
+    {
+      "iso_n3": "831",
+      "name": "Guernsey"
+    },
+    {
+      "iso_n3": "832",
+      "name": "Jersey"
+    },
+    {
+      "iso_n3": "833",
+      "name": "Isle of Man"
+    },
+    {
+      "iso_n3": "850",
+      "name": "U.S. Virgin Is."
+    },
+    {
+      "iso_n3": "876",
+      "name": "Wallis and Futuna Is."
+    }
+  ],
+  "special": [
+    {
+      "id": "732",
+      "name": "W. Sahara",
+      "note": "Western Sahara: disputed territory (M49 special handling)"
+    },
+    {
+      "id": "XKX",
+      "name": "Kosovo",
+      "note": "No M49 numeric code; tracked per the locked registry decision."
+    }
+  ]
+}

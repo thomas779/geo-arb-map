@@ -54,6 +54,7 @@ export interface BilateralLane {
 
 export interface DualCitizenshipPolicy {
   status: 'allowed' | 'banned' | 'conditional';
+  volatility?: string;
   note?: string;
   sources?: string[];
 }

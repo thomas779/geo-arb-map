@@ -41,11 +41,9 @@ const OVERRIDES = {
   '226': { state: 'partial', note: 'Equatorial Guinea: accepted CEMAC biometric-passport circulation 2017 with continued border controls.', sources: ['Equatorial Guinea official statement 2017'] },
 };
 
-async function loadAtlas() {
-  const localPath = process.argv[2];
-  if (localPath) return JSON.parse(fs.readFileSync(localPath, 'utf8'));
-  const res = await fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json');
-  return res.json();
+// Registry is the canonical jurisdiction list (run scripts/build_registry.js first)
+function loadRegistry() {
+  return JSON.parse(fs.readFileSync('data/registry.json', 'utf8'));
 }
 
 function datasetIsos(data) {
@@ -61,25 +59,30 @@ function datasetIsos(data) {
   return isos;
 }
 
-const atlas = await loadAtlas();
+const registry = loadRegistry();
 const data = JSON.parse(fs.readFileSync('public/blocs_data.json', 'utf8'));
 const inDataset = datasetIsos(data);
 
-const geoms = atlas.objects.countries.geometries;
+const entries = [
+  ...registry.sovereigns.map(e => ({ ...e, type: 'sovereign' })),
+  ...registry.territories.map(e => ({ ...e, type: 'territory' })),
+  ...registry.special.map(e => ({ iso_n3: e.id, name: e.name, type: 'special', registry_note: e.note })),
+];
 const rows = [];
 const seen = new Set();
 
-for (const g of geoms) {
-  const iso = String(g.id).padStart(3, '0');
+for (const entry of entries) {
+  const iso = entry.iso_n3;
   if (seen.has(iso)) continue;
   seen.add(iso);
-  const name = g.properties?.name ?? iso;
+  const name = entry.name;
 
-  const row = { iso_n3: iso, name, state: 'unchecked', last_checked: null };
+  const row = { iso_n3: iso, name, type: entry.type, state: 'unchecked', last_checked: null };
+  if (entry.registry_note) row.note = entry.registry_note;
 
   if (inDataset.has(iso)) {
     row.state = 'partial';
-    row.note = 'Appears in blocs_data.json (bloc member and/or lane party).';
+    row.note = [row.note, 'Appears in blocs_data.json (bloc member and/or lane party).'].filter(Boolean).join(' ');
     row.last_checked = TODAY;
   }
 
@@ -99,14 +102,14 @@ for (const g of geoms) {
   rows.push(row);
 }
 
-// Territories in our dataset that the 50m atlas may not carry as features
+// Jurisdictions in our dataset that the registry may not carry
 for (const iso of inDataset) {
   if (!seen.has(iso)) {
     const name =
       data.blocs.flatMap(b => [...b.members, ...(b.former_members ?? [])])
         .concat(data.bilateral_lanes.flatMap(l => [l.destination, ...l.beneficiaries]))
         .find(m => m.iso_n3 === iso)?.name ?? iso;
-    rows.push({ iso_n3: iso, name, state: 'partial', note: 'In dataset; not a world-atlas 50m feature (micro-territory).', last_checked: TODAY });
+    rows.push({ iso_n3: iso, name, type: 'territory', state: 'partial', note: 'In dataset; absent from registry tiers - review registry supplement.', last_checked: TODAY });
     seen.add(iso);
   }
 }
@@ -118,7 +121,7 @@ for (const r of rows) counts[r.state] = (counts[r.state] ?? 0) + 1;
 
 const out = {
   meta: {
-    description: 'Research-coverage matrix: which countries have been checked for privileged settlement arrangements. States: verified | verified_none | partial | unchecked.',
+    description: 'Research-coverage matrix over the canonical registry (M49-style sovereigns + territory supplement): which jurisdictions have been checked for privileged settlement arrangements. States: verified | verified_none | partial | unchecked.',
     last_updated: TODAY,
     counts,
   },

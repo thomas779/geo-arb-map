@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "description": "Hand-audited edge overrides for the strategy-explorer graph. Every entry requires reason_code (event_accelerator | treaty_exception | status_rendering_override | coverage_negative_seed), sources, and date. Consumed by scripts/build_edges.js (not yet built).",
+    "last_updated": "2026-07-16"
+  },
+  "edges": [
+    {
+      "id": "brazil_child_parent_naturalization",
+      "reason_code": "event_accelerator",
+      "event": "child born in Brazil",
+      "grants": [
+        {"who": "child", "node": "cit:076", "years": 0},
+        {"who": "parent", "node": "cit:076", "years": 1, "via": "pr:076", "note": "Ordinary naturalization residence period reduced to 1 year for applicants with a Brazilian child."}
+      ],
+      "allocation": "right",
+      "confidence": "high",
+      "sources": ["Brazil Ministry of Justice naturalization materials"],
+      "date": "2026-07-16"
+    },
+    {
+      "id": "mexico_child_parent_naturalization",
+      "reason_code": "event_accelerator",
+      "event": "child born in Mexico",
+      "grants": [
+        {"who": "child", "node": "cit:484", "years": 0},
+        {"who": "parent", "node": "cit:484", "years": 2, "via": "pr:484", "note": "Naturalization letter after 2 years of residence (vs 5 standard) for a foreigner with a Mexican-born child."}
+      ],
+      "allocation": "right",
+      "confidence": "high",
+      "sources": ["Mexico SRE naturalization guidance"],
+      "date": "2026-07-16"
+    },
+    {
+      "id": "argentina_child_parent_residence",
+      "reason_code": "event_accelerator",
+      "event": "child born in Argentina",
+      "grants": [
+        {"who": "child", "node": "cit:032", "years": 0},
+        {"who": "parent", "node": "pr:032", "years": 0, "note": "Family-based permanent residence ONLY - no verified parent citizenship fast-track. Parent naturalization then follows Argentina's ordinary 2-yr track from residence."}
+      ],
+      "allocation": "right",
+      "confidence": "high",
+      "sources": ["Argentine constitution (jus soli)", "DNM family-based residence rules"],
+      "date": "2026-07-16"
+    },
+    {
+      "id": "russia_tajikistan_keep_both",
+      "reason_code": "treaty_exception",
+      "event": null,
+      "grants": [],
+      "note": "Conflict-of-laws treatment for RU-TJ dual citizens; see dual_citizenship.treaty_exceptions in blocs_data.json. Creates no mobility edge.",
+      "confidence": "high",
+      "sources": ["1995 Russia-Tajikistan dual-citizenship treaty"],
+      "date": "2026-07-16"
+    },
+    {
+      "id": "greater_china_card_rendering",
+      "reason_code": "status_rendering_override",
+      "event": null,
+      "grants": [],
+      "note": "Greater China interfaces render as one-way status cards only - never bloc-style map fills, never counted in footprints for non-Chinese nationals. Mainland-to-HK/Macau one-way permit carries allocation: quota_queue (150/day, score-based, family-reunion classes only per NIA June 2026).",
+      "confidence": "high",
+      "sources": ["NIA 2026-06-30 settlement approval classes", "HK ImmD one-way permit FAQs", "Taiwan MAC guidance (HK/Macau Gold Card holders cannot use it for settlement)"],
+      "date": "2026-07-16"
+    }
+  ]
+}
