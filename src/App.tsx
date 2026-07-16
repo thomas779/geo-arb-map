@@ -10,6 +10,26 @@ import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { StackingView } from '@/components/StackingView';
 import { useTheme } from '@/components/theme-provider';
+import type { PlantedFlag } from '@/lib/planner';
+
+const FLAGS_KEY = 'geo-arb-flags';
+
+function initialFlags(): PlantedFlag[] {
+  // ?flags=372,840r — tooling/demo override (r suffix = resident), not persisted
+  const fromUrl = new URLSearchParams(window.location.search).get('flags');
+  if (fromUrl) {
+    return fromUrl.split(',').filter(Boolean).map(tok => {
+      const resident = tok.endsWith('r');
+      const iso = tok.replace(/r$/, '').padStart(3, '0');
+      return { iso_n3: iso, name: iso, status: resident ? 'resident' as const : 'citizen' as const };
+    });
+  }
+  try {
+    return JSON.parse(localStorage.getItem(FLAGS_KEY) ?? '[]');
+  } catch {
+    return [];
+  }
+}
 
 const initialState: AppState = {
   view: 'map',
@@ -23,12 +43,27 @@ const initialState: AppState = {
 export default function App() {
   const [state, setState] = useState<AppState>(initialState);
   const [data, setData] = useState<BlocsData | null>(null);
+  const [flags, setFlags] = useState<PlantedFlag[]>(initialFlags);
   const { theme, setTheme } = useTheme();
+
+  const changeFlags = useCallback((next: PlantedFlag[]) => {
+    localStorage.setItem(FLAGS_KEY, JSON.stringify(next));
+    setFlags(next);
+  }, []);
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + 'blocs_data.json')
       .then(res => res.json())
-      .then((d: BlocsData) => setData(d))
+      .then((d: BlocsData) => {
+        setData(d);
+        setFlags(fs => fs.map(f => {
+          if (f.name !== f.iso_n3) return f;
+          const m = d.blocs.flatMap(b => b.members)
+            .concat(d.bilateral_lanes.flatMap(l => [l.destination, ...l.beneficiaries]))
+            .find(x => x.iso_n3 === f.iso_n3);
+          return m ? { ...f, name: m.name } : f;
+        }));
+      })
       .catch(err => console.error('Failed to load blocs_data.json:', err));
   }, []);
 
@@ -131,9 +166,9 @@ export default function App() {
           />
         )}
         <div id="map-wrap" className="relative min-w-0 flex-1 overflow-hidden">
-          <WorldMap data={data} state={state} theme={theme} onSelect={selectCountry} />
+          <WorldMap data={data} state={state} theme={theme} flags={flags} onSelect={selectCountry} />
           {data && state.view === 'stacking' && (
-            <StackingView data={data} onBlocSelect={backToMapWithBloc} />
+            <StackingView data={data} onBlocSelect={backToMapWithBloc} flags={flags} onFlagsChange={changeFlags} />
           )}
         </div>
         {data && state.country && (

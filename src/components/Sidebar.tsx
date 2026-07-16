@@ -90,10 +90,10 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
         className={cn(rowBase, 'h-9', state.view === 'stacking' && rowSelected)}
         onClick={() => onView('stacking')}
       >
-        ⊕ Stacking Plays
+        ⚑ My Flags & Stacking Plays
       </Button>
       <p className="mx-2 mt-1 mb-2 text-[11px] leading-snug text-muted-foreground">
-        Passports that unlock two or more blocs at once.
+        Plant the statuses you hold; see what they unlock and the best next flag.
       </p>
 
       <div className="sticky top-0 z-10 -mx-1 bg-background px-1 pt-1 pb-2">

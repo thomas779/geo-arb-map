@@ -2,6 +2,7 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import type { BlocsData, AppState, Bloc } from './types';
 import { blendColors, displayColor, isDarkTheme } from './lib/color';
+import type { PlantedFlag } from './lib/planner';
 
 interface MicroState {
   iso: string;
@@ -52,9 +53,11 @@ let _currentK = 1;
 
 let _gMap: d3.Selection<SVGGElement, unknown, HTMLElement, unknown>;
 let _gDots: d3.Selection<SVGGElement, unknown, HTMLElement, unknown>;
+let _gFlags: d3.Selection<SVGGElement, unknown, HTMLElement, unknown>;
 let _svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, unknown>;
 let _zoom: d3.ZoomBehavior<SVGSVGElement, unknown>;
 let _featureBounds: Map<string, [[number, number], [number, number]]>;
+let _featureCentroids: Map<string, [number, number]>;
 let _tooltip: HTMLElement;
 let _isReady = false;
 let _pendingRender: (() => void) | null = null;
@@ -81,10 +84,12 @@ export function init(data: BlocsData, onSelect: (iso: string, name: string) => v
   _svg = svg;
   _gMap = svg.append('g');
   _gDots = svg.append('g').attr('class', 'dot-layer');
+  _gFlags = svg.append('g').attr('class', 'flag-layer');
 
   _projection = d3.geoNaturalEarth1();
   _path = d3.geoPath(_projection);
   _featureBounds = new Map();
+  _featureCentroids = new Map();
 
   // Zoom + pan
   _zoom = d3.zoom<SVGSVGElement, unknown>()
@@ -93,6 +98,10 @@ export function init(data: BlocsData, onSelect: (iso: string, name: string) => v
       _currentK = e.transform.k;
       _gMap.attr('transform', e.transform);
       _gDots.attr('transform', e.transform);
+      _gFlags.attr('transform', e.transform);
+      _gFlags.selectAll<SVGTextElement, PlantedFlag>('text')
+        .style('font-size', `${18 / _currentK}px`)
+        .attr('stroke-width', 3 / _currentK);
       // Keep dots and their leader labels at constant screen size
       _gDots.selectAll<SVGCircleElement, MicroState>('circle.micro-dot')
         .attr('r', 5 / _currentK);
@@ -111,7 +120,11 @@ export function init(data: BlocsData, onSelect: (iso: string, name: string) => v
       .each(function (d) {
         // Bounds must be captured AFTER fitSize — they're used for zoom framing
         const id = (d as unknown as { id: number | string }).id;
-        _featureBounds.set(String(id).padStart(3, '0'), _path.bounds(d));
+        const iso = String(id).padStart(3, '0');
+        _featureBounds.set(iso, _path.bounds(d));
+        // Area-weighted centroid — bbox centers break on antimeridian-crossing
+        // features (US/Russia/Fiji), whose boxes span the whole projection.
+        _featureCentroids.set(iso, _path.centroid(d));
       });
     updateDotPositions();
   }
@@ -179,6 +192,46 @@ function updateDotPositions(): void {
   _gDots.selectAll<SVGCircleElement, MicroState>('circle')
     .attr('cx', d => (_projection([d.lon, d.lat]) ?? [0, 0])[0])
     .attr('cy', d => (_projection([d.lon, d.lat]) ?? [0, 0])[1]);
+}
+
+function centroidForIso(iso: string): [number, number] | null {
+  const c = _featureCentroids.get(iso);
+  if (c && isFinite(c[0]) && isFinite(c[1])) return c;
+  const micro = MICRO_STATES.find(m => m.iso === iso);
+  if (micro) return _projection([micro.lon, micro.lat]) ?? null;
+  return null;
+}
+
+/** "Planted" flag glyphs on the map for the user's held statuses. */
+function drawFlags(flags: PlantedFlag[]): void {
+  const placed = flags
+    .map(f => ({ f, pos: centroidForIso(f.iso_n3) }))
+    .filter((x): x is { f: PlantedFlag; pos: [number, number] } => x.pos !== null);
+
+  _gFlags.selectAll<SVGTextElement, { f: PlantedFlag; pos: [number, number] }>('text')
+    .data(placed, d => d.f.iso_n3)
+    .join(
+      enter => enter.append('text')
+        .attr('class', 'flag-pin')
+        .attr('x', d => d.pos[0])
+        .attr('y', d => d.pos[1] - 14)
+        .attr('opacity', 0)
+        .call(t => t.transition().duration(350)
+          .attr('y', d => d.pos[1])
+          .attr('opacity', 1)),
+      update => update
+        .attr('x', d => d.pos[0])
+        .attr('y', d => d.pos[1]),
+      exit => exit.transition().duration(200).attr('opacity', 0).remove(),
+    )
+    .attr('text-anchor', 'middle')
+    .style('font-size', `${18 / _currentK}px`)
+    .attr('fill', d => d.f.status === 'citizen' ? 'var(--map-accent)' : 'var(--map-muted)')
+    .attr('stroke', 'var(--map-ocean)')
+    .attr('stroke-width', 3 / _currentK)
+    .attr('paint-order', 'stroke')
+    .attr('pointer-events', 'none')
+    .text('⚑');
 }
 
 function showDotLeader(d: MicroState): void {
@@ -352,7 +405,7 @@ function paintAll(state: AppState, data: BlocsData): void {
     });
 }
 
-export function render(state: AppState, data: BlocsData): void {
+export function render(state: AppState, data: BlocsData, flags: PlantedFlag[] = []): void {
   const mapEl = document.getElementById('map')!;
   const hint = document.getElementById('hint')!;
 
@@ -368,10 +421,12 @@ export function render(state: AppState, data: BlocsData): void {
   if (!_isReady) {
     _pendingRender = () => {
       paintAll(state, data);
+      drawFlags(flags);
       frameSelection(state, data);
     };
   } else {
     paintAll(state, data);
+    drawFlags(flags);
     frameSelection(state, data);
   }
 }

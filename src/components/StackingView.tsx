@@ -10,14 +10,18 @@ import {
 } from '@/components/ui/accordion';
 import { displayColor } from '@/lib/color';
 import { useTheme } from '@/components/theme-provider';
+import { MyFlags } from '@/components/MyFlags';
+import type { PlantedFlag } from '@/lib/planner';
 
 interface Props {
   data: BlocsData;
   /** null = plain back-to-map; a bloc id = back to map with that bloc selected */
   onBlocSelect: (blocId: string | null) => void;
+  flags: PlantedFlag[];
+  onFlagsChange: (flags: PlantedFlag[]) => void;
 }
 
-export function StackingView({ data, onBlocSelect }: Props) {
+export function StackingView({ data, onBlocSelect, flags, onFlagsChange }: Props) {
   const dark = useTheme().theme === 'dark';
   const blocById = new Map(data.blocs.map(b => [b.id, b]));
 
@@ -27,15 +31,21 @@ export function StackingView({ data, onBlocSelect }: Props) {
         <Button variant="outline" size="sm" onClick={() => onBlocSelect(null)}>
           ← Back to Map
         </Button>
-        <h2 className="text-xl font-bold">Stacking Plays</h2>
+        <h2 className="text-xl font-bold">My Flags</h2>
       </div>
 
+      <MyFlags data={data} flags={flags} onChange={onFlagsChange} />
+
+      <div className="mt-10 mb-3 flex items-baseline gap-3 border-t pt-6">
+        <h3 className="text-base font-bold">Example paths</h3>
+        <span className="text-xs text-muted-foreground">curated stacking plays for inspiration</span>
+      </div>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4">
         {data.stacking_plays.map(play => (
           <Card key={`${play.passport}-${play.timeline}`} className="gap-2 py-4">
             <CardHeader className="px-4">
               <CardTitle className="text-[17px]">{play.passport}</CardTitle>
-              <Badge variant="outline" className="w-fit text-[11px] tabular-nums text-primary">
+              <Badge variant="outline" className="h-auto max-w-full whitespace-normal text-[11px] leading-snug tabular-nums text-primary">
                 {play.timeline}
               </Badge>
             </CardHeader>

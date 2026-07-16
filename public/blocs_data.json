@@ -2286,21 +2286,12 @@
     },
     {
       "passport": "Brazil",
-      "timeline": "1 yr (parent of Brazilian child)",
+      "timeline": "1 yr (Brazilian child) + 2 yrs Spain",
       "blocs": [
         "mercosur",
         "cplp"
       ],
-      "footprint": "South America + Portugal/EU pipeline via CPLP 7-yr track"
-    },
-    {
-      "passport": "Brazil",
-      "timeline": "1 yr (parent of Brazilian child) + 2 yrs Spain",
-      "blocs": [
-        "mercosur",
-        "cplp"
-      ],
-      "footprint": "Brazil-to-EU pipeline: Brazilian citizenship -> Spain's 2-yr Ibero-American naturalization -> full EU/EEA citizenship. Faster than Portugal's 7-yr CPLP track."
+      "footprint": "Brazil-to-EU pipeline: Brazilian citizenship (1 yr as parent of a Brazilian child) -> Spain's 2-yr Ibero-American naturalization -> full EU/EEA citizenship. Beats the 7-yr CPLP route to Portugal, which Brazilian citizenship also unlocks."
     },
     {
       "passport": "Falklands-born",
