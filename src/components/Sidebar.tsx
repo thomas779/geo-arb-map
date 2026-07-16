@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Check } from 'lucide-react';
 import type { AppState, BilateralLane, Bloc, BlocsData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -18,13 +19,13 @@ const CATEGORIES: Array<[Bloc['category'], string]> = [
 ];
 
 /*
- * Row selection uses ONE dedicated treatment: an ink cursor bar (left border)
- * plus the neutral accent tint. Never amber/gold — that belongs to bloc
- * colors and map accents — and never anything else in the sidebar.
+ * Row selection uses the shadcn check-item idiom: the bloc's color swatch
+ * becomes a checked box (white ✓ over the bloc color) and the row fills with
+ * the neutral accent tint. One treatment, used only for selection.
  */
 const rowBase =
-  'h-8 w-full justify-start gap-2 rounded-sm border-l-2 border-l-transparent px-2 text-left text-[13px] font-medium';
-const rowSelected = 'border-l-foreground/80 bg-accent';
+  'h-8 w-full justify-start gap-2 rounded-md px-2 text-left text-[13px] font-medium';
+const rowSelected = 'bg-accent';
 
 /**
  * Destination badge: always "→ " + a label guaranteed short enough not to
@@ -52,6 +53,17 @@ interface Props {
   onBloc: (id: string | null) => void;
   onLane: (id: string | null) => void;
   onView: (v: 'map' | 'stacking') => void;
+}
+
+function Swatch({ color, selected }: { color: string; selected: boolean }) {
+  return (
+    <span
+      className="chip flex items-center justify-center transition-transform duration-150"
+      style={{ background: color, transform: selected ? 'scale(1.15)' : undefined }}
+    >
+      {selected && <Check className="size-2.5 text-white" strokeWidth={3.5} />}
+    </span>
+  );
 }
 
 function CatLabel({ children }: { children: string }) {
@@ -120,7 +132,7 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
                   className={cn(rowBase, state.blocs.includes(b.id) && rowSelected)}
                   onClick={() => onBloc(b.id)}
                 >
-                  <span className="chip" style={{ background: displayColor(b.color, dark) }} />
+                  <Swatch color={displayColor(b.color, dark)} selected={state.blocs.includes(b.id)} />
                   <span className="min-w-0 flex-1 truncate">{b.name}</span>
                   <Badge variant="outline" className="text-[10px] tabular-nums text-muted-foreground">
                     {b.members.length}
@@ -144,7 +156,7 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
                   className={cn(rowBase, state.lane === l.id && rowSelected)}
                   onClick={() => onLane(state.lane === l.id ? null : l.id)}
                 >
-                  <span className="chip" style={{ background: displayColor(l.color, dark) }} />
+                  <Swatch color={displayColor(l.color, dark)} selected={state.lane === l.id} />
                   <span className="min-w-0 flex-1 truncate">{l.name}</span>
                   <Badge variant="outline" className="whitespace-nowrap text-[10px] text-muted-foreground">
                     → {destShort(l)}

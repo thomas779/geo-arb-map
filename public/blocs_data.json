@@ -61,7 +61,7 @@
       "name": "EU / EEA (+ Switzerland)",
       "category": "full",
       "strength": 1,
-      "color": "#3B6FB5",
+      "color": "#4A7DBF",
       "members": [
         {
           "name": "Austria",
@@ -201,7 +201,7 @@
       "name": "Mercosur Residence Agreement",
       "category": "full",
       "strength": 1,
-      "color": "#2E9E6B",
+      "color": "#4C99D3",
       "members": [
         {
           "name": "Argentina",
@@ -253,7 +253,7 @@
       "name": "Andean Community (CAN)",
       "category": "full",
       "strength": 1,
-      "color": "#7BB662",
+      "color": "#1187B4",
       "members": [
         {
           "name": "Bolivia",
@@ -285,7 +285,7 @@
       "name": "Eurasian Economic Union (EAEU)",
       "category": "full",
       "strength": 2,
-      "color": "#8E6BB5",
+      "color": "#1CA2C3",
       "members": [
         {
           "name": "Armenia",
@@ -321,7 +321,7 @@
       "name": "Union State (Russia-Belarus)",
       "category": "full",
       "strength": 1,
-      "color": "#A85D5D",
+      "color": "#009174",
       "members": [
         {
           "name": "Russia",
@@ -345,7 +345,7 @@
       "name": "Trans-Tasman Travel Arrangement",
       "category": "full",
       "strength": 1,
-      "color": "#C25B8A",
+      "color": "#44A87C",
       "members": [
         {
           "name": "Australia",
@@ -369,7 +369,7 @@
       "name": "Common Travel Area (CTA)",
       "category": "full",
       "strength": 1,
-      "color": "#4FA3A5",
+      "color": "#408F57",
       "members": [
         {
           "name": "Ireland",
@@ -405,7 +405,7 @@
       "name": "OECS (Eastern Caribbean)",
       "category": "full",
       "strength": 1,
-      "color": "#E0A93E",
+      "color": "#6AA35F",
       "members": [
         {
           "name": "Antigua and Barbuda",
@@ -449,7 +449,7 @@
       "name": "CARICOM Single Market (CSME)",
       "category": "partial",
       "strength": 2,
-      "color": "#D97A45",
+      "color": "#B68B16",
       "members": [
         {
           "name": "Antigua and Barbuda",
@@ -522,7 +522,7 @@
       "name": "East African Community (EAC)",
       "category": "partial",
       "strength": 2,
-      "color": "#B5443B",
+      "color": "#AC6600",
       "members": [
         {
           "name": "Burundi",
@@ -570,7 +570,7 @@
       "name": "Nordic Passport Union (NPU)",
       "category": "full",
       "strength": 2,
-      "color": "#5C7FA3",
+      "color": "#65893B",
       "members": [
         {
           "name": "Denmark",
@@ -614,7 +614,7 @@
       "name": "ECOWAS (West Africa)",
       "category": "partial",
       "strength": 2,
-      "color": "#9E7B3C",
+      "color": "#CC7044",
       "members": [
         {
           "name": "Benin",
@@ -692,7 +692,7 @@
       "name": "Gulf Cooperation Council (GCC)",
       "category": "closed",
       "strength": 1,
-      "color": "#6B8E5A",
+      "color": "#B85D50",
       "members": [
         {
           "name": "Bahrain",
@@ -732,7 +732,7 @@
       "name": "Compact of Free Association (CoFA)",
       "category": "closed",
       "strength": 2,
-      "color": "#5A8E8A",
+      "color": "#D1717A",
       "members": [
         {
           "name": "United States of America",
@@ -764,7 +764,7 @@
       "name": "India-Nepal Treaty (1950)",
       "category": "closed",
       "strength": 1,
-      "color": "#B5763B",
+      "color": "#A74F6D",
       "members": [
         {
           "name": "India",
@@ -788,7 +788,7 @@
       "name": "India-Bhutan Treaty (1949)",
       "category": "closed",
       "strength": 1,
-      "color": "#8A6E4B",
+      "color": "#C270A0",
       "members": [
         {
           "name": "India",
@@ -812,7 +812,7 @@
       "name": "CPLP (Portuguese-speaking countries)",
       "category": "hub_spoke",
       "strength": 2,
-      "color": "#3E8E7E",
+      "color": "#799542",
       "members": [
         {
           "name": "Brazil",
@@ -864,7 +864,7 @@
       "name": "UK-Hong Kong BN(O) Route",
       "category": "one_way",
       "strength": 2,
-      "color": "#C77B4A",
+      "color": "#937FCC",
       "members": [
         {
           "name": "United Kingdom",
@@ -888,7 +888,7 @@
       "name": "UK & Overseas Territories",
       "category": "one_way",
       "strength": 2,
-      "color": "#7E6A9E",
+      "color": "#8C5DA1",
       "members": [
         {
           "name": "United Kingdom",
@@ -948,7 +948,7 @@
       "name": "Cross-Strait & SAR Permits (Greater China)",
       "category": "one_way",
       "strength": 2,
-      "color": "#A34F6E",
+      "color": "#BD76AE",
       "members": [
         {
           "name": "China",
@@ -980,7 +980,7 @@
       "name": "ASEAN (proto)",
       "category": "proto",
       "strength": 3,
-      "color": "#7A7A8C",
+      "color": "#627486",
       "members": [
         {
           "name": "Brunei",
@@ -1036,7 +1036,7 @@
       "name": "Central America Four (CA-4)",
       "category": "proto",
       "strength": 3,
-      "color": "#8C8C7A",
+      "color": "#77889B",
       "members": [
         {
           "name": "Guatemala",
@@ -1068,7 +1068,7 @@
       "name": "Pacific Alliance (proto)",
       "category": "proto",
       "strength": 3,
-      "color": "#7A8C8C",
+      "color": "#8B9EB1",
       "members": [
         {
           "name": "Chile",
@@ -1100,7 +1100,7 @@
     {
       "id": "tn_usmca",
       "name": "TN (USMCA professionals)",
-      "color": "#5B8FA8",
+      "color": "#977E0D",
       "destination": {
         "name": "United States of America",
         "iso_n3": "840"
@@ -1122,7 +1122,7 @@
     {
       "id": "e3",
       "name": "E-3 (Australians)",
-      "color": "#A8825B",
+      "color": "#B59432",
       "destination": {
         "name": "United States of America",
         "iso_n3": "840"
@@ -1140,7 +1140,7 @@
     {
       "id": "h1b1",
       "name": "H-1B1 (Chile & Singapore)",
-      "color": "#7FA85B",
+      "color": "#A07A0C",
       "destination": {
         "name": "United States of America",
         "iso_n3": "840"
@@ -1162,7 +1162,7 @@
     {
       "id": "e2",
       "name": "E-2 Treaty Investor",
-      "color": "#A85B8F",
+      "color": "#BE8F34",
       "destination": {
         "name": "United States of America",
         "iso_n3": "840"
@@ -1492,7 +1492,7 @@
     {
       "id": "spain_iberoamerican",
       "name": "Spain 2-year naturalization (Ibero-American)",
-      "color": "#C94F3D",
+      "color": "#A97515",
       "destination": {
         "name": "Spain",
         "iso_n3": "724"
@@ -1567,7 +1567,7 @@
     {
       "id": "uk_yms_expanded",
       "name": "UK Youth Mobility (expanded AU/CA/NZ tier)",
-      "color": "#4F7FC9",
+      "color": "#C68B3A",
       "destination": {
         "name": "United Kingdom",
         "iso_n3": "826"
@@ -1594,7 +1594,7 @@
     {
       "id": "uk_ancestry",
       "name": "UK Ancestry visa",
-      "color": "#6FA88F",
+      "color": "#B76896",
       "destination": {
         "name": "United Kingdom",
         "iso_n3": "826"
@@ -1608,7 +1608,7 @@
     {
       "id": "falklands_argentina",
       "name": "Argentina citizenship claim (Falklands-born)",
-      "color": "#6E9E5A",
+      "color": "#B07021",
       "destination": {
         "name": "Argentina",
         "iso_n3": "032"
@@ -1627,7 +1627,7 @@
     {
       "id": "daft",
       "name": "Dutch-American Friendship Treaty (DAFT)",
-      "color": "#B0A04F",
+      "color": "#CD8643",
       "destination": {
         "name": "Netherlands",
         "iso_n3": "528"
@@ -1645,7 +1645,7 @@
     {
       "id": "australia_pev",
       "name": "Australia Pacific Engagement Visa",
-      "color": "#C98A4F",
+      "color": "#B56B2E",
       "destination": {
         "name": "Australia",
         "iso_n3": "036"
@@ -1705,7 +1705,7 @@
     {
       "id": "nz_samoan_quota",
       "name": "NZ Samoan Quota",
-      "color": "#5FA8A0",
+      "color": "#D2824E",
       "destination": {
         "name": "New Zealand",
         "iso_n3": "554"
@@ -1729,7 +1729,7 @@
     {
       "id": "nz_pacific_access",
       "name": "NZ Pacific Access Category",
-      "color": "#4F9EC9",
+      "color": "#B9683B",
       "destination": {
         "name": "New Zealand",
         "iso_n3": "554"
@@ -1765,7 +1765,7 @@
     {
       "id": "nz_realm",
       "name": "NZ Realm citizenship (Cook Is/Niue/Tokelau)",
-      "color": "#7FB35A",
+      "color": "#D67E5A",
       "destination": {
         "name": "New Zealand",
         "iso_n3": "554"
@@ -1797,7 +1797,7 @@
     {
       "id": "france_algeria",
       "name": "France-Algeria 1968 Accord",
-      "color": "#B5685A",
+      "color": "#BC6449",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1821,7 +1821,7 @@
     {
       "id": "monaco_france",
       "name": "Monaco-France free establishment",
-      "color": "#C94F8E",
+      "color": "#D87B67",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1845,7 +1845,7 @@
     {
       "id": "japan_epa_careworkers",
       "name": "Japan EPA nurse/careworker lanes",
-      "color": "#6E7FC9",
+      "color": "#BD6256",
       "destination": {
         "name": "Japan",
         "iso_n3": "392"
@@ -1879,7 +1879,7 @@
     {
       "id": "france_morocco",
       "name": "France-Morocco 1987 Accord",
-      "color": "#4FA36E",
+      "color": "#D87974",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1903,7 +1903,7 @@
     {
       "id": "france_tunisia",
       "name": "France-Tunisia 1988 Accord",
-      "color": "#A36E4F",
+      "color": "#BD6063",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1928,7 +1928,7 @@
     {
       "id": "france_senegal",
       "name": "France-Senegal conventions package",
-      "color": "#4F6EA3",
+      "color": "#D87781",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1953,7 +1953,7 @@
     {
       "id": "france_gabon",
       "name": "France-Gabon conventions package",
-      "color": "#6EA34F",
+      "color": "#BC5F70",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1978,7 +1978,7 @@
     {
       "id": "andorra_conventions",
       "name": "Andorra mobility conventions (ES/FR/PT)",
-      "color": "#A34F4F",
+      "color": "#D5778E",
       "destination": {
         "name": "Andorra",
         "iso_n3": "020"
@@ -2012,7 +2012,7 @@
     {
       "id": "israel_law_of_return",
       "name": "Israel Law of Return",
-      "color": "#3FA9A0",
+      "color": "#9C5587",
       "destination": {
         "name": "Israel",
         "iso_n3": "376"
@@ -2032,7 +2032,7 @@
     {
       "id": "poland_karta_polaka",
       "name": "Poland Karta Polaka",
-      "color": "#C95F5F",
+      "color": "#C37DB6",
       "destination": {
         "name": "Poland",
         "iso_n3": "616"
@@ -2052,7 +2052,7 @@
     {
       "id": "hungary_simplified",
       "name": "Hungary simplified naturalization",
-      "color": "#6EC98A",
+      "color": "#AB6CAA",
       "destination": {
         "name": "Hungary",
         "iso_n3": "348"
@@ -2071,7 +2071,7 @@
     {
       "id": "germany_spaetaussiedler",
       "name": "Germany Spataussiedler route",
-      "color": "#A0A05A",
+      "color": "#905999",
       "destination": {
         "name": "Germany",
         "iso_n3": "276"
@@ -2091,7 +2091,7 @@
     {
       "id": "kazakhstan_qandas",
       "name": "Kazakhstan Qandas status",
-      "color": "#C9B04F",
+      "color": "#B482C8",
       "destination": {
         "name": "Kazakhstan",
         "iso_n3": "398"
@@ -2112,7 +2112,7 @@
     {
       "id": "russia_compatriot",
       "name": "Russia Compatriot Resettlement",
-      "color": "#8E5AB5",
+      "color": "#9B71BA",
       "destination": {
         "name": "Russia",
         "iso_n3": "643"
@@ -2132,7 +2132,7 @@
     {
       "id": "korea_f4",
       "name": "South Korea F-4 Overseas Korean",
-      "color": "#5A8EC9",
+      "color": "#805FA8",
       "destination": {
         "name": "South Korea",
         "iso_n3": "410"
@@ -2151,7 +2151,7 @@
     {
       "id": "japan_nikkei",
       "name": "Japan Nikkei Long-Term Resident",
-      "color": "#B55A8E",
+      "color": "#A188D6",
       "destination": {
         "name": "Japan",
         "iso_n3": "392"
@@ -2171,7 +2171,7 @@
     {
       "id": "india_oci",
       "name": "India OCI (Overseas Citizen of India)",
-      "color": "#E08A3E",
+      "color": "#8978C5",
       "destination": {
         "name": "India",
         "iso_n3": "356"
@@ -2192,7 +2192,7 @@
     {
       "id": "ireland_fbr",
       "name": "Ireland Foreign Births Register",
-      "color": "#3E8E4F",
+      "color": "#6D66B1",
       "destination": {
         "name": "Ireland",
         "iso_n3": "372"
@@ -2211,7 +2211,7 @@
     {
       "id": "italy_jure_sanguinis",
       "name": "Italy jure sanguinis (post-2025)",
-      "color": "#5AB56E",
+      "color": "#8C8FDE",
       "destination": {
         "name": "Italy",
         "iso_n3": "380"
@@ -2230,7 +2230,7 @@
     {
       "id": "armenia_ethnic",
       "name": "Armenia ethnic-Armenian citizenship",
-      "color": "#B58E5A",
+      "color": "#727FCB",
       "destination": {
         "name": "Armenia",
         "iso_n3": "051"
@@ -2367,25 +2367,11 @@
   ],
   "dual_citizenship": {
     "countries": {
-      "392": {
+      "156": {
         "status": "banned",
-        "note": "Japan: naturalization requires renouncing prior citizenship.",
+        "note": "China (PRC): dual nationality not recognized.",
         "sources": [
-          "Japan Nationality Act Art. 5"
-        ]
-      },
-      "356": {
-        "status": "banned",
-        "note": "India: no dual citizenship; OCI is a quasi-status, not nationality.",
-        "sources": [
-          "Indian Citizenship Act"
-        ]
-      },
-      "398": {
-        "status": "banned",
-        "note": "Kazakhstan: dual citizenship prohibited, incl. for kandas.",
-        "sources": [
-          "eGov.kz citizenship guidance"
+          "PRC Nationality Law Art. 3"
         ]
       },
       "180": {
@@ -2395,11 +2381,25 @@
           "DRC nationality law"
         ]
       },
-      "156": {
+      "356": {
         "status": "banned",
-        "note": "China (PRC): dual nationality not recognized.",
+        "note": "India: no dual citizenship; OCI is a quasi-status, not nationality.",
         "sources": [
-          "PRC Nationality Law Art. 3"
+          "Indian Citizenship Act"
+        ]
+      },
+      "392": {
+        "status": "banned",
+        "note": "Japan: naturalization requires renouncing prior citizenship.",
+        "sources": [
+          "Japan Nationality Act Art. 5"
+        ]
+      },
+      "398": {
+        "status": "banned",
+        "note": "Kazakhstan: dual citizenship prohibited, incl. for kandas.",
+        "sources": [
+          "eGov.kz citizenship guidance"
         ]
       },
       "643": {
