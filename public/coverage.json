@@ -3,9 +3,9 @@
     "description": "Research-coverage matrix over the canonical registry (M49-style sovereigns + territory supplement): which jurisdictions have been checked for privileged settlement arrangements. States: verified | verified_none | partial | unchecked.",
     "last_updated": "2026-07-16",
     "counts": {
-      "unchecked": 69,
-      "partial": 166,
-      "verified_none": 4
+      "unchecked": 54,
+      "partial": 183,
+      "verified_none": 2
     }
   },
   "rows": [
@@ -27,8 +27,9 @@
       "iso_n3": "008",
       "name": "Albania",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "012",
@@ -73,9 +74,9 @@
       "iso_n3": "031",
       "name": "Azerbaijan",
       "type": "sovereign",
-      "state": "verified_none",
+      "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "Azerbaijan: Turkey-Azerbaijan is visa-free/ID-card travel only; no settlement lane verified. No Turan visa instrument in force.",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Gray-zone: Azerbaijan: Turkey-Azerbaijan is visa-free/ID-card travel only; no settlement lane verified. No Turan visa instrument in force.",
       "sources": [
         "Turkish official travel guidance"
       ]
@@ -123,8 +124,9 @@
       "iso_n3": "050",
       "name": "Bangladesh",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "051",
@@ -178,8 +180,9 @@
       "iso_n3": "070",
       "name": "Bosnia and Herz.",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "072",
@@ -281,7 +284,7 @@
       "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "Cameroon: France package real but 2009 accord narrower (pending_verification). CEMAC travel implemented; residence/establishment not.",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Cameroon: France package real but 2009 accord narrower (pending_verification). CEMAC travel implemented; residence/establishment not.",
       "sources": [
         "Batch-2 Francophone run"
       ]
@@ -325,8 +328,9 @@
       "iso_n3": "144",
       "name": "Sri Lanka",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "148",
@@ -387,7 +391,7 @@
       "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "Congo: France-Congo accords could not be verified at settlement grade in this sweep; may exist as narrower labor channels.",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Congo: France-Congo accords could not be verified at settlement grade in this sweep; may exist as narrower labor channels.",
       "sources": [
         "Batch-2 coverage statement"
       ]
@@ -412,8 +416,9 @@
       "iso_n3": "188",
       "name": "Costa Rica",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "191",
@@ -511,8 +516,9 @@
       "iso_n3": "231",
       "name": "Ethiopia",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "232",
@@ -616,9 +622,9 @@
       "iso_n3": "268",
       "name": "Georgia",
       "type": "sovereign",
-      "state": "verified_none",
+      "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "Georgia: 1-yr visa-free stay is generous but unilateral visa policy, not a settlement privilege.",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Gray-zone: Georgia: 1-yr visa-free stay is generous but unilateral visa policy, not a settlement privilege.",
       "sources": [
         "Georgian government visa-exemption list"
       ]
@@ -875,8 +881,9 @@
       "iso_n3": "400",
       "name": "Jordan",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "404",
@@ -1075,7 +1082,7 @@
       "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "Mongolia: ethnic-return process fragments found, but no clean primary-law text comparable to Kazakhstan kandas.",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Mongolia: ethnic-return process fragments found, but no clean primary-law text comparable to Kazakhstan kandas.",
       "sources": [
         "Batch-2 coverage statement"
       ]
@@ -1084,15 +1091,17 @@
       "iso_n3": "498",
       "name": "Moldova",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "499",
       "name": "Montenegro",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "500",
@@ -1283,15 +1292,17 @@
       "iso_n3": "586",
       "name": "Pakistan",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "591",
       "name": "Panama",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "598",
@@ -1505,8 +1516,9 @@
       "iso_n3": "688",
       "name": "Serbia",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "690",
@@ -1763,22 +1775,25 @@
       "iso_n3": "804",
       "name": "Ukraine",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "807",
       "name": "Macedonia",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "818",
       "name": "Egypt",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "826",

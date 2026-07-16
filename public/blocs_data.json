@@ -9,17 +9,50 @@
       "CIT": "What full citizenship adds"
     },
     "excluded": [
-      {"name": "Singapore-Malaysia", "reason": "Work-pass facilitation and a border CIQ arrangement only; no mutual settlement rights."},
-      {"name": "SADC Free Movement Protocol", "reason": "Signed 2005 but never ratified by the required two-thirds of members; not in force."},
-      {"name": "COMESA Free Movement Protocol", "reason": "Adopted 1998; only Burundi has ratified; not in force."},
-      {"name": "MSG Skills Movement Scheme (Melanesia)", "reason": "Temporary skilled-worker quota only (400/country); no settlement rights and no recorded uptake."},
-      {"name": "AU-wide Free Movement Protocol", "reason": "Adopted 2018; insufficient ratifications to take legal effect continent-wide."},
-      {"name": "Schengen Area", "reason": "Travel/border arrangement, not a settlement-rights regime (settlement rights come from EU/EEA)."},
-      {"name": "India-Sri Lanka", "reason": "1954 Indo-Lanka Agreement covers only a registered legacy population (Indian-origin Tamils), not general citizens. 2024 visa-free entry for Indians is 30-day tourism, not settlement."},
-      {"name": "Svalbard Treaty open access", "reason": "Treaty nationals may live/work in Svalbard indefinitely, but it confers zero rights in mainland Norway - no settlement path, so out of scope."},
-      {"name": "San Marino-Italy", "reason": "De facto border openness confirmed, but the full reciprocal settlement-rights package could not be verified from primary sources."},
-      {"name": "Turkey-Northern Cyprus", "reason": "No clear primary legal source showing a formal privileged settlement lane on the Turkish side."},
-      {"name": "Portugal Sephardic naturalization", "reason": "Route narrowed/closed to new applicants - no longer operative as a live fast lane."}
+      {
+        "name": "Singapore-Malaysia",
+        "reason": "Work-pass facilitation and a border CIQ arrangement only; no mutual settlement rights."
+      },
+      {
+        "name": "SADC Free Movement Protocol",
+        "reason": "Signed 2005 but never ratified by the required two-thirds of members; not in force."
+      },
+      {
+        "name": "COMESA Free Movement Protocol",
+        "reason": "Adopted 1998; only Burundi has ratified; not in force."
+      },
+      {
+        "name": "MSG Skills Movement Scheme (Melanesia)",
+        "reason": "Temporary skilled-worker quota only (400/country); no settlement rights and no recorded uptake."
+      },
+      {
+        "name": "AU-wide Free Movement Protocol",
+        "reason": "Adopted 2018; insufficient ratifications to take legal effect continent-wide."
+      },
+      {
+        "name": "Schengen Area",
+        "reason": "Travel/border arrangement, not a settlement-rights regime (settlement rights come from EU/EEA)."
+      },
+      {
+        "name": "India-Sri Lanka",
+        "reason": "1954 Indo-Lanka Agreement covers only a registered legacy population (Indian-origin Tamils), not general citizens. 2024 visa-free entry for Indians is 30-day tourism, not settlement."
+      },
+      {
+        "name": "Svalbard Treaty open access",
+        "reason": "Treaty nationals may live/work in Svalbard indefinitely, but it confers zero rights in mainland Norway - no settlement path, so out of scope."
+      },
+      {
+        "name": "San Marino-Italy",
+        "reason": "De facto border openness confirmed, but the full reciprocal settlement-rights package could not be verified from primary sources."
+      },
+      {
+        "name": "Turkey-Northern Cyprus",
+        "reason": "No clear primary legal source showing a formal privileged settlement lane on the Turkish side."
+      },
+      {
+        "name": "Portugal Sephardic naturalization",
+        "reason": "Route narrowed/closed to new applicants - no longer operative as a live fast lane."
+      }
     ]
   },
   "blocs": [
@@ -30,22 +63,130 @@
       "strength": 1,
       "color": "#3B6FB5",
       "members": [
-        {"name": "Austria", "iso_n3": "040"}, {"name": "Belgium", "iso_n3": "056"},
-        {"name": "Bulgaria", "iso_n3": "100"}, {"name": "Croatia", "iso_n3": "191"},
-        {"name": "Cyprus", "iso_n3": "196"}, {"name": "Czechia", "iso_n3": "203"},
-        {"name": "Denmark", "iso_n3": "208"}, {"name": "Estonia", "iso_n3": "233"},
-        {"name": "Finland", "iso_n3": "246"}, {"name": "France", "iso_n3": "250"},
-        {"name": "Germany", "iso_n3": "276"}, {"name": "Greece", "iso_n3": "300"},
-        {"name": "Hungary", "iso_n3": "348"}, {"name": "Ireland", "iso_n3": "372"},
-        {"name": "Italy", "iso_n3": "380"}, {"name": "Latvia", "iso_n3": "428"},
-        {"name": "Lithuania", "iso_n3": "440"}, {"name": "Luxembourg", "iso_n3": "442"},
-        {"name": "Malta", "iso_n3": "470"}, {"name": "Netherlands", "iso_n3": "528"},
-        {"name": "Poland", "iso_n3": "616"}, {"name": "Portugal", "iso_n3": "620"},
-        {"name": "Romania", "iso_n3": "642"}, {"name": "Slovakia", "iso_n3": "703"},
-        {"name": "Slovenia", "iso_n3": "705"}, {"name": "Spain", "iso_n3": "724"},
-        {"name": "Sweden", "iso_n3": "752"}, {"name": "Iceland", "iso_n3": "352"},
-        {"name": "Liechtenstein", "iso_n3": "438"}, {"name": "Norway", "iso_n3": "578"},
-        {"name": "Switzerland", "iso_n3": "756"}
+        {
+          "name": "Austria",
+          "iso_n3": "040"
+        },
+        {
+          "name": "Belgium",
+          "iso_n3": "056"
+        },
+        {
+          "name": "Bulgaria",
+          "iso_n3": "100"
+        },
+        {
+          "name": "Croatia",
+          "iso_n3": "191"
+        },
+        {
+          "name": "Cyprus",
+          "iso_n3": "196"
+        },
+        {
+          "name": "Czechia",
+          "iso_n3": "203"
+        },
+        {
+          "name": "Denmark",
+          "iso_n3": "208"
+        },
+        {
+          "name": "Estonia",
+          "iso_n3": "233"
+        },
+        {
+          "name": "Finland",
+          "iso_n3": "246"
+        },
+        {
+          "name": "France",
+          "iso_n3": "250"
+        },
+        {
+          "name": "Germany",
+          "iso_n3": "276"
+        },
+        {
+          "name": "Greece",
+          "iso_n3": "300"
+        },
+        {
+          "name": "Hungary",
+          "iso_n3": "348"
+        },
+        {
+          "name": "Ireland",
+          "iso_n3": "372"
+        },
+        {
+          "name": "Italy",
+          "iso_n3": "380"
+        },
+        {
+          "name": "Latvia",
+          "iso_n3": "428"
+        },
+        {
+          "name": "Lithuania",
+          "iso_n3": "440"
+        },
+        {
+          "name": "Luxembourg",
+          "iso_n3": "442"
+        },
+        {
+          "name": "Malta",
+          "iso_n3": "470"
+        },
+        {
+          "name": "Netherlands",
+          "iso_n3": "528"
+        },
+        {
+          "name": "Poland",
+          "iso_n3": "616"
+        },
+        {
+          "name": "Portugal",
+          "iso_n3": "620"
+        },
+        {
+          "name": "Romania",
+          "iso_n3": "642"
+        },
+        {
+          "name": "Slovakia",
+          "iso_n3": "703"
+        },
+        {
+          "name": "Slovenia",
+          "iso_n3": "705"
+        },
+        {
+          "name": "Spain",
+          "iso_n3": "724"
+        },
+        {
+          "name": "Sweden",
+          "iso_n3": "752"
+        },
+        {
+          "name": "Iceland",
+          "iso_n3": "352"
+        },
+        {
+          "name": "Liechtenstein",
+          "iso_n3": "438"
+        },
+        {
+          "name": "Norway",
+          "iso_n3": "578"
+        },
+        {
+          "name": "Switzerland",
+          "iso_n3": "756"
+        }
       ],
       "rights": {
         "TR": "National-level only; no bloc-wide rights from a first-country TR.",
@@ -62,11 +203,42 @@
       "strength": 1,
       "color": "#2E9E6B",
       "members": [
-        {"name": "Argentina", "iso_n3": "032"}, {"name": "Bolivia", "iso_n3": "068"},
-        {"name": "Brazil", "iso_n3": "076"}, {"name": "Chile", "iso_n3": "152"},
-        {"name": "Colombia", "iso_n3": "170"}, {"name": "Ecuador", "iso_n3": "218"},
-        {"name": "Paraguay", "iso_n3": "600"}, {"name": "Peru", "iso_n3": "604"},
-        {"name": "Uruguay", "iso_n3": "858"}
+        {
+          "name": "Argentina",
+          "iso_n3": "032"
+        },
+        {
+          "name": "Bolivia",
+          "iso_n3": "068"
+        },
+        {
+          "name": "Brazil",
+          "iso_n3": "076"
+        },
+        {
+          "name": "Chile",
+          "iso_n3": "152"
+        },
+        {
+          "name": "Colombia",
+          "iso_n3": "170"
+        },
+        {
+          "name": "Ecuador",
+          "iso_n3": "218"
+        },
+        {
+          "name": "Paraguay",
+          "iso_n3": "600"
+        },
+        {
+          "name": "Peru",
+          "iso_n3": "604"
+        },
+        {
+          "name": "Uruguay",
+          "iso_n3": "858"
+        }
       ],
       "rights": {
         "TR": "Any member-state citizen can obtain residency in another member on nationality alone (clean criminal record required).",
@@ -83,8 +255,22 @@
       "strength": 1,
       "color": "#7BB662",
       "members": [
-        {"name": "Bolivia", "iso_n3": "068"}, {"name": "Colombia", "iso_n3": "170"},
-        {"name": "Ecuador", "iso_n3": "218"}, {"name": "Peru", "iso_n3": "604"}
+        {
+          "name": "Bolivia",
+          "iso_n3": "068"
+        },
+        {
+          "name": "Colombia",
+          "iso_n3": "170"
+        },
+        {
+          "name": "Ecuador",
+          "iso_n3": "218"
+        },
+        {
+          "name": "Peru",
+          "iso_n3": "604"
+        }
       ],
       "rights": {
         "TR": "Nationality-based residency rights similar to Mercosur.",
@@ -101,9 +287,26 @@
       "strength": 2,
       "color": "#8E6BB5",
       "members": [
-        {"name": "Armenia", "iso_n3": "051"}, {"name": "Belarus", "iso_n3": "112"},
-        {"name": "Kazakhstan", "iso_n3": "398"}, {"name": "Kyrgyzstan", "iso_n3": "417"},
-        {"name": "Russia", "iso_n3": "643"}
+        {
+          "name": "Armenia",
+          "iso_n3": "051"
+        },
+        {
+          "name": "Belarus",
+          "iso_n3": "112"
+        },
+        {
+          "name": "Kazakhstan",
+          "iso_n3": "398"
+        },
+        {
+          "name": "Kyrgyzstan",
+          "iso_n3": "417"
+        },
+        {
+          "name": "Russia",
+          "iso_n3": "643"
+        }
       ],
       "rights": {
         "TR": "Free movement of labor, mutual recognition of qualifications for member-state citizens.",
@@ -120,7 +323,14 @@
       "strength": 1,
       "color": "#A85D5D",
       "members": [
-        {"name": "Russia", "iso_n3": "643"}, {"name": "Belarus", "iso_n3": "112"}
+        {
+          "name": "Russia",
+          "iso_n3": "643"
+        },
+        {
+          "name": "Belarus",
+          "iso_n3": "112"
+        }
       ],
       "rights": {
         "TR": "Nationality-based: citizens of either state may reside in the other without normal immigration procedures (1999 treaty, in force 2000).",
@@ -137,7 +347,14 @@
       "strength": 1,
       "color": "#C25B8A",
       "members": [
-        {"name": "Australia", "iso_n3": "036"}, {"name": "New Zealand", "iso_n3": "554"}
+        {
+          "name": "Australia",
+          "iso_n3": "036"
+        },
+        {
+          "name": "New Zealand",
+          "iso_n3": "554"
+        }
       ],
       "rights": {
         "TR": "Not applicable; rights attach to citizenship.",
@@ -154,9 +371,26 @@
       "strength": 1,
       "color": "#4FA3A5",
       "members": [
-        {"name": "Ireland", "iso_n3": "372"}, {"name": "United Kingdom", "iso_n3": "826"},
-        {"name": "Guernsey", "iso_n3": "831"}, {"name": "Jersey", "iso_n3": "832"},
-        {"name": "Isle of Man", "iso_n3": "833"}
+        {
+          "name": "Ireland",
+          "iso_n3": "372"
+        },
+        {
+          "name": "United Kingdom",
+          "iso_n3": "826"
+        },
+        {
+          "name": "Guernsey",
+          "iso_n3": "831"
+        },
+        {
+          "name": "Jersey",
+          "iso_n3": "832"
+        },
+        {
+          "name": "Isle of Man",
+          "iso_n3": "833"
+        }
       ],
       "rights": {
         "TR": "Not applicable; rights attach to citizenship.",
@@ -173,10 +407,34 @@
       "strength": 1,
       "color": "#E0A93E",
       "members": [
-        {"name": "Antigua and Barbuda", "iso_n3": "028"}, {"name": "Dominica", "iso_n3": "212"},
-        {"name": "Grenada", "iso_n3": "308"}, {"name": "St. Kitts and Nevis", "iso_n3": "659"},
-        {"name": "St. Lucia", "iso_n3": "662"}, {"name": "St. Vincent and the Grenadines", "iso_n3": "670"},
-        {"name": "Montserrat", "iso_n3": "500"}
+        {
+          "name": "Antigua and Barbuda",
+          "iso_n3": "028"
+        },
+        {
+          "name": "Dominica",
+          "iso_n3": "212"
+        },
+        {
+          "name": "Grenada",
+          "iso_n3": "308"
+        },
+        {
+          "name": "St. Kitts and Nevis",
+          "iso_n3": "659"
+        },
+        {
+          "name": "St. Lucia",
+          "iso_n3": "662"
+        },
+        {
+          "name": "St. Vincent and the Grenadines",
+          "iso_n3": "670"
+        },
+        {
+          "name": "Montserrat",
+          "iso_n3": "500"
+        }
       ],
       "rights": {
         "TR": "Not the main mechanism.",
@@ -193,12 +451,54 @@
       "strength": 2,
       "color": "#D97A45",
       "members": [
-        {"name": "Antigua and Barbuda", "iso_n3": "028"}, {"name": "Barbados", "iso_n3": "052"},
-        {"name": "Belize", "iso_n3": "084"}, {"name": "Dominica", "iso_n3": "212"},
-        {"name": "Grenada", "iso_n3": "308"}, {"name": "Guyana", "iso_n3": "328"},
-        {"name": "Jamaica", "iso_n3": "388"}, {"name": "St. Kitts and Nevis", "iso_n3": "659"},
-        {"name": "St. Lucia", "iso_n3": "662"}, {"name": "St. Vincent and the Grenadines", "iso_n3": "670"},
-        {"name": "Suriname", "iso_n3": "740"}, {"name": "Trinidad and Tobago", "iso_n3": "780"}
+        {
+          "name": "Antigua and Barbuda",
+          "iso_n3": "028"
+        },
+        {
+          "name": "Barbados",
+          "iso_n3": "052"
+        },
+        {
+          "name": "Belize",
+          "iso_n3": "084"
+        },
+        {
+          "name": "Dominica",
+          "iso_n3": "212"
+        },
+        {
+          "name": "Grenada",
+          "iso_n3": "308"
+        },
+        {
+          "name": "Guyana",
+          "iso_n3": "328"
+        },
+        {
+          "name": "Jamaica",
+          "iso_n3": "388"
+        },
+        {
+          "name": "St. Kitts and Nevis",
+          "iso_n3": "659"
+        },
+        {
+          "name": "St. Lucia",
+          "iso_n3": "662"
+        },
+        {
+          "name": "St. Vincent and the Grenadines",
+          "iso_n3": "670"
+        },
+        {
+          "name": "Suriname",
+          "iso_n3": "740"
+        },
+        {
+          "name": "Trinidad and Tobago",
+          "iso_n3": "780"
+        }
       ],
       "rights": {
         "TR": "Skills Certificate holders (12 approved worker categories) can work indefinitely without a permit. Not a general residency right.",
@@ -209,7 +509,12 @@
       "notes": "Oct 2025 'Enhanced Cooperation': Barbados, Belize, Dominica, SVG now give each other's citizens full free movement without a Skills Certificate.",
       "sub_bloc": {
         "name": "Enhanced Cooperation Four (2025)",
-        "members_iso": ["052", "084", "212", "670"]
+        "members_iso": [
+          "052",
+          "084",
+          "212",
+          "670"
+        ]
       }
     },
     {
@@ -219,10 +524,38 @@
       "strength": 2,
       "color": "#B5443B",
       "members": [
-        {"name": "Burundi", "iso_n3": "108"}, {"name": "DR Congo", "iso_n3": "180"},
-        {"name": "Kenya", "iso_n3": "404"}, {"name": "Rwanda", "iso_n3": "646"},
-        {"name": "Somalia", "iso_n3": "706"}, {"name": "South Sudan", "iso_n3": "728"},
-        {"name": "Tanzania", "iso_n3": "834"}, {"name": "Uganda", "iso_n3": "800"}
+        {
+          "name": "Burundi",
+          "iso_n3": "108"
+        },
+        {
+          "name": "DR Congo",
+          "iso_n3": "180"
+        },
+        {
+          "name": "Kenya",
+          "iso_n3": "404"
+        },
+        {
+          "name": "Rwanda",
+          "iso_n3": "646"
+        },
+        {
+          "name": "Somalia",
+          "iso_n3": "706"
+        },
+        {
+          "name": "South Sudan",
+          "iso_n3": "728"
+        },
+        {
+          "name": "Tanzania",
+          "iso_n3": "834"
+        },
+        {
+          "name": "Uganda",
+          "iso_n3": "800"
+        }
       ],
       "rights": {
         "TR": "Visa-free travel + renewable residence permits for member citizens; labor mobility restricted to high-skilled categories.",
@@ -239,10 +572,34 @@
       "strength": 2,
       "color": "#5C7FA3",
       "members": [
-        {"name": "Denmark", "iso_n3": "208"}, {"name": "Finland", "iso_n3": "246"},
-        {"name": "Iceland", "iso_n3": "352"}, {"name": "Norway", "iso_n3": "578"},
-        {"name": "Sweden", "iso_n3": "752"},
-        {"name": "Faroe Islands", "iso_n3": "234"}, {"name": "Greenland", "iso_n3": "304"}
+        {
+          "name": "Denmark",
+          "iso_n3": "208"
+        },
+        {
+          "name": "Finland",
+          "iso_n3": "246"
+        },
+        {
+          "name": "Iceland",
+          "iso_n3": "352"
+        },
+        {
+          "name": "Norway",
+          "iso_n3": "578"
+        },
+        {
+          "name": "Sweden",
+          "iso_n3": "752"
+        },
+        {
+          "name": "Faroe Islands",
+          "iso_n3": "234"
+        },
+        {
+          "name": "Greenland",
+          "iso_n3": "304"
+        }
       ],
       "rights": {
         "TR": "Not bloc-portable.",
@@ -259,16 +616,68 @@
       "strength": 2,
       "color": "#9E7B3C",
       "members": [
-        {"name": "Benin", "iso_n3": "204"}, {"name": "Cabo Verde", "iso_n3": "132"},
-        {"name": "Cote d'Ivoire", "iso_n3": "384"}, {"name": "Gambia", "iso_n3": "270"},
-        {"name": "Ghana", "iso_n3": "288"}, {"name": "Guinea", "iso_n3": "324"},
-        {"name": "Guinea-Bissau", "iso_n3": "624"}, {"name": "Liberia", "iso_n3": "430"},
-        {"name": "Nigeria", "iso_n3": "566"}, {"name": "Senegal", "iso_n3": "686"},
-        {"name": "Sierra Leone", "iso_n3": "694"}, {"name": "Togo", "iso_n3": "768"}
+        {
+          "name": "Benin",
+          "iso_n3": "204"
+        },
+        {
+          "name": "Cabo Verde",
+          "iso_n3": "132"
+        },
+        {
+          "name": "Cote d'Ivoire",
+          "iso_n3": "384"
+        },
+        {
+          "name": "Gambia",
+          "iso_n3": "270"
+        },
+        {
+          "name": "Ghana",
+          "iso_n3": "288"
+        },
+        {
+          "name": "Guinea",
+          "iso_n3": "324"
+        },
+        {
+          "name": "Guinea-Bissau",
+          "iso_n3": "624"
+        },
+        {
+          "name": "Liberia",
+          "iso_n3": "430"
+        },
+        {
+          "name": "Nigeria",
+          "iso_n3": "566"
+        },
+        {
+          "name": "Senegal",
+          "iso_n3": "686"
+        },
+        {
+          "name": "Sierra Leone",
+          "iso_n3": "694"
+        },
+        {
+          "name": "Togo",
+          "iso_n3": "768"
+        }
       ],
       "former_members": [
-        {"name": "Mali", "iso_n3": "466"}, {"name": "Burkina Faso", "iso_n3": "854"},
-        {"name": "Niger", "iso_n3": "562"}
+        {
+          "name": "Mali",
+          "iso_n3": "466"
+        },
+        {
+          "name": "Burkina Faso",
+          "iso_n3": "854"
+        },
+        {
+          "name": "Niger",
+          "iso_n3": "562"
+        }
       ],
       "rights": {
         "TR": "Visa-free entry (90 days) + implemented right of residency via ECOWAS residence card.",
@@ -285,9 +694,30 @@
       "strength": 1,
       "color": "#6B8E5A",
       "members": [
-        {"name": "Bahrain", "iso_n3": "048"}, {"name": "Kuwait", "iso_n3": "414"},
-        {"name": "Oman", "iso_n3": "512"}, {"name": "Qatar", "iso_n3": "634"},
-        {"name": "Saudi Arabia", "iso_n3": "682"}, {"name": "United Arab Emirates", "iso_n3": "784"}
+        {
+          "name": "Bahrain",
+          "iso_n3": "048"
+        },
+        {
+          "name": "Kuwait",
+          "iso_n3": "414"
+        },
+        {
+          "name": "Oman",
+          "iso_n3": "512"
+        },
+        {
+          "name": "Qatar",
+          "iso_n3": "634"
+        },
+        {
+          "name": "Saudi Arabia",
+          "iso_n3": "682"
+        },
+        {
+          "name": "United Arab Emirates",
+          "iso_n3": "784"
+        }
       ],
       "rights": {
         "TR": "None bloc-portable for foreign residents (they are the majority population in most members).",
@@ -304,10 +734,22 @@
       "strength": 2,
       "color": "#5A8E8A",
       "members": [
-        {"name": "United States of America", "iso_n3": "840"},
-        {"name": "Micronesia", "iso_n3": "583"},
-        {"name": "Marshall Islands", "iso_n3": "584"},
-        {"name": "Palau", "iso_n3": "585"}
+        {
+          "name": "United States of America",
+          "iso_n3": "840"
+        },
+        {
+          "name": "Micronesia",
+          "iso_n3": "583"
+        },
+        {
+          "name": "Marshall Islands",
+          "iso_n3": "584"
+        },
+        {
+          "name": "Palau",
+          "iso_n3": "585"
+        }
       ],
       "rights": {
         "TR": "n/a",
@@ -324,7 +766,14 @@
       "strength": 1,
       "color": "#B5763B",
       "members": [
-        {"name": "India", "iso_n3": "356"}, {"name": "Nepal", "iso_n3": "524"}
+        {
+          "name": "India",
+          "iso_n3": "356"
+        },
+        {
+          "name": "Nepal",
+          "iso_n3": "524"
+        }
       ],
       "rights": {
         "TR": "n/a",
@@ -341,7 +790,14 @@
       "strength": 1,
       "color": "#8A6E4B",
       "members": [
-        {"name": "India", "iso_n3": "356"}, {"name": "Bhutan", "iso_n3": "064"}
+        {
+          "name": "India",
+          "iso_n3": "356"
+        },
+        {
+          "name": "Bhutan",
+          "iso_n3": "064"
+        }
       ],
       "rights": {
         "TR": "n/a",
@@ -358,11 +814,42 @@
       "strength": 2,
       "color": "#3E8E7E",
       "members": [
-        {"name": "Brazil", "iso_n3": "076"}, {"name": "Portugal", "iso_n3": "620"},
-        {"name": "Angola", "iso_n3": "024"}, {"name": "Mozambique", "iso_n3": "508"},
-        {"name": "Cape Verde", "iso_n3": "132"}, {"name": "Guinea-Bissau", "iso_n3": "624"},
-        {"name": "Sao Tome and Principe", "iso_n3": "678"}, {"name": "Timor-Leste", "iso_n3": "626"},
-        {"name": "Equatorial Guinea", "iso_n3": "226"}
+        {
+          "name": "Brazil",
+          "iso_n3": "076"
+        },
+        {
+          "name": "Portugal",
+          "iso_n3": "620"
+        },
+        {
+          "name": "Angola",
+          "iso_n3": "024"
+        },
+        {
+          "name": "Mozambique",
+          "iso_n3": "508"
+        },
+        {
+          "name": "Cape Verde",
+          "iso_n3": "132"
+        },
+        {
+          "name": "Guinea-Bissau",
+          "iso_n3": "624"
+        },
+        {
+          "name": "Sao Tome and Principe",
+          "iso_n3": "678"
+        },
+        {
+          "name": "Timor-Leste",
+          "iso_n3": "626"
+        },
+        {
+          "name": "Equatorial Guinea",
+          "iso_n3": "226"
+        }
       ],
       "rights": {
         "TR": "CPLP Mobility Agreement: real, operative visa/residence categories between members. Brazil grants residency to CPLP nationals on nationality alone (since Oct 2023). Portugal now requires a consular residence visa first (2025 law).",
@@ -379,7 +866,14 @@
       "strength": 2,
       "color": "#C77B4A",
       "members": [
-        {"name": "United Kingdom", "iso_n3": "826"}, {"name": "Hong Kong", "iso_n3": "344"}
+        {
+          "name": "United Kingdom",
+          "iso_n3": "826"
+        },
+        {
+          "name": "Hong Kong",
+          "iso_n3": "344"
+        }
       ],
       "rights": {
         "TR": "BN(O) visa: 5-year UK residence permission to live, work, and study for BN(O) status holders and dependents.",
@@ -396,13 +890,50 @@
       "strength": 2,
       "color": "#7E6A9E",
       "members": [
-        {"name": "United Kingdom", "iso_n3": "826"},
-        {"name": "Anguilla", "iso_n3": "660"}, {"name": "Bermuda", "iso_n3": "060"},
-        {"name": "British Virgin Islands", "iso_n3": "092"}, {"name": "Cayman Islands", "iso_n3": "136"},
-        {"name": "Falkland Islands", "iso_n3": "238"}, {"name": "Gibraltar", "iso_n3": "292"},
-        {"name": "Montserrat", "iso_n3": "500"}, {"name": "Pitcairn Islands", "iso_n3": "612"},
-        {"name": "St. Helena, Ascension and Tristan da Cunha", "iso_n3": "654"},
-        {"name": "Turks and Caicos Islands", "iso_n3": "796"}
+        {
+          "name": "United Kingdom",
+          "iso_n3": "826"
+        },
+        {
+          "name": "Anguilla",
+          "iso_n3": "660"
+        },
+        {
+          "name": "Bermuda",
+          "iso_n3": "060"
+        },
+        {
+          "name": "British Virgin Islands",
+          "iso_n3": "092"
+        },
+        {
+          "name": "Cayman Islands",
+          "iso_n3": "136"
+        },
+        {
+          "name": "Falkland Islands",
+          "iso_n3": "238"
+        },
+        {
+          "name": "Gibraltar",
+          "iso_n3": "292"
+        },
+        {
+          "name": "Montserrat",
+          "iso_n3": "500"
+        },
+        {
+          "name": "Pitcairn Islands",
+          "iso_n3": "612"
+        },
+        {
+          "name": "St. Helena, Ascension and Tristan da Cunha",
+          "iso_n3": "654"
+        },
+        {
+          "name": "Turks and Caicos Islands",
+          "iso_n3": "796"
+        }
       ],
       "rights": {
         "TR": "n/a - rights attach to citizenship status.",
@@ -419,8 +950,22 @@
       "strength": 2,
       "color": "#A34F6E",
       "members": [
-        {"name": "China", "iso_n3": "156"}, {"name": "Hong Kong", "iso_n3": "344"},
-        {"name": "Macau", "iso_n3": "446"}, {"name": "Taiwan", "iso_n3": "158"}
+        {
+          "name": "China",
+          "iso_n3": "156"
+        },
+        {
+          "name": "Hong Kong",
+          "iso_n3": "344"
+        },
+        {
+          "name": "Macau",
+          "iso_n3": "446"
+        },
+        {
+          "name": "Taiwan",
+          "iso_n3": "158"
+        }
       ],
       "rights": {
         "TR": "HK/Macau/Taiwan permanent residents (Chinese citizens) may enter and reside in the mainland freely (Home Return Permit / Mainland Travel Permit).",
@@ -437,11 +982,46 @@
       "strength": 3,
       "color": "#7A7A8C",
       "members": [
-        {"name": "Brunei", "iso_n3": "096"}, {"name": "Cambodia", "iso_n3": "116"},
-        {"name": "Indonesia", "iso_n3": "360"}, {"name": "Laos", "iso_n3": "418"},
-        {"name": "Malaysia", "iso_n3": "458"}, {"name": "Myanmar", "iso_n3": "104"},
-        {"name": "Philippines", "iso_n3": "608"}, {"name": "Singapore", "iso_n3": "702"},
-        {"name": "Thailand", "iso_n3": "764"}, {"name": "Vietnam", "iso_n3": "704"}
+        {
+          "name": "Brunei",
+          "iso_n3": "096"
+        },
+        {
+          "name": "Cambodia",
+          "iso_n3": "116"
+        },
+        {
+          "name": "Indonesia",
+          "iso_n3": "360"
+        },
+        {
+          "name": "Laos",
+          "iso_n3": "418"
+        },
+        {
+          "name": "Malaysia",
+          "iso_n3": "458"
+        },
+        {
+          "name": "Myanmar",
+          "iso_n3": "104"
+        },
+        {
+          "name": "Philippines",
+          "iso_n3": "608"
+        },
+        {
+          "name": "Singapore",
+          "iso_n3": "702"
+        },
+        {
+          "name": "Thailand",
+          "iso_n3": "764"
+        },
+        {
+          "name": "Vietnam",
+          "iso_n3": "704"
+        }
       ],
       "rights": {
         "TR": "None bloc-level.",
@@ -458,8 +1038,22 @@
       "strength": 3,
       "color": "#8C8C7A",
       "members": [
-        {"name": "Guatemala", "iso_n3": "320"}, {"name": "El Salvador", "iso_n3": "222"},
-        {"name": "Honduras", "iso_n3": "340"}, {"name": "Nicaragua", "iso_n3": "558"}
+        {
+          "name": "Guatemala",
+          "iso_n3": "320"
+        },
+        {
+          "name": "El Salvador",
+          "iso_n3": "222"
+        },
+        {
+          "name": "Honduras",
+          "iso_n3": "340"
+        },
+        {
+          "name": "Nicaragua",
+          "iso_n3": "558"
+        }
       ],
       "rights": {
         "TR": "Passport-free travel between the four.",
@@ -476,8 +1070,22 @@
       "strength": 3,
       "color": "#7A8C8C",
       "members": [
-        {"name": "Chile", "iso_n3": "152"}, {"name": "Colombia", "iso_n3": "170"},
-        {"name": "Mexico", "iso_n3": "484"}, {"name": "Peru", "iso_n3": "604"}
+        {
+          "name": "Chile",
+          "iso_n3": "152"
+        },
+        {
+          "name": "Colombia",
+          "iso_n3": "170"
+        },
+        {
+          "name": "Mexico",
+          "iso_n3": "484"
+        },
+        {
+          "name": "Peru",
+          "iso_n3": "604"
+        }
       ],
       "rights": {
         "TR": "Visa-free mobility up to 6 months for UNPAID tourism, transit, and business activity only.",
@@ -493,9 +1101,19 @@
       "id": "tn_usmca",
       "name": "TN (USMCA professionals)",
       "color": "#5B8FA8",
-      "destination": {"name": "United States of America", "iso_n3": "840"},
+      "destination": {
+        "name": "United States of America",
+        "iso_n3": "840"
+      },
       "beneficiaries": [
-        {"name": "Canada", "iso_n3": "124"}, {"name": "Mexico", "iso_n3": "484"}
+        {
+          "name": "Canada",
+          "iso_n3": "124"
+        },
+        {
+          "name": "Mexico",
+          "iso_n3": "484"
+        }
       ],
       "grants": "Canadian and Mexican citizens in ~60 listed professions: US work status, renewable indefinitely in 3-yr increments, no annual cap, no lottery. Canadians can apply at the border.",
       "limits": "Nonimmigrant intent required - renewals can be denied if settlement intent is suspected. Employer-specific.",
@@ -505,9 +1123,15 @@
       "id": "e3",
       "name": "E-3 (Australians)",
       "color": "#A8825B",
-      "destination": {"name": "United States of America", "iso_n3": "840"},
+      "destination": {
+        "name": "United States of America",
+        "iso_n3": "840"
+      },
       "beneficiaries": [
-        {"name": "Australia", "iso_n3": "036"}
+        {
+          "name": "Australia",
+          "iso_n3": "036"
+        }
       ],
       "grants": "Australian citizens: 10,500 dedicated US specialty-occupation visas per year (cap never reached), 2-yr renewable indefinitely, spouse may work.",
       "limits": "Nonimmigrant status - does not itself lead to a green card.",
@@ -517,9 +1141,19 @@
       "id": "h1b1",
       "name": "H-1B1 (Chile & Singapore)",
       "color": "#7FA85B",
-      "destination": {"name": "United States of America", "iso_n3": "840"},
+      "destination": {
+        "name": "United States of America",
+        "iso_n3": "840"
+      },
       "beneficiaries": [
-        {"name": "Chile", "iso_n3": "152"}, {"name": "Singapore", "iso_n3": "702"}
+        {
+          "name": "Chile",
+          "iso_n3": "152"
+        },
+        {
+          "name": "Singapore",
+          "iso_n3": "702"
+        }
       ],
       "grants": "Carve-out from the H-1B lottery: 1,400 visas/yr for Chileans, 5,400 for Singaporeans, rarely exhausted. Specialty occupations.",
       "limits": "Nonimmigrant intent; 1-yr increments; no direct settlement path.",
@@ -529,37 +1163,402 @@
       "id": "e2",
       "name": "E-2 Treaty Investor",
       "color": "#A85B8F",
-      "destination": {"name": "United States of America", "iso_n3": "840"},
-      "beneficiaries_note": "80+ treaty countries; map paints major ones only. Notably excludes India, China (PRC), and Brazil.",
+      "destination": {
+        "name": "United States of America",
+        "iso_n3": "840"
+      },
+      "beneficiaries_note": "Full official State Dept treaty list (78 active E-2 countries painted). Notable absences: India, China (PRC), Brazil, Russia, Vietnam, Saudi Arabia. Bolivia and Ecuador are TERMINATED for new investors (grandfathered pre-2012/pre-2018 investments only). Kosovo also qualifies but has no ISO numeric code, so it is not painted. Greece and Brunei are E-1 (trader) only. UK nationals must actually reside in British territory in Europe to qualify.",
       "beneficiaries": [
-        {"name": "Japan", "iso_n3": "392"}, {"name": "South Korea", "iso_n3": "410"},
-        {"name": "United Kingdom", "iso_n3": "826"}, {"name": "Germany", "iso_n3": "276"},
-        {"name": "France", "iso_n3": "250"}, {"name": "Italy", "iso_n3": "380"},
-        {"name": "Spain", "iso_n3": "724"}, {"name": "Netherlands", "iso_n3": "528"},
-        {"name": "Canada", "iso_n3": "124"}, {"name": "Mexico", "iso_n3": "484"},
-        {"name": "Turkey", "iso_n3": "792"}, {"name": "Taiwan", "iso_n3": "158"},
-        {"name": "Thailand", "iso_n3": "764"}, {"name": "Philippines", "iso_n3": "608"},
-        {"name": "Australia", "iso_n3": "036"}, {"name": "Norway", "iso_n3": "578"}
+        {
+          "name": "Albania",
+          "iso_n3": "008"
+        },
+        {
+          "name": "Argentina",
+          "iso_n3": "032"
+        },
+        {
+          "name": "Armenia",
+          "iso_n3": "051"
+        },
+        {
+          "name": "Australia",
+          "iso_n3": "036"
+        },
+        {
+          "name": "Austria",
+          "iso_n3": "040"
+        },
+        {
+          "name": "Azerbaijan",
+          "iso_n3": "031"
+        },
+        {
+          "name": "Bahrain",
+          "iso_n3": "048"
+        },
+        {
+          "name": "Bangladesh",
+          "iso_n3": "050"
+        },
+        {
+          "name": "Belgium",
+          "iso_n3": "056"
+        },
+        {
+          "name": "Bosnia and Herzegovina",
+          "iso_n3": "070"
+        },
+        {
+          "name": "Bulgaria",
+          "iso_n3": "100"
+        },
+        {
+          "name": "Cameroon",
+          "iso_n3": "120"
+        },
+        {
+          "name": "Canada",
+          "iso_n3": "124"
+        },
+        {
+          "name": "Chile",
+          "iso_n3": "152"
+        },
+        {
+          "name": "Taiwan",
+          "iso_n3": "158"
+        },
+        {
+          "name": "Colombia",
+          "iso_n3": "170"
+        },
+        {
+          "name": "Congo (Brazzaville)",
+          "iso_n3": "178"
+        },
+        {
+          "name": "DR Congo",
+          "iso_n3": "180"
+        },
+        {
+          "name": "Costa Rica",
+          "iso_n3": "188"
+        },
+        {
+          "name": "Croatia",
+          "iso_n3": "191"
+        },
+        {
+          "name": "Czechia",
+          "iso_n3": "203"
+        },
+        {
+          "name": "Denmark",
+          "iso_n3": "208"
+        },
+        {
+          "name": "Egypt",
+          "iso_n3": "818"
+        },
+        {
+          "name": "Estonia",
+          "iso_n3": "233"
+        },
+        {
+          "name": "Ethiopia",
+          "iso_n3": "231"
+        },
+        {
+          "name": "Finland",
+          "iso_n3": "246"
+        },
+        {
+          "name": "France",
+          "iso_n3": "250"
+        },
+        {
+          "name": "Georgia",
+          "iso_n3": "268"
+        },
+        {
+          "name": "Germany",
+          "iso_n3": "276"
+        },
+        {
+          "name": "Grenada",
+          "iso_n3": "308"
+        },
+        {
+          "name": "Honduras",
+          "iso_n3": "340"
+        },
+        {
+          "name": "Ireland",
+          "iso_n3": "372"
+        },
+        {
+          "name": "Israel",
+          "iso_n3": "376"
+        },
+        {
+          "name": "Italy",
+          "iso_n3": "380"
+        },
+        {
+          "name": "Jamaica",
+          "iso_n3": "388"
+        },
+        {
+          "name": "Japan",
+          "iso_n3": "392"
+        },
+        {
+          "name": "Jordan",
+          "iso_n3": "400"
+        },
+        {
+          "name": "Kazakhstan",
+          "iso_n3": "398"
+        },
+        {
+          "name": "South Korea",
+          "iso_n3": "410"
+        },
+        {
+          "name": "Kyrgyzstan",
+          "iso_n3": "417"
+        },
+        {
+          "name": "Latvia",
+          "iso_n3": "428"
+        },
+        {
+          "name": "Liberia",
+          "iso_n3": "430"
+        },
+        {
+          "name": "Lithuania",
+          "iso_n3": "440"
+        },
+        {
+          "name": "Luxembourg",
+          "iso_n3": "442"
+        },
+        {
+          "name": "North Macedonia",
+          "iso_n3": "807"
+        },
+        {
+          "name": "Mexico",
+          "iso_n3": "484"
+        },
+        {
+          "name": "Moldova",
+          "iso_n3": "498"
+        },
+        {
+          "name": "Mongolia",
+          "iso_n3": "496"
+        },
+        {
+          "name": "Montenegro",
+          "iso_n3": "499"
+        },
+        {
+          "name": "Morocco",
+          "iso_n3": "504"
+        },
+        {
+          "name": "Netherlands",
+          "iso_n3": "528"
+        },
+        {
+          "name": "New Zealand",
+          "iso_n3": "554"
+        },
+        {
+          "name": "Norway",
+          "iso_n3": "578"
+        },
+        {
+          "name": "Oman",
+          "iso_n3": "512"
+        },
+        {
+          "name": "Pakistan",
+          "iso_n3": "586"
+        },
+        {
+          "name": "Panama",
+          "iso_n3": "591"
+        },
+        {
+          "name": "Paraguay",
+          "iso_n3": "600"
+        },
+        {
+          "name": "Philippines",
+          "iso_n3": "608"
+        },
+        {
+          "name": "Poland",
+          "iso_n3": "616"
+        },
+        {
+          "name": "Portugal",
+          "iso_n3": "620"
+        },
+        {
+          "name": "Romania",
+          "iso_n3": "642"
+        },
+        {
+          "name": "Senegal",
+          "iso_n3": "686"
+        },
+        {
+          "name": "Serbia",
+          "iso_n3": "688"
+        },
+        {
+          "name": "Singapore",
+          "iso_n3": "702"
+        },
+        {
+          "name": "Slovakia",
+          "iso_n3": "703"
+        },
+        {
+          "name": "Slovenia",
+          "iso_n3": "705"
+        },
+        {
+          "name": "Spain",
+          "iso_n3": "724"
+        },
+        {
+          "name": "Sri Lanka",
+          "iso_n3": "144"
+        },
+        {
+          "name": "Suriname",
+          "iso_n3": "740"
+        },
+        {
+          "name": "Sweden",
+          "iso_n3": "752"
+        },
+        {
+          "name": "Switzerland",
+          "iso_n3": "756"
+        },
+        {
+          "name": "Thailand",
+          "iso_n3": "764"
+        },
+        {
+          "name": "Togo",
+          "iso_n3": "768"
+        },
+        {
+          "name": "Trinidad and Tobago",
+          "iso_n3": "780"
+        },
+        {
+          "name": "Tunisia",
+          "iso_n3": "788"
+        },
+        {
+          "name": "Turkey",
+          "iso_n3": "792"
+        },
+        {
+          "name": "Ukraine",
+          "iso_n3": "804"
+        },
+        {
+          "name": "United Kingdom",
+          "iso_n3": "826"
+        }
       ],
-      "grants": "Citizens of treaty countries who make a substantial US business investment: renewable investor status with no fixed cap, spouse may work.",
+      "grants": "Citizens of treaty countries who make a substantial US business investment: renewable investor status with no fixed cap, spouse may work. Recent additions: Israel (2019), New Zealand (2019), Portugal (Mar 2024).",
       "limits": "Must maintain the investment; nonimmigrant status with no direct green card path; 'substantial' is undefined but typically $100K+.",
-      "leads_to_settlement": false
+      "leads_to_settlement": false,
+      "sources": [
+        "US State Dept treaty country list: travel.state.gov/content/travel/en/us-visas/visa-information-resources/fees/treaty.html"
+      ]
     },
     {
       "id": "spain_iberoamerican",
       "name": "Spain 2-year naturalization (Ibero-American)",
       "color": "#C94F3D",
-      "destination": {"name": "Spain", "iso_n3": "724"},
+      "destination": {
+        "name": "Spain",
+        "iso_n3": "724"
+      },
       "beneficiaries_note": "All Ibero-American nationals (incl. Brazil) + Philippines, Andorra, Equatorial Guinea, Portugal",
       "beneficiaries": [
-        {"name": "Brazil", "iso_n3": "076"}, {"name": "Mexico", "iso_n3": "484"},
-        {"name": "Argentina", "iso_n3": "032"}, {"name": "Colombia", "iso_n3": "170"},
-        {"name": "Peru", "iso_n3": "604"}, {"name": "Chile", "iso_n3": "152"},
-        {"name": "Philippines", "iso_n3": "608"}, {"name": "Portugal", "iso_n3": "620"},
-        {"name": "Ecuador", "iso_n3": "218"}, {"name": "Uruguay", "iso_n3": "858"},
-        {"name": "Paraguay", "iso_n3": "600"}, {"name": "Bolivia", "iso_n3": "068"},
-        {"name": "Venezuela", "iso_n3": "862"}, {"name": "Equatorial Guinea", "iso_n3": "226"},
-        {"name": "Andorra", "iso_n3": "020"}
+        {
+          "name": "Brazil",
+          "iso_n3": "076"
+        },
+        {
+          "name": "Mexico",
+          "iso_n3": "484"
+        },
+        {
+          "name": "Argentina",
+          "iso_n3": "032"
+        },
+        {
+          "name": "Colombia",
+          "iso_n3": "170"
+        },
+        {
+          "name": "Peru",
+          "iso_n3": "604"
+        },
+        {
+          "name": "Chile",
+          "iso_n3": "152"
+        },
+        {
+          "name": "Philippines",
+          "iso_n3": "608"
+        },
+        {
+          "name": "Portugal",
+          "iso_n3": "620"
+        },
+        {
+          "name": "Ecuador",
+          "iso_n3": "218"
+        },
+        {
+          "name": "Uruguay",
+          "iso_n3": "858"
+        },
+        {
+          "name": "Paraguay",
+          "iso_n3": "600"
+        },
+        {
+          "name": "Bolivia",
+          "iso_n3": "068"
+        },
+        {
+          "name": "Venezuela",
+          "iso_n3": "862"
+        },
+        {
+          "name": "Equatorial Guinea",
+          "iso_n3": "226"
+        },
+        {
+          "name": "Andorra",
+          "iso_n3": "020"
+        }
       ],
       "grants": "Naturalization after 2 years of legal residence (vs 10 standard), dual citizenship permitted. Result: full EU/EEA citizenship. Requires DELE A2 Spanish + civics test; processing backlogs add 1-2+ yrs.",
       "limits": "Residence must be legal and continuous immediately before applying.",
@@ -569,10 +1568,23 @@
       "id": "uk_yms_expanded",
       "name": "UK Youth Mobility (expanded AU/CA/NZ tier)",
       "color": "#4F7FC9",
-      "destination": {"name": "United Kingdom", "iso_n3": "826"},
+      "destination": {
+        "name": "United Kingdom",
+        "iso_n3": "826"
+      },
       "beneficiaries": [
-        {"name": "Australia", "iso_n3": "036"}, {"name": "Canada", "iso_n3": "124"},
-        {"name": "New Zealand", "iso_n3": "554"}
+        {
+          "name": "Australia",
+          "iso_n3": "036"
+        },
+        {
+          "name": "Canada",
+          "iso_n3": "124"
+        },
+        {
+          "name": "New Zealand",
+          "iso_n3": "554"
+        }
       ],
       "grants": "Ages 18-35 (vs 18-30 standard), 3 years (vs 2), no ballot/cap for AU-CA-NZ, work in almost any job, no sponsor. Reciprocal: UK citizens get Australia's Working Holiday to 35, 3 yrs, no farm-work requirement.",
       "limits": "YMS time does NOT count toward Indefinite Leave to Remain; one use per lifetime; no dependants. This is the closest existing thing to 'CANZUK', which remains an advocacy proposal with no treaty.",
@@ -583,7 +1595,10 @@
       "id": "uk_ancestry",
       "name": "UK Ancestry visa",
       "color": "#6FA88F",
-      "destination": {"name": "United Kingdom", "iso_n3": "826"},
+      "destination": {
+        "name": "United Kingdom",
+        "iso_n3": "826"
+      },
       "beneficiaries_note": "Commonwealth citizens with a UK-born grandparent - descent-conditional, so beneficiary countries are not mapped",
       "beneficiaries": [],
       "grants": "5-year work visa, renewable, leads to Indefinite Leave to Remain then citizenship.",
@@ -594,9 +1609,15 @@
       "id": "falklands_argentina",
       "name": "Argentina citizenship claim (Falklands-born)",
       "color": "#6E9E5A",
-      "destination": {"name": "Argentina", "iso_n3": "032"},
+      "destination": {
+        "name": "Argentina",
+        "iso_n3": "032"
+      },
       "beneficiaries": [
-        {"name": "Falkland Islands", "iso_n3": "238"}
+        {
+          "name": "Falkland Islands",
+          "iso_n3": "238"
+        }
       ],
       "grants": "Argentine law treats the islands as Argentine territory (jus soli): native-born islanders who declare themselves Argentine before Argentine authorities have been recognized as Argentine nationals BY BIRTH - unlocking Mercosur residence rights.",
       "limits": "Legislation is inconclusive; recognition is case-by-case on individual declaration, politically charged, and take-up among islanders is essentially nil. Draft bills to formalize it have not passed.",
@@ -607,9 +1628,15 @@
       "id": "daft",
       "name": "Dutch-American Friendship Treaty (DAFT)",
       "color": "#B0A04F",
-      "destination": {"name": "Netherlands", "iso_n3": "528"},
+      "destination": {
+        "name": "Netherlands",
+        "iso_n3": "528"
+      },
       "beneficiaries": [
-        {"name": "United States of America", "iso_n3": "840"}
+        {
+          "name": "United States of America",
+          "iso_n3": "840"
+        }
       ],
       "grants": "US citizens: 2-yr renewable Dutch self-employment residence with only ~EUR 4,500 business investment - far below normal entrepreneur thresholds. Renewable toward PR at 5 yrs.",
       "limits": "Must maintain the business and investment. Investment figure approximate.",
@@ -619,13 +1646,51 @@
       "id": "australia_pev",
       "name": "Australia Pacific Engagement Visa",
       "color": "#C98A4F",
-      "destination": {"name": "Australia", "iso_n3": "036"},
+      "destination": {
+        "name": "Australia",
+        "iso_n3": "036"
+      },
       "beneficiaries": [
-        {"name": "Micronesia", "iso_n3": "583"}, {"name": "Fiji", "iso_n3": "242"},
-        {"name": "Nauru", "iso_n3": "520"}, {"name": "Palau", "iso_n3": "585"},
-        {"name": "Papua New Guinea", "iso_n3": "598"}, {"name": "Solomon Islands", "iso_n3": "090"},
-        {"name": "Timor-Leste", "iso_n3": "626"}, {"name": "Tonga", "iso_n3": "776"},
-        {"name": "Tuvalu", "iso_n3": "798"}, {"name": "Vanuatu", "iso_n3": "548"}
+        {
+          "name": "Micronesia",
+          "iso_n3": "583"
+        },
+        {
+          "name": "Fiji",
+          "iso_n3": "242"
+        },
+        {
+          "name": "Nauru",
+          "iso_n3": "520"
+        },
+        {
+          "name": "Palau",
+          "iso_n3": "585"
+        },
+        {
+          "name": "Papua New Guinea",
+          "iso_n3": "598"
+        },
+        {
+          "name": "Solomon Islands",
+          "iso_n3": "090"
+        },
+        {
+          "name": "Timor-Leste",
+          "iso_n3": "626"
+        },
+        {
+          "name": "Tonga",
+          "iso_n3": "776"
+        },
+        {
+          "name": "Tuvalu",
+          "iso_n3": "798"
+        },
+        {
+          "name": "Vanuatu",
+          "iso_n3": "548"
+        }
       ],
       "grants": "PERMANENT residence by annual ballot (subclass 192) for citizens of Pacific states + Timor-Leste. Citizenship follows Australia's ordinary residence rules. 2026-27 ballot open.",
       "limits": "Ballot-allocated annual quota; eligible-country list is administratively maintained and can change.",
@@ -633,15 +1698,23 @@
       "allocation": "ballot",
       "confidence": "medium",
       "volatility": "medium",
-      "sources": ["Australian Dept of Home Affairs: Pacific Engagement visa (subclass 192)"]
+      "sources": [
+        "Australian Dept of Home Affairs: Pacific Engagement visa (subclass 192)"
+      ]
     },
     {
       "id": "nz_samoan_quota",
       "name": "NZ Samoan Quota",
       "color": "#5FA8A0",
-      "destination": {"name": "New Zealand", "iso_n3": "554"},
+      "destination": {
+        "name": "New Zealand",
+        "iso_n3": "554"
+      },
       "beneficiaries": [
-        {"name": "Samoa", "iso_n3": "882"}
+        {
+          "name": "Samoa",
+          "iso_n3": "882"
+        }
       ],
       "grants": "Permanent residence by annual ballot for Samoan citizens with a permanent full-time NZ job offer. Citizenship follows normal NZ grant rules.",
       "limits": "Annual quota; requires winning the ballot + job offer.",
@@ -649,16 +1722,35 @@
       "allocation": "ballot",
       "confidence": "high",
       "volatility": "low",
-      "sources": ["Immigration New Zealand: Samoan Quota"]
+      "sources": [
+        "Immigration New Zealand: Samoan Quota"
+      ]
     },
     {
       "id": "nz_pacific_access",
       "name": "NZ Pacific Access Category",
       "color": "#4F9EC9",
-      "destination": {"name": "New Zealand", "iso_n3": "554"},
+      "destination": {
+        "name": "New Zealand",
+        "iso_n3": "554"
+      },
       "beneficiaries": [
-        {"name": "Fiji", "iso_n3": "242"}, {"name": "Kiribati", "iso_n3": "296"},
-        {"name": "Tonga", "iso_n3": "776"}, {"name": "Tuvalu", "iso_n3": "798"}
+        {
+          "name": "Fiji",
+          "iso_n3": "242"
+        },
+        {
+          "name": "Kiribati",
+          "iso_n3": "296"
+        },
+        {
+          "name": "Tonga",
+          "iso_n3": "776"
+        },
+        {
+          "name": "Tuvalu",
+          "iso_n3": "798"
+        }
       ],
       "grants": "Permanent residence by annual ballot for citizens of Fiji, Kiribati, Tonga, Tuvalu with a permanent full-time NZ job offer.",
       "limits": "Annual quota; ballot + job offer required.",
@@ -666,62 +1758,111 @@
       "allocation": "ballot",
       "confidence": "high",
       "volatility": "low",
-      "sources": ["Immigration New Zealand: Pacific Access Category"]
+      "sources": [
+        "Immigration New Zealand: Pacific Access Category"
+      ]
     },
     {
       "id": "nz_realm",
       "name": "NZ Realm citizenship (Cook Is/Niue/Tokelau)",
       "color": "#7FB35A",
-      "destination": {"name": "New Zealand", "iso_n3": "554"},
+      "destination": {
+        "name": "New Zealand",
+        "iso_n3": "554"
+      },
       "beneficiaries": [
-        {"name": "Cook Islands", "iso_n3": "184"}, {"name": "Niue", "iso_n3": "570"},
-        {"name": "Tokelau", "iso_n3": "772"}
+        {
+          "name": "Cook Islands",
+          "iso_n3": "184"
+        },
+        {
+          "name": "Niue",
+          "iso_n3": "570"
+        },
+        {
+          "name": "Tokelau",
+          "iso_n3": "772"
+        }
       ],
       "grants": "Cook Islanders, Niueans, and Tokelauans ARE New Zealand citizens - full right to enter and live in NZ. Sits at the nationality layer, not the immigration layer.",
       "limits": "Constitutional linkage, deeply entrenched. NZ citizenship also unlocks Australia via the Trans-Tasman arrangement.",
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "low",
-      "sources": ["NZ Dept of Internal Affairs: Citizenship guidance", "Immigration NZ: Who are New Zealand citizens?"]
+      "sources": [
+        "NZ Dept of Internal Affairs: Citizenship guidance",
+        "Immigration NZ: Who are New Zealand citizens?"
+      ]
     },
     {
       "id": "france_algeria",
       "name": "France-Algeria 1968 Accord",
       "color": "#B5685A",
-      "destination": {"name": "France", "iso_n3": "250"},
+      "destination": {
+        "name": "France",
+        "iso_n3": "250"
+      },
       "beneficiaries": [
-        {"name": "Algeria", "iso_n3": "012"}
+        {
+          "name": "Algeria",
+          "iso_n3": "012"
+        }
       ],
       "grants": "Special residence/work regime for Algerian nationals in France, distinct from (and in several respects more favorable than) the ordinary immigration code - including work, family, and 10-year certificate tracks leading to settlement and naturalization.",
       "limits": "Heavily contested in French politics and repeatedly threatened in 2025 - still in force but among the most fragile major fast lanes in Europe.",
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "high",
-      "sources": ["Legifrance: 1968 France-Algeria accord", "Service-Public.fr: Algerian salaried worker rules"]
+      "sources": [
+        "Legifrance: 1968 France-Algeria accord",
+        "Service-Public.fr: Algerian salaried worker rules"
+      ]
     },
     {
       "id": "monaco_france",
       "name": "Monaco-France free establishment",
       "color": "#C94F8E",
-      "destination": {"name": "France", "iso_n3": "250"},
+      "destination": {
+        "name": "France",
+        "iso_n3": "250"
+      },
       "beneficiaries": [
-        {"name": "Monaco", "iso_n3": "492"}
+        {
+          "name": "Monaco",
+          "iso_n3": "492"
+        }
       ],
       "grants": "Monegasque nationals may live and work in France with no residence or work permit - long-settled special bilateral position.",
       "limits": "Applies to Monaco's ~9,000 citizens only (most Monaco residents are not Monegasque nationals).",
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "low",
-      "sources": ["Embassy of Monaco in France: Living in France", "France-Monaco Convention on Good-Neighbourliness"]
+      "sources": [
+        "Embassy of Monaco in France: Living in France",
+        "France-Monaco Convention on Good-Neighbourliness"
+      ]
     },
     {
       "id": "japan_epa_careworkers",
       "name": "Japan EPA nurse/careworker lanes",
       "color": "#6E7FC9",
-      "destination": {"name": "Japan", "iso_n3": "392"},
+      "destination": {
+        "name": "Japan",
+        "iso_n3": "392"
+      },
       "beneficiaries": [
-        {"name": "Indonesia", "iso_n3": "360"}, {"name": "Philippines", "iso_n3": "608"},
-        {"name": "Vietnam", "iso_n3": "704"}
+        {
+          "name": "Indonesia",
+          "iso_n3": "360"
+        },
+        {
+          "name": "Philippines",
+          "iso_n3": "608"
+        },
+        {
+          "name": "Vietnam",
+          "iso_n3": "704"
+        }
       ],
       "grants": "Treaty-based candidate entry into Japan's care system; after passing Japanese licensure, workers may stay and work indefinitely as licensed professionals with no renewal-count limits - a real long-term settlement funnel.",
       "limits": "Profession-specific (nursing/care work) via designated public matching; candidate period requires passing the national exam. Japan bans dual citizenship at naturalization.",
@@ -730,76 +1871,131 @@
       "renounces_previous": true,
       "confidence": "high",
       "volatility": "medium",
-      "sources": ["Japan MHLW: Acceptance of foreign nurse and careworker candidates", "Japan MOFA: Long-term stay visa guide"]
+      "sources": [
+        "Japan MHLW: Acceptance of foreign nurse and careworker candidates",
+        "Japan MOFA: Long-term stay visa guide"
+      ]
     },
     {
       "id": "france_morocco",
       "name": "France-Morocco 1987 Accord",
       "color": "#4FA36E",
-      "destination": {"name": "France", "iso_n3": "250"},
+      "destination": {
+        "name": "France",
+        "iso_n3": "250"
+      },
       "beneficiaries": [
-        {"name": "Morocco", "iso_n3": "504"}
+        {
+          "name": "Morocco",
+          "iso_n3": "504"
+        }
       ],
       "grants": "Nationality-specific stay-and-employment regime displacing ordinary French immigration law on covered points; supports residence-card progression toward settlement.",
       "limits": "Not open migration - work-based admission under the accord's rules; French law applies where the treaty is silent.",
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "medium",
-      "sources": ["Legifrance Decree No. 94-203 (1987 accord)", "CAA Toulouse 2023 decision applying the accord"]
+      "sources": [
+        "Legifrance Decree No. 94-203 (1987 accord)",
+        "CAA Toulouse 2023 decision applying the accord"
+      ]
     },
     {
       "id": "france_tunisia",
       "name": "France-Tunisia 1988 Accord",
       "color": "#A36E4F",
-      "destination": {"name": "France", "iso_n3": "250"},
+      "destination": {
+        "name": "France",
+        "iso_n3": "250"
+      },
       "beneficiaries": [
-        {"name": "Tunisia", "iso_n3": "788"}
+        {
+          "name": "Tunisia",
+          "iso_n3": "788"
+        }
       ],
       "grants": "Treaty-based work and family admission with a nationality-specific residence regime (1988 accord + 2000 avenant + 2008 migration protocol), leading to settlement.",
       "limits": "Applies on covered points only; French general law fills gaps.",
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "medium",
-      "sources": ["Legifrance Decree No. 89-87", "Decree No. 2003-976", "Decree No. 2009-905"]
+      "sources": [
+        "Legifrance Decree No. 89-87",
+        "Decree No. 2003-976",
+        "Decree No. 2009-905"
+      ]
     },
     {
       "id": "france_senegal",
       "name": "France-Senegal conventions package",
       "color": "#4F6EA3",
-      "destination": {"name": "France", "iso_n3": "250"},
+      "destination": {
+        "name": "France",
+        "iso_n3": "250"
+      },
       "beneficiaries": [
-        {"name": "Senegal", "iso_n3": "686"}
+        {
+          "name": "Senegal",
+          "iso_n3": "686"
+        }
       ],
       "grants": "1995 circulation/stay convention + 2000 establishment convention + 2006/2008 'gestion concertee' package: derogatory work/stay channels supporting residence progression to settlement.",
       "limits": "Channel-specific rather than general free movement.",
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "medium",
-      "sources": ["Legifrance Decree No. 2002-337", "Decree No. 2009-1073", "CESEDA annex (Senegal instruments)"]
+      "sources": [
+        "Legifrance Decree No. 2002-337",
+        "Decree No. 2009-1073",
+        "CESEDA annex (Senegal instruments)"
+      ]
     },
     {
       "id": "france_gabon",
       "name": "France-Gabon conventions package",
       "color": "#6EA34F",
-      "destination": {"name": "France", "iso_n3": "250"},
+      "destination": {
+        "name": "France",
+        "iso_n3": "250"
+      },
       "beneficiaries": [
-        {"name": "Gabon", "iso_n3": "266"}
+        {
+          "name": "Gabon",
+          "iso_n3": "266"
+        }
       ],
       "grants": "1992 circulation/stay + 2002 establishment conventions: nationals of each state may enter, travel, choose residence, and depart under the conventions' conditions; 2007 accord supplements.",
       "limits": "Convention conditions apply; unusually well documented in treaty publication and case law.",
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "low",
-      "sources": ["Legifrance Decree No. 2003-963", "Decree No. 2004-684", "Decree No. 2008-900"]
+      "sources": [
+        "Legifrance Decree No. 2003-963",
+        "Decree No. 2004-684",
+        "Decree No. 2008-900"
+      ]
     },
     {
       "id": "andorra_conventions",
       "name": "Andorra mobility conventions (ES/FR/PT)",
       "color": "#A34F4F",
-      "destination": {"name": "Andorra", "iso_n3": "020"},
+      "destination": {
+        "name": "Andorra",
+        "iso_n3": "020"
+      },
       "beneficiaries": [
-        {"name": "Spain", "iso_n3": "724"}, {"name": "France", "iso_n3": "250"},
-        {"name": "Portugal", "iso_n3": "620"}
+        {
+          "name": "Spain",
+          "iso_n3": "724"
+        },
+        {
+          "name": "France",
+          "iso_n3": "250"
+        },
+        {
+          "name": "Portugal",
+          "iso_n3": "620"
+        }
       ],
       "grants": "Privileged entry, movement, stay, and establishment in Andorra for Spanish, French (2001 convention), and Portuguese (2007 convention) nationals - cited in current Andorran e-government residence procedures.",
       "limits": "Residence/work privilege only: Andorran naturalization stays ordinary (20 yrs standard, 10 with schooling) and Andorra bans dual citizenship.",
@@ -807,13 +2003,20 @@
       "renounces_previous": true,
       "confidence": "high",
       "volatility": "low",
-      "sources": ["Andorra e-tramits J.1/J.2 residence procedures", "2001 Andorra-Spain-France convention", "2007 Andorra-Portugal convention"]
+      "sources": [
+        "Andorra e-tramits J.1/J.2 residence procedures",
+        "2001 Andorra-Spain-France convention",
+        "2007 Andorra-Portugal convention"
+      ]
     },
     {
       "id": "israel_law_of_return",
       "name": "Israel Law of Return",
       "color": "#3FA9A0",
-      "destination": {"name": "Israel", "iso_n3": "376"},
+      "destination": {
+        "name": "Israel",
+        "iso_n3": "376"
+      },
       "beneficiaries_note": "Jews and eligible family members worldwide (incl. the 1970 grandchild clause) - identity-based, not nationality-based, so beneficiary countries are not mapped",
       "beneficiaries": [],
       "grants": "Immigration-and-citizenship entitlement (aliyah): moves a qualifying outsider straight into a citizenship track with minimal prior residence. One of the most powerful settlement lanes in the world.",
@@ -821,13 +2024,19 @@
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "high",
-      "sources": ["Law of Return text (1950, amended 1970)", "Israeli consular guidance"]
+      "sources": [
+        "Law of Return text (1950, amended 1970)",
+        "Israeli consular guidance"
+      ]
     },
     {
       "id": "poland_karta_polaka",
       "name": "Poland Karta Polaka",
       "color": "#C95F5F",
-      "destination": {"name": "Poland", "iso_n3": "616"},
+      "destination": {
+        "name": "Poland",
+        "iso_n3": "616"
+      },
       "beneficiaries_note": "People of Polish descent/nation affiliation (historically concentrated in post-Soviet states) - descent-based, not mapped",
       "beneficiaries": [],
       "grants": "Pole's Card -> national visa -> permanent residence -> recognition as citizen after ~1 yr of residence with PR. Bundles diaspora identity with hard migration outcomes; dual citizenship OK.",
@@ -835,13 +2044,19 @@
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "medium",
-      "sources": ["gov.pl: Pole's Card", "gov.pl: Recognition as a Polish citizen"]
+      "sources": [
+        "gov.pl: Pole's Card",
+        "gov.pl: Recognition as a Polish citizen"
+      ]
     },
     {
       "id": "hungary_simplified",
       "name": "Hungary simplified naturalization",
       "color": "#6EC98A",
-      "destination": {"name": "Hungary", "iso_n3": "348"},
+      "destination": {
+        "name": "Hungary",
+        "iso_n3": "348"
+      },
       "beneficiaries_note": "People with Hungarian ancestry or former Hungarian citizenship (concentrated in neighboring states) - descent-based, not mapped",
       "beneficiaries": [],
       "grants": "Citizenship WITHOUT residence in Hungary: prove ancestry + Hungarian language ability. EU citizenship as the result. Operating since 2011.",
@@ -849,13 +2064,18 @@
       "leads_to_settlement": true,
       "confidence": "medium",
       "volatility": "low",
-      "sources": ["Embassy of Hungary: About Hungarian Citizenship"]
+      "sources": [
+        "Embassy of Hungary: About Hungarian Citizenship"
+      ]
     },
     {
       "id": "germany_spaetaussiedler",
       "name": "Germany Spataussiedler route",
       "color": "#A0A05A",
-      "destination": {"name": "Germany", "iso_n3": "276"},
+      "destination": {
+        "name": "Germany",
+        "iso_n3": "276"
+      },
       "beneficiaries_note": "Ethnic German resettlers from the former Soviet bloc under the Federal Expellees Act - ancestry-based, not mapped",
       "beneficiaries": [],
       "grants": "Recognition as a late ethnic German resettler confers German nationality automatically upon entry - ethnic eligibility, managed admission, automatic citizenship.",
@@ -863,13 +2083,19 @@
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "low",
-      "sources": ["BAMF: Ethnic German resettlers", "BMI: Spataussiedler"]
+      "sources": [
+        "BAMF: Ethnic German resettlers",
+        "BMI: Spataussiedler"
+      ]
     },
     {
       "id": "kazakhstan_qandas",
       "name": "Kazakhstan Qandas status",
       "color": "#C9B04F",
-      "destination": {"name": "Kazakhstan", "iso_n3": "398"},
+      "destination": {
+        "name": "Kazakhstan",
+        "iso_n3": "398"
+      },
       "beneficiaries_note": "Ethnic Kazakhs abroad - ethnicity-based, not mapped",
       "beneficiaries": [],
       "grants": "Ethnic Kazakhs entering Kazakhstan receive Qandas status with linked residence-permit channels, then SIMPLIFIED citizenship regardless of length of residence - one of the clearest ethnic-return fast lanes anywhere (2026 digital pilot links PR issuance to status services).",
@@ -878,13 +2104,19 @@
       "renounces_previous": true,
       "confidence": "high",
       "volatility": "low",
-      "sources": ["eGov.kz: Status and rights of kandas (2026 pilot)", "eGov.kz: Simplified citizenship for kandas"]
+      "sources": [
+        "eGov.kz: Status and rights of kandas (2026 pilot)",
+        "eGov.kz: Simplified citizenship for kandas"
+      ]
     },
     {
       "id": "russia_compatriot",
       "name": "Russia Compatriot Resettlement",
       "color": "#8E5AB5",
-      "destination": {"name": "Russia", "iso_n3": "643"},
+      "destination": {
+        "name": "Russia",
+        "iso_n3": "643"
+      },
       "beneficiaries_note": "'Compatriots abroad' (broad cultural/historical definition) - identity-based, not mapped",
       "beneficiaries": [],
       "grants": "Federal programme: qualify as a compatriot, join via a participating region, relocate, and use an accelerated settlement/citizenship track. Dual citizenship tolerated.",
@@ -893,13 +2125,18 @@
       "allocation": "discretionary",
       "confidence": "medium",
       "volatility": "medium",
-      "sources": ["Kremlin: State Programme for voluntary resettlement of compatriots"]
+      "sources": [
+        "Kremlin: State Programme for voluntary resettlement of compatriots"
+      ]
     },
     {
       "id": "korea_f4",
       "name": "South Korea F-4 Overseas Korean",
       "color": "#5A8EC9",
-      "destination": {"name": "South Korea", "iso_n3": "410"},
+      "destination": {
+        "name": "South Korea",
+        "iso_n3": "410"
+      },
       "beneficiaries_note": "Overseas Koreans (ethnic Koreans with foreign nationality) - diaspora-based, not mapped",
       "beneficiaries": [],
       "grants": "F-4 visa: broad labor-market access + credible downline to F-5 permanent residence. Functions as a quasi-membership lane for the Korean diaspora.",
@@ -907,13 +2144,18 @@
       "leads_to_settlement": true,
       "confidence": "medium",
       "volatility": "medium",
-      "sources": ["Korea Visa Portal: F-4 Overseas Korean"]
+      "sources": [
+        "Korea Visa Portal: F-4 Overseas Korean"
+      ]
     },
     {
       "id": "japan_nikkei",
       "name": "Japan Nikkei Long-Term Resident",
       "color": "#B55A8E",
-      "destination": {"name": "Japan", "iso_n3": "392"},
+      "destination": {
+        "name": "Japan",
+        "iso_n3": "392"
+      },
       "beneficiaries_note": "Nikkei (Japanese descendants, mainly in Brazil/Peru) through 4th generation - descent-based, not mapped",
       "beneficiaries": [],
       "grants": "Long-Term Resident status for qualifying Japanese descendants; PR and naturalization available after ordinary residence.",
@@ -922,13 +2164,18 @@
       "renounces_previous": true,
       "confidence": "high",
       "volatility": "medium",
-      "sources": ["Japan MOJ: Long-Term Resident for Nikkei descendants"]
+      "sources": [
+        "Japan MOJ: Long-Term Resident for Nikkei descendants"
+      ]
     },
     {
       "id": "india_oci",
       "name": "India OCI (Overseas Citizen of India)",
       "color": "#E08A3E",
-      "destination": {"name": "India", "iso_n3": "356"},
+      "destination": {
+        "name": "India",
+        "iso_n3": "356"
+      },
       "beneficiaries_note": "Persons of Indian origin + eligible spouses worldwide - descent-based, not mapped",
       "beneficiaries": [],
       "grants": "Lifelong multiple-entry status with indefinite stay and no registration limits - stronger than a visa, weaker than nationality. Statutory path to citizenship after 5 yrs as OCI + ordinary residence (s.5(1)(g)).",
@@ -937,13 +2184,19 @@
       "renounces_previous": true,
       "confidence": "high",
       "volatility": "medium",
-      "sources": ["MHA India: OCI Cardholder portal", "Citizenship Rules 2009 s.5(1)(g)"]
+      "sources": [
+        "MHA India: OCI Cardholder portal",
+        "Citizenship Rules 2009 s.5(1)(g)"
+      ]
     },
     {
       "id": "ireland_fbr",
       "name": "Ireland Foreign Births Register",
       "color": "#3E8E4F",
-      "destination": {"name": "Ireland", "iso_n3": "372"},
+      "destination": {
+        "name": "Ireland",
+        "iso_n3": "372"
+      },
       "beneficiaries_note": "Anyone with an Irish-born grandparent - descent-based, not mapped",
       "beneficiaries": [],
       "grants": "Citizenship by descent via registration - no residence required, no language test. Result: EU/EEA + CTA, the broadest single-passport footprint. Dual citizenship OK.",
@@ -951,13 +2204,18 @@
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "low",
-      "sources": ["Irish Immigration Service: citizenship by birth or descent"]
+      "sources": [
+        "Irish Immigration Service: citizenship by birth or descent"
+      ]
     },
     {
       "id": "italy_jure_sanguinis",
       "name": "Italy jure sanguinis (post-2025)",
       "color": "#5AB56E",
-      "destination": {"name": "Italy", "iso_n3": "380"},
+      "destination": {
+        "name": "Italy",
+        "iso_n3": "380"
+      },
       "beneficiaries_note": "Italian descendants under the reworked post-2025 rules - descent-based, not mapped",
       "beneficiaries": [],
       "grants": "Citizenship by descent with no residence requirement if applying via consulate. Result: EU/EEA citizenship. Dual OK.",
@@ -965,13 +2223,18 @@
       "leads_to_settlement": true,
       "confidence": "high",
       "volatility": "high",
-      "sources": ["Italian consular guidance: Cittadinanza iure sanguinis - nuova disciplina (Law 74/2025)"]
+      "sources": [
+        "Italian consular guidance: Cittadinanza iure sanguinis - nuova disciplina (Law 74/2025)"
+      ]
     },
     {
       "id": "armenia_ethnic",
       "name": "Armenia ethnic-Armenian citizenship",
       "color": "#B58E5A",
-      "destination": {"name": "Armenia", "iso_n3": "051"},
+      "destination": {
+        "name": "Armenia",
+        "iso_n3": "051"
+      },
       "beneficiaries_note": "Ethnic Armenians and descendants worldwide - descent-based, not mapped",
       "beneficiaries": [],
       "grants": "Citizenship by descent/ethnicity with no general residence requirement (new e-system since Jan 2026). Armenian citizenship also carries EAEU work rights across 5 states.",
@@ -979,50 +2242,74 @@
       "leads_to_settlement": true,
       "confidence": "medium",
       "volatility": "low",
-      "sources": ["Armenian MFA: Citizenship (Decision No. 97-N, 2026)"]
+      "sources": [
+        "Armenian MFA: Citizenship (Decision No. 97-N, 2026)"
+      ]
     }
   ],
   "stacking_plays": [
     {
       "passport": "Ireland",
       "timeline": "5 yrs",
-      "blocs": ["eu_eea", "cta"],
+      "blocs": [
+        "eu_eea",
+        "cta"
+      ],
       "footprint": "34-35 jurisdictions — broadest single-passport footprint via naturalization"
     },
     {
       "passport": "Bolivia",
       "timeline": "3 yrs",
-      "blocs": ["can", "mercosur"],
+      "blocs": [
+        "can",
+        "mercosur"
+      ],
       "footprint": "Redundant double coverage of South America"
     },
     {
       "passport": "Dominica (CBI)",
       "timeline": "6-12 months",
-      "blocs": ["oecs", "csme"],
+      "blocs": [
+        "oecs",
+        "csme"
+      ],
       "footprint": "9 Caribbean jurisdictions, no residency required"
     },
     {
       "passport": "Chile",
       "timeline": "~5 yrs",
-      "blocs": ["mercosur", "pacific_alliance"],
+      "blocs": [
+        "mercosur",
+        "pacific_alliance"
+      ],
       "footprint": "South America + facilitated Mexico access"
     },
     {
       "passport": "Brazil",
       "timeline": "1 yr (parent of Brazilian child)",
-      "blocs": ["mercosur", "cplp"],
+      "blocs": [
+        "mercosur",
+        "cplp"
+      ],
       "footprint": "South America + Portugal/EU pipeline via CPLP 7-yr track"
     },
     {
       "passport": "Brazil",
       "timeline": "1 yr (parent of Brazilian child) + 2 yrs Spain",
-      "blocs": ["mercosur", "cplp"],
+      "blocs": [
+        "mercosur",
+        "cplp"
+      ],
       "footprint": "Brazil-to-EU pipeline: Brazilian citizenship -> Spain's 2-yr Ibero-American naturalization -> full EU/EEA citizenship. Faster than Portugal's 7-yr CPLP track."
     },
     {
       "passport": "Falklands-born",
       "timeline": "birthright (dual claim)",
-      "blocs": ["cta", "uk_bot", "mercosur"],
+      "blocs": [
+        "cta",
+        "uk_bot",
+        "mercosur"
+      ],
       "footprint": "Uniquely dual-bloc by birth: British citizen (BOTC 2002) = UK + CTA, plus a claimable Argentine nationality-by-birth = Mercosur. Argentine recognition is case-by-case and politically charged."
     }
   ],
@@ -1034,7 +2321,10 @@
       "confidence": "medium",
       "reason": "Distinct legal regime confirmed in primary law (Hong Kong and Macao Affairs Act), but post-2020 security-screening practice has shifted administratively rather than by clean codified amendment - residence-to-settlement timing imprecise.",
       "volatility": "high",
-      "sources": ["Hong Kong and Macao Affairs Act", "Taiwan MAC/NIA guidance post-2020"]
+      "sources": [
+        "Hong Kong and Macao Affairs Act",
+        "Taiwan MAC/NIA guidance post-2020"
+      ]
     },
     {
       "id": "taiwan_mainland_spouse",
@@ -1043,7 +2333,10 @@
       "confidence": "medium",
       "reason": "Special spouse regime is real in primary law, but latest operational details are fragmented across Taiwan ministries; 2025 policy updates affected long-term-residence administration.",
       "volatility": "high",
-      "sources": ["Mainland Area People spouse regulations", "Taiwan official immigration guidance"]
+      "sources": [
+        "Mainland Area People spouse regulations",
+        "Taiwan official immigration guidance"
+      ]
     },
     {
       "id": "france_cameroon",
@@ -1052,7 +2345,10 @@
       "confidence": "medium",
       "reason": "1994 convention force is clear, but the practical reach of the 2009 'gestion concertee' accord is narrower and more administrative than the Maghreb/Senegal/Gabon packages.",
       "volatility": "medium",
-      "sources": ["Legifrance Decree No. 96-1033 (1994)", "French court citation of the 2009 accord"]
+      "sources": [
+        "Legifrance Decree No. 96-1033 (1994)",
+        "French court citation of the 2009 accord"
+      ]
     },
     {
       "id": "france_mali",
@@ -1061,7 +2357,9 @@
       "confidence": "medium",
       "reason": "CESEDA annex confirms the 1994 conventions formally survive, but current administrative practice is politically exposed given the state of France-Mali relations.",
       "volatility": "high",
-      "sources": ["French CESEDA annex (1994 Mali conventions)"]
+      "sources": [
+        "French CESEDA annex (1994 Mali conventions)"
+      ]
     },
     {
       "id": "liechtenstein_switzerland",
@@ -1070,53 +2368,125 @@
       "confidence": "medium",
       "reason": "2008 bilateral framework verified; Switzerland recognizes a 5-yr settlement effect for Liechtenstein nationals, but Liechtenstein retains quota/lottery limits for Swiss nationals - the edge beyond the EEA/Swiss baseline is asymmetric and technical. Moved here from the excluded list after batch-2 research.",
       "volatility": "low",
-      "sources": ["Swiss SEM Niederlassungsvereinbarungen page", "Liechtenstein LLV residence pages"]
+      "sources": [
+        "Swiss SEM Niederlassungsvereinbarungen page",
+        "Liechtenstein LLV residence pages"
+      ]
     }
   ],
   "dual_citizenship": {
     "countries": {
-      "392": {"status": "banned", "note": "Japan: naturalization requires renouncing prior citizenship.", "sources": ["Japan Nationality Act Art. 5"]},
-      "356": {"status": "banned", "note": "India: no dual citizenship; OCI is a quasi-status, not nationality.", "sources": ["Indian Citizenship Act"]},
-      "398": {"status": "banned", "note": "Kazakhstan: dual citizenship prohibited, incl. for kandas.", "sources": ["eGov.kz citizenship guidance"]},
-      "180": {"status": "banned", "note": "DR Congo: dual citizenship banned.", "sources": ["DRC nationality law"]},
-      "156": {"status": "banned", "note": "China (PRC): dual nationality not recognized.", "sources": ["PRC Nationality Law Art. 3"]},
-      "643": {"status": "allowed", "volatility": "high", "note": "Russia: renunciation requirement eliminated in 2020; 138-FZ (2023) requires only an unverified declaration of intent. Caveat: naturalized citizens face broad revocation grounds (138-FZ art. 22-24, expanded July 2025) - acquired citizenship is legally weaker than birth citizenship.", "sources": ["138-FZ (2023)", "Russian MFA dual-citizenship guidance", "Constitutional Court 2025 statement"]}
+      "392": {
+        "status": "banned",
+        "note": "Japan: naturalization requires renouncing prior citizenship.",
+        "sources": [
+          "Japan Nationality Act Art. 5"
+        ]
+      },
+      "356": {
+        "status": "banned",
+        "note": "India: no dual citizenship; OCI is a quasi-status, not nationality.",
+        "sources": [
+          "Indian Citizenship Act"
+        ]
+      },
+      "398": {
+        "status": "banned",
+        "note": "Kazakhstan: dual citizenship prohibited, incl. for kandas.",
+        "sources": [
+          "eGov.kz citizenship guidance"
+        ]
+      },
+      "180": {
+        "status": "banned",
+        "note": "DR Congo: dual citizenship banned.",
+        "sources": [
+          "DRC nationality law"
+        ]
+      },
+      "156": {
+        "status": "banned",
+        "note": "China (PRC): dual nationality not recognized.",
+        "sources": [
+          "PRC Nationality Law Art. 3"
+        ]
+      },
+      "643": {
+        "status": "allowed",
+        "volatility": "high",
+        "note": "Russia: renunciation requirement eliminated in 2020; 138-FZ (2023) requires only an unverified declaration of intent. Caveat: naturalized citizens face broad revocation grounds (138-FZ art. 22-24, expanded July 2025) - acquired citizenship is legally weaker than birth citizenship.",
+        "sources": [
+          "138-FZ (2023)",
+          "Russian MFA dual-citizenship guidance",
+          "Constitutional Court 2025 statement"
+        ]
+      }
     },
     "treaty_exceptions": [
       {
         "id": "russia_tajikistan_dual",
         "name": "Russia-Tajikistan Dual Citizenship Treaty (1995)",
         "parties": [
-          {"name": "Russia", "iso_n3": "643"}, {"name": "Tajikistan", "iso_n3": "762"}
+          {
+            "name": "Russia",
+            "iso_n3": "643"
+          },
+          {
+            "name": "Tajikistan",
+            "iso_n3": "762"
+          }
         ],
         "effect": "The sole surviving Russian dual-citizenship treaty: changes conflict-of-laws treatment (military service, consular protection, document recognition) for Russia-Tajikistan dual citizens. Not a mobility lane - and NOT what permits keeping both citizenships (general Russian law already allows that since 2020).",
         "status": "operative",
         "confidence": "high",
-        "sources": ["1995 treaty text", "Russian ratification act"],
+        "sources": [
+          "1995 treaty text",
+          "Russian ratification act"
+        ],
         "last_checked": "2026-07-16"
       },
       {
         "id": "argentina_spain_dual",
         "name": "Argentina-Spain Nationality Convention (1969, 2001 protocol)",
         "parties": [
-          {"name": "Argentina", "iso_n3": "032"}, {"name": "Spain", "iso_n3": "724"}
+          {
+            "name": "Argentina",
+            "iso_n3": "032"
+          },
+          {
+            "name": "Spain",
+            "iso_n3": "724"
+          }
         ],
         "effect": "Protected bilateral double-nationality framework once citizenship is otherwise acquired - not a right to move or settle automatically.",
         "status": "operative",
         "confidence": "high",
-        "sources": ["BOE 1969 convention", "BOE 2001 protocol"],
+        "sources": [
+          "BOE 1969 convention",
+          "BOE 2001 protocol"
+        ],
         "last_checked": "2026-07-16"
       },
       {
         "id": "argentina_italy_dual",
         "name": "Argentina-Italy Citizenship Agreement (1971)",
         "parties": [
-          {"name": "Argentina", "iso_n3": "032"}, {"name": "Italy", "iso_n3": "380"}
+          {
+            "name": "Argentina",
+            "iso_n3": "032"
+          },
+          {
+            "name": "Italy",
+            "iso_n3": "380"
+          }
         ],
         "effect": "Quiescent/full citizenship mechanics between the two states; Italy's 1992 general dual-citizenship law reduced its marginal effect, which is narrower than often claimed.",
         "status": "operative",
         "confidence": "medium",
-        "sources": ["1971 agreement", "Italian Consulate Buenos Aires guidance"],
+        "sources": [
+          "1971 agreement",
+          "Italian Consulate Buenos Aires guidance"
+        ],
         "last_checked": "2026-07-16"
       }
     ]
