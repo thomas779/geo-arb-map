@@ -454,6 +454,26 @@ aside {
   margin-bottom: 8px;
 }
 
+.alloc-badge,
+.renounce-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  border-radius: 5px;
+  padding: 4px 8px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.alloc-badge {
+  color: #D98A5A;
+  background: rgba(217, 122, 69, 0.1);
+}
+
+.renounce-badge {
+  color: #C97A7A;
+  background: rgba(181, 68, 59, 0.12);
+}
+
 .lane-meta {
   font-family: var(--mono);
   font-size: 10px;

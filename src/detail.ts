@@ -72,6 +72,10 @@ export function render(state: AppState, data: BlocsData, onClose: () => void): v
           ? `Inbound lane — privileged access into ${countryName}`
           : `Outbound lane — access to ${l.destination.name}`
       }</div>
+      ${l.allocation && l.allocation !== 'right'
+        ? `<div class="alloc-badge">⚄ not guaranteed — ${l.allocation.replace('_', ' ')}</div>` : ''}
+      ${l.renounces_previous
+        ? `<div class="renounce-badge">⚠ naturalizing here requires renouncing prior citizenship</div>` : ''}
       <div class="rung"><span class="tier">GET</span><p>${l.grants}</p></div>
       <div class="rung"><span class="tier">BUT</span><p>${l.limits}</p></div>
       ${l.beneficiaries_note ? `<div class="notes">${l.beneficiaries_note}</div>` : ''}

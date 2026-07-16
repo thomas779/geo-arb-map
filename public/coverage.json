@@ -1,0 +1,1670 @@
+{
+  "meta": {
+    "description": "Research-coverage matrix: which countries have been checked for privileged settlement arrangements. States: verified | verified_none | partial | unchecked.",
+    "last_updated": "2026-07-16",
+    "counts": {
+      "unchecked": 69,
+      "partial": 166,
+      "verified_none": 4
+    }
+  },
+  "rows": [
+    {
+      "iso_n3": "004",
+      "name": "Afghanistan",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "008",
+      "name": "Albania",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "010",
+      "name": "Antarctica",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "012",
+      "name": "Algeria",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "016",
+      "name": "American Samoa",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "020",
+      "name": "Andorra",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "024",
+      "name": "Angola",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "028",
+      "name": "Antigua and Barb.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "031",
+      "name": "Azerbaijan",
+      "state": "verified_none",
+      "last_checked": "2026-07-16",
+      "note": "Azerbaijan: Turkey-Azerbaijan is visa-free/ID-card travel only; no settlement lane verified. No Turan visa instrument in force.",
+      "sources": [
+        "Turkish official travel guidance"
+      ]
+    },
+    {
+      "iso_n3": "032",
+      "name": "Argentina",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "036",
+      "name": "Australia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "040",
+      "name": "Austria",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "044",
+      "name": "Bahamas",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "048",
+      "name": "Bahrain",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "050",
+      "name": "Bangladesh",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "051",
+      "name": "Armenia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "052",
+      "name": "Barbados",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "056",
+      "name": "Belgium",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "060",
+      "name": "Bermuda",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "064",
+      "name": "Bhutan",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "068",
+      "name": "Bolivia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "070",
+      "name": "Bosnia and Herz.",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "072",
+      "name": "Botswana",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "076",
+      "name": "Brazil",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "084",
+      "name": "Belize",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "086",
+      "name": "Br. Indian Ocean Ter.",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "090",
+      "name": "Solomon Is.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "092",
+      "name": "British Virgin Is.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "096",
+      "name": "Brunei",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "100",
+      "name": "Bulgaria",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "104",
+      "name": "Myanmar",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "108",
+      "name": "Burundi",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "112",
+      "name": "Belarus",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "116",
+      "name": "Cambodia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "120",
+      "name": "Cameroon",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Cameroon: France package real but 2009 accord narrower (pending_verification). CEMAC travel implemented; residence/establishment not.",
+      "sources": [
+        "Batch-2 Francophone run"
+      ]
+    },
+    {
+      "iso_n3": "124",
+      "name": "Canada",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "132",
+      "name": "Cabo Verde",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "136",
+      "name": "Cayman Is.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "140",
+      "name": "Central African Rep.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Central African Republic: CEMAC biometric-passport travel partially implemented; no settlement rights in force.",
+      "sources": [
+        "CEMAC communiques 2012/2013"
+      ]
+    },
+    {
+      "iso_n3": "144",
+      "name": "Sri Lanka",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "148",
+      "name": "Chad",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Chad: CEMAC travel partially implemented; no settlement rights in force.",
+      "sources": [
+        "CEMAC communiques 2012/2013"
+      ]
+    },
+    {
+      "iso_n3": "152",
+      "name": "Chile",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "156",
+      "name": "China",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "158",
+      "name": "Taiwan",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Taiwan: HK/Macau and Mainland-spouse channels confirmed in primary law, but post-2020 operational tightening imprecise (pending_verification).",
+      "sources": [
+        "Batch-2 Greater China run"
+      ]
+    },
+    {
+      "iso_n3": "170",
+      "name": "Colombia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "174",
+      "name": "Comoros",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "178",
+      "name": "Congo",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Congo: France-Congo accords could not be verified at settlement grade in this sweep; may exist as narrower labor channels.",
+      "sources": [
+        "Batch-2 coverage statement"
+      ]
+    },
+    {
+      "iso_n3": "180",
+      "name": "Dem. Rep. Congo",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "184",
+      "name": "Cook Is.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "188",
+      "name": "Costa Rica",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "191",
+      "name": "Croatia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "192",
+      "name": "Cuba",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "196",
+      "name": "Cyprus",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "203",
+      "name": "Czechia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "204",
+      "name": "Benin",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Benin: 2007 France accord derogates from CESEDA but covers work/study channels, not settlement-grade rights.",
+      "sources": [
+        "Legifrance Decree No. 2010-230"
+      ]
+    },
+    {
+      "iso_n3": "208",
+      "name": "Denmark",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "212",
+      "name": "Dominica",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "214",
+      "name": "Dominican Rep.",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "218",
+      "name": "Ecuador",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "222",
+      "name": "El Salvador",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "226",
+      "name": "Eq. Guinea",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Equatorial Guinea: accepted CEMAC biometric-passport circulation 2017 with continued border controls.",
+      "sources": [
+        "Equatorial Guinea official statement 2017"
+      ]
+    },
+    {
+      "iso_n3": "231",
+      "name": "Ethiopia",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "232",
+      "name": "Eritrea",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "233",
+      "name": "Estonia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "234",
+      "name": "Faeroe Is.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "238",
+      "name": "Falkland Is.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "239",
+      "name": "S. Geo. and the Is.",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "242",
+      "name": "Fiji",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "246",
+      "name": "Finland",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "248",
+      "name": "Åland",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "250",
+      "name": "France",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "258",
+      "name": "Fr. Polynesia",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "260",
+      "name": "Fr. S. Antarctic Lands",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "262",
+      "name": "Djibouti",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "266",
+      "name": "Gabon",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "268",
+      "name": "Georgia",
+      "state": "verified_none",
+      "last_checked": "2026-07-16",
+      "note": "Georgia: 1-yr visa-free stay is generous but unilateral visa policy, not a settlement privilege.",
+      "sources": [
+        "Georgian government visa-exemption list"
+      ]
+    },
+    {
+      "iso_n3": "270",
+      "name": "Gambia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "275",
+      "name": "Palestine",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "276",
+      "name": "Germany",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "288",
+      "name": "Ghana",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "292",
+      "name": "Gibraltar",
+      "state": "partial",
+      "note": "In dataset; not a world-atlas 50m feature (micro-territory).",
+      "last_checked": "2026-07-16"
+    },
+    {
+      "iso_n3": "296",
+      "name": "Kiribati",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "300",
+      "name": "Greece",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "304",
+      "name": "Greenland",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "308",
+      "name": "Grenada",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "316",
+      "name": "Guam",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "320",
+      "name": "Guatemala",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "324",
+      "name": "Guinea",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "328",
+      "name": "Guyana",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "332",
+      "name": "Haiti",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "334",
+      "name": "Heard I. and McDonald Is.",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "336",
+      "name": "Vatican",
+      "state": "verified_none",
+      "last_checked": "2026-07-16",
+      "note": "Vatican: citizenship is office-functional, not a settlement lane.",
+      "sources": [
+        "Official Vatican citizenship materials"
+      ]
+    },
+    {
+      "iso_n3": "340",
+      "name": "Honduras",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "344",
+      "name": "Hong Kong",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "348",
+      "name": "Hungary",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "352",
+      "name": "Iceland",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "356",
+      "name": "India",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "360",
+      "name": "Indonesia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "364",
+      "name": "Iran",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "368",
+      "name": "Iraq",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "372",
+      "name": "Ireland",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "376",
+      "name": "Israel",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "380",
+      "name": "Italy",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "384",
+      "name": "Côte d'Ivoire",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Cote d'Ivoire: France-CIV accord not verified at settlement grade in batch-2 sweep.",
+      "sources": [
+        "Batch-2 coverage statement"
+      ]
+    },
+    {
+      "iso_n3": "388",
+      "name": "Jamaica",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "392",
+      "name": "Japan",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "398",
+      "name": "Kazakhstan",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "400",
+      "name": "Jordan",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "404",
+      "name": "Kenya",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "408",
+      "name": "North Korea",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "410",
+      "name": "South Korea",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "414",
+      "name": "Kuwait",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "417",
+      "name": "Kyrgyzstan",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "418",
+      "name": "Laos",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "422",
+      "name": "Lebanon",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "426",
+      "name": "Lesotho",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "428",
+      "name": "Latvia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "430",
+      "name": "Liberia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "434",
+      "name": "Libya",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "438",
+      "name": "Liechtenstein",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "440",
+      "name": "Lithuania",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "442",
+      "name": "Luxembourg",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "446",
+      "name": "Macao",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "450",
+      "name": "Madagascar",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "454",
+      "name": "Malawi",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "458",
+      "name": "Malaysia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "462",
+      "name": "Maldives",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "466",
+      "name": "Mali",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "470",
+      "name": "Malta",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "478",
+      "name": "Mauritania",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "480",
+      "name": "Mauritius",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "484",
+      "name": "Mexico",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "492",
+      "name": "Monaco",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "496",
+      "name": "Mongolia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Mongolia: ethnic-return process fragments found, but no clean primary-law text comparable to Kazakhstan kandas.",
+      "sources": [
+        "Batch-2 coverage statement"
+      ]
+    },
+    {
+      "iso_n3": "498",
+      "name": "Moldova",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "499",
+      "name": "Montenegro",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "500",
+      "name": "Montserrat",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "504",
+      "name": "Morocco",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "508",
+      "name": "Mozambique",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "512",
+      "name": "Oman",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "516",
+      "name": "Namibia",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "520",
+      "name": "Nauru",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "524",
+      "name": "Nepal",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "528",
+      "name": "Netherlands",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "531",
+      "name": "Curaçao",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "533",
+      "name": "Aruba",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "534",
+      "name": "Sint Maarten",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "540",
+      "name": "New Caledonia",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "548",
+      "name": "Vanuatu",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "554",
+      "name": "New Zealand",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "558",
+      "name": "Nicaragua",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "562",
+      "name": "Niger",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "566",
+      "name": "Nigeria",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "570",
+      "name": "Niue",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "574",
+      "name": "Norfolk Island",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "578",
+      "name": "Norway",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "580",
+      "name": "N. Mariana Is.",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "583",
+      "name": "Micronesia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "584",
+      "name": "Marshall Is.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "585",
+      "name": "Palau",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "586",
+      "name": "Pakistan",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "591",
+      "name": "Panama",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "598",
+      "name": "Papua New Guinea",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "600",
+      "name": "Paraguay",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "604",
+      "name": "Peru",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "608",
+      "name": "Philippines",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "612",
+      "name": "Pitcairn Is.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "616",
+      "name": "Poland",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "620",
+      "name": "Portugal",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "624",
+      "name": "Guinea-Bissau",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "626",
+      "name": "Timor-Leste",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "630",
+      "name": "Puerto Rico",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "634",
+      "name": "Qatar",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "642",
+      "name": "Romania",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "643",
+      "name": "Russia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "646",
+      "name": "Rwanda",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "652",
+      "name": "St-Barthélemy",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "654",
+      "name": "Saint Helena",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "659",
+      "name": "St. Kitts and Nevis",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "660",
+      "name": "Anguilla",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "662",
+      "name": "Saint Lucia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "663",
+      "name": "St-Martin",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "666",
+      "name": "St. Pierre and Miquelon",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "670",
+      "name": "St. Vin. and Gren.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "674",
+      "name": "San Marino",
+      "state": "verified_none",
+      "last_checked": "2026-07-16",
+      "note": "San Marino: 1939/1980 conventions confirmed, but open-ended reciprocal residence/work rights with Italy not proven in primary law.",
+      "sources": [
+        "1939 friendship convention",
+        "1980 additional agreement"
+      ]
+    },
+    {
+      "iso_n3": "678",
+      "name": "São Tomé and Principe",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "682",
+      "name": "Saudi Arabia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "686",
+      "name": "Senegal",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "688",
+      "name": "Serbia",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "690",
+      "name": "Seychelles",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "694",
+      "name": "Sierra Leone",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "702",
+      "name": "Singapore",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "703",
+      "name": "Slovakia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "704",
+      "name": "Vietnam",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "705",
+      "name": "Slovenia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "706",
+      "name": "Somalia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "710",
+      "name": "South Africa",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "716",
+      "name": "Zimbabwe",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "724",
+      "name": "Spain",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "728",
+      "name": "S. Sudan",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "729",
+      "name": "Sudan",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "732",
+      "name": "W. Sahara",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "740",
+      "name": "Suriname",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "748",
+      "name": "eSwatini",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "752",
+      "name": "Sweden",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "756",
+      "name": "Switzerland",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "760",
+      "name": "Syria",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "762",
+      "name": "Tajikistan",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Tajikistan: Russia recruitment lane is temporary-only; the 1995 dual-citizenship treaty is recorded under dual_citizenship.",
+      "sources": [
+        "Publication Pravo 2020 agreement",
+        "1995 dual-citizenship treaty"
+      ]
+    },
+    {
+      "iso_n3": "764",
+      "name": "Thailand",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "768",
+      "name": "Togo",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Togo: France-Togo accord not verified at settlement grade in batch-2 sweep.",
+      "sources": [
+        "Batch-2 coverage statement"
+      ]
+    },
+    {
+      "iso_n3": "772",
+      "name": "Tokelau",
+      "state": "partial",
+      "note": "In dataset; not a world-atlas 50m feature (micro-territory).",
+      "last_checked": "2026-07-16"
+    },
+    {
+      "iso_n3": "776",
+      "name": "Tonga",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "780",
+      "name": "Trinidad and Tobago",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "784",
+      "name": "United Arab Emirates",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "788",
+      "name": "Tunisia",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "792",
+      "name": "Turkey",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Turkey: TRNC-side facilitation exists (property, company formation) but no blanket Turkey-side residence/work right verified.",
+      "sources": [
+        "Batch-2 gray-zone log"
+      ]
+    },
+    {
+      "iso_n3": "795",
+      "name": "Turkmenistan",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "796",
+      "name": "Turks and Caicos Is.",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "798",
+      "name": "Tuvalu",
+      "state": "partial",
+      "note": "In dataset; not a world-atlas 50m feature (micro-territory).",
+      "last_checked": "2026-07-16"
+    },
+    {
+      "iso_n3": "800",
+      "name": "Uganda",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "804",
+      "name": "Ukraine",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "807",
+      "name": "Macedonia",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "818",
+      "name": "Egypt",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "826",
+      "name": "United Kingdom",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "831",
+      "name": "Guernsey",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "832",
+      "name": "Jersey",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "833",
+      "name": "Isle of Man",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "834",
+      "name": "Tanzania",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "840",
+      "name": "United States of America",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "850",
+      "name": "U.S. Virgin Is.",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "854",
+      "name": "Burkina Faso",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "858",
+      "name": "Uruguay",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "860",
+      "name": "Uzbekistan",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Uzbekistan: Russia recruitment lane (2017) is temporary-labor only - out of settlement scope.",
+      "sources": [
+        "Publication Pravo 2017 agreement"
+      ]
+    },
+    {
+      "iso_n3": "862",
+      "name": "Venezuela",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "876",
+      "name": "Wallis and Futuna Is.",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "882",
+      "name": "Samoa",
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+    },
+    {
+      "iso_n3": "887",
+      "name": "Yemen",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "894",
+      "name": "Zambia",
+      "state": "unchecked",
+      "last_checked": null
+    },
+    {
+      "iso_n3": "undefined",
+      "name": "Somaliland",
+      "state": "unchecked",
+      "last_checked": null
+    }
+  ]
+}

@@ -1024,5 +1024,100 @@
       "blocs": ["cta", "uk_bot", "mercosur"],
       "footprint": "Uniquely dual-bloc by birth: British citizen (BOTC 2002) = UK + CTA, plus a claimable Argentine nationality-by-birth = Mercosur. Argentine recognition is case-by-case and politically charged."
     }
-  ]
+  ],
+  "pending_verification": [
+    {
+      "id": "taiwan_hk_macau_residence",
+      "name": "Taiwan special residence/settlement regime for HK & Macau residents",
+      "proposed_shape": "lane (one-way, destination Taiwan)",
+      "confidence": "medium",
+      "reason": "Distinct legal regime confirmed in primary law (Hong Kong and Macao Affairs Act), but post-2020 security-screening practice has shifted administratively rather than by clean codified amendment - residence-to-settlement timing imprecise.",
+      "volatility": "high",
+      "sources": ["Hong Kong and Macao Affairs Act", "Taiwan MAC/NIA guidance post-2020"]
+    },
+    {
+      "id": "taiwan_mainland_spouse",
+      "name": "Taiwan Mainland-spouse residence and settlement track",
+      "proposed_shape": "lane (one-way, destination Taiwan)",
+      "confidence": "medium",
+      "reason": "Special spouse regime is real in primary law, but latest operational details are fragmented across Taiwan ministries; 2025 policy updates affected long-term-residence administration.",
+      "volatility": "high",
+      "sources": ["Mainland Area People spouse regulations", "Taiwan official immigration guidance"]
+    },
+    {
+      "id": "france_cameroon",
+      "name": "France-Cameroon circulation/stay package",
+      "proposed_shape": "lane (destination France, beneficiary Cameroon)",
+      "confidence": "medium",
+      "reason": "1994 convention force is clear, but the practical reach of the 2009 'gestion concertee' accord is narrower and more administrative than the Maghreb/Senegal/Gabon packages.",
+      "volatility": "medium",
+      "sources": ["Legifrance Decree No. 96-1033 (1994)", "French court citation of the 2009 accord"]
+    },
+    {
+      "id": "france_mali",
+      "name": "France-Mali circulation and establishment package",
+      "proposed_shape": "lane (destination France, beneficiary Mali)",
+      "confidence": "medium",
+      "reason": "CESEDA annex confirms the 1994 conventions formally survive, but current administrative practice is politically exposed given the state of France-Mali relations.",
+      "volatility": "high",
+      "sources": ["French CESEDA annex (1994 Mali conventions)"]
+    },
+    {
+      "id": "liechtenstein_switzerland",
+      "name": "Liechtenstein-Switzerland migration framework",
+      "proposed_shape": "lane (two-way, asymmetric)",
+      "confidence": "medium",
+      "reason": "2008 bilateral framework verified; Switzerland recognizes a 5-yr settlement effect for Liechtenstein nationals, but Liechtenstein retains quota/lottery limits for Swiss nationals - the edge beyond the EEA/Swiss baseline is asymmetric and technical. Moved here from the excluded list after batch-2 research.",
+      "volatility": "low",
+      "sources": ["Swiss SEM Niederlassungsvereinbarungen page", "Liechtenstein LLV residence pages"]
+    }
+  ],
+  "dual_citizenship": {
+    "countries": {
+      "392": {"status": "banned", "note": "Japan: naturalization requires renouncing prior citizenship.", "sources": ["Japan Nationality Act Art. 5"]},
+      "356": {"status": "banned", "note": "India: no dual citizenship; OCI is a quasi-status, not nationality.", "sources": ["Indian Citizenship Act"]},
+      "398": {"status": "banned", "note": "Kazakhstan: dual citizenship prohibited, incl. for kandas.", "sources": ["eGov.kz citizenship guidance"]},
+      "180": {"status": "banned", "note": "DR Congo: dual citizenship banned.", "sources": ["DRC nationality law"]},
+      "156": {"status": "banned", "note": "China (PRC): dual nationality not recognized.", "sources": ["PRC Nationality Law Art. 3"]},
+      "643": {"status": "conditional", "note": "Russia: renunciation required for most naturalizers, with treaty exceptions (see treaty_exceptions) and exemptions for Belarusians.", "sources": ["Russian citizenship law", "2026 restriction carve-outs"]}
+    },
+    "treaty_exceptions": [
+      {
+        "id": "russia_tajikistan_dual",
+        "name": "Russia-Tajikistan Dual Citizenship Treaty (1995)",
+        "parties": [
+          {"name": "Russia", "iso_n3": "643"}, {"name": "Tajikistan", "iso_n3": "762"}
+        ],
+        "effect": "Keep-both exception: citizens may acquire the other state's citizenship under domestic law while retaining their original one - the sole surviving Russian dual-citizenship treaty. Not a mobility lane; it removes the renunciation obstacle to settlement/naturalization.",
+        "status": "operative",
+        "confidence": "high",
+        "sources": ["1995 treaty text", "Russian ratification act"],
+        "last_checked": "2026-07-16"
+      },
+      {
+        "id": "argentina_spain_dual",
+        "name": "Argentina-Spain Nationality Convention (1969, 2001 protocol)",
+        "parties": [
+          {"name": "Argentina", "iso_n3": "032"}, {"name": "Spain", "iso_n3": "724"}
+        ],
+        "effect": "Protected bilateral double-nationality framework once citizenship is otherwise acquired - not a right to move or settle automatically.",
+        "status": "operative",
+        "confidence": "high",
+        "sources": ["BOE 1969 convention", "BOE 2001 protocol"],
+        "last_checked": "2026-07-16"
+      },
+      {
+        "id": "argentina_italy_dual",
+        "name": "Argentina-Italy Citizenship Agreement (1971)",
+        "parties": [
+          {"name": "Argentina", "iso_n3": "032"}, {"name": "Italy", "iso_n3": "380"}
+        ],
+        "effect": "Quiescent/full citizenship mechanics between the two states; Italy's 1992 general dual-citizenship law reduced its marginal effect, which is narrower than often claimed.",
+        "status": "operative",
+        "confidence": "medium",
+        "sources": ["1971 agreement", "Italian Consulate Buenos Aires guidance"],
+        "last_checked": "2026-07-16"
+      }
+    ]
+  }
 }
