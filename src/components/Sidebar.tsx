@@ -64,7 +64,7 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
                 size="sm"
                 className={cn(
                   'h-auto w-full justify-start gap-2 px-2 py-1.5 text-left text-[13px] font-medium whitespace-normal',
-                  state.bloc === b.id && 'border border-primary bg-accent',
+                  state.bloc === b.id && 'border border-primary bg-primary/10',
                 )}
                 onClick={() => onBloc(state.bloc === b.id ? null : b.id)}
               >
@@ -90,7 +90,7 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
                 size="sm"
                 className={cn(
                   'h-auto w-full justify-start gap-2 px-2 py-1.5 text-left text-[13px] font-medium whitespace-normal',
-                  state.lane === l.id && 'border border-primary bg-accent',
+                  state.lane === l.id && 'border border-primary bg-primary/10',
                 )}
                 onClick={() => onLane(state.lane === l.id ? null : l.id)}
               >
