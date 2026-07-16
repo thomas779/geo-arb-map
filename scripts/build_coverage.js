@@ -39,6 +39,13 @@ const OVERRIDES = {
   '140': { state: 'partial', note: 'Central African Republic: CEMAC biometric-passport travel partially implemented; no settlement rights in force.', sources: ['CEMAC communiques 2012/2013'] },
   '148': { state: 'partial', note: 'Chad: CEMAC travel partially implemented; no settlement rights in force.', sources: ['CEMAC communiques 2012/2013'] },
   '226': { state: 'partial', note: 'Equatorial Guinea: accepted CEMAC biometric-passport circulation 2017 with continued border controls.', sources: ['Equatorial Guinea official statement 2017'] },
+  '710': { state: 'partial', note: 'South Africa: no settlement-grade lane found - SADC protocol not in force; ZEP/LEP permits are temporary and explicitly bar PR. Panama FNV beneficiary.', sources: ['SA Home Affairs ZEP/LEP extension to May 2027'] },
+  '716': { state: 'partial', note: 'Zimbabwe: ZEP exemption permits (to May 2027) allow live/work/study in South Africa but bar permanent residency - temporary-only, out of settlement scope.', sources: ['SA Home Affairs ZEP extension'] },
+  '426': { state: 'partial', note: 'Lesotho: LEP exemption permits (to May 2027) allow live/work/study in South Africa but bar permanent residency - temporary-only, out of settlement scope.', sources: ['SA Home Affairs LEP extension'] },
+  '434': { state: 'verified_none', note: 'Libya: no privileged Italian (ex-colonial) immigration lane; ordinary third-country treatment.', sources: ['1947 Treaty of Peace renunciation; no operative accord found'] },
+  '232': { state: 'verified_none', note: 'Eritrea: no privileged Italian (ex-colonial) immigration lane.', sources: ['No operative accord found'] },
+  '056': { state: 'partial', note: 'Belgium: no privileged lane for nationals of former colonies (DRC/Rwanda/Burundi) - ordinary third-country treatment.', sources: ['No operative accord found'] },
+  '740': { state: 'partial', note: 'Suriname: 2014 Persons of Surinamese Origin law grants diaspora residence/work rights in Suriname (pending_verification); the 1975 NL allocation treaty transition ended 1980.', sources: ['Wet PSA 2014', 'Toescheidingsovereenkomst 1975'] },
 };
 
 // Registry is the canonical jurisdiction list (run scripts/build_registry.js first)

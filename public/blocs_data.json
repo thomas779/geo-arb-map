@@ -52,6 +52,22 @@
       {
         "name": "Portugal Sephardic naturalization",
         "reason": "Route narrowed/closed to new applicants - no longer operative as a live fast lane."
+      },
+      {
+        "name": "Netherlands-Suriname (post-colonial preference)",
+        "reason": "The 1975 Toescheidingsovereenkomst's free-settlement transition ended in 1980; today only case-by-case option/reacquisition procedures remain - no general privileged lane into the Netherlands."
+      },
+      {
+        "name": "Belgium-DR Congo/Rwanda/Burundi",
+        "reason": "No privileged residence or settlement regime for nationals of Belgium's former colonies - they are ordinary third-country nationals under Belgian law."
+      },
+      {
+        "name": "Italy-Libya/Somalia/Eritrea/Ethiopia",
+        "reason": "Italy renounced colonial claims in 1947 and maintains no colonial-preference immigration lane; Italy's real fast lane is jure sanguinis descent citizenship."
+      },
+      {
+        "name": "South Africa ZEP/LEP permits",
+        "reason": "Zimbabwean and Lesotho Exemption Permits (extended to May 2027) allow live/work/study but explicitly BAR permanent residency and status changes - temporary by design, out of settlement scope."
       }
     ]
   },
@@ -201,7 +217,7 @@
       "name": "Mercosur Residence Agreement",
       "category": "full",
       "strength": 1,
-      "color": "#4C99D3",
+      "color": "#5198D4",
       "members": [
         {
           "name": "Argentina",
@@ -253,7 +269,7 @@
       "name": "Andean Community (CAN)",
       "category": "full",
       "strength": 1,
-      "color": "#1187B4",
+      "color": "#2585B7",
       "members": [
         {
           "name": "Bolivia",
@@ -285,7 +301,7 @@
       "name": "Eurasian Economic Union (EAEU)",
       "category": "full",
       "strength": 2,
-      "color": "#1CA2C3",
+      "color": "#309FCA",
       "members": [
         {
           "name": "Armenia",
@@ -321,7 +337,7 @@
       "name": "Union State (Russia-Belarus)",
       "category": "full",
       "strength": 1,
-      "color": "#009174",
+      "color": "#008BAB",
       "members": [
         {
           "name": "Russia",
@@ -345,7 +361,7 @@
       "name": "Trans-Tasman Travel Arrangement",
       "category": "full",
       "strength": 1,
-      "color": "#44A87C",
+      "color": "#2EA98A",
       "members": [
         {
           "name": "Australia",
@@ -369,7 +385,7 @@
       "name": "Common Travel Area (CTA)",
       "category": "full",
       "strength": 1,
-      "color": "#408F57",
+      "color": "#319061",
       "members": [
         {
           "name": "Ireland",
@@ -405,7 +421,7 @@
       "name": "OECS (Eastern Caribbean)",
       "category": "full",
       "strength": 1,
-      "color": "#6AA35F",
+      "color": "#64A464",
       "members": [
         {
           "name": "Antigua and Barbuda",
@@ -864,7 +880,7 @@
       "name": "UK-Hong Kong BN(O) Route",
       "category": "one_way",
       "strength": 2,
-      "color": "#937FCC",
+      "color": "#917FCD",
       "members": [
         {
           "name": "United Kingdom",
@@ -888,7 +904,7 @@
       "name": "UK & Overseas Territories",
       "category": "one_way",
       "strength": 2,
-      "color": "#8C5DA1",
+      "color": "#875FA6",
       "members": [
         {
           "name": "United Kingdom",
@@ -948,7 +964,7 @@
       "name": "Cross-Strait & SAR Permits (Greater China)",
       "category": "one_way",
       "strength": 2,
-      "color": "#BD76AE",
+      "color": "#B679B9",
       "members": [
         {
           "name": "China",
@@ -974,6 +990,38 @@
       },
       "fastest_entry": "n/a for outsiders - rights attach to Chinese citizenship plus permanent residency of HK, Macau, or Taiwan.",
       "notes": "Asymmetric toward the mainland; permit mechanics only. Context: HK and Macau PR via 7 years' ordinary residence is ORDINARY immigration law open to anyone - it is not a privileged lane and is deliberately not mapped as an arrangement here."
+    },
+    {
+      "id": "dutch_kingdom",
+      "name": "Kingdom of the Netherlands",
+      "category": "one_way",
+      "strength": 2,
+      "members": [
+        {
+          "name": "Netherlands",
+          "iso_n3": "528"
+        },
+        {
+          "name": "Aruba",
+          "iso_n3": "533"
+        },
+        {
+          "name": "Curacao",
+          "iso_n3": "531"
+        },
+        {
+          "name": "Sint Maarten",
+          "iso_n3": "534"
+        }
+      ],
+      "rights": {
+        "TR": "n/a - one shared Dutch nationality across all four Kingdom countries.",
+        "PR": "European Dutch settling in the Caribbean countries get near-automatic admission (good conduct + housing + means; no work permit needed in Curacao/Sint Maarten/BES). Aruba administers its own DIMAS admission.",
+        "CIT": "All Kingdom citizens hold DUTCH (EU) nationality: Caribbean-to-European-Netherlands direction is fully open (right of abode). Naturalizing in Curacao/Aruba/Sint Maarten yields the same Dutch/EU passport."
+      },
+      "fastest_entry": "Naturalize in any Kingdom country (5 yrs) -> Dutch nationality -> EU/EEA + the whole Kingdom. Caribbean naturalization is a real EU-passport door.",
+      "notes": "Asymmetric but softer than the UK-BOT model: right of abode in the Caribbean countries is limited to those with a connection to the region, yet admission for other Dutch nationals is near-automatic with mild conditions.",
+      "color": "#AE6395"
     },
     {
       "id": "asean",
@@ -1122,7 +1170,7 @@
     {
       "id": "e3",
       "name": "E-3 (Australians)",
-      "color": "#B59432",
+      "color": "#B49532",
       "destination": {
         "name": "United States of America",
         "iso_n3": "840"
@@ -1162,7 +1210,7 @@
     {
       "id": "e2",
       "name": "E-2 Treaty Investor",
-      "color": "#BE8F34",
+      "color": "#BD9033",
       "destination": {
         "name": "United States of America",
         "iso_n3": "840"
@@ -1492,7 +1540,7 @@
     {
       "id": "spain_iberoamerican",
       "name": "Spain 2-year naturalization (Ibero-American)",
-      "color": "#A97515",
+      "color": "#A87514",
       "destination": {
         "name": "Spain",
         "iso_n3": "724"
@@ -1567,7 +1615,7 @@
     {
       "id": "uk_yms_expanded",
       "name": "UK Youth Mobility (expanded AU/CA/NZ tier)",
-      "color": "#C68B3A",
+      "color": "#C58B39",
       "destination": {
         "name": "United Kingdom",
         "iso_n3": "826"
@@ -1608,7 +1656,7 @@
     {
       "id": "falklands_argentina",
       "name": "Argentina citizenship claim (Falklands-born)",
-      "color": "#B07021",
+      "color": "#AF711F",
       "destination": {
         "name": "Argentina",
         "iso_n3": "032"
@@ -1627,7 +1675,7 @@
     {
       "id": "daft",
       "name": "Dutch-American Friendship Treaty (DAFT)",
-      "color": "#CD8643",
+      "color": "#CC8741",
       "destination": {
         "name": "Netherlands",
         "iso_n3": "528"
@@ -1643,9 +1691,229 @@
       "leads_to_settlement": true
     },
     {
+      "id": "panama_friendly_nations",
+      "name": "Panama Friendly Nations Visa",
+      "color": "#B46C2B",
+      "destination": {
+        "name": "Panama",
+        "iso_n3": "591"
+      },
+      "beneficiaries_note": "50 'friendly nations' per Executive Decree 226 (2021). NOT removed, but tightened: the 2012 decree's instant PR became a 2-yr provisional first, with a qualifying tie required.",
+      "beneficiaries": [
+        {
+          "name": "Andorra",
+          "iso_n3": "020"
+        },
+        {
+          "name": "Argentina",
+          "iso_n3": "032"
+        },
+        {
+          "name": "Australia",
+          "iso_n3": "036"
+        },
+        {
+          "name": "Austria",
+          "iso_n3": "040"
+        },
+        {
+          "name": "Belgium",
+          "iso_n3": "056"
+        },
+        {
+          "name": "Brazil",
+          "iso_n3": "076"
+        },
+        {
+          "name": "Canada",
+          "iso_n3": "124"
+        },
+        {
+          "name": "Chile",
+          "iso_n3": "152"
+        },
+        {
+          "name": "Costa Rica",
+          "iso_n3": "188"
+        },
+        {
+          "name": "Croatia",
+          "iso_n3": "191"
+        },
+        {
+          "name": "Cyprus",
+          "iso_n3": "196"
+        },
+        {
+          "name": "Czechia",
+          "iso_n3": "203"
+        },
+        {
+          "name": "Denmark",
+          "iso_n3": "208"
+        },
+        {
+          "name": "Estonia",
+          "iso_n3": "233"
+        },
+        {
+          "name": "Finland",
+          "iso_n3": "246"
+        },
+        {
+          "name": "France",
+          "iso_n3": "250"
+        },
+        {
+          "name": "Germany",
+          "iso_n3": "276"
+        },
+        {
+          "name": "Greece",
+          "iso_n3": "300"
+        },
+        {
+          "name": "Hong Kong",
+          "iso_n3": "344"
+        },
+        {
+          "name": "Hungary",
+          "iso_n3": "348"
+        },
+        {
+          "name": "Ireland",
+          "iso_n3": "372"
+        },
+        {
+          "name": "Israel",
+          "iso_n3": "376"
+        },
+        {
+          "name": "Japan",
+          "iso_n3": "392"
+        },
+        {
+          "name": "Latvia",
+          "iso_n3": "428"
+        },
+        {
+          "name": "Liechtenstein",
+          "iso_n3": "438"
+        },
+        {
+          "name": "Lithuania",
+          "iso_n3": "440"
+        },
+        {
+          "name": "Luxembourg",
+          "iso_n3": "442"
+        },
+        {
+          "name": "Malta",
+          "iso_n3": "470"
+        },
+        {
+          "name": "Mexico",
+          "iso_n3": "484"
+        },
+        {
+          "name": "Monaco",
+          "iso_n3": "492"
+        },
+        {
+          "name": "Montenegro",
+          "iso_n3": "499"
+        },
+        {
+          "name": "Netherlands",
+          "iso_n3": "528"
+        },
+        {
+          "name": "New Zealand",
+          "iso_n3": "554"
+        },
+        {
+          "name": "Norway",
+          "iso_n3": "578"
+        },
+        {
+          "name": "Paraguay",
+          "iso_n3": "600"
+        },
+        {
+          "name": "Peru",
+          "iso_n3": "604"
+        },
+        {
+          "name": "Poland",
+          "iso_n3": "616"
+        },
+        {
+          "name": "Portugal",
+          "iso_n3": "620"
+        },
+        {
+          "name": "San Marino",
+          "iso_n3": "674"
+        },
+        {
+          "name": "Serbia",
+          "iso_n3": "688"
+        },
+        {
+          "name": "Singapore",
+          "iso_n3": "702"
+        },
+        {
+          "name": "Slovakia",
+          "iso_n3": "703"
+        },
+        {
+          "name": "South Africa",
+          "iso_n3": "710"
+        },
+        {
+          "name": "South Korea",
+          "iso_n3": "410"
+        },
+        {
+          "name": "Spain",
+          "iso_n3": "724"
+        },
+        {
+          "name": "Sweden",
+          "iso_n3": "752"
+        },
+        {
+          "name": "Switzerland",
+          "iso_n3": "756"
+        },
+        {
+          "name": "United Kingdom",
+          "iso_n3": "826"
+        },
+        {
+          "name": "United States of America",
+          "iso_n3": "840"
+        },
+        {
+          "name": "Uruguay",
+          "iso_n3": "858"
+        }
+      ],
+      "grants": "Citizens of ~50 friendly nations: 2-yr provisional residency, then PERMANENT residency (no expiry), eventually naturalization (5 yrs). Qualify via Panamanian employment, USD 200K real estate, or a USD 200K 3-yr bank deposit. Approval ~4-6 months.",
+      "limits": "Decree 226 (Jul 2021) replaced the original 2012 instant-PR regime - a qualifying economic/professional tie is now mandatory. Government fees ~USD 1,050 + legal fees.",
+      "leads_to_settlement": true,
+      "confidence": "high",
+      "volatility": "medium",
+      "sources": [
+        "Executive Decree 226 of July 2021 (replacing Decree 416 of 2012)"
+      ]
+    },
+    {
       "id": "australia_pev",
       "name": "Australia Pacific Engagement Visa",
-      "color": "#B56B2E",
+      "color": "#D1834B",
       "destination": {
         "name": "Australia",
         "iso_n3": "036"
@@ -1705,7 +1973,7 @@
     {
       "id": "nz_samoan_quota",
       "name": "NZ Samoan Quota",
-      "color": "#D2824E",
+      "color": "#B86838",
       "destination": {
         "name": "New Zealand",
         "iso_n3": "554"
@@ -1729,7 +1997,7 @@
     {
       "id": "nz_pacific_access",
       "name": "NZ Pacific Access Category",
-      "color": "#B9683B",
+      "color": "#D57F56",
       "destination": {
         "name": "New Zealand",
         "iso_n3": "554"
@@ -1765,7 +2033,7 @@
     {
       "id": "nz_realm",
       "name": "NZ Realm citizenship (Cook Is/Niue/Tokelau)",
-      "color": "#D67E5A",
+      "color": "#BB6545",
       "destination": {
         "name": "New Zealand",
         "iso_n3": "554"
@@ -1797,7 +2065,7 @@
     {
       "id": "france_algeria",
       "name": "France-Algeria 1968 Accord",
-      "color": "#BC6449",
+      "color": "#D77C62",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1821,7 +2089,7 @@
     {
       "id": "monaco_france",
       "name": "Monaco-France free establishment",
-      "color": "#D87B67",
+      "color": "#BD6251",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1845,7 +2113,7 @@
     {
       "id": "japan_epa_careworkers",
       "name": "Japan EPA nurse/careworker lanes",
-      "color": "#BD6256",
+      "color": "#D87A6F",
       "destination": {
         "name": "Japan",
         "iso_n3": "392"
@@ -1879,7 +2147,7 @@
     {
       "id": "france_morocco",
       "name": "France-Morocco 1987 Accord",
-      "color": "#D87974",
+      "color": "#BD605E",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1903,7 +2171,7 @@
     {
       "id": "france_tunisia",
       "name": "France-Tunisia 1988 Accord",
-      "color": "#BD6063",
+      "color": "#D8787B",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1928,7 +2196,7 @@
     {
       "id": "france_senegal",
       "name": "France-Senegal conventions package",
-      "color": "#D87781",
+      "color": "#BC5F6A",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1953,7 +2221,7 @@
     {
       "id": "france_gabon",
       "name": "France-Gabon conventions package",
-      "color": "#BC5F70",
+      "color": "#D77788",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -1978,7 +2246,7 @@
     {
       "id": "andorra_conventions",
       "name": "Andorra mobility conventions (ES/FR/PT)",
-      "color": "#D5778E",
+      "color": "#BA5F76",
       "destination": {
         "name": "Andorra",
         "iso_n3": "020"
@@ -2362,6 +2630,18 @@
       "sources": [
         "Swiss SEM Niederlassungsvereinbarungen page",
         "Liechtenstein LLV residence pages"
+      ]
+    },
+    {
+      "id": "suriname_psa",
+      "name": "Suriname Persons of Surinamese Origin law (2014)",
+      "proposed_shape": "ancestry lane (destination Suriname)",
+      "confidence": "medium",
+      "reason": "Suriname's 2014 PSA law grants Surinamese-origin persons (largely Dutch nationals of Surinamese descent) residence/work rights in Suriname - a diaspora status short of citizenship (no voting rights). Operative per 2025 legal commentary, but primary-law detail not yet verified to the live bar.",
+      "volatility": "medium",
+      "sources": [
+        "Wet Personen van Surinaamse Afkomst (2014)",
+        "Dagblad Suriname legal commentary (Nov 2025)"
       ]
     }
   ],

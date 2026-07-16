@@ -42,6 +42,9 @@ const MICRO_STATES: MicroState[] = [
   { iso: '570', name: 'Niue',                       lon: -169.87, lat: -19.05 },
   { iso: '772', name: 'Tokelau',                    lon: -171.85, lat: -9.2 },
   { iso: '492', name: 'Monaco',                     lon: 7.42, lat: 43.73 },
+  { iso: '533', name: 'Aruba',                      lon: -69.97, lat: 12.52 },
+  { iso: '531', name: 'Curacao',                    lon: -68.99, lat: 12.17 },
+  { iso: '534', name: 'Sint Maarten',               lon: -63.07, lat: 18.04 },
 ];
 
 // Module-level state (init once)

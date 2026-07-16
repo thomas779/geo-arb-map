@@ -3,9 +3,9 @@
     "description": "Research-coverage matrix over the canonical registry (M49-style sovereigns + territory supplement): which jurisdictions have been checked for privileged settlement arrangements. States: verified | verified_none | partial | unchecked.",
     "last_updated": "2026-07-16",
     "counts": {
-      "unchecked": 54,
-      "partial": 183,
-      "verified_none": 2
+      "unchecked": 46,
+      "partial": 190,
+      "verified_none": 3
     }
   },
   "rows": [
@@ -150,7 +150,10 @@
       "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Belgium: no privileged lane for nationals of former colonies (DRC/Rwanda/Burundi) - ordinary third-country treatment.",
+      "sources": [
+        "No operative accord found"
+      ]
     },
     {
       "iso_n3": "060",
@@ -524,8 +527,12 @@
       "iso_n3": "232",
       "name": "Eritrea",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "verified_none",
+      "last_checked": "2026-07-16",
+      "note": "Eritrea: no privileged Italian (ex-colonial) immigration lane.",
+      "sources": [
+        "No operative accord found"
+      ]
     },
     {
       "iso_n3": "233",
@@ -943,8 +950,12 @@
       "iso_n3": "426",
       "name": "Lesotho",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Lesotho: LEP exemption permits (to May 2027) allow live/work/study in South Africa but bar permanent residency - temporary-only, out of settlement scope.",
+      "sources": [
+        "SA Home Affairs LEP extension"
+      ]
     },
     {
       "iso_n3": "428",
@@ -966,8 +977,12 @@
       "iso_n3": "434",
       "name": "Libya",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "verified_none",
+      "last_checked": "2026-07-16",
+      "note": "Libya: no privileged Italian (ex-colonial) immigration lane; ordinary third-country treatment.",
+      "sources": [
+        "1947 Treaty of Peace renunciation; no operative accord found"
+      ]
     },
     {
       "iso_n3": "438",
@@ -1170,22 +1185,25 @@
       "iso_n3": "531",
       "name": "Curaçao",
       "type": "territory",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "533",
       "name": "Aruba",
       "type": "territory",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "534",
       "name": "Sint Maarten",
       "type": "territory",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "540",
@@ -1480,9 +1498,9 @@
       "iso_n3": "674",
       "name": "San Marino",
       "type": "sovereign",
-      "state": "verified_none",
+      "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "San Marino: 1939/1980 conventions confirmed, but open-ended reciprocal residence/work rights with Italy not proven in primary law.",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Gray-zone: San Marino: 1939/1980 conventions confirmed, but open-ended reciprocal residence/work rights with Italy not proven in primary law.",
       "sources": [
         "1939 friendship convention",
         "1980 additional agreement"
@@ -1579,15 +1597,23 @@
       "iso_n3": "710",
       "name": "South Africa",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). South Africa: no settlement-grade lane found - SADC protocol not in force; ZEP/LEP permits are temporary and explicitly bar PR. Panama FNV beneficiary.",
+      "sources": [
+        "SA Home Affairs ZEP/LEP extension to May 2027"
+      ]
     },
     {
       "iso_n3": "716",
       "name": "Zimbabwe",
       "type": "sovereign",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Zimbabwe: ZEP exemption permits (to May 2027) allow live/work/study in South Africa but bar permanent residency - temporary-only, out of settlement scope.",
+      "sources": [
+        "SA Home Affairs ZEP extension"
+      ]
     },
     {
       "iso_n3": "724",
@@ -1626,7 +1652,11 @@
       "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Suriname: 2014 Persons of Surinamese Origin law grants diaspora residence/work rights in Suriname (pending_verification); the 1975 NL allocation treaty transition ended 1980.",
+      "sources": [
+        "Wet PSA 2014",
+        "Toescheidingsovereenkomst 1975"
+      ]
     },
     {
       "iso_n3": "748",

@@ -39,14 +39,26 @@ const walk = (from, to, n) =>
   Array.from({ length: n }, (_, i) => (n === 1 ? from : from + ((to - from) * i) / (n - 1)));
 
 // ── family definitions (hue arcs, in sidebar order) ─────────────────────────
+// Hue ranges are walked adaptively over however many blocs the category has,
+// so adding a bloc re-spaces its family instead of running off the end.
 const FAMILY = {
-  full:      { hues: [...walk(255, 220, 4), ...walk(172, 130, 5)], Ls: [0.585, 0.66], C: 0.115 }, // blue → green, hopping sRGB's dark-teal chroma pinch (h≈185-215)
-  partial:   { hues: [85, 65, 45],      Ls: [0.66, 0.575, 0.64], C: 0.13 }, // gold → rust
-  hub_spoke: { hues: [125],             Ls: [0.63], C: 0.115 },       // lime-green
-  one_way:   { hues: [295, 315, 335],   Ls: [0.645, 0.555, 0.66], C: 0.115 }, // violet → magenta
-  closed:    { hues: [30, 15, 0, 345],  Ls: [0.585, 0.66, 0.545, 0.65], C: 0.12 }, // clay → crimson
-  proto:     { hues: [250, 250, 250],   Ls: [0.55, 0.62, 0.69], C: 0.035 },  // recessive slate
+  // blue → green in two segments, hopping sRGB's dark-teal chroma pinch (h≈185-215)
+  full:      { segments: [[255, 220], [172, 130]], Ls: [0.585, 0.66], C: 0.115 },
+  partial:   { segments: [[85, 45]],   Ls: [0.66, 0.575, 0.64], C: 0.13 },  // gold → rust
+  hub_spoke: { segments: [[125, 125]], Ls: [0.63], C: 0.115 },              // lime-green
+  one_way:   { segments: [[293, 341]], Ls: [0.645, 0.555, 0.66, 0.60], C: 0.115 }, // violet → magenta
+  closed:    { segments: [[30, -15]],  Ls: [0.585, 0.66, 0.545, 0.65], C: 0.12 },  // clay → crimson
+  proto:     { segments: [[250, 250]], Ls: [0.55, 0.62, 0.69], C: 0.035 },  // recessive slate
 };
+
+function familyHues(segments, n) {
+  if (n === 1) return [segments[0][0]];
+  if (segments.length === 1) return walk(segments[0][0], segments[0][1], n);
+  // split n across segments proportionally (at least 1 each)
+  const first = Math.max(1, Math.round(n / 2));
+  return [...walk(segments[0][0], segments[0][1], first),
+          ...walk(segments[1][0], segments[1][1], n - first)];
+}
 
 // Lanes: identity chips, never co-displayed on the map — hue walks per group,
 // alternating L so the sidebar sequence still separates neighbors.
@@ -62,10 +74,11 @@ const data = JSON.parse(fs.readFileSync('public/blocs_data.json', 'utf8'));
 const report = {};
 for (const cat of CATEGORY_ORDER) {
   const blocs = data.blocs.filter(b => b.category === cat);
+  if (!blocs.length) continue;
   const f = FAMILY[cat];
-  const colors = ramp(f.hues, f.Ls, f.C);
+  const colors = ramp(familyHues(f.segments, blocs.length), f.Ls, f.C);
   blocs.forEach((b, i) => { b.color = colors[i]; });
-  report[cat] = colors.slice(0, blocs.length);
+  report[cat] = colors;
 }
 
 const bilateral = data.bilateral_lanes.filter(l => l.beneficiaries.length > 0);
