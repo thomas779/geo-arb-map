@@ -2,6 +2,8 @@ import type { AppState, BilateralLane, Bloc, BlocsData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { displayColor } from '@/lib/color';
+import { useTheme } from '@/components/theme-provider';
 
 interface Props {
   data: BlocsData;
@@ -19,12 +21,13 @@ function Rung({ tier, text }: { tier: string; text: string }) {
 }
 
 function BlocCard({ bloc, iso, former }: { bloc: Bloc; iso: string; former: boolean }) {
+  const dark = useTheme().theme === 'dark';
   const inSubBloc = !former && bloc.sub_bloc?.members_iso.includes(iso);
   return (
     <Card className="mb-3 gap-2 py-4">
       <CardHeader className="px-4">
         <CardTitle className="flex items-center gap-2 font-sans text-sm">
-          <span className="chip" style={{ background: bloc.color }} />
+          <span className="chip" style={{ background: displayColor(bloc.color, dark) }} />
           <span className="min-w-0 flex-1">{bloc.name}</span>
           {former && (
             <Badge variant="outline" className="text-[9.5px] font-semibold uppercase tracking-wider text-muted-foreground">
@@ -56,11 +59,12 @@ function BlocCard({ bloc, iso, former }: { bloc: Bloc; iso: string; former: bool
 }
 
 function LaneCard({ lane, inbound, countryName }: { lane: BilateralLane; inbound: boolean; countryName: string }) {
+  const dark = useTheme().theme === 'dark';
   return (
     <Card className="mb-3 gap-2 py-4">
       <CardHeader className="px-4">
         <CardTitle className="flex items-center gap-2 font-sans text-sm">
-          <span className="chip" style={{ background: lane.color }} />
+          <span className="chip" style={{ background: displayColor(lane.color, dark) }} />
           <span className="min-w-0 flex-1">{lane.name}</span>
           <Badge variant={lane.leads_to_settlement ? 'default' : 'secondary'} className="text-[9.5px] font-semibold uppercase">
             {lane.leads_to_settlement ? '→ settlement path' : 'work access only'}

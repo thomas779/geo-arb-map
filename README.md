@@ -15,7 +15,7 @@ and ancestry/diaspora routes (Law of Return, OCI, Karta Polaka, descent citizens
 > levels. Verify with an immigration lawyer in the specific country before acting
 > on anything shown here.
 
-Live site: deployed to GitHub Pages on every push to `main` (base path `/geo-arb-map/`).
+Live site: deployed to GitHub Pages on every push to `main` (Vite `base` is now `/` — requires a user site or custom domain to serve from the root).
 
 ## Stack
 
@@ -59,7 +59,7 @@ mistake, add an invariant for it.
 
 ```sh
 bun install        # dependencies
-bun run dev        # dev server → http://localhost:5173/geo-arb-map/
+bun run dev        # dev server → http://localhost:5173/
 bun test           # dataset invariant + regression suite
 bun run build      # tsc → bun test → vite build (what CI runs)
 

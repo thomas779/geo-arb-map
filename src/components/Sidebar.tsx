@@ -1,7 +1,12 @@
+import { useState } from 'react';
 import type { AppState, BilateralLane, Bloc, BlocsData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
+import { displayColor } from '@/lib/color';
+import { useTheme } from '@/components/theme-provider';
 
 const CATEGORIES: Array<[Bloc['category'], string]> = [
   ['full', 'Full blocs'],
@@ -21,6 +26,26 @@ const rowBase =
   'h-8 w-full justify-start gap-2 rounded-sm border-l-2 border-l-transparent px-2 text-left text-[13px] font-medium';
 const rowSelected = 'border-l-foreground/80 bg-accent';
 
+/**
+ * Destination badge: always "→ " + a label guaranteed short enough not to
+ * truncate. Long country names get a fixed short code — never a mid-word cut.
+ */
+const DEST_SHORT: Record<string, string> = {
+  'United States of America': 'US',
+  'United Kingdom': 'UK',
+  'Netherlands': 'NL',
+  'New Zealand': 'NZ',
+  'South Korea': 'KR',
+  'Kazakhstan': 'KZ',
+  'Argentina': 'ARG',
+  'Australia': 'AUS',
+};
+
+function destShort(l: BilateralLane): string {
+  const name = l.destination.name;
+  return DEST_SHORT[name] ?? (name.length <= 7 ? name : name.slice(0, 3).toUpperCase());
+}
+
 interface Props {
   data: BlocsData;
   state: AppState;
@@ -37,14 +62,25 @@ function CatLabel({ children }: { children: string }) {
   );
 }
 
-function shortDest(l: BilateralLane): string {
-  return l.destination.name === 'United States of America' ? 'US' : l.destination.name;
+function RowTooltip({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipContent side="right">{label}</TooltipContent>
+    </Tooltip>
+  );
 }
 
 export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
+  const { theme } = useTheme();
+  const dark = theme === 'dark';
+  const [query, setQuery] = useState('');
+  const q = query.trim().toLowerCase();
+  const matches = (name: string) => !q || name.toLowerCase().includes(q);
+
   const laneGroups: Array<[string, BilateralLane[]]> = [
-    ['Bilateral fast lanes', data.bilateral_lanes.filter(l => l.beneficiaries.length > 0)],
-    ['Ancestry & diaspora routes', data.bilateral_lanes.filter(l => l.beneficiaries.length === 0)],
+    ['Bilateral fast lanes', data.bilateral_lanes.filter(l => l.beneficiaries.length > 0 && matches(l.name))],
+    ['Ancestry & diaspora routes', data.bilateral_lanes.filter(l => l.beneficiaries.length === 0 && matches(l.name))],
   ];
 
   return (
@@ -60,27 +96,37 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
         Passports that unlock two or more blocs at once.
       </p>
 
+      <div className="sticky top-0 z-10 -mx-1 bg-background px-1 pt-1 pb-2">
+        <Input
+          type="search"
+          placeholder="Filter blocs & lanes…"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          className="h-8 text-[13px]"
+        />
+      </div>
+
       {CATEGORIES.map(([cat, label]) => {
-        const blocs = data.blocs.filter(b => b.category === cat);
+        const blocs = data.blocs.filter(b => b.category === cat && matches(b.name));
         if (!blocs.length) return null;
         return (
           <div key={cat}>
             <CatLabel>{label}</CatLabel>
             {blocs.map(b => (
-              <Button
-                key={b.id}
-                variant="ghost"
-                size="sm"
-                title={b.name}
-                className={cn(rowBase, state.bloc === b.id && rowSelected)}
-                onClick={() => onBloc(state.bloc === b.id ? null : b.id)}
-              >
-                <span className="chip" style={{ background: b.color }} />
-                <span className="min-w-0 flex-1 truncate">{b.name}</span>
-                <Badge variant="outline" className="text-[10px] tabular-nums text-muted-foreground">
-                  {b.members.length}
-                </Badge>
-              </Button>
+              <RowTooltip key={b.id} label={b.name}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(rowBase, state.bloc === b.id && rowSelected)}
+                  onClick={() => onBloc(state.bloc === b.id ? null : b.id)}
+                >
+                  <span className="chip" style={{ background: displayColor(b.color, dark) }} />
+                  <span className="min-w-0 flex-1 truncate">{b.name}</span>
+                  <Badge variant="outline" className="text-[10px] tabular-nums text-muted-foreground">
+                    {b.members.length}
+                  </Badge>
+                </Button>
+              </RowTooltip>
             ))}
           </div>
         );
@@ -91,24 +137,32 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
           <div key={label}>
             <CatLabel>{label}</CatLabel>
             {lanes.map(l => (
-              <Button
-                key={l.id}
-                variant="ghost"
-                size="sm"
-                title={`${l.name} → ${l.destination.name}`}
-                className={cn(rowBase, state.lane === l.id && rowSelected)}
-                onClick={() => onLane(state.lane === l.id ? null : l.id)}
-              >
-                <span className="chip" style={{ background: l.color }} />
-                <span className="min-w-0 flex-1 truncate">{l.name}</span>
-                <Badge variant="outline" className="max-w-[72px] truncate text-[10px] text-muted-foreground">
-                  →{shortDest(l)}
-                </Badge>
-              </Button>
+              <RowTooltip key={l.id} label={`${l.name} → ${l.destination.name}`}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className={cn(rowBase, state.lane === l.id && rowSelected)}
+                  onClick={() => onLane(state.lane === l.id ? null : l.id)}
+                >
+                  <span className="chip" style={{ background: displayColor(l.color, dark) }} />
+                  <span className="min-w-0 flex-1 truncate">{l.name}</span>
+                  <Badge variant="outline" className="whitespace-nowrap text-[10px] text-muted-foreground">
+                    → {destShort(l)}
+                  </Badge>
+                </Button>
+              </RowTooltip>
             ))}
           </div>
         ) : null,
       )}
+
+      {q &&
+        !CATEGORIES.some(([cat]) => data.blocs.some(b => b.category === cat && matches(b.name))) &&
+        laneGroups.every(([, lanes]) => !lanes.length) && (
+          <p className="mx-2 mt-4 text-xs text-muted-foreground">
+            No blocs or lanes match “{query}”.
+          </p>
+        )}
 
       <Button
         variant="outline"

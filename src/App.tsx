@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Moon, Sun } from 'lucide-react';
 import type { AppState, BlocsData } from './types';
 import * as url from './url';
+import { Button } from '@/components/ui/button';
 import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { StackingView } from '@/components/StackingView';
+import { useTheme } from '@/components/theme-provider';
 
 const initialState: AppState = {
   view: 'map',
@@ -18,6 +21,7 @@ const initialState: AppState = {
 export default function App() {
   const [state, setState] = useState<AppState>(initialState);
   const [data, setData] = useState<BlocsData | null>(null);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     fetch(import.meta.env.BASE_URL + 'blocs_data.json')
@@ -64,6 +68,15 @@ export default function App() {
             </span>
           )}
         </span>
+        <Button
+          variant="ghost"
+          size="icon-sm"
+          className="ml-auto self-center text-muted-foreground"
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        >
+          {theme === 'dark' ? <Sun /> : <Moon />}
+        </Button>
       </header>
       <main className="flex min-h-0 flex-1">
         {data && (
@@ -76,7 +89,7 @@ export default function App() {
           />
         )}
         <div id="map-wrap" className="relative min-w-0 flex-1 overflow-hidden">
-          <WorldMap data={data} state={state} onSelect={selectCountry} />
+          <WorldMap data={data} state={state} theme={theme} onSelect={selectCountry} />
           {data && state.view === 'stacking' && (
             <StackingView data={data} onBlocSelect={backToMapWithBloc} />
           )}

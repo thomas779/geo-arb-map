@@ -4,7 +4,25 @@
  * themed in index.css. The custom properties below are consumed by
  * src/map.ts fill logic (var(--map-land), var(--map-accent)) — keep in sync.
  */
+/*
+ * Map tokens get designed light values — NOT a lightness inversion of the
+ * dark set. Light keeps the same ~8-10% ocean/land luminance separation
+ * (paper sea #E4EAF1 vs land #C7D1DD), and the hover accent is the
+ * darkened brand amber so it doesn't wash out on paper.
+ */
 :root {
+  /* ocean == page background (the svg has no ocean rect); land sits ~10% below it */
+  --map-ocean: #EEF2F7;
+  --map-land: #C7D1DD;
+  --map-panel: #FFFFFF;
+  --map-panel-edge: #CBD5E1;
+  --map-ink: #17202C;
+  --map-muted: #5A6B80;
+  --map-accent: #A87A16;
+  --map-mono: "IBM Plex Mono", monospace;
+}
+
+.dark {
   --map-ocean: #101823;
   /* one clear luminance step above the ocean so landmass reads unaided */
   --map-land: #2E3A49;
@@ -13,7 +31,6 @@
   --map-ink: #E8ECF1;
   --map-muted: #93A1B3;
   --map-accent: #F2C14E;
-  --map-mono: "IBM Plex Mono", monospace;
 }
 
 /* ── Map layer (imperative D3 — not React) ── */

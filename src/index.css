@@ -49,42 +49,44 @@
 }
 
 /*
- * Single dark theme — the atlas's visual identity (ocean #101823,
- * panel #161F2B, ink #E8ECF1, amber #F2C14E accent). No light mode.
+ * Two themes, one identity. Dark is the native "ocean terminal" look
+ * (:root defaults to light for shadcn convention; the app defaults to
+ * dark via ThemeProvider). Light is a cool-paper counterpart — brand
+ * amber darkened to #A87A16 so primary/ring hold contrast on paper.
  */
 :root {
-    --background: #101823;
-    --foreground: #E8ECF1;
-    --card: #161F2B;
-    --card-foreground: #E8ECF1;
-    --popover: #161F2B;
-    --popover-foreground: #E8ECF1;
-    --primary: #F2C14E;
-    --primary-foreground: #101823;
-    --secondary: #223040;
-    --secondary-foreground: #E8ECF1;
-    --muted: #223040;
-    --muted-foreground: #93A1B3;
-    --accent: #1D2836;
-    --accent-foreground: #E8ECF1;
-    --destructive: #B5443B;
-    --border: #223040;
-    --input: #223040;
-    --ring: #F2C14E;
+    --background: #EEF2F7;
+    --foreground: #17202C;
+    --card: #FFFFFF;
+    --card-foreground: #17202C;
+    --popover: #FFFFFF;
+    --popover-foreground: #17202C;
+    --primary: #A87A16;
+    --primary-foreground: #FFFFFF;
+    --secondary: #DCE3EC;
+    --secondary-foreground: #17202C;
+    --muted: #E2E8F0;
+    --muted-foreground: #5A6B80;
+    --accent: #E6ECF3;
+    --accent-foreground: #17202C;
+    --destructive: #A93B32;
+    --border: #CBD5E1;
+    --input: #CBD5E1;
+    --ring: #A87A16;
     --chart-1: #3B6FB5;
     --chart-2: #2E9E6B;
-    --chart-3: #E0A93E;
+    --chart-3: #A87A16;
     --chart-4: #B5443B;
     --chart-5: #8E6BB5;
     --radius: 0.5rem;
-    --sidebar: #101823;
-    --sidebar-foreground: #E8ECF1;
-    --sidebar-primary: #F2C14E;
-    --sidebar-primary-foreground: #101823;
-    --sidebar-accent: #161F2B;
-    --sidebar-accent-foreground: #E8ECF1;
-    --sidebar-border: #223040;
-    --sidebar-ring: #F2C14E;
+    --sidebar: #EEF2F7;
+    --sidebar-foreground: #17202C;
+    --sidebar-primary: #A87A16;
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: #E6ECF3;
+    --sidebar-accent-foreground: #17202C;
+    --sidebar-border: #CBD5E1;
+    --sidebar-ring: #A87A16;
 }
 
 .dark {

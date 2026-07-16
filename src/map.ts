@@ -1,6 +1,7 @@
 import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import type { BlocsData, AppState, Bloc } from './types';
+import { displayColor, isDarkTheme } from './lib/color';
 
 interface MicroState {
   iso: string;
@@ -51,9 +52,13 @@ let _currentK = 1;
 
 let _gMap: d3.Selection<SVGGElement, unknown, HTMLElement, unknown>;
 let _gDots: d3.Selection<SVGGElement, unknown, HTMLElement, unknown>;
+let _svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, unknown>;
+let _zoom: d3.ZoomBehavior<SVGSVGElement, unknown>;
+let _featureBounds: Map<string, [[number, number], [number, number]]>;
 let _tooltip: HTMLElement;
 let _isReady = false;
 let _pendingRender: (() => void) | null = null;
+let _lastFocus: string | null = null;
 
 export function init(data: BlocsData, onSelect: (iso: string, name: string) => void): void {
   // Build iso → blocs index (current members only; former_members excluded from count)
@@ -73,24 +78,27 @@ export function init(data: BlocsData, onSelect: (iso: string, name: string) => v
   _tooltip = document.getElementById('tooltip')!;
 
   const svg = d3.select<SVGSVGElement, unknown>('#map');
+  _svg = svg;
   _gMap = svg.append('g');
   _gDots = svg.append('g').attr('class', 'dot-layer');
 
   _projection = d3.geoNaturalEarth1();
   _path = d3.geoPath(_projection);
+  _featureBounds = new Map();
 
   // Zoom + pan
-  const zoom = d3.zoom<SVGSVGElement, unknown>()
+  _zoom = d3.zoom<SVGSVGElement, unknown>()
     .scaleExtent([1, 12])
     .on('zoom', e => {
       _currentK = e.transform.k;
       _gMap.attr('transform', e.transform);
       _gDots.attr('transform', e.transform);
-      // Keep dots at constant screen size
-      _gDots.selectAll<SVGCircleElement, MicroState>('circle')
+      // Keep dots and their leader labels at constant screen size
+      _gDots.selectAll<SVGCircleElement, MicroState>('circle.micro-dot')
         .attr('r', 5 / _currentK);
+      _gDots.selectAll('.dot-leader').remove();
     });
-  svg.call(zoom);
+  svg.call(_zoom);
 
   function resize() {
     const wrap = document.getElementById('map-wrap')!;
@@ -99,7 +107,12 @@ export function init(data: BlocsData, onSelect: (iso: string, name: string) => v
     svg.attr('viewBox', `0 0 ${w} ${h}`);
     _projection.fitSize([w, h], { type: 'Sphere' });
     _gMap.selectAll<SVGPathElement, d3.GeoPermissibleObjects>('path')
-      .attr('d', d => _path(d));
+      .attr('d', d => _path(d))
+      .each(function (d) {
+        // Bounds must be captured AFTER fitSize — they're used for zoom framing
+        const id = (d as unknown as { id: number | string }).id;
+        _featureBounds.set(String(id).padStart(3, '0'), _path.bounds(d));
+      });
     updateDotPositions();
   }
   window.addEventListener('resize', resize);
@@ -131,16 +144,21 @@ export function init(data: BlocsData, onSelect: (iso: string, name: string) => v
           onSelect(String(d.id).padStart(3, '0'), d.properties.name);
         });
 
-      // Dot markers for micro-states
+      // Dot markers for micro-states: hover shows a leader line + name label
+      // (plus the shared tooltip); click selects exactly like a filled country.
       _gDots.selectAll('circle')
         .data(MICRO_STATES)
         .join('circle')
         .attr('class', 'micro-dot')
         .attr('r', 5)
+        .on('mouseenter', (_e, d) => showDotLeader(d))
         .on('mousemove', (e, d) => {
           showTooltip(e as MouseEvent, d.name, d.iso);
         })
-        .on('mouseleave', hideTooltip)
+        .on('mouseleave', () => {
+          hideTooltip();
+          _gDots.selectAll('.dot-leader').remove();
+        })
         .on('click', (_e, d) => onSelect(d.iso, d.name));
 
       _isReady = true;
@@ -161,6 +179,88 @@ function updateDotPositions(): void {
   _gDots.selectAll<SVGCircleElement, MicroState>('circle')
     .attr('cx', d => (_projection([d.lon, d.lat]) ?? [0, 0])[0])
     .attr('cy', d => (_projection([d.lon, d.lat]) ?? [0, 0])[1]);
+}
+
+function showDotLeader(d: MicroState): void {
+  _gDots.selectAll('.dot-leader').remove();
+  const [x, y] = _projection([d.lon, d.lat]) ?? [0, 0];
+  const k = _currentK;
+  const dx = 16 / k;
+  const dy = -16 / k;
+  const g = _gDots.append('g').attr('class', 'dot-leader');
+  g.append('line')
+    .attr('x1', x).attr('y1', y)
+    .attr('x2', x + dx).attr('y2', y + dy)
+    .attr('stroke', 'var(--map-accent)')
+    .attr('stroke-width', 1 / k);
+  g.append('text')
+    .attr('x', x + dx + 4 / k)
+    .attr('y', y + dy)
+    .attr('dominant-baseline', 'middle')
+    .attr('fill', 'var(--map-ink)')
+    .attr('stroke', 'var(--map-ocean)')
+    .attr('stroke-width', 3 / k)
+    .attr('paint-order', 'stroke')
+    .style('font', `500 ${12 / k}px Inter, sans-serif`)
+    .text(d.name);
+}
+
+/** Animate the camera to frame a set of jurisdictions (with padding). */
+function zoomToIsos(isos: string[]): void {
+  const wrap = document.getElementById('map-wrap')!;
+  const w = wrap.clientWidth;
+  const h = wrap.clientHeight;
+
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const iso of isos) {
+    const b = _featureBounds.get(iso);
+    if (b) {
+      x0 = Math.min(x0, b[0][0]); y0 = Math.min(y0, b[0][1]);
+      x1 = Math.max(x1, b[1][0]); y1 = Math.max(y1, b[1][1]);
+      continue;
+    }
+    const micro = MICRO_STATES.find(m => m.iso === iso);
+    if (micro) {
+      const [mx, my] = _projection([micro.lon, micro.lat]) ?? [0, 0];
+      x0 = Math.min(x0, mx - 8); y0 = Math.min(y0, my - 8);
+      x1 = Math.max(x1, mx + 8); y1 = Math.max(y1, my + 8);
+    }
+  }
+  if (!isFinite(x0)) { resetZoom(); return; }
+
+  const k = Math.max(1, Math.min(8, 0.82 / Math.max((x1 - x0) / w, (y1 - y0) / h)));
+  const cx = (x0 + x1) / 2;
+  const cy = (y0 + y1) / 2;
+  _svg.transition().duration(750).call(
+    _zoom.transform,
+    d3.zoomIdentity.translate(w / 2 - k * cx, h / 2 - k * cy).scale(k),
+  );
+}
+
+function resetZoom(): void {
+  _svg.transition().duration(600).call(_zoom.transform, d3.zoomIdentity);
+}
+
+/** Frame the current selection; called by render() when focus changes. */
+function frameSelection(state: AppState, data: BlocsData): void {
+  const focus = state.bloc ?? (state.lane ? `lane:${state.lane}` : null);
+  if (focus === _lastFocus) return;
+  _lastFocus = focus;
+
+  if (state.bloc) {
+    const b = data.blocs.find(x => x.id === state.bloc);
+    if (!b) return resetZoom();
+    zoomToIsos([
+      ...b.members.map(m => m.iso_n3),
+      ...(b.former_members ?? []).map(m => m.iso_n3),
+    ]);
+  } else if (state.lane) {
+    const l = data.bilateral_lanes.find(x => x.id === state.lane);
+    if (!l) return resetZoom();
+    zoomToIsos([l.destination.iso_n3, ...l.beneficiaries.map(m => m.iso_n3)]);
+  } else {
+    resetZoom();
+  }
 }
 
 function showTooltip(e: MouseEvent, name: string, iso: string): void {
@@ -185,13 +285,15 @@ function hideTooltip(): void {
 }
 
 function colorForIso(iso: string, state: AppState, data: BlocsData): string {
+  const dark = isDarkTheme();
   if (state.lane) {
     const lane = data.bilateral_lanes.find(l => l.id === state.lane);
     if (!lane) return 'var(--map-land)';
-    if (lane.destination.iso_n3 === iso) return lane.color;
+    const laneColor = displayColor(lane.color, dark);
+    if (lane.destination.iso_n3 === iso) return laneColor;
     if (lane.beneficiaries.some(m => m.iso_n3 === iso)) {
-      const c = d3.color(lane.color) as d3.RGBColor | null;
-      if (!c) return lane.color;
+      const c = d3.color(laneColor) as d3.RGBColor | null;
+      if (!c) return laneColor;
       c.opacity = 0.65;
       return c.formatRgb();
     }
@@ -200,20 +302,25 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   if (state.bloc) {
     const ab = data.blocs.find(b => b.id === state.bloc);
     if (!ab) return 'var(--map-land)';
+    const blocColor = displayColor(ab.color, dark);
     if (ab.sub_bloc?.members_iso.includes(iso)) {
-      return d3.color(ab.color)?.brighter(0.7)?.formatHex() ?? ab.color;
+      const c = d3.color(blocColor);
+      return (dark ? c?.brighter(0.7) : c?.brighter(0.4))?.formatHex() ?? blocColor;
     }
-    if (ab.members.some(m => m.iso_n3 === iso)) return ab.color;
+    if (ab.members.some(m => m.iso_n3 === iso)) return blocColor;
     if (ab.former_members?.some(m => m.iso_n3 === iso)) {
-      return d3.color(ab.color)?.darker(1.6)?.formatHex() ?? '#333';
+      const c = d3.color(blocColor);
+      return (dark ? c?.darker(1.6) : c?.brighter(1.1))?.formatHex() ?? '#888';
     }
     return 'var(--map-land)';
   }
   const count = (_byCountry?.get(iso) ?? []).length;
   if (!count) return 'var(--map-land)';
-  // Linear interpolation in RGB space between the two sentinel colors
+  // Count overlay gets its own ramp per theme (light needs darker blues)
   const t = Math.min((count - 1) / 3, 1);
-  return d3.interpolateRgb('#33465C', '#6C93BF')(t);
+  return dark
+    ? d3.interpolateRgb('#33465C', '#6C93BF')(t)
+    : d3.interpolateRgb('#9FB4CE', '#2F5E9E')(t);
 }
 
 function paintAll(state: AppState, data: BlocsData): void {
@@ -246,8 +353,12 @@ export function render(state: AppState, data: BlocsData): void {
   hint.style.display = '';
 
   if (!_isReady) {
-    _pendingRender = () => paintAll(state, data);
+    _pendingRender = () => {
+      paintAll(state, data);
+      frameSelection(state, data);
+    };
   } else {
     paintAll(state, data);
+    frameSelection(state, data);
   }
 }

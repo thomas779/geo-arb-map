@@ -8,6 +8,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { displayColor } from '@/lib/color';
+import { useTheme } from '@/components/theme-provider';
 
 interface Props {
   data: BlocsData;
@@ -16,6 +18,7 @@ interface Props {
 }
 
 export function StackingView({ data, onBlocSelect }: Props) {
+  const dark = useTheme().theme === 'dark';
   const blocById = new Map(data.blocs.map(b => [b.id, b]));
 
   return (
@@ -45,7 +48,7 @@ export function StackingView({ data, onBlocSelect }: Props) {
                     <button
                       key={blocId}
                       className="cursor-pointer rounded-[5px] px-2 py-0.5 text-[11px] font-medium text-white opacity-90 transition-[opacity,transform] hover:-translate-y-px hover:opacity-100"
-                      style={{ background: b.color }}
+                      style={{ background: displayColor(b.color, dark) }}
                       onClick={() => onBlocSelect(blocId)}
                     >
                       {b.name}
