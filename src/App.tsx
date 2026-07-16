@@ -10,25 +10,43 @@ import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { StackingView } from '@/components/StackingView';
 import { useTheme } from '@/components/theme-provider';
-import type { PlantedFlag } from '@/lib/planner';
+import { EMPTY_PROFILE, type FlagStatus, type PlantedFlag, type Profile } from '@/lib/planner';
 
-const FLAGS_KEY = 'geo-arb-flags';
+const PROFILE_KEY = 'geo-arb-profile';
+const LEGACY_FLAGS_KEY = 'geo-arb-flags';
 
-function initialFlags(): PlantedFlag[] {
-  // ?flags=372,840r — tooling/demo override (r suffix = resident), not persisted
-  const fromUrl = new URLSearchParams(window.location.search).get('flags');
-  if (fromUrl) {
-    return fromUrl.split(',').filter(Boolean).map(tok => {
-      const resident = tok.endsWith('r');
-      const iso = tok.replace(/r$/, '').padStart(3, '0');
-      return { iso_n3: iso, name: iso, status: resident ? 'resident' as const : 'citizen' as const };
+const URL_STATUS: Record<string, FlagStatus> = { t: 'tr', p: 'pr', c: 'cit', d: 'diaspora', r: 'pr' };
+
+function initialProfile(): Profile {
+  // Tooling/demo override: ?flags=372c,840p,356d&born=344&ancestors=380,616&heritage=israel_law_of_return
+  const params = new URLSearchParams(window.location.search);
+  const fromUrl = params.get('flags') ?? params.get('born') ?? params.get('ancestors') ?? params.get('heritage');
+  if (fromUrl !== null) {
+    const flags: PlantedFlag[] = (params.get('flags') ?? '').split(',').filter(Boolean).map(tok => {
+      const suffix = tok.slice(-1);
+      const status = URL_STATUS[suffix] ?? 'cit';
+      const iso = (URL_STATUS[suffix] ? tok.slice(0, -1) : tok).padStart(3, '0');
+      return { iso_n3: iso, name: iso, status };
     });
+    return {
+      flags,
+      birthplace: params.get('born')?.padStart(3, '0') ?? null,
+      ancestors: (params.get('ancestors') ?? '').split(',').filter(Boolean).map(a => a.padStart(3, '0')),
+      heritages: (params.get('heritage') ?? '').split(',').filter(Boolean),
+    };
   }
   try {
-    return JSON.parse(localStorage.getItem(FLAGS_KEY) ?? '[]');
-  } catch {
-    return [];
-  }
+    const stored = localStorage.getItem(PROFILE_KEY);
+    if (stored) return { ...EMPTY_PROFILE, ...JSON.parse(stored) };
+    // Migrate v1 (flat flag array with citizen/resident statuses)
+    const legacy = localStorage.getItem(LEGACY_FLAGS_KEY);
+    if (legacy) {
+      const flags = (JSON.parse(legacy) as Array<{ iso_n3: string; name: string; status: string }>)
+        .map(f => ({ ...f, status: (f.status === 'citizen' ? 'cit' : f.status === 'resident' ? 'pr' : f.status) as FlagStatus }));
+      return { ...EMPTY_PROFILE, flags };
+    }
+  } catch { /* fall through */ }
+  return EMPTY_PROFILE;
 }
 
 const initialState: AppState = {
@@ -43,12 +61,12 @@ const initialState: AppState = {
 export default function App() {
   const [state, setState] = useState<AppState>(initialState);
   const [data, setData] = useState<BlocsData | null>(null);
-  const [flags, setFlags] = useState<PlantedFlag[]>(initialFlags);
+  const [profile, setProfile] = useState<Profile>(initialProfile);
   const { theme, setTheme } = useTheme();
 
-  const changeFlags = useCallback((next: PlantedFlag[]) => {
-    localStorage.setItem(FLAGS_KEY, JSON.stringify(next));
-    setFlags(next);
+  const changeProfile = useCallback((next: Profile) => {
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(next));
+    setProfile(next);
   }, []);
 
   useEffect(() => {
@@ -56,12 +74,15 @@ export default function App() {
       .then(res => res.json())
       .then((d: BlocsData) => {
         setData(d);
-        setFlags(fs => fs.map(f => {
-          if (f.name !== f.iso_n3) return f;
-          const m = d.blocs.flatMap(b => b.members)
-            .concat(d.bilateral_lanes.flatMap(l => [l.destination, ...l.beneficiaries]))
-            .find(x => x.iso_n3 === f.iso_n3);
-          return m ? { ...f, name: m.name } : f;
+        setProfile(p => ({
+          ...p,
+          flags: p.flags.map(f => {
+            if (f.name !== f.iso_n3) return f;
+            const m = d.blocs.flatMap(b => b.members)
+              .concat(d.bilateral_lanes.flatMap(l => [l.destination, ...l.beneficiaries]))
+              .find(x => x.iso_n3 === f.iso_n3);
+            return m ? { ...f, name: m.name } : f;
+          }),
         }));
       })
       .catch(err => console.error('Failed to load blocs_data.json:', err));
@@ -79,6 +100,7 @@ export default function App() {
   const toggleBloc = useCallback((id: string | null) => {
     setState(s => ({
       ...s,
+      view: 'map', // selecting from the sidebar always shows the map
       blocs: id === null
         ? []
         : s.blocs.includes(id) ? s.blocs.filter(b => b !== id) : [...s.blocs, id],
@@ -88,7 +110,7 @@ export default function App() {
     }));
   }, []);
   const selectLane = useCallback((id: string | null) =>
-    patch({ lane: id, blocs: [], country: null, countryName: null }), [patch]);
+    patch({ view: 'map', lane: id, blocs: [], country: null, countryName: null }), [patch]);
   const selectView = useCallback((v: 'map' | 'stacking') =>
     patch({ view: v }), [patch]);
   const selectCountry = useCallback((iso: string, name: string) =>
@@ -166,9 +188,9 @@ export default function App() {
           />
         )}
         <div id="map-wrap" className="relative min-w-0 flex-1 overflow-hidden">
-          <WorldMap data={data} state={state} theme={theme} flags={flags} onSelect={selectCountry} />
+          <WorldMap data={data} state={state} theme={theme} profile={profile} onSelect={selectCountry} />
           {data && state.view === 'stacking' && (
-            <StackingView data={data} onBlocSelect={backToMapWithBloc} flags={flags} onFlagsChange={changeFlags} />
+            <StackingView data={data} onBlocSelect={backToMapWithBloc} profile={profile} onProfileChange={changeProfile} />
           )}
         </div>
         {data && state.country && (

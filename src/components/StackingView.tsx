@@ -11,17 +11,17 @@ import {
 import { displayColor } from '@/lib/color';
 import { useTheme } from '@/components/theme-provider';
 import { MyFlags } from '@/components/MyFlags';
-import type { PlantedFlag } from '@/lib/planner';
+import type { Profile } from '@/lib/planner';
 
 interface Props {
   data: BlocsData;
   /** null = plain back-to-map; a bloc id = back to map with that bloc selected */
   onBlocSelect: (blocId: string | null) => void;
-  flags: PlantedFlag[];
-  onFlagsChange: (flags: PlantedFlag[]) => void;
+  profile: Profile;
+  onProfileChange: (profile: Profile) => void;
 }
 
-export function StackingView({ data, onBlocSelect, flags, onFlagsChange }: Props) {
+export function StackingView({ data, onBlocSelect, profile, onProfileChange }: Props) {
   const dark = useTheme().theme === 'dark';
   const blocById = new Map(data.blocs.map(b => [b.id, b]));
 
@@ -34,7 +34,7 @@ export function StackingView({ data, onBlocSelect, flags, onFlagsChange }: Props
         <h2 className="text-xl font-bold">My Flags</h2>
       </div>
 
-      <MyFlags data={data} flags={flags} onChange={onFlagsChange} />
+      <MyFlags data={data} profile={profile} onChange={onProfileChange} />
 
       <div className="mt-10 mb-3 flex items-baseline gap-3 border-t pt-6">
         <h3 className="text-base font-bold">Example paths</h3>

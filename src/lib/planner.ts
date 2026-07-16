@@ -13,11 +13,63 @@ import type { BilateralLane, Bloc, BlocsData } from '../types';
  *    losing everything derived from the renounced flags
  */
 
+/** Mirrors the dataset's own ladder; 'diaspora' = OCI/F-4-style quasi-status. */
+export type FlagStatus = 'tr' | 'pr' | 'cit' | 'diaspora';
+
 export interface PlantedFlag {
   iso_n3: string;
   name: string;
-  status: 'citizen' | 'resident';
+  status: FlagStatus;
 }
+
+export interface Profile {
+  flags: PlantedFlag[];
+  /** iso_n3 of country of birth — unlocks birth-based lanes (e.g. Falklands→Argentina) */
+  birthplace: string | null;
+  /** iso_n3 of parents'/grandparents' birthplaces — unlocks descent lanes */
+  ancestors: string[];
+  /** self-attested heritage claims, keyed by lane id (Law of Return, Spätaussiedler...) */
+  heritages: string[];
+}
+
+export const EMPTY_PROFILE: Profile = { flags: [], birthplace: null, ancestors: [], heritages: [] };
+
+/** Heritage claims that aren't captured by an ancestor's birthplace. */
+export const HERITAGE_OPTIONS: Array<{ laneId: string; label: string }> = [
+  { laneId: 'israel_law_of_return', label: 'Jewish heritage (Law of Return)' },
+  { laneId: 'germany_spaetaussiedler', label: 'Ethnic German (Spätaussiedler)' },
+  { laneId: 'kazakhstan_qandas', label: 'Ethnic Kazakh (Qandas)' },
+  { laneId: 'russia_compatriot', label: "Russian 'compatriot' (cultural/historical tie)" },
+];
+
+/** Lanes whose qualifying class is birthplace, not nationality. */
+const BIRTHPLACE_LANES: Record<string, string> = {
+  '238': 'falklands_argentina',
+};
+
+/** Birthplace-conditional notes we can't fully verify from a birthplace alone. */
+const BIRTHPLACE_HINTS: Record<string, string> = {
+  '344': 'Born in Hong Kong: BN(O) eligibility (UK 5+1 route) depends on pre-handover birth or a BN(O) parent — check the UK-Hong Kong card.',
+  '032': 'Born in Argentina: jus soli — you are likely already an Argentine citizen; plant it as a flag.',
+  '076': 'Born in Brazil: jus soli — you are likely already a Brazilian citizen; plant it as a flag.',
+  '484': 'Born in Mexico: jus soli — you are likely already a Mexican citizen; plant it as a flag.',
+};
+
+/** Rough years-to-citizenship for descent/heritage routes (processing, not residence). */
+const DESCENT_YEARS: Record<string, number> = {
+  ireland_fbr: 1.5,
+  italy_jure_sanguinis: 1.5,
+  uk_ancestry: 6, // 5-yr visa -> ILR -> citizenship
+  poland_karta_polaka: 2,
+  hungary_simplified: 1,
+  armenia_ethnic: 1,
+  korea_f4: 4,
+  japan_nikkei: 5,
+  israel_law_of_return: 0.5,
+  germany_spaetaussiedler: 1,
+  kazakhstan_qandas: 1,
+  russia_compatriot: 1.5,
+};
 
 export interface CountryOption {
   iso_n3: string;
@@ -35,6 +87,10 @@ export interface UnlockResult {
   workLanes: BilateralLane[];
   /** chance-based lanes: ballot / quota_queue / discretionary */
   chanceLanes: BilateralLane[];
+  /** descent/heritage lanes this profile plausibly qualifies for (paths, not current rights) */
+  ancestryLanes: BilateralLane[];
+  /** birthplace-derived notes (jus soli hints, BN(O) conditionality) */
+  birthHints: string[];
   /** deduped jurisdictions reachable beyond the held citizenships */
   countries: Set<string>;
 }
@@ -48,6 +104,7 @@ export interface Recommendation {
   score: number;
   newBlocs: string[];
   renouncesPrevious: boolean;
+  via: 'naturalization' | 'ancestry' | 'heritage';
 }
 
 const COUNTED_CATEGORIES = new Set(['full', 'partial', 'hub_spoke', 'closed']);
@@ -72,13 +129,15 @@ export function countryOptions(data: BlocsData): CountryOption[] {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
-export function computeUnlocks(citizenIsos: string[], data: BlocsData): UnlockResult {
-  const held = new Set(citizenIsos);
+export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult {
+  const held = new Set(profile.flags.filter(f => f.status === 'cit').map(f => f.iso_n3));
   const blocs: Bloc[] = [];
   const asymmetric: Bloc[] = [];
   const lanes: BilateralLane[] = [];
   const workLanes: BilateralLane[] = [];
   const chanceLanes: BilateralLane[] = [];
+  const ancestryLanes: BilateralLane[] = [];
+  const birthHints: string[] = [];
   const countries = new Set<string>();
 
   for (const b of data.blocs) {
@@ -93,7 +152,9 @@ export function computeUnlocks(citizenIsos: string[], data: BlocsData): UnlockRe
   }
 
   for (const l of data.bilateral_lanes) {
-    if (!l.beneficiaries.some(m => held.has(m.iso_n3))) continue; // identity lanes never match
+    const byNationality = l.beneficiaries.some(m => held.has(m.iso_n3));
+    const byBirth = profile.birthplace !== null && BIRTHPLACE_LANES[profile.birthplace] === l.id;
+    if (!byNationality && !byBirth) continue;
     const allocation = l.allocation ?? 'right';
     if (allocation !== 'right') {
       chanceLanes.push(l);
@@ -107,8 +168,28 @@ export function computeUnlocks(citizenIsos: string[], data: BlocsData): UnlockRe
     countries.add(l.destination.iso_n3);
   }
 
+  // Descent + heritage lanes: qualifying is personal, not nationality-based.
+  const identityLanes = data.bilateral_lanes.filter(l => l.beneficiaries.length === 0);
+  const heritageIds = new Set(profile.heritages);
+  const ancestorIsos = new Set(profile.ancestors);
+  for (const l of identityLanes) {
+    if (heritageIds.has(l.id) || ancestorIsos.has(l.destination.iso_n3)) {
+      ancestryLanes.push(l);
+    }
+  }
+
+  if (profile.birthplace && BIRTHPLACE_HINTS[profile.birthplace]) {
+    birthHints.push(BIRTHPLACE_HINTS[profile.birthplace]);
+  }
+
+  // PR / diaspora statuses: you can already live there — count the country,
+  // even though it generates no bloc rights in this dataset.
+  for (const f of profile.flags) {
+    if (f.status === 'pr' || f.status === 'diaspora') countries.add(f.iso_n3);
+  }
+
   for (const iso of held) countries.delete(iso);
-  return { blocs, asymmetric, lanes, workLanes, chanceLanes, countries };
+  return { blocs, asymmetric, lanes, workLanes, chanceLanes, ancestryLanes, birthHints, countries };
 }
 
 /**
@@ -133,14 +214,26 @@ export function acquisitionYears(data: BlocsData): Map<string, number> {
   ];
   for (const text of texts) {
     for (const segment of text.split(/[;.]/)) {
-      const num = segment.match(/~?\s*(\d+)(?:\s*-\s*\d+)?\s*(yrs?|years?|months?)/i);
-      if (!num) continue;
-      const value = num[2].toLowerCase().startsWith('month')
-        ? Math.max(0.5, parseInt(num[1], 10) / 12)
-        : parseInt(num[1], 10);
+      // All durations in the segment, with positions — a segment like
+      // "Brazil: 1 yr (child) + 2 yrs Spain" carries different values for
+      // different countries, so each name takes its NEAREST number.
+      const nums: Array<{ value: number; index: number }> = [];
+      for (const m of segment.matchAll(/~?\s*(\d+)(?:\s*-\s*\d+)?\s*(yrs?|years?|months?)/gi)) {
+        const value = m[2].toLowerCase().startsWith('month')
+          ? Math.max(0.5, parseInt(m[1], 10) / 12)
+          : parseInt(m[1], 10);
+        nums.push({ value, index: m.index ?? 0 });
+      }
+      if (!nums.length) continue;
       const seg = segment.toLowerCase();
       for (const [name, iso] of nameToIso) {
-        if (seg.includes(name)) consider(iso, value);
+        const at = seg.indexOf(name);
+        if (at === -1) continue;
+        let best = nums[0];
+        for (const n of nums) {
+          if (Math.abs(n.index - at) < Math.abs(best.index - at)) best = n;
+        }
+        consider(iso, best.value);
       }
     }
   }
@@ -148,45 +241,69 @@ export function acquisitionYears(data: BlocsData): Map<string, number> {
 }
 
 export function recommend(
-  flags: PlantedFlag[],
+  profile: Profile,
   data: BlocsData,
   limit = 5,
 ): Recommendation[] {
-  const heldIsos = flags.filter(f => f.status === 'citizen').map(f => f.iso_n3);
-  const current = computeUnlocks(heldIsos, data);
+  const heldIsos = profile.flags.filter(f => f.status === 'cit').map(f => f.iso_n3);
+  const current = computeUnlocks(profile, data);
   const currentSize = current.countries.size;
   const currentBlocIds = new Set(current.blocs.map(b => b.id));
   const held = new Set(heldIsos);
   const durations = acquisitionYears(data);
   const bans = data.dual_citizenship?.countries ?? {};
 
-  const recs: Recommendation[] = [];
-  for (const opt of countryOptions(data)) {
-    if (held.has(opt.iso_n3)) continue;
+  const withCitizenship = (iso: string): Profile => ({
+    ...profile,
+    flags: [...profile.flags, { iso_n3: iso, name: iso, status: 'cit' }],
+  });
+  const onlyCitizenship = (iso: string): Profile => ({
+    ...profile,
+    flags: [{ iso_n3: iso, name: iso, status: 'cit' }],
+  });
 
-    const renounces = bans[opt.iso_n3]?.status === 'banned';
-    // Renunciation destinations: net footprint = what X alone gives, minus
-    // everything the current flags gave (per explorer-spec part B).
-    const next = renounces
-      ? computeUnlocks([opt.iso_n3], data)
-      : computeUnlocks([...heldIsos, opt.iso_n3], data);
+  const evaluate = (
+    iso: string, name: string,
+    years: number | null,
+    via: Recommendation['via'],
+  ): Recommendation | null => {
+    if (held.has(iso)) return null;
+    const renounces = bans[iso]?.status === 'banned';
+    // Renunciation destinations: net footprint per explorer-spec part B.
+    const next = computeUnlocks(renounces ? onlyCitizenship(iso) : withCitizenship(iso), data);
     const nextCountries = new Set(next.countries);
-    nextCountries.add(opt.iso_n3); // the new home country itself
-    for (const iso of held) nextCountries.delete(iso);
-
+    nextCountries.add(iso);
+    for (const h of held) nextCountries.delete(h);
     const marginal = nextCountries.size - currentSize;
-    if (marginal <= 0) continue;
-
-    const years = durations.get(opt.iso_n3) ?? null;
-    recs.push({
-      iso_n3: opt.iso_n3,
-      name: opt.name,
-      marginal,
-      years,
+    if (marginal <= 0) return null;
+    return {
+      iso_n3: iso, name, marginal, years,
       score: marginal / Math.max(years ?? DEFAULT_YEARS, 0.75),
       newBlocs: next.blocs.filter(b => !currentBlocIds.has(b.id)).map(b => b.name),
       renouncesPrevious: renounces,
-    });
+      via,
+    };
+  };
+
+  const recs: Recommendation[] = [];
+
+  // Descent/heritage paths the profile qualifies for — usually the best moves.
+  for (const lane of current.ancestryLanes) {
+    if (!lane.leads_to_settlement) continue;
+    const via = profile.heritages.includes(lane.id) ? 'heritage' : 'ancestry';
+    const r = evaluate(
+      lane.destination.iso_n3, lane.destination.name,
+      DESCENT_YEARS[lane.id] ?? 2, via,
+    );
+    if (r) recs.push(r);
+  }
+  const ancestryIsos = new Set(recs.map(r => r.iso_n3));
+
+  // Ordinary naturalization/CBI candidates.
+  for (const opt of countryOptions(data)) {
+    if (ancestryIsos.has(opt.iso_n3)) continue;
+    const r = evaluate(opt.iso_n3, opt.name, durations.get(opt.iso_n3) ?? null, 'naturalization');
+    if (r) recs.push(r);
   }
 
   recs.sort((a, b) => b.score - a.score || b.marginal - a.marginal);

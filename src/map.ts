@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import * as topojson from 'topojson-client';
 import type { BlocsData, AppState, Bloc } from './types';
 import { blendColors, displayColor, isDarkTheme } from './lib/color';
-import type { PlantedFlag } from './lib/planner';
+import { EMPTY_PROFILE, type PlantedFlag, type Profile } from './lib/planner';
 
 interface MicroState {
   iso: string;
@@ -202,9 +202,12 @@ function centroidForIso(iso: string): [number, number] | null {
   return null;
 }
 
-/** "Planted" flag glyphs on the map for the user's held statuses. */
-function drawFlags(flags: PlantedFlag[]): void {
-  const placed = flags
+/** "Planted" flag glyphs: held statuses (⚑) plus birthplace (⚐). */
+function drawFlags(profile: Profile): void {
+  const pseudo: PlantedFlag[] = profile.birthplace && !profile.flags.some(f => f.iso_n3 === profile.birthplace)
+    ? [{ iso_n3: profile.birthplace, name: 'birthplace', status: 'tr' }]
+    : [];
+  const placed = [...profile.flags, ...pseudo]
     .map(f => ({ f, pos: centroidForIso(f.iso_n3) }))
     .filter((x): x is { f: PlantedFlag; pos: [number, number] } => x.pos !== null);
 
@@ -226,12 +229,12 @@ function drawFlags(flags: PlantedFlag[]): void {
     )
     .attr('text-anchor', 'middle')
     .style('font-size', `${18 / _currentK}px`)
-    .attr('fill', d => d.f.status === 'citizen' ? 'var(--map-accent)' : 'var(--map-muted)')
+    .attr('fill', d => d.f.status === 'cit' ? 'var(--map-accent)' : 'var(--map-muted)')
     .attr('stroke', 'var(--map-ocean)')
     .attr('stroke-width', 3 / _currentK)
     .attr('paint-order', 'stroke')
     .attr('pointer-events', 'none')
-    .text('⚑');
+    .text(d => d.f.name === 'birthplace' ? '⚐' : '⚑');
 }
 
 function showDotLeader(d: MicroState): void {
@@ -405,7 +408,7 @@ function paintAll(state: AppState, data: BlocsData): void {
     });
 }
 
-export function render(state: AppState, data: BlocsData, flags: PlantedFlag[] = []): void {
+export function render(state: AppState, data: BlocsData, profile: Profile = EMPTY_PROFILE): void {
   const mapEl = document.getElementById('map')!;
   const hint = document.getElementById('hint')!;
 
@@ -421,12 +424,12 @@ export function render(state: AppState, data: BlocsData, flags: PlantedFlag[] = 
   if (!_isReady) {
     _pendingRender = () => {
       paintAll(state, data);
-      drawFlags(flags);
+      drawFlags(profile);
       frameSelection(state, data);
     };
   } else {
     paintAll(state, data);
-    drawFlags(flags);
+    drawFlags(profile);
     frameSelection(state, data);
   }
 }
