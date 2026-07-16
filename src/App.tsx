@@ -59,8 +59,8 @@ export default function App() {
         <span className="text-xs text-muted-foreground">
           Where one status unlocks many countries — TR / PR / CIT rights per bloc.
           {data && (
-            <span className="ml-1.5 font-mono text-[11px] opacity-75">
-              Last verified: {data.meta.last_verified} · {data.meta.disclaimer}
+            <span className="ml-1.5 text-[11px] opacity-80">
+              Last verified <span className="font-mono">{data.meta.last_verified}</span> · {data.meta.disclaimer}
             </span>
           )}
         </span>

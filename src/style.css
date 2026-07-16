@@ -2,17 +2,18 @@
  * Bespoke styles for the D3 map layer and data-dense card internals.
  * App shell layout, buttons, cards, and accordions are shadcn/Tailwind —
  * themed in index.css. The custom properties below are consumed by
- * src/map.ts fill logic (var(--land), var(--accent)) — keep in sync.
+ * src/map.ts fill logic (var(--map-land), var(--map-accent)) — keep in sync.
  */
 :root {
-  --ocean: #101823;
-  --land: #26303E;
-  --panel: #161F2B;
-  --panel-edge: #223040;
-  --ink: #E8ECF1;
-  --muted: #93A1B3;
-  --accent: #F2C14E;
-  --mono: "IBM Plex Mono", monospace;
+  --map-ocean: #101823;
+  /* one clear luminance step above the ocean so landmass reads unaided */
+  --map-land: #2E3A49;
+  --map-panel: #161F2B;
+  --map-panel-edge: #223040;
+  --map-ink: #E8ECF1;
+  --map-muted: #93A1B3;
+  --map-accent: #F2C14E;
+  --map-mono: "IBM Plex Mono", monospace;
 }
 
 /* ── Map layer (imperative D3 — not React) ── */
@@ -26,13 +27,13 @@
 #map:active { cursor: grabbing; }
 
 .country {
-  stroke: var(--ocean);
+  stroke: var(--map-ocean);
   stroke-width: 0.4;
   transition: fill 0.15s;
 }
 
 .country:hover {
-  stroke: var(--accent);
+  stroke: var(--map-accent);
   stroke-width: 0.8;
 }
 
@@ -43,7 +44,7 @@
 }
 
 .micro-dot:hover {
-  stroke: var(--accent);
+  stroke: var(--map-accent);
   stroke-width: 1.5;
 }
 
@@ -51,9 +52,9 @@
   position: absolute;
   bottom: 12px;
   left: 14px;
-  font-family: var(--mono);
+  font-family: "Inter", system-ui, sans-serif;
   font-size: 11px;
-  color: var(--muted);
+  color: var(--map-muted);
   pointer-events: none;
 }
 
@@ -61,8 +62,8 @@
   position: absolute;
   pointer-events: none;
   display: none;
-  background: var(--panel);
-  border: 1px solid var(--panel-edge);
+  background: var(--map-panel);
+  border: 1px solid var(--map-panel-edge);
   border-radius: 7px;
   padding: 6px 10px;
   font: 500 12px "Inter", sans-serif;
@@ -70,7 +71,7 @@
   z-index: 10;
 }
 
-.tt-blocs { color: var(--muted); font-size: 11px; margin-top: 2px; }
+.tt-blocs { color: var(--map-muted); font-size: 11px; margin-top: 2px; }
 
 /* ── Shared chips (bloc/lane color swatches) ── */
 .chip {
@@ -86,22 +87,24 @@
   display: flex;
   gap: 10px;
   padding: 7px 0;
-  border-top: 1px dashed var(--panel-edge);
+  border-top: 1px dashed var(--map-panel-edge);
 }
 
 .rung:first-of-type { border-top: none; }
 
 .rung .tier {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--accent);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--map-accent);
   width: 30px;
   flex-shrink: 0;
-  padding-top: 1px;
+  padding-top: 2px;
 }
 
 .rung p {
   font-size: 12px;
   line-height: 1.45;
-  color: var(--ink);
+  color: var(--map-ink);
 }

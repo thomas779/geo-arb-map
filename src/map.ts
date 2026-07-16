@@ -187,7 +187,7 @@ function hideTooltip(): void {
 function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   if (state.lane) {
     const lane = data.bilateral_lanes.find(l => l.id === state.lane);
-    if (!lane) return 'var(--land)';
+    if (!lane) return 'var(--map-land)';
     if (lane.destination.iso_n3 === iso) return lane.color;
     if (lane.beneficiaries.some(m => m.iso_n3 === iso)) {
       const c = d3.color(lane.color) as d3.RGBColor | null;
@@ -195,11 +195,11 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
       c.opacity = 0.65;
       return c.formatRgb();
     }
-    return 'var(--land)';
+    return 'var(--map-land)';
   }
   if (state.bloc) {
     const ab = data.blocs.find(b => b.id === state.bloc);
-    if (!ab) return 'var(--land)';
+    if (!ab) return 'var(--map-land)';
     if (ab.sub_bloc?.members_iso.includes(iso)) {
       return d3.color(ab.color)?.brighter(0.7)?.formatHex() ?? ab.color;
     }
@@ -207,10 +207,10 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
     if (ab.former_members?.some(m => m.iso_n3 === iso)) {
       return d3.color(ab.color)?.darker(1.6)?.formatHex() ?? '#333';
     }
-    return 'var(--land)';
+    return 'var(--map-land)';
   }
   const count = (_byCountry?.get(iso) ?? []).length;
-  if (!count) return 'var(--land)';
+  if (!count) return 'var(--map-land)';
   // Linear interpolation in RGB space between the two sentinel colors
   const t = Math.min((count - 1) / 3, 1);
   return d3.interpolateRgb('#33465C', '#6C93BF')(t);
@@ -227,7 +227,7 @@ function paintAll(state: AppState, data: BlocsData): void {
       if (!state.bloc) return 'none';
       const ab = data.blocs.find(b => b.id === state.bloc);
       return (ab && ab.members.some(m => m.iso_n3 === d.iso))
-        ? 'var(--accent)'
+        ? 'var(--map-accent)'
         : 'none';
     });
 }

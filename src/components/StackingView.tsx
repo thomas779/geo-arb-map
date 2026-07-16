@@ -32,7 +32,7 @@ export function StackingView({ data, onBlocSelect }: Props) {
           <Card key={`${play.passport}-${play.timeline}`} className="gap-2 py-4">
             <CardHeader className="px-4">
               <CardTitle className="text-[17px]">{play.passport}</CardTitle>
-              <Badge variant="outline" className="w-fit font-mono text-[11px] text-primary">
+              <Badge variant="outline" className="w-fit text-[11px] tabular-nums text-primary">
                 {play.timeline}
               </Badge>
             </CardHeader>
@@ -65,7 +65,7 @@ export function StackingView({ data, onBlocSelect }: Props) {
         <Accordion type="multiple">
           {data.meta.excluded && data.meta.excluded.length > 0 && (
             <AccordionItem value="excluded">
-              <AccordionTrigger className="font-mono text-[11px] uppercase tracking-[1.4px] text-muted-foreground">
+              <AccordionTrigger className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                 Evaluated &amp; excluded ({data.meta.excluded.length})
               </AccordionTrigger>
               <AccordionContent>
@@ -84,7 +84,7 @@ export function StackingView({ data, onBlocSelect }: Props) {
           )}
           {data.pending_verification && data.pending_verification.length > 0 && (
             <AccordionItem value="pending">
-              <AccordionTrigger className="font-mono text-[11px] uppercase tracking-[1.4px] text-muted-foreground">
+              <AccordionTrigger className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
                 Pending verification ({data.pending_verification.length})
               </AccordionTrigger>
               <AccordionContent>
@@ -95,7 +95,7 @@ export function StackingView({ data, onBlocSelect }: Props) {
                   {data.pending_verification.map(p => (
                     <div key={p.id} className="text-xs leading-relaxed text-muted-foreground">
                       <b className="font-semibold text-foreground">{p.name}</b>{' '}
-                      <Badge variant="outline" className="mx-1 font-mono text-[9.5px]">
+                      <Badge variant="outline" className="mx-1 text-[9.5px]">
                         {p.confidence}
                       </Badge>
                       — {p.reason}

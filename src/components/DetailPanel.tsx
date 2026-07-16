@@ -27,7 +27,7 @@ function BlocCard({ bloc, iso, former }: { bloc: Bloc; iso: string; former: bool
           <span className="chip" style={{ background: bloc.color }} />
           <span className="min-w-0 flex-1">{bloc.name}</span>
           {former && (
-            <Badge variant="outline" className="font-mono text-[9.5px] uppercase tracking-wider text-muted-foreground">
+            <Badge variant="outline" className="text-[9.5px] font-semibold uppercase tracking-wider text-muted-foreground">
               former member
             </Badge>
           )}
@@ -62,25 +62,25 @@ function LaneCard({ lane, inbound, countryName }: { lane: BilateralLane; inbound
         <CardTitle className="flex items-center gap-2 font-sans text-sm">
           <span className="chip" style={{ background: lane.color }} />
           <span className="min-w-0 flex-1">{lane.name}</span>
-          <Badge variant={lane.leads_to_settlement ? 'default' : 'secondary'} className="font-mono text-[9.5px] uppercase">
+          <Badge variant={lane.leads_to_settlement ? 'default' : 'secondary'} className="text-[9.5px] font-semibold uppercase">
             {lane.leads_to_settlement ? '→ settlement path' : 'work access only'}
           </Badge>
         </CardTitle>
       </CardHeader>
       <CardContent className="px-4">
-        <div className="mb-2 font-mono text-[10.5px] text-muted-foreground">
+        <div className="mb-2 text-[10.5px] text-muted-foreground">
           {inbound
             ? `Inbound lane — privileged access into ${countryName}`
             : `Outbound lane — access to ${lane.destination.name}`}
         </div>
         <div className="mb-2 flex flex-wrap gap-1.5">
           {lane.allocation && lane.allocation !== 'right' && (
-            <Badge variant="outline" className="font-mono text-[10px] text-primary">
+            <Badge variant="outline" className="text-[10px] text-primary">
               ⚄ not guaranteed — {lane.allocation.replace('_', ' ')}
             </Badge>
           )}
           {lane.renounces_previous && (
-            <Badge variant="destructive" className="font-mono text-[10px]">
+            <Badge variant="destructive" className="text-[10px]">
               ⚠ requires renouncing prior citizenship
             </Badge>
           )}
@@ -95,12 +95,12 @@ function LaneCard({ lane, inbound, countryName }: { lane: BilateralLane; inbound
         {(lane.confidence || lane.volatility) && (
           <div className="mt-2 flex flex-wrap gap-1.5 border-t border-dashed pt-2">
             {lane.confidence && (
-              <Badge variant="outline" className="font-mono text-[10px] text-muted-foreground">
+              <Badge variant="outline" className="text-[10px] text-muted-foreground">
                 confidence: {lane.confidence}
               </Badge>
             )}
             {lane.volatility && (
-              <Badge variant="outline" className="font-mono text-[10px] text-muted-foreground">
+              <Badge variant="outline" className="text-[10px] text-muted-foreground">
                 volatility: {lane.volatility}
               </Badge>
             )}
@@ -159,14 +159,14 @@ export function DetailPanel({ data, state, onClose }: Props) {
       {formerBlocs.map(b => <BlocCard key={b.id} bloc={b} iso={iso} former={true} />)}
 
       {lanesIn.length > 0 && (
-        <div className="mt-4 mb-2 font-mono text-[10.5px] uppercase tracking-[1.4px] text-muted-foreground">
+        <div className="mt-4 mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           Fast lanes into {countryName}
         </div>
       )}
       {lanesIn.map(l => <LaneCard key={l.id} lane={l} inbound={true} countryName={countryName} />)}
 
       {lanesOut.length > 0 && (
-        <div className="mt-4 mb-2 font-mono text-[10.5px] uppercase tracking-[1.4px] text-muted-foreground">
+        <div className="mt-4 mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
           Fast-lane access elsewhere
         </div>
       )}

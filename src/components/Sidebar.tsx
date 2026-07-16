@@ -12,6 +12,15 @@ const CATEGORIES: Array<[Bloc['category'], string]> = [
   ['proto', 'Proto-blocs'],
 ];
 
+/*
+ * Row selection uses ONE dedicated treatment: an ink cursor bar (left border)
+ * plus the neutral accent tint. Never amber/gold — that belongs to bloc
+ * colors and map accents — and never anything else in the sidebar.
+ */
+const rowBase =
+  'h-8 w-full justify-start gap-2 rounded-sm border-l-2 border-l-transparent px-2 text-left text-[13px] font-medium';
+const rowSelected = 'border-l-foreground/80 bg-accent';
+
 interface Props {
   data: BlocsData;
   state: AppState;
@@ -22,7 +31,7 @@ interface Props {
 
 function CatLabel({ children }: { children: string }) {
   return (
-    <div className="mx-1.5 mt-4 mb-1.5 font-mono text-[10.5px] uppercase tracking-[1.4px] text-muted-foreground">
+    <div className="mx-1.5 mt-4 mb-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
       {children}
     </div>
   );
@@ -41,15 +50,15 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
   return (
     <aside className="w-[265px] shrink-0 overflow-y-auto border-r px-3 pt-3 pb-6">
       <Button
-        variant="outline"
-        className={cn(
-          'mx-1.5 mb-2 w-[calc(100%-12px)] justify-start',
-          state.view === 'stacking' && 'border-primary text-primary',
-        )}
+        variant="ghost"
+        className={cn(rowBase, 'h-9', state.view === 'stacking' && rowSelected)}
         onClick={() => onView('stacking')}
       >
         ⊕ Stacking Plays
       </Button>
+      <p className="mx-2 mt-1 mb-2 text-[11px] leading-snug text-muted-foreground">
+        Passports that unlock two or more blocs at once.
+      </p>
 
       {CATEGORIES.map(([cat, label]) => {
         const blocs = data.blocs.filter(b => b.category === cat);
@@ -62,15 +71,13 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
                 key={b.id}
                 variant="ghost"
                 size="sm"
-                className={cn(
-                  'h-auto w-full justify-start gap-2 px-2 py-1.5 text-left text-[13px] font-medium whitespace-normal',
-                  state.bloc === b.id && 'border border-primary bg-primary/10',
-                )}
+                title={b.name}
+                className={cn(rowBase, state.bloc === b.id && rowSelected)}
                 onClick={() => onBloc(state.bloc === b.id ? null : b.id)}
               >
                 <span className="chip" style={{ background: b.color }} />
-                <span className="min-w-0 flex-1">{b.name}</span>
-                <Badge variant="outline" className="font-mono text-[10.5px] text-muted-foreground">
+                <span className="min-w-0 flex-1 truncate">{b.name}</span>
+                <Badge variant="outline" className="text-[10px] tabular-nums text-muted-foreground">
                   {b.members.length}
                 </Badge>
               </Button>
@@ -88,15 +95,13 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
                 key={l.id}
                 variant="ghost"
                 size="sm"
-                className={cn(
-                  'h-auto w-full justify-start gap-2 px-2 py-1.5 text-left text-[13px] font-medium whitespace-normal',
-                  state.lane === l.id && 'border border-primary bg-primary/10',
-                )}
+                title={`${l.name} → ${l.destination.name}`}
+                className={cn(rowBase, state.lane === l.id && rowSelected)}
                 onClick={() => onLane(state.lane === l.id ? null : l.id)}
               >
                 <span className="chip" style={{ background: l.color }} />
-                <span className="min-w-0 flex-1">{l.name}</span>
-                <Badge variant="outline" className="font-mono text-[10.5px] text-muted-foreground">
+                <span className="min-w-0 flex-1 truncate">{l.name}</span>
+                <Badge variant="outline" className="max-w-[72px] truncate text-[10px] text-muted-foreground">
                   →{shortDest(l)}
                 </Badge>
               </Button>
