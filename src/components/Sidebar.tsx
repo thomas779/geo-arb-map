@@ -58,7 +58,6 @@ interface Props {
   state: AppState;
   onBloc: (id: string | null) => void;
   onLane: (id: string | null) => void;
-  onView: (v: 'map' | 'stacking') => void;
 }
 
 function Swatch({ color, selected }: { color: string; selected: boolean }) {
@@ -86,7 +85,7 @@ function RowTooltip({ label, children }: { label: string; children: React.ReactN
   );
 }
 
-export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
+export function Sidebar({ data, state, onBloc, onLane }: Props) {
   const { theme } = useTheme();
   const dark = theme === 'dark';
   const [query, setQuery] = useState('');
@@ -105,17 +104,6 @@ export function Sidebar({ data, state, onBloc, onLane, onView }: Props) {
 
   return (
     <aside className="h-full w-full overflow-y-auto px-3 pt-3 pb-6">
-      <Button
-        variant="ghost"
-        className={cn(rowBase, 'h-9', state.view === 'stacking' && rowSelected)}
-        onClick={() => onView('stacking')}
-      >
-        ⚑ My Flags & Stacking Plays
-      </Button>
-      <p className="mx-2 mt-1 mb-2 text-[11px] leading-snug text-muted-foreground">
-        Plant the statuses you hold; see what they unlock and the best next flag.
-      </p>
-
       <div className="sticky top-0 z-10 -mx-1 bg-background px-1 pt-1 pb-2">
         <Input
           type="search"

@@ -143,17 +143,32 @@ export default function App() {
                 state={state}
                 onBloc={toggleBloc}
                 onLane={selectLane}
-                onView={selectView}
               />
             </SheetContent>
           </Sheet>
         )}
         <div className="flex min-w-0 items-baseline gap-3">
           <h1 className="whitespace-nowrap text-[22px] font-bold tracking-[0.2px]">Settlement Blocs</h1>
-          <span className="hidden truncate text-xs text-muted-foreground md:inline">
+          <span className="hidden truncate text-xs text-muted-foreground lg:inline">
             Your Path to Global Citizenship
           </span>
         </div>
+        <nav aria-label="View" className="flex shrink-0 overflow-hidden rounded-md border">
+          {([['map', 'Map'], ['stacking', 'Planner']] as const).map(([v, label]) => (
+            <button
+              key={v}
+              aria-current={state.view === v ? 'page' : undefined}
+              className={
+                state.view === v
+                  ? 'bg-secondary px-3 py-1.5 text-[12px] font-semibold text-secondary-foreground'
+                  : 'px-3 py-1.5 text-[12px] font-medium text-muted-foreground hover:bg-accent hover:text-foreground'
+              }
+              onClick={() => selectView(v)}
+            >
+              {label}
+            </button>
+          ))}
+        </nav>
         <div className="ml-auto flex shrink-0 items-center gap-2">
           {data && (
             <>
@@ -204,7 +219,6 @@ export default function App() {
               state={state}
               onBloc={toggleBloc}
               onLane={selectLane}
-              onView={selectView}
             />
           </div>
         )}

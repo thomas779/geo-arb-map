@@ -27,12 +27,7 @@ export function StackingView({ data, onBlocSelect, profile, onProfileChange }: P
 
   return (
     <div className="absolute inset-0 overflow-y-auto bg-background px-7 py-6">
-      <div className="mb-6 flex items-center gap-4">
-        <Button variant="outline" size="sm" onClick={() => onBlocSelect(null)}>
-          ← Back to Map
-        </Button>
-        <h2 className="text-xl font-bold">My Flags</h2>
-      </div>
+      <h2 className="mb-6 text-xl font-bold">Planner</h2>
 
       <MyFlags data={data} profile={profile} onChange={onProfileChange} />
 
