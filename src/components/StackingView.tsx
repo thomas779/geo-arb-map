@@ -12,6 +12,7 @@ import { displayColor } from '@/lib/color';
 import { useTheme } from '@/components/theme-provider';
 import { MyFlags } from '@/components/MyFlags';
 import type { Profile } from '@/lib/planner';
+import type { GraphEdge } from '@/lib/pathfinder';
 
 interface Props {
   data: BlocsData;
@@ -19,9 +20,10 @@ interface Props {
   onBlocSelect: (blocId: string | null) => void;
   profile: Profile;
   onProfileChange: (profile: Profile) => void;
+  edges: GraphEdge[] | null;
 }
 
-export function StackingView({ data, onBlocSelect, profile, onProfileChange }: Props) {
+export function StackingView({ data, onBlocSelect, profile, onProfileChange, edges }: Props) {
   const dark = useTheme().theme === 'dark';
   const blocById = new Map(data.blocs.map(b => [b.id, b]));
 
@@ -29,7 +31,7 @@ export function StackingView({ data, onBlocSelect, profile, onProfileChange }: P
     <div className="absolute inset-0 overflow-y-auto bg-background px-7 py-6">
       <h2 className="mb-6 text-xl font-bold">Planner</h2>
 
-      <MyFlags data={data} profile={profile} onChange={onProfileChange} />
+      <MyFlags data={data} edges={edges} profile={profile} onChange={onProfileChange} />
 
       <div className="mt-10 mb-3 flex items-baseline gap-3 border-t pt-6">
         <h3 className="text-base font-bold">Playbooks</h3>

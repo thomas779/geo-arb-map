@@ -12,6 +12,7 @@ import { DetailPanel } from '@/components/DetailPanel';
 import { StackingView } from '@/components/StackingView';
 import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, type FlagStatus, type PlantedFlag, type Profile } from '@/lib/planner';
+import type { EdgesFile, GraphEdge } from '@/lib/pathfinder';
 
 const PROFILE_KEY = 'geo-arb-profile';
 const LEGACY_FLAGS_KEY = 'geo-arb-flags';
@@ -63,6 +64,7 @@ export default function App() {
   const [state, setState] = useState<AppState>(initialState);
   const [data, setData] = useState<BlocsData | null>(null);
   const [profile, setProfile] = useState<Profile>(initialProfile);
+  const [edges, setEdges] = useState<GraphEdge[] | null>(null);
   const { theme, setTheme } = useTheme();
 
   const changeProfile = useCallback((next: Profile) => {
@@ -87,6 +89,10 @@ export default function App() {
         }));
       })
       .catch(err => console.error('Failed to load blocs_data.json:', err));
+    fetch(import.meta.env.BASE_URL + 'edges.json')
+      .then(res => res.json())
+      .then((e: EdgesFile) => setEdges(e.edges))
+      .catch(err => console.error('Failed to load edges.json:', err));
   }, []);
 
   useEffect(() => {
@@ -225,7 +231,7 @@ export default function App() {
         <div id="map-wrap" className="relative min-w-0 flex-1 overflow-hidden">
           <WorldMap data={data} state={state} theme={theme} profile={profile} onSelect={selectCountry} />
           {data && state.view === 'stacking' && (
-            <StackingView data={data} onBlocSelect={backToMapWithBloc} profile={profile} onProfileChange={changeProfile} />
+            <StackingView data={data} edges={edges} onBlocSelect={backToMapWithBloc} profile={profile} onProfileChange={changeProfile} />
           )}
           {data && (
             <Tooltip>

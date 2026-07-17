@@ -56,7 +56,7 @@ const BIRTHPLACE_HINTS: Record<string, string> = {
 };
 
 /** Rough years-to-citizenship for descent/heritage routes (processing, not residence). */
-const DESCENT_YEARS: Record<string, number> = {
+export const DESCENT_YEARS: Record<string, number> = {
   ireland_fbr: 1.5,
   italy_jure_sanguinis: 1.5,
   uk_ancestry: 6, // 5-yr visa -> ILR -> citizenship
@@ -204,7 +204,7 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
  * Countries without a parseable duration rank with a conservative default
  * and display "time unknown".
  */
-function acquisitionYears(data: BlocsData): Map<string, number> {
+export function acquisitionYears(data: BlocsData): Map<string, number> {
   const years = new Map<string, number>();
   const nameToIso = new Map<string, string>();
   for (const opt of countryOptions(data)) nameToIso.set(opt.name.toLowerCase(), opt.iso_n3);

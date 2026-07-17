@@ -1,6 +1,10 @@
 # Strategy Explorer — Locked Design Decisions
 
-Status: **spec only — the explorer UI, pathfinder, and `build_edges.js` are NOT built yet.**
+Status: **engine SHIPPED (2026-07-17): `scripts/build_edges.js` → `public/edges.json`,
+`src/lib/pathfinder.ts` (multi-source Dijkstra, needs-gating, allocation filtering),
+acceptance tests in `tests/pathfinder.test.ts` — all green. The planner's Next moves
+now uses multi-hop paths. Still open: dedicated explorer page, coverage page,
+money/presence lexicographic dimensions (currently years-only + hops tiebreak).**
 This file records decisions locked on 2026-07-16 (from batch-3 external research review
 plus owner rulings) so the feature lands cleanly when requested. Concepts win over
 naming: where the research doc's field names differ from the repo's, the repo's win.
@@ -94,10 +98,16 @@ presence — via two passes, not a single compressed scalar.
 
 ## Build order (locked)
 
-1. ~~normalizer~~ (done) → 2. ~~coverage registry~~ (done) → 3. `scripts/build_edges.js`
-(consumes live high-confidence records + manual_edges.json only) → 4. renunciation +
-allocation semantics on edges → 5. pathfinder + footprint engine → 6. explorer page →
-7. coverage page → 8. map-panel indicators + Greater China card renderer.
+1. ~~normalizer~~ → 2. ~~coverage registry~~ → 3. ~~build_edges.js~~ →
+4. ~~renunciation + allocation semantics~~ → 5. ~~pathfinder + footprint engine~~
+(all done 2026-07-17) → 6. explorer page → 7. coverage page → 8. map-panel
+indicators + Greater China card renderer.
+
+Known v1 approximation (flag before explorer page ships): naturalization edges use
+each country's FASTEST documented track, which may be nationality-conditional —
+e.g. Spain's 2-yr Ibero-American years apply to a Karta-Polaka Pole's chain where
+the ordinary 10-yr track would be correct. Fix: nationality-conditioned
+naturalization edges (needs: ['nationality_group:ibero_american']).
 
 ## Acceptance tests (implement as real tests before shipping the explorer)
 

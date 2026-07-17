@@ -5,6 +5,7 @@ import {
   computeUnlocks, countryOptions, recommend, HERITAGE_OPTIONS,
   type CountryOption, type FlagStatus, type Profile,
 } from '@/lib/planner';
+import { describePath, recommendPaths, type GraphEdge, type PathRec } from '@/lib/pathfinder';
 import { Badge } from '@/components/ui/badge';
 import {
   Card, CardContent, CardDescription, CardHeader, CardTitle,
@@ -19,6 +20,7 @@ import { useTheme } from '@/components/theme-provider';
 
 interface Props {
   data: BlocsData;
+  edges: GraphEdge[] | null;
   profile: Profile;
   onChange: (profile: Profile) => void;
 }
@@ -102,7 +104,7 @@ function ChipButton({ onRemove, label, children }: {
   );
 }
 
-export function MyFlags({ data, profile, onChange }: Props) {
+export function MyFlags({ data, edges, profile, onChange }: Props) {
   const dark = useTheme().theme === 'dark';
   const [status, setStatus] = useState<FlagStatus>('cit');
 
@@ -117,15 +119,22 @@ export function MyFlags({ data, profile, onChange }: Props) {
     [profileKey, data],
   );
   const hasInput = profile.flags.length > 0 || profile.birthplace || profile.ancestors.length > 0 || profile.heritages.length > 0;
-  const recs = useMemo(
-    () => (hasInput ? recommend(profile, data, 5) : []),
+  const recs = useMemo(() => {
+    if (!hasInput) return [];
+    // Multi-hop pathfinder once the graph is loaded; single-hop fallback until then
+    if (edges) {
+      return recommendPaths(profile, data, edges, 5).map(r => ({
+        ...r,
+        plan: describePath(r.steps, data),
+      }));
+    }
+    return recommend(profile, data, 5).map(r => ({ ...r, plan: null as string | null, hops: 1 }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [profileKey, data],
-  );
+  }, [profileKey, data, edges]);
   const [top, ...rest] = recs;
 
-  const viaLabel = (via: 'naturalization' | 'ancestry' | 'heritage') =>
-    via === 'naturalization' ? null : via === 'ancestry' ? 'via ancestry' : 'via heritage claim';
+  const viaLabel = (via: PathRec['via'] | 'naturalization' | 'ancestry' | 'heritage') =>
+    via === 'ancestry' ? 'via ancestry' : via === 'heritage' ? 'via heritage claim' : null;
 
   return (
     <div className="grid max-w-[1200px] items-start gap-6 lg:grid-cols-[minmax(340px,400px)_1fr]">
@@ -369,22 +378,32 @@ export function MyFlags({ data, profile, onChange }: Props) {
                       </span>
                       <span className="text-muted-foreground">≈ {top.score.toFixed(1)} countries/yr</span>
                     </div>
+                    {'plan' in top && top.plan && (
+                      <p className="mt-2 text-xs text-foreground/90">
+                        <span className="text-muted-foreground">Plan: </span>{top.plan}
+                      </p>
+                    )}
                     {top.newBlocs.length > 0 && (
-                      <p className="mt-2 text-xs text-muted-foreground">Adds: {top.newBlocs.join(' · ')}</p>
+                      <p className="mt-1.5 text-xs text-muted-foreground">Adds: {top.newBlocs.join(' · ')}</p>
                     )}
                   </div>
                 )}
                 {rest.length > 0 && (
                   <div className="flex flex-col gap-1">
                     {rest.map((r, i) => (
-                      <div key={r.iso_n3} className="flex items-baseline gap-3 rounded-md border px-3 py-2 text-[13px]">
-                        <span className="w-4 text-right text-[11px] tabular-nums text-muted-foreground">{i + 2}</span>
-                        <span className="font-medium">{r.name}</span>
-                        {viaLabel(r.via) && <span className="text-[10px] text-primary">{viaLabel(r.via)}</span>}
-                        {r.renouncesPrevious && <span className="text-[10px] text-destructive">⚠ renounce</span>}
-                        <span className="ml-auto text-right text-xs text-muted-foreground">
-                          +{r.marginal} countries · {r.years !== null ? `~${r.years} yrs` : 'time unknown'}
-                        </span>
+                      <div key={r.iso_n3} className="rounded-md border px-3 py-2 text-[13px]">
+                        <div className="flex items-baseline gap-3">
+                          <span className="w-4 text-right text-[11px] tabular-nums text-muted-foreground">{i + 2}</span>
+                          <span className="font-medium">{r.name}</span>
+                          {viaLabel(r.via) && <span className="text-[10px] text-primary">{viaLabel(r.via)}</span>}
+                          {r.renouncesPrevious && <span className="text-[10px] text-destructive">⚠ renounce</span>}
+                          <span className="ml-auto text-right text-xs text-muted-foreground">
+                            +{r.marginal} countries · {r.years !== null ? `~${r.years} yrs` : 'time unknown'}
+                          </span>
+                        </div>
+                        {'plan' in r && r.plan && (
+                          <p className="mt-0.5 pl-7 text-[11px] text-muted-foreground">{r.plan}</p>
+                        )}
                       </div>
                     ))}
                   </div>
