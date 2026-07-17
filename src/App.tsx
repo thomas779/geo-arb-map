@@ -151,7 +151,7 @@ export default function App() {
         <div className="flex min-w-0 items-baseline gap-3">
           <h1 className="whitespace-nowrap text-[22px] font-bold tracking-[0.2px]">Settlement Blocs</h1>
           <span className="hidden truncate text-xs text-muted-foreground md:inline">
-            One flag, many countries
+            Your Path to Global Citizenship
           </span>
         </div>
         <div className="ml-auto flex shrink-0 items-center gap-2">

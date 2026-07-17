@@ -107,7 +107,6 @@ export interface Recommendation {
   via: 'naturalization' | 'ancestry' | 'heritage';
 }
 
-const COUNTED_CATEGORIES = new Set(['full', 'partial', 'hub_spoke', 'closed']);
 const DEFAULT_YEARS = 6; // conservative assumption when no duration is parseable
 
 /** Every country selectable as a flag: any jurisdiction in blocs or lanes. */
@@ -198,7 +197,7 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
  * Countries without a parseable duration rank with a conservative default
  * and display "time unknown".
  */
-export function acquisitionYears(data: BlocsData): Map<string, number> {
+function acquisitionYears(data: BlocsData): Map<string, number> {
   const years = new Map<string, number>();
   const nameToIso = new Map<string, string>();
   for (const opt of countryOptions(data)) nameToIso.set(opt.name.toLowerCase(), opt.iso_n3);
