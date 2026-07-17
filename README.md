@@ -1,21 +1,32 @@
-# Settlement Blocs — Global Mobility Atlas
+# Settlement Blocs — Your Path to Global Citizenship
 
-An interactive world map of **settlement blocs and bilateral fast lanes**: groups of
-countries where holding citizenship (or sometimes residency) in one member unlocks
-legal rights to live, work, or settle in the others — the EU/EEA, Mercosur, ECOWAS,
-GCC, CARICOM, plus one-way arrangements (BN(O), UK–Overseas Territories), bilateral
-fast lanes (Spain's 2-year Ibero-American naturalization, France–Maghreb accords),
-and ancestry/diaspora routes (Law of Return, OCI, Karta Polaka, descent citizenship).
+**A free handbook for geo-arbitrageurs — the one consulting firms gate behind a
+"contact us" page.**
+
+Some passports and residencies quietly unlock whole regions: Mercosur residency
+opens most of South America; a child born in Mexico can one day work in the US
+without a lottery; an Irish grandparent is a two-year paper trail away from the
+entire EU. These windows exist today, and only a handful of people know how to
+stack them. The window to arb them leads to generations of opportunity.
+
+This project maps all of it on one interactive atlas — blocs, bilateral fast
+lanes, ancestry routes, generational moves — and gives you a **planner**: plant
+the statuses you hold (citizenship, PR, even an OCI), your birthplace, and where
+your parents were born, and it computes what you've already unlocked and the
+best next flag, as an actual multi-step plan ("Karta Polaka → EU free movement →
+naturalize"). Maximize your footprint; set your kids up with a bigger one.
+
+It's open data, open code, and built to be contributed to — corrections are
+welcome, and the test suite makes it impossible to silently reintroduce a
+mistake we've already fixed.
 
 > ## ⚠️ Not legal advice
 >
-> **Everything in this project is informational only.** Immigration and nationality
-> rules change constantly — several entries changed within the last twelve months —
-> and much of this dataset was researched with LLM assistance at varying confidence
-> levels. Verify with an immigration lawyer in the specific country before acting
-> on anything shown here.
-
-Live site: deployed to GitHub Pages on every push to `main` (Vite `base` is now `/` — requires a user site or custom domain to serve from the root).
+> **Everything here is informational only.** Immigration and nationality rules
+> change constantly — several entries changed within the last twelve months —
+> and much of this dataset was researched with AI assistance at varying,
+> clearly-labeled confidence levels. Verify with an immigration lawyer in the
+> specific country before acting on anything shown here.
 
 ## Stack
 
@@ -24,7 +35,7 @@ world-atlas TopoJSON for the map (imperative layer wrapped in a thin React
 component). Bun for package management, tests, and scripts. No backend — the
 dataset ships as static JSON.
 
-## Data provenance & confidence tiers
+## Where the data comes from
 
 The dataset is **LLM-researched and human-curated**, not authoritative:
 
@@ -46,7 +57,7 @@ Known single-source items (several naturalization timelines) are flagged in the
 research docs and should be re-verified against primary law before being treated
 as authoritative.
 
-## Data corrections
+## Fixing mistakes (and keeping them fixed)
 
 Hard-won corrections are **locked in by tests**: `tests/data_invariants.test.ts`
 pins regression facts (e.g. Russia's dual-citizenship status, which took three
