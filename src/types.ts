@@ -99,6 +99,14 @@ export interface BlocsData {
   blocs: Bloc[];
   bilateral_lanes: BilateralLane[];
   stacking_plays: StackingPlay[];
+  /** Audited child-birth accelerators (from data/manual_edges.json) */
+  generational_events?: Array<{
+    id: string;
+    country: Member;
+    child: string;
+    parent: string;
+    sources?: string[];
+  }>;
   /** Researched but below confidence bar - stored, never rendered. */
   pending_verification?: PendingArrangement[];
   dual_citizenship?: {

@@ -32,14 +32,21 @@ export function StackingView({ data, onBlocSelect, profile, onProfileChange }: P
       <MyFlags data={data} profile={profile} onChange={onProfileChange} />
 
       <div className="mt-10 mb-3 flex items-baseline gap-3 border-t pt-6">
-        <h3 className="text-base font-bold">Example paths</h3>
-        <span className="text-xs text-muted-foreground">curated stacking plays for inspiration</span>
+        <h3 className="text-base font-bold">Playbooks</h3>
+        <span className="text-xs text-muted-foreground">
+          curated, editorial strategies — unlike Next moves, these are not computed from your profile
+        </span>
       </div>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(220px,1fr))] gap-4">
         {data.stacking_plays.map(play => (
           <Card key={`${play.passport}-${play.timeline}`} className="gap-2 py-4">
             <CardHeader className="px-4">
-              <CardTitle className="text-[17px]">{play.passport}</CardTitle>
+              <CardTitle className="flex items-center gap-2 text-[17px]">
+                {play.passport}
+                {profile.flags.some(f => play.passport.toLowerCase().includes(f.name.toLowerCase())) && (
+                  <Badge variant="outline" className="text-[9px] font-semibold uppercase text-primary">you hold this</Badge>
+                )}
+              </CardTitle>
               <Badge variant="outline" className="h-auto max-w-full whitespace-normal text-[11px] leading-snug tabular-nums text-primary">
                 {play.timeline}
               </Badge>

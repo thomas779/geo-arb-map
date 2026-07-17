@@ -2805,5 +2805,44 @@
         "last_checked": "2026-07-16"
       }
     ]
-  }
+  },
+  "generational_events": [
+    {
+      "id": "child_brazil",
+      "country": {
+        "name": "Brazil",
+        "iso_n3": "076"
+      },
+      "child": "Brazilian citizenship at birth (jus soli) - Mercosur + CPLP + Spain's 2-yr Ibero-American track from day one.",
+      "parent": "Parent naturalization after just 1 year of residence.",
+      "sources": [
+        "Brazil Ministry of Justice naturalization materials"
+      ]
+    },
+    {
+      "id": "child_mexico",
+      "country": {
+        "name": "Mexico",
+        "iso_n3": "484"
+      },
+      "child": "Mexican citizenship at birth (jus soli) - TN professional access to the US at working age, E-2 investor eligibility, Spain 2-yr track.",
+      "parent": "Parent naturalization after 2 years of residence (vs 5 standard).",
+      "sources": [
+        "Mexico SRE naturalization guidance"
+      ]
+    },
+    {
+      "id": "child_argentina",
+      "country": {
+        "name": "Argentina",
+        "iso_n3": "032"
+      },
+      "child": "Argentine citizenship at birth (jus soli) - Mercosur-wide residence rights.",
+      "parent": "Parent gets family-based permanent residence, then Argentina's ordinary 2-yr naturalization.",
+      "sources": [
+        "Argentine constitution (jus soli)",
+        "DNM family-based residence rules"
+      ]
+    }
+  ]
 }

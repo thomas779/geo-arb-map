@@ -168,10 +168,17 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
   }
 
   // Descent + heritage lanes: qualifying is personal, not nationality-based.
+  // A lane already consumed doesn't count as a path: holding citizenship at
+  // the destination, or holding the diaspora status itself (e.g. India OCI),
+  // removes it from "paths you may qualify for".
+  const consumed = new Set(
+    profile.flags.filter(f => f.status === 'cit' || f.status === 'diaspora').map(f => f.iso_n3),
+  );
   const identityLanes = data.bilateral_lanes.filter(l => l.beneficiaries.length === 0);
   const heritageIds = new Set(profile.heritages);
   const ancestorIsos = new Set(profile.ancestors);
   for (const l of identityLanes) {
+    if (consumed.has(l.destination.iso_n3)) continue;
     if (heritageIds.has(l.id) || ancestorIsos.has(l.destination.iso_n3)) {
       ancestryLanes.push(l);
     }

@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from 'react';
-import { Flag, MapPin, X } from 'lucide-react';
+import { Baby, Flag, MapPin, X } from 'lucide-react';
 import type { BlocsData } from '../types';
 import {
   computeUnlocks, countryOptions, recommend, HERITAGE_OPTIONS,
@@ -291,7 +291,7 @@ export function MyFlags({ data, profile, onChange }: Props) {
                         {unlocked.blocs.map(b => (
                           <span key={b.id} className="rounded-[5px] px-2 py-0.5 text-[11px] font-medium text-white"
                                 style={{ background: displayColor(b.color, dark) }}>
-                            {b.name}
+                            {b.name} · {b.members.length}
                           </span>
                         ))}
                       </div>
@@ -319,13 +319,6 @@ export function MyFlags({ data, profile, onChange }: Props) {
                     )}
                   </>
                 )}
-                {unlocked.ancestryLanes.length > 0 && (
-                  <p className="text-[11px] text-muted-foreground">
-                    Descent/heritage paths you may qualify for:{' '}
-                    <span className="text-foreground">{unlocked.ancestryLanes.map(l => l.name).join(' · ')}</span>
-                    {' '}— scored under next moves.
-                  </p>
-                )}
                 {(unlocked.workLanes.length > 0 || unlocked.chanceLanes.length > 0) && (
                   <p className="text-[10.5px] text-muted-foreground">
                     Not counted: {[
@@ -345,6 +338,13 @@ export function MyFlags({ data, profile, onChange }: Props) {
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-3 px-5">
+                {unlocked.ancestryLanes.length > 0 && (
+                  <p className="text-[11px] text-muted-foreground">
+                    Your descent/heritage may qualify you for:{' '}
+                    <span className="text-foreground">{unlocked.ancestryLanes.map(l => l.name).join(' · ')}</span>
+                    {' '}— scored below.
+                  </p>
+                )}
                 {recs.length === 0 && (
                   <p className="text-xs text-muted-foreground">
                     Nothing left to recommend — your flags already cover every mapped bloc.
@@ -387,6 +387,24 @@ export function MyFlags({ data, profile, onChange }: Props) {
                         </span>
                       </div>
                     ))}
+                  </div>
+                )}
+                {data.generational_events && data.generational_events.length > 0 && (
+                  <div className="mt-1 border-t border-dashed pt-3">
+                    <div className="mb-2 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      <Baby className="size-3.5" aria-hidden /> Generational moves — a child born here changes both your maps
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      {data.generational_events
+                        .filter(ev => !profile.flags.some(f => f.iso_n3 === ev.country.iso_n3 && f.status === 'cit'))
+                        .map(ev => (
+                          <div key={ev.id} className="rounded-md border border-dashed px-3 py-2 text-[12px] leading-snug">
+                            <b className="font-semibold">{ev.country.name}</b>
+                            <span className="text-muted-foreground"> — child: </span>{ev.child}
+                            <span className="text-muted-foreground"> Parent: </span>{ev.parent}
+                          </div>
+                        ))}
+                    </div>
                   </div>
                 )}
                 <p className="text-[10.5px] leading-snug text-muted-foreground">
