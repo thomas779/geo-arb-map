@@ -116,6 +116,52 @@ export interface BlocsData {
   };
 }
 
+export type CitizenshipAcquisitionMode = 'ancestry' | 'naturalization' | 'birth' | 'investment';
+export type CitizenshipRouteStatus = 'active' | 'inactive' | 'verified_negative' | 'pending_verification';
+export type CitizenshipCoverageState = 'reviewed' | 'partial' | 'pending' | 'unchecked';
+
+export interface CitizenshipRouteSource {
+  title: string;
+  url: string;
+}
+
+export interface CitizenshipRoute {
+  id: string;
+  country: Member;
+  mode: CitizenshipAcquisitionMode;
+  status: CitizenshipRouteStatus;
+  title: string;
+  summary: string;
+  facts: Record<string, unknown>;
+  confidence: 'high' | 'medium' | 'low';
+  last_checked: string;
+  sources: CitizenshipRouteSource[];
+}
+
+export interface CitizenshipRoutesData {
+  meta: {
+    description: string;
+    last_updated: string;
+    acquisition_modes: Record<CitizenshipAcquisitionMode, string>;
+    coverage_states: Record<CitizenshipCoverageState, string>;
+    counts: {
+      jurisdictions: number;
+      routes: number;
+      by_mode: Record<CitizenshipAcquisitionMode, number>;
+      by_status: Partial<Record<CitizenshipRouteStatus, number>>;
+    };
+  };
+  jurisdictions: Array<{
+    iso_n3: string;
+    name: string;
+    type: 'sovereign' | 'territory' | 'special';
+    coverage: Record<CitizenshipAcquisitionMode, CitizenshipCoverageState>;
+    route_ids: string[];
+    registry_note?: string;
+  }>;
+  routes: CitizenshipRoute[];
+}
+
 export interface AppState {
   view: 'map' | 'stacking';
   /** Multi-select compare: countries in 2+ selected blocs render blended. */

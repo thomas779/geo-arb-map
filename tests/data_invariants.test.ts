@@ -1,5 +1,10 @@
 import { describe, test, expect } from 'bun:test';
-import type { BlocsData, Bloc, BilateralLane } from '../src/types';
+import type {
+  BilateralLane,
+  Bloc,
+  BlocsData,
+  CitizenshipRoutesData,
+} from '../src/types';
 
 /**
  * Regression + invariant tests for the dataset.
@@ -19,6 +24,18 @@ const data = (await Bun.file(
 const coverage = (await Bun.file(
   new URL('../public/coverage.json', import.meta.url),
 ).json()) as { rows: Array<{ iso_n3: string; type: string }> };
+
+const citizenshipRoutes = (await Bun.file(
+  new URL('../public/citizenship_routes.json', import.meta.url),
+).json()) as CitizenshipRoutesData;
+
+const registry = await Bun.file(
+  new URL('../data/registry.json', import.meta.url),
+).json() as {
+  sovereigns: Array<{ iso_n3: string }>;
+  territories: Array<{ iso_n3: string }>;
+  special: Array<{ id: string }>;
+};
 
 const ISO_RE = /^\d{3}$/;
 const CATEGORIES = ['full', 'partial', 'hub_spoke', 'one_way', 'closed', 'proto'];
@@ -158,5 +175,85 @@ describe('coverage.json', () => {
         expect(r.iso_n3, `coverage row ${r.iso_n3}`).toMatch(ISO_RE);
       }
     }
+  });
+});
+
+describe('citizenship route database', () => {
+  test('covers every registry jurisdiction exactly once across all four modes', () => {
+    const registryIds = new Set([
+      ...registry.sovereigns.map(row => row.iso_n3),
+      ...registry.territories.map(row => row.iso_n3),
+      ...registry.special.map(row => row.id),
+    ]);
+    const routeIds = citizenshipRoutes.jurisdictions.map(row => row.iso_n3);
+    expect(new Set(routeIds).size).toBe(routeIds.length);
+    expect(new Set(routeIds)).toEqual(registryIds);
+    for (const row of citizenshipRoutes.jurisdictions) {
+      expect(Object.keys(row.coverage).sort()).toEqual(
+        ['ancestry', 'birth', 'investment', 'naturalization'],
+      );
+    }
+  });
+
+  test('route records are sourced, dated, and referentially valid', () => {
+    const jurisdictionIds = new Set(citizenshipRoutes.jurisdictions.map(row => row.iso_n3));
+    const ids = new Set<string>();
+    for (const route of citizenshipRoutes.routes) {
+      expect(ids.has(route.id), `duplicate route ${route.id}`).toBe(false);
+      ids.add(route.id);
+      expect(jurisdictionIds.has(route.country.iso_n3), route.id).toBe(true);
+      expect(['ancestry', 'naturalization', 'birth', 'investment']).toContain(route.mode);
+      expect(['active', 'inactive', 'verified_negative', 'pending_verification']).toContain(route.status);
+      expect(route.last_checked).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(route.sources.length, route.id).toBeGreaterThan(0);
+      for (const source of route.sources) {
+        expect(source.url, route.id).toMatch(/^https:\/\//);
+      }
+    }
+  });
+
+  test('education residence rules preserve the France/Colombia distinction', () => {
+    const france = citizenshipRoutes.routes.find(route =>
+      route.id === 'france-study-naturalization-residence');
+    const colombia = citizenshipRoutes.routes.find(route =>
+      route.id === 'colombia-study-permanent-residence-credit');
+    expect(france?.facts.residence_credit).toBe('full_if_lawful_habitual_and_continuous');
+    expect(france?.facts.reduced_residence_years).toBe(2);
+    expect(france?.facts.automatic).toBe(false);
+    expect(colombia?.status).toBe('verified_negative');
+    expect(colombia?.facts.residence_credit).toBe('none');
+  });
+
+  test('active CBI list is explicit and excludes pending statutory leads', () => {
+    const active = citizenshipRoutes.routes.filter(route =>
+      route.mode === 'investment' && route.status === 'active');
+    const pending = citizenshipRoutes.routes.filter(route =>
+      route.mode === 'investment' && route.status === 'pending_verification');
+    expect(active.length).toBe(11);
+    expect(pending.map(route => route.country.iso_n3).sort()).toEqual(['116', '882']);
+  });
+
+  test('Portugal records preserve the 2026 transition and nationality-dependent periods', () => {
+    const portugal = citizenshipRoutes.routes.find(route =>
+      route.id === 'portugal-ordinary-naturalization-2026');
+    expect(portugal?.status).toBe('active');
+    expect(portugal?.facts.effective_from).toBe('2026-05-19');
+    expect(portugal?.facts.ordinary_residence_years_cplp_eu).toBe(7);
+    expect(portugal?.facts.ordinary_residence_years_other).toBe(10);
+    expect(portugal?.facts.pending_applications_old_law).toBe(true);
+  });
+
+  test('ended EU investor schemes cannot appear as active CBI', () => {
+    const malta = citizenshipRoutes.routes.find(route =>
+      route.id === 'malta-transactional-investor-citizenship-ended');
+    const bulgaria = citizenshipRoutes.routes.find(route =>
+      route.id === 'bulgaria-investor-citizenship-repealed');
+    const turkiye = citizenshipRoutes.routes.find(route =>
+      route.id === 'turkiye-exceptional-investor-citizenship');
+    expect(malta?.status).toBe('inactive');
+    expect(bulgaria?.status).toBe('inactive');
+    expect(turkiye?.status).toBe('active');
+    expect(turkiye?.facts.property_threshold_usd).toBe(400000);
+    expect(turkiye?.facts.holding_period_years).toBe(3);
   });
 });

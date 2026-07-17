@@ -1,0 +1,3612 @@
+{
+  "meta": {
+    "description": "Country-level citizenship acquisition matrix. Every registry jurisdiction has explicit coverage for ancestry, naturalization, birth, and investment; unchecked is a research state, not a claim that no route exists.",
+    "last_updated": "2026-07-17",
+    "acquisition_modes": {
+      "ancestry": "Citizenship through a parent, grandparent, wider descent rule, restoration, or documented heritage connection.",
+      "naturalization": "Citizenship after residence or another qualifying domestic status, including rules about which residence periods count.",
+      "birth": "Citizenship or an accelerated parent route triggered by place of birth.",
+      "investment": "Direct investor citizenship or a contribution programme; residence-by-investment without direct citizenship is naturalization, not CBI."
+    },
+    "coverage_states": {
+      "reviewed": "A current route or verified negative has been checked against an official source.",
+      "partial": "At least one relevant rule is recorded, but the mode is not exhaustive for this jurisdiction.",
+      "pending": "A legal basis or credible lead exists, but current operation is not verified for live recommendations.",
+      "unchecked": "No route-level review has been completed for this mode."
+    },
+    "counts": {
+      "jurisdictions": 239,
+      "routes": 25,
+      "by_mode": {
+        "ancestry": 3,
+        "naturalization": 6,
+        "birth": 1,
+        "investment": 15
+      },
+      "by_status": {
+        "active": 20,
+        "verified_negative": 1,
+        "inactive": 2,
+        "pending_verification": 2
+      }
+    }
+  },
+  "jurisdictions": [
+    {
+      "iso_n3": "000",
+      "name": "Somaliland",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "004",
+      "name": "Afghanistan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "008",
+      "name": "Albania",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "012",
+      "name": "Algeria",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "016",
+      "name": "American Samoa",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "020",
+      "name": "Andorra",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "024",
+      "name": "Angola",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "028",
+      "name": "Antigua and Barb.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "antigua-barbuda-cip"
+      ]
+    },
+    {
+      "iso_n3": "031",
+      "name": "Azerbaijan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "032",
+      "name": "Argentina",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "partial",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "036",
+      "name": "Australia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "040",
+      "name": "Austria",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "044",
+      "name": "Bahamas",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "048",
+      "name": "Bahrain",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "050",
+      "name": "Bangladesh",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "051",
+      "name": "Armenia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "052",
+      "name": "Barbados",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "056",
+      "name": "Belgium",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "060",
+      "name": "Bermuda",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "064",
+      "name": "Bhutan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "068",
+      "name": "Bolivia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "070",
+      "name": "Bosnia and Herz.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "072",
+      "name": "Botswana",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "076",
+      "name": "Brazil",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "partial",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "084",
+      "name": "Belize",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "086",
+      "name": "Br. Indian Ocean Ter.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "090",
+      "name": "Solomon Is.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "092",
+      "name": "British Virgin Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "096",
+      "name": "Brunei",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "100",
+      "name": "Bulgaria",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "partial",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "bulgaria-ordinary-naturalization",
+        "bulgaria-bulgarian-origin-naturalization",
+        "bulgaria-investor-citizenship-repealed"
+      ]
+    },
+    {
+      "iso_n3": "104",
+      "name": "Myanmar",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "108",
+      "name": "Burundi",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "112",
+      "name": "Belarus",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "116",
+      "name": "Cambodia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "pending"
+      },
+      "route_ids": [
+        "cambodia-investor-naturalization-status"
+      ]
+    },
+    {
+      "iso_n3": "120",
+      "name": "Cameroon",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "124",
+      "name": "Canada",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "132",
+      "name": "Cabo Verde",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "136",
+      "name": "Cayman Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "140",
+      "name": "Central African Rep.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "144",
+      "name": "Sri Lanka",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "148",
+      "name": "Chad",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "152",
+      "name": "Chile",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "156",
+      "name": "China",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "158",
+      "name": "Taiwan",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "170",
+      "name": "Colombia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "partial",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": [
+        "colombia-study-permanent-residence-credit"
+      ]
+    },
+    {
+      "iso_n3": "174",
+      "name": "Comoros",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "178",
+      "name": "Congo",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "180",
+      "name": "Dem. Rep. Congo",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "184",
+      "name": "Cook Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "188",
+      "name": "Costa Rica",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "191",
+      "name": "Croatia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "192",
+      "name": "Cuba",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "196",
+      "name": "Cyprus",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "203",
+      "name": "Czechia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "204",
+      "name": "Benin",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "208",
+      "name": "Denmark",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "212",
+      "name": "Dominica",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "dominica-cbi"
+      ]
+    },
+    {
+      "iso_n3": "214",
+      "name": "Dominican Rep.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "218",
+      "name": "Ecuador",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "222",
+      "name": "El Salvador",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "226",
+      "name": "Eq. Guinea",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "231",
+      "name": "Ethiopia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "232",
+      "name": "Eritrea",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "233",
+      "name": "Estonia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "234",
+      "name": "Faeroe Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "238",
+      "name": "Falkland Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "239",
+      "name": "S. Geo. and the Is.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "242",
+      "name": "Fiji",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "246",
+      "name": "Finland",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "248",
+      "name": "Åland",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "250",
+      "name": "France",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "partial",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": [
+        "france-study-naturalization-residence"
+      ]
+    },
+    {
+      "iso_n3": "258",
+      "name": "Fr. Polynesia",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "260",
+      "name": "Fr. S. Antarctic Lands",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "262",
+      "name": "Djibouti",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "266",
+      "name": "Gabon",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "268",
+      "name": "Georgia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "270",
+      "name": "Gambia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "275",
+      "name": "Palestine",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "276",
+      "name": "Germany",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "288",
+      "name": "Ghana",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "292",
+      "name": "Gibraltar",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "296",
+      "name": "Kiribati",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "300",
+      "name": "Greece",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "partial",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": [
+        "greece-ordinary-naturalization",
+        "greece-citizenship-by-greek-parent"
+      ]
+    },
+    {
+      "iso_n3": "304",
+      "name": "Greenland",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "308",
+      "name": "Grenada",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "grenada-cbi"
+      ]
+    },
+    {
+      "iso_n3": "316",
+      "name": "Guam",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "320",
+      "name": "Guatemala",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "324",
+      "name": "Guinea",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "328",
+      "name": "Guyana",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "332",
+      "name": "Haiti",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "334",
+      "name": "Heard I. and McDonald Is.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "336",
+      "name": "Vatican",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "340",
+      "name": "Honduras",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "344",
+      "name": "Hong Kong",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "348",
+      "name": "Hungary",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "352",
+      "name": "Iceland",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "356",
+      "name": "India",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "360",
+      "name": "Indonesia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "364",
+      "name": "Iran",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "368",
+      "name": "Iraq",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "372",
+      "name": "Ireland",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "376",
+      "name": "Israel",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "380",
+      "name": "Italy",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "384",
+      "name": "Côte d'Ivoire",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "388",
+      "name": "Jamaica",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "392",
+      "name": "Japan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "398",
+      "name": "Kazakhstan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "400",
+      "name": "Jordan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "jordan-investor-citizenship"
+      ]
+    },
+    {
+      "iso_n3": "404",
+      "name": "Kenya",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "408",
+      "name": "North Korea",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "410",
+      "name": "South Korea",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "414",
+      "name": "Kuwait",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "417",
+      "name": "Kyrgyzstan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "418",
+      "name": "Laos",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "422",
+      "name": "Lebanon",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "426",
+      "name": "Lesotho",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "428",
+      "name": "Latvia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "430",
+      "name": "Liberia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "434",
+      "name": "Libya",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "438",
+      "name": "Liechtenstein",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "440",
+      "name": "Lithuania",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "442",
+      "name": "Luxembourg",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "446",
+      "name": "Macao",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "450",
+      "name": "Madagascar",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "454",
+      "name": "Malawi",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "458",
+      "name": "Malaysia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "462",
+      "name": "Maldives",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "466",
+      "name": "Mali",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "470",
+      "name": "Malta",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "partial",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "malta-residence-naturalization",
+        "malta-registration-family-descent",
+        "malta-transactional-investor-citizenship-ended"
+      ]
+    },
+    {
+      "iso_n3": "478",
+      "name": "Mauritania",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "480",
+      "name": "Mauritius",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "484",
+      "name": "Mexico",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "partial",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "492",
+      "name": "Monaco",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "496",
+      "name": "Mongolia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "498",
+      "name": "Moldova",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "499",
+      "name": "Montenegro",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "500",
+      "name": "Montserrat",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "504",
+      "name": "Morocco",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "508",
+      "name": "Mozambique",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "512",
+      "name": "Oman",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "516",
+      "name": "Namibia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "520",
+      "name": "Nauru",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "nauru-climate-resilience-citizenship"
+      ]
+    },
+    {
+      "iso_n3": "524",
+      "name": "Nepal",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "528",
+      "name": "Netherlands",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "531",
+      "name": "Curaçao",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "533",
+      "name": "Aruba",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "534",
+      "name": "Sint Maarten",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "540",
+      "name": "New Caledonia",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "548",
+      "name": "Vanuatu",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "vanuatu-investor-citizenship"
+      ]
+    },
+    {
+      "iso_n3": "554",
+      "name": "New Zealand",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "558",
+      "name": "Nicaragua",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "562",
+      "name": "Niger",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "566",
+      "name": "Nigeria",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "570",
+      "name": "Niue",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "574",
+      "name": "Norfolk Island",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "578",
+      "name": "Norway",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "580",
+      "name": "N. Mariana Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "583",
+      "name": "Micronesia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "584",
+      "name": "Marshall Is.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "585",
+      "name": "Palau",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "586",
+      "name": "Pakistan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "591",
+      "name": "Panama",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "598",
+      "name": "Papua New Guinea",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "600",
+      "name": "Paraguay",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "604",
+      "name": "Peru",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "608",
+      "name": "Philippines",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "612",
+      "name": "Pitcairn Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "616",
+      "name": "Poland",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "620",
+      "name": "Portugal",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "partial",
+        "birth": "partial",
+        "investment": "unchecked"
+      },
+      "route_ids": [
+        "portugal-ordinary-naturalization-2026",
+        "portugal-birth-parent-residence-2026"
+      ]
+    },
+    {
+      "iso_n3": "624",
+      "name": "Guinea-Bissau",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "626",
+      "name": "Timor-Leste",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "630",
+      "name": "Puerto Rico",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "634",
+      "name": "Qatar",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "642",
+      "name": "Romania",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "643",
+      "name": "Russia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "646",
+      "name": "Rwanda",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "652",
+      "name": "St-Barthélemy",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "654",
+      "name": "Saint Helena",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "659",
+      "name": "St. Kitts and Nevis",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "st-kitts-nevis-citizenship-programme"
+      ]
+    },
+    {
+      "iso_n3": "660",
+      "name": "Anguilla",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "662",
+      "name": "Saint Lucia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "saint-lucia-cip"
+      ]
+    },
+    {
+      "iso_n3": "663",
+      "name": "St-Martin",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "666",
+      "name": "St. Pierre and Miquelon",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "670",
+      "name": "St. Vin. and Gren.",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "674",
+      "name": "San Marino",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "678",
+      "name": "São Tomé and Principe",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "sao-tome-principe-cbi"
+      ]
+    },
+    {
+      "iso_n3": "682",
+      "name": "Saudi Arabia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "686",
+      "name": "Senegal",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "688",
+      "name": "Serbia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "690",
+      "name": "Seychelles",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "694",
+      "name": "Sierra Leone",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "702",
+      "name": "Singapore",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "703",
+      "name": "Slovakia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "704",
+      "name": "Vietnam",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "705",
+      "name": "Slovenia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "706",
+      "name": "Somalia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "710",
+      "name": "South Africa",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "716",
+      "name": "Zimbabwe",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "724",
+      "name": "Spain",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "728",
+      "name": "S. Sudan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "729",
+      "name": "Sudan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "732",
+      "name": "W. Sahara",
+      "type": "special",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": [],
+      "registry_note": "Western Sahara: disputed territory (M49 special handling)"
+    },
+    {
+      "iso_n3": "740",
+      "name": "Suriname",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "748",
+      "name": "eSwatini",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "752",
+      "name": "Sweden",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "756",
+      "name": "Switzerland",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "760",
+      "name": "Syria",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "762",
+      "name": "Tajikistan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "764",
+      "name": "Thailand",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "768",
+      "name": "Togo",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "772",
+      "name": "Tokelau",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "776",
+      "name": "Tonga",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "780",
+      "name": "Trinidad and Tobago",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "784",
+      "name": "United Arab Emirates",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "788",
+      "name": "Tunisia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "792",
+      "name": "Turkey",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "turkiye-exceptional-investor-citizenship"
+      ]
+    },
+    {
+      "iso_n3": "795",
+      "name": "Turkmenistan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "796",
+      "name": "Turks and Caicos Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "798",
+      "name": "Tuvalu",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "800",
+      "name": "Uganda",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "804",
+      "name": "Ukraine",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "807",
+      "name": "Macedonia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "818",
+      "name": "Egypt",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "reviewed"
+      },
+      "route_ids": [
+        "egypt-investor-citizenship"
+      ]
+    },
+    {
+      "iso_n3": "826",
+      "name": "United Kingdom",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "partial",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "831",
+      "name": "Guernsey",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "832",
+      "name": "Jersey",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "833",
+      "name": "Isle of Man",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "834",
+      "name": "Tanzania",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "840",
+      "name": "United States of America",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "850",
+      "name": "U.S. Virgin Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "854",
+      "name": "Burkina Faso",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "858",
+      "name": "Uruguay",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "860",
+      "name": "Uzbekistan",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "862",
+      "name": "Venezuela",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "876",
+      "name": "Wallis and Futuna Is.",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "882",
+      "name": "Samoa",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "pending"
+      },
+      "route_ids": [
+        "samoa-citizenship-investment-status"
+      ]
+    },
+    {
+      "iso_n3": "887",
+      "name": "Yemen",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "894",
+      "name": "Zambia",
+      "type": "sovereign",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
+      "iso_n3": "XKX",
+      "name": "Kosovo",
+      "type": "special",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": [],
+      "registry_note": "No M49 numeric code; tracked per the locked registry decision."
+    }
+  ],
+  "routes": [
+    {
+      "id": "france-study-naturalization-residence",
+      "country": {
+        "iso_n3": "250",
+        "name": "France"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "French higher education can reduce the naturalization residence period to two years",
+      "summary": "French Civil Code article 21-17 ordinarily requires five years of habitual residence and does not exclude lawful student residence. Article 21-18 reduces that period to two years for a person who successfully completes two years of higher education toward a diploma from a French university or higher-education institution. A valid permit, continuing residence, assimilation, language and stable professional integration remain material; naturalization is discretionary.",
+      "facts": {
+        "ordinary_residence_years": 5,
+        "reduced_residence_years": 2,
+        "reduction_condition": "Successfully complete two years of higher education toward a diploma from a French university or higher-education institution",
+        "qualifying_status": "student",
+        "target": "citizenship",
+        "residence_credit": "full_if_lawful_habitual_and_continuous",
+        "automatic": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "French Civil Code, article 21-17",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419648/"
+        },
+        {
+          "title": "French Civil Code, article 21-18",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000024197095/"
+        },
+        {
+          "title": "Service-Public — Naturalisation française par décret",
+          "url": "https://www.service-public.fr/particuliers/vosdroits/F34708"
+        },
+        {
+          "title": "CESEDA — student residence permits",
+          "url": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070158/LEGISCTA000042771650/"
+        }
+      ]
+    },
+    {
+      "id": "colombia-study-permanent-residence-credit",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "mode": "naturalization",
+      "status": "verified_negative",
+      "title": "Visitor student visa time does not accumulate toward permanent residence",
+      "summary": "Colombia's current student route is a Visitor (V) visa. The Foreign Ministry states that study time does not count toward a Resident (R) visa by accumulated time; article 90 lists qualifying Migrant (M) categories and does not include the V student visa.",
+      "facts": {
+        "qualifying_status": "V student",
+        "target": "permanent_residence",
+        "residence_credit": "none",
+        "automatic": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Colombia Foreign Ministry — Visa FAQ",
+          "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/abece-de-visas"
+        },
+        {
+          "title": "Resolution 5477 of 2022, article 90 (as amended)",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm"
+        },
+        {
+          "title": "Colombia Foreign Ministry — V Student Visa",
+          "url": "https://www.cancilleria.gov.co/node/26940"
+        }
+      ]
+    },
+    {
+      "id": "antigua-barbuda-cip",
+      "country": {
+        "iso_n3": "028",
+        "name": "Antigua and Barbuda"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Citizenship by Investment Programme",
+      "summary": "Government-administered direct citizenship programme with contribution, real-estate and other approved investment options.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Antigua and Barbuda Citizenship by Investment Unit",
+          "url": "https://cip.gov.ag/home"
+        }
+      ]
+    },
+    {
+      "id": "dominica-cbi",
+      "country": {
+        "iso_n3": "212",
+        "name": "Dominica"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Citizenship by Investment Programme",
+      "summary": "Government-administered direct citizenship programme offering a public-fund contribution and approved real-estate route.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Dominica Citizenship by Investment Unit",
+          "url": "https://www.cbiu.gov.dm/"
+        }
+      ]
+    },
+    {
+      "id": "grenada-cbi",
+      "country": {
+        "iso_n3": "308",
+        "name": "Grenada"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Citizenship by Investment Programme",
+      "summary": "Government-administered direct citizenship programme with National Transformation Fund and approved-project routes.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Grenada Citizenship by Investment",
+          "url": "https://www.cbi.gov.gd/index_php/"
+        }
+      ]
+    },
+    {
+      "id": "st-kitts-nevis-citizenship-programme",
+      "country": {
+        "iso_n3": "659",
+        "name": "St. Kitts and Nevis"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Citizenship Programme",
+      "summary": "Government-administered direct citizenship programme requiring a prescribed investment or contribution and due diligence.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "St. Kitts and Nevis Citizenship Unit",
+          "url": "https://ciu.gov.kn/application-process/"
+        }
+      ]
+    },
+    {
+      "id": "saint-lucia-cip",
+      "country": {
+        "iso_n3": "662",
+        "name": "Saint Lucia"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Citizenship by Investment Programme",
+      "summary": "Direct citizenship by registration following a qualifying investment under the Citizenship by Investment Act.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Saint Lucia Citizenship by Investment Act",
+          "url": "https://pmd.govt.lc/wp-content/uploads/2025/10/Citizenship-by-Investment-Act-Cap.1.20.pdf"
+        }
+      ]
+    },
+    {
+      "id": "turkiye-exceptional-investor-citizenship",
+      "country": {
+        "iso_n3": "792",
+        "name": "Türkiye"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Exceptional citizenship for qualifying investors",
+      "summary": "Foreign investors meeting a prescribed property, capital, deposit, securities, pension-fund or job-creation condition may acquire citizenship by presidential decision.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false,
+        "discretionary_decision": true,
+        "property_threshold_usd": 400000,
+        "other_investment_threshold_usd": 500000,
+        "holding_period_years": 3,
+        "job_creation_threshold": 50
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Invest in Türkiye — Acquiring Property and Citizenship",
+          "url": "https://f.invest.gov.tr/en/investmentguide/pages/acquiring-property-and-citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "egypt-investor-citizenship",
+      "country": {
+        "iso_n3": "818",
+        "name": "Egypt"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Egyptian citizenship through investment programmes",
+      "summary": "The Prime Minister's citizenship unit administers direct routes through a non-refundable contribution, property, an investment project or a central-bank deposit.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false,
+        "discretionary_decision": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Egyptian Cabinet — Citizenship through Investment Programmes",
+          "url": "https://egyptcitizenship.gov.eg/"
+        },
+        {
+          "title": "GAFI — Unit for Granting Egyptian Citizenship in Exchange for Investment",
+          "url": "https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "jordan-investor-citizenship",
+      "country": {
+        "iso_n3": "400",
+        "name": "Jordan"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Investor citizenship criteria",
+      "summary": "Jordan's Cabinet-approved criteria provide citizenship routes through qualifying securities, productive projects, business expansion or sustained job creation; several project routes require a three-year compliance period.",
+      "facts": {
+        "programme_type": "investor_citizenship",
+        "residence_required": false,
+        "discretionary_decision": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Jordanian Prime Ministry — Cabinet decisions of 15 July 2026",
+          "url": "https://www.pm.gov.jo/AR/NewsDetails/am0847"
+        }
+      ]
+    },
+    {
+      "id": "vanuatu-investor-citizenship",
+      "country": {
+        "iso_n3": "548",
+        "name": "Vanuatu"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Investor and contribution citizenship programmes",
+      "summary": "The Citizenship Commission lists investor citizenship, the Development Support Program, the Vanuatu Contribution Program and a real-estate option under the Citizenship Act framework.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Vanuatu Citizenship Commission — Types of Citizenship",
+          "url": "https://vancitizenship.gov.vu/index.php/citizenship/types-of-citizenship"
+        },
+        {
+          "title": "Vanuatu Citizenship Commission — Legislative Framework",
+          "url": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework"
+        }
+      ]
+    },
+    {
+      "id": "nauru-climate-resilience-citizenship",
+      "country": {
+        "iso_n3": "520",
+        "name": "Nauru"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Economic and Climate Resilience Citizenship Program",
+      "summary": "A statutory contribution programme administered by the Nauru Program Office to fund economic development and climate resilience.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_contribution",
+        "residence_required": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Government of Nauru — programme launch",
+          "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx"
+        },
+        {
+          "title": "Nauru Economic and Climate Resilience Citizenship Act 2024",
+          "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "sao-tome-principe-cbi",
+      "country": {
+        "iso_n3": "678",
+        "name": "São Tomé and Príncipe"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Citizenship by Investment Programme",
+      "summary": "A direct contribution route created under Decree-Law 07/2025 and promoted through the country's official consular network.",
+      "facts": {
+        "programme_type": "direct_citizenship_by_contribution",
+        "residence_required": false
+      },
+      "confidence": "medium",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Honorary Consulate of São Tomé and Príncipe — Citizenship by Investment",
+          "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/"
+        }
+      ]
+    },
+    {
+      "id": "portugal-ordinary-naturalization-2026",
+      "country": {
+        "iso_n3": "620",
+        "name": "Portugal"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Ordinary naturalization uses seven- or ten-year residence periods under the 2026 law",
+      "summary": "For applications made from 19 May 2026, the ordinary legal-residence period is seven years for nationals of Portuguese-speaking countries and EU Member States, and ten years for other nationals. Applications already pending when the law entered into force remain under the earlier rules. The Ministry of Justice notes that some practical implementation still requires supplementary regulation; eligibility is not an automatic grant.",
+      "facts": {
+        "ordinary_residence_years_cplp_eu": 7,
+        "ordinary_residence_years_other": 10,
+        "effective_from": "2026-05-19",
+        "pending_applications_old_law": true,
+        "automatic": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Portuguese Ministry of Justice — Nationality Law: new rules effective 19 May",
+          "url": "https://justica.gov.pt/Noticias/Lei-da-Nacionalidade-novas-regras-entram-em-vigor-a-19-de-maio"
+        },
+        {
+          "title": "Portuguese Ministry of Justice — Portuguese nationality",
+          "url": "https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa"
+        }
+      ]
+    },
+    {
+      "id": "portugal-birth-parent-residence-2026",
+      "country": {
+        "iso_n3": "620",
+        "name": "Portugal"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Birth in Portugal can qualify when a parent has five years of legal residence",
+      "summary": "The 2026 nationality-law changes provide a birth-in-Portugal route where, at the time of birth, one parent has legally resided in Portugal for at least five years. This is a conditional jus soli rule, not unconditional citizenship for every child born in Portugal; additional statutory conditions and implementation rules must be checked for an individual case.",
+      "facts": {
+        "parent_legal_residence_years": 5,
+        "effective_from": "2026-05-19",
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Portuguese Ministry of Justice — Nationality Law: new rules effective 19 May",
+          "url": "https://justica.gov.pt/Noticias/Lei-da-Nacionalidade-novas-regras-entram-em-vigor-a-19-de-maio"
+        }
+      ]
+    },
+    {
+      "id": "malta-residence-naturalization",
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Residence-based naturalization requires the final twelve months plus four of the preceding six years",
+      "summary": "An adult may apply after residing in Malta throughout the twelve months immediately before the application and for an aggregate of at least four years during the preceding six years. The applicant must also meet character and language requirements. Naturalization remains a ministerial, discretionary decision rather than an entitlement after five calendar years.",
+      "facts": {
+        "immediate_residence_months": 12,
+        "preceding_window_years": 6,
+        "aggregate_residence_years_in_window": 4,
+        "automatic": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Community Malta Agency — Acquisition of Citizenship",
+          "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "malta-registration-family-descent",
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Registration routes cover defined descent and family connections",
+      "summary": "Malta provides registration routes for specified family situations, including descendants in the direct line where the relevant line includes two consecutive ascendants born in Malta, and for certain second or subsequent generations born abroad. A foreign spouse of a Maltese citizen may also qualify for registration after five years of marriage, subject to the applicable conditions.",
+      "facts": {
+        "route_type": "registration",
+        "spouse_marriage_years": 5,
+        "automatic": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Community Malta Agency — Acquisition of Citizenship",
+          "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "malta-transactional-investor-citizenship-ended",
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
+      "mode": "investment",
+      "status": "inactive",
+      "title": "The former transactional investor-citizenship programme has ended",
+      "summary": "Malta discontinued the Granting of Citizenship for Exceptional Services programme following the Court of Justice of the European Union judgment. Current exceptional-merit naturalization is a discretionary route based on genuine exceptional service or contribution and residence; it should not be represented as a direct citizenship-by-investment product.",
+      "facts": {
+        "programme_type": "former_direct_investor_citizenship",
+        "ended_year": 2025,
+        "replacement_is_cbi": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Government of Malta — citizenship programme discontinued",
+          "url": "https://www.gov.mt/en/Government/DOI/Press%20Releases/Pages/2025/07/16/PR251293en.aspx"
+        },
+        {
+          "title": "Community Malta Agency — amendments to the Citizenship Act",
+          "url": "https://komunita.gov.mt/2025/09/02/amendments-to-the-maltese-citizenship-act-and-subsidiary-legislation/"
+        },
+        {
+          "title": "Community Malta Agency — naturalisation on the basis of merit",
+          "url": "https://komunita.gov.mt/wp-content/uploads/2026/02/Citizenship-by-Naturalisation-on-the-Basis-of-Merit.pdf"
+        }
+      ]
+    },
+    {
+      "id": "bulgaria-ordinary-naturalization",
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Ordinary naturalization generally requires five years holding permanent or long-term residence",
+      "summary": "Bulgaria's ordinary route generally requires an adult to have held permanent or long-term residence for at least five years, alongside criminal-record, income or occupation, Bulgarian-language and—unless an exception applies—prior-citizenship release requirements. This is five years after the qualifying residence status, not a promise of citizenship after five years of any lawful stay.",
+      "facts": {
+        "permanent_or_long_term_status_years": 5,
+        "language_required": true,
+        "renunciation_generally_required": true,
+        "automatic": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Bulgarian Ministry of Justice — Bulgarian Citizenship Act, article 12",
+          "url": "https://justice.government.bg/home/normdoc/2134446592"
+        },
+        {
+          "title": "Bulgarian Ministry of Justice — Bulgarian citizenship services",
+          "url": "https://justice.government.bg/home/index/dbg"
+        }
+      ]
+    },
+    {
+      "id": "bulgaria-bulgarian-origin-naturalization",
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Bulgarian-origin route can waive residence, income, language and renunciation conditions",
+      "summary": "A person of Bulgarian origin may apply under article 15 without the ordinary residence, income, language and release-of-prior-citizenship conditions. The applicant must establish the family relationship with at least one ancestor of Bulgarian origin, up to the third degree inclusive, using the required official documents.",
+      "facts": {
+        "maximum_ancestor_degree": 3,
+        "residence_required": false,
+        "language_required": false,
+        "renunciation_required": false,
+        "automatic": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Bulgarian Ministry of Justice — Bulgarian Citizenship Act, article 15",
+          "url": "https://justice.government.bg/home/normdoc/2134446592"
+        }
+      ]
+    },
+    {
+      "id": "bulgaria-investor-citizenship-repealed",
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
+      "mode": "investment",
+      "status": "inactive",
+      "title": "Investor-citizenship provisions were repealed in 2022",
+      "summary": "Bulgaria repealed the special investment-based citizenship provisions in 2022. Investment or property ownership should not be presented as a current direct route to Bulgarian citizenship; any residence obtained on another legal basis follows the applicable ordinary nationality rules.",
+      "facts": {
+        "programme_type": "former_investor_citizenship",
+        "repealed_year": 2022
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "National Assembly of Bulgaria — investment citizenship provisions repealed",
+          "url": "https://www.parliament.bg/en/news/ID/5424"
+        },
+        {
+          "title": "Bulgarian Ministry of Justice — Bulgarian Citizenship Act",
+          "url": "https://justice.government.bg/home/normdoc/2134446592"
+        }
+      ]
+    },
+    {
+      "id": "greece-ordinary-naturalization",
+      "country": {
+        "iso_n3": "300",
+        "name": "Greece"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Ordinary naturalization generally requires seven years of legal residence",
+      "summary": "Greece's ordinary naturalization route for non-co-ethnic foreign nationals generally uses seven years of legal residence, with distinct eligible residence categories and supporting documents. Applicants must also satisfy the applicable integration, language, civic-knowledge and character requirements; residence eligibility is not an automatic grant.",
+      "facts": {
+        "ordinary_residence_years": 7,
+        "automatic": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Hellenic Ministry of Interior — acquisition of Greek citizenship: supporting documents",
+          "url": "https://www.ypes.gr/en/acquisition-of-the-greek-citizenship-sup-doc/"
+        },
+        {
+          "title": "Hellenic Ministry of Interior — naturalization residence period",
+          "url": "https://www.ypes.gr/t-theodorikakos-epimenoyme-elliniki-ithageneia-sta-7-chronia-ochi-se-3-chronia/"
+        }
+      ]
+    },
+    {
+      "id": "greece-citizenship-by-greek-parent",
+      "country": {
+        "iso_n3": "300",
+        "name": "Greece"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship routes exist through a Greek parent and defined descent declarations",
+      "summary": "Greek nationality law provides acquisition and declaration procedures for people born to a Greek parent, with separate documentary routes depending on birth date, registration and the parents' marital or acknowledgment status. This record confirms the route family but does not collapse those distinct procedures into one universal checklist.",
+      "facts": {
+        "route_type": "parentage_and_descent",
+        "automatic": "depends_on_birth_and_registration_facts"
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Hellenic Ministry of Interior — acquisition of Greek citizenship: supporting documents",
+          "url": "https://www.ypes.gr/en/acquisition-of-the-greek-citizenship-sup-doc/"
+        }
+      ]
+    },
+    {
+      "id": "samoa-citizenship-investment-status",
+      "country": {
+        "iso_n3": "882",
+        "name": "Samoa"
+      },
+      "mode": "investment",
+      "status": "pending_verification",
+      "title": "Citizenship Investment Act exists; current programme operation needs verification",
+      "summary": "Samoa has a Citizenship Investment Act and was reviewing the programme framework in 2025, but current application operations and qualifying guidelines are not yet verified for live recommendations.",
+      "facts": {
+        "programme_type": "statutory_basis_only"
+      },
+      "confidence": "medium",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Government of Samoa — Citizenship Investment Act 2015",
+          "url": "https://www.ag.gov.ws/wp-content/uploads/2024/02/Citizenship-Investment-Act-2015.pdf"
+        },
+        {
+          "title": "Samoa Ministry of Commerce — 2025 policy framework workshop",
+          "url": "https://mcil.gov.ws/node/89"
+        }
+      ]
+    },
+    {
+      "id": "cambodia-investor-naturalization-status",
+      "country": {
+        "iso_n3": "116",
+        "name": "Cambodia"
+      },
+      "mode": "investment",
+      "status": "pending_verification",
+      "title": "Investor and donor naturalization exists in law; current operation needs verification",
+      "summary": "Cambodia's nationality law contains investment and donation provisions, but a current government-administered programme and operational requirements have not been verified for live recommendations.",
+      "facts": {
+        "programme_type": "statutory_investor_naturalization"
+      },
+      "confidence": "medium",
+      "last_checked": "2026-07-17",
+      "sources": [
+        {
+          "title": "Cambodia Committee for Investment and Development — Law on Nationality",
+          "url": "https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf"
+        }
+      ]
+    }
+  ]
+}
