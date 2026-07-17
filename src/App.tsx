@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Info, Menu, Moon, Sun } from 'lucide-react';
+import { Info, List, Map as MapIcon, Moon, Sun } from 'lucide-react';
 import type { AppState, BlocsData } from './types';
 import * as url from './url';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
@@ -65,6 +64,11 @@ export default function App() {
   const [data, setData] = useState<BlocsData | null>(null);
   const [profile, setProfile] = useState<Profile>(initialProfile);
   const [edges, setEdges] = useState<GraphEdge[] | null>(null);
+  // Portrait phones browse a LIST first; the map is on demand. Shared links
+  // with a selection land straight on the framed map.
+  const [mobileList, setMobileList] = useState<boolean>(
+    initialState.blocs.length === 0 && !initialState.lane && !initialState.country,
+  );
   const { theme, setTheme } = useTheme();
 
   const changeProfile = useCallback((next: Profile) => {
@@ -105,6 +109,7 @@ export default function App() {
 
   /** Toggle a bloc in the compare set; null clears the whole selection. */
   const toggleBloc = useCallback((id: string | null) => {
+    setMobileList(false);
     setState(s => ({
       ...s,
       view: 'map', // selecting from the sidebar always shows the map
@@ -116,8 +121,10 @@ export default function App() {
       countryName: null,
     }));
   }, []);
-  const selectLane = useCallback((id: string | null) =>
-    patch({ view: 'map', lane: id, blocs: [], country: null, countryName: null }), [patch]);
+  const selectLane = useCallback((id: string | null) => {
+    setMobileList(false);
+    patch({ view: 'map', lane: id, blocs: [], country: null, countryName: null });
+  }, [patch]);
   const selectView = useCallback((v: 'map' | 'stacking') =>
     patch({ view: v }), [patch]);
   const selectCountry = useCallback((iso: string, name: string) =>
@@ -135,24 +142,6 @@ export default function App() {
   return (
     <div className="flex h-screen flex-col overflow-hidden">
       <header className="flex shrink-0 items-center gap-3 border-b px-3 py-3 sm:px-5">
-        {data && (
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon-sm" className="md:hidden" aria-label="Open bloc list">
-                <Menu />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] p-0">
-              <SheetTitle className="sr-only">Blocs and lanes</SheetTitle>
-              <Sidebar
-                data={data}
-                state={state}
-                onBloc={toggleBloc}
-                onLane={selectLane}
-              />
-            </SheetContent>
-          </Sheet>
-        )}
         <div className="flex min-w-0 items-baseline gap-3">
           <h1 className="whitespace-nowrap text-[22px] font-bold tracking-[0.2px]">Settlement Blocs</h1>
           <span className="hidden truncate text-xs text-muted-foreground lg:inline">
@@ -230,6 +219,27 @@ export default function App() {
         )}
         <div id="map-wrap" className="relative min-w-0 flex-1 overflow-hidden">
           <WorldMap data={data} state={state} theme={theme} profile={profile} onSelect={selectCountry} />
+          {data && state.view === 'map' && mobileList && (
+            <div className="absolute inset-0 z-10 bg-background md:hidden">
+              <Sidebar
+                data={data}
+                state={state}
+                onBloc={toggleBloc}
+                onLane={selectLane}
+              />
+            </div>
+          )}
+          {data && state.view === 'map' && (
+            <Button
+              variant="secondary"
+              size="sm"
+              className="absolute bottom-4 left-1/2 z-20 -translate-x-1/2 shadow-lg md:hidden"
+              onClick={() => setMobileList(v => !v)}
+            >
+              {mobileList ? <MapIcon /> : <List />}
+              {mobileList ? 'Map' : 'List'}
+            </Button>
+          )}
           {data && state.view === 'stacking' && (
             <StackingView data={data} edges={edges} onBlocSelect={backToMapWithBloc} profile={profile} onProfileChange={changeProfile} />
           )}
