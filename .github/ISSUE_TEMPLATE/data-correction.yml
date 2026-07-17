@@ -1,0 +1,75 @@
+name: Data correction
+description: Report an inaccurate, outdated, or incomplete mobility claim.
+title: "[Data correction] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve the atlas. Do not include passport numbers, application files, private profile facts, or other sensitive personal information.
+  - type: input
+    id: context
+    attributes:
+      label: Country, route, or arrangement
+      description: Include the route or lane ID if the product supplied one.
+      placeholder: "Example: Spain Ibero-American naturalization — spain_iberoamerican"
+    validations:
+      required: true
+  - type: textarea
+    id: current_claim
+    attributes:
+      label: What does the product currently claim?
+      description: Quote or summarize the specific statement that needs review.
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: What should it say instead?
+      description: Explain the correction and when it became effective, if known.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Best supporting source
+      description: Prefer current legislation, an official government page, treaty text, or a court decision.
+      placeholder: "https://..."
+    validations:
+      required: true
+  - type: dropdown
+    id: source_type
+    attributes:
+      label: Source type
+      options:
+        - Legislation or treaty text
+        - Official government guidance
+        - Court or administrative decision
+        - Professional commentary
+        - First-hand experience
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: effective_date
+    attributes:
+      label: Publication or effective date
+      placeholder: "YYYY-MM-DD or unknown"
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: Separate personal experience from claims about the current rule.
+  - type: checkboxes
+    id: urgency
+    attributes:
+      label: Urgency
+      options:
+        - label: This claim could cause someone to make a consequential decision if left unchanged.
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have removed sensitive personal information and understand this report will be public.
+          required: true
+

@@ -1,0 +1,54 @@
+name: Product feedback
+description: Tell us what worked, what confused you, or what prevented you from finding a route.
+title: "[Feedback] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Keep this about the product experience. Use the data-correction form for inaccurate legal or mobility claims. Do not include private profile facts or identifying documents.
+  - type: textarea
+    id: goal
+    attributes:
+      label: What were you trying to do?
+      placeholder: "Example: understand whether the planner could find a route toward living in Spain"
+    validations:
+      required: true
+  - type: textarea
+    id: experience
+    attributes:
+      label: What happened?
+      description: Tell us what was clear, confusing, missing, or broken.
+    validations:
+      required: true
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Did you find a route worth investigating?
+      options:
+        - "Yes"
+        - "Partly"
+        - "No"
+        - "I did not reach the planner"
+    validations:
+      required: true
+  - type: dropdown
+    id: device
+    attributes:
+      label: Where were you using the product?
+      options:
+        - Desktop browser
+        - Mobile browser
+        - Tablet browser
+        - Other
+  - type: textarea
+    id: improvement
+    attributes:
+      label: What is the smallest change that would improve this?
+  - type: checkboxes
+    id: acknowledgement
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have removed sensitive profile facts and understand this feedback will be public.
+          required: true
+
