@@ -25,8 +25,12 @@ export function WorldMap({ data, state, theme, profile, onSelect }: Props) {
   useEffect(() => {
     if (!data || inited.current) return;
     inited.current = true;
-    initMap(data, (iso, name) => onSelectRef.current(iso, name));
+    const cleanup = initMap(data, (iso, name) => onSelectRef.current(iso, name));
     renderMap(state, data, profile);
+    return () => {
+      cleanup();
+      inited.current = false;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 

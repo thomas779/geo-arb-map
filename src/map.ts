@@ -66,8 +66,17 @@ let _tooltip: HTMLElement;
 let _isReady = false;
 let _pendingRender: (() => void) | null = null;
 let _lastFocus: string | null = null;
+let _resizeObserver: ResizeObserver | null = null;
+let _abortController: AbortController | null = null;
+let _initialized = false;
 
-export function init(data: BlocsData, onSelect: (iso: string, name: string) => void): void {
+export function init(
+  data: BlocsData,
+  onSelect: (iso: string, name: string) => void,
+): () => void {
+  if (_initialized) destroy();
+  _initialized = true;
+
   // Build iso → blocs index (current members only; former_members excluded from count)
   _byCountry = new Map();
   _formerByCountry = new Map();
@@ -132,11 +141,16 @@ export function init(data: BlocsData, onSelect: (iso: string, name: string) => v
       });
     updateDotPositions();
   }
-  window.addEventListener('resize', resize);
+  _resizeObserver = new ResizeObserver(resize);
+  _resizeObserver.observe(document.getElementById('map-wrap')!);
 
   // Fetch world atlas topology
+  _abortController = new AbortController();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  d3.json<any>('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
+  d3.json<any>(
+    'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json',
+    { signal: _abortController.signal },
+  )
     .then(world => {
       if (!world) return;
 
@@ -186,10 +200,29 @@ export function init(data: BlocsData, onSelect: (iso: string, name: string) => v
         _pendingRender = null;
       }
     })
-    .catch(() => {
+    .catch((error: unknown) => {
+      if (error instanceof DOMException && error.name === 'AbortError') return;
       const hint = document.getElementById('hint');
       if (hint) hint.textContent = 'Map unavailable — could not reach cdn.jsdelivr.net.';
     });
+
+  return destroy;
+}
+
+export function destroy(): void {
+  if (!_initialized) return;
+  _resizeObserver?.disconnect();
+  _resizeObserver = null;
+  _abortController?.abort();
+  _abortController = null;
+  _svg.on('.zoom', null);
+  _svg.selectAll('*').remove();
+  if (_tooltip) _tooltip.style.display = 'none';
+  _isReady = false;
+  _pendingRender = null;
+  _lastFocus = null;
+  _currentK = 1;
+  _initialized = false;
 }
 
 function updateDotPositions(): void {
@@ -393,8 +426,8 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   // Count overlay gets its own ramp per theme (light needs darker blues)
   const t = Math.min((count - 1) / 3, 1);
   return dark
-    ? d3.interpolateRgb('#33465C', '#6C93BF')(t)
-    : d3.interpolateRgb('#9FB4CE', '#2F5E9E')(t);
+    ? d3.interpolateRgb('#555C73', '#91A4FF')(t)
+    : d3.interpolateRgb('#AEB9D7', '#3552B8')(t);
 }
 
 function paintAll(state: AppState, data: BlocsData): void {

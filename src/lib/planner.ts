@@ -29,7 +29,18 @@ export interface Goal {
   intent: GoalIntent;
 }
 
+export type AlertChannel = 'none' | 'telegram';
+
+export interface AlertPreferences {
+  /** Delivery choice only; a real connection is established by the future alert service. */
+  channel: AlertChannel;
+  /** Legal-rule notifications are never sent before editorial verification. */
+  verifiedOnly: true;
+}
+
 export interface Profile {
+  /** Local persistence schema. Shared profile URLs intentionally omit private settings. */
+  version: 2;
   flags: PlantedFlag[];
   /** iso_n3 of country of birth — unlocks birth-based lanes (e.g. Falklands→Argentina) */
   birthplace: string | null;
@@ -41,12 +52,58 @@ export interface Profile {
   partnerCitizenships: string[];
   /** declared destinations: what you WANT, path-solved by the engine */
   goals: Goal[];
+  /** Stable goal keys (`intent:iso_n3`) selected for future rule-change monitoring. */
+  watchedRoutes: string[];
+  /** Private delivery preference; no contact handle is stored in the browser profile. */
+  alerts: AlertPreferences;
 }
 
 export const EMPTY_PROFILE: Profile = {
+  version: 2,
   flags: [], birthplace: null, ancestors: [], heritages: [],
   partnerCitizenships: [], goals: [],
+  watchedRoutes: [],
+  alerts: { channel: 'none', verifiedOnly: true },
 };
+
+export function goalKey(goal: Goal): string {
+  return `${goal.intent}:${goal.iso_n3}`;
+}
+
+/** Defensive localStorage/URL migration: older partial profiles become schema-v2 profiles. */
+export function normalizeProfile(raw: unknown): Profile {
+  if (!raw || typeof raw !== 'object') return { ...EMPTY_PROFILE, alerts: { ...EMPTY_PROFILE.alerts } };
+  const value = raw as Partial<Profile>;
+  const flags = Array.isArray(value.flags) ? value.flags : [];
+  const goals = Array.isArray(value.goals) ? value.goals : [];
+  const validGoalKeys = new Set(goals.map(goalKey));
+  const watchedRoutes = Array.isArray(value.watchedRoutes)
+    ? value.watchedRoutes.filter(key => typeof key === 'string' && validGoalKeys.has(key))
+    : [];
+  return {
+    version: 2,
+    flags,
+    birthplace: typeof value.birthplace === 'string' ? value.birthplace : null,
+    ancestors: Array.isArray(value.ancestors) ? value.ancestors : [],
+    heritages: Array.isArray(value.heritages) ? value.heritages : [],
+    partnerCitizenships: Array.isArray(value.partnerCitizenships) ? value.partnerCitizenships : [],
+    goals,
+    watchedRoutes: [...new Set(watchedRoutes)],
+    alerts: {
+      channel: value.alerts?.channel === 'telegram' ? 'telegram' : 'none',
+      verifiedOnly: true,
+    },
+  };
+}
+
+export function profileHasInput(profile: Profile): boolean {
+  return profile.flags.length > 0
+    || profile.birthplace !== null
+    || profile.ancestors.length > 0
+    || profile.heritages.length > 0
+    || profile.partnerCitizenships.length > 0
+    || profile.goals.length > 0;
+}
 
 /** Heritage claims that aren't captured by an ancestor's birthplace. */
 export const HERITAGE_OPTIONS: Array<{ laneId: string; label: string }> = [
@@ -85,6 +142,48 @@ export const DESCENT_YEARS: Record<string, number> = {
   russia_compatriot: 1.5,
 };
 
+export interface ConditionalNaturalizationRule {
+  laneId: string;
+  privilegedYears: number;
+  ordinaryYears: number;
+}
+
+/** Audited fast tracks whose duration depends on a citizenship held by the applicant. */
+export const CONDITIONAL_NATURALIZATION_RULES: Record<string, ConditionalNaturalizationRule> = {
+  '724': { laneId: 'spain_iberoamerican', privilegedYears: 2, ordinaryYears: 10 },
+};
+
+/**
+ * Audited corrections where prose contains several timelines or a conditional
+ * accelerator. The parser remains useful for discovery; these values are the
+ * safe general timelines used when no qualifying edge says otherwise.
+ */
+export const ACQUISITION_YEAR_OVERRIDES: Record<string, number> = {
+  '076': 4,  // Brazil: 1 year in the source is the Brazilian-child accelerator
+  '208': 9,  // Denmark (the shared Nordic sentence also contains Iceland's 7)
+  '246': 8,  // Finland
+  '578': 8,  // Norway
+  '604': 5,  // Peru: use the conservative pending-regulation timeline
+  '724': 10, // Spain: 2 years is nationality-conditioned
+  '752': 8,  // Sweden
+  '512': 20, // Oman (the shared GCC sentence starts with Bahrain's 25)
+};
+
+/** Active citizenship-by-investment programs and their acquisition estimates. */
+export const CBI_YEARS: Record<string, number> = {
+  '028': 1,
+  '212': 0.5,
+  '308': 1,
+  '659': 1,
+  '662': 1,
+};
+
+/** Parsed snippets that are not safe general naturalization edges. */
+const NON_GENERAL_ACQUISITION_ISOS = new Set([
+  '196', // Cyprus: the four-year route requires qualifying employment
+  '212', // Dominica: the parsed six-month duration is CBI, modeled separately
+]);
+
 export interface CountryOption {
   iso_n3: string;
   name: string;
@@ -117,8 +216,10 @@ export interface Recommendation {
   /** marginal countries per year (uses a conservative default when years unknown) */
   score: number;
   newBlocs: string[];
+  lostBlocs: string[];
+  lostCitizenships: string[];
   renouncesPrevious: boolean;
-  via: 'naturalization' | 'ancestry' | 'heritage';
+  via: 'naturalization' | 'cbi' | 'ancestry' | 'heritage';
 }
 
 const DEFAULT_YEARS = 6; // conservative assumption when no duration is parseable
@@ -212,6 +313,35 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
   return { blocs, asymmetric, lanes, workLanes, chanceLanes, ancestryLanes, birthHints, countries };
 }
 
+/** Additional jurisdictions available through a partner, without double-counting either spouse's flags. */
+export function householdExtraCountries(profile: Profile, data: BlocsData): number {
+  if (!profile.partnerCitizenships.length) return 0;
+  const partnerProfile: Profile = {
+    ...profile,
+    flags: profile.partnerCitizenships.map(iso => ({
+      iso_n3: iso,
+      name: iso,
+      status: 'cit' as const,
+    })),
+    partnerCitizenships: [],
+    goals: [],
+  };
+  const ours = new Set(computeUnlocks(profile, data).countries);
+  profile.flags
+    .filter(f => f.status === 'cit')
+    .forEach(f => ours.add(f.iso_n3));
+
+  const theirs = computeUnlocks(partnerProfile, data).countries;
+  const householdAdditions = new Set(theirs);
+  profile.partnerCitizenships.forEach(iso => householdAdditions.add(iso));
+
+  let extra = 0;
+  for (const iso of householdAdditions) {
+    if (!ours.has(iso)) extra++;
+  }
+  return extra;
+}
+
 /**
  * Best-effort acquisition durations parsed from the dataset's own text
  * ("Argentina: 2 yrs...", "Bolivia or Ecuador: 3 yrs", "6-12 months").
@@ -257,6 +387,10 @@ export function acquisitionYears(data: BlocsData): Map<string, number> {
       }
     }
   }
+  for (const [iso, value] of Object.entries(ACQUISITION_YEAR_OVERRIDES)) {
+    years.set(iso, value);
+  }
+  for (const iso of NON_GENERAL_ACQUISITION_ISOS) years.delete(iso);
   return years;
 }
 
@@ -272,6 +406,13 @@ export function recommend(
   const held = new Set(heldIsos);
   const durations = acquisitionYears(data);
   const bans = data.dual_citizenship?.countries ?? {};
+  const yearsForProfile = (iso: string): number | null => {
+    const conditional = CONDITIONAL_NATURALIZATION_RULES[iso];
+    if (!conditional) return durations.get(iso) ?? null;
+    const lane = data.bilateral_lanes.find(l => l.id === conditional.laneId);
+    const qualifies = lane?.beneficiaries.some(b => held.has(b.iso_n3)) ?? false;
+    return qualifies ? conditional.privilegedYears : conditional.ordinaryYears;
+  };
 
   const withCitizenship = (iso: string): Profile => ({
     ...profile,
@@ -279,7 +420,10 @@ export function recommend(
   });
   const onlyCitizenship = (iso: string): Profile => ({
     ...profile,
-    flags: [{ iso_n3: iso, name: iso, status: 'cit' }],
+    flags: [
+      ...profile.flags.filter(f => f.status !== 'cit'),
+      { iso_n3: iso, name: iso, status: 'cit' },
+    ],
   });
 
   const evaluate = (
@@ -300,6 +444,10 @@ export function recommend(
       iso_n3: iso, name, marginal, years,
       score: marginal / Math.max(years ?? DEFAULT_YEARS, 0.75),
       newBlocs: next.blocs.filter(b => !currentBlocIds.has(b.id)).map(b => b.name),
+      lostBlocs: current.blocs.filter(b => !next.blocs.some(n => n.id === b.id)).map(b => b.name),
+      lostCitizenships: renounces
+        ? profile.flags.filter(f => f.status === 'cit').map(f => f.name)
+        : [],
       renouncesPrevious: renounces,
       via,
     };
@@ -322,7 +470,13 @@ export function recommend(
   // Ordinary naturalization/CBI candidates.
   for (const opt of countryOptions(data)) {
     if (ancestryIsos.has(opt.iso_n3)) continue;
-    const r = evaluate(opt.iso_n3, opt.name, durations.get(opt.iso_n3) ?? null, 'naturalization');
+    const cbiYears = CBI_YEARS[opt.iso_n3];
+    const r = evaluate(
+      opt.iso_n3,
+      opt.name,
+      cbiYears ?? yearsForProfile(opt.iso_n3),
+      cbiYears === undefined ? 'naturalization' : 'cbi',
+    );
     if (r) recs.push(r);
   }
 

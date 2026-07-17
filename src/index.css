@@ -25,6 +25,8 @@
     --color-input: var(--input);
     --color-border: var(--border);
     --color-destructive: var(--destructive);
+    --color-verified-foreground: var(--verified-foreground);
+    --color-verified: var(--verified);
     --color-accent-foreground: var(--accent-foreground);
     --color-accent: var(--accent);
     --color-muted-foreground: var(--muted-foreground);
@@ -49,78 +51,88 @@
 }
 
 /*
- * Two themes, one identity. Dark is the native "ocean terminal" look
- * (:root defaults to light for shadcn convention; the app defaults to
- * dark via ThemeProvider). Light is a cool-paper counterpart — brand
- * amber darkened to #A87A16 so primary/ring hold contrast on paper.
+ * Flag Paths palette: mineral paper, carbon ink, registry ultramarine,
+ * field green for verification, and vermilion for risk. Light and dark are
+ * related palettes rather than simple inversions. The multi-colour data
+ * palette remains reserved for the map, where colour encodes a real series.
  */
 :root {
-    --background: #EEF2F7;
-    --foreground: #17202C;
-    --card: #FFFFFF;
-    --card-foreground: #17202C;
-    --popover: #FFFFFF;
-    --popover-foreground: #17202C;
-    --primary: #A87A16;
+    --background: #EFEDE7;
+    --foreground: #222321;
+    --card: #F9F7F1;
+    --card-foreground: #222321;
+    --popover: #F9F7F1;
+    --popover-foreground: #222321;
+    --primary: #3552B8;
     --primary-foreground: #FFFFFF;
-    --secondary: #DCE3EC;
-    --secondary-foreground: #17202C;
-    --muted: #E2E8F0;
-    --muted-foreground: #5A6B80;
-    --accent: #E6ECF3;
-    --accent-foreground: #17202C;
-    --destructive: #A93B32;
-    --border: #CBD5E1;
-    --input: #CBD5E1;
-    --ring: #A87A16;
-    --chart-1: #3B6FB5;
-    --chart-2: #2E9E6B;
-    --chart-3: #A87A16;
-    --chart-4: #B5443B;
-    --chart-5: #8E6BB5;
+    --secondary: #DEDFDA;
+    --secondary-foreground: #222321;
+    --muted: #E2E1DB;
+    --muted-foreground: #62645F;
+    --accent: #E1E5F2;
+    --accent-foreground: #222321;
+    --verified: #3F755E;
+    --verified-foreground: #FFFFFF;
+    --destructive: #B54834;
+    --border: #C9C9C1;
+    --input: #C2C3BB;
+    --ring: #3552B8;
+    --chart-1: #3552B8;
+    --chart-2: #2E8293;
+    --chart-3: #B27E27;
+    --chart-4: #B54834;
+    --chart-5: #7658A1;
+    --ambient-primary: rgba(53, 82, 184, 0.11);
+    --ambient-warm: rgba(181, 72, 52, 0.075);
+    --survey-line: rgba(34, 35, 33, 0.045);
     --radius: 0.5rem;
-    --sidebar: #EEF2F7;
-    --sidebar-foreground: #17202C;
-    --sidebar-primary: #A87A16;
+    --sidebar: #E6E5DF;
+    --sidebar-foreground: #222321;
+    --sidebar-primary: #3552B8;
     --sidebar-primary-foreground: #FFFFFF;
-    --sidebar-accent: #E6ECF3;
-    --sidebar-accent-foreground: #17202C;
-    --sidebar-border: #CBD5E1;
-    --sidebar-ring: #A87A16;
+    --sidebar-accent: #DCDDD7;
+    --sidebar-accent-foreground: #222321;
+    --sidebar-border: #C9C9C1;
+    --sidebar-ring: #3552B8;
 }
 
 .dark {
-    --background: #101823;
-    --foreground: #E8ECF1;
-    --card: #161F2B;
-    --card-foreground: #E8ECF1;
-    --popover: #161F2B;
-    --popover-foreground: #E8ECF1;
-    --primary: #F2C14E;
-    --primary-foreground: #101823;
-    --secondary: #223040;
-    --secondary-foreground: #E8ECF1;
-    --muted: #223040;
-    --muted-foreground: #93A1B3;
-    --accent: #1D2836;
-    --accent-foreground: #E8ECF1;
-    --destructive: #B5443B;
-    --border: #223040;
-    --input: #223040;
-    --ring: #F2C14E;
-    --chart-1: #3B6FB5;
-    --chart-2: #2E9E6B;
-    --chart-3: #E0A93E;
-    --chart-4: #B5443B;
-    --chart-5: #8E6BB5;
-    --sidebar: #101823;
-    --sidebar-foreground: #E8ECF1;
-    --sidebar-primary: #F2C14E;
-    --sidebar-primary-foreground: #101823;
-    --sidebar-accent: #161F2B;
-    --sidebar-accent-foreground: #E8ECF1;
-    --sidebar-border: #223040;
-    --sidebar-ring: #F2C14E;
+    --background: #191A18;
+    --foreground: #EEEAE1;
+    --card: #23241F;
+    --card-foreground: #EEEAE1;
+    --popover: #23241F;
+    --popover-foreground: #EEEAE1;
+    --primary: #91A4FF;
+    --primary-foreground: #151719;
+    --secondary: #2E302A;
+    --secondary-foreground: #EEEAE1;
+    --muted: #2B2D28;
+    --muted-foreground: #A8AAA3;
+    --accent: #2A2E3F;
+    --accent-foreground: #EEEAE1;
+    --verified: #7DB18F;
+    --verified-foreground: #132019;
+    --destructive: #F07A60;
+    --border: #3B3D36;
+    --input: #45483F;
+    --ring: #91A4FF;
+    --chart-1: #91A4FF;
+    --chart-2: #67B5C1;
+    --chart-3: #DFB45F;
+    --chart-4: #F07A60;
+    --chart-5: #B39BDB;
+    --ambient-primary: rgba(145, 164, 255, 0.12);
+    --ambient-warm: rgba(240, 122, 96, 0.07);
+    --survey-line: rgba(238, 234, 225, 0.035);
+    --sidebar: #1E201C;
+    --sidebar-foreground: #EEEAE1;
+    --sidebar-primary: #91A4FF;
+    --sidebar-primary-foreground: #151719;
+    --sidebar-accent: #2E302A;
+    --sidebar-accent-foreground: #EEEAE1;
+    --sidebar-border: #3B3D36;
+    --sidebar-ring: #91A4FF;
 }
 
 @layer base {
@@ -133,7 +145,38 @@
   html {
     @apply font-sans;
     }
-  h1, h2, h3 {
+  h1, h2 {
     font-family: var(--font-heading);
     }
+}
+
+/*
+ * One atmospheric gesture, derived from a surveyor's registration sheet.
+ * It lives behind the map and planner only; cards and controls stay quiet.
+ */
+.cartographic-surface {
+  background-color: var(--background);
+  background-image:
+    radial-gradient(circle at 86% 8%, var(--ambient-primary), transparent 30rem),
+    radial-gradient(circle at 8% 92%, var(--ambient-warm), transparent 34rem),
+    linear-gradient(var(--survey-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--survey-line) 1px, transparent 1px);
+  background-size: auto, auto, 72px 72px, 72px 72px;
+}
+
+@media (max-width: 767px) {
+  .cartographic-surface {
+    background-image:
+      radial-gradient(circle at 92% 5%, var(--ambient-primary), transparent 20rem),
+      radial-gradient(circle at 4% 96%, var(--ambient-warm), transparent 24rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

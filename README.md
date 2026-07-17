@@ -1,7 +1,6 @@
-# Settlement Blocs — Your Path to Global Citizenship
+# Flag Paths — Global Mobility Pathfinder
 
-**A free handbook for geo-arbitrageurs — the one consulting firms gate behind a
-"contact us" page.**
+**Find the citizenship and residence paths hidden in your profile.**
 
 Some passports and residencies quietly unlock whole regions: Mercosur residency
 opens most of South America; a child born in Mexico can one day work in the US
@@ -20,6 +19,23 @@ It's open data, open code, and built to be contributed to — corrections are
 welcome, and the test suite makes it impossible to silently reintroduce a
 mistake we've already fixed.
 
+## What public v1 is
+
+Flag Paths is a citizenship and immigration-residence pathfinder for
+individuals and households. A user can:
+
+- explore settlement blocs and mobility lanes without an account;
+- create a private, local profile from held statuses, relevant family facts, a
+  partner's citizenships, and a destination goal;
+- see personalized deterministic and chance-based routes kept clearly separate; and
+- watch a route locally as the foundation for reviewed change alerts.
+
+The product uses Flag Theory as a long-term worldview, but v1 does **not** model tax
+residence, company structures, banking, assets, or investments. The focused public
+launch plan is in [`docs/gtm-v1.md`](docs/gtm-v1.md); the staged Flag Theory direction
+and identity architecture are in
+[`docs/strategic-map.md`](docs/strategic-map.md).
+
 > ## ⚠️ Not legal advice
 >
 > **Everything here is informational only.** Immigration and nationality rules
@@ -32,8 +48,8 @@ mistake we've already fixed.
 
 React 19 + TypeScript + Vite 8, shadcn/ui + Tailwind v4 for the shell, D3 +
 world-atlas TopoJSON for the map (imperative layer wrapped in a thin React
-component). Bun for package management, tests, and scripts. No backend — the
-dataset ships as static JSON.
+component). Bun for package management, tests, and scripts. There is currently no
+backend: the dataset ships as static JSON and the profile stays in the user's browser.
 
 ## Where the data comes from
 
@@ -52,6 +68,11 @@ The dataset is **LLM-researched and human-curated**, not authoritative:
    `public/coverage.json` — an all-jurisdiction matrix of research coverage
    (`verified / verified_none / partial / unchecked`) so absence of evidence is
    never displayed as evidence of absence.
+5. `data/citizenship_routes.json` stores reviewed country-level rules across four
+   acquisition modes: ancestry, naturalization, birth, and investment.
+   `scripts/build_citizenship_routes.js` expands those records over all 239 registry
+   jurisdictions in `public/citizenship_routes.json`. Every mode is explicit:
+   `reviewed / partial / pending / unchecked`; “unchecked” never means no route exists.
 
 Known single-source items (several naturalization timelines) are flagged in the
 research docs and should be re-verified against primary law before being treated
@@ -78,19 +99,35 @@ bun run build      # tsc → bun test → vite build (what CI runs)
 bun scripts/normalize_research.js data/research_batches/<batch>.json
 bun scripts/build_registry.js     # regenerate data/registry.json
 bun scripts/build_coverage.js     # regenerate public/coverage.json
+bun run data:citizenship          # regenerate public/citizenship_routes.json
 ```
 
 ## Repository layout
 
 ```
-public/           blocs_data.json (the dataset), coverage.json
+public/           blocs_data.json, coverage.json, citizenship_routes.json
 src/              React shell (App, components/) + imperative D3 map layer (map.ts)
 src/components/ui shadcn/ui primitives (generated)
-data/             registry, manual edge overrides, raw research batches
-scripts/          normalizer + registry/coverage generators (bun)
+data/             registry, citizenship route sources, manual overrides, research batches
+scripts/          normalizer + registry/coverage/route generators (bun)
 tests/            dataset invariant + regression suite
 docs/             explorer-spec.md — locked design for the strategy explorer
 ```
+
+Product and launch documents:
+
+- [`docs/strategic-map.md`](docs/strategic-map.md) — long-term Flag Theory map,
+  expansion gates, and progressive identity decision.
+- [`docs/gtm-v1.md`](docs/gtm-v1.md) — v1 positioning, launch phases, metrics, and
+  release checklist.
+- [`docs/community-strategy.md`](docs/community-strategy.md) — small founding-community
+  pilot around real routes and reviewed knowledge.
+- [`docs/monitoring-architecture.md`](docs/monitoring-architecture.md) — source
+  monitoring, reviewed changes, account-backed watches, and alert delivery.
+- [`docs/data-architecture.md`](docs/data-architecture.md) — country nationality-law
+  files, cross-border arrangements, generated indexes, and source policy.
+- [`docs/explorer-spec.md`](docs/explorer-spec.md) — engine and explorer design
+  decisions.
 
 ## License
 

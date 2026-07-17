@@ -14,14 +14,21 @@
  *   - identity lanes:         conditional cit:dest edges gated by `needs`
  *                             (ancestor:ISO or heritage:<laneId>)
  *   - naturalization:         pr/settle_full/settle_partial:X → cit:X using
- *                             dataset-parsed years; renounces_previous set
- *                             from dual_citizenship
+ *                             dataset-parsed years, with audited ordinary +
+ *                             nationality-gated edges where the fastest track
+ *                             is conditional; renounces_previous set from
+ *                             dual_citizenship
  *   - child-birth events:     conditional edges gated by needs
  *                             ['willing_child_abroad'] (from manual_edges)
  */
 
 import fs from 'node:fs';
-import { acquisitionYears, DESCENT_YEARS } from '../src/lib/planner.ts';
+import {
+  acquisitionYears,
+  CBI_YEARS,
+  CONDITIONAL_NATURALIZATION_RULES,
+  DESCENT_YEARS,
+} from '../src/lib/planner.ts';
 
 export function buildEdges(data, manualEdges) {
   const edges = [];
@@ -71,19 +78,31 @@ export function buildEdges(data, manualEdges) {
 
   // ── Citizenship-by-investment: open to anyone (money-gated, a right) ──
   // Active OECS programs per the oecs bloc notes (SVG's is still planned).
-  for (const iso of ['028', '212', '308', '659', '662']) {
-    push({ from: '*', to: `cit:${iso}`, mechanism: 'cbi', years: 1 });
+  for (const [iso, years] of Object.entries(CBI_YEARS)) {
+    push({ from: '*', to: `cit:${iso}`, mechanism: 'cbi', years });
   }
 
   // ── Naturalization edges (dataset-parsed residence→citizenship years) ──
   const years = acquisitionYears(data);
   for (const [iso, y] of years) {
+    const conditioned = CONDITIONAL_NATURALIZATION_RULES[iso];
+    const ordinaryYears = conditioned?.ordinaryYears ?? y;
     for (const fromKind of ['pr', 'settle_full', 'settle_partial']) {
       push({
         from: `${fromKind}:${iso}`, to: `cit:${iso}`, mechanism: 'naturalization',
-        years: y, confidence: 'dataset-parsed',
+        years: ordinaryYears, confidence: conditioned ? 'audited-ordinary' : 'dataset-parsed',
         renounces_previous: renounces(iso) || undefined,
       });
+      if (conditioned) {
+        const lane = data.bilateral_lanes.find(l => l.id === conditioned.laneId);
+        if (!lane) throw new Error(`Missing conditional naturalization lane: ${conditioned.laneId}`);
+        push({
+          from: `${fromKind}:${iso}`, to: `cit:${iso}`, mechanism: 'naturalization',
+          years: conditioned.privilegedYears, confidence: 'audited-conditional',
+          needs: [`citizenship_any:${lane.beneficiaries.map(m => m.iso_n3).join(',')}`],
+          renounces_previous: renounces(iso) || undefined,
+        });
+      }
     }
   }
 

@@ -1,7 +1,19 @@
 import { describe, test, expect } from 'bun:test';
 import type { BlocsData } from '../src/types';
-import { EMPTY_PROFILE, type Profile } from '../src/lib/planner';
+import {
+  acquisitionYears,
+  EMPTY_PROFILE,
+  goalKey,
+  householdExtraCountries,
+  normalizeProfile,
+  profileHasInput,
+  recommend,
+  type Profile,
+} from '../src/lib/planner';
 import { shortestPaths, recommendPaths, type GraphEdge } from '../src/lib/pathfinder';
+import { paramsForState, readProfile } from '../src/url';
+import { clearStoredProfile, LEGACY_FLAGS_KEY, PROFILE_KEY } from '../src/lib/profile-storage';
+import { dataCorrectionUrl, sourceUrl } from '../src/lib/trust';
 // @ts-expect-error — plain-JS bun script, imported for its exported builder
 import { buildEdges } from '../scripts/build_edges.js';
 
@@ -14,11 +26,19 @@ const data = (await Bun.file(
   new URL('../public/blocs_data.json', import.meta.url),
 ).json()) as BlocsData;
 const manual = await Bun.file(new URL('../data/manual_edges.json', import.meta.url)).json();
-const edges: GraphEdge[] = buildEdges(data, manual).edges;
+const generatedEdges = buildEdges(data, manual);
+const edges: GraphEdge[] = generatedEdges.edges;
+const committedEdges = await Bun.file(
+  new URL('../public/edges.json', import.meta.url),
+).json();
 
 const profileOf = (over: Partial<Profile>): Profile => ({ ...EMPTY_PROFILE, ...over });
 const citizen = (iso: string, name = iso) =>
   profileOf({ flags: [{ iso_n3: iso, name, status: 'cit' }] });
+
+test('public/edges.json is current with its builder inputs', () => {
+  expect(committedEdges).toEqual(generatedEdges);
+});
 
 describe('explorer-spec acceptance tests', () => {
   test('(a) US citizen, no conditional facts: TN never chains into settlement', () => {
@@ -103,6 +123,65 @@ describe('explorer-spec acceptance tests', () => {
     const nlRec = recs.find(r => r.iso_n3 === '528');
     expect(nlRec && nlRec.marginal).toBeGreaterThan(25); // EU-wide gain
   });
+
+  test('nationality-conditioned timelines do not leak onto unrelated paths', () => {
+    const us = citizen('840', 'United States');
+    const spain = shortestPaths(us, edges).get('cit:724');
+    expect(spain).toBeDefined();
+    expect(spain!.years).toBe(15); // DAFT 5 + ordinary Spanish naturalization 10
+
+    const uruguay = shortestPaths(citizen('858', 'Uruguay'), edges).get('cit:724');
+    expect(uruguay?.years).toBe(2); // Ibero-American fast track remains available
+
+    expect(recommend(us, data, 200).find(r => r.iso_n3 === '724')?.years).toBe(10);
+    expect(recommend(citizen('858'), data, 200).find(r => r.iso_n3 === '724')?.years).toBe(2);
+  });
+
+  test('event accelerators do not become general naturalization timelines', () => {
+    const emptyWithGoal = profileOf({ goals: [{ iso_n3: '724', intent: 'cit' }] });
+    expect(recommend(emptyWithGoal, data, 200).find(r => r.iso_n3 === '076')?.years).toBe(4);
+    expect(recommend(emptyWithGoal, data, 200).find(r => r.iso_n3 === '212')).toMatchObject({
+      years: 0.5,
+      via: 'cbi',
+    });
+    for (const edge of edges.filter(e =>
+      e.mechanism === 'naturalization' && e.to === 'cit:076')) {
+      expect(edge.years).toBe(4);
+    }
+    expect(edges.some(e => e.mechanism === 'naturalization' && e.to === 'cit:212')).toBe(false);
+    expect(edges.find(e => e.mechanism === 'cbi' && e.to === 'cit:212')?.years).toBe(0.5);
+
+    const durations = acquisitionYears(data);
+    expect(durations.has('196')).toBe(false); // conditional Cyprus employment route
+    expect(durations.get('604')).toBe(5); // conservative pending Peru timeline
+  });
+
+  test('multi-hop recommendations retain citizenships acquired along the path', () => {
+    const angola = citizen('024', 'Angola');
+    const spain = shortestPaths(angola, edges).get('cit:724');
+    expect(spain?.citizenships).toEqual(['024', '076', '724']);
+    expect(spain?.years).toBe(6);
+
+    const rec = recommendPaths(angola, data, edges, 50).find(r => r.iso_n3 === '724');
+    expect(rec?.marginal).toBe(41);
+    expect(rec?.newBlocs).toContain('Mercosur Residence Agreement');
+  });
+
+  test('hop-bounded search keeps a slower path when it has enough hops left', () => {
+    const edge = (from: string, to: string, years: number): GraphEdge => ({
+      from, to, years, mechanism: `${from}>${to}`,
+      allocation: 'right', confidence: 'high', needs: [],
+    });
+    const synthetic = [
+      edge('cit:001', 'a', 0),
+      edge('a', 'b', 0),
+      edge('b', 'x', 0),
+      edge('cit:001', 'x', 1),
+      edge('x', 'y', 0),
+      edge('y', 'cit:999', 0),
+    ];
+    expect(shortestPaths(citizen('001'), synthetic).get('cit:999')?.years).toBe(1);
+  });
 });
 
 describe('goal solving', () => {
@@ -126,5 +205,116 @@ describe('goal solving', () => {
     });
     const [answer] = solveGoals(p, data, edges);
     expect(answer.reached === null || !answer.reached.startsWith('work:')).toBe(true);
+  });
+
+  test('an existing PR satisfies a LIVE goal immediately', async () => {
+    const { solveGoals } = await import('../src/lib/pathfinder');
+    const p = profileOf({
+      flags: [{ iso_n3: '840', name: 'United States', status: 'pr' }],
+      goals: [{ iso_n3: '840', intent: 'live' }],
+    });
+    const [answer] = solveGoals(p, data, edges);
+    expect(answer.best?.years).toBe(0);
+    expect(answer.reached).toBe('pr:840');
+  });
+
+  test('renunciation answers enumerate the citizenship lost', async () => {
+    const { solveGoals } = await import('../src/lib/pathfinder');
+    const p = profileOf({
+      flags: [{ iso_n3: '840', name: 'United States', status: 'cit' }],
+      heritages: ['kazakhstan_qandas'],
+      goals: [{ iso_n3: '398', intent: 'cit' }],
+    });
+    const [answer] = solveGoals(p, data, edges);
+    expect(answer.best?.renounces).toBe(true);
+    expect(answer.best?.lostCitizenships).toEqual(['840']);
+  });
+});
+
+describe('profile and URL regressions', () => {
+  test('legacy stored profiles migrate to private schema-v2 defaults', () => {
+    expect(normalizeProfile({
+      flags: [{ iso_n3: '840', name: 'United States', status: 'cit' }],
+      goals: [{ iso_n3: '724', intent: 'live' }],
+    })).toMatchObject({
+      version: 2,
+      watchedRoutes: [],
+      alerts: { channel: 'none', verifiedOnly: true },
+    });
+  });
+
+  test('watched routes are stable, deduplicated, and limited to existing goals', () => {
+    const goal = { iso_n3: '724', intent: 'live' as const };
+    expect(goalKey(goal)).toBe('live:724');
+    const migrated = normalizeProfile({
+      goals: [goal],
+      watchedRoutes: ['live:724', 'live:724', 'work:840'],
+      alerts: { channel: 'telegram', verifiedOnly: false },
+    });
+    expect(migrated.watchedRoutes).toEqual(['live:724']);
+    expect(migrated.alerts).toEqual({ channel: 'telegram', verifiedOnly: true });
+  });
+
+  test('a goal by itself counts as planner input', () => {
+    expect(profileHasInput(profileOf({
+      goals: [{ iso_n3: '724', intent: 'live' }],
+    }))).toBe(true);
+  });
+
+  test('a shared partner citizenship adds no duplicate household country', () => {
+    const p = profileOf({
+      flags: [{ iso_n3: '840', name: 'United States', status: 'cit' }],
+      partnerCitizenships: ['840'],
+    });
+    expect(householdExtraCountries(p, data)).toBe(0);
+  });
+
+  test('partner-only and goals-only profile URLs are recognized', () => {
+    expect(readProfile(new URLSearchParams('partner=840'))?.partnerCitizenships).toEqual(['840']);
+    expect(readProfile(new URLSearchParams('goals=724l'))?.goals).toEqual([
+      { iso_n3: '724', intent: 'live' },
+    ]);
+  });
+
+  test('map URL synchronization strips private profile parameters but preserves public tooling state', () => {
+    const params = paramsForState(
+      new URLSearchParams('flags=840c&born=344&partner=724&theme=light&info=privacy&bloc=legacy'),
+      {
+        view: 'stacking',
+        blocs: ['eu_eea'],
+        lane: null,
+        country: null,
+        countryName: null,
+      },
+    );
+    expect(params.get('flags')).toBeNull();
+    expect(params.get('born')).toBeNull();
+    expect(params.get('partner')).toBeNull();
+    expect(params.get('theme')).toBe('light');
+    expect(params.get('info')).toBe('privacy');
+    expect(params.get('bloc')).toBeNull();
+    expect(params.get('blocs')).toBe('eu_eea');
+  });
+
+  test('clearing a profile removes both current and legacy browser records', () => {
+    const removed: string[] = [];
+    clearStoredProfile({ removeItem: key => removed.push(key) });
+    expect(removed).toEqual([PROFILE_KEY, LEGACY_FLAGS_KEY]);
+  });
+
+  test('correction links contain public route context but no profile facts', () => {
+    const correction = new URL(dataCorrectionUrl('Spain route', 'goal:live:724'));
+    expect(correction.hostname).toBe('github.com');
+    expect(correction.searchParams.get('template')).toBe('data-correction.yml');
+    expect(correction.searchParams.get('title')).toContain('goal:live:724');
+    expect(correction.toString()).not.toContain('partner=');
+    expect(correction.toString()).not.toContain('flags=');
+  });
+
+  test('source labels become links only when they contain a domain', () => {
+    expect(sourceUrl('US State Dept: travel.state.gov/content/travel/en/us-visas')).toBe(
+      'https://travel.state.gov/content/travel/en/us-visas',
+    );
+    expect(sourceUrl('Brazil Ministry of Justice naturalization materials')).toBeNull();
   });
 });

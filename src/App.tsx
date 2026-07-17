@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Info, List, Map as MapIcon, Moon, Sun } from 'lucide-react';
-import type { AppState, BlocsData } from './types';
+import { List, Map as MapIcon, Moon, ShieldCheck, Sun } from 'lucide-react';
+import type { AppState, BlocsData, CitizenshipRoutesData } from './types';
 import * as url from './url';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -9,48 +9,29 @@ import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { StackingView } from '@/components/StackingView';
+import { TrustCenter } from '@/components/TrustCenter';
 import { useTheme } from '@/components/theme-provider';
-import { EMPTY_PROFILE, type FlagStatus, type PlantedFlag, type Profile } from '@/lib/planner';
+import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
 import type { EdgesFile, GraphEdge } from '@/lib/pathfinder';
-
-const PROFILE_KEY = 'geo-arb-profile';
-const LEGACY_FLAGS_KEY = 'geo-arb-flags';
-
-const URL_STATUS: Record<string, FlagStatus> = { t: 'tr', p: 'pr', c: 'cit', d: 'diaspora', r: 'pr' };
+import { clearStoredProfile, LEGACY_FLAGS_KEY, PROFILE_KEY } from '@/lib/profile-storage';
+import type { TrustSection } from './url';
 
 function initialProfile(): Profile {
   // Tooling/demo override: ?flags=372c,840p,356d&born=344&ancestors=380,616&heritage=israel_law_of_return
-  const params = new URLSearchParams(window.location.search);
-  const fromUrl = params.get('flags') ?? params.get('born') ?? params.get('ancestors') ?? params.get('heritage');
-  if (fromUrl !== null) {
-    const flags: PlantedFlag[] = (params.get('flags') ?? '').split(',').filter(Boolean).map(tok => {
-      const suffix = tok.slice(-1);
-      const status = URL_STATUS[suffix] ?? 'cit';
-      const iso = (URL_STATUS[suffix] ? tok.slice(0, -1) : tok).padStart(3, '0');
-      return { iso_n3: iso, name: iso, status };
-    });
-    return {
-      flags,
-      birthplace: params.get('born')?.padStart(3, '0') ?? null,
-      ancestors: (params.get('ancestors') ?? '').split(',').filter(Boolean).map(a => a.padStart(3, '0')),
-      heritages: (params.get('heritage') ?? '').split(',').filter(Boolean),
-      partnerCitizenships: (params.get('partner') ?? '').split(',').filter(Boolean).map(a => a.padStart(3, '0')),
-      // ?goals=840w,724l,372c  (w=work, l=live, c=citizenship)
-      goals: (params.get('goals') ?? '').split(',').filter(Boolean).map(tok => ({
-        iso_n3: tok.slice(0, -1).padStart(3, '0'),
-        intent: ({ w: 'work', l: 'live', c: 'cit' } as const)[tok.slice(-1) as 'w' | 'l' | 'c'] ?? 'live',
-      })),
-    };
-  }
+  const fromUrl = import.meta.env.DEV ? url.readProfile() : null;
+  if (fromUrl) return normalizeProfile(fromUrl);
   try {
     const stored = localStorage.getItem(PROFILE_KEY);
-    if (stored) return { ...EMPTY_PROFILE, ...JSON.parse(stored) };
+    if (stored) return normalizeProfile(JSON.parse(stored));
     // Migrate v1 (flat flag array with citizen/resident statuses)
     const legacy = localStorage.getItem(LEGACY_FLAGS_KEY);
     if (legacy) {
       const flags = (JSON.parse(legacy) as Array<{ iso_n3: string; name: string; status: string }>)
-        .map(f => ({ ...f, status: (f.status === 'citizen' ? 'cit' : f.status === 'resident' ? 'pr' : f.status) as FlagStatus }));
-      return { ...EMPTY_PROFILE, flags };
+        .map(f => ({
+          ...f,
+          status: (f.status === 'citizen' ? 'cit' : f.status === 'resident' ? 'pr' : f.status) as Profile['flags'][number]['status'],
+        }));
+      return normalizeProfile({ flags });
     }
   } catch { /* fall through */ }
   return EMPTY_PROFILE;
@@ -70,6 +51,8 @@ export default function App() {
   const [data, setData] = useState<BlocsData | null>(null);
   const [profile, setProfile] = useState<Profile>(initialProfile);
   const [edges, setEdges] = useState<GraphEdge[] | null>(null);
+  const [citizenshipRoutes, setCitizenshipRoutes] = useState<CitizenshipRoutesData | null>(null);
+  const [infoSection, setInfoSection] = useState<TrustSection | null>(() => url.readInfo());
   // Portrait phones browse a LIST first; the map is on demand. Shared links
   // with a selection land straight on the framed map.
   const [mobileList, setMobileList] = useState<boolean>(
@@ -78,8 +61,21 @@ export default function App() {
   const { theme, setTheme } = useTheme();
 
   const changeProfile = useCallback((next: Profile) => {
-    localStorage.setItem(PROFILE_KEY, JSON.stringify(next));
-    setProfile(next);
+    url.clearProfileParams();
+    const normalized = normalizeProfile(next);
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(normalized));
+    setProfile(normalized);
+  }, []);
+
+  const changeInfo = useCallback((section: TrustSection | null) => {
+    url.setInfo(section);
+    setInfoSection(section);
+  }, []);
+
+  const clearProfile = useCallback(() => {
+    clearStoredProfile(localStorage);
+    url.clearProfileParams();
+    setProfile(EMPTY_PROFILE);
   }, []);
 
   useEffect(() => {
@@ -103,6 +99,10 @@ export default function App() {
       .then(res => res.json())
       .then((e: EdgesFile) => setEdges(e.edges))
       .catch(err => console.error('Failed to load edges.json:', err));
+    fetch(import.meta.env.BASE_URL + 'citizenship_routes.json')
+      .then(res => res.json())
+      .then((routes: CitizenshipRoutesData) => setCitizenshipRoutes(routes))
+      .catch(err => console.error('Failed to load citizenship_routes.json:', err));
   }, []);
 
   useEffect(() => {
@@ -146,12 +146,14 @@ export default function App() {
   }, [patch]);
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden">
-      <header className="flex shrink-0 items-center gap-3 border-b px-3 py-3 sm:px-5">
+    <div className="flex h-dvh flex-col overflow-hidden">
+      <header className="flex shrink-0 items-center gap-1.5 border-b bg-card/80 px-2.5 py-2 backdrop-blur-sm sm:gap-3 sm:px-5 sm:py-3">
         <div className="flex min-w-0 items-baseline gap-3">
-          <h1 className="whitespace-nowrap text-[22px] font-bold tracking-[0.2px]">Settlement Blocs</h1>
+          <h1 className="whitespace-nowrap text-xl font-bold tracking-tight sm:text-2xl">
+            Flag Paths
+          </h1>
           <span className="hidden truncate text-xs text-muted-foreground lg:inline">
-            Your Path to Global Citizenship
+            Your Path to Global Mobility
           </span>
         </div>
         <nav aria-label="View" className="flex shrink-0 overflow-hidden rounded-md border">
@@ -161,8 +163,8 @@ export default function App() {
               aria-current={state.view === v ? 'page' : undefined}
               className={
                 state.view === v
-                  ? 'bg-secondary px-3 py-1.5 text-[12px] font-semibold text-secondary-foreground'
-                  : 'px-3 py-1.5 text-[12px] font-medium text-muted-foreground hover:bg-accent hover:text-foreground'
+                  ? 'min-h-9 bg-secondary px-2 text-xs font-semibold text-secondary-foreground sm:min-h-0 sm:px-3 sm:py-1.5'
+                  : 'min-h-9 px-2 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground sm:min-h-0 sm:px-3 sm:py-1.5'
               }
               onClick={() => selectView(v)}
             >
@@ -175,7 +177,7 @@ export default function App() {
             <>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Badge variant="outline" className="hidden cursor-help text-[10px] text-muted-foreground sm:inline-flex">
+                  <Badge variant="outline" className="hidden cursor-help text-xs text-muted-foreground sm:inline-flex">
                     TR · PR · CIT
                   </Badge>
                 </TooltipTrigger>
@@ -187,24 +189,22 @@ export default function App() {
                   </div>
                 </TooltipContent>
               </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Badge variant="outline" className="cursor-help gap-1 text-[10px] text-muted-foreground">
-                    <Info className="size-3" aria-hidden />
-                    <span className="hidden sm:inline">Research atlas — not legal advice</span>
-                    <span className="sm:hidden">Not legal advice</span>
-                  </Badge>
-                </TooltipTrigger>
-                <TooltipContent side="bottom" className="max-w-[300px] text-xs">
-                  {data.meta.disclaimer}
-                </TooltipContent>
-              </Tooltip>
+              <Button
+                variant="outline"
+                size="sm"
+                className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-7 sm:w-auto sm:px-2"
+                aria-label="Open trust and data"
+                onClick={() => changeInfo('methodology')}
+              >
+                <ShieldCheck className="size-3" aria-hidden />
+                <span className="hidden sm:inline">Trust &amp; data</span>
+              </Button>
             </>
           )}
           <Button
             variant="ghost"
             size="icon-sm"
-            className="text-muted-foreground"
+            className="hidden text-muted-foreground min-[360px]:inline-flex min-[360px]:size-9 sm:size-7"
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           >
@@ -223,7 +223,7 @@ export default function App() {
             />
           </div>
         )}
-        <div id="map-wrap" className="relative min-w-0 flex-1 overflow-hidden">
+        <div id="map-wrap" className="cartographic-surface relative min-w-0 flex-1 overflow-hidden">
           <WorldMap data={data} state={state} theme={theme} profile={profile} onSelect={selectCountry} />
           {data && state.view === 'map' && mobileList && (
             <div className="absolute inset-0 z-10 bg-background md:hidden">
@@ -239,7 +239,7 @@ export default function App() {
             <Button
               variant="secondary"
               size="sm"
-              className="absolute bottom-4 left-1/2 z-20 -translate-x-1/2 shadow-lg md:hidden"
+              className="absolute bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 z-20 min-h-11 -translate-x-1/2 gap-2 px-4 shadow-lg md:hidden"
               onClick={() => setMobileList(v => !v)}
             >
               {mobileList ? <MapIcon /> : <List />}
@@ -247,29 +247,57 @@ export default function App() {
             </Button>
           )}
           {data && state.view === 'stacking' && (
-            <StackingView data={data} edges={edges} onBlocSelect={backToMapWithBloc} profile={profile} onProfileChange={changeProfile} />
+            <StackingView
+              data={data}
+              edges={edges}
+              citizenshipRoutes={citizenshipRoutes}
+              onBlocSelect={backToMapWithBloc}
+              profile={profile}
+              onProfileChange={changeProfile}
+              onOpenPrivacy={() => changeInfo('privacy')}
+            />
           )}
           {data && (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <button
-                  className="absolute right-3 bottom-3 z-10 flex size-5 cursor-help items-center justify-center"
-                  aria-label={`Dataset verified ${data.meta.last_verified}`}
-                >
-                  <span className="absolute size-2.5 rounded-full bg-emerald-500/40 motion-safe:animate-ping" />
-                  <span className="relative size-2 rounded-full bg-emerald-500" />
-                </button>
-              </TooltipTrigger>
-              <TooltipContent side="left" className="text-xs">
-                Dataset verified {data.meta.last_verified}
-              </TooltipContent>
-            </Tooltip>
+            <button
+              className="absolute right-3 bottom-3 z-10 hidden rounded-full border bg-background/90 px-2.5 py-1 font-mono text-xs text-muted-foreground shadow-sm backdrop-blur-sm hover:text-foreground sm:block"
+              aria-label={`Dataset reviewed through ${data.meta.last_verified}. Open methodology.`}
+              onClick={() => changeInfo('methodology')}
+            >
+              reviewed&nbsp;·&nbsp;{data.meta.last_verified}
+            </button>
           )}
         </div>
         {data && state.country && (
-          <DetailPanel data={data} state={state} onClose={closeDetail} />
+          <DetailPanel
+            data={data}
+            citizenshipRoutes={citizenshipRoutes}
+            state={state}
+            onClose={closeDetail}
+          />
         )}
       </main>
+      {data && (
+        <TrustCenter
+          open={infoSection !== null}
+          section={infoSection ?? 'methodology'}
+          lastReviewed={data.meta.last_verified}
+          hasProfile={
+            profile.flags.length > 0
+            || profile.birthplace !== null
+            || profile.ancestors.length > 0
+            || profile.heritages.length > 0
+            || profile.partnerCitizenships.length > 0
+            || profile.goals.length > 0
+            || profile.watchedRoutes.length > 0
+            || profile.alerts.channel !== 'none'
+          }
+          onOpenChange={open => {
+            if (!open) changeInfo(null);
+          }}
+          onSectionChange={changeInfo}
+          onClearProfile={clearProfile}
+        />
+      )}
     </div>
   );
 }
