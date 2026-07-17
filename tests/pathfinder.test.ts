@@ -104,3 +104,27 @@ describe('explorer-spec acceptance tests', () => {
     expect(nlRec && nlRec.marginal).toBeGreaterThan(25); // EU-wide gain
   });
 });
+
+describe('goal solving', () => {
+  test('non-US citizen wanting to WORK in the US gets a lane answer, not a shrug', async () => {
+    const { solveGoals } = await import('../src/lib/pathfinder');
+    const p = profileOf({
+      flags: [{ iso_n3: '124', name: 'Canada', status: 'cit' }],
+      goals: [{ iso_n3: '840', intent: 'work' }],
+    });
+    const [answer] = solveGoals(p, data, edges);
+    expect(answer.best).not.toBeNull();
+    expect(answer.reached).toBe('work:840');
+    expect(answer.best!.steps.some(s => s.mechanism === 'tn_usmca' || s.mechanism === 'e2')).toBe(true);
+  });
+
+  test('a LIVE goal never accepts a work-only terminal', async () => {
+    const { solveGoals } = await import('../src/lib/pathfinder');
+    const p = profileOf({
+      flags: [{ iso_n3: '124', name: 'Canada', status: 'cit' }],
+      goals: [{ iso_n3: '840', intent: 'live' }],
+    });
+    const [answer] = solveGoals(p, data, edges);
+    expect(answer.reached === null || !answer.reached.startsWith('work:')).toBe(true);
+  });
+});

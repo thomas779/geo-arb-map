@@ -69,6 +69,12 @@ export function buildEdges(data, manualEdges) {
     }
   }
 
+  // ── Citizenship-by-investment: open to anyone (money-gated, a right) ──
+  // Active OECS programs per the oecs bloc notes (SVG's is still planned).
+  for (const iso of ['028', '212', '308', '659', '662']) {
+    push({ from: '*', to: `cit:${iso}`, mechanism: 'cbi', years: 1 });
+  }
+
   // ── Naturalization edges (dataset-parsed residence→citizenship years) ──
   const years = acquisitionYears(data);
   for (const [iso, y] of years) {

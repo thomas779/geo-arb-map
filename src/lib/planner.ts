@@ -22,6 +22,13 @@ export interface PlantedFlag {
   status: FlagStatus;
 }
 
+export type GoalIntent = 'live' | 'work' | 'cit';
+
+export interface Goal {
+  iso_n3: string;
+  intent: GoalIntent;
+}
+
 export interface Profile {
   flags: PlantedFlag[];
   /** iso_n3 of country of birth — unlocks birth-based lanes (e.g. Falklands→Argentina) */
@@ -30,9 +37,16 @@ export interface Profile {
   ancestors: string[];
   /** self-attested heritage claims, keyed by lane id (Law of Return, Spätaussiedler...) */
   heritages: string[];
+  /** partner's citizenships — household footprint derives from either spouse */
+  partnerCitizenships: string[];
+  /** declared destinations: what you WANT, path-solved by the engine */
+  goals: Goal[];
 }
 
-export const EMPTY_PROFILE: Profile = { flags: [], birthplace: null, ancestors: [], heritages: [] };
+export const EMPTY_PROFILE: Profile = {
+  flags: [], birthplace: null, ancestors: [], heritages: [],
+  partnerCitizenships: [], goals: [],
+};
 
 /** Heritage claims that aren't captured by an ancestor's birthplace. */
 export const HERITAGE_OPTIONS: Array<{ laneId: string; label: string }> = [

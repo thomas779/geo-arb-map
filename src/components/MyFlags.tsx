@@ -1,11 +1,11 @@
 import { useMemo, useRef, useState } from 'react';
-import { Baby, Flag, MapPin, X } from 'lucide-react';
+import { Baby, Flag, Heart, MapPin, Target, X } from 'lucide-react';
 import type { BlocsData } from '../types';
 import {
   computeUnlocks, countryOptions, recommend, HERITAGE_OPTIONS,
-  type CountryOption, type FlagStatus, type Profile,
+  type CountryOption, type FlagStatus, type GoalIntent, type Profile,
 } from '@/lib/planner';
-import { describePath, recommendPaths, type GraphEdge, type PathRec } from '@/lib/pathfinder';
+import { describePath, recommendPaths, solveGoals, type GraphEdge, type PathRec } from '@/lib/pathfinder';
 import { Badge } from '@/components/ui/badge';
 import {
   Card, CardContent, CardDescription, CardHeader, CardTitle,
@@ -107,6 +107,7 @@ function ChipButton({ onRemove, label, children }: {
 export function MyFlags({ data, edges, profile, onChange }: Props) {
   const dark = useTheme().theme === 'dark';
   const [status, setStatus] = useState<FlagStatus>('cit');
+  const [goalIntent, setGoalIntent] = useState<GoalIntent>('live');
 
   const options = useMemo(() => countryOptions(data), [data]);
   const heldIsos = new Set(profile.flags.map(f => f.iso_n3));
@@ -118,20 +119,47 @@ export function MyFlags({ data, edges, profile, onChange }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [profileKey, data],
   );
-  const hasInput = profile.flags.length > 0 || profile.birthplace || profile.ancestors.length > 0 || profile.heritages.length > 0;
+  const hasInput = profile.flags.length > 0 || profile.birthplace || profile.ancestors.length > 0 || profile.heritages.length > 0 || profile.partnerCitizenships.length > 0;
   const recs = useMemo(() => {
     if (!hasInput) return [];
-    // Multi-hop pathfinder once the graph is loaded; single-hop fallback until then
-    if (edges) {
-      return recommendPaths(profile, data, edges, 5).map(r => ({
-        ...r,
-        plan: describePath(r.steps, data),
-      }));
+    // Multi-hop pathfinder + single-hop candidates (which assume ordinary
+    // relocation), deduped by destination keeping the better score.
+    const single = recommend(profile, data, 10).map(r => ({ ...r, plan: null as string | null, hops: 1 }));
+    if (!edges) return single.slice(0, 5);
+    const multi = recommendPaths(profile, data, edges, 10).map(r => ({
+      ...r,
+      plan: describePath(r.steps, data),
+    }));
+    const byIso = new Map<string, (typeof multi)[number] | (typeof single)[number]>();
+    for (const r of [...multi, ...single]) {
+      const prev = byIso.get(r.iso_n3);
+      if (!prev || r.score > prev.score) byIso.set(r.iso_n3, r);
     }
-    return recommend(profile, data, 5).map(r => ({ ...r, plan: null as string | null, hops: 1 }));
+    return [...byIso.values()].sort((a, b) => b.score - a.score || b.marginal - a.marginal).slice(0, 5);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profileKey, data, edges]);
   const [top, ...rest] = recs;
+
+  const goalAnswers = useMemo(
+    () => (edges && profile.goals.length ? solveGoals(profile, data, edges) : []),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [profileKey, data, edges],
+  );
+  const partnerExtra = useMemo(() => {
+    if (!profile.partnerCitizenships.length) return 0;
+    const partnerProfile: Profile = {
+      ...profile,
+      flags: profile.partnerCitizenships.map(iso => ({ iso_n3: iso, name: iso, status: 'cit' as const })),
+      partnerCitizenships: [], goals: [],
+    };
+    const theirs = computeUnlocks(partnerProfile, data);
+    const ours = new Set(unlocked.countries);
+    let extra = 0;
+    for (const c of theirs.countries) if (!ours.has(c)) extra++;
+    for (const iso of profile.partnerCitizenships) if (!ours.has(iso)) extra++;
+    return extra;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profileKey, data]);
 
   const viaLabel = (via: PathRec['via'] | 'naturalization' | 'ancestry' | 'heritage') =>
     via === 'ancestry' ? 'via ancestry' : via === 'heritage' ? 'via heritage claim' : null;
@@ -237,6 +265,70 @@ export function MyFlags({ data, edges, profile, onChange }: Props) {
             </div>
           </div>
 
+          <div>
+            <FieldLabel htmlFor="partner-picker">Partner's citizenships</FieldLabel>
+            <div className="flex flex-wrap items-center gap-1.5">
+              {profile.partnerCitizenships.map(iso => (
+                <ChipButton
+                  key={iso}
+                  label={`Remove ${nameOf(iso)}`}
+                  onRemove={() => onChange({ ...profile, partnerCitizenships: profile.partnerCitizenships.filter(a => a !== iso) })}
+                >
+                  <Heart className="size-3 text-muted-foreground" />
+                  {nameOf(iso)}
+                </ChipButton>
+              ))}
+              <CountryPicker
+                id="partner-picker"
+                options={options}
+                exclude={new Set(profile.partnerCitizenships)}
+                placeholder="Partner's country…"
+                onPick={o => onChange({ ...profile, partnerCitizenships: [...profile.partnerCitizenships, o.iso_n3] })}
+              />
+            </div>
+          </div>
+
+          <div>
+            <FieldLabel htmlFor="goal-picker">Goals — where do you want to live or work?</FieldLabel>
+            <div className="flex flex-wrap items-center gap-1.5">
+              {profile.goals.map(g => (
+                <ChipButton
+                  key={`${g.iso_n3}-${g.intent}`}
+                  label={`Remove goal ${nameOf(g.iso_n3)}`}
+                  onRemove={() => onChange({ ...profile, goals: profile.goals.filter(x => !(x.iso_n3 === g.iso_n3 && x.intent === g.intent)) })}
+                >
+                  <Target className="size-3 text-primary" />
+                  {g.intent === 'work' ? 'Work in' : g.intent === 'cit' ? 'Citizenship of' : 'Live in'} {nameOf(g.iso_n3)}
+                </ChipButton>
+              ))}
+            </div>
+            <div className="mt-1.5 flex flex-wrap items-center gap-2">
+              <CountryPicker
+                id="goal-picker"
+                options={options}
+                exclude={new Set(profile.goals.map(g => g.iso_n3))}
+                placeholder="Add a destination…"
+                onPick={o => onChange({ ...profile, goals: [...profile.goals, { iso_n3: o.iso_n3, intent: goalIntent }] })}
+              />
+              <div className="flex overflow-hidden rounded-md border" role="radiogroup" aria-label="Goal type">
+                {(['live', 'work', 'cit'] as GoalIntent[]).map(i => (
+                  <button
+                    key={i}
+                    role="radio"
+                    aria-checked={goalIntent === i}
+                    className={cn(
+                      'px-2 py-1.5 text-[11px] font-medium capitalize',
+                      goalIntent === i ? 'bg-secondary text-secondary-foreground' : 'text-muted-foreground hover:bg-accent',
+                    )}
+                    onClick={() => setGoalIntent(i)}
+                  >
+                    {i === 'cit' ? 'Citizenship' : i}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
           <Accordion type="single" collapsible>
             <AccordionItem value="heritage" className="border-b-0">
               <AccordionTrigger className="py-1 text-[11px] font-medium text-muted-foreground hover:no-underline">
@@ -328,6 +420,13 @@ export function MyFlags({ data, edges, profile, onChange }: Props) {
                     )}
                   </>
                 )}
+                {partnerExtra > 0 && (
+                  <p className="text-[11px] text-muted-foreground">
+                    <Heart className="mr-1 inline size-3" aria-hidden />
+                    Household: your partner's citizenship adds <b className="text-foreground">+{partnerExtra}</b> more
+                    countries the family can typically derive residence in.
+                  </p>
+                )}
                 {(unlocked.workLanes.length > 0 || unlocked.chanceLanes.length > 0) && (
                   <p className="text-[10.5px] text-muted-foreground">
                     Not counted: {[
@@ -338,6 +437,56 @@ export function MyFlags({ data, edges, profile, onChange }: Props) {
                 )}
               </CardContent>
             </Card>
+
+            {goalAnswers.length > 0 && (
+              <Card className="gap-3 py-5">
+                <CardHeader className="px-5">
+                  <CardTitle className="font-sans text-sm">Your goals</CardTitle>
+                  <CardDescription className="text-xs">What you want, path-solved from what you have</CardDescription>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-2 px-5">
+                  {goalAnswers.map(a => (
+                    <div key={`${a.goal.iso_n3}-${a.goal.intent}`} className="rounded-md border px-3 py-2.5 text-[13px]">
+                      <div className="flex flex-wrap items-baseline gap-2">
+                        <Target className="size-3.5 self-center text-primary" aria-hidden />
+                        <span className="font-medium">
+                          {a.goal.intent === 'work' ? 'Work in' : a.goal.intent === 'cit' ? 'Citizenship of' : 'Live in'} {nameOf(a.goal.iso_n3)}
+                        </span>
+                        {a.best && (
+                          <span className="ml-auto text-xs text-muted-foreground">
+                            {a.best.years === 0 ? 'unlocked today' : `~${a.best.years} yrs`}
+                          </span>
+                        )}
+                      </div>
+                      {a.best ? (
+                        a.best.steps.length > 0 ? (
+                          <p className="mt-0.5 pl-5 text-[11.5px] text-muted-foreground">
+                            {describePath(a.best.steps, data)}
+                            {a.reached?.startsWith('work:') && ' — work access (not settlement)'}
+                            {a.best.renounces && ' · ⚠ requires renouncing'}
+                          </p>
+                        ) : (
+                          <p className="mt-0.5 pl-5 text-[11.5px] text-muted-foreground">
+                            Already covered by a citizenship you hold.
+                          </p>
+                        )
+                      ) : (
+                        <p className="mt-0.5 pl-5 text-[11.5px] text-muted-foreground">
+                          No deterministic path with your current facts
+                          {a.chance.length > 0 && <> — chance-based: {a.chance.join(', ')}</>}
+                          {a.viaPartner && <> — but your partner's citizenship covers it (family derivation)</>}.
+                        </p>
+                      )}
+                      {a.best && a.viaPartner && (
+                        <p className="mt-0.5 pl-5 text-[11px] text-muted-foreground">
+                          Also coverable via your partner (family derivation).
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            )}
 
             <Card className="gap-3 py-5">
               <CardHeader className="px-5">

@@ -34,6 +34,12 @@ function initialProfile(): Profile {
       birthplace: params.get('born')?.padStart(3, '0') ?? null,
       ancestors: (params.get('ancestors') ?? '').split(',').filter(Boolean).map(a => a.padStart(3, '0')),
       heritages: (params.get('heritage') ?? '').split(',').filter(Boolean),
+      partnerCitizenships: (params.get('partner') ?? '').split(',').filter(Boolean).map(a => a.padStart(3, '0')),
+      // ?goals=840w,724l,372c  (w=work, l=live, c=citizenship)
+      goals: (params.get('goals') ?? '').split(',').filter(Boolean).map(tok => ({
+        iso_n3: tok.slice(0, -1).padStart(3, '0'),
+        intent: ({ w: 'work', l: 'live', c: 'cit' } as const)[tok.slice(-1) as 'w' | 'l' | 'c'] ?? 'live',
+      })),
     };
   }
   try {

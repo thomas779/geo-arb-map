@@ -1,5 +1,5 @@
 import type { BlocsData } from '../types';
-import { computeUnlocks, type Profile } from './planner';
+import { computeUnlocks, type Goal, type Profile } from './planner';
 
 /**
  * Multi-hop pathfinder over the status graph (public/edges.json), per
@@ -178,10 +178,81 @@ export function recommendPaths(
   return recs.slice(0, limit);
 }
 
+export interface GoalAnswer {
+  goal: Goal;
+  /** best deterministic path (null = no path with current facts) */
+  best: { years: number; steps: PathStep[]; renounces: boolean } | null;
+  /** the terminal node the best path reaches (work:.. vs settle.. vs cit:..) */
+  reached: string | null;
+  /** chance-based lanes toward this goal (ballot/quota/discretionary) */
+  chance: string[];
+  /** true when the partner's citizenships already cover the goal */
+  viaPartner: boolean;
+}
+
+/** Which graph nodes satisfy an intent, in preference order. */
+function goalNodes(goal: Goal): string[] {
+  const iso = goal.iso_n3;
+  if (goal.intent === 'cit') return [`cit:${iso}`];
+  if (goal.intent === 'work') return [`cit:${iso}`, `settle_full:${iso}`, `settle_partial:${iso}`, `work:${iso}`];
+  return [`cit:${iso}`, `settle_full:${iso}`, `settle_partial:${iso}`]; // live
+}
+
+/**
+ * Solve declared goals: cheapest deterministic path per goal, plus
+ * chance-based options and partner coverage. Work goals treat work:* nodes
+ * as legitimate answers — the one context where work-only lanes are wins.
+ */
+export function solveGoals(
+  profile: Profile,
+  data: BlocsData,
+  edges: GraphEdge[],
+): GoalAnswer[] {
+  if (!profile.goals.length) return [];
+  const paths = shortestPaths(profile, edges);
+  const held = new Set(profile.flags.filter(f => f.status === 'cit').map(f => f.iso_n3));
+
+  const partnerProfile: Profile = {
+    ...profile,
+    flags: profile.partnerCitizenships.map(iso => ({ iso_n3: iso, name: iso, status: 'cit' as const })),
+    goals: [], partnerCitizenships: [],
+  };
+  const partnerCountries = profile.partnerCitizenships.length
+    ? (() => { const u = computeUnlocks(partnerProfile, data); const s = new Set(u.countries); profile.partnerCitizenships.forEach(i => s.add(i)); return s; })()
+    : new Set<string>();
+
+  return profile.goals.map(goal => {
+    let best: GoalAnswer['best'] = null;
+    let reached: string | null = null;
+    if (held.has(goal.iso_n3)) {
+      best = { years: 0, steps: [], renounces: false };
+      reached = `cit:${goal.iso_n3}`;
+    } else {
+      for (const node of goalNodes(goal)) {
+        const p = paths.get(node);
+        if (p && (best === null || p.years < best.years)) {
+          best = { years: p.years, steps: p.steps, renounces: p.renounces };
+          reached = node;
+        }
+      }
+    }
+    const chance = data.bilateral_lanes
+      .filter(l => l.destination.iso_n3 === goal.iso_n3
+        && (l.allocation ?? 'right') !== 'right'
+        && l.beneficiaries.some(b => held.has(b.iso_n3)))
+      .map(l => l.name);
+    return {
+      goal, best, reached, chance,
+      viaPartner: partnerCountries.has(goal.iso_n3),
+    };
+  });
+}
+
 /** Human-readable one-line plan: "Mercosur residency → naturalize (~2 yrs)" */
 export function describePath(steps: PathStep[], data: BlocsData): string {
   const mechName = (id: string): string => {
     if (id === 'naturalization') return 'naturalize';
+    if (id === 'cbi') return 'citizenship by investment (~$200-250K)';
     return data.blocs.find(b => b.id === id)?.name
       ?? data.bilateral_lanes.find(l => l.id === id)?.name
       ?? id;
