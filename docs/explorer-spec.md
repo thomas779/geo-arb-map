@@ -3,8 +3,9 @@
 Status: **engine SHIPPED (2026-07-17): `scripts/build_edges.js` → `public/edges.json`,
 `src/lib/pathfinder.ts` (multi-source Dijkstra, needs-gating, allocation filtering),
 acceptance tests in `tests/pathfinder.test.ts` — all green. The planner's Next moves
-now uses multi-hop paths. Still open: dedicated explorer page, coverage page,
-money/presence lexicographic dimensions (currently years-only + hops tiebreak).**
+now uses multi-hop paths with retained-citizenship and renunciation history.
+Still open: dedicated explorer page, coverage page, money/presence lexicographic
+dimensions (currently years-only + hops tiebreak).**
 This file records decisions locked on 2026-07-16 (from batch-3 external research review
 plus owner rulings) so the feature lands cleanly when requested. Concepts win over
 naming: where the research doc's field names differ from the repo's, the repo's win.
@@ -92,9 +93,10 @@ CAN+Mercosur must not double-count). Count `settle_full` and `settle_partial` se
 ## Pathfinder (when built)
 
 Legal logic (which edges exist for THIS user) separated from graph logic (ranking).
-Multi-source Dijkstra from active citizenships, weight fn returns None for ineligible
-edges; max 3 hops. Ranking is lexicographic — years, then money, then physical
-presence — via two passes, not a single compressed scalar.
+Multi-source Dijkstra from active citizenships carries the citizenship set through
+each state so later nationality-gated edges and renunciation are evaluated correctly;
+max 4 edges. Ranking is currently years then hops; money and physical presence remain
+future lexicographic dimensions.
 
 ## Build order (locked)
 
@@ -103,11 +105,14 @@ presence — via two passes, not a single compressed scalar.
 (all done 2026-07-17) → 6. explorer page → 7. coverage page → 8. map-panel
 indicators + Greater China card renderer.
 
-Known v1 approximation (flag before explorer page ships): naturalization edges use
-each country's FASTEST documented track, which may be nationality-conditional —
-e.g. Spain's 2-yr Ibero-American years apply to a Karta-Polaka Pole's chain where
-the ordinary 10-yr track would be correct. Fix: nationality-conditioned
-naturalization edges (needs: ['nationality_group:ibero_american']).
+Nationality-conditioned naturalization is represented as a general ordinary edge
+plus a faster edge gated by `citizenship_any:<ISO,...>`. Spain therefore uses the
+ordinary 10-year track unless the path's retained citizenship set contains an
+audited Ibero-American beneficiary. Add future conditional timelines to
+`CONDITIONAL_NATURALIZATION_RULES` in `src/lib/planner.ts`.
+Text-derived general timelines pass through `ACQUISITION_YEAR_OVERRIDES`; event
+accelerators and CBI durations are modeled separately, and conditional snippets
+without a user-checkable fact do not generate deterministic naturalization edges.
 
 ## Acceptance tests (implement as real tests before shipping the explorer)
 
