@@ -3,8 +3,8 @@
     "description": "Research-coverage matrix over the canonical registry (M49-style sovereigns + territory supplement): which jurisdictions have been checked for privileged settlement arrangements. States: verified | verified_none | partial | unchecked.",
     "last_updated": "2026-07-16",
     "counts": {
-      "unchecked": 46,
-      "partial": 190,
+      "unchecked": 45,
+      "partial": 191,
       "verified_none": 3
     }
   },
@@ -1476,8 +1476,9 @@
       "iso_n3": "663",
       "name": "St-Martin",
       "type": "territory",
-      "state": "unchecked",
-      "last_checked": null
+      "state": "partial",
+      "last_checked": "2026-07-16",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party)."
     },
     {
       "iso_n3": "666",
@@ -1694,7 +1695,7 @@
       "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "Tajikistan: Russia recruitment lane is temporary-only; the 1995 dual-citizenship treaty is recorded under dual_citizenship.",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Tajikistan: Russia recruitment lane is temporary-only; the 1995 dual-citizenship treaty is recorded under dual_citizenship.",
       "sources": [
         "Publication Pravo 2020 agreement",
         "1995 dual-citizenship treaty"
@@ -1902,7 +1903,7 @@
       "type": "sovereign",
       "state": "partial",
       "last_checked": "2026-07-16",
-      "note": "Uzbekistan: Russia recruitment lane (2017) is temporary-labor only - out of settlement scope.",
+      "note": "Appears in blocs_data.json (bloc member and/or lane party). Uzbekistan: Russia recruitment lane (2017) is temporary-labor only - out of settlement scope.",
       "sources": [
         "Publication Pravo 2017 agreement"
       ]

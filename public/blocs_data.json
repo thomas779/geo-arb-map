@@ -202,6 +202,10 @@
         {
           "name": "Switzerland",
           "iso_n3": "756"
+        },
+        {
+          "name": "Saint-Martin (France)",
+          "iso_n3": "663"
         }
       ],
       "rights": {
@@ -210,7 +214,7 @@
         "CIT": "Full right to live, work, study, and access healthcare/social security in every member state. Strongest bloc in the world."
       },
       "fastest_entry": "Cyprus ~4 yrs (B1 Greek + qualifying employment); standard 5 yrs in FR/BE/NL/IE/LU. Portugal now 10 yrs, Sweden/Finland 8.",
-      "notes": "Switzerland linked via EU-Swiss free movement agreement rather than EEA membership."
+      "notes": "Switzerland linked via EU-Swiss free movement agreement rather than EEA membership. French Outermost Regions are EU territory: Guadeloupe, Martinique, French Guiana, Reunion, and Mayotte render inside the France shape; Saint-Martin has its own map feature and is listed explicitly. St-Barthelemy left the EU in 2012 (now an OCT), and the Dutch Caribbean (Aruba/Curacao/Sint Maarten) are OCTs outside the EU - their people are EU citizens via Dutch nationality, but EU law does not apply there."
     },
     {
       "id": "mercosur",
@@ -1020,7 +1024,7 @@
         "CIT": "All Kingdom citizens hold DUTCH (EU) nationality: Caribbean-to-European-Netherlands direction is fully open (right of abode). Naturalizing in Curacao/Aruba/Sint Maarten yields the same Dutch/EU passport."
       },
       "fastest_entry": "Naturalize in any Kingdom country (5 yrs) -> Dutch nationality -> EU/EEA + the whole Kingdom. Caribbean naturalization is a real EU-passport door.",
-      "notes": "Asymmetric but softer than the UK-BOT model: right of abode in the Caribbean countries is limited to those with a connection to the region, yet admission for other Dutch nationals is near-automatic with mild conditions.",
+      "notes": "Asymmetric but softer than the UK-BOT model: right of abode in the Caribbean countries is limited to those with a connection to the region, yet admission for other Dutch nationals is near-automatic with mild conditions. Note: Aruba, Curacao, and Sint Maarten are EU 'Overseas Countries & Territories' - OUTSIDE the EU (no EU law, no Schengen), even though their citizens hold EU citizenship via Dutch nationality. The French half of the island (Saint-Martin) IS in the EU as an Outermost Region.",
       "color": "#AE6395"
     },
     {
@@ -1188,7 +1192,7 @@
     {
       "id": "h1b1",
       "name": "H-1B1 (Chile & Singapore)",
-      "color": "#A07A0C",
+      "color": "#A07A0B",
       "destination": {
         "name": "United States of America",
         "iso_n3": "840"
@@ -1540,7 +1544,7 @@
     {
       "id": "spain_iberoamerican",
       "name": "Spain 2-year naturalization (Ibero-American)",
-      "color": "#A87514",
+      "color": "#A77613",
       "destination": {
         "name": "Spain",
         "iso_n3": "724"
@@ -1615,7 +1619,7 @@
     {
       "id": "uk_yms_expanded",
       "name": "UK Youth Mobility (expanded AU/CA/NZ tier)",
-      "color": "#C58B39",
+      "color": "#C48C38",
       "destination": {
         "name": "United Kingdom",
         "iso_n3": "826"
@@ -1656,7 +1660,7 @@
     {
       "id": "falklands_argentina",
       "name": "Argentina citizenship claim (Falklands-born)",
-      "color": "#AF711F",
+      "color": "#AE711D",
       "destination": {
         "name": "Argentina",
         "iso_n3": "032"
@@ -1675,7 +1679,7 @@
     {
       "id": "daft",
       "name": "Dutch-American Friendship Treaty (DAFT)",
-      "color": "#CC8741",
+      "color": "#CB8740",
       "destination": {
         "name": "Netherlands",
         "iso_n3": "528"
@@ -1693,7 +1697,7 @@
     {
       "id": "panama_friendly_nations",
       "name": "Panama Friendly Nations Visa",
-      "color": "#B46C2B",
+      "color": "#B36D29",
       "destination": {
         "name": "Panama",
         "iso_n3": "591"
@@ -1911,9 +1915,49 @@
       ]
     },
     {
+      "id": "russia_cis_patent",
+      "name": "Russia CIS work-patent regime",
+      "color": "#D08349",
+      "destination": {
+        "name": "Russia",
+        "iso_n3": "643"
+      },
+      "beneficiaries": [
+        {
+          "name": "Uzbekistan",
+          "iso_n3": "860"
+        },
+        {
+          "name": "Tajikistan",
+          "iso_n3": "762"
+        },
+        {
+          "name": "Azerbaijan",
+          "iso_n3": "031"
+        },
+        {
+          "name": "Moldova",
+          "iso_n3": "498"
+        },
+        {
+          "name": "Ukraine",
+          "iso_n3": "804"
+        }
+      ],
+      "grants": "Visa-free CIS nationals outside the EAEU: enter Russia without a visa and work via a 'patent' (monthly tax prepayment, 1-12 months, renewable without leaving) - no quota, no employer sponsorship. EAEU citizens (Armenia/Belarus/Kazakhstan/Kyrgyzstan) need no patent at all - that's the EAEU bloc.",
+      "limits": "Work access only - the patent confers no residence-to-settlement progression by itself. Regional patents restrict where you may work. Ukraine's inclusion is war-era volatile; verify current practice before relying on it.",
+      "leads_to_settlement": false,
+      "allocation": "right",
+      "confidence": "high",
+      "volatility": "high",
+      "sources": [
+        "Russian GUVM work-patent rules for visa-free CIS nationals"
+      ]
+    },
+    {
       "id": "australia_pev",
       "name": "Australia Pacific Engagement Visa",
-      "color": "#D1834B",
+      "color": "#B76935",
       "destination": {
         "name": "Australia",
         "iso_n3": "036"
@@ -1973,7 +2017,7 @@
     {
       "id": "nz_samoan_quota",
       "name": "NZ Samoan Quota",
-      "color": "#B86838",
+      "color": "#D48053",
       "destination": {
         "name": "New Zealand",
         "iso_n3": "554"
@@ -1997,7 +2041,7 @@
     {
       "id": "nz_pacific_access",
       "name": "NZ Pacific Access Category",
-      "color": "#D57F56",
+      "color": "#BA6641",
       "destination": {
         "name": "New Zealand",
         "iso_n3": "554"
@@ -2033,7 +2077,7 @@
     {
       "id": "nz_realm",
       "name": "NZ Realm citizenship (Cook Is/Niue/Tokelau)",
-      "color": "#BB6545",
+      "color": "#D77D5F",
       "destination": {
         "name": "New Zealand",
         "iso_n3": "554"
@@ -2065,7 +2109,7 @@
     {
       "id": "france_algeria",
       "name": "France-Algeria 1968 Accord",
-      "color": "#D77C62",
+      "color": "#BC634D",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -2089,7 +2133,7 @@
     {
       "id": "monaco_france",
       "name": "Monaco-France free establishment",
-      "color": "#BD6251",
+      "color": "#D87A6A",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -2113,7 +2157,7 @@
     {
       "id": "japan_epa_careworkers",
       "name": "Japan EPA nurse/careworker lanes",
-      "color": "#D87A6F",
+      "color": "#BD6159",
       "destination": {
         "name": "Japan",
         "iso_n3": "392"
@@ -2147,7 +2191,7 @@
     {
       "id": "france_morocco",
       "name": "France-Morocco 1987 Accord",
-      "color": "#BD605E",
+      "color": "#D87876",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -2171,7 +2215,7 @@
     {
       "id": "france_tunisia",
       "name": "France-Tunisia 1988 Accord",
-      "color": "#D8787B",
+      "color": "#BD6065",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -2196,7 +2240,7 @@
     {
       "id": "france_senegal",
       "name": "France-Senegal conventions package",
-      "color": "#BC5F6A",
+      "color": "#D77782",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -2221,7 +2265,7 @@
     {
       "id": "france_gabon",
       "name": "France-Gabon conventions package",
-      "color": "#D77788",
+      "color": "#BC5F71",
       "destination": {
         "name": "France",
         "iso_n3": "250"
@@ -2246,7 +2290,7 @@
     {
       "id": "andorra_conventions",
       "name": "Andorra mobility conventions (ES/FR/PT)",
-      "color": "#BA5F76",
+      "color": "#D5778E",
       "destination": {
         "name": "Andorra",
         "iso_n3": "020"
