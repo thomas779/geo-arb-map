@@ -1,4 +1,4 @@
-import timelineRulesJson from '../../public/timeline_rules.json';
+import timelineRulesJson from '../data/timeline_rules.generated.json';
 import type { BlocsData } from '../types';
 
 export type TimelineConfidence = 'high' | 'medium' | 'legacy';

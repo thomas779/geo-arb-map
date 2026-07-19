@@ -60,7 +60,7 @@ const timelineRules = await Bun.file(
 };
 
 const compiledTimelineRules = await Bun.file(
-  new URL('../public/timeline_rules.json', import.meta.url),
+  new URL('../src/data/timeline_rules.generated.json', import.meta.url),
 ).json();
 
 const curatedCitizenshipRoutes = await Bun.file(

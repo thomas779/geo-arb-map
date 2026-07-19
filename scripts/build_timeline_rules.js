@@ -5,6 +5,8 @@
  * Reviewed durations remain references to numeric facts in
  * data/citizenship_routes.json. The generated public file resolves those
  * references so browser code does not bundle the full research corpus.
+ * The generated module lives under src/ because Vite intentionally forbids
+ * importing application data from public/ during development.
  */
 
 import fs from 'node:fs';
@@ -64,9 +66,9 @@ if (import.meta.main) {
   const source = JSON.parse(fs.readFileSync('data/timeline_rules.json', 'utf8'));
   const citizenshipRoutes = JSON.parse(fs.readFileSync('data/citizenship_routes.json', 'utf8'));
   const output = buildTimelineRules(source, citizenshipRoutes);
-  fs.writeFileSync('public/timeline_rules.json', `${JSON.stringify(output, null, 2)}\n`);
+  fs.writeFileSync('src/data/timeline_rules.generated.json', `${JSON.stringify(output, null, 2)}\n`);
   console.log(
-    `public/timeline_rules.json: ${output.naturalization.length} naturalization, `
+    `src/data/timeline_rules.generated.json: ${output.naturalization.length} naturalization, `
     + `${output.heritage.length} heritage, ${output.investment.length} investment`,
   );
 }
