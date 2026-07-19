@@ -110,14 +110,13 @@ bun run monitor:draft
 ## Deployment
 
 The public site is deployed to [atlas.thomphreys.com](https://atlas.thomphreys.com/)
-as a Cloudflare Worker with static assets:
+as a Cloudflare Worker with static assets. Cloudflare is the sole production
+host:
 
 ```sh
 bun run deploy:web
 ```
 
-The same repository also keeps the GitHub Pages deployment as a fallback. Its
-workflow sets `VITE_BASE_PATH=/geo-arb-map/`; local and Cloudflare builds use `/`.
 The website Worker is separate from the newsletter-intake Worker and does not
 handle email.
 
