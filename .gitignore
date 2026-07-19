@@ -9,6 +9,7 @@ monitor/cloudflare/.wrangler/
 
 # caches & logs
 .vite/
+.generated/
 *.log
 *.tsbuildinfo
 

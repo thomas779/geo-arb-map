@@ -202,6 +202,12 @@ user's route.
 
 ## Incremental migration
 
+The executable checklist and cutover gates live in
+[`docs/data-migration-plan.md`](data-migration-plan.md). The first implementation
+is deliberately a shadow compiler: it proves that pilot records can be split
+and reassembled without changing the live application before any source file is
+moved.
+
 1. Keep `public/blocs_data.json` working.
 2. Extract one jurisdiction or arrangement at a time into the new source
    directories.

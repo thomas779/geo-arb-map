@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "status": "shadow",
+  "jurisdictions": ["250", "620", "724"],
+  "arrangements": {
+    "blocs": ["eu_eea", "mercosur"],
+    "bilateral_lanes": ["spain_iberoamerican"]
+  },
+  "cutover_gate": "Promote only after structural parity, invariant tests, production build, and reviewed source-file diffs all pass."
+}
