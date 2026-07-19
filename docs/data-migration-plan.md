@@ -1,6 +1,6 @@
 # Data migration plan
 
-Status: **Phase 0 in progress — shadow compiler active**
+Status: **Phase 1 in progress — canonical schemas and candidates active**
 
 The migration separates the system into two planes:
 
@@ -85,7 +85,8 @@ proofs, not the final schema. Before promotion, canonical records must:
 
 - store a jurisdiction identity once rather than repeating it in every route;
 - give routes and sources stable IDs;
-- reference sources by ID with `supports_fields` paths;
+- reference sources by ID with stable ID-addressed `supports_fields` paths
+  rather than reorder-sensitive array indexes;
 - separate structured eligibility, milestones, and timelines from editorial
   summaries;
 - store `effective_from`, optional `effective_to`, and supersession links so a
@@ -110,16 +111,17 @@ affect planner or graph output.
 - [x] Reassemble compatibility documents from the split candidates and legacy
   remainder.
 - [x] Require structural parity and content hashes in tests.
-- [ ] Review generated pilot candidates for the canonical v1 schema.
+- [x] Review generated pilot candidates for the canonical v1 schema.
 
 **Exit gate:** shadow output is structurally identical to both current source
 documents and the full test/build suite passes.
 
 ### Phase 1 — canonical schemas and first cutover
 
-- [ ] Add versioned JSON schemas for jurisdiction, arrangement, source,
+- [x] Add versioned JSON schemas for jurisdiction, arrangement, source,
   timeline, and change-proposal records.
-- [ ] Transform and review the shadow candidates against those schemas.
+- [x] Transform the shadow candidates against those schemas.
+- [ ] Review the transformed candidates and add missing arrangement sources.
 - [ ] Promote reviewed pilot candidates into `data/jurisdictions/` and
   `data/arrangements/`.
 - [ ] Make canonical records authoritative for migrated IDs while keeping the

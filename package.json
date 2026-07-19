@@ -9,6 +9,8 @@
     "build": "tsc && tsc -p monitor/cloudflare/tsconfig.json && bun test && vite build",
     "deploy:web": "bun run build && bun scripts/deploy_web.ts",
     "data:citizenship": "bun scripts/build_citizenship_routes.js",
+    "data:schemas": "bun scripts/build_data_schemas.ts",
+    "data:migrate:canonical": "bun scripts/build_canonical_candidates.ts",
     "data:migrate:shadow": "bun scripts/build_data_shadow.ts",
     "data:timelines": "bun scripts/build_timeline_rules.js",
     "data:edges": "bun run data:timelines && bun scripts/build_edges.js",
@@ -53,6 +55,7 @@
     "tailwindcss": "^4.3.2",
     "typescript": "^5.5.3",
     "vite": "^8.1.4",
-    "wrangler": "^4.112.0"
+    "wrangler": "^4.112.0",
+    "zod": "^4.3.6"
   }
 }
