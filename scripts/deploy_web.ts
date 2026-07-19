@@ -62,14 +62,18 @@ if (result.exitCode !== 0 || !result.output.includes('Current Version ID:')) {
 const expectedAssets = (await Bun.file(distIndex).text())
   .match(/assets\/index-[^"' ]+\.(?:js|css)/g) ?? [];
 let live = false;
-for (let attempt = 0; attempt < 3; attempt += 1) {
+const verificationAttempts = 15;
+for (let attempt = 0; attempt < verificationAttempts; attempt += 1) {
   const response = await fetch(`${productionUrl}?deploy-check=${Date.now()}`, {
     headers: { 'cache-control': 'no-cache' },
   });
   const html = await response.text();
   live = response.ok && expectedAssets.every(asset => html.includes(asset));
   if (live) break;
-  await Bun.sleep(1_000);
+  if (attempt === 0) {
+    console.warn('Waiting for the custom-domain edge cache to serve the active version.');
+  }
+  await Bun.sleep(2_000);
 }
 
 if (!live) {
