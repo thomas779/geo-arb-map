@@ -4,9 +4,13 @@ import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
 import {
+  applyCanonicalMutations,
+  buildCanonicalImportPlan,
+  buildCanonicalReleasePlan,
   importCanonicalPilot,
   readCanonicalProjections,
   readCanonicalReleaseProjections,
+  renderCanonicalSql,
 } from '../scripts/lib/canonical-store';
 
 const migration = fs.readFileSync(
@@ -20,6 +24,7 @@ const pilot = buildCanonicalPilot();
 function importedDatabase(): {
   database: Database;
   revisions: string[];
+  revisionByEntity: Record<string, string>;
 } {
   const database = new Database(':memory:', { strict: true });
   database.exec(migration);
@@ -27,6 +32,7 @@ function importedDatabase(): {
   return {
     database,
     revisions: Object.values(imported.revision_by_entity),
+    revisionByEntity: imported.revision_by_entity,
   };
 }
 
@@ -53,8 +59,34 @@ describe('canonical SQL import and projections', () => {
     expect(first.database.query('SELECT COUNT(*) AS count FROM releases').get()).toEqual({
       count: 0,
     });
+    importCanonicalPilot(first.database, pilot);
+    expect(first.database.query(
+      'SELECT COUNT(*) AS count FROM canonical_revisions',
+    ).get()).toEqual({ count: firstRevisions.length });
     first.database.close();
     second.database.close();
+  });
+
+  test('renders the same provider-neutral import plan for D1 SQL', () => {
+    const plan = buildCanonicalImportPlan(pilot);
+    const rendered = renderCanonicalSql(plan.mutations);
+    const direct = new Database(':memory:', { strict: true });
+    const fromSql = new Database(':memory:', { strict: true });
+    direct.exec(migration);
+    fromSql.exec(migration);
+    applyCanonicalMutations(direct, plan.mutations);
+    fromSql.exec(rendered);
+    const snapshot = (database: Database) => database.query(
+      `SELECT entity_id, id, content_hash, review_status
+       FROM canonical_revisions ORDER BY entity_id`,
+    ).all();
+
+    expect(rendered).not.toContain('?1');
+    expect(snapshot(fromSql)).toEqual(snapshot(direct));
+    expect(fromSql.query('SELECT COUNT(*) AS count FROM evidence_links').get())
+      .toEqual(direct.query('SELECT COUNT(*) AS count FROM evidence_links').get());
+    direct.close();
+    fromSql.close();
   });
 
   test('derives queryable route and coverage projections from SQL', () => {
@@ -130,26 +162,23 @@ describe('canonical SQL import and projections', () => {
 
   test('queries a published release without a large revision parameter list', () => {
     const imported = importedDatabase();
+    const release = buildCanonicalReleasePlan({
+      revisionByEntity: imported.revisionByEntity,
+      createdAt: '2026-07-19T01:00:00.000Z',
+      publishedAt: '2026-07-19T02:00:00.000Z',
+    });
+    expect(() => applyCanonicalMutations(
+      imported.database,
+      release.mutations,
+    )).toThrow('release items must be approved revisions');
+    expect(imported.database.query('SELECT COUNT(*) AS count FROM releases').get())
+      .toEqual({ count: 0 });
+
     imported.database.query(
       `UPDATE canonical_revisions
        SET review_status = 'approved', approved_at = ?1`,
     ).run('2026-07-19T01:00:00.000Z');
-    imported.database.query(
-      `INSERT INTO releases (id, status, manifest_hash, created_at)
-       VALUES ('release:test', 'building', 'manifest:test', ?1)`,
-    ).run('2026-07-19T01:00:00.000Z');
-    const insertItem = imported.database.query(
-      `INSERT INTO release_items (release_id, entity_id, revision_id)
-       SELECT 'release:test', entity_id, id
-       FROM canonical_revisions
-       WHERE id = ?1`,
-    );
-    for (const revisionId of imported.revisions) insertItem.run(revisionId);
-    imported.database.query(
-      `UPDATE releases
-       SET status = 'published', published_at = ?1
-       WHERE id = 'release:test'`,
-    ).run('2026-07-19T02:00:00.000Z');
+    applyCanonicalMutations(imported.database, release.mutations);
 
     const candidate = readCanonicalProjections(
       imported.database,
@@ -157,7 +186,7 @@ describe('canonical SQL import and projections', () => {
     );
     const published = readCanonicalReleaseProjections(
       imported.database,
-      'release:test',
+      release.release_id,
     );
     expect(published).toEqual(candidate);
     imported.database.close();

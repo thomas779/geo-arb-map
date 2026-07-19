@@ -5,8 +5,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildCanonicalPilot } from './lib/canonical-pilot';
 import {
-  importCanonicalPilot,
+  applyCanonicalMutations,
+  buildCanonicalImportPlan,
   readCanonicalProjections,
+  renderCanonicalSql,
 } from './lib/canonical-store';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -24,7 +26,9 @@ fs.rmSync(temporary, { force: true });
 const pilot = buildCanonicalPilot();
 const database = new Database(temporary, { create: true, strict: true });
 database.exec(migration);
-const imported = importCanonicalPilot(database, pilot);
+const plan = buildCanonicalImportPlan(pilot);
+applyCanonicalMutations(database, plan.mutations);
+const { mutations: _mutations, ...imported } = plan;
 const projections = readCanonicalProjections(
   database,
   Object.values(imported.revision_by_entity),
@@ -41,6 +45,10 @@ fs.writeFileSync(
     imported,
     projections,
   }, null, 2)}\n`,
+);
+fs.writeFileSync(
+  path.join(generatedRoot, 'canonical-import.sql'),
+  renderCanonicalSql(plan.mutations),
 );
 
 console.log(

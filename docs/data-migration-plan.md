@@ -185,8 +185,11 @@ consumer while parity tests prove no unrelated record changed.
   revisions, evidence joins, approval state, and immutable releases.
 - [x] Import the pilot deterministically into local SQLite and derive
   release-scoped coverage, route, arrangement, and graph projections with SQL.
-- [ ] Import canonical records through the same service used by production;
-  do not add a second direct-write path.
+- [x] Generate one parameterized import plan for local SQLite and D1 rather
+  than maintaining a second production write path.
+- [x] Refuse release compilation until every selected revision is approved.
+- [x] Create the isolated Western Europe Data D1 deployment and import the
+  canonical pilot as draft records with no published release.
 - [ ] Add `bun run data:build` against local SQLite/D1.
 - [ ] Validate schemas, temporal constraints, approvals, and references.
 - [ ] Compile catalog, country details, arrangements, coverage, timelines,

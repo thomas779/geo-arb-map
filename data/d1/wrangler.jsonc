@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "flag-paths-data-admin",
+  "compatibility_date": "2026-07-19",
+  "d1_databases": [
+    {
+      "binding": "DATA_DB",
+      "database_name": "flag-paths-data",
+      "database_id": "a39dc273-ff97-48a9-8058-97ee3368875a",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

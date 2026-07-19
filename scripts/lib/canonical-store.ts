@@ -8,6 +8,12 @@ import type {
 import type { CanonicalPilot } from './canonical-pilot';
 
 type CanonicalRecord = SourceRecord | JurisdictionRecord | ArrangementRecord;
+export type CanonicalSqlValue = string | number | null;
+
+export interface CanonicalSqlMutation {
+  sql: string;
+  values: CanonicalSqlValue[];
+}
 
 export interface CanonicalImportResult {
   created_at: string;
@@ -24,6 +30,20 @@ export interface CanonicalImportResult {
     participants: number;
     evidence_links: number;
   };
+}
+
+export interface CanonicalImportPlan extends CanonicalImportResult {
+  mutations: CanonicalSqlMutation[];
+}
+
+export interface CanonicalReleasePlan {
+  release_id: string;
+  manifest_hash: string;
+  mutations: CanonicalSqlMutation[];
+}
+
+interface MutationSink {
+  run(sql: string, values: CanonicalSqlValue[]): void;
 }
 
 export interface CanonicalRouteProjection {
@@ -101,138 +121,153 @@ export function canonicalRevisionId(record: CanonicalRecord): string {
 }
 
 function insertRevision(
-  db: Database,
+  sink: MutationSink,
   record: CanonicalRecord,
   createdAt: string,
 ): string {
   const contentHash = hashJson(record);
   const revisionId = canonicalRevisionId(record);
-  db.query(
+  sink.run(
     `INSERT INTO canonical_entities (id, entity_type, created_at)
-     VALUES (?1, ?2, ?3)`,
-  ).run(record.id, record.entity_type, createdAt);
-  db.query(
+     VALUES (?1, ?2, ?3)
+     ON CONFLICT(id) DO UPDATE SET entity_type = excluded.entity_type
+     WHERE canonical_entities.entity_type != excluded.entity_type`,
+    [record.id, record.entity_type, createdAt],
+  );
+  sink.run(
     `INSERT INTO canonical_revisions (
        id, entity_id, schema_version, payload_json, content_hash,
        review_status, created_at
-     ) VALUES (?1, ?2, ?3, ?4, ?5, 'draft', ?6)`,
-  ).run(
-    revisionId,
-    record.id,
-    record.schema_version,
-    JSON.stringify(record),
-    contentHash,
-    createdAt,
+     ) VALUES (?1, ?2, ?3, ?4, ?5, 'draft', ?6)
+     ON CONFLICT(id) DO UPDATE SET content_hash = excluded.content_hash
+     WHERE canonical_revisions.content_hash != excluded.content_hash`,
+    [
+      revisionId,
+      record.id,
+      record.schema_version,
+      JSON.stringify(record),
+      contentHash,
+      createdAt,
+    ],
   );
   return revisionId;
 }
 
-function insertSource(db: Database, source: SourceRecord, revisionId: string): void {
-  db.query(
+function insertSource(
+  sink: MutationSink,
+  source: SourceRecord,
+  revisionId: string,
+): void {
+  sink.run(
     `INSERT INTO source_index (
        revision_id, url, publisher, source_type, last_checked
-     ) VALUES (?1, ?2, ?3, ?4, ?5)`,
-  ).run(
-    revisionId,
-    source.url,
-    source.publisher,
-    source.source_type,
-    source.last_checked,
-  );
-  const insertJurisdiction = db.query(
-    `INSERT INTO source_jurisdictions (revision_id, iso_n3)
-     VALUES (?1, ?2)`,
+     ) VALUES (?1, ?2, ?3, ?4, ?5)
+     ON CONFLICT(revision_id) DO NOTHING`,
+    [
+      revisionId,
+      source.url,
+      source.publisher,
+      source.source_type,
+      source.last_checked,
+    ],
   );
   for (const iso of [...source.jurisdictions].sort()) {
-    insertJurisdiction.run(revisionId, iso);
+    sink.run(
+      `INSERT INTO source_jurisdictions (revision_id, iso_n3)
+       VALUES (?1, ?2)
+       ON CONFLICT(revision_id, iso_n3) DO NOTHING`,
+      [revisionId, iso],
+    );
   }
 }
 
 function insertJurisdiction(
-  db: Database,
+  sink: MutationSink,
   record: JurisdictionRecord,
   revisionId: string,
 ): void {
-  db.query(
+  sink.run(
     `INSERT INTO jurisdiction_index (
        revision_id, iso_n3, name, jurisdiction_type,
        review_state, review_confidence, last_checked
-     ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)`,
-  ).run(
-    revisionId,
-    record.jurisdiction.iso_n3,
-    record.jurisdiction.name,
-    record.jurisdiction.type,
-    record.review.state,
-    record.review.confidence,
-    record.review.last_checked,
-  );
-  const insertRoute = db.query(
-    `INSERT INTO route_index (
-       revision_id, route_id, mode, route_status, title,
-       review_state, review_confidence, last_checked
-     ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)`,
-  );
-  const insertVariant = db.query(
-    `INSERT INTO route_variant_index (
-       revision_id, route_id, variant_id, outcome, allocation,
-       eligibility_minimum_months, processing_typical_months,
-       timeline_confidence
-     ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)`,
+     ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)
+     ON CONFLICT(revision_id) DO NOTHING`,
+    [
+      revisionId,
+      record.jurisdiction.iso_n3,
+      record.jurisdiction.name,
+      record.jurisdiction.type,
+      record.review.state,
+      record.review.confidence,
+      record.review.last_checked,
+    ],
   );
   for (const route of [...record.routes].sort((a, b) => a.id.localeCompare(b.id))) {
-    insertRoute.run(
-      revisionId,
-      route.id,
-      route.mode,
-      route.status,
-      route.title,
-      route.review.state,
-      route.review.confidence,
-      route.review.last_checked,
-    );
-    for (const variant of [...route.variants].sort((a, b) => a.id.localeCompare(b.id))) {
-      insertVariant.run(
+    sink.run(
+      `INSERT INTO route_index (
+         revision_id, route_id, mode, route_status, title,
+         review_state, review_confidence, last_checked
+       ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)
+       ON CONFLICT(revision_id, route_id) DO NOTHING`,
+      [
         revisionId,
         route.id,
-        variant.id,
-        variant.outcome,
-        variant.allocation,
-        variant.timeline.eligibility_minimum_months,
-        variant.timeline.processing_typical_months,
-        variant.timeline.confidence,
+        route.mode,
+        route.status,
+        route.title,
+        route.review.state,
+        route.review.confidence,
+        route.review.last_checked,
+      ],
+    );
+    for (const variant of [...route.variants].sort((a, b) => a.id.localeCompare(b.id))) {
+      sink.run(
+        `INSERT INTO route_variant_index (
+           revision_id, route_id, variant_id, outcome, allocation,
+           eligibility_minimum_months, processing_typical_months,
+           timeline_confidence
+         ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)
+         ON CONFLICT(revision_id, route_id, variant_id) DO NOTHING`,
+        [
+          revisionId,
+          route.id,
+          variant.id,
+          variant.outcome,
+          variant.allocation,
+          variant.timeline.eligibility_minimum_months,
+          variant.timeline.processing_typical_months,
+          variant.timeline.confidence,
+        ],
       );
     }
   }
 }
 
 function insertArrangement(
-  db: Database,
+  sink: MutationSink,
   record: ArrangementRecord,
   revisionId: string,
 ): void {
-  db.query(
+  sink.run(
     `INSERT INTO arrangement_index (
        revision_id, arrangement_id, kind, status, directionality, name,
        display_category, display_strength,
        review_state, review_confidence, last_checked
-     ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)`,
-  ).run(
-    revisionId,
-    record.id,
-    record.kind,
-    record.status,
-    record.directionality,
-    record.name,
-    record.display.category,
-    record.display.strength,
-    record.review.state,
-    record.review.confidence,
-    record.review.last_checked,
-  );
-  const insertParticipant = db.query(
-    `INSERT INTO arrangement_participants (revision_id, role, iso_n3)
-     VALUES (?1, ?2, ?3)`,
+     ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)
+     ON CONFLICT(revision_id) DO NOTHING`,
+    [
+      revisionId,
+      record.id,
+      record.kind,
+      record.status,
+      record.directionality,
+      record.name,
+      record.display.category,
+      record.display.strength,
+      record.review.state,
+      record.review.confidence,
+      record.review.last_checked,
+    ],
   );
   const participantGroups = [
     ['member', record.participants.members],
@@ -241,24 +276,32 @@ function insertArrangement(
     ['beneficiary', record.participants.beneficiaries],
   ] as const;
   for (const [role, isos] of participantGroups) {
-    for (const iso of [...isos].sort()) insertParticipant.run(revisionId, role, iso);
+    for (const iso of [...isos].sort()) {
+      sink.run(
+        `INSERT INTO arrangement_participants (revision_id, role, iso_n3)
+         VALUES (?1, ?2, ?3)
+         ON CONFLICT(revision_id, role, iso_n3) DO NOTHING`,
+        [revisionId, role, iso],
+      );
+    }
   }
-  const insertPathway = db.query(
-    `INSERT INTO arrangement_pathway_index (
-       revision_id, pathway_id, outcome, allocation,
-       eligibility_minimum_months, processing_typical_months,
-       timeline_confidence
-     ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)`,
-  );
   for (const pathway of [...record.pathways].sort((a, b) => a.id.localeCompare(b.id))) {
-    insertPathway.run(
-      revisionId,
-      pathway.id,
-      pathway.outcome,
-      pathway.allocation,
-      pathway.timeline.eligibility_minimum_months,
-      pathway.timeline.processing_typical_months,
-      pathway.timeline.confidence,
+    sink.run(
+      `INSERT INTO arrangement_pathway_index (
+         revision_id, pathway_id, outcome, allocation,
+         eligibility_minimum_months, processing_typical_months,
+         timeline_confidence
+       ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)
+       ON CONFLICT(revision_id, pathway_id) DO NOTHING`,
+      [
+        revisionId,
+        pathway.id,
+        pathway.outcome,
+        pathway.allocation,
+        pathway.timeline.eligibility_minimum_months,
+        pathway.timeline.processing_typical_months,
+        pathway.timeline.confidence,
+      ],
     );
   }
 }
@@ -279,16 +322,11 @@ function evidenceReferences(record: JurisdictionRecord | ArrangementRecord): Arr
 }
 
 function insertEvidence(
-  db: Database,
+  sink: MutationSink,
   records: Array<JurisdictionRecord | ArrangementRecord>,
   revisionByEntity: Record<string, string>,
 ): number {
   const seen = new Set<string>();
-  const insert = db.query(
-    `INSERT INTO evidence_links (
-       target_revision_id, source_revision_id, field_path, note
-     ) VALUES (?1, ?2, ?3, ?4)`,
-  );
   for (const record of records) {
     const targetRevisionId = revisionByEntity[record.id];
     if (!targetRevisionId) throw new Error(`Missing revision for ${record.id}`);
@@ -301,11 +339,18 @@ function insertEvidence(
         const key = `${targetRevisionId}\0${sourceRevisionId}\0${fieldPath}`;
         if (seen.has(key)) continue;
         seen.add(key);
-        insert.run(
-          targetRevisionId,
-          sourceRevisionId,
-          fieldPath,
-          reference.note ?? null,
+        sink.run(
+          `INSERT INTO evidence_links (
+             target_revision_id, source_revision_id, field_path, note
+           ) VALUES (?1, ?2, ?3, ?4)
+           ON CONFLICT(target_revision_id, source_revision_id, field_path)
+           DO NOTHING`,
+          [
+            targetRevisionId,
+            sourceRevisionId,
+            fieldPath,
+            reference.note ?? null,
+          ],
         );
       }
     }
@@ -313,12 +358,17 @@ function insertEvidence(
   return seen.size;
 }
 
-export function importCanonicalPilot(
-  db: Database,
+export function buildCanonicalImportPlan(
   pilot: CanonicalPilot,
-): CanonicalImportResult {
+): CanonicalImportPlan {
   const createdAt = deterministicCreatedAt(pilot);
   const revisionByEntity: Record<string, string> = {};
+  const mutations: CanonicalSqlMutation[] = [];
+  const sink: MutationSink = {
+    run(sql, values) {
+      mutations.push({ sql, values });
+    },
+  };
   const records: CanonicalRecord[] = [
     ...pilot.sources,
     ...pilot.jurisdictions,
@@ -326,24 +376,22 @@ export function importCanonicalPilot(
   ].sort((a, b) => a.id.localeCompare(b.id));
 
   let evidenceLinks = 0;
-  db.transaction(() => {
-    for (const record of records) {
-      const revisionId = insertRevision(db, record, createdAt);
-      revisionByEntity[record.id] = revisionId;
-      if (record.entity_type === 'source') insertSource(db, record, revisionId);
-      if (record.entity_type === 'jurisdiction') {
-        insertJurisdiction(db, record, revisionId);
-      }
-      if (record.entity_type === 'arrangement') {
-        insertArrangement(db, record, revisionId);
-      }
+  for (const record of records) {
+    const revisionId = insertRevision(sink, record, createdAt);
+    revisionByEntity[record.id] = revisionId;
+    if (record.entity_type === 'source') insertSource(sink, record, revisionId);
+    if (record.entity_type === 'jurisdiction') {
+      insertJurisdiction(sink, record, revisionId);
     }
-    evidenceLinks = insertEvidence(
-      db,
-      [...pilot.jurisdictions, ...pilot.arrangements],
-      revisionByEntity,
-    );
-  })();
+    if (record.entity_type === 'arrangement') {
+      insertArrangement(sink, record, revisionId);
+    }
+  }
+  evidenceLinks = insertEvidence(
+    sink,
+    [...pilot.jurisdictions, ...pilot.arrangements],
+    revisionByEntity,
+  );
 
   return {
     created_at: createdAt,
@@ -378,6 +426,99 @@ export function importCanonicalPilot(
       ),
       evidence_links: evidenceLinks,
     },
+    mutations,
+  };
+}
+
+export function applyCanonicalMutations(
+  db: Database,
+  mutations: CanonicalSqlMutation[],
+): void {
+  db.transaction(() => {
+    for (const mutation of mutations) {
+      db.query(mutation.sql).run(...mutation.values);
+    }
+  })();
+}
+
+export function importCanonicalPilot(
+  db: Database,
+  pilot: CanonicalPilot,
+): CanonicalImportResult {
+  const plan = buildCanonicalImportPlan(pilot);
+  applyCanonicalMutations(db, plan.mutations);
+  const { mutations: _mutations, ...result } = plan;
+  return result;
+}
+
+function sqlLiteral(value: CanonicalSqlValue): string {
+  if (value === null) return 'NULL';
+  if (typeof value === 'number') {
+    if (!Number.isFinite(value)) throw new Error('SQL values must be finite numbers');
+    return String(value);
+  }
+  return `'${value.split("'").join("''")}'`;
+}
+
+export function renderCanonicalSql(
+  mutations: CanonicalSqlMutation[],
+): string {
+  const statements = mutations.map(mutation => {
+    const rendered = mutation.sql.replace(/\?(\d+)/g, (_match, position: string) => {
+      const value = mutation.values[Number(position) - 1];
+      if (value === undefined) {
+        throw new Error(`Missing SQL value ?${position}`);
+      }
+      return sqlLiteral(value);
+    });
+    return `${rendered};`;
+  });
+  return [
+    '-- Generated by scripts/build_canonical_database.ts. Do not edit.',
+    ...statements,
+    '',
+  ].join('\n');
+}
+
+export function buildCanonicalReleasePlan({
+  revisionByEntity,
+  createdAt,
+  publishedAt,
+}: {
+  revisionByEntity: Record<string, string>;
+  createdAt: string;
+  publishedAt: string;
+}): CanonicalReleasePlan {
+  const entries = Object.entries(revisionByEntity)
+    .sort(([a], [b]) => a.localeCompare(b));
+  if (entries.length === 0) throw new Error('Cannot build an empty canonical release');
+  const manifestHash = hashJson(entries);
+  const releaseId = manifestHash.slice(0, 16);
+  const mutations: CanonicalSqlMutation[] = [{
+    sql: `INSERT INTO releases (
+      id, status, manifest_hash, created_at
+    ) VALUES (?1, 'building', ?2, ?3)
+    ON CONFLICT(id) DO NOTHING`,
+    values: [releaseId, manifestHash, createdAt],
+  }];
+  for (const [entityId, revisionId] of entries) {
+    mutations.push({
+      sql: `INSERT INTO release_items (release_id, entity_id, revision_id)
+        VALUES (?1, ?2, ?3)
+        ON CONFLICT(release_id, entity_id) DO NOTHING`,
+      values: [releaseId, entityId, revisionId],
+    });
+  }
+  mutations.push({
+    sql: `UPDATE releases
+      SET status = 'published', published_at = ?2
+      WHERE id = ?1 AND status = 'building'`,
+    values: [releaseId, publishedAt],
+  });
+  return {
+    release_id: releaseId,
+    manifest_hash: manifestHash,
+    mutations,
   };
 }
 
