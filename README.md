@@ -122,6 +122,9 @@ The public site is deployed to [atlas.thomphreys.com](https://atlas.thomphreys.c
 as a Cloudflare Worker with static assets. Cloudflare is the sole production
 host:
 
+For implementation continuation context, see
+[`docs/continuation-handoff.md`](docs/continuation-handoff.md).
+
 ```sh
 bun run deploy:web
 ```
@@ -132,11 +135,11 @@ handle email.
 ## Repository layout
 
 ```
-public/           blocs_data.json, coverage.json, citizenship_routes.json
+public/           current compatibility artifacts; generated after D1 cutover
 src/              React shell (App, components/) + imperative D3 map layer (map.ts)
 src/components/ui shadcn/ui primitives (generated)
-data/             registry, citizenship routes, canonical timelines, manual overrides, research batches
-scripts/          normalizer + registry/coverage/route generators (bun)
+data/             canonical schemas, D1 migrations, legacy inputs, research batches
+scripts/          deterministic data compiler, migration, parity, and deployment tools
 monitor/          source collectors, bounded triage, and review-lead drafts
 tests/            dataset invariant + regression suite
 docs/             explorer-spec.md — locked design for the strategy explorer
