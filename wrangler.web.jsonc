@@ -10,8 +10,8 @@
   },
   "routes": [
     {
-      "pattern": "atlas.thomphreys.com",
-      "custom_domain": true
+      "pattern": "atlas.thomphreys.com/*",
+      "zone_name": "thomphreys.com"
     }
   ]
 }
