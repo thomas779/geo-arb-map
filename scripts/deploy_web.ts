@@ -5,6 +5,8 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 const wranglerEntry = fileURLToPath(
   new URL('../node_modules/wrangler/bin/wrangler.js', import.meta.url),
 );
+const distIndex = fileURLToPath(new URL('../dist/index.html', import.meta.url));
+const productionUrl = 'https://atlas.thomphreys.com/';
 
 async function findNode(): Promise<string | null> {
   const systemNode = Bun.which('node');
@@ -26,14 +28,53 @@ if (!node) {
   process.exit(1);
 }
 
-const result = Bun.spawnSync(
-  [node, wranglerEntry, 'deploy', '--config', 'wrangler.web.jsonc'],
-  {
-    cwd: repoRoot,
-    stdin: 'inherit',
-    stdout: 'inherit',
-    stderr: 'inherit',
-  },
-);
+async function deploy(): Promise<{ exitCode: number; output: string }> {
+  const child = Bun.spawn(
+    [node!, wranglerEntry, 'deploy', '--config', 'wrangler.web.jsonc'],
+    {
+      cwd: repoRoot,
+      stdin: 'inherit',
+      stdout: 'pipe',
+      stderr: 'pipe',
+    },
+  );
+  const [exitCode, stdout, stderr] = await Promise.all([
+    child.exited,
+    new Response(child.stdout).text(),
+    new Response(child.stderr).text(),
+  ]);
+  const output = `${stdout}${stderr}`;
+  process.stdout.write(output);
+  return { exitCode, output };
+}
 
-process.exit(result.exitCode);
+let result = await deploy();
+if (result.exitCode === 0 && !result.output.includes('Current Version ID:')) {
+  console.warn('Wrangler uploaded assets without activating a version; retrying deployment once.');
+  result = await deploy();
+}
+
+if (result.exitCode !== 0 || !result.output.includes('Current Version ID:')) {
+  console.error('Cloudflare did not confirm an active Worker version.');
+  process.exit(result.exitCode || 1);
+}
+
+const expectedAssets = (await Bun.file(distIndex).text())
+  .match(/assets\/index-[^"' ]+\.(?:js|css)/g) ?? [];
+let live = false;
+for (let attempt = 0; attempt < 3; attempt += 1) {
+  const response = await fetch(`${productionUrl}?deploy-check=${Date.now()}`, {
+    headers: { 'cache-control': 'no-cache' },
+  });
+  const html = await response.text();
+  live = response.ok && expectedAssets.every(asset => html.includes(asset));
+  if (live) break;
+  await Bun.sleep(1_000);
+}
+
+if (!live) {
+  console.error(`Deployment completed, but ${productionUrl} is not serving the current asset hashes.`);
+  process.exit(1);
+}
+
+console.log(`${productionUrl} is serving ${expectedAssets.join(' and ')}.`);
