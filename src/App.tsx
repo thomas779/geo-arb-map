@@ -18,6 +18,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
+import { RouteDetailPanel } from '@/components/RouteDetailPanel';
 import { StackingView } from '@/components/StackingView';
 import { TrustCenter } from '@/components/TrustCenter';
 import { useTheme } from '@/components/theme-provider';
@@ -66,6 +67,7 @@ export default function App() {
   const [infoSection, setInfoSection] = useState<TrustSection | null>(() => url.readInfo());
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
   const [detailPanelOpen, setDetailPanelOpen] = useState(Boolean(initialState.country));
+  const [routePanelOpen, setRoutePanelOpen] = useState(false);
   // Portrait phones browse a LIST first; the map is on demand. Shared links
   // with a selection land straight on the framed map.
   const [mobileList, setMobileList] = useState<boolean>(
@@ -122,6 +124,10 @@ export default function App() {
     url.sync(state);
   }, [state]);
 
+  useEffect(() => {
+    if (state.blocs.length === 0 && !state.lane) setRoutePanelOpen(false);
+  }, [state.blocs.length, state.lane]);
+
   const patch = useCallback((p: Partial<AppState>) => {
     setState(s => ({ ...s, ...p }));
   }, []);
@@ -145,11 +151,13 @@ export default function App() {
     patch({ view: 'map', lane: id, blocs: [], country: null, countryName: null });
   }, [patch]);
   const clearMapSelection = useCallback(() => {
+    setRoutePanelOpen(false);
     patch({ blocs: [], lane: null, country: null, countryName: null });
   }, [patch]);
   const selectView = useCallback((v: 'map' | 'stacking') =>
     patch({ view: v }), [patch]);
   const selectCountry = useCallback((iso: string, name: string) => {
+    setRoutePanelOpen(false);
     setDetailPanelOpen(true);
     patch({ country: iso, countryName: name });
   }, [patch]);
@@ -164,6 +172,13 @@ export default function App() {
       patch({ view: 'map', blocs: [blocId], lane: null, country: null, countryName: null });
     }
   }, [patch]);
+  const inspectRouteSelection = useCallback(() => {
+    setMobileList(false);
+    setRoutePanelOpen(true);
+  }, []);
+
+  const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane);
+  const rightPanelOpen = state.country ? detailPanelOpen : hasRouteSelection && routePanelOpen;
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
@@ -254,28 +269,24 @@ export default function App() {
           </Button>
         </div>
       </header>
-      <main className="relative flex min-h-0 flex-1">
+      <main className="relative flex min-h-0 flex-1 overflow-hidden">
         {data && (
           <div
             className={cn(
-              'relative hidden shrink-0 overflow-hidden border-r transition-[width,border-color] duration-300 ease-out md:block',
-              leftPanelOpen ? 'w-[280px]' : 'w-0 border-transparent',
+              'absolute inset-y-0 left-0 z-20 hidden w-[280px] overflow-hidden border-r bg-sidebar shadow-xl transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none md:block',
+              !leftPanelOpen && '-translate-x-full',
             )}
+            aria-hidden={!leftPanelOpen}
+            inert={!leftPanelOpen}
           >
-            <div
-              className={cn(
-                'absolute inset-y-0 left-0 w-[280px] transition-transform duration-300 ease-out',
-                !leftPanelOpen && '-translate-x-full',
-              )}
-            >
-              <Sidebar
-                data={data}
-                state={state}
-                onBloc={toggleBloc}
-                onLane={selectLane}
-                onClear={clearMapSelection}
-              />
-            </div>
+            <Sidebar
+              data={data}
+              state={state}
+              onBloc={toggleBloc}
+              onLane={selectLane}
+              onClear={clearMapSelection}
+              onInspect={inspectRouteSelection}
+            />
           </div>
         )}
         <div id="map-wrap" className="cartographic-surface relative min-w-0 flex-1 overflow-hidden">
@@ -286,7 +297,10 @@ export default function App() {
                 <Button
                   variant="outline"
                   size="icon"
-                  className="absolute top-3 left-3 z-20 hidden bg-background/85 text-muted-foreground shadow-sm backdrop-blur-md md:inline-flex"
+                  className={cn(
+                    'absolute top-3 left-3 z-30 hidden bg-background/85 text-muted-foreground shadow-sm backdrop-blur-md transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none md:inline-flex',
+                    leftPanelOpen && 'translate-x-[280px]',
+                  )}
                   aria-label={leftPanelOpen ? 'Hide route browser' : 'Show route browser'}
                   aria-expanded={leftPanelOpen}
                   onClick={() => setLeftPanelOpen(open => !open)}
@@ -307,24 +321,40 @@ export default function App() {
                 onBloc={toggleBloc}
                 onLane={selectLane}
                 onClear={clearMapSelection}
+                onInspect={inspectRouteSelection}
               />
             </div>
           )}
           {data && state.view === 'map' && (
-            <Button
-              variant="secondary"
-              size="sm"
+            <div
               className={cn(
-                'absolute left-1/2 z-20 min-h-11 -translate-x-1/2 gap-2 px-4 shadow-lg transition-[bottom] md:hidden',
-                mobileList && (state.blocs.length > 0 || state.lane)
+                'absolute left-1/2 z-20 flex -translate-x-1/2 gap-2 transition-[bottom] md:hidden',
+                mobileList && hasRouteSelection
                   ? 'bottom-[max(4.75rem,calc(env(safe-area-inset-bottom)+4.25rem))]'
                   : 'bottom-[max(1rem,env(safe-area-inset-bottom))]',
               )}
-              onClick={() => setMobileList(v => !v)}
             >
-              {mobileList ? <MapIcon /> : <List />}
-              {mobileList ? 'Map' : 'List'}
-            </Button>
+              <Button
+                variant="secondary"
+                size="sm"
+                className="min-h-11 gap-2 px-4 shadow-lg"
+                onClick={() => setMobileList(v => !v)}
+              >
+                {mobileList ? <MapIcon /> : <List />}
+                {mobileList ? 'Map' : 'List'}
+              </Button>
+              {!mobileList && hasRouteSelection && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="min-h-11 gap-2 bg-background/90 px-4 shadow-lg backdrop-blur-sm"
+                  onClick={inspectRouteSelection}
+                >
+                  <PanelRightOpen aria-hidden />
+                  Details
+                </Button>
+              )}
+            </div>
           )}
           {data && state.view === 'stacking' && (
             <StackingView
@@ -346,47 +376,61 @@ export default function App() {
               reviewed&nbsp;·&nbsp;{data.meta.last_verified}
             </button>
           )}
-          {data && state.view === 'map' && state.country && !detailPanelOpen && (
+          {data && state.view === 'map' && (
+            (state.country && !detailPanelOpen)
+            || (!state.country && hasRouteSelection && !routePanelOpen)
+          ) && (
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   variant="outline"
                   size="sm"
                   className="absolute top-3 right-3 z-20 hidden gap-1.5 bg-background/85 text-muted-foreground shadow-sm backdrop-blur-md md:inline-flex"
-                  onClick={() => setDetailPanelOpen(true)}
+                  onClick={() => {
+                    if (state.country) setDetailPanelOpen(true);
+                    else inspectRouteSelection();
+                  }}
                 >
                   <PanelRightOpen aria-hidden />
                   Details
                 </Button>
               </TooltipTrigger>
-              <TooltipContent side="left">Show country details</TooltipContent>
+              <TooltipContent side="left">
+                {state.country ? 'Show country details' : 'Show selected route details'}
+              </TooltipContent>
             </Tooltip>
           )}
         </div>
-        {data && state.view === 'map' && state.country && (
+        {data && state.view === 'map' && (state.country || hasRouteSelection) && (
           <>
-            <div className="absolute inset-0 z-30 bg-background md:hidden">
-              <DetailPanel
-                data={data}
-                citizenshipRoutes={citizenshipRoutes}
-                state={state}
-                onClose={closeDetail}
-              />
-            </div>
+            {rightPanelOpen && (
+              <div className="absolute inset-0 z-40 bg-background md:hidden">
+                {state.country ? (
+                  <DetailPanel
+                    data={data}
+                    citizenshipRoutes={citizenshipRoutes}
+                    state={state}
+                    onClose={closeDetail}
+                  />
+                ) : (
+                  <RouteDetailPanel
+                    data={data}
+                    blocIds={state.blocs}
+                    laneId={state.lane}
+                    onClose={() => setRoutePanelOpen(false)}
+                  />
+                )}
+              </div>
+            )}
             <div
               className={cn(
-                'relative hidden shrink-0 overflow-hidden border-l transition-[width,border-color] duration-300 ease-out md:block',
-                detailPanelOpen
-                  ? 'w-[370px] xl:w-[390px]'
-                  : 'w-0 border-transparent',
+                'absolute inset-y-0 right-0 z-30 hidden w-[370px] overflow-hidden border-l bg-background shadow-xl transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none md:block xl:w-[390px]',
+                !rightPanelOpen && 'translate-x-full',
               )}
+              aria-hidden={!rightPanelOpen}
+              inert={!rightPanelOpen}
             >
-              <div
-                className={cn(
-                  'absolute inset-y-0 right-0 w-[370px] transition-transform duration-300 ease-out xl:w-[390px]',
-                  !detailPanelOpen && 'translate-x-full',
-                )}
-              >
+              {state.country ? (
                 <DetailPanel
                   data={data}
                   citizenshipRoutes={citizenshipRoutes}
@@ -394,7 +438,14 @@ export default function App() {
                   onClose={closeDetail}
                   onCollapse={() => setDetailPanelOpen(false)}
                 />
-              </div>
+              ) : (
+                <RouteDetailPanel
+                  data={data}
+                  blocIds={state.blocs}
+                  laneId={state.lane}
+                  onClose={() => setRoutePanelOpen(false)}
+                />
+              )}
             </div>
           </>
         )}

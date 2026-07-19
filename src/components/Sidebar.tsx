@@ -1,5 +1,5 @@
 import { useId, useState } from 'react';
-import { Check, ChevronDown, SlidersHorizontal, X } from 'lucide-react';
+import { Check, ChevronDown, Info, SlidersHorizontal, X } from 'lucide-react';
 import type { AppState, BilateralLane, Bloc, BlocsData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -58,6 +58,7 @@ interface Props {
   onBloc: (id: string | null) => void;
   onLane: (id: string | null) => void;
   onClear: () => void;
+  onInspect: () => void;
 }
 
 function Swatch({ color, selected }: { color: string; selected: boolean }) {
@@ -133,7 +134,7 @@ function LaneDirection({ lane }: { lane: BilateralLane }) {
   );
 }
 
-export function Sidebar({ data, state, onBloc, onLane, onClear }: Props) {
+export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Props) {
   const { theme } = useTheme();
   const dark = theme === 'dark';
   const filterPanelId = useId();
@@ -571,10 +572,19 @@ export function Sidebar({ data, state, onBloc, onLane, onClear }: Props) {
               variant="ghost"
               size="sm"
               className="min-h-9 shrink-0 gap-1 px-2 text-xs text-muted-foreground hover:text-foreground md:min-h-7"
+              onClick={onInspect}
+            >
+              <Info className="size-3.5" aria-hidden />
+              Details
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              className="size-9 shrink-0 text-muted-foreground hover:text-foreground md:size-7"
+              aria-label="Reset map selection"
               onClick={onClear}
             >
               <X className="size-3.5" aria-hidden />
-              Reset
             </Button>
           </div>
         </div>
