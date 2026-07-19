@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Monitor fixture</title>
+    <item>
+      <title>France changes student naturalization residence credit</title>
+      <link>https://example.test/france-change</link>
+      <guid>https://example.test/france-change</guid>
+      <description><![CDATA[The residence requirement may have changed for some graduates in France.]]></description>
+      <pubDate>Fri, 17 Jul 2026 10:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

@@ -1,6 +1,11 @@
 # dependencies / build output
 node_modules/
 dist/
+monitor/.out/
+monitor/**/.out/
+monitor/cloudflare/.dev.vars
+monitor/cloudflare/.wrangler/
+.wrangler/
 
 # caches & logs
 .vite/

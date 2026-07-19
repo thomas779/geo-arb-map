@@ -1,0 +1,48 @@
+name: Publish reviewed Telegram brief
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Reviewed monitoring issue number
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: telegram-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: telegram-publication
+    env:
+      GH_TOKEN: ${{ github.token }}
+      MONITOR_LLM_PROVIDER: ${{ vars.MONITOR_LLM_PROVIDER }}
+      MONITOR_LLM_BASE_URL: ${{ vars.MONITOR_LLM_BASE_URL }}
+      MONITOR_LLM_MODEL: ${{ vars.MONITOR_LLM_MODEL }}
+      MONITOR_LLM_TIMEOUT_MS: ${{ vars.MONITOR_LLM_TIMEOUT_MS }}
+      MONITOR_LLM_API_KEY: ${{ secrets.MONITOR_LLM_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      MONITOR_TRIAGE_MODEL: ${{ vars.MONITOR_TRIAGE_MODEL }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHANNEL_ID: ${{ vars.TELEGRAM_CHANNEL_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Preview reviewed brief
+        run: bun run monitor:telegram -- --issue "${{ inputs.issue_number }}" --dry-run
+
+      - name: Publish reviewed brief
+        run: bun run monitor:telegram -- --issue "${{ inputs.issue_number }}" --apply

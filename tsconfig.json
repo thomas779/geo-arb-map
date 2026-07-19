@@ -17,5 +17,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "tests"]
+  "include": ["src", "tests", "monitor"],
+  "exclude": ["monitor/cloudflare/worker.ts"]
 }

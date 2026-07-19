@@ -1,0 +1,13 @@
+{
+  "action": "newsletter_signal",
+  "client_payload": {
+    "source_id": "fragomen-client-alerts",
+    "message": {
+      "message_id": "8f96bc5817d87de901166efc89f1f052b0f090beaed476fa62fd433399116855",
+      "subject": "Portugal: Nationality processing update",
+      "text": "A client alert describing a possible change.",
+      "received_at": "2026-07-17T10:00:00.000Z",
+      "canonical_url": "https://www.fragomen.com/insights/portugal-nationality-processing-update.html"
+    }
+  }
+}

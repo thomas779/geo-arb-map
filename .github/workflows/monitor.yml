@@ -1,0 +1,79 @@
+name: Monitor mobility sources
+
+on:
+  schedule:
+    - cron: "17 7 * * 1"
+  repository_dispatch:
+    types: [newsletter_signal]
+  workflow_dispatch:
+    inputs:
+      open_issues:
+        description: Create GitHub issues after triage
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: mobility-source-monitor
+  cancel-in-progress: false
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    env:
+      MONITOR_LLM_PROVIDER: ${{ vars.MONITOR_LLM_PROVIDER }}
+      MONITOR_LLM_BASE_URL: ${{ vars.MONITOR_LLM_BASE_URL }}
+      MONITOR_LLM_MODEL: ${{ vars.MONITOR_LLM_MODEL }}
+      MONITOR_LLM_TIMEOUT_MS: ${{ vars.MONITOR_LLM_TIMEOUT_MS }}
+      MONITOR_LLM_API_KEY: ${{ secrets.MONITOR_LLM_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      MONITOR_TRIAGE_MODEL: ${{ vars.MONITOR_TRIAGE_MODEL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Collect recent signals
+        if: github.event_name != 'repository_dispatch'
+        run: bun run monitor:collect
+
+      - name: Normalize newsletter dispatch
+        if: github.event_name == 'repository_dispatch'
+        run: bun run monitor:email:dispatch
+
+      - name: Read existing issue markers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh issue list --state all --limit 1000 --json number,body > monitor/.out/existing-issues.json
+
+      - name: Triage new signals
+        run: bun run monitor:triage
+
+      - name: Render issue drafts
+        run: bun run monitor:draft
+
+      - name: Create reviewed-lead issues
+        if: >-
+          (github.event_name == 'workflow_dispatch' && inputs.open_issues) ||
+          (github.event_name == 'schedule' && vars.MONITOR_OPEN_ISSUES == 'true')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bun run monitor:open
+
+      - name: Upload monitor run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitor-run-${{ github.run_id }}
+          path: monitor/.out/
+          if-no-files-found: warn
+          retention-days: 30

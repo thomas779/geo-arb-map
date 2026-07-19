@@ -1,0 +1,28 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "flag-paths-newsletter-intake",
+  "main": "worker.ts",
+  "compatibility_date": "2026-07-17",
+  "workers_dev": false,
+  "preview_urls": false,
+  "vars": {
+    "GITHUB_OWNER": "thomas779",
+    "GITHUB_REPO": "geo-arb-map",
+    "GITHUB_EVENT_TYPE": "newsletter_signal",
+    "MAX_EMAIL_BYTES": "10485760"
+  },
+  "r2_buckets": [
+    {
+      "binding": "RAW_EMAILS",
+      "bucket_name": "flag-paths-monitor-raw-email"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "flag-paths-monitor",
+      "database_id": "bf99a572-f60f-4050-9bd3-cab23526015a",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

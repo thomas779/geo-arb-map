@@ -1,0 +1,241 @@
+{
+  "$comment": "Every collector must emit the Signal shape in monitor/schema/signal.ts. Active sources are publisher-controlled RSS or Atom feeds. Planned sources need authentication or an unbuilt transport such as inbound email, YouTube transcripts, APIs, or HTML/PDF diffing. Independent agencies and country specialists are preferred over broad social monitoring.",
+  "sources": [
+    {
+      "id": "globalcit-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://globalcit.eu/feed/",
+      "jurisdictions": ["multi"],
+      "notes": "EUI Global Citizenship Observatory — academic tracking of nationality-law changes worldwide."
+    },
+    {
+      "id": "imidaily-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://www.imidaily.com/feed/",
+      "jurisdictions": ["multi"],
+      "notes": "Investment-migration trade press — CBI/RBI program changes, often ahead of official gazettes."
+    },
+    {
+      "id": "wandering-investor-blog",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://thewanderinginvestor.com/feed/",
+      "jurisdictions": ["multi"],
+      "notes": "Ladislas Maurice — independent, on-the-ground residency/citizenship reporting; has broken program changes (e.g. Argentina CBI) ahead of trade press."
+    },
+    {
+      "id": "wandering-investor-telegram",
+      "tier": "discovery",
+      "adapter": "telegram_html",
+      "status": "active",
+      "url": "https://t.me/s/thewanderinginvestor",
+      "channel": "thewanderinginvestor",
+      "jurisdictions": ["multi"],
+      "max_items": 25,
+      "notes": "Curated exception to the no-broad-social rule. Public channel preview by Ladislas Maurice; often contains residency/citizenship findings and links before the main blog. Discovery only and always requires primary-source verification."
+    },
+    {
+      "id": "wandering-investor-newsletter",
+      "tier": "discovery",
+      "adapter": "email",
+      "status": "planned",
+      "subscription_url": "https://thewanderinginvestor.com/blog/",
+      "archive_url": "https://thewanderinginvestor.com/category/private-list-update/",
+      "jurisdictions": ["multi"],
+      "notes": "Free Notes from the Road newsletter. Keep separate from the blog RSS and public Telegram preview so private-list or early updates can be captured, then deduplicate by canonical article URL."
+    },
+    {
+      "id": "fragomen-client-alerts",
+      "tier": "discovery",
+      "adapter": "email",
+      "status": "planned",
+      "subscription_url": "https://www.fragomen.com/subscribe-fragomen-insights/subscribe.html",
+      "archive_url": "https://www.fragomen.com/insights/index.html?type=news",
+      "jurisdictions": ["multi"],
+      "notes": "Global immigration law-firm client alerts with country labels, dates, summaries, and public canonical articles. High-value newsletter candidate for changes to visas, residence, citizenship applications, fees, and processing."
+    },
+    {
+      "id": "investment-migration-council-newsletter",
+      "tier": "discovery",
+      "adapter": "email",
+      "status": "planned",
+      "subscription_url": "https://investmentmigration.org/newsletter/",
+      "archive_url": "https://investmentmigration.org/newsletter-archive/",
+      "jurisdictions": ["multi"],
+      "notes": "Industry-body newsletter and archive focused on investment migration. Useful for programme and regulatory leads; commercial or opinion content must be discarded by triage."
+    },
+    {
+      "id": "latitude-news",
+      "tier": "discovery",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.latitudeworld.com/news/",
+      "jurisdictions": ["multi"],
+      "notes": "Agency news index with dated residence, citizenship, descent, and CBI updates. No verified feed was found, so this needs a narrow HTML index adapter and per-article canonical URLs."
+    },
+    {
+      "id": "nomad-capitalist-podcast",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://nomadcapitalist.libsyn.com/rss",
+      "jurisdictions": ["multi"],
+      "notes": "Andrew Henderson — high volume, uneven signal-to-noise, but covers program changes fast (e.g. 'Armenia's New Fast-Track Residence for 2026'). Blog has no discoverable RSS; podcast feed does."
+    },
+    {
+      "id": "nomad-capitalist-newsletter",
+      "tier": "discovery",
+      "adapter": "email",
+      "status": "planned",
+      "subscription_url": "https://nomadcapitalist.com/email/",
+      "jurisdictions": ["multi"],
+      "notes": "Nomad Capitalist Weekly Rundown. The publisher says it covers citizenship programme changes, offshore news, and global updates. Keep separate from the active podcast feed for independent deduplication; discovery only."
+    },
+    {
+      "id": "bal-immigration-alerts",
+      "tier": "discovery",
+      "adapter": "email",
+      "status": "planned",
+      "subscription_url": "https://www.bal.com/newsletter-sign-up/",
+      "archive_url": "https://www.bal.com/insights/",
+      "jurisdictions": ["multi"],
+      "notes": "Berry Appleman & Leiden global immigration alerts. Strong coverage of work, residence, student, and permanent-residence rule changes; employment-heavy and discovery only."
+    },
+    {
+      "id": "foster-global-updates",
+      "tier": "discovery",
+      "adapter": "email",
+      "status": "planned",
+      "subscription_url": "https://www.fosterglobal.com/subscribe-to-our-immigration-updates/",
+      "jurisdictions": ["multi"],
+      "notes": "Law-firm immigration updates with selectable global coverage. Useful as a second legal-practitioner signal after Fragomen and BAL; discovery only."
+    },
+    {
+      "id": "henley-global-newsroom",
+      "tier": "discovery",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.henleyglobal.com/newsroom",
+      "jurisdictions": ["multi"],
+      "notes": "Residence- and citizenship-planning firm newsroom. Useful for CBI/RBI launches and closures, but commercial claims require primary-source verification and aggressive deduplication."
+    },
+    {
+      "id": "boe-spain",
+      "tier": "verification",
+      "adapter": "api",
+      "status": "planned",
+      "jurisdictions": ["724"],
+      "notes": "Boletín Oficial del Estado open API — verifies changes to Spain's Ibero-American naturalization track, the pathfinder graph's most load-bearing edge."
+    },
+    {
+      "id": "dre-portugal",
+      "tier": "verification",
+      "adapter": "api",
+      "status": "planned",
+      "jurisdictions": ["620"],
+      "notes": "Diário da República Eletrónico open data — verifies the 2026 nationality-law transition already recorded in citizenship_routes.json."
+    },
+    {
+      "id": "boletin-argentina",
+      "tier": "verification",
+      "adapter": "rss",
+      "status": "planned",
+      "jurisdictions": ["032"],
+      "notes": "Boletín Oficial de la República Argentina — flagged volatile in dual_citizenship / generational_events (pending decree)."
+    },
+    {
+      "id": "legislation-gov-uk",
+      "tier": "verification",
+      "adapter": "api",
+      "status": "planned",
+      "jurisdictions": ["826"],
+      "notes": "legislation.gov.uk API — verifies BN(O)/ILR changes flagged volatile in the dataset."
+    },
+    {
+      "id": "legifrance-piste",
+      "tier": "verification",
+      "adapter": "api",
+      "status": "planned",
+      "jurisdictions": ["250"],
+      "notes": "Légifrance via the PISTE gateway — requires human developer registration before an adapter can be built."
+    },
+    {
+      "id": "ircc-newsroom",
+      "tier": "verification",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://api.io.canada.ca/io-server/gc/news/en/v2?dept=departmentofcitizenshipandimmigration&sort=publishedDate&orderBy=desc&publishedDate%3E=2021-07-23&pick=50&format=atom&atomtitle=Immigration,%20Refugees%20and%20Citizenship%20Canada",
+      "jurisdictions": ["124"],
+      "max_items": 50,
+      "notes": "Official IRCC Atom feed for Canadian immigration and citizenship announcements. Verification tier, although a reviewer must still resolve announcements to the underlying regulation, instruction, or public policy."
+    },
+    {
+      "id": "uscis-alerts",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.uscis.gov/newsroom/alerts",
+      "jurisdictions": ["840"],
+      "notes": "Official USCIS alert index for naturalization, permanent residence, work authorization, fees, forms, and policy-manual changes. Needs a narrow paginated index adapter."
+    },
+    {
+      "id": "eurlex-official-journal",
+      "tier": "verification",
+      "adapter": "rss",
+      "status": "planned",
+      "url": "https://eur-lex.europa.eu/oj/direct-access.html?locale=en",
+      "jurisdictions": ["eu"],
+      "notes": "Authentic Official Journal of the European Union. Configure a focused EUR-Lex RSS search for nationality, residence, migration, accession, and free-movement instruments rather than ingesting the entire journal."
+    },
+    {
+      "id": "komunita-malta",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://komunita.gov.mt/",
+      "jurisdictions": ["470"],
+      "notes": "Official Community Malta Agency news and guidance covering citizenship by birth, registration, naturalization, merit, and investment. Needs snapshot and linked-document diffing."
+    },
+    {
+      "id": "greece-migration-legislation",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://migration.gov.gr/nomothesia-1-2/nomothesia-archi-prosfygon/",
+      "jurisdictions": ["300"],
+      "notes": "Official Greek Ministry of Migration and Asylum legislation index. Monitor new laws and gazette references, then resolve nationality-specific changes through the competent ministry and Government Gazette."
+    },
+    {
+      "id": "colombia-nationality-norms",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/",
+      "jurisdictions": ["170"],
+      "notes": "Official Colombian public-service normative repository. Build a saved-query adapter for nationality, residence-credit, visa, and naturalization terms instead of crawling the full corpus."
+    },
+    {
+      "id": "turkiye-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.yourkeyturkiye.gov.tr/en/acquisition-of-citizenship",
+      "jurisdictions": ["792"],
+      "notes": "Official Invest in Türkiye citizenship-acquisition guidance, including qualifying investment thresholds. Pair page diffs with Resmî Gazete monitoring before publishing a rule change."
+    },
+    {
+      "id": "brazil-official-gazette",
+      "tier": "verification",
+      "adapter": "api",
+      "status": "planned",
+      "url": "https://www.gov.br/pt-br/servicos/acessar-o-diario-oficial-da-uniao",
+      "jurisdictions": ["076"],
+      "notes": "Official access point for Brazil's Diário Oficial da União. Build a keyword/API query for nationality, naturalization, migration, residence, and visa instruments."
+    }
+  ]
+}

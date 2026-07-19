@@ -1,0 +1,20 @@
+[
+  {
+    "source_id": "fragomen-client-alerts",
+    "recipient": "newsletters@monitor.example.com",
+    "allowed_sender_domains": ["fragomen.com"],
+    "canonical_hosts": ["fragomen.com"]
+  },
+  {
+    "source_id": "investment-migration-council-newsletter",
+    "recipient": "newsletters@monitor.example.com",
+    "allowed_sender_domains": ["investmentmigration.org"],
+    "canonical_hosts": ["investmentmigration.org"]
+  },
+  {
+    "source_id": "nomad-capitalist-newsletter",
+    "recipient": "newsletters@monitor.example.com",
+    "allowed_sender_domains": ["nomadcapitalist.com"],
+    "canonical_hosts": ["nomadcapitalist.com"]
+  }
+]
