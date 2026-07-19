@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && tsc -p monitor/cloudflare/tsconfig.json && bun test && vite build",
-    "deploy:web": "bun run build && wrangler deploy --config wrangler.web.jsonc",
+    "deploy:web": "bun run build && bun scripts/deploy_web.ts",
     "data:citizenship": "bun scripts/build_citizenship_routes.js",
     "monitor:collect": "bun monitor/collectors/run.ts",
     "monitor:email:dispatch": "bun monitor/collectors/github-dispatch.ts",
