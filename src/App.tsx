@@ -208,9 +208,9 @@ export default function App() {
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="max-w-[300px]">
                   <div className="flex flex-col gap-1.5 text-xs">
-                    <span><b>Temporary</b> — {data.meta.tier_legend.TR}</span>
-                    <span><b>Permanent</b> — {data.meta.tier_legend.PR}</span>
-                    <span><b>Citizenship</b> — {data.meta.tier_legend.CIT}</span>
+                    <span><b>TR</b> — {data.meta.tier_legend.TR}</span>
+                    <span><b>PR</b> — {data.meta.tier_legend.PR}</span>
+                    <span><b>CIT</b> — {data.meta.tier_legend.CIT}</span>
                   </div>
                 </TooltipContent>
               </Tooltip>
