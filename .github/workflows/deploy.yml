@@ -29,6 +29,8 @@ jobs:
 
       - name: Build
         run: bun run build
+        env:
+          VITE_BASE_PATH: /geo-arb-map/
 
       - uses: actions/upload-pages-artifact@v3
         with:
