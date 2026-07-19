@@ -190,12 +190,12 @@ consumer while parity tests prove no unrelated record changed.
 - [x] Refuse release compilation until every selected revision is approved.
 - [x] Create the isolated Western Europe Data D1 deployment and import the
   canonical pilot as draft records with no published release.
-- [ ] Add `bun run data:build` against local SQLite/D1.
-- [ ] Validate schemas, temporal constraints, approvals, and references.
-- [ ] Compile catalog, country details, arrangements, coverage, timelines,
+- [x] Add `bun run data:build` against local SQLite/D1.
+- [x] Validate schemas, temporal constraints, approvals, and references.
+- [x] Compile catalog, country details, arrangements, coverage, timelines,
   graph, API release rows, and release changelog from SQL.
-- [ ] Fail CI on stale generated output or an unsupported source field.
-- [ ] Generate changed entity IDs by comparing release manifests.
+- [x] Fail CI on stale generated output or an unsupported source field.
+- [x] Generate changed entity IDs by comparing release manifests.
 - [ ] Back up D1 to private R2 on a schedule and test restoration.
 
 **Exit gate:** a clean checkout plus an approved database export can reproduce

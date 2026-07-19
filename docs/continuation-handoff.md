@@ -1,7 +1,7 @@
 # Continuation handoff
 
-Updated: 2026-07-19  
-Branch: `main`  
+Updated: 2026-07-19
+Branch: `main`
 Repository: `/Users/thomashumphreys/ghq/github.com/thomas779/geo-arb-map`
 
 ## Objective
@@ -29,12 +29,14 @@ delivery format, not an independently editable database.
 
 Recent commits:
 
-- `bc62a9f feat: add data migration shadow`
-- `11ef266 feat: define canonical data schemas`
-- `4ffd2a0 fix: source pilot arrangements`
-- `0e8da2b feat: add canonical data store`
-- `a998d5d feat: add canonical sql build`
+- `feat: add deterministic data:build compiler`
+- `b287a0a docs: add migration handoff`
 - `6d52686 feat: connect canonical d1`
+- `a998d5d feat: add canonical sql build`
+- `0e8da2b feat: add canonical data store`
+- `4ffd2a0 fix: source pilot arrangements`
+- `11ef266 feat: define canonical data schemas`
+- `bc62a9f feat: add data migration shadow`
 
 Implemented:
 
@@ -46,7 +48,16 @@ Implemented:
 - one provider-neutral mutation plan rendered as D1-compatible SQL;
 - SQL-derived coverage, route, arrangement, and graph projections;
 - approval-gated immutable releases;
-- isolated `flag-paths-data` D1 in Western Europe.
+- isolated `flag-paths-data` D1 in Western Europe;
+- `bun run data:build`, the single deterministic release compiler that reads
+  the canonical SQL scope, combines it with the read-only legacy remainder,
+  compiles catalog, projections, arrangements, jurisdictions, graph edges, API
+  release rows, compatibility documents, and a changelog, and runs parity
+  gates that fail on duplicate ownership, missing IDs, drift outside the
+  sanctioned Spain Ibero-American beneficiary correction, or any approval or
+  publication. The compiler writes a draft release bundle to
+  `.generated/data-canonical/releases/<release_id>/` and never approves D1
+  revisions, publishes a release, replaces `public/*.json`, or deploys.
 
 Remote D1 state:
 
@@ -62,28 +73,39 @@ The public website has not been cut over or redeployed for this migration.
 
 Validation at handoff:
 
-- 90 tests pass;
-- TypeScript passes;
+- 103 tests pass;
+- TypeScript passes (root `tsc` now includes `scripts/`);
 - Vite production build passes;
 - existing warning: main JS chunk is approximately 520 kB.
 
+`bun run data:build` passes every parity gate and writes a draft release whose
+compatibility mobility differs from `public/blocs_data.json` only by the eight
+sanctioned Spain Ibero-American beneficiary additions, and whose compatibility
+citizenship is byte-identical to `data/citizenship_routes.json`.
+
 ## Immediate next task
 
-Build `bun run data:build` as the single deterministic release compiler:
+`bun run data:build` is implemented and its parity gates pass. The compiler is
+deliberately not wired to approve, publish, or cutover. The next step is to
+take the migration to a first reviewed release without breaking the public
+site, in this order:
 
-1. read an explicit canonical revision/release scope from local SQLite/D1;
-2. combine migrated canonical entities with the read-only legacy remainder;
-3. generate catalog, country details, arrangements, coverage, timelines,
-   graph edges, API release rows, and a changelog;
-4. compare generated compatibility documents with the existing public files;
-5. fail on duplicate ownership, missing IDs, unsupported evidence paths, or
-   unexpected drift;
-6. permit the known Spain beneficiary correction only as an explicit reviewed
-   difference;
-7. do not approve D1 revisions, publish a release, replace public JSON, or
-   deploy the website until parity gates pass.
+1. **Schedule D1 backups** — the only remaining unchecked Phase 2 item. Back
+   up `flag-paths-data` to private R2 on a schedule and test restoration, so a
+   reviewed release has a recovery path before any cutover.
+2. **Human review of the draft revisions** — the 21 canonical revisions in
+   `flag-paths-data` are all `draft`. A reviewer approves the pilot scope
+   through the publication service (never the intake Worker). `data:build`
+   remains the parity oracle against the still-authoritative Git JSON.
+3. **First immutable release from approved D1 rows** — record the release in
+   D1 and confirm `data:build` (or its D1-backed equivalent) reproduces the
+   release byte-for-byte from the approved export.
+4. **Phase 3 versioned browser reads** — deploy content-addressed release
+   files with the Worker before any public cutover.
 
-The detailed checklist is in `docs/data-migration-plan.md`.
+Do not approve D1 revisions, publish a release, replace `public/*.json`, or
+deploy the website until the parity gates pass against an approved export and a
+backup/restore has been demonstrated.
 
 ## Scripts-folder direction
 
@@ -119,6 +141,7 @@ bun install
 bun run data:schemas
 bun run data:migrate:canonical
 bun run data:db
+bun run data:build
 bun run build
 ```
 
@@ -141,8 +164,9 @@ D1 configuration and operational commands are documented in
 > Continue the Flag Paths D1 migration in this repository. Read
 > `docs/continuation-handoff.md` and `docs/data-migration-plan.md` completely,
 > inspect `git status` and the recent commits, then implement the immediate next
-> task. Keep D1 as the authoring source and static JSON as generated public
-> output. Do not approve or publish the current draft revisions and do not cut
-> over or deploy until the SQL-plus-legacy compatibility build passes explicit
-> parity tests. Use TypeScript, run the full build, make short logical commits,
-> and push validated work.
+> task. `bun run data:build` is already implemented and passes its parity gates;
+> do not rebuild or replace it — build on it. Keep D1 as the authoring source and
+> static JSON as generated public output. Do not approve or publish the current
+> draft revisions and do not cutover or deploy until parity passes against an
+> approved export and a D1 backup/restore has been demonstrated. Use TypeScript,
+> run the full build, make short logical commits, and push validated work.
