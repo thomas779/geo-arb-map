@@ -121,7 +121,8 @@ documents and the full test/build suite passes.
 - [x] Add versioned JSON schemas for jurisdiction, arrangement, source,
   timeline, and change-proposal records.
 - [x] Transform the shadow candidates against those schemas.
-- [ ] Review the transformed candidates and add missing arrangement sources.
+- [x] Add initial primary and official sources for the pilot arrangements.
+- [ ] Review country-level implementation exceptions before arrangement cutover.
 - [ ] Promote reviewed pilot candidates into `data/jurisdictions/` and
   `data/arrangements/`.
 - [ ] Make canonical records authoritative for migrated IDs while keeping the

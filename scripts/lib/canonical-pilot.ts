@@ -35,6 +35,13 @@ interface CanonicalPilot {
   };
 }
 
+interface ManualPilotSource {
+  record: SourceRecord;
+  arrangement_id: string;
+  supports_fields: string[];
+  note?: string;
+}
+
 function hash(value: unknown, length = 64): string {
   return createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, length);
 }
@@ -51,6 +58,10 @@ function sourceId(url: string): string {
 function sourceType(url: string): SourceRecord['source_type'] {
   const host = new URL(url).hostname;
   if (host.includes('legifrance.gouv.fr')) return 'primary_law';
+  if (host.includes('eur-lex.europa.eu') || host.includes('boe.es')) {
+    return 'primary_law';
+  }
+  if (host.includes('efta.int') || host.includes('mercosur.int')) return 'treaty';
   if (host.includes('justica.gov.pt') || host.includes('service-public.fr')) {
     return 'official_guidance';
   }
@@ -85,6 +96,180 @@ function refs(
     source_id: sourceId(source.url),
     supports_fields: supportsFields,
   }));
+}
+
+function officialSource({
+  title,
+  url,
+  source_type,
+  jurisdictions,
+}: {
+  title: string;
+  url: string;
+  source_type: SourceRecord['source_type'];
+  jurisdictions: string[];
+}): SourceRecord {
+  return SourceRecordSchema.parse({
+    schema_version: 1,
+    entity_type: 'source',
+    id: sourceId(url),
+    title,
+    url,
+    publisher: publisherFromUrl(url),
+    source_type,
+    jurisdictions,
+    language: null,
+    published_at: null,
+    last_checked: '2026-07-19',
+  });
+}
+
+const IBERO_AMERICAN_BENEFICIARIES = [
+  '020', // Andorra
+  '032', // Argentina
+  '068', // Bolivia
+  '076', // Brazil
+  '152', // Chile
+  '170', // Colombia
+  '188', // Costa Rica
+  '192', // Cuba
+  '214', // Dominican Republic
+  '218', // Ecuador
+  '222', // El Salvador
+  '226', // Equatorial Guinea
+  '320', // Guatemala
+  '340', // Honduras
+  '484', // Mexico
+  '558', // Nicaragua
+  '591', // Panama
+  '600', // Paraguay
+  '604', // Peru
+  '608', // Philippines
+  '620', // Portugal
+  '858', // Uruguay
+  '862', // Venezuela
+] as const;
+
+function arrangementSources(shadow: DataShadow): ManualPilotSource[] {
+  const eu = shadow.arrangements.find(item => item.record.id === 'eu_eea');
+  const mercosur = shadow.arrangements.find(item => item.record.id === 'mercosur');
+  if (!eu || !mercosur) throw new Error('Pilot arrangements are incomplete');
+  const euMembers = 'members' in eu.record
+    ? eu.record.members.map(member => member.iso_n3)
+    : [];
+  const mercosurMembers = 'members' in mercosur.record
+    ? mercosur.record.members.map(member => member.iso_n3)
+    : [];
+  return [
+    {
+      arrangement_id: 'eu_eea',
+      record: officialSource({
+        title: 'Directive 2004/38/EC — free movement and residence of Union citizens',
+        url: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32004L0038',
+        source_type: 'primary_law',
+        jurisdictions: euMembers,
+      }),
+      supports_fields: ['/rights_by_status/citizenship'],
+    },
+    {
+      arrangement_id: 'eu_eea',
+      record: officialSource({
+        title: 'Directive 2003/109/EC — status of third-country nationals who are long-term residents',
+        url: 'https://eur-lex.europa.eu/eli/dir/2003/109/',
+        source_type: 'primary_law',
+        jurisdictions: euMembers,
+      }),
+      supports_fields: ['/rights_by_status/permanent_residence'],
+      note: 'Directive scope and participating states require country-level interpretation.',
+    },
+    {
+      arrangement_id: 'eu_eea',
+      record: officialSource({
+        title: 'EEA Agreement — Main Part, including Article 28',
+        url: 'https://www.efta.int/sites/default/files/media/documents/legal-texts/eea/the-eea-agreement/Main%20Text%20of%20the%20Agreement/EEAagreement.pdf',
+        source_type: 'treaty',
+        jurisdictions: euMembers,
+      }),
+      supports_fields: ['/participants/members', '/rights_by_status/citizenship'],
+      note: 'Supports EEA free-movement coverage; citizenship remains domestic.',
+    },
+    {
+      arrangement_id: 'eu_eea',
+      record: officialSource({
+        title: 'EU–Switzerland Agreement on the free movement of persons',
+        url: 'https://eur-lex.europa.eu/legal-content/en/ALL/?uri=CELEX:22002A0430(01)',
+        source_type: 'treaty',
+        jurisdictions: euMembers,
+      }),
+      supports_fields: ['/participants/members', '/rights_by_status/citizenship'],
+      note: 'Supports the Swiss linkage; Switzerland is not an EEA member.',
+    },
+    {
+      arrangement_id: 'mercosur',
+      record: officialSource({
+        title: 'MERCOSUR Decision CMC 28/02 — Residence Agreement',
+        url: 'https://sim.mercosur.int/norma/DEC/28/2002',
+        source_type: 'treaty',
+        jurisdictions: mercosurMembers,
+      }),
+      supports_fields: [
+        '/rights_by_status/temporary_residence',
+        '/rights_by_status/permanent_residence',
+      ],
+    },
+    {
+      arrangement_id: 'mercosur',
+      record: officialSource({
+        title: 'MERCOSUR Citizenship Statute — circulation of persons',
+        url: 'https://www.mercosur.int/wp-content/uploads/2025/02/estatuto-ciudadania-mercosur-es_MAR2026_ECM.pdf',
+        source_type: 'official_guidance',
+        jurisdictions: mercosurMembers,
+      }),
+      supports_fields: [
+        '/participants/members',
+        '/rights_by_status/temporary_residence',
+        '/rights_by_status/permanent_residence',
+      ],
+    },
+    {
+      arrangement_id: 'spain_iberoamerican',
+      record: officialSource({
+        title: 'Spanish Civil Code — Article 22',
+        url: 'https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763',
+        source_type: 'primary_law',
+        jurisdictions: ['724', ...IBERO_AMERICAN_BENEFICIARIES],
+      }),
+      supports_fields: [
+        '/participants/beneficiaries',
+        '/pathways/two_year_naturalization/eligibility',
+        '/pathways/two_year_naturalization/timeline/eligibility_minimum_months',
+      ],
+    },
+    {
+      arrangement_id: 'spain_iberoamerican',
+      record: officialSource({
+        title: 'Spain General Administration — acquisition of nationality by residence',
+        url: 'https://administracion.gob.es/pag_Home/Tu-espacio-europeo/derechos-obligaciones/ciudadanos/residencia/obtencion-nacionalidad.html',
+        source_type: 'official_guidance',
+        jurisdictions: ['724', ...IBERO_AMERICAN_BENEFICIARIES],
+      }),
+      supports_fields: [
+        '/pathways/two_year_naturalization/eligibility',
+        '/pathways/two_year_naturalization/timeline/eligibility_minimum_months',
+      ],
+    },
+    {
+      arrangement_id: 'spain_iberoamerican',
+      record: officialSource({
+        title: 'BOE — full members of the Ibero-American community of nations',
+        url: 'https://www.boe.es/diario_boe/txt.php?id=BOE-A-2022-10484',
+        source_type: 'official_guidance',
+        jurisdictions: ['724', ...IBERO_AMERICAN_BENEFICIARIES],
+      }),
+      supports_fields: ['/participants/beneficiaries'],
+      note: 'Used with Civil Code Article 22 to enumerate the Ibero-American category.',
+    },
+  ];
 }
 
 function franceRecord(shadow: DataShadow): JurisdictionRecord {
@@ -353,6 +538,7 @@ function spainRecord(shadow: DataShadow): JurisdictionRecord {
 function regionalArrangement(
   shadow: DataShadow,
   id: 'eu_eea' | 'mercosur',
+  manualSources: ManualPilotSource[],
 ): ArrangementRecord {
   const candidate = shadow.arrangements.find(item => item.record.id === id);
   if (!candidate || candidate.arrangement_kind !== 'bloc') {
@@ -389,16 +575,25 @@ function regionalArrangement(
       notes: bloc.notes,
     },
     review: {
-      state: 'legacy',
+      state: 'partial',
       confidence: 'medium',
-      last_checked: shadow.compatibility.mobility.meta.last_verified,
-      note: 'Structurally migrated; arrangement sources still require canonical source records.',
+      last_checked: '2026-07-19',
+      note: 'Core official instruments are linked; country-level implementation and scope exceptions remain to be reviewed.',
     },
-    source_refs: [],
+    source_refs: manualSources
+      .filter(source => source.arrangement_id === id)
+      .map(source => ({
+        source_id: source.record.id,
+        supports_fields: source.supports_fields,
+        ...(source.note ? { note: source.note } : {}),
+      })),
   });
 }
 
-function spainIberoArrangement(shadow: DataShadow): ArrangementRecord {
+function spainIberoArrangement(
+  shadow: DataShadow,
+  manualSources: ManualPilotSource[],
+): ArrangementRecord {
   const candidate = shadow.arrangements.find(
     item => item.record.id === 'spain_iberoamerican',
   );
@@ -406,7 +601,7 @@ function spainIberoArrangement(shadow: DataShadow): ArrangementRecord {
     throw new Error('Spain Ibero-American pilot is missing');
   }
   const lane = candidate.record as Extract<typeof candidate.record, { destination: unknown }>;
-  const beneficiaryIsos = lane.beneficiaries.map(member => member.iso_n3);
+  const beneficiaryIsos = [...IBERO_AMERICAN_BENEFICIARIES];
   return ArrangementRecordSchema.parse({
     schema_version: 1,
     entity_type: 'arrangement',
@@ -457,19 +652,37 @@ function spainIberoArrangement(shadow: DataShadow): ArrangementRecord {
       timeline: {
         eligibility_minimum_months: 24,
         processing_typical_months: null,
-        confidence: 'medium',
-        note: 'Legacy route lacks canonical source records; not yet approved for cutover.',
+        confidence: 'high',
+        note: 'Two-year legal-residence eligibility period; processing time remains separate and unverified.',
       },
-      source_refs: [],
+      source_refs: manualSources
+        .filter(source => source.arrangement_id === lane.id)
+        .filter(source => source.supports_fields.some(field => field.startsWith('/pathways/')))
+        .map(source => ({
+          source_id: source.record.id,
+          supports_fields: source.supports_fields.filter(field => field.startsWith('/pathways/')),
+          ...(source.note ? { note: source.note } : {}),
+        })),
     }],
     editorial: { limits: lane.limits },
     review: {
-      state: 'legacy',
-      confidence: 'medium',
-      last_checked: shadow.compatibility.mobility.meta.last_verified,
-      note: 'Structurally migrated; current source records must be added before promotion.',
+      state: 'partial',
+      confidence: 'high',
+      last_checked: '2026-07-19',
+      note: 'Official law and guidance reviewed; beneficiary enumeration corrected in the candidate and awaits compatibility cutover.',
     },
-    source_refs: [],
+    source_refs: manualSources
+      .filter(source => source.arrangement_id === lane.id)
+      .map(source => ({
+        ...source,
+        supports_fields: source.supports_fields.filter(field => !field.startsWith('/pathways/')),
+      }))
+      .filter(source => source.supports_fields.length > 0)
+      .map(source => ({
+        source_id: source.record.id,
+        supports_fields: source.supports_fields,
+        ...(source.note ? { note: source.note } : {}),
+      })),
   });
 }
 
@@ -571,6 +784,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     portugalRecord(shadow),
     spainRecord(shadow),
   ];
+  const manualSources = arrangementSources(shadow);
   const sourcesById = new Map<string, SourceRecord>();
   for (const jurisdiction of shadow.jurisdictions) {
     for (const route of jurisdiction.routes) {
@@ -603,11 +817,18 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
       }
     }
   }
+  for (const manual of manualSources) {
+    const existing = sourcesById.get(manual.record.id);
+    if (existing && existing.url !== manual.record.url) {
+      throw new Error(`Source ID collision ${manual.record.id}`);
+    }
+    sourcesById.set(manual.record.id, manual.record);
+  }
   const sources = [...sourcesById.values()].sort((a, b) => a.id.localeCompare(b.id));
   const arrangements = [
-    regionalArrangement(shadow, 'eu_eea'),
-    regionalArrangement(shadow, 'mercosur'),
-    spainIberoArrangement(shadow),
+    regionalArrangement(shadow, 'eu_eea', manualSources),
+    regionalArrangement(shadow, 'mercosur', manualSources),
+    spainIberoArrangement(shadow, manualSources),
   ];
   const content = {
     sources,

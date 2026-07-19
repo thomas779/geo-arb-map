@@ -44,6 +44,14 @@ describe('canonical v1 data schemas', () => {
     expect(education.timeline.processing_typical_months).toBeNull();
   });
 
+  test('corrects the incomplete legacy Spain beneficiary enumeration in the candidate', () => {
+    const spain = pilot.arrangements.find(item => item.id === 'spain_iberoamerican')!;
+    expect(spain.participants.beneficiaries).toHaveLength(23);
+    for (const iso of ['188', '192', '214', '222', '320', '340', '558', '591']) {
+      expect(spain.participants.beneficiaries).toContain(iso);
+    }
+  });
+
   test('resolves every field-level source reference', () => {
     const sourceIds = new Set(pilot.sources.map(source => source.id));
     const references = [
