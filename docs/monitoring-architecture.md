@@ -43,6 +43,11 @@ official source / Telegram lead
 Automation discovers and explains changes. It never publishes a legal conclusion by
 itself.
 
+The public Telegram layer follows the same rule: AI may triage, synthesize, and
+challenge a draft against supplied evidence, but a completed GitHub review and a
+manual publication action are required. See
+[`telegram-publishing-v0.md`](telegram-publishing-v0.md).
+
 ## Source hierarchy
 
 ### Tier 1 — primary

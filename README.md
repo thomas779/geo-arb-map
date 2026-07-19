@@ -100,6 +100,11 @@ bun scripts/normalize_research.js data/research_batches/<batch>.json
 bun scripts/build_registry.js     # regenerate data/registry.json
 bun scripts/build_coverage.js     # regenerate public/coverage.json
 bun run data:citizenship          # regenerate public/citizenship_routes.json
+
+# reviewed source monitoring (writes only to monitor/.out/)
+bun run monitor:collect
+bun run monitor:triage
+bun run monitor:draft
 ```
 
 ## Repository layout
@@ -110,6 +115,7 @@ src/              React shell (App, components/) + imperative D3 map layer (map.
 src/components/ui shadcn/ui primitives (generated)
 data/             registry, citizenship route sources, manual overrides, research batches
 scripts/          normalizer + registry/coverage/route generators (bun)
+monitor/          source collectors, bounded triage, and review-lead drafts
 tests/            dataset invariant + regression suite
 docs/             explorer-spec.md — locked design for the strategy explorer
 ```
@@ -124,6 +130,8 @@ Product and launch documents:
   pilot around real routes and reviewed knowledge.
 - [`docs/monitoring-architecture.md`](docs/monitoring-architecture.md) — source
   monitoring, reviewed changes, account-backed watches, and alert delivery.
+- [`docs/monitoring-pipeline-v0.md`](docs/monitoring-pipeline-v0.md) — the
+  implemented, review-first source monitor and its activation gate.
 - [`docs/data-architecture.md`](docs/data-architecture.md) — country nationality-law
   files, cross-border arrangements, generated indexes, and source policy.
 - [`docs/explorer-spec.md`](docs/explorer-spec.md) — engine and explorer design
