@@ -1,5 +1,6 @@
 import {
   ChevronDown,
+  ChevronRight,
   ExternalLink,
   PanelRightClose,
   Route,
@@ -19,6 +20,7 @@ interface Props {
   blocIds: string[];
   laneId: string | null;
   onClose: () => void;
+  onSelectCountry: (iso: string, name: string) => void;
 }
 
 const CATEGORY_LABEL: Record<Bloc['category'], string> = {
@@ -49,19 +51,40 @@ function Rights({ bloc }: { bloc: Bloc }) {
   );
 }
 
+function SectionLabel({
+  title,
+  description,
+}: {
+  title: string;
+  description?: string;
+}) {
+  return (
+    <div>
+      <h3 className="text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground">
+        {title}
+      </h3>
+      {description && (
+        <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{description}</p>
+      )}
+    </div>
+  );
+}
+
 function MemberList({
   members,
   overlapCounts,
+  onSelectCountry,
 }: {
   members: Bloc['members'];
   overlapCounts?: Map<string, number>;
+  onSelectCountry?: (iso: string, name: string) => void;
 }) {
   return (
     <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
       {members.map(member => {
         const overlapCount = overlapCounts?.get(member.iso_n3) ?? 0;
-        return (
-          <div key={member.iso_n3} className="flex min-w-0 items-center gap-1.5 text-xs">
+        const content = (
+          <>
             <span className="shrink-0 text-sm" aria-hidden>{countryFlag(member.iso_n3)}</span>
             <span className="truncate">{member.name}</span>
             {overlapCount > 1 && (
@@ -72,6 +95,27 @@ function MemberList({
                 ×{overlapCount}
               </span>
             )}
+            {onSelectCountry && (
+              <ChevronRight className="ml-auto size-3 shrink-0 text-muted-foreground" aria-hidden />
+            )}
+          </>
+        );
+        if (onSelectCountry) {
+          return (
+            <button
+              key={member.iso_n3}
+              type="button"
+              className="flex min-h-8 min-w-0 items-center gap-1.5 rounded px-1 text-left text-xs hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+              aria-label={`Open ${member.name} country guide`}
+              onClick={() => onSelectCountry(member.iso_n3, member.name)}
+            >
+              {content}
+            </button>
+          );
+        }
+        return (
+          <div key={member.iso_n3} className="flex min-w-0 items-center gap-1.5 text-xs">
+            {content}
           </div>
         );
       })}
@@ -82,32 +126,39 @@ function MemberList({
 function BlocDetail({
   bloc,
   compact = false,
+  onSelectCountry,
 }: {
   bloc: Bloc;
   compact?: boolean;
+  onSelectCountry: (iso: string, name: string) => void;
 }) {
   const dark = useTheme().theme === 'dark';
   const body = (
     <div className={compact ? 'border-t px-3 pb-3 pt-3' : 'space-y-3'}>
+      <SectionLabel
+        title="Rights by status"
+        description="Read the row matching the status you would hold. Domestic citizenship rules remain country-specific."
+      />
       <Rights bloc={bloc} />
-      <div className="rounded-lg bg-muted/55 px-3 py-2.5">
-        <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-          Entry context
-        </p>
-        <p className="mt-1 text-xs leading-relaxed">{bloc.fastest_entry}</p>
-      </div>
-      {bloc.notes && (
-        <p className="text-xs leading-relaxed text-muted-foreground">{bloc.notes}</p>
-      )}
+      <SectionLabel
+        title="Member countries"
+        description="Open a country guide for its domestic naturalization, birth, ancestry, and investment rules."
+      />
       <details className="group rounded-lg border bg-card">
         <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 px-3 text-xs font-medium">
-          <span>{bloc.members.length} countries in scope</span>
+          <span>Browse {bloc.members.length} country guides</span>
           <ChevronDown className="ml-auto size-3.5 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
         </summary>
         <div className="border-t px-3 py-3">
-          <MemberList members={bloc.members} />
+          <MemberList members={bloc.members} onSelectCountry={onSelectCountry} />
         </div>
       </details>
+      {bloc.notes && (
+        <>
+          <SectionLabel title="Scope notes" />
+          <p className="text-xs leading-relaxed text-muted-foreground">{bloc.notes}</p>
+        </>
+      )}
       <a
         href={dataCorrectionUrl(bloc.name, `bloc:${bloc.id}`)}
         target="_blank"
@@ -144,7 +195,13 @@ function BlocDetail({
   );
 }
 
-function LaneDetail({ lane }: { lane: BilateralLane }) {
+function LaneDetail({
+  lane,
+  onSelectCountry,
+}: {
+  lane: BilateralLane;
+  onSelectCountry: (iso: string, name: string) => void;
+}) {
   const originLabel = lane.beneficiaries.length > 0
     ? `${lane.beneficiaries.length} eligible countr${lane.beneficiaries.length === 1 ? 'y' : 'ies'}`
     : 'Eligibility-based heritage route';
@@ -152,7 +209,11 @@ function LaneDetail({ lane }: { lane: BilateralLane }) {
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2.5">
+      <button
+        type="button"
+        className="flex w-full items-center gap-2 rounded-lg border bg-card px-3 py-2.5 text-left hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+        onClick={() => onSelectCountry(lane.destination.iso_n3, lane.destination.name)}
+      >
         <div className="min-w-0 flex-1">
           <p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
             Destination
@@ -165,8 +226,10 @@ function LaneDetail({ lane }: { lane: BilateralLane }) {
         <Badge variant="outline" className="shrink-0 text-[10px]">
           {lane.leads_to_settlement ? 'Settlement path' : 'Temporary access'}
         </Badge>
-      </div>
+        <ChevronRight className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+      </button>
 
+      <SectionLabel title="What this path provides" />
       <div className="grid gap-px overflow-hidden rounded-lg border bg-border">
         <div className="grid grid-cols-[44px_1fr] gap-2 bg-card px-3 py-2.5">
           <span className="pt-0.5 font-mono text-[10px] font-semibold text-muted-foreground">GET</span>
@@ -201,7 +264,7 @@ function LaneDetail({ lane }: { lane: BilateralLane }) {
             <ChevronDown className="ml-auto size-3.5 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
           </summary>
           <div className="border-t px-3 py-3">
-            <MemberList members={lane.beneficiaries} />
+            <MemberList members={lane.beneficiaries} onSelectCountry={onSelectCountry} />
           </div>
         </details>
       )}
@@ -246,7 +309,13 @@ function LaneDetail({ lane }: { lane: BilateralLane }) {
   );
 }
 
-export function RouteDetailPanel({ data, blocIds, laneId, onClose }: Props) {
+export function RouteDetailPanel({
+  data,
+  blocIds,
+  laneId,
+  onClose,
+  onSelectCountry,
+}: Props) {
   const blocs = data.blocs.filter(bloc => blocIds.includes(bloc.id));
   const lane = laneId
     ? data.bilateral_lanes.find(candidate => candidate.id === laneId) ?? null
@@ -311,11 +380,14 @@ export function RouteDetailPanel({ data, blocIds, laneId, onClose }: Props) {
               {singleBloc.members.length} members
             </Badge>
           </div>
-          <BlocDetail bloc={singleBloc} />
+          <p className="mb-4 text-xs leading-relaxed text-muted-foreground">
+            This guide explains the shared arrangement. Country-specific citizenship timelines live in each member’s country guide.
+          </p>
+          <BlocDetail bloc={singleBloc} onSelectCountry={onSelectCountry} />
         </>
       )}
 
-      {lane && <LaneDetail lane={lane} />}
+      {lane && <LaneDetail lane={lane} onSelectCountry={onSelectCountry} />}
 
       {!singleBloc && !lane && (
         <div className="space-y-4">
@@ -333,7 +405,14 @@ export function RouteDetailPanel({ data, blocIds, laneId, onClose }: Props) {
             </div>
           )}
           <div className="space-y-2">
-            {blocs.map(bloc => <BlocDetail key={bloc.id} bloc={bloc} compact />)}
+            {blocs.map(bloc => (
+              <BlocDetail
+                key={bloc.id}
+                bloc={bloc}
+                compact
+                onSelectCountry={onSelectCountry}
+              />
+            ))}
           </div>
           <details className="group rounded-lg border bg-card">
             <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 px-3 text-xs font-medium">
@@ -341,7 +420,11 @@ export function RouteDetailPanel({ data, blocIds, laneId, onClose }: Props) {
               <ChevronDown className="ml-auto size-3.5 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
             </summary>
             <div className="border-t px-3 py-3">
-              <MemberList members={uniqueMembers} overlapCounts={overlapCounts} />
+              <MemberList
+                members={uniqueMembers}
+                overlapCounts={overlapCounts}
+                onSelectCountry={onSelectCountry}
+              />
             </div>
           </details>
         </div>

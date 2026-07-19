@@ -265,6 +265,7 @@ export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Pro
       : selectedBlocs.length > 1
         ? `${selectedBlocs.length} regional systems`
         : null;
+  const selectionActionLabel = selectedBlocs.length > 1 ? 'Compare routes' : 'Route guide';
 
   const allSections = ['regional', 'country', 'heritage'];
   const [openSections, setOpenSections] = useState<string[]>(() => {
@@ -558,34 +559,38 @@ export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Pro
 
       {selectionLabel && (
         <div className="shrink-0 border-t border-sidebar-border bg-sidebar px-3 py-2.5">
-          <div className="flex min-h-12 items-center gap-2 rounded-lg bg-accent/80 px-2.5 py-1.5">
-            <Check className="size-3.5 shrink-0 text-primary" strokeWidth={2.5} aria-hidden />
-            <div className="min-w-0 flex-1">
-              <p className="text-[9px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
-                On map
-              </p>
-              <p className="truncate text-xs font-medium" title={selectionLabel}>
-                {selectionLabel}
-              </p>
+          <div className="rounded-lg bg-accent/80 p-2">
+            <div className="flex items-center gap-2 px-0.5">
+              <Check className="size-3.5 shrink-0 text-primary" strokeWidth={2.5} aria-hidden />
+              <div className="min-w-0 flex-1">
+                <p className="text-[9px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                  Selected on map
+                </p>
+                <p className="truncate text-xs font-medium" title={selectionLabel}>
+                  {selectionLabel}
+                </p>
+              </div>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="min-h-9 shrink-0 gap-1 px-2 text-xs text-muted-foreground hover:text-foreground md:min-h-7"
-              onClick={onInspect}
-            >
-              <Info className="size-3.5" aria-hidden />
-              Details
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon-sm"
-              className="size-9 shrink-0 text-muted-foreground hover:text-foreground md:size-7"
-              aria-label="Reset map selection"
-              onClick={onClear}
-            >
-              <X className="size-3.5" aria-hidden />
-            </Button>
+            <div className="mt-2 grid grid-cols-2 gap-1.5">
+              <Button
+                variant="secondary"
+                size="sm"
+                className="min-h-9 gap-1.5 px-2 text-xs md:min-h-8"
+                onClick={onInspect}
+              >
+                <Info className="size-3.5" aria-hidden />
+                {selectionActionLabel}
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="min-h-9 gap-1.5 px-2 text-xs text-muted-foreground hover:text-foreground md:min-h-8"
+                onClick={onClear}
+              >
+                <X className="size-3.5" aria-hidden />
+                Clear map
+              </Button>
+            </div>
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-import { ChevronDown, ExternalLink, PanelRightClose, X } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ExternalLink, PanelRightClose, X } from 'lucide-react';
 import type {
   AppState,
   BilateralLane,
@@ -23,6 +23,7 @@ interface Props {
   state: AppState;
   onClose: () => void;
   onCollapse?: () => void;
+  onBackToRoutes?: () => void;
 }
 
 const MODE_LABELS: Record<CitizenshipAcquisitionMode, string> = {
@@ -290,7 +291,14 @@ function LaneCard({ lane, inbound, countryName }: { lane: BilateralLane; inbound
   );
 }
 
-export function DetailPanel({ data, citizenshipRoutes, state, onClose, onCollapse }: Props) {
+export function DetailPanel({
+  data,
+  citizenshipRoutes,
+  state,
+  onClose,
+  onCollapse,
+  onBackToRoutes,
+}: Props) {
   const iso = state.country!;
   const blocs = data.blocs.filter(b => b.members.some(m => m.iso_n3 === iso));
   const formerBlocs = data.blocs.filter(b => b.former_members?.some(m => m.iso_n3 === iso));
@@ -311,6 +319,17 @@ export function DetailPanel({ data, citizenshipRoutes, state, onClose, onCollaps
     <section className="h-full w-full overflow-y-auto bg-background px-3 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-4 md:pt-4 md:pb-8">
       <div className="sticky top-0 z-10 -mx-3 mb-3 flex items-start justify-between gap-2 border-b bg-background/95 px-3 py-3 backdrop-blur-sm sm:-mx-4 sm:px-4 md:static md:mx-0 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
         <div className="min-w-0">
+          {onBackToRoutes && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="-ml-2 mb-1 h-7 gap-1 px-2 text-xs text-muted-foreground"
+              onClick={onBackToRoutes}
+            >
+              <ArrowLeft className="size-3.5" aria-hidden />
+              {state.blocs.length > 1 ? 'Back to comparison' : 'Back to route guide'}
+            </Button>
+          )}
           <h2 className="flex items-center gap-2 text-xl font-semibold">
             {flag && <span aria-hidden>{flag}</span>}
             <span className="truncate">{countryName}</span>

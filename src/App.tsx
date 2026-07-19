@@ -158,9 +158,13 @@ export default function App() {
     patch({ view: v }), [patch]);
   const selectCountry = useCallback((iso: string, name: string) => {
     setRoutePanelOpen(false);
+    if (state.country === iso) {
+      setDetailPanelOpen(open => !open);
+      return;
+    }
     setDetailPanelOpen(true);
     patch({ country: iso, countryName: name });
-  }, [patch]);
+  }, [patch, state.country]);
   const closeDetail = useCallback(() => {
     setDetailPanelOpen(false);
     patch({ country: null, countryName: null });
@@ -176,6 +180,11 @@ export default function App() {
     setMobileList(false);
     setRoutePanelOpen(true);
   }, []);
+  const backToRouteSelection = useCallback(() => {
+    setDetailPanelOpen(false);
+    setRoutePanelOpen(true);
+    patch({ country: null, countryName: null });
+  }, [patch]);
 
   const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane);
   const rightPanelOpen = state.country ? detailPanelOpen : hasRouteSelection && routePanelOpen;
@@ -330,7 +339,7 @@ export default function App() {
               className={cn(
                 'absolute left-1/2 z-20 flex -translate-x-1/2 gap-2 transition-[bottom] md:hidden',
                 mobileList && hasRouteSelection
-                  ? 'bottom-[max(4.75rem,calc(env(safe-area-inset-bottom)+4.25rem))]'
+                  ? 'bottom-[max(7rem,calc(env(safe-area-inset-bottom)+6.5rem))]'
                   : 'bottom-[max(1rem,env(safe-area-inset-bottom))]',
               )}
             >
@@ -351,7 +360,7 @@ export default function App() {
                   onClick={inspectRouteSelection}
                 >
                   <PanelRightOpen aria-hidden />
-                  Details
+                  Route guide
                 </Button>
               )}
             </div>
@@ -392,7 +401,7 @@ export default function App() {
                   }}
                 >
                   <PanelRightOpen aria-hidden />
-                  Details
+                  {state.country ? 'Country guide' : 'Route guide'}
                 </Button>
               </TooltipTrigger>
               <TooltipContent side="left">
@@ -411,6 +420,7 @@ export default function App() {
                     citizenshipRoutes={citizenshipRoutes}
                     state={state}
                     onClose={closeDetail}
+                    onBackToRoutes={hasRouteSelection ? backToRouteSelection : undefined}
                   />
                 ) : (
                   <RouteDetailPanel
@@ -418,6 +428,7 @@ export default function App() {
                     blocIds={state.blocs}
                     laneId={state.lane}
                     onClose={() => setRoutePanelOpen(false)}
+                    onSelectCountry={selectCountry}
                   />
                 )}
               </div>
@@ -437,6 +448,7 @@ export default function App() {
                   state={state}
                   onClose={closeDetail}
                   onCollapse={() => setDetailPanelOpen(false)}
+                  onBackToRoutes={hasRouteSelection ? backToRouteSelection : undefined}
                 />
               ) : (
                 <RouteDetailPanel
@@ -444,6 +456,7 @@ export default function App() {
                   blocIds={state.blocs}
                   laneId={state.lane}
                   onClose={() => setRoutePanelOpen(false)}
+                  onSelectCountry={selectCountry}
                 />
               )}
             </div>
