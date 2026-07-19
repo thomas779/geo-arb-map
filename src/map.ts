@@ -140,6 +140,7 @@ export function init(
         _featureCentroids.set(iso, _path.centroid(d));
       });
     updateDotPositions();
+    updateFlagPositions();
   }
   _resizeObserver = new ResizeObserver(resize);
   _resizeObserver.observe(document.getElementById('map-wrap')!);
@@ -165,6 +166,7 @@ export function init(
         .data(features)
         .join('path')
         .attr('class', 'country')
+        .attr('data-iso', d => String(d.id).padStart(3, '0'))
         .attr('d', d => _path(d as unknown as d3.GeoPermissibleObjects))
         .on('mousemove', (e, d) => {
           const iso = String(d.id).padStart(3, '0');
@@ -231,6 +233,14 @@ function updateDotPositions(): void {
     .attr('cy', d => (_projection([d.lon, d.lat]) ?? [0, 0])[1]);
 }
 
+function updateFlagPositions(): void {
+  _gFlags
+    .selectAll<SVGTextElement, { f: PlantedFlag; pos: [number, number] }>('text.flag-pin')
+    .interrupt()
+    .attr('x', d => centroidForIso(d.f.iso_n3)?.[0] ?? d.pos[0])
+    .attr('y', d => centroidForIso(d.f.iso_n3)?.[1] ?? d.pos[1]);
+}
+
 function centroidForIso(iso: string): [number, number] | null {
   const c = _featureCentroids.get(iso);
   if (c && isFinite(c[0]) && isFinite(c[1])) return c;
@@ -253,6 +263,7 @@ function drawFlags(profile: Profile): void {
     .join(
       enter => enter.append('text')
         .attr('class', 'flag-pin')
+        .attr('data-iso', d => d.f.iso_n3)
         .attr('x', d => d.pos[0])
         .attr('y', d => d.pos[1] - 14)
         .attr('opacity', 0)
