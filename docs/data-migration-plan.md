@@ -6,11 +6,14 @@ The migration separates the system into two planes:
 
 - **Public data plane:** versioned static artifacts deployed with the Atlas
   Worker. No database request is required to load the map or planner.
-- **Monitoring control plane:** Cloudflare Email Workers, D1, and R2 collect,
-  deduplicate, review, and publish evidence-backed changes.
+- **Editorial control plane:** Cloudflare Email Workers, D1, and R2 collect,
+  normalize, query, review, and publish evidence-backed changes.
 
-Git remains the canonical history for reviewed legal facts. D1 records workflow
-state; it does not silently become a second legal source of truth.
+During migration, the existing Git JSON remains authoritative. After the D1
+cutover gate passes, D1 becomes the sole editable store for normalized facts
+and workflow state. Git keeps schemas, migrations, approved change proposals,
+release manifests, and application code; public JSON becomes generated output.
+There is no permanent dual-write path.
 
 ## Non-negotiable invariants
 
@@ -24,6 +27,9 @@ state; it does not silently become a second legal source of truth.
 - Code, schemas, and the static data release deploy as one Worker version.
 - Rollback restores a compatible code-and-data version without a database
   migration.
+- Only approved revisions can enter a release.
+- A published row is append-only: corrections supersede a revision instead of
+  overwriting its history.
 
 ## Architecture decision
 
@@ -55,28 +61,68 @@ boundary:
 - [Workers static assets](https://developers.cloudflare.com/workers/static-assets/)
 - [Workers versions and deployments](https://developers.cloudflare.com/workers/versions-and-deployments/)
 
-### Cloudflare control plane
+### Cloudflare editorial control plane
+
+Use two D1 databases across the trust boundary:
+
+- `flag-paths-monitor` accepts untrusted internet/email signals and stores
+  intake workflow state;
+- `flag-paths-data` stores reviewed canonical facts, projections, and releases.
+
+The intake Worker receives no binding to `flag-paths-data`. A compromised or
+malformed newsletter path therefore cannot write legal facts. Approved
+proposals cross the boundary only through the review/publication service.
 
 | Service | Responsibility | Excluded responsibility |
 |---|---|---|
-| D1 | signal deduplication, review queue, source health, subscriptions, delivery state | serving canonical map facts on every page load |
+| Monitor D1 | signal deduplication, source health, intake workflow and delivery state | canonical facts |
+| Data D1 | normalized facts, source links, temporal revisions, review queue, immutable release membership | untrusted intake and serving mutable working rows directly to the public map |
 | R2 | short-retention raw email and large evidence artifacts | public legal-data source of truth |
-| Worker | ingestion, validation, admin APIs, publication orchestration | unreviewed mutation of public facts |
+| Worker | ingestion, validation, reviewer and public APIs, release compilation, publication orchestration | unreviewed mutation of published facts |
 | Static assets | public catalog, country records, graph, release changelog | mutable workflow state |
 
-D1 can later power an authenticated reviewer dashboard. If global reviewer
-latency matters, use the Sessions API with read replication and bookmarks for
-sequential consistency. Public users do not pay that database latency because
-Atlas reads the static release:
+D1 is the right normalized authoring store because country, source, route,
+participant, evidence, coverage, and change-history relationships are naturally
+relational. SQL can power review queries, coverage reports, graph compilation,
+and a future API. The public map still reads an immutable compiled release, so
+ordinary navigation does not acquire a database round trip.
+
+The public API may query release-scoped D1 rows for filters that are impractical
+to precompute, but it must require or resolve an immutable `release_id`; it
+must never expose unapproved working revisions as current facts.
+
+If global reviewer or API latency matters, use the Sessions API with read
+replication and bookmarks for sequential consistency. Public map users do not
+pay that database latency because Atlas reads the static release:
 
 - [D1 global read replication](https://developers.cloudflare.com/d1/best-practices/read-replication/)
 
 KV is not used as the authoritative release pointer because its globally cached
 reads are eventually consistent. R2 remains appropriate for private raw
-evidence with lifecycle deletion:
+evidence with lifecycle deletion. D1 Time Travel provides short-window recovery;
+scheduled SQL exports to private R2 provide longer retention:
 
 - [Workers KV consistency](https://developers.cloudflare.com/kv/concepts/how-kv-works/)
 - [R2 object lifecycle rules](https://developers.cloudflare.com/r2/buckets/object-lifecycles/)
+- [D1 Time Travel and backups](https://developers.cloudflare.com/d1/reference/time-travel/)
+
+### Source-of-truth cutover
+
+The system deliberately changes authority once:
+
+1. transform the legacy JSON into typed canonical records;
+2. import those records into a local SQLite database using the exact D1
+   migrations;
+3. compile the compatibility JSON and release artifacts from SQL;
+4. prove structural parity, reference integrity, and deterministic hashes;
+5. import the same reviewed rows into D1 and record the first release;
+6. freeze the legacy JSON as an input and switch all future edits to reviewed
+   D1 revisions.
+
+Before step 6, Git JSON is authoritative and D1 is not. After step 6, D1 is
+authoritative and checked-in JSON is not editable. This avoids the most
+dangerous version of the architecture: two stores that can independently
+change the same fact.
 
 ## Canonical v1 record requirements
 
@@ -133,16 +179,22 @@ documents and the full test/build suite passes.
 **Exit gate:** editing a pilot fact in one canonical file updates every derived
 consumer while parity tests prove no unrelated record changed.
 
-### Phase 2 — one deterministic data build
+### Phase 2 — D1 cutover and one deterministic data build
 
-- [ ] Add `bun run data:build`.
-- [ ] Validate schemas and references.
+- [x] Add the canonical D1 schema with relational projections, append-only
+  revisions, evidence joins, approval state, and immutable releases.
+- [ ] Import canonical records through the same service used by production;
+  do not add a second direct-write path.
+- [ ] Add `bun run data:build` against local SQLite/D1.
+- [ ] Validate schemas, temporal constraints, approvals, and references.
 - [ ] Compile catalog, country details, arrangements, coverage, timelines,
-  graph, and release changelog.
+  graph, API release rows, and release changelog from SQL.
 - [ ] Fail CI on stale generated output or an unsupported source field.
 - [ ] Generate changed entity IDs by comparing release manifests.
+- [ ] Back up D1 to private R2 on a schedule and test restoration.
 
-**Exit gate:** a clean checkout can reproduce the release byte-for-byte.
+**Exit gate:** a clean checkout plus an approved database export can reproduce
+the release byte-for-byte, and no canonical fact has two editable homes.
 
 ### Phase 3 — versioned browser reads
 
