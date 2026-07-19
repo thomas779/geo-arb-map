@@ -76,6 +76,13 @@ CREATE TABLE jurisdiction_index (
   jurisdiction_type TEXT NOT NULL CHECK (
     jurisdiction_type IN ('sovereign', 'territory', 'special')
   ),
+  review_state TEXT NOT NULL CHECK (
+    review_state IN ('unchecked', 'legacy', 'pending', 'partial', 'reviewed')
+  ),
+  review_confidence TEXT NOT NULL CHECK (
+    review_confidence IN ('high', 'medium', 'low')
+  ),
+  last_checked TEXT,
   FOREIGN KEY (revision_id) REFERENCES canonical_revisions(id) ON DELETE CASCADE
 );
 
@@ -105,6 +112,13 @@ CREATE TABLE route_index (
     route_status IN ('active', 'inactive', 'verified_negative', 'pending_verification')
   ),
   title TEXT NOT NULL,
+  review_state TEXT NOT NULL CHECK (
+    review_state IN ('unchecked', 'legacy', 'pending', 'partial', 'reviewed')
+  ),
+  review_confidence TEXT NOT NULL CHECK (
+    review_confidence IN ('high', 'medium', 'low')
+  ),
+  last_checked TEXT,
   PRIMARY KEY (revision_id, route_id),
   FOREIGN KEY (revision_id) REFERENCES jurisdiction_index(revision_id) ON DELETE CASCADE
 );
@@ -127,6 +141,9 @@ CREATE TABLE route_variant_index (
   ),
   processing_typical_months INTEGER CHECK (
     processing_typical_months IS NULL OR processing_typical_months > 0
+  ),
+  timeline_confidence TEXT NOT NULL CHECK (
+    timeline_confidence IN ('high', 'medium', 'low')
   ),
   PRIMARY KEY (revision_id, route_id, variant_id),
   FOREIGN KEY (revision_id, route_id)
@@ -151,6 +168,19 @@ CREATE TABLE arrangement_index (
     directionality IN ('symmetric', 'asymmetric')
   ),
   name TEXT NOT NULL,
+  display_category TEXT NOT NULL CHECK (
+    display_category IN ('full', 'partial', 'hub_spoke', 'one_way', 'closed', 'proto')
+  ),
+  display_strength REAL NOT NULL CHECK (
+    display_strength >= 0 AND display_strength <= 1
+  ),
+  review_state TEXT NOT NULL CHECK (
+    review_state IN ('unchecked', 'legacy', 'pending', 'partial', 'reviewed')
+  ),
+  review_confidence TEXT NOT NULL CHECK (
+    review_confidence IN ('high', 'medium', 'low')
+  ),
+  last_checked TEXT,
   FOREIGN KEY (revision_id) REFERENCES canonical_revisions(id) ON DELETE CASCADE
 );
 
@@ -199,6 +229,9 @@ CREATE TABLE arrangement_pathway_index (
   ),
   processing_typical_months INTEGER CHECK (
     processing_typical_months IS NULL OR processing_typical_months > 0
+  ),
+  timeline_confidence TEXT NOT NULL CHECK (
+    timeline_confidence IN ('high', 'medium', 'low')
   ),
   PRIMARY KEY (revision_id, pathway_id),
   FOREIGN KEY (revision_id) REFERENCES arrangement_index(revision_id) ON DELETE CASCADE

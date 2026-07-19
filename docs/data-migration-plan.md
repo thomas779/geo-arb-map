@@ -183,6 +183,8 @@ consumer while parity tests prove no unrelated record changed.
 
 - [x] Add the canonical D1 schema with relational projections, append-only
   revisions, evidence joins, approval state, and immutable releases.
+- [x] Import the pilot deterministically into local SQLite and derive
+  release-scoped coverage, route, arrangement, and graph projections with SQL.
 - [ ] Import canonical records through the same service used by production;
   do not add a second direct-write path.
 - [ ] Add `bun run data:build` against local SQLite/D1.

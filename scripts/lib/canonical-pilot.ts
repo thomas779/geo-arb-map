@@ -15,7 +15,7 @@ import { buildDataShadow, type DataShadow } from './data-shadow';
 
 const REPO_ROOT = fileURLToPath(new URL('../..', import.meta.url));
 
-interface CanonicalPilot {
+export interface CanonicalPilot {
   shadow_release_id: string;
   release_id: string;
   sources: SourceRecord[];

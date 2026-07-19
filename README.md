@@ -106,6 +106,7 @@ bun run data:citizenship          # regenerate public/citizenship_routes.json
 bun run data:migrate:shadow       # split the pilot and prove legacy-shape parity
 bun run data:schemas              # regenerate canonical v1 JSON Schemas
 bun run data:migrate:canonical    # build validated canonical pilot candidates
+bun run data:db                   # import candidates and build SQL projections locally
 bun run data:timelines            # compile reviewed fact references for browser/graph use
 bun run data:edges                # compile timelines, then regenerate public/edges.json
 

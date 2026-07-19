@@ -63,20 +63,24 @@ describe('canonical D1 schema', () => {
     );
     db.query(
       `INSERT INTO jurisdiction_index (
-         revision_id, iso_n3, name, jurisdiction_type
-       ) VALUES (?1, '724', 'Spain', 'sovereign')`,
+         revision_id, iso_n3, name, jurisdiction_type,
+         review_state, review_confidence, last_checked
+       ) VALUES (?1, '724', 'Spain', 'sovereign', 'partial', 'high', '2026-07-19')`,
     ).run('revision:jurisdiction:724:1');
     db.query(
       `INSERT INTO route_index (
-         revision_id, route_id, mode, route_status, title
-       ) VALUES (?1, 'ordinary_naturalization', 'naturalization', 'active', ?2)`,
+         revision_id, route_id, mode, route_status, title,
+         review_state, review_confidence, last_checked
+       ) VALUES (?1, 'ordinary_naturalization', 'naturalization', 'active', ?2,
+         'partial', 'high', '2026-07-19')`,
     ).run('revision:jurisdiction:724:1', 'Ordinary naturalization');
     db.query(
       `INSERT INTO route_variant_index (
          revision_id, route_id, variant_id, outcome, allocation,
-         eligibility_minimum_months, processing_typical_months
+         eligibility_minimum_months, processing_typical_months,
+         timeline_confidence
        ) VALUES (?1, 'ordinary_naturalization', 'standard', 'citizenship',
-         'discretionary', 120, NULL)`,
+         'discretionary', 120, NULL, 'high')`,
     ).run('revision:jurisdiction:724:1');
     db.query(
       `INSERT INTO evidence_links (
