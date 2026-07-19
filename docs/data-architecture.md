@@ -89,6 +89,29 @@ prose:
 Unknown time must be `null`, never a guessed default. The interface can then say
 “time not verified” consistently.
 
+## Timeline ownership
+
+`data/timeline_rules.json` is the current canonical duration layer while
+jurisdiction files are migrated incrementally. It stores atomic durations in
+months and can reference:
+
+- a reviewed route in `data/citizenship_routes.json`;
+- a qualifying lane, such as Spain's Ibero-American rule; or
+- a qualifying bloc, such as Portugal's CPLP/EU rule.
+
+Both the planner and `public/edges.json` derive years from this registry.
+Arrangement fields such as `fastest_entry` and playbook copy are editorial
+context only and must never feed path calculations. A parity test deliberately
+changes every year mentioned in that prose and confirms the computed timeline
+map does not change.
+
+Legacy-confidence timeline rows are migration markers, not a claim of current
+verification. As a country is reviewed, its row should gain a
+duration reference to a numeric `facts` field in the reviewed route, and its
+confidence should be raised in the same change. The number is not copied into
+the timeline registry: changing the reviewed fact updates every derived
+planner and graph consumer.
+
 ## Arrangement files
 
 Regional and bilateral rights do not belong inside either participating

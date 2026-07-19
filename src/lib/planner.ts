@@ -1,4 +1,13 @@
 import type { BilateralLane, Bloc, BlocsData } from '../types';
+import {
+  CBI_YEARS,
+  DESCENT_YEARS,
+  naturalizationRule,
+  naturalizationYears,
+  timelineBeneficiaryIsos,
+} from './timeline-rules';
+
+export { CBI_YEARS, DESCENT_YEARS } from './timeline-rules';
 
 /**
  * "My Flags" planner engine.
@@ -125,64 +134,6 @@ const BIRTHPLACE_HINTS: Record<string, string> = {
   '076': 'Born in Brazil: jus soli — you are likely already a Brazilian citizen; plant it as a flag.',
   '484': 'Born in Mexico: jus soli — you are likely already a Mexican citizen; plant it as a flag.',
 };
-
-/** Rough years-to-citizenship for descent/heritage routes (processing, not residence). */
-export const DESCENT_YEARS: Record<string, number> = {
-  ireland_fbr: 1.5,
-  italy_jure_sanguinis: 1.5,
-  uk_ancestry: 6, // 5-yr visa -> ILR -> citizenship
-  poland_karta_polaka: 2,
-  hungary_simplified: 1,
-  armenia_ethnic: 1,
-  korea_f4: 4,
-  japan_nikkei: 5,
-  israel_law_of_return: 0.5,
-  germany_spaetaussiedler: 1,
-  kazakhstan_qandas: 1,
-  russia_compatriot: 1.5,
-};
-
-export interface ConditionalNaturalizationRule {
-  laneId: string;
-  privilegedYears: number;
-  ordinaryYears: number;
-}
-
-/** Audited fast tracks whose duration depends on a citizenship held by the applicant. */
-export const CONDITIONAL_NATURALIZATION_RULES: Record<string, ConditionalNaturalizationRule> = {
-  '724': { laneId: 'spain_iberoamerican', privilegedYears: 2, ordinaryYears: 10 },
-};
-
-/**
- * Audited corrections where prose contains several timelines or a conditional
- * accelerator. The parser remains useful for discovery; these values are the
- * safe general timelines used when no qualifying edge says otherwise.
- */
-export const ACQUISITION_YEAR_OVERRIDES: Record<string, number> = {
-  '076': 4,  // Brazil: 1 year in the source is the Brazilian-child accelerator
-  '208': 9,  // Denmark (the shared Nordic sentence also contains Iceland's 7)
-  '246': 8,  // Finland
-  '578': 8,  // Norway
-  '604': 5,  // Peru: use the conservative pending-regulation timeline
-  '724': 10, // Spain: 2 years is nationality-conditioned
-  '752': 8,  // Sweden
-  '512': 20, // Oman (the shared GCC sentence starts with Bahrain's 25)
-};
-
-/** Active citizenship-by-investment programs and their acquisition estimates. */
-export const CBI_YEARS: Record<string, number> = {
-  '028': 1,
-  '212': 0.5,
-  '308': 1,
-  '659': 1,
-  '662': 1,
-};
-
-/** Parsed snippets that are not safe general naturalization edges. */
-const NON_GENERAL_ACQUISITION_ISOS = new Set([
-  '196', // Cyprus: the four-year route requires qualifying employment
-  '212', // Dominica: the parsed six-month duration is CBI, modeled separately
-]);
 
 export interface CountryOption {
   iso_n3: string;
@@ -343,55 +294,11 @@ export function householdExtraCountries(profile: Profile, data: BlocsData): numb
 }
 
 /**
- * Best-effort acquisition durations parsed from the dataset's own text
- * ("Argentina: 2 yrs...", "Bolivia or Ecuador: 3 yrs", "6-12 months").
- * Countries without a parseable duration rank with a conservative default
- * and display "time unknown".
+ * Canonical ordinary naturalization durations. The `data` parameter remains
+ * for API compatibility; arrangement prose is deliberately not inspected.
  */
-export function acquisitionYears(data: BlocsData): Map<string, number> {
-  const years = new Map<string, number>();
-  const nameToIso = new Map<string, string>();
-  for (const opt of countryOptions(data)) nameToIso.set(opt.name.toLowerCase(), opt.iso_n3);
-
-  const consider = (iso: string, y: number) => {
-    const prev = years.get(iso);
-    if (prev === undefined || y < prev) years.set(iso, y);
-  };
-
-  const texts: string[] = [
-    ...data.blocs.map(b => b.fastest_entry),
-    ...data.stacking_plays.map(p => `${p.passport}: ${p.timeline}`),
-  ];
-  for (const text of texts) {
-    for (const segment of text.split(/[;.]/)) {
-      // All durations in the segment, with positions — a segment like
-      // "Brazil: 1 yr (child) + 2 yrs Spain" carries different values for
-      // different countries, so each name takes its NEAREST number.
-      const nums: Array<{ value: number; index: number }> = [];
-      for (const m of segment.matchAll(/~?\s*(\d+)(?:\s*-\s*\d+)?\s*(yrs?|years?|months?)/gi)) {
-        const value = m[2].toLowerCase().startsWith('month')
-          ? Math.max(0.5, parseInt(m[1], 10) / 12)
-          : parseInt(m[1], 10);
-        nums.push({ value, index: m.index ?? 0 });
-      }
-      if (!nums.length) continue;
-      const seg = segment.toLowerCase();
-      for (const [name, iso] of nameToIso) {
-        const at = seg.indexOf(name);
-        if (at === -1) continue;
-        let best = nums[0];
-        for (const n of nums) {
-          if (Math.abs(n.index - at) < Math.abs(best.index - at)) best = n;
-        }
-        consider(iso, best.value);
-      }
-    }
-  }
-  for (const [iso, value] of Object.entries(ACQUISITION_YEAR_OVERRIDES)) {
-    years.set(iso, value);
-  }
-  for (const iso of NON_GENERAL_ACQUISITION_ISOS) years.delete(iso);
-  return years;
+export function acquisitionYears(_data: BlocsData): Map<string, number> {
+  return naturalizationYears();
 }
 
 export function recommend(
@@ -407,11 +314,13 @@ export function recommend(
   const durations = acquisitionYears(data);
   const bans = data.dual_citizenship?.countries ?? {};
   const yearsForProfile = (iso: string): number | null => {
-    const conditional = CONDITIONAL_NATURALIZATION_RULES[iso];
-    if (!conditional) return durations.get(iso) ?? null;
-    const lane = data.bilateral_lanes.find(l => l.id === conditional.laneId);
-    const qualifies = lane?.beneficiaries.some(b => held.has(b.iso_n3)) ?? false;
-    return qualifies ? conditional.privilegedYears : conditional.ordinaryYears;
+    const rule = naturalizationRule(iso);
+    if (!rule) return durations.get(iso) ?? null;
+    const conditional = rule.conditional?.find(condition =>
+      timelineBeneficiaryIsos(data, condition).some(beneficiary => held.has(beneficiary)));
+    return conditional
+      ? conditional.minimum_months / 12
+      : rule.ordinary_months / 12;
   };
 
   const withCitizenship = (iso: string): Profile => ({

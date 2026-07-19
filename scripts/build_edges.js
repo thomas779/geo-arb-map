@@ -25,10 +25,13 @@
 import fs from 'node:fs';
 import {
   acquisitionYears,
-  CBI_YEARS,
-  CONDITIONAL_NATURALIZATION_RULES,
-  DESCENT_YEARS,
 } from '../src/lib/planner.ts';
+import {
+  CBI_YEARS,
+  DESCENT_YEARS,
+  naturalizationRule,
+  timelineBeneficiaryIsos,
+} from '../src/lib/timeline-rules.ts';
 
 export function buildEdges(data, manualEdges) {
   const edges = [];
@@ -85,21 +88,25 @@ export function buildEdges(data, manualEdges) {
   // ── Naturalization edges (dataset-parsed residence→citizenship years) ──
   const years = acquisitionYears(data);
   for (const [iso, y] of years) {
-    const conditioned = CONDITIONAL_NATURALIZATION_RULES[iso];
-    const ordinaryYears = conditioned?.ordinaryYears ?? y;
+    const rule = naturalizationRule(iso);
+    const ordinaryYears = rule?.ordinary_months ? rule.ordinary_months / 12 : y;
     for (const fromKind of ['pr', 'settle_full', 'settle_partial']) {
       push({
         from: `${fromKind}:${iso}`, to: `cit:${iso}`, mechanism: 'naturalization',
-        years: ordinaryYears, confidence: conditioned ? 'audited-ordinary' : 'dataset-parsed',
+        years: ordinaryYears,
+        confidence: rule?.confidence === 'high' ? 'audited-ordinary' : 'legacy-canonical',
         renounces_previous: renounces(iso) || undefined,
       });
-      if (conditioned) {
-        const lane = data.bilateral_lanes.find(l => l.id === conditioned.laneId);
-        if (!lane) throw new Error(`Missing conditional naturalization lane: ${conditioned.laneId}`);
+      for (const conditional of rule?.conditional ?? []) {
+        const beneficiaries = timelineBeneficiaryIsos(data, conditional);
+        if (beneficiaries.length === 0) {
+          throw new Error(`Conditional timeline ${iso}:${conditional.id} has no beneficiaries`);
+        }
         push({
           from: `${fromKind}:${iso}`, to: `cit:${iso}`, mechanism: 'naturalization',
-          years: conditioned.privilegedYears, confidence: 'audited-conditional',
-          needs: [`citizenship_any:${lane.beneficiaries.map(m => m.iso_n3).join(',')}`],
+          years: conditional.minimum_months / 12,
+          confidence: 'audited-conditional',
+          needs: [`citizenship_any:${beneficiaries.join(',')}`],
           renounces_previous: renounces(iso) || undefined,
         });
       }
@@ -123,7 +130,7 @@ export function buildEdges(data, manualEdges) {
   return {
     meta: {
       description: 'Status-graph edges for the strategy explorer. Nodes: cit:ISO, pr:ISO, work:ISO (terminal), settle_full:ISO, settle_partial:ISO. Wildcard from "*" = conditional edge gated entirely by needs.',
-      generated_from: 'blocs_data.json + data/manual_edges.json via scripts/build_edges.js',
+      generated_from: 'blocs_data.json + data/manual_edges.json + data/timeline_rules.json via scripts/build_edges.js',
       rules: 'docs/explorer-spec.md',
       counts: { edges: edges.length },
     },

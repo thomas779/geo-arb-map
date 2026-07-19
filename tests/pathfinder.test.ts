@@ -156,6 +156,17 @@ describe('explorer-spec acceptance tests', () => {
     expect(durations.get('604')).toBe(5); // conservative pending Peru timeline
   });
 
+  test('planner timelines never parse arrangement or playbook prose', () => {
+    const altered = structuredClone(data);
+    altered.blocs.forEach(bloc => {
+      bloc.fastest_entry = 'Editorial example changed to 99 years.';
+    });
+    altered.stacking_plays.forEach(play => {
+      play.timeline = '123 years';
+    });
+    expect(acquisitionYears(altered)).toEqual(acquisitionYears(data));
+  });
+
   test('multi-hop recommendations retain citizenships acquired along the path', () => {
     const angola = citizen('024', 'Angola');
     const spain = shortestPaths(angola, edges).get('cit:724');

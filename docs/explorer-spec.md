@@ -109,8 +109,8 @@ Nationality-conditioned naturalization is represented as a general ordinary edge
 plus a faster edge gated by `citizenship_any:<ISO,...>`. Spain therefore uses the
 ordinary 10-year track unless the path's retained citizenship set contains an
 audited Ibero-American beneficiary. Add future conditional timelines to
-`CONDITIONAL_NATURALIZATION_RULES` in `src/lib/planner.ts`.
-Text-derived general timelines pass through `ACQUISITION_YEAR_OVERRIDES`; event
+`data/timeline_rules.json`, referencing a reviewed route fact whenever one
+exists. Arrangement and playbook prose never generates graph durations. Event
 accelerators and CBI durations are modeled separately, and conditional snippets
 without a user-checkable fact do not generate deterministic naturalization edges.
 

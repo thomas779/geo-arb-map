@@ -5,6 +5,8 @@ import type {
   BlocsData,
   CitizenshipRoutesData,
 } from '../src/types';
+// @ts-expect-error — plain-JS bun script, imported for its exported builder
+import { buildTimelineRules } from '../scripts/build_timeline_rules.js';
 
 /**
  * Regression + invariant tests for the dataset.
@@ -28,6 +30,42 @@ const coverage = (await Bun.file(
 const citizenshipRoutes = (await Bun.file(
   new URL('../public/citizenship_routes.json', import.meta.url),
 ).json()) as CitizenshipRoutesData;
+
+const timelineRules = await Bun.file(
+  new URL('../data/timeline_rules.json', import.meta.url),
+).json() as {
+  naturalization: Array<{
+    iso_n3: string;
+    ordinary_months?: number;
+    ordinary_ref?: {
+      route_id: string;
+      fact: string;
+      unit: 'months' | 'years';
+    };
+    conditional?: Array<{
+      id: string;
+      minimum_months?: number;
+      minimum_ref?: {
+        route_id: string;
+        fact: string;
+        unit: 'months' | 'years';
+      };
+      qualifying_lane_id?: string;
+      qualifying_bloc_ids?: string[];
+      excluded_iso_n3?: string[];
+    }>;
+  }>;
+  heritage: Array<{ lane_id: string; duration_months: number }>;
+  investment: Array<{ iso_n3: string; duration_months: number }>;
+};
+
+const compiledTimelineRules = await Bun.file(
+  new URL('../public/timeline_rules.json', import.meta.url),
+).json();
+
+const curatedCitizenshipRoutes = await Bun.file(
+  new URL('../data/citizenship_routes.json', import.meta.url),
+).json();
 
 const registry = await Bun.file(
   new URL('../data/registry.json', import.meta.url),
@@ -156,6 +194,76 @@ describe('referential integrity', () => {
       if (/\bballot|quota\b/i.test(`${l.grants} ${l.limits}`)) {
         expect(l.allocation, `lane ${l.id} mentions ballot/quota but has no explicit allocation`).toBeDefined();
       }
+    }
+  });
+});
+
+describe('canonical timeline rules', () => {
+  test('public timeline index is current with its referenced source facts', () => {
+    expect(compiledTimelineRules).toEqual(
+      buildTimelineRules(timelineRules, curatedCitizenshipRoutes),
+    );
+  });
+
+  test('durations are unique, positive month values', () => {
+    const naturalizationIds = timelineRules.naturalization.map(rule => rule.iso_n3);
+    const heritageIds = timelineRules.heritage.map(rule => rule.lane_id);
+    const investmentIds = timelineRules.investment.map(rule => rule.iso_n3);
+    expect(new Set(naturalizationIds).size).toBe(naturalizationIds.length);
+    expect(new Set(heritageIds).size).toBe(heritageIds.length);
+    expect(new Set(investmentIds).size).toBe(investmentIds.length);
+
+    for (const rule of timelineRules.naturalization) {
+      expect(rule.iso_n3).toMatch(ISO_RE);
+      expect(Number(Boolean(rule.ordinary_months)) + Number(Boolean(rule.ordinary_ref))).toBe(1);
+      if (rule.ordinary_months) {
+        expect(Number.isInteger(rule.ordinary_months)).toBe(true);
+        expect(rule.ordinary_months).toBeGreaterThan(0);
+      }
+      for (const condition of rule.conditional ?? []) {
+        expect(Number(Boolean(condition.minimum_months)) + Number(Boolean(condition.minimum_ref))).toBe(1);
+        if (condition.minimum_months) {
+          expect(Number.isInteger(condition.minimum_months)).toBe(true);
+          expect(condition.minimum_months).toBeGreaterThan(0);
+        }
+      }
+    }
+    for (const rule of [...timelineRules.heritage, ...timelineRules.investment]) {
+      expect(Number.isInteger(rule.duration_months)).toBe(true);
+      expect(rule.duration_months).toBeGreaterThan(0);
+    }
+  });
+
+  test('references resolve to reviewed routes or mapped arrangements', () => {
+    const routeById = new Map(citizenshipRoutes.routes.map(route => [route.id, route]));
+    const laneIds = new Set(data.bilateral_lanes.map(lane => lane.id));
+    const blocIds = new Set(data.blocs.map(bloc => bloc.id));
+
+    for (const rule of timelineRules.naturalization) {
+      if (rule.ordinary_ref) {
+        const route = routeById.get(rule.ordinary_ref.route_id);
+        expect(route, rule.ordinary_ref.route_id).toBeDefined();
+        expect(typeof route?.facts[rule.ordinary_ref.fact], rule.ordinary_ref.fact).toBe('number');
+      }
+      for (const condition of rule.conditional ?? []) {
+        if (condition.minimum_ref) {
+          const route = routeById.get(condition.minimum_ref.route_id);
+          expect(route, condition.minimum_ref.route_id).toBeDefined();
+          expect(typeof route?.facts[condition.minimum_ref.fact], condition.minimum_ref.fact).toBe('number');
+        }
+        if (condition.qualifying_lane_id) {
+          expect(laneIds.has(condition.qualifying_lane_id), condition.id).toBe(true);
+        }
+        for (const blocId of condition.qualifying_bloc_ids ?? []) {
+          expect(blocIds.has(blocId), condition.id).toBe(true);
+        }
+        for (const iso of condition.excluded_iso_n3 ?? []) {
+          expect(iso, condition.id).toMatch(ISO_RE);
+        }
+      }
+    }
+    for (const rule of timelineRules.heritage) {
+      expect(laneIds.has(rule.lane_id), rule.lane_id).toBe(true);
     }
   });
 });

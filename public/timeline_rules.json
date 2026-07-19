@@ -1,0 +1,283 @@
+{
+  "meta": {
+    "description": "Canonical duration inputs used by the planner and generated graph. Durations are stored once in months; UI wording and graph years are derived.",
+    "unit": "months",
+    "policy": "Country-law durations belong here or in a referenced citizenship route. Arrangement prose must never be parsed as a computational input.",
+    "generated_from": "data/timeline_rules.json + data/citizenship_routes.json"
+  },
+  "naturalization": [
+    {
+      "iso_n3": "032",
+      "ordinary_months": 24,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "036",
+      "ordinary_months": 48,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "048",
+      "ordinary_months": 300,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "051",
+      "ordinary_months": 36,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "056",
+      "ordinary_months": 60,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "064",
+      "ordinary_months": 180,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "068",
+      "ordinary_months": 36,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "076",
+      "ordinary_months": 48,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "100",
+      "ordinary_months": 60,
+      "confidence": "high"
+    },
+    {
+      "iso_n3": "108",
+      "ordinary_months": 120,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "112",
+      "ordinary_months": 84,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "152",
+      "ordinary_months": 60,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "208",
+      "ordinary_months": 108,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "218",
+      "ordinary_months": 36,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "246",
+      "ordinary_months": 96,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "250",
+      "ordinary_months": 60,
+      "confidence": "high"
+    },
+    {
+      "iso_n3": "300",
+      "ordinary_months": 84,
+      "confidence": "high"
+    },
+    {
+      "iso_n3": "352",
+      "ordinary_months": 84,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "356",
+      "ordinary_months": 144,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "372",
+      "ordinary_months": 60,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "442",
+      "ordinary_months": 60,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "512",
+      "ordinary_months": 240,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "524",
+      "ordinary_months": 180,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "528",
+      "ordinary_months": 60,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "578",
+      "ordinary_months": 96,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "604",
+      "ordinary_months": 60,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "620",
+      "ordinary_months": 120,
+      "confidence": "high",
+      "conditional": [
+        {
+          "id": "cplp-or-eu-national",
+          "minimum_months": 84,
+          "qualifying_bloc_ids": [
+            "eu_eea",
+            "cplp"
+          ],
+          "excluded_iso_n3": [
+            "352",
+            "438",
+            "578",
+            "663",
+            "756"
+          ]
+        }
+      ]
+    },
+    {
+      "iso_n3": "646",
+      "ordinary_months": 60,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "724",
+      "ordinary_months": 120,
+      "confidence": "high",
+      "conditional": [
+        {
+          "id": "ibero-american-national",
+          "minimum_months": 24,
+          "qualifying_lane_id": "spain_iberoamerican"
+        }
+      ]
+    },
+    {
+      "iso_n3": "752",
+      "ordinary_months": 96,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "800",
+      "ordinary_months": 120,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "834",
+      "ordinary_months": 120,
+      "confidence": "legacy"
+    }
+  ],
+  "heritage": [
+    {
+      "lane_id": "ireland_fbr",
+      "duration_months": 18,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "italy_jure_sanguinis",
+      "duration_months": 18,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "uk_ancestry",
+      "duration_months": 72,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "poland_karta_polaka",
+      "duration_months": 24,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "hungary_simplified",
+      "duration_months": 12,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "armenia_ethnic",
+      "duration_months": 12,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "korea_f4",
+      "duration_months": 48,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "japan_nikkei",
+      "duration_months": 60,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "israel_law_of_return",
+      "duration_months": 6,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "germany_spaetaussiedler",
+      "duration_months": 12,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "kazakhstan_qandas",
+      "duration_months": 12,
+      "confidence": "legacy"
+    },
+    {
+      "lane_id": "russia_compatriot",
+      "duration_months": 18,
+      "confidence": "legacy"
+    }
+  ],
+  "investment": [
+    {
+      "iso_n3": "028",
+      "duration_months": 12,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "212",
+      "duration_months": 6,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "308",
+      "duration_months": 12,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "659",
+      "duration_months": 12,
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "662",
+      "duration_months": 12,
+      "confidence": "legacy"
+    }
+  ]
+}

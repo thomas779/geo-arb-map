@@ -73,6 +73,9 @@ The dataset is **LLM-researched and human-curated**, not authoritative:
    `scripts/build_citizenship_routes.js` expands those records over all 239 registry
    jurisdictions in `public/citizenship_routes.json`. Every mode is explicit:
    `reviewed / partial / pending / unchecked`; “unchecked” never means no route exists.
+6. `data/timeline_rules.json` is the single computational source for planner and
+   graph durations. Values are stored in months and may reference a reviewed
+   citizenship route or mapped arrangement. UI prose is never parsed for years.
 
 Known single-source items (several naturalization timelines) are flagged in the
 research docs and should be re-verified against primary law before being treated
@@ -100,6 +103,8 @@ bun scripts/normalize_research.js data/research_batches/<batch>.json
 bun scripts/build_registry.js     # regenerate data/registry.json
 bun scripts/build_coverage.js     # regenerate public/coverage.json
 bun run data:citizenship          # regenerate public/citizenship_routes.json
+bun run data:timelines            # compile reviewed fact references for browser/graph use
+bun run data:edges                # compile timelines, then regenerate public/edges.json
 
 # reviewed source monitoring (writes only to monitor/.out/)
 bun run monitor:collect
@@ -126,7 +131,7 @@ handle email.
 public/           blocs_data.json, coverage.json, citizenship_routes.json
 src/              React shell (App, components/) + imperative D3 map layer (map.ts)
 src/components/ui shadcn/ui primitives (generated)
-data/             registry, citizenship route sources, manual overrides, research batches
+data/             registry, citizenship routes, canonical timelines, manual overrides, research batches
 scripts/          normalizer + registry/coverage/route generators (bun)
 monitor/          source collectors, bounded triage, and review-lead drafts
 tests/            dataset invariant + regression suite
