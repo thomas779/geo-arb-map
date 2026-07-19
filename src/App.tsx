@@ -1,9 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
-import { List, Map as MapIcon, Moon, ShieldCheck, Sun } from 'lucide-react';
+import {
+  Layers3,
+  List,
+  Map as MapIcon,
+  Moon,
+  PanelLeftClose,
+  PanelLeftOpen,
+  PanelRightOpen,
+  Send,
+  ShieldCheck,
+  Sun,
+} from 'lucide-react';
 import type { AppState, BlocsData, CitizenshipRoutesData } from './types';
 import * as url from './url';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
@@ -14,6 +24,7 @@ import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
 import type { EdgesFile, GraphEdge } from '@/lib/pathfinder';
 import { clearStoredProfile, LEGACY_FLAGS_KEY, PROFILE_KEY } from '@/lib/profile-storage';
+import { cn } from '@/lib/utils';
 import type { TrustSection } from './url';
 
 function initialProfile(): Profile {
@@ -53,6 +64,8 @@ export default function App() {
   const [edges, setEdges] = useState<GraphEdge[] | null>(null);
   const [citizenshipRoutes, setCitizenshipRoutes] = useState<CitizenshipRoutesData | null>(null);
   const [infoSection, setInfoSection] = useState<TrustSection | null>(() => url.readInfo());
+  const [leftPanelOpen, setLeftPanelOpen] = useState(true);
+  const [detailPanelOpen, setDetailPanelOpen] = useState(Boolean(initialState.country));
   // Portrait phones browse a LIST first; the map is on demand. Shared links
   // with a selection land straight on the framed map.
   const [mobileList, setMobileList] = useState<boolean>(
@@ -136,10 +149,14 @@ export default function App() {
   }, [patch]);
   const selectView = useCallback((v: 'map' | 'stacking') =>
     patch({ view: v }), [patch]);
-  const selectCountry = useCallback((iso: string, name: string) =>
-    patch({ country: iso, countryName: name }), [patch]);
-  const closeDetail = useCallback(() =>
-    patch({ country: null, countryName: null }), [patch]);
+  const selectCountry = useCallback((iso: string, name: string) => {
+    setDetailPanelOpen(true);
+    patch({ country: iso, countryName: name });
+  }, [patch]);
+  const closeDetail = useCallback(() => {
+    setDetailPanelOpen(false);
+    patch({ country: null, countryName: null });
+  }, [patch]);
   const backToMapWithBloc = useCallback((blocId: string | null) => {
     if (blocId === null) {
       patch({ view: 'map' });
@@ -175,39 +192,61 @@ export default function App() {
             </button>
           ))}
         </nav>
-        <div className="ml-auto flex shrink-0 items-center gap-2">
+        <div className="ml-auto flex shrink-0 items-center rounded-xl border bg-background/65 p-0.5 shadow-sm backdrop-blur-md">
           {data && (
             <>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Badge variant="outline" className="hidden cursor-help text-xs text-muted-foreground sm:inline-flex">
-                    TR · PR · CIT
-                  </Badge>
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    className="hidden text-muted-foreground sm:inline-flex"
+                    aria-label="Show access-level key"
+                  >
+                    <Layers3 aria-hidden />
+                  </Button>
                 </TooltipTrigger>
                 <TooltipContent side="bottom" className="max-w-[300px]">
-                  <div className="flex flex-col gap-1 text-xs">
-                    <span><b>TR</b> — {data.meta.tier_legend.TR}</span>
-                    <span><b>PR</b> — {data.meta.tier_legend.PR}</span>
-                    <span><b>CIT</b> — {data.meta.tier_legend.CIT}</span>
+                  <div className="flex flex-col gap-1.5 text-xs">
+                    <span><b>Temporary</b> — {data.meta.tier_legend.TR}</span>
+                    <span><b>Permanent</b> — {data.meta.tier_legend.PR}</span>
+                    <span><b>Citizenship</b> — {data.meta.tier_legend.CIT}</span>
                   </div>
                 </TooltipContent>
               </Tooltip>
               <Button
-                variant="outline"
+                variant="ghost"
                 size="sm"
                 className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-7 sm:w-auto sm:px-2"
                 aria-label="Open trust and data"
                 onClick={() => changeInfo('methodology')}
               >
                 <ShieldCheck className="size-3" aria-hidden />
-                <span className="hidden sm:inline">Trust &amp; data</span>
+                <span className="hidden sm:inline">Trust</span>
               </Button>
             </>
           )}
           <Button
+            asChild
+            variant="ghost"
+            size="sm"
+            className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-7 sm:w-auto sm:px-2"
+          >
+            <a
+              href="https://t.me/flagpaths"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Join Flag Paths updates on Telegram"
+            >
+              <Send className="size-3" aria-hidden />
+              <span className="hidden sm:inline">Updates</span>
+            </a>
+          </Button>
+          <span className="mx-0.5 h-4 w-px bg-border" aria-hidden />
+          <Button
             variant="ghost"
             size="icon-sm"
-            className="hidden text-muted-foreground min-[360px]:inline-flex min-[360px]:size-9 sm:size-7"
+            className="text-muted-foreground max-sm:size-9"
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           >
@@ -215,20 +254,51 @@ export default function App() {
           </Button>
         </div>
       </header>
-      <main className="flex min-h-0 flex-1">
+      <main className="relative flex min-h-0 flex-1">
         {data && (
-          <div className="hidden w-[265px] shrink-0 border-r md:block">
-            <Sidebar
-              data={data}
-              state={state}
-              onBloc={toggleBloc}
-              onLane={selectLane}
-              onClear={clearMapSelection}
-            />
+          <div
+            className={cn(
+              'relative hidden shrink-0 overflow-hidden border-r transition-[width,border-color] duration-300 ease-out md:block',
+              leftPanelOpen ? 'w-[280px]' : 'w-0 border-transparent',
+            )}
+          >
+            <div
+              className={cn(
+                'absolute inset-y-0 left-0 w-[280px] transition-transform duration-300 ease-out',
+                !leftPanelOpen && '-translate-x-full',
+              )}
+            >
+              <Sidebar
+                data={data}
+                state={state}
+                onBloc={toggleBloc}
+                onLane={selectLane}
+                onClear={clearMapSelection}
+              />
+            </div>
           </div>
         )}
         <div id="map-wrap" className="cartographic-surface relative min-w-0 flex-1 overflow-hidden">
           <WorldMap data={data} state={state} theme={theme} profile={profile} onSelect={selectCountry} />
+          {data && state.view === 'map' && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="absolute top-3 left-3 z-20 hidden bg-background/85 text-muted-foreground shadow-sm backdrop-blur-md md:inline-flex"
+                  aria-label={leftPanelOpen ? 'Hide route browser' : 'Show route browser'}
+                  aria-expanded={leftPanelOpen}
+                  onClick={() => setLeftPanelOpen(open => !open)}
+                >
+                  {leftPanelOpen ? <PanelLeftClose aria-hidden /> : <PanelLeftOpen aria-hidden />}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                {leftPanelOpen ? 'Hide route browser' : 'Show route browser'}
+              </TooltipContent>
+            </Tooltip>
+          )}
           {data && state.view === 'map' && mobileList && (
             <div className="absolute inset-0 z-10 bg-background md:hidden">
               <Sidebar
@@ -244,7 +314,12 @@ export default function App() {
             <Button
               variant="secondary"
               size="sm"
-              className="absolute bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 z-20 min-h-11 -translate-x-1/2 gap-2 px-4 shadow-lg md:hidden"
+              className={cn(
+                'absolute left-1/2 z-20 min-h-11 -translate-x-1/2 gap-2 px-4 shadow-lg transition-[bottom] md:hidden',
+                mobileList && (state.blocs.length > 0 || state.lane)
+                  ? 'bottom-[max(4.75rem,calc(env(safe-area-inset-bottom)+4.25rem))]'
+                  : 'bottom-[max(1rem,env(safe-area-inset-bottom))]',
+              )}
               onClick={() => setMobileList(v => !v)}
             >
               {mobileList ? <MapIcon /> : <List />}
@@ -271,14 +346,57 @@ export default function App() {
               reviewed&nbsp;·&nbsp;{data.meta.last_verified}
             </button>
           )}
+          {data && state.view === 'map' && state.country && !detailPanelOpen && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="absolute top-3 right-3 z-20 hidden gap-1.5 bg-background/85 text-muted-foreground shadow-sm backdrop-blur-md md:inline-flex"
+                  onClick={() => setDetailPanelOpen(true)}
+                >
+                  <PanelRightOpen aria-hidden />
+                  Details
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="left">Show country details</TooltipContent>
+            </Tooltip>
+          )}
         </div>
-        {data && state.country && (
-          <DetailPanel
-            data={data}
-            citizenshipRoutes={citizenshipRoutes}
-            state={state}
-            onClose={closeDetail}
-          />
+        {data && state.view === 'map' && state.country && (
+          <>
+            <div className="absolute inset-0 z-30 bg-background md:hidden">
+              <DetailPanel
+                data={data}
+                citizenshipRoutes={citizenshipRoutes}
+                state={state}
+                onClose={closeDetail}
+              />
+            </div>
+            <div
+              className={cn(
+                'relative hidden shrink-0 overflow-hidden border-l transition-[width,border-color] duration-300 ease-out md:block',
+                detailPanelOpen
+                  ? 'w-[370px] xl:w-[390px]'
+                  : 'w-0 border-transparent',
+              )}
+            >
+              <div
+                className={cn(
+                  'absolute inset-y-0 right-0 w-[370px] transition-transform duration-300 ease-out xl:w-[390px]',
+                  !detailPanelOpen && 'translate-x-full',
+                )}
+              >
+                <DetailPanel
+                  data={data}
+                  citizenshipRoutes={citizenshipRoutes}
+                  state={state}
+                  onClose={closeDetail}
+                  onCollapse={() => setDetailPanelOpen(false)}
+                />
+              </div>
+            </div>
+          </>
         )}
       </main>
       {data && (

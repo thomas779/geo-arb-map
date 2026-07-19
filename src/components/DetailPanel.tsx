@@ -1,4 +1,4 @@
-import { ChevronDown, ExternalLink, X } from 'lucide-react';
+import { ChevronDown, ExternalLink, PanelRightClose, X } from 'lucide-react';
 import type {
   AppState,
   BilateralLane,
@@ -22,6 +22,7 @@ interface Props {
   citizenshipRoutes: CitizenshipRoutesData | null;
   state: AppState;
   onClose: () => void;
+  onCollapse?: () => void;
 }
 
 const MODE_LABELS: Record<CitizenshipAcquisitionMode, string> = {
@@ -289,7 +290,7 @@ function LaneCard({ lane, inbound, countryName }: { lane: BilateralLane; inbound
   );
 }
 
-export function DetailPanel({ data, citizenshipRoutes, state, onClose }: Props) {
+export function DetailPanel({ data, citizenshipRoutes, state, onClose, onCollapse }: Props) {
   const iso = state.country!;
   const blocs = data.blocs.filter(b => b.members.some(m => m.iso_n3 === iso));
   const formerBlocs = data.blocs.filter(b => b.former_members?.some(m => m.iso_n3 === iso));
@@ -307,7 +308,7 @@ export function DetailPanel({ data, citizenshipRoutes, state, onClose }: Props) 
   const laneCount = lanesIn.length + lanesOut.length;
 
   return (
-    <section className="w-full overflow-y-auto border-l px-3 pb-[max(2rem,env(safe-area-inset-bottom))] max-md:absolute max-md:inset-0 max-md:z-30 max-md:bg-background sm:px-4 md:w-[370px] md:shrink-0 md:pt-4 md:pb-8 xl:w-[390px]">
+    <section className="h-full w-full overflow-y-auto bg-background px-3 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-4 md:pt-4 md:pb-8">
       <div className="sticky top-0 z-10 -mx-3 mb-3 flex items-start justify-between gap-2 border-b bg-background/95 px-3 py-3 backdrop-blur-sm sm:-mx-4 sm:px-4 md:static md:mx-0 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
         <div className="min-w-0">
           <h2 className="flex items-center gap-2 text-xl font-semibold">
@@ -318,9 +319,28 @@ export function DetailPanel({ data, citizenshipRoutes, state, onClose }: Props) 
             {routes.length} country rule{routes.length === 1 ? '' : 's'} · {regionalCount} regional system{regionalCount === 1 ? '' : 's'} · {laneCount} treaty path{laneCount === 1 ? '' : 's'}
           </p>
         </div>
-        <Button variant="ghost" size="icon-lg" className="-mr-1 -mt-1 size-11 shrink-0 text-muted-foreground md:size-8" aria-label="Close country details" onClick={onClose}>
-          <X className="size-5" />
-        </Button>
+        <div className="-mr-1 -mt-1 flex shrink-0 items-center gap-0.5">
+          {onCollapse && (
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              className="hidden text-muted-foreground md:inline-flex"
+              aria-label="Hide country details"
+              onClick={onCollapse}
+            >
+              <PanelRightClose aria-hidden />
+            </Button>
+          )}
+          <Button
+            variant="ghost"
+            size="icon-lg"
+            className="size-11 text-muted-foreground md:size-8"
+            aria-label="Clear country selection"
+            onClick={onClose}
+          >
+            <X className="size-5" />
+          </Button>
+        </div>
       </div>
 
       <SectionHeading

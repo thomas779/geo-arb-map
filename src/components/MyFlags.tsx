@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import {
-  Baby, Bell, Check, ChevronDown, CircleDollarSign, Flag, Heart, LockKeyhole, MapPin, Target, X,
+  Baby, Bell, Check, ChevronDown, CircleDollarSign, Flag, Heart, LockKeyhole, MapPin, Send, Target, X,
 } from 'lucide-react';
 import type { BlocsData, CitizenshipRoutesData } from '../types';
 import {
@@ -734,22 +734,24 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                         </span>
                       ))}
                   </div>
-                  <div className="rounded-md border border-dashed px-3 py-3">
+                  <div className="rounded-lg border bg-muted/35 px-3 py-3">
                     <div className="flex flex-wrap items-center gap-3">
-                      <LockKeyhole className="size-4 text-muted-foreground" aria-hidden />
+                      <Send className="size-4 text-primary" aria-hidden />
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium">Alerts need an account</p>
+                        <p className="text-sm font-medium">Public updates on Telegram</p>
                         <p className="text-xs leading-snug text-muted-foreground">
-                          An account will sync watched paths and delivery preferences without making your profile public.
+                          Join @flagpaths for reviewed policy changes and launch notes. Personalized path alerts are still in development.
                         </p>
                       </div>
                       <Button
+                        asChild
                         variant="outline"
                         size="sm"
-                        className="min-h-10 w-full sm:min-h-0 sm:w-auto"
-                        disabled
+                        className="min-h-10 w-full bg-background sm:min-h-0 sm:w-auto"
                       >
-                        Account sync next
+                        <a href="https://t.me/flagpaths" target="_blank" rel="noreferrer">
+                          Join @flagpaths
+                        </a>
                       </Button>
                     </div>
                   </div>

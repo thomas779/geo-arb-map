@@ -361,8 +361,8 @@ export function Sidebar({ data, state, onBloc, onLane, onClear }: Props) {
   );
 
   return (
-    <aside className="h-full w-full overflow-y-auto bg-sidebar px-3 pt-2 pb-24 md:pt-3 md:pb-6">
-      <div className="sticky top-0 z-10 -mx-1 bg-sidebar px-1 pt-1 pb-2">
+    <aside className="flex h-full w-full flex-col overflow-hidden bg-sidebar">
+      <div className="shrink-0 border-b border-sidebar-border px-3 py-3">
         <div className="flex items-center gap-2">
           <Input
             type="search"
@@ -479,27 +479,10 @@ export function Sidebar({ data, state, onBloc, onLane, onClear }: Props) {
             )}
           </div>
         )}
-
-        {selectionLabel && (
-          <div className="mt-2 flex min-h-10 items-center gap-2 rounded-md bg-accent px-2">
-            <Check className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
-            <span className="min-w-0 flex-1 truncate text-xs font-medium" title={selectionLabel}>
-              {selectionLabel}
-            </span>
-            <Button
-              variant="outline"
-              size="sm"
-              className="min-h-9 shrink-0 gap-1 bg-background/70 px-2 text-xs text-foreground md:min-h-7"
-              onClick={onClear}
-            >
-              <X className="size-3.5" aria-hidden />
-              Clear
-            </Button>
-          </div>
-        )}
       </div>
 
-      <Accordion
+      <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-6">
+        <Accordion
         type="multiple"
         value={isFiltering ? allSections : openSections}
         onValueChange={setOpenSections}
@@ -563,14 +546,39 @@ export function Sidebar({ data, state, onBloc, onLane, onClear }: Props) {
             </AccordionContent>
           </AccordionItem>
         )}
-      </Accordion>
+        </Accordion>
 
-      {isFiltering && regionalCount === 0 && countryLaneCount === 0 && heritageLanes.length === 0 && (
+        {isFiltering && regionalCount === 0 && countryLaneCount === 0 && heritageLanes.length === 0 && (
           <p className="mx-2 mt-4 text-xs text-muted-foreground">
             No routes match these filters.
           </p>
         )}
+      </div>
 
+      {selectionLabel && (
+        <div className="shrink-0 border-t border-sidebar-border bg-sidebar px-3 py-2.5">
+          <div className="flex min-h-12 items-center gap-2 rounded-lg bg-accent/80 px-2.5 py-1.5">
+            <Check className="size-3.5 shrink-0 text-primary" strokeWidth={2.5} aria-hidden />
+            <div className="min-w-0 flex-1">
+              <p className="text-[9px] font-medium uppercase tracking-[0.12em] text-muted-foreground">
+                On map
+              </p>
+              <p className="truncate text-xs font-medium" title={selectionLabel}>
+                {selectionLabel}
+              </p>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="min-h-9 shrink-0 gap-1 px-2 text-xs text-muted-foreground hover:text-foreground md:min-h-7"
+              onClick={onClear}
+            >
+              <X className="size-3.5" aria-hidden />
+              Reset
+            </Button>
+          </div>
+        </div>
+      )}
     </aside>
   );
 }
