@@ -22,6 +22,7 @@ import { displayColor } from '@/lib/color';
 import { useTheme } from '@/components/theme-provider';
 import { dataCorrectionUrl } from '@/lib/trust';
 import { countryFlag, countryLabel } from '@/lib/country';
+import { displayRouteTitle } from '@/lib/display-title';
 
 interface Props {
   data: BlocsData;
@@ -781,7 +782,7 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                       <div className="flex flex-wrap gap-1.5">
                         {unlocked.ancestryLanes.map(lane => (
                           <span key={lane.id} className="rounded-full border bg-background px-2.5 py-1 text-xs">
-                            {lane.name}
+                            {displayRouteTitle(lane.name)}
                           </span>
                         ))}
                       </div>

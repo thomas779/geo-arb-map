@@ -3301,7 +3301,7 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Ordinary naturalization uses seven- or ten-year residence periods under the 2026 law",
+      "title": "Ordinary naturalization uses seven- or ten-year residence periods",
       "summary": "For applications made from 19 May 2026, the ordinary legal-residence period is seven years for nationals of Portuguese-speaking countries and EU Member States, and ten years for other nationals. Applications already pending when the law entered into force remain under the earlier rules. The Ministry of Justice notes that some practical implementation still requires supplementary regulation; eligibility is not an automatic grant.",
       "facts": {
         "ordinary_residence_years_cplp_eu": 7,
@@ -3491,7 +3491,7 @@
       },
       "mode": "investment",
       "status": "inactive",
-      "title": "Investor-citizenship provisions were repealed in 2022",
+      "title": "Investor-citizenship provisions have been repealed",
       "summary": "Bulgaria repealed the special investment-based citizenship provisions in 2022. Investment or property ownership should not be presented as a current direct route to Bulgarian citizenship; any residence obtained on another legal basis follows the applicable ordinary nationality rules.",
       "facts": {
         "programme_type": "former_investor_citizenship",

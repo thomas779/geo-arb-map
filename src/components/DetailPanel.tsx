@@ -14,6 +14,7 @@ import { Badge } from '@/components/ui/badge';
 import { displayColor } from '@/lib/color';
 import { useTheme } from '@/components/theme-provider';
 import { countryFlag } from '@/lib/country';
+import { displayRouteTitle } from '@/lib/display-title';
 import { dataCorrectionUrl, sourceUrl } from '@/lib/trust';
 
 interface Props {
@@ -133,7 +134,9 @@ function RouteCard({ route }: { route: CitizenshipRoute }) {
               {statusLabel(route)}
             </Badge>
           </div>
-          <span className="block text-sm font-medium leading-snug">{route.title}</span>
+          <span className="block text-sm font-medium leading-snug">
+            {displayRouteTitle(route.title)}
+          </span>
         </div>
         <ChevronDown className="mt-1 size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
       </summary>
@@ -179,7 +182,9 @@ function BlocCard({ bloc, iso, former }: { bloc: Bloc; iso: string; former: bool
       <summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 px-3 py-2.5">
         <span className="chip" style={{ background: displayColor(bloc.color, dark) }} />
         <div className="min-w-0 flex-1">
-          <span className="block text-sm font-medium leading-snug">{bloc.name}</span>
+          <span className="block text-sm font-medium leading-snug">
+            {displayRouteTitle(bloc.name)}
+          </span>
           <span className="text-[10px] text-muted-foreground">
             {former ? 'Former membership' : 'Regional rights after qualifying status'}
           </span>
@@ -189,7 +194,7 @@ function BlocCard({ bloc, iso, former }: { bloc: Bloc; iso: string; former: bool
       <div className="border-t px-3 py-3">
         {inSubBloc && (
           <div className="mb-2 rounded-md bg-secondary px-2 py-1.5 text-xs text-secondary-foreground">
-            {bloc.sub_bloc!.name}: full free movement among these members
+            {displayRouteTitle(bloc.sub_bloc!.name)}: full free movement among these members
           </div>
         )}
         <Rung tier="TR" text={bloc.rights.TR} />
@@ -223,7 +228,9 @@ function LaneCard({ lane, inbound, countryName }: { lane: BilateralLane; inbound
       <summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 px-3 py-2.5">
         <span className="chip" style={{ background: displayColor(lane.color, dark) }} />
         <div className="min-w-0 flex-1">
-          <span className="block text-sm font-medium leading-snug">{lane.name}</span>
+          <span className="block text-sm font-medium leading-snug">
+            {displayRouteTitle(lane.name)}
+          </span>
           <span className="text-[10px] text-muted-foreground">
             {inbound ? `Into ${countryName}` : `From ${countryName}`} · {lane.leads_to_settlement ? 'settlement path' : 'temporary access'}
           </span>

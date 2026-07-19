@@ -131,6 +131,9 @@ export default function App() {
     setMobileList(false);
     patch({ view: 'map', lane: id, blocs: [], country: null, countryName: null });
   }, [patch]);
+  const clearMapSelection = useCallback(() => {
+    patch({ blocs: [], lane: null, country: null, countryName: null });
+  }, [patch]);
   const selectView = useCallback((v: 'map' | 'stacking') =>
     patch({ view: v }), [patch]);
   const selectCountry = useCallback((iso: string, name: string) =>
@@ -220,6 +223,7 @@ export default function App() {
               state={state}
               onBloc={toggleBloc}
               onLane={selectLane}
+              onClear={clearMapSelection}
             />
           </div>
         )}
@@ -232,6 +236,7 @@ export default function App() {
                 state={state}
                 onBloc={toggleBloc}
                 onLane={selectLane}
+                onClear={clearMapSelection}
               />
             </div>
           )}
