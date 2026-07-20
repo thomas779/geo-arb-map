@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react';
+import { cn } from '@/lib/utils';
 
 interface Point {
   x: number;
@@ -96,12 +97,16 @@ function buildGlobe(seed: number): { points: Point[]; routes: Route[] } {
 
 const globe = buildGlobe(779);
 
-export function RouteField() {
+interface Props {
+  className?: string;
+}
+
+export function RouteField({ className }: Props) {
   const primaryRoutes = globe.routes.filter((route) => route.primary);
 
   return (
     <figure
-      className="planner-route-field relative aspect-[4/3] w-full overflow-hidden"
+      className={cn('planner-route-field relative aspect-[4/3] w-full overflow-hidden', className)}
       aria-label="A globe showing routes between example destinations"
     >
       <svg
