@@ -187,27 +187,35 @@ consumer while parity tests prove no unrelated record changed.
   release-scoped coverage, route, arrangement, and graph projections with SQL.
 - [x] Generate one parameterized import plan for local SQLite and D1 rather
   than maintaining a second production write path.
-- [x] Refuse release compilation until every selected revision is approved.
+- [x] Keep draft previews separate from approved release compilation; explicit
+  release builds select pinned `release_items` and require approved revisions.
 - [x] Create the isolated Western Europe Data D1 deployment and import the
   canonical pilot as draft records with no published release.
 - [x] Add `bun run data:build` against local SQLite/D1. The compiler reads
   `canonical_revisions.payload_json` from a persistent SQLite database (the
   local mirror produced by `data:db`, or a `wrangler d1 export` via `--db`);
-  it no longer rebuilds from Git.
-- [x] Validate schemas, approvals, and references. Payload JSON is re-parsed
-  against the Zod schemas; the unreleased-state gate asserts zero approvals and
-  zero published releases. Temporal supersession (`effective` from/to) is not
-  yet enforced — a known gap.
-- [~] Compile catalog, country details, arrangements, graph, API release rows,
-  and release changelog from the database. Coverage and timeline SQL
-  projections are still produced only by `data:db` (`canonical-projections.json`)
-  and are not yet emitted as release artifacts.
+  it no longer rebuilds from Git. Draft and approved modes select one
+  supersession head per entity; release mode selects pinned `release_items`.
+- [x] Validate schemas, content hashes, selection state, references, and
+  relational projection completeness. Temporal route supersession
+  (`effective` from/to) is not yet enforced — a known gap.
+- [x] Compile catalog, country details, arrangements, graph, API release rows,
+  coverage, route timelines, arrangement projections, and release changelog
+  from the selected database revisions.
 - [x] Fail CI on parity drift or an unsupported source field. The compiler
   exits non-zero on any failed gate (ownership, projection round-trip,
-  citizenship round-trip, graph parity, remainder byte parity, unreleased state).
+  citizenship round-trip, graph parity, remainder byte parity, selected
+  revision state, canonical reference integrity, and relational projection
+  completeness).
 - [x] Generate changed entity IDs by comparing release manifests. The changelog
   takes an explicit `--baseline <release_id>`; it never selects a baseline by
-  filesystem mtime.
+  filesystem mtime, and the baseline does not alter content identity.
+- [x] Make release identity portable across local mirrors and D1 exports.
+  Filesystem paths are diagnostic-only and stored revision hashes are
+  recomputed before they enter the content-addressed manifest.
+- [x] Add adversarial regression tests proving that missing EU membership,
+  missing pilot entities or routes, Spain-beneficiary removals, ambiguous
+  revision heads, and stored-hash mismatches fail.
 - [ ] Reproduce a release byte-for-byte from a real `wrangler d1 export` of
   `flag-paths-data` (the local SQLite mirror is Git-seeded; the remote export
   path has not yet been exercised end-to-end).

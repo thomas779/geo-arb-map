@@ -29,6 +29,7 @@ delivery format, not an independently editable database.
 
 Recent commits:
 
+- `fix: harden data release compiler`
 - `feat: compile data release from d1`
 - `feat: add deterministic data:build compiler`
 - `b287a0a docs: add migration handoff`
@@ -53,29 +54,41 @@ Implemented:
 - `bun run data:build`, a DB-driven release compiler. Compilation and seeding
   are now separate stages: `bun run data:db` seeds a persistent SQLite database
   from Git, and `bun run data:build` reads `canonical_revisions.payload_json`
-  from that database (or a `wrangler d1 export` passed via `--db`), reconstructs
-  the migrated entities, merges them with the read-only legacy remainder,
-  derives the complete graph, and writes a draft release to
+  from that database (or a `wrangler d1 export` passed via `--db`). Draft,
+  approved-head, and explicit release-item selection modes each choose exactly
+  one immutable revision per entity. The compiler reconstructs the migrated
+  entities, merges them with the read-only legacy remainder, derives the
+  complete graph, and writes a draft release to
   `.generated/data-canonical/releases/<release_id>/`.
+- content-addressed release IDs exclude local database paths and changelog
+  baselines; stored revision hashes are recomputed and verified before use;
+- release bundles now include SQL-derived `projections.json`, `coverage.json`,
+  `timelines.json`, and `arrangement-projections.json`.
 
 The compiler's parity gates prove the database round-trips every canonical-owned
 field and that the only compatibility drift is the sanctioned Spain
 Ibero-American beneficiary correction plus its direct graph propagation:
 
 - `exclusive_ownership` — pilot IDs are owned once and exist in the legacy baseline;
-- `arrangement_projection_parity` — projected arrangements (read from the DB)
-  match the legacy blocs/lanes byte-for-byte except the Spain beneficiary set;
+- `arrangement_projection_parity` — every compatibility-owned arrangement field
+  is projected from the DB and must match the legacy blocs/lanes exactly except
+  the eight named Spain beneficiary additions; removals and other edits fail;
 - `citizenship_roundtrip_parity` — every canonical-owned route field (mode,
   status, summary, confidence, `last_checked`, source URL set) round-trips; the
   free-form `facts` object and the descriptive `title` are explicitly
-  legacy-carried until the canonical schema owns them;
+  legacy-carried until the canonical schema owns them. Pilot route-ID set
+  equality prevents missing or additional routes from passing;
 - `graph_parity` — the full derived graph (1,961 edges) differs from
   `public/edges.json` (1,953) only by the eight Spain settlement edges and the
   three Spain two-year-naturalization conditional edges whose `needs` widened;
 - `legacy_remainder_byte_parity` — the non-pilot slice of the source is
-  reconstructed and compared, not merely counted;
-- `unreleased_draft_state` — zero releases, zero approved revisions, zero
-  published.
+  reconstructed and hash-compared;
+- `selected_revision_state` — draft previews accept draft/approved heads, while
+  approved-head and explicit-release builds require approved revisions;
+- `canonical_reference_integrity` — every route and arrangement source
+  reference resolves inside the selected revision set;
+- `relational_projection_completeness` — payload counts must match the
+  release-scoped SQL coverage, timeline, arrangement, and edge projections.
 
 The compiler never approves D1 revisions, publishes a release, replaces
 `public/*.json`, or deploys.
@@ -94,7 +107,7 @@ The public website has not been cut over or redeployed for this migration.
 
 Validation at handoff:
 
-- 107 tests pass;
+- 117 tests pass, including adversarial compiler mutations;
 - TypeScript passes (root `tsc` now includes `scripts/`);
 - Vite production build passes;
 - existing warning: main JS chunk is approximately 520 kB.
@@ -109,15 +122,12 @@ revisions or cutting over:
    accepts a `wrangler d1 export` via `--db`, but a release has not yet been
    reproduced byte-for-byte from an actual remote `flag-paths-data` export. Do
    that once the export path is exercised.
-2. **Bundle coverage and timeline projections.** The SQL coverage/route/
-   arrangement projections are produced by `data:db`
-   (`canonical-projections.json`) but are not yet emitted as release artifacts.
-3. **Schedule D1 backups.** Back up `flag-paths-data` to private R2 on a
+2. **Schedule D1 backups.** Back up `flag-paths-data` to private R2 on a
    schedule and test restoration, so a reviewed release has a recovery path.
-4. **Human review of the draft revisions.** The 21 canonical revisions are all
+3. **Human review of the draft revisions.** The 21 canonical revisions are all
    `draft`. A reviewer approves the pilot scope through the publication service
    (never the intake Worker).
-5. **First immutable release from approved D1 rows**, then **Phase 3 versioned
+4. **First immutable release from approved D1 rows**, then **Phase 3 versioned
    browser reads** (content-addressed release files shipped with the Worker).
 
 Do not approve D1 revisions, publish a release, replace `public/*.json`, or
@@ -159,7 +169,9 @@ bun run data:schemas
 bun run data:migrate:canonical
 bun run data:db          # Git → persistent SQLite (seeds the database)
 bun run data:build       # SQLite/D1 export → draft release (reads the database)
-bun run data:build -- --db path/to/export.sqlite --baseline <release_id>
+bun run data:build -- --db path/to/export.sqlite --mode approved
+bun run data:build -- --db path/to/export.sqlite --mode release --release <release_id>
+bun run data:build -- --baseline <prior_release_id>
 bun run build
 ```
 
@@ -185,9 +197,11 @@ D1 configuration and operational commands are documented in
 > task. `bun run data:build` is a DB-driven release compiler that reads
 > `canonical_revisions.payload_json` and passes its parity gates; do not rebuild
 > it — build on it. This is still Phase 2 in progress, not a cutover: the
-> remaining work is verifying against a real `wrangler d1 export`, bundling
-> coverage/timeline projections, scheduling R2 backups, then human approval of
-> the draft revisions. Keep D1 as the authoring source and static JSON as
+> remaining work is verifying against a real `wrangler d1 export`, scheduling
+> and restoring an R2 backup, then human approval of the draft revisions. The
+> compiler already supports draft, approved-head, and explicit-release modes
+> and bundles SQL coverage/timeline projections. Keep D1 as the authoring source
+> and static JSON as
 > generated public output. Do not approve or publish the current draft
 > revisions and do not cutover or deploy until parity passes against an approved
 > export and a backup/restore has been demonstrated. Use TypeScript, run the full
