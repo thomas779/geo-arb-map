@@ -14,7 +14,6 @@ interface Point {
 
 interface Route {
   d: string;
-  primary: boolean;
 }
 
 const destinations: Point[] = [
@@ -33,15 +32,7 @@ const edgePoints: Point[] = [
   { x: 585, y: 720 },
 ];
 
-function seededRandom(seed: number) {
-  let value = seed >>> 0;
-  return () => {
-    value = (value * 1664525 + 1013904223) >>> 0;
-    return value / 4294967296;
-  };
-}
-
-function routeBetween(start: Point, end: Point, bend: number, primary = false): Route {
+function routeBetween(start: Point, end: Point, bend: number): Route {
   const midpointX = (start.x + end.x) / 2;
   const midpointY = (start.y + end.y) / 2;
   const dx = end.x - start.x;
@@ -54,34 +45,18 @@ function routeBetween(start: Point, end: Point, bend: number, primary = false): 
       `Q ${(midpointX - (dy / length) * bend).toFixed(1)} ${(midpointY + (dx / length) * bend).toFixed(1)}`,
       `${end.x.toFixed(1)} ${end.y.toFixed(1)}`,
     ].join(' '),
-    primary,
   };
 }
 
-function buildRouteField(seed: number): { points: Point[]; routes: Route[] } {
-  const random = seededRandom(seed);
-  const generatedPoints = Array.from({ length: 18 }, () => ({
-    x: 45 + random() * 1110,
-    y: 38 + random() * 644,
-  }));
-  const points = [...destinations, ...edgePoints, ...generatedPoints];
-  const routes = [
-    routeBetween(edgePoints[0], destinations[0], -118, true),
-    routeBetween(destinations[0], destinations[3], -92, true),
-    routeBetween(destinations[1], destinations[2], 142, true),
-    routeBetween(destinations[2], edgePoints[2], -76, true),
-  ];
-
-  for (let index = 0; index < 16; index += 1) {
-    const start = points[(index * 7 + 4) % points.length];
-    const end = points[(index * 11 + 13) % points.length];
-    routes.push(routeBetween(start, end, (random() - 0.5) * 230));
-  }
-
-  return { points, routes };
-}
-
-const field = buildRouteField(779);
+const field = {
+  points: destinations,
+  routes: [
+    routeBetween(edgePoints[0], destinations[0], -118),
+    routeBetween(destinations[0], destinations[3], -92),
+    routeBetween(destinations[1], destinations[2], 142),
+    routeBetween(destinations[2], edgePoints[2], -76),
+  ],
+};
 
 interface Props {
   className?: string;
@@ -89,8 +64,6 @@ interface Props {
 }
 
 export function RouteField({ className, cover = false }: Props) {
-  const primaryRoutes = field.routes.filter((route) => route.primary);
-
   return (
     <figure
       className={cn('planner-route-field relative aspect-[5/3] w-full overflow-hidden', className)}
@@ -113,13 +86,13 @@ export function RouteField({ className, cover = false }: Props) {
             <path
               key={route.d}
               d={route.d}
-              className={route.primary ? 'planner-route planner-route-primary' : 'planner-route'}
+              className="planner-route planner-route-primary"
               style={{ '--route-index': index } as CSSProperties}
             />
           ))}
 
           <g aria-hidden="true">
-            {primaryRoutes.map((route, index) => (
+            {field.routes.map((route, index) => (
               <circle key={route.d} className="planner-route-traveler" r="4">
                 <animateMotion
                   dur={`${10 + index * 1.4}s`}
