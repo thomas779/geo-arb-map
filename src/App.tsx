@@ -279,7 +279,7 @@ export default function App() {
         </div>
       </header>
       <main className="relative flex min-h-0 flex-1 overflow-hidden">
-        {data && (
+        {data && state.view === 'map' && (
           <div
             className={cn(
               'absolute inset-y-0 left-0 z-20 hidden w-[280px] overflow-hidden border-r bg-sidebar shadow-xl transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none md:block',
