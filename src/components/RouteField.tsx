@@ -16,11 +16,36 @@ interface Route {
   d: string;
 }
 
+const projection = {
+  west: -70,
+  east: 110,
+  left: 700,
+  right: 1120,
+  equatorY: 330,
+  latitudeScale: 4.2,
+} as const;
+
+function destinationPoint(
+  label: string,
+  longitude: number,
+  latitude: number,
+  dx: number,
+  dy: number,
+  anchor: 'start' | 'end',
+): Point {
+  const longitudeRatio = (longitude - projection.west) / (projection.east - projection.west);
+  return {
+    x: projection.left + longitudeRatio * (projection.right - projection.left),
+    y: projection.equatorY - latitude * projection.latitudeScale,
+    destination: { label, dx, dy, anchor },
+  };
+}
+
 const destinations: Point[] = [
-  { x: 790, y: 160, destination: { label: 'Portugal', dx: -14, dy: -10, anchor: 'end' } },
-  { x: 965, y: 105, destination: { label: 'Germany', dx: 14, dy: -10, anchor: 'start' } },
-  { x: 860, y: 430, destination: { label: 'Argentina', dx: -14, dy: 18, anchor: 'end' } },
-  { x: 1100, y: 330, destination: { label: 'Singapore', dx: 14, dy: -10, anchor: 'start' } },
+  destinationPoint('Portugal', -8, 39.5, -14, -10, 'end'),
+  destinationPoint('Germany', 10.5, 51, 14, -10, 'start'),
+  destinationPoint('Argentina', -64, -34, -14, 18, 'end'),
+  destinationPoint('Singapore', 103.8, 1.35, 14, -10, 'start'),
 ];
 
 const edgePoints: Point[] = [
