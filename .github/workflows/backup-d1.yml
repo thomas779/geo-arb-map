@@ -1,0 +1,117 @@
+name: Back up canonical D1
+
+on:
+  schedule:
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: canonical-d1-backup
+  cancel-in-progress: false
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Require Cloudflare backup credentials
+        run: |
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+
+      - name: Export canonical D1
+        run: |
+          set -euo pipefail
+          mkdir -p .generated/data-backup
+          bunx wrangler d1 export flag-paths-data \
+            --remote \
+            --config data/d1/wrangler.jsonc \
+            --output .generated/data-backup/flag-paths-data.sql \
+            --skip-confirmation
+
+      - name: Validate the export and compile its release
+        run: bun run data:build -- --db .generated/data-backup/flag-paths-data.sql
+
+      - name: Package the verified backup
+        run: |
+          set -euo pipefail
+          release_id="$(
+            find .generated/data-canonical/releases \
+              -mindepth 1 \
+              -maxdepth 1 \
+              -type d \
+              -printf '%f\n'
+          )"
+          test -n "$release_id"
+          test "$(printf '%s\n' "$release_id" | wc -l)" -eq 1
+
+          backup_date="$(date -u +%Y/%m/%d)"
+          backup_name="flag-paths-data-${release_id}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.sql"
+          mv .generated/data-backup/flag-paths-data.sql ".generated/data-backup/$backup_name"
+          (
+            cd .generated/data-backup
+            sha256sum "$backup_name" > "$backup_name.sha256"
+          )
+          gzip -9 ".generated/data-backup/$backup_name"
+
+          {
+            echo "BACKUP_DATE=$backup_date"
+            echo "BACKUP_NAME=$backup_name"
+          } >> "$GITHUB_ENV"
+
+      - name: Upload daily backup to private R2
+        run: |
+          set -euo pipefail
+          daily_prefix="daily/$BACKUP_DATE"
+          bunx wrangler r2 object put \
+            "flag-paths-data-backups/$daily_prefix/$BACKUP_NAME.gz" \
+            --file ".generated/data-backup/$BACKUP_NAME.gz" \
+            --remote \
+            --config data/d1/wrangler.jsonc
+          bunx wrangler r2 object put \
+            "flag-paths-data-backups/$daily_prefix/$BACKUP_NAME.sha256" \
+            --file ".generated/data-backup/$BACKUP_NAME.sha256" \
+            --remote \
+            --config data/d1/wrangler.jsonc
+
+      - name: Preserve first backup of each month
+        run: |
+          set -euo pipefail
+          if [[ "$BACKUP_DATE" != */01 ]]; then
+            exit 0
+          fi
+          monthly_prefix="monthly/${BACKUP_DATE%/*}"
+          bunx wrangler r2 object put \
+            "flag-paths-data-backups/$monthly_prefix/$BACKUP_NAME.gz" \
+            --file ".generated/data-backup/$BACKUP_NAME.gz" \
+            --remote \
+            --config data/d1/wrangler.jsonc
+          bunx wrangler r2 object put \
+            "flag-paths-data-backups/$monthly_prefix/$BACKUP_NAME.sha256" \
+            --file ".generated/data-backup/$BACKUP_NAME.sha256" \
+            --remote \
+            --config data/d1/wrangler.jsonc
+
+      - name: Keep a short-lived recovery copy with the workflow run
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-d1-backup-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            .generated/data-backup/*.sql.gz
+            .generated/data-backup/*.sha256
+          if-no-files-found: error
+          retention-days: 7
