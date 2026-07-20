@@ -14,6 +14,7 @@ interface Point {
 
 interface Route {
   d: string;
+  tier: 'primary' | 'ambient';
 }
 
 const projection = {
@@ -57,7 +58,12 @@ const edgePoints: Point[] = [
   { x: 585, y: 720 },
 ];
 
-function routeBetween(start: Point, end: Point, bend: number): Route {
+function routeBetween(
+  start: Point,
+  end: Point,
+  bend: number,
+  tier: Route['tier'] = 'primary',
+): Route {
   const midpointX = (start.x + end.x) / 2;
   const midpointY = (start.y + end.y) / 2;
   const dx = end.x - start.x;
@@ -65,6 +71,7 @@ function routeBetween(start: Point, end: Point, bend: number): Route {
   const length = Math.max(Math.hypot(dx, dy), 1);
 
   return {
+    tier,
     d: [
       `M ${start.x.toFixed(1)} ${start.y.toFixed(1)}`,
       `Q ${(midpointX - (dy / length) * bend).toFixed(1)} ${(midpointY + (dx / length) * bend).toFixed(1)}`,
@@ -80,6 +87,10 @@ const field = {
     routeBetween(destinations[0], destinations[3], -92),
     routeBetween(destinations[1], destinations[2], 142),
     routeBetween(destinations[2], edgePoints[2], -76),
+    routeBetween(edgePoints[4], destinations[3], 168, 'ambient'),
+    routeBetween(edgePoints[3], destinations[0], -160, 'ambient'),
+    routeBetween(destinations[0], edgePoints[5], 68, 'ambient'),
+    routeBetween(destinations[1], edgePoints[1], -80, 'ambient'),
   ],
 };
 
@@ -112,13 +123,16 @@ export function RouteField({ className, compact = false, cover = false }: Props)
             <path
               key={route.d}
               d={route.d}
-              className="planner-route planner-route-primary"
+              className={cn(
+                'planner-route',
+                route.tier === 'primary' ? 'planner-route-primary' : 'planner-route-ambient',
+              )}
               style={{ '--route-index': index } as CSSProperties}
             />
           ))}
 
           <g aria-hidden="true">
-            {field.routes.map((route, index) => (
+            {field.routes.filter(route => route.tier === 'primary').map((route, index) => (
               <circle key={route.d} className="planner-route-traveler" r="4">
                 <animateMotion
                   dur={`${10 + index * 1.4}s`}

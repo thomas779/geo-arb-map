@@ -229,6 +229,14 @@
   animation-delay: calc(var(--route-index) * -1.7s);
 }
 
+.planner-route-ambient {
+  stroke: color-mix(in srgb, var(--primary) 38%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 1 18;
+  animation: planner-route-drift 32s linear infinite;
+  animation-delay: calc(var(--route-index) * -2.1s);
+}
+
 .planner-route-node {
   fill: var(--background);
   stroke: color-mix(in srgb, var(--muted-foreground) 70%, transparent);
