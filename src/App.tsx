@@ -20,6 +20,7 @@ import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { RouteDetailPanel } from '@/components/RouteDetailPanel';
 import { StackingView } from '@/components/StackingView';
+import { PlannerPreview } from '@/components/PlannerPreview';
 import { TrustCenter } from '@/components/TrustCenter';
 import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
@@ -27,6 +28,8 @@ import type { EdgesFile, GraphEdge } from '@/lib/pathfinder';
 import { clearStoredProfile, LEGACY_FLAGS_KEY, PROFILE_KEY } from '@/lib/profile-storage';
 import { cn } from '@/lib/utils';
 import type { TrustSection } from './url';
+
+const PLANNER_ENABLED = import.meta.env.VITE_PLANNER_ENABLED === 'true';
 
 function initialProfile(): Profile {
   // Tooling/demo override: ?flags=372c,840p,356d&born=344&ancestors=380,616&heritage=israel_law_of_return
@@ -110,10 +113,12 @@ export default function App() {
         }));
       })
       .catch(err => console.error('Failed to load blocs_data.json:', err));
-    fetch(import.meta.env.BASE_URL + 'edges.json')
-      .then(res => res.json())
-      .then((e: EdgesFile) => setEdges(e.edges))
-      .catch(err => console.error('Failed to load edges.json:', err));
+    if (PLANNER_ENABLED) {
+      fetch(import.meta.env.BASE_URL + 'edges.json')
+        .then(res => res.json())
+        .then((e: EdgesFile) => setEdges(e.edges))
+        .catch(err => console.error('Failed to load edges.json:', err));
+    }
     fetch(import.meta.env.BASE_URL + 'citizenship_routes.json')
       .then(res => res.json())
       .then((routes: CitizenshipRoutesData) => setCitizenshipRoutes(routes))
@@ -205,14 +210,20 @@ export default function App() {
             <button
               key={v}
               aria-current={state.view === v ? 'page' : undefined}
+              aria-label={v === 'stacking' && !PLANNER_ENABLED ? 'Planner — coming soon' : label}
               className={
                 state.view === v
-                  ? 'min-h-9 bg-secondary px-2 text-xs font-semibold text-secondary-foreground sm:min-h-0 sm:px-3 sm:py-1.5'
-                  : 'min-h-9 px-2 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground sm:min-h-0 sm:px-3 sm:py-1.5'
+                  ? 'flex min-h-9 items-center gap-1.5 bg-secondary px-2 text-xs font-semibold text-secondary-foreground sm:min-h-0 sm:px-3 sm:py-1.5'
+                  : 'flex min-h-9 items-center gap-1.5 px-2 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground sm:min-h-0 sm:px-3 sm:py-1.5'
               }
               onClick={() => selectView(v)}
             >
               {label}
+              {v === 'stacking' && !PLANNER_ENABLED && (
+                <span className="hidden rounded-full border border-current/20 px-1.5 py-px font-mono text-[9px] font-semibold uppercase tracking-wide opacity-70 sm:inline">
+                  Soon
+                </span>
+              )}
             </button>
           ))}
         </nav>
@@ -366,15 +377,19 @@ export default function App() {
             </div>
           )}
           {data && state.view === 'stacking' && (
-            <StackingView
-              data={data}
-              edges={edges}
-              citizenshipRoutes={citizenshipRoutes}
-              onBlocSelect={backToMapWithBloc}
-              profile={profile}
-              onProfileChange={changeProfile}
-              onOpenPrivacy={() => changeInfo('privacy')}
-            />
+            PLANNER_ENABLED ? (
+              <StackingView
+                data={data}
+                edges={edges}
+                citizenshipRoutes={citizenshipRoutes}
+                onBlocSelect={backToMapWithBloc}
+                profile={profile}
+                onProfileChange={changeProfile}
+                onOpenPrivacy={() => changeInfo('privacy')}
+              />
+            ) : (
+              <PlannerPreview onBackToAtlas={() => selectView('map')} />
+            )
           )}
           {data && (
             <button
