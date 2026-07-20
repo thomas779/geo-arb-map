@@ -103,7 +103,7 @@ export function RouteField({ className, cover = false }: Props) {
       >
         <title id="planner-route-field-title">Global mobility route field</title>
         <desc id="planner-route-field-description">
-          Example destinations connected by routes that travel into and out of the page edges.
+          Destinations ordered by approximate longitude and latitude, connected by routes that travel through the page edges.
         </desc>
 
         <g className="planner-routes">
