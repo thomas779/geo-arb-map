@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { Database } from 'bun:sqlite';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 // @ts-expect-error — plain-JS derivation script imported as the graph parity oracle.
@@ -284,6 +285,35 @@ function selectRevisionHeads(
   return selected.sort((a, b) => a.entity_id.localeCompare(b.entity_id));
 }
 
+function materializeDatabaseInput(inputPath: string): {
+  databasePath: string;
+  cleanup: () => void;
+} {
+  if (path.extname(inputPath).toLowerCase() !== '.sql') {
+    return { databasePath: inputPath, cleanup: () => undefined };
+  }
+  const temporaryRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'flag-paths-d1-export-'));
+  const databasePath = path.join(temporaryRoot, 'export.sqlite');
+  const database = new Database(databasePath, { create: true, strict: true });
+  try {
+    database.exec(fs.readFileSync(inputPath, 'utf8'));
+    database.exec('PRAGMA optimize');
+  } catch (error) {
+    database.close();
+    fs.rmSync(temporaryRoot, { recursive: true, force: true });
+    throw new Error(
+      `Failed to materialize D1 SQL export ${inputPath}: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+    );
+  }
+  database.close();
+  return {
+    databasePath,
+    cleanup: () => fs.rmSync(temporaryRoot, { recursive: true, force: true }),
+  };
+}
+
 /** Open a canonical SQLite database (local mirror or D1 export) and load one revision per entity. */
 export function loadCanonicalDatabase(
   dbPath: string,
@@ -297,7 +327,8 @@ export function loadCanonicalDatabase(
         + 'or pass --db <path> to a wrangler D1 export.',
     );
   }
-  const database = new Database(absolute, { readonly: true });
+  const materialized = materializeDatabaseInput(absolute);
+  const database = new Database(materialized.databasePath, { readonly: true });
   try {
     const mode = selection.mode ?? 'draft';
     if (mode === 'release' && !selection.releaseId) {
@@ -427,6 +458,7 @@ export function loadCanonicalDatabase(
     };
   } finally {
     database.close();
+    materialized.cleanup();
   }
 }
 

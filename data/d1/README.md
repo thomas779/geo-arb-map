@@ -69,3 +69,21 @@ bunx wrangler d1 execute flag-paths-data \
   --config data/d1/wrangler.jsonc \
   --file .generated/data-canonical/canonical-import.sql
 ```
+
+Export the remote database and run the same release compiler against it before
+approval or publication:
+
+```sh
+mkdir -p .generated/data-canonical/remote
+bunx wrangler d1 export flag-paths-data \
+  --remote \
+  --config data/d1/wrangler.jsonc \
+  --output .generated/data-canonical/remote/flag-paths-data.sql
+bun run data:build -- \
+  --db .generated/data-canonical/remote/flag-paths-data.sql
+```
+
+Wrangler exports D1 as SQL rather than as a SQLite file. `data:build`
+materializes that SQL in a temporary SQLite database, validates it, and removes
+the temporary database after compilation. The SQL export remains local and
+ignored under `.generated/`.

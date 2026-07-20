@@ -29,6 +29,7 @@ delivery format, not an independently editable database.
 
 Recent commits:
 
+- `feat: compile d1 sql exports`
 - `fix: harden data release compiler`
 - `feat: compile data release from d1`
 - `feat: add deterministic data:build compiler`
@@ -54,7 +55,8 @@ Implemented:
 - `bun run data:build`, a DB-driven release compiler. Compilation and seeding
   are now separate stages: `bun run data:db` seeds a persistent SQLite database
   from Git, and `bun run data:build` reads `canonical_revisions.payload_json`
-  from that database (or a `wrangler d1 export` passed via `--db`). Draft,
+  from that database (or materializes the `.sql` produced by
+  `wrangler d1 export` when passed via `--db`). Draft,
   approved-head, and explicit release-item selection modes each choose exactly
   one immutable revision per entity. The compiler reconstructs the migrated
   entities, merges them with the read-only legacy remainder, derives the
@@ -102,12 +104,21 @@ Remote D1 state:
 - 0 releases;
 - 0 unresolved evidence references.
 
+Remote export verification completed on 2026-07-20:
+
+- `wrangler d1 export flag-paths-data --remote` produced a SQL export;
+- `data:build -- --db <export.sql>` materialized and compiled that export;
+- the remote export and local mirror produced the same database content hash,
+  the same 21 selected entities, and the same release ID
+  (`d87a3807edbbebac`);
+- all 34 generated release files had identical paths and bytes.
+
 The public website has not been cut over or redeployed for this migration.
 `atlas.thomphreys.com` still reads the existing public JSON.
 
 Validation at handoff:
 
-- 117 tests pass, including adversarial compiler mutations;
+- 118 tests pass, including adversarial compiler mutations and SQL-export parity;
 - TypeScript passes (root `tsc` now includes `scripts/`);
 - Vite production build passes;
 - existing warning: main JS chunk is approximately 520 kB.
@@ -118,16 +129,12 @@ Validation at handoff:
 is still **Phase 2 in progress**, not a completed cutover. Before approving D1
 revisions or cutting over:
 
-1. **Verify against a real D1 export.** The compiler reads a SQLite database and
-   accepts a `wrangler d1 export` via `--db`, but a release has not yet been
-   reproduced byte-for-byte from an actual remote `flag-paths-data` export. Do
-   that once the export path is exercised.
-2. **Schedule D1 backups.** Back up `flag-paths-data` to private R2 on a
+1. **Schedule D1 backups.** Back up `flag-paths-data` to private R2 on a
    schedule and test restoration, so a reviewed release has a recovery path.
-3. **Human review of the draft revisions.** The 21 canonical revisions are all
+2. **Human review of the draft revisions.** The 21 canonical revisions are all
    `draft`. A reviewer approves the pilot scope through the publication service
    (never the intake Worker).
-4. **First immutable release from approved D1 rows**, then **Phase 3 versioned
+3. **First immutable release from approved D1 rows**, then **Phase 3 versioned
    browser reads** (content-addressed release files shipped with the Worker).
 
 Do not approve D1 revisions, publish a release, replace `public/*.json`, or
@@ -169,8 +176,8 @@ bun run data:schemas
 bun run data:migrate:canonical
 bun run data:db          # Git → persistent SQLite (seeds the database)
 bun run data:build       # SQLite/D1 export → draft release (reads the database)
-bun run data:build -- --db path/to/export.sqlite --mode approved
-bun run data:build -- --db path/to/export.sqlite --mode release --release <release_id>
+bun run data:build -- --db path/to/export.sql --mode approved
+bun run data:build -- --db path/to/export.sql --mode release --release <release_id>
 bun run data:build -- --baseline <prior_release_id>
 bun run build
 ```
@@ -197,8 +204,10 @@ D1 configuration and operational commands are documented in
 > task. `bun run data:build` is a DB-driven release compiler that reads
 > `canonical_revisions.payload_json` and passes its parity gates; do not rebuild
 > it — build on it. This is still Phase 2 in progress, not a cutover: the
-> remaining work is verifying against a real `wrangler d1 export`, scheduling
-> and restoring an R2 backup, then human approval of the draft revisions. The
+> real `flag-paths-data` D1 export has already reproduced release
+> `d87a3807edbbebac` byte-for-byte against the local mirror. The remaining work
+> is scheduling and restoring an R2 backup, then human approval of the draft
+> revisions. The
 > compiler already supports draft, approved-head, and explicit-release modes
 > and bundles SQL coverage/timeline projections. Keep D1 as the authoring source
 > and static JSON as

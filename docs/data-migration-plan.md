@@ -193,8 +193,9 @@ consumer while parity tests prove no unrelated record changed.
   canonical pilot as draft records with no published release.
 - [x] Add `bun run data:build` against local SQLite/D1. The compiler reads
   `canonical_revisions.payload_json` from a persistent SQLite database (the
-  local mirror produced by `data:db`, or a `wrangler d1 export` via `--db`);
-  it no longer rebuilds from Git. Draft and approved modes select one
+  local mirror produced by `data:db`) or materializes the `.sql` produced by
+  `wrangler d1 export` via `--db`; it no longer rebuilds from Git. Draft and
+  approved modes select one
   supersession head per entity; release mode selects pinned `release_items`.
 - [x] Validate schemas, content hashes, selection state, references, and
   relational projection completeness. Temporal route supersession
@@ -216,9 +217,10 @@ consumer while parity tests prove no unrelated record changed.
 - [x] Add adversarial regression tests proving that missing EU membership,
   missing pilot entities or routes, Spain-beneficiary removals, ambiguous
   revision heads, and stored-hash mismatches fail.
-- [ ] Reproduce a release byte-for-byte from a real `wrangler d1 export` of
-  `flag-paths-data` (the local SQLite mirror is Git-seeded; the remote export
-  path has not yet been exercised end-to-end).
+- [x] Reproduce a release byte-for-byte from a real `wrangler d1 export` of
+  `flag-paths-data`. The 2026-07-20 remote SQL export and local SQLite mirror
+  produced the same database hash, 21-entity scope, release ID
+  (`d87a3807edbbebac`), and 34 byte-identical release files.
 - [ ] Back up D1 to private R2 on a schedule and test restoration.
 
 **Exit gate:** a clean checkout plus an approved database export can reproduce

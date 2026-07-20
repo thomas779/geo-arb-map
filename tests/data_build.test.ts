@@ -5,7 +5,11 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
-import { importCanonicalPilot } from '../scripts/lib/canonical-store';
+import {
+  buildCanonicalImportPlan,
+  importCanonicalPilot,
+  renderCanonicalSql,
+} from '../scripts/lib/canonical-store';
 import {
   compileDataRelease,
   computeChangelog,
@@ -95,6 +99,17 @@ describe('data:build reads the canonical database', () => {
   test('fails clearly when the database is missing', () => {
     expect(() => loadCanonicalDatabase(path.join(tmp, 'does-not-exist.sqlite'), REPO_ROOT))
       .toThrow(/Canonical database not found/);
+  });
+
+  test('compiles a wrangler-style SQL export by materializing it as SQLite', () => {
+    const exportPath = path.join(tmp, 'canonical-export.sql');
+    const plan = buildCanonicalImportPlan(buildCanonicalPilot());
+    fs.writeFileSync(exportPath, `${MIGRATION}\n${renderCanonicalSql(plan.mutations)}`);
+    const fromExport = compileDataRelease({ dbPath: exportPath, root: REPO_ROOT });
+    expect(fromExport.parity.passed).toBe(true);
+    expect(fromExport.manifest.database.content_hash)
+      .toBe(release.manifest.database.content_hash);
+    expect(fromExport.manifest.release_id).toBe(release.manifest.release_id);
   });
 
   test('selects a single supersession head instead of every historical revision', () => {
