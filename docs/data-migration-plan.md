@@ -221,12 +221,20 @@ consumer while parity tests prove no unrelated record changed.
   `flag-paths-data`. The 2026-07-20 remote SQL export and local SQLite mirror
   produced the same database hash, 21-entity scope, release ID
   (`d87a3807edbbebac`), and 34 byte-identical release files.
+- [x] Generate a deterministic review packet from the real D1 export covering
+  every selected revision and content hash, structured route and arrangement
+  field, evidence path, sanctioned difference, and parity gate.
 - [x] Create a private R2 backup bucket, configure 90-day daily and two-year
   monthly retention, and prove that a downloaded real export reproduces release
   `d87a3807edbbebac` with every build gate passing.
 - [ ] Activate the daily GitHub backup workflow by setting its least-privilege
   Cloudflare account variable and API-token secret, then confirm its first
   scheduled run.
+- [ ] Complete the human review checklist for the 21 draft revisions. In
+  particular, Spain is still explicitly unchecked and the France, Portugal,
+  EU/EEA, Mercosur, and Spain lane records still declare partial coverage.
+- [ ] Approve reviewed revisions, pin them to an immutable release, and
+  reproduce that explicit release from a fresh D1 export before browser cutover.
 
 **Exit gate:** a clean checkout plus an approved database export can reproduce
 the release byte-for-byte, and no canonical fact has two editable homes.

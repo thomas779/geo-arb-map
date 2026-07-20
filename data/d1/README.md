@@ -88,6 +88,19 @@ materializes that SQL in a temporary SQLite database, validates it, and removes
 the temporary database after compilation. The SQL export remains local and
 ignored under `.generated/`.
 
+Generate the deterministic human-review packet from the same export:
+
+```sh
+bun run data:review -- \
+  --db .generated/data-canonical/remote/flag-paths-data.sql
+```
+
+The packet is written to
+`.generated/data-canonical/reviews/<release-id>.md`. It lists every selected
+revision and hash, structured route and arrangement fields, evidence paths,
+sanctioned differences, and parity gates. Generating a packet does not approve
+or publish anything.
+
 See [`docs/operations/data-backups.md`](../../docs/operations/data-backups.md)
 for the private R2 schedule, retention policy, restore rehearsal, and disaster
 recovery procedure.
