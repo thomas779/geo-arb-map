@@ -1,6 +1,7 @@
 {
   "$schema": "../../node_modules/wrangler/config-schema.json",
   "name": "flag-paths-data-admin",
+  "account_id": "9fa27a0cad6d1317e96592c85e31f7a6",
   "compatibility_date": "2026-07-19",
   "d1_databases": [
     {

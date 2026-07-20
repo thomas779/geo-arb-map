@@ -22,11 +22,10 @@ monthly/YYYY/MM/<database>-<release>-<run>-<attempt>.sql.sha256
 R2 lifecycle rules retain daily objects for 90 days and monthly objects for
 730 days. GitHub also retains a copy with the workflow run for seven days.
 
-The workflow requires:
-
-- repository variable `CLOUDFLARE_ACCOUNT_ID`; and
-- repository secret `CLOUDFLARE_API_TOKEN`, scoped to read D1 and write the
-  `flag-paths-data-backups` bucket.
+The Cloudflare account ID is non-secret deployment metadata in
+`data/d1/wrangler.jsonc`. The workflow therefore requires only repository secret
+`CLOUDFLARE_API_TOKEN`, scoped to read D1 and write the
+`flag-paths-data-backups` bucket.
 
 The token must not be shared with the email-intake Worker or committed to Git.
 

@@ -228,8 +228,7 @@ consumer while parity tests prove no unrelated record changed.
   monthly retention, and prove that a downloaded real export reproduces release
   `d87a3807edbbebac` with every build gate passing.
 - [ ] Activate the daily GitHub backup workflow by setting its least-privilege
-  Cloudflare account variable and API-token secret, then confirm its first
-  scheduled run.
+  Cloudflare API-token secret, then confirm its first scheduled run.
 - [ ] Complete the human review checklist for the 21 draft revisions. In
   particular, Spain is still explicitly unchecked and the France, Portugal,
   EU/EEA, Mercosur, and Spain lane records still declare partial coverage.
