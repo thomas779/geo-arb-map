@@ -30,7 +30,6 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
         className="planner-preview-compact-routes pointer-events-none absolute z-0 !aspect-auto lg:hidden"
       />
       <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[64%] bg-gradient-to-r from-background/95 via-background/75 to-transparent lg:block" />
-      <div className="planner-preview-reading-veil pointer-events-none absolute inset-x-0 top-0 z-[1] lg:hidden" />
 
       <div className="relative z-10 mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 py-10 sm:px-8 sm:py-16 lg:px-12">
         <div className="relative min-h-[760px] sm:min-h-[700px] md:min-h-[620px] lg:min-h-[570px] lg:py-12">
