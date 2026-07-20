@@ -25,10 +25,15 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
   return (
     <div className="cartographic-surface absolute inset-0 overflow-x-hidden overflow-y-auto">
       <RouteField className="pointer-events-none absolute inset-0 hidden h-full !aspect-auto lg:block" cover />
+      <RouteField
+        compact
+        className="planner-preview-compact-routes pointer-events-none absolute z-0 !aspect-auto lg:hidden"
+      />
       <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[64%] bg-gradient-to-r from-background/95 via-background/75 to-transparent lg:block" />
+      <div className="planner-preview-reading-veil pointer-events-none absolute inset-x-0 top-0 z-[1] lg:hidden" />
 
       <div className="relative z-10 mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 py-10 sm:px-8 sm:py-16 lg:px-12">
-        <div className="relative lg:min-h-[570px] lg:py-12">
+        <div className="relative min-h-[760px] sm:min-h-[700px] md:min-h-[620px] lg:min-h-[570px] lg:py-12">
 
           <div className="relative z-10 max-w-[680px] lg:pt-6">
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
@@ -68,10 +73,6 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
             </p>
           </div>
 
-          <RouteField
-            compact
-            className="planner-preview-inline-routes mt-6 h-[clamp(280px,46vw,440px)] !aspect-auto lg:hidden"
-          />
         </div>
 
         <div className="relative z-10 mt-12 grid border-y border-border/80 bg-background/55 backdrop-blur-[2px] sm:grid-cols-3 lg:mt-0">
