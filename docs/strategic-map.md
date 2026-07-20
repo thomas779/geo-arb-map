@@ -1,7 +1,7 @@
 # Flag Paths — Long-term Strategic Map
 
-Status: working direction  
-Date: 2026-07-17  
+Status: active direction
+Date: 2026-07-20
 Decision horizon: public v1 first; expand only after observed demand
 
 ## The strategic choice
@@ -9,15 +9,20 @@ Decision horizon: public v1 first; expand only after observed demand
 Flag Paths uses **Flag Theory as its worldview, not as its initial product
 surface**.
 
-The public v1 is a citizenship and immigration-residence pathfinder. It helps someone
-turn the statuses and family facts they already have into a practical route toward a
-place they want to live, work, or naturalize.
+The public v1 is a citizenship and immigration-residence atlas. It helps someone see
+how country rules, regional rights, and nationality-specific pathways connect, then
+follow reviewed changes through Telegram.
 
 That is a narrow enough promise to understand and a deep enough problem to build a
 valuable product around. Tax residence, companies, banking, assets, and digital
-presence remain part of the long-term map, but they do not belong in the v1 planner.
+presence remain part of the long-term map, but they do not belong in public v1.
 Each has different laws, data, risk, and professional boundaries. Adding all five now
 would make the product harder to trust before the core mobility loop is proven.
+
+The personalized planner remains a later product horizon. It will require a broader
+profile, optional identity, strong country coverage, monitored rule dependencies, and
+clear professional boundaries. Public v1 keeps the Planner tab as an honest preview
+rather than shipping a partial recommendation product.
 
 ## North star
 
@@ -30,7 +35,7 @@ changed, and which next move creates the most useful optionality.
 
 The near-term product should be described more simply:
 
-> Find the citizenship and residence paths hidden in your profile.
+> Explore how citizenship, residence, and mobility rights connect across countries.
 
 ## The Flag Theory map
 
@@ -49,51 +54,49 @@ and it implies tax, business, and wealth guidance the product does not yet provi
 
 ## Product expansion map
 
-### Horizon 1 — Discover and plan mobility
+### Horizon 1 — Explore the public atlas
 
-**Promise:** Show me what my current profile unlocks and a plausible path to my goal.
+**Promise:** Show me how countries, regional rights, and mobility pathways connect.
 
 - Explore blocs, bilateral lanes, ancestry routes, and event-driven routes.
-- Create a private profile with held statuses, relevant facts, partner information,
-  and a destination goal.
-- See deterministic and chance-based paths clearly separated.
-- Save a watched route and understand its important assumptions.
 - See sources, confidence, verification dates, and explicit coverage gaps.
+- Share stable public country and route contexts.
+- Join Telegram for reviewed country and mobility updates.
 - Keep speculative “acquire and hold” accession watches separate from current
   rights. Candidate-country citizenship can create future optionality, but the
-  planner must not score target-bloc rights until accession actually occurs.
+  atlas must not present target-bloc rights as current until accession occurs.
 
-**Gate to proceed:** New users can reach a relevant route without founder help, and a
-meaningful share choose to watch it.
+**Gate to proceed:** New users can understand a relevant country or route without
+founder help, and a meaningful share join the update channel or return.
 
-### Horizon 2 — Remember and monitor
+### Horizon 2 — Publish and monitor
 
-**Promise:** Keep my plan current when a rule that matters to me changes.
+**Promise:** Keep the atlas current and explain meaningful rule changes.
 
-- Optional account-based sync across devices.
 - Stable identities for legal rules and route dependencies.
 - Reviewed change detection rather than raw automated legal alerts.
-- A clear explanation of which watched route changed and why.
-- Telegram and email delivery without giving either channel ownership of the profile.
+- A concise website update and Telegram brief linked to the changed source and rule.
+- Consistent country coverage and visible correction history.
 - See [`monitoring-architecture.md`](monitoring-architecture.md) for the proposed
   ingestion, review, impact-matching, account, and delivery system.
 
-**Gate to proceed:** Users return because of watched routes, and reviewed changes can
-be delivered accurately with a sustainable editorial workflow.
+**Gate to proceed:** People return from country updates, and reviewed changes can be
+published accurately with a sustainable editorial workflow.
 
-### Horizon 3 — Build the knowledge loop
+### Horizon 3 — Personalize routes
 
-**Promise:** Learn from people pursuing the same routes without confusing anecdotes
-with law.
+**Promise:** Use the facts I choose to share to suggest routes worth investigating.
 
-- Redacted route briefs that users deliberately choose to share.
-- Route clinics, dated field notes, corrections, and source contributions.
-- Contributor credit and a visible product changelog.
-- A small, moderated community layer; no custom social feed.
+- A substantially expanded private profile covering held statuses, family,
+  education, work, goals, and other legally relevant facts.
+- Suggestions whose dependencies resolve to reviewed, monitored rules.
+- Optional account-based save and sync after the user sees value.
+- Route watches and relevant updates through in-product, Telegram, or email delivery.
+- Clear escalation from automated discovery to personalized professional guidance
+  where judgment is required.
 
-**Gate to proceed:** Non-founder contributions repeatedly improve data or help other
-members, and the moderation burden remains healthy. See
-[`community-strategy.md`](community-strategy.md).
+**Gate to proceed:** Country coverage and monitoring are strong enough to support
+useful suggestions, and real users demonstrate demand for saved personal planning.
 
 ### Horizon 4 — Add tax-residence awareness
 
@@ -123,15 +126,15 @@ profile—not one giant form or one universal “optimization score.”
 
 ### Principle: value before identity
 
-The profile starts locally and works without an account. After the user reaches a
-personalized route or watches it, offer:
+Public atlas exploration works without an account. When the later planner can produce
+a useful personalized route or watch, offer:
 
 > Save and sync this profile
 
 Signing in is a persistence feature, not the activation event. A provider outage or
 OAuth decision should never prevent someone from discovering value.
 
-### Recommended v1 identity path
+### Recommended planner identity path
 
 Use **Supabase** as the single optional backend for authentication and profile sync:
 
@@ -169,12 +172,12 @@ experience before the mobility use case requires it.
 
 ## Durable product principles
 
-1. **Narrow promise, broad worldview.** Win citizenship and residence planning before
-   expanding across Flag Theory.
-2. **Profile after utility, not signup before utility.** Anonymous exploration and
-   local profiles remain first-class.
+1. **Narrow promise, broad worldview.** Win the public atlas and reviewed-update loop
+   before personalized planning or wider Flag Theory.
+2. **Profile after utility, not signup before utility.** Anonymous atlas exploration
+   remains first-class; profiles arrive with a product that can use them well.
 3. **Reviewed change, not notification noise.** Legal changes are checked before they
-   become profile alerts.
+   become public updates or later profile alerts.
 4. **Facts and inferences stay distinct.** Show which input unlocked a route and which
    assumptions still need verification.
 5. **Open evidence builds trust.** Sources, confidence, coverage, tests, and correction

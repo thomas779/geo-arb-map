@@ -1,18 +1,22 @@
 # Flag Paths — Founding Community Strategy
 
-Status: working proposal  
-Date: 2026-07-17  
+Status: deferred discussion-community plan
+Date: 2026-07-20
 Inputs: current product, founder handoff, and `.agents/product-marketing.md`
 
 ## The strategic call
 
-Build the profile and monitoring product now; use community as a lightweight,
-opt-in layer around real routes and reviewed changes.
+Launch the public atlas and reviewed-update channel first. Do not make profiles,
+personalized planning, or a discussion community prerequisites for public v1.
 
-The first milestone is not a large public chat or a full account system. It is a private
-mobility profile that reaches one personalized route, lets the user watch it, and later
-delivers reviewed changes. A small, deliberately recruited group can then prove whether
-people will repeatedly help one another discover, verify, and progress those routes.
+The immediate community surface is the public `@flagpaths` Telegram broadcast:
+reviewed citizenship, residence, and mobility changes summarized clearly and linked
+back to the relevant Atlas page or source. Its job is to create a useful return loop,
+not to simulate an active social network.
+
+The founding discussion-group proposal below is retained as a later hypothesis. Revisit
+it only after the broadcast has a useful publishing rhythm and readers demonstrate that
+they want discussion, route clinics, or contributor recognition.
 
 ## Community identity and promise
 
@@ -45,7 +49,10 @@ The weekly behavior to design around is: **help advance one real route**.
 
 ## Platform choice
 
-**Recommended pilot:** Telegram, split into three deliberately separate surfaces:
+**Current v1 surface:** Telegram broadcast channel for verified rule changes and
+product updates.
+
+**Later pilot:** Telegram split into three deliberately separate surfaces:
 
 - A broadcast channel for verified rule changes and product updates.
 - A private or invite-only discussion group, organized with topics, for the first
@@ -66,8 +73,8 @@ Known tradeoff: Telegram discussion still becomes noisy and is not the system of
 Durable conclusions must move into the dataset, documentation, or a later public
 knowledge base. Never let an important legal claim live only in chat.
 
-**Do not open it publicly while empty.** First recruit members manually and seed the
-conversations that demonstrate the intended culture.
+**Do not open the discussion group publicly while empty.** The broadcast channel is
+public; discussion should be seeded and recruited deliberately if it is added later.
 
 ## Minimum Telegram architecture
 
@@ -198,14 +205,12 @@ pilot. Recognition can start as names in the changelog and personal thank-yous.
 
 Current product sequence:
 
-1. Ship the progressive mobility profile and local route watchlist.
+1. Ship the public atlas and visible trust/correction surfaces.
 2. Give dataset rules stable monitoring identities and build reviewed change detection.
-3. Connect a private Telegram bot for watched-route delivery.
-4. Add a redacted route brief with a “discuss this route” handoff.
-5. Recruit the first five people and conduct short onboarding conversations.
-
-The profile remains private by default. Telegram receives only the information required
-to deliver a chosen watch; it does not become the owner of the mobility profile.
+3. Publish reviewed website updates and concise `@flagpaths` posts that link back.
+4. Establish a consistent update rhythm and measure qualified returns from Telegram.
+5. Revisit discussion, profiles, watchlists, and personalized planning from observed
+   demand rather than launch assumptions.
 
 ## Open decisions
 
