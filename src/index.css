@@ -169,6 +169,18 @@
   mask-image: radial-gradient(ellipse at center, black 54%, transparent 92%);
 }
 
+.planner-globe-surface {
+  stroke: color-mix(in srgb, var(--muted-foreground) 54%, transparent);
+  stroke-width: 1.15;
+  vector-effect: non-scaling-stroke;
+}
+
+.planner-globe-grid {
+  stroke: color-mix(in srgb, var(--muted-foreground) 27%, transparent);
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
 .planner-route {
   --route-index: 0;
   fill: none;

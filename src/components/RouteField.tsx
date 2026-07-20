@@ -3,7 +3,6 @@ import type { CSSProperties } from 'react';
 interface Point {
   x: number;
   y: number;
-  size: number;
   destination?: {
     label: string;
     dx: number;
@@ -17,6 +16,15 @@ interface Route {
   primary: boolean;
 }
 
+const GLOBE = { cx: 280, cy: 210, radius: 164 } as const;
+
+const destinations = [
+  { label: 'Portugal', longitude: -8, latitude: 39, dx: -12, dy: -9, anchor: 'end' as const },
+  { label: 'Germany', longitude: 10, latitude: 51, dx: 12, dy: -9, anchor: 'start' as const },
+  { label: 'Argentina', longitude: -64, latitude: -34, dx: -12, dy: 16, anchor: 'end' as const },
+  { label: 'Singapore', longitude: 104, latitude: 1, dx: 12, dy: -9, anchor: 'start' as const },
+] as const;
+
 function seededRandom(seed: number) {
   let value = seed >>> 0;
   return () => {
@@ -25,53 +33,76 @@ function seededRandom(seed: number) {
   };
 }
 
-function buildRouteField(seed: number): { points: Point[]; routes: Route[] } {
+function project(longitude: number, latitude: number): Point {
+  return {
+    x: GLOBE.cx + (longitude / 180) * GLOBE.radius * 0.92,
+    y: GLOBE.cy - (latitude / 90) * GLOBE.radius * 0.88,
+  };
+}
+
+function routeBetween(start: Point, end: Point, bend: number, primary = false): Route {
+  const midpointX = (start.x + end.x) / 2;
+  const midpointY = (start.y + end.y) / 2;
+  const dx = end.x - start.x;
+  const dy = end.y - start.y;
+  const length = Math.max(Math.hypot(dx, dy), 1);
+
+  return {
+    d: [
+      `M ${start.x.toFixed(1)} ${start.y.toFixed(1)}`,
+      `Q ${(midpointX - (dy / length) * bend).toFixed(1)} ${(midpointY + (dx / length) * bend).toFixed(1)}`,
+      `${end.x.toFixed(1)} ${end.y.toFixed(1)}`,
+    ].join(' '),
+    primary,
+  };
+}
+
+function buildGlobe(seed: number): { points: Point[]; routes: Route[] } {
   const random = seededRandom(seed);
-  const destinations = new Map<number, Point['destination']>([
-    [6, { label: 'Portugal', dx: 12, dy: 4, anchor: 'start' }],
-    [9, { label: 'Argentina', dx: 12, dy: -10, anchor: 'start' }],
-    [10, { label: 'Germany', dx: 12, dy: 4, anchor: 'start' }],
-    [13, { label: 'Singapore', dx: -12, dy: -10, anchor: 'end' }],
-  ]);
-  const points = Array.from({ length: 16 }, (_, index) => {
-    const angle = index * 2.399963 + random() * 0.28;
-    const radius = Math.sqrt((index + 1) / 16);
-    const destination = destinations.get(index);
+  const destinationPoints = destinations.map((destination) => ({
+    ...project(destination.longitude, destination.latitude),
+    destination: {
+      label: destination.label,
+      dx: destination.dx,
+      dy: destination.dy,
+      anchor: destination.anchor,
+    },
+  }));
+
+  const generatedPoints = Array.from({ length: 13 }, () => {
+    const angle = random() * Math.PI * 2;
+    const radius = Math.sqrt(random()) * GLOBE.radius * 0.82;
     return {
-      x: 280 + Math.cos(angle) * radius * (205 + random() * 26),
-      y: 210 + Math.sin(angle) * radius * (142 + random() * 22),
-      size: destination ? 5 : 2.6,
-      destination,
+      x: GLOBE.cx + Math.cos(angle) * radius,
+      y: GLOBE.cy + Math.sin(angle) * radius,
     };
   });
 
-  const routes = Array.from({ length: 11 }, (_, index) => {
-    const start = points[(index * 5 + 1) % points.length];
-    const end = points[(index * 7 + 6) % points.length];
-    const midpointX = (start.x + end.x) / 2;
-    const midpointY = (start.y + end.y) / 2;
-    const dx = end.x - start.x;
-    const dy = end.y - start.y;
-    const length = Math.max(Math.hypot(dx, dy), 1);
-    const bend = (random() - 0.5) * 150;
-    const controlX = midpointX - (dy / length) * bend;
-    const controlY = midpointY + (dx / length) * bend;
-    return {
-      d: `M ${start.x.toFixed(1)} ${start.y.toFixed(1)} Q ${controlX.toFixed(1)} ${controlY.toFixed(1)} ${end.x.toFixed(1)} ${end.y.toFixed(1)}`,
-      primary: index === 1 || index === 5 || index === 10,
-    };
-  });
+  const points = [...destinationPoints, ...generatedPoints];
+  const routes = [
+    routeBetween(points[0], points[1], -24, true),
+    routeBetween(points[1], points[3], -58, true),
+    routeBetween(points[0], points[2], 48, true),
+  ];
+
+  for (let index = 0; index < 9; index += 1) {
+    const start = points[4 + ((index * 5 + 1) % generatedPoints.length)];
+    const end = points[4 + ((index * 7 + 5) % generatedPoints.length)];
+    routes.push(routeBetween(start, end, (random() - 0.5) * 88));
+  }
 
   return { points, routes };
 }
 
-const field = buildRouteField(779);
+const globe = buildGlobe(779);
 
 export function RouteField() {
+  const primaryRoutes = globe.routes.filter((route) => route.primary);
+
   return (
     <figure
       className="planner-route-field relative aspect-[4/3] w-full overflow-hidden"
-      aria-label="A miniature atlas showing routes between example destinations"
+      aria-label="A globe showing routes between example destinations"
     >
       <svg
         className="absolute inset-0 size-full"
@@ -80,23 +111,41 @@ export function RouteField() {
         aria-labelledby="planner-route-field-title planner-route-field-description"
         preserveAspectRatio="xMidYMid meet"
       >
-        <title id="planner-route-field-title">Mobility route field</title>
+        <title id="planner-route-field-title">Global mobility routes</title>
         <desc id="planner-route-field-description">
-          Example destinations connected by overlapping routes, with markers moving along three routes being evaluated.
+          A spherical globe with example destinations and markers moving along three routes being evaluated.
         </desc>
 
-        <g className="text-border" fill="none" stroke="currentColor">
-          <ellipse cx="280" cy="210" rx="229" ry="160" opacity="0.5" />
-          <ellipse cx="280" cy="210" rx="168" ry="118" opacity="0.38" />
-          <ellipse cx="280" cy="210" rx="104" ry="72" opacity="0.28" />
-          <path d="M 51 210 H 509" opacity="0.3" />
-          <path d="M 280 50 V 370" opacity="0.3" />
-          <path d="M 75 132 C 184 182 374 182 485 132" opacity="0.24" />
-          <path d="M 75 288 C 184 238 374 238 485 288" opacity="0.24" />
+        <defs>
+          <radialGradient id="planner-globe-fill" cx="35%" cy="28%" r="75%">
+            <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.13" />
+            <stop offset="62%" stopColor="var(--primary)" stopOpacity="0.035" />
+            <stop offset="100%" stopColor="var(--background)" stopOpacity="0" />
+          </radialGradient>
+          <clipPath id="planner-globe-clip">
+            <circle cx={GLOBE.cx} cy={GLOBE.cy} r={GLOBE.radius} />
+          </clipPath>
+        </defs>
+
+        <circle
+          className="planner-globe-surface"
+          cx={GLOBE.cx}
+          cy={GLOBE.cy}
+          r={GLOBE.radius}
+          fill="url(#planner-globe-fill)"
+        />
+
+        <g className="planner-globe-grid" fill="none">
+          <circle cx={GLOBE.cx} cy={GLOBE.cy} r={GLOBE.radius} />
+          <ellipse cx={GLOBE.cx} cy={GLOBE.cy} rx="68" ry={GLOBE.radius} />
+          <ellipse cx={GLOBE.cx} cy={GLOBE.cy} rx="125" ry={GLOBE.radius} />
+          <ellipse cx={GLOBE.cx} cy={GLOBE.cy} rx={GLOBE.radius} ry="54" />
+          <ellipse cx={GLOBE.cx} cy={GLOBE.cy - 58} rx="142" ry="29" />
+          <ellipse cx={GLOBE.cx} cy={GLOBE.cy + 58} rx="142" ry="29" />
         </g>
 
-        <g className="planner-routes">
-          {field.routes.map((route, index) => (
+        <g className="planner-routes" clipPath="url(#planner-globe-clip)">
+          {globe.routes.map((route, index) => (
             <path
               key={route.d}
               d={route.d}
@@ -104,25 +153,25 @@ export function RouteField() {
               style={{ '--route-index': index } as CSSProperties}
             />
           ))}
-        </g>
 
-        <g aria-hidden="true">
-          {field.routes.filter((route) => route.primary).map((route, index) => (
-            <circle key={route.d} className="planner-route-traveler" r="4">
-              <animateMotion
-                dur={`${8.5 + index * 1.25}s`}
-                begin={`${index * -2.4}s`}
-                repeatCount="indefinite"
-                path={route.d}
-              />
-            </circle>
-          ))}
+          <g aria-hidden="true">
+            {primaryRoutes.map((route, index) => (
+              <circle key={route.d} className="planner-route-traveler" r="4">
+                <animateMotion
+                  dur={`${8.5 + index * 1.25}s`}
+                  begin={`${index * -2.4}s`}
+                  repeatCount="indefinite"
+                  path={route.d}
+                />
+              </circle>
+            ))}
+          </g>
         </g>
 
         <g>
-          {field.points.map((point, index) => (
+          {globe.points.map((point, index) => (
             <g key={`${point.x}-${point.y}`}>
-              {point.size > 4 && (
+              {point.destination && (
                 <circle
                   className="planner-route-halo"
                   cx={point.x}
@@ -132,10 +181,10 @@ export function RouteField() {
                 />
               )}
               <circle
-                className={point.size > 4 ? 'planner-route-node planner-route-node-key' : 'planner-route-node'}
+                className={point.destination ? 'planner-route-node planner-route-node-key' : 'planner-route-node'}
                 cx={point.x}
                 cy={point.y}
-                r={point.size}
+                r={point.destination ? 5 : 2.6}
               />
               {point.destination && (
                 <text
