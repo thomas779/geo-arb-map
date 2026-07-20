@@ -85,10 +85,11 @@ const field = {
 
 interface Props {
   className?: string;
+  compact?: boolean;
   cover?: boolean;
 }
 
-export function RouteField({ className, cover = false }: Props) {
+export function RouteField({ className, compact = false, cover = false }: Props) {
   return (
     <figure
       className={cn('planner-route-field relative aspect-[5/3] w-full overflow-hidden', className)}
@@ -96,7 +97,7 @@ export function RouteField({ className, cover = false }: Props) {
     >
       <svg
         className="absolute inset-0 size-full"
-        viewBox="0 0 1200 720"
+        viewBox={compact ? '600 40 620 600' : '0 0 1200 720'}
         role="img"
         aria-labelledby="planner-route-field-title planner-route-field-description"
         preserveAspectRatio={cover ? 'xMidYMid slice' : 'xMidYMid meet'}

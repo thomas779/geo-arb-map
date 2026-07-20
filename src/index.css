@@ -168,6 +168,11 @@
   mask-image: radial-gradient(ellipse at center, black 58%, transparent 98%);
 }
 
+.planner-preview-inline-routes .planner-route-label {
+  font-size: 16px;
+  stroke-width: 5px;
+}
+
 .planner-route {
   --route-index: 0;
   fill: none;

@@ -68,7 +68,10 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
             </p>
           </div>
 
-          <RouteField className="planner-preview-inline-routes mt-6 h-[260px] !aspect-auto lg:hidden" />
+          <RouteField
+            compact
+            className="planner-preview-inline-routes mt-6 h-[clamp(280px,46vw,440px)] !aspect-auto lg:hidden"
+          />
         </div>
 
         <div className="relative z-10 mt-12 grid border-y border-border/80 bg-background/55 backdrop-blur-[2px] sm:grid-cols-3 lg:mt-0">
