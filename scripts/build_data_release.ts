@@ -13,19 +13,41 @@
  * gate cutover on a clean build.
  *
  * Usage:
- *   bun run data:build [--db <path>] [--baseline <release_id>]
+ *   bun run data:build [--db <path>] [--mode draft|approved]
+ *   bun run data:build -- --db <path> --mode release --release <release_id>
+ *   bun run data:build -- --baseline <prior_release_id>
  */
-import { compileDataRelease, writeDataRelease } from './lib/data-build';
+import {
+  compileDataRelease,
+  writeDataRelease,
+  type CompileSelectionMode,
+} from './lib/data-build';
 
 function arg(name: string): string | undefined {
   const index = process.argv.indexOf(name);
-  return index >= 0 ? process.argv[index + 1] : undefined;
+  if (index < 0) return undefined;
+  const value = process.argv[index + 1];
+  if (!value || value.startsWith('--')) {
+    throw new Error(`${name} requires a value`);
+  }
+  return value;
 }
 
 const dbPath = arg('--db');
 const baselineReleaseId = arg('--baseline');
+const modeValue = arg('--mode') ?? 'draft';
+if (!['draft', 'approved', 'release'].includes(modeValue)) {
+  throw new Error(`Unsupported --mode ${modeValue}; expected draft, approved, or release`);
+}
+const selectionMode = modeValue as CompileSelectionMode;
+const releaseId = arg('--release');
 
-const release = compileDataRelease({ dbPath, baselineReleaseId });
+const release = compileDataRelease({
+  dbPath,
+  baselineReleaseId,
+  selectionMode,
+  releaseId,
+});
 const output = writeDataRelease(release);
 
 const failed = release.parity.gates.filter(gate => gate.status === 'fail');
@@ -44,7 +66,8 @@ if (failed.length > 0 || !release.parity.passed) {
 const sanctionedGraph = release.compatibility_diff.graph.filter(d =>
   d.kind === 'added').length;
 console.log(
-  `data:build ${release.manifest.release_id} (db: ${release.manifest.database.path}): `
+  `data:build ${release.manifest.release_id} `
+  + `(db: ${release.input.database_path}, mode: ${release.manifest.database.selection_mode}): `
   + `${release.manifest.counts.canonical_entities} canonical entities, `
   + `${release.manifest.counts.routes} routes, `
   + `${release.manifest.counts.graph_edges} graph edges, `
