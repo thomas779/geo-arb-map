@@ -164,6 +164,81 @@
   background-size: auto, auto, 72px 72px, 72px 72px;
 }
 
+.planner-route-field {
+  background: radial-gradient(ellipse at 50% 48%, var(--ambient-primary), transparent 66%);
+  mask-image: radial-gradient(ellipse at center, black 54%, transparent 92%);
+}
+
+.planner-route {
+  --route-index: 0;
+  fill: none;
+  stroke: color-mix(in srgb, var(--muted-foreground) 38%, transparent);
+  stroke-width: 1;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.planner-route-primary {
+  stroke: color-mix(in srgb, var(--primary) 76%, transparent);
+  stroke-width: 1.6;
+  stroke-dasharray: 1 12;
+  animation: planner-route-drift 22s linear infinite;
+  animation-delay: calc(var(--route-index) * -1.7s);
+}
+
+.planner-route-node {
+  fill: var(--background);
+  stroke: color-mix(in srgb, var(--muted-foreground) 70%, transparent);
+  stroke-width: 1.3;
+  vector-effect: non-scaling-stroke;
+}
+
+.planner-route-node-key {
+  fill: var(--primary);
+  stroke: var(--background);
+  stroke-width: 2.4;
+}
+
+.planner-route-halo {
+  --route-index: 0;
+  fill: none;
+  stroke: color-mix(in srgb, var(--primary) 42%, transparent);
+  stroke-width: 1;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: planner-route-breathe 5s ease-in-out infinite;
+  animation-delay: calc(var(--route-index) * -0.8s);
+  vector-effect: non-scaling-stroke;
+}
+
+.planner-route-label {
+  fill: var(--foreground);
+  stroke: var(--background);
+  stroke-width: 3px;
+  paint-order: stroke fill;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.planner-route-traveler {
+  fill: var(--primary);
+  stroke: var(--background);
+  stroke-width: 2.2;
+  vector-effect: non-scaling-stroke;
+}
+
+@keyframes planner-route-drift {
+  to { stroke-dashoffset: -52; }
+}
+
+@keyframes planner-route-breathe {
+  0%, 100% { opacity: 0.18; transform: scale(0.8); }
+  50% { opacity: 0.7; transform: scale(1.08); }
+}
+
 @media (max-width: 767px) {
   .cartographic-surface {
     background-image:
@@ -173,6 +248,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .planner-route-traveler {
+    display: none;
+  }
+
   *, *::before, *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;

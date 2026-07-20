@@ -1,5 +1,6 @@
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { RouteField } from '@/components/RouteField';
 
 interface Props {
   onBackToAtlas: () => void;
@@ -24,7 +25,7 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
   return (
     <div className="cartographic-surface absolute inset-0 overflow-y-auto">
       <div className="mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 py-10 sm:px-8 sm:py-16 lg:px-12">
-        <div className="grid items-end gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)] lg:gap-16">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(340px,0.85fr)] lg:gap-14">
           <div>
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
               Planner · later release
@@ -34,9 +35,9 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
               <span className="block text-muted-foreground">Personal routes come next.</span>
             </h2>
             <p className="mt-6 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Flag Paths is launching as a public map of citizenship, residence, and
-              mobility rules. The planner will return when profiles, monitoring, and
-              source review are ready to support useful suggestions.
+              Flag Paths is a public map of citizenship, residence, and mobility
+              rules. A later planner release will turn the facts you choose to share
+              into source-backed routes worth investigating.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="min-h-11 gap-2">
@@ -52,10 +53,10 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
               <Button
                 variant="outline"
                 size="lg"
-                className="min-h-11 bg-background/65"
+                className="min-h-11 bg-card/70 text-foreground hover:bg-accent"
                 onClick={onBackToAtlas}
               >
-                Back to the atlas
+                Explore the atlas
               </Button>
             </div>
             <p className="mt-3 text-xs text-muted-foreground">
@@ -63,29 +64,7 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
             </p>
           </div>
 
-          <div
-            className="relative border-y border-border/80 py-6"
-            aria-label="Future planner flow"
-          >
-            <div className="absolute top-[2.1rem] right-2 left-2 h-px bg-border" aria-hidden />
-            <div className="relative grid grid-cols-3 gap-3">
-              {['You choose', 'Rules checked', 'Options compared'].map((label, index) => (
-                <div key={label} className="min-w-0">
-                  <span
-                    className={
-                      index === 0
-                        ? 'block size-3 rounded-full border-2 border-primary bg-background'
-                        : 'block size-3 rounded-full border-2 border-border bg-background'
-                    }
-                    aria-hidden
-                  />
-                  <p className="mt-4 font-mono text-[10px] font-semibold uppercase leading-snug tracking-[0.12em] text-muted-foreground">
-                    {label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <RouteField />
         </div>
 
         <div className="mt-12 grid border-y border-border/80 sm:grid-cols-3 lg:mt-16">
