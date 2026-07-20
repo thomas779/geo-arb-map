@@ -87,3 +87,7 @@ Wrangler exports D1 as SQL rather than as a SQLite file. `data:build`
 materializes that SQL in a temporary SQLite database, validates it, and removes
 the temporary database after compilation. The SQL export remains local and
 ignored under `.generated/`.
+
+See [`docs/operations/data-backups.md`](../../docs/operations/data-backups.md)
+for the private R2 schedule, retention policy, restore rehearsal, and disaster
+recovery procedure.

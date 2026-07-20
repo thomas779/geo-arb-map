@@ -1,6 +1,6 @@
 # Data migration plan
 
-Status: **Phase 1 in progress — canonical schemas and candidates active**
+Status: **Phase 2 in progress — D1 release pipeline active**
 
 The migration separates the system into two planes:
 
@@ -221,7 +221,12 @@ consumer while parity tests prove no unrelated record changed.
   `flag-paths-data`. The 2026-07-20 remote SQL export and local SQLite mirror
   produced the same database hash, 21-entity scope, release ID
   (`d87a3807edbbebac`), and 34 byte-identical release files.
-- [ ] Back up D1 to private R2 on a schedule and test restoration.
+- [x] Create a private R2 backup bucket, configure 90-day daily and two-year
+  monthly retention, and prove that a downloaded real export reproduces release
+  `d87a3807edbbebac` with every build gate passing.
+- [ ] Activate the daily GitHub backup workflow by setting its least-privilege
+  Cloudflare account variable and API-token secret, then confirm its first
+  scheduled run.
 
 **Exit gate:** a clean checkout plus an approved database export can reproduce
 the release byte-for-byte, and no canonical fact has two editable homes.
