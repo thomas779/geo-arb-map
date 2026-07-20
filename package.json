@@ -12,6 +12,7 @@
     "data:schemas": "bun scripts/build_data_schemas.ts",
     "data:build": "bun scripts/build_data_release.ts",
     "data:db": "bun scripts/build_canonical_database.ts",
+    "data:review": "bun scripts/build_data_review.ts",
     "data:migrate:canonical": "bun scripts/build_canonical_candidates.ts",
     "data:migrate:shadow": "bun scripts/build_data_shadow.ts",
     "data:timelines": "bun scripts/build_timeline_rules.js",
