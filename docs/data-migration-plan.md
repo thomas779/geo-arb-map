@@ -190,12 +190,27 @@ consumer while parity tests prove no unrelated record changed.
 - [x] Refuse release compilation until every selected revision is approved.
 - [x] Create the isolated Western Europe Data D1 deployment and import the
   canonical pilot as draft records with no published release.
-- [x] Add `bun run data:build` against local SQLite/D1.
-- [x] Validate schemas, temporal constraints, approvals, and references.
-- [x] Compile catalog, country details, arrangements, coverage, timelines,
-  graph, API release rows, and release changelog from SQL.
-- [x] Fail CI on stale generated output or an unsupported source field.
-- [x] Generate changed entity IDs by comparing release manifests.
+- [x] Add `bun run data:build` against local SQLite/D1. The compiler reads
+  `canonical_revisions.payload_json` from a persistent SQLite database (the
+  local mirror produced by `data:db`, or a `wrangler d1 export` via `--db`);
+  it no longer rebuilds from Git.
+- [x] Validate schemas, approvals, and references. Payload JSON is re-parsed
+  against the Zod schemas; the unreleased-state gate asserts zero approvals and
+  zero published releases. Temporal supersession (`effective` from/to) is not
+  yet enforced — a known gap.
+- [~] Compile catalog, country details, arrangements, graph, API release rows,
+  and release changelog from the database. Coverage and timeline SQL
+  projections are still produced only by `data:db` (`canonical-projections.json`)
+  and are not yet emitted as release artifacts.
+- [x] Fail CI on parity drift or an unsupported source field. The compiler
+  exits non-zero on any failed gate (ownership, projection round-trip,
+  citizenship round-trip, graph parity, remainder byte parity, unreleased state).
+- [x] Generate changed entity IDs by comparing release manifests. The changelog
+  takes an explicit `--baseline <release_id>`; it never selects a baseline by
+  filesystem mtime.
+- [ ] Reproduce a release byte-for-byte from a real `wrangler d1 export` of
+  `flag-paths-data` (the local SQLite mirror is Git-seeded; the remote export
+  path has not yet been exercised end-to-end).
 - [ ] Back up D1 to private R2 on a schedule and test restoration.
 
 **Exit gate:** a clean checkout plus an approved database export can reproduce
