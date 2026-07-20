@@ -24,12 +24,11 @@ const futureCapabilities = [
 export function PlannerPreview({ onBackToAtlas }: Props) {
   return (
     <div className="cartographic-surface absolute inset-0 overflow-x-hidden overflow-y-auto">
-      <div className="mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 py-10 sm:px-8 sm:py-16 lg:px-12">
+      <RouteField className="pointer-events-none absolute inset-0 hidden h-full !aspect-auto lg:block" cover />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[64%] bg-gradient-to-r from-background/95 via-background/75 to-transparent lg:block" />
+
+      <div className="relative z-10 mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 py-10 sm:px-8 sm:py-16 lg:px-12">
         <div className="relative lg:min-h-[570px] lg:py-12">
-          <div className="pointer-events-none absolute inset-y-0 -right-[290px] hidden w-[1060px] lg:block">
-            <RouteField className="h-full !aspect-auto" />
-          </div>
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[70%] bg-gradient-to-r from-background via-background/95 to-transparent lg:block" />
 
           <div className="relative z-10 max-w-[680px] lg:pt-6">
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
@@ -69,7 +68,7 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
             </p>
           </div>
 
-          <RouteField className="mt-6 h-[310px] !aspect-auto lg:hidden" />
+          <RouteField className="planner-preview-inline-routes mt-6 h-[260px] !aspect-auto lg:hidden" />
         </div>
 
         <div className="relative z-10 mt-12 grid border-y border-border/80 bg-background/55 backdrop-blur-[2px] sm:grid-cols-3 lg:mt-0">

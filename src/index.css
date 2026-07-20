@@ -164,21 +164,8 @@
   background-size: auto, auto, 72px 72px, 72px 72px;
 }
 
-.planner-route-field {
-  background: radial-gradient(ellipse at 50% 48%, var(--ambient-primary), transparent 66%);
-  mask-image: radial-gradient(ellipse at center, black 54%, transparent 92%);
-}
-
-.planner-globe-surface {
-  stroke: color-mix(in srgb, var(--muted-foreground) 54%, transparent);
-  stroke-width: 1.15;
-  vector-effect: non-scaling-stroke;
-}
-
-.planner-globe-grid {
-  stroke: color-mix(in srgb, var(--muted-foreground) 27%, transparent);
-  stroke-width: 0.8;
-  vector-effect: non-scaling-stroke;
+.planner-preview-inline-routes {
+  mask-image: radial-gradient(ellipse at center, black 58%, transparent 98%);
 }
 
 .planner-route {
