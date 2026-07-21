@@ -215,28 +215,33 @@ export default function App() {
             Your Path to Global Mobility
           </span>
         </div>
-        <nav aria-label="View" className="grid shrink-0 grid-cols-2 overflow-hidden rounded-lg border bg-background/45 p-0.5">
+        <nav
+          aria-label="View"
+          className="relative grid shrink-0 grid-cols-2 border-b border-border/70"
+        >
           {([['map', 'Map'], ['stacking', 'Planner']] as const).map(([v, label]) => (
             <button
               key={v}
               aria-current={state.view === v ? 'page' : undefined}
               aria-label={v === 'stacking' ? 'Planner — coming soon' : label}
               className={cn(
-                'flex h-9 w-16 items-center justify-center gap-1.5 rounded-md text-xs transition-colors sm:h-8 sm:w-[94px]',
+                'flex h-9 w-16 items-center justify-center text-xs font-semibold outline-none transition-colors focus-visible:underline focus-visible:decoration-2 focus-visible:decoration-ring focus-visible:underline-offset-4 sm:h-8 sm:w-[78px]',
                 state.view === v
-                  ? 'bg-secondary font-semibold text-secondary-foreground shadow-sm'
-                  : 'font-medium text-muted-foreground hover:bg-accent/60 hover:text-foreground',
+                  ? 'text-foreground'
+                  : 'text-muted-foreground hover:text-foreground',
               )}
               onClick={() => selectView(v)}
             >
               {label}
-              {v === 'stacking' && (
-                <span className="hidden rounded-full border border-current/20 px-1.5 py-px font-mono text-[9px] font-semibold uppercase tracking-wide opacity-70 sm:inline">
-                  Soon
-                </span>
-              )}
             </button>
           ))}
+          <span
+            aria-hidden
+            className={cn(
+              'absolute bottom-[-1px] left-0 h-0.5 w-1/2 bg-primary transition-transform duration-200 motion-reduce:transition-none',
+              state.view === 'stacking' && 'translate-x-full',
+            )}
+          />
         </nav>
         <div className="ml-auto flex shrink-0 items-center rounded-xl border bg-background/65 p-0.5 shadow-sm backdrop-blur-md">
           {data && (
