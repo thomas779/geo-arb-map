@@ -165,25 +165,34 @@
 }
 
 .planner-preview-compact-routes {
-  top: 27rem;
-  left: -14%;
-  width: 128%;
-  height: 30rem;
-  opacity: 0.9;
-  mask-image: radial-gradient(ellipse at center, black 55%, transparent 94%);
+  top: 0;
+  left: -42%;
+  width: 184%;
+  height: 100%;
+  min-height: 38rem;
+  opacity: 0.24;
+  mask-image: radial-gradient(ellipse 82% 78% at 52% 44%, black 34%, transparent 100%);
 }
 
 .planner-preview-compact-routes .planner-route-label {
-  font-size: 16px;
-  stroke-width: 5px;
+  display: none;
 }
 
 @media (min-width: 640px) {
   .planner-preview-compact-routes {
-    top: 20rem;
-    left: 8%;
-    width: 102%;
-    height: 34rem;
+    top: 0;
+    left: 6%;
+    width: 106%;
+    height: 100%;
+    min-height: 34rem;
+    opacity: 0.34;
+    mask-image: radial-gradient(ellipse 76% 82% at 58% 44%, black 36%, transparent 100%);
+  }
+
+  .planner-preview-compact-routes .planner-route-label {
+    display: block;
+    font-size: 13px;
+    stroke-width: 5px;
   }
 }
 
@@ -193,6 +202,8 @@
     left: 34%;
     width: 74%;
     height: 38rem;
+    min-height: 0;
+    opacity: 0.72;
     mask-image: linear-gradient(to right, transparent 0%, black 34%, black 88%, transparent 100%);
   }
 }
