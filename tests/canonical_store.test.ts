@@ -141,9 +141,9 @@ describe('canonical SQL import and projections', () => {
 
     expect(projections.routes).toHaveLength(canonicalVariantCount);
     expect(projections.coverage.map(row => row.iso_n3)).toEqual([
-      '032', '036', '076', '100', '124', '136', '170', '196', '212', '250',
-      '268', '276', '300', '372', '380', '470', '484', '528', '554', '620',
-      '659', '688', '702', '724',
+      '028', '032', '036', '044', '076', '100', '124', '136', '170', '196',
+      '212', '250', '268', '276', '300', '308', '372', '380', '470', '484',
+      '528', '554', '620', '659', '662', '688', '702', '724',
       '756', '784', '792', '826', '840', '858',
     ]);
     expect(projections.coverage.find(row => row.iso_n3 === '250')).toMatchObject({

@@ -23,6 +23,10 @@ describe('canonical data schemas', () => {
   test('keeps one jurisdiction identity and preserves existing route IDs while adding reviewed routes', () => {
     const routeIds = pilot.jurisdictions.flatMap(item => item.routes.map(route => route.id));
     expect(routeIds).toEqual([
+      'antigua-barbuda-citizenship-by-parent',
+      'antigua-barbuda-naturalization',
+      'antigua-barbuda-citizenship-by-birth',
+      'antigua-barbuda-cip',
       'argentina-citizenship-by-parent',
       'argentina-naturalization-after-residence',
       'argentina-citizenship-by-birth',
@@ -30,6 +34,9 @@ describe('canonical data schemas', () => {
       'australia-citizenship-by-descent',
       'australia-citizenship-by-conferral',
       'australia-citizenship-by-birth',
+      'bahamas-citizenship-by-parent',
+      'bahamas-naturalization',
+      'bahamas-citizenship-connected-to-birth',
       'brazil-citizenship-by-parent',
       'brazil-naturalization-by-residence',
       'brazil-citizenship-by-birth',
@@ -63,6 +70,10 @@ describe('canonical data schemas', () => {
       'germany-citizenship-by-parent',
       'germany-naturalization-by-residence',
       'germany-citizenship-by-birth',
+      'grenada-citizenship-by-parent',
+      'grenada-naturalization',
+      'grenada-citizenship-by-birth',
+      'grenada-cbi',
       'greece-citizenship-by-greek-parent',
       'greece-ordinary-naturalization',
       'greece-citizenship-birth-and-school',
@@ -88,6 +99,10 @@ describe('canonical data schemas', () => {
       'portugal-citizenship-by-parent',
       'portugal-ordinary-naturalization-2026',
       'portugal-birth-parent-residence-2026',
+      'saint-lucia-citizenship-by-parent-or-grandparent',
+      'saint-lucia-naturalization',
+      'saint-lucia-citizenship-by-birth',
+      'saint-lucia-cip',
       'st-kitts-nevis-citizenship-by-parent',
       'st-kitts-nevis-naturalization',
       'st-kitts-nevis-citizenship-by-birth',
@@ -159,6 +174,28 @@ describe('canonical data schemas', () => {
       ?.variants[0]?.eligibility).toContainEqual(
         expect.objectContaining({ field: 'investment.minimum_usd', value: 250000 }),
       );
+
+    const antigua = byIso.get('028')!;
+    expect(antigua.routes.find(route => route.id === 'antigua-barbuda-cip')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'residence.first_five_years_days', value: 5 }),
+      );
+
+    const grenada = byIso.get('308')!;
+    expect(grenada.routes.find(route => route.id === 'grenada-cbi')
+      ?.variants[0]?.eligibility).not.toContainEqual(
+        expect.objectContaining({ field: 'investment.minimum_usd' }),
+      );
+
+    const saintLucia = byIso.get('662')!;
+    expect(saintLucia.routes.find(route => route.id === 'saint-lucia-cip')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'investment.minimum_usd', value: 240000 }),
+      );
+
+    const bahamas = byIso.get('044')!;
+    expect(bahamas.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
   });
 
   test('models eligibility time separately from processing time', () => {

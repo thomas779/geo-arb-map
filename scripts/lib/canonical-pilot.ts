@@ -229,6 +229,24 @@ const OFFICIAL_URLS = {
   st_kitts_cbi_options: 'https://ciu.gov.kn/cbi-options/',
   st_kitts_government_notices: 'https://ciu.gov.kn/government-notices/',
   st_kitts_application: 'https://ciu.gov.kn/application-process/',
+  antigua_constitution: 'https://www.legislation.gov.uk/uksi/1981/1106/contents/made',
+  antigua_citizenship_act: 'https://laws.gov.ag/wp-content/uploads/2018/08/cap-22.pdf',
+  antigua_citizenship_faq: 'https://immigration.gov.ag/frequently-asked-questions/citizenship-permit-faqs/',
+  antigua_cbi_act: 'https://cip.gov.ag/wp-content/uploads/2013/10/Antigua-and-Barbuda-Citizenship-by-Investment-Act-2013.pdf',
+  antigua_cbi_options: 'https://cip.gov.ag/citizenship/',
+  antigua_cbi_home: 'https://cip.gov.ag/home',
+  grenada_constitution: 'https://www.gov.gd/government/the-constitution',
+  grenada_citizenship_act: 'https://www.laws.gov.gd/index.php/chapters/c-39a-75d/92-chapter-54-citizenship-act',
+  grenada_naturalization_form: 'https://gndembassyprc.mofa.gov.gd/wp-content/uploads/2023/09/Schedule-5-Regulation-7.pdf',
+  grenada_cbi: 'https://www.cbi.gov.gd/index_php/',
+  saint_lucia_constitution: 'https://www.govt.lc/constitution7',
+  saint_lucia_citizenship_amendment: 'https://npc.govt.lc/files/laws/acts/2024/Act%20No%207%20of%202024%20Citizenship%20of%20Saint%20Lucia.pdf',
+  saint_lucia_descent_guidance: 'https://homeaffairs.govt.lc/news/the-citizenship-of-saint-lucia-act-is-amended',
+  saint_lucia_cbi_act: 'https://pmd.govt.lc/wp-content/uploads/2025/10/Citizenship-by-Investment-Act-Cap.1.20.pdf',
+  saint_lucia_cbi_options: 'https://www.cipsaintlucia.com/citizenship-by-investment',
+  bahamas_constitution: 'https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf',
+  bahamas_nationality_act: 'https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-0018/1973-0018.pdf',
+  bahamas_economic_pr: 'https://www.immigration.gov.bs/wp-content/uploads/2019/10/PERMANENT-RESIDENCE-FORM-ECONOMIC.pdf',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -587,6 +605,24 @@ function jurisdictionSources(): SourceRecord[] {
       ['St Kitts and Nevis Citizenship Unit — Investment options', OFFICIAL_URLS.st_kitts_cbi_options, '659', 'en', 'official_guidance', 'st-kitts-citizenship-law'],
       ['St Kitts and Nevis Citizenship Unit — Government notices', OFFICIAL_URLS.st_kitts_government_notices, '659', 'en', 'official_guidance', 'st-kitts-citizenship-law'],
       ['St. Kitts and Nevis Citizenship Unit', OFFICIAL_URLS.st_kitts_application, '659', 'en', 'official_guidance', 'st-kitts-citizenship-law'],
+      ['Constitution of Antigua and Barbuda', OFFICIAL_URLS.antigua_constitution, '028', 'en', 'primary_law', 'antigua-citizenship-law'],
+      ['Antigua and Barbuda Citizenship Act', OFFICIAL_URLS.antigua_citizenship_act, '028', 'en', 'primary_law', 'antigua-citizenship-law'],
+      ['Antigua and Barbuda Immigration — Citizenship FAQs', OFFICIAL_URLS.antigua_citizenship_faq, '028', 'en', 'official_guidance', 'antigua-citizenship-law'],
+      ['Antigua and Barbuda Citizenship by Investment Act', OFFICIAL_URLS.antigua_cbi_act, '028', 'en', 'primary_law', 'antigua-citizenship-law'],
+      ['Antigua and Barbuda CIU — Investment options', OFFICIAL_URLS.antigua_cbi_options, '028', 'en', 'official_guidance', 'antigua-citizenship-law'],
+      ['Antigua and Barbuda Citizenship by Investment Unit', OFFICIAL_URLS.antigua_cbi_home, '028', 'en', 'official_guidance', 'antigua-citizenship-law'],
+      ['Constitution of Grenada', OFFICIAL_URLS.grenada_constitution, '308', 'en', 'primary_law', 'grenada-citizenship-law'],
+      ['Grenada Citizenship Act', OFFICIAL_URLS.grenada_citizenship_act, '308', 'en', 'primary_law', 'grenada-citizenship-law'],
+      ['Grenada — application for naturalisation', OFFICIAL_URLS.grenada_naturalization_form, '308', 'en', 'official_guidance', 'grenada-citizenship-law'],
+      ['Grenada Citizenship by Investment', OFFICIAL_URLS.grenada_cbi, '308', 'en', 'official_guidance', 'grenada-citizenship-law'],
+      ['Constitution of Saint Lucia — citizenship', OFFICIAL_URLS.saint_lucia_constitution, '662', 'en', 'primary_law', 'saint-lucia-citizenship-law'],
+      ['Citizenship of Saint Lucia (Amendment) Act 2024', OFFICIAL_URLS.saint_lucia_citizenship_amendment, '662', 'en', 'primary_law', 'saint-lucia-citizenship-law'],
+      ['Saint Lucia Home Affairs — descent amendment', OFFICIAL_URLS.saint_lucia_descent_guidance, '662', 'en', 'official_guidance', 'saint-lucia-citizenship-law'],
+      ['Saint Lucia Citizenship by Investment Act', OFFICIAL_URLS.saint_lucia_cbi_act, '662', 'en', 'primary_law', 'saint-lucia-citizenship-law'],
+      ['Saint Lucia CIP — Investment options', OFFICIAL_URLS.saint_lucia_cbi_options, '662', 'en', 'official_guidance', 'saint-lucia-citizenship-law'],
+      ['Constitution of The Bahamas — citizenship', OFFICIAL_URLS.bahamas_constitution, '044', 'en', 'primary_law', 'bahamas-nationality-law'],
+      ['Bahamas Nationality Act', OFFICIAL_URLS.bahamas_nationality_act, '044', 'en', 'primary_law', 'bahamas-nationality-law'],
+      ['Bahamas Immigration — Economic permanent residence', OFFICIAL_URLS.bahamas_economic_pr, '044', 'en', 'official_guidance', 'bahamas-nationality-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -2433,6 +2469,283 @@ function stKittsNevisRecord(shadow: DataShadow, officialSources: SourceRecord[])
         allocation: 'discretionary',
         note: 'Official minimums currently start at US$250,000 for SISC or Public Benefit, US$325,000 for approved development or condominium property, and US$600,000 for a private home.',
         lastChecked: '2026-07-17',
+      }),
+    ],
+  });
+}
+
+function antiguaBarbudaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.antigua_constitution);
+  const act = requireSource(officialSources, OFFICIAL_URLS.antigua_citizenship_act);
+  const citizenshipFaq = requireSource(officialSources, OFFICIAL_URLS.antigua_citizenship_faq);
+  const cbiAct = requireSource(officialSources, OFFICIAL_URLS.antigua_cbi_act);
+  const cbiOptions = requireSource(officialSources, OFFICIAL_URLS.antigua_cbi_options);
+  const cbiLegacy = requireSource(officialSources, OFFICIAL_URLS.antigua_cbi_home);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '028',
+    name: 'Antigua and Barbuda',
+    note: 'All acquisition modes reviewed against the Constitution, Citizenship Act and current Citizenship by Investment Unit options.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, act] },
+      { mode: 'naturalization', finding: 'present', sources: [act, citizenshipFaq] },
+      { mode: 'birth', finding: 'present', sources: [constitution] },
+      { mode: 'investment', finding: 'present', sources: [cbiAct, cbiOptions] },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'antigua-barbuda-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Citizenship through a citizen parent',
+        summary: 'A person born abroad acquires citizenship at birth through a qualifying Antigua and Barbuda citizen parent under section 113 of the Constitution.',
+        source: [constitution, act],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '028' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'antigua-barbuda-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after a qualifying residence period',
+        summary: 'The Citizenship Act requires residence throughout the twelve months immediately before application and at least five aggregate years during the preceding seven-year period.',
+        source: [act, citizenshipFaq],
+        eligibility: [
+          { field: 'residence.final_twelve_months_continuous', operator: 'eq', value: true },
+          { field: 'residence.prior_seven_years_months', operator: 'gte', value: 60, unit: 'months' },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        note: 'The eight-year window contains a continuous final year plus five aggregate years in the preceding seven; it is not an eight-year continuous-residence rule.',
+      }),
+      principalCitizenshipRoute({
+        id: 'antigua-barbuda-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Citizenship by birth in Antigua and Barbuda',
+        summary: 'A person born in Antigua and Barbuda acquires citizenship at birth, subject to the Constitution’s diplomatic-immunity and hostile-occupation exceptions.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '028' },
+          { field: 'birth.constitutional_exception', operator: 'eq', value: false },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'antigua-barbuda-cip',
+        mode: 'investment',
+        title: 'Citizenship by Investment Programme',
+        summary: 'Government-administered direct citizenship programme with contribution, real-estate and other approved investment options.',
+        source: cbiLegacy,
+        eligibility: [
+          { field: 'investment.minimum_usd', operator: 'gte', value: 230000 },
+          { field: 'compliance.due_diligence_passed', operator: 'eq', value: true },
+          { field: 'residence.first_five_years_days', operator: 'gte', value: 5, unit: 'days' },
+        ],
+        months: 0,
+        allocation: 'discretionary',
+        note: 'The National Development Fund option currently starts at US$230,000. Other approved routes and fees differ, and the principal applicant must spend at least five days in Antigua and Barbuda during the first five calendar years.',
+        lastChecked: '2026-07-17',
+      }),
+    ],
+  });
+}
+
+function grenadaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.grenada_constitution);
+  const act = requireSource(officialSources, OFFICIAL_URLS.grenada_citizenship_act);
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.grenada_naturalization_form);
+  const cbi = requireSource(officialSources, OFFICIAL_URLS.grenada_cbi);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '308',
+    note: 'All acquisition modes reviewed against the Constitution, Citizenship Act, official naturalisation form and Citizenship by Investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, act] },
+      { mode: 'naturalization', finding: 'present', sources: [act, naturalization] },
+      { mode: 'birth', finding: 'present', sources: [constitution] },
+      { mode: 'investment', finding: 'present', sources: [cbi] },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'grenada-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Citizenship through a citizen parent',
+        summary: 'A person born outside Grenada acquires citizenship at birth when a qualifying parent is a Grenadian citizen.',
+        source: [constitution, act],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '308' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'grenada-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after a seven-year residence history',
+        summary: 'An alien may apply for discretionary naturalization using the official form’s seven-year residence or government-service history, with character, solvency and intention-to-reside review.',
+        source: [act, naturalization],
+        eligibility: [{ field: 'residence_or_government_service.history_months', operator: 'gte', value: 84, unit: 'months' }],
+        months: 84,
+        allocation: 'discretionary',
+        note: 'The official application records the seven years immediately before filing. It does not establish an automatic grant after seven continuous years.',
+      }),
+      principalCitizenshipRoute({
+        id: 'grenada-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Citizenship by birth in Grenada',
+        summary: 'A person born in Grenada acquires citizenship at birth, subject to the constitutional diplomatic-immunity and hostile-occupation exceptions.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '308' },
+          { field: 'birth.constitutional_exception', operator: 'eq', value: false },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'grenada-cbi',
+        mode: 'investment',
+        title: 'Citizenship by Investment Programme',
+        summary: 'Government-administered direct citizenship programme with National Transformation Fund and approved-project routes.',
+        source: cbi,
+        eligibility: [
+          { field: 'investment.qualifying_option', operator: 'in', value: ['national_transformation_fund', 'approved_project'] },
+          { field: 'compliance.due_diligence_passed', operator: 'eq', value: true },
+        ],
+        months: 0,
+        allocation: 'discretionary',
+        note: 'The official programme page confirms the contribution and approved-project routes. Monetary thresholds are intentionally omitted here because the same page currently displays an older minimum and should not be treated as a reliable current fee schedule.',
+        lastChecked: '2026-07-17',
+      }),
+    ],
+  });
+}
+
+function saintLuciaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.saint_lucia_constitution);
+  const amendment = requireSource(officialSources, OFFICIAL_URLS.saint_lucia_citizenship_amendment);
+  const descent = requireSource(officialSources, OFFICIAL_URLS.saint_lucia_descent_guidance);
+  const cbiAct = requireSource(officialSources, OFFICIAL_URLS.saint_lucia_cbi_act);
+  const cbiOptions = requireSource(officialSources, OFFICIAL_URLS.saint_lucia_cbi_options);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '662',
+    note: 'All acquisition modes reviewed against the Constitution, the 2024 citizenship amendment and the current Citizenship by Investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, amendment, descent] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution, amendment] },
+      { mode: 'investment', finding: 'present', sources: [cbiAct, cbiOptions] },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'saint-lucia-citizenship-by-parent-or-grandparent',
+        mode: 'ancestry',
+        title: 'Citizenship through a citizen parent or grandparent',
+        summary: 'The 2024 amendment extends citizenship by descent to a person born abroad whose parent or grandparent is a Saint Lucian citizen by birth, subject to the statutory conditions.',
+        source: [amendment, descent],
+        eligibility: [{ field: 'parent_or_grandparent.citizen_by_birth.iso_n3', operator: 'eq', value: '662' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'saint-lucia-naturalization',
+        mode: 'naturalization',
+        title: 'Registration after seven years for a Commonwealth citizen',
+        summary: 'A Commonwealth citizen is entitled to apply for registration after seven years of ordinary residence in Saint Lucia, subject to the Constitution’s application and public-interest conditions.',
+        source: constitution,
+        eligibility: [
+          { field: 'citizenship.commonwealth', operator: 'eq', value: true },
+          { field: 'residence.ordinary_months', operator: 'gte', value: 84, unit: 'months' },
+        ],
+        months: 84,
+        allocation: 'right',
+      }),
+      principalCitizenshipRoute({
+        id: 'saint-lucia-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Citizenship by birth in Saint Lucia',
+        summary: 'A person born in Saint Lucia acquires citizenship at birth, subject to the statutory diplomatic-immunity and hostile-occupation exceptions.',
+        source: [constitution, amendment],
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '662' },
+          { field: 'birth.constitutional_exception', operator: 'eq', value: false },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'saint-lucia-cip',
+        mode: 'investment',
+        title: 'Citizenship by Investment Programme',
+        summary: 'Direct citizenship by registration following a qualifying investment under the Citizenship by Investment Act.',
+        source: cbiAct,
+        eligibility: [
+          { field: 'investment.minimum_usd', operator: 'gte', value: 240000 },
+          { field: 'compliance.due_diligence_passed', operator: 'eq', value: true },
+        ],
+        months: 0,
+        allocation: 'discretionary',
+        note: 'The National Economic Fund option currently starts at US$240,000 for a principal applicant with up to three qualifying dependants; other options and fees differ.',
+        lastChecked: '2026-07-17',
+      }),
+    ],
+  });
+}
+
+function bahamasRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.bahamas_constitution);
+  const act = requireSource(officialSources, OFFICIAL_URLS.bahamas_nationality_act);
+  const economicPr = requireSource(officialSources, OFFICIAL_URLS.bahamas_economic_pr);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '044',
+    name: 'Bahamas',
+    note: 'All acquisition modes reviewed against the Constitution and Nationality Act; economic permanent residence is kept distinct from citizenship.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, act] },
+      { mode: 'naturalization', finding: 'present', sources: [act] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Birth in The Bahamas grants citizenship at birth when a parent is a citizen; a person born there to non-citizen parents has a separate constitutional registration window at age 18.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, act, economicPr],
+        note: 'Investment can support economic permanent residence, not direct citizenship. Citizenship still follows the Constitution and Nationality Act.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'bahamas-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Citizenship through a qualifying Bahamian parent',
+        summary: 'The Constitution provides citizenship at birth or a registration route for a person born abroad through a qualifying Bahamian parent; the applicable rule depends on parentage and the circumstances of birth.',
+        source: [constitution, act],
+        eligibility: [{ field: 'parent.qualifies_under_constitution', operator: 'eq', value: true }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'bahamas-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after a qualifying residence period',
+        summary: 'The Nationality Act requires twelve months of residence immediately before application and at least six aggregate years during the preceding nine years, alongside character, English, civic-knowledge and permanent-home requirements.',
+        source: act,
+        eligibility: [
+          { field: 'residence.final_twelve_months_continuous', operator: 'eq', value: true },
+          { field: 'residence.prior_nine_years_months', operator: 'gte', value: 72, unit: 'months' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        note: 'The ten-year statutory window contains a final continuous year plus six aggregate years in the preceding nine; it is not a ten-year continuous-residence rule.',
+      }),
+      principalCitizenshipRoute({
+        id: 'bahamas-citizenship-connected-to-birth',
+        mode: 'birth',
+        title: 'Citizenship connected to birth in The Bahamas',
+        summary: 'Birth in The Bahamas confers citizenship at birth when a parent is Bahamian. A person born there to non-citizen parents may instead apply for registration at age 18 and before turning 19, subject to the constitutional conditions.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '044' },
+          { field: 'birth.citizen_parent_or_age_18_registration_conditions', operator: 'eq', value: true },
+        ],
+        months: 0,
+        note: 'The age-18 route is later registration connected to birthplace, not citizenship at birth.',
       }),
     ],
   });
@@ -4325,8 +4638,10 @@ function validateReferences(pilot: CanonicalPilot, shadow: DataShadow): void {
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
   const jurisdictions = [
+    antiguaBarbudaRecord(shadow, countrySources),
     argentinaRecord(shadow, countrySources),
     australiaRecord(shadow, countrySources),
+    bahamasRecord(shadow, countrySources),
     brazilRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
@@ -4337,6 +4652,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     franceRecord(shadow, countrySources),
     georgiaRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
+    grenadaRecord(shadow, countrySources),
     greeceRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
@@ -4345,6 +4661,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     netherlandsRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
+    saintLuciaRecord(shadow, countrySources),
     stKittsNevisRecord(shadow, countrySources),
     serbiaRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),
