@@ -20,12 +20,18 @@ describe('canonical data schemas', () => {
     }
   });
 
-  test('keeps one jurisdiction identity and preserves existing route IDs', () => {
+  test('keeps one jurisdiction identity and preserves existing route IDs while adding reviewed routes', () => {
     const routeIds = pilot.jurisdictions.flatMap(item => item.routes.map(route => route.id));
     expect(routeIds).toEqual([
+      'france-citizenship-by-parent',
       'france-study-naturalization-residence',
+      'france-birth-and-residence',
+      'portugal-citizenship-by-parent',
       'portugal-ordinary-naturalization-2026',
       'portugal-birth-parent-residence-2026',
+      'spain-citizenship-by-parent-or-option',
+      'spain-citizenship-by-birth',
+      'spain-naturalization-by-residence',
     ]);
     for (const jurisdiction of pilot.jurisdictions) {
       for (const route of jurisdiction.routes) {
@@ -36,7 +42,10 @@ describe('canonical data schemas', () => {
 
   test('models eligibility time separately from processing time', () => {
     const france = pilot.jurisdictions.find(item => item.jurisdiction.iso_n3 === '250')!;
-    const education = france.routes[0]!.variants.find(
+    const naturalization = france.routes.find(
+      route => route.id === 'france-study-naturalization-residence',
+    )!;
+    const education = naturalization.variants.find(
       variant => variant.id === 'higher_education',
     )!;
     expect(education.timeline.eligibility_minimum_months).toBe(24);
@@ -71,8 +80,11 @@ describe('canonical data schemas', () => {
     const sourceIds = new Set(pilot.sources.map(source => source.id));
     const references = [
       ...pilot.jurisdictions.flatMap(jurisdiction =>
-        jurisdiction.routes.flatMap(route =>
-          route.variants.flatMap(variant => variant.source_refs))),
+        [
+          ...jurisdiction.coverage.flatMap(item => item.source_refs),
+          ...jurisdiction.routes.flatMap(route =>
+            route.variants.flatMap(variant => variant.source_refs)),
+        ]),
       ...pilot.arrangements.flatMap(arrangement =>
         arrangement.pathways.flatMap(pathway => pathway.source_refs)),
     ];

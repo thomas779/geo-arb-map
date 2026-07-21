@@ -103,11 +103,17 @@ function officialSource({
   url,
   source_type,
   jurisdictions,
+  language = null,
+  last_checked = '2026-07-21',
+  monitoring,
 }: {
   title: string;
   url: string;
   source_type: SourceRecord['source_type'];
   jurisdictions: string[];
+  language?: string | null;
+  last_checked?: string;
+  monitoring?: SourceRecord['monitoring'];
 }): SourceRecord {
   return SourceRecordSchema.parse({
     schema_version: 1,
@@ -118,10 +124,109 @@ function officialSource({
     publisher: publisherFromUrl(url),
     source_type,
     jurisdictions,
-    language: null,
+    language,
     published_at: null,
-    last_checked: '2026-07-19',
+    last_checked,
+    ...(monitoring ? { monitoring } : {}),
   });
+}
+
+const OFFICIAL_URLS = {
+  france_descent: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419373/',
+  france_birth_residence: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039366780/',
+  france_birth_guidance: 'https://www.service-public.fr/particuliers/vosdroits/F295',
+  portugal_nationality: 'https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa',
+  portugal_applications: 'https://justica.gov.pt/Servicos/Submeter-pedido-de-nacionalidade',
+  spain_civil_code: 'https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763',
+} as const;
+
+function jurisdictionSources(): SourceRecord[] {
+  return [
+    officialSource({
+      title: 'French Civil Code — Article 18',
+      url: OFFICIAL_URLS.france_descent,
+      source_type: 'primary_law',
+      jurisdictions: ['250'],
+      language: 'fr',
+      monitoring: {
+        source_id: 'legifrance-piste',
+        method: 'api',
+        url: 'https://piste.gouv.fr/',
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'French Civil Code — Article 21-7',
+      url: OFFICIAL_URLS.france_birth_residence,
+      source_type: 'primary_law',
+      jurisdictions: ['250'],
+      language: 'fr',
+      monitoring: {
+        source_id: 'legifrance-piste',
+        method: 'api',
+        url: 'https://piste.gouv.fr/',
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'Service-Public — French nationality for a child born in France',
+      url: OFFICIAL_URLS.france_birth_guidance,
+      source_type: 'official_guidance',
+      jurisdictions: ['250'],
+      language: 'fr',
+      monitoring: {
+        source_id: 'france-service-public-nationality',
+        method: 'http',
+        url: OFFICIAL_URLS.france_birth_guidance,
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'Portuguese Ministry of Justice — Portuguese nationality',
+      url: OFFICIAL_URLS.portugal_nationality,
+      source_type: 'official_guidance',
+      jurisdictions: ['620'],
+      language: 'pt',
+      monitoring: {
+        source_id: 'portugal-justice-nationality',
+        method: 'http',
+        url: OFFICIAL_URLS.portugal_nationality,
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'Portuguese Ministry of Justice — Submit a nationality application',
+      url: OFFICIAL_URLS.portugal_applications,
+      source_type: 'official_guidance',
+      jurisdictions: ['620'],
+      language: 'pt',
+      monitoring: {
+        source_id: 'portugal-justice-nationality',
+        method: 'http',
+        url: OFFICIAL_URLS.portugal_applications,
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'Spanish Civil Code — Articles 17, 20 and 22',
+      url: OFFICIAL_URLS.spain_civil_code,
+      source_type: 'primary_law',
+      jurisdictions: ['724'],
+      language: 'es',
+      monitoring: {
+        source_id: 'boe-spain',
+        method: 'api',
+        url: 'https://www.boe.es/datosabiertos/api/api.php',
+        status: 'planned',
+      },
+    }),
+  ];
+}
+
+function requireSource(sources: SourceRecord[], url: string): SourceRecord {
+  const source = sources.find(item => item.url === url);
+  if (!source) throw new Error(`Canonical source is missing: ${url}`);
+  return source;
 }
 
 const IBERO_AMERICAN_BENEFICIARIES = [
@@ -272,7 +377,7 @@ function arrangementSources(shadow: DataShadow): ManualPilotSource[] {
   ];
 }
 
-function franceRecord(shadow: DataShadow): JurisdictionRecord {
+function franceRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '250');
   const legacy = candidate?.routes.find(
     route => route.id === 'france-study-naturalization-residence',
@@ -282,6 +387,9 @@ function franceRecord(shadow: DataShadow): JurisdictionRecord {
   if (!article17 || !article18 || !servicePublic || !ceseda) {
     throw new Error('France pilot sources are incomplete');
   }
+  const descentSource = requireSource(officialSources, OFFICIAL_URLS.france_descent);
+  const birthLawSource = requireSource(officialSources, OFFICIAL_URLS.france_birth_residence);
+  const birthGuidanceSource = requireSource(officialSources, OFFICIAL_URLS.france_birth_guidance);
   return JurisdictionRecordSchema.parse({
     schema_version: 2,
     entity_type: 'jurisdiction',
@@ -291,14 +399,14 @@ function franceRecord(shadow: DataShadow): JurisdictionRecord {
       state: 'partial',
       confidence: legacy.confidence,
       last_checked: legacy.last_checked,
-      note: 'Naturalization education accelerator reviewed; other acquisition modes remain incomplete.',
+      note: 'Descent, birth-and-residence, and selected naturalization routes reviewed.',
     },
     coverage: [
       {
         mode: 'ancestry',
-        finding: 'unknown',
-        review: { state: 'unchecked', confidence: 'low', last_checked: null },
-        source_refs: [],
+        finding: 'present',
+        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([descentSource], ['/coverage/ancestry']),
       },
       {
         mode: 'naturalization',
@@ -313,9 +421,12 @@ function franceRecord(shadow: DataShadow): JurisdictionRecord {
       },
       {
         mode: 'birth',
-        finding: 'unknown',
-        review: { state: 'unchecked', confidence: 'low', last_checked: null },
-        source_refs: [],
+        finding: 'present',
+        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs(
+          [birthLawSource, birthGuidanceSource],
+          ['/coverage/birth'],
+        ),
       },
       {
         mode: 'investment',
@@ -325,6 +436,37 @@ function franceRecord(shadow: DataShadow): JurisdictionRecord {
       },
     ],
     routes: [{
+      id: 'france-citizenship-by-parent',
+      mode: 'ancestry',
+      status: 'active',
+      title: 'Citizenship through a French parent',
+      summary: 'A child is French when at least one parent is French.',
+      effective: { from: null, to: null, supersedes: [] },
+      review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+      variants: [{
+        id: 'french_parent',
+        label: 'At least one French parent',
+        outcome: 'citizenship',
+        allocation: 'right',
+        eligibility: [{
+          field: 'parent.citizenship.iso_n3',
+          operator: 'eq',
+          value: '250',
+        }],
+        milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+        timeline: {
+          eligibility_minimum_months: 0,
+          processing_typical_months: null,
+          confidence: 'high',
+          note: 'The entitlement is by filiation; documentation and registration time are separate.',
+        },
+        source_refs: refs([descentSource], [
+          '/routes/france-citizenship-by-parent/summary',
+          '/routes/france-citizenship-by-parent/variants/french_parent/eligibility',
+          '/routes/france-citizenship-by-parent/variants/french_parent/allocation',
+        ]),
+      }],
+    }, {
       id: legacy.id,
       mode: legacy.mode,
       status: legacy.status,
@@ -410,11 +552,55 @@ function franceRecord(shadow: DataShadow): JurisdictionRecord {
           ],
         },
       ],
+    }, {
+      id: 'france-birth-and-residence',
+      mode: 'birth',
+      status: 'active',
+      title: 'Citizenship after birth and residence in France',
+      summary: 'A person born in France to foreign parents can acquire citizenship at adulthood when the statutory residence conditions are met.',
+      effective: { from: null, to: null, supersedes: [] },
+      review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+      variants: [{
+        id: 'automatic_at_majority',
+        label: 'Automatic acquisition at adulthood',
+        outcome: 'citizenship',
+        allocation: 'right',
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '250' },
+          { field: 'residence.current_jurisdiction', operator: 'eq', value: '250' },
+          {
+            field: 'residence.habitual_months_since_age_11',
+            operator: 'gte',
+            value: 60,
+            unit: 'months',
+          },
+        ],
+        milestones: [
+          { status: 'birth_in_country', minimum_months: 0 },
+          {
+            status: 'habitual_residence_since_age_11',
+            minimum_months: 60,
+            note: 'At least five years in total since age 11.',
+          },
+          { status: 'citizenship_at_majority', minimum_months: null },
+        ],
+        timeline: {
+          eligibility_minimum_months: null,
+          processing_typical_months: null,
+          confidence: 'high',
+          note: 'This age-based rule cannot be represented as a simple countdown from arrival.',
+        },
+        source_refs: refs([birthLawSource, birthGuidanceSource], [
+          '/routes/france-birth-and-residence/summary',
+          '/routes/france-birth-and-residence/variants/automatic_at_majority/eligibility',
+          '/routes/france-birth-and-residence/variants/automatic_at_majority/milestones',
+        ]),
+      }],
     }],
   });
 }
 
-function portugalRecord(shadow: DataShadow): JurisdictionRecord {
+function portugalRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '620');
   const ordinary = candidate?.routes.find(
     route => route.id === 'portugal-ordinary-naturalization-2026',
@@ -423,6 +609,8 @@ function portugalRecord(shadow: DataShadow): JurisdictionRecord {
     route => route.id === 'portugal-birth-parent-residence-2026',
   );
   if (!candidate || !ordinary || !birth) throw new Error('Portugal pilot routes are missing');
+  const nationalitySource = requireSource(officialSources, OFFICIAL_URLS.portugal_nationality);
+  const applicationSource = requireSource(officialSources, OFFICIAL_URLS.portugal_applications);
   return JurisdictionRecordSchema.parse({
     schema_version: 2,
     entity_type: 'jurisdiction',
@@ -432,14 +620,17 @@ function portugalRecord(shadow: DataShadow): JurisdictionRecord {
       state: 'partial',
       confidence: 'high',
       last_checked: ordinary.last_checked,
-      note: 'Ordinary naturalization and one conditional birth route reviewed.',
+      note: 'Direct descent, ordinary naturalization, and one conditional birth route reviewed.',
     },
     coverage: [
       {
         mode: 'ancestry',
-        finding: 'unknown',
-        review: { state: 'unchecked', confidence: 'low', last_checked: null },
-        source_refs: [],
+        finding: 'present',
+        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs(
+          [nationalitySource, applicationSource],
+          ['/coverage/ancestry'],
+        ),
       },
       {
         mode: 'naturalization',
@@ -469,6 +660,42 @@ function portugalRecord(shadow: DataShadow): JurisdictionRecord {
       },
     ],
     routes: [
+      {
+        id: 'portugal-citizenship-by-parent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship through a Portuguese parent',
+        summary: 'A person born abroad can obtain Portuguese nationality when a parent was Portuguese at the time of birth.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'portuguese_parent_at_birth',
+          label: 'Portuguese parent at birth',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [{
+            field: 'parent.citizenship.iso_n3',
+            operator: 'eq',
+            value: '620',
+            note: 'The parent held Portuguese nationality when the child was born.',
+          }],
+          milestones: [
+            { status: 'citizenship_entitlement', minimum_months: 0 },
+            { status: 'civil_registration', minimum_months: null },
+          ],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Eligibility is by descent; registration and processing time are separate.',
+          },
+          source_refs: refs([nationalitySource, applicationSource], [
+            '/routes/portugal-citizenship-by-parent/summary',
+            '/routes/portugal-citizenship-by-parent/variants/portuguese_parent_at_birth/eligibility',
+            '/routes/portugal-citizenship-by-parent/variants/portuguese_parent_at_birth/allocation',
+          ]),
+        }],
+      },
       {
         id: ordinary.id,
         mode: ordinary.mode,
@@ -582,32 +809,262 @@ function portugalRecord(shadow: DataShadow): JurisdictionRecord {
   });
 }
 
-function spainRecord(shadow: DataShadow): JurisdictionRecord {
+function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '724');
   if (!candidate) throw new Error('Spain pilot jurisdiction is missing');
+  const civilCode = requireSource(officialSources, OFFICIAL_URLS.spain_civil_code);
   return JurisdictionRecordSchema.parse({
     schema_version: 2,
     entity_type: 'jurisdiction',
     id: 'jurisdiction:724',
     jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
     review: {
-      state: 'unchecked',
-      confidence: 'low',
-      last_checked: null,
-      note: 'No country-law route has been promoted from the legacy dataset yet.',
+      state: 'partial',
+      confidence: 'high',
+      last_checked: '2026-07-21',
+      note: 'Core descent, birth, option, and residence routes are structured from the Civil Code.',
     },
     coverage: [
-      'ancestry',
-      'naturalization',
-      'birth',
-      'investment',
-    ].map(mode => ({
-      mode,
-      finding: 'unknown',
-      review: { state: 'unchecked', confidence: 'low', last_checked: null },
-      source_refs: [],
-    })),
-    routes: [],
+      {
+        mode: 'ancestry',
+        finding: 'present',
+        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([civilCode], ['/coverage/ancestry']),
+      },
+      {
+        mode: 'naturalization',
+        finding: 'present',
+        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([civilCode], ['/coverage/naturalization']),
+      },
+      {
+        mode: 'birth',
+        finding: 'present',
+        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([civilCode], ['/coverage/birth']),
+      },
+      {
+        mode: 'investment',
+        finding: 'unknown',
+        review: { state: 'unchecked', confidence: 'low', last_checked: null },
+        source_refs: [],
+      },
+    ],
+    routes: [
+      {
+        id: 'spain-citizenship-by-parent-or-option',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship through a Spanish parent or option',
+        summary: 'Spain recognizes nationality by origin through a Spanish parent and an option route for some children of originally Spanish parents.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'spanish_parent',
+            label: 'Spanish parent',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [{
+              field: 'parent.citizenship.iso_n3',
+              operator: 'eq',
+              value: '724',
+            }],
+            milestones: [{ status: 'citizenship_by_origin', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Nationality by origin; documentation time is separate.',
+            },
+            source_refs: refs([civilCode], [
+              '/routes/spain-citizenship-by-parent-or-option/variants/spanish_parent/eligibility',
+              '/routes/spain-citizenship-by-parent-or-option/variants/spanish_parent/allocation',
+            ]),
+          },
+          {
+            id: 'originally_spanish_parent_born_in_spain',
+            label: 'Option through an originally Spanish parent born in Spain',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              {
+                field: 'parent.citizenship.originally_spanish',
+                operator: 'eq',
+                value: true,
+              },
+              { field: 'parent.birth.jurisdiction', operator: 'eq', value: '724' },
+            ],
+            milestones: [{ status: 'nationality_option', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'A statutory option route under Civil Code Article 20.',
+            },
+            source_refs: refs([civilCode], [
+              '/routes/spain-citizenship-by-parent-or-option/variants/originally_spanish_parent_born_in_spain/eligibility',
+              '/routes/spain-citizenship-by-parent-or-option/variants/originally_spanish_parent_born_in_spain/allocation',
+            ]),
+          },
+        ],
+      },
+      {
+        id: 'spain-citizenship-by-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Citizenship through birth in Spain',
+        summary: 'Birth in Spain can confer nationality by origin in specific parentage or statelessness cases.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'foreign_parent_born_in_spain',
+            label: 'Foreign parent also born in Spain',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'birth.jurisdiction', operator: 'eq', value: '724' },
+              { field: 'parent.birth.jurisdiction', operator: 'eq', value: '724' },
+              {
+                field: 'parent.diplomatic_exception',
+                operator: 'neq',
+                value: true,
+              },
+            ],
+            milestones: [{ status: 'citizenship_by_origin', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'high',
+            },
+            source_refs: refs([civilCode], [
+              '/routes/spain-citizenship-by-birth/variants/foreign_parent_born_in_spain/eligibility',
+            ]),
+          },
+          {
+            id: 'no_nationality_transmitted',
+            label: 'No nationality transmitted by either parent',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'birth.jurisdiction', operator: 'eq', value: '724' },
+              {
+                field: 'parent.nationality_transmitted',
+                operator: 'eq',
+                value: false,
+                note: 'Applies where both parents are stateless or neither parent’s law grants nationality to the child.',
+              },
+            ],
+            milestones: [{ status: 'citizenship_by_origin', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'high',
+            },
+            source_refs: refs([civilCode], [
+              '/routes/spain-citizenship-by-birth/variants/no_nationality_transmitted/eligibility',
+            ]),
+          },
+        ],
+      },
+      {
+        id: 'spain-naturalization-by-residence',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after legal residence',
+        summary: 'The general residence period is ten years, with shorter statutory periods for refugees and specified groups.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'ordinary',
+            label: 'Ordinary residence',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [{
+              field: 'residence.lawful_months',
+              operator: 'gte',
+              value: 120,
+              unit: 'months',
+            }],
+            milestones: [
+              { status: 'lawful_residence', minimum_months: 120 },
+              { status: 'citizenship_application', minimum_months: 0 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 120,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Eligibility period only; the grant is not automatic.',
+            },
+            source_refs: refs([civilCode], [
+              '/routes/spain-naturalization-by-residence/variants/ordinary/eligibility',
+              '/routes/spain-naturalization-by-residence/variants/ordinary/timeline/eligibility_minimum_months',
+              '/routes/spain-naturalization-by-residence/variants/ordinary/allocation',
+            ]),
+          },
+          {
+            id: 'recognized_refugee',
+            label: 'Recognized refugee',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'protection.refugee_status', operator: 'eq', value: true },
+              {
+                field: 'residence.lawful_months',
+                operator: 'gte',
+                value: 60,
+                unit: 'months',
+              },
+            ],
+            milestones: [
+              { status: 'lawful_residence', minimum_months: 60 },
+              { status: 'citizenship_application', minimum_months: 0 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Five-year residence period for a person recognized as a refugee.',
+            },
+            source_refs: refs([civilCode], [
+              '/routes/spain-naturalization-by-residence/variants/recognized_refugee/eligibility',
+              '/routes/spain-naturalization-by-residence/variants/recognized_refugee/timeline/eligibility_minimum_months',
+            ]),
+          },
+          {
+            id: 'born_in_spain',
+            label: 'Born in Spain',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'birth.jurisdiction', operator: 'eq', value: '724' },
+              {
+                field: 'residence.lawful_months',
+                operator: 'gte',
+                value: 12,
+                unit: 'months',
+              },
+            ],
+            milestones: [
+              { status: 'lawful_residence', minimum_months: 12 },
+              { status: 'citizenship_application', minimum_months: 0 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 12,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'One-year residence period for a person born in Spanish territory.',
+            },
+            source_refs: refs([civilCode], [
+              '/routes/spain-naturalization-by-residence/variants/born_in_spain/eligibility',
+              '/routes/spain-naturalization-by-residence/variants/born_in_spain/timeline/eligibility_minimum_months',
+            ]),
+          },
+        ],
+      },
+    ],
   });
 }
 
@@ -773,11 +1230,11 @@ function pointerExists(root: unknown, pointer: string): boolean {
         current = current[index];
         continue;
       }
-      const identified = current.find(item =>
-        typeof item === 'object'
-        && item !== null
-        && 'id' in item
-        && item.id === part);
+      const identified = current.find(item => {
+        if (typeof item !== 'object' || item === null) return false;
+        if ('id' in item && item.id === part) return true;
+        return 'mode' in item && item.mode === part;
+      });
       if (identified === undefined) return false;
       current = identified;
       continue;
@@ -803,8 +1260,11 @@ function validateReferences(pilot: CanonicalPilot, shadow: DataShadow): void {
   }
   for (const entity of [...pilot.jurisdictions, ...pilot.arrangements]) {
     const references = entity.entity_type === 'jurisdiction'
-      ? entity.routes.flatMap(route =>
-        route.variants.flatMap(variant => variant.source_refs))
+      ? [
+          ...entity.coverage.flatMap(item => item.source_refs),
+          ...entity.routes.flatMap(route =>
+            route.variants.flatMap(variant => variant.source_refs)),
+        ]
       : [
           ...entity.source_refs,
           ...entity.pathways.flatMap(pathway => pathway.source_refs),
@@ -855,10 +1315,11 @@ function validateReferences(pilot: CanonicalPilot, shadow: DataShadow): void {
 }
 
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
+  const countrySources = jurisdictionSources();
   const jurisdictions = [
-    franceRecord(shadow),
-    portugalRecord(shadow),
-    spainRecord(shadow),
+    franceRecord(shadow, countrySources),
+    portugalRecord(shadow, countrySources),
+    spainRecord(shadow, countrySources),
   ];
   const manualSources = arrangementSources(shadow);
   const sourcesById = new Map<string, SourceRecord>();
@@ -899,6 +1360,26 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
       throw new Error(`Source ID collision ${manual.record.id}`);
     }
     sourcesById.set(manual.record.id, manual.record);
+  }
+  for (const source of countrySources) {
+    const existing = sourcesById.get(source.id);
+    if (existing && existing.url !== source.url) {
+      throw new Error(`Source ID collision ${source.id}`);
+    }
+    if (existing) {
+      sourcesById.set(source.id, {
+        ...source,
+        jurisdictions: [...new Set([
+          ...existing.jurisdictions,
+          ...source.jurisdictions,
+        ])].sort(),
+        last_checked: existing.last_checked > source.last_checked
+          ? existing.last_checked
+          : source.last_checked,
+      });
+    } else {
+      sourcesById.set(source.id, source);
+    }
   }
   const sources = [...sourcesById.values()].sort((a, b) => a.id.localeCompare(b.id));
   const arrangements = [

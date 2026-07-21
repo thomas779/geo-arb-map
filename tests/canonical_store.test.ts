@@ -116,8 +116,8 @@ describe('canonical SQL import and projections', () => {
     expect(projections.routes).toHaveLength(canonicalVariantCount);
     expect(projections.coverage.map(row => row.iso_n3)).toEqual(['250', '620', '724']);
     expect(projections.coverage.find(row => row.iso_n3 === '250')).toMatchObject({
-      route_count: 1,
-      route_modes: ['naturalization'],
+      route_count: 3,
+      route_modes: ['ancestry', 'birth', 'naturalization'],
     });
     expect(projections.mode_coverage).toHaveLength(12);
     expect(projections.mode_coverage.find(row =>
@@ -128,9 +128,9 @@ describe('canonical SQL import and projections', () => {
       });
     expect(projections.mode_coverage.find(row =>
       row.iso_n3 === '724' && row.mode === 'birth')).toMatchObject({
-        finding: 'unknown',
-        review_state: 'unchecked',
-        route_count: 0,
+        finding: 'present',
+        review_state: 'partial',
+        route_count: 1,
       });
     imported.database.close();
   });

@@ -752,10 +752,9 @@ function expectedCompatibilityMobility(
 }
 
 /**
- * Citizenship routes are not yet corrected in canonical (the schema does not
- * own the legacy free-form `facts`). Instead of copying wholesale, prove the
- * database round-trips every canonical-owned field of each pilot route and
- * report any drift.
+ * Compatibility still carries legacy-only titles and free-form `facts`.
+ * Existing legacy routes must round-trip exactly; new canonical routes remain
+ * in the release bundle until the browser cuts over to canonical projections.
  */
 function citizenshipFieldDrift(
   loaded: LoadedCanonical,
@@ -799,17 +798,6 @@ function citizenshipFieldDrift(
       });
     }
   }
-  for (const routeId of canonicalRouteIds) {
-    if (!expectedRouteIds.has(routeId)) {
-      drift.push({
-        entity_id: routeId,
-        field: 'id',
-        canonical: routeId,
-        legacy: '(missing legacy route)',
-      });
-    }
-  }
-
   for (const { jurisdiction, route } of canonicalRoutes) {
     const legacy = legacyRouteById.get(route.id);
     if (!legacy) continue;
@@ -942,11 +930,19 @@ function gateArrangementProjectionParity(
 
 function gateCitizenshipRoundtrip(loaded: LoadedCanonical, sourceCitizenship: LegacyCitizenship): ParityGateResult {
   const drift = citizenshipFieldDrift(loaded, sourceCitizenship);
+  const legacyIds = new Set(sourceCitizenship.routes.map(route => route.id));
+  const canonicalAdditions = loaded.jurisdictions
+    .flatMap(jurisdiction => jurisdiction.routes.map(route => route.id))
+    .filter(routeId => !legacyIds.has(routeId))
+    .sort();
   return {
     gate: 'citizenship_roundtrip_parity',
     status: drift.length === 0 ? 'pass' : 'fail',
     detail: {
       drift,
+      canonical_additions: canonicalAdditions,
+      compatibility_policy:
+        'Canonical-only routes ship in the release bundle and are not back-projected into legacy JSON.',
       legacy_carried_fields: [
         'title (canonical introduces a structural label; the legacy descriptive title is inherited)',
         'facts (canonical does not yet own structured facts; inherited until the schema grows)',

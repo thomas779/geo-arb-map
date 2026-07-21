@@ -144,7 +144,11 @@ describe('data:build reads the canonical database', () => {
     db.close();
 
     const loaded = loadCanonicalDatabase(historyPath, REPO_ROOT);
-    expect(loaded.entities).toHaveLength(21);
+    expect(loaded.entities).toHaveLength(
+      buildCanonicalPilot().sources.length
+        + buildCanonicalPilot().jurisdictions.length
+        + buildCanonicalPilot().arrangements.length,
+    );
     expect(loaded.sources.find(source => source.id === 'source:boe_es:a445a31ce9')?.title)
       .toEndWith('(reviewed)');
   });
@@ -298,7 +302,11 @@ describe('data:build adversarial parity', () => {
     });
     expect(pinned.parity.passed).toBe(true);
     expect(pinned.manifest.database.release_id).toBe('reviewed-release');
-    expect(pinned.api_release_rows).toHaveLength(21);
+    expect(pinned.api_release_rows).toHaveLength(
+      buildCanonicalPilot().sources.length
+        + buildCanonicalPilot().jurisdictions.length
+        + buildCanonicalPilot().arrangements.length,
+    );
   });
 });
 
@@ -350,9 +358,18 @@ describe('data:build parity gates', () => {
   test('citizenship round-trips every canonical-owned field with zero drift', () => {
     const detail = gate('citizenship_roundtrip_parity').detail as {
       drift: unknown[];
+      canonical_additions: string[];
       legacy_carried_fields: string[];
     };
     expect(detail.drift).toEqual([]);
+    expect(detail.canonical_additions).toEqual([
+      'france-birth-and-residence',
+      'france-citizenship-by-parent',
+      'portugal-citizenship-by-parent',
+      'spain-citizenship-by-birth',
+      'spain-citizenship-by-parent-or-option',
+      'spain-naturalization-by-residence',
+    ]);
     // Documents the honest gap: title and facts are legacy-carried.
     expect(detail.legacy_carried_fields.length).toBeGreaterThanOrEqual(2);
   });
