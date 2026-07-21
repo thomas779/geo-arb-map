@@ -55,7 +55,7 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
                   rel="noreferrer"
                 >
                   <Send aria-hidden />
-                  Get country updates
+                  Join for updates
                 </a>
               </Button>
               <Button

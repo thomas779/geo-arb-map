@@ -51,7 +51,7 @@ optimized mobility plan.
 
 **Use cases:**
 
-- Explore regional settlement blocs and bilateral fast lanes.
+- Explore regional Flag Paths and bilateral fast lanes.
 - Find a multi-step path to a target work, residence, or citizenship outcome.
 - Understand a household footprint that includes a partner’s citizenships.
 - Compare deterministic routes with ballot, quota, or discretionary possibilities.
@@ -196,7 +196,7 @@ Explain complexity without sounding like a consultancy or making legal promises.
 
 **Current product proof:**
 
-- 24 settlement blocs, 35 bilateral or identity lanes, and 1,944 generated graph edges
+- 24 Flag Paths, 35 bilateral or identity lanes, and 1,944 generated graph edges
   in the current local dataset.
 - Personalized live/work/citizenship goals and partner-aware household planning.
 - A progressive facts → direction → watch activation path, stored locally by default.
