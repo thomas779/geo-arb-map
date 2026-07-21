@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   ChevronDown,
+  ExternalLink,
   Layers3,
   List,
   Map as MapIcon,
@@ -64,7 +65,7 @@ function BrandMark() {
     <svg
       aria-hidden
       viewBox="0 0 32 32"
-      className="hidden size-8 shrink-0 sm:block"
+      className="size-8 shrink-0"
       fill="none"
     >
       <path
@@ -230,7 +231,7 @@ export default function App() {
       <header className="flex h-14 shrink-0 items-center gap-1.5 border-b bg-card/90 px-2.5 backdrop-blur-sm sm:h-16 sm:gap-4 sm:px-5">
         <div className="flex min-w-0 items-center gap-2.5">
           <BrandMark />
-          <div className="min-w-0">
+          <div className="hidden min-w-0 sm:block">
             <h1 className="whitespace-nowrap font-heading text-xl font-bold tracking-[-0.035em] sm:text-[1.45rem]">
               Flag Paths
               <span className="sr-only"> — citizenship and residency paths atlas</span>
@@ -335,7 +336,7 @@ export default function App() {
             asChild
             variant="ghost"
             size="sm"
-            className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-8 sm:w-[78px] sm:px-2"
+            className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-8 sm:w-[88px] sm:px-2"
           >
             <a
               href="https://t.me/flagpaths"
@@ -344,7 +345,10 @@ export default function App() {
               aria-label="Join Flag Paths updates on Telegram"
             >
               <Send className="size-3" aria-hidden />
-              <span className="hidden sm:inline">Updates</span>
+              <span className="hidden items-center gap-1 sm:flex">
+                Updates
+                <ExternalLink className="size-2.5" aria-hidden />
+              </span>
             </a>
           </Button>
           <span className="mx-1 h-5 w-px bg-border" aria-hidden />
@@ -451,11 +455,15 @@ export default function App() {
           )}
           {data && (
             <button
-              className="absolute right-3 bottom-3 z-10 hidden rounded-full border bg-background/90 px-2.5 py-1 font-mono text-xs text-muted-foreground shadow-sm backdrop-blur-sm hover:text-foreground sm:block"
+              className="absolute right-3 bottom-3 z-10 hidden items-center gap-1.5 rounded-full border bg-background/90 px-2.5 py-1 font-mono text-xs text-muted-foreground shadow-sm backdrop-blur-sm hover:text-foreground sm:inline-flex"
               aria-label={`Data evidence updated ${dataStatus.updatedAt}. Open methodology.`}
               onClick={() => changeInfo('methodology')}
             >
-              updated&nbsp;·&nbsp;{dataStatus.updatedAt}
+              <span className="relative flex size-2" aria-hidden>
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-verified/55 motion-reduce:hidden" />
+                <span className="relative inline-flex size-2 rounded-full bg-verified" />
+              </span>
+              <span>updated&nbsp;·&nbsp;{dataStatus.updatedAt}</span>
             </button>
           )}
           {data && state.view === 'map' && (

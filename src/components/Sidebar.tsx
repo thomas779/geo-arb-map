@@ -371,7 +371,7 @@ export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Pro
             placeholder="Search countries, routes, or rights…"
             value={query}
             onChange={e => setQuery(e.target.value)}
-            className="h-11 min-w-0 flex-1 text-base md:h-8 md:text-sm"
+            className="h-11 min-w-0 flex-1 text-base placeholder:text-[13px] md:h-8 md:text-sm md:placeholder:text-sm"
           />
           <Button
             type="button"

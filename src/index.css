@@ -208,6 +208,68 @@
   }
 }
 
+/* Keep the desktop Planner as one composed viewport, even on short laptops. */
+@media (min-width: 1024px) and (max-height: 700px) {
+  .planner-preview-layout {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .planner-preview-title {
+    margin-top: 0.5rem;
+    font-size: 2.875rem;
+    line-height: 0.98;
+  }
+
+  .planner-preview-body {
+    margin-top: 0.875rem;
+    font-size: 0.9375rem;
+    line-height: 1.45;
+  }
+
+  .planner-preview-actions {
+    margin-top: 1rem;
+  }
+
+  .planner-preview-note {
+    margin-top: 0.25rem;
+  }
+
+  .planner-preview-capabilities {
+    margin-top: 0.5rem;
+  }
+
+  .planner-preview-capability {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 540px) {
+  .planner-preview-title {
+    font-size: 2.5rem;
+  }
+
+  .planner-preview-body {
+    margin-top: 0.625rem;
+    font-size: 0.8125rem;
+  }
+
+  .planner-preview-actions {
+    margin-top: 0.75rem;
+  }
+
+  .planner-preview-note,
+  .planner-preview-capability p {
+    display: none;
+  }
+
+  .planner-preview-capability {
+    padding-top: 0.625rem;
+    padding-bottom: 0.625rem;
+  }
+}
+
 .planner-route {
   --route-index: 0;
   fill: none;

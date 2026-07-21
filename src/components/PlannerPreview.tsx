@@ -23,7 +23,7 @@ const futureCapabilities = [
 
 export function PlannerPreview({ onBackToAtlas }: Props) {
   return (
-    <div className="cartographic-surface absolute inset-0 overflow-x-hidden overflow-y-auto">
+    <div className="planner-preview cartographic-surface absolute inset-0 overflow-x-hidden overflow-y-auto lg:overflow-y-hidden">
       <RouteField className="pointer-events-none absolute inset-0 hidden h-full !aspect-auto lg:block" cover />
       <RouteField
         compact
@@ -31,23 +31,23 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
       />
       <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[64%] bg-gradient-to-r from-background/95 via-background/75 to-transparent lg:block" />
 
-      <div className="relative z-10 mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 py-10 sm:px-8 sm:py-16 lg:px-12">
-        <div className="relative md:min-h-[620px] lg:min-h-[570px] lg:py-12">
+      <div className="planner-preview-layout relative z-10 mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 py-10 sm:px-8 sm:py-12 lg:h-full lg:min-h-0 lg:justify-start lg:px-12 lg:py-6">
+        <div className="planner-preview-hero relative lg:flex lg:min-h-0 lg:flex-1 lg:items-center">
 
-          <div className="relative z-10 max-w-[680px] lg:pt-6">
+          <div className="planner-preview-copy relative z-10 max-w-[680px]">
             <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
               Planner · later release
             </p>
-            <h2 className="mt-4 max-w-[760px] text-balance text-4xl font-bold leading-[1.03] tracking-[-0.035em] sm:text-5xl lg:text-6xl">
+            <h2 className="planner-preview-title mt-4 max-w-[760px] text-balance text-4xl font-bold leading-[1.03] tracking-[-0.035em] sm:text-5xl lg:text-6xl">
               The atlas comes first.
               <span className="block text-muted-foreground">Personal routes come next.</span>
             </h2>
-            <p className="mt-6 max-w-lg text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="planner-preview-body mt-6 max-w-lg text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
               Flag Paths is a public map of citizenship, residence, and mobility
               rules. A later planner release will turn the facts you choose to share
               into source-backed routes worth investigating.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="planner-preview-actions mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="min-h-11 gap-2">
                 <a
                   href="https://t.me/flagpaths"
@@ -67,21 +67,21 @@ export function PlannerPreview({ onBackToAtlas }: Props) {
                 Explore the atlas
               </Button>
             </div>
-            <p className="mt-3 text-xs text-muted-foreground">
+            <p className="planner-preview-note mt-3 text-xs text-muted-foreground">
               No account is needed to use the atlas today.
             </p>
           </div>
 
         </div>
 
-        <div className="relative z-10 mt-12 grid border-y border-border/80 bg-background/55 backdrop-blur-[2px] sm:grid-cols-3 lg:mt-0">
+        <div className="planner-preview-capabilities relative z-10 mt-12 grid shrink-0 border-y border-border/80 bg-background/55 backdrop-blur-[2px] sm:grid-cols-3 lg:mt-4">
           {futureCapabilities.map((item, index) => (
             <div
               key={item.title}
               className={
                 index === 0
-                  ? 'py-6 sm:pr-6'
-                  : 'border-t py-6 sm:border-t-0 sm:border-l sm:px-6'
+                  ? 'planner-preview-capability py-6 sm:pr-6 lg:py-4'
+                  : 'planner-preview-capability border-t py-6 sm:border-t-0 sm:border-l sm:px-6 lg:py-4'
               }
             >
               <h3 className="text-sm font-semibold">{item.title}</h3>
