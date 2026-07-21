@@ -36,7 +36,15 @@ For every jurisdiction in `data/migration-pilot.json`:
    residence continuity, age, declaration, language, and renunciation rules.
 5. Treat investor residence or permanent residence as distinct from direct
    citizenship by investment.
-6. Report disagreements using the canonical record ID, JSON pointer, source
+6. For territorial-birth routes, trace downstream family effects separately:
+   the child's citizenship, each relative's residence eligibility, any reduced
+   naturalization period, and whether the result is automatic or discretionary.
+   Never collapse family-unity residence into citizenship for parents or
+   grandparents.
+7. For visas, record separately whether time counts toward permanent residence
+   and toward naturalization; a renewable long-stay permit is not necessarily a
+   settlement route.
+8. Report disagreements using the canonical record ID, JSON pointer, source
    URL, proposed correction, and the date the source was checked.
 
 Do not approve a generated packet merely because it validates. Schema and

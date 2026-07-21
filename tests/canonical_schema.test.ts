@@ -263,6 +263,12 @@ describe('canonical data schemas', () => {
       route.id === 'brazil-naturalization-by-residence')!;
     expect(brazilNaturalization.variants.find(variant =>
       variant.id === 'portuguese_speaking_country')?.timeline.eligibility_minimum_months).toBe(12);
+    expect(brazilNaturalization.variants.find(variant =>
+      variant.id === 'parent_of_brazilian_child')?.timeline.eligibility_minimum_months).toBe(12);
+    expect(brazilNaturalization.variants.find(variant =>
+      variant.id === 'parent_of_brazilian_child')?.timeline.note).toContain(
+        'Grandparents may qualify for family-reunification residence',
+      );
     expect(brazilNaturalization.summary).not.toContain('South American');
 
     const mexicoNaturalization = byIso.get('484')!.routes.find(route =>
@@ -271,6 +277,12 @@ describe('canonical data schemas', () => {
       variant.id === 'latin_american_or_iberian_origin')?.eligibility).toContainEqual(
       expect.objectContaining({ value: ['latin_america', 'iberian_peninsula'] }),
     );
+    expect(mexicoNaturalization.variants.find(variant =>
+      variant.id === 'parent_of_mexican_child_by_birth')?.timeline.eligibility_minimum_months).toBe(24);
+    expect(mexicoNaturalization.variants.find(variant =>
+      variant.id === 'parent_of_mexican_child_by_birth')?.timeline.note).toContain(
+        'Parents and grandparents can qualify for permanent residence',
+      );
 
     const colombiaBirth = byIso.get('170')!.routes.find(route =>
       route.id === 'colombia-citizenship-by-conditional-birth')!;

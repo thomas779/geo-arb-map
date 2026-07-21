@@ -207,8 +207,13 @@ const OFFICIAL_URLS = {
   argentina_investment_decree: 'https://www.argentina.gob.ar/normativa/nacional/decreto-524-2025-415710/texto',
   brazil_constitution: 'https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm',
   brazil_migration_law: 'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2017/lei/l13445.htm',
+  brazil_naturalization_residence: 'https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria/ter-residencia-em-territorio-nacional-pelo-prazo-estabelecido-pela-lei-brasileira',
+  brazil_family_reunification: 'https://www.gov.br/pf/pt-br/assuntos/imigracao/duvidas-frequentes',
   mexico_constitution: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf',
   mexico_nationality_law: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LNac.pdf',
+  mexico_migration_law: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LMigra.pdf',
+  mexico_child_naturalization: 'https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-tener-hijos-mexicanos-por-nacimiento',
+  mexico_family_residence: 'https://www.inm.gob.mx/static/Tramites/cambio_de_condicion_estancia/Residente_permanente_por_vinculo_familiar.pdf',
   colombia_nationality_law: 'https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm',
   colombia_visa_faq: 'https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/abece-de-visas',
   colombia_visa_resolution: 'https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm',
@@ -596,8 +601,13 @@ function jurisdictionSources(): SourceRecord[] {
       ['Argentina — Decree 524/2025 on citizenship by investment', OFFICIAL_URLS.argentina_investment_decree, '032', 'es', 'primary_law', 'argentina-citizenship-law'],
       ['Constitution of Brazil — Article 12', OFFICIAL_URLS.brazil_constitution, '076', 'pt', 'primary_law', 'brazil-citizenship-law'],
       ['Brazil Migration Law No. 13,445/2017', OFFICIAL_URLS.brazil_migration_law, '076', 'pt', 'primary_law', 'brazil-citizenship-law'],
+      ['Brazil Ministry of Justice — naturalization residence periods', OFFICIAL_URLS.brazil_naturalization_residence, '076', 'pt', 'official_guidance', 'brazil-citizenship-law'],
+      ['Brazil Federal Police — family-reunification guidance', OFFICIAL_URLS.brazil_family_reunification, '076', 'pt', 'official_guidance', 'brazil-citizenship-law'],
       ['Political Constitution of Mexico — Article 30', OFFICIAL_URLS.mexico_constitution, '484', 'es', 'primary_law', 'mexico-nationality-law'],
       ['Mexico Nationality Law', OFFICIAL_URLS.mexico_nationality_law, '484', 'es', 'primary_law', 'mexico-nationality-law'],
+      ['Mexico Migration Law', OFFICIAL_URLS.mexico_migration_law, '484', 'es', 'primary_law', 'mexico-nationality-law'],
+      ['Mexico Foreign Ministry — naturalization for parents of Mexican-born children', OFFICIAL_URLS.mexico_child_naturalization, '484', 'es', 'official_guidance', 'mexico-nationality-law'],
+      ['Mexico INM — permanent residence through family relationship', OFFICIAL_URLS.mexico_family_residence, '484', 'es', 'official_guidance', 'mexico-nationality-law'],
       ['Colombia Law 2332 of 2023 — nationality', OFFICIAL_URLS.colombia_nationality_law, '170', 'es', 'primary_law', 'colombia-nationality-law'],
       ['Colombia Foreign Ministry — Visa FAQ', OFFICIAL_URLS.colombia_visa_faq, '170', 'es', 'official_guidance', 'colombia-nationality-law'],
       ['Colombia Resolution 5477 of 2022', OFFICIAL_URLS.colombia_visa_resolution, '170', 'es', 'primary_law', 'colombia-nationality-law'],
@@ -1922,6 +1932,14 @@ function brazilRecord(
 ): JurisdictionRecord {
   const constitution = requireSource(officialSources, OFFICIAL_URLS.brazil_constitution);
   const migrationLaw = requireSource(officialSources, OFFICIAL_URLS.brazil_migration_law);
+  const naturalizationGuidance = requireSource(
+    officialSources,
+    OFFICIAL_URLS.brazil_naturalization_residence,
+  );
+  const familyGuidance = requireSource(
+    officialSources,
+    OFFICIAL_URLS.brazil_family_reunification,
+  );
   const naturalizationId = 'brazil-naturalization-by-residence';
   return reviewedCountryRecord({
     shadow,
@@ -1953,7 +1971,7 @@ function brazilRecord(
         mode: 'naturalization',
         status: 'active',
         title: 'Brazilian naturalization after residence',
-        summary: 'Ordinary naturalization generally requires four years of residence; the Constitution provides a one-year route for people originating from Portuguese-speaking countries who also satisfy the applicable conditions.',
+        summary: 'Ordinary naturalization generally requires four years of residence. The minimum falls to one year for a parent of a Brazilian child and for a person originating from a Portuguese-speaking country, subject to the remaining conditions.',
         effective: { from: null, to: null, supersedes: [] },
         review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
         variants: [
@@ -1988,6 +2006,32 @@ function brazilRecord(
               `/routes/${naturalizationId}/variants/portuguese_speaking_country/timeline`,
             ]),
           },
+          {
+            id: 'parent_of_brazilian_child',
+            label: 'One-year route for a parent of a Brazilian child',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'child.nationality.iso_n3', operator: 'eq', value: '076' },
+              { field: 'residence.indefinite_continuous_months', operator: 'gte', value: 12, unit: 'months' },
+            ],
+            milestones: [
+              { status: 'family_reunification_residence', minimum_months: 0 },
+              { status: 'indefinite_continuous_residence', minimum_months: 12 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 12,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'The child is Brazilian at birth. A parent can seek family-reunification residence, and having a Brazilian child reduces the naturalization residence minimum to one year; citizenship is not automatic. Grandparents may qualify for family-reunification residence as second-degree ascendants, but receive no automatic citizenship or child-based one-year naturalization shortcut.',
+            },
+            source_refs: refs([migrationLaw, naturalizationGuidance, familyGuidance], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/parent_of_brazilian_child/eligibility`,
+              `/routes/${naturalizationId}/variants/parent_of_brazilian_child/milestones`,
+              `/routes/${naturalizationId}/variants/parent_of_brazilian_child/timeline`,
+            ]),
+          },
         ],
       },
       principalCitizenshipRoute({
@@ -2012,6 +2056,15 @@ function mexicoRecord(
 ): JurisdictionRecord {
   const constitution = requireSource(officialSources, OFFICIAL_URLS.mexico_constitution);
   const nationalityLaw = requireSource(officialSources, OFFICIAL_URLS.mexico_nationality_law);
+  const migrationLaw = requireSource(officialSources, OFFICIAL_URLS.mexico_migration_law);
+  const childNaturalization = requireSource(
+    officialSources,
+    OFFICIAL_URLS.mexico_child_naturalization,
+  );
+  const familyResidence = requireSource(
+    officialSources,
+    OFFICIAL_URLS.mexico_family_residence,
+  );
   const naturalizationId = 'mexico-naturalization-by-residence';
   return reviewedCountryRecord({
     shadow,
@@ -2043,7 +2096,7 @@ function mexicoRecord(
         mode: 'naturalization',
         status: 'active',
         title: 'Mexican naturalization after residence',
-        summary: 'The ordinary route requires five years of residence; Article 20 reduces the period to two years for a person originating from a Latin American country or the Iberian Peninsula.',
+        summary: 'The ordinary route requires five years of residence. Article 20 reduces the period to two years for a person originating from Latin America or the Iberian Peninsula and for a parent of a Mexican child by birth.',
         effective: { from: null, to: null, supersedes: [] },
         review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
         variants: [
@@ -2076,6 +2129,32 @@ function mexicoRecord(
               `/routes/${naturalizationId}/summary`,
               `/routes/${naturalizationId}/variants/latin_american_or_iberian_origin/eligibility`,
               `/routes/${naturalizationId}/variants/latin_american_or_iberian_origin/timeline`,
+            ]),
+          },
+          {
+            id: 'parent_of_mexican_child_by_birth',
+            label: 'Two-year route for a parent of a Mexican child by birth',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'child.mexican_by_birth', operator: 'eq', value: true },
+              { field: 'residence.in_mexico_months', operator: 'gte', value: 24, unit: 'months' },
+            ],
+            milestones: [
+              { status: 'permanent_residence_by_family_relationship', minimum_months: 0 },
+              { status: 'residence_in_mexico', minimum_months: 24 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'The child is Mexican at birth. Parents and grandparents can qualify for permanent residence through the direct family relationship, but only a parent with a Mexican child by birth receives this two-year naturalization route; citizenship is not automatic for either generation.',
+            },
+            source_refs: refs([nationalityLaw, migrationLaw, childNaturalization, familyResidence], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/parent_of_mexican_child_by_birth/eligibility`,
+              `/routes/${naturalizationId}/variants/parent_of_mexican_child_by_birth/milestones`,
+              `/routes/${naturalizationId}/variants/parent_of_mexican_child_by_birth/timeline`,
             ]),
           },
         ],
