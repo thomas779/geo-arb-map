@@ -20,6 +20,16 @@
       "notes": "Investment-migration trade press — CBI/RBI program changes, often ahead of official gazettes."
     },
     {
+      "id": "settled-nomad-visas",
+      "tier": "discovery",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://settlednomad.com/visas/",
+      "jurisdictions": ["multi"],
+      "keywords": ["residence", "residency", "permanent residence", "permanent residency", "citizenship", "naturalization", "renewable", "convertible"],
+      "notes": "Commercial digital-nomad and residence-visa index. Use it to discover missing permits and claimed transitions only. Every duration, renewal, tax, PR-credit, and citizenship-credit claim must be resolved to current official evidence before entering D1. Affiliate and promotional content is never verification."
+    },
+    {
       "id": "wandering-investor-blog",
       "tier": "discovery",
       "adapter": "rss",
@@ -189,10 +199,11 @@
       "pages": [
         { "id": "nationality-overview", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao" },
         { "id": "ordinary-naturalization", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria" },
-        { "id": "residence-period", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria/ter-residencia-em-territorio-nacional-pelo-prazo-estabelecido-pela-lei-brasileira" }
+        { "id": "residence-period", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria/ter-residencia-em-territorio-nacional-pelo-prazo-estabelecido-pela-lei-brasileira" },
+        { "id": "family-reunification", "url": "https://www.gov.br/pf/pt-br/assuntos/imigracao/duvidas-frequentes" }
       ],
-      "keywords": ["nacionalidade", "naturalização", "residência", "países de língua portuguesa", "migração"],
-      "notes": "Official Ministry of Justice nationality and naturalization guidance. Resolve substantive changes against Article 12 of the Constitution and Migration Law No. 13,445. The Planalto endpoints closed the collector socket during the 2026-07-21 live test, so they remain canonical evidence but are not the scheduled transport."
+      "keywords": ["nacionalidade", "naturalização", "residência", "filho brasileiro", "reunião familiar", "ascendente", "países de língua portuguesa", "migração"],
+      "notes": "Official Ministry of Justice nationality and naturalization guidance plus Federal Police family-reunification guidance. Resolve substantive changes against Article 12 of the Constitution and Migration Law No. 13,445. The Planalto endpoints closed the collector socket during the 2026-07-21 live test, so they remain canonical evidence but are not the scheduled transport."
     },
     {
       "id": "mexico-nationality-law",
@@ -203,10 +214,11 @@
       "jurisdictions": ["484"],
       "pages": [
         { "id": "ordinary-naturalization", "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-residencia" },
-        { "id": "latin-american-or-iberian-origin", "url": "https://sre.gob.mx/carta-de-naturalizacion-por-ser-originario-de-un-pais-latinoamericano-o-de-la-peninsula-iberica" }
+        { "id": "latin-american-or-iberian-origin", "url": "https://sre.gob.mx/carta-de-naturalizacion-por-ser-originario-de-un-pais-latinoamericano-o-de-la-peninsula-iberica" },
+        { "id": "parent-of-mexican-child", "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-tener-hijos-mexicanos-por-nacimiento" }
       ],
-      "keywords": ["nacionalidad", "naturalización", "residencia", "latinoamericano", "Península Ibérica"],
-      "notes": "Official Foreign Ministry guidance for the five-year ordinary route and two-year Latin American or Iberian Peninsula route. Resolve substantive changes against the Chamber of Deputies current Constitution and Nationality Law. The Chamber index did not complete reliably in the 2026-07-21 collector test, so SRE guidance is the scheduled transport."
+      "keywords": ["nacionalidad", "naturalización", "residencia", "hijos mexicanos por nacimiento", "latinoamericano", "Península Ibérica"],
+      "notes": "Official Foreign Ministry guidance for the five-year ordinary route, the two-year Latin American or Iberian Peninsula route, and the two-year route for parents of Mexican-born children. Resolve substantive changes against the Chamber of Deputies current Constitution, Nationality Law, and Migration Law. The Chamber index did not complete reliably in the 2026-07-21 collector test, so SRE guidance is the scheduled transport."
     },
     {
       "id": "dof-mexico",

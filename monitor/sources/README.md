@@ -23,6 +23,7 @@ legal conclusion.
 | --- | --- | --- | --- |
 | GLOBALCIT | RSS | Worldwide nationality-law discovery | Active |
 | IMI Daily | RSS | CBI/RBI trade-press discovery | Active |
+| Settled Nomad visa index | HTML content hash | Missing-visa and claimed PR/CIT-transition discovery | Active; commercial discovery only |
 | The Wandering Investor blog | RSS | Independent field discovery | Active |
 | The Wandering Investor Telegram | Public channel preview | Fast field discovery | Active |
 | Nomad Capitalist podcast | RSS | Broad programme discovery | Active |
@@ -51,6 +52,8 @@ legal conclusion.
 | Bulgaria Citizenship Act | HTML content hash, two pages | Official nationality-law and service verification | Active; service page healthy, Act endpoint has a TLS-chain failure and is recorded as failed health data |
 | Serbia citizenship guidance | HTML content hash, two pages | Official nationality-law and procedure verification | Active; live fetch verified 2026-07-21 |
 | UAE nationality and Golden Visa | HTML content hash, three pages | Official nationality nomination and investor-residence verification | Active; government guidance and Golden Visa pages healthy, e-laws endpoint is monitored for recovery |
+| Brazil Justice and Federal Police guidance | HTML content hash, four pages | Official nationality, reduced naturalization, and family-reunification verification | Active; parent/ascendant pages added 2026-07-21 |
+| Mexico Foreign Ministry naturalization | HTML content hash, three pages | Official ordinary, origin-preference, and Mexican-child parent-route verification | Active; parent route added 2026-07-21 |
 | Nomad Capitalist Weekly Rundown | Email Worker | Newsletter discovery | Subscribed through the shared intake address on 2026-07-19; awaiting first delivery |
 | The Wandering Investor Notes from the Road | Email Worker | Private-list and early discovery | Intake active; publisher form returned a subscription error on 2026-07-18 |
 
