@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 120,
+      "routes": 134,
       "by_mode": {
-        "ancestry": 34,
-        "naturalization": 35,
-        "birth": 34,
-        "investment": 17
+        "ancestry": 38,
+        "naturalization": 40,
+        "birth": 38,
+        "investment": 18
       },
       "by_status": {
-        "active": 114,
+        "active": 128,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -247,12 +247,16 @@
       "name": "Barbados",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "barbados-citizenship-by-parent",
+        "barbados-naturalization",
+        "barbados-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "056",
@@ -1684,12 +1688,17 @@
       "name": "Mauritius",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "mauritius-citizenship-by-descent",
+        "mauritius-naturalization",
+        "mauritius-citizenship-connected-to-birth",
+        "mauritius-investor-naturalization"
+      ]
     },
     {
       "iso_n3": "484",
@@ -1922,12 +1931,15 @@
       "name": "Vanuatu",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "vanuatu-citizenship-by-parent",
+        "vanuatu-naturalization",
+        "vanuatu-citizenship-at-birth-by-parent",
         "vanuatu-investor-citizenship"
       ]
     },
@@ -2084,12 +2096,17 @@
       "name": "Panama",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "panama-nationality-through-parent",
+        "panama-ordinary-naturalization",
+        "panama-family-naturalization",
+        "panama-nationality-by-birth"
+      ]
     },
     {
       "iso_n3": "598",
@@ -3600,6 +3617,114 @@
         {
           "title": "Bahamas Nationality Act",
           "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-0018/1973-0018.pdf"
+        }
+      ]
+    },
+    {
+      "id": "barbados-citizenship-by-birth",
+      "country": {
+        "iso_n3": "052",
+        "name": "Barbados"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Barbados",
+      "summary": "A person born in Barbados after 29 November 1966 is generally a citizen from birth, subject to narrow diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "barbados-citizenship-by-birth-principal",
+          "label": "Citizenship by birth in Barbados",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Barbados — citizenship",
+          "url": "https://www.electoral.barbados.gov.bb/wp-content/uploads/2021/10/The_Constitution_of_Barbados.pdf"
+        }
+      ]
+    },
+    {
+      "id": "barbados-citizenship-by-parent",
+      "country": {
+        "iso_n3": "052",
+        "name": "Barbados"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a qualifying Barbadian parent",
+      "summary": "A person born abroad acquires citizenship at birth through the constitutional parentage rules, including where at least one parent is a Barbadian citizen born in Barbados.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "barbados-citizenship-by-parent-principal",
+          "label": "Citizenship through a qualifying Barbadian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Barbados — citizenship",
+          "url": "https://www.electoral.barbados.gov.bb/wp-content/uploads/2021/10/The_Constitution_of_Barbados.pdf"
+        },
+        {
+          "title": "Barbados Immigration — Citizenship",
+          "url": "https://immigration.gov.bb/pages/Citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "barbados-naturalization",
+      "country": {
+        "iso_n3": "052",
+        "name": "Barbados"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after qualifying residence",
+      "summary": "An alien may apply after twelve continuous months immediately before the application and at least five aggregate years of residence during the preceding seven years, subject to character and residence-intention requirements.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "barbados-naturalization-principal",
+          "label": "Naturalization after qualifying residence",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "The Act uses a final continuous year plus five aggregate years in the preceding seven. It is neither six continuous years nor eight continuous years."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Barbados Citizenship Act",
+          "url": "https://www.barbadoslawcourts.gov.bb/assets/content/pdfs/statutes/BarbadosCitizenshipCAP186.pdf"
         }
       ]
     },
@@ -5654,6 +5779,153 @@
       ]
     },
     {
+      "id": "mauritius-citizenship-by-descent",
+      "country": {
+        "iso_n3": "480",
+        "name": "Mauritius"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a Mauritian parent",
+      "summary": "A person born abroad is a Mauritian citizen by descent when a qualifying parent is a Mauritian citizen by birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mauritius-citizenship-by-descent-principal",
+          "label": "Citizenship through a Mauritian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Mauritius Prime Minister’s Office — Citizenship",
+          "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "mauritius-citizenship-connected-to-birth",
+      "country": {
+        "iso_n3": "480",
+        "name": "Mauritius"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship connected to birth in Mauritius",
+      "summary": "Birth in Mauritius before 1 October 1995 generally conferred citizenship regardless of parentage; after that date, at least one parent must be a Mauritian citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mauritius-citizenship-connected-to-birth-principal",
+          "label": "Citizenship connected to birth in Mauritius",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Mauritius Prime Minister’s Office — Citizenship",
+          "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "mauritius-investor-naturalization",
+      "country": {
+        "iso_n3": "480",
+        "name": "Mauritius"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Investor naturalization after residence",
+      "summary": "The Minister may accept two continuous years of residence from an applicant who has invested at least US$500,000 in Mauritius, instead of the ordinary residence pattern.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mauritius-investor-naturalization-principal",
+          "label": "Investor naturalization after residence",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "This is discretionary naturalization with a statutory investment and residence condition, not residence-free direct citizenship."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Mauritius Citizenship Act",
+          "url": "https://lawsofmauritius.govmu.org/portal/viewlegislationdocument/web/?docnumber=&doctitle=TWF1cml0aXVzIENpdGl6ZW5zaGlwIEFjdA%3D%3D&doctype=act"
+        },
+        {
+          "title": "Mauritius Prime Minister’s Office — Citizenship",
+          "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "mauritius-naturalization",
+      "country": {
+        "iso_n3": "480",
+        "name": "Mauritius"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after qualifying residence",
+      "summary": "A non-Commonwealth applicant may seek naturalization after twelve continuous months immediately before applying and five aggregate years during the preceding seven years, subject to character, language and residence-intention requirements.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mauritius-naturalization-principal",
+          "label": "Naturalization after qualifying residence",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Mauritius Citizenship Act",
+          "url": "https://lawsofmauritius.govmu.org/portal/viewlegislationdocument/web/?docnumber=&doctitle=TWF1cml0aXVzIENpdGl6ZW5zaGlwIEFjdA%3D%3D&doctype=act"
+        },
+        {
+          "title": "Mauritius Prime Minister’s Office — Citizenship",
+          "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx"
+        }
+      ]
+    },
+    {
       "id": "mexico-citizenship-by-birth",
       "country": {
         "iso_n3": "484",
@@ -5911,6 +6183,76 @@
       ]
     },
     {
+      "id": "vanuatu-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "548",
+        "name": "Vanuatu"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Vanuatu parent",
+      "summary": "A child born after independence acquires citizenship at birth, whether born in Vanuatu or abroad, if at least one parent is a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "vanuatu-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Vanuatu parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Vanuatu — citizenship",
+          "url": "https://parliament.gov.vu/images/constitution.pdf"
+        }
+      ]
+    },
+    {
+      "id": "vanuatu-citizenship-by-parent",
+      "country": {
+        "iso_n3": "548",
+        "name": "Vanuatu"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a Vanuatu parent",
+      "summary": "A person born after independence, in Vanuatu or abroad, becomes a citizen when at least one parent is a Vanuatu citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "vanuatu-citizenship-by-parent-principal",
+          "label": "Citizenship through a Vanuatu parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Vanuatu — citizenship",
+          "url": "https://parliament.gov.vu/images/constitution.pdf"
+        }
+      ]
+    },
+    {
       "id": "vanuatu-investor-citizenship",
       "country": {
         "iso_n3": "548",
@@ -5922,14 +6264,66 @@
       "summary": "The Citizenship Commission lists investor citizenship, the Development Support Program, the Vanuatu Contribution Program and a real-estate option under the Citizenship Act framework.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
-        "residence_required": false
+        "residence_required": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "vanuatu-investor-citizenship-principal",
+          "label": "Investor and contribution citizenship programmes",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Programme options, contribution levels, due-diligence rules and designated agents are volatile. Verify them against current Commission regulations before relying on a quote."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
           "title": "Vanuatu Citizenship Commission — Types of Citizenship",
           "url": "https://vancitizenship.gov.vu/index.php/citizenship/types-of-citizenship"
+        },
+        {
+          "title": "Vanuatu Citizenship Commission — Legislative Framework",
+          "url": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework"
+        }
+      ]
+    },
+    {
+      "id": "vanuatu-naturalization",
+      "country": {
+        "iso_n3": "548",
+        "name": "Vanuatu"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after continuous residence",
+      "summary": "A foreign national or stateless person may apply after living continuously in Vanuatu for at least ten years, subject to further statutory conditions and review.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "vanuatu-naturalization-principal",
+          "label": "Naturalization after continuous residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Vanuatu — citizenship",
+          "url": "https://parliament.gov.vu/images/constitution.pdf"
         },
         {
           "title": "Vanuatu Citizenship Commission — Legislative Framework",
@@ -6045,6 +6439,152 @@
         {
           "title": "New Zealand Government — Citizenship by birth, descent and grant",
           "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/"
+        }
+      ]
+    },
+    {
+      "id": "panama-family-naturalization",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization through a qualifying family connection",
+      "summary": "The Constitution reduces the residence period to three consecutive years for an applicant with a child born in Panama, a Panamanian parent, or a Panamanian spouse, while retaining the other Article 10 requirements.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "panama-family-naturalization-principal",
+          "label": "Naturalization through a qualifying family connection",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Panama — nationality and naturalization",
+          "url": "https://constitucion.te.gob.pa/constitucion-vigente/"
+        },
+        {
+          "title": "Panama Migration — Naturalization requirements",
+          "url": "https://www.migracion.gob.pa/wp-content/uploads/REQUISITOS-DE-NATURALIZACION-ACTUALIZADO.pdf"
+        }
+      ]
+    },
+    {
+      "id": "panama-nationality-by-birth",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Nationality by birth in Panama",
+      "summary": "A person born in Panama is Panamanian by birth under Article 9 of the Constitution.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "panama-nationality-by-birth-principal",
+          "label": "Nationality by birth in Panama",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Panama — nationality and naturalization",
+          "url": "https://constitucion.te.gob.pa/constitucion-vigente/"
+        }
+      ]
+    },
+    {
+      "id": "panama-nationality-through-parent",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Nationality through a Panamanian parent",
+      "summary": "A person born abroad to a Panamanian parent can acquire nationality under Article 9, subject to domicile in Panama and, for a naturalized parent, a timely declaration after majority.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "panama-nationality-through-parent-principal",
+          "label": "Nationality through a Panamanian parent",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Panama — nationality and naturalization",
+          "url": "https://constitucion.te.gob.pa/constitucion-vigente/"
+        }
+      ]
+    },
+    {
+      "id": "panama-ordinary-naturalization",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Ordinary naturalization",
+      "summary": "A permanent resident may apply after five consecutive years in Panama, subject to the constitutional declaration, nationality-renunciation, Spanish and civic-knowledge requirements.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "panama-ordinary-naturalization-principal",
+          "label": "Ordinary naturalization",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Panama — nationality and naturalization",
+          "url": "https://constitucion.te.gob.pa/constitucion-vigente/"
+        },
+        {
+          "title": "Panama Migration — Naturalization requirements",
+          "url": "https://www.migracion.gob.pa/wp-content/uploads/REQUISITOS-DE-NATURALIZACION-ACTUALIZADO.pdf"
         }
       ]
     },
