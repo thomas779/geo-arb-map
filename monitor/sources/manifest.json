@@ -166,6 +166,77 @@
       "notes": "Boletín Oficial de la República Argentina — flagged volatile in dual_citizenship / generational_events (pending decree)."
     },
     {
+      "id": "argentina-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion",
+      "jurisdictions": ["032"],
+      "pages": [
+        { "id": "citizenship-law-346", "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion" },
+        { "id": "investment-decree-524-2025", "url": "https://www.argentina.gob.ar/normativa/nacional/decreto-524-2025-415710/texto" }
+      ],
+      "keywords": ["ciudadanía", "naturalización", "residencia", "inversión relevante", "Agencia de Programas de Ciudadanía por Inversión"],
+      "notes": "Official consolidated Citizenship Law and Decree 524/2025. Monitor Article 2 and the investment agency framework; any investment threshold requires an official Ministry of Economy instrument before publication."
+    },
+    {
+      "id": "brazil-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao",
+      "jurisdictions": ["076"],
+      "pages": [
+        { "id": "nationality-overview", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao" },
+        { "id": "ordinary-naturalization", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria" },
+        { "id": "residence-period", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria/ter-residencia-em-territorio-nacional-pelo-prazo-estabelecido-pela-lei-brasileira" }
+      ],
+      "keywords": ["nacionalidade", "naturalização", "residência", "países de língua portuguesa", "migração"],
+      "notes": "Official Ministry of Justice nationality and naturalization guidance. Resolve substantive changes against Article 12 of the Constitution and Migration Law No. 13,445. The Planalto endpoints closed the collector socket during the 2026-07-21 live test, so they remain canonical evidence but are not the scheduled transport."
+    },
+    {
+      "id": "mexico-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-residencia",
+      "jurisdictions": ["484"],
+      "pages": [
+        { "id": "ordinary-naturalization", "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-residencia" },
+        { "id": "latin-american-or-iberian-origin", "url": "https://sre.gob.mx/carta-de-naturalizacion-por-ser-originario-de-un-pais-latinoamericano-o-de-la-peninsula-iberica" }
+      ],
+      "keywords": ["nacionalidad", "naturalización", "residencia", "latinoamericano", "Península Ibérica"],
+      "notes": "Official Foreign Ministry guidance for the five-year ordinary route and two-year Latin American or Iberian Peninsula route. Resolve substantive changes against the Chamber of Deputies current Constitution and Nationality Law. The Chamber index did not complete reliably in the 2026-07-21 collector test, so SRE guidance is the scheduled transport."
+    },
+    {
+      "id": "dof-mexico",
+      "tier": "verification",
+      "adapter": "api",
+      "status": "planned",
+      "kind": "gazette_search",
+      "url": "https://www.dof.gob.mx/",
+      "jurisdictions": ["484"],
+      "keywords": ["nacionalidad", "naturalización", "residencia", "migración", "extranjeros"],
+      "notes": "Official Diario Oficial de la Federación. Add a narrow saved search or supported API query before activation."
+    },
+    {
+      "id": "colombia-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm",
+      "jurisdictions": ["170"],
+      "pages": [
+        { "id": "nationality-law-2332-2023", "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm" },
+        { "id": "naturalization-guidance", "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/nacionalidad/naturalizacion" },
+        { "id": "visa-faq", "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/abece-de-visas" },
+        { "id": "visa-resolution-5477-2022", "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm" },
+        { "id": "student-visa", "url": "https://www.cancilleria.gov.co/node/26940" }
+      ],
+      "keywords": ["nacionalidad", "naturalización", "domicilio", "visa de residente", "visa de estudiante"],
+      "notes": "Official Foreign Ministry current nationality law, naturalization guidance and visa rules. Law 2332/2023 controls current nationality findings; older Law 43 is not treated as current authority. The Función Pública mirror failed certificate verification in the 2026-07-21 collector test, so the Cancillería copy is the scheduled transport."
+    },
+    {
       "id": "legislation-gov-uk",
       "tier": "verification",
       "adapter": "api",
