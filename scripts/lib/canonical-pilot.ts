@@ -177,6 +177,21 @@ const OFFICIAL_URLS = {
   singapore_constitution: 'https://sso.agc.gov.sg/Act/CONS1963?ProvIds=P110-&ViewType=Advance',
   singapore_citizenship: 'https://www.ica.gov.sg/reside/citizenship',
   singapore_gip: 'https://www.edb.gov.sg/en/incentives-and-programmes/global-investor-programme.html',
+  malta_citizenship: 'https://komunita.gov.mt/services/acquisition-of-citizenship/',
+  malta_citizenship_act: 'https://legislation.mt/eli/cap/188/eng/pdf',
+  malta_investment_repeal: 'https://www.gov.mt/en/Government/DOI/Press%20Releases/Pages/2025/07/16/PR251293en.aspx',
+  malta_amendments: 'https://komunita.gov.mt/2025/09/02/amendments-to-the-maltese-citizenship-act-and-subsidiary-legislation/',
+  malta_merit: 'https://komunita.gov.mt/wp-content/uploads/2026/02/Citizenship-by-Naturalisation-on-the-Basis-of-Merit.pdf',
+  cyprus_origin: 'https://www.gov.cy/moi/en/ministry/departments/civil-registry-section/registry-office-2/cypriot-citizenship-nationality/acquisition-of-cypriot-citizenship-due-to-cypriot-origin/',
+  cyprus_naturalization: 'https://www.gov.cy/moi/en/documents/acquisition-of-cypriot-citizenship-by-naturalization-due-to-years-of-residence-form-m127/',
+  cyprus_investment_termination: 'https://cipregistry.mof.gov.cy/en/',
+  turkiye_citizenship: 'https://nvi.gov.tr/turk-vatandasliginin-kazanilmasi',
+  turkiye_citizenship_law: 'https://www.nvi.gov.tr/kurumlar/nvi.gov.tr/mevzuat/nufusmevzuat/ingilizce/TURKISH_CITIZENSHIP_LAW_5901.pdf',
+  turkiye_investment: 'https://f.invest.gov.tr/en/investmentguide/pages/acquiring-property-and-citizenship.aspx',
+  uruguay_constitution_birth: 'https://www.impo.com.uy/bases/constitucion/1967-1967/74',
+  uruguay_nationality_law: 'https://www.impo.com.uy/bases/leyes/16021-1989',
+  uruguay_legal_citizenship: 'https://www.gub.uy/tramites/carta-ciudadania',
+  uruguay_tax_residence: 'https://www.gub.uy/direccion-general-impositiva/comunicacion/publicaciones/causales-residencia-fiscal',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -463,6 +478,35 @@ function jurisdictionSources(): SourceRecord[] {
           '756': 'switzerland-citizenship-guidance',
           '840': 'us-citizenship-guidance',
         }[jurisdiction]!,
+        method: 'http',
+        url,
+        status: 'planned',
+      },
+    })),
+    ...[
+      ['Community Malta Agency — Acquisition of Citizenship', OFFICIAL_URLS.malta_citizenship, '470', 'en', 'official_guidance', 'komunita-malta'],
+      ['Maltese Citizenship Act, Chapter 188', OFFICIAL_URLS.malta_citizenship_act, '470', 'en', 'primary_law', 'malta-legislation'],
+      ['Government of Malta — citizenship programme discontinued', OFFICIAL_URLS.malta_investment_repeal, '470', 'en', 'official_guidance', 'komunita-malta'],
+      ['Community Malta Agency — amendments to the Citizenship Act', OFFICIAL_URLS.malta_amendments, '470', 'en', 'official_guidance', 'komunita-malta'],
+      ['Community Malta Agency — naturalisation on the basis of merit', OFFICIAL_URLS.malta_merit, '470', 'en', 'official_guidance', 'malta-legislation'],
+      ['Cyprus Ministry of Interior — Citizenship due to Cypriot origin', OFFICIAL_URLS.cyprus_origin, '196', 'en', 'official_guidance', 'cyprus-citizenship-guidance'],
+      ['Cyprus Ministry of Interior — Naturalization due to residence', OFFICIAL_URLS.cyprus_naturalization, '196', 'en', 'official_guidance', 'cyprus-citizenship-guidance'],
+      ['Cyprus Ministry of Finance — Investment Programme termination', OFFICIAL_URLS.cyprus_investment_termination, '196', 'en', 'official_guidance', 'cyprus-investment-programme'],
+      ['Türkiye NVI — Acquisition of Turkish citizenship', OFFICIAL_URLS.turkiye_citizenship, '792', 'tr', 'official_guidance', 'turkiye-citizenship-guidance'],
+      ['Turkish Citizenship Law No. 5901', OFFICIAL_URLS.turkiye_citizenship_law, '792', 'en', 'primary_law', 'turkiye-citizenship-guidance'],
+      ['Invest in Türkiye — Acquiring Property and Citizenship', OFFICIAL_URLS.turkiye_investment, '792', 'en', 'official_guidance', 'turkiye-investment-guidance'],
+      ['Uruguay Constitution — Article 74', OFFICIAL_URLS.uruguay_constitution_birth, '858', 'es', 'primary_law', 'uruguay-nationality-law'],
+      ['Uruguay Law No. 16.021 — Nationality', OFFICIAL_URLS.uruguay_nationality_law, '858', 'es', 'primary_law', 'uruguay-nationality-law'],
+      ['Uruguay Electoral Court — Legal citizenship application', OFFICIAL_URLS.uruguay_legal_citizenship, '858', 'es', 'official_guidance', 'uruguay-citizenship-guidance'],
+      ['Uruguay DGI — Tax residence through investment', OFFICIAL_URLS.uruguay_tax_residence, '858', 'es', 'official_guidance', 'uruguay-tax-residence'],
+    ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
+      title,
+      url,
+      source_type: sourceType as SourceRecord['source_type'],
+      jurisdictions: [jurisdiction],
+      language,
+      monitoring: {
+        source_id: monitorId,
         method: 'http',
         url,
         status: 'planned',
@@ -1504,6 +1548,7 @@ function reviewedCountryRecord({
   note,
   coverage,
   routes,
+  name,
 }: {
   shadow: DataShadow;
   iso: string;
@@ -1516,6 +1561,7 @@ function reviewedCountryRecord({
     note?: string;
   }>;
   routes: JurisdictionRecord['routes'];
+  name?: string;
 }): JurisdictionRecord {
   const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === iso);
   if (!candidate) throw new Error(`Jurisdiction ${iso} is missing`);
@@ -1523,7 +1569,7 @@ function reviewedCountryRecord({
     schema_version: 2,
     entity_type: 'jurisdiction',
     id: `jurisdiction:${iso}`,
-    jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
+    jurisdiction: { ...candidate.jurisdiction, ...(name ? { name } : {}), type: 'sovereign' },
     review: {
       state: 'reviewed',
       confidence: 'high',
@@ -1542,6 +1588,162 @@ function reviewedCountryRecord({
       source_refs: refs(item.sources, [`/coverage/${item.mode}`]),
     })),
     routes,
+  });
+}
+
+function principalCitizenshipRoute({
+  id,
+  mode,
+  title,
+  summary,
+  source,
+  eligibility,
+  months,
+  allocation = 'right',
+  note,
+  status = 'active',
+  lastChecked = '2026-07-21',
+}: {
+  id: string;
+  mode: 'ancestry' | 'naturalization' | 'birth' | 'investment';
+  title: string;
+  summary: string;
+  source: SourceRecord | SourceRecord[];
+  eligibility: Array<{
+    field: string;
+    operator: 'eq' | 'neq' | 'in' | 'not_in' | 'gte' | 'lte' | 'exists';
+    value: string | number | boolean | string[] | number[] | null;
+    unit?: 'months' | 'years' | 'days' | 'count';
+    note?: string;
+  }>;
+  months: number | null;
+  allocation?: 'right' | 'discretionary';
+  note?: string;
+  status?: 'active' | 'inactive';
+  lastChecked?: string;
+}): JurisdictionRecord['routes'][number] {
+  const variantId = `${id}-principal`;
+  return {
+    id,
+    mode,
+    status,
+    title,
+    summary,
+    effective: { from: null, to: null, supersedes: [] },
+    review: { state: 'reviewed', confidence: 'high', last_checked: lastChecked },
+    variants: [{
+      id: variantId,
+      label: title,
+      outcome: 'citizenship',
+      allocation,
+      eligibility,
+      milestones: [{ status: 'citizenship_application', minimum_months: months }],
+      timeline: {
+        eligibility_minimum_months: months,
+        processing_typical_months: null,
+        confidence: 'high',
+        ...(note ? { note } : {}),
+      },
+      source_refs: refs(Array.isArray(source) ? source : [source], [
+        `/routes/${id}/summary`,
+        `/routes/${id}/variants/${variantId}/eligibility`,
+        `/routes/${id}/variants/${variantId}/timeline`,
+      ]),
+    }],
+  };
+}
+
+function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
+  const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
+  const repeal = requireSource(officialSources, OFFICIAL_URLS.malta_investment_repeal);
+  const amendments = requireSource(officialSources, OFFICIAL_URLS.malta_amendments);
+  const merit = requireSource(officialSources, OFFICIAL_URLS.malta_merit);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '470',
+    note: 'All acquisition modes reviewed against the consolidated Citizenship Act and Community Malta guidance after the 2025 repeal of investor citizenship.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [guidance, act] },
+      { mode: 'naturalization', finding: 'present', sources: [guidance, act] },
+      { mode: 'birth', finding: 'present', sources: [guidance, act], note: 'Birth in Malta is not generally sufficient; the current rule depends on a qualifying parent.' },
+      { mode: 'investment', finding: 'present', sources: [repeal, amendments, merit], note: 'The modeled route is historical and inactive: the Granting of Citizenship for Exceptional Services programme was discontinued in 2025. Merit naturalization is discretionary and not direct CBI.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({ id: 'malta-registration-family-descent', mode: 'ancestry', title: 'Maltese citizenship by descent', summary: 'Malta provides registration routes for specified family situations, including descendants in the direct line where the relevant line includes two consecutive ascendants born in Malta, and for certain second or subsequent generations born abroad. A foreign spouse of a Maltese citizen may also qualify for registration after five years of marriage, subject to the applicable conditions.', source: guidance, eligibility: [{ field: 'ancestor.citizenship.iso_n3', operator: 'eq', value: '470' }], months: 0, lastChecked: '2026-07-17' }),
+      principalCitizenshipRoute({ id: 'malta-residence-naturalization', mode: 'naturalization', title: 'Maltese naturalization by residence', summary: 'An adult may apply after residing in Malta throughout the twelve months immediately before the application and for an aggregate of at least four years during the preceding six years. The applicant must also meet character and language requirements. Naturalization remains a ministerial, discretionary decision rather than an entitlement after five calendar years.', source: guidance, eligibility: [{ field: 'residence.immediately_preceding_months', operator: 'gte', value: 12, unit: 'months' }, { field: 'residence.prior_six_years_months', operator: 'gte', value: 48, unit: 'months' }], months: 60, allocation: 'discretionary', note: 'The statutory residence threshold establishes eligibility to apply, not an entitlement to citizenship.', lastChecked: '2026-07-17' }),
+      principalCitizenshipRoute({ id: 'malta-citizenship-by-birth', mode: 'birth', title: 'Citizenship at birth through a qualifying parent', summary: 'For births on or after 1 August 1989, birth in Malta confers citizenship only where a parent has the qualifying citizenship or status required by the Act.', source: guidance, eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '470' }, { field: 'parent.qualifying_status', operator: 'eq', value: true }], months: 0 }),
+      principalCitizenshipRoute({ id: 'malta-transactional-investor-citizenship-ended', mode: 'investment', title: 'Former investor-citizenship programme', summary: 'Malta discontinued the Granting of Citizenship for Exceptional Services programme following the Court of Justice of the European Union judgment. Current exceptional-merit naturalization is a discretionary route based on genuine exceptional service or contribution and residence; it should not be represented as a direct citizenship-by-investment product.', source: [repeal, amendments, merit], eligibility: [{ field: 'programme.accepting_new_applications', operator: 'eq', value: false }], months: null, allocation: 'discretionary', status: 'inactive', lastChecked: '2026-07-17', note: 'Historical route retained to state explicitly that transactional investor citizenship ended in 2025.' }),
+    ],
+  });
+}
+
+function cyprusRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const origin = requireSource(officialSources, OFFICIAL_URLS.cyprus_origin);
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.cyprus_naturalization);
+  const termination = requireSource(officialSources, OFFICIAL_URLS.cyprus_investment_termination);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '196',
+    note: 'All acquisition modes reviewed against current Ministry of Interior guidance and the official record of the terminated investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [origin] },
+      { mode: 'naturalization', finding: 'present', sources: [naturalization] },
+      { mode: 'birth', finding: 'present', sources: [origin], note: 'The principal birth-related route is citizenship through a Cypriot parent, including consular registration for a person born abroad; Cyprus does not operate general territorial jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [termination], note: 'The Cyprus Investment Programme stopped accepting new applications from 1 November 2020.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({ id: 'cyprus-citizenship-by-origin', mode: 'ancestry', title: 'Cypriot citizenship due to origin', summary: 'Cypriot-origin registration routes cover people born abroad and specified descendants, using the applicable M121, M123, M124 or M126 procedure.', source: origin, eligibility: [{ field: 'ancestor.citizenship_or_origin.iso_n3', operator: 'eq', value: '196' }], months: 0 }),
+      principalCitizenshipRoute({ id: 'cyprus-naturalization-by-residence', mode: 'naturalization', title: 'Cypriot naturalization by residence', summary: 'The ordinary route requires twelve continuous months immediately before application and at least seven cumulative lawful years in the preceding ten years, plus language, civic, character and resources tests.', source: naturalization, eligibility: [{ field: 'residence.immediately_preceding_months', operator: 'gte', value: 12, unit: 'months' }, { field: 'residence.prior_ten_years_months', operator: 'gte', value: 84, unit: 'months' }, { field: 'language.greek_level', operator: 'eq', value: 'B1' }], months: 96, allocation: 'discretionary' }),
+      principalCitizenshipRoute({ id: 'cyprus-citizenship-at-birth-by-parent', mode: 'birth', title: 'Citizenship at birth through a Cypriot parent', summary: 'A person born abroad after 16 August 1960 can use the consular-birth route where a mother or father was a Cypriot citizen at the time of birth, subject to statutory exceptions and registration.', source: origin, eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '196' }, { field: 'parent.citizenship_at_child_birth', operator: 'eq', value: true }], months: 0 }),
+    ],
+  });
+}
+
+function turkiyeRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const guidance = requireSource(officialSources, OFFICIAL_URLS.turkiye_citizenship);
+  const law = requireSource(officialSources, OFFICIAL_URLS.turkiye_citizenship_law);
+  const investment = requireSource(officialSources, OFFICIAL_URLS.turkiye_investment);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '792',
+    name: 'Türkiye',
+    note: 'All acquisition modes reviewed against Citizenship Law No. 5901, NVI guidance, and the current official investment thresholds.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [guidance, law] },
+      { mode: 'naturalization', finding: 'present', sources: [guidance, law] },
+      { mode: 'birth', finding: 'present', sources: [guidance, law], note: 'Territorial birth citizenship is limited to a child who would otherwise acquire no nationality, including a foundling presumed born in Türkiye.' },
+      { mode: 'investment', finding: 'present', sources: [investment, law] },
+    ],
+    routes: [
+      principalCitizenshipRoute({ id: 'turkiye-citizenship-by-descent', mode: 'ancestry', title: 'Turkish citizenship by descent', summary: 'A child acquires Turkish citizenship through a Turkish mother or father, subject to the parentage rules in Citizenship Law No. 5901.', source: law, eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '792' }], months: 0 }),
+      principalCitizenshipRoute({ id: 'turkiye-naturalization-by-residence', mode: 'naturalization', title: 'Turkish naturalization after residence', summary: 'An adult can apply under the general provisions after five continuous years of residence and satisfaction of settlement, language, character, health and security conditions.', source: guidance, eligibility: [{ field: 'residence.continuous_months', operator: 'gte', value: 60, unit: 'months' }, { field: 'language.turkish_sufficient', operator: 'eq', value: true }], months: 60, allocation: 'discretionary' }),
+      principalCitizenshipRoute({ id: 'turkiye-citizenship-by-birth-statelessness', mode: 'birth', title: 'Citizenship at birth to prevent statelessness', summary: 'A child born in Türkiye who cannot acquire any nationality from the parents becomes Turkish from birth; a foundling is presumed born in Türkiye.', source: guidance, eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '792' }, { field: 'child.other_nationality_acquired', operator: 'eq', value: false }], months: 0 }),
+      principalCitizenshipRoute({ id: 'turkiye-exceptional-investor-citizenship', mode: 'investment', title: 'Exceptional citizenship through qualifying investment', summary: 'Foreign investors meeting a prescribed property, capital, deposit, securities, pension-fund or job-creation condition may acquire citizenship by presidential decision.', source: investment, eligibility: [{ field: 'investment.property_usd', operator: 'gte', value: 400000 }, { field: 'investment.holding_months', operator: 'gte', value: 36, unit: 'months' }], months: 36, allocation: 'discretionary', lastChecked: '2026-07-17', note: 'The property variant is modeled here; official guidance also lists USD 500,000 alternatives and a 50-job option.' }),
+    ],
+  });
+}
+
+function uruguayRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.uruguay_constitution_birth);
+  const nationality = requireSource(officialSources, OFFICIAL_URLS.uruguay_nationality_law);
+  const legalCitizenship = requireSource(officialSources, OFFICIAL_URLS.uruguay_legal_citizenship);
+  const taxResidence = requireSource(officialSources, OFFICIAL_URLS.uruguay_tax_residence);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '858',
+    note: 'All acquisition modes reviewed with Uruguay’s distinction between natural nationality and later legal citizenship preserved.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, nationality] },
+      { mode: 'naturalization', finding: 'present', sources: [legalCitizenship] },
+      { mode: 'birth', finding: 'present', sources: [constitution, nationality] },
+      { mode: 'investment', finding: 'verified_none', sources: [legalCitizenship, taxResidence], note: 'Investment can establish a tax-residence basis and property can evidence means of life, but it does not directly confer citizenship; legal citizenship still requires habitual residence.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({ id: 'uruguay-nationality-by-parent', mode: 'ancestry', title: 'Uruguayan nationality through a parent', summary: 'A child of a Uruguayan mother or father is a Uruguayan national regardless of birthplace; constitutional natural-citizenship exercise involves the applicable connection and registration steps.', source: nationality, eligibility: [{ field: 'parent.nationality.iso_n3', operator: 'eq', value: '858' }], months: 0 }),
+      principalCitizenshipRoute({ id: 'uruguay-legal-citizenship-by-residence', mode: 'naturalization', title: 'Uruguayan legal citizenship by habitual residence', summary: 'A foreign adult of good conduct may seek legal citizenship after three years of habitual residence with family constituted in Uruguay, or five years without, while proving qualifying means or activity.', source: legalCitizenship, eligibility: [{ field: 'residence.habitual_months', operator: 'gte', value: 36, unit: 'months' }, { field: 'family.constituted_in_uruguay', operator: 'eq', value: true }], months: 36, allocation: 'right', note: 'Without family constituted in Uruguay the period is five years. An absence exceeding six continuous months resets the residence period.' }),
+      principalCitizenshipRoute({ id: 'uruguay-nationality-by-birth', mode: 'birth', title: 'Uruguayan nationality by territorial birth', summary: 'Every person born anywhere in the territory of Uruguay is a natural citizen and Uruguayan national.', source: constitution, eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '858' }], months: 0 }),
+    ],
   });
 }
 
@@ -3251,18 +3453,22 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
   const jurisdictions = [
     australiaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
+    cyprusRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
+    maltaRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),
     switzerlandRecord(shadow, countrySources),
+    turkiyeRecord(shadow, countrySources),
     unitedKingdomRecord(shadow, countrySources),
     unitedStatesRecord(shadow, countrySources),
+    uruguayRecord(shadow, countrySources),
   ];
   const manualSources = arrangementSources(shadow);
   const sourcesById = new Map<string, SourceRecord>();

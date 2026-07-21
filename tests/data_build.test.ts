@@ -97,8 +97,8 @@ describe('data:build reads the canonical database', () => {
       selected_statuses: ['draft'],
       selected_release_status: null,
     });
-    expect(loaded.projections.coverage).toHaveLength(14);
-    expect(loaded.projections.mode_coverage).toHaveLength(56);
+    expect(loaded.projections.coverage).toHaveLength(18);
+    expect(loaded.projections.mode_coverage).toHaveLength(72);
   });
 
   test('fails clearly when the database is missing', () => {
@@ -367,6 +367,9 @@ describe('data:build parity gates', () => {
       'canada-citizenship-by-birth',
       'canada-citizenship-by-descent',
       'canada-citizenship-grant',
+      'cyprus-citizenship-at-birth-by-parent',
+      'cyprus-citizenship-by-origin',
+      'cyprus-naturalization-by-residence',
       'france-birth-and-residence',
       'france-citizenship-by-parent',
       'germany-citizenship-by-birth',
@@ -378,6 +381,7 @@ describe('data:build parity gates', () => {
       'italy-citizenship-by-descent',
       'italy-citizenship-connected-to-birth',
       'italy-naturalization-by-residence',
+      'malta-citizenship-by-birth',
       'netherlands-citizenship-by-parent',
       'netherlands-naturalization-by-residence',
       'netherlands-third-generation-birth',
@@ -394,9 +398,15 @@ describe('data:build parity gates', () => {
       'switzerland-citizenship-by-descent',
       'switzerland-ordinary-naturalization',
       'switzerland-third-generation-naturalization',
+      'turkiye-citizenship-by-birth-statelessness',
+      'turkiye-citizenship-by-descent',
+      'turkiye-naturalization-by-residence',
       'uk-citizenship-by-birth',
       'uk-citizenship-by-parent',
       'uk-naturalization-after-settlement',
+      'uruguay-legal-citizenship-by-residence',
+      'uruguay-nationality-by-birth',
+      'uruguay-nationality-by-parent',
       'us-citizenship-at-birth-abroad',
       'us-citizenship-by-birth',
       'us-naturalization-after-lpr',

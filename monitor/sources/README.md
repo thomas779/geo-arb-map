@@ -25,6 +25,13 @@ The legal-review handoff for another model or reviewer is
 | Netherlands IND citizenship | HTML content hash | Official verification lead | Active; live fetch verified 2026-07-21 |
 | Singapore ICA citizenship | HTML content hash | Official verification lead | Active; live fetch verified 2026-07-21 |
 | Switzerland SEM citizenship | HTML content hash | Official verification lead | Active; live fetch verified 2026-07-21 |
+| Malta Community Agency citizenship | HTML content hash | Official verification lead | Active; live fetch verified 2026-07-21 |
+| Cyprus investment-programme registry | HTML content hash | Official negative-CBI verification | Active; live fetch verified 2026-07-21 |
+| Türkiye NVI citizenship | HTML content hash | Official verification lead | Active; live fetch verified 2026-07-21 |
+| Invest in Türkiye citizenship thresholds | HTML content hash | Official CBI verification | Active; live fetch verified 2026-07-21 |
+| Uruguay IMPO nationality law | HTML content hash | Official legal verification lead | Active; live fetch verified 2026-07-21 |
+| Uruguay Electoral Court citizenship | HTML content hash | Official naturalization verification | Active; live fetch verified 2026-07-21 |
+| Uruguay DGI tax residence | HTML content hash | Official classification safeguard | Active; live fetch verified 2026-07-21 |
 | Nomad Capitalist Weekly Rundown | Email Worker | Newsletter discovery | Subscribed through the shared intake address on 2026-07-19; awaiting first delivery |
 | The Wandering Investor Notes from the Road | Email Worker | Private-list and early discovery | Intake active; publisher form returned a subscription error on 2026-07-18 |
 
@@ -49,6 +56,11 @@ through a domain different from the publisher's website. Reserve a dedicated
 address only for genuinely ambiguous senders.
 
 ## Adapter queue
+
+Cyprus Ministry of Interior citizenship guidance is a P0 gap: the official hub
+returned HTTP 403 to the bounded collector on 2026-07-21. Its official pages
+remain canonical evidence, but the source is correctly marked `planned` until a
+permitted feed/API or resilient browser-backed adapter is available.
 
 1. **P0 — official sources already relevant to the product graph:** Spain BOE,
    Portugal DRE, France Légifrance, Argentina Boletín Oficial, UK legislation,

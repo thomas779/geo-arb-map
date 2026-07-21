@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 64,
+      "routes": 74,
       "by_mode": {
-        "ancestry": 17,
-        "naturalization": 18,
-        "birth": 14,
+        "ancestry": 20,
+        "naturalization": 21,
+        "birth": 18,
         "investment": 15
       },
       "by_status": {
-        "active": 59,
+        "active": 69,
         "inactive": 2,
         "pending_verification": 2,
         "verified_negative": 1
@@ -679,12 +679,16 @@
       "name": "Cyprus",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "cyprus-citizenship-by-origin",
+        "cyprus-naturalization-by-residence",
+        "cyprus-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "203",
@@ -1616,14 +1620,15 @@
       "name": "Malta",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "partial",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
-        "malta-residence-naturalization",
         "malta-registration-family-descent",
+        "malta-residence-naturalization",
+        "malta-citizenship-by-birth",
         "malta-transactional-investor-citizenship-ended"
       ]
     },
@@ -2707,15 +2712,18 @@
     },
     {
       "iso_n3": "792",
-      "name": "Turkey",
+      "name": "Türkiye",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "turkiye-citizenship-by-descent",
+        "turkiye-naturalization-by-residence",
+        "turkiye-citizenship-by-birth-statelessness",
         "turkiye-exceptional-investor-citizenship"
       ]
     },
@@ -2914,12 +2922,16 @@
       "name": "Uruguay",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "uruguay-nationality-by-parent",
+        "uruguay-legal-citizenship-by-residence",
+        "uruguay-nationality-by-birth"
+      ]
     },
     {
       "iso_n3": "860",
@@ -3401,6 +3413,111 @@
         {
           "title": "Colombia Foreign Ministry — V Student Visa",
           "url": "https://www.cancilleria.gov.co/node/26940"
+        }
+      ]
+    },
+    {
+      "id": "cyprus-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "196",
+        "name": "Cyprus"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Cypriot parent",
+      "summary": "A person born abroad after 16 August 1960 can use the consular-birth route where a mother or father was a Cypriot citizen at the time of birth, subject to statutory exceptions and registration.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cyprus-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Cypriot parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Cyprus Ministry of Interior — Citizenship due to Cypriot origin",
+          "url": "https://www.gov.cy/moi/en/ministry/departments/civil-registry-section/registry-office-2/cypriot-citizenship-nationality/acquisition-of-cypriot-citizenship-due-to-cypriot-origin/"
+        }
+      ]
+    },
+    {
+      "id": "cyprus-citizenship-by-origin",
+      "country": {
+        "iso_n3": "196",
+        "name": "Cyprus"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Cypriot citizenship due to origin",
+      "summary": "Cypriot-origin registration routes cover people born abroad and specified descendants, using the applicable M121, M123, M124 or M126 procedure.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cyprus-citizenship-by-origin-principal",
+          "label": "Cypriot citizenship due to origin",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Cyprus Ministry of Interior — Citizenship due to Cypriot origin",
+          "url": "https://www.gov.cy/moi/en/ministry/departments/civil-registry-section/registry-office-2/cypriot-citizenship-nationality/acquisition-of-cypriot-citizenship-due-to-cypriot-origin/"
+        }
+      ]
+    },
+    {
+      "id": "cyprus-naturalization-by-residence",
+      "country": {
+        "iso_n3": "196",
+        "name": "Cyprus"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Cypriot naturalization by residence",
+      "summary": "The ordinary route requires twelve continuous months immediately before application and at least seven cumulative lawful years in the preceding ten years, plus language, civic, character and resources tests.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cyprus-naturalization-by-residence-principal",
+          "label": "Cypriot naturalization by residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Cyprus Ministry of Interior — Naturalization due to residence",
+          "url": "https://www.gov.cy/moi/en/documents/acquisition-of-cypriot-citizenship-by-naturalization-due-to-years-of-residence-form-m127/"
         }
       ]
     },
@@ -4067,6 +4184,41 @@
       ]
     },
     {
+      "id": "malta-citizenship-by-birth",
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a qualifying parent",
+      "summary": "For births on or after 1 August 1989, birth in Malta confers citizenship only where a parent has the qualifying citizenship or status required by the Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malta-citizenship-by-birth-principal",
+          "label": "Citizenship at birth through a qualifying parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Community Malta Agency — Acquisition of Citizenship",
+          "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/"
+        }
+      ]
+    },
+    {
       "id": "malta-registration-family-descent",
       "country": {
         "iso_n3": "470",
@@ -4074,13 +4226,27 @@
       },
       "mode": "ancestry",
       "status": "active",
-      "title": "Registration routes cover defined descent and family connections",
+      "title": "Maltese citizenship by descent",
       "summary": "Malta provides registration routes for specified family situations, including descendants in the direct line where the relevant line includes two consecutive ascendants born in Malta, and for certain second or subsequent generations born abroad. A foreign spouse of a Maltese citizen may also qualify for registration after five years of marriage, subject to the applicable conditions.",
       "facts": {
         "route_type": "registration",
         "spouse_marriage_years": 5,
-        "automatic": false
+        "automatic": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "malta-registration-family-descent-principal",
+          "label": "Maltese citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
@@ -4098,14 +4264,29 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Residence-based naturalization requires the final twelve months plus four of the preceding six years",
+      "title": "Maltese naturalization by residence",
       "summary": "An adult may apply after residing in Malta throughout the twelve months immediately before the application and for an aggregate of at least four years during the preceding six years. The applicant must also meet character and language requirements. Naturalization remains a ministerial, discretionary decision rather than an entitlement after five calendar years.",
       "facts": {
         "immediate_residence_months": 12,
         "preceding_window_years": 6,
         "aggregate_residence_years_in_window": 4,
-        "automatic": false
+        "automatic": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "malta-residence-naturalization-principal",
+          "label": "Maltese naturalization by residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "The statutory residence threshold establishes eligibility to apply, not an entitlement to citizenship."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
@@ -4123,13 +4304,26 @@
       },
       "mode": "investment",
       "status": "inactive",
-      "title": "The former transactional investor-citizenship programme has ended",
+      "title": "Former investor-citizenship programme",
       "summary": "Malta discontinued the Granting of Citizenship for Exceptional Services programme following the Court of Justice of the European Union judgment. Current exceptional-merit naturalization is a discretionary route based on genuine exceptional service or contribution and residence; it should not be represented as a direct citizenship-by-investment product.",
       "facts": {
         "programme_type": "former_direct_investor_citizenship",
         "ended_year": 2025,
-        "replacement_is_cbi": false
+        "replacement_is_cbi": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "malta-transactional-investor-citizenship-ended-principal",
+          "label": "Former investor-citizenship programme",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Historical route retained to state explicitly that transactional investor citizenship ended in 2025."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
@@ -4999,6 +5193,76 @@
       ]
     },
     {
+      "id": "turkiye-citizenship-by-birth-statelessness",
+      "country": {
+        "iso_n3": "792",
+        "name": "Türkiye"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth to prevent statelessness",
+      "summary": "A child born in Türkiye who cannot acquire any nationality from the parents becomes Turkish from birth; a foundling is presumed born in Türkiye.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "turkiye-citizenship-by-birth-statelessness-principal",
+          "label": "Citizenship at birth to prevent statelessness",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Türkiye NVI — Acquisition of Turkish citizenship",
+          "url": "https://nvi.gov.tr/turk-vatandasliginin-kazanilmasi"
+        }
+      ]
+    },
+    {
+      "id": "turkiye-citizenship-by-descent",
+      "country": {
+        "iso_n3": "792",
+        "name": "Türkiye"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Turkish citizenship by descent",
+      "summary": "A child acquires Turkish citizenship through a Turkish mother or father, subject to the parentage rules in Citizenship Law No. 5901.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "turkiye-citizenship-by-descent-principal",
+          "label": "Turkish citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Turkish Citizenship Law No. 5901",
+          "url": "https://www.nvi.gov.tr/kurumlar/nvi.gov.tr/mevzuat/nufusmevzuat/ingilizce/TURKISH_CITIZENSHIP_LAW_5901.pdf"
+        }
+      ]
+    },
+    {
       "id": "turkiye-exceptional-investor-citizenship",
       "country": {
         "iso_n3": "792",
@@ -5006,7 +5270,7 @@
       },
       "mode": "investment",
       "status": "active",
-      "title": "Exceptional citizenship for qualifying investors",
+      "title": "Exceptional citizenship through qualifying investment",
       "summary": "Foreign investors meeting a prescribed property, capital, deposit, securities, pension-fund or job-creation condition may acquire citizenship by presidential decision.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
@@ -5015,14 +5279,63 @@
         "property_threshold_usd": 400000,
         "other_investment_threshold_usd": 500000,
         "holding_period_years": 3,
-        "job_creation_threshold": 50
+        "job_creation_threshold": 50,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ]
       },
+      "pathways": [
+        {
+          "id": "turkiye-exceptional-investor-citizenship-principal",
+          "label": "Exceptional citizenship through qualifying investment",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "The property variant is modeled here; official guidance also lists USD 500,000 alternatives and a 50-job option."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
           "title": "Invest in Türkiye — Acquiring Property and Citizenship",
           "url": "https://f.invest.gov.tr/en/investmentguide/pages/acquiring-property-and-citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "turkiye-naturalization-by-residence",
+      "country": {
+        "iso_n3": "792",
+        "name": "Türkiye"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Turkish naturalization after residence",
+      "summary": "An adult can apply under the general provisions after five continuous years of residence and satisfaction of settlement, language, character, health and security conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "turkiye-naturalization-by-residence-principal",
+          "label": "Turkish naturalization after residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Türkiye NVI — Acquisition of Turkish citizenship",
+          "url": "https://nvi.gov.tr/turk-vatandasliginin-kazanilmasi"
         }
       ]
     },
@@ -5273,6 +5586,112 @@
         {
           "title": "USCIS — Naturalization for lawful permanent residents",
           "url": "https://www.uscis.gov/sites/default/files/document/fact-sheets/DO_FactSheet_NaturalizationForLawfulPermanentResidents_wTorUNonimmigrantStatus_V3_508.pdf"
+        }
+      ]
+    },
+    {
+      "id": "uruguay-legal-citizenship-by-residence",
+      "country": {
+        "iso_n3": "858",
+        "name": "Uruguay"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Uruguayan legal citizenship by habitual residence",
+      "summary": "A foreign adult of good conduct may seek legal citizenship after three years of habitual residence with family constituted in Uruguay, or five years without, while proving qualifying means or activity.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uruguay-legal-citizenship-by-residence-principal",
+          "label": "Uruguayan legal citizenship by habitual residence",
+          "allocation": "right",
+          "eligibility_months": 36,
+          "note": "Without family constituted in Uruguay the period is five years. An absence exceeding six continuous months resets the residence period."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Uruguay Electoral Court — Legal citizenship application",
+          "url": "https://www.gub.uy/tramites/carta-ciudadania"
+        }
+      ]
+    },
+    {
+      "id": "uruguay-nationality-by-birth",
+      "country": {
+        "iso_n3": "858",
+        "name": "Uruguay"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Uruguayan nationality by territorial birth",
+      "summary": "Every person born anywhere in the territory of Uruguay is a natural citizen and Uruguayan national.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uruguay-nationality-by-birth-principal",
+          "label": "Uruguayan nationality by territorial birth",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Uruguay Constitution — Article 74",
+          "url": "https://www.impo.com.uy/bases/constitucion/1967-1967/74"
+        }
+      ]
+    },
+    {
+      "id": "uruguay-nationality-by-parent",
+      "country": {
+        "iso_n3": "858",
+        "name": "Uruguay"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Uruguayan nationality through a parent",
+      "summary": "A child of a Uruguayan mother or father is a Uruguayan national regardless of birthplace; constitutional natural-citizenship exercise involves the applicable connection and registration steps.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uruguay-nationality-by-parent-principal",
+          "label": "Uruguayan nationality through a parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Uruguay Law No. 16.021 — Nationality",
+          "url": "https://www.impo.com.uy/bases/leyes/16021-1989"
         }
       ]
     },

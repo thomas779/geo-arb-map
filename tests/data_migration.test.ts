@@ -19,18 +19,22 @@ describe('data migration shadow', () => {
     expect(shadow.jurisdictions.map(item => item.jurisdiction.iso_n3)).toEqual([
       '036',
       '124',
+      '196',
       '250',
       '276',
       '372',
       '380',
+      '470',
       '528',
       '554',
       '620',
       '702',
       '724',
       '756',
+      '792',
       '826',
       '840',
+      '858',
     ]);
     expect(shadow.arrangements.map(item => item.record.id)).toEqual([
       'eu_eea',
@@ -38,9 +42,9 @@ describe('data migration shadow', () => {
       'spain_iberoamerican',
     ]);
     expect(shadow.manifest.counts).toEqual({
-      jurisdictions: 14,
+      jurisdictions: 18,
       arrangements: 3,
-      citizenship_routes: 3,
+      citizenship_routes: 7,
     });
   });
 

@@ -333,10 +333,37 @@
       "id": "komunita-malta",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
-      "url": "https://komunita.gov.mt/",
+      "status": "active",
+      "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/",
       "jurisdictions": ["470"],
-      "notes": "Official Community Malta Agency news and guidance covering citizenship by birth, registration, naturalization, merit, and investment. Needs snapshot and linked-document diffing."
+      "notes": "Official Community Malta acquisition guidance. Normalized page snapshots detect changes to birth, descent, registration and naturalization guidance; legal conclusions must be resolved to Chapter 188."
+    },
+    {
+      "id": "malta-legislation",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://legislation.mt/eli/cap/188/eng/pdf",
+      "jurisdictions": ["470"],
+      "notes": "Consolidated Maltese Citizenship Act. Add a PDF text/hash adapter and monitor amendment metadata before activating."
+    },
+    {
+      "id": "cyprus-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.gov.cy/moi/en/ministry/departments/civil-registry-section/registry-office-2/cypriot-citizenship-nationality/",
+      "jurisdictions": ["196"],
+      "notes": "Official Ministry of Interior citizenship hub linking origin, marriage and residence-naturalization procedures. Direct collection returned HTTP 403 on 2026-07-21; add a permitted feed/API or resilient browser-backed adapter before activation."
+    },
+    {
+      "id": "cyprus-investment-programme",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://cipregistry.mof.gov.cy/en/",
+      "jurisdictions": ["196"],
+      "notes": "Official Ministry of Finance registry page recording that the Cyprus Investment Programme was terminated and accepts no new applications."
     },
     {
       "id": "greece-migration-legislation",
@@ -360,10 +387,46 @@
       "id": "turkiye-citizenship-guidance",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
-      "url": "https://www.yourkeyturkiye.gov.tr/en/acquisition-of-citizenship",
+      "status": "active",
+      "url": "https://nvi.gov.tr/turk-vatandasliginin-kazanilmasi",
       "jurisdictions": ["792"],
-      "notes": "Official Invest in Türkiye citizenship-acquisition guidance, including qualifying investment thresholds. Pair page diffs with Resmî Gazete monitoring before publishing a rule change."
+      "notes": "Official NVI citizenship-acquisition guidance covering descent, stateless birth, general five-year naturalization and exceptional acquisition. Pair diffs with Law No. 5901 and Resmî Gazete."
+    },
+    {
+      "id": "turkiye-investment-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.invest.gov.tr/en/investmentguide/pages/acquiring-property-and-citizenship.aspx",
+      "jurisdictions": ["792"],
+      "notes": "Official Invest in Türkiye page listing current exceptional-citizenship investment thresholds and holding periods."
+    },
+    {
+      "id": "uruguay-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.impo.com.uy/bases/leyes/16021-1989",
+      "jurisdictions": ["858"],
+      "notes": "Official IMPO updated-law page for nationality by territorial birth and Uruguayan parentage."
+    },
+    {
+      "id": "uruguay-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gub.uy/tramites/carta-ciudadania",
+      "jurisdictions": ["858"],
+      "notes": "Official Electoral Court legal-citizenship procedure, including three/five-year habitual-residence rules and reset conditions."
+    },
+    {
+      "id": "uruguay-tax-residence",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gub.uy/direccion-general-impositiva/comunicacion/publicaciones/causales-residencia-fiscal",
+      "jurisdictions": ["858"],
+      "notes": "Official DGI tax-residence page used to prevent investment-based tax residence from being misclassified as direct citizenship."
     },
     {
       "id": "brazil-official-gazette",
