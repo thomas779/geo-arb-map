@@ -213,6 +213,22 @@ const OFFICIAL_URLS = {
   colombia_visa_faq: 'https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/abece-de-visas',
   colombia_visa_resolution: 'https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm',
   colombia_student_visa: 'https://www.cancilleria.gov.co/node/26940',
+  georgia_citizenship: 'https://sda.gov.ge/en/products/citizenship/',
+  georgia_citizenship_law: 'https://matsne.gov.ge/en/document/view/2342552?publication=7',
+  cayman_botc: 'https://otp.gov.ky/web/odg/botc-registration-and-naturalisation',
+  cayman_status_reform: 'https://gov.ky/web/mcei/immigrationreform',
+  uk_nationality_act: 'https://www.legislation.gov.uk/ukpga/1981/61/contents',
+  dominica_citizenship: 'https://www.dominica.gov.dm/services/citizenship/how-do-i-apply-for-citizenship-of-the-commonwealth-of-dominica',
+  dominica_forms: 'https://www.dominica.gov.dm/forms',
+  dominica_constitution: 'https://www.dominica.gov.dm/laws/chapters/chap1-01.pdf',
+  dominica_cbi_law: 'https://www.cbiu.gov.dm/dominica-citizenship/legislation/',
+  dominica_cbi_options: 'https://www.cbiu.gov.dm/faqs/',
+  dominica_cbi_home: 'https://www.cbiu.gov.dm/',
+  st_kitts_constitution: 'https://lawcommission.gov.kn/wp-content/documents/Annual-Laws/The-Constitution-of-St-Christopher-and-Nevis.pdf',
+  st_kitts_citizenship_act: 'https://lawcommission.gov.kn/wp-content/documents/Revised-Acts-of-St-Kitts-and-Nevis/Revised-Acts-of-St-Kitts-and-Nevis-2020/Ch-01_05-Saint-Christopher-and-Nevis-Citizenship-Act.pdf',
+  st_kitts_cbi_options: 'https://ciu.gov.kn/cbi-options/',
+  st_kitts_government_notices: 'https://ciu.gov.kn/government-notices/',
+  st_kitts_application: 'https://ciu.gov.kn/application-process/',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -555,6 +571,22 @@ function jurisdictionSources(): SourceRecord[] {
       ['Colombia Foreign Ministry — Visa FAQ', OFFICIAL_URLS.colombia_visa_faq, '170', 'es', 'official_guidance', 'colombia-nationality-law'],
       ['Colombia Resolution 5477 of 2022', OFFICIAL_URLS.colombia_visa_resolution, '170', 'es', 'primary_law', 'colombia-nationality-law'],
       ['Colombia Foreign Ministry — V Student Visa', OFFICIAL_URLS.colombia_student_visa, '170', 'es', 'official_guidance', 'colombia-nationality-law'],
+      ['Georgia Public Service Development Agency — Citizenship', OFFICIAL_URLS.georgia_citizenship, '268', 'en', 'official_guidance', 'georgia-citizenship-law'],
+      ['Organic Law of Georgia on Georgian Citizenship', OFFICIAL_URLS.georgia_citizenship_law, '268', 'en', 'primary_law', 'georgia-citizenship-law'],
+      ['Cayman Islands Government — BOTC registration and naturalisation', OFFICIAL_URLS.cayman_botc, '136', 'en', 'official_guidance', 'cayman-botc-status'],
+      ['Cayman Islands Government — Immigration reform', OFFICIAL_URLS.cayman_status_reform, '136', 'en', 'official_guidance', 'cayman-botc-status'],
+      ['British Nationality Act 1981', OFFICIAL_URLS.uk_nationality_act, '136', 'en', 'primary_law', 'cayman-botc-status'],
+      ['Dominica Government — Citizenship applications', OFFICIAL_URLS.dominica_citizenship, '212', 'en', 'official_guidance', 'dominica-citizenship-law'],
+      ['Dominica Government — Citizenship forms', OFFICIAL_URLS.dominica_forms, '212', 'en', 'official_guidance', 'dominica-citizenship-law'],
+      ['Constitution of the Commonwealth of Dominica', OFFICIAL_URLS.dominica_constitution, '212', 'en', 'primary_law', 'dominica-citizenship-law'],
+      ['Dominica CBIU — Citizenship by Investment legislation', OFFICIAL_URLS.dominica_cbi_law, '212', 'en', 'official_guidance', 'dominica-citizenship-law'],
+      ['Dominica CBIU — Programme options and requirements', OFFICIAL_URLS.dominica_cbi_options, '212', 'en', 'official_guidance', 'dominica-citizenship-law'],
+      ['Dominica Citizenship by Investment Unit', OFFICIAL_URLS.dominica_cbi_home, '212', 'en', 'official_guidance', 'dominica-citizenship-law'],
+      ['Constitution of St Christopher and Nevis', OFFICIAL_URLS.st_kitts_constitution, '659', 'en', 'primary_law', 'st-kitts-citizenship-law'],
+      ['St Christopher and Nevis Citizenship Act', OFFICIAL_URLS.st_kitts_citizenship_act, '659', 'en', 'primary_law', 'st-kitts-citizenship-law'],
+      ['St Kitts and Nevis Citizenship Unit — Investment options', OFFICIAL_URLS.st_kitts_cbi_options, '659', 'en', 'official_guidance', 'st-kitts-citizenship-law'],
+      ['St Kitts and Nevis Citizenship Unit — Government notices', OFFICIAL_URLS.st_kitts_government_notices, '659', 'en', 'official_guidance', 'st-kitts-citizenship-law'],
+      ['St. Kitts and Nevis Citizenship Unit', OFFICIAL_URLS.st_kitts_application, '659', 'en', 'official_guidance', 'st-kitts-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -1605,6 +1637,7 @@ function reviewedCountryRecord({
   coverage,
   routes,
   name,
+  type = 'sovereign',
 }: {
   shadow: DataShadow;
   iso: string;
@@ -1618,6 +1651,7 @@ function reviewedCountryRecord({
   }>;
   routes: JurisdictionRecord['routes'];
   name?: string;
+  type?: 'sovereign' | 'territory' | 'special';
 }): JurisdictionRecord {
   const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === iso);
   if (!candidate) throw new Error(`Jurisdiction ${iso} is missing`);
@@ -1625,7 +1659,7 @@ function reviewedCountryRecord({
     schema_version: 2,
     entity_type: 'jurisdiction',
     id: `jurisdiction:${iso}`,
-    jurisdiction: { ...candidate.jurisdiction, ...(name ? { name } : {}), type: 'sovereign' },
+    jurisdiction: { ...candidate.jurisdiction, ...(name ? { name } : {}), type },
     review: {
       state: 'reviewed',
       confidence: 'high',
@@ -2128,6 +2162,278 @@ function colombiaRecord(
           ]),
         }],
       },
+    ],
+  });
+}
+
+function georgiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const guidance = requireSource(officialSources, OFFICIAL_URLS.georgia_citizenship);
+  const law = requireSource(officialSources, OFFICIAL_URLS.georgia_citizenship_law);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '268',
+    note: 'All acquisition modes reviewed against Georgia’s Organic Law and Public Service Development Agency guidance.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law, guidance] },
+      { mode: 'naturalization', finding: 'present', sources: [law, guidance] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [law, guidance],
+        note: 'Territorial birth alone is insufficient; the principal rules cover a Georgian parent and narrow safeguards against statelessness.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [law, guidance],
+        note: 'Georgia has no direct, entitlement-based citizenship-by-investment programme. Economic contribution may be considered only within exceptional, discretionary citizenship.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'georgia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Georgian citizenship through a Georgian parent',
+        summary: 'A person acquires Georgian citizenship by birth when at least one parent is a Georgian citizen.',
+        source: [law, guidance],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '268' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'georgia-ordinary-naturalization',
+        mode: 'naturalization',
+        title: 'Ordinary naturalization after ten years',
+        summary: 'An adult may apply after ten consecutive years of lawful residence, subject to the Georgian language, history and law test and a qualifying economic connection.',
+        source: [law, guidance],
+        eligibility: [
+          { field: 'residence.lawful_months', operator: 'gte', value: 120, unit: 'months' },
+          { field: 'integration.citizenship_test_passed', operator: 'eq', value: true },
+          { field: 'connection.employment_property_business_or_enterprise_interest', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        note: 'A Georgian citizen’s spouse has a separate five-year simplified route. Eligibility does not guarantee the presidential grant.',
+      }),
+      principalCitizenshipRoute({
+        id: 'georgia-citizenship-by-protected-birth',
+        mode: 'birth',
+        title: 'Citizenship at birth under anti-statelessness safeguards',
+        summary: 'A child born in Georgia can acquire citizenship under narrow statutory safeguards, including where qualifying parents are stateless or the other parent is unknown.',
+        source: [law, guidance],
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '268' },
+          { field: 'birth.anti_statelessness_condition_met', operator: 'eq', value: true },
+        ],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function caymanIslandsRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const botc = requireSource(officialSources, OFFICIAL_URLS.cayman_botc);
+  const reform = requireSource(officialSources, OFFICIAL_URLS.cayman_status_reform);
+  const nationalityAct = requireSource(officialSources, OFFICIAL_URLS.uk_nationality_act);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '136',
+    name: 'Cayman Islands',
+    type: 'territory',
+    note: 'Cayman is a British Overseas Territory. BOTC citizenship and Caymanian immigration status are related but legally distinct and are displayed without conflating either with British citizenship.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [nationalityAct] },
+      { mode: 'naturalization', finding: 'present', sources: [nationalityAct, botc, reform] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [nationalityAct, reform],
+        note: 'Birth in Cayman is not unconditional jus soli; BOTC and Caymanian-status rules depend on parental status and date-specific provisions.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [nationalityAct, botc, reform],
+        note: 'Cayman offers investment-linked residence options, not direct citizenship by investment. BOTC naturalization and Caymanian status remain separate later processes.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'cayman-botc-by-descent',
+        mode: 'ancestry',
+        title: 'BOTC citizenship by descent through a qualifying parent',
+        summary: 'British Overseas Territories citizenship connected to Cayman can pass to a child born abroad under the British Nationality Act’s descent and registration rules.',
+        source: nationalityAct,
+        eligibility: [
+          { field: 'parent.status', operator: 'eq', value: 'botc_connected_to_cayman' },
+          { field: 'birth.outside_qualifying_territory', operator: 'eq', value: true },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'cayman-botc-naturalization',
+        mode: 'naturalization',
+        title: 'BOTC naturalization after qualifying residence',
+        summary: 'An adult can apply to naturalize as a BOTC connected to Cayman under the British Nationality Act after the statutory residence period; Caymanian status is a separate immigration status.',
+        source: [nationalityAct, botc, reform],
+        eligibility: [
+          { field: 'residence.in_cayman_months', operator: 'gte', value: 60, unit: 'months' },
+          { field: 'residence.final_twelve_months_compliant', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        note: 'The general BOTC naturalization schedule uses five years. From 1 May 2026, Caymanian status based on naturalization generally requires 20 years lawful ordinary residence or 10 years after BOTC naturalization or registration.',
+      }),
+      principalCitizenshipRoute({
+        id: 'cayman-botc-by-birth',
+        mode: 'birth',
+        title: 'BOTC citizenship at birth through a qualifying parent',
+        summary: 'A child born in Cayman acquires BOTC at birth when a parent is a BOTC or is settled in the territory, subject to the British Nationality Act and date-specific rules.',
+        source: nationalityAct,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '136' },
+          { field: 'parent.botc_or_settled_at_birth', operator: 'eq', value: true },
+        ],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function dominicaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const guidance = requireSource(officialSources, OFFICIAL_URLS.dominica_citizenship);
+  const forms = requireSource(officialSources, OFFICIAL_URLS.dominica_forms);
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.dominica_constitution);
+  const cbiLaw = requireSource(officialSources, OFFICIAL_URLS.dominica_cbi_law);
+  const cbiOptions = requireSource(officialSources, OFFICIAL_URLS.dominica_cbi_options);
+  const cbiLegacy = requireSource(officialSources, OFFICIAL_URLS.dominica_cbi_home);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '212',
+    note: 'All acquisition modes reviewed against the Constitution, government citizenship procedures and current Citizenship by Investment regulations.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, guidance] },
+      { mode: 'naturalization', finding: 'present', sources: [guidance, forms] },
+      { mode: 'birth', finding: 'present', sources: [constitution] },
+      { mode: 'investment', finding: 'present', sources: [cbiLaw, cbiOptions] },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'dominica-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Dominican citizenship through a citizen parent',
+        summary: 'The Constitution provides citizenship by descent for a person born outside Dominica to a qualifying Dominican parent.',
+        source: [constitution, guidance],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '212' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'dominica-naturalization-after-residence',
+        mode: 'naturalization',
+        title: 'Naturalization after seven years of residence',
+        summary: 'Government forms provide a citizenship application route after seven years of residence, subject to ministerial approval and the supporting-document requirements.',
+        source: [guidance, forms],
+        eligibility: [{ field: 'residence.in_dominica_months', operator: 'gte', value: 84, unit: 'months' }],
+        months: 84,
+        allocation: 'discretionary',
+      }),
+      principalCitizenshipRoute({
+        id: 'dominica-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Citizenship by birth in Dominica',
+        summary: 'A person born in Dominica acquires citizenship at birth, subject to the constitutional exceptions for certain diplomatic and hostile-occupation circumstances.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '212' },
+          { field: 'birth.constitutional_exception', operator: 'eq', value: false },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'dominica-cbi',
+        mode: 'investment',
+        title: 'Dominica Citizenship by Investment Programme',
+        summary: 'Government-administered direct citizenship programme offering a public-fund contribution and approved real-estate route.',
+        source: cbiLegacy,
+        eligibility: [
+          { field: 'investment.minimum_usd', operator: 'gte', value: 200000 },
+          { field: 'compliance.due_diligence_passed', operator: 'eq', value: true },
+        ],
+        months: 0,
+        allocation: 'discretionary',
+        note: 'The official minimum starts at US$200,000 for a single applicant under either the fund contribution or approved-real-estate route; fees and family thresholds vary.',
+        lastChecked: '2026-07-17',
+      }),
+    ],
+  });
+}
+
+function stKittsNevisRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.st_kitts_constitution);
+  const act = requireSource(officialSources, OFFICIAL_URLS.st_kitts_citizenship_act);
+  const cbi = requireSource(officialSources, OFFICIAL_URLS.st_kitts_cbi_options);
+  const notices = requireSource(officialSources, OFFICIAL_URLS.st_kitts_government_notices);
+  const application = requireSource(officialSources, OFFICIAL_URLS.st_kitts_application);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '659',
+    note: 'All acquisition modes reviewed against the Constitution, Citizenship Act and current official Citizenship Unit options.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, act] },
+      { mode: 'naturalization', finding: 'present', sources: [act] },
+      { mode: 'birth', finding: 'present', sources: [constitution] },
+      { mode: 'investment', finding: 'present', sources: [act, cbi, notices] },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'st-kitts-nevis-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Citizenship through a citizen parent',
+        summary: 'The Constitution provides citizenship by descent for a person born abroad to a qualifying citizen parent.',
+        source: [constitution, act],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '659' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'st-kitts-nevis-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after a fifteen-year qualifying window',
+        summary: 'The Citizenship Act requires residence throughout the twelve months immediately before application and residence during the preceding fourteen years, with good-character and intention-to-reside requirements.',
+        source: act,
+        eligibility: [
+          { field: 'residence.qualifying_window_months', operator: 'gte', value: 180, unit: 'months' },
+          { field: 'residence.final_twelve_months_continuous', operator: 'eq', value: true },
+        ],
+        months: 180,
+        allocation: 'discretionary',
+        note: 'The Second Schedule states a final continuous 12 months plus residence during the 14 years before that period. This is not modeled as a simple 14-year continuous-residence rule.',
+      }),
+      principalCitizenshipRoute({
+        id: 'st-kitts-nevis-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Citizenship by birth in St Kitts and Nevis',
+        summary: 'A person born in the federation acquires citizenship at birth, except for the Constitution’s diplomatic-immunity and hostile-occupation exceptions.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '659' },
+          { field: 'birth.constitutional_exception', operator: 'eq', value: false },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'st-kitts-nevis-citizenship-programme',
+        mode: 'investment',
+        title: 'Citizenship Programme',
+        summary: 'Government-administered direct citizenship programme requiring a prescribed investment or contribution and due diligence.',
+        source: application,
+        eligibility: [
+          { field: 'investment.minimum_usd', operator: 'gte', value: 250000 },
+          { field: 'compliance.due_diligence_passed', operator: 'eq', value: true },
+        ],
+        months: 0,
+        allocation: 'discretionary',
+        note: 'Official minimums currently start at US$250,000 for SISC or Public Benefit, US$325,000 for approved development or condominium property, and US$600,000 for a private home.',
+        lastChecked: '2026-07-17',
+      }),
     ],
   });
 }
@@ -4024,9 +4330,12 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     brazilRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
+    caymanIslandsRecord(shadow, countrySources),
     colombiaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
+    dominicaRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
+    georgiaRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
     greeceRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
@@ -4036,6 +4345,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     netherlandsRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
+    stKittsNevisRecord(shadow, countrySources),
     serbiaRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),

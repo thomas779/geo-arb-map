@@ -40,6 +40,9 @@ describe('canonical data schemas', () => {
       'canada-citizenship-by-descent',
       'canada-citizenship-grant',
       'canada-citizenship-by-birth',
+      'cayman-botc-by-descent',
+      'cayman-botc-naturalization',
+      'cayman-botc-by-birth',
       'colombia-citizenship-by-parent',
       'colombia-naturalization-by-residence',
       'colombia-citizenship-by-conditional-birth',
@@ -47,9 +50,16 @@ describe('canonical data schemas', () => {
       'cyprus-citizenship-by-origin',
       'cyprus-naturalization-by-residence',
       'cyprus-citizenship-at-birth-by-parent',
+      'dominica-citizenship-by-parent',
+      'dominica-naturalization-after-residence',
+      'dominica-citizenship-by-birth',
+      'dominica-cbi',
       'france-citizenship-by-parent',
       'france-study-naturalization-residence',
       'france-birth-and-residence',
+      'georgia-citizenship-by-parent',
+      'georgia-ordinary-naturalization',
+      'georgia-citizenship-by-protected-birth',
       'germany-citizenship-by-parent',
       'germany-naturalization-by-residence',
       'germany-citizenship-by-birth',
@@ -78,6 +88,10 @@ describe('canonical data schemas', () => {
       'portugal-citizenship-by-parent',
       'portugal-ordinary-naturalization-2026',
       'portugal-birth-parent-residence-2026',
+      'st-kitts-nevis-citizenship-by-parent',
+      'st-kitts-nevis-naturalization',
+      'st-kitts-nevis-citizenship-by-birth',
+      'st-kitts-nevis-citizenship-programme',
       'serbia-citizenship-by-descent',
       'serbia-admission-after-permanent-residence',
       'serbia-citizenship-by-birth-statelessness',
@@ -113,6 +127,38 @@ describe('canonical data schemas', () => {
         expect(route).not.toHaveProperty('country');
       }
     }
+  });
+
+  test('pins the reviewed low-tax and Caribbean findings that are easy to conflate', () => {
+    const byIso = new Map(pilot.jurisdictions.map(item => [item.jurisdiction.iso_n3, item]));
+
+    const georgia = byIso.get('268')!;
+    expect(georgia.routes.find(route => route.id === 'georgia-ordinary-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(120);
+    expect(georgia.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const cayman = byIso.get('136')!;
+    expect(cayman.jurisdiction.type).toBe('territory');
+    expect(cayman.review.note).toMatch(/distinct/);
+    expect(cayman.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const dominica = byIso.get('212')!;
+    expect(dominica.routes.find(route => route.id === 'dominica-naturalization-after-residence')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(84);
+    expect(dominica.routes.find(route => route.id === 'dominica-cbi')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'investment.minimum_usd', value: 200000 }),
+      );
+
+    const stKitts = byIso.get('659')!;
+    expect(stKitts.routes.find(route => route.id === 'st-kitts-nevis-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(180);
+    expect(stKitts.routes.find(route => route.id === 'st-kitts-nevis-citizenship-programme')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'investment.minimum_usd', value: 250000 }),
+      );
   });
 
   test('models eligibility time separately from processing time', () => {
