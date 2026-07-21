@@ -279,6 +279,31 @@
   vector-effect: non-scaling-stroke;
 }
 
+.planner-geography {
+  opacity: 0.44;
+}
+
+.planner-geography-country {
+  fill: color-mix(in srgb, var(--primary) 2.5%, transparent);
+  stroke: color-mix(in srgb, var(--muted-foreground) 34%, transparent);
+  stroke-width: 0.55;
+  vector-effect: non-scaling-stroke;
+}
+
+.planner-geography-country[data-region="eu_eea"] {
+  stroke: color-mix(in srgb, var(--primary) 30%, var(--muted-foreground));
+}
+
+@media (max-width: 1023px) {
+  .planner-geography {
+    opacity: 0.26;
+  }
+
+  .planner-geography-country {
+    stroke-width: 0.45;
+  }
+}
+
 .planner-route-primary {
   stroke: color-mix(in srgb, var(--primary) 76%, transparent);
   stroke-width: 1.6;

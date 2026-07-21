@@ -1,8 +1,10 @@
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { RouteField } from '@/components/RouteField';
+import type { BlocsData } from '@/types';
 
 interface Props {
+  data: BlocsData;
   onBackToAtlas: () => void;
 }
 
@@ -21,11 +23,25 @@ const futureCapabilities = [
   },
 ];
 
-export function PlannerPreview({ onBackToAtlas }: Props) {
+const CARTOGRAPHIC_BLOCS = new Set(['eu_eea', 'mercosur', 'asean']);
+
+export function PlannerPreview({ data, onBackToAtlas }: Props) {
+  const regions = data.blocs
+    .filter(bloc => CARTOGRAPHIC_BLOCS.has(bloc.id))
+    .map(bloc => ({
+      id: bloc.id,
+      isos: bloc.members.map(member => member.iso_n3),
+    }));
+
   return (
     <div className="planner-preview cartographic-surface absolute inset-0 overflow-x-hidden overflow-y-auto lg:overflow-y-hidden">
-      <RouteField className="pointer-events-none absolute inset-0 hidden h-full !aspect-auto lg:block" cover />
       <RouteField
+        regions={regions}
+        className="pointer-events-none absolute inset-0 hidden h-full !aspect-auto lg:block"
+        cover
+      />
+      <RouteField
+        regions={regions}
         compact
         className="planner-preview-compact-routes pointer-events-none absolute z-0 !aspect-auto lg:hidden"
       />

@@ -1,4 +1,6 @@
-import type { CSSProperties } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
+import * as d3 from 'd3';
+import * as topojson from 'topojson-client';
 import { cn } from '@/lib/utils';
 
 interface Point {
@@ -17,6 +19,17 @@ interface Route {
   tier: 'primary' | 'ambient';
 }
 
+interface Region {
+  id: string;
+  isos: string[];
+}
+
+interface GeographyPath {
+  id: string;
+  region: string;
+  d: string;
+}
+
 const projection = {
   west: -70,
   east: 110,
@@ -25,6 +38,77 @@ const projection = {
   equatorY: 330,
   latitudeScale: 4.2,
 } as const;
+
+const projectionScale = ((projection.right - projection.left)
+  / (projection.east - projection.west)) * (180 / Math.PI);
+const projectionTranslateX = projection.left
+  - projectionScale * (projection.west * Math.PI / 180);
+const plannerProjection = d3.geoProjection((longitude, latitude) => [longitude, latitude * 1.8])
+  .scale(projectionScale)
+  .translate([projectionTranslateX, projection.equatorY])
+  .precision(0.25);
+const plannerGeoPath = d3.geoPath(plannerProjection);
+
+type AtlasFeature = {
+  id: number | string;
+  geometry: unknown;
+  properties: Record<string, unknown>;
+  type: 'Feature';
+};
+
+let atlasFeaturesPromise: Promise<AtlasFeature[]> | null = null;
+
+function loadAtlasFeatures(): Promise<AtlasFeature[]> {
+  if (!atlasFeaturesPromise) {
+    atlasFeaturesPromise = fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
+      .then(response => {
+        if (!response.ok) throw new Error(`World atlas request failed: ${response.status}`);
+        return response.json();
+      })
+      .then(world => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return (topojson.feature(world, world.objects.countries) as any).features as AtlasFeature[];
+      });
+  }
+  return atlasFeaturesPromise;
+}
+
+function useGeographyPaths(regions: Region[]): GeographyPath[] {
+  const [paths, setPaths] = useState<GeographyPath[]>([]);
+  const regionKey = regions
+    .map(region => `${region.id}:${[...region.isos].sort().join(',')}`)
+    .sort()
+    .join('|');
+
+  useEffect(() => {
+    let active = true;
+    const regionByIso = new Map<string, string>();
+    for (const region of regions) {
+      for (const iso of region.isos) regionByIso.set(iso, region.id);
+    }
+
+    loadAtlasFeatures()
+      .then(features => {
+        if (!active) return;
+        setPaths(features.flatMap(feature => {
+          const iso = String(feature.id).padStart(3, '0');
+          const region = regionByIso.get(iso);
+          if (!region) return [];
+          const d = plannerGeoPath(feature as unknown as d3.GeoPermissibleObjects);
+          return d ? [{ id: iso, region, d }] : [];
+        }));
+      })
+      .catch(() => {
+        if (active) setPaths([]);
+      });
+
+    return () => { active = false; };
+  // The stable membership signature is the meaningful dependency here.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [regionKey]);
+
+  return paths;
+}
 
 function destinationPoint(
   label: string,
@@ -98,9 +182,12 @@ interface Props {
   className?: string;
   compact?: boolean;
   cover?: boolean;
+  regions?: Region[];
 }
 
-export function RouteField({ className, compact = false, cover = false }: Props) {
+export function RouteField({ className, compact = false, cover = false, regions = [] }: Props) {
+  const geographyPaths = useGeographyPaths(regions);
+
   return (
     <figure
       className={cn('planner-route-field relative aspect-[5/3] w-full overflow-hidden', className)}
@@ -115,8 +202,19 @@ export function RouteField({ className, compact = false, cover = false }: Props)
       >
         <title id="planner-route-field-title">Global mobility route field</title>
         <desc id="planner-route-field-description">
-          Destinations ordered by approximate longitude and latitude, connected by routes that travel through the page edges.
+          Destinations ordered by longitude and latitude across fine regional outlines, connected by animated routes.
         </desc>
+
+        <g className="planner-geography" aria-hidden="true">
+          {geographyPaths.map(path => (
+            <path
+              key={`${path.region}-${path.id}`}
+              d={path.d}
+              data-region={path.region}
+              className="planner-geography-country"
+            />
+          ))}
+        </g>
 
         <g className="planner-routes">
           {field.routes.map((route, index) => (

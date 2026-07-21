@@ -451,7 +451,7 @@ export default function App() {
             </div>
           )}
           {data && state.view === 'stacking' && (
-            <PlannerPreview onBackToAtlas={() => selectView('map')} />
+            <PlannerPreview data={data} onBackToAtlas={() => selectView('map')} />
           )}
           {data && (
             <button
