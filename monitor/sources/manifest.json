@@ -158,6 +158,15 @@
       "notes": "legislation.gov.uk API — verifies BN(O)/ILR changes flagged volatile in the dataset."
     },
     {
+      "id": "gov-uk-citizenship",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.gov.uk/browse/citizenship/citizenship",
+      "jurisdictions": ["826"],
+      "notes": "Official GOV.UK citizenship guidance index. Diff the index and linked birth, descent, registration, and naturalization guidance; resolve legal changes to legislation.gov.uk before publishing."
+    },
+    {
       "id": "legifrance-piste",
       "tier": "verification",
       "adapter": "api",
@@ -183,6 +192,42 @@
       "url": "https://justica.gov.pt/Como-obter-nacionalidade-portuguesa",
       "jurisdictions": ["620"],
       "notes": "Official Ministry of Justice nationality guide and application profiles. Page diffs are useful operational signals; verify legal changes against Diário da República."
+    },
+    {
+      "id": "germany-nationality-act",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.gesetze-im-internet.de/stag/",
+      "jurisdictions": ["276"],
+      "notes": "Current German text of the Nationality Act from the Federal Ministry of Justice and Federal Office of Justice. Monitor the consolidated HTML/XML and amendment history; translations are review aids, not controlling text."
+    },
+    {
+      "id": "ireland-dfa-citizenship",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.dfa.ie/citizenship/",
+      "jurisdictions": ["372"],
+      "notes": "Official Department of Foreign Affairs citizenship guidance, including the Foreign Births Register and citizenship by descent. Diff the index and linked guidance."
+    },
+    {
+      "id": "ireland-isd-citizenship",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.irishimmigration.ie/how-to-become-an-irish-citizen/",
+      "jurisdictions": ["372"],
+      "notes": "Official Immigration Service Delivery naturalization guidance. Monitor eligibility, reckonable residence, application procedure, fees, and linked notices."
+    },
+    {
+      "id": "irish-statute-book",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.irishstatutebook.ie/",
+      "jurisdictions": ["372"],
+      "notes": "Official Irish Statute Book. Monitor nationality acts and amending instruments referenced by reviewed canonical claims."
     },
     {
       "id": "ircc-newsroom",

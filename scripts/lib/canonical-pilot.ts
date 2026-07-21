@@ -143,7 +143,7 @@ const OFFICIAL_URLS = {
   portugal_nationality: 'https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa',
   portugal_applications: 'https://justica.gov.pt/Servicos/Submeter-pedido-de-nacionalidade',
   spain_civil_code: 'https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763',
-  germany_nationality_act: 'https://www.gesetze-im-internet.de/englisch_stag/englisch_stag.html',
+  germany_nationality_act: 'https://www.gesetze-im-internet.de/stag/',
   ireland_born_abroad: 'https://www.dfa.ie/citizenship/born-abroad/',
   ireland_naturalization: 'https://www.irishimmigration.ie/how-to-become-an-irish-citizen-guide/',
   ireland_birth_law: 'https://www.irishstatutebook.ie/eli/2004/act/38/section/4/enacted/en/html',
@@ -298,11 +298,11 @@ function jurisdictionSources(): SourceRecord[] {
       },
     }),
     officialSource({
-      title: 'German Nationality Act',
+      title: 'German Nationality Act (Staatsangehörigkeitsgesetz)',
       url: OFFICIAL_URLS.germany_nationality_act,
       source_type: 'primary_law',
       jurisdictions: ['276'],
-      language: 'en',
+      language: 'de',
       monitoring: {
         source_id: 'germany-nationality-act',
         method: 'http',

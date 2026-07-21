@@ -77,6 +77,14 @@ requires official evidence just as a positive route does. Discovery begins with
 government guidance and legislation; commercial publishers and social channels
 only identify leads.
 
+The birth review must not collapse distinct rules into a single “birthright”
+label. Record separately: citizenship at birth by descent; territorial
+citizenship at birth; foundling and otherwise-stateless safeguards; citizenship
+available later because of birth in the country; and every parental status,
+parental residence, child residence, age, declaration, or application condition.
+Spain's one-year residence route and France's age-and-residence routes belong in
+the last category, not in unconditional citizenship at birth.
+
 ## Batch acceptance gate
 
 A country batch can enter a release only when:

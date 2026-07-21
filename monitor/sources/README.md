@@ -4,6 +4,11 @@
 onboarding state and prioritization without exposing intake aliases, tokens, or
 private mailbox data.
 
+Run `bun run monitor:audit` after `bun run data:db` to generate the complete
+country-by-country review and monitoring gap report at
+`.generated/monitor/source-coverage.json`. The report derives its country scope
+from `data/registry.json`; do not maintain a second manual country checklist.
+
 ## Live now
 
 | Source | Transport | Role | State |
