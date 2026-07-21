@@ -68,6 +68,29 @@ collection report, triage report, signal file, lead file, and issue draft as a
 - a manual run checks `open_issues`; or
 - the repository variable `MONITOR_OPEN_ISSUES` is exactly `true`.
 
+## Operating boundaries
+
+- RSS, newsletters, specialist publishers, and Telegram are discovery only.
+- A verified change requires a current primary legal, government, court, or
+  tax-authority source plus an effective date or an explicit unknown date.
+- AI ranks and challenges evidence; it never approves or publishes a fact.
+- The first real runs stay draft-only. Inspect `issue-drafts.json` before
+  enabling issue creation.
+- Tax claims must distinguish residence, source, filing, treaty, and incentive
+  rules rather than collapsing them into a country label.
+
+## Telegram publication
+
+The public destination is `@flagpaths`. GitHub environment
+`telegram-publication` holds `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHANNEL_ID`.
+The bot needs only permission to post.
+
+To publish, a monitoring issue must contain primary evidence, a completed
+reviewer checklist, and exact copy under `## Public brief`. Then run the
+`publish-telegram.yml` workflow with the issue number. The workflow previews the
+post, performs a claim-versus-evidence audit, refuses duplicate publication, and
+posts only after every gate passes.
+
 ## Layout
 
 ```text
@@ -85,7 +108,6 @@ publish/telegram.ts         reviewed-issue gate and Telegram Bot API publisher
 .out/                       generated local/CI run artifacts (gitignored)
 ```
 
-Design and rollout boundaries are in
-[`docs/monitoring-pipeline-v0.md`](../docs/monitoring-pipeline-v0.md). Telegram
-publication setup and editorial policy are in
-[`docs/telegram-publishing-v0.md`](../docs/telegram-publishing-v0.md).
+The source watchlist and onboarding state live in
+[`sources/README.md`](sources/README.md). Email intake deployment is documented
+in [`cloudflare/README.md`](cloudflare/README.md).

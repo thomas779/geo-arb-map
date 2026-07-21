@@ -55,7 +55,7 @@ ${excerpt || '> No excerpt was supplied.'}
 
 This issue is an unverified monitoring lead. It must not be copied into the public
 dataset until the reviewer checklist is satisfied. See
-\`docs/monitoring-pipeline-v0.md\`.
+\`monitor/README.md\`.
 
 <!-- signal:${lead.signal_id} -->`;
   return { signal_id: lead.signal_id, title, body };

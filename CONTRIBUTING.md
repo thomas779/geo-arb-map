@@ -4,11 +4,12 @@ This is a community handbook. The most valuable contribution is a **data
 correction with a source** — rules change constantly and no one person can
 watch every country.
 
-## Fix or add an arrangement
+## Fix or add data
 
-1. Everything lives in `public/blocs_data.json` (blocs, bilateral lanes,
-   ancestry routes, exclusions, dual-citizenship policies).
-2. Edit it, cite a source (official/primary beats blog), and run:
+1. Open a correction or monitoring issue with the primary source and affected
+   country, route, or arrangement. Public JSON is compatibility output during
+   the D1 cutover; do not introduce another editable source of truth.
+2. Make the smallest canonical or compatibility change and run:
 
    ```sh
    bun install
@@ -19,12 +20,12 @@ watch every country.
    fixed mistake, breaks the schema, or forgets required fields (identity
    lanes need a `beneficiaries_note`; ballot/quota lanes need an explicit
    `allocation`; etc.).
-3. If you touched membership or lane parties, regenerate the derived files:
+3. If you touched a compatibility route or arrangement, regenerate only the
+   affected outputs:
 
    ```sh
-   bun scripts/assign_palette.js    # ordered category colors
-   bun scripts/build_coverage.js    # per-country research coverage
-   bun scripts/build_edges.js       # the planner's path graph
+   bun run data:citizenship
+   bun run data:edges
    ```
 
 4. Open a PR. CI runs the same gate.

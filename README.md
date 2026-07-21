@@ -1,6 +1,6 @@
 # Flag Paths — Global Mobility Pathfinder
 
-**Find the citizenship and residence paths hidden in your profile.**
+**Explore citizenship, residence, and mobility rules across countries.**
 
 Some passports and residencies quietly unlock whole regions: Mercosur residency
 opens most of South America; a child born in Mexico can one day work in the US
@@ -8,12 +8,10 @@ without a lottery; an Irish grandparent is a two-year paper trail away from the
 entire EU. These windows exist today, and only a handful of people know how to
 stack them. The window to arb them leads to generations of opportunity.
 
-This project maps all of it on one interactive atlas — blocs, bilateral fast
-lanes, ancestry routes, generational moves — and gives you a **planner**: plant
-the statuses you hold (citizenship, PR, even an OCI), your birthplace, and where
-your parents were born, and it computes what you've already unlocked and the
-best next flag, as an actual multi-step plan ("Karta Polaka → EU free movement →
-naturalize"). Maximize your footprint; set your kids up with a bigger one.
+The public product is an interactive Atlas of regional rights, bilateral lanes,
+heritage routes, and country nationality laws. The personalized planner is a
+later release; it stays behind a clear preview until the underlying country data
+is sufficiently reviewed.
 
 It's open data, open code, and built to be contributed to — corrections are
 welcome, and the test suite makes it impossible to silently reintroduce a
@@ -21,20 +19,15 @@ mistake we've already fixed.
 
 ## What public v1 is
 
-Flag Paths is a citizenship and immigration-residence pathfinder for
-individuals and households. A user can:
+Flag Paths v1 is a public citizenship and immigration-residence Atlas. A user can:
 
 - explore settlement blocs and mobility lanes without an account;
-- create a private, local profile from held statuses, relevant family facts, a
-  partner's citizenships, and a destination goal;
-- see personalized deterministic and chance-based routes kept clearly separate; and
-- watch a route locally as the foundation for reviewed change alerts.
+- inspect country and route details with visible source and review state; and
+- join the public Telegram channel for reviewed updates.
 
-The product uses Flag Theory as a long-term worldview, but v1 does **not** model tax
-residence, company structures, banking, assets, or investments. The focused public
-launch plan is in [`docs/gtm-v1.md`](docs/gtm-v1.md); the staged Flag Theory direction
-and identity architecture are in
-[`docs/strategic-map.md`](docs/strategic-map.md).
+V1 does **not** collect profiles or model tax residence, company structures,
+banking, or assets. Current priorities are reviewed country coverage, testing the
+monitoring pipeline, and publishing useful Atlas updates.
 
 > ## ⚠️ Not legal advice
 >
@@ -48,38 +41,21 @@ and identity architecture are in
 
 React 19 + TypeScript + Vite 8, shadcn/ui + Tailwind v4 for the shell, D3 +
 world-atlas TopoJSON for the map (imperative layer wrapped in a thin React
-component). Bun for package management, tests, and scripts. There is currently no
-backend: the dataset ships as static JSON and the profile stays in the user's browser.
+component). Bun handles package management, tests, and scripts. Reviewed
+authoring data lives in D1; the public site receives immutable, cacheable JSON
+compiled with the application.
 
-## Where the data comes from
+## Data pipeline
 
-The dataset is **LLM-researched and human-curated**, not authoritative:
+Discovery signals enter through the monitor and can only create review leads;
+they never edit legal facts. Human-reviewed canonical revisions are stored in
+`flag-paths-data` D1 and compiled by `bun run data:build` into an immutable
+release. During the remaining cutover, the live compatibility files under
+`public/` are retained as tested inputs and outputs.
 
-1. External research arrives as batches in `data/research_batches/` (a foreign
-   schema: category codes A–E, TR/PR/CIT booleans, iso_numeric).
-2. `scripts/normalize_research.js` classifies each record: settlement-leading +
-   high confidence → candidate for the live dataset; medium/low confidence →
-   `pending_verification` (stored, never rendered); temporary-only → out of scope;
-   citizenship-compatibility treaties → `dual_citizenship`.
-3. Live records are merged **manually** into `public/blocs_data.json` with
-   editorial text; hand-audited exceptions live in `data/manual_edges.json`
-   (every entry carries a `reason_code`, sources, and date).
-4. `scripts/build_registry.js` + `scripts/build_coverage.js` generate
-   `public/coverage.json` — an all-jurisdiction matrix of research coverage
-   (`verified / verified_none / partial / unchecked`) so absence of evidence is
-   never displayed as evidence of absence.
-5. `data/citizenship_routes.json` stores reviewed country-level rules across four
-   acquisition modes: ancestry, naturalization, birth, and investment.
-   `scripts/build_citizenship_routes.js` expands those records over all 239 registry
-   jurisdictions in `public/citizenship_routes.json`. Every mode is explicit:
-   `reviewed / partial / pending / unchecked`; “unchecked” never means no route exists.
-6. `data/timeline_rules.json` is the single computational source for planner and
-   graph durations. Values are stored in months and may reference a reviewed
-   citizenship route or mapped arrangement. UI prose is never parsed for years.
-
-Known single-source items (several naturalization timelines) are flagged in the
-research docs and should be re-verified against primary law before being treated
-as authoritative.
+Country coverage is explicit for ancestry, naturalization, birth, and
+investment. `unknown` never means that no route exists; a negative conclusion
+must be reviewed and sourced.
 
 ## Fixing mistakes (and keeping them fixed)
 
@@ -99,14 +75,10 @@ bun test           # dataset invariant + regression suite
 bun run build      # tsc → bun test → vite build (what CI runs)
 
 # data tooling
-bun scripts/normalize_research.js data/research_batches/<batch>.json
-bun scripts/build_registry.js     # regenerate data/registry.json
-bun scripts/build_coverage.js     # regenerate public/coverage.json
 bun run data:citizenship          # regenerate public/citizenship_routes.json
-bun run data:migrate:shadow       # split the pilot and prove legacy-shape parity
-bun run data:schemas              # regenerate canonical v1 JSON Schemas
-bun run data:migrate:canonical    # build validated canonical pilot candidates
 bun run data:db                   # import candidates and build SQL projections locally
+bun run data:build                # compile a deterministic draft release from SQLite/D1
+bun run data:review               # render the human review packet
 bun run data:timelines            # compile reviewed fact references for browser/graph use
 bun run data:edges                # compile timelines, then regenerate public/edges.json
 
@@ -139,20 +111,18 @@ handle email.
 public/           current compatibility artifacts; generated after D1 cutover
 src/              React shell (App, components/) + imperative D3 map layer (map.ts)
 src/components/ui shadcn/ui primitives (generated)
-data/             canonical schemas, D1 migrations, legacy inputs, research batches
+data/             D1 migrations and compatibility inputs still used by the build
 scripts/          deterministic data compiler, migration, parity, and deployment tools
 monitor/          source collectors, bounded triage, and review-lead drafts
 tests/            dataset invariant + regression suite
 docs/             indexed product, data, and operational documentation
 ```
 
-The authoritative documentation map is [`docs/README.md`](docs/README.md). It
-separates current roadmaps, durable references, operational runbooks, and
-archived context so an old handoff cannot silently become the plan.
+The concise documentation index is [`docs/README.md`](docs/README.md).
 
 ## License
 
 Code is licensed under [MIT](LICENSE). The dataset
-(`public/blocs_data.json`, `public/coverage.json`, `data/`) is licensed under
+(`public/*.json`, `data/`) is licensed under
 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — attribute
 "geo-arb-map contributors".

@@ -262,26 +262,3 @@ export const CANONICAL_SCHEMAS = {
   arrangement: ArrangementRecordSchema,
   change_proposal: ChangeProposalSchema,
 } as const;
-
-const SCHEMA_BASE = 'https://atlas.thomphreys.com/data/schemas';
-
-export function jsonSchemaArtifacts(): Record<string, unknown> {
-  const versioned = {
-    'source-v1': SourceRecordSchema,
-    'jurisdiction-v1': JurisdictionRecordV1Schema,
-    'jurisdiction-v2': JurisdictionRecordSchema,
-    'arrangement-v1': ArrangementRecordSchema,
-    'change_proposal-v1': ChangeProposalSchema,
-  } as const;
-  return Object.fromEntries(Object.entries(versioned).map(([name, schema]) => {
-    const jsonSchema = z.toJSONSchema(schema, { target: 'draft-2020-12' });
-    return [
-      `${name}.schema.json`,
-      {
-        ...jsonSchema,
-        $id: `${SCHEMA_BASE}/${name}.schema.json`,
-        title: `Flag Paths ${name.replace(/[-_]/g, ' ')}`,
-      },
-    ];
-  }));
-}

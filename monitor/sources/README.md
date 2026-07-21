@@ -61,3 +61,28 @@ address only for genuinely ambiguous senders.
   worldwide coverage.
 - Record a source failure as health data; never silently convert it into “no
   change.”
+
+## Adding a source
+
+Add a manifest entry only when the publisher regularly covers nationality,
+residence, cross-border work or settlement, dual-citizenship restrictions,
+quotas, costs, or programme openings and closures. Prefer narrow official or
+specialist publishers over general mobility blogs.
+
+Required shape:
+
+```json
+{
+  "id": "stable-lowercase-id",
+  "tier": "discovery",
+  "adapter": "rss",
+  "status": "active",
+  "url": "https://example.org/feed/",
+  "jurisdictions": ["250"],
+  "max_items": 25,
+  "notes": "What it catches and why it is useful."
+}
+```
+
+Use `planned` when an adapter or credential is missing. Before merging, run
+`bun run monitor:test` and a bounded real collection for the new source.

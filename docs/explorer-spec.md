@@ -16,17 +16,12 @@ naming: where the research doc's field names differ from the repo's, the repo's 
   `pending_verification` (below-high confidence, never rendered/never in graph),
   `dual_citizenship` (per-country policies + treaty_exceptions).
 - `data/registry.json` — canonical jurisdiction registry: M49-style core sovereigns
-  + supplemental territory tier (Taiwan, HK, Macau, Kosovo, Crown Dependencies,
-  overseas territories, associated states). Built by `scripts/build_registry.js`.
-- `public/coverage.json` — all-jurisdiction research-coverage matrix over the registry.
-  States: `verified | verified_none | partial | unchecked`. Built by
-  `scripts/build_coverage.js`. `verified_none` is first-class: the UI must say
-  "checked, nothing qualifies" — never render it as blank.
+  plus the territory and special-jurisdiction supplement.
 - `data/manual_edges.json` — hand-audited overrides. Every entry carries
   `reason_code` (`event_accelerator | treaty_exception | status_rendering_override |
   coverage_negative_seed`), sources, and date.
-- `scripts/normalize_research.js` — ingests external batches (category A–E schema),
-  routes to live / pending / out-of-scope / dual-citizenship buckets.
+- canonical D1 mode coverage — records `unknown`, `present`, and sourced
+  `verified_none` independently for all four acquisition modes.
 
 ## Node design (locked)
 

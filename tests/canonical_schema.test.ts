@@ -2,7 +2,6 @@ import { describe, expect, test } from 'bun:test';
 import {
   CANONICAL_SCHEMAS,
   ChangeProposalSchema,
-  jsonSchemaArtifacts,
 } from '../scripts/lib/canonical-schema';
 import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
 
@@ -108,14 +107,5 @@ describe('canonical data schemas', () => {
     };
     expect(ChangeProposalSchema.safeParse(proposal).success).toBe(true);
     expect(ChangeProposalSchema.safeParse({ ...proposal, source_refs: [] }).success).toBe(false);
-  });
-
-  test('checked-in JSON Schemas are current', async () => {
-    for (const [filename, schema] of Object.entries(jsonSchemaArtifacts())) {
-      const checkedIn = await Bun.file(
-        new URL(`../data/schemas/${filename}`, import.meta.url),
-      ).json();
-      expect(checkedIn).toEqual(schema);
-    }
   });
 });

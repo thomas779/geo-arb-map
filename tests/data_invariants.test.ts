@@ -23,10 +23,6 @@ const data = (await Bun.file(
   new URL('../public/blocs_data.json', import.meta.url),
 ).json()) as BlocsData;
 
-const coverage = (await Bun.file(
-  new URL('../public/coverage.json', import.meta.url),
-).json()) as { rows: Array<{ iso_n3: string; type: string }> };
-
 const citizenshipRoutes = (await Bun.file(
   new URL('../public/citizenship_routes.json', import.meta.url),
 ).json()) as CitizenshipRoutesData;
@@ -264,24 +260,6 @@ describe('canonical timeline rules', () => {
     }
     for (const rule of timelineRules.heritage) {
       expect(laneIds.has(rule.lane_id), rule.lane_id).toBe(true);
-    }
-  });
-});
-
-describe('coverage.json', () => {
-  test('rows have unique iso_n3', () => {
-    const seen = new Set<string>();
-    for (const r of coverage.rows) {
-      expect(seen.has(r.iso_n3), `duplicate coverage row ${r.iso_n3}`).toBe(false);
-      seen.add(r.iso_n3);
-    }
-  });
-
-  test('non-special rows use numeric iso_n3', () => {
-    for (const r of coverage.rows) {
-      if (r.type !== 'special') {
-        expect(r.iso_n3, `coverage row ${r.iso_n3}`).toMatch(ISO_RE);
-      }
     }
   });
 });
