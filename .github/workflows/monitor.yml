@@ -44,7 +44,7 @@ jobs:
 
       - name: Collect recent signals
         if: github.event_name != 'repository_dispatch'
-        run: bun run monitor:collect
+        run: bun run monitor:collect --strict
 
       - name: Normalize newsletter dispatch
         if: github.event_name == 'repository_dispatch'

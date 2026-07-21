@@ -61,7 +61,9 @@ bun run monitor:triage \
 bun run monitor:draft
 ```
 
-The `.github/workflows/monitor.yml` workflow runs weekly and uploads every
+The `.github/workflows/monitor.yml` workflow runs weekly in strict collection
+mode, so any active source failure fails the job instead of silently shrinking
+coverage. It uploads every
 collection report, triage report, signal file, lead file, and issue draft as a
 30-day artifact. It creates issues only when:
 
