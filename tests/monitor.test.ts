@@ -4,6 +4,7 @@ import { parseRss, type RssSource } from '../monitor/collectors/rss';
 import { parseNewsletterMessages } from '../monitor/collectors/email';
 import { signalFromNewsletterDispatch } from '../monitor/collectors/github-dispatch';
 import { parseTelegramPreview } from '../monitor/collectors/telegram';
+import { parseHtmlSnapshot } from '../monitor/collectors/html';
 import {
   canonicalArticleUrl,
   parseNewsletterRoutes,
@@ -54,6 +55,33 @@ describe('monitor Signal contract', () => {
 });
 
 describe('monitor feed collector', () => {
+  test('turns visible official-page changes into stable content-hash signals', () => {
+    const source = {
+      id: 'official-nationality-page',
+      tier: 'verification' as const,
+      adapter: 'html_index' as const,
+      url: 'https://government.example.test/nationality',
+      jurisdictions: ['380'],
+    };
+    const first = parseHtmlSnapshot(`
+      <html><head><title>Nationality rules</title><script>window.build = 1</script></head>
+      <body><h1>Nationality rules</h1><p>Five years of residence.</p></body></html>
+    `, source, { retrievedAt })[0];
+    const dynamicOnly = parseHtmlSnapshot(`
+      <html><head><title>Nationality rules</title><script>window.build = 2</script></head>
+      <body><h1>Nationality rules</h1> <p>Five years of residence.</p></body></html>
+    `, source, { retrievedAt })[0];
+    const changed = parseHtmlSnapshot(`
+      <html><head><title>Nationality rules</title></head>
+      <body><h1>Nationality rules</h1><p>Six years of residence.</p></body></html>
+    `, source, { retrievedAt })[0];
+
+    expect(first.id).toBe(dynamicOnly.id);
+    expect(changed.id).not.toBe(first.id);
+    expect(first.jurisdiction).toBe('380');
+    expect(first.excerpt).toContain('Five years of residence.');
+  });
+
   test('parses RSS and Atom into the same contract', () => {
     const xml = `<?xml version="1.0"?>
       <rss><channel><item>

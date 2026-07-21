@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { collectRss, parseRss, type RssSource } from './rss';
+import { collectHtmlSnapshot, parseHtmlSnapshot, type HtmlSource } from './html';
 import {
   collectTelegramPreview,
   parseTelegramPreview,
@@ -95,13 +96,18 @@ function isTelegramSource(source: ManifestSource): source is ManifestSource & Te
     source.channel.length > 0;
 }
 
+function isHtmlSource(source: ManifestSource): source is ManifestSource & HtmlSource {
+  return source.adapter === 'html_index' && typeof source.url === 'string' && source.url.length > 0;
+}
+
 function collectFixture(source: ManifestSource, fixtureDir: string, retrievedAt: string): Signal[] {
-  const extension = isTelegramSource(source) ? 'html' : 'xml';
+  const extension = isTelegramSource(source) || isHtmlSource(source) ? 'html' : 'xml';
   const fixturePath = path.join(fixtureDir, `${source.id}.${extension}`);
   if (!fs.existsSync(fixturePath)) throw new Error(`fixture missing: ${fixturePath}`);
   const fixture = fs.readFileSync(fixturePath, 'utf8');
   if (isRssSource(source)) return parseRss(fixture, source, { retrievedAt });
   if (isTelegramSource(source)) return parseTelegramPreview(fixture, source, { retrievedAt });
+  if (isHtmlSource(source)) return parseHtmlSnapshot(fixture, source, { retrievedAt });
   throw new Error(`active adapter "${source.adapter}" is not implemented`);
 }
 
@@ -135,6 +141,8 @@ export async function runCollectors(
           ? await collectRss(source, { retrievedAt })
           : isTelegramSource(source)
             ? await collectTelegramPreview(source, { retrievedAt })
+            : isHtmlSource(source)
+              ? await collectHtmlSnapshot(source, { retrievedAt })
             : (() => { throw new Error(`active adapter "${source.adapter}" is not implemented`); })();
       const recent = found.filter(signal => withinLookback(signal, options.lookbackDays, retrievedAt));
       collected.push(...recent);

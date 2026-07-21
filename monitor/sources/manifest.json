@@ -1,5 +1,5 @@
 {
-  "$comment": "Every collector must emit the Signal shape in monitor/schema/signal.ts. Active sources are publisher-controlled RSS or Atom feeds. Planned sources need authentication or an unbuilt transport such as inbound email, YouTube transcripts, APIs, or HTML/PDF diffing. Independent agencies and country specialists are preferred over broad social monitoring.",
+  "$comment": "Every collector must emit the Signal shape in monitor/schema/signal.ts. Active sources use implemented RSS, public Telegram, or stable HTML snapshot transports. Planned sources still need credentials, onboarding, a specialized query, or a proven reliable endpoint. Independent agencies and country specialists are preferred over broad social monitoring.",
   "sources": [
     {
       "id": "globalcit-rss",
@@ -264,6 +264,42 @@
       "url": "https://www.uscis.gov/citizenship",
       "jurisdictions": ["840"],
       "notes": "Monitor USCIS and Department of State citizenship-at-birth, naturalization, and investor-residence guidance, resolving legal changes to the U.S. Code."
+    },
+    {
+      "id": "italy-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.esteri.it/it/servizi-consolari-e-visti/normativa_consolare/serviziconsolari/cittadinanza/",
+      "jurisdictions": ["380"],
+      "notes": "Monitor current Foreign Ministry citizenship guidance, including the 2025 descent reform and later circulars; resolve amendments to official legislation before publishing."
+    },
+    {
+      "id": "netherlands-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://ind.nl/en/dutch-citizenship",
+      "jurisdictions": ["528"],
+      "notes": "Monitor IND birth, option, naturalization, loss, and procedure guidance and cross-check changes against the Netherlands Nationality Act."
+    },
+    {
+      "id": "singapore-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.ica.gov.sg/reside/citizenship",
+      "jurisdictions": ["702"],
+      "notes": "Monitor ICA citizenship eligibility and procedure guidance; resolve substantive changes against Part 10 of the Constitution and current subsidiary legislation."
+    },
+    {
+      "id": "switzerland-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html",
+      "jurisdictions": ["756"],
+      "notes": "Monitor SEM descent, ordinary, facilitated, and third-generation guidance; resolve changes to Fedlex and applicable cantonal rules."
     },
     {
       "id": "ircc-newsroom",

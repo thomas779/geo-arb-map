@@ -12,7 +12,7 @@ import { loadCanonicalDatabase } from '../../scripts/lib/data-build';
 
 const ROOT = fileURLToPath(new URL('../..', import.meta.url));
 const MODES: AcquisitionMode[] = ['ancestry', 'naturalization', 'birth', 'investment'];
-const IMPLEMENTED_ACTIVE_ADAPTERS = new Set(['rss', 'telegram_html']);
+const IMPLEMENTED_ACTIVE_ADAPTERS = new Set(['rss', 'telegram_html', 'html_index']);
 const METHOD_ADAPTERS: Record<string, string> = {
   api: 'api',
   email: 'email',

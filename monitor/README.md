@@ -73,6 +73,10 @@ collection report, triage report, signal file, lead file, and issue draft as a
 ## Operating boundaries
 
 - RSS, newsletters, specialist publishers, and Telegram are discovery only.
+- Stable official pages without feeds are polled by normalized content hash.
+  Unchanged visible content keeps the same signal ID; a changed page creates a
+  review signal. Scripts, styles, comments, and SVG markup are ignored to reduce
+  deployment noise, but a page redesign can still require manual triage.
 - A verified change requires a current primary legal, government, court, or
   tax-authority source plus an effective date or an explicit unknown date.
 - AI ranks and challenges evidence; it never approves or publishes a fact.

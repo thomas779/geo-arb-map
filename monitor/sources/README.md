@@ -8,6 +8,8 @@ Run `bun run monitor:audit` after `bun run data:db` to generate the complete
 country-by-country review and monitoring gap report at
 `.generated/monitor/source-coverage.json`. The report derives its country scope
 from `data/registry.json`; do not maintain a second manual country checklist.
+The legal-review handoff for another model or reviewer is
+[`../../docs/fact-check-handoff.md`](../../docs/fact-check-handoff.md).
 
 ## Live now
 
@@ -19,6 +21,10 @@ from `data/registry.json`; do not maintain a second manual country checklist.
 | The Wandering Investor Telegram | Public channel preview | Fast field discovery | Active |
 | Nomad Capitalist podcast | RSS | Broad programme discovery | Active |
 | IRCC newsroom | Atom | Official Canadian verification lead | Active |
+| Italy Foreign Ministry citizenship | HTML content hash | Official verification lead | Active; live fetch verified 2026-07-21 |
+| Netherlands IND citizenship | HTML content hash | Official verification lead | Active; live fetch verified 2026-07-21 |
+| Singapore ICA citizenship | HTML content hash | Official verification lead | Active; live fetch verified 2026-07-21 |
+| Switzerland SEM citizenship | HTML content hash | Official verification lead | Active; live fetch verified 2026-07-21 |
 | Nomad Capitalist Weekly Rundown | Email Worker | Newsletter discovery | Subscribed through the shared intake address on 2026-07-19; awaiting first delivery |
 | The Wandering Investor Notes from the Road | Email Worker | Private-list and early discovery | Intake active; publisher form returned a subscription error on 2026-07-18 |
 
@@ -59,6 +65,9 @@ address only for genuinely ambiguous senders.
 ## Admission rules
 
 - Prefer RSS, Atom, APIs, gazettes, and stable document indexes over scraping.
+- Where no webhook, feed, or API exists, use the `html_index` adapter to poll a
+  stable official page by normalized content hash. It detects change; it does
+  not determine the legal meaning of that change.
 - Add email only when the public archive exposes canonical article URLs.
 - Use commercial publishers and social channels for discovery, never
   verification.
