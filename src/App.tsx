@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
+  ChevronDown,
   Layers3,
   List,
   Map as MapIcon,
@@ -238,28 +239,24 @@ export default function App() {
             </span>
           </div>
         </div>
-        <nav
-          aria-label="View"
-          className="relative grid shrink-0 grid-cols-2 border-b border-border/70"
-        >
-          {([['map', 'Map'], ['stacking', 'Planner']] as const).map(([v, label]) => (
+        <nav aria-label="Primary" className="flex shrink-0 items-center gap-4 sm:gap-6">
+          {([['map', 'Atlas'], ['stacking', 'Planner']] as const).map(([v, label]) => (
             <button
               key={v}
               aria-current={state.view === v ? 'page' : undefined}
               aria-label={v === 'stacking' ? 'Planner — coming soon' : label}
-              className="flex h-9 w-14 items-center justify-center text-xs font-semibold text-foreground outline-none transition-colors hover:text-primary focus-visible:text-primary sm:h-8 sm:w-[72px]"
+              className={cn(
+                'relative flex h-9 items-center justify-center text-xs font-semibold outline-none transition-colors focus-visible:text-primary',
+                state.view === v ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
+              )}
               onClick={() => selectView(v)}
             >
               {label}
+              {state.view === v && (
+                <span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 bg-primary" />
+              )}
             </button>
           ))}
-          <span
-            aria-hidden
-            className={cn(
-              'absolute bottom-[-1px] left-0 h-0.5 w-1/2 bg-primary transition-transform duration-200 motion-reduce:transition-none',
-              state.view === 'stacking' && 'translate-x-full',
-            )}
-          />
         </nav>
         <div className="ml-auto flex shrink-0 items-center gap-0.5">
           {data && (
@@ -270,32 +267,55 @@ export default function App() {
                     variant="ghost"
                     size="sm"
                     className="hidden h-8 min-w-8 gap-1.5 px-2 text-xs text-muted-foreground sm:inline-flex"
-                    aria-label="Open access-level key"
+                    aria-label="Open access levels"
                   >
                     <Layers3 aria-hidden />
-                    <span className="hidden xl:inline">Key</span>
+                    <span className="hidden lg:inline">Rights</span>
+                    <ChevronDown className="hidden size-3 lg:block" aria-hidden />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent align="end" className="w-[310px] p-0">
-                  <div className="border-b px-4 py-3">
-                    <p className="text-sm font-semibold">Access key</p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">The status needed to unlock a mapped right.</p>
+                <PopoverContent align="end" className="w-[min(360px,calc(100vw-24px))] overflow-hidden p-0">
+                  <div className="border-b px-4 py-3.5">
+                    <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-primary">
+                      Map legend
+                    </p>
+                    <div className="mt-1 flex items-baseline justify-between gap-4">
+                      <p className="font-heading text-lg font-semibold">Access levels</p>
+                      <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">Less → more</p>
+                    </div>
                   </div>
-                  <div className="grid gap-px bg-border">
-                    {(['TR', 'PR', 'CIT'] as const).map((tier, index) => (
-                      <div key={tier} className="grid grid-cols-[42px_1fr] items-center gap-3 bg-popover px-4 py-3">
-                        <span className="grid size-8 place-items-center rounded-md border bg-background font-mono text-[11px] font-semibold">
+                  <div className="divide-y">
+                    {([
+                      ['TR', 'Temporary residence', 'Time-limited residence and attached work rights.'],
+                      ['PR', 'Permanent residence', 'Durable settlement rights without citizenship.'],
+                      ['CIT', 'Citizenship', 'Nationality, passport, and political rights.'],
+                    ] as const).map(([tier, title, detail], index) => (
+                      <div key={tier} className="grid grid-cols-[34px_48px_1fr] items-center gap-3 px-4 py-3.5">
+                        <span className="font-mono text-[11px] font-semibold text-foreground">
                           {tier}
                         </span>
-                        <span className="text-xs leading-snug text-muted-foreground">{data.meta.tier_legend[tier]}</span>
-                        <span
-                          aria-hidden
-                          className="col-start-1 row-start-2 h-0.5 rounded-full bg-primary"
-                          style={{ width: `${45 + index * 25}%` }}
-                        />
+                        <span className="flex gap-1" aria-label={`Level ${index + 1} of 3`}>
+                          {[0, 1, 2].map(step => (
+                            <span
+                              key={step}
+                              aria-hidden
+                              className={cn(
+                                'h-1.5 w-3 rounded-full',
+                                step <= index ? 'bg-primary' : 'bg-muted',
+                              )}
+                            />
+                          ))}
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-xs font-semibold text-foreground">{title}</span>
+                          <span className="mt-0.5 block text-[11px] leading-snug text-muted-foreground">{detail}</span>
+                        </span>
                       </div>
                     ))}
                   </div>
+                  <p className="border-t bg-muted/25 px-4 py-2.5 text-[10px] text-muted-foreground">
+                    Exact rights vary by country and permit.
+                  </p>
                 </PopoverContent>
               </Popover>
               <Button
