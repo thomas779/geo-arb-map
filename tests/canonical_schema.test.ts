@@ -37,6 +37,9 @@ describe('canonical data schemas', () => {
       'bahamas-citizenship-by-parent',
       'bahamas-naturalization',
       'bahamas-citizenship-connected-to-birth',
+      'barbados-citizenship-by-parent',
+      'barbados-naturalization',
+      'barbados-citizenship-by-birth',
       'brazil-citizenship-by-parent',
       'brazil-naturalization-by-residence',
       'brazil-citizenship-by-birth',
@@ -87,15 +90,27 @@ describe('canonical data schemas', () => {
       'malta-residence-naturalization',
       'malta-citizenship-by-birth',
       'malta-transactional-investor-citizenship-ended',
+      'mauritius-citizenship-by-descent',
+      'mauritius-naturalization',
+      'mauritius-citizenship-connected-to-birth',
+      'mauritius-investor-naturalization',
       'mexico-citizenship-by-parent',
       'mexico-naturalization-by-residence',
       'mexico-citizenship-by-birth',
       'netherlands-citizenship-by-parent',
       'netherlands-naturalization-by-residence',
       'netherlands-third-generation-birth',
+      'vanuatu-citizenship-by-parent',
+      'vanuatu-naturalization',
+      'vanuatu-citizenship-at-birth-by-parent',
+      'vanuatu-investor-citizenship',
       'nz-citizenship-by-descent',
       'nz-citizenship-by-grant',
       'nz-citizenship-by-birth',
+      'panama-nationality-through-parent',
+      'panama-ordinary-naturalization',
+      'panama-family-naturalization',
+      'panama-nationality-by-birth',
       'portugal-citizenship-by-parent',
       'portugal-ordinary-naturalization-2026',
       'portugal-birth-parent-residence-2026',
@@ -196,6 +211,32 @@ describe('canonical data schemas', () => {
     const bahamas = byIso.get('044')!;
     expect(bahamas.coverage.find(item => item.mode === 'investment')?.finding)
       .toBe('verified_none');
+
+    const barbados = byIso.get('052')!;
+    expect(barbados.routes.find(route => route.id === 'barbados-naturalization')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'residence.prior_seven_years_aggregate_months', value: 60 }),
+      );
+
+    const mauritius = byIso.get('480')!;
+    expect(mauritius.routes.find(route => route.id === 'mauritius-investor-naturalization')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'investment.minimum_usd', value: 500000 }),
+      );
+    expect(mauritius.routes.find(route => route.id === 'mauritius-investor-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(24);
+
+    const panama = byIso.get('591')!;
+    expect(panama.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+    expect(panama.routes.find(route => route.id === 'panama-family-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(36);
+
+    const vanuatu = byIso.get('548')!;
+    expect(vanuatu.routes.find(route => route.id === 'vanuatu-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(120);
+    expect(vanuatu.routes.find(route => route.id === 'vanuatu-investor-citizenship')
+      ?.review.last_checked).toBe('2026-07-17');
   });
 
   test('models eligibility time separately from processing time', () => {

@@ -247,6 +247,19 @@ const OFFICIAL_URLS = {
   bahamas_constitution: 'https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf',
   bahamas_nationality_act: 'https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-0018/1973-0018.pdf',
   bahamas_economic_pr: 'https://www.immigration.gov.bs/wp-content/uploads/2019/10/PERMANENT-RESIDENCE-FORM-ECONOMIC.pdf',
+  barbados_constitution: 'https://www.electoral.barbados.gov.bb/wp-content/uploads/2021/10/The_Constitution_of_Barbados.pdf',
+  barbados_citizenship_act: 'https://www.barbadoslawcourts.gov.bb/assets/content/pdfs/statutes/BarbadosCitizenshipCAP186.pdf',
+  barbados_citizenship_guidance: 'https://immigration.gov.bb/pages/Citizenship.aspx',
+  mauritius_citizenship_act: 'https://lawsofmauritius.govmu.org/portal/viewlegislationdocument/web/?docnumber=&doctitle=TWF1cml0aXVzIENpdGl6ZW5zaGlwIEFjdA%3D%3D&doctype=act',
+  mauritius_citizenship_guidance: 'https://dha.govmu.org/Pages/Services/Citizenship.aspx',
+  panama_constitution: 'https://constitucion.te.gob.pa/constitucion-vigente/',
+  panama_naturalization_requirements: 'https://www.migracion.gob.pa/wp-content/uploads/REQUISITOS-DE-NATURALIZACION-ACTUALIZADO.pdf',
+  vanuatu_constitution: 'https://parliament.gov.vu/images/constitution.pdf',
+  vanuatu_registration_guidance: 'https://crvsd.gov.vu/services/registration-of-new-citizens',
+  vanuatu_cbi_review: 'https://pmo.gov.vu/en/public-information/press-release/1150-coi-report-and-recommendations.html',
+  vanuatu_citizenship_types: 'https://vancitizenship.gov.vu/index.php/citizenship/types-of-citizenship',
+  vanuatu_legislative_framework: 'https://vancitizenship.gov.vu/index.php/about-us/legislative-framework',
+  vanuatu_dsp_regulations: 'https://vancitizenship.gov.vu/images/Order_No_33_of_2019_-_New_DSP_Regulations.pdf',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -623,6 +636,19 @@ function jurisdictionSources(): SourceRecord[] {
       ['Constitution of The Bahamas — citizenship', OFFICIAL_URLS.bahamas_constitution, '044', 'en', 'primary_law', 'bahamas-nationality-law'],
       ['Bahamas Nationality Act', OFFICIAL_URLS.bahamas_nationality_act, '044', 'en', 'primary_law', 'bahamas-nationality-law'],
       ['Bahamas Immigration — Economic permanent residence', OFFICIAL_URLS.bahamas_economic_pr, '044', 'en', 'official_guidance', 'bahamas-nationality-law'],
+      ['Constitution of Barbados — citizenship', OFFICIAL_URLS.barbados_constitution, '052', 'en', 'primary_law', 'barbados-citizenship-law'],
+      ['Barbados Citizenship Act', OFFICIAL_URLS.barbados_citizenship_act, '052', 'en', 'primary_law', 'barbados-citizenship-law'],
+      ['Barbados Immigration — Citizenship', OFFICIAL_URLS.barbados_citizenship_guidance, '052', 'en', 'official_guidance', 'barbados-citizenship-law'],
+      ['Mauritius Citizenship Act', OFFICIAL_URLS.mauritius_citizenship_act, '480', 'en', 'primary_law', 'mauritius-citizenship-law'],
+      ['Mauritius Prime Minister’s Office — Citizenship', OFFICIAL_URLS.mauritius_citizenship_guidance, '480', 'en', 'official_guidance', 'mauritius-citizenship-law'],
+      ['Constitution of Panama — nationality and naturalization', OFFICIAL_URLS.panama_constitution, '591', 'es', 'primary_law', 'panama-nationality-law'],
+      ['Panama Migration — Naturalization requirements', OFFICIAL_URLS.panama_naturalization_requirements, '591', 'es', 'official_guidance', 'panama-nationality-law'],
+      ['Constitution of Vanuatu — citizenship', OFFICIAL_URLS.vanuatu_constitution, '548', 'en', 'primary_law', 'vanuatu-citizenship-law'],
+      ['Vanuatu Civil Registry — Registration of new citizens', OFFICIAL_URLS.vanuatu_registration_guidance, '548', 'en', 'official_guidance', 'vanuatu-citizenship-law'],
+      ['Vanuatu Prime Minister’s Office — CBI review', OFFICIAL_URLS.vanuatu_cbi_review, '548', 'en', 'official_guidance', 'vanuatu-citizenship-law'],
+      ['Vanuatu Citizenship Commission — Types of Citizenship', OFFICIAL_URLS.vanuatu_citizenship_types, '548', 'en', 'official_guidance', 'vanuatu-citizenship-law'],
+      ['Vanuatu Citizenship Commission — Legislative Framework', OFFICIAL_URLS.vanuatu_legislative_framework, '548', 'en', 'official_guidance', 'vanuatu-citizenship-law'],
+      ['Vanuatu Development Support Program Regulations', OFFICIAL_URLS.vanuatu_dsp_regulations, '548', 'en', 'primary_law', 'vanuatu-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -2751,6 +2777,290 @@ function bahamasRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
   });
 }
 
+function barbadosRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.barbados_constitution);
+  const act = requireSource(officialSources, OFFICIAL_URLS.barbados_citizenship_act);
+  const guidance = requireSource(officialSources, OFFICIAL_URLS.barbados_citizenship_guidance);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '052',
+    note: 'All acquisition modes reviewed against the Constitution, Citizenship Act and official Immigration guidance. Barbados retains broad territorial birth citizenship, subject to narrow constitutional exceptions.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, guidance] },
+      { mode: 'naturalization', finding: 'present', sources: [act] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'A person born in Barbados after independence is generally a citizen at birth; the Constitution has narrow diplomatic-immunity and hostile-occupation exceptions.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, act, guidance],
+        note: 'No direct citizenship-by-investment route appears in the reviewed citizenship framework. Investment or residence products must not be represented as direct citizenship.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'barbados-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Citizenship through a qualifying Barbadian parent',
+        summary: 'A person born abroad acquires citizenship at birth through the constitutional parentage rules, including where at least one parent is a Barbadian citizen born in Barbados.',
+        source: [constitution, guidance],
+        eligibility: [{ field: 'parent.qualifies_under_constitution', operator: 'eq', value: true }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'barbados-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after qualifying residence',
+        summary: 'An alien may apply after twelve continuous months immediately before the application and at least five aggregate years of residence during the preceding seven years, subject to character and residence-intention requirements.',
+        source: act,
+        eligibility: [
+          { field: 'residence.final_continuous_months', operator: 'gte', value: 12, unit: 'months' },
+          { field: 'residence.prior_seven_years_aggregate_months', operator: 'gte', value: 60, unit: 'months' },
+        ],
+        months: null,
+        allocation: 'discretionary',
+        note: 'The Act uses a final continuous year plus five aggregate years in the preceding seven. It is neither six continuous years nor eight continuous years.',
+      }),
+      principalCitizenshipRoute({
+        id: 'barbados-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Citizenship by birth in Barbados',
+        summary: 'A person born in Barbados after 29 November 1966 is generally a citizen from birth, subject to narrow diplomatic-immunity and hostile-occupation exceptions.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '052' },
+          { field: 'birth.constitutional_exception_applies', operator: 'eq', value: false },
+        ],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function mauritiusRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.mauritius_citizenship_act);
+  const guidance = requireSource(officialSources, OFFICIAL_URLS.mauritius_citizenship_guidance);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '480',
+    note: 'All acquisition modes reviewed against the current Citizenship Act and Prime Minister’s Office guidance. The investor route is naturalization after investment and residence, not passport purchase without residence.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [guidance] },
+      { mode: 'naturalization', finding: 'present', sources: [act, guidance] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [guidance],
+        note: 'Birth before 1 October 1995 generally conferred citizenship regardless of parentage. For later births in Mauritius, a citizen parent is required.',
+      },
+      {
+        mode: 'investment',
+        finding: 'present',
+        sources: [act, guidance],
+        note: 'Section 9(3) permits the Minister to accept two continuous years of residence for an applicant investing at least US$500,000. The grant remains discretionary naturalization.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'mauritius-citizenship-by-descent',
+        mode: 'ancestry',
+        title: 'Citizenship through a Mauritian parent',
+        summary: 'A person born abroad is a Mauritian citizen by descent when a qualifying parent is a Mauritian citizen by birth.',
+        source: guidance,
+        eligibility: [{ field: 'parent.citizen_by_birth.iso_n3', operator: 'eq', value: '480' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'mauritius-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after qualifying residence',
+        summary: 'A non-Commonwealth applicant may seek naturalization after twelve continuous months immediately before applying and five aggregate years during the preceding seven years, subject to character, language and residence-intention requirements.',
+        source: [act, guidance],
+        eligibility: [
+          { field: 'residence.final_continuous_months', operator: 'gte', value: 12, unit: 'months' },
+          { field: 'residence.prior_seven_years_aggregate_months', operator: 'gte', value: 60, unit: 'months' },
+        ],
+        months: null,
+        allocation: 'discretionary',
+      }),
+      principalCitizenshipRoute({
+        id: 'mauritius-citizenship-connected-to-birth',
+        mode: 'birth',
+        title: 'Citizenship connected to birth in Mauritius',
+        summary: 'Birth in Mauritius before 1 October 1995 generally conferred citizenship regardless of parentage; after that date, at least one parent must be a Mauritian citizen.',
+        source: guidance,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '480' },
+          { field: 'birth.before_1995_10_01_or_citizen_parent', operator: 'eq', value: true },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'mauritius-investor-naturalization',
+        mode: 'investment',
+        title: 'Investor naturalization after residence',
+        summary: 'The Minister may accept two continuous years of residence from an applicant who has invested at least US$500,000 in Mauritius, instead of the ordinary residence pattern.',
+        source: [act, guidance],
+        eligibility: [
+          { field: 'investment.minimum_usd', operator: 'gte', value: 500000 },
+          { field: 'residence.continuous_months', operator: 'gte', value: 24, unit: 'months' },
+        ],
+        months: 24,
+        allocation: 'discretionary',
+        note: 'This is discretionary naturalization with a statutory investment and residence condition, not residence-free direct citizenship.',
+      }),
+    ],
+  });
+}
+
+function panamaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.panama_constitution);
+  const requirements = requireSource(
+    officialSources,
+    OFFICIAL_URLS.panama_naturalization_requirements,
+  );
+  return reviewedCountryRecord({
+    shadow,
+    iso: '591',
+    note: 'All acquisition modes reviewed against the current Constitution and National Migration Service requirements. Investor and Friendly Nations residence routes remain separate from citizenship.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, requirements] },
+      { mode: 'birth', finding: 'present', sources: [constitution] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, requirements],
+        note: 'Panama offers investment-linked residence, but the reviewed nationality framework contains no direct citizenship-by-investment entitlement.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'panama-nationality-through-parent',
+        mode: 'ancestry',
+        title: 'Nationality through a Panamanian parent',
+        summary: 'A person born abroad to a Panamanian parent can acquire nationality under Article 9, subject to domicile in Panama and, for a naturalized parent, a timely declaration after majority.',
+        source: constitution,
+        eligibility: [
+          { field: 'parent.citizenship.iso_n3', operator: 'eq', value: '591' },
+          { field: 'residence.domicile_in_panama', operator: 'eq', value: true },
+        ],
+        months: null,
+      }),
+      principalCitizenshipRoute({
+        id: 'panama-ordinary-naturalization',
+        mode: 'naturalization',
+        title: 'Ordinary naturalization',
+        summary: 'A permanent resident may apply after five consecutive years in Panama, subject to the constitutional declaration, nationality-renunciation, Spanish and civic-knowledge requirements.',
+        source: [constitution, requirements],
+        eligibility: [
+          { field: 'residence.consecutive_months', operator: 'gte', value: 60, unit: 'months' },
+          { field: 'residence.status', operator: 'eq', value: 'permanent_resident' },
+          { field: 'integration.spanish_and_civics', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+      }),
+      principalCitizenshipRoute({
+        id: 'panama-family-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization through a qualifying family connection',
+        summary: 'The Constitution reduces the residence period to three consecutive years for an applicant with a child born in Panama, a Panamanian parent, or a Panamanian spouse, while retaining the other Article 10 requirements.',
+        source: [constitution, requirements],
+        eligibility: [
+          { field: 'residence.consecutive_months', operator: 'gte', value: 36, unit: 'months' },
+          { field: 'family.qualifying_panamanian_connection', operator: 'eq', value: true },
+        ],
+        months: 36,
+        allocation: 'discretionary',
+      }),
+      principalCitizenshipRoute({
+        id: 'panama-nationality-by-birth',
+        mode: 'birth',
+        title: 'Nationality by birth in Panama',
+        summary: 'A person born in Panama is Panamanian by birth under Article 9 of the Constitution.',
+        source: constitution,
+        eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '591' }],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function vanuatuRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.vanuatu_constitution);
+  const registration = requireSource(
+    officialSources,
+    OFFICIAL_URLS.vanuatu_registration_guidance,
+  );
+  const cbiReview = requireSource(officialSources, OFFICIAL_URLS.vanuatu_cbi_review);
+  const types = requireSource(officialSources, OFFICIAL_URLS.vanuatu_citizenship_types);
+  const framework = requireSource(officialSources, OFFICIAL_URLS.vanuatu_legislative_framework);
+  const dsp = requireSource(officialSources, OFFICIAL_URLS.vanuatu_dsp_regulations);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '548',
+    note: 'All acquisition modes reviewed against the constitutional citizenship chapter and Citizenship Commission materials. The Commission’s investment programmes remain subject to current regulations and official programme administration.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, registration] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, framework] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution, registration],
+        note: 'Birth in Vanuatu alone is insufficient. A person born after independence, in Vanuatu or abroad, is a citizen when at least one parent is a citizen.',
+      },
+      { mode: 'investment', finding: 'present', sources: [types, framework, dsp, cbiReview] },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'vanuatu-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Citizenship through a Vanuatu parent',
+        summary: 'A person born after independence, in Vanuatu or abroad, becomes a citizen when at least one parent is a Vanuatu citizen.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '548' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'vanuatu-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after continuous residence',
+        summary: 'A foreign national or stateless person may apply after living continuously in Vanuatu for at least ten years, subject to further statutory conditions and review.',
+        source: [constitution, framework],
+        eligibility: [{ field: 'residence.continuous_months', operator: 'gte', value: 120, unit: 'months' }],
+        months: 120,
+        allocation: 'discretionary',
+      }),
+      principalCitizenshipRoute({
+        id: 'vanuatu-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Vanuatu parent',
+        summary: 'A child born after independence acquires citizenship at birth, whether born in Vanuatu or abroad, if at least one parent is a citizen.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '548' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'vanuatu-investor-citizenship',
+        mode: 'investment',
+        title: 'Investor and contribution citizenship programmes',
+        summary: 'The Citizenship Commission lists investor citizenship, the Development Support Program, the Vanuatu Contribution Program and a real-estate option under the Citizenship Act framework.',
+        source: [types, framework],
+        eligibility: [{ field: 'programme.official_investor_or_contribution_route', operator: 'eq', value: true }],
+        months: null,
+        allocation: 'discretionary',
+        note: 'Programme options, contribution levels, due-diligence rules and designated agents are volatile. Verify them against current Commission regulations before relying on a quote.',
+        lastChecked: '2026-07-17',
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -4642,6 +4952,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     argentinaRecord(shadow, countrySources),
     australiaRecord(shadow, countrySources),
     bahamasRecord(shadow, countrySources),
+    barbadosRecord(shadow, countrySources),
     brazilRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
@@ -4657,9 +4968,12 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     irelandRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
+    mauritiusRecord(shadow, countrySources),
     mexicoRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
+    vanuatuRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
+    panamaRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
     saintLuciaRecord(shadow, countrySources),
     stKittsNevisRecord(shadow, countrySources),
