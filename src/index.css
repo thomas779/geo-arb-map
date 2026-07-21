@@ -334,6 +334,15 @@
   }
 }
 
+/* Tall desktops need a deliberate editorial start rather than vertical
+ * centering, which exaggerates the empty top margin on large displays. */
+@media (min-width: 1024px) and (min-height: 800px) {
+  .planner-preview-hero {
+    align-items: flex-start;
+    padding-top: clamp(3rem, 6vh, 5rem);
+  }
+}
+
 /* Keep the desktop Planner as one composed viewport, even on short laptops. */
 @media (min-width: 1024px) and (max-height: 700px) {
   .planner-preview-layout {

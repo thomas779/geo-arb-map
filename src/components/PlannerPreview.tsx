@@ -32,7 +32,7 @@ export function PlannerPreview({ data, onBackToAtlas }: Props) {
 
   return (
     <div className="planner-preview cartographic-surface absolute inset-0 overflow-x-hidden overflow-y-auto lg:overflow-y-hidden">
-      <div className="planner-preview-layout relative z-10 mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 pt-10 pb-4 sm:px-8 sm:py-12 lg:h-full lg:min-h-0 lg:justify-start lg:px-12 lg:py-6">
+      <div className="planner-preview-layout relative z-10 mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 pt-10 pb-4 sm:px-8 sm:py-12 lg:h-full lg:min-h-0 lg:max-w-[calc(100vw-8rem)] lg:justify-start lg:px-12 lg:py-6">
         <GlobeRouteField regionIsos={regionIsos} />
         <div className="planner-preview-copy-shade pointer-events-none absolute inset-0 z-[1]" />
 
