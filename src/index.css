@@ -229,6 +229,16 @@
   vector-effect: non-scaling-stroke;
 }
 
+.planner-globe-route-primary {
+  opacity: 0.92;
+}
+
+.planner-globe-route-ambient {
+  opacity: 0.38;
+  stroke-width: 1.15;
+  stroke-dasharray: 1 13;
+}
+
 .planner-globe-traveler {
   fill: var(--primary);
   stroke: var(--background);
@@ -237,10 +247,18 @@
 }
 
 .planner-globe-destination {
-  fill: var(--primary);
   stroke: var(--background);
-  stroke-width: 3;
   vector-effect: non-scaling-stroke;
+}
+
+.planner-globe-destination-featured {
+  fill: var(--primary);
+  stroke-width: 3;
+}
+
+.planner-globe-destination-secondary {
+  fill: color-mix(in srgb, var(--primary) 70%, var(--background));
+  stroke-width: 1.8;
 }
 
 .planner-globe-destination-halo {
