@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 52,
+      "routes": 64,
       "by_mode": {
-        "ancestry": 13,
-        "naturalization": 14,
-        "birth": 10,
+        "ancestry": 17,
+        "naturalization": 18,
+        "birth": 14,
         "investment": 15
       },
       "by_status": {
-        "active": 47,
+        "active": 59,
         "inactive": 2,
         "pending_verification": 2,
         "verified_negative": 1
@@ -1298,12 +1298,16 @@
       "name": "Italy",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "italy-citizenship-by-descent",
+        "italy-naturalization-by-residence",
+        "italy-citizenship-connected-to-birth"
+      ]
     },
     {
       "iso_n3": "384",
@@ -1798,12 +1802,16 @@
       "name": "Netherlands",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "netherlands-citizenship-by-parent",
+        "netherlands-naturalization-by-residence",
+        "netherlands-third-generation-birth"
+      ]
     },
     {
       "iso_n3": "531",
@@ -2402,12 +2410,16 @@
       "name": "Singapore",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "singapore-citizenship-by-descent",
+        "singapore-citizenship-after-pr",
+        "singapore-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "703",
@@ -2574,12 +2586,16 @@
       "name": "Switzerland",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "switzerland-citizenship-by-descent",
+        "switzerland-ordinary-naturalization",
+        "switzerland-third-generation-naturalization"
+      ]
     },
     {
       "iso_n3": "760",
@@ -3905,6 +3921,128 @@
       ]
     },
     {
+      "id": "italy-citizenship-by-descent",
+      "country": {
+        "iso_n3": "380",
+        "name": "Italy"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through an Italian parent",
+      "summary": "A child of an Italian citizen can acquire citizenship by descent, but the 2025 reform limits automatic transmission to foreign-born people who hold another citizenship unless a statutory connection exception applies.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "italian_parent_with_connection",
+          "label": "Italian parent and statutory connection",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Italian Ministry of Foreign Affairs — Citizenship",
+          "url": "https://www.esteri.it/it/servizi-consolari-e-visti/normativa_consolare/serviziconsolari/cittadinanza/"
+        }
+      ]
+    },
+    {
+      "id": "italy-citizenship-connected-to-birth",
+      "country": {
+        "iso_n3": "380",
+        "name": "Italy"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Limited citizenship routes connected to birth in Italy",
+      "summary": "Birth in Italy is not generally enough. Citizenship exists at birth in limited statelessness or non-transmission cases, while a foreign child born and continuously resident in Italy may declare citizenship after reaching adulthood.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          0,
+          216
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "otherwise_stateless",
+          "label": "Otherwise stateless at birth",
+          "allocation": "right",
+          "eligibility_months": 0
+        },
+        {
+          "id": "born_and_continuously_resident",
+          "label": "Born and continuously resident until adulthood",
+          "allocation": "right",
+          "eligibility_months": 216,
+          "note": "This is later acquisition because of birth and residence, not unconditional citizenship at birth."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Italian Ministry of the Interior — Citizenship",
+          "url": "https://www.interno.gov.it/it/temi/cittadinanza-e-altri-diritti-civili/cittadinanza"
+        },
+        {
+          "title": "Italian Ministry of Foreign Affairs — Citizenship",
+          "url": "https://www.esteri.it/it/servizi-consolari-e-visti/normativa_consolare/serviziconsolari/cittadinanza/"
+        }
+      ]
+    },
+    {
+      "id": "italy-naturalization-by-residence",
+      "country": {
+        "iso_n3": "380",
+        "name": "Italy"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after legal residence",
+      "summary": "The general route permits an application after ten years of legal residence, with shorter periods for specified groups.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ordinary",
+          "label": "General ten-year route",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Other statutory requirements and differentiated residence periods can apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Italian Ministry of the Interior — Citizenship",
+          "url": "https://www.interno.gov.it/it/temi/cittadinanza-e-altri-diritti-civili/cittadinanza"
+        },
+        {
+          "title": "Italian Ministry of Foreign Affairs — Citizenship",
+          "url": "https://www.esteri.it/it/servizi-consolari-e-visti/normativa_consolare/serviziconsolari/cittadinanza/"
+        }
+      ]
+    },
+    {
       "id": "jordan-investor-citizenship",
       "country": {
         "iso_n3": "400",
@@ -4033,6 +4171,124 @@
         {
           "title": "Nauru Economic and Climate Resilience Citizenship Act 2024",
           "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "netherlands-citizenship-by-parent",
+      "country": {
+        "iso_n3": "528",
+        "name": "Netherlands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Dutch citizenship through a parent",
+      "summary": "A child generally acquires Dutch citizenship automatically when the statutory Dutch-parent conditions are met at birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "dutch_parent_at_birth",
+          "label": "Dutch parent at birth",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "IND — Dutch citizen by birth, acknowledgment or adoption",
+          "url": "https://ind.nl/en/dutch-citizenship/dutch-citizen-by-birth-acknowledgment-or-adoption"
+        },
+        {
+          "title": "Netherlands Nationality Act",
+          "url": "https://wetten.overheid.nl/BWBR0003738/2023-10-01"
+        }
+      ]
+    },
+    {
+      "id": "netherlands-naturalization-by-residence",
+      "country": {
+        "iso_n3": "528",
+        "name": "Netherlands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after legal residence",
+      "summary": "The standard naturalization route generally requires five consecutive years of lawful residence with a qualifying status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ordinary",
+          "label": "Standard five-year route",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Status, integration, public-order, and usually renunciation requirements also apply; statutory exceptions can shorten the term."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "IND — Dutch citizenship through naturalisation",
+          "url": "https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation"
+        },
+        {
+          "title": "Netherlands Nationality Act",
+          "url": "https://wetten.overheid.nl/BWBR0003738/2023-10-01"
+        }
+      ]
+    },
+    {
+      "id": "netherlands-third-generation-birth",
+      "country": {
+        "iso_n3": "528",
+        "name": "Netherlands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Automatic citizenship for a qualifying third generation",
+      "summary": "A child can acquire Dutch citizenship at birth under the statutory third-generation principal-residence rule even without a Dutch parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "third_generation_principal_residence",
+          "label": "Third-generation principal-residence rule",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "IND — Dutch citizen by birth, acknowledgment or adoption",
+          "url": "https://ind.nl/en/dutch-citizenship/dutch-citizen-by-birth-acknowledgment-or-adoption"
+        },
+        {
+          "title": "Netherlands Nationality Act",
+          "url": "https://wetten.overheid.nl/BWBR0003738/2023-10-01"
         }
       ]
     },
@@ -4376,6 +4632,121 @@
       ]
     },
     {
+      "id": "singapore-citizenship-after-pr",
+      "country": {
+        "iso_n3": "702",
+        "name": "Singapore"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship application after permanent residence",
+      "summary": "An adult permanent resident is eligible to apply after at least two years as a PR; approval remains discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "adult_pr",
+          "label": "Adult permanent resident",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Eligibility to apply is not an entitlement to approval; national-service and other rules can apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Singapore ICA — Becoming a Singapore citizen",
+          "url": "https://www.ica.gov.sg/reside/citizenship"
+        },
+        {
+          "title": "Constitution of the Republic of Singapore — Citizenship",
+          "url": "https://sso.agc.gov.sg/Act/CONS1963?ProvIds=P110-&ViewType=Advance"
+        }
+      ]
+    },
+    {
+      "id": "singapore-citizenship-by-birth",
+      "country": {
+        "iso_n3": "702",
+        "name": "Singapore"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Singapore",
+      "summary": "A person born in Singapore is a citizen by birth when at least one parent is a Singapore citizen, subject to the constitutional exceptions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "citizen_parent",
+          "label": "Born in Singapore to a citizen parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of the Republic of Singapore — Citizenship",
+          "url": "https://sso.agc.gov.sg/Act/CONS1963?ProvIds=P110-&ViewType=Advance"
+        }
+      ]
+    },
+    {
+      "id": "singapore-citizenship-by-descent",
+      "country": {
+        "iso_n3": "702",
+        "name": "Singapore"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship by descent",
+      "summary": "A person born outside Singapore can acquire citizenship by descent through a Singapore citizen parent, subject to registration and additional connection rules where the parent is also a citizen by descent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "singapore_citizen_parent",
+          "label": "Singapore citizen parent",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "A citizen-by-descent parent must also satisfy the Constitution’s Singapore-residence connection test."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of the Republic of Singapore — Citizenship",
+          "url": "https://sso.agc.gov.sg/Act/CONS1963?ProvIds=P110-&ViewType=Advance"
+        },
+        {
+          "title": "Singapore ICA — Becoming a Singapore citizen",
+          "url": "https://www.ica.gov.sg/reside/citizenship"
+        }
+      ]
+    },
+    {
       "id": "spain-citizenship-by-birth",
       "country": {
         "iso_n3": "724",
@@ -4515,6 +4886,115 @@
         {
           "title": "Spanish Civil Code — Articles 17, 20 and 22",
           "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763"
+        }
+      ]
+    },
+    {
+      "id": "switzerland-citizenship-by-descent",
+      "country": {
+        "iso_n3": "756",
+        "name": "Switzerland"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Swiss citizenship through a parent",
+      "summary": "Swiss citizenship is principally acquired through paternal or maternal descent rather than birthplace alone.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "swiss_parent",
+          "label": "Swiss parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Swiss SEM — Acquiring Swiss citizenship",
+          "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html"
+        }
+      ]
+    },
+    {
+      "id": "switzerland-ordinary-naturalization",
+      "country": {
+        "iso_n3": "756",
+        "name": "Switzerland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Ordinary naturalization",
+      "summary": "Ordinary naturalization generally requires ten years in Switzerland and a permanent C permit, alongside federal, cantonal, and communal requirements.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ordinary",
+          "label": "Ten-year route with C permit",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Three years must fall within the five years before filing; cantonal and communal residence rules also apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Swiss SEM — Ordinary naturalisation",
+          "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden/ordentlich.html"
+        }
+      ]
+    },
+    {
+      "id": "switzerland-third-generation-naturalization",
+      "country": {
+        "iso_n3": "756",
+        "name": "Switzerland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Facilitated naturalization for a third generation born in Switzerland",
+      "summary": "Birth in Switzerland does not itself grant citizenship, but a qualifying third-generation applicant born there may use facilitated naturalization before age 25.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "third_generation",
+          "label": "Third generation born in Switzerland",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "This is later facilitated naturalization connected to birthplace and family residence, not citizenship at birth."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Swiss SEM — Third-generation naturalisation",
+          "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden/3-generation.html"
+        },
+        {
+          "title": "Swiss SEM — Acquiring Swiss citizenship",
+          "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html"
         }
       ]
     },

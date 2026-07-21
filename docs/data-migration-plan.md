@@ -46,10 +46,14 @@ Completed:
   planner graph is no longer shipped as a public artifact;
 - real D1 export reproduction and private R2 backup/restore rehearsal; and
 - automated D1 backup workflow.
+- reviewed four-mode records for the United States, Canada, Australia, New
+  Zealand, United Kingdom, Ireland, Germany, France, Portugal, Spain, Italy,
+  Netherlands, Switzerland, and Singapore.
 
 Still required:
 
-1. Add the first reviewed country batch through one repeatable authoring command.
+1. Begin the second reviewed country batch through the same evidence and release
+   gates.
 2. Approve reviewed revisions and create the first immutable release.
 3. Switch the Atlas to content-addressed release assets and delete compatibility
    builders and inputs.

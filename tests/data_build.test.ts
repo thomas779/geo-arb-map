@@ -97,8 +97,8 @@ describe('data:build reads the canonical database', () => {
       selected_statuses: ['draft'],
       selected_release_status: null,
     });
-    expect(loaded.projections.coverage).toHaveLength(10);
-    expect(loaded.projections.mode_coverage).toHaveLength(40);
+    expect(loaded.projections.coverage).toHaveLength(14);
+    expect(loaded.projections.mode_coverage).toHaveLength(56);
   });
 
   test('fails clearly when the database is missing', () => {
@@ -375,13 +375,25 @@ describe('data:build parity gates', () => {
       'ireland-citizenship-by-birth',
       'ireland-citizenship-by-descent',
       'ireland-naturalization-by-residence',
+      'italy-citizenship-by-descent',
+      'italy-citizenship-connected-to-birth',
+      'italy-naturalization-by-residence',
+      'netherlands-citizenship-by-parent',
+      'netherlands-naturalization-by-residence',
+      'netherlands-third-generation-birth',
       'nz-citizenship-by-birth',
       'nz-citizenship-by-descent',
       'nz-citizenship-by-grant',
       'portugal-citizenship-by-parent',
+      'singapore-citizenship-after-pr',
+      'singapore-citizenship-by-birth',
+      'singapore-citizenship-by-descent',
       'spain-citizenship-by-birth',
       'spain-citizenship-by-parent-or-option',
       'spain-naturalization-by-residence',
+      'switzerland-citizenship-by-descent',
+      'switzerland-ordinary-naturalization',
+      'switzerland-third-generation-naturalization',
       'uk-citizenship-by-birth',
       'uk-citizenship-by-parent',
       'uk-naturalization-after-settlement',

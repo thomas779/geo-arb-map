@@ -164,6 +164,19 @@ const OFFICIAL_URLS = {
   nz_citizenship_types: 'https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/',
   nz_citizenship_presence: 'https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/requirements-for-nz-citizenship/presence-requirements/',
   nz_active_investor: 'https://www.immigration.govt.nz/visas/active-investor-plus-visa/',
+  italy_citizenship: 'https://www.esteri.it/it/servizi-consolari-e-visti/normativa_consolare/serviziconsolari/cittadinanza/',
+  italy_interior: 'https://www.interno.gov.it/it/temi/cittadinanza-e-altri-diritti-civili/cittadinanza',
+  italy_investor_visa: 'https://investorvisa.mise.gov.it/index.php/en/investor-visa-how-it-works',
+  netherlands_citizenship: 'https://www.government.nl/themes/migration-and-travel/dutch-citizenship/becoming-a-dutch-citizen',
+  netherlands_birth: 'https://ind.nl/en/dutch-citizenship/dutch-citizen-by-birth-acknowledgment-or-adoption',
+  netherlands_naturalization: 'https://ind.nl/en/dutch-citizenship/becoming-a-dutch-national-through-naturalisation',
+  netherlands_nationality_act: 'https://wetten.overheid.nl/BWBR0003738/2023-10-01',
+  switzerland_citizenship: 'https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html',
+  switzerland_naturalization: 'https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden/ordentlich.html',
+  switzerland_third_generation: 'https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden/3-generation.html',
+  singapore_constitution: 'https://sso.agc.gov.sg/Act/CONS1963?ProvIds=P110-&ViewType=Advance',
+  singapore_citizenship: 'https://www.ica.gov.sg/reside/citizenship',
+  singapore_gip: 'https://www.edb.gov.sg/en/incentives-and-programmes/global-investor-programme.html',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -417,10 +430,24 @@ function jurisdictionSources(): SourceRecord[] {
       ['New Zealand Government — Citizenship by birth, descent and grant', OFFICIAL_URLS.nz_citizenship_types, '554'],
       ['New Zealand Government — Citizenship presence requirements', OFFICIAL_URLS.nz_citizenship_presence, '554'],
       ['Immigration New Zealand — Active Investor Plus Visa', OFFICIAL_URLS.nz_active_investor, '554'],
+      ['Italian Ministry of Foreign Affairs — Citizenship', OFFICIAL_URLS.italy_citizenship, '380'],
+      ['Italian Ministry of the Interior — Citizenship', OFFICIAL_URLS.italy_interior, '380'],
+      ['Italian Ministry of Enterprises — Investor Visa', OFFICIAL_URLS.italy_investor_visa, '380'],
+      ['Government of the Netherlands — Becoming a Dutch citizen', OFFICIAL_URLS.netherlands_citizenship, '528'],
+      ['IND — Dutch citizen by birth, acknowledgment or adoption', OFFICIAL_URLS.netherlands_birth, '528'],
+      ['IND — Dutch citizenship through naturalisation', OFFICIAL_URLS.netherlands_naturalization, '528'],
+      ['Netherlands Nationality Act', OFFICIAL_URLS.netherlands_nationality_act, '528'],
+      ['Swiss SEM — Acquiring Swiss citizenship', OFFICIAL_URLS.switzerland_citizenship, '756'],
+      ['Swiss SEM — Ordinary naturalisation', OFFICIAL_URLS.switzerland_naturalization, '756'],
+      ['Swiss SEM — Third-generation naturalisation', OFFICIAL_URLS.switzerland_third_generation, '756'],
+      ['Constitution of the Republic of Singapore — Citizenship', OFFICIAL_URLS.singapore_constitution, '702'],
+      ['Singapore ICA — Becoming a Singapore citizen', OFFICIAL_URLS.singapore_citizenship, '702'],
+      ['Singapore EDB — Global Investor Programme', OFFICIAL_URLS.singapore_gip, '702'],
     ].map(([title, url, jurisdiction]) => officialSource({
       title,
       url,
       source_type: url.includes('uscode.house.gov') || url.includes('legislation.gov.au')
+        || url.includes('wetten.overheid.nl') || url.includes('sso.agc.gov.sg')
         ? 'primary_law'
         : 'official_guidance',
       jurisdictions: [jurisdiction],
@@ -430,6 +457,10 @@ function jurisdictionSources(): SourceRecord[] {
           '036': 'australia-citizenship-guidance',
           '124': 'canada-citizenship-guidance',
           '554': 'nz-citizenship-guidance',
+          '380': 'italy-citizenship-guidance',
+          '528': 'netherlands-citizenship-guidance',
+          '702': 'singapore-citizenship-guidance',
+          '756': 'switzerland-citizenship-guidance',
           '840': 'us-citizenship-guidance',
         }[jurisdiction]!,
         method: 'http',
@@ -1988,6 +2019,455 @@ function newZealandRecord(shadow: DataShadow, officialSources: SourceRecord[]): 
   });
 }
 
+function italyRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const citizenship = requireSource(officialSources, OFFICIAL_URLS.italy_citizenship);
+  const interior = requireSource(officialSources, OFFICIAL_URLS.italy_interior);
+  const investorVisa = requireSource(officialSources, OFFICIAL_URLS.italy_investor_visa);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '380',
+    note: 'All acquisition modes reviewed against current post-2025 official guidance; principal routes are modeled.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [citizenship, interior] },
+      { mode: 'naturalization', finding: 'present', sources: [citizenship, interior] },
+      { mode: 'birth', finding: 'present', sources: [interior] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [citizenship, investorVisa],
+        note: 'Investor Visa for Italy leads to a residence permit, not direct citizenship; citizenship remains governed by the ordinary statutory modes.',
+      },
+    ],
+    routes: [
+      {
+        id: 'italy-citizenship-by-descent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship through an Italian parent',
+        summary: 'A child of an Italian citizen can acquire citizenship by descent, but the 2025 reform limits automatic transmission to foreign-born people who hold another citizenship unless a statutory connection exception applies.',
+        effective: { from: '2025-05-24', to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'italian_parent_with_connection',
+          label: 'Italian parent and statutory connection',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'parent.citizenship.iso_n3', operator: 'eq', value: '380' },
+            {
+              field: 'italy.post_2025_connection_exception',
+              operator: 'eq',
+              value: true,
+              note: 'For a person born abroad who holds another citizenship, an exception in article 3-bis must apply; declarations for some minors are separately time-limited.',
+            },
+          ],
+          milestones: [{ status: 'citizenship_entitlement_or_declaration', minimum_months: 0 }],
+          timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+          source_refs: refs([citizenship], [
+            '/routes/italy-citizenship-by-descent/summary',
+            '/routes/italy-citizenship-by-descent/effective',
+            '/routes/italy-citizenship-by-descent/variants/italian_parent_with_connection/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'italy-naturalization-by-residence',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after legal residence',
+        summary: 'The general route permits an application after ten years of legal residence, with shorter periods for specified groups.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'ordinary',
+          label: 'General ten-year route',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [{ field: 'residence.legal_months', operator: 'gte', value: 120, unit: 'months' }],
+          milestones: [{ status: 'legal_residence', minimum_months: 120 }],
+          timeline: {
+            eligibility_minimum_months: 120,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Other statutory requirements and differentiated residence periods can apply.',
+          },
+          source_refs: refs([interior, citizenship], [
+            '/routes/italy-naturalization-by-residence/summary',
+            '/routes/italy-naturalization-by-residence/variants/ordinary/eligibility',
+            '/routes/italy-naturalization-by-residence/variants/ordinary/timeline',
+          ]),
+        }],
+      },
+      {
+        id: 'italy-citizenship-connected-to-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Limited citizenship routes connected to birth in Italy',
+        summary: 'Birth in Italy is not generally enough. Citizenship exists at birth in limited statelessness or non-transmission cases, while a foreign child born and continuously resident in Italy may declare citizenship after reaching adulthood.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'otherwise_stateless',
+            label: 'Otherwise stateless at birth',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'birth.jurisdiction', operator: 'eq', value: '380' },
+              { field: 'parent.nationality_transmitted', operator: 'eq', value: false },
+            ],
+            milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+            timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+            source_refs: refs([interior], ['/routes/italy-citizenship-connected-to-birth/variants/otherwise_stateless']),
+          },
+          {
+            id: 'born_and_continuously_resident',
+            label: 'Born and continuously resident until adulthood',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'birth.jurisdiction', operator: 'eq', value: '380' },
+              { field: 'residence.legal_continuous_until_age_18', operator: 'eq', value: true },
+              { field: 'declaration.within_one_year_of_age_18', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'citizenship_declaration_after_majority', minimum_months: 216 }],
+            timeline: {
+              eligibility_minimum_months: 216,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'This is later acquisition because of birth and residence, not unconditional citizenship at birth.',
+            },
+            source_refs: refs([citizenship, interior], [
+              '/routes/italy-citizenship-connected-to-birth/summary',
+              '/routes/italy-citizenship-connected-to-birth/variants/born_and_continuously_resident',
+            ]),
+          },
+        ],
+      },
+    ],
+  });
+}
+
+function netherlandsRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const overview = requireSource(officialSources, OFFICIAL_URLS.netherlands_citizenship);
+  const birth = requireSource(officialSources, OFFICIAL_URLS.netherlands_birth);
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.netherlands_naturalization);
+  const law = requireSource(officialSources, OFFICIAL_URLS.netherlands_nationality_act);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '528',
+    note: 'All acquisition modes reviewed; automatic acquisition, option, and principal naturalization paths are distinguished.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [birth, law] },
+      { mode: 'naturalization', finding: 'present', sources: [naturalization, law] },
+      { mode: 'birth', finding: 'present', sources: [birth, law] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [overview, law],
+        note: 'The official acquisition modes contain no direct citizenship-by-investment route.',
+      },
+    ],
+    routes: [
+      {
+        id: 'netherlands-citizenship-by-parent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Dutch citizenship through a parent',
+        summary: 'A child generally acquires Dutch citizenship automatically when the statutory Dutch-parent conditions are met at birth.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'dutch_parent_at_birth',
+          label: 'Dutch parent at birth',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '528' }],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+          source_refs: refs([birth, law], [
+            '/routes/netherlands-citizenship-by-parent/summary',
+            '/routes/netherlands-citizenship-by-parent/variants/dutch_parent_at_birth/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'netherlands-naturalization-by-residence',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after legal residence',
+        summary: 'The standard naturalization route generally requires five consecutive years of lawful residence with a qualifying status.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'ordinary',
+          label: 'Standard five-year route',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [{ field: 'residence.lawful_consecutive_months', operator: 'gte', value: 60, unit: 'months' }],
+          milestones: [{ status: 'qualifying_lawful_residence', minimum_months: 60 }],
+          timeline: {
+            eligibility_minimum_months: 60,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Status, integration, public-order, and usually renunciation requirements also apply; statutory exceptions can shorten the term.',
+          },
+          source_refs: refs([naturalization, law], [
+            '/routes/netherlands-naturalization-by-residence/summary',
+            '/routes/netherlands-naturalization-by-residence/variants/ordinary/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'netherlands-third-generation-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Automatic citizenship for a qualifying third generation',
+        summary: 'A child can acquire Dutch citizenship at birth under the statutory third-generation principal-residence rule even without a Dutch parent.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'third_generation_principal_residence',
+          label: 'Third-generation principal-residence rule',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.kingdom_of_netherlands', operator: 'eq', value: true },
+            { field: 'parent.principal_residence_in_kingdom_at_birth', operator: 'eq', value: true },
+            { field: 'parent.qualifying_second_generation_connection', operator: 'eq', value: true },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+          source_refs: refs([birth, law], [
+            '/routes/netherlands-third-generation-birth/summary',
+            '/routes/netherlands-third-generation-birth/variants/third_generation_principal_residence/eligibility',
+          ]),
+        }],
+      },
+    ],
+  });
+}
+
+function switzerlandRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const overview = requireSource(officialSources, OFFICIAL_URLS.switzerland_citizenship);
+  const ordinary = requireSource(officialSources, OFFICIAL_URLS.switzerland_naturalization);
+  const thirdGeneration = requireSource(officialSources, OFFICIAL_URLS.switzerland_third_generation);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '756',
+    note: 'All acquisition modes reviewed; descent, ordinary naturalization, and the birthplace-linked third-generation route are modeled.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [overview] },
+      { mode: 'naturalization', finding: 'present', sources: [ordinary, overview] },
+      { mode: 'birth', finding: 'present', sources: [thirdGeneration, overview] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [overview, ordinary],
+        note: 'Official citizenship guidance enumerates descent and naturalization routes, not direct citizenship by investment.',
+      },
+    ],
+    routes: [
+      {
+        id: 'switzerland-citizenship-by-descent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Swiss citizenship through a parent',
+        summary: 'Swiss citizenship is principally acquired through paternal or maternal descent rather than birthplace alone.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'swiss_parent',
+          label: 'Swiss parent',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '756' }],
+          milestones: [{ status: 'citizenship_by_descent', minimum_months: 0 }],
+          timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+          source_refs: refs([overview], [
+            '/routes/switzerland-citizenship-by-descent/summary',
+            '/routes/switzerland-citizenship-by-descent/variants/swiss_parent/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'switzerland-ordinary-naturalization',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Ordinary naturalization',
+        summary: 'Ordinary naturalization generally requires ten years in Switzerland and a permanent C permit, alongside federal, cantonal, and communal requirements.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'ordinary',
+          label: 'Ten-year route with C permit',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [
+            { field: 'residence.counted_months', operator: 'gte', value: 120, unit: 'months' },
+            { field: 'residence.permit', operator: 'eq', value: 'C' },
+          ],
+          milestones: [{ status: 'counted_residence', minimum_months: 120 }],
+          timeline: {
+            eligibility_minimum_months: 120,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Three years must fall within the five years before filing; cantonal and communal residence rules also apply.',
+          },
+          source_refs: refs([ordinary], [
+            '/routes/switzerland-ordinary-naturalization/summary',
+            '/routes/switzerland-ordinary-naturalization/variants/ordinary/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'switzerland-third-generation-naturalization',
+        mode: 'birth',
+        status: 'active',
+        title: 'Facilitated naturalization for a third generation born in Switzerland',
+        summary: 'Birth in Switzerland does not itself grant citizenship, but a qualifying third-generation applicant born there may use facilitated naturalization before age 25.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'third_generation',
+          label: 'Third generation born in Switzerland',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '756' },
+            { field: 'person.age_years', operator: 'lte', value: 24, unit: 'years' },
+            { field: 'residence.permit', operator: 'eq', value: 'C' },
+            { field: 'education.swiss_compulsory_years', operator: 'gte', value: 5, unit: 'years' },
+            { field: 'family.third_generation_conditions_met', operator: 'eq', value: true },
+          ],
+          milestones: [{ status: 'facilitated_naturalization_application', minimum_months: null }],
+          timeline: {
+            eligibility_minimum_months: null,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'This is later facilitated naturalization connected to birthplace and family residence, not citizenship at birth.',
+          },
+          source_refs: refs([thirdGeneration, overview], [
+            '/routes/switzerland-third-generation-naturalization/summary',
+            '/routes/switzerland-third-generation-naturalization/variants/third_generation/eligibility',
+          ]),
+        }],
+      },
+    ],
+  });
+}
+
+function singaporeRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.singapore_constitution);
+  const citizenship = requireSource(officialSources, OFFICIAL_URLS.singapore_citizenship);
+  const gip = requireSource(officialSources, OFFICIAL_URLS.singapore_gip);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '702',
+    note: 'All acquisition modes reviewed against the current Constitution and official ICA/EDB guidance.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, citizenship] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, citizenship] },
+      { mode: 'birth', finding: 'present', sources: [constitution] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, gip, citizenship],
+        note: 'The Global Investor Programme grants permanent residence; citizenship requires a separate discretionary application under the ordinary citizenship framework.',
+      },
+    ],
+    routes: [
+      {
+        id: 'singapore-citizenship-by-descent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship by descent',
+        summary: 'A person born outside Singapore can acquire citizenship by descent through a Singapore citizen parent, subject to registration and additional connection rules where the parent is also a citizen by descent.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'singapore_citizen_parent',
+          label: 'Singapore citizen parent',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'parent.citizenship.iso_n3', operator: 'eq', value: '702' },
+            { field: 'birth.registered_within_one_year_or_extension', operator: 'eq', value: true },
+          ],
+          milestones: [{ status: 'citizenship_by_descent_registration', minimum_months: 0 }],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'A citizen-by-descent parent must also satisfy the Constitution’s Singapore-residence connection test.',
+          },
+          source_refs: refs([constitution, citizenship], [
+            '/routes/singapore-citizenship-by-descent/summary',
+            '/routes/singapore-citizenship-by-descent/variants/singapore_citizen_parent/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'singapore-citizenship-after-pr',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Citizenship application after permanent residence',
+        summary: 'An adult permanent resident is eligible to apply after at least two years as a PR; approval remains discretionary.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'adult_pr',
+          label: 'Adult permanent resident',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [
+            { field: 'person.age_years', operator: 'gte', value: 21, unit: 'years' },
+            { field: 'residence.permanent_months', operator: 'gte', value: 24, unit: 'months' },
+          ],
+          milestones: [{ status: 'permanent_residence', minimum_months: 24 }],
+          timeline: {
+            eligibility_minimum_months: 24,
+            processing_typical_months: 12,
+            confidence: 'high',
+            note: 'Eligibility to apply is not an entitlement to approval; national-service and other rules can apply.',
+          },
+          source_refs: refs([citizenship, constitution], [
+            '/routes/singapore-citizenship-after-pr/summary',
+            '/routes/singapore-citizenship-after-pr/variants/adult_pr/eligibility',
+            '/routes/singapore-citizenship-after-pr/variants/adult_pr/timeline',
+          ]),
+        }],
+      },
+      {
+        id: 'singapore-citizenship-by-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Citizenship by birth in Singapore',
+        summary: 'A person born in Singapore is a citizen by birth when at least one parent is a Singapore citizen, subject to the constitutional exceptions.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'citizen_parent',
+          label: 'Born in Singapore to a citizen parent',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '702' },
+            { field: 'parent.citizenship.iso_n3', operator: 'eq', value: '702' },
+            { field: 'parent.constitutional_exception', operator: 'neq', value: true },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+          source_refs: refs([constitution], [
+            '/routes/singapore-citizenship-by-birth/summary',
+            '/routes/singapore-citizenship-by-birth/variants/citizen_parent/eligibility',
+          ]),
+        }],
+      },
+    ],
+  });
+}
+
 function germanyRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '276');
   if (!candidate) throw new Error('Germany jurisdiction is missing');
@@ -2774,9 +3254,13 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     franceRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
+    italyRecord(shadow, countrySources),
+    netherlandsRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
+    singaporeRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),
+    switzerlandRecord(shadow, countrySources),
     unitedKingdomRecord(shadow, countrySources),
     unitedStatesRecord(shadow, countrySources),
   ];
