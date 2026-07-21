@@ -133,7 +133,11 @@ function officialSource({
 
 const OFFICIAL_URLS = {
   france_descent: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419373/',
+  france_birth_no_nationality: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419453/',
+  france_birth_parent_born_france: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419425/',
+  france_birth_diplomatic_exception: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419523/',
   france_birth_residence: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039366780/',
+  france_birth_minor_declaration: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419871/',
   france_birth_guidance: 'https://www.service-public.fr/particuliers/vosdroits/F295',
   france_nationality_code: 'https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006070721/2026-01-01',
   portugal_nationality: 'https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa',
@@ -179,6 +183,58 @@ function jurisdictionSources(): SourceRecord[] {
     officialSource({
       title: 'French Civil Code — Article 21-7',
       url: OFFICIAL_URLS.france_birth_residence,
+      source_type: 'primary_law',
+      jurisdictions: ['250'],
+      language: 'fr',
+      monitoring: {
+        source_id: 'legifrance-piste',
+        method: 'api',
+        url: 'https://piste.gouv.fr/',
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'French Civil Code — Article 19-1',
+      url: OFFICIAL_URLS.france_birth_no_nationality,
+      source_type: 'primary_law',
+      jurisdictions: ['250'],
+      language: 'fr',
+      monitoring: {
+        source_id: 'legifrance-piste',
+        method: 'api',
+        url: 'https://piste.gouv.fr/',
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'French Civil Code — Article 19-3',
+      url: OFFICIAL_URLS.france_birth_parent_born_france,
+      source_type: 'primary_law',
+      jurisdictions: ['250'],
+      language: 'fr',
+      monitoring: {
+        source_id: 'legifrance-piste',
+        method: 'api',
+        url: 'https://piste.gouv.fr/',
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'French Civil Code — Article 20-5',
+      url: OFFICIAL_URLS.france_birth_diplomatic_exception,
+      source_type: 'primary_law',
+      jurisdictions: ['250'],
+      language: 'fr',
+      monitoring: {
+        source_id: 'legifrance-piste',
+        method: 'api',
+        url: 'https://piste.gouv.fr/',
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'French Civil Code — Article 21-11',
+      url: OFFICIAL_URLS.france_birth_minor_declaration,
       source_type: 'primary_law',
       jurisdictions: ['250'],
       language: 'fr',
@@ -500,7 +556,23 @@ function franceRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
     throw new Error('France pilot sources are incomplete');
   }
   const descentSource = requireSource(officialSources, OFFICIAL_URLS.france_descent);
+  const birthNoNationalitySource = requireSource(
+    officialSources,
+    OFFICIAL_URLS.france_birth_no_nationality,
+  );
+  const birthParentBornFranceSource = requireSource(
+    officialSources,
+    OFFICIAL_URLS.france_birth_parent_born_france,
+  );
+  const birthDiplomaticExceptionSource = requireSource(
+    officialSources,
+    OFFICIAL_URLS.france_birth_diplomatic_exception,
+  );
   const birthLawSource = requireSource(officialSources, OFFICIAL_URLS.france_birth_residence);
+  const birthMinorDeclarationSource = requireSource(
+    officialSources,
+    OFFICIAL_URLS.france_birth_minor_declaration,
+  );
   const birthGuidanceSource = requireSource(officialSources, OFFICIAL_URLS.france_birth_guidance);
   const nationalityCode = requireSource(officialSources, OFFICIAL_URLS.france_nationality_code);
   return JurisdictionRecordSchema.parse({
@@ -540,7 +612,14 @@ function franceRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
         finding: 'present',
         review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
         source_refs: refs(
-          [birthLawSource, birthGuidanceSource],
+          [
+            birthNoNationalitySource,
+            birthParentBornFranceSource,
+            birthDiplomaticExceptionSource,
+            birthLawSource,
+            birthMinorDeclarationSource,
+            birthGuidanceSource,
+          ],
           ['/coverage/birth'],
         ),
       },
@@ -677,46 +756,162 @@ function franceRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
       id: 'france-birth-and-residence',
       mode: 'birth',
       status: 'active',
-      title: 'Citizenship after birth and residence in France',
-      summary: 'A person born in France to foreign parents can acquire citizenship at adulthood when the statutory residence conditions are met.',
+      title: 'Citizenship through birth and residence in France',
+      summary: 'Birth in France alone is not generally enough. Limited parentage or statelessness cases confer citizenship at birth; otherwise a child of foreign parents can acquire it from age 13, 16, or automatically at 18 when the residence conditions are met.',
       effective: { from: null, to: null, supersedes: [] },
       review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
-      variants: [{
-        id: 'automatic_at_majority',
-        label: 'Automatic acquisition at adulthood',
-        outcome: 'citizenship',
-        allocation: 'right',
-        eligibility: [
-          { field: 'birth.jurisdiction', operator: 'eq', value: '250' },
-          { field: 'residence.current_jurisdiction', operator: 'eq', value: '250' },
-          {
-            field: 'residence.habitual_months_since_age_11',
-            operator: 'gte',
-            value: 60,
-            unit: 'months',
+      variants: [
+        {
+          id: 'parent_born_in_france',
+          label: 'Born in France to a parent also born in France',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '250' },
+            { field: 'parent.birth.jurisdiction', operator: 'eq', value: '250' },
+            { field: 'parent.diplomatic_exception', operator: 'neq', value: true },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Citizenship from birth under the double-jus-soli rule, subject to the diplomatic exception.',
           },
-        ],
-        milestones: [
-          { status: 'birth_in_country', minimum_months: 0 },
-          {
-            status: 'habitual_residence_since_age_11',
-            minimum_months: 60,
-            note: 'At least five years in total since age 11.',
-          },
-          { status: 'citizenship_at_majority', minimum_months: null },
-        ],
-        timeline: {
-          eligibility_minimum_months: null,
-          processing_typical_months: null,
-          confidence: 'high',
-          note: 'This age-based rule cannot be represented as a simple countdown from arrival.',
+          source_refs: refs([birthParentBornFranceSource, birthDiplomaticExceptionSource], [
+            '/routes/france-birth-and-residence/variants/parent_born_in_france/eligibility',
+            '/routes/france-birth-and-residence/variants/parent_born_in_france/milestones',
+          ]),
         },
-        source_refs: refs([birthLawSource, birthGuidanceSource], [
-          '/routes/france-birth-and-residence/summary',
-          '/routes/france-birth-and-residence/variants/automatic_at_majority/eligibility',
-          '/routes/france-birth-and-residence/variants/automatic_at_majority/milestones',
-        ]),
-      }],
+        {
+          id: 'no_nationality_transmitted',
+          label: 'Stateless parents or no nationality transmitted',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '250' },
+            {
+              field: 'parent.nationality_transmitted',
+              operator: 'eq',
+              value: false,
+              note: 'Both parents are stateless or neither parent’s nationality law transmits nationality to the child.',
+            },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Citizenship from birth where the child would otherwise receive no nationality from either parent.',
+          },
+          source_refs: refs([birthNoNationalitySource], [
+            '/routes/france-birth-and-residence/variants/no_nationality_transmitted/eligibility',
+            '/routes/france-birth-and-residence/variants/no_nationality_transmitted/milestones',
+          ]),
+        },
+        {
+          id: 'declaration_from_age_13',
+          label: 'Parent declaration from age 13',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '250' },
+            { field: 'parent.citizenship.foreign', operator: 'eq', value: true },
+            { field: 'person.age_years', operator: 'gte', value: 13, unit: 'years' },
+            { field: 'residence.current_jurisdiction', operator: 'eq', value: '250' },
+            {
+              field: 'residence.habitual_months_since_age_8',
+              operator: 'gte',
+              value: 60,
+              unit: 'months',
+            },
+            { field: 'child.consent', operator: 'eq', value: true },
+          ],
+          milestones: [
+            { status: 'birth_in_country', minimum_months: 0 },
+            { status: 'parental_nationality_declaration', minimum_months: null },
+          ],
+          timeline: {
+            eligibility_minimum_months: null,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'From age 13, a parent may declare with the child’s consent after at least five years of habitual residence in France since age 8.',
+          },
+          source_refs: refs([birthMinorDeclarationSource, birthGuidanceSource], [
+            '/routes/france-birth-and-residence/variants/declaration_from_age_13/eligibility',
+            '/routes/france-birth-and-residence/variants/declaration_from_age_13/milestones',
+          ]),
+        },
+        {
+          id: 'declaration_from_age_16',
+          label: 'Personal declaration from age 16',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '250' },
+            { field: 'parent.citizenship.foreign', operator: 'eq', value: true },
+            { field: 'person.age_years', operator: 'gte', value: 16, unit: 'years' },
+            { field: 'residence.current_jurisdiction', operator: 'eq', value: '250' },
+            {
+              field: 'residence.habitual_months_since_age_11',
+              operator: 'gte',
+              value: 60,
+              unit: 'months',
+            },
+          ],
+          milestones: [
+            { status: 'birth_in_country', minimum_months: 0 },
+            { status: 'nationality_declaration', minimum_months: null },
+          ],
+          timeline: {
+            eligibility_minimum_months: null,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'At age 16 or 17, the child may declare while living in France after at least five years of habitual residence since age 11.',
+          },
+          source_refs: refs([birthMinorDeclarationSource, birthGuidanceSource], [
+            '/routes/france-birth-and-residence/variants/declaration_from_age_16/eligibility',
+            '/routes/france-birth-and-residence/variants/declaration_from_age_16/milestones',
+          ]),
+        },
+        {
+          id: 'automatic_at_majority',
+          label: 'Automatic acquisition at age 18',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '250' },
+            { field: 'parent.citizenship.foreign', operator: 'eq', value: true },
+            { field: 'residence.current_jurisdiction', operator: 'eq', value: '250' },
+            {
+              field: 'residence.habitual_months_since_age_11',
+              operator: 'gte',
+              value: 60,
+              unit: 'months',
+            },
+          ],
+          milestones: [
+            { status: 'birth_in_country', minimum_months: 0 },
+            {
+              status: 'habitual_residence_since_age_11',
+              minimum_months: 60,
+              note: 'At least five years in total since age 11.',
+            },
+            { status: 'citizenship_at_majority', minimum_months: null },
+          ],
+          timeline: {
+            eligibility_minimum_months: null,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Automatic at age 18 if the person lives in France then and has accumulated at least five years of habitual residence since age 11.',
+          },
+          source_refs: refs([birthLawSource, birthGuidanceSource], [
+            '/routes/france-birth-and-residence/summary',
+            '/routes/france-birth-and-residence/variants/automatic_at_majority/eligibility',
+            '/routes/france-birth-and-residence/variants/automatic_at_majority/milestones',
+          ]),
+        },
+      ],
     }],
   });
 }
@@ -1048,7 +1243,7 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
         mode: 'birth',
         status: 'active',
         title: 'Citizenship through birth in Spain',
-        summary: 'Birth in Spain can confer nationality by origin in specific parentage or statelessness cases.',
+        summary: 'Birth in Spain alone does not generally confer citizenship. Nationality by origin applies in limited parentage, statelessness, or undetermined-parentage cases.',
         effective: { from: null, to: null, supersedes: [] },
         review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
         variants: [
@@ -1100,6 +1295,27 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
               '/routes/spain-citizenship-by-birth/variants/no_nationality_transmitted/eligibility',
             ]),
           },
+          {
+            id: 'undetermined_parentage',
+            label: 'Undetermined parentage',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'birth.jurisdiction', operator: 'eq', value: '724' },
+              { field: 'parentage.determined', operator: 'eq', value: false },
+            ],
+            milestones: [{ status: 'citizenship_by_origin', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Spanish origin nationality applies when parentage is undetermined; the Civil Code also presumes certain found minors were born in Spain.',
+            },
+            source_refs: refs([civilCode], [
+              '/routes/spain-citizenship-by-birth/variants/undetermined_parentage/eligibility',
+              '/routes/spain-citizenship-by-birth/variants/undetermined_parentage/timeline',
+            ]),
+          },
         ],
       },
       {
@@ -1107,7 +1323,7 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
         mode: 'naturalization',
         status: 'active',
         title: 'Naturalization after legal residence',
-        summary: 'The general residence period is ten years, with shorter statutory periods for refugees and specified groups.',
+        summary: 'The general residence period is ten years and five years for recognized refugees. A person born in Spain who is not already Spanish by origin can apply after one year of legal, continuous residence immediately before applying; the grant is not automatic.',
         effective: { from: null, to: null, supersedes: [] },
         review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
         variants: [
@@ -1189,7 +1405,7 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
               eligibility_minimum_months: 12,
               processing_typical_months: null,
               confidence: 'high',
-              note: 'One-year residence period for a person born in Spanish territory.',
+              note: 'One year of legal, continuous residence immediately before the application. Article 22 also requires good civic conduct and sufficient integration; the grant is not automatic.',
             },
             source_refs: refs([civilCode], [
               '/routes/spain-naturalization-by-residence/variants/born_in_spain/eligibility',

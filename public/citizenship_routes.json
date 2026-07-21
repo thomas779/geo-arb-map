@@ -3156,24 +3156,79 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship after birth and residence in France",
-      "summary": "A person born in France to foreign parents can acquire citizenship at adulthood when the statutory residence conditions are met.",
+      "title": "Citizenship through birth and residence in France",
+      "summary": "Birth in France alone is not generally enough. Limited parentage or statelessness cases confer citizenship at birth; otherwise a child of foreign parents can acquire it from age 13, 16, or automatically at 18 when the residence conditions are met.",
       "facts": {
         "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [],
+        "variant_count": 5,
+        "eligibility_months": [
+          0
+        ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "parent_born_in_france",
+          "label": "Born in France to a parent also born in France",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Citizenship from birth under the double-jus-soli rule, subject to the diplomatic exception."
+        },
+        {
+          "id": "no_nationality_transmitted",
+          "label": "Stateless parents or no nationality transmitted",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Citizenship from birth where the child would otherwise receive no nationality from either parent."
+        },
+        {
+          "id": "declaration_from_age_13",
+          "label": "Parent declaration from age 13",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "From age 13, a parent may declare with the child’s consent after at least five years of habitual residence in France since age 8."
+        },
+        {
+          "id": "declaration_from_age_16",
+          "label": "Personal declaration from age 16",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "At age 16 or 17, the child may declare while living in France after at least five years of habitual residence since age 11."
+        },
+        {
+          "id": "automatic_at_majority",
+          "label": "Automatic acquisition at age 18",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Automatic at age 18 if the person lives in France then and has accumulated at least five years of habitual residence since age 11."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
         {
-          "title": "French Civil Code — Article 21-7",
-          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039366780/"
+          "title": "French Civil Code — Article 19-3",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419425/"
+        },
+        {
+          "title": "French Civil Code — Article 20-5",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419523/"
+        },
+        {
+          "title": "French Civil Code — Article 19-1",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419453/"
+        },
+        {
+          "title": "French Civil Code — Article 21-11",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419871/"
         },
         {
           "title": "Service-Public — French nationality for a child born in France",
           "url": "https://www.service-public.fr/particuliers/vosdroits/F295"
+        },
+        {
+          "title": "French Civil Code — Article 21-7",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039366780/"
         }
       ]
     },
@@ -3195,6 +3250,15 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "french_parent",
+          "label": "At least one French parent",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "The entitlement is by filiation; documentation and registration time are separate."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3230,6 +3294,22 @@
         ],
         "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "ordinary",
+          "label": "Ordinary residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Eligibility period only; naturalization remains discretionary."
+        },
+        {
+          "id": "higher_education",
+          "label": "French higher-education reduction",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Reduced eligibility period, not a processing-time promise."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
@@ -3269,6 +3349,15 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "qualifying_parent_residence",
+          "label": "Parent resident for five years with permanent status",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "The five-year period is a condition already met by the parent before birth."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3296,6 +3385,15 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "german_parent",
+          "label": "German parent at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Citizenship is acquired at birth when the statutory conditions are met."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3324,6 +3422,22 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "ordinary",
+          "label": "Standard five-year route",
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Other requirements in section 10 still apply."
+        },
+        {
+          "id": "spouse_of_german",
+          "label": "Spouse or registered partner of a German",
+          "allocation": "right",
+          "eligibility_months": 36,
+          "note": "The residence and relationship requirements operate together."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3424,6 +3538,21 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "citizen_or_entitled_parent",
+          "label": "Irish citizen or entitled parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        },
+        {
+          "id": "qualifying_parent_residence",
+          "label": "Parent resident for three of the previous four years",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Specified study and protection-processing periods do not count toward the parent’s residence calculation."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3451,6 +3580,22 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "irish_born_parent",
+          "label": "Parent born on the island of Ireland",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "The Department of Foreign Affairs describes this category as automatic."
+        },
+        {
+          "id": "foreign_birth_registration",
+          "label": "Foreign Birth Registration",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Citizenship begins when the person is entered on the Foreign Births Register."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3478,6 +3623,15 @@
         ],
         "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "ordinary",
+          "label": "Standard adult naturalization",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "The Minister retains discretion and other statutory conditions apply."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3667,6 +3821,15 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "parent_five_year_residence",
+          "label": "Parent with five years of legal residence",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "The five-year period applies to the parent before the child’s birth."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
@@ -3694,6 +3857,15 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "portuguese_parent_at_birth",
+          "label": "Portuguese parent at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Eligibility is by descent; registration and processing time are separate."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3731,6 +3903,22 @@
         ],
         "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "cplp_or_eu_national",
+          "label": "CPLP or EU national",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Eligibility period for applications under the 2026 law."
+        },
+        {
+          "id": "other_national",
+          "label": "Other national",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "General eligibility period for applications under the 2026 law."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
@@ -3822,15 +4010,36 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship through birth in Spain",
-      "summary": "Birth in Spain can confer nationality by origin in specific parentage or statelessness cases.",
+      "summary": "Birth in Spain alone does not generally confer citizenship. Nationality by origin applies in limited parentage, statelessness, or undetermined-parentage cases.",
       "facts": {
         "canonical": true,
-        "variant_count": 2,
+        "variant_count": 3,
         "eligibility_months": [
           0
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "foreign_parent_born_in_spain",
+          "label": "Foreign parent also born in Spain",
+          "allocation": "right",
+          "eligibility_months": 0
+        },
+        {
+          "id": "no_nationality_transmitted",
+          "label": "No nationality transmitted by either parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        },
+        {
+          "id": "undetermined_parentage",
+          "label": "Undetermined parentage",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Spanish origin nationality applies when parentage is undetermined; the Civil Code also presumes certain found minors were born in Spain."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3858,6 +4067,22 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "spanish_parent",
+          "label": "Spanish parent",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Nationality by origin; documentation time is separate."
+        },
+        {
+          "id": "originally_spanish_parent_born_in_spain",
+          "label": "Option through an originally Spanish parent born in Spain",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "A statutory option route under Civil Code Article 20."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3876,7 +4101,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after legal residence",
-      "summary": "The general residence period is ten years, with shorter statutory periods for refugees and specified groups.",
+      "summary": "The general residence period is ten years and five years for recognized refugees. A person born in Spain who is not already Spanish by origin can apply after one year of legal, continuous residence immediately before applying; the grant is not automatic.",
       "facts": {
         "canonical": true,
         "variant_count": 3,
@@ -3887,6 +4112,29 @@
         ],
         "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "ordinary",
+          "label": "Ordinary residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Eligibility period only; the grant is not automatic."
+        },
+        {
+          "id": "recognized_refugee",
+          "label": "Recognized refugee",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Five-year residence period for a person recognized as a refugee."
+        },
+        {
+          "id": "born_in_spain",
+          "label": "Born in Spain",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "One year of legal, continuous residence immediately before the application. Article 22 also requires good civic conduct and sufficient integration; the grant is not automatic."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3970,6 +4218,14 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "british_or_settled_parent",
+          "label": "British or settled parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -3997,6 +4253,15 @@
         ],
         "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "british_parent",
+          "label": "British parent",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Some categories are automatic and others require registration."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [
@@ -4025,6 +4290,22 @@
         ],
         "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "ordinary",
+          "label": "Standard settled route",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "The residence and settled-status periods overlap when settlement was obtained earlier."
+        },
+        {
+          "id": "spouse_of_british_citizen",
+          "label": "Spouse or civil partner of a British citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "No additional 12-month wait after settlement applies to this variant."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-21",
       "sources": [

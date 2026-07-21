@@ -125,6 +125,14 @@ export interface CitizenshipRouteSource {
   url: string;
 }
 
+export interface CitizenshipRoutePathway {
+  id: string;
+  label: string;
+  allocation: 'right' | 'discretionary' | 'ballot' | 'quota_queue';
+  eligibility_months: number | null;
+  note?: string;
+}
+
 export interface CitizenshipRoute {
   id: string;
   country: Member;
@@ -133,6 +141,7 @@ export interface CitizenshipRoute {
   title: string;
   summary: string;
   facts: Record<string, unknown>;
+  pathways?: CitizenshipRoutePathway[];
   confidence: 'high' | 'medium' | 'low';
   last_checked: string;
   sources: CitizenshipRouteSource[];

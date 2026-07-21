@@ -413,6 +413,30 @@ describe('data:build parity gates', () => {
     )?.sources.length).toBeGreaterThan(0);
   });
 
+  test('frontend country details preserve named canonical pathways', () => {
+    const spainResidence = release.frontend.citizenship.routes.find(
+      route => route.id === 'spain-naturalization-by-residence',
+    );
+    expect(spainResidence?.pathways).toContainEqual(expect.objectContaining({
+      id: 'born_in_spain',
+      eligibility_months: 12,
+      allocation: 'discretionary',
+    }));
+    expect(spainResidence?.summary).toContain('one year of legal, continuous residence');
+
+    const franceBirth = release.frontend.citizenship.routes.find(
+      route => route.id === 'france-birth-and-residence',
+    );
+    expect(franceBirth?.pathways?.map(pathway => pathway.id)).toEqual([
+      'parent_born_in_france',
+      'no_nationality_transmitted',
+      'declaration_from_age_13',
+      'declaration_from_age_16',
+      'automatic_at_majority',
+    ]);
+    expect(franceBirth?.summary).toContain('Birth in France alone is not generally enough');
+  });
+
   test('legacy remainder byte parity partitions source and pilot exactly', () => {
     expect(gate('legacy_remainder_byte_parity').status).toBe('pass');
   });

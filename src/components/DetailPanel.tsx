@@ -129,6 +129,16 @@ function factLabels(route: CitizenshipRoute): string[] {
   return labels.slice(0, 3);
 }
 
+function pathwayTiming(months: number | null): string | null {
+  if (months === null) return null;
+  if (months === 0) return 'At birth or qualifying status';
+  if (months % 12 === 0) {
+    const years = months / 12;
+    return `${years} ${years === 1 ? 'year' : 'years'}`;
+  }
+  return `${months} months`;
+}
+
 function RouteCard({ route }: { route: CitizenshipRoute }) {
   const facts = factLabels(route);
   return (
@@ -159,6 +169,29 @@ function RouteCard({ route }: { route: CitizenshipRoute }) {
             {facts.map(fact => (
               <Badge key={fact} variant="secondary" className="text-[10px]">{fact}</Badge>
             ))}
+          </div>
+        )}
+        {route.pathways && route.pathways.length > 0 && (
+          <div className="mt-3 space-y-2 border-t border-dashed pt-3">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Paths covered
+            </p>
+            {route.pathways.map(pathway => {
+              const timing = pathwayTiming(pathway.eligibility_months);
+              return (
+                <div key={pathway.id} className="rounded-md bg-secondary/55 px-2.5 py-2">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
+                    <span className="text-xs font-medium text-foreground">{pathway.label}</span>
+                    {timing && <span className="text-[10px] text-muted-foreground">{timing}</span>}
+                  </div>
+                  {pathway.note && (
+                    <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">
+                      {pathway.note}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
           </div>
         )}
         <div className="mt-3 border-t border-dashed pt-2">

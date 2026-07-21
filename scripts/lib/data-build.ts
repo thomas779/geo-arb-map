@@ -892,6 +892,13 @@ function projectFrontendCitizenship(
           ...(legacyRoute?.facts ?? {}),
           ...canonicalRouteFacts(route),
         },
+        pathways: route.variants.map(variant => ({
+          id: variant.id,
+          label: variant.label,
+          allocation: variant.allocation,
+          eligibility_months: variant.timeline.eligibility_minimum_months,
+          ...(variant.timeline.note ? { note: variant.timeline.note } : {}),
+        })),
         confidence: route.review.confidence,
         last_checked: route.review.last_checked ?? '2026-07-21',
         sources: canonicalRouteSources(route, sourceIndex, []),
