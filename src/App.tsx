@@ -233,6 +233,7 @@ export default function App() {
           <div className="min-w-0">
             <h1 className="whitespace-nowrap font-heading text-xl font-bold tracking-[-0.035em] sm:text-[1.45rem]">
               Flag Paths
+              <span className="sr-only"> — citizenship and residency paths atlas</span>
             </h1>
             <span className="hidden font-mono text-[8px] font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:block">
               Mobility atlas
