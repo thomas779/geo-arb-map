@@ -192,6 +192,17 @@ const OFFICIAL_URLS = {
   uruguay_nationality_law: 'https://www.impo.com.uy/bases/leyes/16021-1989',
   uruguay_legal_citizenship: 'https://www.gub.uy/tramites/carta-ciudadania',
   uruguay_tax_residence: 'https://www.gub.uy/direccion-general-impositiva/comunicacion/publicaciones/causales-residencia-fiscal',
+  greece_citizenship_code: 'https://www.ypes.gr/kodikas-ellinikis-ithageneias/',
+  greece_citizenship_supporting_documents: 'https://www.ypes.gr/en/acquisition-of-the-greek-citizenship-sup-doc/',
+  greece_seven_year_naturalization: 'https://www.ypes.gr/t-theodorikakos-epimenoyme-elliniki-ithageneia-sta-7-chronia-ochi-se-3-chronia/',
+  greece_golden_visa: 'https://migration.gov.gr/en/golden-visa/',
+  bulgaria_citizenship_act: 'https://justice.government.bg/home/normdoc/2134446592',
+  bulgaria_citizenship_directorate: 'https://justice.government.bg/home/index/dbg',
+  bulgaria_investment_repeal: 'https://www.parliament.bg/en/news/ID/5424',
+  serbia_citizenship_guidance: 'https://mup.gov.rs/wps/portal/sr/gradjani/dokumenta/Drzavljanstvo/',
+  uae_nationality_law: 'https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1',
+  uae_nationality_guidance: 'https://u.ae/en/information-and-services/passports-and-traveling/emirati-nationality',
+  uae_golden_visa: 'https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -510,6 +521,31 @@ function jurisdictionSources(): SourceRecord[] {
         method: 'http',
         url,
         status: 'planned',
+      },
+    })),
+    ...[
+      ['Greek Ministry of Interior — Citizenship Code', OFFICIAL_URLS.greece_citizenship_code, '300', 'el', 'primary_law', 'greece-citizenship'],
+      ['Greek Ministry of Interior — Citizenship supporting documents', OFFICIAL_URLS.greece_citizenship_supporting_documents, '300', 'en', 'official_guidance', 'greece-citizenship'],
+      ['Greek Ministry of Interior — seven-year naturalization period', OFFICIAL_URLS.greece_seven_year_naturalization, '300', 'el', 'official_guidance', 'greece-citizenship'],
+      ['Greek Ministry of Migration — Golden Visa', OFFICIAL_URLS.greece_golden_visa, '300', 'en', 'official_guidance', 'greece-investor-residence'],
+      ['Bulgarian Ministry of Justice — Citizenship Act', OFFICIAL_URLS.bulgaria_citizenship_act, '100', 'bg', 'primary_law', 'bulgaria-citizenship'],
+      ['Bulgarian Ministry of Justice — Citizenship Directorate', OFFICIAL_URLS.bulgaria_citizenship_directorate, '100', 'bg', 'official_guidance', 'bulgaria-citizenship'],
+      ['Bulgarian National Assembly — investment citizenship repealed', OFFICIAL_URLS.bulgaria_investment_repeal, '100', 'en', 'official_guidance', 'bulgaria-citizenship'],
+      ['Serbian Ministry of Interior — Citizenship', OFFICIAL_URLS.serbia_citizenship_guidance, '688', 'sr', 'official_guidance', 'serbia-citizenship'],
+      ['UAE Ministry of Justice — Nationality and Passports Law', OFFICIAL_URLS.uae_nationality_law, '784', 'en', 'primary_law', 'uae-nationality'],
+      ['UAE Government — Emirati nationality', OFFICIAL_URLS.uae_nationality_guidance, '784', 'en', 'official_guidance', 'uae-nationality'],
+      ['UAE Government — Golden Visa', OFFICIAL_URLS.uae_golden_visa, '784', 'en', 'official_guidance', 'uae-golden-visa'],
+    ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
+      title,
+      url,
+      source_type: sourceType as SourceRecord['source_type'],
+      jurisdictions: [jurisdiction],
+      language,
+      monitoring: {
+        source_id: monitorId,
+        method: 'http',
+        url,
+        status: 'active',
       },
     })),
   ];
@@ -1743,6 +1779,95 @@ function uruguayRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
       principalCitizenshipRoute({ id: 'uruguay-nationality-by-parent', mode: 'ancestry', title: 'Uruguayan nationality through a parent', summary: 'A child of a Uruguayan mother or father is a Uruguayan national regardless of birthplace; constitutional natural-citizenship exercise involves the applicable connection and registration steps.', source: nationality, eligibility: [{ field: 'parent.nationality.iso_n3', operator: 'eq', value: '858' }], months: 0 }),
       principalCitizenshipRoute({ id: 'uruguay-legal-citizenship-by-residence', mode: 'naturalization', title: 'Uruguayan legal citizenship by habitual residence', summary: 'A foreign adult of good conduct may seek legal citizenship after three years of habitual residence with family constituted in Uruguay, or five years without, while proving qualifying means or activity.', source: legalCitizenship, eligibility: [{ field: 'residence.habitual_months', operator: 'gte', value: 36, unit: 'months' }, { field: 'family.constituted_in_uruguay', operator: 'eq', value: true }], months: 36, allocation: 'right', note: 'Without family constituted in Uruguay the period is five years. An absence exceeding six continuous months resets the residence period.' }),
       principalCitizenshipRoute({ id: 'uruguay-nationality-by-birth', mode: 'birth', title: 'Uruguayan nationality by territorial birth', summary: 'Every person born anywhere in the territory of Uruguay is a natural citizen and Uruguayan national.', source: constitution, eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '858' }], months: 0 }),
+    ],
+  });
+}
+
+function greeceRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const code = requireSource(officialSources, OFFICIAL_URLS.greece_citizenship_code);
+  const supporting = requireSource(officialSources, OFFICIAL_URLS.greece_citizenship_supporting_documents);
+  const sevenYears = requireSource(officialSources, OFFICIAL_URLS.greece_seven_year_naturalization);
+  const goldenVisa = requireSource(officialSources, OFFICIAL_URLS.greece_golden_visa);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '300',
+    note: 'All acquisition modes reviewed against the Ministry of Interior citizenship code; investor residence is kept separate from citizenship.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [code] },
+      { mode: 'naturalization', finding: 'present', sources: [code] },
+      { mode: 'birth', finding: 'present', sources: [code], note: 'Birth in Greece is not generally sufficient; the code provides limited automatic and declaration routes tied to parent status, statelessness, residence and schooling.' },
+      { mode: 'investment', finding: 'verified_none', sources: [code, goldenVisa], note: 'The Golden Visa is an investor residence permit, not direct citizenship.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({ id: 'greece-citizenship-by-greek-parent', mode: 'ancestry', title: 'Citizenship routes through a Greek parent', summary: 'Greek nationality law provides acquisition and declaration procedures for people born to a Greek parent, with separate documentary routes depending on birth date, registration and the parents\' marital or acknowledgment status. This record confirms the route family but does not collapse those distinct procedures into one universal checklist.', source: supporting, eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '300' }], months: 0, lastChecked: '2026-07-17' }),
+      principalCitizenshipRoute({ id: 'greece-ordinary-naturalization', mode: 'naturalization', title: 'Ordinary naturalization after residence', summary: 'Greece\'s ordinary naturalization route for non-co-ethnic foreign nationals generally uses seven years of legal residence, with distinct eligible residence categories and supporting documents. Applicants must also satisfy the applicable integration, language, civic-knowledge and character requirements; residence eligibility is not an automatic grant.', source: [supporting, sevenYears], eligibility: [{ field: 'residence.lawful_continuous_months', operator: 'gte', value: 84, unit: 'months' }], months: 84, allocation: 'discretionary', lastChecked: '2026-07-17' }),
+      principalCitizenshipRoute({ id: 'greece-citizenship-birth-and-school', mode: 'birth', title: 'Citizenship following birth and schooling in Greece', summary: 'A child born in Greece to foreign parents can acquire citizenship by declaration where the statutory parent-residence, lawful-status and Greek-school conditions are met.', source: code, eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '300' }, { field: 'parent.residence_before_birth_months', operator: 'gte', value: 60, unit: 'months' }, { field: 'education.enrolled_in_greek_school', operator: 'eq', value: true }], months: 0, note: 'This is a declaration route connected to birth and schooling, not unconditional jus soli.' }),
+    ],
+  });
+}
+
+function bulgariaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.bulgaria_citizenship_act);
+  const directorate = requireSource(officialSources, OFFICIAL_URLS.bulgaria_citizenship_directorate);
+  const repeal = requireSource(officialSources, OFFICIAL_URLS.bulgaria_investment_repeal);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '100',
+    note: 'All acquisition modes reviewed against the current Bulgarian Citizenship Act and Ministry of Justice citizenship procedures.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act, directorate] },
+      { mode: 'naturalization', finding: 'present', sources: [act, directorate] },
+      { mode: 'birth', finding: 'present', sources: [act], note: 'Territorial birth applies where the person does not acquire another citizenship by origin; it is not general jus soli.' },
+      { mode: 'investment', finding: 'present', sources: [act, repeal], note: 'The only modeled route is historical and inactive: investment-naturalization Articles 12a and 14a were repealed in 2022 and unfinished proceedings were terminated.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({ id: 'bulgaria-bulgarian-origin-naturalization', mode: 'ancestry', title: 'Naturalization for a person of Bulgarian origin', summary: 'A person of Bulgarian origin may apply under article 15 without the ordinary residence, income, language and release-of-prior-citizenship conditions. The applicant must establish the family relationship with at least one ancestor of Bulgarian origin, up to the third degree inclusive, using the required official documents.', source: act, eligibility: [{ field: 'ancestor.bulgarian_origin_degree', operator: 'lte', value: 3, unit: 'count' }], months: 0, allocation: 'discretionary', lastChecked: '2026-07-17' }),
+      principalCitizenshipRoute({ id: 'bulgaria-ordinary-naturalization', mode: 'naturalization', title: 'Ordinary naturalization after permanent residence', summary: 'Bulgaria\'s ordinary route generally requires an adult to have held permanent or long-term residence for at least five years, alongside criminal-record, income or occupation, Bulgarian-language and—unless an exception applies—prior-citizenship release requirements. This is five years after the qualifying residence status, not a promise of citizenship after five years of any lawful stay.', source: [act, directorate], eligibility: [{ field: 'residence.permanent_or_long_term_months', operator: 'gte', value: 60, unit: 'months' }, { field: 'language.bulgarian_required', operator: 'eq', value: true }], months: 60, allocation: 'discretionary', note: 'The five years run from obtaining permanent or long-term residence, not merely from first arrival.', lastChecked: '2026-07-17' }),
+      principalCitizenshipRoute({ id: 'bulgaria-citizenship-by-birth-statelessness', mode: 'birth', title: 'Citizenship by birth where no other citizenship is acquired', summary: 'A person born in Bulgaria is a citizen by place of birth if they do not acquire another citizenship by origin; a foundling with unknown parents is presumed born in Bulgaria.', source: act, eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '100' }, { field: 'child.other_nationality_acquired', operator: 'eq', value: false }], months: 0 }),
+      principalCitizenshipRoute({ id: 'bulgaria-investor-citizenship-repealed', mode: 'investment', title: 'Former investor-citizenship provisions', summary: 'Bulgaria repealed the special investment-based citizenship provisions in 2022. Investment or property ownership should not be presented as a current direct route to Bulgarian citizenship; any residence obtained on another legal basis follows the applicable ordinary nationality rules.', source: [repeal, act], eligibility: [{ field: 'programme.accepting_new_applications', operator: 'eq', value: false }], months: null, allocation: 'discretionary', status: 'inactive', lastChecked: '2026-07-17', note: 'Historical negative retained to prevent stale investor-citizenship recommendations.' }),
+    ],
+  });
+}
+
+function serbiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const guidance = requireSource(officialSources, OFFICIAL_URLS.serbia_citizenship_guidance);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '688',
+    note: 'All acquisition modes reviewed against the Serbian Ministry of Interior citizenship guidance and linked Citizenship Act.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [guidance] },
+      { mode: 'naturalization', finding: 'present', sources: [guidance] },
+      { mode: 'birth', finding: 'present', sources: [guidance], note: 'Birth in Serbia is limited to children whose parents are unknown, of unknown citizenship or stateless, or where the child would otherwise be stateless.' },
+      { mode: 'investment', finding: 'verified_none', sources: [guidance], note: 'The official acquisition grounds do not provide a direct citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({ id: 'serbia-citizenship-by-descent', mode: 'ancestry', title: 'Serbian citizenship by descent', summary: 'Serbian citizenship is acquired by descent under the parentage and, for some foreign-born children, registration conditions in the Citizenship Act.', source: guidance, eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '688' }], months: 0 }),
+      principalCitizenshipRoute({ id: 'serbia-admission-after-permanent-residence', mode: 'naturalization', title: 'Admission after permanent residence', summary: 'An adult foreigner with permanent residence may request admission to Serbian citizenship subject to release or qualifying assurance regarding former citizenship and a declaration that Serbia is their state.', source: guidance, eligibility: [{ field: 'residence.permanent_status', operator: 'eq', value: true }, { field: 'declaration.serbia_as_state', operator: 'eq', value: true }], months: 36, allocation: 'discretionary', note: 'Current foreigner rules generally make permanent residence available after three years of continuous temporary residence; citizenship admission then remains a separate decision.' }),
+      principalCitizenshipRoute({ id: 'serbia-citizenship-by-birth-statelessness', mode: 'birth', title: 'Citizenship at birth to prevent statelessness', summary: 'A child born or found in Serbia acquires citizenship where both parents are unknown, of unknown citizenship or stateless, or where the child would otherwise be stateless.', source: guidance, eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '688' }, { field: 'child.other_nationality_acquired', operator: 'eq', value: false }], months: 0 }),
+    ],
+  });
+}
+
+function unitedArabEmiratesRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.uae_nationality_law);
+  const guidance = requireSource(officialSources, OFFICIAL_URLS.uae_nationality_guidance);
+  const goldenVisa = requireSource(officialSources, OFFICIAL_URLS.uae_golden_visa);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '784',
+    note: 'All acquisition modes reviewed against the federal nationality law and UAE Government guidance; nomination-based nationality is distinguished from Golden Visa residence.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law] },
+      { mode: 'naturalization', finding: 'present', sources: [law, guidance], note: 'Naturalization and the 2021 exceptional categories are discretionary and nomination-based.' },
+      { mode: 'birth', finding: 'present', sources: [law], note: 'Birth in the UAE alone does not confer citizenship; acquisition at birth depends principally on a qualifying parent or the foundling/statelessness rules.' },
+      { mode: 'investment', finding: 'present', sources: [guidance, goldenVisa], note: 'Property-owning investors may be nominated for nationality, but there is no open, threshold-based direct CBI application. The Golden Visa is residence only.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({ id: 'uae-citizenship-by-father', mode: 'ancestry', title: 'Emirati nationality through a citizen father', summary: 'Federal law treats a person born in the UAE or abroad to a qualifying Emirati father as a citizen by operation of law, with additional limited maternal and foundling cases.', source: law, eligibility: [{ field: 'parent.father_citizenship.iso_n3', operator: 'eq', value: '784' }], months: 0 }),
+      principalCitizenshipRoute({ id: 'uae-exceptional-naturalization', mode: 'naturalization', title: 'Exceptional nomination for Emirati nationality', summary: 'Specified professionals, scientists, inventors, intellectuals and talented people may be nominated for nationality when their category-specific conditions are met.', source: guidance, eligibility: [{ field: 'nomination.by_competent_uae_authority', operator: 'eq', value: true }], months: null, allocation: 'discretionary', note: 'There is no public self-application route or guaranteed timeline.' }),
+      principalCitizenshipRoute({ id: 'uae-citizenship-at-birth-qualifying-parent', mode: 'birth', title: 'Citizenship at birth through a qualifying parent', summary: 'Citizenship at birth follows the federal parentage rules rather than territorial birth; the law also protects certain children of unknown or stateless parentage.', source: law, eligibility: [{ field: 'birth.parent_qualifying_under_federal_law', operator: 'eq', value: true }], months: 0 }),
+      principalCitizenshipRoute({ id: 'uae-investor-nationality-nomination', mode: 'investment', title: 'Investor nomination for Emirati nationality', summary: 'The 2021 exceptional categories allow a property-owning investor to be nominated for nationality by designated UAE authorities.', source: guidance, eligibility: [{ field: 'investment.uae_property_owned', operator: 'eq', value: true }, { field: 'nomination.by_competent_uae_authority', operator: 'eq', value: true }], months: null, allocation: 'discretionary', note: 'This is not a purchasable or threshold-based CBI programme. Golden Visa investment residence is separate.' }),
     ],
   });
 }
@@ -3452,20 +3577,24 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
   const countrySources = jurisdictionSources();
   const jurisdictions = [
     australiaRecord(shadow, countrySources),
+    bulgariaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
+    greeceRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
+    serbiaRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),
     switzerlandRecord(shadow, countrySources),
     turkiyeRecord(shadow, countrySources),
+    unitedArabEmiratesRecord(shadow, countrySources),
     unitedKingdomRecord(shadow, countrySources),
     unitedStatesRecord(shadow, countrySources),
     uruguayRecord(shadow, countrySources),

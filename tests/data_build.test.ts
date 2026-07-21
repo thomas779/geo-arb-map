@@ -97,8 +97,8 @@ describe('data:build reads the canonical database', () => {
       selected_statuses: ['draft'],
       selected_release_status: null,
     });
-    expect(loaded.projections.coverage).toHaveLength(18);
-    expect(loaded.projections.mode_coverage).toHaveLength(72);
+    expect(loaded.projections.coverage).toHaveLength(22);
+    expect(loaded.projections.mode_coverage).toHaveLength(88);
   });
 
   test('fails clearly when the database is missing', () => {
@@ -364,6 +364,7 @@ describe('data:build parity gates', () => {
       'australia-citizenship-by-birth',
       'australia-citizenship-by-conferral',
       'australia-citizenship-by-descent',
+      'bulgaria-citizenship-by-birth-statelessness',
       'canada-citizenship-by-birth',
       'canada-citizenship-by-descent',
       'canada-citizenship-grant',
@@ -375,6 +376,7 @@ describe('data:build parity gates', () => {
       'germany-citizenship-by-birth',
       'germany-citizenship-by-parent',
       'germany-naturalization-by-residence',
+      'greece-citizenship-birth-and-school',
       'ireland-citizenship-by-birth',
       'ireland-citizenship-by-descent',
       'ireland-naturalization-by-residence',
@@ -389,6 +391,9 @@ describe('data:build parity gates', () => {
       'nz-citizenship-by-descent',
       'nz-citizenship-by-grant',
       'portugal-citizenship-by-parent',
+      'serbia-admission-after-permanent-residence',
+      'serbia-citizenship-by-birth-statelessness',
+      'serbia-citizenship-by-descent',
       'singapore-citizenship-after-pr',
       'singapore-citizenship-by-birth',
       'singapore-citizenship-by-descent',
@@ -401,6 +406,10 @@ describe('data:build parity gates', () => {
       'turkiye-citizenship-by-birth-statelessness',
       'turkiye-citizenship-by-descent',
       'turkiye-naturalization-by-residence',
+      'uae-citizenship-at-birth-qualifying-parent',
+      'uae-citizenship-by-father',
+      'uae-exceptional-naturalization',
+      'uae-investor-nationality-nomination',
       'uk-citizenship-by-birth',
       'uk-citizenship-by-parent',
       'uk-naturalization-after-settlement',

@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 74,
+      "routes": 83,
       "by_mode": {
-        "ancestry": 20,
-        "naturalization": 21,
-        "birth": 18,
-        "investment": 15
+        "ancestry": 22,
+        "naturalization": 23,
+        "birth": 22,
+        "investment": 16
       },
       "by_status": {
-        "active": 69,
+        "active": 78,
         "inactive": 2,
         "pending_verification": 2,
         "verified_negative": 1
@@ -391,14 +391,15 @@
       "name": "Bulgaria",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "partial",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
-        "bulgaria-ordinary-naturalization",
         "bulgaria-bulgarian-origin-naturalization",
+        "bulgaria-ordinary-naturalization",
+        "bulgaria-citizenship-by-birth-statelessness",
         "bulgaria-investor-citizenship-repealed"
       ]
     },
@@ -1053,14 +1054,15 @@
       "name": "Greece",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "partial",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
       "route_ids": [
+        "greece-citizenship-by-greek-parent",
         "greece-ordinary-naturalization",
-        "greece-citizenship-by-greek-parent"
+        "greece-citizenship-birth-and-school"
       ]
     },
     {
@@ -2379,12 +2381,16 @@
       "name": "Serbia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "serbia-citizenship-by-descent",
+        "serbia-admission-after-permanent-residence",
+        "serbia-citizenship-by-birth-statelessness"
+      ]
     },
     {
       "iso_n3": "690",
@@ -2691,12 +2697,17 @@
       "name": "United Arab Emirates",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "uae-citizenship-by-father",
+        "uae-exceptional-naturalization",
+        "uae-citizenship-at-birth-qualifying-parent",
+        "uae-investor-nationality-nomination"
+      ]
     },
     {
       "iso_n3": "788",
@@ -3174,20 +3185,69 @@
       },
       "mode": "ancestry",
       "status": "active",
-      "title": "Bulgarian-origin route can waive residence, income, language and renunciation conditions",
+      "title": "Naturalization for a person of Bulgarian origin",
       "summary": "A person of Bulgarian origin may apply under article 15 without the ordinary residence, income, language and release-of-prior-citizenship conditions. The applicant must establish the family relationship with at least one ancestor of Bulgarian origin, up to the third degree inclusive, using the required official documents.",
       "facts": {
         "maximum_ancestor_degree": 3,
         "residence_required": false,
         "language_required": false,
         "renunciation_required": false,
-        "automatic": false
+        "automatic": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "bulgaria-bulgarian-origin-naturalization-principal",
+          "label": "Naturalization for a person of Bulgarian origin",
+          "allocation": "discretionary",
+          "eligibility_months": 0
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
-          "title": "Bulgarian Ministry of Justice — Bulgarian Citizenship Act, article 15",
+          "title": "Bulgarian Ministry of Justice — Citizenship Act",
+          "url": "https://justice.government.bg/home/normdoc/2134446592"
+        }
+      ]
+    },
+    {
+      "id": "bulgaria-citizenship-by-birth-statelessness",
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth where no other citizenship is acquired",
+      "summary": "A person born in Bulgaria is a citizen by place of birth if they do not acquire another citizenship by origin; a foundling with unknown parents is presumed born in Bulgaria.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bulgaria-citizenship-by-birth-statelessness-principal",
+          "label": "Citizenship by birth where no other citizenship is acquired",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Bulgarian Ministry of Justice — Citizenship Act",
           "url": "https://justice.government.bg/home/normdoc/2134446592"
         }
       ]
@@ -3200,21 +3260,34 @@
       },
       "mode": "investment",
       "status": "inactive",
-      "title": "Investor-citizenship provisions were repealed in 2022",
+      "title": "Former investor-citizenship provisions",
       "summary": "Bulgaria repealed the special investment-based citizenship provisions in 2022. Investment or property ownership should not be presented as a current direct route to Bulgarian citizenship; any residence obtained on another legal basis follows the applicable ordinary nationality rules.",
       "facts": {
         "programme_type": "former_investor_citizenship",
-        "repealed_year": 2022
+        "repealed_year": 2022,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "bulgaria-investor-citizenship-repealed-principal",
+          "label": "Former investor-citizenship provisions",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Historical negative retained to prevent stale investor-citizenship recommendations."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
-          "title": "National Assembly of Bulgaria — investment citizenship provisions repealed",
+          "title": "Bulgarian National Assembly — investment citizenship repealed",
           "url": "https://www.parliament.bg/en/news/ID/5424"
         },
         {
-          "title": "Bulgarian Ministry of Justice — Bulgarian Citizenship Act",
+          "title": "Bulgarian Ministry of Justice — Citizenship Act",
           "url": "https://justice.government.bg/home/normdoc/2134446592"
         }
       ]
@@ -3227,23 +3300,38 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Ordinary naturalization generally requires five years holding permanent or long-term residence",
+      "title": "Ordinary naturalization after permanent residence",
       "summary": "Bulgaria's ordinary route generally requires an adult to have held permanent or long-term residence for at least five years, alongside criminal-record, income or occupation, Bulgarian-language and—unless an exception applies—prior-citizenship release requirements. This is five years after the qualifying residence status, not a promise of citizenship after five years of any lawful stay.",
       "facts": {
         "permanent_or_long_term_status_years": 5,
         "language_required": true,
         "renunciation_generally_required": true,
-        "automatic": false
+        "automatic": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "bulgaria-ordinary-naturalization-principal",
+          "label": "Ordinary naturalization after permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "The five years run from obtaining permanent or long-term residence, not merely from first arrival."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
-          "title": "Bulgarian Ministry of Justice — Bulgarian Citizenship Act, article 12",
+          "title": "Bulgarian Ministry of Justice — Citizenship Act",
           "url": "https://justice.government.bg/home/normdoc/2134446592"
         },
         {
-          "title": "Bulgarian Ministry of Justice — Bulgarian citizenship services",
+          "title": "Bulgarian Ministry of Justice — Citizenship Directorate",
           "url": "https://justice.government.bg/home/index/dbg"
         }
       ]
@@ -3844,6 +3932,42 @@
       ]
     },
     {
+      "id": "greece-citizenship-birth-and-school",
+      "country": {
+        "iso_n3": "300",
+        "name": "Greece"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship following birth and schooling in Greece",
+      "summary": "A child born in Greece to foreign parents can acquire citizenship by declaration where the statutory parent-residence, lawful-status and Greek-school conditions are met.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "greece-citizenship-birth-and-school-principal",
+          "label": "Citizenship following birth and schooling in Greece",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "This is a declaration route connected to birth and schooling, not unconditional jus soli."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Greek Ministry of Interior — Citizenship Code",
+          "url": "https://www.ypes.gr/kodikas-ellinikis-ithageneias/"
+        }
+      ]
+    },
+    {
       "id": "greece-citizenship-by-greek-parent",
       "country": {
         "iso_n3": "300",
@@ -3851,17 +3975,31 @@
       },
       "mode": "ancestry",
       "status": "active",
-      "title": "Citizenship routes exist through a Greek parent and defined descent declarations",
+      "title": "Citizenship routes through a Greek parent",
       "summary": "Greek nationality law provides acquisition and declaration procedures for people born to a Greek parent, with separate documentary routes depending on birth date, registration and the parents' marital or acknowledgment status. This record confirms the route family but does not collapse those distinct procedures into one universal checklist.",
       "facts": {
         "route_type": "parentage_and_descent",
-        "automatic": "depends_on_birth_and_registration_facts"
+        "automatic": "depends_on_birth_and_registration_facts",
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
       },
+      "pathways": [
+        {
+          "id": "greece-citizenship-by-greek-parent-principal",
+          "label": "Citizenship routes through a Greek parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
-          "title": "Hellenic Ministry of Interior — acquisition of Greek citizenship: supporting documents",
+          "title": "Greek Ministry of Interior — Citizenship supporting documents",
           "url": "https://www.ypes.gr/en/acquisition-of-the-greek-citizenship-sup-doc/"
         }
       ]
@@ -3874,21 +4012,35 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Ordinary naturalization generally requires seven years of legal residence",
+      "title": "Ordinary naturalization after residence",
       "summary": "Greece's ordinary naturalization route for non-co-ethnic foreign nationals generally uses seven years of legal residence, with distinct eligible residence categories and supporting documents. Applicants must also satisfy the applicable integration, language, civic-knowledge and character requirements; residence eligibility is not an automatic grant.",
       "facts": {
         "ordinary_residence_years": 7,
-        "automatic": false
+        "automatic": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "greece-ordinary-naturalization-principal",
+          "label": "Ordinary naturalization after residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
-          "title": "Hellenic Ministry of Interior — acquisition of Greek citizenship: supporting documents",
+          "title": "Greek Ministry of Interior — Citizenship supporting documents",
           "url": "https://www.ypes.gr/en/acquisition-of-the-greek-citizenship-sup-doc/"
         },
         {
-          "title": "Hellenic Ministry of Interior — naturalization residence period",
+          "title": "Greek Ministry of Interior — seven-year naturalization period",
           "url": "https://www.ypes.gr/t-theodorikakos-epimenoyme-elliniki-ithageneia-sta-7-chronia-ochi-se-3-chronia/"
         }
       ]
@@ -4826,6 +4978,112 @@
       ]
     },
     {
+      "id": "serbia-admission-after-permanent-residence",
+      "country": {
+        "iso_n3": "688",
+        "name": "Serbia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Admission after permanent residence",
+      "summary": "An adult foreigner with permanent residence may request admission to Serbian citizenship subject to release or qualifying assurance regarding former citizenship and a declaration that Serbia is their state.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "serbia-admission-after-permanent-residence-principal",
+          "label": "Admission after permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Current foreigner rules generally make permanent residence available after three years of continuous temporary residence; citizenship admission then remains a separate decision."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Serbian Ministry of Interior — Citizenship",
+          "url": "https://mup.gov.rs/wps/portal/sr/gradjani/dokumenta/Drzavljanstvo/"
+        }
+      ]
+    },
+    {
+      "id": "serbia-citizenship-by-birth-statelessness",
+      "country": {
+        "iso_n3": "688",
+        "name": "Serbia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth to prevent statelessness",
+      "summary": "A child born or found in Serbia acquires citizenship where both parents are unknown, of unknown citizenship or stateless, or where the child would otherwise be stateless.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "serbia-citizenship-by-birth-statelessness-principal",
+          "label": "Citizenship at birth to prevent statelessness",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Serbian Ministry of Interior — Citizenship",
+          "url": "https://mup.gov.rs/wps/portal/sr/gradjani/dokumenta/Drzavljanstvo/"
+        }
+      ]
+    },
+    {
+      "id": "serbia-citizenship-by-descent",
+      "country": {
+        "iso_n3": "688",
+        "name": "Serbia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Serbian citizenship by descent",
+      "summary": "Serbian citizenship is acquired by descent under the parentage and, for some foreign-born children, registration conditions in the Citizenship Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "serbia-citizenship-by-descent-principal",
+          "label": "Serbian citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Serbian Ministry of Interior — Citizenship",
+          "url": "https://mup.gov.rs/wps/portal/sr/gradjani/dokumenta/Drzavljanstvo/"
+        }
+      ]
+    },
+    {
       "id": "singapore-citizenship-after-pr",
       "country": {
         "iso_n3": "702",
@@ -5189,6 +5447,144 @@
         {
           "title": "Swiss SEM — Acquiring Swiss citizenship",
           "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html"
+        }
+      ]
+    },
+    {
+      "id": "uae-citizenship-at-birth-qualifying-parent",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a qualifying parent",
+      "summary": "Citizenship at birth follows the federal parentage rules rather than territorial birth; the law also protects certain children of unknown or stateless parentage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uae-citizenship-at-birth-qualifying-parent-principal",
+          "label": "Citizenship at birth through a qualifying parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "UAE Ministry of Justice — Nationality and Passports Law",
+          "url": "https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1"
+        }
+      ]
+    },
+    {
+      "id": "uae-citizenship-by-father",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Emirati nationality through a citizen father",
+      "summary": "Federal law treats a person born in the UAE or abroad to a qualifying Emirati father as a citizen by operation of law, with additional limited maternal and foundling cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uae-citizenship-by-father-principal",
+          "label": "Emirati nationality through a citizen father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "UAE Ministry of Justice — Nationality and Passports Law",
+          "url": "https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1"
+        }
+      ]
+    },
+    {
+      "id": "uae-exceptional-naturalization",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Exceptional nomination for Emirati nationality",
+      "summary": "Specified professionals, scientists, inventors, intellectuals and talented people may be nominated for nationality when their category-specific conditions are met.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "uae-exceptional-naturalization-principal",
+          "label": "Exceptional nomination for Emirati nationality",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "There is no public self-application route or guaranteed timeline."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "UAE Government — Emirati nationality",
+          "url": "https://u.ae/en/information-and-services/passports-and-traveling/emirati-nationality"
+        }
+      ]
+    },
+    {
+      "id": "uae-investor-nationality-nomination",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Investor nomination for Emirati nationality",
+      "summary": "The 2021 exceptional categories allow a property-owning investor to be nominated for nationality by designated UAE authorities.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "uae-investor-nationality-nomination-principal",
+          "label": "Investor nomination for Emirati nationality",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "This is not a purchasable or threshold-based CBI programme. Golden Visa investment residence is separate."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "UAE Government — Emirati nationality",
+          "url": "https://u.ae/en/information-and-services/passports-and-traveling/emirati-nationality"
         }
       ]
     },

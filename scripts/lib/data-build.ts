@@ -705,7 +705,10 @@ function canonicalRouteSources(
     const replacement = canonicalByUrl.get(source.url);
     if (!replacement) return [];
     canonicalByUrl.delete(source.url);
-    return [replacement];
+    // The canonical source owns the evidence URL. Keep the legacy display title
+    // for existing compatibility routes because one statute can have several
+    // route-specific labels without requiring duplicate canonical sources.
+    return [{ ...replacement, title: source.title }];
   });
   return [...ordered, ...canonicalByUrl.values()];
 }
@@ -971,7 +974,6 @@ function citizenshipFieldDrift(
   source: LegacyCitizenship,
 ): CompatibilityDiff['citizenship_field_drift'] {
   const sourceIndex = new Map(loaded.sources.map(src => [src.id, src]));
-  const canonicalSourceByUrl = new Map(loaded.sources.map(src => [src.url, src]));
   const legacyRouteById = new Map(source.routes.map(route => [route.id, route]));
   const drift: CompatibilityDiff['citizenship_field_drift'] = [];
   const pilotIsos = new Set(loaded.jurisdictions.map(item => item.jurisdiction.iso_n3));
@@ -1040,18 +1042,6 @@ function citizenshipFieldDrift(
           canonical: [...canonicalSourceUrls].sort(),
           legacy: [...legacySourceUrls].sort(),
         });
-      }
-      for (const url of canonicalSourceUrls) {
-        const canonicalSource = canonicalSourceByUrl.get(url);
-        const legacySource = legacy.sources.find(source => source.url === url);
-        if (canonicalSource && legacySource && canonicalSource.title !== legacySource.title) {
-          drift.push({
-            entity_id: route.id,
-            field: `sources[${url}].title`,
-            canonical: canonicalSource.title,
-            legacy: legacySource.title,
-          });
-        }
       }
   }
   return drift;
@@ -1143,6 +1133,7 @@ function gateCitizenshipRoundtrip(loaded: LoadedCanonical, sourceCitizenship: Le
       legacy_carried_fields: [
         'title (canonical introduces a structural label; the legacy descriptive title is inherited)',
         'facts (canonical does not yet own structured facts; inherited until the schema grows)',
+        'source titles (canonical owns the evidence URL; route-specific display labels are inherited)',
       ],
     },
   };

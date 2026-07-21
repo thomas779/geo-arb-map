@@ -48,7 +48,9 @@ Completed:
 - automated D1 backup workflow.
 - reviewed four-mode records for the United States, Canada, Australia, New
   Zealand, United Kingdom, Ireland, Germany, France, Portugal, Spain, Italy,
-  Netherlands, Switzerland, Singapore, Malta, Cyprus, Türkiye, and Uruguay.
+  Netherlands, Switzerland, Singapore, Malta, Cyprus, Türkiye, Uruguay,
+  Bulgaria, Greece, Serbia, and the United Arab Emirates; and
+- active dedicated official-page monitoring for every reviewed jurisdiction.
 
 Still required:
 

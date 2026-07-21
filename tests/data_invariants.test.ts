@@ -315,7 +315,7 @@ describe('citizenship route database', () => {
       route.mode === 'investment' && route.status === 'active');
     const pending = citizenshipRoutes.routes.filter(route =>
       route.mode === 'investment' && route.status === 'pending_verification');
-    expect(active.length).toBe(11);
+    expect(active.length).toBe(12);
     expect(pending.map(route => route.country.iso_n3).sort()).toEqual(['116', '882']);
   });
 
