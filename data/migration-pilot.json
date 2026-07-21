@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "status": "shadow",
-  "jurisdictions": ["250", "276", "372", "620", "724", "826"],
+  "jurisdictions": ["036", "124", "250", "276", "372", "554", "620", "724", "826", "840"],
   "arrangements": {
     "blocs": ["eu_eea", "mercosur"],
     "bilateral_lanes": ["spain_iberoamerican"]

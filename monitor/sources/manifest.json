@@ -230,6 +230,42 @@
       "notes": "Official Irish Statute Book. Monitor nationality acts and amending instruments referenced by reviewed canonical claims."
     },
     {
+      "id": "australia-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://immi.homeaffairs.gov.au/citizenship",
+      "jurisdictions": ["036"],
+      "notes": "Monitor the Australian Citizenship Act plus Home Affairs descent, conferral, residence, and migration-program guidance linked by canonical claims."
+    },
+    {
+      "id": "canada-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship.html",
+      "jurisdictions": ["124"],
+      "notes": "Monitor current IRCC citizenship status, descent, birth, physical-presence, and permanent-residence guidance, including the post-15 December 2025 descent rules."
+    },
+    {
+      "id": "nz-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/",
+      "jurisdictions": ["554"],
+      "notes": "Monitor New Zealand citizenship by birth, descent, and grant guidance plus linked investor-residence pages."
+    },
+    {
+      "id": "us-citizenship-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.uscis.gov/citizenship",
+      "jurisdictions": ["840"],
+      "notes": "Monitor USCIS and Department of State citizenship-at-birth, naturalization, and investor-residence guidance, resolving legal changes to the U.S. Code."
+    },
+    {
       "id": "ircc-newsroom",
       "tier": "verification",
       "adapter": "rss",

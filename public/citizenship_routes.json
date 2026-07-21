@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 40,
+      "routes": 52,
       "by_mode": {
-        "ancestry": 9,
-        "naturalization": 10,
-        "birth": 6,
+        "ancestry": 13,
+        "naturalization": 14,
+        "birth": 10,
         "investment": 15
       },
       "by_status": {
-        "active": 35,
+        "active": 47,
         "inactive": 2,
         "pending_verification": 2,
         "verified_negative": 1
@@ -159,12 +159,16 @@
       "name": "Australia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "australia-citizenship-by-descent",
+        "australia-citizenship-by-conferral",
+        "australia-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "040",
@@ -465,12 +469,16 @@
       "name": "Canada",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "canada-citizenship-by-descent",
+        "canada-citizenship-grant",
+        "canada-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "132",
@@ -1876,12 +1884,16 @@
       "name": "New Zealand",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "nz-citizenship-by-descent",
+        "nz-citizenship-by-grant",
+        "nz-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "558",
@@ -2846,12 +2858,16 @@
       "name": "United States of America",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "us-citizenship-at-birth-abroad",
+        "us-naturalization-after-lpr",
+        "us-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "850",
@@ -3001,6 +3017,128 @@
       ]
     },
     {
+      "id": "australia-citizenship-by-birth",
+      "country": {
+        "iso_n3": "036",
+        "name": "Australia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Australia",
+      "summary": "A child born in Australia is a citizen when a parent is a citizen or permanent resident, or when the child is ordinarily resident in Australia for the first ten years of life.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          0,
+          120
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "citizen_or_permanent_parent",
+          "label": "Citizen or permanent-resident parent at birth",
+          "allocation": "right",
+          "eligibility_months": 0
+        },
+        {
+          "id": "ten_year_ordinary_residence",
+          "label": "First ten years ordinarily resident in Australia",
+          "allocation": "right",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Australian Citizenship Act 2007",
+          "url": "https://www.legislation.gov.au/C2007A00020/latest/text"
+        }
+      ]
+    },
+    {
+      "id": "australia-citizenship-by-conferral",
+      "country": {
+        "iso_n3": "036",
+        "name": "Australia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship by conferral after residence",
+      "summary": "The general residence requirement is four years on a valid visa, including the final 12 months as a permanent resident or eligible Special Category Visa holder.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          48
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "general_residence",
+          "label": "General residence route",
+          "allocation": "discretionary",
+          "eligibility_months": 48,
+          "note": "Absence, character, test, and pledge requirements also apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Australian Home Affairs — Citizenship residence calculator",
+          "url": "https://immi.homeaffairs.gov.au/help-support/tools/residence-calculator"
+        },
+        {
+          "title": "Australian Citizenship Act 2007",
+          "url": "https://www.legislation.gov.au/C2007A00020/latest/text"
+        }
+      ]
+    },
+    {
+      "id": "australia-citizenship-by-descent",
+      "country": {
+        "iso_n3": "036",
+        "name": "Australia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship by descent",
+      "summary": "A person born outside Australia may apply by descent when a parent was an Australian citizen at the time of birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "australian_parent",
+          "label": "Australian citizen parent at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "If the parent was themselves a citizen by descent, a two-year lawful-presence condition can apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Australian Home Affairs — Citizenship by descent",
+          "url": "https://immi.homeaffairs.gov.au/citizenship/become-a-citizen/by-descent"
+        },
+        {
+          "title": "Australian Citizenship Act 2007",
+          "url": "https://www.legislation.gov.au/C2007A00020/latest/text"
+        }
+      ]
+    },
+    {
       "id": "bulgaria-bulgarian-origin-naturalization",
       "country": {
         "iso_n3": "100",
@@ -3101,6 +3239,119 @@
         {
           "title": "Cambodia Committee for Investment and Development — Law on Nationality",
           "url": "https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf"
+        }
+      ]
+    },
+    {
+      "id": "canada-citizenship-by-birth",
+      "country": {
+        "iso_n3": "124",
+        "name": "Canada"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Canada",
+      "summary": "A person born in Canada is generally a citizen at birth, with a narrow exception for children of certain foreign diplomatic personnel.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "born_in_canada",
+          "label": "Born in Canada",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "IRCC — Check if you may be a Canadian citizen",
+          "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/eligibility/already-citizen.html"
+        }
+      ]
+    },
+    {
+      "id": "canada-citizenship-by-descent",
+      "country": {
+        "iso_n3": "124",
+        "name": "Canada"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a Canadian parent",
+      "summary": "A child born abroad to a Canadian parent is generally a citizen; from 15 December 2025, a Canadian parent also born abroad must usually have spent 1,095 days in Canada before the child’s birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "canadian_parent_born_or_naturalized_in_canada",
+          "label": "Canadian parent born or naturalized in Canada",
+          "allocation": "right",
+          "eligibility_months": 0
+        },
+        {
+          "id": "canadian_parent_also_born_abroad",
+          "label": "Canadian parent also born abroad",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "This substantial-connection test applies to births on or after 15 December 2025."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "IRCC — Check if you may be a Canadian citizen",
+          "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/eligibility/already-citizen.html"
+        }
+      ]
+    },
+    {
+      "id": "canada-citizenship-grant",
+      "country": {
+        "iso_n3": "124",
+        "name": "Canada"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship grant after physical presence",
+      "summary": "An adult permanent resident generally needs 1,095 days of physical presence in the five-year eligibility period, including at least 730 days as a permanent resident.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "adult_standard",
+          "label": "Standard adult grant",
+          "allocation": "right",
+          "eligibility_months": 36,
+          "note": "Tax, language, test, oath, and prohibition rules can also apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "IRCC — Canadian citizenship eligibility",
+          "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/who.html"
         }
       ]
     },
@@ -3813,6 +4064,117 @@
       ]
     },
     {
+      "id": "nz-citizenship-by-birth",
+      "country": {
+        "iso_n3": "554",
+        "name": "New Zealand"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in New Zealand",
+      "summary": "For births from 1 January 2006, a child born in New Zealand is a citizen when at least one parent is a citizen or has the right to live in New Zealand indefinitely.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "citizen_or_resident_parent",
+          "label": "Citizen or indefinitely resident parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "New Zealand Government — Citizenship by birth, descent and grant",
+          "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/"
+        }
+      ]
+    },
+    {
+      "id": "nz-citizenship-by-descent",
+      "country": {
+        "iso_n3": "554",
+        "name": "New Zealand"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship by descent",
+      "summary": "A person born overseas can register as a citizen by descent when a parent was a New Zealand citizen by birth or grant at the time of birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nz_parent_otherwise_than_descent",
+          "label": "Parent citizen by birth or grant",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "A citizen by descent generally cannot transmit citizenship to another overseas-born generation."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "New Zealand Government — Citizenship by birth, descent and grant",
+          "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/"
+        }
+      ]
+    },
+    {
+      "id": "nz-citizenship-by-grant",
+      "country": {
+        "iso_n3": "554",
+        "name": "New Zealand"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship by grant after residence",
+      "summary": "Most adults need five years as a resident, 1,350 days of physical presence in total, and at least 240 days in each of those five years.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "standard_presence",
+          "label": "Standard five-year presence route",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Language, character, and intention-to-reside requirements also apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "New Zealand Government — Citizenship presence requirements",
+          "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/requirements-for-nz-citizenship/presence-requirements/"
+        },
+        {
+          "title": "New Zealand Government — Citizenship by birth, descent and grant",
+          "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/"
+        }
+      ]
+    },
+    {
       "id": "portugal-birth-parent-residence-2026",
       "country": {
         "iso_n3": "620",
@@ -4324,6 +4686,113 @@
         {
           "title": "GOV.UK — Naturalization with indefinite leave or settled status",
           "url": "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain"
+        }
+      ]
+    },
+    {
+      "id": "us-citizenship-at-birth-abroad",
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship at birth through a U.S. citizen parent",
+      "summary": "A child born abroad can acquire citizenship at birth when the citizen parent meets the applicable residence, physical-presence, parentage, and date-of-birth rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "one_us_citizen_parent",
+          "label": "One U.S. citizen parent for births from 14 November 1986",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Different historical and family configurations use different statutory tests."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "U.S. Department of State — Citizenship at birth abroad",
+          "url": "https://travel.state.gov/content/travel/en/legal/travel-legal-considerations/us-citizenship/Acquisition-US-Citizenship-Child-Born-Abroad.html"
+        }
+      ]
+    },
+    {
+      "id": "us-citizenship-by-birth",
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in the United States",
+      "summary": "Federal statute grants citizenship at birth to a person born in the United States and subject to its jurisdiction.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "born_in_us_subject_to_jurisdiction",
+          "label": "Born in the United States and subject to its jurisdiction",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "U.S. Code — 8 USC 1401",
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&hl=false&req=granuleid%3AUSC-prelim-title8-section1401"
+        }
+      ]
+    },
+    {
+      "id": "us-naturalization-after-lpr",
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after permanent residence",
+      "summary": "The standard route requires five years as a lawful permanent resident and at least 30 months of physical presence in that period.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "standard_five_year",
+          "label": "Five-year LPR route",
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Continuous residence, character, English, civics, and oath requirements also apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "USCIS — Naturalization for lawful permanent residents",
+          "url": "https://www.uscis.gov/sites/default/files/document/fact-sheets/DO_FactSheet_NaturalizationForLawfulPermanentResidents_wTorUNonimmigrantStatus_V3_508.pdf"
         }
       ]
     },

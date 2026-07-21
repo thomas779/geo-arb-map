@@ -97,8 +97,8 @@ describe('data:build reads the canonical database', () => {
       selected_statuses: ['draft'],
       selected_release_status: null,
     });
-    expect(loaded.projections.coverage).toHaveLength(6);
-    expect(loaded.projections.mode_coverage).toHaveLength(24);
+    expect(loaded.projections.coverage).toHaveLength(10);
+    expect(loaded.projections.mode_coverage).toHaveLength(40);
   });
 
   test('fails clearly when the database is missing', () => {
@@ -361,6 +361,12 @@ describe('data:build parity gates', () => {
     };
     expect(detail.drift).toEqual([]);
     expect(detail.canonical_additions).toEqual([
+      'australia-citizenship-by-birth',
+      'australia-citizenship-by-conferral',
+      'australia-citizenship-by-descent',
+      'canada-citizenship-by-birth',
+      'canada-citizenship-by-descent',
+      'canada-citizenship-grant',
       'france-birth-and-residence',
       'france-citizenship-by-parent',
       'germany-citizenship-by-birth',
@@ -369,6 +375,9 @@ describe('data:build parity gates', () => {
       'ireland-citizenship-by-birth',
       'ireland-citizenship-by-descent',
       'ireland-naturalization-by-residence',
+      'nz-citizenship-by-birth',
+      'nz-citizenship-by-descent',
+      'nz-citizenship-by-grant',
       'portugal-citizenship-by-parent',
       'spain-citizenship-by-birth',
       'spain-citizenship-by-parent-or-option',
@@ -376,6 +385,9 @@ describe('data:build parity gates', () => {
       'uk-citizenship-by-birth',
       'uk-citizenship-by-parent',
       'uk-naturalization-after-settlement',
+      'us-citizenship-at-birth-abroad',
+      'us-citizenship-by-birth',
+      'us-naturalization-after-lpr',
     ]);
     // Documents the honest gap: title and facts are legacy-carried.
     expect(detail.legacy_carried_fields.length).toBeGreaterThanOrEqual(2);

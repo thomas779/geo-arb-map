@@ -23,6 +23,12 @@ describe('canonical data schemas', () => {
   test('keeps one jurisdiction identity and preserves existing route IDs while adding reviewed routes', () => {
     const routeIds = pilot.jurisdictions.flatMap(item => item.routes.map(route => route.id));
     expect(routeIds).toEqual([
+      'australia-citizenship-by-descent',
+      'australia-citizenship-by-conferral',
+      'australia-citizenship-by-birth',
+      'canada-citizenship-by-descent',
+      'canada-citizenship-grant',
+      'canada-citizenship-by-birth',
       'france-citizenship-by-parent',
       'france-study-naturalization-residence',
       'france-birth-and-residence',
@@ -32,6 +38,9 @@ describe('canonical data schemas', () => {
       'ireland-citizenship-by-descent',
       'ireland-naturalization-by-residence',
       'ireland-citizenship-by-birth',
+      'nz-citizenship-by-descent',
+      'nz-citizenship-by-grant',
+      'nz-citizenship-by-birth',
       'portugal-citizenship-by-parent',
       'portugal-ordinary-naturalization-2026',
       'portugal-birth-parent-residence-2026',
@@ -41,6 +50,9 @@ describe('canonical data schemas', () => {
       'uk-citizenship-by-parent',
       'uk-naturalization-after-settlement',
       'uk-citizenship-by-birth',
+      'us-citizenship-at-birth-abroad',
+      'us-naturalization-after-lpr',
+      'us-citizenship-by-birth',
     ]);
     for (const jurisdiction of pilot.jurisdictions) {
       for (const route of jurisdiction.routes) {

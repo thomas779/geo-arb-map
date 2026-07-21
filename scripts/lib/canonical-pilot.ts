@@ -150,6 +150,20 @@ const OFFICIAL_URLS = {
   uk_british_parent: 'https://www.gov.uk/apply-citizenship-british-parent',
   uk_born_in_country: 'https://www.gov.uk/apply-citizenship-born-uk/eligibility',
   uk_naturalization: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain',
+  us_citizenship_abroad: 'https://travel.state.gov/content/travel/en/legal/travel-legal-considerations/us-citizenship/Acquisition-US-Citizenship-Child-Born-Abroad.html',
+  us_citizenship_statute: 'https://uscode.house.gov/view.xhtml?edition=prelim&hl=false&req=granuleid%3AUSC-prelim-title8-section1401',
+  us_naturalization: 'https://www.uscis.gov/sites/default/files/document/fact-sheets/DO_FactSheet_NaturalizationForLawfulPermanentResidents_wTorUNonimmigrantStatus_V3_508.pdf',
+  us_eb5: 'https://www.uscis.gov/eb-5',
+  canada_citizenship_status: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/eligibility/already-citizen.html',
+  canada_naturalization: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/who.html',
+  canada_pr_status: 'https://www.canada.ca/en/immigration-refugees-citizenship/services/permanent-residents/status.html',
+  australia_citizenship_act: 'https://www.legislation.gov.au/C2007A00020/latest/text',
+  australia_descent: 'https://immi.homeaffairs.gov.au/citizenship/become-a-citizen/by-descent',
+  australia_naturalization: 'https://immi.homeaffairs.gov.au/help-support/tools/residence-calculator',
+  australia_investor_closure: 'https://immi.homeaffairs.gov.au/what-we-do/skilled-migration-program/recent-changes',
+  nz_citizenship_types: 'https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/',
+  nz_citizenship_presence: 'https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/requirements-for-nz-citizenship/presence-requirements/',
+  nz_active_investor: 'https://www.immigration.govt.nz/visas/active-investor-plus-visa/',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -388,6 +402,41 @@ function jurisdictionSources(): SourceRecord[] {
         status: 'planned',
       },
     }),
+    ...[
+      ['U.S. Department of State — Citizenship at birth abroad', OFFICIAL_URLS.us_citizenship_abroad, '840'],
+      ['U.S. Code — 8 USC 1401', OFFICIAL_URLS.us_citizenship_statute, '840'],
+      ['USCIS — Naturalization for lawful permanent residents', OFFICIAL_URLS.us_naturalization, '840'],
+      ['USCIS — EB-5 Immigrant Investor Program', OFFICIAL_URLS.us_eb5, '840'],
+      ['IRCC — Check if you may be a Canadian citizen', OFFICIAL_URLS.canada_citizenship_status, '124'],
+      ['IRCC — Canadian citizenship eligibility', OFFICIAL_URLS.canada_naturalization, '124'],
+      ['IRCC — Understand permanent resident status', OFFICIAL_URLS.canada_pr_status, '124'],
+      ['Australian Citizenship Act 2007', OFFICIAL_URLS.australia_citizenship_act, '036'],
+      ['Australian Home Affairs — Citizenship by descent', OFFICIAL_URLS.australia_descent, '036'],
+      ['Australian Home Affairs — Citizenship residence calculator', OFFICIAL_URLS.australia_naturalization, '036'],
+      ['Australian Home Affairs — Skilled migration recent changes', OFFICIAL_URLS.australia_investor_closure, '036'],
+      ['New Zealand Government — Citizenship by birth, descent and grant', OFFICIAL_URLS.nz_citizenship_types, '554'],
+      ['New Zealand Government — Citizenship presence requirements', OFFICIAL_URLS.nz_citizenship_presence, '554'],
+      ['Immigration New Zealand — Active Investor Plus Visa', OFFICIAL_URLS.nz_active_investor, '554'],
+    ].map(([title, url, jurisdiction]) => officialSource({
+      title,
+      url,
+      source_type: url.includes('uscode.house.gov') || url.includes('legislation.gov.au')
+        ? 'primary_law'
+        : 'official_guidance',
+      jurisdictions: [jurisdiction],
+      language: 'en',
+      monitoring: {
+        source_id: {
+          '036': 'australia-citizenship-guidance',
+          '124': 'canada-citizenship-guidance',
+          '554': 'nz-citizenship-guidance',
+          '840': 'us-citizenship-guidance',
+        }[jurisdiction]!,
+        method: 'http',
+        url,
+        status: 'planned',
+      },
+    })),
   ];
 }
 
@@ -1418,6 +1467,527 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
   });
 }
 
+function reviewedCountryRecord({
+  shadow,
+  iso,
+  note,
+  coverage,
+  routes,
+}: {
+  shadow: DataShadow;
+  iso: string;
+  note: string;
+  coverage: Array<{
+    mode: 'ancestry' | 'naturalization' | 'birth' | 'investment';
+    finding: 'present' | 'verified_none';
+    sources: SourceRecord[];
+    confidence?: 'high' | 'medium';
+    note?: string;
+  }>;
+  routes: JurisdictionRecord['routes'];
+}): JurisdictionRecord {
+  const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === iso);
+  if (!candidate) throw new Error(`Jurisdiction ${iso} is missing`);
+  return JurisdictionRecordSchema.parse({
+    schema_version: 2,
+    entity_type: 'jurisdiction',
+    id: `jurisdiction:${iso}`,
+    jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
+    review: {
+      state: 'reviewed',
+      confidence: 'high',
+      last_checked: '2026-07-21',
+      note,
+    },
+    coverage: coverage.map(item => ({
+      mode: item.mode,
+      finding: item.finding,
+      review: {
+        state: 'reviewed',
+        confidence: item.confidence ?? 'high',
+        last_checked: '2026-07-21',
+        ...(item.note ? { note: item.note } : {}),
+      },
+      source_refs: refs(item.sources, [`/coverage/${item.mode}`]),
+    })),
+    routes,
+  });
+}
+
+function unitedStatesRecord(
+  shadow: DataShadow,
+  officialSources: SourceRecord[],
+): JurisdictionRecord {
+  const abroad = requireSource(officialSources, OFFICIAL_URLS.us_citizenship_abroad);
+  const statute = requireSource(officialSources, OFFICIAL_URLS.us_citizenship_statute);
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.us_naturalization);
+  const eb5 = requireSource(officialSources, OFFICIAL_URLS.us_eb5);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '840',
+    note: 'All acquisition modes reviewed; principal citizenship-at-birth, parent-transmission, and LPR naturalization paths are modeled.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [abroad] },
+      { mode: 'naturalization', finding: 'present', sources: [naturalization] },
+      { mode: 'birth', finding: 'present', sources: [statute] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [eb5, naturalization],
+        note: 'EB-5 is a lawful-permanent-residence program; citizenship still requires a separate naturalization path.',
+      },
+    ],
+    routes: [
+      {
+        id: 'us-citizenship-at-birth-abroad',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship at birth through a U.S. citizen parent',
+        summary: 'A child born abroad can acquire citizenship at birth when the citizen parent meets the applicable residence, physical-presence, parentage, and date-of-birth rules.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'one_us_citizen_parent',
+          label: 'One U.S. citizen parent for births from 14 November 1986',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'parent.citizenship.iso_n3', operator: 'eq', value: '840' },
+            { field: 'parent.us_physical_presence_months', operator: 'gte', value: 60, unit: 'months' },
+            { field: 'parent.us_physical_presence_after_age_14_months', operator: 'gte', value: 24, unit: 'months' },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Different historical and family configurations use different statutory tests.',
+          },
+          source_refs: refs([abroad], [
+            '/routes/us-citizenship-at-birth-abroad/summary',
+            '/routes/us-citizenship-at-birth-abroad/variants/one_us_citizen_parent/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'us-naturalization-after-lpr',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after permanent residence',
+        summary: 'The standard route requires five years as a lawful permanent resident and at least 30 months of physical presence in that period.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'standard_five_year',
+          label: 'Five-year LPR route',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'residence.lpr_months', operator: 'gte', value: 60, unit: 'months' },
+            { field: 'residence.physical_presence_months_previous_60', operator: 'gte', value: 30, unit: 'months' },
+          ],
+          milestones: [{ status: 'lawful_permanent_residence', minimum_months: 60 }],
+          timeline: {
+            eligibility_minimum_months: 60,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Continuous residence, character, English, civics, and oath requirements also apply.',
+          },
+          source_refs: refs([naturalization], [
+            '/routes/us-naturalization-after-lpr/summary',
+            '/routes/us-naturalization-after-lpr/variants/standard_five_year/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'us-citizenship-by-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Citizenship by birth in the United States',
+        summary: 'Federal statute grants citizenship at birth to a person born in the United States and subject to its jurisdiction.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'born_in_us_subject_to_jurisdiction',
+          label: 'Born in the United States and subject to its jurisdiction',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '840' },
+            { field: 'birth.subject_to_us_jurisdiction', operator: 'eq', value: true },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+          source_refs: refs([statute], [
+            '/routes/us-citizenship-by-birth/summary',
+            '/routes/us-citizenship-by-birth/variants/born_in_us_subject_to_jurisdiction/eligibility',
+          ]),
+        }],
+      },
+    ],
+  });
+}
+
+function canadaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const status = requireSource(officialSources, OFFICIAL_URLS.canada_citizenship_status);
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.canada_naturalization);
+  const permanentResidence = requireSource(officialSources, OFFICIAL_URLS.canada_pr_status);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '124',
+    note: 'All acquisition modes reviewed against current post-15 December 2025 guidance; principal descent, birth, and grant paths are modeled.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [status] },
+      { mode: 'naturalization', finding: 'present', sources: [naturalization] },
+      { mode: 'birth', finding: 'present', sources: [status] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [permanentResidence, naturalization],
+        note: 'Economic immigration can create permanent residence, but permanent residents are not citizens and must separately qualify for a citizenship grant.',
+      },
+    ],
+    routes: [
+      {
+        id: 'canada-citizenship-by-descent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship through a Canadian parent',
+        summary: 'A child born abroad to a Canadian parent is generally a citizen; from 15 December 2025, a Canadian parent also born abroad must usually have spent 1,095 days in Canada before the child’s birth.',
+        effective: { from: '2025-12-15', to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'canadian_parent_born_or_naturalized_in_canada',
+            label: 'Canadian parent born or naturalized in Canada',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '124' }],
+            milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+            timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+            source_refs: refs([status], [
+              '/routes/canada-citizenship-by-descent/summary',
+              '/routes/canada-citizenship-by-descent/variants/canadian_parent_born_or_naturalized_in_canada/eligibility',
+            ]),
+          },
+          {
+            id: 'canadian_parent_also_born_abroad',
+            label: 'Canadian parent also born abroad',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'parent.citizenship.iso_n3', operator: 'eq', value: '124' },
+              { field: 'parent.canada_physical_presence_days_before_birth', operator: 'gte', value: 1095, unit: 'days' },
+            ],
+            milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'This substantial-connection test applies to births on or after 15 December 2025.',
+            },
+            source_refs: refs([status], [
+              '/routes/canada-citizenship-by-descent/variants/canadian_parent_also_born_abroad/eligibility',
+              '/routes/canada-citizenship-by-descent/variants/canadian_parent_also_born_abroad/timeline',
+            ]),
+          },
+        ],
+      },
+      {
+        id: 'canada-citizenship-grant',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Citizenship grant after physical presence',
+        summary: 'An adult permanent resident generally needs 1,095 days of physical presence in the five-year eligibility period, including at least 730 days as a permanent resident.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'adult_standard',
+          label: 'Standard adult grant',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'residence.permanent_status', operator: 'eq', value: true },
+            { field: 'residence.physical_presence_days_previous_5_years', operator: 'gte', value: 1095, unit: 'days' },
+            { field: 'residence.permanent_resident_days_previous_5_years', operator: 'gte', value: 730, unit: 'days' },
+          ],
+          milestones: [{ status: 'qualifying_physical_presence', minimum_months: 36 }],
+          timeline: {
+            eligibility_minimum_months: 36,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Tax, language, test, oath, and prohibition rules can also apply.',
+          },
+          source_refs: refs([naturalization], [
+            '/routes/canada-citizenship-grant/summary',
+            '/routes/canada-citizenship-grant/variants/adult_standard/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'canada-citizenship-by-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Citizenship by birth in Canada',
+        summary: 'A person born in Canada is generally a citizen at birth, with a narrow exception for children of certain foreign diplomatic personnel.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'born_in_canada',
+          label: 'Born in Canada',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '124' },
+            { field: 'parent.foreign_diplomatic_exception', operator: 'neq', value: true },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+          source_refs: refs([status], [
+            '/routes/canada-citizenship-by-birth/summary',
+            '/routes/canada-citizenship-by-birth/variants/born_in_canada/eligibility',
+          ]),
+        }],
+      },
+    ],
+  });
+}
+
+function australiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.australia_citizenship_act);
+  const descent = requireSource(officialSources, OFFICIAL_URLS.australia_descent);
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.australia_naturalization);
+  const investorClosure = requireSource(officialSources, OFFICIAL_URLS.australia_investor_closure);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '036',
+    note: 'All acquisition modes reviewed; principal descent, conferral, and birth paths are modeled.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [descent, act] },
+      { mode: 'naturalization', finding: 'present', sources: [naturalization, act] },
+      { mode: 'birth', finding: 'present', sources: [act] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [act, investorClosure],
+        note: 'The Citizenship Act contains no direct investment acquisition mode, and the former investor visa program closed to new applications in 2024.',
+      },
+    ],
+    routes: [
+      {
+        id: 'australia-citizenship-by-descent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship by descent',
+        summary: 'A person born outside Australia may apply by descent when a parent was an Australian citizen at the time of birth.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'australian_parent',
+          label: 'Australian citizen parent at birth',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '036' }],
+          milestones: [{ status: 'citizenship_application', minimum_months: 0 }],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'If the parent was themselves a citizen by descent, a two-year lawful-presence condition can apply.',
+          },
+          source_refs: refs([descent, act], [
+            '/routes/australia-citizenship-by-descent/summary',
+            '/routes/australia-citizenship-by-descent/variants/australian_parent/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'australia-citizenship-by-conferral',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Citizenship by conferral after residence',
+        summary: 'The general residence requirement is four years on a valid visa, including the final 12 months as a permanent resident or eligible Special Category Visa holder.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'general_residence',
+          label: 'General residence route',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [
+            { field: 'residence.valid_visa_months', operator: 'gte', value: 48, unit: 'months' },
+            { field: 'residence.permanent_or_scv_months', operator: 'gte', value: 12, unit: 'months' },
+          ],
+          milestones: [
+            { status: 'lawful_residence', minimum_months: 48 },
+            { status: 'permanent_residence_or_scv', minimum_months: 12 },
+          ],
+          timeline: {
+            eligibility_minimum_months: 48,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Absence, character, test, and pledge requirements also apply.',
+          },
+          source_refs: refs([naturalization, act], [
+            '/routes/australia-citizenship-by-conferral/summary',
+            '/routes/australia-citizenship-by-conferral/variants/general_residence/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'australia-citizenship-by-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Citizenship by birth in Australia',
+        summary: 'A child born in Australia is a citizen when a parent is a citizen or permanent resident, or when the child is ordinarily resident in Australia for the first ten years of life.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'citizen_or_permanent_parent',
+            label: 'Citizen or permanent-resident parent at birth',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'birth.jurisdiction', operator: 'eq', value: '036' },
+              { field: 'parent.australian_citizen_or_permanent_resident', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+            timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+            source_refs: refs([act], [
+              '/routes/australia-citizenship-by-birth/summary',
+              '/routes/australia-citizenship-by-birth/variants/citizen_or_permanent_parent/eligibility',
+            ]),
+          },
+          {
+            id: 'ten_year_ordinary_residence',
+            label: 'First ten years ordinarily resident in Australia',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'birth.jurisdiction', operator: 'eq', value: '036' },
+              { field: 'residence.ordinary_months_from_birth', operator: 'gte', value: 120, unit: 'months' },
+            ],
+            milestones: [{ status: 'citizenship_on_tenth_birthday', minimum_months: 120 }],
+            timeline: { eligibility_minimum_months: 120, processing_typical_months: null, confidence: 'high' },
+            source_refs: refs([act], [
+              '/routes/australia-citizenship-by-birth/variants/ten_year_ordinary_residence/eligibility',
+              '/routes/australia-citizenship-by-birth/variants/ten_year_ordinary_residence/timeline',
+            ]),
+          },
+        ],
+      },
+    ],
+  });
+}
+
+function newZealandRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const types = requireSource(officialSources, OFFICIAL_URLS.nz_citizenship_types);
+  const presence = requireSource(officialSources, OFFICIAL_URLS.nz_citizenship_presence);
+  const activeInvestor = requireSource(officialSources, OFFICIAL_URLS.nz_active_investor);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '554',
+    note: 'All acquisition modes reviewed; principal birth, descent, and grant paths are modeled.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [types] },
+      { mode: 'naturalization', finding: 'present', sources: [presence, types] },
+      { mode: 'birth', finding: 'present', sources: [types] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [activeInvestor, types],
+        note: 'Active Investor Plus is a resident visa; citizenship remains a separate grant under the ordinary citizenship rules.',
+      },
+    ],
+    routes: [
+      {
+        id: 'nz-citizenship-by-descent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship by descent',
+        summary: 'A person born overseas can register as a citizen by descent when a parent was a New Zealand citizen by birth or grant at the time of birth.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'nz_parent_otherwise_than_descent',
+          label: 'Parent citizen by birth or grant',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [{ field: 'parent.nz_citizenship_by_birth_or_grant', operator: 'eq', value: true }],
+          milestones: [{ status: 'citizenship_by_descent_registration', minimum_months: 0 }],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'A citizen by descent generally cannot transmit citizenship to another overseas-born generation.',
+          },
+          source_refs: refs([types], [
+            '/routes/nz-citizenship-by-descent/summary',
+            '/routes/nz-citizenship-by-descent/variants/nz_parent_otherwise_than_descent/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'nz-citizenship-by-grant',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Citizenship by grant after residence',
+        summary: 'Most adults need five years as a resident, 1,350 days of physical presence in total, and at least 240 days in each of those five years.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'standard_presence',
+          label: 'Standard five-year presence route',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [
+            { field: 'residence.indefinite_right_months', operator: 'gte', value: 60, unit: 'months' },
+            { field: 'residence.nz_presence_days_previous_5_years', operator: 'gte', value: 1350, unit: 'days' },
+            { field: 'residence.nz_presence_days_each_year', operator: 'gte', value: 240, unit: 'days' },
+          ],
+          milestones: [{ status: 'qualifying_residence', minimum_months: 60 }],
+          timeline: {
+            eligibility_minimum_months: 60,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Language, character, and intention-to-reside requirements also apply.',
+          },
+          source_refs: refs([presence, types], [
+            '/routes/nz-citizenship-by-grant/summary',
+            '/routes/nz-citizenship-by-grant/variants/standard_presence/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'nz-citizenship-by-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Citizenship by birth in New Zealand',
+        summary: 'For births from 1 January 2006, a child born in New Zealand is a citizen when at least one parent is a citizen or has the right to live in New Zealand indefinitely.',
+        effective: { from: '2006-01-01', to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'citizen_or_resident_parent',
+          label: 'Citizen or indefinitely resident parent',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '554' },
+            { field: 'parent.nz_citizen_or_indefinite_residence', operator: 'eq', value: true },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+          source_refs: refs([types], [
+            '/routes/nz-citizenship-by-birth/summary',
+            '/routes/nz-citizenship-by-birth/variants/citizen_or_resident_parent/eligibility',
+          ]),
+        }],
+      },
+    ],
+  });
+}
+
 function germanyRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '276');
   if (!candidate) throw new Error('Germany jurisdiction is missing');
@@ -2199,12 +2769,16 @@ function validateReferences(pilot: CanonicalPilot, shadow: DataShadow): void {
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
   const jurisdictions = [
+    australiaRecord(shadow, countrySources),
+    canadaRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
+    newZealandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),
     unitedKingdomRecord(shadow, countrySources),
+    unitedStatesRecord(shadow, countrySources),
   ];
   const manualSources = arrangementSources(shadow);
   const sourcesById = new Map<string, SourceRecord>();
