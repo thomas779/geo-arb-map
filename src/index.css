@@ -285,14 +285,22 @@
 
 @media (max-width: 1023px) {
   .planner-globe {
-    top: 55%;
-    right: -50%;
-    width: 128%;
-    opacity: 0.32;
+    top: 56%;
+    right: auto;
+    left: 50%;
+    width: max(46rem, 128vw);
+    translate: -50% -50%;
+    opacity: 0.58;
   }
 
   .planner-preview-copy-shade {
-    background: linear-gradient(180deg, color-mix(in srgb, var(--background) 97%, transparent) 0%, color-mix(in srgb, var(--background) 82%, transparent) 48%, transparent 80%);
+    background: radial-gradient(
+      ellipse 92% 68% at 18% 20%,
+      var(--background) 0%,
+      color-mix(in srgb, var(--background) 86%, transparent) 43%,
+      color-mix(in srgb, var(--background) 42%, transparent) 70%,
+      transparent 100%
+    );
   }
 
   .planner-globe-label {
@@ -302,10 +310,19 @@
 
 @media (max-width: 639px) {
   .planner-globe {
-    top: 56%;
-    right: -64%;
-    width: 172%;
-    opacity: 0.23;
+    top: 50%;
+    width: max(43rem, 178vw);
+    opacity: 0.55;
+  }
+
+  .planner-preview-copy-shade {
+    background: radial-gradient(
+      ellipse 122% 58% at 5% 18%,
+      var(--background) 0%,
+      color-mix(in srgb, var(--background) 78%, transparent) 42%,
+      color-mix(in srgb, var(--background) 30%, transparent) 72%,
+      transparent 100%
+    );
   }
 }
 
