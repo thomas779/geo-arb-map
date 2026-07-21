@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 96,
+      "routes": 108,
       "by_mode": {
-        "ancestry": 26,
-        "naturalization": 27,
-        "birth": 26,
+        "ancestry": 30,
+        "naturalization": 31,
+        "birth": 30,
         "investment": 17
       },
       "by_status": {
-        "active": 90,
+        "active": 102,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -504,15 +504,19 @@
     },
     {
       "iso_n3": "136",
-      "name": "Cayman Is.",
+      "name": "Cayman Islands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "cayman-botc-by-descent",
+        "cayman-botc-naturalization",
+        "cayman-botc-by-birth"
+      ]
     },
     {
       "iso_n3": "140",
@@ -744,12 +748,15 @@
       "name": "Dominica",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "dominica-citizenship-by-parent",
+        "dominica-naturalization-after-residence",
+        "dominica-citizenship-by-birth",
         "dominica-cbi"
       ]
     },
@@ -978,12 +985,16 @@
       "name": "Georgia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "georgia-citizenship-by-parent",
+        "georgia-ordinary-naturalization",
+        "georgia-citizenship-by-protected-birth"
+      ]
     },
     {
       "iso_n3": "270",
@@ -2271,12 +2282,15 @@
       "name": "St. Kitts and Nevis",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "st-kitts-nevis-citizenship-by-parent",
+        "st-kitts-nevis-naturalization",
+        "st-kitts-nevis-citizenship-by-birth",
         "st-kitts-nevis-citizenship-programme"
       ]
     },
@@ -3749,6 +3763,120 @@
       ]
     },
     {
+      "id": "cayman-botc-by-birth",
+      "country": {
+        "iso_n3": "136",
+        "name": "Cayman Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "BOTC citizenship at birth through a qualifying parent",
+      "summary": "A child born in Cayman acquires BOTC at birth when a parent is a BOTC or is settled in the territory, subject to the British Nationality Act and date-specific rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cayman-botc-by-birth-principal",
+          "label": "BOTC citizenship at birth through a qualifying parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "British Nationality Act 1981",
+          "url": "https://www.legislation.gov.uk/ukpga/1981/61/contents"
+        }
+      ]
+    },
+    {
+      "id": "cayman-botc-by-descent",
+      "country": {
+        "iso_n3": "136",
+        "name": "Cayman Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "BOTC citizenship by descent through a qualifying parent",
+      "summary": "British Overseas Territories citizenship connected to Cayman can pass to a child born abroad under the British Nationality Act’s descent and registration rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cayman-botc-by-descent-principal",
+          "label": "BOTC citizenship by descent through a qualifying parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "British Nationality Act 1981",
+          "url": "https://www.legislation.gov.uk/ukpga/1981/61/contents"
+        }
+      ]
+    },
+    {
+      "id": "cayman-botc-naturalization",
+      "country": {
+        "iso_n3": "136",
+        "name": "Cayman Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "BOTC naturalization after qualifying residence",
+      "summary": "An adult can apply to naturalize as a BOTC connected to Cayman under the British Nationality Act after the statutory residence period; Caymanian status is a separate immigration status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cayman-botc-naturalization-principal",
+          "label": "BOTC naturalization after qualifying residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "The general BOTC naturalization schedule uses five years. From 1 May 2026, Caymanian status based on naturalization generally requires 20 years lawful ordinary residence or 10 years after BOTC naturalization or registration."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "British Nationality Act 1981",
+          "url": "https://www.legislation.gov.uk/ukpga/1981/61/contents"
+        },
+        {
+          "title": "Cayman Islands Government — BOTC registration and naturalisation",
+          "url": "https://otp.gov.ky/web/odg/botc-registration-and-naturalisation"
+        },
+        {
+          "title": "Cayman Islands Government — Immigration reform",
+          "url": "https://gov.ky/web/mcei/immigrationreform"
+        }
+      ]
+    },
+    {
       "id": "colombia-citizenship-by-conditional-birth",
       "country": {
         "iso_n3": "170",
@@ -4021,18 +4149,146 @@
       },
       "mode": "investment",
       "status": "active",
-      "title": "Citizenship by Investment Programme",
+      "title": "Dominica Citizenship by Investment Programme",
       "summary": "Government-administered direct citizenship programme offering a public-fund contribution and approved real-estate route.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
-        "residence_required": false
+        "residence_required": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "dominica-cbi-principal",
+          "label": "Dominica Citizenship by Investment Programme",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "The official minimum starts at US$200,000 for a single applicant under either the fund contribution or approved-real-estate route; fees and family thresholds vary."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
           "title": "Dominica Citizenship by Investment Unit",
           "url": "https://www.cbiu.gov.dm/"
+        }
+      ]
+    },
+    {
+      "id": "dominica-citizenship-by-birth",
+      "country": {
+        "iso_n3": "212",
+        "name": "Dominica"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Dominica",
+      "summary": "A person born in Dominica acquires citizenship at birth, subject to the constitutional exceptions for certain diplomatic and hostile-occupation circumstances.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "dominica-citizenship-by-birth-principal",
+          "label": "Citizenship by birth in Dominica",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of the Commonwealth of Dominica",
+          "url": "https://www.dominica.gov.dm/laws/chapters/chap1-01.pdf"
+        }
+      ]
+    },
+    {
+      "id": "dominica-citizenship-by-parent",
+      "country": {
+        "iso_n3": "212",
+        "name": "Dominica"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Dominican citizenship through a citizen parent",
+      "summary": "The Constitution provides citizenship by descent for a person born outside Dominica to a qualifying Dominican parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "dominica-citizenship-by-parent-principal",
+          "label": "Dominican citizenship through a citizen parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of the Commonwealth of Dominica",
+          "url": "https://www.dominica.gov.dm/laws/chapters/chap1-01.pdf"
+        },
+        {
+          "title": "Dominica Government — Citizenship applications",
+          "url": "https://www.dominica.gov.dm/services/citizenship/how-do-i-apply-for-citizenship-of-the-commonwealth-of-dominica"
+        }
+      ]
+    },
+    {
+      "id": "dominica-naturalization-after-residence",
+      "country": {
+        "iso_n3": "212",
+        "name": "Dominica"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after seven years of residence",
+      "summary": "Government forms provide a citizenship application route after seven years of residence, subject to ministerial approval and the supporting-document requirements.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "dominica-naturalization-after-residence-principal",
+          "label": "Naturalization after seven years of residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Dominica Government — Citizenship applications",
+          "url": "https://www.dominica.gov.dm/services/citizenship/how-do-i-apply-for-citizenship-of-the-commonwealth-of-dominica"
+        },
+        {
+          "title": "Dominica Government — Citizenship forms",
+          "url": "https://www.dominica.gov.dm/forms"
         }
       ]
     },
@@ -4216,6 +4472,124 @@
         {
           "title": "CESEDA — student residence permits",
           "url": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070158/LEGISCTA000042771650/"
+        }
+      ]
+    },
+    {
+      "id": "georgia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Georgian citizenship through a Georgian parent",
+      "summary": "A person acquires Georgian citizenship by birth when at least one parent is a Georgian citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "georgia-citizenship-by-parent-principal",
+          "label": "Georgian citizenship through a Georgian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Organic Law of Georgia on Georgian Citizenship",
+          "url": "https://matsne.gov.ge/en/document/view/2342552?publication=7"
+        },
+        {
+          "title": "Georgia Public Service Development Agency — Citizenship",
+          "url": "https://sda.gov.ge/en/products/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "georgia-citizenship-by-protected-birth",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth under anti-statelessness safeguards",
+      "summary": "A child born in Georgia can acquire citizenship under narrow statutory safeguards, including where qualifying parents are stateless or the other parent is unknown.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "georgia-citizenship-by-protected-birth-principal",
+          "label": "Citizenship at birth under anti-statelessness safeguards",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Organic Law of Georgia on Georgian Citizenship",
+          "url": "https://matsne.gov.ge/en/document/view/2342552?publication=7"
+        },
+        {
+          "title": "Georgia Public Service Development Agency — Citizenship",
+          "url": "https://sda.gov.ge/en/products/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "georgia-ordinary-naturalization",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Ordinary naturalization after ten years",
+      "summary": "An adult may apply after ten consecutive years of lawful residence, subject to the Georgian language, history and law test and a qualifying economic connection.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "georgia-ordinary-naturalization-principal",
+          "label": "Ordinary naturalization after ten years",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "A Georgian citizen’s spouse has a separate five-year simplified route. Eligibility does not guarantee the presidential grant."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Organic Law of Georgia on Georgian Citizenship",
+          "url": "https://matsne.gov.ge/en/document/view/2342552?publication=7"
+        },
+        {
+          "title": "Georgia Public Service Development Agency — Citizenship",
+          "url": "https://sda.gov.ge/en/products/citizenship/"
         }
       ]
     },
@@ -5425,6 +5799,80 @@
       ]
     },
     {
+      "id": "st-kitts-nevis-citizenship-by-birth",
+      "country": {
+        "iso_n3": "659",
+        "name": "St. Kitts and Nevis"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in St Kitts and Nevis",
+      "summary": "A person born in the federation acquires citizenship at birth, except for the Constitution’s diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "st-kitts-nevis-citizenship-by-birth-principal",
+          "label": "Citizenship by birth in St Kitts and Nevis",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of St Christopher and Nevis",
+          "url": "https://lawcommission.gov.kn/wp-content/documents/Annual-Laws/The-Constitution-of-St-Christopher-and-Nevis.pdf"
+        }
+      ]
+    },
+    {
+      "id": "st-kitts-nevis-citizenship-by-parent",
+      "country": {
+        "iso_n3": "659",
+        "name": "St. Kitts and Nevis"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a citizen parent",
+      "summary": "The Constitution provides citizenship by descent for a person born abroad to a qualifying citizen parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "st-kitts-nevis-citizenship-by-parent-principal",
+          "label": "Citizenship through a citizen parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of St Christopher and Nevis",
+          "url": "https://lawcommission.gov.kn/wp-content/documents/Annual-Laws/The-Constitution-of-St-Christopher-and-Nevis.pdf"
+        },
+        {
+          "title": "St Christopher and Nevis Citizenship Act",
+          "url": "https://lawcommission.gov.kn/wp-content/documents/Revised-Acts-of-St-Kitts-and-Nevis/Revised-Acts-of-St-Kitts-and-Nevis-2020/Ch-01_05-Saint-Christopher-and-Nevis-Citizenship-Act.pdf"
+        }
+      ]
+    },
+    {
       "id": "st-kitts-nevis-citizenship-programme",
       "country": {
         "iso_n3": "659",
@@ -5436,14 +5884,65 @@
       "summary": "Government-administered direct citizenship programme requiring a prescribed investment or contribution and due diligence.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
-        "residence_required": false
+        "residence_required": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "st-kitts-nevis-citizenship-programme-principal",
+          "label": "Citizenship Programme",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Official minimums currently start at US$250,000 for SISC or Public Benefit, US$325,000 for approved development or condominium property, and US$600,000 for a private home."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
           "title": "St. Kitts and Nevis Citizenship Unit",
           "url": "https://ciu.gov.kn/application-process/"
+        }
+      ]
+    },
+    {
+      "id": "st-kitts-nevis-naturalization",
+      "country": {
+        "iso_n3": "659",
+        "name": "St. Kitts and Nevis"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after a fifteen-year qualifying window",
+      "summary": "The Citizenship Act requires residence throughout the twelve months immediately before application and residence during the preceding fourteen years, with good-character and intention-to-reside requirements.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          180
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "st-kitts-nevis-naturalization-principal",
+          "label": "Naturalization after a fifteen-year qualifying window",
+          "allocation": "discretionary",
+          "eligibility_months": 180,
+          "note": "The Second Schedule states a final continuous 12 months plus residence during the 14 years before that period. This is not modeled as a simple 14-year continuous-residence rule."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "St Christopher and Nevis Citizenship Act",
+          "url": "https://lawcommission.gov.kn/wp-content/documents/Revised-Acts-of-St-Kitts-and-Nevis/Revised-Acts-of-St-Kitts-and-Nevis-2020/Ch-01_05-Saint-Christopher-and-Nevis-Citizenship-Act.pdf"
         }
       ]
     },
