@@ -164,6 +164,14 @@
   background-size: auto, auto, 72px 72px, 72px 72px;
 }
 
+/* The Planner's real regional outlines replace the generic survey grid. */
+.planner-preview.cartographic-surface {
+  background-image:
+    radial-gradient(circle at 86% 8%, var(--ambient-primary), transparent 30rem),
+    radial-gradient(circle at 8% 92%, var(--ambient-warm), transparent 34rem);
+  background-size: auto;
+}
+
 .planner-preview-compact-routes {
   top: 0;
   left: -42%;
