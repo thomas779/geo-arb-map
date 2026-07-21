@@ -9,6 +9,12 @@ const DateOnly = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Expected YYYY-MM-DD');
 const NullableDate = DateOnly.nullable();
 const Confidence = z.enum(['high', 'medium', 'low']);
 const ReviewState = z.enum(['unchecked', 'legacy', 'pending', 'partial', 'reviewed']);
+export const AcquisitionModeSchema = z.enum([
+  'ancestry',
+  'naturalization',
+  'birth',
+  'investment',
+]);
 
 export const ReviewSchema = z.strictObject({
   state: ReviewState,
@@ -97,7 +103,7 @@ export const RouteVariantSchema = z.strictObject({
 
 export const RouteSchema = z.strictObject({
   id: EntityId,
-  mode: z.enum(['ancestry', 'naturalization', 'birth', 'investment']),
+  mode: AcquisitionModeSchema,
   status: z.enum(['active', 'inactive', 'verified_negative', 'pending_verification']),
   title: z.string().min(1),
   summary: z.string().min(1),
@@ -110,18 +116,80 @@ export const RouteSchema = z.strictObject({
   variants: z.array(RouteVariantSchema).min(1),
 });
 
-export const JurisdictionRecordSchema = z.strictObject({
+const JurisdictionIdentitySchema = z.strictObject({
+  iso_n3: IsoN3,
+  name: z.string().min(1),
+  type: z.enum(['sovereign', 'territory', 'special']),
+});
+
+export const JurisdictionRecordV1Schema = z.strictObject({
   schema_version: z.literal(1),
   entity_type: z.literal('jurisdiction'),
   id: z.string().regex(/^jurisdiction:\d{3}$/),
-  jurisdiction: z.strictObject({
-    iso_n3: IsoN3,
-    name: z.string().min(1),
-    type: z.enum(['sovereign', 'territory', 'special']),
-  }),
+  jurisdiction: JurisdictionIdentitySchema,
   review: ReviewSchema,
   routes: z.array(RouteSchema),
 });
+
+export const ModeCoverageSchema = z.strictObject({
+  mode: AcquisitionModeSchema,
+  finding: z.enum(['unknown', 'present', 'verified_none']),
+  review: ReviewSchema,
+  source_refs: z.array(SourceReferenceSchema),
+});
+
+const REQUIRED_MODES = AcquisitionModeSchema.options;
+
+export const JurisdictionRecordSchema = z.strictObject({
+  schema_version: z.literal(2),
+  entity_type: z.literal('jurisdiction'),
+  id: z.string().regex(/^jurisdiction:\d{3}$/),
+  jurisdiction: JurisdictionIdentitySchema,
+  review: ReviewSchema,
+  coverage: z.array(ModeCoverageSchema).length(REQUIRED_MODES.length),
+  routes: z.array(RouteSchema),
+}).superRefine((record, context) => {
+  const modes = record.coverage.map(item => item.mode);
+  for (const mode of REQUIRED_MODES) {
+    if (modes.filter(item => item === mode).length !== 1) {
+      context.addIssue({
+        code: 'custom',
+        path: ['coverage'],
+        message: `Coverage must contain exactly one ${mode} record`,
+      });
+    }
+  }
+  for (const item of record.coverage) {
+    const routeCount = record.routes.filter(route => route.mode === item.mode).length;
+    if (item.finding === 'present' && routeCount === 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['coverage', modes.indexOf(item.mode), 'finding'],
+        message: `Coverage finding present requires a ${item.mode} route`,
+      });
+    }
+    if (item.finding === 'verified_none' && routeCount > 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['coverage', modes.indexOf(item.mode), 'finding'],
+        message: `Coverage finding verified_none cannot have a ${item.mode} route`,
+      });
+    }
+    if (item.finding === 'verified_none'
+      && (item.review.state !== 'reviewed' || item.source_refs.length === 0)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['coverage', modes.indexOf(item.mode)],
+        message: 'A reviewed negative requires reviewed state and evidence',
+      });
+    }
+  }
+});
+
+export const JurisdictionPayloadSchema = z.union([
+  JurisdictionRecordV1Schema,
+  JurisdictionRecordSchema,
+]);
 
 const ParticipantSchema = z.strictObject({
   members: z.array(IsoN3),
@@ -180,13 +248,17 @@ export const ChangeProposalSchema = z.strictObject({
 });
 
 export type SourceRecord = z.infer<typeof SourceRecordSchema>;
+export type AcquisitionMode = z.infer<typeof AcquisitionModeSchema>;
+export type ModeCoverage = z.infer<typeof ModeCoverageSchema>;
+export type JurisdictionRecordV1 = z.infer<typeof JurisdictionRecordV1Schema>;
 export type JurisdictionRecord = z.infer<typeof JurisdictionRecordSchema>;
+export type JurisdictionPayload = z.infer<typeof JurisdictionPayloadSchema>;
 export type ArrangementRecord = z.infer<typeof ArrangementRecordSchema>;
 export type ChangeProposal = z.infer<typeof ChangeProposalSchema>;
 
 export const CANONICAL_SCHEMAS = {
   source: SourceRecordSchema,
-  jurisdiction: JurisdictionRecordSchema,
+  jurisdiction: JurisdictionPayloadSchema,
   arrangement: ArrangementRecordSchema,
   change_proposal: ChangeProposalSchema,
 } as const;
@@ -194,17 +266,22 @@ export const CANONICAL_SCHEMAS = {
 const SCHEMA_BASE = 'https://atlas.thomphreys.com/data/schemas';
 
 export function jsonSchemaArtifacts(): Record<string, unknown> {
-  return Object.fromEntries(
-    Object.entries(CANONICAL_SCHEMAS).map(([name, schema]) => {
-      const jsonSchema = z.toJSONSchema(schema, { target: 'draft-2020-12' });
-      return [
-        `${name}-v1.schema.json`,
-        {
-          ...jsonSchema,
-          $id: `${SCHEMA_BASE}/${name}-v1.schema.json`,
-          title: `Flag Paths ${name.replace('_', ' ')} v1`,
-        },
-      ];
-    }),
-  );
+  const versioned = {
+    'source-v1': SourceRecordSchema,
+    'jurisdiction-v1': JurisdictionRecordV1Schema,
+    'jurisdiction-v2': JurisdictionRecordSchema,
+    'arrangement-v1': ArrangementRecordSchema,
+    'change_proposal-v1': ChangeProposalSchema,
+  } as const;
+  return Object.fromEntries(Object.entries(versioned).map(([name, schema]) => {
+    const jsonSchema = z.toJSONSchema(schema, { target: 'draft-2020-12' });
+    return [
+      `${name}.schema.json`,
+      {
+        ...jsonSchema,
+        $id: `${SCHEMA_BASE}/${name}.schema.json`,
+        title: `Flag Paths ${name.replace(/[-_]/g, ' ')}`,
+      },
+    ];
+  }));
 }

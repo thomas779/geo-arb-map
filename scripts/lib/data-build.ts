@@ -1085,6 +1085,7 @@ function gateRelationalProjectionCompleteness(
 ): ParityGateResult {
   const expected = {
     coverage: loaded.jurisdictions.length,
+    mode_coverage: loaded.jurisdictions.length * 4,
     route_variants: loaded.jurisdictions.reduce(
       (count, jurisdiction) =>
         count + jurisdiction.routes.reduce(
@@ -1117,6 +1118,7 @@ function gateRelationalProjectionCompleteness(
   };
   const actual = {
     coverage: loaded.projections.coverage.length,
+    mode_coverage: loaded.projections.mode_coverage.length,
     route_variants: loaded.projections.routes.length,
     arrangement_participants: loaded.projections.arrangements.length,
     edges: loaded.projections.edges.length,
@@ -1373,6 +1375,10 @@ export function writeDataRelease(release: DataRelease, root = REPO_ROOT): string
   writeJson(path.join(releaseRoot, 'catalog.json'), release.catalog);
   writeJson(path.join(releaseRoot, 'projections.json'), release.projections);
   writeJson(path.join(releaseRoot, 'coverage.json'), release.projections.coverage);
+  writeJson(
+    path.join(releaseRoot, 'mode-coverage.json'),
+    release.projections.mode_coverage,
+  );
   writeJson(path.join(releaseRoot, 'timelines.json'), release.projections.routes);
   writeJson(
     path.join(releaseRoot, 'arrangement-projections.json'),

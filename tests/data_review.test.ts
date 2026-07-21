@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
+import { readCanonicalMigrations } from '../scripts/lib/d1-migrations';
 import { importCanonicalPilot } from '../scripts/lib/canonical-store';
 import { compileDataRelease } from '../scripts/lib/data-build';
 import { renderDataReview } from '../scripts/lib/data-review';
@@ -13,10 +14,7 @@ describe('canonical review packet', () => {
     const root = process.cwd();
     const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'data-review-'));
     const databasePath = path.join(temporary, 'canonical.sqlite');
-    const migration = fs.readFileSync(
-      path.join(root, 'data/d1/migrations/0001_canonical_data.sql'),
-      'utf8',
-    );
+    const migration = readCanonicalMigrations(root);
     const pilot = buildCanonicalPilot();
     const database = new Database(databasePath, { create: true, strict: true });
     database.exec(migration);

@@ -3,11 +3,13 @@ import type { Database } from 'bun:sqlite';
 import type {
   ArrangementRecord,
   JurisdictionRecord,
+  JurisdictionRecordV1,
   SourceRecord,
 } from './canonical-schema';
+import { JurisdictionRecordV1Schema } from './canonical-schema';
 import type { CanonicalPilot } from './canonical-pilot';
 
-type CanonicalRecord = SourceRecord | JurisdictionRecord | ArrangementRecord;
+type CanonicalRecord = SourceRecord | JurisdictionRecord | JurisdictionRecordV1 | ArrangementRecord;
 export type CanonicalSqlValue = string | number | null;
 
 export interface CanonicalSqlMutation {
@@ -23,6 +25,7 @@ export interface CanonicalImportResult {
     revisions: number;
     sources: number;
     jurisdictions: number;
+    mode_coverage: number;
     arrangements: number;
     routes: number;
     route_variants: number;
@@ -73,6 +76,18 @@ export interface CanonicalCoverageProjection {
   arrangement_count: number;
 }
 
+export interface CanonicalModeCoverageProjection {
+  iso_n3: string;
+  jurisdiction: string;
+  mode: string;
+  finding: string;
+  review_state: string;
+  review_confidence: string;
+  last_checked: string | null;
+  review_note: string | null;
+  route_count: number;
+}
+
 export interface CanonicalArrangementProjection {
   arrangement_id: string;
   name: string;
@@ -95,6 +110,7 @@ export interface CanonicalEdgeProjection {
 
 export interface CanonicalProjections {
   coverage: CanonicalCoverageProjection[];
+  mode_coverage: CanonicalModeCoverageProjection[];
   routes: CanonicalRouteProjection[];
   arrangements: CanonicalArrangementProjection[];
   edges: CanonicalEdgeProjection[];
@@ -124,6 +140,7 @@ function insertRevision(
   sink: MutationSink,
   record: CanonicalRecord,
   createdAt: string,
+  supersedesRevisionId: string | null = null,
 ): string {
   const contentHash = hashJson(record);
   const revisionId = canonicalRevisionId(record);
@@ -137,8 +154,8 @@ function insertRevision(
   sink.run(
     `INSERT INTO canonical_revisions (
        id, entity_id, schema_version, payload_json, content_hash,
-       review_status, created_at
-     ) VALUES (?1, ?2, ?3, ?4, ?5, 'draft', ?6)
+       review_status, created_at, supersedes_revision_id
+     ) VALUES (?1, ?2, ?3, ?4, ?5, 'draft', ?6, ?7)
      ON CONFLICT(id) DO UPDATE SET content_hash = excluded.content_hash
      WHERE canonical_revisions.content_hash != excluded.content_hash`,
     [
@@ -148,9 +165,18 @@ function insertRevision(
       JSON.stringify(record),
       contentHash,
       createdAt,
+      supersedesRevisionId,
     ],
   );
   return revisionId;
+}
+
+function legacyJurisdictionRevision(record: JurisdictionRecord): JurisdictionRecordV1 {
+  const { coverage: _coverage, ...legacy } = record;
+  return JurisdictionRecordV1Schema.parse({
+    ...legacy,
+    schema_version: 1,
+  });
 }
 
 function insertSource(
@@ -202,6 +228,24 @@ function insertJurisdiction(
       record.review.last_checked,
     ],
   );
+  for (const coverage of [...record.coverage].sort((a, b) => a.mode.localeCompare(b.mode))) {
+    sink.run(
+      `INSERT INTO jurisdiction_mode_coverage (
+         revision_id, mode, finding, review_state, review_confidence,
+         last_checked, review_note
+       ) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)
+       ON CONFLICT(revision_id, mode) DO NOTHING`,
+      [
+        revisionId,
+        coverage.mode,
+        coverage.finding,
+        coverage.review.state,
+        coverage.review.confidence,
+        coverage.review.last_checked,
+        coverage.review.note ?? null,
+      ],
+    );
+  }
   for (const route of [...record.routes].sort((a, b) => a.id.localeCompare(b.id))) {
     sink.run(
       `INSERT INTO route_index (
@@ -312,8 +356,11 @@ function evidenceReferences(record: JurisdictionRecord | ArrangementRecord): Arr
   note?: string;
 }> {
   if (record.entity_type === 'jurisdiction') {
-    return record.routes.flatMap(route =>
-      route.variants.flatMap(variant => variant.source_refs));
+    return [
+      ...record.coverage.flatMap(item => item.source_refs),
+      ...record.routes.flatMap(route =>
+        route.variants.flatMap(variant => variant.source_refs)),
+    ];
   }
   return [
     ...record.source_refs,
@@ -369,7 +416,7 @@ export function buildCanonicalImportPlan(
       mutations.push({ sql, values });
     },
   };
-  const records: CanonicalRecord[] = [
+  const records: Array<SourceRecord | JurisdictionRecord | ArrangementRecord> = [
     ...pilot.sources,
     ...pilot.jurisdictions,
     ...pilot.arrangements,
@@ -377,7 +424,15 @@ export function buildCanonicalImportPlan(
 
   let evidenceLinks = 0;
   for (const record of records) {
-    const revisionId = insertRevision(sink, record, createdAt);
+    let supersedesRevisionId: string | null = null;
+    if (record.entity_type === 'jurisdiction') {
+      supersedesRevisionId = insertRevision(
+        sink,
+        legacyJurisdictionRevision(record),
+        createdAt,
+      );
+    }
+    const revisionId = insertRevision(sink, record, createdAt, supersedesRevisionId);
     revisionByEntity[record.id] = revisionId;
     if (record.entity_type === 'source') insertSource(sink, record, revisionId);
     if (record.entity_type === 'jurisdiction') {
@@ -400,9 +455,13 @@ export function buildCanonicalImportPlan(
     ),
     counts: {
       entities: records.length,
-      revisions: records.length,
+      revisions: records.length + pilot.jurisdictions.length,
       sources: pilot.sources.length,
       jurisdictions: pilot.jurisdictions.length,
+      mode_coverage: pilot.jurisdictions.reduce(
+        (sum, item) => sum + item.coverage.length,
+        0,
+      ),
       arrangements: pilot.arrangements.length,
       routes: pilot.jurisdictions.reduce((sum, item) => sum + item.routes.length, 0),
       route_variants: pilot.jurisdictions.reduce(
@@ -638,6 +697,33 @@ function readScopedCanonicalProjections(
     ...row,
     route_modes: row.route_modes?.split(',').sort() ?? [],
   }));
+  const modeCoverage = rows<CanonicalModeCoverageProjection>(
+    db,
+    `${scoped.cte},
+     route_summary AS (
+       SELECT revision_id, mode, COUNT(*) AS route_count
+       FROM route_index
+       GROUP BY revision_id, mode
+     )
+     SELECT
+       jurisdiction.iso_n3,
+       jurisdiction.name AS jurisdiction,
+       coverage.mode,
+       coverage.finding,
+       coverage.review_state,
+       coverage.review_confidence,
+       coverage.last_checked,
+       coverage.review_note,
+       COALESCE(route_summary.route_count, 0) AS route_count
+     FROM projection_scope AS scope
+     JOIN jurisdiction_index AS jurisdiction USING (revision_id)
+     JOIN jurisdiction_mode_coverage AS coverage USING (revision_id)
+     LEFT JOIN route_summary
+       ON route_summary.revision_id = coverage.revision_id
+       AND route_summary.mode = coverage.mode
+     ORDER BY jurisdiction.iso_n3, coverage.mode`,
+    scoped.values,
+  );
   const arrangements = rows<CanonicalArrangementProjection>(
     db,
     `${scoped.cte}
@@ -711,6 +797,7 @@ function readScopedCanonicalProjections(
   );
   return {
     coverage,
+    mode_coverage: modeCoverage,
     routes,
     arrangements,
     edges: [...regionalEdges, ...pathwayEdges],

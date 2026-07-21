@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildCanonicalPilot } from './lib/canonical-pilot';
+import { readCanonicalMigrations } from './lib/d1-migrations';
 import {
   applyCanonicalMutations,
   buildCanonicalImportPlan,
@@ -15,10 +16,7 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const generatedRoot = path.join(root, '.generated/data-canonical');
 const output = path.join(generatedRoot, 'canonical.sqlite');
 const temporary = `${output}.tmp`;
-const migration = fs.readFileSync(
-  path.join(root, 'data/d1/migrations/0001_canonical_data.sql'),
-  'utf8',
-);
+const migration = readCanonicalMigrations(root);
 
 fs.mkdirSync(generatedRoot, { recursive: true });
 fs.rmSync(temporary, { force: true });

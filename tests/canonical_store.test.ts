@@ -3,6 +3,7 @@ import { describe, expect, test } from 'bun:test';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
+import { readCanonicalMigrations } from '../scripts/lib/d1-migrations';
 import {
   applyCanonicalMutations,
   buildCanonicalImportPlan,
@@ -13,11 +14,8 @@ import {
   renderCanonicalSql,
 } from '../scripts/lib/canonical-store';
 
-const migration = fs.readFileSync(
-  fileURLToPath(
-    new URL('../data/d1/migrations/0001_canonical_data.sql', import.meta.url),
-  ),
-  'utf8',
+const migration = readCanonicalMigrations(
+  fileURLToPath(new URL('..', import.meta.url)),
 );
 const pilot = buildCanonicalPilot();
 
@@ -51,7 +49,7 @@ describe('canonical SQL import and projections', () => {
 
     expect(firstRevisions).toEqual(secondRevisions);
     expect(firstRevisions).toHaveLength(
-      pilot.sources.length + pilot.jurisdictions.length + pilot.arrangements.length,
+      pilot.sources.length + (pilot.jurisdictions.length * 2) + pilot.arrangements.length,
     );
     expect(firstRevisions.every(
       row => (row as { review_status: string }).review_status === 'draft',
@@ -59,6 +57,18 @@ describe('canonical SQL import and projections', () => {
     expect(first.database.query('SELECT COUNT(*) AS count FROM releases').get()).toEqual({
       count: 0,
     });
+    const heads = first.database.query(
+      `SELECT revision.id
+       FROM canonical_revisions AS revision
+       WHERE NOT EXISTS (
+         SELECT 1 FROM canonical_revisions AS newer
+         WHERE newer.supersedes_revision_id = revision.id
+       )
+       ORDER BY revision.entity_id`,
+    ).all();
+    expect(heads).toHaveLength(
+      pilot.sources.length + pilot.jurisdictions.length + pilot.arrangements.length,
+    );
     importCanonicalPilot(first.database, pilot);
     expect(first.database.query(
       'SELECT COUNT(*) AS count FROM canonical_revisions',
@@ -109,6 +119,19 @@ describe('canonical SQL import and projections', () => {
       route_count: 1,
       route_modes: ['naturalization'],
     });
+    expect(projections.mode_coverage).toHaveLength(12);
+    expect(projections.mode_coverage.find(row =>
+      row.iso_n3 === '250' && row.mode === 'naturalization')).toMatchObject({
+        finding: 'present',
+        review_state: 'partial',
+        route_count: 1,
+      });
+    expect(projections.mode_coverage.find(row =>
+      row.iso_n3 === '724' && row.mode === 'birth')).toMatchObject({
+        finding: 'unknown',
+        review_state: 'unchecked',
+        route_count: 0,
+      });
     imported.database.close();
   });
 

@@ -5,6 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
+import { readCanonicalMigrations } from '../scripts/lib/d1-migrations';
 import {
   buildCanonicalImportPlan,
   importCanonicalPilot,
@@ -21,10 +22,7 @@ import {
 } from '../scripts/lib/data-build';
 
 const REPO_ROOT = process.cwd();
-const MIGRATION = fs.readFileSync(
-  path.join(REPO_ROOT, 'data/d1/migrations/0001_canonical_data.sql'),
-  'utf8',
-);
+const MIGRATION = readCanonicalMigrations(REPO_ROOT);
 
 /** Build a fresh canonical SQLite database (the `data:db` stage) for hermetic tests. */
 function buildDatabase(dbPath: string): void {
@@ -49,16 +47,22 @@ function buildMutatedDatabase(
   buildDatabase(mutationPath);
   const db = new Database(mutationPath, { strict: true });
   const row = db.query(
-    'SELECT payload_json FROM canonical_revisions WHERE entity_id = ?1',
-  ).get(entityId) as { payload_json: string };
+    `SELECT revision.id, revision.payload_json
+     FROM canonical_revisions AS revision
+     WHERE revision.entity_id = ?1
+       AND NOT EXISTS (
+         SELECT 1 FROM canonical_revisions AS newer
+         WHERE newer.supersedes_revision_id = revision.id
+       )`,
+  ).get(entityId) as { id: string; payload_json: string };
   const payload = JSON.parse(row.payload_json) as Record<string, unknown>;
   mutate(payload);
   db.exec('DROP TRIGGER canonical_revision_content_immutable');
   db.query(
     `UPDATE canonical_revisions
      SET payload_json = ?1, content_hash = ?2
-     WHERE entity_id = ?3`,
-  ).run(JSON.stringify(payload), hashJson(payload), entityId);
+     WHERE id = ?3`,
+  ).run(JSON.stringify(payload), hashJson(payload), row.id);
   db.close();
   return mutationPath;
 }
@@ -94,6 +98,7 @@ describe('data:build reads the canonical database', () => {
       selected_release_status: null,
     });
     expect(loaded.projections.coverage).toHaveLength(3);
+    expect(loaded.projections.mode_coverage).toHaveLength(12);
   });
 
   test('fails clearly when the database is missing', () => {
@@ -221,10 +226,8 @@ describe('data:build adversarial parity', () => {
         payload.routes = [];
       },
     );
-    const mutated = compileDataRelease({ dbPath: mutationPath, root: REPO_ROOT });
-    expect(mutated.parity.passed).toBe(false);
-    expect(mutated.parity.gates.find(item => item.gate === 'citizenship_roundtrip_parity')?.status)
-      .toBe('fail');
+    expect(() => compileDataRelease({ dbPath: mutationPath, root: REPO_ROOT }))
+      .toThrow('Coverage finding present requires a naturalization route');
   });
 
   test('fails when the Spain correction removes an existing beneficiary', () => {
@@ -278,8 +281,12 @@ describe('data:build adversarial parity', () => {
     ).run();
     db.query(
       `INSERT INTO release_items (release_id, entity_id, revision_id)
-       SELECT 'reviewed-release', entity_id, id
-       FROM canonical_revisions`,
+       SELECT 'reviewed-release', revision.entity_id, revision.id
+       FROM canonical_revisions AS revision
+       WHERE NOT EXISTS (
+         SELECT 1 FROM canonical_revisions AS newer
+         WHERE newer.supersedes_revision_id = revision.id
+       )`,
     ).run();
     db.close();
 
@@ -437,6 +444,7 @@ describe('data:build determinism and writes', () => {
         'catalog.json',
         'projections.json',
         'coverage.json',
+        'mode-coverage.json',
         'timelines.json',
         'arrangement-projections.json',
         'graph.json',

@@ -8,7 +8,7 @@ import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
 
 const pilot = buildCanonicalPilot();
 
-describe('canonical v1 data schemas', () => {
+describe('canonical data schemas', () => {
   test('all pilot candidates validate against executable schemas', () => {
     for (const source of pilot.sources) {
       expect(CANONICAL_SCHEMAS.source.safeParse(source).success).toBe(true);
@@ -42,6 +42,22 @@ describe('canonical v1 data schemas', () => {
     )!;
     expect(education.timeline.eligibility_minimum_months).toBe(24);
     expect(education.timeline.processing_typical_months).toBeNull();
+  });
+
+  test('requires one explicit coverage finding for every acquisition mode', () => {
+    const france = pilot.jurisdictions.find(item => item.jurisdiction.iso_n3 === '250')!;
+    expect(france.schema_version).toBe(2);
+    expect(france.coverage.map(item => item.mode).sort()).toEqual([
+      'ancestry',
+      'birth',
+      'investment',
+      'naturalization',
+    ]);
+    const invalid = {
+      ...france,
+      coverage: france.coverage.filter(item => item.mode !== 'investment'),
+    };
+    expect(CANONICAL_SCHEMAS.jurisdiction.safeParse(invalid).success).toBe(false);
   });
 
   test('corrects the incomplete legacy Spain beneficiary enumeration in the candidate', () => {

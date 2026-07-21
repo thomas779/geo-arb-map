@@ -9,6 +9,9 @@ The storage model is hybrid:
 - immutable canonical JSON records preserve the complete typed legal record;
 - relational projections index the fields used by coverage, route, graph, and
   API queries;
+- `jurisdiction_mode_coverage` stores one explicit ancestry, naturalization,
+  birth, and investment finding per jurisdiction revision, including reviewed
+  negatives that cannot be inferred from route absence;
 - evidence links pin a source revision to a stable field path;
 - immutable releases select exactly one approved revision of each entity.
 
@@ -45,12 +48,17 @@ exist, apply the schema migration first and the generated import second.
 Approval and publication remain separate operations guarded by database
 constraints.
 
-Current remote pilot state:
+Remote state before applying the mode-coverage upgrade:
 
 - 15 source revisions, 3 jurisdiction revisions, and 3 arrangement revisions;
 - all 21 revisions are `draft`;
 - all evidence references resolve; and
 - the release table is empty.
+
+Migration `0002_mode_coverage.sql` and the next canonical import add version-2
+jurisdiction revisions. Each version-2 revision explicitly supersedes its
+version-1 pilot revision, so D1 retains history without creating ambiguous
+heads. Apply the migration before importing the regenerated SQL.
 
 The isolated database is configured in `wrangler.jsonc`. Apply schema
 migrations with:

@@ -2,11 +2,11 @@ import { Database } from 'bun:sqlite';
 import { describe, expect, test } from 'bun:test';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { readCanonicalMigrations } from '../scripts/lib/d1-migrations';
 
-const migrationPath = fileURLToPath(
-  new URL('../data/d1/migrations/0001_canonical_data.sql', import.meta.url),
+const migration = readCanonicalMigrations(
+  fileURLToPath(new URL('..', import.meta.url)),
 );
-const migration = fs.readFileSync(migrationPath, 'utf8');
 
 function database(): Database {
   const db = new Database(':memory:', { strict: true });
@@ -186,6 +186,43 @@ describe('canonical D1 schema', () => {
       'revision:jurisdiction:620:1',
       'https://example.com/not-a-source',
     )).toThrow('source index revision must belong to a source entity');
+    db.close();
+  });
+
+  test('stores explicit reviewed negatives independently from route presence', () => {
+    const db = database();
+    insertEntity(db, {
+      id: 'jurisdiction:724',
+      type: 'jurisdiction',
+      revision: 'revision:jurisdiction:724:coverage',
+    });
+    db.query(
+      `INSERT INTO jurisdiction_index (
+         revision_id, iso_n3, name, jurisdiction_type,
+         review_state, review_confidence, last_checked
+       ) VALUES (?1, '724', 'Spain', 'sovereign', 'partial', 'high', '2026-07-21')`,
+    ).run('revision:jurisdiction:724:coverage');
+    db.query(
+      `INSERT INTO jurisdiction_mode_coverage (
+         revision_id, mode, finding, review_state, review_confidence, last_checked
+       ) VALUES (?1, 'investment', 'verified_none', 'reviewed', 'high', '2026-07-21')`,
+    ).run('revision:jurisdiction:724:coverage');
+
+    expect(db.query(
+      `SELECT mode, finding, review_state
+       FROM jurisdiction_mode_coverage WHERE revision_id = ?1`,
+    ).get('revision:jurisdiction:724:coverage')).toEqual({
+      mode: 'investment',
+      finding: 'verified_none',
+      review_state: 'reviewed',
+    });
+    expect(() => db.query(
+      `INSERT INTO jurisdiction_mode_coverage (
+         revision_id, mode, finding, review_state, review_confidence
+       ) VALUES (?1, 'birth', 'verified_none', 'partial', 'medium')`,
+    ).run('revision:jurisdiction:724:coverage')).toThrow(
+      'verified negative coverage must be reviewed',
+    );
     db.close();
   });
 });

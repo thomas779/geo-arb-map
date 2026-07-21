@@ -283,7 +283,7 @@ function franceRecord(shadow: DataShadow): JurisdictionRecord {
     throw new Error('France pilot sources are incomplete');
   }
   return JurisdictionRecordSchema.parse({
-    schema_version: 1,
+    schema_version: 2,
     entity_type: 'jurisdiction',
     id: 'jurisdiction:250',
     jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
@@ -293,6 +293,37 @@ function franceRecord(shadow: DataShadow): JurisdictionRecord {
       last_checked: legacy.last_checked,
       note: 'Naturalization education accelerator reviewed; other acquisition modes remain incomplete.',
     },
+    coverage: [
+      {
+        mode: 'ancestry',
+        finding: 'unknown',
+        review: { state: 'unchecked', confidence: 'low', last_checked: null },
+        source_refs: [],
+      },
+      {
+        mode: 'naturalization',
+        finding: 'present',
+        review: {
+          state: 'partial',
+          confidence: legacy.confidence,
+          last_checked: legacy.last_checked,
+          note: 'Ordinary and French higher-education variants are represented.',
+        },
+        source_refs: refs(legacy.sources, ['/coverage/naturalization']),
+      },
+      {
+        mode: 'birth',
+        finding: 'unknown',
+        review: { state: 'unchecked', confidence: 'low', last_checked: null },
+        source_refs: [],
+      },
+      {
+        mode: 'investment',
+        finding: 'unknown',
+        review: { state: 'unchecked', confidence: 'low', last_checked: null },
+        source_refs: [],
+      },
+    ],
     routes: [{
       id: legacy.id,
       mode: legacy.mode,
@@ -393,7 +424,7 @@ function portugalRecord(shadow: DataShadow): JurisdictionRecord {
   );
   if (!candidate || !ordinary || !birth) throw new Error('Portugal pilot routes are missing');
   return JurisdictionRecordSchema.parse({
-    schema_version: 1,
+    schema_version: 2,
     entity_type: 'jurisdiction',
     id: 'jurisdiction:620',
     jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
@@ -403,6 +434,40 @@ function portugalRecord(shadow: DataShadow): JurisdictionRecord {
       last_checked: ordinary.last_checked,
       note: 'Ordinary naturalization and one conditional birth route reviewed.',
     },
+    coverage: [
+      {
+        mode: 'ancestry',
+        finding: 'unknown',
+        review: { state: 'unchecked', confidence: 'low', last_checked: null },
+        source_refs: [],
+      },
+      {
+        mode: 'naturalization',
+        finding: 'present',
+        review: {
+          state: 'partial',
+          confidence: ordinary.confidence,
+          last_checked: ordinary.last_checked,
+        },
+        source_refs: refs(ordinary.sources, ['/coverage/naturalization']),
+      },
+      {
+        mode: 'birth',
+        finding: 'present',
+        review: {
+          state: 'partial',
+          confidence: birth.confidence,
+          last_checked: birth.last_checked,
+        },
+        source_refs: refs(birth.sources, ['/coverage/birth']),
+      },
+      {
+        mode: 'investment',
+        finding: 'unknown',
+        review: { state: 'unchecked', confidence: 'low', last_checked: null },
+        source_refs: [],
+      },
+    ],
     routes: [
       {
         id: ordinary.id,
@@ -521,7 +586,7 @@ function spainRecord(shadow: DataShadow): JurisdictionRecord {
   const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '724');
   if (!candidate) throw new Error('Spain pilot jurisdiction is missing');
   return JurisdictionRecordSchema.parse({
-    schema_version: 1,
+    schema_version: 2,
     entity_type: 'jurisdiction',
     id: 'jurisdiction:724',
     jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
@@ -531,6 +596,17 @@ function spainRecord(shadow: DataShadow): JurisdictionRecord {
       last_checked: null,
       note: 'No country-law route has been promoted from the legacy dataset yet.',
     },
+    coverage: [
+      'ancestry',
+      'naturalization',
+      'birth',
+      'investment',
+    ].map(mode => ({
+      mode,
+      finding: 'unknown',
+      review: { state: 'unchecked', confidence: 'low', last_checked: null },
+      source_refs: [],
+    })),
     routes: [],
   });
 }
