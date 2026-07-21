@@ -58,6 +58,26 @@ const initialState: AppState = {
   ...url.read(),
 };
 
+function BrandMark() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 32 32"
+      className="hidden size-8 shrink-0 sm:block"
+      fill="none"
+    >
+      <path
+        d="M5.5 24.5c0-7.2 4.1-9.8 9.1-9.8 5.8 0 6.1-7.2 11.9-7.2"
+        className="stroke-primary"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <circle cx="5.5" cy="24.5" r="3" className="fill-card stroke-foreground" strokeWidth="1.5" />
+      <circle cx="26.5" cy="7.5" r="3" className="fill-primary stroke-card" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
 export default function App() {
   const [state, setState] = useState<AppState>(initialState);
   const [data, setData] = useState<BlocsData | null>(null);
@@ -206,14 +226,17 @@ export default function App() {
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
-      <header className="flex shrink-0 items-center gap-1.5 border-b bg-card/80 px-2.5 py-2 backdrop-blur-sm sm:gap-3 sm:px-5 sm:py-3">
-        <div className="flex min-w-0 items-baseline gap-3">
-          <h1 className="whitespace-nowrap text-xl font-bold tracking-tight sm:text-2xl">
-            Flag Paths
-          </h1>
-          <span className="hidden truncate text-xs text-muted-foreground lg:inline">
-            Your Path to Global Mobility
-          </span>
+      <header className="flex h-14 shrink-0 items-center gap-1.5 border-b bg-card/90 px-2.5 backdrop-blur-sm sm:h-16 sm:gap-4 sm:px-5">
+        <div className="flex min-w-0 items-center gap-2.5">
+          <BrandMark />
+          <div className="min-w-0">
+            <h1 className="whitespace-nowrap font-heading text-xl font-bold tracking-[-0.035em] sm:text-[1.45rem]">
+              Flag Paths
+            </h1>
+            <span className="hidden font-mono text-[8px] font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:block">
+              Mobility atlas
+            </span>
+          </div>
         </div>
         <nav
           aria-label="View"
@@ -224,12 +247,7 @@ export default function App() {
               key={v}
               aria-current={state.view === v ? 'page' : undefined}
               aria-label={v === 'stacking' ? 'Planner — coming soon' : label}
-              className={cn(
-                'flex h-9 w-16 items-center justify-center text-xs font-semibold outline-none transition-colors focus-visible:underline focus-visible:decoration-2 focus-visible:decoration-ring focus-visible:underline-offset-4 sm:h-8 sm:w-[78px]',
-                state.view === v
-                  ? 'text-foreground'
-                  : 'text-muted-foreground hover:text-foreground',
-              )}
+              className="flex h-9 w-14 items-center justify-center text-xs font-semibold text-foreground outline-none transition-colors hover:text-primary focus-visible:text-primary sm:h-8 sm:w-[72px]"
               onClick={() => selectView(v)}
             >
               {label}
@@ -243,7 +261,7 @@ export default function App() {
             )}
           />
         </nav>
-        <div className="ml-auto flex shrink-0 items-center rounded-xl border bg-background/65 p-0.5 shadow-sm backdrop-blur-md">
+        <div className="ml-auto flex shrink-0 items-center gap-0.5">
           {data && (
             <>
               <Popover>
@@ -283,7 +301,7 @@ export default function App() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-8 sm:w-[82px] sm:px-2"
+                className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-8 sm:w-[78px] sm:px-2"
                 aria-label="Open trust and data"
                 onClick={() => changeInfo('methodology')}
               >
@@ -296,7 +314,7 @@ export default function App() {
             asChild
             variant="ghost"
             size="sm"
-            className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-8 sm:w-[82px] sm:px-2"
+            className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-8 sm:w-[78px] sm:px-2"
           >
             <a
               href="https://t.me/flagpaths"
@@ -308,7 +326,7 @@ export default function App() {
               <span className="hidden sm:inline">Updates</span>
             </a>
           </Button>
-          <span className="mx-0.5 h-4 w-px bg-border" aria-hidden />
+          <span className="mx-1 h-5 w-px bg-border" aria-hidden />
           <Button
             variant="ghost"
             size="icon-sm"
