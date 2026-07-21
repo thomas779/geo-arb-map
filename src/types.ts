@@ -171,6 +171,12 @@ export interface CitizenshipRoutesData {
   routes: CitizenshipRoute[];
 }
 
+export interface DataReleaseMeta {
+  release_id: string;
+  selection_mode: string;
+  generated_at: string;
+}
+
 export interface AppState {
   view: 'map' | 'stacking';
   /** Multi-select compare: countries in 2+ selected blocs render blended. */

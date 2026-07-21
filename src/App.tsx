@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Layers3,
   List,
@@ -11,9 +11,10 @@ import {
   ShieldCheck,
   Sun,
 } from 'lucide-react';
-import type { AppState, BlocsData, CitizenshipRoutesData } from './types';
+import type { AppState, BlocsData, CitizenshipRoutesData, DataReleaseMeta } from './types';
 import * as url from './url';
 import { Button } from '@/components/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
@@ -62,6 +63,7 @@ export default function App() {
   const [data, setData] = useState<BlocsData | null>(null);
   const [profile, setProfile] = useState<Profile>(initialProfile);
   const [citizenshipRoutes, setCitizenshipRoutes] = useState<CitizenshipRoutesData | null>(null);
+  const [dataRelease, setDataRelease] = useState<DataReleaseMeta | null>(null);
   const [infoSection, setInfoSection] = useState<TrustSection | null>(() => url.readInfo());
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
   const [detailPanelOpen, setDetailPanelOpen] = useState(Boolean(initialState.country));
@@ -72,6 +74,35 @@ export default function App() {
     initialState.blocs.length === 0 && !initialState.lane && !initialState.country,
   );
   const { theme, setTheme } = useTheme();
+
+  const dataStatus = useMemo(() => {
+    const evidenceDates = [
+      data?.meta.last_verified,
+      citizenshipRoutes?.meta.last_updated,
+      dataRelease?.generated_at.slice(0, 10),
+      ...((citizenshipRoutes?.routes ?? []).map(route => route.last_checked)),
+    ].filter((date): date is string => Boolean(date));
+    evidenceDates.sort();
+    const updatedAt = evidenceDates[evidenceDates.length - 1] ?? '—';
+    const jurisdictions = citizenshipRoutes?.meta.counts.jurisdictions ?? 0;
+    const reviewedJurisdictions = citizenshipRoutes?.jurisdictions.filter(jurisdiction =>
+      Object.values(jurisdiction.coverage).every(state => state === 'reviewed'),
+    ).length ?? 0;
+    const reviewedModes = citizenshipRoutes?.jurisdictions.reduce(
+      (count, jurisdiction) => count
+        + Object.values(jurisdiction.coverage).filter(state => state === 'reviewed').length,
+      0,
+    ) ?? 0;
+
+    return {
+      updatedAt,
+      jurisdictions,
+      reviewedJurisdictions,
+      reviewedModes,
+      totalModes: jurisdictions * 4,
+      countryRules: citizenshipRoutes?.meta.counts.routes ?? 0,
+    };
+  }, [citizenshipRoutes, data, dataRelease]);
 
   const changeInfo = useCallback((section: TrustSection | null) => {
     url.setInfo(section);
@@ -105,6 +136,10 @@ export default function App() {
       .then(res => res.json())
       .then((routes: CitizenshipRoutesData) => setCitizenshipRoutes(routes))
       .catch(err => console.error('Failed to load citizenship_routes.json:', err));
+    fetch(import.meta.env.BASE_URL + 'data_release.json')
+      .then(res => res.json())
+      .then((release: DataReleaseMeta) => setDataRelease(release))
+      .catch(err => console.error('Failed to load data_release.json:', err));
   }, []);
 
   useEffect(() => {
@@ -180,17 +215,18 @@ export default function App() {
             Your Path to Global Mobility
           </span>
         </div>
-        <nav aria-label="View" className="flex shrink-0 overflow-hidden rounded-md border">
+        <nav aria-label="View" className="grid shrink-0 grid-cols-2 overflow-hidden rounded-lg border bg-background/45 p-0.5">
           {([['map', 'Map'], ['stacking', 'Planner']] as const).map(([v, label]) => (
             <button
               key={v}
               aria-current={state.view === v ? 'page' : undefined}
               aria-label={v === 'stacking' ? 'Planner — coming soon' : label}
-              className={
+              className={cn(
+                'flex h-9 w-16 items-center justify-center gap-1.5 rounded-md text-xs transition-colors sm:h-8 sm:w-[94px]',
                 state.view === v
-                  ? 'flex min-h-9 items-center gap-1.5 bg-secondary px-2 text-xs font-semibold text-secondary-foreground sm:min-h-0 sm:px-3 sm:py-1.5'
-                  : 'flex min-h-9 items-center gap-1.5 px-2 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground sm:min-h-0 sm:px-3 sm:py-1.5'
-              }
+                  ? 'bg-secondary font-semibold text-secondary-foreground shadow-sm'
+                  : 'font-medium text-muted-foreground hover:bg-accent/60 hover:text-foreground',
+              )}
               onClick={() => selectView(v)}
             >
               {label}
@@ -205,29 +241,44 @@ export default function App() {
         <div className="ml-auto flex shrink-0 items-center rounded-xl border bg-background/65 p-0.5 shadow-sm backdrop-blur-md">
           {data && (
             <>
-              <Tooltip>
-                <TooltipTrigger asChild>
+              <Popover>
+                <PopoverTrigger asChild>
                   <Button
                     variant="ghost"
-                    size="icon-sm"
-                    className="hidden text-muted-foreground sm:inline-flex"
-                    aria-label="Show access-level key"
+                    size="sm"
+                    className="hidden h-8 min-w-8 gap-1.5 px-2 text-xs text-muted-foreground sm:inline-flex"
+                    aria-label="Open access-level key"
                   >
                     <Layers3 aria-hidden />
+                    <span className="hidden xl:inline">Key</span>
                   </Button>
-                </TooltipTrigger>
-                <TooltipContent side="bottom" className="max-w-[300px]">
-                  <div className="flex flex-col gap-1.5 text-xs">
-                    <span><b>TR</b> — {data.meta.tier_legend.TR}</span>
-                    <span><b>PR</b> — {data.meta.tier_legend.PR}</span>
-                    <span><b>CIT</b> — {data.meta.tier_legend.CIT}</span>
+                </PopoverTrigger>
+                <PopoverContent align="end" className="w-[310px] p-0">
+                  <div className="border-b px-4 py-3">
+                    <p className="text-sm font-semibold">Access key</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">The status needed to unlock a mapped right.</p>
                   </div>
-                </TooltipContent>
-              </Tooltip>
+                  <div className="grid gap-px bg-border">
+                    {(['TR', 'PR', 'CIT'] as const).map((tier, index) => (
+                      <div key={tier} className="grid grid-cols-[42px_1fr] items-center gap-3 bg-popover px-4 py-3">
+                        <span className="grid size-8 place-items-center rounded-md border bg-background font-mono text-[11px] font-semibold">
+                          {tier}
+                        </span>
+                        <span className="text-xs leading-snug text-muted-foreground">{data.meta.tier_legend[tier]}</span>
+                        <span
+                          aria-hidden
+                          className="col-start-1 row-start-2 h-0.5 rounded-full bg-primary"
+                          style={{ width: `${45 + index * 25}%` }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
               <Button
                 variant="ghost"
                 size="sm"
-                className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-7 sm:w-auto sm:px-2"
+                className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-8 sm:w-[82px] sm:px-2"
                 aria-label="Open trust and data"
                 onClick={() => changeInfo('methodology')}
               >
@@ -240,7 +291,7 @@ export default function App() {
             asChild
             variant="ghost"
             size="sm"
-            className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-7 sm:w-auto sm:px-2"
+            className="size-9 gap-1.5 p-0 text-xs text-muted-foreground sm:h-8 sm:w-[82px] sm:px-2"
           >
             <a
               href="https://t.me/flagpaths"
@@ -357,10 +408,10 @@ export default function App() {
           {data && (
             <button
               className="absolute right-3 bottom-3 z-10 hidden rounded-full border bg-background/90 px-2.5 py-1 font-mono text-xs text-muted-foreground shadow-sm backdrop-blur-sm hover:text-foreground sm:block"
-              aria-label={`Dataset reviewed through ${data.meta.last_verified}. Open methodology.`}
+              aria-label={`Data evidence updated ${dataStatus.updatedAt}. Open methodology.`}
               onClick={() => changeInfo('methodology')}
             >
-              reviewed&nbsp;·&nbsp;{data.meta.last_verified}
+              updated&nbsp;·&nbsp;{dataStatus.updatedAt}
             </button>
           )}
           {data && state.view === 'map' && (
@@ -445,7 +496,7 @@ export default function App() {
         <TrustCenter
           open={infoSection !== null}
           section={infoSection ?? 'methodology'}
-          lastReviewed={data.meta.last_verified}
+          dataStatus={dataStatus}
           hasProfile={
             profile.flags.length > 0
             || profile.birthplace !== null

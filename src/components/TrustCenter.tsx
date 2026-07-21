@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import {
-  BookOpen, Check, Database, ExternalLink, GitPullRequest, LockKeyhole,
-  MessageSquare, Network, Route, ScanSearch, Trash2, TriangleAlert,
+  BookOpen, Database, ExternalLink, FileCheck2, GitPullRequest,
+  Landmark, LockKeyhole, MessageSquare, ScanSearch, Server, ShieldCheck,
+  Monitor, Trash2, TriangleAlert, UserRoundCheck,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -16,11 +17,20 @@ import type { TrustSection } from '@/url';
 interface Props {
   open: boolean;
   section: TrustSection;
-  lastReviewed: string;
+  dataStatus: DataStatus;
   hasProfile: boolean;
   onOpenChange: (open: boolean) => void;
   onSectionChange: (section: TrustSection) => void;
   onClearProfile: () => void;
+}
+
+interface DataStatus {
+  updatedAt: string;
+  jurisdictions: number;
+  reviewedJurisdictions: number;
+  reviewedModes: number;
+  totalModes: number;
+  countryRules: number;
 }
 
 const sections: Array<{
@@ -29,7 +39,7 @@ const sections: Array<{
   detail: string;
   icon: typeof BookOpen;
 }> = [
-  { id: 'methodology', label: 'Methodology', detail: 'How routes are made', icon: BookOpen },
+  { id: 'methodology', label: 'Methodology', detail: 'How data is checked', icon: BookOpen },
   { id: 'privacy', label: 'Privacy', detail: 'What stays private', icon: LockKeyhole },
   { id: 'limitations', label: 'Limitations', detail: 'Where to verify', icon: TriangleAlert },
 ];
@@ -37,21 +47,52 @@ const sections: Array<{
 const evidenceSteps = [
   { label: 'Sources', icon: Database },
   { label: 'Review', icon: ScanSearch },
-  { label: 'Graph', icon: Network },
-  { label: 'Route', icon: Route },
+  { label: 'Release', icon: FileCheck2 },
 ];
 
-function Methodology({ lastReviewed }: { lastReviewed: string }) {
+function Methodology({ dataStatus }: { dataStatus: DataStatus }) {
+  const coveragePercent = dataStatus.totalModes > 0
+    ? Math.round((dataStatus.reviewedModes / dataStatus.totalModes) * 100)
+    : 0;
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Evidence trail
-        </p>
-        <h3 className="mt-1 font-heading text-xl font-semibold">From a legal claim to a route you can inspect.</h3>
+        <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-primary">Data passport</p>
+        <h3 className="mt-1 font-heading text-xl font-semibold">What is live, and how much has been checked.</h3>
       </div>
 
-      <div className="grid grid-cols-4 rounded-lg border bg-background/50 px-2 py-3">
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-4">
+        {[
+          ['Updated', dataStatus.updatedAt, 'Latest published activity'],
+          ['Tracked', dataStatus.jurisdictions.toLocaleString(), 'Jurisdictions'],
+          ['Reviewed', dataStatus.reviewedJurisdictions.toLocaleString(), 'Complete countries'],
+          ['Rules', dataStatus.countryRules.toLocaleString(), 'Country records'],
+        ].map(([label, value, detail]) => (
+          <div key={label} className="bg-card px-3 py-3.5">
+            <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">{label}</p>
+            <p className="mt-1 text-lg font-semibold tabular-nums">{value}</p>
+            <p className="text-[11px] text-muted-foreground">{detail}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="rounded-lg border bg-background/45 p-4">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold">Route-level coverage</p>
+            <p className="mt-0.5 text-[11px] text-muted-foreground">
+              {dataStatus.reviewedModes} of {dataStatus.totalModes} country × acquisition-mode checks
+            </p>
+          </div>
+          <span className="font-mono text-sm font-semibold text-primary">{coveragePercent}%</span>
+        </div>
+        <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
+          <div className="h-full rounded-full bg-primary" style={{ width: `${coveragePercent}%` }} />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 rounded-lg border bg-background/50 px-2 py-3">
         {evidenceSteps.map((step, index) => {
           const Icon = step.icon;
           return (
@@ -70,44 +111,17 @@ function Methodology({ lastReviewed }: { lastReviewed: string }) {
         })}
       </div>
 
-      <div className="space-y-4 text-sm leading-relaxed text-muted-foreground">
-        <div>
-          <h4 className="font-sans text-sm font-semibold text-foreground">What qualifies for the map</h4>
-          <p className="mt-1">
-            Flag Paths covers citizenship, immigration residence, privileged
-            settlement arrangements, and family facts that can unlock those paths.
-            Ordinary travel visas, tax residence, companies, banking, and investments
-            are outside the current model.
-          </p>
-        </div>
-        <div>
-          <h4 className="font-sans text-sm font-semibold text-foreground">How claims enter the product</h4>
-          <p className="mt-1">
-            External research is normalized, classified, and reviewed. High-confidence
-            settlement claims can enter the live dataset; uncertain records stay visible
-            to maintainers as pending verification and do not create deterministic paths.
-            Hand-audited exceptions include their reason and sources.
-          </p>
-        </div>
-        <div>
-          <h4 className="font-sans text-sm font-semibold text-foreground">How routes are calculated</h4>
-          <p className="mt-1">
-            The pathfinder treats legal statuses as a graph. It carries acquired and
-            retained citizenships through each step, keeps work-only routes terminal,
-            and separates rights from ballots, quotas, and discretionary programs.
-            Known corrections are protected by tests.
-          </p>
-        </div>
-        <div className="rounded-md border border-dashed px-3 py-3">
-          <p className="flex items-start gap-2">
-            <Check className="mt-0.5 size-3.5 shrink-0 text-verified" aria-hidden />
-            <span>
-              <b className="font-semibold text-foreground">Dataset reviewed through {lastReviewed}.</b>{' '}
-              This is the dataset release date, not a claim that every law changed or was
-              individually rechecked that day.
-            </span>
-          </p>
-        </div>
+      <div className="grid gap-2 sm:grid-cols-3">
+        {[
+          ['Scope', 'Citizenship, residence, and privileged mobility.'],
+          ['Evidence', 'Official sources first; uncertain claims stay unpublished.'],
+          ['Meaning', 'Updated is release activity. Reviewed is explicit coverage.'],
+        ].map(([title, text]) => (
+          <div key={title} className="rounded-md border border-dashed p-3">
+            <h4 className="text-xs font-semibold">{title}</h4>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{text}</p>
+          </div>
+        ))}
       </div>
 
       <a
@@ -136,29 +150,42 @@ function Privacy({
   }, [hasProfile]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       <div>
         <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Local by default
         </p>
         <h3 className="mt-1 font-heading text-xl font-semibold">Your mobility profile stays in this browser.</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          There is currently no Flag Paths account or profile backend. Your held
-          statuses, birthplace, ancestry, heritage, partner citizenships, goals,
-          watchlist, and alert preference are stored in this browser’s local storage.
-        </p>
       </div>
 
-      <div className="space-y-3 text-sm leading-relaxed">
+      <div className="grid grid-cols-[1fr_auto_1fr] items-center overflow-hidden rounded-lg border bg-background/45 p-4 text-center">
+        <div className="grid justify-items-center gap-2">
+          <span className="grid size-10 place-items-center rounded-full border bg-card"><Monitor className="size-4" /></span>
+          <span className="text-xs font-semibold">This browser</span>
+          <span className="text-[10px] text-muted-foreground">Profile facts stay here</span>
+        </div>
+        <div className="mx-3 flex items-center" aria-hidden>
+          <span className="h-px w-5 bg-border sm:w-10" />
+          <LockKeyhole className="mx-1 size-3.5 text-verified" />
+          <span className="h-px w-5 bg-border sm:w-10" />
+        </div>
+        <div className="grid justify-items-center gap-2 opacity-55">
+          <span className="grid size-10 place-items-center rounded-full border bg-card"><Server className="size-4" /></span>
+          <span className="text-xs font-semibold">No profile server</span>
+          <span className="text-[10px] text-muted-foreground">Public data downloads only</span>
+        </div>
+      </div>
+
+      <div className="grid gap-2 sm:grid-cols-3">
         {[
-          ['What leaves the browser', 'The app downloads its public datasets. It does not upload your profile. Opening GitHub feedback or source links sends you to that external site under its own privacy practices.'],
-          ['Hosting information', 'The hosting provider may receive ordinary request information such as your IP address, browser details, requested page, and time of access.'],
-          ['Links and sharing', 'Map and route links should contain public route identifiers only. Profile-shaped demo parameters work only in development, are removed from the address, and are not a public sharing format.'],
-          ['Future sync', 'If optional account sync is added, it will require a separate explanation and an explicit choice before any profile facts are stored remotely.'],
-        ].map(([title, text]) => (
-          <div key={title} className="border-l-2 border-border pl-3">
-            <h4 className="font-sans text-sm font-semibold">{title}</h4>
-            <p className="mt-0.5 text-muted-foreground">{text}</p>
+          ['Local profile', 'Citizenship, family facts, and goals remain in local storage.', Monitor],
+          ['Normal hosting', 'Cloudflare may receive standard request logs such as IP and browser.', Server],
+          ['External links', 'GitHub and source links use those sites’ own privacy policies.', ExternalLink],
+        ].map(([title, text, Icon]) => (
+          <div key={title as string} className="rounded-md border p-3">
+            <Icon className="size-3.5 text-muted-foreground" aria-hidden />
+            <h4 className="mt-2 text-xs font-semibold">{title as string}</h4>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{text as string}</p>
           </div>
         ))}
       </div>
@@ -201,14 +228,10 @@ function Privacy({
 
 function Limitations() {
   const limits = [
-    ['Rules change', 'Immigration and nationality rules can change without warning, and sources may lag implementation.'],
-    ['Coverage varies', 'A blank country or missing route can mean it has not been researched to the live-data threshold—not that no route exists.'],
-    ['Eligibility is individual', 'Documents, residence history, criminal records, language, income, family circumstances, and administrative discretion can change an outcome.'],
-    ['Timelines are estimates', 'Processing and naturalization years are rough planning inputs, not approval or completion dates.'],
-    ['Confidence is editorial', 'A confidence label describes the research record; it is not a probability that an application will succeed.'],
-    ['Routes simplify reality', 'A graph step identifies a legal mechanism worth investigating. It does not complete prerequisite visas, residence maintenance, filings, or professional review.'],
-    ['No tax model', 'The planner does not determine tax residence, domicile, treaty position, company obligations, or investment consequences.'],
-    ['No legal advice', 'Use the atlas to discover and compare questions. Verify a promising path with current official sources and a qualified professional before acting.'],
+    ['Rules move', 'Policy and implementation can change before a source is updated.', ScanSearch],
+    ['Gaps are visible', 'Missing data means unreviewed—not that no route exists.', Database],
+    ['People differ', 'Documents, history, and discretion change eligibility.', UserRoundCheck],
+    ['Verify before acting', 'The atlas is research, not legal or tax advice.', Landmark],
   ];
   return (
     <div className="space-y-5">
@@ -218,13 +241,20 @@ function Limitations() {
         </p>
         <h3 className="mt-1 font-heading text-xl font-semibold">A route is a research lead, not a legal conclusion.</h3>
       </div>
-      <div className="divide-y rounded-lg border">
-        {limits.map(([title, text]) => (
-          <div key={title} className="grid gap-1 px-4 py-3 sm:grid-cols-[130px_1fr] sm:gap-4">
-            <h4 className="font-sans text-xs font-semibold text-foreground">{title}</h4>
-            <p className="text-xs leading-relaxed text-muted-foreground">{text}</p>
+      <div className="grid gap-px overflow-hidden rounded-lg border bg-border sm:grid-cols-2">
+        {limits.map(([title, text, Icon]) => (
+          <div key={title as string} className="bg-card p-4">
+            <span className="grid size-8 place-items-center rounded-md border bg-background text-muted-foreground">
+              <Icon className="size-3.5" aria-hidden />
+            </span>
+            <h4 className="mt-3 font-sans text-xs font-semibold text-foreground">{title as string}</h4>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{text as string}</p>
           </div>
         ))}
+      </div>
+      <div className="flex items-start gap-2 rounded-md border border-dashed p-3 text-xs leading-relaxed text-muted-foreground">
+        <ShieldCheck className="mt-0.5 size-3.5 shrink-0 text-verified" aria-hidden />
+        <p>Use country cards to inspect sources and review state. Confirm a promising route with the responsible authority or a qualified professional.</p>
       </div>
     </div>
   );
@@ -233,7 +263,7 @@ function Limitations() {
 export function TrustCenter({
   open,
   section,
-  lastReviewed,
+  dataStatus,
   hasProfile,
   onOpenChange,
   onSectionChange,
@@ -275,7 +305,7 @@ export function TrustCenter({
         </nav>
 
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6 sm:px-7">
-          {section === 'methodology' && <Methodology lastReviewed={lastReviewed} />}
+          {section === 'methodology' && <Methodology dataStatus={dataStatus} />}
           {section === 'privacy' && <Privacy hasProfile={hasProfile} onClearProfile={onClearProfile} />}
           {section === 'limitations' && <Limitations />}
         </div>
