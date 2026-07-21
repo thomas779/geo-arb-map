@@ -129,8 +129,10 @@
       "tier": "verification",
       "adapter": "api",
       "status": "planned",
+      "kind": "gazette_search",
       "url": "https://www.boe.es/datosabiertos/api/api.php",
       "jurisdictions": ["724"],
+      "keywords": ["ciudadanía", "nacionalidad", "naturalización", "residencia", "extranjería"],
       "notes": "Official BOE open API for daily gazette summaries and consolidated legislation. Monitor Civil Code BOE-A-1889-4763 plus nationality-related new instruments."
     },
     {
@@ -138,7 +140,9 @@
       "tier": "verification",
       "adapter": "api",
       "status": "planned",
+      "kind": "gazette_search",
       "jurisdictions": ["620"],
+      "keywords": ["cidadania", "nacionalidade", "naturalização", "residência", "estrangeiros"],
       "notes": "Diário da República Eletrónico open data — verifies the 2026 nationality-law transition already recorded in citizenship_routes.json."
     },
     {
@@ -146,7 +150,9 @@
       "tier": "verification",
       "adapter": "rss",
       "status": "planned",
+      "kind": "gazette_search",
       "jurisdictions": ["032"],
+      "keywords": ["ciudadanía", "nacionalidad", "naturalización", "residencia", "migraciones"],
       "notes": "Boletín Oficial de la República Argentina — flagged volatile in dual_citizenship / generational_events (pending decree)."
     },
     {
@@ -154,7 +160,9 @@
       "tier": "verification",
       "adapter": "api",
       "status": "planned",
+      "kind": "gazette_search",
       "jurisdictions": ["826"],
+      "keywords": ["citizenship", "nationality", "naturalisation", "residence", "immigration"],
       "notes": "legislation.gov.uk API — verifies BN(O)/ILR changes flagged volatile in the dataset."
     },
     {
@@ -325,8 +333,10 @@
       "tier": "verification",
       "adapter": "rss",
       "status": "planned",
+      "kind": "gazette_search",
       "url": "https://eur-lex.europa.eu/oj/direct-access.html?locale=en",
       "jurisdictions": ["eu"],
+      "keywords": ["citizenship", "nationality", "naturalisation", "residence", "free movement", "migration", "ciudadanía", "nacionalidad", "cittadinanza", "nationalité", "Staatsangehörigkeit"],
       "notes": "Authentic Official Journal of the European Union. Configure a focused EUR-Lex RSS search for nationality, residence, migration, accession, and free-movement instruments rather than ingesting the entire journal."
     },
     {
@@ -336,6 +346,20 @@
       "status": "active",
       "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/",
       "jurisdictions": ["470"],
+      "pages": [
+        {
+          "id": "acquisition-guidance",
+          "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/"
+        },
+        {
+          "id": "citizenship-act-amendments",
+          "url": "https://komunita.gov.mt/2025/09/02/amendments-to-the-maltese-citizenship-act-and-subsidiary-legislation/"
+        },
+        {
+          "id": "investor-programme-repeal",
+          "url": "https://komunita.gov.mt/en/2025/07/23/press-release-the-government-publishes-amendments-to-the-maltese-citizenship-act/"
+        }
+      ],
       "notes": "Official Community Malta acquisition guidance. Normalized page snapshots detect changes to birth, descent, registration and naturalization guidance; legal conclusions must be resolved to Chapter 188."
     },
     {
@@ -433,8 +457,10 @@
       "tier": "verification",
       "adapter": "api",
       "status": "planned",
+      "kind": "gazette_search",
       "url": "https://www.gov.br/pt-br/servicos/acessar-o-diario-oficial-da-uniao",
       "jurisdictions": ["076"],
+      "keywords": ["cidadania", "nacionalidade", "naturalização", "residência", "migração", "estrangeiros"],
       "notes": "Official access point for Brazil's Diário Oficial da União. Build a keyword/API query for nationality, naturalization, migration, residence, and visa instruments."
     }
   ]

@@ -178,6 +178,9 @@ export function buildPrompt(signals: Signal[], datasetContext: DatasetContext): 
 Keep only signals that plausibly report a changed rule, programme, requirement, status,
 deadline, quota, or official interpretation. Omit opinion, evergreen explainers,
 personal anecdotes, and items that merely restate a known rule.
+For page_changed signals, the diff proves only that page text changed. Classify wording,
+navigation, templates, and accessibility edits as source_only_editorial_change or omit them.
+Do not claim that a law changed unless changed text and primary evidence support that conclusion.
 
 Current dataset context (absence is not evidence that no route exists):
 ${JSON.stringify(datasetContext)}
@@ -193,6 +196,8 @@ ${JSON.stringify(signals.map(signal => ({
   excerpt: signal.excerpt,
   url: signal.url,
   published_at: signal.published_at,
+  event_type: signal.event_type,
+  page_text_diff: signal.change?.diff,
 })))}
 
 Return a JSON array only. Omit irrelevant signals. Each retained entry must be:

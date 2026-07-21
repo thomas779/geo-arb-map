@@ -14,6 +14,9 @@ The storage model is hybrid:
   negatives that cannot be inferred from route absence;
 - evidence links pin a source revision to a stable field path;
 - immutable releases select exactly one approved revision of each entity.
+- `monitor_pages` stores the last known-good official-page snapshot and HTTP
+  validators; `monitor_observations` preserves every retrieval, failure, and
+  normalized text diff without changing canonical facts.
 
 This avoids fully normalizing every evolving eligibility rule while still
 making important relationships and filters queryable in SQL.
@@ -47,6 +50,11 @@ Do not apply the SQL file to `flag-paths-monitor`. Once the separate
 exist, apply the schema migration first and the generated import second.
 Approval and publication remain separate operations guarded by database
 constraints.
+
+The weekly monitor applies migrations, exports D1 as its read snapshot, and
+writes a small generated SQL mutation file back after collection. Monitor state
+is operational evidence only: it cannot approve a canonical revision or publish
+a data release.
 
 Remote state before applying the mode-coverage upgrade:
 

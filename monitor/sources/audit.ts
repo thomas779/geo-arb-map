@@ -45,6 +45,9 @@ export interface MonitorSource {
   status: 'active' | 'planned';
   jurisdictions?: string[];
   url?: string;
+  kind?: string;
+  keywords?: string[];
+  pages?: Array<{ id: string; url: string; jurisdiction?: string; keywords?: string[] }>;
 }
 
 export interface SourceManifest {
@@ -135,6 +138,15 @@ export function buildMonitoringCoverageAudit(
       if (!registryIds.has(jurisdiction) && !['multi', 'eu'].includes(jurisdiction)) {
         structuralErrors.push(`monitor source ${source.id} uses unknown jurisdiction ${jurisdiction}`);
       }
+    }
+    if (source.kind === 'gazette_search' && !source.keywords?.length) {
+      structuralErrors.push(`gazette source ${source.id} requires local-language keywords`);
+    }
+    const pageIds = new Set<string>();
+    for (const page of source.pages ?? []) {
+      if (pageIds.has(page.id)) structuralErrors.push(`monitor source ${source.id} has duplicate page ${page.id}`);
+      pageIds.add(page.id);
+      try { new URL(page.url); } catch { structuralErrors.push(`monitor source ${source.id} has invalid page URL ${page.url}`); }
     }
   }
 

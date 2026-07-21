@@ -19,6 +19,16 @@ export function buildIssueDraft(lead: Lead): IssueDraft {
   const source = lead.signal;
   const title = `[Monitor lead] ${lead.jurisdiction}: ${lead.summary}`.slice(0, 200);
   const excerpt = quoteExcerpt(source.excerpt);
+  const pageDiff = source.change?.diff
+    ? `## Detected page-text diff
+
+\`\`\`diff
+${source.change.diff.slice(0, 6_000)}
+\`\`\`
+
+This proves that the normalized page changed. It does **not** prove that the law changed.
+`
+    : '';
   const body = `## Possible change
 
 ${lead.summary}
@@ -37,9 +47,12 @@ ${lead.summary}
 
 ${excerpt || '> No excerpt was supplied.'}
 
+${pageDiff}
+
 ## Reviewer checklist
 
 - [ ] Locate and cite the current primary legal or government source.
+- [ ] Classify this as editorial/navigation, operational guidance, or a substantive legal change.
 - [ ] Confirm the effective date and any transition rules.
 - [ ] Identify the exact dataset entities and fields affected.
 - [ ] Add or update a regression invariant with any data correction.

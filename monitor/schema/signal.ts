@@ -3,6 +3,14 @@
 import { createHash } from 'node:crypto';
 
 export type SignalTier = 'discovery' | 'verification';
+export type SignalEventType = 'new_item' | 'page_changed' | 'page_unavailable';
+
+export interface PageChangeEvidence {
+  page_id: string;
+  previous_hash: string | null;
+  current_hash: string | null;
+  diff: string;
+}
 
 export interface Signal {
   id: string;
@@ -14,6 +22,8 @@ export interface Signal {
   excerpt: string;
   published_at: string | null;
   retrieved_at: string;
+  event_type?: SignalEventType;
+  change?: PageChangeEvidence;
 }
 
 export interface MakeSignalInput {
@@ -26,6 +36,8 @@ export interface MakeSignalInput {
   excerpt?: string;
   publishedAt?: string | null;
   retrievedAt?: string;
+  eventType?: SignalEventType;
+  change?: PageChangeEvidence;
 }
 
 export const SIGNAL_TIERS = new Set<SignalTier>(['discovery', 'verification']);
@@ -61,6 +73,8 @@ export function makeSignal({
   excerpt = '',
   publishedAt,
   retrievedAt = new Date().toISOString(),
+  eventType,
+  change,
 }: MakeSignalInput): Signal {
   const cleanSourceId = requiredString(sourceId, 'source_id');
   const cleanExternalId = requiredString(externalId, 'external_id');
@@ -78,6 +92,8 @@ export function makeSignal({
     excerpt: String(excerpt ?? '').trim().slice(0, 500),
     published_at: optionalDate(publishedAt, 'published_at'),
     retrieved_at: optionalDate(retrievedAt, 'retrieved_at'),
+    ...(eventType ? { event_type: eventType } : {}),
+    ...(change ? { change } : {}),
   });
 }
 
@@ -97,6 +113,18 @@ export function assertSignal(value: unknown): Signal {
   optionalDate(signal.published_at, 'published_at');
   if (optionalDate(signal.retrieved_at, 'retrieved_at') === null) {
     throw new TypeError('Signal retrieved_at is required');
+  }
+  if (signal.event_type != null
+    && !['new_item', 'page_changed', 'page_unavailable'].includes(String(signal.event_type))) {
+    throw new TypeError(`Invalid Signal event_type: ${String(signal.event_type)}`);
+  }
+  if (signal.change != null) {
+    if (!signal.change || typeof signal.change !== 'object') {
+      throw new TypeError('Signal change must be an object');
+    }
+    const change = signal.change as Record<string, unknown>;
+    requiredString(change.page_id, 'change.page_id');
+    requiredString(change.diff, 'change.diff');
   }
   return value as Signal;
 }

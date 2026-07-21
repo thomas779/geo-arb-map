@@ -12,8 +12,14 @@ normal primary-source review, test, and pull-request process.
 ## Commands
 
 ```sh
-# Fetch active sources from the last 14 days.
+# Fetch active sources from the last 14 days without persistent state.
 bun run monitor:collect
+
+# Stateful local run. The collector reads the last hash/validators from SQLite
+# and emits portable D1 mutations for this run.
+bun run monitor:collect -- \
+  --state-db .generated/data-canonical/canonical.sqlite \
+  --state-sql monitor/.out/monitor-state.sql
 
 # Triage unseen signals. With no LLM config this safely writes an empty lead file
 # and a report explaining that triage was skipped.
@@ -74,9 +80,20 @@ collection report, triage report, signal file, lead file, and issue draft as a
 
 - RSS, newsletters, specialist publishers, and Telegram are discovery only.
 - Stable official pages without feeds are polled by normalized content hash.
-  Unchanged visible content keeps the same signal ID; a changed page creates a
-  review signal. Scripts, styles, comments, and SVG markup are ignored to reduce
-  deployment noise, but a page redesign can still require manual triage.
+  D1 retains the last successful hash, ETag, Last-Modified value, final URL,
+  health state, previous/current normalized text, and immutable observation
+  history. A changed page creates a review signal with a textual diff; the first
+  observation establishes a silent baseline. Scripts, styles, comments, and SVG
+  markup are ignored to reduce deployment noise.
+- Conditional HTTP requests avoid downloading unchanged pages when the server
+  supports ETag or Last-Modified. Redirects, 404/410 responses, login pages,
+  bot-protection screens, and consecutive failures are recorded without erasing
+  the last known-good text.
+- `pages` in the source manifest lets one authority/source own several stable
+  pages. Page IDs remain stable even when URLs redirect.
+- A page diff is never treated as a legal change automatically. The triage model
+  must classify it as editorial/navigation, operational guidance, or a possible
+  substantive change; a reviewer still resolves it to primary evidence.
 - A verified change requires a current primary legal, government, court, or
   tax-authority source plus an effective date or an explicit unknown date.
 - AI ranks and challenges evidence; it never approves or publishes a fact.
@@ -103,6 +120,7 @@ posts only after every gate passes.
 sources/manifest.json       watched and planned sources
 sources/CONTRIBUTING.md     source quality and contribution rules
 schema/signal.ts            shared, validated Signal contract
+state.ts                    D1-backed page state and observation mutations
 collectors/                 feeds, curated Telegram, typed email boundary
 cloudflare/                  Email Worker, D1 migration, and deployment guide
 llm/client.ts               Anthropic and OpenAI-compatible model boundary

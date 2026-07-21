@@ -3,18 +3,26 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { collectRss, parseRss, type RssSource } from './rss';
-import { collectHtmlSnapshot, parseHtmlSnapshot, type HtmlSource } from './html';
+import {
+  collectHtmlPage,
+  collectHtmlSnapshot,
+  parseHtmlSnapshot,
+  type HtmlPage,
+  type HtmlSource,
+} from './html';
 import {
   collectTelegramPreview,
   parseTelegramPreview,
   type TelegramSource,
 } from './telegram';
 import { dedupeSignals, type Signal, type SignalTier } from '../schema/signal';
+import { MonitorStateStore } from '../state';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
-interface ManifestSource {
+export interface ManifestSource {
   id: string;
   tier: SignalTier;
   adapter: string;
@@ -24,6 +32,9 @@ interface ManifestSource {
   jurisdictions?: string[];
   max_items?: number;
   notes?: string;
+  pages?: HtmlPage[];
+  keywords?: string[];
+  keyword_match?: 'any' | 'all';
 }
 
 interface SourceManifest {
@@ -37,15 +48,19 @@ export interface CollectorOptions {
   output: string;
   report: string;
   lookbackDays: number;
+  stateDb: string | null;
+  stateSql: string;
 }
 
 interface SourceResult {
   source_id: string;
-  status: 'ok' | 'error';
+  status: 'ok' | 'partial' | 'error';
   fetched?: number;
   accepted?: number;
   error?: string;
   duration_ms: number;
+  pages_attempted?: number;
+  pages_changed?: number;
 }
 
 export interface CollectionReport {
@@ -67,6 +82,8 @@ function readArgs(argv: string[]): CollectorOptions {
     output: path.join(ROOT, '.out', 'signals.json'),
     report: path.join(ROOT, '.out', 'collection-report.json'),
     lookbackDays: Number(process.env.MONITOR_LOOKBACK_DAYS ?? 14),
+    stateDb: process.env.MONITOR_STATE_DB ? path.resolve(process.env.MONITOR_STATE_DB) : null,
+    stateSql: path.join(ROOT, '.out', 'monitor-state.sql'),
   };
   for (let index = 0; index < argv.length; index += 1) {
     const value = argv[index];
@@ -76,6 +93,8 @@ function readArgs(argv: string[]): CollectorOptions {
     else if (value === '--output') options.output = path.resolve(argv[++index]);
     else if (value === '--report') options.report = path.resolve(argv[++index]);
     else if (value === '--lookback-days') options.lookbackDays = Number(argv[++index]);
+    else if (value === '--state-db') options.stateDb = path.resolve(argv[++index]);
+    else if (value === '--state-sql') options.stateSql = path.resolve(argv[++index]);
     else throw new Error(`Unknown collector option: ${value}`);
   }
   if (!Number.isFinite(options.lookbackDays) || options.lookbackDays < 0) {
@@ -97,7 +116,30 @@ function isTelegramSource(source: ManifestSource): source is ManifestSource & Te
 }
 
 function isHtmlSource(source: ManifestSource): source is ManifestSource & HtmlSource {
-  return source.adapter === 'html_index' && typeof source.url === 'string' && source.url.length > 0;
+  return source.adapter === 'html_index' && (
+    (typeof source.url === 'string' && source.url.length > 0)
+    || Boolean(source.pages?.length)
+  );
+}
+
+export function expandHtmlPages(source: ManifestSource & HtmlSource): HtmlSource[] {
+  if (!source.pages?.length) return [source];
+  return source.pages.map(page => ({
+    id: source.id,
+    tier: source.tier,
+    adapter: 'html_index',
+    url: page.url,
+    jurisdictions: [page.jurisdiction ?? source.jurisdictions?.[0] ?? 'multi'],
+    keywords: page.keywords ?? source.keywords,
+    page_id: page.id,
+  }));
+}
+
+export function signalMatchesKeywords(signal: Signal, source: ManifestSource): boolean {
+  if (!source.keywords?.length) return true;
+  const haystack = `${signal.title} ${signal.excerpt}`.toLocaleLowerCase();
+  const matches = source.keywords.map(keyword => haystack.includes(keyword.toLocaleLowerCase()));
+  return source.keyword_match === 'all' ? matches.every(Boolean) : matches.some(Boolean);
 }
 
 function collectFixture(source: ManifestSource, fixtureDir: string, retrievedAt: string): Signal[] {
@@ -107,7 +149,8 @@ function collectFixture(source: ManifestSource, fixtureDir: string, retrievedAt:
   const fixture = fs.readFileSync(fixturePath, 'utf8');
   if (isRssSource(source)) return parseRss(fixture, source, { retrievedAt });
   if (isTelegramSource(source)) return parseTelegramPreview(fixture, source, { retrievedAt });
-  if (isHtmlSource(source)) return parseHtmlSnapshot(fixture, source, { retrievedAt });
+  if (isHtmlSource(source)) return expandHtmlPages(source).flatMap(page =>
+    parseHtmlSnapshot(fixture, page, { retrievedAt }));
   throw new Error(`active adapter "${source.adapter}" is not implemented`);
 }
 
@@ -131,10 +174,16 @@ export async function runCollectors(
   const retrievedAt = new Date().toISOString();
   const collected: Signal[] = [];
   const sourceResults: SourceResult[] = [];
+  const state = options.stateDb
+    ? new MonitorStateStore(path.resolve(ROOT, '..'), options.stateDb)
+    : null;
 
   for (const source of active) {
     const startedAt = Date.now();
     try {
+      let pagesAttempted: number | undefined;
+      let pagesChanged: number | undefined;
+      let pageErrors: string[] = [];
       const found = options.fixtureDir
         ? collectFixture(source, options.fixtureDir, retrievedAt)
         : isRssSource(source)
@@ -142,18 +191,45 @@ export async function runCollectors(
           : isTelegramSource(source)
             ? await collectTelegramPreview(source, { retrievedAt })
             : isHtmlSource(source)
-              ? await collectHtmlSnapshot(source, { retrievedAt })
+              ? state
+                ? await (async () => {
+                  const pages = expandHtmlPages(source);
+                  pagesAttempted = pages.length;
+                  pagesChanged = 0;
+                  const signals: Signal[] = [];
+                  for (const page of pages) {
+                    const prior = state.getPage(`${page.id}:${page.page_id ?? ''}`)
+                      ?? state.getPage(`${page.id}:${createHash('sha256').update(page.url).digest('hex').slice(0, 12)}`);
+                    const result = await collectHtmlPage(page, prior, { retrievedAt });
+                    state.record(result.observation);
+                    signals.push(...result.signals);
+                    if (result.observation.change_kind === 'page_changed') pagesChanged += 1;
+                    if (result.error) pageErrors.push(`${page.page_id ?? page.url}: ${result.error}`);
+                  }
+                  return signals;
+                })()
+                : (await Promise.all(expandHtmlPages(source).map(page =>
+                  collectHtmlSnapshot(page, { retrievedAt })))).flat()
             : (() => { throw new Error(`active adapter "${source.adapter}" is not implemented`); })();
-      const recent = found.filter(signal => withinLookback(signal, options.lookbackDays, retrievedAt));
+      const recent = found
+        .filter(signal => withinLookback(signal, options.lookbackDays, retrievedAt))
+        .filter(signal => signalMatchesKeywords(signal, source));
       collected.push(...recent);
       sourceResults.push({
         source_id: source.id,
-        status: 'ok',
+        status: pageErrors.length ? 'partial' : 'ok',
         fetched: found.length,
         accepted: recent.length,
         duration_ms: Date.now() - startedAt,
+        ...(pagesAttempted == null ? {} : { pages_attempted: pagesAttempted }),
+        ...(pagesChanged == null ? {} : { pages_changed: pagesChanged }),
+        ...(pageErrors.length ? { error: pageErrors.join('; ') } : {}),
       });
-      console.log(`${source.id}: ${recent.length}/${found.length} signals inside lookback`);
+      if (pageErrors.length) {
+        console.error(`::warning title=Monitor source partially failed::${source.id}: ${pageErrors.join('; ')}`);
+      } else {
+        console.log(`${source.id}: ${recent.length}/${found.length} signals inside lookback`);
+      }
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       sourceResults.push({
@@ -167,7 +243,8 @@ export async function runCollectors(
   }
 
   const signals = dedupeSignals(collected);
-  const failures = sourceResults.filter(result => result.status === 'error');
+  const failures = sourceResults.filter(result => result.status !== 'ok');
+  const hardFailures = sourceResults.filter(result => result.status === 'error');
   const report: CollectionReport = {
     retrieved_at: retrievedAt,
     fixture_mode: Boolean(options.fixtureDir),
@@ -183,10 +260,18 @@ export async function runCollectors(
   fs.mkdirSync(path.dirname(options.report), { recursive: true });
   fs.writeFileSync(options.output, `${JSON.stringify(signals, null, 2)}\n`);
   fs.writeFileSync(options.report, `${JSON.stringify(report, null, 2)}\n`);
+  if (state) {
+    state.writeMutations(options.stateSql);
+    state.close();
+  }
   console.log(`wrote ${signals.length} signals to ${options.output}`);
 
-  if ((options.strict && failures.length > 0) || (active.length > 0 && failures.length === active.length)) {
-    throw new Error(`${failures.length}/${active.length} monitor sources failed`);
+  // Page-level access degradation is durable monitoring data, not a reason to
+  // discard healthy signals from every other source. Strict mode still fails
+  // on collector/adapter crashes; partial health remains visible in D1 and the
+  // collection report for follow-up.
+  if ((options.strict && hardFailures.length > 0) || (active.length > 0 && failures.length === active.length)) {
+    throw new Error(`${failures.length}/${active.length} monitor sources failed (${hardFailures.length} hard)`);
   }
   return { signals, report };
 }

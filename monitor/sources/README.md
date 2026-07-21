@@ -11,6 +11,12 @@ from `data/registry.json`; do not maintain a second manual country checklist.
 The legal-review handoff for another model or reviewer is
 [`../../docs/fact-check-handoff.md`](../../docs/fact-check-handoff.md).
 
+One source can contain a `pages` array when the same authority publishes birth,
+descent, naturalization, programme, or amendment guidance separately. Gazette
+sources use `kind: "gazette_search"` plus local-language `keywords`; the audit
+rejects a gazette configuration with no terms. Matching creates a lead, never a
+legal conclusion.
+
 ## Live now
 
 | Source | Transport | Role | State |

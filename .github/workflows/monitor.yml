@@ -32,6 +32,7 @@ jobs:
       MONITOR_LLM_API_KEY: ${{ secrets.MONITOR_LLM_API_KEY }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MONITOR_TRIAGE_MODEL: ${{ vars.MONITOR_TRIAGE_MODEL }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -42,9 +43,31 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Prepare persistent monitor state
+        if: github.event_name != 'repository_dispatch'
+        run: |
+          bunx wrangler d1 migrations apply flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc
+          mkdir -p monitor/.out
+          bunx wrangler d1 export flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc \
+            --output monitor/.out/monitor-state-before.sql \
+            --skip-confirmation
+
       - name: Collect recent signals
         if: github.event_name != 'repository_dispatch'
-        run: bun run monitor:collect --strict
+        run: >-
+          bun run monitor:collect --strict
+          --state-db monitor/.out/monitor-state-before.sql
+          --state-sql monitor/.out/monitor-state.sql
+
+      - name: Persist monitor observations
+        if: always() && github.event_name != 'repository_dispatch'
+        run: |
+          test -s monitor/.out/monitor-state.sql
+          bunx wrangler d1 execute flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc \
+            --file monitor/.out/monitor-state.sql
 
       - name: Normalize newsletter dispatch
         if: github.event_name == 'repository_dispatch'
