@@ -698,6 +698,69 @@
       "notes": "Official Citizenship Unit pages for current CBI options and notices. Constitution and Citizenship Act PDFs remain canonical primary evidence for birth, descent and ordinary naturalisation."
     },
     {
+      "id": "antigua-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made",
+      "jurisdictions": ["028"],
+      "pages": [
+        { "id": "constitution", "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made" },
+        { "id": "cbi-act", "url": "https://cip.gov.ag/wp-content/uploads/2013/10/Antigua-and-Barbuda-Citizenship-by-Investment-Act-2013.pdf" },
+        { "id": "cbi-options", "url": "https://cip.gov.ag/citizenship/" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "National Development Fund", "approved real estate", "minimum investment"],
+      "notes": "Official Constitution and CIU pages are polled. The Antigua laws and immigration hosts currently fail automated TLS verification, so the Citizenship Act remains canonical evidence but requires manual retrieval until the authority fixes its certificate. Track the presence rule and volatile investment minimums separately from ordinary naturalisation."
+    },
+    {
+      "id": "grenada-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.gd/government/the-constitution",
+      "jurisdictions": ["308"],
+      "pages": [
+        { "id": "constitution", "url": "https://www.gov.gd/government/the-constitution" },
+        { "id": "citizenship-act-index", "url": "https://www.laws.gov.gd/index.php/chapters/c-39a-75d/92-chapter-54-citizenship-act" },
+        { "id": "naturalisation-form", "url": "https://gndembassyprc.mofa.gov.gd/wp-content/uploads/2023/09/Schedule-5-Regulation-7.pdf" },
+        { "id": "cbi-programme", "url": "https://www.cbi.gov.gd/index_php/" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "National Transformation Fund", "approved project", "minimum contribution"],
+      "notes": "Official constitutional, legal, consular and CBI pages. The programme landing page currently exposes an older minimum, so fee changes require a current regulation or official circular before publication."
+    },
+    {
+      "id": "saint-lucia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.govt.lc/constitution7",
+      "jurisdictions": ["662"],
+      "pages": [
+        { "id": "constitution", "url": "https://www.govt.lc/constitution7" },
+        { "id": "citizenship-amendment-2024", "url": "https://npc.govt.lc/files/laws/acts/2024/Act%20No%207%20of%202024%20Citizenship%20of%20Saint%20Lucia.pdf" },
+        { "id": "descent-guidance", "url": "https://homeaffairs.govt.lc/news/the-citizenship-of-saint-lucia-act-is-amended" },
+        { "id": "cbi-act", "url": "https://pmd.govt.lc/wp-content/uploads/2025/10/Citizenship-by-Investment-Act-Cap.1.20.pdf" },
+        { "id": "cbi-options", "url": "https://www.cipsaintlucia.com/citizenship-by-investment" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "grandfather", "grandmother", "National Economic Fund", "minimum qualifying investment"],
+      "notes": "Official Constitution, 2024 descent amendment and current CIP sources. Track later amendments and programme price changes without conflating registration, naturalisation and CBI."
+    },
+    {
+      "id": "bahamas-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf",
+      "jurisdictions": ["044"],
+      "pages": [
+        { "id": "constitution", "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf" },
+        { "id": "nationality-act", "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-0018/1973-0018.pdf" },
+        { "id": "economic-permanent-residence", "url": "https://www.immigration.gov.bs/wp-content/uploads/2019/10/PERMANENT-RESIDENCE-FORM-ECONOMIC.pdf" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "registration", "economic permanent residence", "investment"],
+      "notes": "Official Constitution, Nationality Act and economic-PR form. The investment page is a classification safeguard: permanent residence must not be represented as direct citizenship."
+    },
+    {
       "id": "brazil-official-gazette",
       "tier": "verification",
       "adapter": "api",

@@ -149,6 +149,43 @@ describe('monitor feed collector', () => {
     expect(blocked.observation.state).toBe('blocked');
   });
 
+  test('hashes official PDFs without storing binary bytes as SQLite text', async () => {
+    const source = {
+      id: 'official-pdf', tier: 'verification' as const, adapter: 'html_index' as const,
+      url: 'https://government.example.test/nationality.pdf', jurisdictions: ['028'],
+    };
+    const bytes = new Uint8Array([0x25, 0x50, 0x44, 0x46, 0x2d, 0x31, 0x2e, 0x37, 0, 255]);
+    const baseline = await collectHtmlPage(source, null, {
+      retrievedAt,
+      fetchImpl: (async () => new Response(bytes, {
+        status: 200, headers: { 'content-type': 'application/pdf', etag: '"pdf-v1"' },
+      })) as unknown as typeof fetch,
+    });
+    expect(baseline.observation.change_kind).toBe('baseline');
+    expect(baseline.observation.current_text).toMatch(/^PDF document · 10 bytes · SHA-256 /);
+    expect(baseline.signals).toHaveLength(0);
+
+    const prior = {
+      page_id: baseline.observation.page_id, source_id: source.id, url: source.url,
+      jurisdiction: '028', state: 'healthy' as const,
+      last_success_hash: baseline.observation.current_hash,
+      previous_text: null, current_text: baseline.observation.current_text,
+      etag: '"pdf-v1"', last_modified: null, final_url: source.url,
+      last_http_status: 200, last_attempted_at: retrievedAt,
+      last_success_retrieved_at: retrievedAt, consecutive_failures: 0,
+      last_error: null, updated_at: retrievedAt,
+    } satisfies MonitorPageState;
+    const changed = await collectHtmlPage(source, prior, {
+      retrievedAt,
+      fetchImpl: (async () => new Response(new Uint8Array([...bytes, 1]), {
+        status: 200, headers: { 'content-type': 'application/pdf', etag: '"pdf-v2"' },
+      })) as unknown as typeof fetch,
+    });
+    expect(changed.observation.change_kind).toBe('page_changed');
+    expect(changed.signals).toHaveLength(1);
+    expect(changed.signals[0]?.title).toContain('Official PDF changed');
+  });
+
   test('expands several pages under one source and applies local-language filters', () => {
     const source = {
       id: 'official-gazette', tier: 'verification' as const, adapter: 'html_index' as const,

@@ -130,7 +130,7 @@ export async function collectHtmlPage(
 ): Promise<HtmlCollectionResult> {
   const hadSuccessfulBaseline = Boolean(previous?.last_success_hash);
   const headers: Record<string, string> = {
-    Accept: 'text/html,application/xhtml+xml',
+    Accept: 'text/html,application/xhtml+xml,application/pdf',
     'User-Agent': 'flag-paths-monitor/0.2 (+https://github.com/thomas779/geo-arb-map)',
   };
   if (previous?.etag) headers['If-None-Match'] = previous.etag;
@@ -185,6 +185,45 @@ export async function collectHtmlPage(
       current_hash: null, previous_text: previous?.current_text ?? null,
       current_text: null, text_diff: null, error: message,
     } };
+  }
+
+  const contentType = response.headers.get('content-type')?.toLocaleLowerCase() ?? '';
+  const isPdf = contentType.includes('application/pdf')
+    || new URL(response.url || source.url).pathname.toLocaleLowerCase().endsWith('.pdf');
+  if (isPdf) {
+    const bytes = new Uint8Array(await response.arrayBuffer());
+    const currentHash = createHash('sha256').update(bytes).digest('hex');
+    const changed = Boolean(previous?.last_success_hash && previous.last_success_hash !== currentHash);
+    const baseline = !previous?.last_success_hash;
+    const currentText = `PDF document · ${bytes.byteLength} bytes · SHA-256 ${currentHash}`;
+    const previousText = previous?.current_text ?? null;
+    const diff = changed
+      ? `- ${previousText ?? 'Previous PDF snapshot unavailable'}\n+ ${currentText}`
+      : null;
+    const state: PageHealth = response.redirected || Boolean(response.url && response.url !== source.url)
+      ? 'redirected'
+      : 'healthy';
+    const observation: PageObservation = {
+      ...base, state,
+      change_kind: baseline ? 'baseline' : changed ? 'page_changed' : 'unchanged',
+      current_hash: currentHash, previous_text: previousText,
+      current_text: currentText, text_diff: diff, error: null,
+    };
+    const signals = changed
+      ? [makeSignal({
+        sourceId: source.id, tier: source.tier,
+        jurisdiction: source.jurisdictions?.[0] ?? 'multi',
+        externalId: `${source.url}#${currentHash}`, url: source.url,
+        title: `Official PDF changed: ${new URL(source.url).pathname.split('/').pop() || source.id}`,
+        excerpt: currentText, retrievedAt, eventType: 'page_changed',
+        change: {
+          page_id: pageId(source), previous_hash: previous?.last_success_hash ?? null,
+          current_hash: currentHash,
+          diff: diff ?? 'Official PDF content changed.',
+        },
+      })]
+      : [];
+    return { signals, observation, error: null };
   }
 
   const html = await response.text();
