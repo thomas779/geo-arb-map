@@ -638,6 +638,66 @@
       "notes": "Official DGI tax-residence page used to prevent investment-based tax residence from being misclassified as direct citizenship."
     },
     {
+      "id": "georgia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://sda.gov.ge/en/products/citizenship/",
+      "jurisdictions": ["268"],
+      "pages": [
+        { "id": "citizenship-guidance", "url": "https://sda.gov.ge/en/products/citizenship/" },
+        { "id": "organic-law", "url": "https://matsne.gov.ge/en/document/view/2342552?publication=7" }
+      ],
+      "keywords": ["citizenship", "naturalization", "lawful residence", "საქართველოს მოქალაქეობა", "ნატურალიზაცია"],
+      "notes": "Official service guidance plus the consolidated Organic Law. Monitor ordinary and simplified residence periods, birth safeguards and exceptional-citizenship provisions."
+    },
+    {
+      "id": "cayman-botc-status",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://otp.gov.ky/web/odg/botc-registration-and-naturalisation",
+      "jurisdictions": ["136"],
+      "pages": [
+        { "id": "botc-registration-naturalisation", "url": "https://otp.gov.ky/web/odg/botc-registration-and-naturalisation" },
+        { "id": "caymanian-status-reform", "url": "https://gov.ky/web/mcei/immigrationreform" },
+        { "id": "british-nationality-act", "url": "https://www.legislation.gov.uk/ukpga/1981/61/contents" }
+      ],
+      "keywords": ["BOTC", "naturalisation", "registration", "Caymanian status", "lawful and ordinary residence"],
+      "notes": "Tracks BOTC rules and Caymanian status separately. Investment-linked residence must never be promoted as direct citizenship."
+    },
+    {
+      "id": "dominica-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.dominica.gov.dm/services/citizenship/how-do-i-apply-for-citizenship-of-the-commonwealth-of-dominica",
+      "jurisdictions": ["212"],
+      "pages": [
+        { "id": "citizenship-application", "url": "https://www.dominica.gov.dm/services/citizenship/how-do-i-apply-for-citizenship-of-the-commonwealth-of-dominica" },
+        { "id": "citizenship-forms", "url": "https://www.dominica.gov.dm/forms" },
+        { "id": "cbi-legislation", "url": "https://www.cbiu.gov.dm/dominica-citizenship/legislation/" },
+        { "id": "cbi-options", "url": "https://www.cbiu.gov.dm/faqs/" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "seven years", "Economic Diversification Fund", "approved real estate", "minimum investment"],
+      "notes": "Official general-citizenship and CBI sources. CBI thresholds are volatile and require a current regulation or CBIU page before publication."
+    },
+    {
+      "id": "st-kitts-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://ciu.gov.kn/cbi-options/",
+      "jurisdictions": ["659"],
+      "pages": [
+        { "id": "cbi-options", "url": "https://ciu.gov.kn/cbi-options/" },
+        { "id": "government-notices", "url": "https://ciu.gov.kn/government-notices/" },
+        { "id": "application-process", "url": "https://ciu.gov.kn/application-process/" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "Sustainable Island State Contribution", "Public Benefit Option", "real estate", "minimum investment"],
+      "notes": "Official Citizenship Unit pages for current CBI options and notices. Constitution and Citizenship Act PDFs remain canonical primary evidence for birth, descent and ordinary naturalisation."
+    },
+    {
       "id": "brazil-official-gazette",
       "tier": "verification",
       "adapter": "api",
