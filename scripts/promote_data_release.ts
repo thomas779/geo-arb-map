@@ -14,11 +14,12 @@ function arg(name: string): string | undefined {
   return index >= 0 ? process.argv[index + 1] : undefined;
 }
 
-const selectionMode = (arg('--mode') ?? 'approved') as CompileSelectionMode;
+const allowDraft = process.argv.includes('--allow-draft');
+const selectionMode = (arg('--mode') ?? (allowDraft ? 'draft' : 'approved')) as CompileSelectionMode;
 if (!['draft', 'approved', 'release'].includes(selectionMode)) {
   throw new Error(`Unsupported --mode ${selectionMode}`);
 }
-if (selectionMode === 'draft' && !process.argv.includes('--allow-draft')) {
+if (selectionMode === 'draft' && !allowDraft) {
   throw new Error('Draft promotion requires the explicit --allow-draft flag');
 }
 
