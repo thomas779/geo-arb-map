@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 108,
+      "routes": 120,
       "by_mode": {
-        "ancestry": 30,
-        "naturalization": 31,
-        "birth": 30,
+        "ancestry": 34,
+        "naturalization": 35,
+        "birth": 34,
         "investment": 17
       },
       "by_status": {
-        "active": 102,
+        "active": 114,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -118,15 +118,18 @@
     },
     {
       "iso_n3": "028",
-      "name": "Antigua and Barb.",
+      "name": "Antigua and Barbuda",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "antigua-barbuda-citizenship-by-parent",
+        "antigua-barbuda-naturalization",
+        "antigua-barbuda-citizenship-by-birth",
         "antigua-barbuda-cip"
       ]
     },
@@ -192,12 +195,16 @@
       "name": "Bahamas",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "bahamas-citizenship-by-parent",
+        "bahamas-naturalization",
+        "bahamas-citizenship-connected-to-birth"
+      ]
     },
     {
       "iso_n3": "048",
@@ -1105,12 +1112,15 @@
       "name": "Grenada",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "grenada-citizenship-by-parent",
+        "grenada-naturalization",
+        "grenada-citizenship-by-birth",
         "grenada-cbi"
       ]
     },
@@ -2311,12 +2321,15 @@
       "name": "Saint Lucia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "saint-lucia-citizenship-by-parent-or-grandparent",
+        "saint-lucia-naturalization",
+        "saint-lucia-citizenship-by-birth",
         "saint-lucia-cip"
       ]
     },
@@ -3074,14 +3087,143 @@
       "summary": "Government-administered direct citizenship programme with contribution, real-estate and other approved investment options.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
-        "residence_required": true
+        "residence_required": true,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "antigua-barbuda-cip-principal",
+          "label": "Citizenship by Investment Programme",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "The National Development Fund option currently starts at US$230,000. Other approved routes and fees differ, and the principal applicant must spend at least five days in Antigua and Barbuda during the first five calendar years."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
           "title": "Antigua and Barbuda Citizenship by Investment Unit",
           "url": "https://cip.gov.ag/home"
+        }
+      ]
+    },
+    {
+      "id": "antigua-barbuda-citizenship-by-birth",
+      "country": {
+        "iso_n3": "028",
+        "name": "Antigua and Barbuda"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Antigua and Barbuda",
+      "summary": "A person born in Antigua and Barbuda acquires citizenship at birth, subject to the Constitution’s diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "antigua-barbuda-citizenship-by-birth-principal",
+          "label": "Citizenship by birth in Antigua and Barbuda",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Antigua and Barbuda",
+          "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made"
+        }
+      ]
+    },
+    {
+      "id": "antigua-barbuda-citizenship-by-parent",
+      "country": {
+        "iso_n3": "028",
+        "name": "Antigua and Barbuda"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a citizen parent",
+      "summary": "A person born abroad acquires citizenship at birth through a qualifying Antigua and Barbuda citizen parent under section 113 of the Constitution.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "antigua-barbuda-citizenship-by-parent-principal",
+          "label": "Citizenship through a citizen parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Antigua and Barbuda",
+          "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made"
+        },
+        {
+          "title": "Antigua and Barbuda Citizenship Act",
+          "url": "https://laws.gov.ag/wp-content/uploads/2018/08/cap-22.pdf"
+        }
+      ]
+    },
+    {
+      "id": "antigua-barbuda-naturalization",
+      "country": {
+        "iso_n3": "028",
+        "name": "Antigua and Barbuda"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after a qualifying residence period",
+      "summary": "The Citizenship Act requires residence throughout the twelve months immediately before application and at least five aggregate years during the preceding seven-year period.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "antigua-barbuda-naturalization-principal",
+          "label": "Naturalization after a qualifying residence period",
+          "allocation": "discretionary",
+          "eligibility_months": 96,
+          "note": "The eight-year window contains a continuous final year plus five aggregate years in the preceding seven; it is not an eight-year continuous-residence rule."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Antigua and Barbuda Citizenship Act",
+          "url": "https://laws.gov.ag/wp-content/uploads/2018/08/cap-22.pdf"
+        },
+        {
+          "title": "Antigua and Barbuda Immigration — Citizenship FAQs",
+          "url": "https://immigration.gov.ag/frequently-asked-questions/citizenship-permit-faqs/"
         }
       ]
     },
@@ -3347,6 +3489,117 @@
         {
           "title": "Australian Citizenship Act 2007",
           "url": "https://www.legislation.gov.au/C2007A00020/latest/text"
+        }
+      ]
+    },
+    {
+      "id": "bahamas-citizenship-by-parent",
+      "country": {
+        "iso_n3": "044",
+        "name": "Bahamas"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a qualifying Bahamian parent",
+      "summary": "The Constitution provides citizenship at birth or a registration route for a person born abroad through a qualifying Bahamian parent; the applicable rule depends on parentage and the circumstances of birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahamas-citizenship-by-parent-principal",
+          "label": "Citizenship through a qualifying Bahamian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of The Bahamas — citizenship",
+          "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf"
+        },
+        {
+          "title": "Bahamas Nationality Act",
+          "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-0018/1973-0018.pdf"
+        }
+      ]
+    },
+    {
+      "id": "bahamas-citizenship-connected-to-birth",
+      "country": {
+        "iso_n3": "044",
+        "name": "Bahamas"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship connected to birth in The Bahamas",
+      "summary": "Birth in The Bahamas confers citizenship at birth when a parent is Bahamian. A person born there to non-citizen parents may instead apply for registration at age 18 and before turning 19, subject to the constitutional conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahamas-citizenship-connected-to-birth-principal",
+          "label": "Citizenship connected to birth in The Bahamas",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "The age-18 route is later registration connected to birthplace, not citizenship at birth."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of The Bahamas — citizenship",
+          "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf"
+        }
+      ]
+    },
+    {
+      "id": "bahamas-naturalization",
+      "country": {
+        "iso_n3": "044",
+        "name": "Bahamas"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after a qualifying residence period",
+      "summary": "The Nationality Act requires twelve months of residence immediately before application and at least six aggregate years during the preceding nine years, alongside character, English, civic-knowledge and permanent-home requirements.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bahamas-naturalization-principal",
+          "label": "Naturalization after a qualifying residence period",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "The ten-year statutory window contains a final continuous year plus six aggregate years in the preceding nine; it is not a ten-year continuous-residence rule."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Bahamas Nationality Act",
+          "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-0018/1973-0018.pdf"
         }
       ]
     },
@@ -4835,14 +5088,143 @@
       "summary": "Government-administered direct citizenship programme with National Transformation Fund and approved-project routes.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
-        "residence_required": false
+        "residence_required": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "grenada-cbi-principal",
+          "label": "Citizenship by Investment Programme",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "The official programme page confirms the contribution and approved-project routes. Monetary thresholds are intentionally omitted here because the same page currently displays an older minimum and should not be treated as a reliable current fee schedule."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
           "title": "Grenada Citizenship by Investment",
           "url": "https://www.cbi.gov.gd/index_php/"
+        }
+      ]
+    },
+    {
+      "id": "grenada-citizenship-by-birth",
+      "country": {
+        "iso_n3": "308",
+        "name": "Grenada"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Grenada",
+      "summary": "A person born in Grenada acquires citizenship at birth, subject to the constitutional diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "grenada-citizenship-by-birth-principal",
+          "label": "Citizenship by birth in Grenada",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Grenada",
+          "url": "https://www.gov.gd/government/the-constitution"
+        }
+      ]
+    },
+    {
+      "id": "grenada-citizenship-by-parent",
+      "country": {
+        "iso_n3": "308",
+        "name": "Grenada"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a citizen parent",
+      "summary": "A person born outside Grenada acquires citizenship at birth when a qualifying parent is a Grenadian citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "grenada-citizenship-by-parent-principal",
+          "label": "Citizenship through a citizen parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Grenada",
+          "url": "https://www.gov.gd/government/the-constitution"
+        },
+        {
+          "title": "Grenada Citizenship Act",
+          "url": "https://www.laws.gov.gd/index.php/chapters/c-39a-75d/92-chapter-54-citizenship-act"
+        }
+      ]
+    },
+    {
+      "id": "grenada-naturalization",
+      "country": {
+        "iso_n3": "308",
+        "name": "Grenada"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after a seven-year residence history",
+      "summary": "An alien may apply for discretionary naturalization using the official form’s seven-year residence or government-service history, with character, solvency and intention-to-reside review.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "grenada-naturalization-principal",
+          "label": "Naturalization after a seven-year residence history",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "The official application records the seven years immediately before filing. It does not establish an automatic grant after seven continuous years."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Grenada Citizenship Act",
+          "url": "https://www.laws.gov.gd/index.php/chapters/c-39a-75d/92-chapter-54-citizenship-act"
+        },
+        {
+          "title": "Grenada — application for naturalisation",
+          "url": "https://gndembassyprc.mofa.gov.gd/wp-content/uploads/2023/09/Schedule-5-Regulation-7.pdf"
         }
       ]
     },
@@ -5958,14 +6340,142 @@
       "summary": "Direct citizenship by registration following a qualifying investment under the Citizenship by Investment Act.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
-        "residence_required": false
+        "residence_required": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "saint-lucia-cip-principal",
+          "label": "Citizenship by Investment Programme",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "The National Economic Fund option currently starts at US$240,000 for a principal applicant with up to three qualifying dependants; other options and fees differ."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
         {
           "title": "Saint Lucia Citizenship by Investment Act",
           "url": "https://pmd.govt.lc/wp-content/uploads/2025/10/Citizenship-by-Investment-Act-Cap.1.20.pdf"
+        }
+      ]
+    },
+    {
+      "id": "saint-lucia-citizenship-by-birth",
+      "country": {
+        "iso_n3": "662",
+        "name": "Saint Lucia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Saint Lucia",
+      "summary": "A person born in Saint Lucia acquires citizenship at birth, subject to the statutory diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-lucia-citizenship-by-birth-principal",
+          "label": "Citizenship by birth in Saint Lucia",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Saint Lucia — citizenship",
+          "url": "https://www.govt.lc/constitution7"
+        },
+        {
+          "title": "Citizenship of Saint Lucia (Amendment) Act 2024",
+          "url": "https://npc.govt.lc/files/laws/acts/2024/Act%20No%207%20of%202024%20Citizenship%20of%20Saint%20Lucia.pdf"
+        }
+      ]
+    },
+    {
+      "id": "saint-lucia-citizenship-by-parent-or-grandparent",
+      "country": {
+        "iso_n3": "662",
+        "name": "Saint Lucia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a citizen parent or grandparent",
+      "summary": "The 2024 amendment extends citizenship by descent to a person born abroad whose parent or grandparent is a Saint Lucian citizen by birth, subject to the statutory conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-lucia-citizenship-by-parent-or-grandparent-principal",
+          "label": "Citizenship through a citizen parent or grandparent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Citizenship of Saint Lucia (Amendment) Act 2024",
+          "url": "https://npc.govt.lc/files/laws/acts/2024/Act%20No%207%20of%202024%20Citizenship%20of%20Saint%20Lucia.pdf"
+        },
+        {
+          "title": "Saint Lucia Home Affairs — descent amendment",
+          "url": "https://homeaffairs.govt.lc/news/the-citizenship-of-saint-lucia-act-is-amended"
+        }
+      ]
+    },
+    {
+      "id": "saint-lucia-naturalization",
+      "country": {
+        "iso_n3": "662",
+        "name": "Saint Lucia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Registration after seven years for a Commonwealth citizen",
+      "summary": "A Commonwealth citizen is entitled to apply for registration after seven years of ordinary residence in Saint Lucia, subject to the Constitution’s application and public-interest conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-lucia-naturalization-principal",
+          "label": "Registration after seven years for a Commonwealth citizen",
+          "allocation": "right",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Saint Lucia — citizenship",
+          "url": "https://www.govt.lc/constitution7"
         }
       ]
     },
