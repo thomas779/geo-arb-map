@@ -38,6 +38,19 @@ legal conclusion.
 | Uruguay IMPO nationality law | HTML content hash | Official legal verification lead | Active; live fetch verified 2026-07-21 |
 | Uruguay Electoral Court citizenship | HTML content hash | Official naturalization verification | Active; live fetch verified 2026-07-21 |
 | Uruguay DGI tax residence | HTML content hash | Official classification safeguard | Active; live fetch verified 2026-07-21 |
+| Spain Civil Code | HTML content hash | Official nationality-law verification | Active; live fetch verified 2026-07-21 |
+| UK citizenship guidance | HTML content hash, four pages | Official descent, birth, naturalization, and status verification | Active; live fetch verified 2026-07-21 |
+| France Service Public nationality | HTML content hash, two pages | Official birth and naturalization verification | Active; live fetch verified 2026-07-21 |
+| Portugal Justice nationality | HTML content hash, three pages | Official nationality profiles and application verification | Active; live fetch verified 2026-07-21 |
+| Germany Nationality Act | HTML content hash | Official consolidated-law verification | Active; live fetch verified 2026-07-21 |
+| Ireland DFA, ISD, and Statute Book | HTML content hash, four pages | Official descent, naturalization, and birth-law verification | Active; live fetch verified 2026-07-21 |
+| Australia citizenship guidance | HTML content hash, four pages | Official descent, conferral, birth, and evidence verification | Active; live fetch verified 2026-07-21 |
+| New Zealand citizenship guidance | HTML content hash, four pages | Official descent, grant, birth, and presence verification | Active; live fetch verified 2026-07-21 |
+| USCIS citizenship and alerts | HTML content hash, four pages | Official naturalization, investment-residence, and change discovery | Active; live fetch verified 2026-07-21 |
+| Greece citizenship and Golden Visa | HTML content hash, two pages | Official citizenship-law and investor-residence verification | Active; Golden Visa fetch healthy, citizenship page returns 403 and is recorded as failed health data |
+| Bulgaria Citizenship Act | HTML content hash, two pages | Official nationality-law and service verification | Active; service page healthy, Act endpoint has a TLS-chain failure and is recorded as failed health data |
+| Serbia citizenship guidance | HTML content hash, two pages | Official nationality-law and procedure verification | Active; live fetch verified 2026-07-21 |
+| UAE nationality and Golden Visa | HTML content hash, three pages | Official nationality nomination and investor-residence verification | Active; government guidance and Golden Visa pages healthy, e-laws endpoint is monitored for recovery |
 | Nomad Capitalist Weekly Rundown | Email Worker | Newsletter discovery | Subscribed through the shared intake address on 2026-07-19; awaiting first delivery |
 | The Wandering Investor Notes from the Road | Email Worker | Private-list and early discovery | Intake active; publisher form returned a subscription error on 2026-07-18 |
 
@@ -68,12 +81,12 @@ returned HTTP 403 to the bounded collector on 2026-07-21. Its official pages
 remain canonical evidence, but the source is correctly marked `planned` until a
 permitted feed/API or resilient browser-backed adapter is available.
 
-1. **P0 — official sources already relevant to the product graph:** Spain BOE,
+1. **P0 — gazettes supplementing active guidance monitors:** Spain BOE,
    Portugal DRE, France Légifrance, Argentina Boletín Oficial, UK legislation,
    and the IRCC feed.
-2. **P1 — high-value country coverage gaps:** Malta Community Agency, Greek
-   migration legislation, Colombia's normative repository, Türkiye citizenship
-   guidance plus Resmî Gazete, Brazil's Diário Oficial, and USCIS alerts.
+2. **P1 — high-value country coverage gaps:** Colombia's normative repository,
+   Brazil's Diário Oficial, Mexico's Diario Oficial, Israel's official
+   nationality guidance, and Poland and Hungary's consolidated nationality law.
 3. **P1 — European framework changes:** a focused EUR-Lex RSS query for
    nationality, migration, residence, free movement, and accession.
 4. **P2 — commercial discovery:** Latitude and Henley index adapters. Treat

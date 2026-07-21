@@ -125,6 +125,16 @@
       "notes": "Residence- and citizenship-planning firm newsroom. Useful for CBI/RBI launches and closures, but commercial claims require primary-source verification and aggressive deduplication."
     },
     {
+      "id": "spain-civil-code",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763",
+      "jurisdictions": ["724"],
+      "keywords": ["nacionalidad", "naturalización", "residencia", "ciudadanía"],
+      "notes": "Official consolidated Civil Code. Monitor nationality provisions and amendment metadata; BOE gazette discovery remains a separate planned adapter."
+    },
+    {
       "id": "boe-spain",
       "tier": "verification",
       "adapter": "api",
@@ -169,9 +179,15 @@
       "id": "gov-uk-citizenship",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
+      "status": "active",
       "url": "https://www.gov.uk/browse/citizenship/citizenship",
       "jurisdictions": ["826"],
+      "pages": [
+        { "id": "citizenship-index", "url": "https://www.gov.uk/browse/citizenship/citizenship" },
+        { "id": "citizenship-by-parent", "url": "https://www.gov.uk/apply-citizenship-british-parent" },
+        { "id": "citizenship-by-birth", "url": "https://www.gov.uk/apply-citizenship-born-uk/eligibility" },
+        { "id": "naturalisation", "url": "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain" }
+      ],
       "notes": "Official GOV.UK citizenship guidance index. Diff the index and linked birth, descent, registration, and naturalization guidance; resolve legal changes to legislation.gov.uk before publishing."
     },
     {
@@ -187,25 +203,34 @@
       "id": "france-service-public-nationality",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
-      "url": "https://www.service-public.fr/particuliers/vosdroits/N111",
+      "status": "active",
+      "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/N111",
       "jurisdictions": ["250"],
+      "pages": [
+        { "id": "nationality-index", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/N111" },
+        { "id": "birth-in-france", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F295" }
+      ],
       "notes": "Official French nationality guidance index. Diff the index and linked birth, descent, declaration, and naturalization guidance; resolve substantive changes to Légifrance before publishing."
     },
     {
       "id": "portugal-justice-nationality",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
-      "url": "https://justica.gov.pt/Como-obter-nacionalidade-portuguesa",
+      "status": "active",
+      "url": "https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa",
       "jurisdictions": ["620"],
+      "pages": [
+        { "id": "nationality-overview", "url": "https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa" },
+        { "id": "nationality-guide", "url": "https://justica.gov.pt/Guias/como-obter-nacionalidade-portuguesa" },
+        { "id": "submit-application", "url": "https://justica.gov.pt/Servicos/Submeter-pedido-de-nacionalidade" }
+      ],
       "notes": "Official Ministry of Justice nationality guide and application profiles. Page diffs are useful operational signals; verify legal changes against Diário da República."
     },
     {
       "id": "germany-nationality-act",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
+      "status": "active",
       "url": "https://www.gesetze-im-internet.de/stag/",
       "jurisdictions": ["276"],
       "notes": "Current German text of the Nationality Act from the Federal Ministry of Justice and Federal Office of Justice. Monitor the consolidated HTML/XML and amendment history; translations are review aids, not controlling text."
@@ -214,17 +239,21 @@
       "id": "ireland-dfa-citizenship",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
+      "status": "active",
       "url": "https://www.dfa.ie/citizenship/",
       "jurisdictions": ["372"],
+      "pages": [
+        { "id": "citizenship-index", "url": "https://www.dfa.ie/citizenship/" },
+        { "id": "born-abroad", "url": "https://www.dfa.ie/citizenship/born-abroad/" }
+      ],
       "notes": "Official Department of Foreign Affairs citizenship guidance, including the Foreign Births Register and citizenship by descent. Diff the index and linked guidance."
     },
     {
       "id": "ireland-isd-citizenship",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
-      "url": "https://www.irishimmigration.ie/how-to-become-an-irish-citizen/",
+      "status": "active",
+      "url": "https://www.irishimmigration.ie/how-to-become-an-irish-citizen-guide/",
       "jurisdictions": ["372"],
       "notes": "Official Immigration Service Delivery naturalization guidance. Monitor eligibility, reckonable residence, application procedure, fees, and linked notices."
     },
@@ -232,8 +261,8 @@
       "id": "irish-statute-book",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
-      "url": "https://www.irishstatutebook.ie/",
+      "status": "active",
+      "url": "https://www.irishstatutebook.ie/eli/2004/act/38/section/4/enacted/en/html",
       "jurisdictions": ["372"],
       "notes": "Official Irish Statute Book. Monitor nationality acts and amending instruments referenced by reviewed canonical claims."
     },
@@ -241,9 +270,15 @@
       "id": "australia-citizenship-guidance",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
-      "url": "https://immi.homeaffairs.gov.au/citizenship",
+      "status": "active",
+      "url": "https://www.legislation.gov.au/C2007A00020/latest/text",
       "jurisdictions": ["036"],
+      "pages": [
+        { "id": "citizenship-act", "url": "https://www.legislation.gov.au/C2007A00020/latest/text" },
+        { "id": "citizenship-by-descent", "url": "https://immi.homeaffairs.gov.au/citizenship/become-a-citizen/by-descent" },
+        { "id": "residence-calculator", "url": "https://immi.homeaffairs.gov.au/help-support/tools/residence-calculator" },
+        { "id": "migration-program-changes", "url": "https://immi.homeaffairs.gov.au/what-we-do/skilled-migration-program/recent-changes" }
+      ],
       "notes": "Monitor the Australian Citizenship Act plus Home Affairs descent, conferral, residence, and migration-program guidance linked by canonical claims."
     },
     {
@@ -259,18 +294,29 @@
       "id": "nz-citizenship-guidance",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
+      "status": "active",
       "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/",
       "jurisdictions": ["554"],
+      "pages": [
+        { "id": "citizenship-index", "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/" },
+        { "id": "citizenship-types", "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/" },
+        { "id": "presence-requirements", "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/requirements-for-nz-citizenship/presence-requirements/" },
+        { "id": "active-investor-plus", "url": "https://www.immigration.govt.nz/visas/active-investor-plus-visa/" }
+      ],
       "notes": "Monitor New Zealand citizenship by birth, descent, and grant guidance plus linked investor-residence pages."
     },
     {
       "id": "us-citizenship-guidance",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
+      "status": "active",
       "url": "https://www.uscis.gov/citizenship",
       "jurisdictions": ["840"],
+      "pages": [
+        { "id": "citizenship-index", "url": "https://www.uscis.gov/citizenship" },
+        { "id": "naturalization", "url": "https://www.uscis.gov/citizenship/learn-about-citizenship/citizenship-and-naturalization" },
+        { "id": "eb5-investor", "url": "https://www.uscis.gov/eb-5" }
+      ],
       "notes": "Monitor USCIS and Department of State citizenship-at-birth, naturalization, and investor-residence guidance, resolving legal changes to the U.S. Code."
     },
     {
@@ -323,7 +369,7 @@
       "id": "uscis-alerts",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
+      "status": "active",
       "url": "https://www.uscis.gov/newsroom/alerts",
       "jurisdictions": ["840"],
       "notes": "Official USCIS alert index for naturalization, permanent residence, work authorization, fees, forms, and policy-manual changes. Needs a narrow paginated index adapter."
@@ -338,6 +384,74 @@
       "jurisdictions": ["eu"],
       "keywords": ["citizenship", "nationality", "naturalisation", "residence", "free movement", "migration", "ciudadanía", "nacionalidad", "cittadinanza", "nationalité", "Staatsangehörigkeit"],
       "notes": "Authentic Official Journal of the European Union. Configure a focused EUR-Lex RSS search for nationality, residence, migration, accession, and free-movement instruments rather than ingesting the entire journal."
+    },
+    {
+      "id": "greece-citizenship",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.ypes.gr/kodikas-ellinikis-ithageneias/",
+      "jurisdictions": ["300"],
+      "keywords": ["ιθαγένεια", "πολιτογράφηση", "γέννηση", "διαμονή"],
+      "notes": "Official Ministry of Interior consolidated Citizenship Code, including descent, conditional birth and schooling routes, and ordinary naturalization."
+    },
+    {
+      "id": "greece-investor-residence",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://migration.gov.gr/en/golden-visa/",
+      "jurisdictions": ["300"],
+      "keywords": ["investor", "residence permit", "golden visa", "investment"],
+      "notes": "Official investor-residence guidance used to keep Golden Visa residence separate from direct citizenship."
+    },
+    {
+      "id": "bulgaria-citizenship",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://justice.government.bg/home/normdoc/2134446592",
+      "jurisdictions": ["100"],
+      "pages": [
+        { "id": "citizenship-act", "url": "https://justice.government.bg/home/normdoc/2134446592" },
+        { "id": "citizenship-directorate", "url": "https://mjs.bg/home/index/dbg?top=1" }
+      ],
+      "keywords": ["гражданство", "натурализация", "произход", "месторождение", "инвестиции"],
+      "notes": "Official Citizenship Act and Ministry of Justice citizenship procedures; the Act records repeal of investment-naturalization Articles 12a and 14a."
+    },
+    {
+      "id": "serbia-citizenship",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://mup.gov.rs/wps/portal/sr/gradjani/dokumenta/Drzavljanstvo/",
+      "jurisdictions": ["688"],
+      "keywords": ["држављанство", "državljanstvo", "пореклом", "пријем", "рођењем"],
+      "notes": "Official Ministry of Interior citizenship index and linked Citizenship Act covering descent, territorial statelessness safeguards, and admission."
+    },
+    {
+      "id": "uae-nationality",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1",
+      "jurisdictions": ["784"],
+      "pages": [
+        { "id": "nationality-law", "url": "https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1" },
+        { "id": "exceptional-nationality-guidance", "url": "https://u.ae/en/information-and-services/passports-and-traveling/emirati-nationality" }
+      ],
+      "keywords": ["nationality", "naturalisation", "naturalization", "investor", "citizen"],
+      "notes": "Federal nationality law plus official guidance for the nomination-based exceptional categories introduced in 2021."
+    },
+    {
+      "id": "uae-golden-visa",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
+      "jurisdictions": ["784"],
+      "keywords": ["golden visa", "residence", "investor", "investment fund"],
+      "notes": "Official Golden Visa guidance used to prevent investor residence from being misclassified as direct citizenship."
     },
     {
       "id": "komunita-malta",

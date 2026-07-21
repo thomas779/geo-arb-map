@@ -198,6 +198,35 @@ describe('monitor feed collector', () => {
     fs.rmSync(directory, { recursive: true, force: true });
   });
 
+  test('chunks large snapshots into D1-portable SQL without losing text', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'monitor-state-sql-test-'));
+    const sourceDb = path.join(directory, 'source.sqlite');
+    const targetDb = path.join(directory, 'target.sqlite');
+    const sqlPath = path.join(directory, 'mutations.sql');
+    const largeText = `Citizenship law ${"'quoted provision' ".repeat(8_000)}`;
+    const sourceStore = new MonitorStateStore(process.cwd(), sourceDb);
+    sourceStore.record({
+      page_id: 'large:page', source_id: 'large', jurisdiction: '300',
+      attempted_at: retrievedAt, state: 'healthy', change_kind: 'baseline', http_status: 200,
+      requested_url: 'https://example.test/large', final_url: 'https://example.test/large',
+      previous_hash: null, current_hash: 'large-hash', previous_text: null,
+      current_text: largeText, text_diff: null, etag: null, last_modified: null, error: null,
+    });
+    sourceStore.writeMutations(sqlPath);
+    sourceStore.close();
+
+    const rendered = fs.readFileSync(sqlPath, 'utf8');
+    expect(Math.max(...rendered.split('\n').map(line => line.length))).toBeLessThan(50_000);
+    const targetStore = new MonitorStateStore(process.cwd(), targetDb);
+    targetStore.database.exec(rendered);
+    expect(targetStore.getPage('large:page')?.current_text).toBe(largeText);
+    expect(targetStore.database.query(
+      'SELECT current_text FROM monitor_observations WHERE page_id = ?1',
+    ).get('large:page')).toEqual({ current_text: largeText });
+    targetStore.close();
+    fs.rmSync(directory, { recursive: true, force: true });
+  });
+
   test('renders a bounded normalized textual diff', () => {
     expect(diffNormalizedText('five years residence', 'six years residence'))
       .toBe('- five years residence\n+ six years residence');

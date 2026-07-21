@@ -53,6 +53,54 @@ function sql(value: string | number | null): string {
   return `'${value.replace(/'/g, "''")}'`;
 }
 
+const SQL_TEXT_CHUNK_SIZE = 20_000;
+
+function appendTextMutations(
+  table: 'monitor_pages' | 'monitor_observations',
+  keyColumn: 'page_id' | 'id',
+  key: string,
+  field: 'previous_text' | 'current_text' | 'text_diff',
+  value: string | null,
+): string[] {
+  if (value === null) return [];
+  const mutations = [
+    `UPDATE ${table} SET ${field} = '' WHERE ${keyColumn} = ${sql(key)};`,
+  ];
+  for (let offset = 0; offset < value.length; offset += SQL_TEXT_CHUNK_SIZE) {
+    mutations.push(
+      `UPDATE ${table} SET ${field} = ${field} || ${sql(value.slice(offset, offset + SQL_TEXT_CHUNK_SIZE))} WHERE ${keyColumn} = ${sql(key)};`,
+    );
+  }
+  return mutations;
+}
+
+function renderPageUpsert(values: Array<string | number | null>): string {
+  return `INSERT INTO monitor_pages (
+      page_id, source_id, url, jurisdiction, state, last_success_hash,
+      previous_text, current_text, etag, last_modified, final_url,
+      last_http_status, last_attempted_at, last_success_retrieved_at,
+      consecutive_failures, last_error, updated_at
+    ) VALUES (${values.map(sql).join(', ')})
+    ON CONFLICT(page_id) DO UPDATE SET
+      source_id=excluded.source_id, url=excluded.url, jurisdiction=excluded.jurisdiction,
+      state=excluded.state, last_success_hash=excluded.last_success_hash,
+      previous_text=excluded.previous_text, current_text=excluded.current_text,
+      etag=excluded.etag, last_modified=excluded.last_modified,
+      final_url=excluded.final_url, last_http_status=excluded.last_http_status,
+      last_attempted_at=excluded.last_attempted_at,
+      last_success_retrieved_at=excluded.last_success_retrieved_at,
+      consecutive_failures=excluded.consecutive_failures,
+      last_error=excluded.last_error, updated_at=excluded.updated_at;`;
+}
+
+function renderObservationInsert(values: Array<string | number | null>): string {
+  return `INSERT OR IGNORE INTO monitor_observations (
+      id, page_id, source_id, attempted_at, state, change_kind, http_status,
+      requested_url, final_url, previous_hash, current_hash, previous_text,
+      current_text, text_diff, etag, last_modified, error
+    ) VALUES (${values.map(sql).join(', ')});`;
+}
+
 function observationId(observation: PageObservation): string {
   return createHash('sha256').update(JSON.stringify([
     observation.page_id,
@@ -111,42 +159,39 @@ export class MonitorStateStore {
       observation.final_url, observation.http_status, observation.attempted_at,
       lastSuccessAt, failures, observation.error, observation.attempted_at,
     ];
-    const pageSql = `INSERT INTO monitor_pages (
-      page_id, source_id, url, jurisdiction, state, last_success_hash,
-      previous_text, current_text, etag, last_modified, final_url,
-      last_http_status, last_attempted_at, last_success_retrieved_at,
-      consecutive_failures, last_error, updated_at
-    ) VALUES (${pageValues.map(sql).join(', ')})
-    ON CONFLICT(page_id) DO UPDATE SET
-      source_id=excluded.source_id, url=excluded.url, jurisdiction=excluded.jurisdiction,
-      state=excluded.state, last_success_hash=excluded.last_success_hash,
-      previous_text=excluded.previous_text, current_text=excluded.current_text,
-      etag=excluded.etag, last_modified=excluded.last_modified,
-      final_url=excluded.final_url, last_http_status=excluded.last_http_status,
-      last_attempted_at=excluded.last_attempted_at,
-      last_success_retrieved_at=excluded.last_success_retrieved_at,
-      consecutive_failures=excluded.consecutive_failures,
-      last_error=excluded.last_error, updated_at=excluded.updated_at;`;
+    const pageSql = renderPageUpsert(pageValues);
 
+    const observationKey = observationId(observation);
     const observationValues = [
-      observationId(observation), observation.page_id, observation.source_id,
+      observationKey, observation.page_id, observation.source_id,
       observation.attempted_at, observation.state, observation.change_kind,
       observation.http_status, observation.requested_url, observation.final_url,
       observation.previous_hash, observation.current_hash, observation.previous_text,
       observation.current_text, observation.text_diff, observation.etag,
       observation.last_modified, observation.error,
     ];
-    const observationSql = `INSERT OR IGNORE INTO monitor_observations (
-      id, page_id, source_id, attempted_at, state, change_kind, http_status,
-      requested_url, final_url, previous_hash, current_hash, previous_text,
-      current_text, text_diff, etag, last_modified, error
-    ) VALUES (${observationValues.map(sql).join(', ')});`;
+    const observationSql = renderObservationInsert(observationValues);
 
     this.database.transaction(() => {
       this.database.exec(pageSql);
       this.database.exec(observationSql);
     })();
-    this.mutations.push(pageSql, observationSql);
+    const portablePageValues = [...pageValues];
+    portablePageValues[6] = null;
+    portablePageValues[7] = null;
+    const portableObservationValues = [...observationValues];
+    portableObservationValues[11] = null;
+    portableObservationValues[12] = null;
+    portableObservationValues[13] = null;
+    this.mutations.push(
+      renderPageUpsert(portablePageValues),
+      ...appendTextMutations('monitor_pages', 'page_id', observation.page_id, 'previous_text', previousText),
+      ...appendTextMutations('monitor_pages', 'page_id', observation.page_id, 'current_text', currentText),
+      renderObservationInsert(portableObservationValues),
+      ...appendTextMutations('monitor_observations', 'id', observationKey, 'previous_text', observation.previous_text),
+      ...appendTextMutations('monitor_observations', 'id', observationKey, 'current_text', observation.current_text),
+      ...appendTextMutations('monitor_observations', 'id', observationKey, 'text_diff', observation.text_diff),
+    );
   }
 
   writeMutations(outputPath: string): void {

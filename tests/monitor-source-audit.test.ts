@@ -28,8 +28,11 @@ describe('monitoring source coverage audit', () => {
 
   test('does not confuse global discovery with active official verification', () => {
     expect(audit.global_discovery_sources.some(source => source.id === 'globalcit-rss')).toBe(true);
-    expect(audit.summary.jurisdictions_with_active_verification).toBeGreaterThanOrEqual(1);
-    expect(audit.jurisdictions.find(item => item.iso_n3 === '724')?.gaps)
-      .toContain('no_active_verification_source');
+    expect(audit.summary.jurisdictions_with_active_verification).toBeGreaterThanOrEqual(22);
+    for (const jurisdiction of canonical.jurisdictions) {
+      expect(audit.jurisdictions.find(
+        item => item.iso_n3 === jurisdiction.jurisdiction.iso_n3,
+      )?.gaps).not.toContain('no_active_verification_source');
+    }
   });
 });
