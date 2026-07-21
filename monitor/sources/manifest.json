@@ -761,6 +761,81 @@
       "notes": "Official Constitution, Nationality Act and economic-PR form. The investment page is a classification safeguard: permanent residence must not be represented as direct citizenship."
     },
     {
+      "id": "barbados-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://immigration.gov.bb/pages/Citizenship.aspx",
+      "jurisdictions": ["052"],
+      "pages": [
+        { "id": "constitution", "url": "https://www.electoral.barbados.gov.bb/wp-content/uploads/2021/10/The_Constitution_of_Barbados.pdf" },
+        { "id": "citizenship-act", "url": "https://www.barbadoslawcourts.gov.bb/assets/content/pdfs/statutes/BarbadosCitizenshipCAP186.pdf" },
+        { "id": "citizenship-guidance", "url": "https://immigration.gov.bb/pages/Citizenship.aspx" },
+        { "id": "citizenship-bills", "url": "https://governmentprintery.gov.bb/category/bills/" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "born in Barbados", "ordinary residence", "Citizenship Bill"],
+      "notes": "Official constitutional, statutory, administrative and bills sources. Proposed bills are review signals only and must not alter the canonical law until enacted and commenced."
+    },
+    {
+      "id": "mauritius-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx",
+      "jurisdictions": ["480"],
+      "pages": [
+        { "id": "citizenship-act", "url": "https://lawsofmauritius.govmu.org/portal/viewlegislationdocument/web/?docnumber=&doctitle=TWF1cml0aXVzIENpdGl6ZW5zaGlwIEFjdA%3D%3D&doctype=act" },
+        { "id": "citizenship-guidance", "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "invested", "500,000 US dollars", "1 October 1995", "residence permit"],
+      "notes": "Official current Act and Prime Minister’s Office guidance. Monitor the special investor-naturalization threshold and residence condition separately from residence-by-investment programmes."
+    },
+    {
+      "id": "panama-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://constitucion.te.gob.pa/constitucion-vigente/",
+      "jurisdictions": ["591"],
+      "pages": [
+        { "id": "current-constitution", "url": "https://constitucion.te.gob.pa/constitucion-vigente/" },
+        { "id": "naturalization-requirements", "url": "https://www.migracion.gob.pa/wp-content/uploads/REQUISITOS-DE-NATURALIZACION-ACTUALIZADO.pdf" },
+        { "id": "constitutional-reforms", "url": "https://constitucion.te.gob.pa/reformas-a-la-constitucion-de-1972/" }
+      ],
+      "keywords": ["nacionalidad", "naturalización", "carta de naturaleza", "cinco años", "tres años", "residencia permanente", "Artículo 10"],
+      "notes": "Official Constitution, current naturalization checklist and reform history. Friendly Nations and investor permits are residence mechanisms, not direct citizenship."
+    },
+    {
+      "id": "vanuatu-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://crvsd.gov.vu/services/registration-of-new-citizens",
+      "jurisdictions": ["548"],
+      "pages": [
+        { "id": "new-citizen-registration", "url": "https://crvsd.gov.vu/services/registration-of-new-citizens" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "Development Support Program", "Contribution Program", "fees", "dual citizenship", "designated agents"],
+      "notes": "Official civil-registry page listing naturalization and current investor citizenship categories. The Commission, Parliament and Prime Minister’s Office materials remain canonical evidence but fail Bun TLS verification; those endpoints are tracked separately as planned until their certificate chains work in CI."
+    },
+    {
+      "id": "vanuatu-primary-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://parliament.gov.vu/images/constitution.pdf",
+      "jurisdictions": ["548"],
+      "pages": [
+        { "id": "constitutional-citizenship", "url": "https://parliament.gov.vu/images/constitution.pdf" },
+        { "id": "citizenship-types", "url": "https://vancitizenship.gov.vu/index.php/citizenship/types-of-citizenship" },
+        { "id": "legislative-framework", "url": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework" },
+        { "id": "cbi-review", "url": "https://pmo.gov.vu/en/public-information/press-release/1150-coi-report-and-recommendations.html" },
+        { "id": "citizenship-amendment-bill", "url": "https://parliament.gov.vu/images/Bills/Second%20Ordinary%20session%202025/Bill%20for%20the%20Citizenship/Bill%20for%20the%20Citizenship%20Am%20Act%20No.%20%20of%202025.pdf" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "Development Support Program", "Contribution Program", "amendment", "fees"],
+      "notes": "Official primary-law and programme sources. Activate once their TLS certificate chains validate in the strict Bun/CI collector. Bills and review notices are signals only, not enacted-law changes."
+    },
+    {
       "id": "brazil-official-gazette",
       "tier": "verification",
       "adapter": "api",
