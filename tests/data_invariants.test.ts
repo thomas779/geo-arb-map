@@ -315,7 +315,8 @@ describe('citizenship route database', () => {
       route.mode === 'investment' && route.status === 'active');
     const pending = citizenshipRoutes.routes.filter(route =>
       route.mode === 'investment' && route.status === 'pending_verification');
-    expect(active.length).toBe(12);
+    expect(active.length).toBe(13);
+    expect(active.map(route => route.id)).toContain('mauritius-investor-naturalization');
     expect(pending.map(route => route.country.iso_n3).sort()).toEqual(['032', '116', '882']);
   });
 
