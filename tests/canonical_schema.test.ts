@@ -26,12 +26,21 @@ describe('canonical data schemas', () => {
       'france-citizenship-by-parent',
       'france-study-naturalization-residence',
       'france-birth-and-residence',
+      'germany-citizenship-by-parent',
+      'germany-naturalization-by-residence',
+      'germany-citizenship-by-birth',
+      'ireland-citizenship-by-descent',
+      'ireland-naturalization-by-residence',
+      'ireland-citizenship-by-birth',
       'portugal-citizenship-by-parent',
       'portugal-ordinary-naturalization-2026',
       'portugal-birth-parent-residence-2026',
       'spain-citizenship-by-parent-or-option',
       'spain-citizenship-by-birth',
       'spain-naturalization-by-residence',
+      'uk-citizenship-by-parent',
+      'uk-naturalization-after-settlement',
+      'uk-citizenship-by-birth',
     ]);
     for (const jurisdiction of pilot.jurisdictions) {
       for (const route of jurisdiction.routes) {

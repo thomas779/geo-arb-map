@@ -97,8 +97,8 @@ describe('data:build reads the canonical database', () => {
       selected_statuses: ['draft'],
       selected_release_status: null,
     });
-    expect(loaded.projections.coverage).toHaveLength(3);
-    expect(loaded.projections.mode_coverage).toHaveLength(12);
+    expect(loaded.projections.coverage).toHaveLength(6);
+    expect(loaded.projections.mode_coverage).toHaveLength(24);
   });
 
   test('fails clearly when the database is missing', () => {
@@ -363,10 +363,19 @@ describe('data:build parity gates', () => {
     expect(detail.canonical_additions).toEqual([
       'france-birth-and-residence',
       'france-citizenship-by-parent',
+      'germany-citizenship-by-birth',
+      'germany-citizenship-by-parent',
+      'germany-naturalization-by-residence',
+      'ireland-citizenship-by-birth',
+      'ireland-citizenship-by-descent',
+      'ireland-naturalization-by-residence',
       'portugal-citizenship-by-parent',
       'spain-citizenship-by-birth',
       'spain-citizenship-by-parent-or-option',
       'spain-naturalization-by-residence',
+      'uk-citizenship-by-birth',
+      'uk-citizenship-by-parent',
+      'uk-naturalization-after-settlement',
     ]);
     // Documents the honest gap: title and facts are legacy-carried.
     expect(detail.legacy_carried_fields.length).toBeGreaterThanOrEqual(2);
@@ -385,10 +394,10 @@ describe('data:build parity gates', () => {
     );
     expect(spain).toMatchObject({
       coverage: {
-        ancestry: 'partial',
-        naturalization: 'partial',
-        birth: 'partial',
-        investment: 'unchecked',
+        ancestry: 'reviewed',
+        naturalization: 'reviewed',
+        birth: 'reviewed',
+        investment: 'reviewed',
       },
     });
     expect(spain?.route_ids).toEqual([

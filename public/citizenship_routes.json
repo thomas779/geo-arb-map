@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 239,
-      "routes": 31,
+      "routes": 40,
       "by_mode": {
-        "ancestry": 6,
-        "naturalization": 7,
-        "birth": 3,
+        "ancestry": 9,
+        "naturalization": 10,
+        "birth": 6,
         "investment": 15
       },
       "by_status": {
-        "active": 26,
+        "active": 35,
         "inactive": 2,
         "pending_verification": 2,
         "verified_negative": 1
@@ -889,10 +889,10 @@
       "name": "France",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "partial",
-        "birth": "partial",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
       "route_ids": [
         "france-citizenship-by-parent",
@@ -989,12 +989,16 @@
       "name": "Germany",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "germany-citizenship-by-parent",
+        "germany-naturalization-by-residence",
+        "germany-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "288",
@@ -1258,12 +1262,16 @@
       "name": "Ireland",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "ireland-citizenship-by-descent",
+        "ireland-naturalization-by-residence",
+        "ireland-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "376",
@@ -2084,10 +2092,10 @@
       "name": "Portugal",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "partial",
-        "birth": "partial",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
       "route_ids": [
         "portugal-citizenship-by-parent",
@@ -2454,10 +2462,10 @@
       "name": "Spain",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "partial",
-        "birth": "partial",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
       "route_ids": [
         "spain-citizenship-by-parent-or-option",
@@ -2762,12 +2770,16 @@
       "name": "United Kingdom",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "uk-citizenship-by-parent",
+        "uk-naturalization-after-settlement",
+        "uk-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "831",
@@ -3240,6 +3252,88 @@
       ]
     },
     {
+      "id": "germany-citizenship-by-birth",
+      "country": {
+        "iso_n3": "276",
+        "name": "Germany"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Germany",
+      "summary": "A child of foreign parents born in Germany acquires citizenship when one parent meets the residence and permanent-status conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "German Nationality Act",
+          "url": "https://www.gesetze-im-internet.de/englisch_stag/englisch_stag.html"
+        }
+      ]
+    },
+    {
+      "id": "germany-citizenship-by-parent",
+      "country": {
+        "iso_n3": "276",
+        "name": "Germany"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a German parent",
+      "summary": "A child generally acquires German citizenship at birth when at least one parent is German.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "German Nationality Act",
+          "url": "https://www.gesetze-im-internet.de/englisch_stag/englisch_stag.html"
+        }
+      ]
+    },
+    {
+      "id": "germany-naturalization-by-residence",
+      "country": {
+        "iso_n3": "276",
+        "name": "Germany"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after residence",
+      "summary": "The standard entitlement uses five years of lawful ordinary residence, with a shorter rule for spouses of Germans.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          36,
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "German Nationality Act",
+          "url": "https://www.gesetze-im-internet.de/englisch_stag/englisch_stag.html"
+        }
+      ]
+    },
+    {
       "id": "greece-citizenship-by-greek-parent",
       "country": {
         "iso_n3": "300",
@@ -3309,6 +3403,87 @@
         {
           "title": "Grenada Citizenship by Investment",
           "url": "https://www.cbi.gov.gd/index_php/"
+        }
+      ]
+    },
+    {
+      "id": "ireland-citizenship-by-birth",
+      "country": {
+        "iso_n3": "372",
+        "name": "Ireland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth on the island of Ireland",
+      "summary": "For births from 2005, citizenship depends on a parent’s citizenship, entitlement, or qualifying residence before the birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Irish Nationality and Citizenship Act 2004 — Section 4",
+          "url": "https://www.irishstatutebook.ie/eli/2004/act/38/section/4/enacted/en/html"
+        }
+      ]
+    },
+    {
+      "id": "ireland-citizenship-by-descent",
+      "country": {
+        "iso_n3": "372",
+        "name": "Ireland"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through an Irish parent or grandparent",
+      "summary": "Citizenship may be automatic through an Irish-born parent or available through Foreign Birth Registration in specified overseas cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Irish Department of Foreign Affairs — Born abroad",
+          "url": "https://www.dfa.ie/citizenship/born-abroad/"
+        }
+      ]
+    },
+    {
+      "id": "ireland-naturalization-by-residence",
+      "country": {
+        "iso_n3": "372",
+        "name": "Ireland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after reckonable residence",
+      "summary": "The standard adult route requires five years of reckonable residence in the previous nine, including one continuous year immediately before applying.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Irish Immigration Service — How to become an Irish citizen",
+          "url": "https://www.irishimmigration.ie/how-to-become-an-irish-citizen-guide/"
         }
       ]
     },
@@ -3774,6 +3949,88 @@
         {
           "title": "GAFI — Unit for Granting Egyptian Citizenship in Exchange for Investment",
           "url": "https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "uk-citizenship-by-birth",
+      "country": {
+        "iso_n3": "826",
+        "name": "United Kingdom"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in the UK",
+      "summary": "For births from 1983, a child is normally automatically British when a parent is British or settled at the time of birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "GOV.UK — British citizenship for people born in the UK",
+          "url": "https://www.gov.uk/apply-citizenship-born-uk/eligibility"
+        }
+      ]
+    },
+    {
+      "id": "uk-citizenship-by-parent",
+      "country": {
+        "iso_n3": "826",
+        "name": "United Kingdom"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a British parent",
+      "summary": "British citizenship can usually pass one generation to a child born outside the UK, subject to the parent’s status and the date and place of birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "GOV.UK — British citizenship through a British parent",
+          "url": "https://www.gov.uk/apply-citizenship-british-parent"
+        }
+      ]
+    },
+    {
+      "id": "uk-naturalization-after-settlement",
+      "country": {
+        "iso_n3": "826",
+        "name": "United Kingdom"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after settlement",
+      "summary": "The standard route combines five years of residence with at least 12 months holding indefinite leave, settled status, or indefinite leave to enter.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          36,
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "GOV.UK — Naturalization with indefinite leave or settled status",
+          "url": "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain"
         }
       ]
     },

@@ -18,8 +18,11 @@ describe('data migration shadow', () => {
   test('extracts the complete pilot set with stable entity identities', () => {
     expect(shadow.jurisdictions.map(item => item.jurisdiction.iso_n3)).toEqual([
       '250',
+      '276',
+      '372',
       '620',
       '724',
+      '826',
     ]);
     expect(shadow.arrangements.map(item => item.record.id)).toEqual([
       'eu_eea',
@@ -27,7 +30,7 @@ describe('data migration shadow', () => {
       'spain_iberoamerican',
     ]);
     expect(shadow.manifest.counts).toEqual({
-      jurisdictions: 3,
+      jurisdictions: 6,
       arrangements: 3,
       citizenship_routes: 3,
     });

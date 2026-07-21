@@ -140,22 +140,24 @@ describe('canonical SQL import and projections', () => {
     );
 
     expect(projections.routes).toHaveLength(canonicalVariantCount);
-    expect(projections.coverage.map(row => row.iso_n3)).toEqual(['250', '620', '724']);
+    expect(projections.coverage.map(row => row.iso_n3)).toEqual([
+      '250', '276', '372', '620', '724', '826',
+    ]);
     expect(projections.coverage.find(row => row.iso_n3 === '250')).toMatchObject({
       route_count: 3,
       route_modes: ['ancestry', 'birth', 'naturalization'],
     });
-    expect(projections.mode_coverage).toHaveLength(12);
+    expect(projections.mode_coverage).toHaveLength(24);
     expect(projections.mode_coverage.find(row =>
       row.iso_n3 === '250' && row.mode === 'naturalization')).toMatchObject({
         finding: 'present',
-        review_state: 'partial',
+      review_state: 'reviewed',
         route_count: 1,
       });
     expect(projections.mode_coverage.find(row =>
       row.iso_n3 === '724' && row.mode === 'birth')).toMatchObject({
         finding: 'present',
-        review_state: 'partial',
+      review_state: 'reviewed',
         route_count: 1,
       });
     imported.database.close();

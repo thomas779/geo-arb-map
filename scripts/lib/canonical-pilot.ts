@@ -135,13 +135,34 @@ const OFFICIAL_URLS = {
   france_descent: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419373/',
   france_birth_residence: 'https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000039366780/',
   france_birth_guidance: 'https://www.service-public.fr/particuliers/vosdroits/F295',
+  france_nationality_code: 'https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006070721/2026-01-01',
   portugal_nationality: 'https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa',
   portugal_applications: 'https://justica.gov.pt/Servicos/Submeter-pedido-de-nacionalidade',
   spain_civil_code: 'https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763',
+  germany_nationality_act: 'https://www.gesetze-im-internet.de/englisch_stag/englisch_stag.html',
+  ireland_born_abroad: 'https://www.dfa.ie/citizenship/born-abroad/',
+  ireland_naturalization: 'https://www.irishimmigration.ie/how-to-become-an-irish-citizen-guide/',
+  ireland_birth_law: 'https://www.irishstatutebook.ie/eli/2004/act/38/section/4/enacted/en/html',
+  uk_british_parent: 'https://www.gov.uk/apply-citizenship-british-parent',
+  uk_born_in_country: 'https://www.gov.uk/apply-citizenship-born-uk/eligibility',
+  uk_naturalization: 'https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
   return [
+    officialSource({
+      title: 'French Civil Code — French nationality provisions',
+      url: OFFICIAL_URLS.france_nationality_code,
+      source_type: 'primary_law',
+      jurisdictions: ['250'],
+      language: 'fr',
+      monitoring: {
+        source_id: 'legifrance-piste',
+        method: 'api',
+        url: 'https://piste.gouv.fr/',
+        status: 'planned',
+      },
+    }),
     officialSource({
       title: 'French Civil Code — Article 18',
       url: OFFICIAL_URLS.france_descent,
@@ -217,6 +238,97 @@ function jurisdictionSources(): SourceRecord[] {
         source_id: 'boe-spain',
         method: 'api',
         url: 'https://www.boe.es/datosabiertos/api/api.php',
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'German Nationality Act',
+      url: OFFICIAL_URLS.germany_nationality_act,
+      source_type: 'primary_law',
+      jurisdictions: ['276'],
+      language: 'en',
+      monitoring: {
+        source_id: 'germany-nationality-act',
+        method: 'http',
+        url: OFFICIAL_URLS.germany_nationality_act,
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'Irish Department of Foreign Affairs — Born abroad',
+      url: OFFICIAL_URLS.ireland_born_abroad,
+      source_type: 'official_guidance',
+      jurisdictions: ['372'],
+      language: 'en',
+      monitoring: {
+        source_id: 'ireland-dfa-citizenship',
+        method: 'http',
+        url: OFFICIAL_URLS.ireland_born_abroad,
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'Irish Immigration Service — How to become an Irish citizen',
+      url: OFFICIAL_URLS.ireland_naturalization,
+      source_type: 'official_guidance',
+      jurisdictions: ['372'],
+      language: 'en',
+      monitoring: {
+        source_id: 'ireland-isd-citizenship',
+        method: 'http',
+        url: OFFICIAL_URLS.ireland_naturalization,
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'Irish Nationality and Citizenship Act 2004 — Section 4',
+      url: OFFICIAL_URLS.ireland_birth_law,
+      source_type: 'primary_law',
+      jurisdictions: ['372'],
+      language: 'en',
+      monitoring: {
+        source_id: 'irish-statute-book',
+        method: 'http',
+        url: OFFICIAL_URLS.ireland_birth_law,
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'GOV.UK — British citizenship through a British parent',
+      url: OFFICIAL_URLS.uk_british_parent,
+      source_type: 'official_guidance',
+      jurisdictions: ['826'],
+      language: 'en',
+      monitoring: {
+        source_id: 'gov-uk-citizenship',
+        method: 'http',
+        url: OFFICIAL_URLS.uk_british_parent,
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'GOV.UK — British citizenship for people born in the UK',
+      url: OFFICIAL_URLS.uk_born_in_country,
+      source_type: 'official_guidance',
+      jurisdictions: ['826'],
+      language: 'en',
+      monitoring: {
+        source_id: 'gov-uk-citizenship',
+        method: 'http',
+        url: OFFICIAL_URLS.uk_born_in_country,
+        status: 'planned',
+      },
+    }),
+    officialSource({
+      title: 'GOV.UK — Naturalization with indefinite leave or settled status',
+      url: OFFICIAL_URLS.uk_naturalization,
+      source_type: 'official_guidance',
+      jurisdictions: ['826'],
+      language: 'en',
+      monitoring: {
+        source_id: 'gov-uk-citizenship',
+        method: 'http',
+        url: OFFICIAL_URLS.uk_naturalization,
         status: 'planned',
       },
     }),
@@ -390,39 +502,43 @@ function franceRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
   const descentSource = requireSource(officialSources, OFFICIAL_URLS.france_descent);
   const birthLawSource = requireSource(officialSources, OFFICIAL_URLS.france_birth_residence);
   const birthGuidanceSource = requireSource(officialSources, OFFICIAL_URLS.france_birth_guidance);
+  const nationalityCode = requireSource(officialSources, OFFICIAL_URLS.france_nationality_code);
   return JurisdictionRecordSchema.parse({
     schema_version: 2,
     entity_type: 'jurisdiction',
     id: 'jurisdiction:250',
     jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
     review: {
-      state: 'partial',
+      state: 'reviewed',
       confidence: legacy.confidence,
       last_checked: legacy.last_checked,
-      note: 'Descent, birth-and-residence, and selected naturalization routes reviewed.',
+      note: 'All acquisition modes reviewed; the modeled routes focus on the principal public paths.',
     },
     coverage: [
       {
         mode: 'ancestry',
         finding: 'present',
-        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
         source_refs: refs([descentSource], ['/coverage/ancestry']),
       },
       {
         mode: 'naturalization',
         finding: 'present',
         review: {
-          state: 'partial',
+          state: 'reviewed',
           confidence: legacy.confidence,
           last_checked: legacy.last_checked,
-          note: 'Ordinary and French higher-education variants are represented.',
+          note: 'The mode is reviewed; ordinary and French higher-education variants are represented.',
         },
-        source_refs: refs(legacy.sources, ['/coverage/naturalization']),
+        source_refs: refs(
+          [nationalityCode, ...legacy.sources],
+          ['/coverage/naturalization'],
+        ),
       },
       {
         mode: 'birth',
         finding: 'present',
-        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
         source_refs: refs(
           [birthLawSource, birthGuidanceSource],
           ['/coverage/birth'],
@@ -430,9 +546,14 @@ function franceRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
       },
       {
         mode: 'investment',
-        finding: 'unknown',
-        review: { state: 'unchecked', confidence: 'low', last_checked: null },
-        source_refs: [],
+        finding: 'verified_none',
+        review: {
+          state: 'reviewed',
+          confidence: 'high',
+          last_checked: '2026-07-21',
+          note: 'No direct citizenship-by-investment route appears in the reviewed nationality provisions; residence-by-investment is separate.',
+        },
+        source_refs: refs([nationalityCode], ['/coverage/investment']),
       },
     ],
     routes: [{
@@ -617,16 +738,16 @@ function portugalRecord(shadow: DataShadow, officialSources: SourceRecord[]): Ju
     id: 'jurisdiction:620',
     jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
     review: {
-      state: 'partial',
+      state: 'reviewed',
       confidence: 'high',
       last_checked: ordinary.last_checked,
-      note: 'Direct descent, ordinary naturalization, and one conditional birth route reviewed.',
+      note: 'All acquisition modes reviewed; the modeled routes focus on the principal public paths.',
     },
     coverage: [
       {
         mode: 'ancestry',
         finding: 'present',
-        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
         source_refs: refs(
           [nationalitySource, applicationSource],
           ['/coverage/ancestry'],
@@ -636,7 +757,7 @@ function portugalRecord(shadow: DataShadow, officialSources: SourceRecord[]): Ju
         mode: 'naturalization',
         finding: 'present',
         review: {
-          state: 'partial',
+          state: 'reviewed',
           confidence: ordinary.confidence,
           last_checked: ordinary.last_checked,
         },
@@ -646,7 +767,7 @@ function portugalRecord(shadow: DataShadow, officialSources: SourceRecord[]): Ju
         mode: 'birth',
         finding: 'present',
         review: {
-          state: 'partial',
+          state: 'reviewed',
           confidence: birth.confidence,
           last_checked: birth.last_checked,
         },
@@ -654,9 +775,17 @@ function portugalRecord(shadow: DataShadow, officialSources: SourceRecord[]): Ju
       },
       {
         mode: 'investment',
-        finding: 'unknown',
-        review: { state: 'unchecked', confidence: 'low', last_checked: null },
-        source_refs: [],
+        finding: 'verified_none',
+        review: {
+          state: 'reviewed',
+          confidence: 'high',
+          last_checked: '2026-07-21',
+          note: 'The official nationality guide identifies no direct citizenship-by-investment route; investment residence is not citizenship.',
+        },
+        source_refs: refs(
+          [nationalitySource, applicationSource],
+          ['/coverage/investment'],
+        ),
       },
     ],
     routes: [
@@ -819,35 +948,40 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
     id: 'jurisdiction:724',
     jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
     review: {
-      state: 'partial',
+      state: 'reviewed',
       confidence: 'high',
       last_checked: '2026-07-21',
-      note: 'Core descent, birth, option, and residence routes are structured from the Civil Code.',
+      note: 'All acquisition modes reviewed; the modeled routes focus on the principal public paths.',
     },
     coverage: [
       {
         mode: 'ancestry',
         finding: 'present',
-        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
         source_refs: refs([civilCode], ['/coverage/ancestry']),
       },
       {
         mode: 'naturalization',
         finding: 'present',
-        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
         source_refs: refs([civilCode], ['/coverage/naturalization']),
       },
       {
         mode: 'birth',
         finding: 'present',
-        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
         source_refs: refs([civilCode], ['/coverage/birth']),
       },
       {
         mode: 'investment',
-        finding: 'unknown',
-        review: { state: 'unchecked', confidence: 'low', last_checked: null },
-        source_refs: [],
+        finding: 'verified_none',
+        review: {
+          state: 'reviewed',
+          confidence: 'high',
+          last_checked: '2026-07-21',
+          note: 'The reviewed Civil Code nationality provisions contain no direct citizenship-by-investment route; investment residence is separate.',
+        },
+        source_refs: refs([civilCode], ['/coverage/investment']),
       },
     ],
     routes: [
@@ -1063,6 +1197,538 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
             ]),
           },
         ],
+      },
+    ],
+  });
+}
+
+function germanyRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '276');
+  if (!candidate) throw new Error('Germany jurisdiction is missing');
+  const law = requireSource(officialSources, OFFICIAL_URLS.germany_nationality_act);
+  return JurisdictionRecordSchema.parse({
+    schema_version: 2,
+    entity_type: 'jurisdiction',
+    id: 'jurisdiction:276',
+    jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
+    review: {
+      state: 'reviewed',
+      confidence: 'high',
+      last_checked: '2026-07-21',
+      note: 'All acquisition modes reviewed against the Nationality Act; principal public paths are modeled.',
+    },
+    coverage: [
+      {
+        mode: 'ancestry',
+        finding: 'present',
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([law], ['/coverage/ancestry']),
+      },
+      {
+        mode: 'naturalization',
+        finding: 'present',
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([law], ['/coverage/naturalization']),
+      },
+      {
+        mode: 'birth',
+        finding: 'present',
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([law], ['/coverage/birth']),
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        review: {
+          state: 'reviewed',
+          confidence: 'high',
+          last_checked: '2026-07-21',
+          note: 'Section 3 enumerates the acquisition modes and contains no direct citizenship-by-investment route.',
+        },
+        source_refs: refs([law], ['/coverage/investment']),
+      },
+    ],
+    routes: [
+      {
+        id: 'germany-citizenship-by-parent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship through a German parent',
+        summary: 'A child generally acquires German citizenship at birth when at least one parent is German.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'german_parent',
+          label: 'German parent at birth',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [{
+            field: 'parent.citizenship.iso_n3',
+            operator: 'eq',
+            value: '276',
+            note: 'For some births abroad, section 4(4) requires registration within one year.',
+          }],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Citizenship is acquired at birth when the statutory conditions are met.',
+          },
+          source_refs: refs([law], [
+            '/routes/germany-citizenship-by-parent/summary',
+            '/routes/germany-citizenship-by-parent/variants/german_parent/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'germany-naturalization-by-residence',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after residence',
+        summary: 'The standard entitlement uses five years of lawful ordinary residence, with a shorter rule for spouses of Germans.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'ordinary',
+            label: 'Standard five-year route',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [{
+              field: 'residence.lawful_ordinary_months',
+              operator: 'gte',
+              value: 60,
+              unit: 'months',
+            }],
+            milestones: [
+              { status: 'lawful_ordinary_residence', minimum_months: 60 },
+              { status: 'citizenship_application', minimum_months: 0 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Other requirements in section 10 still apply.',
+            },
+            source_refs: refs([law], [
+              '/routes/germany-naturalization-by-residence/variants/ordinary/eligibility',
+              '/routes/germany-naturalization-by-residence/variants/ordinary/timeline',
+            ]),
+          },
+          {
+            id: 'spouse_of_german',
+            label: 'Spouse or registered partner of a German',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'partner.citizenship.iso_n3', operator: 'eq', value: '276' },
+              { field: 'residence.lawful_ordinary_months', operator: 'gte', value: 36, unit: 'months' },
+              { field: 'relationship.duration_months', operator: 'gte', value: 24, unit: 'months' },
+            ],
+            milestones: [
+              { status: 'lawful_ordinary_residence', minimum_months: 36 },
+              { status: 'qualifying_relationship', minimum_months: 24 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 36,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'The residence and relationship requirements operate together.',
+            },
+            source_refs: refs([law], [
+              '/routes/germany-naturalization-by-residence/variants/spouse_of_german/eligibility',
+            ]),
+          },
+        ],
+      },
+      {
+        id: 'germany-citizenship-by-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Citizenship by birth in Germany',
+        summary: 'A child of foreign parents born in Germany acquires citizenship when one parent meets the residence and permanent-status conditions.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'qualifying_parent_residence',
+          label: 'Parent resident for five years with permanent status',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '276' },
+            { field: 'parent.residence.lawful_ordinary_months', operator: 'gte', value: 60, unit: 'months' },
+            { field: 'parent.residence.permanent_right', operator: 'eq', value: true },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'The five-year period is a condition already met by the parent before birth.',
+          },
+          source_refs: refs([law], [
+            '/routes/germany-citizenship-by-birth/summary',
+            '/routes/germany-citizenship-by-birth/variants/qualifying_parent_residence/eligibility',
+          ]),
+        }],
+      },
+    ],
+  });
+}
+
+function irelandRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '372');
+  if (!candidate) throw new Error('Ireland jurisdiction is missing');
+  const descent = requireSource(officialSources, OFFICIAL_URLS.ireland_born_abroad);
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.ireland_naturalization);
+  const birthLaw = requireSource(officialSources, OFFICIAL_URLS.ireland_birth_law);
+  return JurisdictionRecordSchema.parse({
+    schema_version: 2,
+    entity_type: 'jurisdiction',
+    id: 'jurisdiction:372',
+    jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
+    review: {
+      state: 'reviewed',
+      confidence: 'high',
+      last_checked: '2026-07-21',
+      note: 'All acquisition modes reviewed; principal descent, residence, and birth paths are modeled.',
+    },
+    coverage: [
+      {
+        mode: 'ancestry',
+        finding: 'present',
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([descent], ['/coverage/ancestry']),
+      },
+      {
+        mode: 'naturalization',
+        finding: 'present',
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([naturalization], ['/coverage/naturalization']),
+      },
+      {
+        mode: 'birth',
+        finding: 'present',
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([birthLaw], ['/coverage/birth']),
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        review: {
+          state: 'reviewed',
+          confidence: 'medium',
+          last_checked: '2026-07-21',
+          note: 'The official citizenship guide identifies no direct citizenship-by-investment route.',
+        },
+        source_refs: refs([naturalization, descent], ['/coverage/investment']),
+      },
+    ],
+    routes: [
+      {
+        id: 'ireland-citizenship-by-descent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship through an Irish parent or grandparent',
+        summary: 'Citizenship may be automatic through an Irish-born parent or available through Foreign Birth Registration in specified overseas cases.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'irish_born_parent',
+            label: 'Parent born on the island of Ireland',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [{ field: 'parent.birth.island_of_ireland', operator: 'eq', value: true }],
+            milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'The Department of Foreign Affairs describes this category as automatic.',
+            },
+            source_refs: refs([descent], [
+              '/routes/ireland-citizenship-by-descent/variants/irish_born_parent/eligibility',
+            ]),
+          },
+          {
+            id: 'foreign_birth_registration',
+            label: 'Foreign Birth Registration',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [{
+              field: 'grandparent.birth.island_of_ireland',
+              operator: 'eq',
+              value: true,
+              note: 'Also covers specified cases where a parent was an Irish citizen before the birth but was born abroad.',
+            }],
+            milestones: [{ status: 'foreign_birth_registration', minimum_months: null }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Citizenship begins when the person is entered on the Foreign Births Register.',
+            },
+            source_refs: refs([descent], [
+              '/routes/ireland-citizenship-by-descent/variants/foreign_birth_registration/eligibility',
+              '/routes/ireland-citizenship-by-descent/variants/foreign_birth_registration/timeline',
+            ]),
+          },
+        ],
+      },
+      {
+        id: 'ireland-naturalization-by-residence',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after reckonable residence',
+        summary: 'The standard adult route requires five years of reckonable residence in the previous nine, including one continuous year immediately before applying.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'ordinary',
+          label: 'Standard adult naturalization',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [
+            { field: 'residence.reckonable_months_previous_108', operator: 'gte', value: 60, unit: 'months' },
+            { field: 'residence.continuous_months_immediately_before', operator: 'gte', value: 12, unit: 'months' },
+          ],
+          milestones: [
+            { status: 'reckonable_residence', minimum_months: 60 },
+            { status: 'citizenship_application', minimum_months: 0 },
+          ],
+          timeline: {
+            eligibility_minimum_months: 60,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'The Minister retains discretion and other statutory conditions apply.',
+          },
+          source_refs: refs([naturalization], [
+            '/routes/ireland-naturalization-by-residence/summary',
+            '/routes/ireland-naturalization-by-residence/variants/ordinary/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'ireland-citizenship-by-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Citizenship by birth on the island of Ireland',
+        summary: 'For births from 2005, citizenship depends on a parent’s citizenship, entitlement, or qualifying residence before the birth.',
+        effective: { from: '2005-01-01', to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'citizen_or_entitled_parent',
+            label: 'Irish citizen or entitled parent',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'birth.island_of_ireland', operator: 'eq', value: true },
+              { field: 'parent.irish_citizenship_or_entitlement', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+            timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+            source_refs: refs([birthLaw], [
+              '/routes/ireland-citizenship-by-birth/variants/citizen_or_entitled_parent/eligibility',
+            ]),
+          },
+          {
+            id: 'qualifying_parent_residence',
+            label: 'Parent resident for three of the previous four years',
+            outcome: 'citizenship',
+            allocation: 'right',
+            eligibility: [
+              { field: 'birth.island_of_ireland', operator: 'eq', value: true },
+              { field: 'parent.residence.reckonable_months_previous_48', operator: 'gte', value: 36, unit: 'months' },
+            ],
+            milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Specified study and protection-processing periods do not count toward the parent’s residence calculation.',
+            },
+            source_refs: refs([birthLaw], [
+              '/routes/ireland-citizenship-by-birth/variants/qualifying_parent_residence/eligibility',
+              '/routes/ireland-citizenship-by-birth/variants/qualifying_parent_residence/timeline',
+            ]),
+          },
+        ],
+      },
+    ],
+  });
+}
+
+function unitedKingdomRecord(
+  shadow: DataShadow,
+  officialSources: SourceRecord[],
+): JurisdictionRecord {
+  const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '826');
+  if (!candidate) throw new Error('United Kingdom jurisdiction is missing');
+  const parent = requireSource(officialSources, OFFICIAL_URLS.uk_british_parent);
+  const birth = requireSource(officialSources, OFFICIAL_URLS.uk_born_in_country);
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.uk_naturalization);
+  return JurisdictionRecordSchema.parse({
+    schema_version: 2,
+    entity_type: 'jurisdiction',
+    id: 'jurisdiction:826',
+    jurisdiction: { ...candidate.jurisdiction, type: 'sovereign' },
+    review: {
+      state: 'reviewed',
+      confidence: 'high',
+      last_checked: '2026-07-21',
+      note: 'All acquisition modes reviewed; principal parent, birth, and settlement paths are modeled.',
+    },
+    coverage: [
+      {
+        mode: 'ancestry',
+        finding: 'present',
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([parent], ['/coverage/ancestry']),
+      },
+      {
+        mode: 'naturalization',
+        finding: 'present',
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([naturalization], ['/coverage/naturalization']),
+      },
+      {
+        mode: 'birth',
+        finding: 'present',
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        source_refs: refs([birth], ['/coverage/birth']),
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        review: {
+          state: 'reviewed',
+          confidence: 'medium',
+          last_checked: '2026-07-21',
+          note: 'The official citizenship routes reviewed contain no direct citizenship-by-investment route.',
+        },
+        source_refs: refs([naturalization, parent, birth], ['/coverage/investment']),
+      },
+    ],
+    routes: [
+      {
+        id: 'uk-citizenship-by-parent',
+        mode: 'ancestry',
+        status: 'active',
+        title: 'Citizenship through a British parent',
+        summary: 'British citizenship can usually pass one generation to a child born outside the UK, subject to the parent’s status and the date and place of birth.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'british_parent',
+          label: 'British parent',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [{
+            field: 'parent.british_citizenship',
+            operator: 'eq',
+            value: true,
+            note: 'Automatic transmission depends on how the parent became British and the child’s birth circumstances.',
+          }],
+          milestones: [{ status: 'citizenship_at_birth_or_registration', minimum_months: 0 }],
+          timeline: {
+            eligibility_minimum_months: 0,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Some categories are automatic and others require registration.',
+          },
+          source_refs: refs([parent], [
+            '/routes/uk-citizenship-by-parent/summary',
+            '/routes/uk-citizenship-by-parent/variants/british_parent/eligibility',
+          ]),
+        }],
+      },
+      {
+        id: 'uk-naturalization-after-settlement',
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after settlement',
+        summary: 'The standard route combines five years of residence with at least 12 months holding indefinite leave, settled status, or indefinite leave to enter.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'ordinary',
+            label: 'Standard settled route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'residence.lawful_months', operator: 'gte', value: 60, unit: 'months' },
+              { field: 'residence.settled_status_months', operator: 'gte', value: 12, unit: 'months' },
+            ],
+            milestones: [
+              { status: 'qualifying_residence', minimum_months: 60 },
+              { status: 'settled_status', minimum_months: 12 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: 6,
+              confidence: 'high',
+              note: 'The residence and settled-status periods overlap when settlement was obtained earlier.',
+            },
+            source_refs: refs([naturalization], [
+              '/routes/uk-naturalization-after-settlement/summary',
+              '/routes/uk-naturalization-after-settlement/variants/ordinary/eligibility',
+              '/routes/uk-naturalization-after-settlement/variants/ordinary/timeline',
+            ]),
+          },
+          {
+            id: 'spouse_of_british_citizen',
+            label: 'Spouse or civil partner of a British citizen',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'partner.british_citizenship', operator: 'eq', value: true },
+              { field: 'residence.lawful_months', operator: 'gte', value: 36, unit: 'months' },
+              { field: 'residence.settled_status', operator: 'eq', value: true },
+            ],
+            milestones: [
+              { status: 'qualifying_residence', minimum_months: 36 },
+              { status: 'settled_status', minimum_months: 0 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 36,
+              processing_typical_months: 6,
+              confidence: 'high',
+              note: 'No additional 12-month wait after settlement applies to this variant.',
+            },
+            source_refs: refs([naturalization], [
+              '/routes/uk-naturalization-after-settlement/variants/spouse_of_british_citizen/eligibility',
+            ]),
+          },
+        ],
+      },
+      {
+        id: 'uk-citizenship-by-birth',
+        mode: 'birth',
+        status: 'active',
+        title: 'Citizenship by birth in the UK',
+        summary: 'For births from 1983, a child is normally automatically British when a parent is British or settled at the time of birth.',
+        effective: { from: '1983-01-01', to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [{
+          id: 'british_or_settled_parent',
+          label: 'British or settled parent',
+          outcome: 'citizenship',
+          allocation: 'right',
+          eligibility: [
+            { field: 'birth.jurisdiction', operator: 'eq', value: '826' },
+            { field: 'parent.british_or_settled_at_birth', operator: 'eq', value: true },
+          ],
+          milestones: [{ status: 'citizenship_at_birth', minimum_months: 0 }],
+          timeline: { eligibility_minimum_months: 0, processing_typical_months: null, confidence: 'high' },
+          source_refs: refs([birth], [
+            '/routes/uk-citizenship-by-birth/summary',
+            '/routes/uk-citizenship-by-birth/variants/british_or_settled_parent/eligibility',
+          ]),
+        }],
       },
     ],
   });
@@ -1318,8 +1984,11 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
   const countrySources = jurisdictionSources();
   const jurisdictions = [
     franceRecord(shadow, countrySources),
+    germanyRecord(shadow, countrySources),
+    irelandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),
+    unitedKingdomRecord(shadow, countrySources),
   ];
   const manualSources = arrangementSources(shadow);
   const sourcesById = new Map<string, SourceRecord>();
