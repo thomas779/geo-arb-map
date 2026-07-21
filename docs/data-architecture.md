@@ -12,37 +12,30 @@ share one document:
 These should be authored separately and compiled together. The UI taxonomy
 should be derived from what a route does, not from which source file contains it.
 
-## Proposed source layout
+## Current source model
 
 ```text
-data/
-  jurisdictions/
-    250-france.json
-    170-colombia.json
-    ...
-  arrangements/
-    eu-eea.json
-    daft.json
-    tn-usmca.json
-    ...
-  research/
-    inbox/
-    reviewed/
-  registry.json
-public/
-  jurisdiction-index.json    # generated compact country summaries
-  arrangement-index.json     # generated compact regional/bilateral list
-  edges.json                 # generated pathfinding graph
-  coverage.json              # generated research-state matrix
+monitor D1            untrusted discovery signals
+        ↓ human evidence review
+data D1               immutable canonical revisions + SQL projections
+        ↓ deterministic release compiler
+release assets        catalog, country details, arrangements, coverage, graph
+        ↓ Worker static assets
+public Atlas          no per-click D1 request
 ```
 
-`public/` remains generated and optimized for the browser. It should never be
-the place where a legal fact is edited by hand.
+Canonical JSON payloads are stored inside immutable D1 revisions. Normalized
+projection tables make coverage, source, route, arrangement, and release
+queries efficient without splitting every legal clause across SQL columns.
+Public JSON remains generated and optimized for the browser. It is never the
+place where a legal fact is edited by hand.
 
-## Jurisdiction files
+## Jurisdiction records
 
-One file per nationality law keeps a country's internal rules together and
-makes review ownership clear.
+One canonical revision per nationality law keeps a country's internal rules
+together and makes review ownership clear. The release compiler may serialize
+that revision as one country file for cacheable delivery; that file is output,
+not authoring state.
 
 ```json
 {

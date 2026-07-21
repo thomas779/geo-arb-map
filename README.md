@@ -122,8 +122,9 @@ The public site is deployed to [atlas.thomphreys.com](https://atlas.thomphreys.c
 as a Cloudflare Worker with static assets. Cloudflare is the sole production
 host:
 
-For implementation continuation context, see
-[`docs/continuation-handoff.md`](docs/continuation-handoff.md).
+For current implementation authority and document status, start with
+[`docs/README.md`](docs/README.md). The active data roadmap is
+[`docs/data-migration-plan.md`](docs/data-migration-plan.md).
 
 ```sh
 bun run deploy:web
@@ -142,25 +143,12 @@ data/             canonical schemas, D1 migrations, legacy inputs, research batc
 scripts/          deterministic data compiler, migration, parity, and deployment tools
 monitor/          source collectors, bounded triage, and review-lead drafts
 tests/            dataset invariant + regression suite
-docs/             explorer-spec.md — locked design for the strategy explorer
+docs/             indexed product, data, and operational documentation
 ```
 
-Product and launch documents:
-
-- [`docs/strategic-map.md`](docs/strategic-map.md) — long-term Flag Theory map,
-  expansion gates, and progressive identity decision.
-- [`docs/gtm-v1.md`](docs/gtm-v1.md) — v1 positioning, launch phases, metrics, and
-  release checklist.
-- [`docs/community-strategy.md`](docs/community-strategy.md) — small founding-community
-  pilot around real routes and reviewed knowledge.
-- [`docs/monitoring-architecture.md`](docs/monitoring-architecture.md) — source
-  monitoring, reviewed changes, account-backed watches, and alert delivery.
-- [`docs/monitoring-pipeline-v0.md`](docs/monitoring-pipeline-v0.md) — the
-  implemented, review-first source monitor and its activation gate.
-- [`docs/data-architecture.md`](docs/data-architecture.md) — country nationality-law
-  files, cross-border arrangements, generated indexes, and source policy.
-- [`docs/explorer-spec.md`](docs/explorer-spec.md) — engine and explorer design
-  decisions.
+The authoritative documentation map is [`docs/README.md`](docs/README.md). It
+separates current roadmaps, durable references, operational runbooks, and
+archived context so an old handoff cannot silently become the plan.
 
 ## License
 

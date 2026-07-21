@@ -203,6 +203,10 @@ consumer while parity tests prove no unrelated record changed.
 - [x] Compile catalog, country details, arrangements, graph, API release rows,
   coverage, route timelines, arrangement projections, and release changelog
   from the selected database revisions.
+- [x] Add versioned per-mode jurisdiction coverage with explicit `unknown`,
+  `present`, and evidence-backed `verified_none` findings. Project all four
+  acquisition modes through SQL and preserve version-1 pilot revisions as
+  superseded history.
 - [x] Fail CI on parity drift or an unsupported source field. The compiler
   exits non-zero on any failed gate (ownership, projection round-trip,
   citizenship round-trip, graph parity, remainder byte parity, selected
@@ -227,8 +231,9 @@ consumer while parity tests prove no unrelated record changed.
 - [x] Create a private R2 backup bucket, configure 90-day daily and two-year
   monthly retention, and prove that a downloaded real export reproduces release
   `d87a3807edbbebac` with every build gate passing.
-- [ ] Activate the daily GitHub backup workflow by setting its least-privilege
-  Cloudflare API-token secret, then confirm its first scheduled run.
+- [x] Activate the GitHub backup workflow with a least-privilege Cloudflare API
+  token and confirm a successful manual run. Confirm the first scheduled run as
+  an ongoing operational check.
 - [ ] Complete the human review checklist for the 21 draft revisions. In
   particular, Spain is still explicitly unchecked and the France, Portugal,
   EU/EEA, Mercosur, and Spain lane records still declare partial coverage.
@@ -269,3 +274,36 @@ Migrate in small batches. Start with the pilot, then countries with reviewed
 route-level data, then high-value arrangements, and finally unchecked coverage
 rows. Never combine a storage cutover with a UI redesign or monitoring-policy
 change in the same release.
+
+## Country review priority
+
+Country review order is a product queue, not a legal classification. Do not put
+labels such as “attractive” into canonical records. Keep the underlying signals
+separate so the queue can be changed without rewriting facts:
+
+- observed Atlas inspections and search demand;
+- destination and origin relevance to the launch audience;
+- number of currently known routes and cross-border arrangements;
+- quality and monitorability of primary official sources;
+- expected change frequency and materiality; and
+- review effort and language coverage.
+
+Sanctions, conflict, or access constraints may lower operational priority, but
+they do not mean a country is permanently excluded. African, Caribbean, Asian,
+and Latin American jurisdictions with strong mobility, ancestry, birth, or
+investment relevance remain eligible for early batches.
+
+Initial research batches:
+
+1. **Core destinations:** United States, Canada, United Kingdom, Ireland,
+   Australia, New Zealand, Germany, France, Portugal, Spain, Italy, Netherlands,
+   Switzerland, and Singapore.
+2. **High-leverage route countries:** Argentina, Brazil, Mexico, Colombia,
+   Uruguay, Paraguay, Chile, Malta, Greece, Cyprus, Turkey, Israel, Poland, and
+   Hungary.
+3. **Demand expansion:** use privacy-safe Atlas inspection counts and correction
+   requests to choose subsequent batches rather than relying on intuition.
+
+Each jurisdiction is reviewed across ancestry, naturalization, birth, and
+investment. A mode with no qualifying route must be stored as a reviewed
+negative with evidence; it must never be inferred from an empty route array.

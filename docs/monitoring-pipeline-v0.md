@@ -2,8 +2,8 @@
 
 Status: implemented, safe by default (discovery lane) · Date: 2026-07-17
 
-`docs/monitoring-architecture.md` specs the account-backed v2 platform
-(Supabase, watches, delivery). This document is the v0 that ships first,
+`docs/monitoring-architecture.md` retains a deferred account-backed v2 proposal.
+This document is the v0 that ships first,
 inside this repo, reusing what already exists: GitHub issues as lead intake,
 PRs as review, the invariant suite as QA.
 
@@ -125,10 +125,10 @@ creation with either the manual `open_issues` input or a repository variable:
   cited law by hand. Spain is the natural first pick: the Ibero-American
   naturalization track is the single most load-bearing edge in the
   pathfinder graph, and BOE has a genuinely open API.
-- **Email source activation** — the Cloudflare Worker, private archive, D1
-  idempotency, sanitized repository dispatch, and GitHub event adapter are
-  implemented. Account resources, real intake aliases, secrets, retention policy,
-  and publisher subscriptions remain intentionally undeployed.
+- **Email source operation** — the Cloudflare Worker, private archive, D1
+  idempotency, sanitized repository dispatch, GitHub event adapter, domain, and
+  production deployment are configured. Publisher subscriptions and routine
+  end-to-end review of real messages remain operational work.
 - **Curated YouTube feeds** — use the official per-channel RSS feed only for
   an allowlist of agencies and country specialists. A transcript/caption step
   is required because titles alone are too weak for legal-change triage.
@@ -144,14 +144,14 @@ creation with either the manual `open_issues` input or a repository variable:
   Prove the loop produces real, useful leads before adding sources.
 - **v1**: verification-lane official APIs (Spain first), agency/newsletter
   email intake, curated YouTube transcripts, and client-side watch-diff alerts.
-- **v2**: `docs/monitoring-architecture.md` as written — Supabase accounts,
-  row-level policies, delivery — once alert subscribers exist to justify it.
+- **v2**: revisit the deferred account-backed proposal only once alert
+  subscribers exist to justify accounts, row-level policies, and delivery.
 
-## Planned Cloudflare newsletter intake
+## Cloudflare newsletter intake
 
-Cloudflare is the preferred first email transport. Its code is implemented but
-account resources are not deployed yet.
-The intended boundary is:
+Cloudflare is the email transport. The production Worker is deployed; the
+remaining activation work is subscribing publishers and exercising the boundary
+with real messages:
 
 ```text
 newsletter subscriptions

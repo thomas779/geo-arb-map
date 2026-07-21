@@ -1,5 +1,10 @@
 # Flag Paths — Monitoring and Account Architecture
 
+> **Deferred v2 context.** This account-backed proposal is not the current
+> implementation plan. Use [`monitoring-pipeline-v0.md`](monitoring-pipeline-v0.md)
+> for current operations and [`data-migration-plan.md`](data-migration-plan.md)
+> for canonical data work.
+
 Status: proposed implementation plan  
 Date: 2026-07-17  
 Goal: turn a locally watched path into a trustworthy, account-backed change alert

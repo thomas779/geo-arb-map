@@ -1,6 +1,6 @@
 # Telegram publishing v0
 
-Status: implemented, awaiting bot and channel credentials
+Status: implemented and configured for the public `@flagpaths` channel
 Purpose: turn reviewed monitoring leads into a useful public news feed without
 letting a model publish legal or tax conclusions autonomously
 
@@ -79,8 +79,8 @@ evergreen explainers as change alerts.
    Editing messages can be added later if correction tooling needs it.
 4. In GitHub, create an environment named `telegram-publication`.
 5. Add `TELEGRAM_BOT_TOKEN` as an environment secret. Never paste or commit it.
-6. Add `TELEGRAM_CHANNEL_ID` as an environment variable using the public username,
-   such as `@flagpathsbriefing`.
+6. Add `TELEGRAM_CHANNEL_ID` as an environment variable using the public username.
+   Production uses `@flagpaths`; a numeric channel ID is also valid.
 7. Configure a model for real publications using the provider-neutral variables below.
 8. Optionally configure required reviewers on the environment for a second approval
    click.

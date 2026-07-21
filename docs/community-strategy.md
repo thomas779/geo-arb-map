@@ -1,5 +1,8 @@
 # Flag Paths — Founding Community Strategy
 
+> **Deferred context.** This proposal is not part of public v1. Current product
+> scope is defined by [`gtm-v1.md`](gtm-v1.md).
+
 Status: deferred discussion-community plan
 Date: 2026-07-20
 Inputs: current product, founder handoff, and `.agents/product-marketing.md`

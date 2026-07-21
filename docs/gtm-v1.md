@@ -205,11 +205,12 @@ locally first, then offer optional save and sync.
 
 ## Immediate build order
 
-1. Finish the public trust surface: methodology, privacy, limitations, correction, and
-   feedback links.
-2. Complete the reviewed-change → website → Telegram publication loop.
-3. Add privacy-safe atlas and Telegram-conversion analytics.
-4. Run the controlled alpha and fix the dominant exploration failure.
-5. Publish reviewed country updates consistently enough to create a return loop.
+1. Establish D1 as the reviewed authoring source and compile immutable public
+   release assets from it.
+2. Fill the most useful country coverage in evidence-backed review batches so
+   the Atlas has a credible baseline.
+3. Complete the reviewed-change → website → Telegram publication loop.
+4. Add privacy-safe atlas and Telegram-conversion analytics.
+5. Run the controlled alpha and fix the dominant exploration failure.
 6. Revisit profiles, account sync, and personalized planning only after the atlas and
    monitoring loop show demand.

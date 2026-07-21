@@ -1,5 +1,9 @@
 # Continuation handoff
 
+> **Archived snapshot.** This document is retained for historical context and
+> is not current implementation authority. Start with [`README.md`](README.md)
+> and [`data-migration-plan.md`](data-migration-plan.md).
+
 Updated: 2026-07-19
 Branch: `main`
 Repository: `/Users/thomashumphreys/ghq/github.com/thomas779/geo-arb-map`
