@@ -256,8 +256,8 @@ export function GlobeRouteField({ className, regionIsos = [] }: Props) {
         .text(destination => destination.label);
 
       const started = performance.now();
-      // Earth's 23.4° axial tilt keeps the globe from reading like a flat carousel.
-      const baseRotation: [number, number, number] = [20, -14, -23.4];
+      // Keep north upright so the geography reads immediately as an atlas.
+      const baseRotation: [number, number, number] = [20, -14, 0];
       let lastPaint = -Infinity;
 
       const render = (now: number) => {
@@ -338,7 +338,7 @@ export function GlobeRouteField({ className, regionIsos = [] }: Props) {
       >
         <title id="planner-globe-title">Global mobility routes</title>
         <desc id="planner-globe-description">
-          A tilted, slowly rotating globe with moving routes between prominent citizenship and mobility destinations.
+          A slowly rotating globe with moving routes between prominent citizenship and mobility destinations.
         </desc>
       </svg>
     </figure>
