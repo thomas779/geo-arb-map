@@ -14,7 +14,7 @@ let atlasFeaturesPromise: Promise<AtlasFeature[]> | null = null;
 
 function loadAtlasFeatures(): Promise<AtlasFeature[]> {
   if (!atlasFeaturesPromise) {
-    atlasFeaturesPromise = fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')
+    atlasFeaturesPromise = fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
       .then(response => {
         if (!response.ok) throw new Error(`World atlas request failed: ${response.status}`);
         return response.json();
@@ -176,7 +176,7 @@ export function GlobeRouteField({ className, regionIsos = [] }: Props) {
 
       const render = (now: number) => {
         if (cancelled) return;
-        if (!reduceMotion && now - lastPaint < 34) {
+        if (!reduceMotion && now - lastPaint < 50) {
           frame = requestAnimationFrame(render);
           return;
         }
