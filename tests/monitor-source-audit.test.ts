@@ -18,8 +18,8 @@ describe('monitoring source coverage audit', () => {
 
   test('covers the registry without maintaining a second country list', () => {
     expect(audit.summary.sovereigns).toBe(200);
-    expect(audit.summary.registry_jurisdictions).toBe(239);
-    expect(audit.jurisdictions).toHaveLength(239);
+    expect(audit.summary.registry_jurisdictions).toBe(240);
+    expect(audit.jurisdictions).toHaveLength(240);
   });
 
   test('keeps canonical monitoring references aligned with the source manifest', () => {

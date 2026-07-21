@@ -45,8 +45,17 @@ const MICRO_STATES: MicroState[] = [
   { iso: '533', name: 'Aruba',                      lon: -69.97, lat: 12.52 },
   { iso: '531', name: 'Curacao',                    lon: -68.99, lat: 12.17 },
   { iso: '534', name: 'Sint Maarten',               lon: -63.11, lat: 17.98 },
+  { iso: '535', name: 'Bonaire',                    lon: -68.26, lat: 12.20 },
   { iso: '663', name: 'Saint-Martin (France)',      lon: -62.99, lat: 18.11 },
 ];
+
+// Caribbean Netherlands is its own ISO entry for selection and country data,
+// while mobility rights inherit from the Netherlands (the country it belongs to).
+const MOBILITY_PARENT_ISO: Record<string, string> = { '535': '528' };
+
+function mobilityIso(iso: string): string {
+  return MOBILITY_PARENT_ISO[iso] ?? iso;
+}
 
 // Module-level state (init once)
 let _projection: d3.GeoProjection;
@@ -162,37 +171,47 @@ export function init(
         geometry: unknown;
       }>;
 
-      _gMap.selectAll('path')
+      const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      const countryPaths = _gMap.selectAll('path')
         .data(features)
         .join('path')
         .attr('class', 'country')
         .attr('data-iso', d => String(d.id).padStart(3, '0'))
         .attr('d', d => _path(d as unknown as d3.GeoPermissibleObjects))
-        .on('mousemove', (e, d) => {
-          const iso = String(d.id).padStart(3, '0');
-          showTooltip(e as MouseEvent, d.properties.name, iso);
-        })
-        .on('mouseleave', hideTooltip)
         .on('click', (_e, d) => {
           onSelect(String(d.id).padStart(3, '0'), d.properties.name);
         });
 
+      if (canHover) {
+        countryPaths
+          .on('mousemove', (e, d) => {
+            const iso = String(d.id).padStart(3, '0');
+            showTooltip(e as MouseEvent, d.properties.name, iso);
+          })
+          .on('mouseleave', hideTooltip);
+      }
+
       // Dot markers for micro-states: hover shows a leader line + name label
       // (plus the shared tooltip); click selects exactly like a filled country.
-      _gDots.selectAll('circle')
+      const microDots = _gDots.selectAll('circle')
         .data(MICRO_STATES)
         .join('circle')
         .attr('class', 'micro-dot')
+        .attr('data-iso', d => d.iso)
         .attr('r', 5)
-        .on('mouseenter', (_e, d) => showDotLeader(d))
-        .on('mousemove', (e, d) => {
-          showTooltip(e as MouseEvent, d.name, d.iso);
-        })
-        .on('mouseleave', () => {
-          hideTooltip();
-          _gDots.selectAll('.dot-leader').remove();
-        })
         .on('click', (_e, d) => onSelect(d.iso, d.name));
+
+      if (canHover) {
+        microDots
+          .on('mouseenter', (_e, d) => showDotLeader(d))
+          .on('mousemove', (e, d) => {
+            showTooltip(e as MouseEvent, d.name, d.iso);
+          })
+          .on('mouseleave', () => {
+            hideTooltip();
+            _gDots.selectAll('.dot-leader').remove();
+          });
+      }
 
       _isReady = true;
       resize();
@@ -370,8 +389,9 @@ function frameSelection(state: AppState, data: BlocsData): void {
 }
 
 function showTooltip(e: MouseEvent, name: string, iso: string): void {
-  const blocs = _byCountry.get(iso) ?? [];
-  const former = _formerByCountry.get(iso) ?? [];
+  const lookupIso = mobilityIso(iso);
+  const blocs = _byCountry.get(lookupIso) ?? [];
+  const former = _formerByCountry.get(lookupIso) ?? [];
   const lines = [
     ...blocs.map(b => b.name),
     ...former.map(b => `${b.name} (former member — rights honored until further notice)`),
@@ -391,13 +411,14 @@ function hideTooltip(): void {
 }
 
 function colorForIso(iso: string, state: AppState, data: BlocsData): string {
+  const lookupIso = mobilityIso(iso);
   const dark = isDarkTheme();
   if (state.lane) {
     const lane = data.bilateral_lanes.find(l => l.id === state.lane);
     if (!lane) return 'var(--map-land)';
     const laneColor = displayColor(lane.color, dark);
-    if (lane.destination.iso_n3 === iso) return laneColor;
-    if (lane.beneficiaries.some(m => m.iso_n3 === iso)) {
+    if (lane.destination.iso_n3 === lookupIso) return laneColor;
+    if (lane.beneficiaries.some(m => m.iso_n3 === lookupIso)) {
       const c = d3.color(laneColor) as d3.RGBColor | null;
       if (!c) return laneColor;
       c.opacity = 0.65;
@@ -407,7 +428,7 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   }
   if (state.blocs.length) {
     const selected = data.blocs.filter(b => state.blocs.includes(b.id));
-    const containing = selected.filter(b => b.members.some(m => m.iso_n3 === iso));
+    const containing = selected.filter(b => b.members.some(m => m.iso_n3 === lookupIso));
 
     if (containing.length >= 2) {
       // Overlap country: Lab-blend of every containing bloc's color
@@ -416,7 +437,7 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
     if (containing.length === 1) {
       const ab = containing[0];
       const blocColor = displayColor(ab.color, dark);
-      if (ab.sub_bloc?.members_iso.includes(iso)) {
+      if (ab.sub_bloc?.members_iso.includes(lookupIso)) {
         const c = d3.color(blocColor);
         return (dark ? c?.brighter(0.7) : c?.brighter(0.4))?.formatHex() ?? blocColor;
       }
@@ -425,14 +446,14 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
     // Former members only render in single-bloc focus (avoids ambiguity in compare mode)
     if (selected.length === 1) {
       const ab = selected[0];
-      if (ab.former_members?.some(m => m.iso_n3 === iso)) {
+      if (ab.former_members?.some(m => m.iso_n3 === lookupIso)) {
         const c = d3.color(displayColor(ab.color, dark));
         return (dark ? c?.darker(1.6) : c?.brighter(1.1))?.formatHex() ?? '#888';
       }
     }
     return 'var(--map-land)';
   }
-  const count = (_byCountry?.get(iso) ?? []).length;
+  const count = (_byCountry?.get(lookupIso) ?? []).length;
   if (!count) return 'var(--map-land)';
   // Count overlay gets its own ramp per theme (light needs darker blues)
   const t = Math.min((count - 1) / 3, 1);
@@ -450,8 +471,9 @@ function paintAll(state: AppState, data: BlocsData): void {
     .attr('fill', d => colorForIso(d.iso, state, data))
     .attr('stroke', d => {
       if (!state.blocs.length) return 'none';
+      const lookupIso = mobilityIso(d.iso);
       const inSelected = data.blocs.some(b =>
-        state.blocs.includes(b.id) && b.members.some(m => m.iso_n3 === d.iso));
+        state.blocs.includes(b.id) && b.members.some(m => m.iso_n3 === lookupIso));
       return inSelected ? 'var(--map-accent)' : 'none';
     });
 }

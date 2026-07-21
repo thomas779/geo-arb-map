@@ -1,10 +1,10 @@
 {
   "meta": {
     "description": "Canonical jurisdiction registry: M49-style core sovereigns + supplemental territory registry. Coverage and future graph layers span both tiers.",
-    "last_updated": "2026-07-16",
+    "last_updated": "2026-07-21",
     "counts": {
       "sovereigns": 200,
-      "territories": 37,
+      "territories": 38,
       "special": 2
     }
   },
@@ -886,6 +886,10 @@
     {
       "iso_n3": "534",
       "name": "Sint Maarten"
+    },
+    {
+      "iso_n3": "535",
+      "name": "Bonaire, Sint Eustatius and Saba"
     },
     {
       "iso_n3": "540",

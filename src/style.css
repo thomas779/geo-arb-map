@@ -46,22 +46,26 @@
   stroke: var(--map-ocean);
   stroke-width: 0.4;
   transition: fill 0.15s;
-}
-
-.country:hover {
-  stroke: var(--map-accent);
-  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
 }
 
 .micro-dot {
   cursor: pointer;
   transition: fill 0.15s;
   stroke: none;
+  vector-effect: non-scaling-stroke;
 }
 
-.micro-dot:hover {
-  stroke: var(--map-accent);
-  stroke-width: 1.5;
+@media (hover: hover) and (pointer: fine) {
+  .country:hover {
+    stroke: var(--map-accent);
+    stroke-width: 0.8;
+  }
+
+  .micro-dot:hover {
+    stroke: var(--map-accent);
+    stroke-width: 1.5;
+  }
 }
 
 #hint {
@@ -75,6 +79,10 @@
 }
 
 @media (max-width: 767px) {
+  .country {
+    stroke-width: 0.3;
+  }
+
   #hint {
     bottom: max(68px, calc(env(safe-area-inset-bottom) + 60px));
     left: 50%;

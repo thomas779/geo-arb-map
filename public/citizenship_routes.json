@@ -15,7 +15,7 @@
       "unchecked": "No route-level review has been completed for this mode."
     },
     "counts": {
-      "jurisdictions": 239,
+      "jurisdictions": 240,
       "routes": 40,
       "by_mode": {
         "ancestry": 9,
@@ -1834,6 +1834,18 @@
       "route_ids": []
     },
     {
+      "iso_n3": "535",
+      "name": "Bonaire, Sint Eustatius and Saba",
+      "type": "territory",
+      "coverage": {
+        "ancestry": "unchecked",
+        "naturalization": "unchecked",
+        "birth": "unchecked",
+        "investment": "unchecked"
+      },
+      "route_ids": []
+    },
+    {
       "iso_n3": "540",
       "name": "New Caledonia",
       "type": "territory",
@@ -3362,8 +3374,8 @@
       "last_checked": "2026-07-21",
       "sources": [
         {
-          "title": "German Nationality Act",
-          "url": "https://www.gesetze-im-internet.de/englisch_stag/englisch_stag.html"
+          "title": "German Nationality Act (Staatsangehörigkeitsgesetz)",
+          "url": "https://www.gesetze-im-internet.de/stag/"
         }
       ]
     },
@@ -3398,8 +3410,8 @@
       "last_checked": "2026-07-21",
       "sources": [
         {
-          "title": "German Nationality Act",
-          "url": "https://www.gesetze-im-internet.de/englisch_stag/englisch_stag.html"
+          "title": "German Nationality Act (Staatsangehörigkeitsgesetz)",
+          "url": "https://www.gesetze-im-internet.de/stag/"
         }
       ]
     },
@@ -3442,8 +3454,8 @@
       "last_checked": "2026-07-21",
       "sources": [
         {
-          "title": "German Nationality Act",
-          "url": "https://www.gesetze-im-internet.de/englisch_stag/englisch_stag.html"
+          "title": "German Nationality Act (Staatsangehörigkeitsgesetz)",
+          "url": "https://www.gesetze-im-internet.de/stag/"
         }
       ]
     },
