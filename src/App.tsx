@@ -19,17 +19,13 @@ import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { RouteDetailPanel } from '@/components/RouteDetailPanel';
-import { StackingView } from '@/components/StackingView';
 import { PlannerPreview } from '@/components/PlannerPreview';
 import { TrustCenter } from '@/components/TrustCenter';
 import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
-import type { EdgesFile, GraphEdge } from '@/lib/pathfinder';
 import { clearStoredProfile, LEGACY_FLAGS_KEY, PROFILE_KEY } from '@/lib/profile-storage';
 import { cn } from '@/lib/utils';
 import type { TrustSection } from './url';
-
-const PLANNER_ENABLED = import.meta.env.VITE_PLANNER_ENABLED === 'true';
 
 function initialProfile(): Profile {
   // Tooling/demo override: ?flags=372c,840p,356d&born=344&ancestors=380,616&heritage=israel_law_of_return
@@ -65,7 +61,6 @@ export default function App() {
   const [state, setState] = useState<AppState>(initialState);
   const [data, setData] = useState<BlocsData | null>(null);
   const [profile, setProfile] = useState<Profile>(initialProfile);
-  const [edges, setEdges] = useState<GraphEdge[] | null>(null);
   const [citizenshipRoutes, setCitizenshipRoutes] = useState<CitizenshipRoutesData | null>(null);
   const [infoSection, setInfoSection] = useState<TrustSection | null>(() => url.readInfo());
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
@@ -77,13 +72,6 @@ export default function App() {
     initialState.blocs.length === 0 && !initialState.lane && !initialState.country,
   );
   const { theme, setTheme } = useTheme();
-
-  const changeProfile = useCallback((next: Profile) => {
-    url.clearProfileParams();
-    const normalized = normalizeProfile(next);
-    localStorage.setItem(PROFILE_KEY, JSON.stringify(normalized));
-    setProfile(normalized);
-  }, []);
 
   const changeInfo = useCallback((section: TrustSection | null) => {
     url.setInfo(section);
@@ -113,12 +101,6 @@ export default function App() {
         }));
       })
       .catch(err => console.error('Failed to load blocs_data.json:', err));
-    if (PLANNER_ENABLED) {
-      fetch(import.meta.env.BASE_URL + 'edges.json')
-        .then(res => res.json())
-        .then((e: EdgesFile) => setEdges(e.edges))
-        .catch(err => console.error('Failed to load edges.json:', err));
-    }
     fetch(import.meta.env.BASE_URL + 'citizenship_routes.json')
       .then(res => res.json())
       .then((routes: CitizenshipRoutesData) => setCitizenshipRoutes(routes))
@@ -174,13 +156,6 @@ export default function App() {
     setDetailPanelOpen(false);
     patch({ country: null, countryName: null });
   }, [patch]);
-  const backToMapWithBloc = useCallback((blocId: string | null) => {
-    if (blocId === null) {
-      patch({ view: 'map' });
-    } else {
-      patch({ view: 'map', blocs: [blocId], lane: null, country: null, countryName: null });
-    }
-  }, [patch]);
   const inspectRouteSelection = useCallback(() => {
     setMobileList(false);
     setRoutePanelOpen(true);
@@ -210,7 +185,7 @@ export default function App() {
             <button
               key={v}
               aria-current={state.view === v ? 'page' : undefined}
-              aria-label={v === 'stacking' && !PLANNER_ENABLED ? 'Planner — coming soon' : label}
+              aria-label={v === 'stacking' ? 'Planner — coming soon' : label}
               className={
                 state.view === v
                   ? 'flex min-h-9 items-center gap-1.5 bg-secondary px-2 text-xs font-semibold text-secondary-foreground sm:min-h-0 sm:px-3 sm:py-1.5'
@@ -219,7 +194,7 @@ export default function App() {
               onClick={() => selectView(v)}
             >
               {label}
-              {v === 'stacking' && !PLANNER_ENABLED && (
+              {v === 'stacking' && (
                 <span className="hidden rounded-full border border-current/20 px-1.5 py-px font-mono text-[9px] font-semibold uppercase tracking-wide opacity-70 sm:inline">
                   Soon
                 </span>
@@ -377,19 +352,7 @@ export default function App() {
             </div>
           )}
           {data && state.view === 'stacking' && (
-            PLANNER_ENABLED ? (
-              <StackingView
-                data={data}
-                edges={edges}
-                citizenshipRoutes={citizenshipRoutes}
-                onBlocSelect={backToMapWithBloc}
-                profile={profile}
-                onProfileChange={changeProfile}
-                onOpenPrivacy={() => changeInfo('privacy')}
-              />
-            ) : (
-              <PlannerPreview onBackToAtlas={() => selectView('map')} />
-            )
+            <PlannerPreview onBackToAtlas={() => selectView('map')} />
           )}
           {data && (
             <button

@@ -98,6 +98,16 @@ function statusLabel(route: CitizenshipRoute): string {
 function factLabels(route: CitizenshipRoute): string[] {
   const facts = route.facts;
   const labels: string[] = [];
+  if (Array.isArray(facts.eligibility_months)) {
+    const months = facts.eligibility_months.filter(
+      (value): value is number => typeof value === 'number',
+    );
+    if (months.length === 1 && months[0] === 0) labels.push('eligible by status');
+    else if (months.length === 1) labels.push(`${months[0] / 12} years`);
+    else if (months.length > 1) {
+      labels.push(`${months.map(value => value / 12).join(' / ')} years`);
+    }
+  }
   if (typeof facts.ordinary_residence_years === 'number') {
     labels.push(`${facts.ordinary_residence_years} years`);
   }
@@ -152,8 +162,9 @@ function RouteCard({ route }: { route: CitizenshipRoute }) {
           </div>
         )}
         <div className="mt-3 border-t border-dashed pt-2">
-          <div className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-            Official sources
+          <div className="flex items-center justify-between gap-2 text-[10px] text-muted-foreground">
+            <span className="font-semibold uppercase tracking-wider">Official sources</span>
+            <span>Checked {route.last_checked}</span>
           </div>
           <ul className="mt-1.5 space-y-1.5">
             {route.sources.map(source => (

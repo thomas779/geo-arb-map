@@ -4,9 +4,16 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-// @ts-expect-error — plain-JS derivation script imported as the graph parity oracle.
-import { buildEdges } from '../build_edges.js';
-import type { BlocsData, BilateralLane, Bloc, Member } from '../../src/types';
+import type {
+  BlocsData,
+  BilateralLane,
+  Bloc,
+  CitizenshipAcquisitionMode,
+  CitizenshipCoverageState,
+  CitizenshipRoute,
+  CitizenshipRoutesData,
+  Member,
+} from '../../src/types';
 import {
   CANONICAL_SCHEMAS,
   type ArrangementRecord,
@@ -30,11 +37,10 @@ export const REPO_ROOT = fileURLToPath(new URL('../..', import.meta.url));
  * works against an approved D1 export after cutover.
  *
  * The compiler combines the migrated canonical entities with the read-only
- * legacy remainder, reconstructs the public shapes, derives the complete graph,
- * and runs parity gates that prove the DB round-trips every canonical-owned
- * field and that the only compatibility drift vs the live public files is the
- * sanctioned Spain Ibero-American beneficiary correction and its direct graph
- * propagation.
+ * legacy remainder, reconstructs the public shapes, and runs parity gates that
+ * prove the DB round-trips every canonical-owned field and that the only
+ * compatibility drift vs the live public files is the sanctioned Spain
+ * Ibero-American beneficiary correction.
  *
  * It never approves revisions, never publishes a release row, and never
  * overwrites `public/*.json`. It writes a draft release bundle under
@@ -47,7 +53,7 @@ const SPAIN_ADDED_BENEFICIARIES = ['188', '192', '214', '222', '320', '340', '55
 /** Canonical-owned compatibility fields that may legitimately differ from legacy. */
 export interface SanctionedDifference {
   entity_id: string;
-  kind: 'beneficiary_correction' | 'graph_propagation';
+  kind: 'beneficiary_correction';
   description: string;
 }
 
@@ -57,12 +63,6 @@ export const SANCTIONED_DIFFERENCES: readonly SanctionedDifference[] = [
     kind: 'beneficiary_correction',
     description:
       'Ibero-American beneficiary enumeration corrected against Civil Code Article 22 and the BOE community list; awaits compatibility cutover.',
-  },
-  {
-    entity_id: SPAIN_IBEROAMERICAN,
-    kind: 'graph_propagation',
-    description:
-      'The corrected beneficiary set adds Spain settlement edges for the eight new Ibero-American nationals and widens the Spain two-year naturalization conditional to include them.',
   },
 ];
 
@@ -83,15 +83,9 @@ export interface CompatibilityDiffEntry {
   after: unknown;
 }
 
-export interface GraphDiffEntry {
-  kind: 'added' | 'removed';
-  edge: Record<string, unknown>;
-}
-
 export interface CompatibilityDiff {
   mobility: CompatibilityDiffEntry[];
   citizenship_field_drift: Array<{ entity_id: string; field: string; canonical: unknown; legacy: unknown }>;
-  graph: GraphDiffEntry[];
 }
 
 export interface EntityRow {
@@ -131,7 +125,6 @@ export interface DataReleaseManifest {
     jurisdictions: number;
     arrangements: number;
     routes: number;
-    graph_edges: number;
     legacy_mobility_remainder: number;
     legacy_citizenship_remainder: number;
   };
@@ -152,11 +145,13 @@ export interface DataRelease {
   jurisdictions: JurisdictionRecord[];
   arrangements: ArrangementRecord[];
   sources: SourceRecord[];
-  graph: { meta: Record<string, unknown>; edges: unknown[] };
   api_release_rows: EntityRow[];
   compatibility: {
     mobility: BlocsData;
     citizenship: { meta: Record<string, unknown>; routes: unknown[] };
+  };
+  frontend: {
+    citizenship: CitizenshipRoutesData;
   };
   compatibility_diff: CompatibilityDiff;
   parity: {
@@ -171,6 +166,13 @@ interface Registry {
   territories: Member[];
   special: Array<{ id: string; name: string }>;
 }
+
+const ACQUISITION_MODES: CitizenshipAcquisitionMode[] = [
+  'ancestry',
+  'naturalization',
+  'birth',
+  'investment',
+];
 
 interface MigrationPilot {
   jurisdictions: string[];
@@ -196,10 +198,6 @@ interface LegacyCitizenshipRoute {
 interface LegacyCitizenship {
   meta: Record<string, unknown>;
   routes: LegacyCitizenshipRoute[];
-}
-
-interface ManualEdges {
-  edges?: Array<Record<string, unknown>>;
 }
 
 export interface LoadedCanonical {
@@ -312,6 +310,39 @@ function materializeDatabaseInput(inputPath: string): {
     databasePath,
     cleanup: () => fs.rmSync(temporaryRoot, { recursive: true, force: true }),
   };
+}
+
+/** Read the single current draft head for every entity from a DB or D1 export. */
+export function readCanonicalHeadIds(
+  dbPath: string,
+  root = REPO_ROOT,
+): Record<string, string> {
+  const absolute = path.isAbsolute(dbPath) ? dbPath : path.join(root, dbPath);
+  if (!fs.existsSync(absolute)) throw new Error(`Canonical database not found at ${absolute}`);
+  const materialized = materializeDatabaseInput(absolute);
+  const database = new Database(materialized.databasePath, { readonly: true });
+  try {
+    const rows = database.query(
+      `SELECT
+         entity.id AS entity_id,
+         entity.entity_type AS entity_type,
+         revision.id AS revision_id,
+         revision.payload_json AS payload_json,
+         revision.content_hash AS content_hash,
+         revision.review_status AS review_status,
+         revision.created_at AS created_at,
+         revision.supersedes_revision_id AS supersedes_revision_id
+       FROM canonical_revisions AS revision
+       JOIN canonical_entities AS entity ON entity.id = revision.entity_id
+       ORDER BY entity.id, revision.created_at, revision.id`,
+    ).all() as CanonicalRevisionRow[];
+    return Object.fromEntries(
+      selectRevisionHeads(rows, 'draft').map(row => [row.entity_id, row.revision_id]),
+    );
+  } finally {
+    database.close();
+    materialized.cleanup();
+  }
 }
 
 /** Open a canonical SQLite database (local mirror or D1 export) and load one revision per entity. */
@@ -714,6 +745,178 @@ function projectCompatibilityCitizenship(
   };
 }
 
+function coverageState(
+  state: JurisdictionRecord['coverage'][number]['review']['state'],
+): CitizenshipCoverageState {
+  if (state === 'reviewed') return 'reviewed';
+  if (state === 'partial') return 'partial';
+  if (state === 'pending') return 'pending';
+  return 'unchecked';
+}
+
+function canonicalRouteFacts(
+  route: JurisdictionRecord['routes'][number],
+): Record<string, unknown> {
+  const eligibilityMonths = [...new Set(route.variants
+    .map(variant => variant.timeline.eligibility_minimum_months)
+    .filter((months): months is number => months !== null))].sort((a, b) => a - b);
+  return {
+    canonical: true,
+    variant_count: route.variants.length,
+    eligibility_months: eligibilityMonths,
+    discretionary_decision: route.variants.some(
+      variant => variant.allocation === 'discretionary',
+    ),
+  };
+}
+
+function buildLegacyCountryDetails(
+  registry: Registry,
+  mobility: BlocsData,
+  citizenship: LegacyCitizenship,
+): CitizenshipRoutesData {
+  const emptyCoverage = (): Record<CitizenshipAcquisitionMode, CitizenshipCoverageState> => ({
+    ancestry: 'unchecked',
+    naturalization: 'unchecked',
+    birth: 'unchecked',
+    investment: 'unchecked',
+  });
+  const entries = [
+    ...registry.sovereigns.map(entry => ({ ...entry, type: 'sovereign' as const })),
+    ...registry.territories.map(entry => ({ ...entry, type: 'territory' as const })),
+    ...registry.special.map(entry => ({
+      iso_n3: entry.id,
+      name: entry.name,
+      type: 'special' as const,
+    })),
+  ];
+  const jurisdictions = entries.map(entry => ({
+    ...entry,
+    coverage: emptyCoverage(),
+    route_ids: [] as string[],
+  }));
+  const byIso = new Map(jurisdictions.map(entry => [entry.iso_n3, entry]));
+
+  for (const lane of mobility.bilateral_lanes) {
+    if (lane.beneficiaries.length !== 0) continue;
+    const row = byIso.get(lane.destination.iso_n3);
+    if (row) row.coverage.ancestry = 'partial';
+  }
+  for (const event of mobility.generational_events ?? []) {
+    const row = byIso.get(event.country.iso_n3);
+    if (row) row.coverage.birth = 'partial';
+  }
+  for (const route of citizenship.routes) {
+    const row = byIso.get(route.country.iso_n3);
+    if (!row) throw new Error(`Legacy citizenship route ${route.id} has no jurisdiction`);
+    row.route_ids.push(route.id);
+    row.coverage[route.mode as CitizenshipAcquisitionMode] = route.status === 'pending_verification'
+      ? 'pending'
+      : route.mode === 'investment' ? 'reviewed' : 'partial';
+  }
+
+  const routes = citizenship.routes as CitizenshipRoute[];
+  const legacyReviewDates = routes.map(route => route.last_checked).sort();
+  return {
+    meta: {
+      description:
+        'Country citizenship routes compiled from a canonical D1 release plus the read-only legacy remainder.',
+      last_updated: legacyReviewDates[legacyReviewDates.length - 1] ?? '2026-07-21',
+      acquisition_modes: {
+        ancestry: 'Citizenship through a parent, grandparent, wider descent rule, restoration, or documented heritage connection.',
+        naturalization: 'Citizenship after residence or another qualifying domestic status.',
+        birth: 'Citizenship or an accelerated route triggered by place of birth.',
+        investment: 'Direct investor citizenship; residence-by-investment is not classified as citizenship by investment.',
+      },
+      coverage_states: {
+        reviewed: 'The recorded finding has been checked against an official source.',
+        partial: 'At least one rule is recorded, but this mode is not yet exhaustive.',
+        pending: 'A credible legal basis exists but current operation is not verified.',
+        unchecked: 'No route-level review has been completed for this mode.',
+      },
+      counts: {
+        jurisdictions: jurisdictions.length,
+        routes: routes.length,
+        by_mode: Object.fromEntries(ACQUISITION_MODES.map(mode => [
+          mode,
+          routes.filter(route => route.mode === mode).length,
+        ])) as Record<CitizenshipAcquisitionMode, number>,
+        by_status: {},
+      },
+    },
+    jurisdictions: jurisdictions.sort((a, b) => a.iso_n3.localeCompare(b.iso_n3)),
+    routes,
+  };
+}
+
+function projectFrontendCitizenship(
+  loaded: LoadedCanonical,
+  registry: Registry,
+  mobility: BlocsData,
+  legacy: LegacyCitizenship,
+): CitizenshipRoutesData {
+  const frontend = buildLegacyCountryDetails(registry, mobility, legacy);
+  const sourceIndex = new Map(loaded.sources.map(source => [source.id, source]));
+  const legacyRouteIndex = new Map(legacy.routes.map(route => [route.id, route]));
+  const canonicalIsos = new Set(
+    loaded.jurisdictions.map(jurisdiction => jurisdiction.jurisdiction.iso_n3),
+  );
+  frontend.routes = frontend.routes.filter(route => !canonicalIsos.has(route.country.iso_n3));
+
+  for (const jurisdiction of loaded.jurisdictions) {
+    const iso = jurisdiction.jurisdiction.iso_n3;
+    const row = frontend.jurisdictions.find(item => item.iso_n3 === iso);
+    if (!row) throw new Error(`Canonical jurisdiction ${iso} is missing from the registry`);
+    row.name = jurisdiction.jurisdiction.name;
+    row.type = jurisdiction.jurisdiction.type;
+    row.route_ids = jurisdiction.routes.map(route => route.id);
+    row.coverage = Object.fromEntries(jurisdiction.coverage.map(item => [
+      item.mode,
+      coverageState(item.review.state),
+    ])) as Record<CitizenshipAcquisitionMode, CitizenshipCoverageState>;
+
+    for (const route of jurisdiction.routes) {
+      const legacyRoute = legacyRouteIndex.get(route.id);
+      frontend.routes.push({
+        id: route.id,
+        country: { iso_n3: iso, name: jurisdiction.jurisdiction.name },
+        mode: route.mode,
+        status: route.status,
+        title: route.title,
+        summary: route.summary,
+        // Preserve structured fields that have not yet migrated into the
+        // canonical schema, then overlay the values derived from D1. This keeps
+        // the Atlas lossless during the staged migration while D1 owns the
+        // route identity, review state, timeline, and sources.
+        facts: {
+          ...(legacyRoute?.facts ?? {}),
+          ...canonicalRouteFacts(route),
+        },
+        confidence: route.review.confidence,
+        last_checked: route.review.last_checked ?? '2026-07-21',
+        sources: canonicalRouteSources(route, sourceIndex, []),
+      });
+    }
+  }
+
+  frontend.routes.sort((a, b) =>
+    a.country.iso_n3.localeCompare(b.country.iso_n3) || a.id.localeCompare(b.id));
+  const canonicalReviewDates = loaded.sources.map(source => source.last_checked).sort();
+  frontend.meta.last_updated = canonicalReviewDates[canonicalReviewDates.length - 1]
+    ?? frontend.meta.last_updated;
+  frontend.meta.counts.routes = frontend.routes.length;
+  frontend.meta.counts.by_mode = Object.fromEntries(ACQUISITION_MODES.map(mode => [
+    mode,
+    frontend.routes.filter(route => route.mode === mode).length,
+  ])) as Record<CitizenshipAcquisitionMode, number>;
+  frontend.meta.counts.by_status = {};
+  for (const route of frontend.routes) {
+    frontend.meta.counts.by_status[route.status] =
+      (frontend.meta.counts.by_status[route.status] ?? 0) + 1;
+  }
+  return frontend;
+}
+
 function diffMobility(generated: BlocsData, source: BlocsData): CompatibilityDiffEntry[] {
   const entries: CompatibilityDiffEntry[] = [];
   entries.push(...deepDiff(source.meta, generated.meta, 'meta'));
@@ -847,19 +1050,6 @@ function citizenshipFieldDrift(
   return drift;
 }
 
-function graphDiff(generated: { edges: unknown[] }, source: { edges: unknown[] }): GraphDiffEntry[] {
-  const sourceKeys = new Set(source.edges.map(edge => JSON.stringify(edge)));
-  const generatedKeys = new Set(generated.edges.map(edge => JSON.stringify(edge)));
-  const entries: GraphDiffEntry[] = [];
-  for (const key of generatedKeys) {
-    if (!sourceKeys.has(key)) entries.push({ kind: 'added', edge: JSON.parse(key) as Record<string, unknown> });
-  }
-  for (const key of sourceKeys) {
-    if (!generatedKeys.has(key)) entries.push({ kind: 'removed', edge: JSON.parse(key) as Record<string, unknown> });
-  }
-  return entries;
-}
-
 function gateExclusiveOwnership(
   loaded: LoadedCanonical,
   sourceMobility: BlocsData,
@@ -947,30 +1137,6 @@ function gateCitizenshipRoundtrip(loaded: LoadedCanonical, sourceCitizenship: Le
         'title (canonical introduces a structural label; the legacy descriptive title is inherited)',
         'facts (canonical does not yet own structured facts; inherited until the schema grows)',
       ],
-    },
-  };
-}
-
-function gateGraphParity(
-  compatibilityMobility: BlocsData,
-  expectedMobility: BlocsData,
-  manualEdges: ManualEdges,
-  sourceEdges: { edges: unknown[] },
-): ParityGateResult {
-  const generated = buildEdges(compatibilityMobility, manualEdges) as { edges: unknown[] };
-  const expected = buildEdges(expectedMobility, manualEdges) as { edges: unknown[] };
-  const actualDiff = graphDiff(generated, sourceEdges);
-  const expectedDiff = graphDiff(expected, sourceEdges);
-  const mismatch = graphDiff(generated, expected);
-  return {
-    gate: 'graph_parity',
-    status: mismatch.length === 0 ? (actualDiff.length ? 'sanctioned' : 'pass') : 'fail',
-    detail: {
-      generated_edges: generated.edges.length,
-      public_edges: sourceEdges.edges.length,
-      expected_diff: expectedDiff,
-      actual_diff: actualDiff,
-      mismatch,
     },
   };
 }
@@ -1155,8 +1321,6 @@ export function compileDataRelease(options: CompileDataReleaseOptions = {}): Dat
 
   const sourceMobility = readJson<BlocsData>(root, 'public/blocs_data.json');
   const sourceCitizenship = readJson<LegacyCitizenship>(root, 'data/citizenship_routes.json');
-  const sourceEdges = readJson<{ edges: unknown[] }>(root, 'public/edges.json');
-  const manualEdges = readJson<ManualEdges>(root, 'data/manual_edges.json');
   const registry = readJson<Registry>(root, 'data/registry.json');
   const pilot = readJson<MigrationPilot>(root, 'data/migration-pilot.json');
   const names = registryNameMap(registry);
@@ -1167,17 +1331,19 @@ export function compileDataRelease(options: CompileDataReleaseOptions = {}): Dat
     loaded,
     sourceCitizenship,
   );
-  const generatedGraph = buildEdges(compatibilityMobility, manualEdges) as { meta: Record<string, unknown>; edges: unknown[] };
-
+  const frontendCitizenship = projectFrontendCitizenship(
+    loaded,
+    registry,
+    compatibilityMobility,
+    sourceCitizenship,
+  );
   const mobilityDiff = diffMobility(compatibilityMobility, sourceMobility);
   const citizenshipDrift = citizenshipFieldDrift(loaded, sourceCitizenship);
-  const graphDiffEntries = graphDiff(generatedGraph, sourceEdges);
 
   const gates: ParityGateResult[] = [
     gateExclusiveOwnership(loaded, sourceMobility, pilot),
     gateArrangementProjectionParity(loaded, sourceMobility, names),
     gateCitizenshipRoundtrip(loaded, sourceCitizenship),
-    gateGraphParity(compatibilityMobility, expectedMobility, manualEdges, sourceEdges),
     gateRemainderByteParity(
       loaded,
       sourceMobility,
@@ -1248,8 +1414,6 @@ export function compileDataRelease(options: CompileDataReleaseOptions = {}): Dat
     source_hashes: {
       'public/blocs_data.json': hashJson(sourceMobility),
       'data/citizenship_routes.json': hashJson(sourceCitizenship),
-      'public/edges.json': hashJson(sourceEdges),
-      'data/manual_edges.json': hashJson(manualEdges),
       'data/registry.json': hashJson(registry),
       'data/migration-pilot.json': hashJson(pilot),
     },
@@ -1259,7 +1423,6 @@ export function compileDataRelease(options: CompileDataReleaseOptions = {}): Dat
       jurisdictions: loaded.jurisdictions.length,
       arrangements: loaded.arrangements.length,
       routes: loaded.jurisdictions.reduce((n, j) => n + j.routes.length, 0),
-      graph_edges: generatedGraph.edges.length,
       legacy_mobility_remainder: legacyRemainder.mobility,
       legacy_citizenship_remainder: legacyRemainder.citizenship,
     },
@@ -1279,13 +1442,12 @@ export function compileDataRelease(options: CompileDataReleaseOptions = {}): Dat
     jurisdictions: loaded.jurisdictions,
     arrangements: loaded.arrangements,
     sources: loaded.sources,
-    graph: generatedGraph,
     api_release_rows: apiReleaseRows,
     compatibility: { mobility: compatibilityMobility, citizenship: compatibilityCitizenship },
+    frontend: { citizenship: frontendCitizenship },
     compatibility_diff: {
       mobility: mobilityDiff,
       citizenship_field_drift: citizenshipDrift,
-      graph: graphDiffEntries,
     },
     parity: {
       gates,
@@ -1380,10 +1542,10 @@ export function writeDataRelease(release: DataRelease, root = REPO_ROOT): string
     path.join(releaseRoot, 'arrangement-projections.json'),
     release.projections.arrangements,
   );
-  writeJson(path.join(releaseRoot, 'graph.json'), release.graph);
   writeJson(path.join(releaseRoot, 'api_release_rows.json'), release.api_release_rows);
   writeJson(path.join(releaseRoot, 'compatibility/blocs_data.json'), release.compatibility.mobility);
   writeJson(path.join(releaseRoot, 'compatibility/citizenship_routes.json'), release.compatibility.citizenship);
+  writeJson(path.join(releaseRoot, 'frontend/citizenship_routes.json'), release.frontend.citizenship);
   writeJson(path.join(releaseRoot, 'compatibility_diff.json'), release.compatibility_diff);
   writeJson(path.join(releaseRoot, 'parity-report.json'), release.parity);
   const baseline = loadBaselineManifest(

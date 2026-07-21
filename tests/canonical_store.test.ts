@@ -99,6 +99,32 @@ describe('canonical SQL import and projections', () => {
     fromSql.close();
   });
 
+  test('a changed import supersedes the existing head instead of forking it', () => {
+    const database = new Database(':memory:', { strict: true });
+    database.exec(migration);
+    const first = importCanonicalPilot(database, pilot);
+    const changed = structuredClone(pilot);
+    changed.sources[0].last_checked = '2026-07-21';
+    changed.jurisdictions[0].review.note = 'Supersession regression fixture.';
+    const next = buildCanonicalImportPlan(changed, first.revision_by_entity);
+    applyCanonicalMutations(database, next.mutations);
+    const ambiguous = database.query(
+      `WITH superseded AS (
+         SELECT supersedes_revision_id AS id
+         FROM canonical_revisions
+         WHERE supersedes_revision_id IS NOT NULL
+       )
+       SELECT revision.entity_id, COUNT(*) AS head_count
+       FROM canonical_revisions AS revision
+       LEFT JOIN superseded ON superseded.id = revision.id
+       WHERE superseded.id IS NULL AND revision.review_status != 'rejected'
+       GROUP BY revision.entity_id
+       HAVING COUNT(*) != 1`,
+    ).all();
+    expect(ambiguous).toEqual([]);
+    database.close();
+  });
+
   test('derives queryable route and coverage projections from SQL', () => {
     const imported = importedDatabase();
     const projections = readCanonicalProjections(

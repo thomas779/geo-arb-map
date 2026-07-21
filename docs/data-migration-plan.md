@@ -38,20 +38,22 @@ Completed:
 - immutable revisions, evidence joins, approval gates, and release membership;
 - France, Portugal, Spain, EU/EEA, Mercosur, and Spain's Ibero-American lane;
 - four-mode SQL coverage projections;
-- deterministic database import, review packet, release compiler, graph, and
-  parity gates;
+- deterministic database import, review packet, release compiler, and parity
+  gates;
+- remote mode-coverage migration, immutable supersession import, and draft
+  reproduction from a fresh D1 export;
+- Atlas country-detail cutover for the France, Portugal, and Spain pilot; the
+  planner graph is no longer shipped as a public artifact;
 - real D1 export reproduction and private R2 backup/restore rehearsal; and
 - automated D1 backup workflow.
 
 Still required:
 
-1. Apply the mode-coverage migration and superseding pilot revisions to remote
-   D1, then reproduce the draft from a fresh export.
-2. Add the first reviewed country batch through one repeatable authoring command.
-3. Approve reviewed revisions and create the first immutable release.
-4. Switch the Atlas to content-addressed release assets and delete compatibility
+1. Add the first reviewed country batch through one repeatable authoring command.
+2. Approve reviewed revisions and create the first immutable release.
+3. Switch the Atlas to content-addressed release assets and delete compatibility
    builders and inputs.
-5. Exercise the monitor with real email/RSS signals through issue draft,
+4. Exercise the monitor with real email/RSS signals through issue draft,
    evidence review, data change, release change, and Telegram preview.
 
 ## Country review order
@@ -84,7 +86,7 @@ A country batch can enter a release only when:
 - every mode has an explicit review state;
 - active routes have structured eligibility, outcome, allocation, and timeline;
 - reviewed negatives have evidence;
-- compatibility and graph changes are fully attributed;
+- compatibility changes are fully attributed;
 - the review packet is signed off by a human; and
 - the full test and production build pass.
 

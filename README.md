@@ -75,12 +75,11 @@ bun test           # dataset invariant + regression suite
 bun run build      # tsc → bun test → vite build (what CI runs)
 
 # data tooling
-bun run data:citizenship          # regenerate public/citizenship_routes.json
 bun run data:db                   # import candidates and build SQL projections locally
 bun run data:build                # compile a deterministic draft release from SQLite/D1
+bun run data:promote -- --allow-draft # promote the reviewed draft to the Atlas artifact
 bun run data:review               # render the human review packet
-bun run data:timelines            # compile reviewed fact references for browser/graph use
-bun run data:edges                # compile timelines, then regenerate public/edges.json
+bun run data:timelines            # compile reviewed fact references for future planner work
 
 # reviewed source monitoring (writes only to monitor/.out/)
 bun run monitor:collect

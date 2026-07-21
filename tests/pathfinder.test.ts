@@ -28,17 +28,10 @@ const data = (await Bun.file(
 const manual = await Bun.file(new URL('../data/manual_edges.json', import.meta.url)).json();
 const generatedEdges = buildEdges(data, manual);
 const edges: GraphEdge[] = generatedEdges.edges;
-const committedEdges = await Bun.file(
-  new URL('../public/edges.json', import.meta.url),
-).json();
 
 const profileOf = (over: Partial<Profile>): Profile => ({ ...EMPTY_PROFILE, ...over });
 const citizen = (iso: string, name = iso) =>
   profileOf({ flags: [{ iso_n3: iso, name, status: 'cit' }] });
-
-test('public/edges.json is current with its builder inputs', () => {
-  expect(committedEdges).toEqual(generatedEdges);
-});
 
 describe('explorer-spec acceptance tests', () => {
   test('(a) US citizen, no conditional facts: TN never chains into settlement', () => {

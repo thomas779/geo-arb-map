@@ -247,8 +247,6 @@ describe('data:build adversarial parity', () => {
     expect(mutated.parity.passed).toBe(false);
     expect(mutated.parity.gates.find(item => item.gate === 'arrangement_projection_parity')?.status)
       .toBe('fail');
-    expect(mutated.parity.gates.find(item => item.gate === 'graph_parity')?.status)
-      .toBe('fail');
   });
 
   test('approved heads compile without weakening parity', () => {
@@ -381,24 +379,29 @@ describe('data:build parity gates', () => {
     expect(release.compatibility.citizenship).toEqual(source);
   });
 
-  test('graph is complete and differs from public only by the sanctioned Spain propagation', () => {
-    const detail = gate('graph_parity').detail as {
-      generated_edges: number;
-      public_edges: number;
-      mismatch: unknown[];
-    };
-    expect(detail.public_edges).toBe(1953);
-    expect(detail.generated_edges).toBeGreaterThan(detail.public_edges);
-    expect(detail.mismatch).toEqual([]);
-    // Every graph diff is attributable to the Spain beneficiary correction.
-    for (const entry of release.compatibility_diff.graph) {
-      const mechanism = String((entry.edge as Record<string, unknown>).mechanism ?? '');
-      const isSpainLane = mechanism === 'spain_iberoamerican';
-      const isSpainNaturalization = mechanism === 'naturalization'
-        && (String((entry.edge as Record<string, unknown>).from).endsWith(':724')
-          || String((entry.edge as Record<string, unknown>).to).endsWith(':724'));
-      expect(isSpainLane || isSpainNaturalization).toBe(true);
-    }
+  test('frontend country details replace migrated jurisdictions with canonical records', () => {
+    const spain = release.frontend.citizenship.jurisdictions.find(
+      jurisdiction => jurisdiction.iso_n3 === '724',
+    );
+    expect(spain).toMatchObject({
+      coverage: {
+        ancestry: 'partial',
+        naturalization: 'partial',
+        birth: 'partial',
+        investment: 'unchecked',
+      },
+    });
+    expect(spain?.route_ids).toEqual([
+      'spain-citizenship-by-parent-or-option',
+      'spain-citizenship-by-birth',
+      'spain-naturalization-by-residence',
+    ]);
+    expect(release.frontend.citizenship.routes.filter(
+      route => route.country.iso_n3 === '250',
+    )).toHaveLength(3);
+    expect(release.frontend.citizenship.routes.find(
+      route => route.id === 'portugal-citizenship-by-parent',
+    )?.sources.length).toBeGreaterThan(0);
   });
 
   test('legacy remainder byte parity partitions source and pilot exactly', () => {
@@ -411,7 +414,7 @@ describe('data:build determinism and writes', () => {
     const second = compileDataRelease({ dbPath, root: REPO_ROOT });
     expect(second.manifest.release_id).toBe(release.manifest.release_id);
     expect(JSON.stringify(second.manifest)).toBe(JSON.stringify(release.manifest));
-    expect(JSON.stringify(second.graph)).toBe(JSON.stringify(release.graph));
+    expect(JSON.stringify(second.frontend)).toBe(JSON.stringify(release.frontend));
     expect(JSON.stringify(second.compatibility)).toBe(JSON.stringify(release.compatibility));
   });
 
@@ -441,9 +444,7 @@ describe('data:build determinism and writes', () => {
       // Copy legacy inputs the compiler reads from disk.
       for (const file of [
         'public/blocs_data.json',
-        'public/edges.json',
         'data/citizenship_routes.json',
-        'data/manual_edges.json',
         'data/registry.json',
         'data/migration-pilot.json',
       ]) {
@@ -464,10 +465,10 @@ describe('data:build determinism and writes', () => {
         'mode-coverage.json',
         'timelines.json',
         'arrangement-projections.json',
-        'graph.json',
         'api_release_rows.json',
         'compatibility/blocs_data.json',
         'compatibility/citizenship_routes.json',
+        'frontend/citizenship_routes.json',
         'parity-report.json',
         'changes.json',
       ]) {

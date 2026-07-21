@@ -4,7 +4,7 @@
  *
  * Reads reviewed canonical records from a persistent SQLite database (the local
  * mirror produced by `bun run data:db`, or a `wrangler d1 export` passed via
- * --db), reconstructs the public shapes, derives the complete graph, runs the
+ * --db), reconstructs the public shapes, runs the
  * parity gates, and writes a draft release bundle under
  * `.generated/data-canonical/releases/<release_id>/`.
  *
@@ -63,15 +63,11 @@ if (failed.length > 0 || !release.parity.passed) {
   process.exit(1);
 }
 
-const sanctionedGraph = release.compatibility_diff.graph.filter(d =>
-  d.kind === 'added').length;
 console.log(
   `data:build ${release.manifest.release_id} `
   + `(db: ${release.input.database_path}, mode: ${release.manifest.database.selection_mode}): `
   + `${release.manifest.counts.canonical_entities} canonical entities, `
   + `${release.manifest.counts.routes} routes, `
-  + `${release.manifest.counts.graph_edges} graph edges, `
-  + `${release.compatibility_diff.mobility.length} mobility diff(s), `
-  + `${sanctionedGraph} sanctioned graph diff(s)`,
+  + `${release.compatibility_diff.mobility.length} mobility diff(s)`,
 );
 console.log(output);

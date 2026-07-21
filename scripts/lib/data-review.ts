@@ -53,8 +53,7 @@ export function renderDataReview(release: DataRelease): string {
     `Selection mode: \`${release.manifest.database.selection_mode}\``,
     '',
     `Canonical scope: ${release.manifest.counts.canonical_entities} entities, `
-      + `${release.manifest.counts.routes} routes, `
-      + `${release.manifest.counts.graph_edges} graph edges.`,
+      + `${release.manifest.counts.routes} routes.`,
     '',
     '> This packet is evidence for human review. Generating it does not approve a',
     '> revision, publish a release, replace public JSON, or deploy the website.',
@@ -67,7 +66,7 @@ export function renderDataReview(release: DataRelease): string {
     '- [ ] Unknown values remain unknown rather than inferred.',
     '- [ ] Participant and beneficiary lists are complete in both directions.',
     '- [ ] The sanctioned Spain correction is accepted.',
-    '- [ ] No unsanctioned compatibility or graph drift is present.',
+    '- [ ] No unsanctioned compatibility drift is present.',
     '',
     '## Revision manifest',
     '',

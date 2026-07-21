@@ -407,6 +407,7 @@ function insertEvidence(
 
 export function buildCanonicalImportPlan(
   pilot: CanonicalPilot,
+  priorRevisionByEntity: Record<string, string> = {},
 ): CanonicalImportPlan {
   const createdAt = deterministicCreatedAt(pilot);
   const revisionByEntity: Record<string, string> = {};
@@ -424,12 +425,13 @@ export function buildCanonicalImportPlan(
 
   let evidenceLinks = 0;
   for (const record of records) {
-    let supersedesRevisionId: string | null = null;
+    let supersedesRevisionId: string | null = priorRevisionByEntity[record.id] ?? null;
     if (record.entity_type === 'jurisdiction') {
       supersedesRevisionId = insertRevision(
         sink,
         legacyJurisdictionRevision(record),
         createdAt,
+        supersedesRevisionId,
       );
     }
     const revisionId = insertRevision(sink, record, createdAt, supersedesRevisionId);

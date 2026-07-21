@@ -1,23 +1,22 @@
 # Strategy Explorer — Locked Design Decisions
 
-Status: **engine SHIPPED (2026-07-17): `scripts/build_edges.js` → `public/edges.json`,
-`src/lib/pathfinder.ts` (multi-source Dijkstra, needs-gating, allocation filtering),
-acceptance tests in `tests/pathfinder.test.ts` — all green. The planner's Next moves
-now uses multi-hop paths with retained-citizenship and renunciation history.
-Still open: dedicated explorer page, coverage page, money/presence lexicographic
-dimensions (currently years-only + hops tiebreak).**
+Status: **deferred with the planner. The experimental pathfinder remains covered by
+acceptance tests, but no graph artifact is shipped to the Atlas. A future planner
+should derive its graph from canonical D1 records rather than committing a second
+public data source.**
 This file records decisions locked on 2026-07-16 (from batch-3 external research review
 plus owner rulings) so the feature lands cleanly when requested. Concepts win over
 naming: where the research doc's field names differ from the repo's, the repo's win.
 
-## Data layer (already built)
+## Data layer (prototype reference)
 
 - `public/blocs_data.json` — blocs, bilateral_lanes, stacking_plays, meta.excluded,
   `pending_verification` (below-high confidence, never rendered/never in graph),
   `dual_citizenship` (per-country policies + treaty_exceptions).
 - `data/registry.json` — canonical jurisdiction registry: M49-style core sovereigns
   plus the territory and special-jurisdiction supplement.
-- `data/manual_edges.json` — hand-audited overrides. Every entry carries
+- `data/manual_edges.json` — retained prototype inputs pending migration into D1.
+  Every entry carries
   `reason_code` (`event_accelerator | treaty_exception | status_rendering_override |
   coverage_negative_seed`), sources, and date.
 - canonical D1 mode coverage — records `unknown`, `present`, and sourced
