@@ -203,6 +203,16 @@ const OFFICIAL_URLS = {
   uae_nationality_law: 'https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1',
   uae_nationality_guidance: 'https://u.ae/en/information-and-services/passports-and-traveling/emirati-nationality',
   uae_golden_visa: 'https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa',
+  argentina_citizenship_law: 'https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion',
+  argentina_investment_decree: 'https://www.argentina.gob.ar/normativa/nacional/decreto-524-2025-415710/texto',
+  brazil_constitution: 'https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm',
+  brazil_migration_law: 'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2017/lei/l13445.htm',
+  mexico_constitution: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf',
+  mexico_nationality_law: 'https://www.diputados.gob.mx/LeyesBiblio/pdf/LNac.pdf',
+  colombia_nationality_law: 'https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm',
+  colombia_visa_faq: 'https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/abece-de-visas',
+  colombia_visa_resolution: 'https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm',
+  colombia_student_visa: 'https://www.cancilleria.gov.co/node/26940',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -535,6 +545,16 @@ function jurisdictionSources(): SourceRecord[] {
       ['UAE Ministry of Justice — Nationality and Passports Law', OFFICIAL_URLS.uae_nationality_law, '784', 'en', 'primary_law', 'uae-nationality'],
       ['UAE Government — Emirati nationality', OFFICIAL_URLS.uae_nationality_guidance, '784', 'en', 'official_guidance', 'uae-nationality'],
       ['UAE Government — Golden Visa', OFFICIAL_URLS.uae_golden_visa, '784', 'en', 'official_guidance', 'uae-golden-visa'],
+      ['Argentina — current text of Citizenship Law No. 346', OFFICIAL_URLS.argentina_citizenship_law, '032', 'es', 'primary_law', 'argentina-citizenship-law'],
+      ['Argentina — Decree 524/2025 on citizenship by investment', OFFICIAL_URLS.argentina_investment_decree, '032', 'es', 'primary_law', 'argentina-citizenship-law'],
+      ['Constitution of Brazil — Article 12', OFFICIAL_URLS.brazil_constitution, '076', 'pt', 'primary_law', 'brazil-citizenship-law'],
+      ['Brazil Migration Law No. 13,445/2017', OFFICIAL_URLS.brazil_migration_law, '076', 'pt', 'primary_law', 'brazil-citizenship-law'],
+      ['Political Constitution of Mexico — Article 30', OFFICIAL_URLS.mexico_constitution, '484', 'es', 'primary_law', 'mexico-nationality-law'],
+      ['Mexico Nationality Law', OFFICIAL_URLS.mexico_nationality_law, '484', 'es', 'primary_law', 'mexico-nationality-law'],
+      ['Colombia Law 2332 of 2023 — nationality', OFFICIAL_URLS.colombia_nationality_law, '170', 'es', 'primary_law', 'colombia-nationality-law'],
+      ['Colombia Foreign Ministry — Visa FAQ', OFFICIAL_URLS.colombia_visa_faq, '170', 'es', 'official_guidance', 'colombia-nationality-law'],
+      ['Colombia Resolution 5477 of 2022', OFFICIAL_URLS.colombia_visa_resolution, '170', 'es', 'primary_law', 'colombia-nationality-law'],
+      ['Colombia Foreign Ministry — V Student Visa', OFFICIAL_URLS.colombia_student_visa, '170', 'es', 'official_guidance', 'colombia-nationality-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -1687,6 +1707,429 @@ function principalCitizenshipRoute({
       ]),
     }],
   };
+}
+
+function argentinaRecord(
+  shadow: DataShadow,
+  officialSources: SourceRecord[],
+): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.argentina_citizenship_law);
+  const investmentDecree = requireSource(
+    officialSources,
+    OFFICIAL_URLS.argentina_investment_decree,
+  );
+  const investmentId = 'argentina-relevant-investment-citizenship';
+  const investmentVariant = `${investmentId}-principal`;
+  return reviewedCountryRecord({
+    shadow,
+    iso: '032',
+    note: 'All four acquisition modes reviewed against the current Citizenship Law. The 2025 investment route is recorded as pending because the official qualifying criteria remain to be verified.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law] },
+      { mode: 'naturalization', finding: 'present', sources: [law] },
+      { mode: 'birth', finding: 'present', sources: [law] },
+      {
+        mode: 'investment',
+        finding: 'present',
+        sources: [law, investmentDecree],
+        note: 'Law 346 and Decree 524/2025 establish citizenship following a relevant investment, but no investment threshold is asserted until the Ministry of Economy criteria and operational rules are verified.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'argentina-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Argentine citizenship through a native Argentine parent',
+        summary: 'A person born abroad to a native Argentine parent may opt for Argentine citizenship under Citizenship Law No. 346.',
+        source: law,
+        eligibility: [{ field: 'parent.native_argentine', operator: 'eq', value: true }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'argentina-naturalization-after-residence',
+        mode: 'naturalization',
+        title: 'Naturalization after two years of continuous legal residence',
+        summary: 'Article 2(1) of Citizenship Law No. 346 permits an adult foreign national to request citizenship after two years of continuous legal residence immediately before applying.',
+        source: law,
+        eligibility: [
+          {
+            field: 'residence.continuous_legal_months',
+            operator: 'gte',
+            value: 24,
+            unit: 'months',
+            note: 'The current text defines continuity strictly and says the applicant must not have left Argentina during the qualifying period.',
+          },
+        ],
+        months: 24,
+        allocation: 'discretionary',
+      }),
+      principalCitizenshipRoute({
+        id: 'argentina-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Argentine citizenship by territorial birth',
+        summary: 'A person born in Argentine territory is generally an Argentine citizen at birth, subject to the statutory exception for children of foreign ministers and diplomatic-legation members residing in Argentina.',
+        source: law,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '032' },
+          { field: 'parent.foreign_diplomatic_exception', operator: 'neq', value: true },
+        ],
+        months: 0,
+      }),
+      {
+        id: investmentId,
+        mode: 'investment',
+        status: 'pending_verification',
+        title: 'Citizenship following a relevant investment',
+        summary: 'The current law permits a foreign national to request citizenship, regardless of residence duration, after making an investment that qualifies as relevant under criteria established by the Ministry of Economy.',
+        effective: { from: '2025-05-29', to: null, supersedes: [] },
+        review: {
+          state: 'pending',
+          confidence: 'high',
+          last_checked: '2026-07-21',
+          note: 'The statutory route and procedure exist, but the qualifying investment criteria and practical availability still require official verification.',
+        },
+        variants: [{
+          id: investmentVariant,
+          label: 'Relevant investment route',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [{
+            field: 'investment.relevant_under_ministry_criteria',
+            operator: 'eq',
+            value: true,
+            note: 'No monetary threshold is asserted in this record.',
+          }],
+          milestones: [
+            { status: 'relevant_investment', minimum_months: null },
+            { status: 'citizenship_application', minimum_months: 0 },
+          ],
+          timeline: {
+            eligibility_minimum_months: null,
+            processing_typical_months: null,
+            confidence: 'low',
+            note: 'Decree 524/2025 provides a review process but no verified investment threshold or reliable public operating timeline.',
+          },
+          source_refs: refs([law, investmentDecree], [
+            `/routes/${investmentId}/summary`,
+            `/routes/${investmentId}/variants/${investmentVariant}/eligibility`,
+            `/routes/${investmentId}/variants/${investmentVariant}/timeline`,
+          ]),
+        }],
+      },
+    ],
+  });
+}
+
+function brazilRecord(
+  shadow: DataShadow,
+  officialSources: SourceRecord[],
+): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.brazil_constitution);
+  const migrationLaw = requireSource(officialSources, OFFICIAL_URLS.brazil_migration_law);
+  const naturalizationId = 'brazil-naturalization-by-residence';
+  return reviewedCountryRecord({
+    shadow,
+    iso: '076',
+    note: 'All acquisition modes reviewed against Article 12 of the Constitution and the current Migration Law; investor residence is not classified as direct citizenship.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, migrationLaw] },
+      { mode: 'birth', finding: 'present', sources: [constitution] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, migrationLaw],
+        note: 'The official nationality grounds contain no direct citizenship-by-investment route. Investment residence remains subject to a separate naturalization process.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'brazil-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Brazilian citizenship through a Brazilian parent',
+        summary: 'A child born abroad to a Brazilian parent can acquire Brazilian nationality through the constitutional service, consular-registration, or later residence-and-option rules.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '076' }],
+        months: 0,
+      }),
+      {
+        id: naturalizationId,
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Brazilian naturalization after residence',
+        summary: 'Ordinary naturalization generally requires four years of residence; the Constitution provides a one-year route for people originating from Portuguese-speaking countries who also satisfy the applicable conditions.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'ordinary_four_years',
+            label: 'Ordinary four-year residence route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [{ field: 'residence.lawful_months', operator: 'gte', value: 48, unit: 'months' }],
+            milestones: [{ status: 'lawful_residence', minimum_months: 48 }],
+            timeline: { eligibility_minimum_months: 48, processing_typical_months: null, confidence: 'high', note: 'Capacity, Portuguese-language ability and absence of a disqualifying criminal conviction also apply.' },
+            source_refs: refs([migrationLaw], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/ordinary_four_years/eligibility`,
+              `/routes/${naturalizationId}/variants/ordinary_four_years/timeline`,
+            ]),
+          },
+          {
+            id: 'portuguese_speaking_country',
+            label: 'One-year route for an origin country with Portuguese as an official language',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'origin.portuguese_official_language', operator: 'eq', value: true },
+              { field: 'residence.continuous_months', operator: 'gte', value: 12, unit: 'months' },
+            ],
+            milestones: [{ status: 'continuous_residence', minimum_months: 12 }],
+            timeline: { eligibility_minimum_months: 12, processing_typical_months: null, confidence: 'high', note: 'Article 12 also requires good moral character.' },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/portuguese_speaking_country/eligibility`,
+              `/routes/${naturalizationId}/variants/portuguese_speaking_country/timeline`,
+            ]),
+          },
+        ],
+      },
+      principalCitizenshipRoute({
+        id: 'brazil-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Brazilian citizenship by territorial birth',
+        summary: 'A person born in Brazil is generally Brazilian at birth, including a child of foreign parents, unless the parents are serving their country.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '076' },
+          { field: 'parent.serving_foreign_country', operator: 'neq', value: true },
+        ],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function mexicoRecord(
+  shadow: DataShadow,
+  officialSources: SourceRecord[],
+): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.mexico_constitution);
+  const nationalityLaw = requireSource(officialSources, OFFICIAL_URLS.mexico_nationality_law);
+  const naturalizationId = 'mexico-naturalization-by-residence';
+  return reviewedCountryRecord({
+    shadow,
+    iso: '484',
+    note: 'All acquisition modes reviewed against Article 30 of the Constitution and the current Nationality Law.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [nationalityLaw] },
+      { mode: 'birth', finding: 'present', sources: [constitution] },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, nationalityLaw],
+        note: 'The official acquisition grounds contain no direct citizenship-by-investment route; residence obtained through economic activity does not bypass naturalization.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'mexico-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Mexican nationality through a Mexican parent',
+        summary: 'Article 30 treats a person born abroad to a Mexican mother or father as Mexican by birth under the constitutional parentage rules.',
+        source: constitution,
+        eligibility: [{ field: 'parent.nationality.iso_n3', operator: 'eq', value: '484' }],
+        months: 0,
+      }),
+      {
+        id: naturalizationId,
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Mexican naturalization after residence',
+        summary: 'The ordinary route requires five years of residence; Article 20 reduces the period to two years for a person originating from a Latin American country or the Iberian Peninsula.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'ordinary_five_years',
+            label: 'Ordinary five-year residence route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [{ field: 'residence.in_mexico_months', operator: 'gte', value: 60, unit: 'months' }],
+            milestones: [{ status: 'residence_in_mexico', minimum_months: 60 }],
+            timeline: { eligibility_minimum_months: 60, processing_typical_months: null, confidence: 'high' },
+            source_refs: refs([nationalityLaw], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/ordinary_five_years/eligibility`,
+              `/routes/${naturalizationId}/variants/ordinary_five_years/timeline`,
+            ]),
+          },
+          {
+            id: 'latin_american_or_iberian_origin',
+            label: 'Two-year route for Latin American or Iberian Peninsula origin',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'origin.region', operator: 'in', value: ['latin_america', 'iberian_peninsula'] },
+              { field: 'residence.in_mexico_months', operator: 'gte', value: 24, unit: 'months' },
+            ],
+            milestones: [{ status: 'residence_in_mexico', minimum_months: 24 }],
+            timeline: { eligibility_minimum_months: 24, processing_typical_months: null, confidence: 'high' },
+            source_refs: refs([nationalityLaw], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/latin_american_or_iberian_origin/eligibility`,
+              `/routes/${naturalizationId}/variants/latin_american_or_iberian_origin/timeline`,
+            ]),
+          },
+        ],
+      },
+      principalCitizenshipRoute({
+        id: 'mexico-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Mexican nationality by territorial birth',
+        summary: 'A person born in Mexican territory is Mexican by birth regardless of the parents’ nationality; the Constitution also covers births aboard qualifying Mexican vessels and aircraft.',
+        source: constitution,
+        eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '484' }],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function colombiaRecord(
+  shadow: DataShadow,
+  officialSources: SourceRecord[],
+): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.colombia_nationality_law);
+  const visaFaq = requireSource(officialSources, OFFICIAL_URLS.colombia_visa_faq);
+  const visaResolution = requireSource(officialSources, OFFICIAL_URLS.colombia_visa_resolution);
+  const studentVisa = requireSource(officialSources, OFFICIAL_URLS.colombia_student_visa);
+  const naturalizationId = 'colombia-naturalization-by-residence';
+  const legacyId = 'colombia-study-permanent-residence-credit';
+  const legacyVariant = `${legacyId}-principal`;
+  const legacySummary = "Colombia's current student route is a Visitor (V) visa. The Foreign Ministry states that study time does not count toward a Resident (R) visa by accumulated time; article 90 lists qualifying Migrant (M) categories and does not include the V student visa.";
+  return reviewedCountryRecord({
+    shadow,
+    iso: '170',
+    note: 'All acquisition modes reviewed against Law 2332 of 2023. Conditional territorial birth and the distinction between student status, permanent residence and naturalization are preserved.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law] },
+      { mode: 'naturalization', finding: 'present', sources: [law, visaFaq, visaResolution, studentVisa] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [law],
+        note: 'Birth in Colombia is conditional: a Colombian parent or a foreign parent domiciled in Colombia at the time of birth qualifies, with a separate statelessness safeguard.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [law],
+        note: 'Law 2332 contains no direct citizenship-by-investment route. Any investor residence remains subject to the ordinary naturalization requirements.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'colombia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Colombian nationality through a Colombian parent',
+        summary: 'A person born abroad to a Colombian mother or father is Colombian by birth after registering at a Colombian consulate or becoming domiciled in Colombia.',
+        source: law,
+        eligibility: [
+          { field: 'parent.nationality.iso_n3', operator: 'eq', value: '170' },
+          { field: 'connection.consular_registration_or_colombian_domicile', operator: 'eq', value: true },
+        ],
+        months: 0,
+      }),
+      {
+        id: naturalizationId,
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Colombian naturalization after residence',
+        summary: 'Law 2332 generally requires five years of continuous domicile as a Resident Visa holder, reduced to two years for a qualifying Colombian spouse or permanent partner, Colombian child, or verified reciprocal treatment.',
+        effective: { from: '2023-09-25', to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        variants: [
+          {
+            id: 'ordinary_five_years',
+            label: 'Ordinary five-year Resident Visa route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'visa.resident_holder', operator: 'eq', value: true },
+              { field: 'domicile.continuous_months', operator: 'gte', value: 60, unit: 'months' },
+            ],
+            milestones: [{ status: 'resident_visa_domicile', minimum_months: 60 }],
+            timeline: { eligibility_minimum_months: 60, processing_typical_months: null, confidence: 'high', note: 'Naturalization remains a sovereign and discretionary decision.' },
+            source_refs: refs([law], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/ordinary_five_years/eligibility`,
+              `/routes/${naturalizationId}/variants/ordinary_five_years/timeline`,
+            ]),
+          },
+          {
+            id: 'reduced_two_years',
+            label: 'Two-year family or reciprocity route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'visa.resident_holder', operator: 'eq', value: true },
+              { field: 'domicile.continuous_months', operator: 'gte', value: 24, unit: 'months' },
+              { field: 'reduction.family_or_reciprocity', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'resident_visa_domicile', minimum_months: 24 }],
+            timeline: { eligibility_minimum_months: 24, processing_typical_months: null, confidence: 'high', note: 'The reduction applies to a Colombian spouse or permanent partner, Colombian children, or verified reciprocal treatment by the origin state.' },
+            source_refs: refs([law], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/reduced_two_years/eligibility`,
+              `/routes/${naturalizationId}/variants/reduced_two_years/timeline`,
+            ]),
+          },
+        ],
+      },
+      principalCitizenshipRoute({
+        id: 'colombia-citizenship-by-conditional-birth',
+        mode: 'birth',
+        title: 'Colombian nationality by conditional territorial birth',
+        summary: 'A child born in Colombia to foreign parents is Colombian by birth when at least one parent was domiciled in Colombia at the time of birth; a separate exception protects a child whom no state recognizes as a national.',
+        source: law,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '170' },
+          { field: 'parent.domiciled_in_colombia_at_birth', operator: 'eq', value: true },
+        ],
+        months: 0,
+      }),
+      {
+        id: legacyId,
+        mode: 'naturalization',
+        status: 'verified_negative',
+        title: 'Visitor student visa time does not accumulate toward permanent residence',
+        summary: legacySummary,
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-17' },
+        variants: [{
+          id: legacyVariant,
+          label: 'V student residence-credit finding',
+          outcome: 'permanent_residence',
+          allocation: 'discretionary',
+          eligibility: [{ field: 'visa.category', operator: 'eq', value: 'V_student' }],
+          milestones: [{ status: 'permanent_residence_credit', minimum_months: null }],
+          timeline: {
+            eligibility_minimum_months: null,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'The V student visa does not accumulate qualifying time toward a Resident Visa under the cited rules.',
+          },
+          source_refs: refs([visaFaq, visaResolution, studentVisa], [
+            `/routes/${legacyId}/summary`,
+            `/routes/${legacyId}/variants/${legacyVariant}/eligibility`,
+            `/routes/${legacyId}/variants/${legacyVariant}/timeline`,
+          ]),
+        }],
+      },
+    ],
+  });
 }
 
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
@@ -3576,9 +4019,12 @@ function validateReferences(pilot: CanonicalPilot, shadow: DataShadow): void {
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
   const jurisdictions = [
+    argentinaRecord(shadow, countrySources),
     australiaRecord(shadow, countrySources),
+    brazilRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
+    colombiaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
@@ -3586,6 +4032,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     irelandRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
+    mexicoRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),

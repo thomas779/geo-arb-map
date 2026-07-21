@@ -316,7 +316,7 @@ describe('citizenship route database', () => {
     const pending = citizenshipRoutes.routes.filter(route =>
       route.mode === 'investment' && route.status === 'pending_verification');
     expect(active.length).toBe(12);
-    expect(pending.map(route => route.country.iso_n3).sort()).toEqual(['116', '882']);
+    expect(pending.map(route => route.country.iso_n3).sort()).toEqual(['032', '116', '882']);
   });
 
   test('Portugal records preserve the 2026 transition and nationality-dependent periods', () => {

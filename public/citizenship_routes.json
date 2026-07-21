@@ -16,17 +16,17 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 83,
+      "routes": 96,
       "by_mode": {
-        "ancestry": 22,
-        "naturalization": 23,
-        "birth": 22,
-        "investment": 16
+        "ancestry": 26,
+        "naturalization": 27,
+        "birth": 26,
+        "investment": 17
       },
       "by_status": {
-        "active": 78,
+        "active": 90,
+        "pending_verification": 3,
         "inactive": 2,
-        "pending_verification": 2,
         "verified_negative": 1
       }
     }
@@ -147,12 +147,17 @@
       "name": "Argentina",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "partial",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "argentina-citizenship-by-parent",
+        "argentina-naturalization-after-residence",
+        "argentina-citizenship-by-birth",
+        "argentina-relevant-investment-citizenship"
+      ]
     },
     {
       "iso_n3": "036",
@@ -319,12 +324,16 @@
       "name": "Brazil",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "partial",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "brazil-citizenship-by-parent",
+        "brazil-naturalization-by-residence",
+        "brazil-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "084",
@@ -582,12 +591,15 @@
       "name": "Colombia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "partial",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
       "route_ids": [
+        "colombia-citizenship-by-parent",
+        "colombia-naturalization-by-residence",
+        "colombia-citizenship-by-conditional-birth",
         "colombia-study-permanent-residence-credit"
       ]
     },
@@ -1663,12 +1675,16 @@
       "name": "Mexico",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "partial",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "mexico-citizenship-by-parent",
+        "mexico-naturalization-by-residence",
+        "mexico-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "492",
@@ -3056,6 +3072,149 @@
       ]
     },
     {
+      "id": "argentina-citizenship-by-birth",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Argentine citizenship by territorial birth",
+      "summary": "A person born in Argentine territory is generally an Argentine citizen at birth, subject to the statutory exception for children of foreign ministers and diplomatic-legation members residing in Argentina.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "argentina-citizenship-by-birth-principal",
+          "label": "Argentine citizenship by territorial birth",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Argentina — current text of Citizenship Law No. 346",
+          "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion"
+        }
+      ]
+    },
+    {
+      "id": "argentina-citizenship-by-parent",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Argentine citizenship through a native Argentine parent",
+      "summary": "A person born abroad to a native Argentine parent may opt for Argentine citizenship under Citizenship Law No. 346.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "argentina-citizenship-by-parent-principal",
+          "label": "Argentine citizenship through a native Argentine parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Argentina — current text of Citizenship Law No. 346",
+          "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion"
+        }
+      ]
+    },
+    {
+      "id": "argentina-naturalization-after-residence",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after two years of continuous legal residence",
+      "summary": "Article 2(1) of Citizenship Law No. 346 permits an adult foreign national to request citizenship after two years of continuous legal residence immediately before applying.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "argentina-naturalization-after-residence-principal",
+          "label": "Naturalization after two years of continuous legal residence",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Argentina — current text of Citizenship Law No. 346",
+          "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion"
+        }
+      ]
+    },
+    {
+      "id": "argentina-relevant-investment-citizenship",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "mode": "investment",
+      "status": "pending_verification",
+      "title": "Citizenship following a relevant investment",
+      "summary": "The current law permits a foreign national to request citizenship, regardless of residence duration, after making an investment that qualifies as relevant under criteria established by the Ministry of Economy.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "argentina-relevant-investment-citizenship-principal",
+          "label": "Relevant investment route",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Decree 524/2025 provides a review process but no verified investment threshold or reliable public operating timeline."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Argentina — current text of Citizenship Law No. 346",
+          "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion"
+        },
+        {
+          "title": "Argentina — Decree 524/2025 on citizenship by investment",
+          "url": "https://www.argentina.gob.ar/normativa/nacional/decreto-524-2025-415710/texto"
+        }
+      ]
+    },
+    {
       "id": "australia-citizenship-by-birth",
       "country": {
         "iso_n3": "036",
@@ -3174,6 +3333,124 @@
         {
           "title": "Australian Citizenship Act 2007",
           "url": "https://www.legislation.gov.au/C2007A00020/latest/text"
+        }
+      ]
+    },
+    {
+      "id": "brazil-citizenship-by-birth",
+      "country": {
+        "iso_n3": "076",
+        "name": "Brazil"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Brazilian citizenship by territorial birth",
+      "summary": "A person born in Brazil is generally Brazilian at birth, including a child of foreign parents, unless the parents are serving their country.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "brazil-citizenship-by-birth-principal",
+          "label": "Brazilian citizenship by territorial birth",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Brazil — Article 12",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm"
+        }
+      ]
+    },
+    {
+      "id": "brazil-citizenship-by-parent",
+      "country": {
+        "iso_n3": "076",
+        "name": "Brazil"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Brazilian citizenship through a Brazilian parent",
+      "summary": "A child born abroad to a Brazilian parent can acquire Brazilian nationality through the constitutional service, consular-registration, or later residence-and-option rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "brazil-citizenship-by-parent-principal",
+          "label": "Brazilian citizenship through a Brazilian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Brazil — Article 12",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm"
+        }
+      ]
+    },
+    {
+      "id": "brazil-naturalization-by-residence",
+      "country": {
+        "iso_n3": "076",
+        "name": "Brazil"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Brazilian naturalization after residence",
+      "summary": "Ordinary naturalization generally requires four years of residence; the Constitution provides a one-year route for people originating from Portuguese-speaking countries who also satisfy the applicable conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          12,
+          48
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ordinary_four_years",
+          "label": "Ordinary four-year residence route",
+          "allocation": "discretionary",
+          "eligibility_months": 48,
+          "note": "Capacity, Portuguese-language ability and absence of a disqualifying criminal conviction also apply."
+        },
+        {
+          "id": "portuguese_speaking_country",
+          "label": "One-year route for an origin country with Portuguese as an official language",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "Article 12 also requires good moral character."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Brazil Migration Law No. 13,445/2017",
+          "url": "https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2017/lei/l13445.htm"
+        },
+        {
+          "title": "Constitution of Brazil — Article 12",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm"
         }
       ]
     },
@@ -3472,6 +3749,120 @@
       ]
     },
     {
+      "id": "colombia-citizenship-by-conditional-birth",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Colombian nationality by conditional territorial birth",
+      "summary": "A child born in Colombia to foreign parents is Colombian by birth when at least one parent was domiciled in Colombia at the time of birth; a separate exception protects a child whom no state recognizes as a national.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "colombia-citizenship-by-conditional-birth-principal",
+          "label": "Colombian nationality by conditional territorial birth",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Colombia Law 2332 of 2023 — nationality",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm"
+        }
+      ]
+    },
+    {
+      "id": "colombia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Colombian nationality through a Colombian parent",
+      "summary": "A person born abroad to a Colombian mother or father is Colombian by birth after registering at a Colombian consulate or becoming domiciled in Colombia.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "colombia-citizenship-by-parent-principal",
+          "label": "Colombian nationality through a Colombian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Colombia Law 2332 of 2023 — nationality",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm"
+        }
+      ]
+    },
+    {
+      "id": "colombia-naturalization-by-residence",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Colombian naturalization after residence",
+      "summary": "Law 2332 generally requires five years of continuous domicile as a Resident Visa holder, reduced to two years for a qualifying Colombian spouse or permanent partner, Colombian child, or verified reciprocal treatment.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          24,
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ordinary_five_years",
+          "label": "Ordinary five-year Resident Visa route",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Naturalization remains a sovereign and discretionary decision."
+        },
+        {
+          "id": "reduced_two_years",
+          "label": "Two-year family or reciprocity route",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "The reduction applies to a Colombian spouse or permanent partner, Colombian children, or verified reciprocal treatment by the origin state."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Colombia Law 2332 of 2023 — nationality",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm"
+        }
+      ]
+    },
+    {
       "id": "colombia-study-permanent-residence-credit",
       "country": {
         "iso_n3": "170",
@@ -3485,8 +3876,21 @@
         "qualifying_status": "V student",
         "target": "permanent_residence",
         "residence_credit": "none",
-        "automatic": false
+        "automatic": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "colombia-study-permanent-residence-credit-principal",
+          "label": "V student residence-credit finding",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "The V student visa does not accumulate qualifying time toward a Resident Visa under the cited rules."
+        }
+      ],
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
@@ -3495,7 +3899,7 @@
           "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/abece-de-visas"
         },
         {
-          "title": "Resolution 5477 of 2022, article 90 (as amended)",
+          "title": "Colombia Resolution 5477 of 2022",
           "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm"
         },
         {
@@ -4490,6 +4894,118 @@
         {
           "title": "Community Malta Agency — naturalisation on the basis of merit",
           "url": "https://komunita.gov.mt/wp-content/uploads/2026/02/Citizenship-by-Naturalisation-on-the-Basis-of-Merit.pdf"
+        }
+      ]
+    },
+    {
+      "id": "mexico-citizenship-by-birth",
+      "country": {
+        "iso_n3": "484",
+        "name": "Mexico"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Mexican nationality by territorial birth",
+      "summary": "A person born in Mexican territory is Mexican by birth regardless of the parents’ nationality; the Constitution also covers births aboard qualifying Mexican vessels and aircraft.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mexico-citizenship-by-birth-principal",
+          "label": "Mexican nationality by territorial birth",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Political Constitution of Mexico — Article 30",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+        }
+      ]
+    },
+    {
+      "id": "mexico-citizenship-by-parent",
+      "country": {
+        "iso_n3": "484",
+        "name": "Mexico"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Mexican nationality through a Mexican parent",
+      "summary": "Article 30 treats a person born abroad to a Mexican mother or father as Mexican by birth under the constitutional parentage rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mexico-citizenship-by-parent-principal",
+          "label": "Mexican nationality through a Mexican parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Political Constitution of Mexico — Article 30",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+        }
+      ]
+    },
+    {
+      "id": "mexico-naturalization-by-residence",
+      "country": {
+        "iso_n3": "484",
+        "name": "Mexico"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Mexican naturalization after residence",
+      "summary": "The ordinary route requires five years of residence; Article 20 reduces the period to two years for a person originating from a Latin American country or the Iberian Peninsula.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          24,
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ordinary_five_years",
+          "label": "Ordinary five-year residence route",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        },
+        {
+          "id": "latin_american_or_iberian_origin",
+          "label": "Two-year route for Latin American or Iberian Peninsula origin",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Mexico Nationality Law",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LNac.pdf"
         }
       ]
     },

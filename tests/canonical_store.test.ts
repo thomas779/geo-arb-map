@@ -141,15 +141,15 @@ describe('canonical SQL import and projections', () => {
 
     expect(projections.routes).toHaveLength(canonicalVariantCount);
     expect(projections.coverage.map(row => row.iso_n3)).toEqual([
-      '036', '100', '124', '196', '250', '276', '300', '372', '380', '470',
-      '528', '554', '620', '688', '702', '724', '756', '784', '792', '826',
-      '840', '858',
+      '032', '036', '076', '100', '124', '170', '196', '250', '276', '300',
+      '372', '380', '470', '484', '528', '554', '620', '688', '702', '724',
+      '756', '784', '792', '826', '840', '858',
     ]);
     expect(projections.coverage.find(row => row.iso_n3 === '250')).toMatchObject({
       route_count: 3,
       route_modes: ['ancestry', 'birth', 'naturalization'],
     });
-    expect(projections.mode_coverage).toHaveLength(88);
+    expect(projections.mode_coverage).toHaveLength(pilot.jurisdictions.length * 4);
     expect(projections.mode_coverage.find(row =>
       row.iso_n3 === '250' && row.mode === 'naturalization')).toMatchObject({
         finding: 'present',

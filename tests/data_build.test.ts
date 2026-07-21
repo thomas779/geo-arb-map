@@ -97,8 +97,9 @@ describe('data:build reads the canonical database', () => {
       selected_statuses: ['draft'],
       selected_release_status: null,
     });
-    expect(loaded.projections.coverage).toHaveLength(22);
-    expect(loaded.projections.mode_coverage).toHaveLength(88);
+    expect(loaded.projections.coverage).toHaveLength(buildCanonicalPilot().jurisdictions.length);
+    expect(loaded.projections.mode_coverage)
+      .toHaveLength(buildCanonicalPilot().jurisdictions.length * 4);
   });
 
   test('fails clearly when the database is missing', () => {
@@ -115,6 +116,35 @@ describe('data:build reads the canonical database', () => {
     expect(fromExport.manifest.database.content_hash)
       .toBe(release.manifest.database.content_hash);
     expect(fromExport.manifest.release_id).toBe(release.manifest.release_id);
+  });
+
+  test('stages the generated superseding import over an exported database', () => {
+    const pilot = buildCanonicalPilot();
+    const basePlan = buildCanonicalImportPlan(pilot);
+    const baseExport = path.join(tmp, 'stage-base.sql');
+    const supersedingImport = path.join(tmp, 'stage-import.sql');
+    const staged = path.join(tmp, 'stage-output.sqlite');
+    fs.writeFileSync(baseExport, `${MIGRATION}\n${renderCanonicalSql(basePlan.mutations)}`);
+    const changedPilot = structuredClone(pilot);
+    changedPilot.jurisdictions[0]!.review.note =
+      `${changedPilot.jurisdictions[0]!.review.note ?? ''} Staging regression.`;
+    fs.writeFileSync(
+      supersedingImport,
+      renderCanonicalSql(
+        buildCanonicalImportPlan(changedPilot, basePlan.revision_by_entity).mutations,
+      ),
+    );
+
+    const result = Bun.spawnSync([
+      'bun',
+      'scripts/stage_canonical_database.ts',
+      '--base', baseExport,
+      '--import', supersedingImport,
+      '--output', staged,
+    ], { cwd: REPO_ROOT, stdout: 'pipe', stderr: 'pipe' });
+    expect(result.exitCode, result.stderr.toString()).toBe(0);
+    expect(loadCanonicalDatabase(staged, REPO_ROOT).entities)
+      .toHaveLength(pilot.sources.length + pilot.jurisdictions.length + pilot.arrangements.length);
   });
 
   test('selects a single supersession head instead of every historical revision', () => {
@@ -361,13 +391,23 @@ describe('data:build parity gates', () => {
     };
     expect(detail.drift).toEqual([]);
     expect(detail.canonical_additions).toEqual([
+      'argentina-citizenship-by-birth',
+      'argentina-citizenship-by-parent',
+      'argentina-naturalization-after-residence',
+      'argentina-relevant-investment-citizenship',
       'australia-citizenship-by-birth',
       'australia-citizenship-by-conferral',
       'australia-citizenship-by-descent',
+      'brazil-citizenship-by-birth',
+      'brazil-citizenship-by-parent',
+      'brazil-naturalization-by-residence',
       'bulgaria-citizenship-by-birth-statelessness',
       'canada-citizenship-by-birth',
       'canada-citizenship-by-descent',
       'canada-citizenship-grant',
+      'colombia-citizenship-by-conditional-birth',
+      'colombia-citizenship-by-parent',
+      'colombia-naturalization-by-residence',
       'cyprus-citizenship-at-birth-by-parent',
       'cyprus-citizenship-by-origin',
       'cyprus-naturalization-by-residence',
@@ -384,6 +424,9 @@ describe('data:build parity gates', () => {
       'italy-citizenship-connected-to-birth',
       'italy-naturalization-by-residence',
       'malta-citizenship-by-birth',
+      'mexico-citizenship-by-birth',
+      'mexico-citizenship-by-parent',
+      'mexico-naturalization-by-residence',
       'netherlands-citizenship-by-parent',
       'netherlands-naturalization-by-residence',
       'netherlands-third-generation-birth',

@@ -23,9 +23,16 @@ describe('canonical data schemas', () => {
   test('keeps one jurisdiction identity and preserves existing route IDs while adding reviewed routes', () => {
     const routeIds = pilot.jurisdictions.flatMap(item => item.routes.map(route => route.id));
     expect(routeIds).toEqual([
+      'argentina-citizenship-by-parent',
+      'argentina-naturalization-after-residence',
+      'argentina-citizenship-by-birth',
+      'argentina-relevant-investment-citizenship',
       'australia-citizenship-by-descent',
       'australia-citizenship-by-conferral',
       'australia-citizenship-by-birth',
+      'brazil-citizenship-by-parent',
+      'brazil-naturalization-by-residence',
+      'brazil-citizenship-by-birth',
       'bulgaria-bulgarian-origin-naturalization',
       'bulgaria-ordinary-naturalization',
       'bulgaria-citizenship-by-birth-statelessness',
@@ -33,6 +40,10 @@ describe('canonical data schemas', () => {
       'canada-citizenship-by-descent',
       'canada-citizenship-grant',
       'canada-citizenship-by-birth',
+      'colombia-citizenship-by-parent',
+      'colombia-naturalization-by-residence',
+      'colombia-citizenship-by-conditional-birth',
+      'colombia-study-permanent-residence-credit',
       'cyprus-citizenship-by-origin',
       'cyprus-naturalization-by-residence',
       'cyprus-citizenship-at-birth-by-parent',
@@ -55,6 +66,9 @@ describe('canonical data schemas', () => {
       'malta-residence-naturalization',
       'malta-citizenship-by-birth',
       'malta-transactional-investor-citizenship-ended',
+      'mexico-citizenship-by-parent',
+      'mexico-naturalization-by-residence',
+      'mexico-citizenship-by-birth',
       'netherlands-citizenship-by-parent',
       'netherlands-naturalization-by-residence',
       'netherlands-third-generation-birth',
@@ -111,6 +125,37 @@ describe('canonical data schemas', () => {
     )!;
     expect(education.timeline.eligibility_minimum_months).toBe(24);
     expect(education.timeline.processing_typical_months).toBeNull();
+  });
+
+  test('pins the reviewed Latin American findings that are easy to misstate', () => {
+    const byIso = new Map(pilot.jurisdictions.map(item => [item.jurisdiction.iso_n3, item]));
+    const argentina = byIso.get('032')!;
+    const argentinaInvestment = argentina.routes.find(route =>
+      route.id === 'argentina-relevant-investment-citizenship')!;
+    expect(argentinaInvestment.status).toBe('pending_verification');
+    expect(argentinaInvestment.summary).not.toMatch(/USD|US\$|\$\d/);
+
+    const brazilNaturalization = byIso.get('076')!.routes.find(route =>
+      route.id === 'brazil-naturalization-by-residence')!;
+    expect(brazilNaturalization.variants.find(variant =>
+      variant.id === 'portuguese_speaking_country')?.timeline.eligibility_minimum_months).toBe(12);
+    expect(brazilNaturalization.summary).not.toContain('South American');
+
+    const mexicoNaturalization = byIso.get('484')!.routes.find(route =>
+      route.id === 'mexico-naturalization-by-residence')!;
+    expect(mexicoNaturalization.variants.find(variant =>
+      variant.id === 'latin_american_or_iberian_origin')?.eligibility).toContainEqual(
+      expect.objectContaining({ value: ['latin_america', 'iberian_peninsula'] }),
+    );
+
+    const colombiaBirth = byIso.get('170')!.routes.find(route =>
+      route.id === 'colombia-citizenship-by-conditional-birth')!;
+    expect(colombiaBirth.variants[0]?.eligibility).toContainEqual(
+      expect.objectContaining({
+        field: 'parent.domiciled_in_colombia_at_birth',
+        value: true,
+      }),
+    );
   });
 
   test('requires one explicit coverage finding for every acquisition mode', () => {
