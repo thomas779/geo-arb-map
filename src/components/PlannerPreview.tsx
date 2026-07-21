@@ -1,6 +1,6 @@
 import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { RouteField } from '@/components/RouteField';
+import { GlobeRouteField } from '@/components/GlobeRouteField';
 import type { BlocsData } from '@/types';
 
 interface Props {
@@ -26,26 +26,14 @@ const futureCapabilities = [
 const CARTOGRAPHIC_BLOCS = new Set(['eu_eea', 'mercosur', 'asean']);
 
 export function PlannerPreview({ data, onBackToAtlas }: Props) {
-  const regions = data.blocs
+  const regionIsos = data.blocs
     .filter(bloc => CARTOGRAPHIC_BLOCS.has(bloc.id))
-    .map(bloc => ({
-      id: bloc.id,
-      isos: bloc.members.map(member => member.iso_n3),
-    }));
+    .flatMap(bloc => bloc.members.map(member => member.iso_n3));
 
   return (
     <div className="planner-preview cartographic-surface absolute inset-0 overflow-x-hidden overflow-y-auto lg:overflow-y-hidden">
-      <RouteField
-        regions={regions}
-        className="pointer-events-none absolute inset-0 hidden h-full !aspect-auto lg:block"
-        cover
-      />
-      <RouteField
-        regions={regions}
-        compact
-        className="planner-preview-compact-routes pointer-events-none absolute z-0 !aspect-auto lg:hidden"
-      />
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[64%] bg-gradient-to-r from-background/95 via-background/75 to-transparent lg:block" />
+      <GlobeRouteField regionIsos={regionIsos} />
+      <div className="planner-preview-copy-shade pointer-events-none absolute inset-0 z-[1]" />
 
       <div className="planner-preview-layout relative z-10 mx-auto flex min-h-full w-full max-w-[1120px] flex-col justify-center px-4 py-10 sm:px-8 sm:py-12 lg:h-full lg:min-h-0 lg:justify-start lg:px-12 lg:py-6">
         <div className="planner-preview-hero relative lg:flex lg:min-h-0 lg:flex-1 lg:items-center">
