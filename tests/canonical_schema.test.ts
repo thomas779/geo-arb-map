@@ -257,12 +257,22 @@ describe('canonical data schemas', () => {
     const egypt = byIso.get('818')!;
     expect(egypt.routes.find(route => route.id === 'egypt-naturalization')
       ?.variants[0]?.timeline.eligibility_minimum_months).toBe(120);
+    expect(egypt.routes.find(route => route.id === 'egypt-naturalization')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'residence.consecutive_lawful_years', value: 10 }),
+      );
     expect(egypt.routes.find(route => route.id === 'egypt-investor-citizenship')
       ?.variants[0]?.allocation).toBe('discretionary');
 
     const jordan = byIso.get('400')!;
     expect(jordan.routes.find(route => route.id === 'jordan-naturalization')
       ?.variants[0]?.timeline.eligibility_minimum_months).toBe(48);
+    expect(jordan.routes.find(route => route.id === 'jordan-naturalization')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'prior_nationality.lost_or_renounced', value: true }),
+      );
+    expect(jordan.routes.find(route => route.id === 'jordan-investor-citizenship')
+      ?.summary).toMatch(/Dual nationality is routinely permitted/i);
     expect(jordan.coverage.find(item => item.mode === 'birth')?.review.note)
       .toMatch(/not general jus soli/i);
 
@@ -271,6 +281,8 @@ describe('canonical data schemas', () => {
       ?.variants[0]?.timeline.eligibility_minimum_months).toBe(84);
     expect(nauru.routes.find(route => route.id === 'nauru-climate-resilience-citizenship')
       ?.variants[0]?.allocation).toBe('discretionary');
+    expect(nauru.routes.find(route => route.id === 'nauru-climate-resilience-citizenship')
+      ?.variants[0]?.timeline.note).toMatch(/115,000|promotional/i);
 
     const saoTome = byIso.get('678')!;
     expect(saoTome.routes.find(route => route.id === 'sao-tome-naturalization')

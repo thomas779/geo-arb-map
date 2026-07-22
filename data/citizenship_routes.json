@@ -120,10 +120,10 @@
       "mode": "investment",
       "status": "active",
       "title": "Citizenship Programme",
-      "summary": "Government-administered direct citizenship programme requiring a prescribed investment or contribution and due diligence.",
+      "summary": "Government-administered direct citizenship programme requiring a prescribed investment or contribution, including the Sustainable Island State Contribution (SISC), and due diligence.",
       "facts": { "programme_type": "direct_citizenship_by_investment", "residence_required": false },
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-22",
       "sources": [
         { "title": "St. Kitts and Nevis Citizenship Unit", "url": "https://ciu.gov.kn/application-process/" }
       ]
@@ -185,7 +185,7 @@
       "mode": "investment",
       "status": "active",
       "title": "Investor citizenship criteria",
-      "summary": "Jordan's Cabinet-approved criteria provide citizenship routes through qualifying securities, productive projects, business expansion or sustained job creation. Several project routes require a multi-year compliance period, often with a temporary three-year passport before a recommendation for full citizenship.",
+      "summary": "Jordan's Cabinet-approved criteria, administered by the Ministry of Investment / Invest Jordan, provide citizenship routes through qualifying securities, productive projects, business expansion or sustained job creation. Several project routes require a multi-year compliance period, often with a temporary three-year passport before a recommendation for full citizenship. Dual nationality is routinely permitted on this economic pathway.",
       "facts": { "programme_type": "investor_citizenship", "residence_required": false, "discretionary_decision": true },
       "confidence": "high",
       "last_checked": "2026-07-22",
@@ -215,7 +215,7 @@
       "mode": "investment",
       "status": "active",
       "title": "Economic and Climate Resilience Citizenship Program",
-      "summary": "A statutory contribution programme administered by the Nauru Program Office under the 2024 Act, under which a foreign adult may acquire economic and climate resilience citizenship after a prescribed contribution and due diligence, without a residence requirement.",
+      "summary": "A statutory contribution programme administered by the Nauru Program Office under the Nauru Economic and Climate Resilience Citizenship Act 2024, under which a foreign adult may acquire economic and climate resilience citizenship after a prescribed contribution and due diligence, without a residence requirement.",
       "facts": { "programme_type": "direct_citizenship_by_contribution", "residence_required": false },
       "confidence": "high",
       "last_checked": "2026-07-22",
