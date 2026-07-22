@@ -209,7 +209,7 @@
       "jurisdictions": [
         "268"
       ],
-      "notes": "Tbilisi Expat e-Newsletter from ExpatHub.GE. User has prior mail worth replaying for intake tests. Map sender domain after first real delivery. Discovery only; many posts are forward-looking (programme openings/closings) and need official confirmation."
+      "notes": "Tbilisi Expat e-Newsletter from ExpatHub.GE. Superseded for discovery by expathub-georgia-rss: the e-News is a BirdSend-tracked aggregator digest whose links resolve to outside primary sources (matsne.gov.ge, info.parliament.ge, news) rather than expathub.ge articles, so the email intake cannot extract a canonical URL and archives it as ignored. Ingest ExpatHub via RSS; reserve email intake for publisher newsletters that link to their own articles. Kept planned only as an intake-format reference."
     },
     {
       "id": "bal-insights-rss",
