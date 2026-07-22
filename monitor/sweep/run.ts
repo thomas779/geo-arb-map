@@ -316,6 +316,7 @@ export async function runSweep(
           groundedQueries += result.searchQueries.length;
           citationsSeen += result.citations.length;
           grounded = result;
+          console.log(`  [debug] ${entry.iso_n3} chars=${result.text.length} citations=${result.citations.length} queries=${result.searchQueries.length} head=${JSON.stringify(result.text.slice(0, 200))}`);
           raw = parseJsonArray(result.text);
         }
         const normalized = normalizeFindings(raw, entry, grounded);
