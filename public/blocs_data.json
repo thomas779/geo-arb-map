@@ -71,7 +71,7 @@
       },
       {
         "name": "Commonwealth of Nations membership",
-        "reason": "Political association of mostly former British-empire states; Commonwealth citizenship alone does not confer free movement, automatic UK residence, ILR, or right of abode. Preferential UK routes that use Commonwealth status as one gate (UK Ancestry visa; some Youth Mobility partners) are modeled as bilateral/identity lanes, not as a regional bloc."
+        "reason": "No general UK settlement rights from membership alone. Live UK routes that use Commonwealth status (e.g. Ancestry, some Youth Mobility partners) are separate bilateral lanes."
       }
     ]
   },
@@ -1658,7 +1658,7 @@
       "beneficiaries_note": "Commonwealth citizens with a UK-born grandparent - descent-conditional, so beneficiary countries are not mapped",
       "beneficiaries": [],
       "grants": "5-year work visa, renewable, leads to Indefinite Leave to Remain then citizenship.",
-      "limits": "Requires a UK-born grandparent; Commonwealth citizenship alone is not enough. Being a Commonwealth citizen by itself does not create a UK settlement right.",
+      "limits": "Needs a UK-born grandparent. Commonwealth citizenship alone is not enough.",
       "leads_to_settlement": true
     },
     {
@@ -1669,15 +1669,14 @@
         "name": "Taiwan",
         "iso_n3": "158"
       },
-      "beneficiaries_note": "Foreign specialists in designated professional fields under the Act for the Recruitment and Employment of Foreign Professionals - skill-based, not nationality-mapped",
+      "beneficiaries_note": "Foreign specialists in designated fields - skill-based, not nationality-mapped",
       "beneficiaries": [],
-      "grants": "Combined open work permit + residence + multiple re-entry for up to 3 years (renewable). No employer sponsor required. Creditable path to Alien Permanent Resident Certificate (APRC) after holding Gold Card / foreign special professional status for three consecutive years with average residence ≥183 days/year (NIA / Foreign Professionals Act guidance).",
-      "limits": "Field eligibility is reviewed (architecture, digital, economy, science & tech, finance, biotech, etc.); not a passive investment 'golden visa'. APRC is permanent residence, not citizenship. Naturalization still requires the Nationality Act (generally 5 years domicile, language/civics, and loss of prior nationality within one year of permission).",
+      "grants": "Open work + residence for up to 3 years (renewable), no sponsor. Path to permanent residence after about 3 years of qualifying stay.",
+      "limits": "Field eligibility is reviewed. Permanent residence only — not citizenship, and not Cross-Strait / HK / Macau rights.",
       "leads_to_settlement": true,
       "allocation": "discretionary",
       "sources": [
         "https://goldcard.nat.gov.tw/en/",
-        "https://foreigntalentact.ndc.gov.tw/en/Content_List.aspx?n=A2224A7A67D9DEEA",
         "https://www.immigration.gov.tw/5475/5478/141465/141808/411648/cp_news"
       ]
     },
