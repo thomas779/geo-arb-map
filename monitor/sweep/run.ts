@@ -37,6 +37,7 @@ export interface Finding {
   iso_n3: string;
   jurisdiction: string;
   claim: string;
+  headline: string;
   status: Exclude<FindingStatus, 'not_found'>;
   primary_urls: string[];
   effective_date: string | null;
@@ -170,11 +171,15 @@ ${JSON.stringify({
 ${rssExcerpts.length ? `\nRecent discovery leads to check (verify independently):\n${rssExcerpts.map(text => `- ${text}`).join('\n')}` : ''}
 
 Return ONLY a JSON array (no prose, no code fences). Return [] if nothing new. Each entry:
-{"iso_n3":"${entry.iso_n3}","claim":"one factual sentence on what changed","status":"confirmed|proposed|rumour|not_found",
-"primary_urls":["https://official-source"],"effective_date":"YYYY-MM-DD or null",
-"affects_dataset":boolean,"category":"ancestry|naturalization|birth|investment|visa|residency|cbi","brief":"1-2 sentence public news brief"}
-Put ONLY official/primary URLs in primary_urls — never blogs or aggregators. Use status "confirmed" only
-when a primary source supports it.`;
+{"iso_n3":"${entry.iso_n3}","claim":"one precise, factual sentence on what changed (for the record)",
+"status":"confirmed|proposed|rumour|not_found","primary_urls":["https://official-source"],
+"effective_date":"YYYY-MM-DD or null","affects_dataset":boolean,
+"category":"ancestry|naturalization|birth|investment|visa|residency|cbi",
+"headline":"a punchy, specific 4-9 word hook — the change as it matters to a globally mobile reader",
+"brief":"1-2 tight sentences a subscriber wants to read: what changed, why it matters, and one concrete number, date, or detail"}
+Voice for headline and brief: plain, confident, and specific; lead with the change or the number; no clickbait,
+no hype, no exclamation marks, and never legal advice. Put ONLY official/primary URLs in primary_urls — never
+blogs or aggregators. Use status "confirmed" only when a primary source supports it.`;
 }
 
 // Normalize the model's raw JSON for one jurisdiction into validated findings.
@@ -207,10 +212,12 @@ export function normalizeFindings(
     const effectiveDate = typeof effectiveRaw === 'string' && /^\d{4}-\d{2}-\d{2}/.test(effectiveRaw)
       ? effectiveRaw.slice(0, 10)
       : null;
+    const headline = String(item.headline ?? claim).trim().replace(/\s+/g, ' ').slice(0, 120) || claim;
     return [{
       iso_n3: entry.iso_n3,
       jurisdiction: entry.name,
       claim,
+      headline,
       status: status as Finding['status'],
       primary_urls: primaryUrls,
       effective_date: effectiveDate,

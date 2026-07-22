@@ -19,12 +19,25 @@ import {
   type ReviewIssue,
   type TelegramPost,
 } from './telegram';
+import countries from 'i18n-iso-countries';
 import { llmConfigFromEnv } from '../llm/client';
 import type { Finding } from '../sweep/run';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TELEGRAM_MESSAGE_LIMIT = 4096;
-const DISCLAIMER = 'Information only — verify the rule for your circumstances.';
+const DISCLAIMER = 'ℹ️ Information only — verify the rule for your situation before acting.';
+
+// Country flag emoji from an ISO-3166 numeric code, for an eye-catching, scannable
+// channel. Falls back to a globe for territories/specials without a flag.
+function flagEmoji(isoN3: string): string {
+  try {
+    const alpha2 = countries.numericToAlpha2(isoN3);
+    if (!alpha2 || alpha2.length !== 2) return '🌍';
+    return String.fromCodePoint(...[...alpha2.toUpperCase()].map(c => 0x1f1e6 + c.charCodeAt(0) - 65));
+  } catch {
+    return '🌍';
+  }
+}
 
 interface NewsOptions {
   findings: string;
@@ -45,16 +58,19 @@ export function fingerprint(finding: Pick<Finding, 'iso_n3' | 'claim' | 'effecti
 export function buildNewsPost(finding: Finding): TelegramPost {
   const sources = finding.primary_urls;
   if (sources.length === 0) throw new Error('finding has no primary source URL');
-  const title = `${finding.jurisdiction}: ${finding.claim}`.slice(0, 200);
-  const lines = [title, '', finding.brief];
-  if (finding.effective_date) lines.push(`Effective: ${finding.effective_date}`);
-  lines.push(
-    '',
-    sources.length === 1 ? 'Primary source:' : 'Sources:',
-    ...sources.map(url => `• ${url}`),
-    '',
-    DISCLAIMER,
-  );
+  const headline = (finding.headline || finding.claim).slice(0, 160);
+  const meta = [
+    finding.effective_date ? `Effective ${finding.effective_date}` : null,
+    finding.category,
+  ].filter(Boolean).join(' · ');
+
+  const lines = [`${flagEmoji(finding.iso_n3)} ${finding.jurisdiction.toUpperCase()} — ${headline}`, '', finding.brief];
+  if (meta) lines.push('', `📌 ${meta}`);
+  lines.push('');
+  if (sources.length === 1) lines.push(`🔗 ${sources[0]}`);
+  else lines.push('🔗 Sources:', ...sources.map(url => `• ${url}`));
+  lines.push('', DISCLAIMER);
+
   const text = lines.join('\n');
   if (text.length > TELEGRAM_MESSAGE_LIMIT) {
     throw new Error(`News post is ${text.length} characters; maximum is ${TELEGRAM_MESSAGE_LIMIT}`);
@@ -69,6 +85,7 @@ export function synthesizeIssue(finding: Finding): ReviewIssue {
   const body = [
     '## Verified evidence',
     '',
+    finding.claim,
     finding.brief,
     finding.effective_date ? `Effective date: ${finding.effective_date}.` : '',
     ...finding.primary_urls.map(url => `- ${url}`),

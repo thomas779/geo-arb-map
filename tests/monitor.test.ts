@@ -378,7 +378,7 @@ describe('AI sweep + grounded verify', () => {
 
   test('findingToLead maps a dataset-affecting finding to a Lead with a sourced signal', () => {
     const finding: Finding = {
-      iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', status: 'confirmed',
+      iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
       primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
       category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: ['q'],
     };
@@ -436,12 +436,12 @@ describe('AI sweep + grounded verify', () => {
 
   test('buildNewsPost + fingerprint + synthesizeIssue', () => {
     const finding: Finding = {
-      iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', status: 'confirmed',
+      iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
       primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
       category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: [],
     };
     const post = buildNewsPost(finding);
-    expect(post.text).toContain('Malta: CBI closed');
+    expect(post.text).toContain('🇲🇹 MALTA — Malta ends golden passports');
     expect(post.text).toContain('https://komunita.gov.mt/x');
     expect(post.text).toContain('Information only');
     expect(() => buildNewsPost({ ...finding, primary_urls: [] })).toThrow('primary source');
