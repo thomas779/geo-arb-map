@@ -1223,6 +1223,92 @@
       ],
       "keywords": ["citizenship", "naturalisation", "naturalization", "Federal Constitution", "residence", "Malay"],
       "notes": "Federal Constitution plus Immigration Residence Pass page. JPN citizenship portal failed TLS in the collector."
+    },
+    {
+      "id": "vietnam-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html",
+      "jurisdictions": ["704"],
+      "pages": [{ "id": "nationality-law-2008", "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html" }],
+      "keywords": ["nationality", "naturalization", "citizenship", "Vietnam", "residence"],
+      "notes": "English Law on Vietnamese Nationality 2008 text."
+    },
+    {
+      "id": "cambodia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Cambodia_2008",
+      "jurisdictions": ["116"],
+      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Cambodia_2008" }],
+      "keywords": ["nationality", "citizenship", "naturalization", "Cambodia"],
+      "notes": "Constitution nationality framework."
+    },
+    {
+      "id": "kenya-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://immigration.go.ke/citizenship-section/",
+      "jurisdictions": ["404"],
+      "pages": [
+        { "id": "immigration-citizenship", "url": "https://immigration.go.ke/citizenship-section/" },
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Kenya_2010" }
+      ],
+      "keywords": ["citizenship", "registration", "naturalization", "birth", "Kenya", "seven years"],
+      "notes": "Immigration Department citizenship page plus 2010 Constitution."
+    },
+    {
+      "id": "ghana-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.mint.gov.gh/e-services-portal/naturalization-as-ghanaian-citizen/",
+      "jurisdictions": ["288"],
+      "pages": [
+        { "id": "mint-naturalization", "url": "https://www.mint.gov.gh/e-services-portal/naturalization-as-ghanaian-citizen/" },
+        { "id": "citizenship-act", "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/02/Ghana_Citizenship_Act_with_forms_591_2000.pdf" }
+      ],
+      "keywords": ["naturalization", "citizenship", "Ghana", "residence", "Citizenship Act"],
+      "notes": "Interior naturalization service page plus Citizenship Act 2000 PDF."
+    },
+    {
+      "id": "morocco-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Morocco_2011",
+      "jurisdictions": ["504"],
+      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Morocco_2011" }],
+      "keywords": ["nationality", "citizenship", "naturalization", "Morocco"],
+      "notes": "2011 Constitution nationality framework."
+    },
+    {
+      "id": "india-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme",
+      "jurisdictions": ["356"],
+      "pages": [
+        { "id": "oci-scheme", "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme" },
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/India_2016" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "OCI", "Overseas Citizen", "India"],
+      "notes": "MEA OCI scheme (not dual citizenship) plus Constitution. Dual nationality banned for full citizens."
+    },
+    {
+      "id": "samoa-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Samoa_2017",
+      "jurisdictions": ["882"],
+      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Samoa_2017" }],
+      "keywords": ["citizenship", "nationality", "naturalization", "Samoa", "residence"],
+      "notes": "Constitution citizenship framework. NZ Samoan Quota remains a separate mobility ballot."
     }
   ]
 }

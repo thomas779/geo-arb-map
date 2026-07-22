@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 197,
+      "routes": 218,
       "by_mode": {
-        "ancestry": 59,
-        "naturalization": 61,
-        "birth": 59,
+        "ancestry": 66,
+        "naturalization": 68,
+        "birth": 66,
         "investment": 18
       },
       "by_status": {
-        "active": 191,
+        "active": 212,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -468,12 +468,15 @@
       "name": "Cambodia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "pending"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
       "route_ids": [
+        "cambodia-citizenship-by-parent",
+        "cambodia-naturalization",
+        "cambodia-citizenship-at-birth-by-parent",
         "cambodia-investor-naturalization-status"
       ]
     },
@@ -1068,12 +1071,16 @@
       "name": "Ghana",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "ghana-citizenship-by-parent",
+        "ghana-naturalization",
+        "ghana-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "292",
@@ -1285,12 +1292,16 @@
       "name": "India",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "india-citizenship-by-parent",
+        "india-naturalization",
+        "india-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "360",
@@ -1454,12 +1465,16 @@
       "name": "Kenya",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "kenya-citizenship-by-parent",
+        "kenya-registration-by-residence",
+        "kenya-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "408",
@@ -1824,12 +1839,16 @@
       "name": "Morocco",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "morocco-citizenship-by-parent",
+        "morocco-naturalization",
+        "morocco-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "508",
@@ -2578,12 +2597,16 @@
       "name": "Vietnam",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "vietnam-citizenship-by-parent",
+        "vietnam-naturalization",
+        "vietnam-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "705",
@@ -3125,12 +3148,15 @@
       "name": "Samoa",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "pending"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
       "route_ids": [
+        "samoa-citizenship-by-parent",
+        "samoa-naturalization",
+        "samoa-citizenship-at-birth-by-parent",
         "samoa-citizenship-investment-status"
       ]
     },
@@ -4206,6 +4232,80 @@
       ]
     },
     {
+      "id": "cambodia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "116",
+        "name": "Cambodia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Cambodian parent",
+      "summary": "Birth to a Cambodian parent creates Cambodian nationality. Birth in Cambodia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cambodia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Cambodian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cambodia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cambodia_2008"
+        }
+      ]
+    },
+    {
+      "id": "cambodia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "116",
+        "name": "Cambodia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Cambodian nationality through a Cambodian parent",
+      "summary": "A child of a Cambodian parent is Cambodian under nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cambodia-citizenship-by-parent-principal",
+          "label": "Cambodian nationality through a Cambodian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cambodia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cambodia_2008"
+        },
+        {
+          "title": "Cambodia Law on Nationality 1996 (CIB English text)",
+          "url": "https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf"
+        }
+      ]
+    },
+    {
       "id": "cambodia-investor-naturalization-status",
       "country": {
         "iso_n3": "116",
@@ -4216,13 +4316,64 @@
       "title": "Investor and donor naturalization exists in law; current operation needs verification",
       "summary": "Cambodia's nationality law contains investment and donation provisions, but a current government-administered programme and operational requirements have not been verified for live recommendations.",
       "facts": {
-        "programme_type": "statutory_investor_naturalization"
+        "programme_type": "statutory_investor_naturalization",
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "cambodia-investor-naturalization-status-principal",
+          "label": "Investor and donor naturalization exists in law; current operation needs verification",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
       "confidence": "medium",
       "last_checked": "2026-07-17",
       "sources": [
         {
-          "title": "Cambodia Committee for Investment and Development — Law on Nationality",
+          "title": "Cambodia Law on Nationality 1996 (CIB English text)",
+          "url": "https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf"
+        }
+      ]
+    },
+    {
+      "id": "cambodia-naturalization",
+      "country": {
+        "iso_n3": "116",
+        "name": "Cambodia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after seven years residence",
+      "summary": "Foreign adults may apply after about seven years continuous legal residence, with language and character conditions. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cambodia-naturalization-principal",
+          "label": "Naturalization after seven years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cambodia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cambodia_2008"
+        },
+        {
+          "title": "Cambodia Law on Nationality 1996 (CIB English text)",
           "url": "https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf"
         }
       ]
@@ -5609,6 +5760,115 @@
       ]
     },
     {
+      "id": "ghana-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "288",
+        "name": "Ghana"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Ghanaian parent",
+      "summary": "Birth to a Ghanaian parent creates Ghanaian citizenship under the applicable constitutional date rules. Birth in Ghana alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ghana-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Ghanaian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ghana Citizenship Act 2000 (Act 591)",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/02/Ghana_Citizenship_Act_with_forms_591_2000.pdf"
+        }
+      ]
+    },
+    {
+      "id": "ghana-citizenship-by-parent",
+      "country": {
+        "iso_n3": "288",
+        "name": "Ghana"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Ghanaian citizenship through a Ghanaian parent",
+      "summary": "A child of a Ghanaian citizen parent is Ghanaian under the Citizenship Act and Constitution date rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ghana-citizenship-by-parent-principal",
+          "label": "Ghanaian citizenship through a Ghanaian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ghana Citizenship Act 2000 (Act 591)",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/02/Ghana_Citizenship_Act_with_forms_591_2000.pdf"
+        }
+      ]
+    },
+    {
+      "id": "ghana-naturalization",
+      "country": {
+        "iso_n3": "288",
+        "name": "Ghana"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Applicants need twelve months residence immediately before applying and at least five years aggregate residence in the prior seven years, plus language, character, and integration conditions. Ministerial approval with presidential assent; discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ghana-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ghana Citizenship Act 2000 (Act 591)",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/02/Ghana_Citizenship_Act_with_forms_591_2000.pdf"
+        },
+        {
+          "title": "Ghana Ministry of Interior — naturalization",
+          "url": "https://www.mint.gov.gh/e-services-portal/naturalization-as-ghanaian-citizen/"
+        }
+      ]
+    },
+    {
       "id": "greece-citizenship-birth-and-school",
       "country": {
         "iso_n3": "300",
@@ -5982,6 +6242,116 @@
         {
           "title": "Hungary Government — acquisition of Hungarian nationality",
           "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality"
+        }
+      ]
+    },
+    {
+      "id": "india-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "356",
+        "name": "India"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Indian parent",
+      "summary": "After 1987, birth in India creates citizenship only with a qualifying Indian parent (or later rules for both parents). Birth in India alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "india-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Indian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "India Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/India_2016"
+        }
+      ]
+    },
+    {
+      "id": "india-citizenship-by-parent",
+      "country": {
+        "iso_n3": "356",
+        "name": "India"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Indian citizenship through an Indian parent",
+      "summary": "A child of an Indian citizen parent may be Indian under the Citizenship Act date rules. Overseas Citizen of India (OCI) is a separate status for persons of Indian origin abroad — not dual nationality.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "india-citizenship-by-parent-principal",
+          "label": "Indian citizenship through an Indian parent",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "OCI is modeled in mobility as a diaspora status, not citizenship."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "India Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/India_2016"
+        },
+        {
+          "title": "India MEA — Overseas Citizenship of India Scheme",
+          "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme"
+        }
+      ]
+    },
+    {
+      "id": "india-naturalization",
+      "country": {
+        "iso_n3": "356",
+        "name": "India"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after long residence",
+      "summary": "Ordinary naturalization generally requires about twelve years residence (eleven of the prior fourteen plus twelve months immediately before applying), renunciation of prior nationality, and character conditions. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          144
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "india-naturalization-principal",
+          "label": "Naturalization after long residence",
+          "allocation": "discretionary",
+          "eligibility_months": 144
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "India Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/India_2016"
         }
       ]
     },
@@ -6717,6 +7087,119 @@
       ]
     },
     {
+      "id": "kenya-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Kenyan parent",
+      "summary": "Birth to a Kenyan citizen parent creates Kenyan citizenship by birth. Birth in Kenya alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kenya-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Kenyan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Kenya 2010 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kenya_2010"
+        }
+      ]
+    },
+    {
+      "id": "kenya-citizenship-by-parent",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Kenyan citizenship through a Kenyan parent",
+      "summary": "A person is a citizen by birth if a parent is a Kenyan citizen at the time of birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kenya-citizenship-by-parent-principal",
+          "label": "Kenyan citizenship through a Kenyan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Kenya 2010 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kenya_2010"
+        },
+        {
+          "title": "Kenya Immigration — Citizenship section",
+          "url": "https://immigration.go.ke/citizenship-section/"
+        }
+      ]
+    },
+    {
+      "id": "kenya-registration-by-residence",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Registration after seven years lawful residence",
+      "summary": "Adults lawfully resident for a continuous period of at least seven years may apply for registration as a citizen. Spouses of Kenyans may apply after seven years of marriage. Grant follows statutory conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "kenya-registration-by-residence-principal",
+          "label": "Registration after seven years lawful residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Kenya 2010 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kenya_2010"
+        },
+        {
+          "title": "Kenya Immigration — Citizenship section",
+          "url": "https://immigration.go.ke/citizenship-section/"
+        }
+      ]
+    },
+    {
       "id": "korea-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "410",
@@ -7369,6 +7852,111 @@
         {
           "title": "Mexico INM — permanent residence through family relationship",
           "url": "https://www.inm.gob.mx/static/Tramites/cambio_de_condicion_estancia/Residente_permanente_por_vinculo_familiar.pdf"
+        }
+      ]
+    },
+    {
+      "id": "morocco-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "504",
+        "name": "Morocco"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Moroccan parent",
+      "summary": "Birth to a Moroccan parent creates Moroccan nationality. Birth in Morocco alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "morocco-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Moroccan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Morocco 2011 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Morocco_2011"
+        }
+      ]
+    },
+    {
+      "id": "morocco-citizenship-by-parent",
+      "country": {
+        "iso_n3": "504",
+        "name": "Morocco"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Moroccan nationality through a Moroccan parent",
+      "summary": "A child of a Moroccan father or mother is Moroccan under the nationality code.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "morocco-citizenship-by-parent-principal",
+          "label": "Moroccan nationality through a Moroccan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Morocco 2011 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Morocco_2011"
+        }
+      ]
+    },
+    {
+      "id": "morocco-naturalization",
+      "country": {
+        "iso_n3": "504",
+        "name": "Morocco"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Foreign adults may apply after five years continuous legal residence, with language and character conditions. Shorter tracks exist for spouses. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "morocco-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Morocco 2011 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Morocco_2011"
         }
       ]
     },
@@ -9429,6 +10017,111 @@
       ]
     },
     {
+      "id": "vietnam-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "704",
+        "name": "Vietnam"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Vietnamese parent",
+      "summary": "Birth to a Vietnamese parent creates Vietnamese nationality. Birth in Vietnam alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "vietnam-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Vietnamese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Vietnam Law on Vietnamese Nationality 2008 (English)",
+          "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html"
+        }
+      ]
+    },
+    {
+      "id": "vietnam-citizenship-by-parent",
+      "country": {
+        "iso_n3": "704",
+        "name": "Vietnam"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Vietnamese nationality through a Vietnamese parent",
+      "summary": "A child of a Vietnamese citizen parent is Vietnamese under the Nationality Law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "vietnam-citizenship-by-parent-principal",
+          "label": "Vietnamese nationality through a Vietnamese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Vietnam Law on Vietnamese Nationality 2008 (English)",
+          "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html"
+        }
+      ]
+    },
+    {
+      "id": "vietnam-naturalization",
+      "country": {
+        "iso_n3": "704",
+        "name": "Vietnam"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Adult foreigners may apply after five consecutive years of permanent residence, with language, livelihood, and character conditions. Applicants generally renounce prior nationality. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "vietnam-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Vietnam Law on Vietnamese Nationality 2008 (English)",
+          "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html"
+        }
+      ]
+    },
+    {
       "id": "south-africa-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "710",
@@ -10678,6 +11371,76 @@
       ]
     },
     {
+      "id": "samoa-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "882",
+        "name": "Samoa"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Samoan parent",
+      "summary": "Birth to a Samoan parent creates Samoan citizenship. Birth in Samoa alone to two foreign parents is not general unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "samoa-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Samoan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Samoa Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Samoa_2017"
+        }
+      ]
+    },
+    {
+      "id": "samoa-citizenship-by-parent",
+      "country": {
+        "iso_n3": "882",
+        "name": "Samoa"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Samoan citizenship through a Samoan parent",
+      "summary": "A child of a Samoan citizen parent is Samoan under the Citizenship Act lineage rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "samoa-citizenship-by-parent-principal",
+          "label": "Samoan citizenship through a Samoan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Samoa Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Samoa_2017"
+        }
+      ]
+    },
+    {
       "id": "samoa-citizenship-investment-status",
       "country": {
         "iso_n3": "882",
@@ -10688,18 +11451,65 @@
       "title": "Citizenship Investment Act exists; current programme operation needs verification",
       "summary": "Samoa has a Citizenship Investment Act and was reviewing the programme framework in 2025, but current application operations and qualifying guidelines are not yet verified for live recommendations.",
       "facts": {
-        "programme_type": "statutory_basis_only"
+        "programme_type": "statutory_basis_only",
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
       },
+      "pathways": [
+        {
+          "id": "samoa-citizenship-investment-status-principal",
+          "label": "Citizenship Investment Act exists; current programme operation needs verification",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
       "confidence": "medium",
       "last_checked": "2026-07-17",
       "sources": [
         {
-          "title": "Government of Samoa — Citizenship Investment Act 2015",
+          "title": "Samoa Citizenship Investment Act 2015",
           "url": "https://www.ag.gov.ws/wp-content/uploads/2024/02/Citizenship-Investment-Act-2015.pdf"
         },
         {
-          "title": "Samoa Ministry of Commerce — 2025 policy framework workshop",
+          "title": "Samoa MCIL — 2025 policy framework workshop",
           "url": "https://mcil.gov.ws/node/89"
+        }
+      ]
+    },
+    {
+      "id": "samoa-naturalization",
+      "country": {
+        "iso_n3": "882",
+        "name": "Samoa"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after residence",
+      "summary": "Foreign adults may apply after five years continuous permanent residence, with character and intention-to-reside conditions. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "samoa-naturalization-principal",
+          "label": "Naturalization after residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Samoa Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Samoa_2017"
         }
       ]
     }

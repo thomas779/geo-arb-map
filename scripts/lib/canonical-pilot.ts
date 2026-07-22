@@ -319,6 +319,19 @@ const OFFICIAL_URLS = {
   ecuador_constitution: 'https://www.constituteproject.org/constitution/Ecuador_2021',
   malaysia_constitution: 'https://www.constituteproject.org/constitution/Malaysia_2007',
   malaysia_residence_pass: 'https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/',
+  vietnam_nationality_law: 'https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html',
+  cambodia_constitution: 'https://www.constituteproject.org/constitution/Cambodia_2008',
+  cambodia_nationality_law: 'https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf',
+  samoa_citizenship_investment_act: 'https://www.ag.gov.ws/wp-content/uploads/2024/02/Citizenship-Investment-Act-2015.pdf',
+  samoa_mcil_workshop: 'https://mcil.gov.ws/node/89',
+  kenya_immigration_citizenship: 'https://immigration.go.ke/citizenship-section/',
+  kenya_constitution: 'https://www.constituteproject.org/constitution/Kenya_2010',
+  ghana_naturalization: 'https://www.mint.gov.gh/e-services-portal/naturalization-as-ghanaian-citizen/',
+  ghana_citizenship_act: 'https://citizenshiprightsafrica.org/wp-content/uploads/2016/02/Ghana_Citizenship_Act_with_forms_591_2000.pdf',
+  morocco_constitution: 'https://www.constituteproject.org/constitution/Morocco_2011',
+  india_constitution: 'https://www.constituteproject.org/constitution/India_2016',
+  india_oci: 'https://www.mea.gov.in/overseas-citizenship-of-india-scheme',
+  samoa_constitution: 'https://www.constituteproject.org/constitution/Samoa_2017',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -767,6 +780,19 @@ function jurisdictionSources(): SourceRecord[] {
       ['Ecuador 2021 Constitution (Constitute Project)', OFFICIAL_URLS.ecuador_constitution, '218', 'en', 'primary_law', 'ecuador-citizenship-law'],
       ['Malaysia Federal Constitution (Constitute Project)', OFFICIAL_URLS.malaysia_constitution, '458', 'en', 'primary_law', 'malaysia-citizenship-law'],
       ['Malaysia Immigration — Residence Pass', OFFICIAL_URLS.malaysia_residence_pass, '458', 'en', 'official_guidance', 'malaysia-citizenship-law'],
+      ['Vietnam Law on Vietnamese Nationality 2008 (English)', OFFICIAL_URLS.vietnam_nationality_law, '704', 'en', 'primary_law', 'vietnam-citizenship-law'],
+      ['Cambodia Constitution (Constitute Project)', OFFICIAL_URLS.cambodia_constitution, '116', 'en', 'primary_law', 'cambodia-citizenship-law'],
+      ['Cambodia Law on Nationality 1996 (CIB English text)', OFFICIAL_URLS.cambodia_nationality_law, '116', 'en', 'primary_law', 'cambodia-citizenship-law'],
+      ['Kenya Immigration — Citizenship section', OFFICIAL_URLS.kenya_immigration_citizenship, '404', 'en', 'official_guidance', 'kenya-citizenship-law'],
+      ['Kenya 2010 Constitution (Constitute Project)', OFFICIAL_URLS.kenya_constitution, '404', 'en', 'primary_law', 'kenya-citizenship-law'],
+      ['Ghana Ministry of Interior — naturalization', OFFICIAL_URLS.ghana_naturalization, '288', 'en', 'official_guidance', 'ghana-citizenship-law'],
+      ['Ghana Citizenship Act 2000 (Act 591)', OFFICIAL_URLS.ghana_citizenship_act, '288', 'en', 'primary_law', 'ghana-citizenship-law'],
+      ['Morocco 2011 Constitution (Constitute Project)', OFFICIAL_URLS.morocco_constitution, '504', 'en', 'primary_law', 'morocco-citizenship-law'],
+      ['India Constitution (Constitute Project)', OFFICIAL_URLS.india_constitution, '356', 'en', 'primary_law', 'india-citizenship-law'],
+      ['India MEA — Overseas Citizenship of India Scheme', OFFICIAL_URLS.india_oci, '356', 'en', 'official_guidance', 'india-citizenship-law'],
+      ['Samoa Constitution (Constitute Project)', OFFICIAL_URLS.samoa_constitution, '882', 'en', 'primary_law', 'samoa-citizenship-law'],
+      ['Samoa Citizenship Investment Act 2015', OFFICIAL_URLS.samoa_citizenship_investment_act, '882', 'en', 'primary_law', 'samoa-citizenship-law'],
+      ['Samoa MCIL — 2025 policy framework workshop', OFFICIAL_URLS.samoa_mcil_workshop, '882', 'en', 'official_guidance', 'samoa-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -1873,6 +1899,8 @@ function principalCitizenshipRoute({
   note,
   status = 'active',
   lastChecked = '2026-07-21',
+  confidence = 'high',
+  reviewState = 'reviewed',
 }: {
   id: string;
   mode: 'ancestry' | 'naturalization' | 'birth' | 'investment';
@@ -1889,8 +1917,10 @@ function principalCitizenshipRoute({
   months: number | null;
   allocation?: 'right' | 'discretionary';
   note?: string;
-  status?: 'active' | 'inactive';
+  status?: 'active' | 'inactive' | 'pending_verification';
   lastChecked?: string;
+  confidence?: 'high' | 'medium';
+  reviewState?: 'reviewed' | 'pending';
 }): JurisdictionRecord['routes'][number] {
   const variantId = `${id}-principal`;
   return {
@@ -1900,7 +1930,7 @@ function principalCitizenshipRoute({
     title,
     summary,
     effective: { from: null, to: null, supersedes: [] },
-    review: { state: 'reviewed', confidence: 'high', last_checked: lastChecked },
+    review: { state: reviewState, confidence, last_checked: lastChecked },
     variants: [{
       id: variantId,
       label: title,
@@ -1911,7 +1941,7 @@ function principalCitizenshipRoute({
       timeline: {
         eligibility_minimum_months: months,
         processing_typical_months: null,
-        confidence: 'high',
+        confidence,
         ...(note ? { note } : {}),
       },
       source_refs: refs(Array.isArray(source) ? source : [source], [
@@ -4720,6 +4750,411 @@ function malaysiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Ju
   });
 }
 
+function vietnamRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.vietnam_nationality_law);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '704',
+    note: 'Reviewed against Law on Vietnamese Nationality 2008. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law] },
+      { mode: 'naturalization', finding: 'present', sources: [law] },
+      { mode: 'birth', finding: 'present', sources: [law], note: 'Parent Vietnamese; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [law], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'vietnam-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Vietnamese nationality through a Vietnamese parent',
+        summary: 'A child of a Vietnamese citizen parent is Vietnamese under the Nationality Law.',
+        source: law,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '704' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'vietnam-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Adult foreigners may apply after five consecutive years of permanent residence, with language, livelihood, and character conditions. Applicants generally renounce prior nationality. Grant is discretionary.',
+        source: law,
+        eligibility: [
+          { field: 'residence.permanent_consecutive_years', operator: 'gte', value: 5, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'vietnam-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Vietnamese parent',
+        summary: 'Birth to a Vietnamese parent creates Vietnamese nationality. Birth in Vietnam alone to two foreign parents is not general jus soli.',
+        source: law,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '704' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function cambodiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.cambodia_constitution);
+  const nationalityLaw = requireSource(officialSources, OFFICIAL_URLS.cambodia_nationality_law);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '116',
+    note: 'Reviewed against Constitution and Nationality Law practice. Investor naturalization remains pending verification.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, nationalityLaw] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, nationalityLaw] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Khmer/Cambodian; not general jus soli.' },
+      {
+        mode: 'investment',
+        finding: 'present',
+        sources: [nationalityLaw],
+        note: 'Nationality law has investment/donation naturalization text; live programme operation remains pending verification.',
+        confidence: 'medium',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'cambodia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Cambodian nationality through a Cambodian parent',
+        summary: 'A child of a Cambodian parent is Cambodian under nationality law.',
+        source: [constitution, nationalityLaw],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '116' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cambodia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after seven years residence',
+        summary: 'Foreign adults may apply after about seven years continuous legal residence, with language and character conditions. Grant is discretionary.',
+        source: [constitution, nationalityLaw],
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 7, unit: 'years' },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cambodia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Cambodian parent',
+        summary: 'Birth to a Cambodian parent creates Cambodian nationality. Birth in Cambodia alone to two foreign parents is not general jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '116' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cambodia-investor-naturalization-status',
+        mode: 'investment',
+        title: 'Investor and donor naturalization exists in law; current operation needs verification',
+        summary: "Cambodia's nationality law contains investment and donation provisions, but a current government-administered programme and operational requirements have not been verified for live recommendations.",
+        source: nationalityLaw,
+        eligibility: [{ field: 'programme_type', operator: 'eq', value: 'statutory_investor_naturalization' }],
+        months: null,
+        allocation: 'discretionary',
+        status: 'pending_verification',
+        lastChecked: '2026-07-17',
+        confidence: 'medium',
+        reviewState: 'pending',
+      }),
+    ],
+  });
+}
+
+function kenyaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const immigration = requireSource(officialSources, OFFICIAL_URLS.kenya_immigration_citizenship);
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.kenya_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '404',
+    note: 'Reviewed against Constitution Chapter 3 and Immigration Department citizenship guidance. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, immigration] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, immigration] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Kenyan citizen; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [immigration], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'kenya-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Kenyan citizenship through a Kenyan parent',
+        summary: 'A person is a citizen by birth if a parent is a Kenyan citizen at the time of birth.',
+        source: [constitution, immigration],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '404' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'kenya-registration-by-residence',
+        mode: 'naturalization',
+        title: 'Registration after seven years lawful residence',
+        summary: 'Adults lawfully resident for a continuous period of at least seven years may apply for registration as a citizen. Spouses of Kenyans may apply after seven years of marriage. Grant follows statutory conditions.',
+        source: [constitution, immigration],
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 7, unit: 'years' },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'kenya-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Kenyan parent',
+        summary: 'Birth to a Kenyan citizen parent creates Kenyan citizenship by birth. Birth in Kenya alone to two foreign parents is not general jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '404' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function ghanaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.ghana_naturalization);
+  const act = requireSource(officialSources, OFFICIAL_URLS.ghana_citizenship_act);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '288',
+    note: 'Reviewed against Citizenship Act 2000 and Interior naturalization guidance. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act] },
+      { mode: 'naturalization', finding: 'present', sources: [act, naturalization] },
+      { mode: 'birth', finding: 'present', sources: [act], note: 'Parent Ghanaian under historical Constitution date rules.' },
+      { mode: 'investment', finding: 'verified_none', sources: [act], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'ghana-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Ghanaian citizenship through a Ghanaian parent',
+        summary: 'A child of a Ghanaian citizen parent is Ghanaian under the Citizenship Act and Constitution date rules.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '288' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'ghana-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Applicants need twelve months residence immediately before applying and at least five years aggregate residence in the prior seven years, plus language, character, and integration conditions. Ministerial approval with presidential assent; discretionary.',
+        source: [act, naturalization],
+        eligibility: [
+          { field: 'residence.aggregate_years_in_prior_seven', operator: 'gte', value: 5, unit: 'years' },
+          { field: 'residence.immediately_preceding_months', operator: 'gte', value: 12, unit: 'months' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'ghana-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Ghanaian parent',
+        summary: 'Birth to a Ghanaian parent creates Ghanaian citizenship under the applicable constitutional date rules. Birth in Ghana alone to two foreign parents is not general jus soli.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '288' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function moroccoRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.morocco_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '504',
+    note: 'Reviewed against Constitution nationality framework and Code de la nationalité practice (five-year naturalization). No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Moroccan; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'morocco-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Moroccan nationality through a Moroccan parent',
+        summary: 'A child of a Moroccan father or mother is Moroccan under the nationality code.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '504' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'morocco-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Foreign adults may apply after five years continuous legal residence, with language and character conditions. Shorter tracks exist for spouses. Grant is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'morocco-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Moroccan parent',
+        summary: 'Birth to a Moroccan parent creates Moroccan nationality. Birth in Morocco alone to two foreign parents is not general jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '504' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function indiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.india_constitution);
+  const oci = requireSource(officialSources, OFFICIAL_URLS.india_oci);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '356',
+    note: 'Reviewed against Constitution citizenship provisions and MEA OCI scheme. OCI is not dual citizenship. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, oci] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent-based rules after 1987; not unrestricted jus soli.' },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, oci],
+        note: 'No citizenship-by-investment. OCI is a diaspora status, not nationality.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'india-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Indian citizenship through an Indian parent',
+        summary: 'A child of an Indian citizen parent may be Indian under the Citizenship Act date rules. Overseas Citizen of India (OCI) is a separate status for persons of Indian origin abroad — not dual nationality.',
+        source: [constitution, oci],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '356' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+        note: 'OCI is modeled in mobility as a diaspora status, not citizenship.',
+      }),
+      principalCitizenshipRoute({
+        id: 'india-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after long residence',
+        summary: 'Ordinary naturalization generally requires about twelve years residence (eleven of the prior fourteen plus twelve months immediately before applying), renunciation of prior nationality, and character conditions. Grant is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years_in_prior_fourteen', operator: 'gte', value: 11, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 144,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'india-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Indian parent',
+        summary: 'After 1987, birth in India creates citizenship only with a qualifying Indian parent (or later rules for both parents). Birth in India alone to two foreign parents is not general jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '356' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function samoaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.samoa_constitution);
+  const investmentAct = requireSource(officialSources, OFFICIAL_URLS.samoa_citizenship_investment_act);
+  const mcil = requireSource(officialSources, OFFICIAL_URLS.samoa_mcil_workshop);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '882',
+    note: 'Reviewed against Constitution citizenship framework. NZ Samoan Quota is a separate mobility ballot. Investment programme remains pending verification.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Samoan or birth connected to Samoa under Citizenship Act rules.' },
+      {
+        mode: 'investment',
+        finding: 'present',
+        sources: [investmentAct, mcil],
+        note: 'Citizenship Investment Act exists; current programme operation remains pending verification.',
+        confidence: 'medium',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'samoa-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Samoan citizenship through a Samoan parent',
+        summary: 'A child of a Samoan citizen parent is Samoan under the Citizenship Act lineage rules.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '882' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'samoa-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after residence',
+        summary: 'Foreign adults may apply after five years continuous permanent residence, with character and intention-to-reside conditions. Grant is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.continuous_permanent_years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'samoa-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Samoan parent',
+        summary: 'Birth to a Samoan parent creates Samoan citizenship. Birth in Samoa alone to two foreign parents is not general unrestricted jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '882' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'samoa-citizenship-investment-status',
+        mode: 'investment',
+        title: 'Citizenship Investment Act exists; current programme operation needs verification',
+        summary: 'Samoa has a Citizenship Investment Act and was reviewing the programme framework in 2025, but current application operations and qualifying guidelines are not yet verified for live recommendations.',
+        source: [investmentAct, mcil],
+        eligibility: [{ field: 'programme_type', operator: 'eq', value: 'statutory_basis_only' }],
+        months: null,
+        allocation: 'discretionary',
+        status: 'pending_verification',
+        lastChecked: '2026-07-17',
+        confidence: 'medium',
+        reviewState: 'pending',
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -6615,6 +7050,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     boliviaRecord(shadow, countrySources),
     brazilRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
+    cambodiaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
     caymanIslandsRecord(shadow, countrySources),
     chileRecord(shadow, countrySources),
@@ -6626,20 +7062,24 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     franceRecord(shadow, countrySources),
     georgiaRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
+    ghanaRecord(shadow, countrySources),
     grenadaRecord(shadow, countrySources),
     greeceRecord(shadow, countrySources),
     hungaryRecord(shadow, countrySources),
+    indiaRecord(shadow, countrySources),
     indonesiaRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
     israelRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
     japanRecord(shadow, countrySources),
     jordanRecord(shadow, countrySources),
+    kenyaRecord(shadow, countrySources),
     koreaRecord(shadow, countrySources),
     malaysiaRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
     mauritiusRecord(shadow, countrySources),
     mexicoRecord(shadow, countrySources),
+    moroccoRecord(shadow, countrySources),
     nauruRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
     vanuatuRecord(shadow, countrySources),
@@ -6652,6 +7092,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     polandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
     saintLuciaRecord(shadow, countrySources),
+    samoaRecord(shadow, countrySources),
     saoTomePrincipeRecord(shadow, countrySources),
     stKittsNevisRecord(shadow, countrySources),
     serbiaRecord(shadow, countrySources),
@@ -6666,6 +7107,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     unitedKingdomRecord(shadow, countrySources),
     unitedStatesRecord(shadow, countrySources),
     uruguayRecord(shadow, countrySources),
+    vietnamRecord(shadow, countrySources),
   ];
   const manualSources = arrangementSources(shadow);
   const sourcesById = new Map<string, SourceRecord>();
