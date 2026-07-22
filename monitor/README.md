@@ -1,6 +1,9 @@
 # Source monitor
 
-This directory contains the review-first monitoring loop for Flag Paths:
+This directory contains the review-first monitoring loop for Flag Paths.
+
+**Operator path to Telegram posts:** see [`PUBLISHING_RUNBOOK.md`](PUBLISHING_RUNBOOK.md)
+(connectivity, bootstrap post, email self-send fixtures, cheap verify LLM, local discovery).
 
 ```text
 source manifest → collectors → signals → LLM triage → issue drafts → human review

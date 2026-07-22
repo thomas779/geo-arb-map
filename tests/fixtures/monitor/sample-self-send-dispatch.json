@@ -1,0 +1,14 @@
+{
+  "action": "newsletter_signal",
+  "client_payload": {
+    "source_id": "expathub-georgia-newsletter",
+    "message": {
+      "message_id": "flag-paths-intake-test-20260722",
+      "from": "alerts@expathub.ge",
+      "subject": "[TEST] Georgia: residency guidance update (intake fixture)",
+      "text": "Fixture newsletter body pointing at a public ExpatHub article for intake tests. Forward-looking residency or tax-residency claims must be confirmed on official Georgian sources before any public brief.",
+      "received_at": "2026-07-22T12:00:00.000Z",
+      "canonical_url": "https://expathub.ge/georgian-visa-residency/"
+    }
+  }
+}

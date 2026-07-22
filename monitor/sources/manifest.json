@@ -172,6 +172,83 @@
       "notes": "Residence- and citizenship-planning firm newsroom. Useful for CBI/RBI launches and closures, but commercial claims require primary-source verification and aggressive deduplication."
     },
     {
+      "id": "expathub-georgia-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://expathub.ge/feed/",
+      "jurisdictions": [
+        "268"
+      ],
+      "keywords": [
+        "residency",
+        "residence",
+        "visa",
+        "citizenship",
+        "nationality",
+        "tax residency",
+        "immigration",
+        "permit",
+        "HNW",
+        "high net worth",
+        "announced",
+        "proposed",
+        "will open",
+        "will close",
+        "coming into force"
+      ],
+      "notes": "Local Georgia (country) expat specialist. High-value for residency, tax residency, and immigration product changes that global agencies under-cover. Discovery only. Forward-looking programme posts are leads: verify against official Georgian sources before any public brief or atlas change."
+    },
+    {
+      "id": "expathub-georgia-newsletter",
+      "tier": "discovery",
+      "adapter": "email",
+      "status": "planned",
+      "subscription_url": "https://expathub.ge/tbilisi-enews/",
+      "archive_url": "https://expathub.ge/articles",
+      "jurisdictions": [
+        "268"
+      ],
+      "notes": "Tbilisi Expat e-Newsletter from ExpatHub.GE. User has prior mail worth replaying for intake tests. Map sender domain after first real delivery. Discovery only; many posts are forward-looking (programme openings/closings) and need official confirmation."
+    },
+    {
+      "id": "bal-insights-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://www.bal.com/insights/feed/",
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "Berry Appleman & Leiden insights feed as a free discovery bridge until BAL email alerts are onboarded. Employment/residence heavy; discovery only."
+    },
+    {
+      "id": "cbi-ch-news-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://citizenshipbyinvestment.ch/index.php/feed/",
+      "jurisdictions": [
+        "multi"
+      ],
+      "keywords": [
+        "citizenship",
+        "CBI",
+        "CIP",
+        "residency",
+        "RBI",
+        "naturalization",
+        "investment",
+        "programme",
+        "program",
+        "closes",
+        "opens",
+        "suspended",
+        "threshold"
+      ],
+      "notes": "Commercial CBI news aggregator. Fast on programme fee/threshold/open-close rumours. Discovery only with aggressive primary-source verification; never treat as official."
+    },
+    {
       "id": "spain-civil-code",
       "tier": "verification",
       "adapter": "html_index",

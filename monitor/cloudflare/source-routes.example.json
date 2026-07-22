@@ -16,5 +16,11 @@
     "recipient": "newsletters@monitor.example.com",
     "allowed_sender_domains": ["nomadcapitalist.com"],
     "canonical_hosts": ["nomadcapitalist.com"]
+  },
+  {
+    "source_id": "expathub-georgia-newsletter",
+    "recipient": "newsletters@monitor.example.com",
+    "allowed_sender_domains": ["expathub.ge"],
+    "canonical_hosts": ["expathub.ge"]
   }
 ]
