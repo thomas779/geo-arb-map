@@ -20,6 +20,7 @@ export interface GroundedResult {
   text: string;
   citations: GroundingCitation[];
   searchQueries: string[];
+  usage: { input: number; output: number };
 }
 
 const DEFAULT_GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
@@ -207,6 +208,7 @@ export async function generateGroundedText(
   // carry `arguments.queries`), their results, and a final message step whose
   // `content[]` holds the answer text and `annotations[].url_citation` sources.
   const body = await response.json() as {
+    usage?: Record<string, number>;
     steps?: Array<{
       type?: string;
       arguments?: { queries?: string[] };
@@ -217,6 +219,9 @@ export async function generateGroundedText(
       }>;
     }>;
   };
+  const usage = body.usage ?? {};
+  const inputTokens = Number(usage.input_tokens ?? usage.prompt_tokens ?? usage.promptTokenCount ?? 0) || 0;
+  const outputTokens = Number(usage.output_tokens ?? usage.completion_tokens ?? usage.candidatesTokenCount ?? 0) || 0;
   const steps = body.steps ?? [];
   const contentItems = steps.flatMap(step => step.content ?? []);
   const text = contentItems.map(item => item.text ?? '').join('').trim();
@@ -227,7 +232,7 @@ export async function generateGroundedText(
       ? [{ uri: annotation.url_citation.url, title: annotation.url_citation.title ?? '' }]
       : []));
   if (!text) throw new Error('Gemini grounded response did not contain text');
-  return { text, citations, searchQueries };
+  return { text, citations, searchQueries, usage: { input: inputTokens, output: outputTokens } };
 }
 
 // Grounding citation URIs are short-lived Google redirect links, not the primary
