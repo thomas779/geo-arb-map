@@ -53,6 +53,9 @@ describe('canonical data schemas', () => {
       'cayman-botc-by-descent',
       'cayman-botc-naturalization',
       'cayman-botc-by-birth',
+      'chile-citizenship-by-parent-or-grandparent',
+      'chile-naturalization',
+      'chile-citizenship-by-birth',
       'colombia-citizenship-by-parent',
       'colombia-naturalization-by-residence',
       'colombia-citizenship-by-conditional-birth',
@@ -84,9 +87,15 @@ describe('canonical data schemas', () => {
       'greece-citizenship-by-greek-parent',
       'greece-ordinary-naturalization',
       'greece-citizenship-birth-and-school',
+      'hungary-citizenship-by-parent-or-simplified-origin',
+      'hungary-ordinary-naturalization',
+      'hungary-citizenship-at-birth-by-parent',
       'ireland-citizenship-by-descent',
       'ireland-naturalization-by-residence',
       'ireland-citizenship-by-birth',
+      'israel-citizenship-by-return-or-parent',
+      'israel-naturalization',
+      'israel-citizenship-at-birth-by-parent',
       'italy-citizenship-by-descent',
       'italy-naturalization-by-residence',
       'italy-citizenship-connected-to-birth',
@@ -123,6 +132,12 @@ describe('canonical data schemas', () => {
       'panama-ordinary-naturalization',
       'panama-family-naturalization',
       'panama-nationality-by-birth',
+      'paraguay-citizenship-by-parent',
+      'paraguay-naturalization',
+      'paraguay-citizenship-by-birth',
+      'poland-citizenship-by-parent',
+      'poland-recognition-by-residence',
+      'poland-citizenship-at-birth-by-parent',
       'portugal-citizenship-by-parent',
       'portugal-ordinary-naturalization-2026',
       'portugal-birth-parent-residence-2026',
@@ -291,6 +306,40 @@ describe('canonical data schemas', () => {
       ?.variants[0]?.eligibility).toContainEqual(
         expect.objectContaining({ field: 'contribution.national_transformation_fund', value: true }),
       );
+
+    const paraguay = byIso.get('600')!;
+    expect(paraguay.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+    expect(paraguay.routes.find(route => route.id === 'paraguay-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(36);
+
+    const chile = byIso.get('152')!;
+    expect(chile.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+    expect(chile.routes.find(route => route.id === 'chile-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(60);
+
+    const israel = byIso.get('376')!;
+    expect(israel.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+    expect(israel.routes.find(route => route.id === 'israel-naturalization')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'prior_nationality.renounced_or_will_cease', value: true }),
+      );
+
+    const poland = byIso.get('616')!;
+    expect(poland.routes.find(route => route.id === 'poland-recognition-by-residence')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'language.polish_level', value: 'B1' }),
+      );
+    expect(poland.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const hungary = byIso.get('348')!;
+    expect(hungary.routes.find(route => route.id === 'hungary-ordinary-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(96);
+    expect(hungary.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
   });
 
   test('models eligibility time separately from processing time', () => {

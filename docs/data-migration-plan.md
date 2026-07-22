@@ -50,7 +50,7 @@ Completed:
   Zealand, United Kingdom, Ireland, Germany, France, Portugal, Spain, Italy,
   Netherlands, Switzerland, Singapore, Malta, Cyprus, Türkiye, Uruguay,
   Bulgaria, Greece, Serbia, the United Arab Emirates, Egypt, Jordan, Nauru,
-  and São Tomé and Príncipe; and
+  São Tomé and Príncipe, Paraguay, Chile, Israel, Poland, and Hungary; and
 - active dedicated official-page monitoring for every reviewed jurisdiction.
 
 Still required:

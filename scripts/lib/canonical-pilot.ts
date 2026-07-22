@@ -279,6 +279,20 @@ const OFFICIAL_URLS = {
   sao_tome_nationality_law: 'https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf',
   sao_tome_cbi_regulation: 'https://www.imidaily.com/wp-content/uploads/2025/08/STP-CBI-Act-01082025-1.pdf',
   sao_tome_cbi_consulate: 'https://saotomeprincipe.de/pt/cidadania-por-investimento/',
+  paraguay_constitution: 'https://www.bacn.gov.py/archivos/9580/CONSTITUCION_ORIGINAL_FIRMADA.pdf',
+  paraguay_constitution_index: 'https://www.bacn.gov.py/leyes-paraguayas/9580/constitucion-nacional-',
+  paraguay_descent_guidance: 'https://repatriados.gov.py/inclusion-a-la-identidad-nacional/',
+  paraguay_migration: 'https://migraciones.gov.py/',
+  chile_sermig_citizenship: 'https://serviciomigraciones.cl/en/citizenship/',
+  chile_constitution_art10: 'https://bcn.cl/2lzfp',
+  israel_nationality_law: 'https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf',
+  israel_law_of_return: 'https://www.jewishvirtuallibrary.org/law-of-return',
+  poland_recognition: 'https://www.gov.pl/web/mswia-en/apply-to-be-recognised-as-a-polish-citizen',
+  poland_citizenship_hub: 'https://www.gov.pl/web/mswia/obywatelstwo',
+  poland_citizenship_en: 'https://www.gov.pl/web/mswia-en/citizenship',
+  hungary_acquisition: 'https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality',
+  hungary_simplified: 'https://www.kormanyhivatal.hu/hu/budapest/jarasok/egyszerusitett-honositasi-eljaras',
+  hungary_simplified_en: 'https://telaviv.mfa.gov.hu/eng/page/egyszerusitett-honositas',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -687,6 +701,20 @@ function jurisdictionSources(): SourceRecord[] {
       ['São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade', OFFICIAL_URLS.sao_tome_nationality_law, '678', 'pt', 'primary_law', 'sao-tome-citizenship-law'],
       ['São Tomé and Príncipe — Decreto-Lei n.º 07/2025 RNID', OFFICIAL_URLS.sao_tome_cbi_regulation, '678', 'pt', 'primary_law', 'sao-tome-citizenship-law'],
       ['Honorary Consulate of São Tomé and Príncipe — Citizenship by Investment', OFFICIAL_URLS.sao_tome_cbi_consulate, '678', 'pt', 'official_guidance', 'sao-tome-citizenship-law'],
+      ['Paraguay Constitution — nationality provisions (signed text)', OFFICIAL_URLS.paraguay_constitution, '600', 'es', 'primary_law', 'paraguay-nationality-law'],
+      ['Paraguay BACN — Constitución Nacional index', OFFICIAL_URLS.paraguay_constitution_index, '600', 'es', 'primary_law', 'paraguay-nationality-law'],
+      ['Paraguay Repatriados — inclusión a la identidad nacional', OFFICIAL_URLS.paraguay_descent_guidance, '600', 'es', 'official_guidance', 'paraguay-nationality-law'],
+      ['Paraguay Dirección General de Migraciones', OFFICIAL_URLS.paraguay_migration, '600', 'es', 'official_guidance', 'paraguay-nationality-law'],
+      ['Chile SERMIG — Chilean citizenship / Carta de Nacionalización', OFFICIAL_URLS.chile_sermig_citizenship, '152', 'en', 'official_guidance', 'chile-nationality-law'],
+      ['Chile Constitution Article 10 — nationality (BCN)', OFFICIAL_URLS.chile_constitution_art10, '152', 'es', 'primary_law', 'chile-nationality-law'],
+      ['Israel Nationality Law 5712-1952 (amended text)', OFFICIAL_URLS.israel_nationality_law, '376', 'en', 'primary_law', 'israel-nationality-law'],
+      ['Israel Law of Return 5710-1950 (published text)', OFFICIAL_URLS.israel_law_of_return, '376', 'en', 'primary_law', 'israel-nationality-law'],
+      ['Poland MSWiA — recognition as a Polish citizen', OFFICIAL_URLS.poland_recognition, '616', 'en', 'official_guidance', 'poland-citizenship-law'],
+      ['Poland MSWiA — obywatelstwo', OFFICIAL_URLS.poland_citizenship_hub, '616', 'pl', 'official_guidance', 'poland-citizenship-law'],
+      ['Poland MSWiA — citizenship (English hub)', OFFICIAL_URLS.poland_citizenship_en, '616', 'en', 'official_guidance', 'poland-citizenship-law'],
+      ['Hungary Government — acquisition of Hungarian nationality', OFFICIAL_URLS.hungary_acquisition, '348', 'en', 'official_guidance', 'hungary-citizenship-law'],
+      ['Hungary Government Office — simplified naturalization', OFFICIAL_URLS.hungary_simplified, '348', 'hu', 'official_guidance', 'hungary-citizenship-law'],
+      ['Hungary MFA — simplified naturalization (English)', OFFICIAL_URLS.hungary_simplified_en, '348', 'en', 'official_guidance', 'hungary-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -3527,6 +3555,344 @@ function saoTomePrincipeRecord(
   });
 }
 
+function paraguayRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.paraguay_constitution);
+  const index = requireSource(officialSources, OFFICIAL_URLS.paraguay_constitution_index);
+  const descent = requireSource(officialSources, OFFICIAL_URLS.paraguay_descent_guidance);
+  const migration = requireSource(officialSources, OFFICIAL_URLS.paraguay_migration);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '600',
+    note: 'All acquisition modes reviewed against Constitución Nacional Arts. 146–148 and official descent/migration guidance. Investor residence is kept distinct from citizenship.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, descent, index] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, migration, index] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution, index],
+        note: 'Birth in Paraguay generally confers natural nationality (jus soli), subject to the constitutional foreign-government-service exception.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, migration, index],
+        note: 'No direct citizenship-by-investment route appears in the constitutional nationality framework. Investor or SUACE-style residence may lead only to later naturalization after the statutory residence period.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'paraguay-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Natural nationality through a Paraguayan parent',
+        summary: 'Children of a Paraguayan mother or father born abroad are natural Paraguayans when they settle permanently in the Republic, or when a parent was in the service of the Republic at the time of birth abroad.',
+        source: [constitution, descent],
+        eligibility: [
+          { field: 'parent.citizenship.iso_n3', operator: 'eq', value: '600' },
+          { field: 'child.settles_permanently_or_parent_in_state_service', operator: 'eq', value: true },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'paraguay-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after minimum residence',
+        summary: 'Foreign adults may seek Paraguayan nationality by naturalization after a constitutional minimum of three years of residence in the national territory, majority, good conduct, and exercise of a profession, trade, science, art or industry, or ownership of property in the country, subject to the statutory process.',
+        source: [constitution, migration],
+        eligibility: [
+          { field: 'residence.minimum_months', operator: 'gte', value: 36, unit: 'months' },
+          { field: 'applicant.majority', operator: 'eq', value: true },
+        ],
+        months: 36,
+        allocation: 'discretionary',
+        note: 'The three-year constitutional minimum is eligibility to apply, not an automatic grant. Administrative practice may involve temporary then permanent residence sequencing before the citizenship petition.',
+      }),
+      principalCitizenshipRoute({
+        id: 'paraguay-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Natural nationality by birth in Paraguay',
+        summary: 'Persons born in the territory of the Republic are natural Paraguayans, subject to the constitutional exception for children of persons in the service of a foreign government.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '600' },
+          { field: 'birth.foreign_government_service_exception', operator: 'eq', value: false },
+        ],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function chileRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const sermig = requireSource(officialSources, OFFICIAL_URLS.chile_sermig_citizenship);
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.chile_constitution_art10);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '152',
+    note: 'All acquisition modes reviewed against Constitución Article 10 and SERMIG Carta de Nacionalización guidance. Investor residence is not direct citizenship.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, sermig] },
+      { mode: 'naturalization', finding: 'present', sources: [sermig, constitution] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Birth in Chile generally confers nationality, except children of transient foreigners or foreigners in the service of their government; limited later option routes exist for some excluded cases.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [sermig, constitution],
+        note: 'Chile has no direct citizenship-by-investment programme. Investor visas support residence only; citizenship still follows naturalization after permanent residence.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'chile-citizenship-by-parent-or-grandparent',
+        mode: 'ancestry',
+        title: 'Nationality through a Chilean parent or grandparent',
+        summary: 'Children of a Chilean father or mother born abroad, and further generations covered by Article 10, may hold or claim Chilean nationality under the constitutional descent rules, including where a parent or grandparent acquired nationality by birth or naturalization as applicable.',
+        source: [constitution, sermig],
+        eligibility: [{ field: 'parent_or_grandparent.citizenship.iso_n3', operator: 'eq', value: '152' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'chile-naturalization',
+        mode: 'naturalization',
+        title: 'Carta de Nacionalización after permanent residence',
+        summary: 'Adult permanent residents may seek a letter of naturalization after five or more years of residence counted from the electronic stamp that led to permanent residence. A reduced two-year continuous residence path applies for specified family ties to Chileans, including a two-year marriage registered in Chile with shared household.',
+        source: sermig,
+        eligibility: [
+          { field: 'residence.permanent_and_qualifying_years', operator: 'gte', value: 5, unit: 'years' },
+          { field: 'status.residencia_definitiva', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        note: 'Family-tie applicants may qualify after two continuous years from the electronic stamp. The grant remains discretionary presidential/administrative naturalization, not an automatic right after five years.',
+      }),
+      principalCitizenshipRoute({
+        id: 'chile-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Nationality by birth in Chile',
+        summary: 'Persons born in Chilean territory are Chilean by birth, except children of transient foreigners or of foreigners who are in Chile in the service of their government. Statelessness safeguards and later option routes may apply to some excluded children.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '152' },
+          { field: 'birth.transient_or_foreign_service_exception', operator: 'eq', value: false },
+        ],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function israelRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const nationality = requireSource(officialSources, OFFICIAL_URLS.israel_nationality_law);
+  const lawOfReturn = requireSource(officialSources, OFFICIAL_URLS.israel_law_of_return);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '376',
+    note: 'All acquisition modes reviewed against the Nationality Law 5712-1952 and the Law of Return 5710-1950. Official gov.il pages currently return 403 to the automated collector and remain monitoring targets; published law texts supply the canonical evidence.',
+    coverage: [
+      {
+        mode: 'ancestry',
+        finding: 'present',
+        sources: [lawOfReturn, nationality],
+        note: 'Law of Return covers Jews, children and grandchildren of Jews, and certain spouses; Nationality Law also transmits citizenship through an Israeli parent.',
+      },
+      { mode: 'naturalization', finding: 'present', sources: [nationality] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [nationality],
+        note: 'Birth in Israel confers citizenship when a parent is an Israeli national; it is not unconditional territorial jus soli for two foreign parents.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [nationality, lawOfReturn],
+        note: 'Israel has no direct citizenship-by-investment programme. Economic residence products must not be represented as Law of Return or naturalization substitutes.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'israel-citizenship-by-return-or-parent',
+        mode: 'ancestry',
+        title: 'Citizenship by return or through an Israeli parent',
+        summary: 'Every Jew has the right to come to Israel as an oleh under the Law of Return; the same rights extend to a child and grandchild of a Jew and to specified spouses, subject to the statutory exceptions. Separately, the Nationality Law transmits Israeli nationality through an Israeli mother or father.',
+        source: [lawOfReturn, nationality],
+        eligibility: [
+          {
+            field: 'qualifying_return_status_or_parent.citizenship.iso_n3',
+            operator: 'eq',
+            value: '376',
+          },
+        ],
+        months: 0,
+        note: 'Law of Return eligibility is not ordinary multi-generation ethnic descent without the statutory Jewish/family definitions. Security, health and anti-Jewish-people activity exclusions apply.',
+      }),
+      principalCitizenshipRoute({
+        id: 'israel-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after permanent residence',
+        summary: 'A non-national adult may naturalize while in Israel after three years of presence out of the five years before application, permanent-residence entitlement, settlement or intention to settle, some knowledge of Hebrew, and renunciation or loss of prior nationality upon naturalization.',
+        source: nationality,
+        eligibility: [
+          { field: 'residence.years_in_israel_of_prior_five', operator: 'gte', value: 3, unit: 'years' },
+          { field: 'status.permanent_residence_entitled', operator: 'eq', value: true },
+          { field: 'language.hebrew_some_knowledge', operator: 'eq', value: true },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 36,
+        allocation: 'discretionary',
+        note: 'Jewish olim under the Law of Return are not subject to the ordinary non-Jew renunciation pattern. Naturalization remains discretionary and security-screened.',
+      }),
+      principalCitizenshipRoute({
+        id: 'israel-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Israeli parent',
+        summary: 'A person born in Israel after the establishment of the State acquires Israeli nationality by birth when a parent was an Israeli national; birth in Israel alone to two foreign parents is not general jus soli under the Nationality Law.',
+        source: nationality,
+        eligibility: [
+          { field: 'parent.citizenship.iso_n3', operator: 'eq', value: '376' },
+          { field: 'parent.citizenship_at_child_birth', operator: 'eq', value: true },
+        ],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function polandRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const recognition = requireSource(officialSources, OFFICIAL_URLS.poland_recognition);
+  const hub = requireSource(officialSources, OFFICIAL_URLS.poland_citizenship_hub);
+  const hubEn = requireSource(officialSources, OFFICIAL_URLS.poland_citizenship_en);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '616',
+    note: 'All acquisition modes reviewed against official MSWiA citizenship guidance implementing the Act on Polish Citizenship. No direct CBI route is offered.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [hub, hubEn] },
+      { mode: 'naturalization', finding: 'present', sources: [recognition, hub] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [hubEn],
+        note: 'Polish citizenship is primarily jus sanguinis: a child of a Polish parent is Polish regardless of birthplace. Territorial birth alone is not general jus soli.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [recognition, hub],
+        note: 'Poland has no direct citizenship-by-investment programme. Residence permits based on business or investment remain residence, not citizenship.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'poland-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Polish citizenship through a Polish parent',
+        summary: 'A child acquires Polish citizenship when at least one parent is a Polish citizen, regardless of the place of birth, subject to the historical continuity rules of the Citizenship Act for older generations.',
+        source: [hub, hubEn],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '616' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'poland-recognition-by-residence',
+        mode: 'naturalization',
+        title: 'Recognition as a Polish citizen after permanent residence',
+        summary: 'A foreign national may be recognised as a Polish citizen after continuous legal residence of at least three years on permanent residence, EU long-term residence or permanent-residence right, with a stable income, a legal title to dwelling, and Polish language at B1. Shorter periods apply for spouses of Polish citizens, refugees, Polish origin / Karta Polaka holders and other statutory categories.',
+        source: recognition,
+        eligibility: [
+          { field: 'residence.continuous_permanent_years', operator: 'gte', value: 3, unit: 'years' },
+          { field: 'language.polish_level', operator: 'eq', value: 'B1' },
+          { field: 'means.stable_income_and_dwelling', operator: 'eq', value: true },
+        ],
+        months: 36,
+        allocation: 'discretionary',
+        note: 'Recognition may be refused for defence or public-security reasons. Presidential grant of citizenship is a separate discretionary channel with different documentary rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'poland-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Polish parent',
+        summary: 'A person born to a Polish citizen parent is a Polish citizen at birth. Birth in Poland to two foreign parents does not generally create citizenship by soil alone.',
+        source: hubEn,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '616' }],
+        months: 0,
+      }),
+    ],
+  });
+}
+
+function hungaryRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const acquisition = requireSource(officialSources, OFFICIAL_URLS.hungary_acquisition);
+  const simplified = requireSource(officialSources, OFFICIAL_URLS.hungary_simplified);
+  const simplifiedEn = requireSource(officialSources, OFFICIAL_URLS.hungary_simplified_en);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '348',
+    note: 'All acquisition modes reviewed against official government acquisition guidance and simplified-naturalization materials. Investor residence is not direct citizenship.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [simplifiedEn, acquisition] },
+      { mode: 'naturalization', finding: 'present', sources: [acquisition, simplifiedEn] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [acquisition],
+        note: 'Hungary follows jus sanguinis: a child of a Hungarian citizen parent is a citizen. Birth in Hungary to foreign parents is not general jus soli.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [acquisition],
+        note: 'Hungary has no direct citizenship-by-investment grant. Guest-investor or other residence products may support later ordinary naturalization but are not citizenship.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'hungary-citizenship-by-parent-or-simplified-origin',
+        mode: 'ancestry',
+        title: 'Citizenship through a Hungarian parent or simplified origin naturalization',
+        summary: 'A person is a Hungarian citizen at birth if a parent is a Hungarian citizen. Separately, simplified naturalization is available without a multi-year residence period for applicants who prove a Hungarian ancestor or Hungarian origin and demonstrate Hungarian language knowledge, or who meet the long marriage-to-Hungarian criteria.',
+        source: [simplifiedEn, acquisition],
+        eligibility: [
+          {
+            field: 'parent_or_ancestor.hungarian_citizenship_or_origin',
+            operator: 'eq',
+            value: true,
+          },
+        ],
+        months: 0,
+        note: 'Parent-at-birth citizenship is recognition of existing status. Simplified naturalization for distant ancestry is discretionary and language-tested; it is not unconditional multi-generation jus sanguinis without process.',
+      }),
+      principalCitizenshipRoute({
+        id: 'hungary-ordinary-naturalization',
+        mode: 'naturalization',
+        title: 'Ordinary naturalization after continuous residence',
+        summary: 'Ordinary naturalization generally requires eight years of continuous residence in Hungary, clean criminal record, livelihood and housing, no public-security obstacle, and a constitutional exam in Hungarian, unless an exemption applies. Preferential shorter periods exist for spouses, parents of Hungarian minors and other statutory categories.',
+        source: acquisition,
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 8, unit: 'years' },
+          { field: 'exam.constitutional_knowledge_hungarian', operator: 'eq', value: true },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        note: 'Residence eligibility is not an automatic grant. Simplified origin naturalization is modeled under the ancestry route family.',
+      }),
+      principalCitizenshipRoute({
+        id: 'hungary-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Hungarian parent',
+        summary: 'A child acquires Hungarian citizenship at birth when at least one parent is a Hungarian citizen, regardless of the place of birth. Birth in Hungary alone to foreign parents is not general jus soli.',
+        source: acquisition,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '348' }],
+        months: 0,
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -5423,6 +5789,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     bulgariaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
     caymanIslandsRecord(shadow, countrySources),
+    chileRecord(shadow, countrySources),
     colombiaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
     dominicaRecord(shadow, countrySources),
@@ -5432,7 +5799,9 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     germanyRecord(shadow, countrySources),
     grenadaRecord(shadow, countrySources),
     greeceRecord(shadow, countrySources),
+    hungaryRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
+    israelRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
     jordanRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
@@ -5443,6 +5812,8 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     vanuatuRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
+    paraguayRecord(shadow, countrySources),
+    polandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
     saintLuciaRecord(shadow, countrySources),
     saoTomePrincipeRecord(shadow, countrySources),
