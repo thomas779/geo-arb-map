@@ -317,35 +317,39 @@ describe('monitor triage', () => {
 
 describe('AI sweep + grounded verify', () => {
   const groundedBody = {
-    candidates: [{
-      content: { parts: [{ text: '[{"iso_n3":"470","claim":"x"}]' }] },
-      groundingMetadata: {
-        groundingChunks: [{ web: { uri: 'https://redirect.example/abc', title: 'Gov MT' } }],
-        webSearchQueries: ['malta citizenship 2026'],
+    steps: [
+      { google_search_call: { arguments: { queries: ['malta citizenship 2026'] } } },
+      {
+        model_output: {
+          content: [{
+            text: '[{"iso_n3":"470","claim":"x"}]',
+            annotations: [{ url_citation: { url: 'https://gov.mt/x', title: 'Gov MT' } }],
+          }],
+        },
       },
-    }],
+    ],
   };
 
-  test('generateGroundedText sends the google_search tool, no JSON schema, and extracts citations', async () => {
+  test('generateGroundedText calls the Interactions API with the search tool and extracts citations', async () => {
     const calls: Array<{ url: string; init: RequestInit }> = [];
     const fetcher = (async (url: string, init: RequestInit) => {
       calls.push({ url, init });
       return new Response(JSON.stringify(groundedBody), { status: 200, headers: { 'content-type': 'application/json' } });
     }) as unknown as typeof fetch;
     const result = await generateGroundedText('find changes', {
-      provider: 'openai-compatible', apiKey: 'secret-key', model: 'gemini-flash-latest',
+      provider: 'openai-compatible', apiKey: 'secret-key', model: 'gemini-3.5-flash',
       googleApiBaseUrl: 'https://gen.example/v1beta', timeoutMs: 1000,
     }, { fetcher });
 
     expect(result.text).toContain('"iso_n3":"470"');
-    expect(result.citations).toEqual([{ uri: 'https://redirect.example/abc', title: 'Gov MT' }]);
+    expect(result.citations).toEqual([{ uri: 'https://gov.mt/x', title: 'Gov MT' }]);
     expect(result.searchQueries).toEqual(['malta citizenship 2026']);
-    expect(calls[0].url).toBe('https://gen.example/v1beta/models/gemini-flash-latest:generateContent');
+    expect(calls[0].url).toBe('https://gen.example/v1beta/interactions');
     expect((calls[0].init.headers as Record<string, string>)['x-goog-api-key']).toBe('secret-key');
     const sent = JSON.parse(String(calls[0].init.body));
-    expect(sent.tools).toEqual([{ google_search: {} }]);
-    expect(sent.generationConfig.responseSchema).toBeUndefined();
-    expect(sent.generationConfig.responseMimeType).toBeUndefined();
+    expect(sent.tools).toEqual([{ type: 'google_search' }]);
+    expect(sent.input).toBe('find changes');
+    expect(sent.model).toBe('gemini-3.5-flash');
   });
 
   const entry = { iso_n3: '470', name: 'Malta' };

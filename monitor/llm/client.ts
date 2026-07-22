@@ -186,47 +186,51 @@ export async function generateGroundedText(
   }
   const baseUrl = normalizedBaseUrl(config.googleApiBaseUrl || DEFAULT_GEMINI_BASE_URL);
   const signal = AbortSignal.timeout(config.timeoutMs);
-  const response = await fetcher(
-    `${baseUrl}/models/${encodeURIComponent(config.model)}:generateContent`,
-    {
-      method: 'POST',
-      signal,
-      headers: {
-        'x-goog-api-key': config.apiKey,
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        // camelCase per the v1beta REST/JSON API; snake_case is silently ignored,
-        // which leaves the model answering from memory with no grounding.
-        tools: [{ googleSearch: {} }],
-        generationConfig: { maxOutputTokens: maxTokens },
-      }),
+  // Google Search grounding for current Gemini models runs on the Interactions
+  // API; the search tool is declared as {type:'google_search'} and the grounded
+  // answer plus citations come back in the response `steps[]`.
+  const response = await fetcher(`${baseUrl}/interactions`, {
+    method: 'POST',
+    signal,
+    headers: {
+      'x-goog-api-key': config.apiKey,
+      'content-type': 'application/json',
     },
-  );
+    body: JSON.stringify({
+      model: config.model,
+      input: prompt,
+      tools: [{ type: 'google_search' }],
+    }),
+  });
   if (!response.ok) throw await responseError(response, 'gemini-grounded');
   const body = await response.json() as {
-    candidates?: Array<{
-      content?: { parts?: Array<{ text?: string }> };
-      groundingMetadata?: {
-        groundingChunks?: Array<{ web?: { uri?: string; title?: string } }>;
-        webSearchQueries?: string[];
+    output_text?: string;
+    steps?: Array<{
+      google_search_call?: { arguments?: { queries?: string[] } };
+      model_output?: {
+        content?: Array<{
+          text?: string;
+          annotations?: Array<{ url_citation?: { url?: string; title?: string } }>;
+        }>;
       };
     }>;
   };
-  const candidate = body.candidates?.[0];
+  const steps = body.steps ?? [];
   if (process.env.MONITOR_GROUNDING_DEBUG) {
-    console.error('[grounding-debug] candidateKeys=' + JSON.stringify(Object.keys(candidate ?? {}))
-      + ' gm=' + JSON.stringify((candidate as Record<string, unknown> | undefined)?.groundingMetadata ?? null).slice(0, 1200));
+    console.error('[grounding-debug] topKeys=' + JSON.stringify(Object.keys(body))
+      + ' steps=' + steps.length + ' stepKinds=' + JSON.stringify(steps.map(step => Object.keys(step))));
   }
-  const text = (candidate?.content?.parts ?? [])
-    .map(part => part.text ?? '')
-    .join('')
-    .trim();
+  const outputContents = steps.flatMap(step => step.model_output?.content ?? []);
+  const text = (typeof body.output_text === 'string' && body.output_text.trim()
+    ? body.output_text
+    : outputContents.map(item => item.text ?? '').join('')).trim();
   if (!text) throw new Error('Gemini grounded response did not contain text');
-  const citations: GroundingCitation[] = (candidate?.groundingMetadata?.groundingChunks ?? [])
-    .flatMap(chunk => (chunk.web?.uri ? [{ uri: chunk.web.uri, title: chunk.web.title ?? '' }] : []));
-  const searchQueries = candidate?.groundingMetadata?.webSearchQueries ?? [];
+  const searchQueries = steps.flatMap(step => step.google_search_call?.arguments?.queries ?? []);
+  const citations: GroundingCitation[] = outputContents
+    .flatMap(item => item.annotations ?? [])
+    .flatMap(annotation => (annotation.url_citation?.url
+      ? [{ uri: annotation.url_citation.url, title: annotation.url_citation.title ?? '' }]
+      : []));
   return { text, citations, searchQueries };
 }
 
