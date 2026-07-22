@@ -384,6 +384,19 @@ const OFFICIAL_URLS = {
   fsm_citizenship_code: 'https://fsmlaw.org/fsm/code/title07/T07_Ch02.htm',
   rwanda_citizenship: 'https://www.migration.gov.rw/our-services/citizenshipss',
   senegal_constitution: 'https://www.constituteproject.org/constitution/Senegal_2016',
+  albania_constitution: 'https://www.constituteproject.org/constitution/Albania_2016',
+  bosnia_herzegovina_constitution: 'https://www.constituteproject.org/constitution/Bosnia_Herzegovina_2009',
+  north_macedonia_constitution: 'https://www.constituteproject.org/constitution/Macedonia_2011',
+  moldova_constitution: 'https://www.constituteproject.org/constitution/Moldova_2016',
+  montenegro_constitution: 'https://www.constituteproject.org/constitution/Montenegro_2013',
+  ukraine_constitution: 'https://www.constituteproject.org/constitution/Ukraine_2019',
+  belize_constitution: 'https://www.constituteproject.org/constitution/Belize_2011',
+  guyana_constitution: 'https://www.constituteproject.org/constitution/Guyana_2016',
+  haiti_constitution: 'https://www.constituteproject.org/constitution/Haiti_2012',
+  jamaica_constitution: 'https://www.constituteproject.org/constitution/Jamaica_2015',
+  saint_vincent_constitution: 'https://www.constituteproject.org/constitution/Saint_Vincent_and_the_Grenadines_2009',
+  suriname_constitution: 'https://www.constituteproject.org/constitution/Suriname_1992',
+  trinidad_and_tobago_constitution: 'https://www.constituteproject.org/constitution/Trinidad_and_Tobago_2007',
   cuba_constitution: 'https://www.constituteproject.org/constitution/Cuba_2019',
   equatorial_guinea_constitution: 'https://www.constituteproject.org/constitution/Equatorial_Guinea_2012',
   slovenia_constitution: 'https://www.constituteproject.org/constitution/Slovenia_2016',
@@ -955,6 +968,19 @@ function jurisdictionSources(): SourceRecord[] {
       ['FSM Code Title 7 Chapter 2 Citizenship', OFFICIAL_URLS.fsm_citizenship_code, '583', 'en', 'primary_law', 'fsm-citizenship-law'],
       ['Rwanda DGIE - citizenship services', OFFICIAL_URLS.rwanda_citizenship, '646', 'en', 'official_guidance', 'rwanda-citizenship-law'],
       ['Senegal Constitution (Constitute Project)', OFFICIAL_URLS.senegal_constitution, '686', 'en', 'primary_law', 'senegal-citizenship-law'],
+      ['Albania Constitution (Constitute Project)', OFFICIAL_URLS.albania_constitution, '008', 'en', 'primary_law', 'albania-citizenship-law'],
+      ['Bosnia and Herzegovina Constitution (Constitute Project)', OFFICIAL_URLS.bosnia_herzegovina_constitution, '070', 'en', 'primary_law', 'bosnia-herzegovina-citizenship-law'],
+      ['North Macedonia Constitution (Constitute Project)', OFFICIAL_URLS.north_macedonia_constitution, '807', 'en', 'primary_law', 'north-macedonia-citizenship-law'],
+      ['Moldova Constitution (Constitute Project)', OFFICIAL_URLS.moldova_constitution, '498', 'en', 'primary_law', 'moldova-citizenship-law'],
+      ['Montenegro Constitution (Constitute Project)', OFFICIAL_URLS.montenegro_constitution, '499', 'en', 'primary_law', 'montenegro-citizenship-law'],
+      ['Ukraine Constitution (Constitute Project)', OFFICIAL_URLS.ukraine_constitution, '804', 'en', 'primary_law', 'ukraine-citizenship-law'],
+      ['Belize Constitution (Constitute Project)', OFFICIAL_URLS.belize_constitution, '084', 'en', 'primary_law', 'belize-citizenship-law'],
+      ['Guyana Constitution (Constitute Project)', OFFICIAL_URLS.guyana_constitution, '328', 'en', 'primary_law', 'guyana-citizenship-law'],
+      ['Haiti Constitution (Constitute Project)', OFFICIAL_URLS.haiti_constitution, '332', 'en', 'primary_law', 'haiti-citizenship-law'],
+      ['Jamaica Constitution (Constitute Project)', OFFICIAL_URLS.jamaica_constitution, '388', 'en', 'primary_law', 'jamaica-citizenship-law'],
+      ['Saint Vincent and the Grenadines Constitution (Constitute Project)', OFFICIAL_URLS.saint_vincent_constitution, '670', 'en', 'primary_law', 'saint-vincent-citizenship-law'],
+      ['Suriname Constitution (Constitute Project)', OFFICIAL_URLS.suriname_constitution, '740', 'en', 'primary_law', 'suriname-citizenship-law'],
+      ['Trinidad and Tobago Constitution (Constitute Project)', OFFICIAL_URLS.trinidad_and_tobago_constitution, '780', 'en', 'primary_law', 'trinidad-and-tobago-citizenship-law'],
       ['Cuba Constitution (Constitute Project)', OFFICIAL_URLS.cuba_constitution, '192', 'en', 'primary_law', 'cuba-citizenship-law'],
       ['Equatorial Guinea Constitution (Constitute Project)', OFFICIAL_URLS.equatorial_guinea_constitution, '226', 'en', 'primary_law', 'equatorial-guinea-citizenship-law'],
       ['Slovenia Constitution (Constitute Project)', OFFICIAL_URLS.slovenia_constitution, '705', 'en', 'primary_law', 'slovenia-citizenship-law'],
@@ -9702,6 +9728,695 @@ function somaliaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
   });
 }
 
+
+function albaniaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.albania_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '008',
+    note: "Reviewed against Albanian constitutional nationality framework. Ordinary naturalization commonly about five years residence. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Albania national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'albania-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Albania nationality through a Albania parent',
+        summary: 'A child of a Albania parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '008' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'albania-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 5 years residence',
+        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'albania-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Albania parent',
+        summary: 'Birth to a Albania parent creates nationality. Birth in Albania alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '008' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function bosniaHerzegovinaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.bosnia_herzegovina_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '070',
+    note: "Reviewed against Bosnian constitutional nationality framework. Ordinary naturalization commonly about eight years continuous residence. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Bosnia and Herzegovina national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'bosnia-herzegovina-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Bosnia and Herzegovina nationality through a Bosnia and Herzegovina parent',
+        summary: 'A child of a Bosnia and Herzegovina parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '070' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'bosnia-herzegovina-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 8 years residence',
+        summary: 'Adults generally need about 8 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 8, unit: 'years' },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'bosnia-herzegovina-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Bosnia and Herzegovina parent',
+        summary: 'Birth to a Bosnia and Herzegovina parent creates nationality. Birth in Bosnia and Herzegovina alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '070' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function northMacedoniaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.north_macedonia_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '807',
+    note: "Reviewed against North Macedonian constitutional nationality framework (Constitute text may use Macedonia). Ordinary naturalization commonly about eight years. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent North Macedonia national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'north-macedonia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'North Macedonia nationality through a North Macedonia parent',
+        summary: 'A child of a North Macedonia parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '807' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'north-macedonia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 8 years residence',
+        summary: 'Adults generally need about 8 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 8, unit: 'years' },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'north-macedonia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a North Macedonia parent',
+        summary: 'Birth to a North Macedonia parent creates nationality. Birth in North Macedonia alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '807' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function moldovaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.moldova_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '498',
+    note: "Reviewed against Moldovan constitutional nationality framework. Ordinary naturalization commonly about ten years, with shorter tracks for spouses and Romanian/Moldovan origin categories in statute. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Moldova national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'moldova-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Moldova nationality through a Moldova parent',
+        summary: 'A child of a Moldova parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '498' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'moldova-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'moldova-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Moldova parent',
+        summary: 'Birth to a Moldova parent creates nationality. Birth in Moldova alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '498' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function montenegroRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.montenegro_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '499',
+    note: "Reviewed against Montenegrin constitutional nationality framework. Ordinary naturalization commonly about ten years lawful residence. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Montenegro national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'montenegro-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Montenegro nationality through a Montenegro parent',
+        summary: 'A child of a Montenegro parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '499' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'montenegro-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'montenegro-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Montenegro parent',
+        summary: 'Birth to a Montenegro parent creates nationality. Birth in Montenegro alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '499' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function ukraineRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.ukraine_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '804',
+    note: "Reviewed against Ukrainian constitutional nationality framework. Ordinary naturalization commonly about five years continuous residence; wartime and origin-based tracks exist in statute. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Ukraine national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'ukraine-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Ukraine nationality through a Ukraine parent',
+        summary: 'A child of a Ukraine parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '804' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'ukraine-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 5 years residence',
+        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'ukraine-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Ukraine parent',
+        summary: 'Birth to a Ukraine parent creates nationality. Birth in Ukraine alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '804' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function belizeRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.belize_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '084',
+    note: "Reviewed against Belize constitutional nationality framework. Ordinary naturalization commonly about five years residence. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Belize national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'belize-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Belize nationality through a Belize parent',
+        summary: 'A child of a Belize parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '084' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'belize-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 5 years residence',
+        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'belize-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Belize parent',
+        summary: 'Birth to a Belize parent creates nationality. Birth in Belize alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '084' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function guyanaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.guyana_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '328',
+    note: "Reviewed against Guyanese constitutional nationality framework. Ordinary naturalization commonly about seven years. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Guyana national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'guyana-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Guyana nationality through a Guyana parent',
+        summary: 'A child of a Guyana parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '328' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'guyana-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 7 years residence',
+        summary: 'Adults generally need about 7 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 7, unit: 'years' },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'guyana-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Guyana parent',
+        summary: 'Birth to a Guyana parent creates nationality. Birth in Guyana alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '328' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function haitiRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.haiti_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '332',
+    note: "Reviewed against Haitian constitutional nationality framework. Ordinary naturalization commonly about five years. Dual nationality rules have been reformed; case-check current statute. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Haiti national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'haiti-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Haiti nationality through a Haiti parent',
+        summary: 'A child of a Haiti parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '332' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'haiti-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 5 years residence',
+        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'haiti-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Haiti parent',
+        summary: 'Birth to a Haiti parent creates nationality. Birth in Haiti alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '332' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function jamaicaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.jamaica_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '388',
+    note: "Reviewed against Jamaican constitutional nationality framework. Ordinary naturalization commonly about five years residence. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Jamaica national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'jamaica-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Jamaica nationality through a Jamaica parent',
+        summary: 'A child of a Jamaica parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '388' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'jamaica-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 5 years residence',
+        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'jamaica-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Jamaica parent',
+        summary: 'Birth to a Jamaica parent creates nationality. Birth in Jamaica alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '388' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function saintVincentRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.saint_vincent_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '670',
+    note: "Reviewed against Vincentian constitutional nationality framework. Ordinary naturalization commonly about seven years. CIP/CBI is separate if an active programme exists and is not modeled without official programme sources here. No modeled CBI route.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Saint Vincent and the Grenadines national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'saint-vincent-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Saint Vincent and the Grenadines nationality through a Saint Vincent and the Grenadines parent',
+        summary: 'A child of a Saint Vincent and the Grenadines parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '670' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'saint-vincent-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 7 years residence',
+        summary: 'Adults generally need about 7 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 7, unit: 'years' },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'saint-vincent-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Saint Vincent and the Grenadines parent',
+        summary: 'Birth to a Saint Vincent and the Grenadines parent creates nationality. Birth in Saint Vincent and the Grenadines alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '670' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function surinameRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.suriname_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '740',
+    note: "Reviewed against Surinamese constitutional nationality framework. Ordinary naturalization commonly about five years. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Suriname national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'suriname-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Suriname nationality through a Suriname parent',
+        summary: 'A child of a Suriname parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '740' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'suriname-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 5 years residence',
+        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'suriname-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Suriname parent',
+        summary: 'Birth to a Suriname parent creates nationality. Birth in Suriname alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '740' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function trinidadAndTobagoRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.trinidad_and_tobago_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '780',
+    note: "Reviewed against Trinidad and Tobago constitutional nationality framework. Ordinary naturalization commonly about eight years residence (five years in some marriage tracks). No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Trinidad and Tobago national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'trinidad-and-tobago-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Trinidad and Tobago nationality through a Trinidad and Tobago parent',
+        summary: 'A child of a Trinidad and Tobago parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '780' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'trinidad-and-tobago-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 8 years residence',
+        summary: 'Adults generally need about 8 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 8, unit: 'years' },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'trinidad-and-tobago-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Trinidad and Tobago parent',
+        summary: 'Birth to a Trinidad and Tobago parent creates nationality. Birth in Trinidad and Tobago alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '780' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
 function senegalRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const constitution = requireSource(officialSources, OFFICIAL_URLS.senegal_constitution);
   return reviewedCountryRecord({
@@ -12393,6 +13108,7 @@ function validateReferences(pilot: CanonicalPilot, shadow: DataShadow): void {
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
   const jurisdictions = [
+    albaniaRecord(shadow, countrySources),
     algeriaRecord(shadow, countrySources),
     andorraRecord(shadow, countrySources),
     angolaRecord(shadow, countrySources),
@@ -12403,8 +13119,10 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     bahamasRecord(shadow, countrySources),
     barbadosRecord(shadow, countrySources),
     belgiumRecord(shadow, countrySources),
+    belizeRecord(shadow, countrySources),
     beninRecord(shadow, countrySources),
     boliviaRecord(shadow, countrySources),
+    bosniaHerzegovinaRecord(shadow, countrySources),
     botswanaRecord(shadow, countrySources),
     brazilRecord(shadow, countrySources),
     bruneiRecord(shadow, countrySources),
@@ -12455,6 +13173,8 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     guatemalaRecord(shadow, countrySources),
     guineaBissauRecord(shadow, countrySources),
     guineaRecord(shadow, countrySources),
+    guyanaRecord(shadow, countrySources),
+    haitiRecord(shadow, countrySources),
     hondurasRecord(shadow, countrySources),
     hungaryRecord(shadow, countrySources),
     icelandRecord(shadow, countrySources),
@@ -12463,6 +13183,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     irelandRecord(shadow, countrySources),
     israelRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
+    jamaicaRecord(shadow, countrySources),
     japanRecord(shadow, countrySources),
     jordanRecord(shadow, countrySources),
     kenyaRecord(shadow, countrySources),
@@ -12485,7 +13206,9 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     mauritiusRecord(shadow, countrySources),
     mexicoRecord(shadow, countrySources),
     micronesiaRecord(shadow, countrySources),
+    moldovaRecord(shadow, countrySources),
     monacoRecord(shadow, countrySources),
+    montenegroRecord(shadow, countrySources),
     moroccoRecord(shadow, countrySources),
     mozambiqueRecord(shadow, countrySources),
     namibiaRecord(shadow, countrySources),
@@ -12495,6 +13218,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     nicaraguaRecord(shadow, countrySources),
     nigeriaRecord(shadow, countrySources),
     nigerRecord(shadow, countrySources),
+    northMacedoniaRecord(shadow, countrySources),
     norwayRecord(shadow, countrySources),
     palauRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
@@ -12507,6 +13231,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     romaniaRecord(shadow, countrySources),
     rwandaRecord(shadow, countrySources),
     saintLuciaRecord(shadow, countrySources),
+    saintVincentRecord(shadow, countrySources),
     samoaRecord(shadow, countrySources),
     saoTomePrincipeRecord(shadow, countrySources),
     senegalRecord(shadow, countrySources),
@@ -12523,6 +13248,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     spainRecord(shadow, countrySources),
     stKittsNevisRecord(shadow, countrySources),
     sudanRecord(shadow, countrySources),
+    surinameRecord(shadow, countrySources),
     swedenRecord(shadow, countrySources),
     switzerlandRecord(shadow, countrySources),
     taiwanRecord(shadow, countrySources),
@@ -12531,10 +13257,12 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     timorLesteRecord(shadow, countrySources),
     togoRecord(shadow, countrySources),
     tongaRecord(shadow, countrySources),
+    trinidadAndTobagoRecord(shadow, countrySources),
     tunisiaRecord(shadow, countrySources),
     turkiyeRecord(shadow, countrySources),
     tuvaluRecord(shadow, countrySources),
     ugandaRecord(shadow, countrySources),
+    ukraineRecord(shadow, countrySources),
     unitedArabEmiratesRecord(shadow, countrySources),
     unitedKingdomRecord(shadow, countrySources),
     unitedStatesRecord(shadow, countrySources),
@@ -12544,6 +13272,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     vietnamRecord(shadow, countrySources),
     zambiaRecord(shadow, countrySources),
     zimbabweRecord(shadow, countrySources),
+
   ];
   const manualSources = arrangementSources(shadow);
   const sourcesById = new Map<string, SourceRecord>();

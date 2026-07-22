@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 477,
+      "routes": 516,
       "by_mode": {
-        "ancestry": 151,
-        "naturalization": 156,
-        "birth": 151,
+        "ancestry": 164,
+        "naturalization": 169,
+        "birth": 164,
         "investment": 19
       },
       "by_status": {
-        "active": 470,
+        "active": 509,
         "pending_verification": 4,
         "inactive": 2,
         "verified_negative": 1
@@ -61,12 +61,16 @@
       "name": "Albania",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "albania-citizenship-by-parent",
+        "albania-naturalization",
+        "albania-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "012",
@@ -335,12 +339,16 @@
       "name": "Bosnia and Herz.",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "bosnia-herzegovina-citizenship-by-parent",
+        "bosnia-herzegovina-naturalization",
+        "bosnia-herzegovina-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "072",
@@ -379,12 +387,16 @@
       "name": "Belize",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "belize-citizenship-by-parent",
+        "belize-naturalization",
+        "belize-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "086",
@@ -1341,24 +1353,32 @@
       "name": "Guyana",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "guyana-citizenship-by-parent",
+        "guyana-naturalization",
+        "guyana-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "332",
       "name": "Haiti",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "haiti-citizenship-by-parent",
+        "haiti-naturalization",
+        "haiti-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "334",
@@ -1569,12 +1589,16 @@
       "name": "Jamaica",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "jamaica-citizenship-by-parent",
+        "jamaica-naturalization",
+        "jamaica-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "392",
@@ -2012,24 +2036,32 @@
       "name": "Moldova",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "moldova-citizenship-by-parent",
+        "moldova-naturalization",
+        "moldova-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "499",
       "name": "Montenegro",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "montenegro-citizenship-by-parent",
+        "montenegro-naturalization",
+        "montenegro-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "500",
@@ -2728,12 +2760,16 @@
       "name": "St. Vin. and Gren.",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "saint-vincent-citizenship-by-parent",
+        "saint-vincent-naturalization",
+        "saint-vincent-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "674",
@@ -3017,12 +3053,16 @@
       "name": "Suriname",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "suriname-citizenship-by-parent",
+        "suriname-naturalization",
+        "suriname-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "748",
@@ -3161,12 +3201,16 @@
       "name": "Trinidad and Tobago",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "trinidad-and-tobago-citizenship-by-parent",
+        "trinidad-and-tobago-naturalization",
+        "trinidad-and-tobago-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "784",
@@ -3279,24 +3323,32 @@
       "name": "Ukraine",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "ukraine-citizenship-by-parent",
+        "ukraine-naturalization",
+        "ukraine-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "807",
       "name": "Macedonia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "north-macedonia-citizenship-by-parent",
+        "north-macedonia-naturalization",
+        "north-macedonia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "818",
@@ -3542,6 +3594,112 @@
     }
   ],
   "routes": [
+    {
+      "id": "albania-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "008",
+        "name": "Albania"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Albania parent",
+      "summary": "Birth to a Albania parent creates nationality. Birth in Albania alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "albania-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Albania parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Albania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Albania_2016"
+        }
+      ]
+    },
+    {
+      "id": "albania-citizenship-by-parent",
+      "country": {
+        "iso_n3": "008",
+        "name": "Albania"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Albania nationality through a Albania parent",
+      "summary": "A child of a Albania parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "albania-citizenship-by-parent-principal",
+          "label": "Albania nationality through a Albania parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Albania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Albania_2016"
+        }
+      ]
+    },
+    {
+      "id": "albania-naturalization",
+      "country": {
+        "iso_n3": "008",
+        "name": "Albania"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "albania-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Albania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Albania_2016"
+        }
+      ]
+    },
     {
       "id": "algeria-citizenship-at-birth-by-parent",
       "country": {
@@ -4825,6 +4983,112 @@
       ]
     },
     {
+      "id": "bosnia-herzegovina-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "070",
+        "name": "Bosnia and Herz."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Bosnia and Herzegovina parent",
+      "summary": "Birth to a Bosnia and Herzegovina parent creates nationality. Birth in Bosnia and Herzegovina alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bosnia-herzegovina-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Bosnia and Herzegovina parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Bosnia and Herzegovina Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bosnia_Herzegovina_2009"
+        }
+      ]
+    },
+    {
+      "id": "bosnia-herzegovina-citizenship-by-parent",
+      "country": {
+        "iso_n3": "070",
+        "name": "Bosnia and Herz."
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Bosnia and Herzegovina nationality through a Bosnia and Herzegovina parent",
+      "summary": "A child of a Bosnia and Herzegovina parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bosnia-herzegovina-citizenship-by-parent-principal",
+          "label": "Bosnia and Herzegovina nationality through a Bosnia and Herzegovina parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Bosnia and Herzegovina Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bosnia_Herzegovina_2009"
+        }
+      ]
+    },
+    {
+      "id": "bosnia-herzegovina-naturalization",
+      "country": {
+        "iso_n3": "070",
+        "name": "Bosnia and Herz."
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 8 years residence",
+      "summary": "Adults generally need about 8 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bosnia-herzegovina-naturalization-principal",
+          "label": "Naturalization after about 8 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Bosnia and Herzegovina Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bosnia_Herzegovina_2009"
+        }
+      ]
+    },
+    {
       "id": "botswana-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "072",
@@ -5059,6 +5323,112 @@
         {
           "title": "Brazil Federal Police — family-reunification guidance",
           "url": "https://www.gov.br/pf/pt-br/assuntos/imigracao/duvidas-frequentes"
+        }
+      ]
+    },
+    {
+      "id": "belize-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "084",
+        "name": "Belize"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Belize parent",
+      "summary": "Birth to a Belize parent creates nationality. Birth in Belize alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "belize-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Belize parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Belize Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belize_2011"
+        }
+      ]
+    },
+    {
+      "id": "belize-citizenship-by-parent",
+      "country": {
+        "iso_n3": "084",
+        "name": "Belize"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Belize nationality through a Belize parent",
+      "summary": "A child of a Belize parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "belize-citizenship-by-parent-principal",
+          "label": "Belize nationality through a Belize parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Belize Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belize_2011"
+        }
+      ]
+    },
+    {
+      "id": "belize-naturalization",
+      "country": {
+        "iso_n3": "084",
+        "name": "Belize"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "belize-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Belize Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belize_2011"
         }
       ]
     },
@@ -10499,6 +10869,218 @@
       ]
     },
     {
+      "id": "guyana-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "328",
+        "name": "Guyana"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Guyana parent",
+      "summary": "Birth to a Guyana parent creates nationality. Birth in Guyana alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guyana-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Guyana parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guyana Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guyana_2016"
+        }
+      ]
+    },
+    {
+      "id": "guyana-citizenship-by-parent",
+      "country": {
+        "iso_n3": "328",
+        "name": "Guyana"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Guyana nationality through a Guyana parent",
+      "summary": "A child of a Guyana parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guyana-citizenship-by-parent-principal",
+          "label": "Guyana nationality through a Guyana parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guyana Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guyana_2016"
+        }
+      ]
+    },
+    {
+      "id": "guyana-naturalization",
+      "country": {
+        "iso_n3": "328",
+        "name": "Guyana"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 7 years residence",
+      "summary": "Adults generally need about 7 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "guyana-naturalization-principal",
+          "label": "Naturalization after about 7 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guyana Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guyana_2016"
+        }
+      ]
+    },
+    {
+      "id": "haiti-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "332",
+        "name": "Haiti"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Haiti parent",
+      "summary": "Birth to a Haiti parent creates nationality. Birth in Haiti alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "haiti-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Haiti parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Haiti Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Haiti_2012"
+        }
+      ]
+    },
+    {
+      "id": "haiti-citizenship-by-parent",
+      "country": {
+        "iso_n3": "332",
+        "name": "Haiti"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Haiti nationality through a Haiti parent",
+      "summary": "A child of a Haiti parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "haiti-citizenship-by-parent-principal",
+          "label": "Haiti nationality through a Haiti parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Haiti Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Haiti_2012"
+        }
+      ]
+    },
+    {
+      "id": "haiti-naturalization",
+      "country": {
+        "iso_n3": "332",
+        "name": "Haiti"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "haiti-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Haiti Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Haiti_2012"
+        }
+      ]
+    },
+    {
       "id": "honduras-citizenship-by-birth",
       "country": {
         "iso_n3": "340",
@@ -11527,6 +12109,112 @@
         {
           "title": "Cote d'Ivoire Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Cote_dIvoire_2016"
+        }
+      ]
+    },
+    {
+      "id": "jamaica-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "388",
+        "name": "Jamaica"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Jamaica parent",
+      "summary": "Birth to a Jamaica parent creates nationality. Birth in Jamaica alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "jamaica-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Jamaica parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Jamaica Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Jamaica_2015"
+        }
+      ]
+    },
+    {
+      "id": "jamaica-citizenship-by-parent",
+      "country": {
+        "iso_n3": "388",
+        "name": "Jamaica"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Jamaica nationality through a Jamaica parent",
+      "summary": "A child of a Jamaica parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "jamaica-citizenship-by-parent-principal",
+          "label": "Jamaica nationality through a Jamaica parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Jamaica Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Jamaica_2015"
+        }
+      ]
+    },
+    {
+      "id": "jamaica-naturalization",
+      "country": {
+        "iso_n3": "388",
+        "name": "Jamaica"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "jamaica-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Jamaica Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Jamaica_2015"
         }
       ]
     },
@@ -13838,6 +14526,218 @@
         {
           "title": "Monaco mon service public - acquiring nationality",
           "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality"
+        }
+      ]
+    },
+    {
+      "id": "moldova-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "498",
+        "name": "Moldova"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Moldova parent",
+      "summary": "Birth to a Moldova parent creates nationality. Birth in Moldova alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "moldova-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Moldova parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Moldova Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Moldova_2016"
+        }
+      ]
+    },
+    {
+      "id": "moldova-citizenship-by-parent",
+      "country": {
+        "iso_n3": "498",
+        "name": "Moldova"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Moldova nationality through a Moldova parent",
+      "summary": "A child of a Moldova parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "moldova-citizenship-by-parent-principal",
+          "label": "Moldova nationality through a Moldova parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Moldova Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Moldova_2016"
+        }
+      ]
+    },
+    {
+      "id": "moldova-naturalization",
+      "country": {
+        "iso_n3": "498",
+        "name": "Moldova"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 10 years residence",
+      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "moldova-naturalization-principal",
+          "label": "Naturalization after about 10 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Moldova Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Moldova_2016"
+        }
+      ]
+    },
+    {
+      "id": "montenegro-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "499",
+        "name": "Montenegro"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Montenegro parent",
+      "summary": "Birth to a Montenegro parent creates nationality. Birth in Montenegro alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "montenegro-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Montenegro parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Montenegro Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Montenegro_2013"
+        }
+      ]
+    },
+    {
+      "id": "montenegro-citizenship-by-parent",
+      "country": {
+        "iso_n3": "499",
+        "name": "Montenegro"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Montenegro nationality through a Montenegro parent",
+      "summary": "A child of a Montenegro parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "montenegro-citizenship-by-parent-principal",
+          "label": "Montenegro nationality through a Montenegro parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Montenegro Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Montenegro_2013"
+        }
+      ]
+    },
+    {
+      "id": "montenegro-naturalization",
+      "country": {
+        "iso_n3": "499",
+        "name": "Montenegro"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 10 years residence",
+      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "montenegro-naturalization-principal",
+          "label": "Naturalization after about 10 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Montenegro Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Montenegro_2013"
         }
       ]
     },
@@ -17156,6 +18056,112 @@
       ]
     },
     {
+      "id": "saint-vincent-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "670",
+        "name": "St. Vin. and Gren."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Saint Vincent and the Grenadines parent",
+      "summary": "Birth to a Saint Vincent and the Grenadines parent creates nationality. Birth in Saint Vincent and the Grenadines alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-vincent-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Saint Vincent and the Grenadines parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Saint Vincent and the Grenadines Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Saint_Vincent_and_the_Grenadines_2009"
+        }
+      ]
+    },
+    {
+      "id": "saint-vincent-citizenship-by-parent",
+      "country": {
+        "iso_n3": "670",
+        "name": "St. Vin. and Gren."
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Saint Vincent and the Grenadines nationality through a Saint Vincent and the Grenadines parent",
+      "summary": "A child of a Saint Vincent and the Grenadines parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-vincent-citizenship-by-parent-principal",
+          "label": "Saint Vincent and the Grenadines nationality through a Saint Vincent and the Grenadines parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Saint Vincent and the Grenadines Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Saint_Vincent_and_the_Grenadines_2009"
+        }
+      ]
+    },
+    {
+      "id": "saint-vincent-naturalization",
+      "country": {
+        "iso_n3": "670",
+        "name": "St. Vin. and Gren."
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 7 years residence",
+      "summary": "Adults generally need about 7 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "saint-vincent-naturalization-principal",
+          "label": "Naturalization after about 7 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Saint Vincent and the Grenadines Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Saint_Vincent_and_the_Grenadines_2009"
+        }
+      ]
+    },
+    {
       "id": "sao-tome-citizenship-by-birth",
       "country": {
         "iso_n3": "678",
@@ -18879,6 +19885,112 @@
       ]
     },
     {
+      "id": "suriname-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "740",
+        "name": "Suriname"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Suriname parent",
+      "summary": "Birth to a Suriname parent creates nationality. Birth in Suriname alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "suriname-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Suriname parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Suriname Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Suriname_1992"
+        }
+      ]
+    },
+    {
+      "id": "suriname-citizenship-by-parent",
+      "country": {
+        "iso_n3": "740",
+        "name": "Suriname"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Suriname nationality through a Suriname parent",
+      "summary": "A child of a Suriname parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "suriname-citizenship-by-parent-principal",
+          "label": "Suriname nationality through a Suriname parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Suriname Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Suriname_1992"
+        }
+      ]
+    },
+    {
+      "id": "suriname-naturalization",
+      "country": {
+        "iso_n3": "740",
+        "name": "Suriname"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "suriname-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Suriname Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Suriname_1992"
+        }
+      ]
+    },
+    {
       "id": "eswatini-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "748",
@@ -19516,6 +20628,112 @@
       ]
     },
     {
+      "id": "trinidad-and-tobago-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "780",
+        "name": "Trinidad and Tobago"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Trinidad and Tobago parent",
+      "summary": "Birth to a Trinidad and Tobago parent creates nationality. Birth in Trinidad and Tobago alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "trinidad-and-tobago-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Trinidad and Tobago parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Trinidad and Tobago Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Trinidad_and_Tobago_2007"
+        }
+      ]
+    },
+    {
+      "id": "trinidad-and-tobago-citizenship-by-parent",
+      "country": {
+        "iso_n3": "780",
+        "name": "Trinidad and Tobago"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Trinidad and Tobago nationality through a Trinidad and Tobago parent",
+      "summary": "A child of a Trinidad and Tobago parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "trinidad-and-tobago-citizenship-by-parent-principal",
+          "label": "Trinidad and Tobago nationality through a Trinidad and Tobago parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Trinidad and Tobago Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Trinidad_and_Tobago_2007"
+        }
+      ]
+    },
+    {
+      "id": "trinidad-and-tobago-naturalization",
+      "country": {
+        "iso_n3": "780",
+        "name": "Trinidad and Tobago"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 8 years residence",
+      "summary": "Adults generally need about 8 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "trinidad-and-tobago-naturalization-principal",
+          "label": "Naturalization after about 8 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Trinidad and Tobago Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Trinidad_and_Tobago_2007"
+        }
+      ]
+    },
+    {
       "id": "uae-citizenship-at-birth-qualifying-parent",
       "country": {
         "iso_n3": "784",
@@ -20112,6 +21330,218 @@
         {
           "title": "Uganda Immigration - naturalization",
           "url": "https://www.immigration.go.ug/node/235"
+        }
+      ]
+    },
+    {
+      "id": "ukraine-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "804",
+        "name": "Ukraine"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Ukraine parent",
+      "summary": "Birth to a Ukraine parent creates nationality. Birth in Ukraine alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ukraine-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Ukraine parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ukraine Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+        }
+      ]
+    },
+    {
+      "id": "ukraine-citizenship-by-parent",
+      "country": {
+        "iso_n3": "804",
+        "name": "Ukraine"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Ukraine nationality through a Ukraine parent",
+      "summary": "A child of a Ukraine parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ukraine-citizenship-by-parent-principal",
+          "label": "Ukraine nationality through a Ukraine parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ukraine Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+        }
+      ]
+    },
+    {
+      "id": "ukraine-naturalization",
+      "country": {
+        "iso_n3": "804",
+        "name": "Ukraine"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ukraine-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ukraine Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+        }
+      ]
+    },
+    {
+      "id": "north-macedonia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "807",
+        "name": "Macedonia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a North Macedonia parent",
+      "summary": "Birth to a North Macedonia parent creates nationality. Birth in North Macedonia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "north-macedonia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a North Macedonia parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "North Macedonia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Macedonia_2011"
+        }
+      ]
+    },
+    {
+      "id": "north-macedonia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "807",
+        "name": "Macedonia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "North Macedonia nationality through a North Macedonia parent",
+      "summary": "A child of a North Macedonia parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "north-macedonia-citizenship-by-parent-principal",
+          "label": "North Macedonia nationality through a North Macedonia parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "North Macedonia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Macedonia_2011"
+        }
+      ]
+    },
+    {
+      "id": "north-macedonia-naturalization",
+      "country": {
+        "iso_n3": "807",
+        "name": "Macedonia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 8 years residence",
+      "summary": "Adults generally need about 8 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "north-macedonia-naturalization-principal",
+          "label": "Naturalization after about 8 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "North Macedonia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Macedonia_2011"
         }
       ]
     },

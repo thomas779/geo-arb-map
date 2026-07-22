@@ -4319,6 +4319,253 @@
         "birth"
       ],
       "notes": "Somalia constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "albania-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Albania_2016",
+      "jurisdictions": [
+        "008"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Albania",
+        "residence",
+        "birth"
+      ],
+      "notes": "Albania constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "bosnia-herzegovina-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Bosnia_Herzegovina_2009",
+      "jurisdictions": [
+        "070"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Bosnia and Herzegovina",
+        "residence",
+        "birth"
+      ],
+      "notes": "Bosnia and Herzegovina constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "north-macedonia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Macedonia_2011",
+      "jurisdictions": [
+        "807"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "North Macedonia",
+        "residence",
+        "birth"
+      ],
+      "notes": "North Macedonia constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "moldova-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Moldova_2016",
+      "jurisdictions": [
+        "498"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Moldova",
+        "residence",
+        "birth"
+      ],
+      "notes": "Moldova constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "montenegro-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Montenegro_2013",
+      "jurisdictions": [
+        "499"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Montenegro",
+        "residence",
+        "birth"
+      ],
+      "notes": "Montenegro constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "ukraine-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Ukraine_2019",
+      "jurisdictions": [
+        "804"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Ukraine",
+        "residence",
+        "birth"
+      ],
+      "notes": "Ukraine constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "belize-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Belize_2011",
+      "jurisdictions": [
+        "084"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Belize",
+        "residence",
+        "birth"
+      ],
+      "notes": "Belize constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "guyana-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Guyana_2016",
+      "jurisdictions": [
+        "328"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Guyana",
+        "residence",
+        "birth"
+      ],
+      "notes": "Guyana constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "haiti-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Haiti_2012",
+      "jurisdictions": [
+        "332"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Haiti",
+        "residence",
+        "birth"
+      ],
+      "notes": "Haiti constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "jamaica-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Jamaica_2015",
+      "jurisdictions": [
+        "388"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Jamaica",
+        "residence",
+        "birth"
+      ],
+      "notes": "Jamaica constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "saint-vincent-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Saint_Vincent_and_the_Grenadines_2009",
+      "jurisdictions": [
+        "670"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Saint Vincent and the Grenadines",
+        "residence",
+        "birth"
+      ],
+      "notes": "Saint Vincent and the Grenadines constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "suriname-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Suriname_1992",
+      "jurisdictions": [
+        "740"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Suriname",
+        "residence",
+        "birth"
+      ],
+      "notes": "Suriname constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "trinidad-and-tobago-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Trinidad_and_Tobago_2007",
+      "jurisdictions": [
+        "780"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Trinidad and Tobago",
+        "residence",
+        "birth"
+      ],
+      "notes": "Trinidad and Tobago constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
     }
   ]
 }
