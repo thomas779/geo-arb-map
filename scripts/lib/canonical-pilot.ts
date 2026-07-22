@@ -384,6 +384,20 @@ const OFFICIAL_URLS = {
   fsm_citizenship_code: 'https://fsmlaw.org/fsm/code/title07/T07_Ch02.htm',
   rwanda_citizenship: 'https://www.migration.gov.rw/our-services/citizenshipss',
   senegal_constitution: 'https://www.constituteproject.org/constitution/Senegal_2016',
+  cuba_constitution: 'https://www.constituteproject.org/constitution/Cuba_2019',
+  equatorial_guinea_constitution: 'https://www.constituteproject.org/constitution/Equatorial_Guinea_2012',
+  slovenia_constitution: 'https://www.constituteproject.org/constitution/Slovenia_2016',
+  burundi_constitution: 'https://www.constituteproject.org/constitution/Burundi_2018',
+  central_african_republic_constitution: 'https://www.constituteproject.org/constitution/Central_African_Republic_2016',
+  chad_constitution: 'https://www.constituteproject.org/constitution/Chad_2018',
+  comoros_constitution: 'https://www.constituteproject.org/constitution/Comoros_2018',
+  djibouti_constitution: 'https://www.constituteproject.org/constitution/Djibouti_2010',
+  eritrea_constitution: 'https://www.constituteproject.org/constitution/Eritrea_1997',
+  guinea_constitution: 'https://www.constituteproject.org/constitution/Guinea_2020',
+  guinea_bissau_constitution: 'https://www.constituteproject.org/constitution/Guinea_Bissau_1996',
+  mauritania_constitution: 'https://www.constituteproject.org/constitution/Mauritania_2012',
+  south_sudan_constitution: 'https://www.constituteproject.org/constitution/South_Sudan_2011',
+  somalia_constitution: 'https://www.constituteproject.org/constitution/Somalia_2012',
   benin_constitution: 'https://www.constituteproject.org/constitution/Benin_1990',
   burkina_faso_constitution: 'https://www.constituteproject.org/constitution/Burkina_Faso_2012',
   congo_constitution: 'https://www.constituteproject.org/constitution/Congo_2015',
@@ -941,6 +955,20 @@ function jurisdictionSources(): SourceRecord[] {
       ['FSM Code Title 7 Chapter 2 Citizenship', OFFICIAL_URLS.fsm_citizenship_code, '583', 'en', 'primary_law', 'fsm-citizenship-law'],
       ['Rwanda DGIE - citizenship services', OFFICIAL_URLS.rwanda_citizenship, '646', 'en', 'official_guidance', 'rwanda-citizenship-law'],
       ['Senegal Constitution (Constitute Project)', OFFICIAL_URLS.senegal_constitution, '686', 'en', 'primary_law', 'senegal-citizenship-law'],
+      ['Cuba Constitution (Constitute Project)', OFFICIAL_URLS.cuba_constitution, '192', 'en', 'primary_law', 'cuba-citizenship-law'],
+      ['Equatorial Guinea Constitution (Constitute Project)', OFFICIAL_URLS.equatorial_guinea_constitution, '226', 'en', 'primary_law', 'equatorial-guinea-citizenship-law'],
+      ['Slovenia Constitution (Constitute Project)', OFFICIAL_URLS.slovenia_constitution, '705', 'en', 'primary_law', 'slovenia-citizenship-law'],
+      ['Burundi Constitution (Constitute Project)', OFFICIAL_URLS.burundi_constitution, '108', 'en', 'primary_law', 'burundi-citizenship-law'],
+      ['Central African Republic Constitution (Constitute Project)', OFFICIAL_URLS.central_african_republic_constitution, '140', 'en', 'primary_law', 'central-african-republic-citizenship-law'],
+      ['Chad Constitution (Constitute Project)', OFFICIAL_URLS.chad_constitution, '148', 'en', 'primary_law', 'chad-citizenship-law'],
+      ['Comoros Constitution (Constitute Project)', OFFICIAL_URLS.comoros_constitution, '174', 'en', 'primary_law', 'comoros-citizenship-law'],
+      ['Djibouti Constitution (Constitute Project)', OFFICIAL_URLS.djibouti_constitution, '262', 'en', 'primary_law', 'djibouti-citizenship-law'],
+      ['Eritrea Constitution (Constitute Project)', OFFICIAL_URLS.eritrea_constitution, '232', 'en', 'primary_law', 'eritrea-citizenship-law'],
+      ['Guinea Constitution (Constitute Project)', OFFICIAL_URLS.guinea_constitution, '324', 'en', 'primary_law', 'guinea-citizenship-law'],
+      ['Guinea-Bissau Constitution (Constitute Project)', OFFICIAL_URLS.guinea_bissau_constitution, '624', 'en', 'primary_law', 'guinea-bissau-citizenship-law'],
+      ['Mauritania Constitution (Constitute Project)', OFFICIAL_URLS.mauritania_constitution, '478', 'en', 'primary_law', 'mauritania-citizenship-law'],
+      ['South Sudan Constitution (Constitute Project)', OFFICIAL_URLS.south_sudan_constitution, '728', 'en', 'primary_law', 'south-sudan-citizenship-law'],
+      ['Somalia Constitution (Constitute Project)', OFFICIAL_URLS.somalia_constitution, '706', 'en', 'primary_law', 'somalia-citizenship-law'],
       ['Benin Constitution (Constitute Project)', OFFICIAL_URLS.benin_constitution, '204', 'en', 'primary_law', 'benin-citizenship-law'],
       ['Burkina Faso Constitution (Constitute Project)', OFFICIAL_URLS.burkina_faso_constitution, '854', 'en', 'primary_law', 'burkina-faso-citizenship-law'],
       ['Republic of the Congo Constitution (Constitute Project)', OFFICIAL_URLS.congo_constitution, '178', 'en', 'primary_law', 'congo-citizenship-law'],
@@ -8932,6 +8960,748 @@ function togoRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jurisd
   });
 }
 
+
+function cubaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.cuba_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '192',
+    note: "Reviewed against Cuban constitutional citizenship framework. Naturalization is by statute and presidential discretion; ordinary multi-year residence is modeled as about five years. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Cuba national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'cuba-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Cuba nationality through a Cuba parent',
+        summary: 'A child of a Cuba parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '192' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cuba-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 5 years residence',
+        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'cuba-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Cuba parent',
+        summary: 'Birth to a Cuba parent creates nationality. Birth in Cuba alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '192' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function equatorialGuineaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.equatorial_guinea_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '226',
+    note: "Reviewed against Equatorial Guinean constitutional nationality framework. Ibero-American Spain beneficiary. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Equatorial Guinea national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'equatorial-guinea-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Equatorial Guinea nationality through a Equatorial Guinea parent',
+        summary: 'A child of a Equatorial Guinea parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '226' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'equatorial-guinea-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'equatorial-guinea-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Equatorial Guinea parent',
+        summary: 'Birth to a Equatorial Guinea parent creates nationality. Birth in Equatorial Guinea alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '226' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function sloveniaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.slovenia_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '705',
+    note: "Reviewed against Slovenian constitutional nationality framework. EU member. Ordinary naturalization commonly about ten years residence with shorter tracks for spouses and Slovenian origin. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Slovenia national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'slovenia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Slovenia nationality through a Slovenia parent',
+        summary: 'A child of a Slovenia parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '705' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'slovenia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'slovenia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Slovenia parent',
+        summary: 'Birth to a Slovenia parent creates nationality. Birth in Slovenia alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '705' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function burundiRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.burundi_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '108',
+    note: "Reviewed against Burundian constitutional nationality framework. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Burundi national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'burundi-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Burundi nationality through a Burundi parent',
+        summary: 'A child of a Burundi parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '108' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'burundi-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'burundi-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Burundi parent',
+        summary: 'Birth to a Burundi parent creates nationality. Birth in Burundi alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '108' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function centralAfricanRepublicRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.central_african_republic_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '140',
+    note: "Reviewed against Central African constitutional nationality framework. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Central African Republic national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'central-african-republic-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Central African Republic nationality through a Central African Republic parent',
+        summary: 'A child of a Central African Republic parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '140' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'central-african-republic-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 5 years residence',
+        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'central-african-republic-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Central African Republic parent',
+        summary: 'Birth to a Central African Republic parent creates nationality. Birth in Central African Republic alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '140' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function chadRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.chad_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '148',
+    note: "Reviewed against Chadian constitutional nationality framework. Ordinary naturalization often modeled near fifteen years. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Chad national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'chad-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Chad nationality through a Chad parent',
+        summary: 'A child of a Chad parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '148' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'chad-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 15 years residence',
+        summary: 'Adults generally need about 15 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 15, unit: 'years' },
+        ],
+        months: 180,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'chad-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Chad parent',
+        summary: 'Birth to a Chad parent creates nationality. Birth in Chad alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '148' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function comorosRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.comoros_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '174',
+    note: "Reviewed against Comorian constitutional nationality framework. No CBI. No modeled CBI route without a current official programme source.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Comoros national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'comoros-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Comoros nationality through a Comoros parent',
+        summary: 'A child of a Comoros parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '174' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'comoros-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'comoros-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Comoros parent',
+        summary: 'Birth to a Comoros parent creates nationality. Birth in Comoros alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '174' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function djiboutiRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.djibouti_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '262',
+    note: "Reviewed against Djiboutian constitutional nationality framework. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Djibouti national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'djibouti-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Djibouti nationality through a Djibouti parent',
+        summary: 'A child of a Djibouti parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '262' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'djibouti-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'djibouti-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Djibouti parent',
+        summary: 'Birth to a Djibouti parent creates nationality. Birth in Djibouti alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '262' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function eritreaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.eritrea_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '232',
+    note: "Reviewed against Eritrean constitutional nationality framework. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Eritrea national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'eritrea-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Eritrea nationality through a Eritrea parent',
+        summary: 'A child of a Eritrea parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '232' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'eritrea-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'eritrea-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Eritrea parent',
+        summary: 'Birth to a Eritrea parent creates nationality. Birth in Eritrea alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '232' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function guineaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.guinea_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '324',
+    note: "Reviewed against Guinean constitutional nationality framework. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Guinea national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'guinea-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Guinea nationality through a Guinea parent',
+        summary: 'A child of a Guinea parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '324' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'guinea-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 5 years residence',
+        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'guinea-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Guinea parent',
+        summary: 'Birth to a Guinea parent creates nationality. Birth in Guinea alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '324' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function guineaBissauRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.guinea_bissau_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '624',
+    note: "Reviewed against Guinea-Bissau constitutional nationality framework. CPLP member. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Guinea-Bissau national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'guinea-bissau-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Guinea-Bissau nationality through a Guinea-Bissau parent',
+        summary: 'A child of a Guinea-Bissau parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '624' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'guinea-bissau-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 6 years residence',
+        summary: 'Adults generally need about 6 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 6, unit: 'years' },
+        ],
+        months: 72,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'guinea-bissau-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Guinea-Bissau parent',
+        summary: 'Birth to a Guinea-Bissau parent creates nationality. Birth in Guinea-Bissau alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '624' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function mauritaniaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.mauritania_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '478',
+    note: "Reviewed against Mauritanian constitutional nationality framework. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Mauritania national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'mauritania-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Mauritania nationality through a Mauritania parent',
+        summary: 'A child of a Mauritania parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '478' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'mauritania-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'mauritania-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Mauritania parent',
+        summary: 'Birth to a Mauritania parent creates nationality. Birth in Mauritania alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '478' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function southSudanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.south_sudan_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '728',
+    note: "Reviewed against South Sudanese constitutional nationality framework. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent South Sudan national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'south-sudan-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'South Sudan nationality through a South Sudan parent',
+        summary: 'A child of a South Sudan parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '728' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'south-sudan-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 10 years residence',
+        summary: 'Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'south-sudan-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a South Sudan parent',
+        summary: 'Birth to a South Sudan parent creates nationality. Birth in South Sudan alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '728' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+
+function somaliaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.somalia_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '706',
+    note: "Reviewed against Somali constitutional nationality framework. Federal nationality law remains fragmented in practice. No CBI.",
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Somalia national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'somalia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Somalia nationality through a Somalia parent',
+        summary: 'A child of a Somalia parent is a national under the constitutional nationality framework and nationality statute.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '706' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'somalia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about 7 years residence',
+        summary: 'Adults generally need about 7 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 7, unit: 'years' },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'somalia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Somalia parent',
+        summary: 'Birth to a Somalia parent creates nationality. Birth in Somalia alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '706' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
 function senegalRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const constitution = requireSource(officialSources, OFFICIAL_URLS.senegal_constitution);
   return reviewedCountryRecord({
@@ -11640,27 +12410,35 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     bruneiRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
     burkinaFasoRecord(shadow, countrySources),
+    burundiRecord(shadow, countrySources),
     caboVerdeRecord(shadow, countrySources),
     cambodiaRecord(shadow, countrySources),
     cameroonRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
     caymanIslandsRecord(shadow, countrySources),
+    centralAfricanRepublicRecord(shadow, countrySources),
+    chadRecord(shadow, countrySources),
     chileRecord(shadow, countrySources),
     chinaRecord(shadow, countrySources),
     colombiaRecord(shadow, countrySources),
+    comorosRecord(shadow, countrySources),
     congoRecord(shadow, countrySources),
     costaRicaRecord(shadow, countrySources),
     coteDivoireRecord(shadow, countrySources),
     croatiaRecord(shadow, countrySources),
+    cubaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
     czechiaRecord(shadow, countrySources),
     denmarkRecord(shadow, countrySources),
-    dominicaRecord(shadow, countrySources),
+    djiboutiRecord(shadow, countrySources),
     dominicanRepublicRecord(shadow, countrySources),
+    dominicaRecord(shadow, countrySources),
     drcRecord(shadow, countrySources),
     ecuadorRecord(shadow, countrySources),
     egyptRecord(shadow, countrySources),
     elSalvadorRecord(shadow, countrySources),
+    equatorialGuineaRecord(shadow, countrySources),
+    eritreaRecord(shadow, countrySources),
     estoniaRecord(shadow, countrySources),
     eswatiniRecord(shadow, countrySources),
     ethiopiaRecord(shadow, countrySources),
@@ -11672,9 +12450,11 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     georgiaRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
     ghanaRecord(shadow, countrySources),
-    grenadaRecord(shadow, countrySources),
     greeceRecord(shadow, countrySources),
+    grenadaRecord(shadow, countrySources),
     guatemalaRecord(shadow, countrySources),
+    guineaBissauRecord(shadow, countrySources),
+    guineaRecord(shadow, countrySources),
     hondurasRecord(shadow, countrySources),
     hungaryRecord(shadow, countrySources),
     icelandRecord(shadow, countrySources),
@@ -11697,10 +12477,11 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     luxembourgRecord(shadow, countrySources),
     madagascarRecord(shadow, countrySources),
     malawiRecord(shadow, countrySources),
-    maliRecord(shadow, countrySources),
     malaysiaRecord(shadow, countrySources),
+    maliRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
     marshallIslandsRecord(shadow, countrySources),
+    mauritaniaRecord(shadow, countrySources),
     mauritiusRecord(shadow, countrySources),
     mexicoRecord(shadow, countrySources),
     micronesiaRecord(shadow, countrySources),
@@ -11710,11 +12491,10 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     namibiaRecord(shadow, countrySources),
     nauruRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
-    nicaraguaRecord(shadow, countrySources),
-    vanuatuRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
-    nigerRecord(shadow, countrySources),
+    nicaraguaRecord(shadow, countrySources),
     nigeriaRecord(shadow, countrySources),
+    nigerRecord(shadow, countrySources),
     norwayRecord(shadow, countrySources),
     palauRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
@@ -11728,17 +12508,20 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     rwandaRecord(shadow, countrySources),
     saintLuciaRecord(shadow, countrySources),
     samoaRecord(shadow, countrySources),
-    senegalRecord(shadow, countrySources),
     saoTomePrincipeRecord(shadow, countrySources),
-    stKittsNevisRecord(shadow, countrySources),
+    senegalRecord(shadow, countrySources),
     serbiaRecord(shadow, countrySources),
     seychellesRecord(shadow, countrySources),
     sierraLeoneRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),
     slovakiaRecord(shadow, countrySources),
+    sloveniaRecord(shadow, countrySources),
     solomonIslandsRecord(shadow, countrySources),
+    somaliaRecord(shadow, countrySources),
     southAfricaRecord(shadow, countrySources),
+    southSudanRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),
+    stKittsNevisRecord(shadow, countrySources),
     sudanRecord(shadow, countrySources),
     swedenRecord(shadow, countrySources),
     switzerlandRecord(shadow, countrySources),
@@ -11748,14 +12531,15 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     timorLesteRecord(shadow, countrySources),
     togoRecord(shadow, countrySources),
     tongaRecord(shadow, countrySources),
-    tuvaluRecord(shadow, countrySources),
     tunisiaRecord(shadow, countrySources),
     turkiyeRecord(shadow, countrySources),
+    tuvaluRecord(shadow, countrySources),
     ugandaRecord(shadow, countrySources),
     unitedArabEmiratesRecord(shadow, countrySources),
     unitedKingdomRecord(shadow, countrySources),
     unitedStatesRecord(shadow, countrySources),
     uruguayRecord(shadow, countrySources),
+    vanuatuRecord(shadow, countrySources),
     venezuelaRecord(shadow, countrySources),
     vietnamRecord(shadow, countrySources),
     zambiaRecord(shadow, countrySources),

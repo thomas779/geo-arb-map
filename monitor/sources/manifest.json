@@ -4053,6 +4053,272 @@
         "birth"
       ],
       "notes": "Togo constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "cuba-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Cuba_2019",
+      "jurisdictions": [
+        "192"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Cuba",
+        "residence",
+        "birth"
+      ],
+      "notes": "Cuba constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "equatorial-guinea-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Equatorial_Guinea_2012",
+      "jurisdictions": [
+        "226"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Equatorial Guinea",
+        "residence",
+        "birth"
+      ],
+      "notes": "Equatorial Guinea constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "slovenia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Slovenia_2016",
+      "jurisdictions": [
+        "705"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Slovenia",
+        "residence",
+        "birth"
+      ],
+      "notes": "Slovenia constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "burundi-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Burundi_2018",
+      "jurisdictions": [
+        "108"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Burundi",
+        "residence",
+        "birth"
+      ],
+      "notes": "Burundi constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "central-african-republic-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Central_African_Republic_2016",
+      "jurisdictions": [
+        "140"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Central African Republic",
+        "residence",
+        "birth"
+      ],
+      "notes": "Central African Republic constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "chad-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Chad_2018",
+      "jurisdictions": [
+        "148"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Chad",
+        "residence",
+        "birth"
+      ],
+      "notes": "Chad constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "comoros-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Comoros_2018",
+      "jurisdictions": [
+        "174"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Comoros",
+        "residence",
+        "birth"
+      ],
+      "notes": "Comoros constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "djibouti-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Djibouti_2010",
+      "jurisdictions": [
+        "262"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Djibouti",
+        "residence",
+        "birth"
+      ],
+      "notes": "Djibouti constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "eritrea-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Eritrea_1997",
+      "jurisdictions": [
+        "232"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Eritrea",
+        "residence",
+        "birth"
+      ],
+      "notes": "Eritrea constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "guinea-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Guinea_2020",
+      "jurisdictions": [
+        "324"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Guinea",
+        "residence",
+        "birth"
+      ],
+      "notes": "Guinea constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "guinea-bissau-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Guinea_Bissau_1996",
+      "jurisdictions": [
+        "624"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Guinea-Bissau",
+        "residence",
+        "birth"
+      ],
+      "notes": "Guinea-Bissau constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "mauritania-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Mauritania_2012",
+      "jurisdictions": [
+        "478"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Mauritania",
+        "residence",
+        "birth"
+      ],
+      "notes": "Mauritania constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "south-sudan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/South_Sudan_2011",
+      "jurisdictions": [
+        "728"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "South Sudan",
+        "residence",
+        "birth"
+      ],
+      "notes": "South Sudan constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "somalia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Somalia_2012",
+      "jurisdictions": [
+        "706"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Somalia",
+        "residence",
+        "birth"
+      ],
+      "notes": "Somalia constitutional nationality framework via Constitute Project text."
     }
   ]
 }
