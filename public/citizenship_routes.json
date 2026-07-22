@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Country citizenship routes compiled from a canonical D1 release plus the read-only legacy remainder.",
-    "last_updated": "2026-07-21",
+    "last_updated": "2026-07-22",
     "acquisition_modes": {
       "ancestry": "Citizenship through a parent, grandparent, wider descent rule, restoration, or documented heritage connection.",
       "naturalization": "Citizenship after residence or another qualifying domestic status.",
@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 134,
+      "routes": 161,
       "by_mode": {
-        "ancestry": 38,
-        "naturalization": 40,
-        "birth": 38,
+        "ancestry": 47,
+        "naturalization": 49,
+        "birth": 47,
         "investment": 18
       },
       "by_status": {
-        "active": 128,
+        "active": 155,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -570,12 +570,16 @@
       "name": "Chile",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "chile-citizenship-by-parent-or-grandparent",
+        "chile-naturalization",
+        "chile-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "156",
@@ -1241,12 +1245,16 @@
       "name": "Hungary",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "hungary-citizenship-by-parent-or-simplified-origin",
+        "hungary-ordinary-naturalization",
+        "hungary-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "352",
@@ -1329,12 +1337,16 @@
       "name": "Israel",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "israel-citizenship-by-return-or-parent",
+        "israel-naturalization",
+        "israel-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "380",
@@ -1405,12 +1417,15 @@
       "name": "Jordan",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "jordan-citizenship-by-father",
+        "jordan-naturalization",
+        "jordan-citizenship-by-birth-limited",
         "jordan-investor-citizenship"
       ]
     },
@@ -1829,12 +1844,15 @@
       "name": "Nauru",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "nauru-citizenship-by-descent",
+        "nauru-naturalization-by-marriage",
+        "nauru-citizenship-connected-to-birth",
         "nauru-climate-resilience-citizenship"
       ]
     },
@@ -2125,12 +2143,16 @@
       "name": "Paraguay",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "paraguay-citizenship-by-parent",
+        "paraguay-naturalization",
+        "paraguay-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "604",
@@ -2173,12 +2195,16 @@
       "name": "Poland",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "poland-citizenship-by-parent",
+        "poland-recognition-by-residence",
+        "poland-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "620",
@@ -2400,15 +2426,18 @@
     },
     {
       "iso_n3": "678",
-      "name": "São Tomé and Principe",
+      "name": "São Tomé and Príncipe",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "sao-tome-citizenship-by-parent-or-grandparent",
+        "sao-tome-naturalization",
+        "sao-tome-citizenship-by-birth",
         "sao-tome-principe-cbi"
       ]
     },
@@ -2875,12 +2904,15 @@
       "name": "Egypt",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
         "investment": "reviewed"
       },
       "route_ids": [
+        "egypt-citizenship-by-parent",
+        "egypt-naturalization",
+        "egypt-citizenship-by-birth",
         "egypt-investor-citizenship"
       ]
     },
@@ -3807,10 +3839,10 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Brazilian naturalization after residence",
-      "summary": "Ordinary naturalization generally requires four years of residence; the Constitution provides a one-year route for people originating from Portuguese-speaking countries who also satisfy the applicable conditions.",
+      "summary": "Ordinary naturalization generally requires four years of residence. The minimum falls to one year for a parent of a Brazilian child and for a person originating from a Portuguese-speaking country, subject to the remaining conditions.",
       "facts": {
         "canonical": true,
-        "variant_count": 2,
+        "variant_count": 3,
         "eligibility_months": [
           12,
           48
@@ -3831,6 +3863,13 @@
           "allocation": "discretionary",
           "eligibility_months": 12,
           "note": "Article 12 also requires good moral character."
+        },
+        {
+          "id": "parent_of_brazilian_child",
+          "label": "One-year route for a parent of a Brazilian child",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "The child is Brazilian at birth. A parent can seek family-reunification residence, and having a Brazilian child reduces the naturalization residence minimum to one year; citizenship is not automatic. Grandparents may qualify for family-reunification residence as second-degree ascendants, but receive no automatic citizenship or child-based one-year naturalization shortcut."
         }
       ],
       "confidence": "high",
@@ -3843,6 +3882,14 @@
         {
           "title": "Constitution of Brazil — Article 12",
           "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm"
+        },
+        {
+          "title": "Brazil Ministry of Justice — naturalization residence periods",
+          "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria/ter-residencia-em-territorio-nacional-pelo-prazo-estabelecido-pela-lei-brasileira"
+        },
+        {
+          "title": "Brazil Federal Police — family-reunification guidance",
+          "url": "https://www.gov.br/pf/pt-br/assuntos/imigracao/duvidas-frequentes"
         }
       ]
     },
@@ -4251,6 +4298,116 @@
         {
           "title": "Cayman Islands Government — Immigration reform",
           "url": "https://gov.ky/web/mcei/immigrationreform"
+        }
+      ]
+    },
+    {
+      "id": "chile-citizenship-by-birth",
+      "country": {
+        "iso_n3": "152",
+        "name": "Chile"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Nationality by birth in Chile",
+      "summary": "Persons born in Chilean territory are Chilean by birth, except children of transient foreigners or of foreigners who are in Chile in the service of their government. Statelessness safeguards and later option routes may apply to some excluded children.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "chile-citizenship-by-birth-principal",
+          "label": "Nationality by birth in Chile",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Chile Constitution Article 10 — nationality (BCN)",
+          "url": "https://bcn.cl/2lzfp"
+        }
+      ]
+    },
+    {
+      "id": "chile-citizenship-by-parent-or-grandparent",
+      "country": {
+        "iso_n3": "152",
+        "name": "Chile"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Nationality through a Chilean parent or grandparent",
+      "summary": "Children of a Chilean father or mother born abroad, and further generations covered by Article 10, may hold or claim Chilean nationality under the constitutional descent rules, including where a parent or grandparent acquired nationality by birth or naturalization as applicable.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "chile-citizenship-by-parent-or-grandparent-principal",
+          "label": "Nationality through a Chilean parent or grandparent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Chile Constitution Article 10 — nationality (BCN)",
+          "url": "https://bcn.cl/2lzfp"
+        },
+        {
+          "title": "Chile SERMIG — Chilean citizenship / Carta de Nacionalización",
+          "url": "https://serviciomigraciones.cl/en/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "chile-naturalization",
+      "country": {
+        "iso_n3": "152",
+        "name": "Chile"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Carta de Nacionalización after permanent residence",
+      "summary": "Adult permanent residents may seek a letter of naturalization after five or more years of residence counted from the electronic stamp that led to permanent residence. A reduced two-year continuous residence path applies for specified family ties to Chileans, including a two-year marriage registered in Chile with shared household.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "chile-naturalization-principal",
+          "label": "Carta de Nacionalización after permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Family-tie applicants may qualify after two continuous years from the electronic stamp. The grant remains discretionary presidential/administrative naturalization, not an automatic right after five years."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Chile SERMIG — Chilean citizenship / Carta de Nacionalización",
+          "url": "https://serviciomigraciones.cl/en/citizenship/"
         }
       ]
     },
@@ -5354,6 +5511,117 @@
       ]
     },
     {
+      "id": "hungary-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "348",
+        "name": "Hungary"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Hungarian parent",
+      "summary": "A child acquires Hungarian citizenship at birth when at least one parent is a Hungarian citizen, regardless of the place of birth. Birth in Hungary alone to foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "hungary-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Hungarian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Hungary Government — acquisition of Hungarian nationality",
+          "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality"
+        }
+      ]
+    },
+    {
+      "id": "hungary-citizenship-by-parent-or-simplified-origin",
+      "country": {
+        "iso_n3": "348",
+        "name": "Hungary"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a Hungarian parent or simplified origin naturalization",
+      "summary": "A person is a Hungarian citizen at birth if a parent is a Hungarian citizen. Separately, simplified naturalization is available without a multi-year residence period for applicants who prove a Hungarian ancestor or Hungarian origin and demonstrate Hungarian language knowledge, or who meet the long marriage-to-Hungarian criteria.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "hungary-citizenship-by-parent-or-simplified-origin-principal",
+          "label": "Citizenship through a Hungarian parent or simplified origin naturalization",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Parent-at-birth citizenship is recognition of existing status. Simplified naturalization for distant ancestry is discretionary and language-tested; it is not unconditional multi-generation jus sanguinis without process."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Hungary MFA — simplified naturalization (English)",
+          "url": "https://telaviv.mfa.gov.hu/eng/page/egyszerusitett-honositas"
+        },
+        {
+          "title": "Hungary Government — acquisition of Hungarian nationality",
+          "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality"
+        }
+      ]
+    },
+    {
+      "id": "hungary-ordinary-naturalization",
+      "country": {
+        "iso_n3": "348",
+        "name": "Hungary"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Ordinary naturalization after continuous residence",
+      "summary": "Ordinary naturalization generally requires eight years of continuous residence in Hungary, clean criminal record, livelihood and housing, no public-security obstacle, and a constitutional exam in Hungarian, unless an exemption applies. Preferential shorter periods exist for spouses, parents of Hungarian minors and other statutory categories.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "hungary-ordinary-naturalization-principal",
+          "label": "Ordinary naturalization after continuous residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96,
+          "note": "Residence eligibility is not an automatic grant. Simplified origin naturalization is modeled under the ancestry route family."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Hungary Government — acquisition of Hungarian nationality",
+          "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality"
+        }
+      ]
+    },
+    {
       "id": "ireland-citizenship-by-birth",
       "country": {
         "iso_n3": "372",
@@ -5471,6 +5739,117 @@
         {
           "title": "Irish Immigration Service — How to become an Irish citizen",
           "url": "https://www.irishimmigration.ie/how-to-become-an-irish-citizen-guide/"
+        }
+      ]
+    },
+    {
+      "id": "israel-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "376",
+        "name": "Israel"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Israeli parent",
+      "summary": "A person born in Israel after the establishment of the State acquires Israeli nationality by birth when a parent was an Israeli national; birth in Israel alone to two foreign parents is not general jus soli under the Nationality Law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "israel-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Israeli parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Israel Nationality Law 5712-1952 (amended text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf"
+        }
+      ]
+    },
+    {
+      "id": "israel-citizenship-by-return-or-parent",
+      "country": {
+        "iso_n3": "376",
+        "name": "Israel"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship by return or through an Israeli parent",
+      "summary": "Every Jew has the right to come to Israel as an oleh under the Law of Return; the same rights extend to a child and grandchild of a Jew and to specified spouses, subject to the statutory exceptions. Separately, the Nationality Law transmits Israeli nationality through an Israeli mother or father.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "israel-citizenship-by-return-or-parent-principal",
+          "label": "Citizenship by return or through an Israeli parent",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Law of Return eligibility is not ordinary multi-generation ethnic descent without the statutory Jewish/family definitions. Security, health and anti-Jewish-people activity exclusions apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Israel Law of Return 5710-1950 (published text)",
+          "url": "https://www.jewishvirtuallibrary.org/law-of-return"
+        },
+        {
+          "title": "Israel Nationality Law 5712-1952 (amended text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf"
+        }
+      ]
+    },
+    {
+      "id": "israel-naturalization",
+      "country": {
+        "iso_n3": "376",
+        "name": "Israel"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after permanent residence",
+      "summary": "A non-national adult may naturalize while in Israel after three years of presence out of the five years before application, permanent-residence entitlement, settlement or intention to settle, some knowledge of Hebrew, and renunciation or loss of prior nationality upon naturalization.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "israel-naturalization-principal",
+          "label": "Naturalization after permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Jewish olim under the Law of Return are not subject to the ordinary non-Jew renunciation pattern. Naturalization remains discretionary and security-screened."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Israel Nationality Law 5712-1952 (amended text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf"
         }
       ]
     },
@@ -5597,6 +5976,76 @@
       ]
     },
     {
+      "id": "jordan-citizenship-by-birth-limited",
+      "country": {
+        "iso_n3": "400",
+        "name": "Jordan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Limited citizenship connected to birth in Jordan",
+      "summary": "A person born in Jordan to a Jordanian mother and a father who is unknown, stateless or whose filiation is not established is Jordanian. A foundling in Jordan is presumed born there and is Jordanian unless the contrary is proved. Birth in Jordan to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "jordan-citizenship-by-birth-limited-principal",
+          "label": "Limited citizenship connected to birth in Jordan",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Jordanian Nationality Law No. 6 of 1954 (as amended)",
+          "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Jordan%20Law%20No.%206%20of%201954%20on%20Nationality%20%28last%20amended%201987%29%20English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "jordan-citizenship-by-father",
+      "country": {
+        "iso_n3": "400",
+        "name": "Jordan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Jordanian nationality through a Jordanian father",
+      "summary": "A person whose father holds Jordanian nationality is Jordanian, and the children of a Jordanian man are Jordanian wherever they are born.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "jordan-citizenship-by-father-principal",
+          "label": "Jordanian nationality through a Jordanian father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Jordanian Nationality Law No. 6 of 1954 (as amended)",
+          "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Jordan%20Law%20No.%206%20of%201954%20on%20Nationality%20%28last%20amended%201987%29%20English.pdf"
+        }
+      ]
+    },
+    {
       "id": "jordan-investor-citizenship",
       "country": {
         "iso_n3": "400",
@@ -5605,18 +6054,72 @@
       "mode": "investment",
       "status": "active",
       "title": "Investor citizenship criteria",
-      "summary": "Jordan's Cabinet-approved criteria provide citizenship routes through qualifying securities, productive projects, business expansion or sustained job creation; several project routes require a three-year compliance period.",
+      "summary": "Jordan's Cabinet-approved criteria, administered by the Ministry of Investment / Invest Jordan, provide citizenship routes through qualifying securities, productive projects, business expansion or sustained job creation. Several project routes require a multi-year compliance period, often with a temporary three-year passport before a recommendation for full citizenship. Dual nationality is routinely permitted on this economic pathway.",
       "facts": {
         "programme_type": "investor_citizenship",
         "residence_required": false,
-        "discretionary_decision": true
+        "discretionary_decision": true,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ]
       },
+      "pathways": [
+        {
+          "id": "jordan-investor-citizenship-principal",
+          "label": "Investor citizenship criteria",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Property purchase alone is a residence route, not direct citizenship. Passive deposit and treasury-bond routes have been phased out. Thresholds and employment numbers change by Cabinet decision; always verify the current Invest Jordan publication before relying on a quote. Origin-country dual-nationality policy should still be checked case by case."
+        }
+      ],
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-22",
       "sources": [
         {
-          "title": "Jordanian Prime Ministry — Cabinet decisions of 15 July 2026",
-          "url": "https://www.pm.gov.jo/AR/NewsDetails/am0847"
+          "title": "Invest Jordan — Cabinet investor residency and citizenship criteria",
+          "url": "https://invest.jo/en/node/123"
+        },
+        {
+          "title": "Jordan News Agency (Petra) — Cabinet investor citizenship amendments",
+          "url": "https://petra.gov.jo/en/news/government-revamps-investor-citizenship-rules-to-funnel-capital-into-provinces"
+        }
+      ]
+    },
+    {
+      "id": "jordan-naturalization",
+      "country": {
+        "iso_n3": "400",
+        "name": "Jordan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after four years of regular residence",
+      "summary": "A non-Jordanian adult may apply to the Council of Ministers after four years of regular residence and an intention to reside in Jordan. The Cabinet may grant or refuse the certificate and may waive the residence period for an Arab applicant or in the public interest with royal approval. Ordinary naturalization under the Nationality Law requires loss of the prior nationality; this renunciation rule is distinct from the investor Cabinet pathway.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          48
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "jordan-naturalization-principal",
+          "label": "Naturalization after four years of regular residence",
+          "allocation": "discretionary",
+          "eligibility_months": 48,
+          "note": "Eligibility to apply is not a right to citizenship. Article 13 of the Nationality Law conditions an ordinary certificate on loss of prior nationality. Political and public-office restrictions apply for years after naturalization. Do not assume the same renunciation rule for investor citizenship."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Jordanian Nationality Law No. 6 of 1954 (as amended)",
+          "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Jordan%20Law%20No.%206%20of%201954%20on%20Nationality%20%28last%20amended%201987%29%20English.pdf"
         }
       ]
     },
@@ -6004,10 +6507,10 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Mexican naturalization after residence",
-      "summary": "The ordinary route requires five years of residence; Article 20 reduces the period to two years for a person originating from a Latin American country or the Iberian Peninsula.",
+      "summary": "The ordinary route requires five years of residence. Article 20 reduces the period to two years for a person originating from Latin America or the Iberian Peninsula and for a parent of a Mexican child by birth.",
       "facts": {
         "canonical": true,
-        "variant_count": 2,
+        "variant_count": 3,
         "eligibility_months": [
           24,
           60
@@ -6026,6 +6529,13 @@
           "label": "Two-year route for Latin American or Iberian Peninsula origin",
           "allocation": "discretionary",
           "eligibility_months": 24
+        },
+        {
+          "id": "parent_of_mexican_child_by_birth",
+          "label": "Two-year route for a parent of a Mexican child by birth",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "The child is Mexican at birth. Parents and grandparents can qualify for permanent residence through the direct family relationship, but only a parent with a Mexican child by birth receives this two-year naturalization route; citizenship is not automatic for either generation."
         }
       ],
       "confidence": "high",
@@ -6034,6 +6544,89 @@
         {
           "title": "Mexico Nationality Law",
           "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LNac.pdf"
+        },
+        {
+          "title": "Mexico Migration Law",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LMigra.pdf"
+        },
+        {
+          "title": "Mexico Foreign Ministry — naturalization for parents of Mexican-born children",
+          "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-tener-hijos-mexicanos-por-nacimiento"
+        },
+        {
+          "title": "Mexico INM — permanent residence through family relationship",
+          "url": "https://www.inm.gob.mx/static/Tramites/cambio_de_condicion_estancia/Residente_permanente_por_vinculo_familiar.pdf"
+        }
+      ]
+    },
+    {
+      "id": "nauru-citizenship-by-descent",
+      "country": {
+        "iso_n3": "520",
+        "name": "Nauru"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship by descent through a Nauruan parent",
+      "summary": "A person born outside Nauru is a citizen if, at the time of birth, either parent was a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nauru-citizenship-by-descent-principal",
+          "label": "Citizenship by descent through a Nauruan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Naoero Citizenship Act 2017",
+          "url": "https://justice.gov.nr/wp-content/uploads/2023/12/Naoero-Citizenship-Act-2017.pdf"
+        }
+      ]
+    },
+    {
+      "id": "nauru-citizenship-connected-to-birth",
+      "country": {
+        "iso_n3": "520",
+        "name": "Nauru"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship connected to birth in Nauru",
+      "summary": "A person born in Nauru is a citizen at birth if either parent is a citizen. A person born in Nauru to non-citizen parents may later apply after twenty continuous years of residence. Foundling and otherwise-stateless birth situations are also protected under the constitutional and statutory framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nauru-citizenship-connected-to-birth-principal",
+          "label": "Citizenship connected to birth in Nauru",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "The twenty-year route is later discretionary acquisition connected to birthplace, not citizenship at birth."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Naoero Citizenship Act 2017",
+          "url": "https://justice.gov.nr/wp-content/uploads/2023/12/Naoero-Citizenship-Act-2017.pdf"
         }
       ]
     },
@@ -6046,21 +6639,76 @@
       "mode": "investment",
       "status": "active",
       "title": "Economic and Climate Resilience Citizenship Program",
-      "summary": "A statutory contribution programme administered by the Nauru Program Office to fund economic development and climate resilience.",
+      "summary": "A statutory contribution programme administered by the Nauru Program Office under the Nauru Economic and Climate Resilience Citizenship Act 2024, under which a foreign adult may acquire economic and climate resilience citizenship after a prescribed contribution and due diligence, without a residence requirement.",
       "facts": {
         "programme_type": "direct_citizenship_by_contribution",
-        "residence_required": false
+        "residence_required": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
       },
-      "confidence": "high",
-      "last_checked": "2026-07-17",
-      "sources": [
+      "pathways": [
         {
-          "title": "Government of Nauru — programme launch",
-          "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx"
-        },
+          "id": "nauru-climate-resilience-citizenship-principal",
+          "label": "Economic and Climate Resilience Citizenship Program",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "The 2024 Act creates the no-residence contribution framework; contribution amounts are programme-prescribed rather than a permanent single figure in the Act. Published baselines have been in the region of USD 115,000, with limited-time promotional discounts (for example lower temporary tiers). Verify current Program Office figures and due-diligence fees before relying on a quote."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
         {
           "title": "Nauru Economic and Climate Resilience Citizenship Act 2024",
           "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf"
+        },
+        {
+          "title": "Nauru Program Office — Economic and Climate Resilience Citizenship Program",
+          "url": "https://www.ecrcp.gov.nr/"
+        },
+        {
+          "title": "Government of Nauru — climate resilience citizenship programme launch",
+          "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx"
+        }
+      ]
+    },
+    {
+      "id": "nauru-naturalization-by-marriage",
+      "country": {
+        "iso_n3": "520",
+        "name": "Nauru"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization through marriage to a Nauruan citizen",
+      "summary": "A foreign spouse may apply after seven continuous years of lawful marriage and residence with the Nauruan spouse, subject to character, health, commitment to reside and no-criminal-conviction conditions. Cabinet may waive the residence period.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "nauru-naturalization-by-marriage-principal",
+          "label": "Naturalization through marriage to a Nauruan citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "The grant is made by the Minister in consultation with Cabinet and is final without court appeal under the Act."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Naoero Citizenship Act 2017",
+          "url": "https://justice.gov.nr/wp-content/uploads/2023/12/Naoero-Citizenship-Act-2017.pdf"
         }
       ]
     },
@@ -6589,6 +7237,230 @@
       ]
     },
     {
+      "id": "paraguay-citizenship-by-birth",
+      "country": {
+        "iso_n3": "600",
+        "name": "Paraguay"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Natural nationality by birth in Paraguay",
+      "summary": "Persons born in the territory of the Republic are natural Paraguayans, subject to the constitutional exception for children of persons in the service of a foreign government.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "paraguay-citizenship-by-birth-principal",
+          "label": "Natural nationality by birth in Paraguay",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Paraguay Constitution — nationality provisions (signed text)",
+          "url": "https://www.bacn.gov.py/archivos/9580/CONSTITUCION_ORIGINAL_FIRMADA.pdf"
+        }
+      ]
+    },
+    {
+      "id": "paraguay-citizenship-by-parent",
+      "country": {
+        "iso_n3": "600",
+        "name": "Paraguay"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Natural nationality through a Paraguayan parent",
+      "summary": "Children of a Paraguayan mother or father born abroad are natural Paraguayans when they settle permanently in the Republic, or when a parent was in the service of the Republic at the time of birth abroad.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "paraguay-citizenship-by-parent-principal",
+          "label": "Natural nationality through a Paraguayan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Paraguay Constitution — nationality provisions (signed text)",
+          "url": "https://www.bacn.gov.py/archivos/9580/CONSTITUCION_ORIGINAL_FIRMADA.pdf"
+        },
+        {
+          "title": "Paraguay Repatriados — inclusión a la identidad nacional",
+          "url": "https://repatriados.gov.py/inclusion-a-la-identidad-nacional/"
+        }
+      ]
+    },
+    {
+      "id": "paraguay-naturalization",
+      "country": {
+        "iso_n3": "600",
+        "name": "Paraguay"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after minimum residence",
+      "summary": "Foreign adults may seek Paraguayan nationality by naturalization after a constitutional minimum of three years of residence in the national territory, majority, good conduct, and exercise of a profession, trade, science, art or industry, or ownership of property in the country, subject to the statutory process.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "paraguay-naturalization-principal",
+          "label": "Naturalization after minimum residence",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "The three-year constitutional minimum is eligibility to apply, not an automatic grant. Administrative practice may involve temporary then permanent residence sequencing before the citizenship petition."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Paraguay Constitution — nationality provisions (signed text)",
+          "url": "https://www.bacn.gov.py/archivos/9580/CONSTITUCION_ORIGINAL_FIRMADA.pdf"
+        },
+        {
+          "title": "Paraguay Dirección General de Migraciones",
+          "url": "https://migraciones.gov.py/"
+        }
+      ]
+    },
+    {
+      "id": "poland-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "616",
+        "name": "Poland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Polish parent",
+      "summary": "A person born to a Polish citizen parent is a Polish citizen at birth. Birth in Poland to two foreign parents does not generally create citizenship by soil alone.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "poland-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Polish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Poland MSWiA — citizenship (English hub)",
+          "url": "https://www.gov.pl/web/mswia-en/citizenship"
+        }
+      ]
+    },
+    {
+      "id": "poland-citizenship-by-parent",
+      "country": {
+        "iso_n3": "616",
+        "name": "Poland"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Polish citizenship through a Polish parent",
+      "summary": "A child acquires Polish citizenship when at least one parent is a Polish citizen, regardless of the place of birth, subject to the historical continuity rules of the Citizenship Act for older generations.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "poland-citizenship-by-parent-principal",
+          "label": "Polish citizenship through a Polish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Poland MSWiA — obywatelstwo",
+          "url": "https://www.gov.pl/web/mswia/obywatelstwo"
+        },
+        {
+          "title": "Poland MSWiA — citizenship (English hub)",
+          "url": "https://www.gov.pl/web/mswia-en/citizenship"
+        }
+      ]
+    },
+    {
+      "id": "poland-recognition-by-residence",
+      "country": {
+        "iso_n3": "616",
+        "name": "Poland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Recognition as a Polish citizen after permanent residence",
+      "summary": "A foreign national may be recognised as a Polish citizen after continuous legal residence of at least three years on permanent residence, EU long-term residence or permanent-residence right, with a stable income, a legal title to dwelling, and Polish language at B1. Shorter periods apply for spouses of Polish citizens, refugees, Polish origin / Karta Polaka holders and other statutory categories.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "poland-recognition-by-residence-principal",
+          "label": "Recognition as a Polish citizen after permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Recognition may be refused for defence or public-security reasons. Presidential grant of citizenship is a separate discretionary channel with different documentary rules."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Poland MSWiA — recognition as a Polish citizen",
+          "url": "https://www.gov.pl/web/mswia-en/apply-to-be-recognised-as-a-polish-citizen"
+        }
+      ]
+    },
+    {
       "id": "portugal-birth-parent-residence-2026",
       "country": {
         "iso_n3": "620",
@@ -6803,7 +7675,7 @@
       "mode": "investment",
       "status": "active",
       "title": "Citizenship Programme",
-      "summary": "Government-administered direct citizenship programme requiring a prescribed investment or contribution and due diligence.",
+      "summary": "Government-administered direct citizenship programme requiring a prescribed investment or contribution, including the Sustainable Island State Contribution (SISC), and due diligence.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
         "residence_required": false,
@@ -6820,11 +7692,11 @@
           "label": "Citizenship Programme",
           "allocation": "discretionary",
           "eligibility_months": 0,
-          "note": "Official minimums currently start at US$250,000 for SISC or Public Benefit, US$325,000 for approved development or condominium property, and US$600,000 for a private home."
+          "note": "Official contribution/investment minimums currently start at US$250,000 for the SISC or Public Benefit option for a single principal applicant. Approved real-estate routes are higher. Due diligence, biometrics and passport fees are additional and change by circular; re-check the Citizenship Unit schedule before quoting all-in cost."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-22",
       "sources": [
         {
           "title": "St. Kitts and Nevis Citizenship Unit",
@@ -7020,6 +7892,112 @@
       ]
     },
     {
+      "id": "sao-tome-citizenship-by-birth",
+      "country": {
+        "iso_n3": "678",
+        "name": "São Tomé and Príncipe"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship connected to birth in São Tomé and Príncipe",
+      "summary": "A person born in São Tomé and Príncipe is of origin nationality when a parent is São-tomense, when the parents are stateless or of unknown nationality, or when foreign parents reside in the territory and are not in the service of another state. Foundling and parental-status conditions remain statutory.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sao-tome-citizenship-by-birth-principal",
+          "label": "Citizenship connected to birth in São Tomé and Príncipe",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf"
+        }
+      ]
+    },
+    {
+      "id": "sao-tome-citizenship-by-parent-or-grandparent",
+      "country": {
+        "iso_n3": "678",
+        "name": "São Tomé and Príncipe"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a São-tomense parent or grandparent",
+      "summary": "Origin nationality covers a person born abroad to a São-tomense parent who declares the wish to be São-tomense, and descendants who are grandchildren of a São-tomense national born abroad.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sao-tome-citizenship-by-parent-or-grandparent-principal",
+          "label": "Citizenship through a São-tomense parent or grandparent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf"
+        }
+      ]
+    },
+    {
+      "id": "sao-tome-naturalization",
+      "country": {
+        "iso_n3": "678",
+        "name": "São Tomé and Príncipe"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years of legal residence",
+      "summary": "The Government may naturalize a foreign adult or stateless person after at least five years of legal residence, Portuguese or national-language knowledge, clean criminal record, national-security clearance and means of subsistence. The grant is by government decree after a Public Prosecutor prior review.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sao-tome-naturalization-principal",
+          "label": "Naturalization after five years of legal residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Naturalization is discretionary and may be refused even when the formal residence period is met. Dual-nationality caps apply to some naturalized persons."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf"
+        }
+      ]
+    },
+    {
       "id": "sao-tome-principe-cbi",
       "country": {
         "iso_n3": "678",
@@ -7028,14 +8006,37 @@
       "mode": "investment",
       "status": "active",
       "title": "Citizenship by Investment Programme",
-      "summary": "A direct contribution route created under Decree-Law 07/2025 and promoted through the country's official consular network.",
+      "summary": "A direct contribution route created under Decreto-Lei n.º 07/2025 as a special naturalization mechanism under Lei n.º 07/2022 for investment or donation to the National Transformation Fund, administered through the Citizenship by Investment and Donation Unit.",
       "facts": {
         "programme_type": "direct_citizenship_by_contribution",
-        "residence_required": false
+        "residence_required": false,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
       },
-      "confidence": "medium",
-      "last_checked": "2026-07-17",
+      "pathways": [
+        {
+          "id": "sao-tome-principe-cbi-principal",
+          "label": "Citizenship by Investment Programme",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "The regulation frames the programme as naturalization for investment or donation, not residence-free passport purchase without process. Minimum contribution figures are set in the regulation annex and programme materials and should be re-checked before reliance."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
       "sources": [
+        {
+          "title": "São Tomé and Príncipe — Decreto-Lei n.º 07/2025 RNID",
+          "url": "https://www.imidaily.com/wp-content/uploads/2025/08/STP-CBI-Act-01082025-1.pdf"
+        },
+        {
+          "title": "São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf"
+        },
         {
           "title": "Honorary Consulate of São Tomé and Príncipe — Citizenship by Investment",
           "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/"
@@ -7801,6 +8802,84 @@
       ]
     },
     {
+      "id": "egypt-citizenship-by-birth",
+      "country": {
+        "iso_n3": "818",
+        "name": "Egypt"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through parentage or foundling status",
+      "summary": "A person is Egyptian at birth when born to an Egyptian father or mother. A person born in Egypt of unknown parents, including a foundling presumed born in Egypt, is also Egyptian. Birth in Egypt alone to identified foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "egypt-citizenship-by-birth-principal",
+          "label": "Citizenship at birth through parentage or foundling status",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Egyptian Nationality Law No. 26 of 1975",
+          "url": "https://manshurat.org/node/7358"
+        },
+        {
+          "title": "Egypt Law No. 154 of 2004 amending the Nationality Law",
+          "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Egypt%20-%20Nationality%20Law%20-%202004%20-%20English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "egypt-citizenship-by-parent",
+      "country": {
+        "iso_n3": "818",
+        "name": "Egypt"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Egyptian nationality through an Egyptian parent",
+      "summary": "A person born of an Egyptian father or an Egyptian mother is Egyptian under Law No. 26 of 1975 as equalized by Law No. 154 of 2004.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "egypt-citizenship-by-parent-principal",
+          "label": "Egyptian nationality through an Egyptian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Egyptian Nationality Law No. 26 of 1975",
+          "url": "https://manshurat.org/node/7358"
+        },
+        {
+          "title": "Egypt Law No. 154 of 2004 amending the Nationality Law",
+          "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Egypt%20-%20Nationality%20Law%20-%202004%20-%20English.pdf"
+        }
+      ]
+    },
+    {
       "id": "egypt-investor-citizenship",
       "country": {
         "iso_n3": "818",
@@ -7809,14 +8888,28 @@
       "mode": "investment",
       "status": "active",
       "title": "Egyptian citizenship through investment programmes",
-      "summary": "The Prime Minister's citizenship unit administers direct routes through a non-refundable contribution, property, an investment project or a central-bank deposit.",
+      "summary": "The Prime Minister's citizenship unit administers direct routes through a non-refundable contribution, property, an investment project or a central-bank deposit. No multi-year residence period is required before the investment programme grant.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
         "residence_required": false,
-        "discretionary_decision": true
+        "discretionary_decision": true,
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ]
       },
+      "pathways": [
+        {
+          "id": "egypt-investor-citizenship-principal",
+          "label": "Egyptian citizenship through investment programmes",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Official programme pages list four investment options starting at USD 250,000. Approval remains discretionary after security review; temporary residence may be issued only to complete the chosen investment programme."
+        }
+      ],
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-22",
       "sources": [
         {
           "title": "Egyptian Cabinet — Citizenship through Investment Programmes",
@@ -7825,6 +8918,42 @@
         {
           "title": "GAFI — Unit for Granting Egyptian Citizenship in Exchange for Investment",
           "url": "https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "egypt-naturalization",
+      "country": {
+        "iso_n3": "818",
+        "name": "Egypt"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Ordinary naturalization after ten consecutive years",
+      "summary": "Under Article 4 of Law No. 26 of 1975, a foreign adult may seek discretionary Egyptian nationality after ten consecutive years of normal legal residence in Egypt, with Arabic-language, means and character review by the Minister of Interior.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "egypt-naturalization-principal",
+          "label": "Ordinary naturalization after ten consecutive years",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence eligibility is not an automatic grant. Shorter statutory routes exist for some Egyptian-origin and other special categories, and investment/property pathways are modeled separately; those are not collapsed into this ordinary record."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Egyptian Nationality Law No. 26 of 1975",
+          "url": "https://manshurat.org/node/7358"
         }
       ]
     },
