@@ -68,6 +68,10 @@
       {
         "name": "South Africa ZEP/LEP permits",
         "reason": "Zimbabwean and Lesotho Exemption Permits (extended to May 2027) allow live/work/study but explicitly BAR permanent residency and status changes - temporary by design, out of settlement scope."
+      },
+      {
+        "name": "Commonwealth of Nations membership",
+        "reason": "Political association of mostly former British-empire states; Commonwealth citizenship alone does not confer free movement, automatic UK residence, ILR, or right of abode. Preferential UK routes that use Commonwealth status as one gate (UK Ancestry visa; some Youth Mobility partners) are modeled as bilateral/identity lanes, not as a regional bloc."
       }
     ]
   },
@@ -1654,8 +1658,28 @@
       "beneficiaries_note": "Commonwealth citizens with a UK-born grandparent - descent-conditional, so beneficiary countries are not mapped",
       "beneficiaries": [],
       "grants": "5-year work visa, renewable, leads to Indefinite Leave to Remain then citizenship.",
-      "limits": "Requires a UK-born grandparent; Commonwealth citizenship alone is not enough.",
+      "limits": "Requires a UK-born grandparent; Commonwealth citizenship alone is not enough. Commonwealth membership alone does not create a UK settlement lane (see meta.excluded).",
       "leads_to_settlement": true
+    },
+    {
+      "id": "taiwan_employment_gold_card",
+      "name": "Taiwan Employment Gold Card",
+      "color": "#C45C5C",
+      "destination": {
+        "name": "Taiwan",
+        "iso_n3": "158"
+      },
+      "beneficiaries_note": "Foreign specialists in designated professional fields under the Act for the Recruitment and Employment of Foreign Professionals - skill-based, not nationality-mapped",
+      "beneficiaries": [],
+      "grants": "Combined open work permit + residence + multiple re-entry for up to 3 years (renewable). No employer sponsor required. Creditable path to Alien Permanent Resident Certificate (APRC) after holding Gold Card / foreign special professional status for three consecutive years with average residence ≥183 days/year (NIA / Foreign Professionals Act guidance).",
+      "limits": "Field eligibility is reviewed (architecture, digital, economy, science & tech, finance, biotech, etc.); not a passive investment 'golden visa'. APRC is permanent residence, not citizenship. Naturalization still requires the Nationality Act (generally 5 years domicile, language/civics, and loss of prior nationality within one year of permission).",
+      "leads_to_settlement": true,
+      "allocation": "discretionary",
+      "sources": [
+        "https://goldcard.nat.gov.tw/en/",
+        "https://foreigntalentact.ndc.gov.tw/en/Content_List.aspx?n=A2224A7A67D9DEEA",
+        "https://www.immigration.gov.tw/5475/5478/141465/141808/411648/cp_news"
+      ]
     },
     {
       "id": "falklands_argentina",

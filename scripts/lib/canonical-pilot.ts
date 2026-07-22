@@ -303,6 +303,8 @@ const OFFICIAL_URLS = {
   south_africa_citizenship_act_page: 'https://www.gov.za/documents/south-african-citizenship-act',
   south_africa_amendment_2010: 'https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf',
   taiwan_nationality_act: 'https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001',
+  taiwan_employment_gold_card: 'https://goldcard.nat.gov.tw/en/',
+  taiwan_nia_permanent_residency: 'https://www.immigration.gov.tw/5475/5478/141465/141808/411648/cp_news',
   indonesia_citizenship_law: 'https://www.ecoi.net/en/file/local/1170232/1504_1217488313_law-of-the-republic-of-indonesia-no-12-on-citizenship-of-the-republic-of-indonesia.pdf',
   indonesia_imigrasi: 'https://www.imigrasi.go.id/',
   thailand_nationality_act: 'https://www.refworld.org/legal/legislation/natlegbod/2012/101733',
@@ -742,6 +744,8 @@ function jurisdictionSources(): SourceRecord[] {
       ['South African Government — Citizenship Act document page', OFFICIAL_URLS.south_africa_citizenship_act_page, '710', 'en', 'official_guidance', 'south-africa-citizenship-law'],
       ['South African Citizenship Amendment Act 17 of 2010', OFFICIAL_URLS.south_africa_amendment_2010, '710', 'en', 'primary_law', 'south-africa-citizenship-law'],
       ['Taiwan (R.O.C.) Nationality Act — Laws & Regulations Database', OFFICIAL_URLS.taiwan_nationality_act, '158', 'en', 'primary_law', 'taiwan-nationality-law'],
+      ['Taiwan Employment Gold Card — official portal', OFFICIAL_URLS.taiwan_employment_gold_card, '158', 'en', 'official_guidance', 'taiwan-employment-gold-card'],
+      ['Taiwan NIA — Guidelines for permanent residency (APRC)', OFFICIAL_URLS.taiwan_nia_permanent_residency, '158', 'en', 'official_guidance', 'taiwan-employment-gold-card'],
       ['Indonesia Law No. 12 of 2006 on Citizenship (English text)', OFFICIAL_URLS.indonesia_citizenship_law, '360', 'en', 'primary_law', 'indonesia-citizenship-law'],
       ['Direktorat Jenderal Imigrasi — official portal', OFFICIAL_URLS.indonesia_imigrasi, '360', 'id', 'official_guidance', 'indonesia-citizenship-law'],
       ['Thailand Nationality Act B.E. 2508 (amended; UNHCR English text)', OFFICIAL_URLS.thailand_nationality_act, '764', 'en', 'primary_law', 'thailand-nationality-law'],
@@ -4200,13 +4204,15 @@ function southAfricaRecord(shadow: DataShadow, officialSources: SourceRecord[]):
 
 function taiwanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const act = requireSource(officialSources, OFFICIAL_URLS.taiwan_nationality_act);
+  const goldCard = requireSource(officialSources, OFFICIAL_URLS.taiwan_employment_gold_card);
+  const aprc = requireSource(officialSources, OFFICIAL_URLS.taiwan_nia_permanent_residency);
   return reviewedCountryRecord({
     shadow,
     iso: '158',
-    note: 'All acquisition modes reviewed against the R.O.C. Nationality Act (Laws & Regulations Database). Naturalization generally requires loss of prior nationality within one year of permission, with statutory exceptions for high-level professionals and special contribution.',
+    note: 'All acquisition modes reviewed against the R.O.C. Nationality Act. The Employment Gold Card and investment-linked APRC tracks are residence products modeled in mobility data, not citizenship grants. Naturalization generally requires loss of prior nationality within one year of permission, with statutory exceptions for high-level professionals and special contribution.',
     coverage: [
       { mode: 'ancestry', finding: 'present', sources: [act] },
-      { mode: 'naturalization', finding: 'present', sources: [act] },
+      { mode: 'naturalization', finding: 'present', sources: [act, goldCard, aprc] },
       {
         mode: 'birth',
         finding: 'present',
@@ -4216,8 +4222,8 @@ function taiwanRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
       {
         mode: 'investment',
         finding: 'verified_none',
-        sources: [act],
-        note: 'Taiwan has no citizenship-by-investment programme. High-level professional and special-contribution naturalization under Articles 5–6 are discretionary merit routes, not purchase of citizenship.',
+        sources: [act, goldCard, aprc],
+        note: 'Taiwan has no citizenship-by-investment programme. The Employment Gold Card is a talent open-work/residence product with a path to APRC; NIA also lists investor/company-responsible-person evidence for ordinary permanent-residence applications after the statutory residence period. Neither is a purchase of nationality. High-level professional and special-contribution naturalization under Articles 5–6 remain discretionary merit routes.',
       },
     ],
     routes: [

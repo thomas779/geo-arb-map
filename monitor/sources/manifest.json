@@ -1101,6 +1101,20 @@
       "notes": "Official Laws & Regulations Database English Nationality Act. Track Article 3 five-year residence floor, Article 9 loss-of-prior-nationality certificate, and Article 5–6 merit exceptions."
     },
     {
+      "id": "taiwan-employment-gold-card",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://goldcard.nat.gov.tw/en/",
+      "jurisdictions": ["158"],
+      "pages": [
+        { "id": "gold-card-home", "url": "https://goldcard.nat.gov.tw/en/" },
+        { "id": "nia-aprc-guidelines", "url": "https://www.immigration.gov.tw/5475/5478/141465/141808/411648/cp_news" }
+      ],
+      "keywords": ["Gold Card", "permanent residency", "APRC", "residence", "foreign professional", "investment", "naturalization", "citizenship"],
+      "notes": "Employment Gold Card and NIA APRC guidelines are residence tracks that funnel into ordinary naturalization; never treat them as citizenship-by-investment."
+    },
+    {
       "id": "indonesia-citizenship-law",
       "tier": "verification",
       "adapter": "html_index",
