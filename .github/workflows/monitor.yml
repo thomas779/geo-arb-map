@@ -75,6 +75,12 @@ jobs:
         if: github.event_name == 'repository_dispatch'
         run: bun run monitor:triage
 
+      - name: Summarize sweep
+        if: always() && github.event_name != 'repository_dispatch'
+        run: |
+          echo "--- sweep-report.json ---"; cat monitor/.out/sweep-report.json 2>/dev/null || echo "(none)"
+          echo "--- findings.json ---"; cat monitor/.out/findings.json 2>/dev/null || echo "(none)"
+
       - name: Render issue drafts
         run: bun run monitor:draft
 
@@ -93,6 +99,7 @@ jobs:
         with:
           name: monitor-run-${{ github.run_id }}
           path: monitor/.out/
+          include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30
 
