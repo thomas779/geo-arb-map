@@ -2277,6 +2277,86 @@
       "notes": "Constitution nationality framework. Cancilleria portal failed TLS in the collector (2026-07-22)."
     },
     {
+      "id": "costa-rica-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Costa_Rica_2020",
+      "jurisdictions": ["188"],
+      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Costa Rica", "residencia"],
+      "notes": "Constitution Articles 13 to 15: birth, five-year Central American/Spanish/Spanish-American floor, seven-year ordinary floor."
+    },
+    {
+      "id": "el-salvador-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/El_Salvador_2014",
+      "jurisdictions": ["222"],
+      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "El Salvador", "hispanoamericanos"],
+      "notes": "Constitution Articles 90 to 92: one-year Spanish/Hispano-American naturalization floor; Central American option by declaration."
+    },
+    {
+      "id": "guatemala-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Guatemala_1993",
+      "jurisdictions": ["320"],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Guatemala_1993"
+        },
+        {
+          "id": "nationality-law-decree-1613",
+          "url": "https://www.acnur.org/fileadmin/Documentos/BDL/2001/0135.pdf"
+        }
+      ],
+      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Guatemala", "concesiva"],
+      "notes": "Constitution nationality framework plus Nationality Law Decree 1613 five-year ordinary / two-year special tracks."
+    },
+    {
+      "id": "honduras-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Honduras_2013",
+      "jurisdictions": ["340"],
+      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Honduras", "iberoamericanos"],
+      "notes": "Constitution Articles 22 to 24: one-year Central American, two-year Spanish/Ibero-American, three-year ordinary floors."
+    },
+    {
+      "id": "nicaragua-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Nicaragua_2014",
+      "jurisdictions": ["558"],
+      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Nicaragua", "centroamericanos"],
+      "notes": "Constitution Articles 15 to 21: Central American option; ordinary naturalization delegated to statute."
+    },
+    {
+      "id": "dominican-republic-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Dominican_Republic_2015",
+      "jurisdictions": ["214"],
+      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Dominican Republic", "nacimiento"],
+      "notes": "Constitution Articles 18 to 20: parentage and restricted jus soli; naturalization by statute."
+    },
+    {
+      "id": "venezuela-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Venezuela_2009",
+      "jurisdictions": ["862"],
+      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Venezuela", "residencia"],
+      "notes": "Constitution Articles 32 to 33: ten-year ordinary floor; five years for Spain/Portugal/Italy/Latin America/Caribbean origin."
+    },
+    {
       "id": "malaysia-citizenship-law",
       "tier": "verification",
       "adapter": "html_index",

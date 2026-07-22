@@ -97,6 +97,9 @@ describe('canonical data schemas', () => {
       'colombia-naturalization-by-residence',
       'colombia-citizenship-by-conditional-birth',
       'colombia-study-permanent-residence-credit',
+      'costa-rica-citizenship-by-parent',
+      'costa-rica-naturalization-by-residence',
+      'costa-rica-citizenship-by-birth',
       'cote-divoire-citizenship-by-parent',
       'cote-divoire-naturalization',
       'cote-divoire-citizenship-at-birth-by-parent',
@@ -116,6 +119,9 @@ describe('canonical data schemas', () => {
       'dominica-naturalization-after-residence',
       'dominica-citizenship-by-birth',
       'dominica-cbi',
+      'dominican-republic-citizenship-by-parent',
+      'dominican-republic-naturalization',
+      'dominican-republic-citizenship-by-birth',
       'ecuador-citizenship-by-parent',
       'ecuador-naturalization',
       'ecuador-citizenship-at-birth',
@@ -123,6 +129,10 @@ describe('canonical data schemas', () => {
       'egypt-naturalization',
       'egypt-citizenship-by-birth',
       'egypt-investor-citizenship',
+      'el-salvador-citizenship-by-parent',
+      'el-salvador-central-american-option',
+      'el-salvador-naturalization-by-residence',
+      'el-salvador-citizenship-by-birth',
       'estonia-citizenship-by-parent',
       'estonia-naturalization',
       'estonia-citizenship-at-birth-by-parent',
@@ -154,6 +164,12 @@ describe('canonical data schemas', () => {
       'greece-citizenship-by-greek-parent',
       'greece-ordinary-naturalization',
       'greece-citizenship-birth-and-school',
+      'guatemala-citizenship-by-parent',
+      'guatemala-naturalization-by-residence',
+      'guatemala-citizenship-by-birth',
+      'honduras-citizenship-by-parent',
+      'honduras-naturalization-by-residence',
+      'honduras-citizenship-by-birth',
       'hungary-citizenship-by-parent-or-simplified-origin',
       'hungary-ordinary-naturalization',
       'hungary-citizenship-at-birth-by-parent',
@@ -242,6 +258,10 @@ describe('canonical data schemas', () => {
       'netherlands-citizenship-by-parent',
       'netherlands-naturalization-by-residence',
       'netherlands-third-generation-birth',
+      'nicaragua-citizenship-by-parent',
+      'nicaragua-central-american-option',
+      'nicaragua-naturalization',
+      'nicaragua-citizenship-by-birth',
       'vanuatu-citizenship-by-parent',
       'vanuatu-naturalization',
       'vanuatu-citizenship-at-birth-by-parent',
@@ -375,6 +395,9 @@ describe('canonical data schemas', () => {
       'uruguay-nationality-by-parent',
       'uruguay-legal-citizenship-by-residence',
       'uruguay-nationality-by-birth',
+      'venezuela-citizenship-by-parent',
+      'venezuela-naturalization-by-residence',
+      'venezuela-citizenship-by-birth',
       'vietnam-citizenship-by-parent',
       'vietnam-naturalization',
       'vietnam-citizenship-at-birth-by-parent',
@@ -696,6 +719,43 @@ describe('canonical data schemas', () => {
       route.id === 'panama-spain-latin-american-reciprocity-naturalization')!;
     expect(panamaReciprocity.variants.find(variant =>
       variant.id === 'spanish_birth_national_two_years')?.timeline.eligibility_minimum_months).toBe(24);
+    expect(panamaReciprocity.variants.find(variant =>
+      variant.id === 'el_salvador_birth_national_one_year')?.timeline.eligibility_minimum_months).toBe(12);
+    expect(panamaReciprocity.variants.find(variant =>
+      variant.id === 'honduras_birth_national_two_years')?.timeline.eligibility_minimum_months).toBe(24);
+    expect(panamaReciprocity.variants.find(variant =>
+      variant.id === 'costa_rica_birth_national_five_years')?.timeline.eligibility_minimum_months).toBe(60);
+    expect(panamaReciprocity.variants.find(variant =>
+      variant.id === 'venezuela_birth_national_five_years')?.timeline.eligibility_minimum_months).toBe(60);
+
+    const elSalvadorNaturalization = byIso.get('222')!.routes.find(route =>
+      route.id === 'el-salvador-naturalization-by-residence')!;
+    expect(elSalvadorNaturalization.variants.find(variant =>
+      variant.id === 'spanish_or_hispano_american_one_year')?.timeline.eligibility_minimum_months).toBe(12);
+
+    const hondurasNaturalization = byIso.get('340')!.routes.find(route =>
+      route.id === 'honduras-naturalization-by-residence')!;
+    expect(hondurasNaturalization.variants.find(variant =>
+      variant.id === 'spanish_or_ibero_american_birth_two_years')?.timeline.eligibility_minimum_months).toBe(24);
+
+    const costaRicaNaturalization = byIso.get('188')!.routes.find(route =>
+      route.id === 'costa-rica-naturalization-by-residence')!;
+    expect(costaRicaNaturalization.variants.find(variant =>
+      variant.id === 'central_american_spanish_spanish_american_birth_five_years')
+      ?.timeline.eligibility_minimum_months).toBe(60);
+
+    const venezuelaNaturalization = byIso.get('862')!.routes.find(route =>
+      route.id === 'venezuela-naturalization-by-residence')!;
+    expect(venezuelaNaturalization.variants.find(variant =>
+      variant.id === 'spain_portugal_italy_latin_america_caribbean_five_years')
+      ?.timeline.eligibility_minimum_months).toBe(60);
+
+    expect(byIso.get('214')!.routes.some(route =>
+      route.id === 'dominican-republic-naturalization')).toBe(true);
+    expect(byIso.get('320')!.routes.some(route =>
+      route.id === 'guatemala-naturalization-by-residence')).toBe(true);
+    expect(byIso.get('558')!.routes.some(route =>
+      route.id === 'nicaragua-central-american-option')).toBe(true);
 
     const colombiaBirth = byIso.get('170')!.routes.find(route =>
       route.id === 'colombia-citizenship-by-conditional-birth')!;

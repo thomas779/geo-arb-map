@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 361,
+      "routes": 384,
       "by_mode": {
-        "ancestry": 113,
-        "naturalization": 116,
-        "birth": 113,
+        "ancestry": 120,
+        "naturalization": 125,
+        "birth": 120,
         "investment": 19
       },
       "by_status": {
-        "active": 354,
+        "active": 377,
         "pending_verification": 4,
         "inactive": 2,
         "verified_negative": 1
@@ -730,12 +730,16 @@
       "name": "Costa Rica",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "costa-rica-citizenship-by-parent",
+        "costa-rica-naturalization-by-residence",
+        "costa-rica-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "191",
@@ -847,12 +851,16 @@
       "name": "Dominican Rep.",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "dominican-republic-citizenship-by-parent",
+        "dominican-republic-naturalization",
+        "dominican-republic-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "218",
@@ -875,12 +883,17 @@
       "name": "El Salvador",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "el-salvador-citizenship-by-parent",
+        "el-salvador-central-american-option",
+        "el-salvador-naturalization-by-residence",
+        "el-salvador-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "226",
@@ -1244,12 +1257,16 @@
       "name": "Guatemala",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "guatemala-citizenship-by-parent",
+        "guatemala-naturalization-by-residence",
+        "guatemala-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "324",
@@ -1316,12 +1333,16 @@
       "name": "Honduras",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "honduras-citizenship-by-parent",
+        "honduras-naturalization-by-residence",
+        "honduras-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "344",
@@ -2141,12 +2162,17 @@
       "name": "Nicaragua",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "nicaragua-citizenship-by-parent",
+        "nicaragua-central-american-option",
+        "nicaragua-naturalization",
+        "nicaragua-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "562",
@@ -3310,12 +3336,16 @@
       "name": "Venezuela",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "venezuela-citizenship-by-parent",
+        "venezuela-naturalization-by-residence",
+        "venezuela-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "876",
@@ -6359,6 +6389,128 @@
       ]
     },
     {
+      "id": "costa-rica-citizenship-by-birth",
+      "country": {
+        "iso_n3": "188",
+        "name": "Costa Rica"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Costa Rican nationality by birth in Costa Rica or through a Costa Rican parent",
+      "summary": "Article 13 nationality by birth rules: Costa Rican parentage, birth in Costa Rica with registration for foreign parents, birth abroad to a Costa Rican by birth with registration, and foundlings.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "costa-rica-citizenship-by-birth-principal",
+          "label": "Costa Rican nationality by birth in Costa Rica or through a Costa Rican parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Costa Rica Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Costa_Rica_2020"
+        }
+      ]
+    },
+    {
+      "id": "costa-rica-citizenship-by-parent",
+      "country": {
+        "iso_n3": "188",
+        "name": "Costa Rica"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Costa Rican nationality through a Costa Rican parent",
+      "summary": "A child of a Costa Rican father or mother is Costa Rican by birth under Article 13, including birth abroad for a Costa Rican parent by birth when registered as provided.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "costa-rica-citizenship-by-parent-principal",
+          "label": "Costa Rican nationality through a Costa Rican parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Costa Rica Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Costa_Rica_2020"
+        }
+      ]
+    },
+    {
+      "id": "costa-rica-naturalization-by-residence",
+      "country": {
+        "iso_n3": "188",
+        "name": "Costa Rica"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after official residence",
+      "summary": "Article 14: Central Americans, Spaniards, and Spanish-Americans by birth may naturalize after five years of official residence; other foreigners need seven years. Marriage to a Costa Rican has a two-year residence track. Spanish language, civics, good conduct, and means still apply under Article 15.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 3,
+        "eligibility_months": [
+          24,
+          60,
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "central_american_spanish_spanish_american_birth_five_years",
+          "label": "Central American, Spanish, or Spanish-American by birth (five years)",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Constitution Article 14(2). Spanish-Americans by birth includes most Ibero-American birth nationals outside Central America."
+        },
+        {
+          "id": "ordinary_seven_years",
+          "label": "Ordinary seven-year residence route",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Constitution Article 14(3) for other foreigners and for Central Americans, Spaniards, or Spanish-Americans who are not so by birth."
+        },
+        {
+          "id": "married_to_costa_rican_two_years",
+          "label": "Married to a Costa Rican (two years)",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Constitution Article 14(5): two years of marriage and residence after declaring the desire to acquire Costa Rican nationality."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Costa Rica Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Costa_Rica_2020"
+        }
+      ]
+    },
+    {
       "id": "croatia-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "191",
@@ -6930,6 +7082,110 @@
       ]
     },
     {
+      "id": "dominican-republic-citizenship-by-birth",
+      "country": {
+        "iso_n3": "214",
+        "name": "Dominican Rep."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Dominican nationality by birth in the Dominican Republic",
+      "summary": "Persons born in the national territory are Dominican under Article 18, except children of foreign diplomats and of foreigners in transit or illegally present as defined by Dominican law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "dominican-republic-citizenship-by-birth-principal",
+          "label": "Dominican nationality by birth in the Dominican Republic",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Dominican Republic Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Dominican_Republic_2015"
+        }
+      ]
+    },
+    {
+      "id": "dominican-republic-citizenship-by-parent",
+      "country": {
+        "iso_n3": "214",
+        "name": "Dominican Rep."
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Dominican nationality through a Dominican parent",
+      "summary": "Sons and daughters of a Dominican mother or father are Dominican under Article 18, including many births abroad subject to the dual-nationality choice rules after age eighteen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "dominican-republic-citizenship-by-parent-principal",
+          "label": "Dominican nationality through a Dominican parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Dominican Republic Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Dominican_Republic_2015"
+        }
+      ]
+    },
+    {
+      "id": "dominican-republic-naturalization",
+      "country": {
+        "iso_n3": "214",
+        "name": "Dominican Rep."
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under nationality statute",
+      "summary": "Article 19: foreigners may become naturalized in accordance with the law. Naturalized persons face political-office limits. Residence and other conditions are fixed by the nationality statute rather than a single constitutional multi-year floor.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "dominican-republic-naturalization-principal",
+          "label": "Naturalization under nationality statute",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Constitution defers periods and process to law (historically Ley 1683 and later amendments). Case-check the current naturalization statute before relying on a specific year count."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Dominican Republic Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Dominican_Republic_2015"
+        }
+      ]
+    },
+    {
       "id": "ecuador-citizenship-at-birth",
       "country": {
         "iso_n3": "218",
@@ -7031,6 +7287,163 @@
         {
           "title": "Ecuador 2021 Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Ecuador_2021"
+        }
+      ]
+    },
+    {
+      "id": "el-salvador-central-american-option",
+      "country": {
+        "iso_n3": "222",
+        "name": "El Salvador"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Central American option by domicile declaration",
+      "summary": "Natives of the other states that constituted the Federal Republic of Central America who domicile in El Salvador may declare the desire to be Salvadoran without renouncing their nationality of origin (Article 90(3)).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "el-salvador-central-american-option-principal",
+          "label": "Central American option by domicile declaration",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Constitution treats this as Salvadoran by birth after declaration, not ordinary naturalization years."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "El Salvador Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/El_Salvador_2014"
+        }
+      ]
+    },
+    {
+      "id": "el-salvador-citizenship-by-birth",
+      "country": {
+        "iso_n3": "222",
+        "name": "El Salvador"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Salvadoran nationality by birth in El Salvador",
+      "summary": "Persons born in the territory of El Salvador are Salvadoran by birth under Article 90.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "el-salvador-citizenship-by-birth-principal",
+          "label": "Salvadoran nationality by birth in El Salvador",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "El Salvador Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/El_Salvador_2014"
+        }
+      ]
+    },
+    {
+      "id": "el-salvador-citizenship-by-parent",
+      "country": {
+        "iso_n3": "222",
+        "name": "El Salvador"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Salvadoran nationality through a Salvadoran parent",
+      "summary": "Children of a Salvadoran father or mother born abroad are Salvadoran by birth under Article 90.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "el-salvador-citizenship-by-parent-principal",
+          "label": "Salvadoran nationality through a Salvadoran parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "El Salvador Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/El_Salvador_2014"
+        }
+      ]
+    },
+    {
+      "id": "el-salvador-naturalization-by-residence",
+      "country": {
+        "iso_n3": "222",
+        "name": "El Salvador"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after residence",
+      "summary": "Article 92: native Spaniards and Hispano-Americans may naturalize after one year of residence; other foreigners after five years; marriage to a Salvadoran has a two-year residence track. Grant is by competent authority under the law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 3,
+        "eligibility_months": [
+          12,
+          24,
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "spanish_or_hispano_american_one_year",
+          "label": "Native Spaniards and Hispano-Americans (one year)",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "Constitution Article 92(1). This is the reciprocal floor used for Panama Article 10(3) modeling of Salvadoran birth nationals."
+        },
+        {
+          "id": "ordinary_five_years",
+          "label": "Ordinary five-year residence route",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        },
+        {
+          "id": "married_to_salvadoran_two_years",
+          "label": "Married to a Salvadoran (two years)",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Constitution Article 92(4): two years residence prior to or after the marriage."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "El Salvador Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/El_Salvador_2014"
         }
       ]
     },
@@ -8356,6 +8769,253 @@
         {
           "title": "Grenada — application for naturalisation",
           "url": "https://gndembassyprc.mofa.gov.gd/wp-content/uploads/2023/09/Schedule-5-Regulation-7.pdf"
+        }
+      ]
+    },
+    {
+      "id": "guatemala-citizenship-by-birth",
+      "country": {
+        "iso_n3": "320",
+        "name": "Guatemala"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Guatemalan nationality by birth in Guatemala or through a Guatemalan parent",
+      "summary": "Birth in Guatemala or through a Guatemalan parent creates Guatemalan nationality under the constitutional framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guatemala-citizenship-by-birth-principal",
+          "label": "Guatemalan nationality by birth in Guatemala or through a Guatemalan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guatemala Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guatemala_1993"
+        }
+      ]
+    },
+    {
+      "id": "guatemala-citizenship-by-parent",
+      "country": {
+        "iso_n3": "320",
+        "name": "Guatemala"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Guatemalan nationality through a Guatemalan parent",
+      "summary": "Children of a Guatemalan parent are Guatemalan under the constitutional nationality framework, including birth abroad subject to registration rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guatemala-citizenship-by-parent-principal",
+          "label": "Guatemalan nationality through a Guatemalan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guatemala Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guatemala_1993"
+        }
+      ]
+    },
+    {
+      "id": "guatemala-naturalization-by-residence",
+      "country": {
+        "iso_n3": "320",
+        "name": "Guatemala"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after domicile and residence",
+      "summary": "Ordinary naturalization (naturalización concesiva) generally requires domicile and five years of immediately preceding residence under the Nationality Law. Shorter two-year tracks exist for statutory special categories (important services, prior Central American residence, recognized merit, or statelessness). Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          24,
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ordinary_five_years",
+          "label": "Ordinary five-year residence route",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Nationality Law Article 33(1): five years immediately preceding residence while domiciled, with limited absence rules."
+        },
+        {
+          "id": "special_two_years",
+          "label": "Two-year special-category route",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Nationality Law Article 33(3): two years for important services, three prior years of residence in a Central American country, recognized merit, or statelessness. Case-check the category before relying on the shorter floor."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guatemala Nationality Law Decree 1613 (ACNUR text)",
+          "url": "https://www.acnur.org/fileadmin/Documentos/BDL/2001/0135.pdf"
+        },
+        {
+          "title": "Guatemala Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guatemala_1993"
+        }
+      ]
+    },
+    {
+      "id": "honduras-citizenship-by-birth",
+      "country": {
+        "iso_n3": "340",
+        "name": "Honduras"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Honduran nationality by birth in Honduras",
+      "summary": "Persons born within the national territory are Honduran by birth under Article 23, with the diplomatic-agent children exception.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "honduras-citizenship-by-birth-principal",
+          "label": "Honduran nationality by birth in Honduras",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Honduras Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Honduras_2013"
+        }
+      ]
+    },
+    {
+      "id": "honduras-citizenship-by-parent",
+      "country": {
+        "iso_n3": "340",
+        "name": "Honduras"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Honduran nationality through a Honduran parent",
+      "summary": "Children born abroad to a Honduran father or mother by birth are Honduran by birth under Article 23.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "honduras-citizenship-by-parent-principal",
+          "label": "Honduran nationality through a Honduran parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Honduras Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Honduras_2013"
+        }
+      ]
+    },
+    {
+      "id": "honduras-naturalization-by-residence",
+      "country": {
+        "iso_n3": "340",
+        "name": "Honduras"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after residence",
+      "summary": "Article 24: Central Americans by birth after one year; Spaniards and Ibero-Americans by birth after two consecutive years; other foreigners after more than three consecutive years. Spouses of Hondurans by birth and selected immigrant groups have separate tracks. Prior renunciation of other nationality is generally required unless a dual-nationality treaty applies.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 4,
+        "eligibility_months": [
+          0,
+          12,
+          24,
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "central_american_birth_one_year",
+          "label": "Central Americans by birth (one year)",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        },
+        {
+          "id": "spanish_or_ibero_american_birth_two_years",
+          "label": "Spaniards and Ibero-Americans by birth (two years)",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Constitution Article 24(2). This is the reciprocal floor used for Panama Article 10(3) modeling of Honduran birth nationals."
+        },
+        {
+          "id": "ordinary_three_years",
+          "label": "Ordinary three-year residence route",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Constitution Article 24(3): more than three consecutive years for other foreigners."
+        },
+        {
+          "id": "married_to_honduran_by_birth",
+          "label": "Married to a Honduran by birth",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Constitution Article 24(6) lists foreigners married to Hondurans by birth among naturalization categories; statutory procedure and any waiting period still apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Honduras Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Honduras_2013"
         }
       ]
     },
@@ -11678,6 +12338,145 @@
       ]
     },
     {
+      "id": "nicaragua-central-american-option",
+      "country": {
+        "iso_n3": "558",
+        "name": "Nicaragua"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Central American option while retaining origin nationality",
+      "summary": "Native-born Central Americans who reside in Nicaragua may apply for Nicaraguan nationality without renouncing their prior nationality (Article 17).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nicaragua-central-american-option-principal",
+          "label": "Central American option while retaining origin nationality",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nicaragua Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Nicaragua_2014"
+        }
+      ]
+    },
+    {
+      "id": "nicaragua-citizenship-by-birth",
+      "country": {
+        "iso_n3": "558",
+        "name": "Nicaragua"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Nicaraguan nationality by birth in Nicaragua",
+      "summary": "Persons born in the national territory are nationals under Article 16, with exceptions for children of certain foreign diplomatic or international-organization personnel unless they opt for Nicaraguan nationality.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nicaragua-citizenship-by-birth-principal",
+          "label": "Nicaraguan nationality by birth in Nicaragua",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nicaragua Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Nicaragua_2014"
+        }
+      ]
+    },
+    {
+      "id": "nicaragua-citizenship-by-parent",
+      "country": {
+        "iso_n3": "558",
+        "name": "Nicaragua"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Nicaraguan nationality through a Nicaraguan parent",
+      "summary": "Children of a Nicaraguan father or mother are nationals under Article 16, including birth abroad with application rules after majority for some cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nicaragua-citizenship-by-parent-principal",
+          "label": "Nicaraguan nationality through a Nicaraguan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nicaragua Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Nicaragua_2014"
+        }
+      ]
+    },
+    {
+      "id": "nicaragua-naturalization",
+      "country": {
+        "iso_n3": "558",
+        "name": "Nicaragua"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under nationality statute",
+      "summary": "Foreigners may be nationalized after applying to the competent authority, renouncing prior nationality, and meeting the requirements fixed by the applicable nationality law (Article 19). Residence periods are statutory rather than fixed in the Constitution.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "nicaragua-naturalization-principal",
+          "label": "Naturalization under nationality statute",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Constitution does not state a single multi-year residence floor; case-check the current nationality law and implementing rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nicaragua Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Nicaragua_2014"
+        }
+      ]
+    },
+    {
       "id": "nigeria-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "566",
@@ -12374,12 +13173,14 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization for Spanish or Latin American birth nationals (reciprocity)",
-      "summary": "Article 10(3) lets nationals by birth of Spain or any Latin American state request naturalization if they meet the same requirements their origin state imposes on Panamanians. For Spanish birth nationals that reciprocal floor is two years of continuous residence (matching Spain Article 22 treatment of Panamanians). Other Latin American origin periods depend on reciprocity and commonly range from about one to three years. Renunciation, Spanish, and civic knowledge still apply.",
+      "summary": "Article 10(3) lets nationals by birth of Spain or any Latin American state request naturalization if they meet the same requirements their origin state imposes on Panamanians. Spanish birth nationals are modeled at two years (Spain Article 22 Ibero floor). Several origin constitutions fix shorter floors for Spanish/Hispano-American or Latin American birth nationals and are modeled as named variants. Other origins still use case-by-case reciprocity. Renunciation, Spanish, and civic knowledge still apply.",
       "facts": {
         "canonical": true,
-        "variant_count": 2,
+        "variant_count": 6,
         "eligibility_months": [
-          24
+          12,
+          24,
+          60
         ],
         "discretionary_decision": true
       },
@@ -12392,11 +13193,39 @@
           "note": "Article 10(3) reciprocity: Spain grants Panamanians the two-year Ibero-American naturalization floor, so Spanish birth nationals are modeled at two years continuous residence in Panama."
         },
         {
+          "id": "el_salvador_birth_national_one_year",
+          "label": "Salvadoran birth nationals (one year by reciprocity)",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "El Salvador Constitution Article 92 gives native Spaniards and Hispano-Americans a one-year residence naturalization floor, so Panamanians get one year there and Salvadoran birth nationals get one year in Panama under Article 10(3)."
+        },
+        {
+          "id": "honduras_birth_national_two_years",
+          "label": "Honduran birth nationals (two years by reciprocity)",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Honduras Constitution Article 24 gives Spaniards and Ibero-Americans by birth a two-year consecutive residence floor (Central Americans by birth are one year). Panamanians fall under the two-year Ibero track, so Honduran birth nationals are modeled at two years in Panama."
+        },
+        {
+          "id": "costa_rica_birth_national_five_years",
+          "label": "Costa Rican birth nationals (five years by reciprocity)",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Costa Rica Constitution Article 14 gives Central Americans, Spaniards, and Spanish-Americans by birth a five-year official residence floor (seven years for other foreigners). Panamanians as Spanish-Americans by birth are on the five-year track, so Costa Rican birth nationals are modeled at five years in Panama."
+        },
+        {
+          "id": "venezuela_birth_national_five_years",
+          "label": "Venezuelan birth nationals (five years by reciprocity)",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Venezuela Constitution Article 33 reduces the ten-year naturalization residence floor to five years for original nationals of Spain, Portugal, Italy, or a Latin American or Caribbean country. Panamanians qualify for five years there, so Venezuelan birth nationals are modeled at five years in Panama."
+        },
+        {
           "id": "latin_american_birth_national_reciprocity",
-          "label": "Latin American birth nationals (reciprocal period)",
+          "label": "Other Latin American birth nationals (reciprocal period)",
           "allocation": "discretionary",
           "eligibility_months": null,
-          "note": "Article 10(3) sets the residence floor to whatever the origin Latin American state requires of Panamanians. Administrative practice often cites about one year (e.g. Colombia, El Salvador), two years (e.g. Argentina, Ecuador, Mexico, Peru), or three years (e.g. Uruguay), but the constitutional rule is reciprocity, not a single fixed number. Case-check the origin state before relying on a shorter floor."
+          "note": "Article 10(3) still sets the residence floor to whatever the origin Latin American state requires of Panamanians. Named variants above cover Spain, El Salvador, Honduras, Costa Rica, and Venezuela where the origin constitution states a clear preferential floor. Other origins (for example Mexico two years for Iberian/Latin American origin, Colombia two years for Spaniards) should be checked against the origin nationality rules before relying on a shorter period."
         }
       ],
       "confidence": "high",
@@ -16568,6 +17397,126 @@
         {
           "title": "Uruguay Law No. 16.021 — Nationality",
           "url": "https://www.impo.com.uy/bases/leyes/16021-1989"
+        }
+      ]
+    },
+    {
+      "id": "venezuela-citizenship-by-birth",
+      "country": {
+        "iso_n3": "862",
+        "name": "Venezuela"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Venezuelan nationality by birth in Venezuela",
+      "summary": "Any person born within the territory of the Republic is Venezuelan by birth under Article 32.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "venezuela-citizenship-by-birth-principal",
+          "label": "Venezuelan nationality by birth in Venezuela",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Venezuela Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Venezuela_2009"
+        }
+      ]
+    },
+    {
+      "id": "venezuela-citizenship-by-parent",
+      "country": {
+        "iso_n3": "862",
+        "name": "Venezuela"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Venezuelan nationality through a Venezuelan parent",
+      "summary": "Article 32 transmits Venezuelan nationality by birth to children born abroad to Venezuelan parents under the parentage, residence, and declaration rules in that article.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "venezuela-citizenship-by-parent-principal",
+          "label": "Venezuelan nationality through a Venezuelan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Venezuela Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Venezuela_2009"
+        }
+      ]
+    },
+    {
+      "id": "venezuela-naturalization-by-residence",
+      "country": {
+        "iso_n3": "862",
+        "name": "Venezuela"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after uninterrupted residence",
+      "summary": "Article 33: naturalization letter after at least ten years uninterrupted residence immediately before the application. The period falls to five years for original nationals of Spain, Portugal, Italy, or a Latin American or Caribbean country. Spouses of Venezuelans may declare after five years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 3,
+        "eligibility_months": [
+          60,
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ordinary_ten_years",
+          "label": "Ordinary ten-year residence route",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        },
+        {
+          "id": "spain_portugal_italy_latin_america_caribbean_five_years",
+          "label": "Spain, Portugal, Italy, Latin America, or Caribbean origin (five years)",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Constitution Article 33. This is the reciprocal floor used for Panama Article 10(3) modeling of Venezuelan birth nationals."
+        },
+        {
+          "id": "married_to_venezuelan_five_years",
+          "label": "Married to a Venezuelan (five years)",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Constitution Article 33(2): declaration of wish to adopt Venezuelan nationality at least five years after the marriage date."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Venezuela Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Venezuela_2009"
         }
       ]
     },

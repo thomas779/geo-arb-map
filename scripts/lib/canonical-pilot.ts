@@ -319,6 +319,14 @@ const OFFICIAL_URLS = {
   peru_migraciones: 'https://www.migraciones.gob.pe/',
   bolivia_constitution: 'https://www.constituteproject.org/constitution/Bolivia_2009',
   ecuador_constitution: 'https://www.constituteproject.org/constitution/Ecuador_2021',
+  costa_rica_constitution: 'https://www.constituteproject.org/constitution/Costa_Rica_2020',
+  el_salvador_constitution: 'https://www.constituteproject.org/constitution/El_Salvador_2014',
+  guatemala_constitution: 'https://www.constituteproject.org/constitution/Guatemala_1993',
+  guatemala_nationality_law: 'https://www.acnur.org/fileadmin/Documentos/BDL/2001/0135.pdf',
+  honduras_constitution: 'https://www.constituteproject.org/constitution/Honduras_2013',
+  nicaragua_constitution: 'https://www.constituteproject.org/constitution/Nicaragua_2014',
+  dominican_republic_constitution: 'https://www.constituteproject.org/constitution/Dominican_Republic_2015',
+  venezuela_constitution: 'https://www.constituteproject.org/constitution/Venezuela_2009',
   malaysia_constitution: 'https://www.constituteproject.org/constitution/Malaysia_2007',
   malaysia_residence_pass: 'https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/',
   vietnam_nationality_law: 'https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html',
@@ -851,6 +859,14 @@ function jurisdictionSources(): SourceRecord[] {
       ['Peru Superintendencia Nacional de Migraciones', OFFICIAL_URLS.peru_migraciones, '604', 'es', 'official_guidance', 'peru-citizenship-law'],
       ['Bolivia 2009 Constitution (Constitute Project)', OFFICIAL_URLS.bolivia_constitution, '068', 'en', 'primary_law', 'bolivia-citizenship-law'],
       ['Ecuador 2021 Constitution (Constitute Project)', OFFICIAL_URLS.ecuador_constitution, '218', 'en', 'primary_law', 'ecuador-citizenship-law'],
+      ['Costa Rica Constitution — nationality (Constitute Project)', OFFICIAL_URLS.costa_rica_constitution, '188', 'en', 'primary_law', 'costa-rica-citizenship-law'],
+      ['El Salvador Constitution — nationality (Constitute Project)', OFFICIAL_URLS.el_salvador_constitution, '222', 'en', 'primary_law', 'el-salvador-citizenship-law'],
+      ['Guatemala Constitution — nationality (Constitute Project)', OFFICIAL_URLS.guatemala_constitution, '320', 'en', 'primary_law', 'guatemala-citizenship-law'],
+      ['Guatemala Nationality Law Decree 1613 (ACNUR text)', OFFICIAL_URLS.guatemala_nationality_law, '320', 'es', 'primary_law', 'guatemala-citizenship-law'],
+      ['Honduras Constitution — nationality (Constitute Project)', OFFICIAL_URLS.honduras_constitution, '340', 'en', 'primary_law', 'honduras-citizenship-law'],
+      ['Nicaragua Constitution — nationality (Constitute Project)', OFFICIAL_URLS.nicaragua_constitution, '558', 'en', 'primary_law', 'nicaragua-citizenship-law'],
+      ['Dominican Republic Constitution — nationality (Constitute Project)', OFFICIAL_URLS.dominican_republic_constitution, '214', 'en', 'primary_law', 'dominican-republic-citizenship-law'],
+      ['Venezuela Constitution — nationality (Constitute Project)', OFFICIAL_URLS.venezuela_constitution, '862', 'en', 'primary_law', 'venezuela-citizenship-law'],
       ['Malaysia Federal Constitution (Constitute Project)', OFFICIAL_URLS.malaysia_constitution, '458', 'en', 'primary_law', 'malaysia-citizenship-law'],
       ['Malaysia Immigration — Residence Pass', OFFICIAL_URLS.malaysia_residence_pass, '458', 'en', 'official_guidance', 'malaysia-citizenship-law'],
       ['Vietnam Law on Vietnamese Nationality 2008 (English)', OFFICIAL_URLS.vietnam_nationality_law, '704', 'en', 'primary_law', 'vietnam-citizenship-law'],
@@ -3499,7 +3515,7 @@ function panamaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
         mode: 'naturalization',
         status: 'active',
         title: 'Naturalization for Spanish or Latin American birth nationals (reciprocity)',
-        summary: 'Article 10(3) lets nationals by birth of Spain or any Latin American state request naturalization if they meet the same requirements their origin state imposes on Panamanians. For Spanish birth nationals that reciprocal floor is two years of continuous residence (matching Spain Article 22 treatment of Panamanians). Other Latin American origin periods depend on reciprocity and commonly range from about one to three years. Renunciation, Spanish, and civic knowledge still apply.',
+        summary: 'Article 10(3) lets nationals by birth of Spain or any Latin American state request naturalization if they meet the same requirements their origin state imposes on Panamanians. Spanish birth nationals are modeled at two years (Spain Article 22 Ibero floor). Several origin constitutions fix shorter floors for Spanish/Hispano-American or Latin American birth nationals and are modeled as named variants. Other origins still use case-by-case reciprocity. Renunciation, Spanish, and civic knowledge still apply.',
         effective: { from: null, to: null, supersedes: [] },
         review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
         variants: [
@@ -3527,8 +3543,96 @@ function panamaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
             ]),
           },
           {
+            id: 'el_salvador_birth_national_one_year',
+            label: 'Salvadoran birth nationals (one year by reciprocity)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'citizenship.by_birth.iso_n3', operator: 'eq', value: '222' },
+              { field: 'residence.consecutive_months', operator: 'gte', value: 12, unit: 'months' },
+              { field: 'integration.spanish_and_civics', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'permanent_residence', minimum_months: 12 }],
+            timeline: {
+              eligibility_minimum_months: 12,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'El Salvador Constitution Article 92 gives native Spaniards and Hispano-Americans a one-year residence naturalization floor, so Panamanians get one year there and Salvadoran birth nationals get one year in Panama under Article 10(3).',
+            },
+            source_refs: refs([constitution, requirements], [
+              `/routes/${reciprocityId}/summary`,
+              `/routes/${reciprocityId}/variants/el_salvador_birth_national_one_year/eligibility`,
+            ]),
+          },
+          {
+            id: 'honduras_birth_national_two_years',
+            label: 'Honduran birth nationals (two years by reciprocity)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'citizenship.by_birth.iso_n3', operator: 'eq', value: '340' },
+              { field: 'residence.consecutive_months', operator: 'gte', value: 24, unit: 'months' },
+              { field: 'integration.spanish_and_civics', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'permanent_residence', minimum_months: 24 }],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Honduras Constitution Article 24 gives Spaniards and Ibero-Americans by birth a two-year consecutive residence floor (Central Americans by birth are one year). Panamanians fall under the two-year Ibero track, so Honduran birth nationals are modeled at two years in Panama.',
+            },
+            source_refs: refs([constitution, requirements], [
+              `/routes/${reciprocityId}/summary`,
+              `/routes/${reciprocityId}/variants/honduras_birth_national_two_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'costa_rica_birth_national_five_years',
+            label: 'Costa Rican birth nationals (five years by reciprocity)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'citizenship.by_birth.iso_n3', operator: 'eq', value: '188' },
+              { field: 'residence.consecutive_months', operator: 'gte', value: 60, unit: 'months' },
+              { field: 'integration.spanish_and_civics', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'permanent_residence', minimum_months: 60 }],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Costa Rica Constitution Article 14 gives Central Americans, Spaniards, and Spanish-Americans by birth a five-year official residence floor (seven years for other foreigners). Panamanians as Spanish-Americans by birth are on the five-year track, so Costa Rican birth nationals are modeled at five years in Panama.',
+            },
+            source_refs: refs([constitution, requirements], [
+              `/routes/${reciprocityId}/summary`,
+              `/routes/${reciprocityId}/variants/costa_rica_birth_national_five_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'venezuela_birth_national_five_years',
+            label: 'Venezuelan birth nationals (five years by reciprocity)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'citizenship.by_birth.iso_n3', operator: 'eq', value: '862' },
+              { field: 'residence.consecutive_months', operator: 'gte', value: 60, unit: 'months' },
+              { field: 'integration.spanish_and_civics', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'permanent_residence', minimum_months: 60 }],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Venezuela Constitution Article 33 reduces the ten-year naturalization residence floor to five years for original nationals of Spain, Portugal, Italy, or a Latin American or Caribbean country. Panamanians qualify for five years there, so Venezuelan birth nationals are modeled at five years in Panama.',
+            },
+            source_refs: refs([constitution, requirements], [
+              `/routes/${reciprocityId}/summary`,
+              `/routes/${reciprocityId}/variants/venezuela_birth_national_five_years/eligibility`,
+            ]),
+          },
+          {
             id: 'latin_american_birth_national_reciprocity',
-            label: 'Latin American birth nationals (reciprocal period)',
+            label: 'Other Latin American birth nationals (reciprocal period)',
             outcome: 'citizenship',
             allocation: 'discretionary',
             eligibility: [
@@ -3541,7 +3645,7 @@ function panamaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
               eligibility_minimum_months: null,
               processing_typical_months: null,
               confidence: 'medium',
-              note: 'Article 10(3) sets the residence floor to whatever the origin Latin American state requires of Panamanians. Administrative practice often cites about one year (e.g. Colombia, El Salvador), two years (e.g. Argentina, Ecuador, Mexico, Peru), or three years (e.g. Uruguay), but the constitutional rule is reciprocity, not a single fixed number. Case-check the origin state before relying on a shorter floor.',
+              note: 'Article 10(3) still sets the residence floor to whatever the origin Latin American state requires of Panamanians. Named variants above cover Spain, El Salvador, Honduras, Costa Rica, and Venezuela where the origin constitution states a clear preferential floor. Other origins (for example Mexico two years for Iberian/Latin American origin, Colombia two years for Spaniards) should be checked against the origin nationality rules before relying on a shorter period.',
             },
             source_refs: refs([constitution, requirements], [
               `/routes/${reciprocityId}/summary`,
@@ -5036,6 +5140,796 @@ function ecuadorRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
         summary: 'Birth to an Ecuadorian parent, or birth in Ecuador under the Constitution, creates Ecuadorian nationality.',
         source: constitution,
         eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '218' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function costaRicaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.costa_rica_constitution);
+  const naturalizationId = 'costa-rica-naturalization-by-residence';
+  return reviewedCountryRecord({
+    shadow,
+    iso: '188',
+    note: 'Reviewed against Constitution Articles 13 to 15. Preferential five-year floors for Central Americans, Spaniards, and Spanish-Americans by birth are modeled as explicit variants. No citizenship-by-investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Article 13 covers birth in Costa Rica to a Costa Rican parent, birth abroad to a Costa Rican by birth with registration, birth in Costa Rica to foreign parents with timely registration, and foundlings.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No direct citizenship-by-investment grant in the constitutional nationality chapter.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'costa-rica-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Costa Rican nationality through a Costa Rican parent',
+        summary: 'A child of a Costa Rican father or mother is Costa Rican by birth under Article 13, including birth abroad for a Costa Rican parent by birth when registered as provided.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '188' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      {
+        id: naturalizationId,
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after official residence',
+        summary: 'Article 14: Central Americans, Spaniards, and Spanish-Americans by birth may naturalize after five years of official residence; other foreigners need seven years. Marriage to a Costa Rican has a two-year residence track. Spanish language, civics, good conduct, and means still apply under Article 15.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
+        variants: [
+          {
+            id: 'central_american_spanish_spanish_american_birth_five_years',
+            label: 'Central American, Spanish, or Spanish-American by birth (five years)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              {
+                field: 'citizenship.by_birth.category',
+                operator: 'in',
+                value: ['central_america', 'spain', 'spanish_america'],
+              },
+              { field: 'residence.official_months', operator: 'gte', value: 60, unit: 'months' },
+            ],
+            milestones: [{ status: 'official_residence', minimum_months: 60 }],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Constitution Article 14(2). Spanish-Americans by birth includes most Ibero-American birth nationals outside Central America.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/central_american_spanish_spanish_american_birth_five_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'ordinary_seven_years',
+            label: 'Ordinary seven-year residence route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'residence.official_months', operator: 'gte', value: 84, unit: 'months' },
+            ],
+            milestones: [{ status: 'official_residence', minimum_months: 84 }],
+            timeline: {
+              eligibility_minimum_months: 84,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Constitution Article 14(3) for other foreigners and for Central Americans, Spaniards, or Spanish-Americans who are not so by birth.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/ordinary_seven_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'married_to_costa_rican_two_years',
+            label: 'Married to a Costa Rican (two years)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'spouse.citizenship.iso_n3', operator: 'eq', value: '188' },
+              { field: 'residence.official_months', operator: 'gte', value: 24, unit: 'months' },
+            ],
+            milestones: [{ status: 'official_residence', minimum_months: 24 }],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Constitution Article 14(5): two years of marriage and residence after declaring the desire to acquire Costa Rican nationality.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/married_to_costa_rican_two_years/eligibility`,
+            ]),
+          },
+        ],
+      },
+      principalCitizenshipRoute({
+        id: 'costa-rica-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Costa Rican nationality by birth in Costa Rica or through a Costa Rican parent',
+        summary: 'Article 13 nationality by birth rules: Costa Rican parentage, birth in Costa Rica with registration for foreign parents, birth abroad to a Costa Rican by birth with registration, and foundlings.',
+        source: constitution,
+        eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '188' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function elSalvadorRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.el_salvador_constitution);
+  const naturalizationId = 'el-salvador-naturalization-by-residence';
+  return reviewedCountryRecord({
+    shadow,
+    iso: '222',
+    note: 'Reviewed against Constitution Articles 90 to 92. Native Spaniards and Hispano-Americans have a one-year naturalization floor; Central American natives of the former Federal Republic can opt by domicile declaration. No citizenship-by-investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Article 90: birth in El Salvador; children of a Salvadoran parent born abroad; and Central American natives of the former Federal Republic who domicile in El Salvador and declare the desire to be Salvadoran without renouncing origin nationality.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No direct citizenship-by-investment grant in the constitutional nationality title.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'el-salvador-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Salvadoran nationality through a Salvadoran parent',
+        summary: 'Children of a Salvadoran father or mother born abroad are Salvadoran by birth under Article 90.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '222' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'el-salvador-central-american-option',
+        mode: 'naturalization',
+        title: 'Central American option by domicile declaration',
+        summary: 'Natives of the other states that constituted the Federal Republic of Central America who domicile in El Salvador may declare the desire to be Salvadoran without renouncing their nationality of origin (Article 90(3)).',
+        source: constitution,
+        eligibility: [
+          { field: 'citizenship.by_birth.region', operator: 'eq', value: 'former_federal_republic_central_america' },
+          { field: 'residence.domicile_in_el_salvador', operator: 'eq', value: true },
+        ],
+        months: 0,
+        allocation: 'right',
+        lastChecked: '2026-07-22',
+        note: 'Constitution treats this as Salvadoran by birth after declaration, not ordinary naturalization years.',
+      }),
+      {
+        id: naturalizationId,
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after residence',
+        summary: 'Article 92: native Spaniards and Hispano-Americans may naturalize after one year of residence; other foreigners after five years; marriage to a Salvadoran has a two-year residence track. Grant is by competent authority under the law.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
+        variants: [
+          {
+            id: 'spanish_or_hispano_american_one_year',
+            label: 'Native Spaniards and Hispano-Americans (one year)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              {
+                field: 'citizenship.by_birth.category',
+                operator: 'in',
+                value: ['spain', 'hispano_america'],
+              },
+              { field: 'residence.in_el_salvador_months', operator: 'gte', value: 12, unit: 'months' },
+            ],
+            milestones: [{ status: 'residence_in_el_salvador', minimum_months: 12 }],
+            timeline: {
+              eligibility_minimum_months: 12,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Constitution Article 92(1). This is the reciprocal floor used for Panama Article 10(3) modeling of Salvadoran birth nationals.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/spanish_or_hispano_american_one_year/eligibility`,
+            ]),
+          },
+          {
+            id: 'ordinary_five_years',
+            label: 'Ordinary five-year residence route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'residence.in_el_salvador_months', operator: 'gte', value: 60, unit: 'months' },
+            ],
+            milestones: [{ status: 'residence_in_el_salvador', minimum_months: 60 }],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: null,
+              confidence: 'high',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/ordinary_five_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'married_to_salvadoran_two_years',
+            label: 'Married to a Salvadoran (two years)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'spouse.citizenship.iso_n3', operator: 'eq', value: '222' },
+              { field: 'residence.in_el_salvador_months', operator: 'gte', value: 24, unit: 'months' },
+            ],
+            milestones: [{ status: 'residence_in_el_salvador', minimum_months: 24 }],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Constitution Article 92(4): two years residence prior to or after the marriage.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/married_to_salvadoran_two_years/eligibility`,
+            ]),
+          },
+        ],
+      },
+      principalCitizenshipRoute({
+        id: 'el-salvador-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Salvadoran nationality by birth in El Salvador',
+        summary: 'Persons born in the territory of El Salvador are Salvadoran by birth under Article 90.',
+        source: constitution,
+        eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '222' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function guatemalaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.guatemala_constitution);
+  const nationalityLaw = requireSource(officialSources, OFFICIAL_URLS.guatemala_nationality_law);
+  const naturalizationId = 'guatemala-naturalization-by-residence';
+  return reviewedCountryRecord({
+    shadow,
+    iso: '320',
+    note: 'Reviewed against the Constitution nationality framework and the Nationality Law (Decree 1613) text for ordinary five-year naturalization. No citizenship-by-investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, nationalityLaw] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Constitutional birth and parentage rules; foreign-parent edge cases follow secondary nationality law.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, nationalityLaw],
+        note: 'No direct citizenship-by-investment grant; ordinary naturalization remains discretionary.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'guatemala-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Guatemalan nationality through a Guatemalan parent',
+        summary: 'Children of a Guatemalan parent are Guatemalan under the constitutional nationality framework, including birth abroad subject to registration rules.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '320' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      {
+        id: naturalizationId,
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after domicile and residence',
+        summary: 'Ordinary naturalization (naturalización concesiva) generally requires domicile and five years of immediately preceding residence under the Nationality Law. Shorter two-year tracks exist for statutory special categories (important services, prior Central American residence, recognized merit, or statelessness). Grant is discretionary.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
+        variants: [
+          {
+            id: 'ordinary_five_years',
+            label: 'Ordinary five-year residence route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'residence.in_guatemala_months', operator: 'gte', value: 60, unit: 'months' },
+            ],
+            milestones: [{ status: 'domicile_in_guatemala', minimum_months: 60 }],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Nationality Law Article 33(1): five years immediately preceding residence while domiciled, with limited absence rules.',
+            },
+            source_refs: refs([nationalityLaw, constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/ordinary_five_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'special_two_years',
+            label: 'Two-year special-category route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'naturalization.special_category', operator: 'eq', value: true },
+              { field: 'residence.in_guatemala_months', operator: 'gte', value: 24, unit: 'months' },
+            ],
+            milestones: [{ status: 'domicile_in_guatemala', minimum_months: 24 }],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'medium',
+              note: 'Nationality Law Article 33(3): two years for important services, three prior years of residence in a Central American country, recognized merit, or statelessness. Case-check the category before relying on the shorter floor.',
+            },
+            source_refs: refs([nationalityLaw], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/special_two_years/eligibility`,
+            ]),
+          },
+        ],
+      },
+      principalCitizenshipRoute({
+        id: 'guatemala-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Guatemalan nationality by birth in Guatemala or through a Guatemalan parent',
+        summary: 'Birth in Guatemala or through a Guatemalan parent creates Guatemalan nationality under the constitutional framework.',
+        source: constitution,
+        eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '320' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function hondurasRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.honduras_constitution);
+  const naturalizationId = 'honduras-naturalization-by-residence';
+  return reviewedCountryRecord({
+    shadow,
+    iso: '340',
+    note: 'Reviewed against Constitution Articles 22 to 24. Central Americans by birth have a one-year floor; Spaniards and Ibero-Americans by birth have two years; other foreigners three years. No citizenship-by-investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Article 23: birth in Honduras (except children of diplomatic agents), children born abroad to a Honduran by birth, births on Honduran vessels or aircraft in defined cases, and foundlings.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No direct citizenship-by-investment grant in the constitutional nationality chapter.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'honduras-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Honduran nationality through a Honduran parent',
+        summary: 'Children born abroad to a Honduran father or mother by birth are Honduran by birth under Article 23.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '340' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      {
+        id: naturalizationId,
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after residence',
+        summary: 'Article 24: Central Americans by birth after one year; Spaniards and Ibero-Americans by birth after two consecutive years; other foreigners after more than three consecutive years. Spouses of Hondurans by birth and selected immigrant groups have separate tracks. Prior renunciation of other nationality is generally required unless a dual-nationality treaty applies.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
+        variants: [
+          {
+            id: 'central_american_birth_one_year',
+            label: 'Central Americans by birth (one year)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'citizenship.by_birth.region', operator: 'eq', value: 'central_america' },
+              { field: 'residence.in_honduras_months', operator: 'gte', value: 12, unit: 'months' },
+            ],
+            milestones: [{ status: 'residence_in_honduras', minimum_months: 12 }],
+            timeline: {
+              eligibility_minimum_months: 12,
+              processing_typical_months: null,
+              confidence: 'high',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/central_american_birth_one_year/eligibility`,
+            ]),
+          },
+          {
+            id: 'spanish_or_ibero_american_birth_two_years',
+            label: 'Spaniards and Ibero-Americans by birth (two years)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              {
+                field: 'citizenship.by_birth.category',
+                operator: 'in',
+                value: ['spain', 'ibero_america'],
+              },
+              { field: 'residence.in_honduras_months', operator: 'gte', value: 24, unit: 'months' },
+            ],
+            milestones: [{ status: 'residence_in_honduras', minimum_months: 24 }],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Constitution Article 24(2). This is the reciprocal floor used for Panama Article 10(3) modeling of Honduran birth nationals.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/spanish_or_ibero_american_birth_two_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'ordinary_three_years',
+            label: 'Ordinary three-year residence route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'residence.in_honduras_months', operator: 'gte', value: 36, unit: 'months' },
+            ],
+            milestones: [{ status: 'residence_in_honduras', minimum_months: 36 }],
+            timeline: {
+              eligibility_minimum_months: 36,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Constitution Article 24(3): more than three consecutive years for other foreigners.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/ordinary_three_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'married_to_honduran_by_birth',
+            label: 'Married to a Honduran by birth',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'spouse.citizenship.by_birth.iso_n3', operator: 'eq', value: '340' },
+            ],
+            milestones: [{ status: 'citizenship_application', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: 0,
+              processing_typical_months: null,
+              confidence: 'medium',
+              note: 'Constitution Article 24(6) lists foreigners married to Hondurans by birth among naturalization categories; statutory procedure and any waiting period still apply.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/married_to_honduran_by_birth/eligibility`,
+            ]),
+          },
+        ],
+      },
+      principalCitizenshipRoute({
+        id: 'honduras-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Honduran nationality by birth in Honduras',
+        summary: 'Persons born within the national territory are Honduran by birth under Article 23, with the diplomatic-agent children exception.',
+        source: constitution,
+        eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '340' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function nicaraguaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.nicaragua_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '558',
+    note: 'Reviewed against Constitution Articles 15 to 21. Central Americans by birth may opt for Nicaraguan nationality while retaining origin nationality. Ordinary naturalization is delegated to statute (renunciation and legal conditions). No citizenship-by-investment programme in the constitutional text.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Article 16: birth in Nicaragua with diplomatic/international-organization exceptions, children of a Nicaraguan parent, foundlings, and limited vessel/aircraft cases.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No direct citizenship-by-investment grant in the constitutional nationality chapter.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'nicaragua-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Nicaraguan nationality through a Nicaraguan parent',
+        summary: 'Children of a Nicaraguan father or mother are nationals under Article 16, including birth abroad with application rules after majority for some cases.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '558' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'nicaragua-central-american-option',
+        mode: 'naturalization',
+        title: 'Central American option while retaining origin nationality',
+        summary: 'Native-born Central Americans who reside in Nicaragua may apply for Nicaraguan nationality without renouncing their prior nationality (Article 17).',
+        source: constitution,
+        eligibility: [
+          { field: 'citizenship.by_birth.region', operator: 'eq', value: 'central_america' },
+          { field: 'residence.in_nicaragua', operator: 'eq', value: true },
+        ],
+        months: 0,
+        allocation: 'right',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'nicaragua-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization under nationality statute',
+        summary: 'Foreigners may be nationalized after applying to the competent authority, renouncing prior nationality, and meeting the requirements fixed by the applicable nationality law (Article 19). Residence periods are statutory rather than fixed in the Constitution.',
+        source: constitution,
+        eligibility: [
+          { field: 'naturalization.statutory_requirements_met', operator: 'eq', value: true },
+        ],
+        months: null,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Constitution does not state a single multi-year residence floor; case-check the current nationality law and implementing rules.',
+      }),
+      principalCitizenshipRoute({
+        id: 'nicaragua-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Nicaraguan nationality by birth in Nicaragua',
+        summary: 'Persons born in the national territory are nationals under Article 16, with exceptions for children of certain foreign diplomatic or international-organization personnel unless they opt for Nicaraguan nationality.',
+        source: constitution,
+        eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '558' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function dominicanRepublicRecord(
+  shadow: DataShadow,
+  officialSources: SourceRecord[],
+): JurisdictionRecord {
+  const constitution = requireSource(
+    officialSources,
+    OFFICIAL_URLS.dominican_republic_constitution,
+  );
+  return reviewedCountryRecord({
+    shadow,
+    iso: '214',
+    note: 'Reviewed against Constitution Articles 18 to 20. Birthright is restricted for children of foreigners in transit or illegally present. Naturalization is delegated to statute. Dual nationality is recognized for Dominicans. No constitutional citizenship-by-investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Article 18: children of a Dominican parent; persons born in the territory except children of diplomats and of foreigners in transit or illegally present; dual-nationality option rules for some births abroad.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No direct citizenship-by-investment grant in the constitutional nationality section.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'dominican-republic-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Dominican nationality through a Dominican parent',
+        summary: 'Sons and daughters of a Dominican mother or father are Dominican under Article 18, including many births abroad subject to the dual-nationality choice rules after age eighteen.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '214' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'dominican-republic-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization under nationality statute',
+        summary: 'Article 19: foreigners may become naturalized in accordance with the law. Naturalized persons face political-office limits. Residence and other conditions are fixed by the nationality statute rather than a single constitutional multi-year floor.',
+        source: constitution,
+        eligibility: [
+          { field: 'naturalization.statutory_requirements_met', operator: 'eq', value: true },
+        ],
+        months: null,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Constitution defers periods and process to law (historically Ley 1683 and later amendments). Case-check the current naturalization statute before relying on a specific year count.',
+      }),
+      principalCitizenshipRoute({
+        id: 'dominican-republic-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Dominican nationality by birth in the Dominican Republic',
+        summary: 'Persons born in the national territory are Dominican under Article 18, except children of foreign diplomats and of foreigners in transit or illegally present as defined by Dominican law.',
+        source: constitution,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '214' },
+          { field: 'birth.parents.not_in_transit_or_illegal', operator: 'eq', value: true },
+        ],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function venezuelaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.venezuela_constitution);
+  const naturalizationId = 'venezuela-naturalization-by-residence';
+  return reviewedCountryRecord({
+    shadow,
+    iso: '862',
+    note: 'Reviewed against Constitution Articles 32 to 33. Ordinary naturalization is ten years uninterrupted residence, reduced to five for original nationals of Spain, Portugal, Italy, or a Latin American or Caribbean country. Marriage track is five years. No citizenship-by-investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Article 32: birth in the territory; birth abroad to two Venezuelan parents by birth; birth abroad to one Venezuelan by birth with residence or declaration; birth abroad to a naturalized Venezuelan parent with later residence and declaration rules.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No direct citizenship-by-investment grant in the constitutional nationality chapter.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'venezuela-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Venezuelan nationality through a Venezuelan parent',
+        summary: 'Article 32 transmits Venezuelan nationality by birth to children born abroad to Venezuelan parents under the parentage, residence, and declaration rules in that article.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '862' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      {
+        id: naturalizationId,
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization after uninterrupted residence',
+        summary: 'Article 33: naturalization letter after at least ten years uninterrupted residence immediately before the application. The period falls to five years for original nationals of Spain, Portugal, Italy, or a Latin American or Caribbean country. Spouses of Venezuelans may declare after five years of marriage.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
+        variants: [
+          {
+            id: 'ordinary_ten_years',
+            label: 'Ordinary ten-year residence route',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              {
+                field: 'residence.uninterrupted_months',
+                operator: 'gte',
+                value: 120,
+                unit: 'months',
+              },
+            ],
+            milestones: [{ status: 'uninterrupted_residence', minimum_months: 120 }],
+            timeline: {
+              eligibility_minimum_months: 120,
+              processing_typical_months: null,
+              confidence: 'high',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/ordinary_ten_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'spain_portugal_italy_latin_america_caribbean_five_years',
+            label: 'Spain, Portugal, Italy, Latin America, or Caribbean origin (five years)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              {
+                field: 'citizenship.original.category',
+                operator: 'in',
+                value: ['spain', 'portugal', 'italy', 'latin_america', 'caribbean'],
+              },
+              {
+                field: 'residence.uninterrupted_months',
+                operator: 'gte',
+                value: 60,
+                unit: 'months',
+              },
+            ],
+            milestones: [{ status: 'uninterrupted_residence', minimum_months: 60 }],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Constitution Article 33. This is the reciprocal floor used for Panama Article 10(3) modeling of Venezuelan birth nationals.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/spain_portugal_italy_latin_america_caribbean_five_years/eligibility`,
+            ]),
+          },
+          {
+            id: 'married_to_venezuelan_five_years',
+            label: 'Married to a Venezuelan (five years)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'spouse.citizenship.iso_n3', operator: 'eq', value: '862' },
+              { field: 'marriage.months', operator: 'gte', value: 60, unit: 'months' },
+            ],
+            milestones: [{ status: 'marriage_to_venezuelan', minimum_months: 60 }],
+            timeline: {
+              eligibility_minimum_months: 60,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Constitution Article 33(2): declaration of wish to adopt Venezuelan nationality at least five years after the marriage date.',
+            },
+            source_refs: refs([constitution], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/married_to_venezuelan_five_years/eligibility`,
+            ]),
+          },
+        ],
+      },
+      principalCitizenshipRoute({
+        id: 'venezuela-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Venezuelan nationality by birth in Venezuela',
+        summary: 'Any person born within the territory of the Republic is Venezuelan by birth under Article 32.',
+        source: constitution,
+        eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '862' }],
         months: 0,
         lastChecked: '2026-07-22',
       }),
@@ -9817,14 +10711,17 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     chileRecord(shadow, countrySources),
     chinaRecord(shadow, countrySources),
     colombiaRecord(shadow, countrySources),
+    costaRicaRecord(shadow, countrySources),
     coteDivoireRecord(shadow, countrySources),
     croatiaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
     czechiaRecord(shadow, countrySources),
     denmarkRecord(shadow, countrySources),
     dominicaRecord(shadow, countrySources),
+    dominicanRepublicRecord(shadow, countrySources),
     ecuadorRecord(shadow, countrySources),
     egyptRecord(shadow, countrySources),
+    elSalvadorRecord(shadow, countrySources),
     estoniaRecord(shadow, countrySources),
     ethiopiaRecord(shadow, countrySources),
     fijiRecord(shadow, countrySources),
@@ -9835,6 +10732,8 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     ghanaRecord(shadow, countrySources),
     grenadaRecord(shadow, countrySources),
     greeceRecord(shadow, countrySources),
+    guatemalaRecord(shadow, countrySources),
+    hondurasRecord(shadow, countrySources),
     hungaryRecord(shadow, countrySources),
     icelandRecord(shadow, countrySources),
     indiaRecord(shadow, countrySources),
@@ -9863,6 +10762,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     namibiaRecord(shadow, countrySources),
     nauruRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
+    nicaraguaRecord(shadow, countrySources),
     vanuatuRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     nigeriaRecord(shadow, countrySources),
@@ -9904,6 +10804,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     unitedKingdomRecord(shadow, countrySources),
     unitedStatesRecord(shadow, countrySources),
     uruguayRecord(shadow, countrySources),
+    venezuelaRecord(shadow, countrySources),
     vietnamRecord(shadow, countrySources),
     zambiaRecord(shadow, countrySources),
     zimbabweRecord(shadow, countrySources),
