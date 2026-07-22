@@ -917,6 +917,105 @@
       ],
       "keywords": ["nacionalidade", "cidadania", "naturalização", "investimento", "doação", "nascimento", "descendência", "residência", "Fundo Nacional de Transformação"],
       "notes": "Consular programme page plus hosted Diário texts of Lei 07/2022 and Decreto-Lei 07/2025. Prefer a future official Diário da República endpoint when a stable government index is available. Commercial hosting of the decree is discovery-adjacent evidence of the gazette text, not a commercial claim."
+    },
+    {
+      "id": "paraguay-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.bacn.gov.py/leyes-paraguayas/9580/constitucion-nacional-",
+      "jurisdictions": ["600"],
+      "pages": [
+        { "id": "constitution-index", "url": "https://www.bacn.gov.py/leyes-paraguayas/9580/constitucion-nacional-" },
+        { "id": "constitution-pdf", "url": "https://www.bacn.gov.py/archivos/9580/CONSTITUCION_ORIGINAL_FIRMADA.pdf" },
+        { "id": "descent-guidance", "url": "https://repatriados.gov.py/inclusion-a-la-identidad-nacional/" },
+        { "id": "migration", "url": "https://migraciones.gov.py/" }
+      ],
+      "keywords": ["nacionalidad", "naturalización", "ciudadanía", "residencia", "nacimiento", "descendencia", "inversión", "radicación"],
+      "notes": "Official Constitution and migration/descent guidance. Investor residence is a classification safeguard only and must not be treated as direct CBI."
+    },
+    {
+      "id": "chile-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://serviciomigraciones.cl/en/citizenship/",
+      "jurisdictions": ["152"],
+      "pages": [
+        { "id": "sermig-citizenship", "url": "https://serviciomigraciones.cl/en/citizenship/" }
+      ],
+      "keywords": ["nacionalización", "nacionalidad", "Residencia Definitiva", "citizenship", "naturalization", "birth", "descent", "inversión"],
+      "notes": "Official SERMIG Carta de Nacionalización guidance. BCN Constitution Article 10 is canonical primary evidence but returned HTTP 401 to the collector and is not listed as a healthy active page until the endpoint permits automated retrieval."
+    },
+    {
+      "id": "israel-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf",
+      "jurisdictions": ["376"],
+      "pages": [
+        { "id": "nationality-law-text", "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf" },
+        { "id": "law-of-return-text", "url": "https://www.jewishvirtuallibrary.org/law-of-return" }
+      ],
+      "keywords": ["nationality", "citizenship", "Law of Return", "oleh", "naturalisation", "naturalization", "Hebrew", "birth", "aliyah"],
+      "notes": "Published Nationality Law and Law of Return texts. Official gov.il Population Authority pages currently return 403 to the bounded collector and are tracked as planned until a resilient adapter is available."
+    },
+    {
+      "id": "israel-govil-guidance",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.gov.il/en/departments/population_and_immigration_authority/govil-landing-page",
+      "jurisdictions": ["376"],
+      "pages": [
+        { "id": "population-authority", "url": "https://www.gov.il/en/departments/population_and_immigration_authority/govil-landing-page" },
+        { "id": "law-of-return-page", "url": "https://www.gov.il/en/pages/law_of_return" }
+      ],
+      "keywords": ["citizenship", "nationality", "Law of Return", "naturalization", "aliyah", "Hebrew"],
+      "notes": "Official Population and Immigration Authority endpoints returned HTTP 403 to the collector on 2026-07-22. Keep planned until a permitted feed or resilient adapter works."
+    },
+    {
+      "id": "poland-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.pl/web/mswia-en/apply-to-be-recognised-as-a-polish-citizen",
+      "jurisdictions": ["616"],
+      "pages": [
+        { "id": "recognition", "url": "https://www.gov.pl/web/mswia-en/apply-to-be-recognised-as-a-polish-citizen" },
+        { "id": "citizenship-en", "url": "https://www.gov.pl/web/mswia-en/citizenship" },
+        { "id": "obywatelstwo", "url": "https://www.gov.pl/web/mswia/obywatelstwo" }
+      ],
+      "keywords": ["obywatelstwo", "citizenship", "citizen", "naturalisation", "naturalization", "recognition", "recognised", "recognized", "B1", "permanent residence", "Karta Polaka", "descent"],
+      "notes": "Official MSWiA citizenship hubs. Track residence recognition periods and language B1 separately from presidential grant of citizenship."
+    },
+    {
+      "id": "hungary-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://telaviv.mfa.gov.hu/eng/page/egyszerusitett-honositas",
+      "jurisdictions": ["348"],
+      "pages": [
+        { "id": "simplified-en", "url": "https://telaviv.mfa.gov.hu/eng/page/egyszerusitett-honositas" },
+        { "id": "simplified-hu", "url": "https://www.kormanyhivatal.hu/hu/budapest/jarasok/egyszerusitett-honositasi-eljaras" }
+      ],
+      "keywords": ["állampolgárság", "honosítás", "citizenship", "citizen", "naturalisation", "naturalization", "simplified", "egyszerűsített", "descent", "nyelv", "residence", "Hungarian"],
+      "notes": "Official simplified-naturalization guidance pages that validate under Bun TLS. The emberijogok.kormany.hu ordinary-acquisition page remains canonical evidence but fails automated TLS verification and is tracked as planned until the certificate chain works in CI."
+    },
+    {
+      "id": "hungary-ordinary-acquisition",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality",
+      "jurisdictions": ["348"],
+      "pages": [
+        { "id": "acquisition", "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality" }
+      ],
+      "keywords": ["citizenship", "nationality", "naturalisation", "naturalization", "residence", "Hungarian"],
+      "notes": "Official ordinary acquisition guidance. Activate once the host certificate chain validates in the Bun/CI collector (TLS local-issuer failure recorded 2026-07-22)."
     }
   ]
 }

@@ -58,6 +58,11 @@ legal conclusion.
 | Jordan Invest and Petra investor criteria | HTML content hash, two pages | Official Cabinet investor-citizenship criteria verification | Active; live fetch verified 2026-07-22 |
 | Nauru Program Office and citizenship acts | HTML content hash, four pages | Official ECRCP and ordinary Citizenship Act verification | Active; live fetch verified 2026-07-22 |
 | São Tomé nationality law and CBI regulation | HTML content hash, three pages | Official nationality statute, RNID decree text, and consular programme verification | Active; live fetch verified 2026-07-22 |
+| Paraguay Constitution and migration guidance | HTML content hash, four pages | Official nationality and residence verification | Active; live fetch verified 2026-07-22 |
+| Chile SERMIG citizenship | HTML content hash | Official Carta de Nacionalización verification | Active; live fetch verified 2026-07-22 |
+| Israel Nationality Law and Law of Return texts | HTML content hash, two pages | Published nationality and return-law verification | Active; gov.il endpoints planned after 403 |
+| Poland MSWiA citizenship | HTML content hash, three pages | Official recognition and citizenship hub verification | Active; live fetch verified 2026-07-22 |
+| Hungary nationality acquisition | HTML content hash, two pages | Official simplified naturalization verification | Active; live fetch verified 2026-07-22; ordinary-acquisition host TLS fails in Bun and is planned |
 | Nomad Capitalist Weekly Rundown | Email Worker | Newsletter discovery | Subscribed through the shared intake address on 2026-07-19; awaiting first delivery |
 | The Wandering Investor Notes from the Road | Email Worker | Private-list and early discovery | Intake active; publisher form returned a subscription error on 2026-07-18 |
 
