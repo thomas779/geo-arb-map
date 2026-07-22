@@ -90,6 +90,9 @@ describe('canonical data schemas', () => {
       'hungary-citizenship-by-parent-or-simplified-origin',
       'hungary-ordinary-naturalization',
       'hungary-citizenship-at-birth-by-parent',
+      'indonesia-citizenship-by-parent',
+      'indonesia-naturalization',
+      'indonesia-citizenship-at-birth-by-parent',
       'ireland-citizenship-by-descent',
       'ireland-naturalization-by-residence',
       'ireland-citizenship-by-birth',
@@ -134,6 +137,9 @@ describe('canonical data schemas', () => {
       'nz-citizenship-by-descent',
       'nz-citizenship-by-grant',
       'nz-citizenship-by-birth',
+      'nigeria-citizenship-by-parent',
+      'nigeria-naturalization',
+      'nigeria-citizenship-at-birth-by-parent',
       'panama-nationality-through-parent',
       'panama-ordinary-naturalization',
       'panama-family-naturalization',
@@ -177,6 +183,12 @@ describe('canonical data schemas', () => {
       'switzerland-citizenship-by-descent',
       'switzerland-ordinary-naturalization',
       'switzerland-third-generation-naturalization',
+      'taiwan-citizenship-by-parent',
+      'taiwan-naturalization',
+      'taiwan-citizenship-at-birth-by-parent',
+      'thailand-citizenship-by-parent',
+      'thailand-naturalization',
+      'thailand-citizenship-at-birth-by-parent',
       'turkiye-citizenship-by-descent',
       'turkiye-naturalization-by-residence',
       'turkiye-citizenship-by-birth-statelessness',
@@ -387,6 +399,34 @@ describe('canonical data schemas', () => {
         expect.objectContaining({ field: 'status.permanent_residence', value: true }),
       );
     expect(southAfrica.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const taiwan = byIso.get('158')!;
+    expect(taiwan.routes.find(route => route.id === 'taiwan-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(60);
+    expect(taiwan.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const indonesia = byIso.get('360')!;
+    expect(indonesia.routes.find(route => route.id === 'indonesia-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(60);
+    expect(indonesia.routes.find(route => route.id === 'indonesia-naturalization')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'prior_nationality.renounced_or_will_cease', value: true }),
+      );
+    expect(indonesia.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const thailand = byIso.get('764')!;
+    expect(thailand.routes.find(route => route.id === 'thailand-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(60);
+    expect(thailand.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const nigeria = byIso.get('566')!;
+    expect(nigeria.routes.find(route => route.id === 'nigeria-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(180);
+    expect(nigeria.coverage.find(item => item.mode === 'investment')?.finding)
       .toBe('verified_none');
   });
 

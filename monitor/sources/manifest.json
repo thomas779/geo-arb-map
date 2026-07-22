@@ -1086,6 +1086,74 @@
       ],
       "keywords": ["citizenship", "naturalisation", "naturalization", "permanent residence", "birth", "descent", "South African", "Minister"],
       "notes": "Official gov.za Citizenship Act 88 of 1995 and 2010 amendment texts. Ordinary naturalization uses the amended five-year continuous ordinary residence after permanent residence. Dual-citizenship loss under s 6(1)(a) has been constitutionally curtailed — track carefully."
+    },
+    {
+      "id": "taiwan-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001",
+      "jurisdictions": ["158"],
+      "pages": [
+        { "id": "nationality-act", "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001" }
+      ],
+      "keywords": ["nationality", "naturalization", "naturalisation", "citizenship", "R.O.C.", "domicile", "birth", "renounce", "Ministry of the Interior"],
+      "notes": "Official Laws & Regulations Database English Nationality Act. Track Article 3 five-year residence floor, Article 9 loss-of-prior-nationality certificate, and Article 5–6 merit exceptions."
+    },
+    {
+      "id": "indonesia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.imigrasi.go.id/",
+      "jurisdictions": ["360"],
+      "pages": [
+        { "id": "imigrasi-home", "url": "https://www.imigrasi.go.id/" },
+        { "id": "law-12-2006-en", "url": "https://www.ecoi.net/en/file/local/1170232/1504_1217488313_law-of-the-republic-of-indonesia-no-12-on-citizenship-of-the-republic-of-indonesia.pdf" }
+      ],
+      "keywords": ["kewarganegaraan", "citizenship", "naturalization", "naturalisation", "warga negara", "birth", "descent", "dual", "Pancasila"],
+      "notes": "Imigrasi portal plus hosted English text of Law 12/2006. Prefer a future stable peraturan.go.id endpoint when collector access is reliable (BPK returned 403 on 2026-07-22)."
+    },
+    {
+      "id": "thailand-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.boi.go.th/index.php?page=eligibility",
+      "jurisdictions": ["764"],
+      "pages": [
+        { "id": "boi-eligibility", "url": "https://www.boi.go.th/index.php?page=eligibility" }
+      ],
+      "keywords": ["nationality", "citizenship", "naturalization", "naturalisation", "Thai", "permanent residence", "residence", "investment", "BOI", "privilege"],
+      "notes": "BOI eligibility is an active residence classification safeguard (not citizenship). Primary Nationality Act B.E. 2508 English text remains canonical evidence via Refworld but returned HTTP 403 to the collector (2026-07-22) and is tracked as planned."
+    },
+    {
+      "id": "thailand-nationality-act-refworld",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733",
+      "jurisdictions": ["764"],
+      "pages": [
+        { "id": "nationality-act-refworld", "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733" }
+      ],
+      "keywords": ["nationality", "citizenship", "naturalization", "Thai", "Cabinet"],
+      "notes": "UNHCR English Nationality Act B.E. 2508 (as amended). Activate once Refworld permits automated retrieval (HTTP 403 recorded 2026-07-22)."
+    },
+    {
+      "id": "nigeria-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://candb.interior.gov.ng/wp-content/uploads/2025/05/CB-Citizenship-Requirements.pdf",
+      "jurisdictions": ["566"],
+      "pages": [
+        { "id": "interior-requirements", "url": "https://candb.interior.gov.ng/wp-content/uploads/2025/05/CB-Citizenship-Requirements.pdf" },
+        { "id": "constitution-chapter-iii", "url": "https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/" },
+        { "id": "constitute-nigeria", "url": "https://www.constituteproject.org/constitution/Nigeria_2011" }
+      ],
+      "keywords": ["citizenship", "naturalization", "naturalisation", "registration", "Constitution", "fifteen", "birth", "renounce", "Interior"],
+      "notes": "Ministry of Interior requirements PDF plus published Constitution Chapter III texts. Portal login page is not a monitoring target; track the public requirements PDF and constitutional sources."
     }
   ]
 }

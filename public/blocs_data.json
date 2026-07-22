@@ -2698,6 +2698,13 @@
           "PRC Nationality Law Art. 3"
         ]
       },
+      "158": {
+        "status": "banned",
+        "note": "Taiwan (R.O.C.): naturalizers generally must produce a certificate of loss of original nationality within one year of permission (statutory exceptions for high-level professionals and special contribution).",
+        "sources": [
+          "R.O.C. Nationality Act Arts. 3 and 9"
+        ]
+      },
       "180": {
         "status": "banned",
         "note": "DR Congo: dual citizenship banned.",
@@ -2710,6 +2717,13 @@
         "note": "India: no dual citizenship; OCI is a quasi-status, not nationality.",
         "sources": [
           "Indian Citizenship Act"
+        ]
+      },
+      "360": {
+        "status": "banned",
+        "note": "Indonesia: adult dual nationality is not retained on naturalization under Law No. 12 of 2006; limited dual for children ends at majority.",
+        "sources": [
+          "Law No. 12 of 2006 on Citizenship"
         ]
       },
       "392": {
@@ -2731,6 +2745,13 @@
         "note": "South Korea: naturalizers generally must renounce prior nationality; limited dual-nationality exceptions exist (e.g. marriage migrants, outstanding talent).",
         "sources": [
           "Nationality Act / HiKorea naturalization guidance"
+        ]
+      },
+      "566": {
+        "status": "banned",
+        "note": "Nigeria: section 28 requires renunciation of other nationalities for naturalization/registration, except citizenship of a country acquired by birth.",
+        "sources": [
+          "1999 Constitution ss. 27–28"
         ]
       },
       "643": {
