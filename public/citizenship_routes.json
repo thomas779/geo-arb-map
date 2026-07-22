@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 330,
+      "routes": 360,
       "by_mode": {
-        "ancestry": 103,
-        "naturalization": 105,
-        "birth": 103,
+        "ancestry": 113,
+        "naturalization": 115,
+        "birth": 113,
         "investment": 19
       },
       "by_status": {
-        "active": 323,
+        "active": 353,
         "pending_verification": 4,
         "inactive": 2,
         "verified_negative": 1
@@ -73,12 +73,16 @@
       "name": "Algeria",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "algeria-citizenship-by-parent",
+        "algeria-naturalization",
+        "algeria-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "016",
@@ -113,12 +117,16 @@
       "name": "Angola",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "angola-citizenship-by-parent",
+        "angola-naturalization",
+        "angola-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "028",
@@ -509,12 +517,16 @@
       "name": "Cameroon",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "cameroon-citizenship-by-parent",
+        "cameroon-naturalization",
+        "cameroon-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "124",
@@ -537,12 +549,16 @@
       "name": "Cabo Verde",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "cabo-verde-citizenship-by-parent",
+        "cabo-verde-naturalization",
+        "cabo-verde-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "136",
@@ -1460,12 +1476,16 @@
       "name": "Côte d'Ivoire",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "cote-divoire-citizenship-by-parent",
+        "cote-divoire-naturalization",
+        "cote-divoire-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "388",
@@ -1939,12 +1959,16 @@
       "name": "Mozambique",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "mozambique-citizenship-by-parent",
+        "mozambique-naturalization",
+        "mozambique-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "512",
@@ -2670,12 +2694,16 @@
       "name": "Seychelles",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "seychelles-citizenship-by-parent",
+        "seychelles-naturalization",
+        "seychelles-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "694",
@@ -2782,12 +2810,16 @@
       "name": "Zimbabwe",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "zimbabwe-citizenship-by-parent",
+        "zimbabwe-naturalization",
+        "zimbabwe-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "724",
@@ -3011,12 +3043,16 @@
       "name": "Tunisia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "tunisia-citizenship-by-parent",
+        "tunisia-naturalization",
+        "tunisia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "792",
@@ -3326,12 +3362,16 @@
       "name": "Zambia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "zambia-citizenship-by-parent",
+        "zambia-naturalization",
+        "zambia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "XKX",
@@ -3347,6 +3387,111 @@
     }
   ],
   "routes": [
+    {
+      "id": "algeria-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "012",
+        "name": "Algeria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Algerian parent",
+      "summary": "Birth to an Algerian parent creates Algerian nationality. Birth in Algeria alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "algeria-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Algerian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Algeria Nationality Code (English text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf"
+        }
+      ]
+    },
+    {
+      "id": "algeria-citizenship-by-parent",
+      "country": {
+        "iso_n3": "012",
+        "name": "Algeria"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Algerian nationality through an Algerian parent",
+      "summary": "A child of an Algerian parent is Algerian under the Nationality Code.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "algeria-citizenship-by-parent-principal",
+          "label": "Algerian nationality through an Algerian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Algeria Nationality Code (English text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf"
+        }
+      ]
+    },
+    {
+      "id": "algeria-naturalization",
+      "country": {
+        "iso_n3": "012",
+        "name": "Algeria"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after seven years residence",
+      "summary": "Adults generally need seven years residence in Algeria, assimilation into Algerian society, livelihood, good character, and majority. Naturalization is by decree and discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "algeria-naturalization-principal",
+          "label": "Naturalization after seven years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Algeria Nationality Code (English text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf"
+        }
+      ]
+    },
     {
       "id": "andorra-citizenship-at-birth-by-parent",
       "country": {
@@ -3457,6 +3602,111 @@
         {
           "title": "Government of Andorra",
           "url": "https://www.govern.ad/en"
+        }
+      ]
+    },
+    {
+      "id": "angola-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "024",
+        "name": "Angola"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Angolan parent",
+      "summary": "Birth to an Angolan parent creates Angolan nationality. Birth in Angola alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "angola-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Angolan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Angola Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Angola_2010"
+        }
+      ]
+    },
+    {
+      "id": "angola-citizenship-by-parent",
+      "country": {
+        "iso_n3": "024",
+        "name": "Angola"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Angolan nationality through an Angolan parent",
+      "summary": "A child of an Angolan parent is Angolan under nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "angola-citizenship-by-parent-principal",
+          "label": "Angolan nationality through an Angolan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Angola Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Angola_2010"
+        }
+      ]
+    },
+    {
+      "id": "angola-naturalization",
+      "country": {
+        "iso_n3": "024",
+        "name": "Angola"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after ten years residence",
+      "summary": "Adults generally need about ten years habitual and regular residence, Portuguese language and civic knowledge, livelihood, and good character. Naturalization is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "angola-naturalization-principal",
+          "label": "Naturalization after ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Angola Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Angola_2010"
         }
       ]
     },
@@ -5174,6 +5424,111 @@
       ]
     },
     {
+      "id": "cameroon-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "120",
+        "name": "Cameroon"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Cameroonian parent",
+      "summary": "Birth to a Cameroonian parent creates nationality. Birth in Cameroon alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cameroon-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Cameroonian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cameroon Ministry of Justice - who is a Cameroonian",
+          "url": "https://minjustice.cm/ova_sev/who-is-a-cameroonian/"
+        }
+      ]
+    },
+    {
+      "id": "cameroon-citizenship-by-parent",
+      "country": {
+        "iso_n3": "120",
+        "name": "Cameroon"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Cameroonian nationality through a Cameroonian parent",
+      "summary": "A child of a Cameroonian parent is Cameroonian under the Nationality Code.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cameroon-citizenship-by-parent-principal",
+          "label": "Cameroonian nationality through a Cameroonian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cameroon Ministry of Justice - who is a Cameroonian",
+          "url": "https://minjustice.cm/ova_sev/who-is-a-cameroonian/"
+        }
+      ]
+    },
+    {
+      "id": "cameroon-naturalization",
+      "country": {
+        "iso_n3": "120",
+        "name": "Cameroon"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years permanent residence",
+      "summary": "Foreign adults who have permanently resided in Cameroon for five consecutive years may request naturalization from the Minister of Justice. The file must show identity, family status, and reasons for seeking nationality. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cameroon-naturalization-principal",
+          "label": "Naturalization after five years permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cameroon Ministry of Justice - who is a Cameroonian",
+          "url": "https://minjustice.cm/ova_sev/who-is-a-cameroonian/"
+        }
+      ]
+    },
+    {
       "id": "canada-citizenship-by-birth",
       "country": {
         "iso_n3": "124",
@@ -5283,6 +5638,111 @@
         {
           "title": "IRCC — Canadian citizenship eligibility",
           "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/adult-minor/who.html"
+        }
+      ]
+    },
+    {
+      "id": "cabo-verde-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "132",
+        "name": "Cabo Verde"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Cape Verdean parent",
+      "summary": "Birth to a Cape Verdean parent creates nationality. Additional birth-in-territory choice rules exist for some long-resident foreign-parent cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cabo-verde-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Cape Verdean parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cape Verde Embassy USA - citizenship overview",
+          "url": "https://www.embcv-usa.gov.cv/images/doc/CAPEVERDEAN_CITIZENSHIP.pdf"
+        }
+      ]
+    },
+    {
+      "id": "cabo-verde-citizenship-by-parent",
+      "country": {
+        "iso_n3": "132",
+        "name": "Cabo Verde"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Cape Verdean nationality through a Cape Verdean parent",
+      "summary": "A child of a Cape Verdean parent is Cape Verdean. Choice and diaspora routes also cover some grandchildren.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cabo-verde-citizenship-by-parent-principal",
+          "label": "Cape Verdean nationality through a Cape Verdean parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cape Verde Embassy USA - citizenship overview",
+          "url": "https://www.embcv-usa.gov.cv/images/doc/CAPEVERDEAN_CITIZENSHIP.pdf"
+        }
+      ]
+    },
+    {
+      "id": "cabo-verde-naturalization",
+      "country": {
+        "iso_n3": "132",
+        "name": "Cabo Verde"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Adults who habitually reside in Cape Verde for at least five years, with moral fitness and capacity to support themselves, may seek naturalization. Dual nationality is generally allowed. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cabo-verde-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cape Verde Embassy USA - citizenship overview",
+          "url": "https://www.embcv-usa.gov.cv/images/doc/CAPEVERDEAN_CITIZENSHIP.pdf"
         }
       ]
     },
@@ -8679,6 +9139,111 @@
       ]
     },
     {
+      "id": "cote-divoire-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "384",
+        "name": "Côte d'Ivoire"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Ivorian parent",
+      "summary": "Birth to an Ivorian parent creates Ivorian nationality. Birth in Cote dIvoire alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cote-divoire-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Ivorian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cote d'Ivoire Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cote_dIvoire_2016"
+        }
+      ]
+    },
+    {
+      "id": "cote-divoire-citizenship-by-parent",
+      "country": {
+        "iso_n3": "384",
+        "name": "Côte d'Ivoire"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Ivorian nationality through an Ivorian parent",
+      "summary": "A child of an Ivorian parent is Ivorian under nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cote-divoire-citizenship-by-parent-principal",
+          "label": "Ivorian nationality through an Ivorian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cote d'Ivoire Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cote_dIvoire_2016"
+        }
+      ]
+    },
+    {
+      "id": "cote-divoire-naturalization",
+      "country": {
+        "iso_n3": "384",
+        "name": "Côte d'Ivoire"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Adults generally need about five years residence in Cote dIvoire, good character, and integration under the nationality code. Naturalization is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cote-divoire-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cote d'Ivoire Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cote_dIvoire_2016"
+        }
+      ]
+    },
+    {
       "id": "japan-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "392",
@@ -10349,6 +10914,111 @@
         {
           "title": "Morocco 2011 Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Morocco_2011"
+        }
+      ]
+    },
+    {
+      "id": "mozambique-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "508",
+        "name": "Mozambique"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Mozambican parent",
+      "summary": "Birth to a Mozambican parent creates nationality. Birth in Mozambique alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mozambique-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Mozambican parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mozambique Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mozambique_2007"
+        }
+      ]
+    },
+    {
+      "id": "mozambique-citizenship-by-parent",
+      "country": {
+        "iso_n3": "508",
+        "name": "Mozambique"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Mozambican nationality through a Mozambican parent",
+      "summary": "A child of a Mozambican parent is Mozambican under the Constitution and nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mozambique-citizenship-by-parent-principal",
+          "label": "Mozambican nationality through a Mozambican parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mozambique Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mozambique_2007"
+        }
+      ]
+    },
+    {
+      "id": "mozambique-naturalization",
+      "country": {
+        "iso_n3": "508",
+        "name": "Mozambique"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Adults generally need about five years residence, Portuguese or local language knowledge, livelihood, and good character. Marriage tracks and other categories also exist. Naturalization is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mozambique-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mozambique Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mozambique_2007"
         }
       ]
     },
@@ -13391,6 +14061,111 @@
       ]
     },
     {
+      "id": "seychelles-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "690",
+        "name": "Seychelles"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Seychellois parent",
+      "summary": "Birth to a Seychellois parent creates citizenship. Birth in Seychelles alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "seychelles-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Seychellois parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Seychelles ICS - permanent resident and citizenship FAQ",
+          "url": "https://www.ics.gov.sc/faq/immigration-services/permanent-resident-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "seychelles-citizenship-by-parent",
+      "country": {
+        "iso_n3": "690",
+        "name": "Seychelles"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Seychellois citizenship through a Seychellois parent",
+      "summary": "A child of a Seychellois citizen parent is a citizen under constitutional and nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "seychelles-citizenship-by-parent-principal",
+          "label": "Seychellois citizenship through a Seychellois parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Seychelles ICS - permanent resident and citizenship FAQ",
+          "url": "https://www.ics.gov.sc/faq/immigration-services/permanent-resident-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "seychelles-naturalization",
+      "country": {
+        "iso_n3": "690",
+        "name": "Seychelles"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after fifteen years residence",
+      "summary": "Ordinary naturalization generally needs about fifteen years aggregate residence, a citizenship exam (about 80 percent in Creole, English, or French), and good character. Marriage tracks use different residence and marriage-length conditions. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          180
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "seychelles-naturalization-principal",
+          "label": "Naturalization after fifteen years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 180
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Seychelles ICS - permanent resident and citizenship FAQ",
+          "url": "https://www.ics.gov.sc/faq/immigration-services/permanent-resident-citizenship"
+        }
+      ]
+    },
+    {
       "id": "singapore-citizenship-after-pr",
       "country": {
         "iso_n3": "702",
@@ -13838,6 +14613,111 @@
         {
           "title": "South African Government — Citizenship Act document page",
           "url": "https://www.gov.za/documents/south-african-citizenship-act"
+        }
+      ]
+    },
+    {
+      "id": "zimbabwe-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "716",
+        "name": "Zimbabwe"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Zimbabwean parent",
+      "summary": "Birth to a Zimbabwean parent creates citizenship under the Constitution. Additional birth categories exist for some SADC-parent historical cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "zimbabwe-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Zimbabwean parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Zimbabwe Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Zimbabwe_2013"
+        }
+      ]
+    },
+    {
+      "id": "zimbabwe-citizenship-by-parent",
+      "country": {
+        "iso_n3": "716",
+        "name": "Zimbabwe"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Zimbabwean citizenship through a Zimbabwean parent",
+      "summary": "A child of a Zimbabwean citizen parent is a citizen under the Constitution. Dual nationality is generally permitted for citizens by birth.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "zimbabwe-citizenship-by-parent-principal",
+          "label": "Zimbabwean citizenship through a Zimbabwean parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Zimbabwe Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Zimbabwe_2013"
+        }
+      ]
+    },
+    {
+      "id": "zimbabwe-naturalization",
+      "country": {
+        "iso_n3": "716",
+        "name": "Zimbabwe"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship by registration after long residence",
+      "summary": "Adults may apply for citizenship by registration after long ordinary residence (commonly five years under the Citizenship Act framework; reform proposals have discussed longer periods). Dual nationality for registration cases is more restricted than for birth citizens. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "zimbabwe-naturalization-principal",
+          "label": "Citizenship by registration after long residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Zimbabwe Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Zimbabwe_2013"
         }
       ]
     },
@@ -14544,6 +15424,111 @@
         {
           "title": "UAE Government — Emirati nationality",
           "url": "https://u.ae/en/information-and-services/passports-and-traveling/emirati-nationality"
+        }
+      ]
+    },
+    {
+      "id": "tunisia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "788",
+        "name": "Tunisia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tunisian parent",
+      "summary": "Birth to a Tunisian parent creates Tunisian nationality. Birth in Tunisia alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tunisia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Tunisian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tunisia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tunisia_2022"
+        }
+      ]
+    },
+    {
+      "id": "tunisia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "788",
+        "name": "Tunisia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Tunisian nationality through a Tunisian parent",
+      "summary": "A child of a Tunisian parent is Tunisian under nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tunisia-citizenship-by-parent-principal",
+          "label": "Tunisian nationality through a Tunisian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tunisia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tunisia_2022"
+        }
+      ]
+    },
+    {
+      "id": "tunisia-naturalization",
+      "country": {
+        "iso_n3": "788",
+        "name": "Tunisia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Adults generally need about five years continuous residence in Tunisia, integration, livelihood, and good character under the Nationality Code. Naturalization is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "tunisia-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tunisia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tunisia_2022"
         }
       ]
     },
@@ -15633,6 +16618,111 @@
         {
           "title": "Samoa Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Samoa_2017"
+        }
+      ]
+    },
+    {
+      "id": "zambia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "894",
+        "name": "Zambia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Zambian parent",
+      "summary": "Birth to a Zambian parent creates citizenship under constitutional categories. Birth in Zambia alone to two foreign parents is not unrestricted open jus soli for all cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "zambia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Zambian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Zambia Citizenship of Zambia Act 2016",
+          "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07"
+        }
+      ]
+    },
+    {
+      "id": "zambia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "894",
+        "name": "Zambia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Zambian citizenship through a Zambian parent",
+      "summary": "A child of a Zambian citizen parent is a citizen under the Constitution and Citizenship Act. Registration and bestowal routes also cover some diaspora cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "zambia-citizenship-by-parent-principal",
+          "label": "Zambian citizenship through a Zambian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Zambia Citizenship of Zambia Act 2016",
+          "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07"
+        }
+      ]
+    },
+    {
+      "id": "zambia-naturalization",
+      "country": {
+        "iso_n3": "894",
+        "name": "Zambia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship by registration after ten years residence",
+      "summary": "Adults may apply for registration after about ten years continuous ordinary residence in Zambia, or five years in some descent, birth-in-Zambia, or marriage categories. Dual citizenship is generally allowed. Grant follows Citizenship Board process.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "zambia-naturalization-principal",
+          "label": "Citizenship by registration after ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Zambia Citizenship of Zambia Act 2016",
+          "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07"
         }
       ]
     }

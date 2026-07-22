@@ -379,6 +379,16 @@ const OFFICIAL_URLS = {
   ethiopia_nationality_proclamation: 'https://www.refworld.org/docid/409100414.html',
   tanzania_naturalization: 'https://www.immigration.go.tz/index.php/3-0-citizenship-by-naturalization',
   uganda_naturalization: 'https://www.immigration.go.ug/node/235',
+  algeria_nationality_code: 'https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf',
+  tunisia_constitution: 'https://www.constituteproject.org/constitution/Tunisia_2022',
+  cote_divoire_constitution: 'https://www.constituteproject.org/constitution/Cote_dIvoire_2016',
+  zambia_citizenship_act: 'https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07',
+  zimbabwe_constitution: 'https://www.constituteproject.org/constitution/Zimbabwe_2013',
+  angola_constitution: 'https://www.constituteproject.org/constitution/Angola_2010',
+  cabo_verde_citizenship: 'https://www.embcv-usa.gov.cv/images/doc/CAPEVERDEAN_CITIZENSHIP.pdf',
+  seychelles_citizenship_faq: 'https://www.ics.gov.sc/faq/immigration-services/permanent-resident-citizenship',
+  cameroon_who_is_cameroonian: 'https://minjustice.cm/ova_sev/who-is-a-cameroonian/',
+  mozambique_constitution: 'https://www.constituteproject.org/constitution/Mozambique_2007',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -887,6 +897,17 @@ function jurisdictionSources(): SourceRecord[] {
       ['Ethiopia Proclamation on Ethiopian Nationality 378/2003', OFFICIAL_URLS.ethiopia_nationality_proclamation, '231', 'en', 'primary_law', 'ethiopia-citizenship-law'],
       ['Tanzania Immigration - citizenship by naturalization', OFFICIAL_URLS.tanzania_naturalization, '834', 'en', 'official_guidance', 'tanzania-citizenship-law'],
       ['Uganda Immigration - naturalization', OFFICIAL_URLS.uganda_naturalization, '800', 'en', 'official_guidance', 'uganda-citizenship-law'],
+      ['Algeria Nationality Code (English text)', OFFICIAL_URLS.algeria_nationality_code, '012', 'en', 'primary_law', 'algeria-citizenship-law'],
+      ['Tunisia Constitution (Constitute Project)', OFFICIAL_URLS.tunisia_constitution, '788', 'en', 'primary_law', 'tunisia-citizenship-law'],
+      ['Cote d\'Ivoire Constitution (Constitute Project)', OFFICIAL_URLS.cote_divoire_constitution, '384', 'en', 'primary_law', 'cote-divoire-citizenship-law'],
+      ['Zambia Citizenship of Zambia Act 2016', OFFICIAL_URLS.zambia_citizenship_act, '894', 'en', 'primary_law', 'zambia-citizenship-law'],
+      ['Zimbabwe Constitution (Constitute Project)', OFFICIAL_URLS.zimbabwe_constitution, '716', 'en', 'primary_law', 'zimbabwe-citizenship-law'],
+      ['Angola Constitution (Constitute Project)', OFFICIAL_URLS.angola_constitution, '024', 'en', 'primary_law', 'angola-citizenship-law'],
+      ['Cape Verde Embassy USA - citizenship overview', OFFICIAL_URLS.cabo_verde_citizenship, '132', 'en', 'official_guidance', 'cabo-verde-citizenship-law'],
+      ['Seychelles ICS - permanent resident and citizenship FAQ', OFFICIAL_URLS.seychelles_citizenship_faq, '690', 'en', 'official_guidance', 'seychelles-citizenship-law'],
+      ['Cameroon Ministry of Justice - who is a Cameroonian', OFFICIAL_URLS.cameroon_who_is_cameroonian, '120', 'en', 'official_guidance', 'cameroon-citizenship-law'],
+      ['Mozambique Constitution (Constitute Project)', OFFICIAL_URLS.mozambique_constitution, '508', 'en', 'primary_law', 'mozambique-citizenship-law'],
+
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -7144,6 +7165,507 @@ function ugandaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
   });
 }
 
+
+function algeriaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const code = requireSource(officialSources, OFFICIAL_URLS.algeria_nationality_code);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '012',
+    note: 'Reviewed against the Algerian Nationality Code. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [code] },
+      { mode: 'naturalization', finding: 'present', sources: [code] },
+      { mode: 'birth', finding: 'present', sources: [code], note: 'Parent Algerian; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [code], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'algeria-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Algerian nationality through an Algerian parent',
+        summary: 'A child of an Algerian parent is Algerian under the Nationality Code.',
+        source: code,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '012' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'algeria-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after seven years residence',
+        summary: 'Adults generally need seven years residence in Algeria, assimilation into Algerian society, livelihood, good character, and majority. Naturalization is by decree and discretionary.',
+        source: code,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 7, unit: 'years' },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'algeria-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Algerian parent',
+        summary: 'Birth to an Algerian parent creates Algerian nationality. Birth in Algeria alone to two foreign parents is not unrestricted jus soli.',
+        source: code,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '012' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function tunisiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.tunisia_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '788',
+    note: 'Reviewed against Tunisian constitutional nationality framework. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Tunisian; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'tunisia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Tunisian nationality through a Tunisian parent',
+        summary: 'A child of a Tunisian parent is Tunisian under nationality law.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '788' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'tunisia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Adults generally need about five years continuous residence in Tunisia, integration, livelihood, and good character under the Nationality Code. Naturalization is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'tunisia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Tunisian parent',
+        summary: 'Birth to a Tunisian parent creates Tunisian nationality. Birth in Tunisia alone to two foreign parents is not unrestricted jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '788' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function coteDivoireRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.cote_divoire_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '384',
+    note: 'Reviewed against Ivorian constitutional nationality framework. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Ivorian; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'cote-divoire-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Ivorian nationality through an Ivorian parent',
+        summary: 'A child of an Ivorian parent is Ivorian under nationality law.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '384' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cote-divoire-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Adults generally need about five years residence in Cote dIvoire, good character, and integration under the nationality code. Naturalization is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cote-divoire-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Ivorian parent',
+        summary: 'Birth to an Ivorian parent creates Ivorian nationality. Birth in Cote dIvoire alone to two foreign parents is not unrestricted jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '384' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function zambiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.zambia_citizenship_act);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '894',
+    note: 'Reviewed against the Citizenship of Zambia Act 2016. Dual citizenship generally allowed since 2016. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act] },
+      { mode: 'naturalization', finding: 'present', sources: [act] },
+      { mode: 'birth', finding: 'present', sources: [act], note: 'Parent Zambian or birth categories under the Constitution and Act.' },
+      { mode: 'investment', finding: 'verified_none', sources: [act], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'zambia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Zambian citizenship through a Zambian parent',
+        summary: 'A child of a Zambian citizen parent is a citizen under the Constitution and Citizenship Act. Registration and bestowal routes also cover some diaspora cases.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '894' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'zambia-naturalization',
+        mode: 'naturalization',
+        title: 'Citizenship by registration after ten years residence',
+        summary: 'Adults may apply for registration after about ten years continuous ordinary residence in Zambia, or five years in some descent, birth-in-Zambia, or marriage categories. Dual citizenship is generally allowed. Grant follows Citizenship Board process.',
+        source: act,
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'zambia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Zambian parent',
+        summary: 'Birth to a Zambian parent creates citizenship under constitutional categories. Birth in Zambia alone to two foreign parents is not unrestricted open jus soli for all cases.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '894' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function zimbabweRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.zimbabwe_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '716',
+    note: 'Reviewed against the 2013 Constitution. Dual nationality is generally allowed for citizens by birth; registration tracks are more restrictive under older Act practice. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Zimbabwean or constitutional birth categories.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'zimbabwe-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Zimbabwean citizenship through a Zimbabwean parent',
+        summary: 'A child of a Zimbabwean citizen parent is a citizen under the Constitution. Dual nationality is generally permitted for citizens by birth.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '716' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'zimbabwe-naturalization',
+        mode: 'naturalization',
+        title: 'Citizenship by registration after long residence',
+        summary: 'Adults may apply for citizenship by registration after long ordinary residence (commonly five years under the Citizenship Act framework; reform proposals have discussed longer periods). Dual nationality for registration cases is more restricted than for birth citizens. Grant is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.ordinary_years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'zimbabwe-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Zimbabwean parent',
+        summary: 'Birth to a Zimbabwean parent creates citizenship under the Constitution. Additional birth categories exist for some SADC-parent historical cases.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '716' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function angolaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.angola_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '024',
+    note: 'Reviewed against Angolan constitutional nationality framework. Ordinary naturalization after long residence. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Angolan; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'angola-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Angolan nationality through an Angolan parent',
+        summary: 'A child of an Angolan parent is Angolan under nationality law.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '024' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'angola-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after ten years residence',
+        summary: 'Adults generally need about ten years habitual and regular residence, Portuguese language and civic knowledge, livelihood, and good character. Naturalization is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.regular_years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'angola-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Angolan parent',
+        summary: 'Birth to an Angolan parent creates Angolan nationality. Birth in Angola alone to two foreign parents is not unrestricted jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '024' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function caboVerdeRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const guide = requireSource(officialSources, OFFICIAL_URLS.cabo_verde_citizenship);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '132',
+    note: 'Reviewed against Cape Verde embassy citizenship overview. Dual nationality generally allowed. No transactional CBI product modeled.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [guide] },
+      { mode: 'naturalization', finding: 'present', sources: [guide] },
+      { mode: 'birth', finding: 'present', sources: [guide], note: 'Parent Cape Verdean or conditional birth rules.' },
+      { mode: 'investment', finding: 'verified_none', sources: [guide], note: 'Historical economic-citizenship products are not modeled as current transactional CBI.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'cabo-verde-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Cape Verdean nationality through a Cape Verdean parent',
+        summary: 'A child of a Cape Verdean parent is Cape Verdean. Choice and diaspora routes also cover some grandchildren.',
+        source: guide,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '132' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cabo-verde-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Adults who habitually reside in Cape Verde for at least five years, with moral fitness and capacity to support themselves, may seek naturalization. Dual nationality is generally allowed. Grant is discretionary.',
+        source: guide,
+        eligibility: [
+          { field: 'residence.habitual_years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cabo-verde-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Cape Verdean parent',
+        summary: 'Birth to a Cape Verdean parent creates nationality. Additional birth-in-territory choice rules exist for some long-resident foreign-parent cases.',
+        source: guide,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '132' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function seychellesRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const ics = requireSource(officialSources, OFFICIAL_URLS.seychelles_citizenship_faq);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '690',
+    note: 'Reviewed against Seychelles Immigration and Civil Status citizenship FAQ. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [ics] },
+      { mode: 'naturalization', finding: 'present', sources: [ics] },
+      { mode: 'birth', finding: 'present', sources: [ics], note: 'Parent Seychellois; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [ics], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'seychelles-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Seychellois citizenship through a Seychellois parent',
+        summary: 'A child of a Seychellois citizen parent is a citizen under constitutional and nationality rules.',
+        source: ics,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '690' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'seychelles-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after fifteen years residence',
+        summary: 'Ordinary naturalization generally needs about fifteen years aggregate residence, a citizenship exam (about 80 percent in Creole, English, or French), and good character. Marriage tracks use different residence and marriage-length conditions. Grant is discretionary.',
+        source: ics,
+        eligibility: [
+          { field: 'residence.aggregate_years', operator: 'gte', value: 15, unit: 'years' },
+        ],
+        months: 180,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'seychelles-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Seychellois parent',
+        summary: 'Birth to a Seychellois parent creates citizenship. Birth in Seychelles alone to two foreign parents is not unrestricted jus soli.',
+        source: ics,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '690' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function cameroonRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const justice = requireSource(officialSources, OFFICIAL_URLS.cameroon_who_is_cameroonian);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '120',
+    note: 'Reviewed against Cameroon Ministry of Justice nationality guidance. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [justice] },
+      { mode: 'naturalization', finding: 'present', sources: [justice] },
+      { mode: 'birth', finding: 'present', sources: [justice], note: 'Parent Cameroonian; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [justice], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'cameroon-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Cameroonian nationality through a Cameroonian parent',
+        summary: 'A child of a Cameroonian parent is Cameroonian under the Nationality Code.',
+        source: justice,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '120' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cameroon-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years permanent residence',
+        summary: 'Foreign adults who have permanently resided in Cameroon for five consecutive years may request naturalization from the Minister of Justice. The file must show identity, family status, and reasons for seeking nationality. Grant is discretionary.',
+        source: justice,
+        eligibility: [
+          { field: 'residence.permanent_consecutive_years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'cameroon-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Cameroonian parent',
+        summary: 'Birth to a Cameroonian parent creates nationality. Birth in Cameroon alone to two foreign parents is not unrestricted jus soli.',
+        source: justice,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '120' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function mozambiqueRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.mozambique_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '508',
+    note: 'Reviewed against Mozambican constitutional nationality provisions. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Mozambican; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'mozambique-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Mozambican nationality through a Mozambican parent',
+        summary: 'A child of a Mozambican parent is Mozambican under the Constitution and nationality law.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '508' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'mozambique-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Adults generally need about five years residence, Portuguese or local language knowledge, livelihood, and good character. Marriage tracks and other categories also exist. Naturalization is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'mozambique-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Mozambican parent',
+        summary: 'Birth to a Mozambican parent creates nationality. Birth in Mozambique alone to two foreign parents is not unrestricted jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '508' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -9031,7 +9553,9 @@ function validateReferences(pilot: CanonicalPilot, shadow: DataShadow): void {
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
   const jurisdictions = [
+    algeriaRecord(shadow, countrySources),
     andorraRecord(shadow, countrySources),
+    angolaRecord(shadow, countrySources),
     antiguaBarbudaRecord(shadow, countrySources),
     argentinaRecord(shadow, countrySources),
     australiaRecord(shadow, countrySources),
@@ -9044,12 +9568,15 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     brazilRecord(shadow, countrySources),
     bruneiRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
+    caboVerdeRecord(shadow, countrySources),
     cambodiaRecord(shadow, countrySources),
+    cameroonRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
     caymanIslandsRecord(shadow, countrySources),
     chileRecord(shadow, countrySources),
     chinaRecord(shadow, countrySources),
     colombiaRecord(shadow, countrySources),
+    coteDivoireRecord(shadow, countrySources),
     croatiaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
     czechiaRecord(shadow, countrySources),
@@ -9091,6 +9618,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     micronesiaRecord(shadow, countrySources),
     monacoRecord(shadow, countrySources),
     moroccoRecord(shadow, countrySources),
+    mozambiqueRecord(shadow, countrySources),
     namibiaRecord(shadow, countrySources),
     nauruRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
@@ -9114,6 +9642,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     saoTomePrincipeRecord(shadow, countrySources),
     stKittsNevisRecord(shadow, countrySources),
     serbiaRecord(shadow, countrySources),
+    seychellesRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),
     slovakiaRecord(shadow, countrySources),
     solomonIslandsRecord(shadow, countrySources),
@@ -9127,6 +9656,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     timorLesteRecord(shadow, countrySources),
     tongaRecord(shadow, countrySources),
     tuvaluRecord(shadow, countrySources),
+    tunisiaRecord(shadow, countrySources),
     turkiyeRecord(shadow, countrySources),
     ugandaRecord(shadow, countrySources),
     unitedArabEmiratesRecord(shadow, countrySources),
@@ -9134,6 +9664,8 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     unitedStatesRecord(shadow, countrySources),
     uruguayRecord(shadow, countrySources),
     vietnamRecord(shadow, countrySources),
+    zambiaRecord(shadow, countrySources),
+    zimbabweRecord(shadow, countrySources),
   ];
   const manualSources = arrangementSources(shadow);
   const sourcesById = new Map<string, SourceRecord>();

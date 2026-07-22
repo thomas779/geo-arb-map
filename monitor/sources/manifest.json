@@ -3354,6 +3354,228 @@
         "twenty years"
       ],
       "notes": "Uganda Immigration naturalization guidance."
+    },
+    {
+      "id": "algeria-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf",
+      "jurisdictions": [
+        "012"
+      ],
+      "pages": [
+        {
+          "id": "code",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "Algeria"
+      ],
+      "notes": "Algerian Nationality Code English text."
+    },
+    {
+      "id": "tunisia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Tunisia_2022",
+      "jurisdictions": [
+        "788"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Tunisia_2022"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "Tunisia",
+        "citizenship"
+      ],
+      "notes": "Constitution framework."
+    },
+    {
+      "id": "cote-divoire-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Cote_dIvoire_2016",
+      "jurisdictions": [
+        "384"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Cote_dIvoire_2016"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "Cote dIvoire",
+        "citizenship"
+      ],
+      "notes": "Constitution framework."
+    },
+    {
+      "id": "zambia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07",
+      "jurisdictions": [
+        "894"
+      ],
+      "pages": [
+        {
+          "id": "act",
+          "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "Zambia",
+        "dual",
+        "registration"
+      ],
+      "notes": "Citizenship of Zambia Act 2016."
+    },
+    {
+      "id": "zimbabwe-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Zimbabwe_2013",
+      "jurisdictions": [
+        "716"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Zimbabwe_2013"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "Zimbabwe",
+        "registration"
+      ],
+      "notes": "2013 Constitution citizenship framework."
+    },
+    {
+      "id": "angola-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Angola_2010",
+      "jurisdictions": [
+        "024"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Angola_2010"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "Angola",
+        "naturalization"
+      ],
+      "notes": "Constitution nationality framework."
+    },
+    {
+      "id": "cabo-verde-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.embcv-usa.gov.cv/images/doc/CAPEVERDEAN_CITIZENSHIP.pdf",
+      "jurisdictions": [
+        "132"
+      ],
+      "pages": [
+        {
+          "id": "overview",
+          "url": "https://www.embcv-usa.gov.cv/images/doc/CAPEVERDEAN_CITIZENSHIP.pdf"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "Cape Verde",
+        "naturalization"
+      ],
+      "notes": "Embassy citizenship overview PDF."
+    },
+    {
+      "id": "seychelles-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.ics.gov.sc/faq/immigration-services/permanent-resident-citizenship",
+      "jurisdictions": [
+        "690"
+      ],
+      "pages": [
+        {
+          "id": "faq",
+          "url": "https://www.ics.gov.sc/faq/immigration-services/permanent-resident-citizenship"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "Seychelles",
+        "naturalization",
+        "fifteen years"
+      ],
+      "notes": "ICS permanent residence and citizenship FAQ."
+    },
+    {
+      "id": "cameroon-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://minjustice.cm/ova_sev/who-is-a-cameroonian/",
+      "jurisdictions": [
+        "120"
+      ],
+      "pages": [
+        {
+          "id": "who-is",
+          "url": "https://minjustice.cm/ova_sev/who-is-a-cameroonian/"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "Cameroon",
+        "naturalisation"
+      ],
+      "notes": "Ministry of Justice nationality guidance."
+    },
+    {
+      "id": "mozambique-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Mozambique_2007",
+      "jurisdictions": [
+        "508"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Mozambique_2007"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "Mozambique",
+        "naturalization"
+      ],
+      "notes": "Constitution nationality articles."
     }
   ]
 }
