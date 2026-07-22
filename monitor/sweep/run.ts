@@ -55,6 +55,8 @@ interface RegistryEntry {
 interface SweepOptions {
   only: string[] | null;
   maxCalls: number;
+  concurrency: number;
+  rotationIndex: number | null;
   output: string;
   leadsOutput: string;
   report: string;
@@ -101,6 +103,8 @@ function readArgs(argv: string[]): SweepOptions {
   const options: SweepOptions = {
     only: null,
     maxCalls: Number(process.env.MONITOR_SWEEP_MAX_CALLS) || 300,
+    concurrency: Number(process.env.MONITOR_SWEEP_CONCURRENCY) || 5,
+    rotationIndex: null,
     output: path.join(outDir, 'findings.json'),
     leadsOutput: path.join(outDir, 'leads.json'),
     report: path.join(outDir, 'sweep-report.json'),
@@ -112,6 +116,8 @@ function readArgs(argv: string[]): SweepOptions {
     const value = argv[index];
     if (value === '--only') options.only = String(argv[++index]).split(',').map(item => item.trim()).filter(Boolean);
     else if (value === '--max-calls') options.maxCalls = Number(argv[++index]);
+    else if (value === '--concurrency') options.concurrency = Number(argv[++index]);
+    else if (value === '--rotation-index') options.rotationIndex = Number(argv[++index]);
     else if (value === '--output') options.output = path.resolve(argv[++index]);
     else if (value === '--leads-output') options.leadsOutput = path.resolve(argv[++index]);
     else if (value === '--report') options.report = path.resolve(argv[++index]);
@@ -122,6 +128,9 @@ function readArgs(argv: string[]): SweepOptions {
   }
   if (!Number.isInteger(options.maxCalls) || options.maxCalls < 1) {
     throw new Error('--max-calls must be a positive integer');
+  }
+  if (!Number.isInteger(options.concurrency) || options.concurrency < 1) {
+    throw new Error('--concurrency must be a positive integer');
   }
   return options;
 }
@@ -246,6 +255,53 @@ export function findingToLead(finding: Finding): Lead | null {
   };
 }
 
+// Choose which jurisdictions to sweep this run. An explicit --only list bypasses
+// rotation. Otherwise jurisdictions with fresh RSS signals are always swept, and
+// the remaining budget rotates through the rest by run index, so all jurisdictions
+// are covered over several runs with no persisted cursor.
+export function selectJurisdictions(
+  registry: RegistryEntry[],
+  options: { only: string[] | null; rssFlagged: Set<string>; maxCalls: number; rotationIndex: number },
+): RegistryEntry[] {
+  if (options.only) {
+    const wanted = new Set(options.only);
+    return registry.filter(entry => wanted.has(entry.iso_n3)).slice(0, options.maxCalls);
+  }
+  const flagged = registry.filter(entry => options.rssFlagged.has(entry.iso_n3));
+  const rest = registry.filter(entry => !options.rssFlagged.has(entry.iso_n3));
+  const budgetForRest = Math.max(0, options.maxCalls - flagged.length);
+  if (budgetForRest === 0 || rest.length === 0) return flagged.slice(0, options.maxCalls);
+  const slices = Math.ceil(rest.length / budgetForRest);
+  const slice = ((options.rotationIndex % slices) + slices) % slices;
+  const rotated = rest.slice(slice * budgetForRest, slice * budgetForRest + budgetForRest);
+  return [...flagged, ...rotated].slice(0, options.maxCalls);
+}
+
+// Run an async mapper over items with a bounded number of concurrent workers,
+// preserving input order in the results.
+async function mapPool<T, R>(
+  items: T[],
+  concurrency: number,
+  fn: (item: T, index: number) => Promise<R>,
+): Promise<R[]> {
+  const results: R[] = new Array(items.length);
+  let cursor = 0;
+  const worker = async (): Promise<void> => {
+    while (cursor < items.length) {
+      const index = cursor;
+      cursor += 1;
+      results[index] = await fn(items[index], index);
+    }
+  };
+  await Promise.all(Array.from({ length: Math.max(1, Math.min(concurrency, items.length)) }, worker));
+  return results;
+}
+
+const FIXTURE_GROUNDED: Pick<GroundedResult, 'citations' | 'searchQueries'> = {
+  citations: [{ uri: 'https://fixture.example', title: 'fixture' }],
+  searchQueries: ['fixture'],
+};
+
 export async function runSweep(
   options: SweepOptions,
 ): Promise<{ findings: Finding[]; leads: Lead[]; report: SweepReport }> {
@@ -273,13 +329,14 @@ export async function runSweep(
     }
   }
 
-  let selected = options.only
-    ? registry.filter(entry => options.only!.includes(entry.iso_n3))
-    : registry;
-  // Prioritize jurisdictions with fresh RSS signals, then cap to the budget.
-  selected = [...selected].sort((a, b) =>
-    (rssByIso.has(b.iso_n3) ? 1 : 0) - (rssByIso.has(a.iso_n3) ? 1 : 0));
-  const capped = selected.slice(0, options.maxCalls);
+  // Weekly rotation index (stateless): distinct runs cover different slices.
+  const rotationIndex = options.rotationIndex ?? Math.floor(Date.now() / (7 * 86_400_000));
+  const capped = selectJurisdictions(registry, {
+    only: options.only,
+    rssFlagged: new Set(rssByIso.keys()),
+    maxCalls: options.maxCalls,
+    rotationIndex,
+  });
 
   const fixtureRaw = options.fixtureResponse
     ? parseJsonArray(fs.readFileSync(options.fixtureResponse, 'utf8'))
@@ -297,37 +354,37 @@ export async function runSweep(
   if (!fixtureRaw && !llm) {
     console.warn('::warning title=Monitor sweep skipped::No monitoring LLM is configured');
   } else {
-    for (const entry of capped) {
+    const outcomes = await mapPool(capped, options.concurrency, async (entry) => {
       const context = datasetContextForJurisdiction(entry.iso_n3, citizenshipData, blocsData);
       const rssExcerpts = rssByIso.get(entry.iso_n3) ?? [];
-      try {
-        let raw: unknown[];
-        let grounded: Pick<GroundedResult, 'citations' | 'searchQueries'>;
-        if (fixtureRaw) {
-          raw = fixtureRaw;
-          grounded = { citations: [{ uri: 'https://fixture.example', title: 'fixture' }], searchQueries: ['fixture'] };
-        } else {
-          const result = await generateGroundedText(
-            buildSweepPrompt(entry, context, rssExcerpts),
-            llm!,
-            { maxTokens: 8192 },
-          );
-          callsMade += 1;
-          groundedQueries += result.searchQueries.length;
-          citationsSeen += result.citations.length;
-          grounded = result;
-          raw = parseJsonArray(result.text);
-        }
-        const normalized = normalizeFindings(raw, entry, grounded);
-        if (normalized.length === 0 && grounded.citations.length === 0 && grounded.searchQueries.length === 0) {
-          skippedNoSearch += 1;
-        }
-        findings.push(...normalized);
+      if (fixtureRaw) {
+        const normalized = normalizeFindings(fixtureRaw, entry, FIXTURE_GROUNDED);
         console.log(`${entry.iso_n3} ${entry.name}: ${normalized.length} findings`);
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
-        console.error(`::warning title=Sweep jurisdiction failed::${entry.iso_n3}: ${message}`);
+        return { findings: normalized, made: 0, queries: 0, citations: 0, skipped: false };
       }
+      let result: GroundedResult;
+      try {
+        result = await generateGroundedText(buildSweepPrompt(entry, context, rssExcerpts), llm!, { maxTokens: 8192 });
+      } catch (error) {
+        console.error(`::warning title=Sweep call failed::${entry.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
+        return { findings: [] as Finding[], made: 0, queries: 0, citations: 0, skipped: false };
+      }
+      let normalized: Finding[] = [];
+      try {
+        normalized = normalizeFindings(parseJsonArray(result.text), entry, result);
+      } catch (error) {
+        console.error(`::warning title=Sweep parse failed::${entry.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
+      }
+      const skipped = normalized.length === 0 && result.citations.length === 0 && result.searchQueries.length === 0;
+      console.log(`${entry.iso_n3} ${entry.name}: ${normalized.length} findings`);
+      return { findings: normalized, made: 1, queries: result.searchQueries.length, citations: result.citations.length, skipped };
+    });
+    for (const outcome of outcomes) {
+      findings.push(...outcome.findings);
+      callsMade += outcome.made;
+      groundedQueries += outcome.queries;
+      citationsSeen += outcome.citations;
+      if (outcome.skipped) skippedNoSearch += 1;
     }
   }
 

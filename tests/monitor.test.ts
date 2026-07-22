@@ -22,6 +22,7 @@ import {
   findingToLead,
   loadRegistry,
   normalizeFindings,
+  selectJurisdictions,
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
@@ -387,6 +388,27 @@ describe('AI sweep + grounded verify', () => {
     expect(lead?.signal.url).toBe('https://komunita.gov.mt/x');
     expect(lead?.signal.excerpt).toContain('Sources: https://komunita.gov.mt/x');
     expect(findingToLead({ ...finding, primary_urls: [] })).toBeNull();
+  });
+
+  test('selectJurisdictions rotates full coverage across runs and always includes RSS-flagged', () => {
+    const registry = Array.from({ length: 10 }, (_, i) => ({ iso_n3: String(100 + i), name: `J${i}` }));
+    const empty = new Set<string>();
+    // budget 4, 10 jurisdictions → 3 slices cover everything within 3 runs.
+    const seen = new Set<string>();
+    for (let run = 0; run < 3; run += 1) {
+      const picked = selectJurisdictions(registry, { only: null, rssFlagged: empty, maxCalls: 4, rotationIndex: run });
+      expect(picked.length).toBeLessThanOrEqual(4);
+      for (const entry of picked) seen.add(entry.iso_n3);
+    }
+    expect(seen.size).toBe(10);
+
+    // RSS-flagged jurisdictions are always included regardless of rotation slice.
+    const flaggedPick = selectJurisdictions(registry, { only: null, rssFlagged: new Set(['109']), maxCalls: 4, rotationIndex: 0 });
+    expect(flaggedPick.some(entry => entry.iso_n3 === '109')).toBe(true);
+
+    // --only bypasses rotation.
+    const onlyPick = selectJurisdictions(registry, { only: ['105', '107'], rssFlagged: empty, maxCalls: 4, rotationIndex: 5 });
+    expect(onlyPick.map(entry => entry.iso_n3).sort()).toEqual(['105', '107']);
   });
 
   test('loadRegistry flattens all three arrays and maps special.id to iso_n3', () => {
