@@ -1658,7 +1658,7 @@
       "beneficiaries_note": "Commonwealth citizens with a UK-born grandparent - descent-conditional, so beneficiary countries are not mapped",
       "beneficiaries": [],
       "grants": "5-year work visa, renewable, leads to Indefinite Leave to Remain then citizenship.",
-      "limits": "Requires a UK-born grandparent; Commonwealth citizenship alone is not enough. Commonwealth membership alone does not create a UK settlement lane (see meta.excluded).",
+      "limits": "Requires a UK-born grandparent; Commonwealth citizenship alone is not enough. Being a Commonwealth citizen by itself does not create a UK settlement right.",
       "leads_to_settlement": true
     },
     {
