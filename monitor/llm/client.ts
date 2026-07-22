@@ -21,6 +21,19 @@ export interface GroundedResult {
   citations: GroundingCitation[];
   searchQueries: string[];
   usage: { input: number; output: number };
+  usageRaw: Record<string, number>;
+}
+
+// The Interactions API usage object's field names vary; match by substring so we
+// capture input/output tokens whatever they're called (prompt/input, completion/candidate/output).
+function tokenField(usage: Record<string, unknown>, kind: 'input' | 'output'): number {
+  for (const [key, value] of Object.entries(usage)) {
+    if (typeof value !== 'number') continue;
+    const k = key.toLowerCase();
+    if (kind === 'input' && (k.includes('input') || k.includes('prompt'))) return value;
+    if (kind === 'output' && (k.includes('output') || k.includes('completion') || k.includes('candidate'))) return value;
+  }
+  return 0;
 }
 
 const DEFAULT_GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
@@ -220,8 +233,8 @@ export async function generateGroundedText(
     }>;
   };
   const usage = body.usage ?? {};
-  const inputTokens = Number(usage.input_tokens ?? usage.prompt_tokens ?? usage.promptTokenCount ?? 0) || 0;
-  const outputTokens = Number(usage.output_tokens ?? usage.completion_tokens ?? usage.candidatesTokenCount ?? 0) || 0;
+  const inputTokens = tokenField(usage, 'input');
+  const outputTokens = tokenField(usage, 'output');
   const steps = body.steps ?? [];
   const contentItems = steps.flatMap(step => step.content ?? []);
   const text = contentItems.map(item => item.text ?? '').join('').trim();
@@ -232,7 +245,11 @@ export async function generateGroundedText(
       ? [{ uri: annotation.url_citation.url, title: annotation.url_citation.title ?? '' }]
       : []));
   if (!text) throw new Error('Gemini grounded response did not contain text');
-  return { text, citations, searchQueries, usage: { input: inputTokens, output: outputTokens } };
+  return {
+    text, citations, searchQueries,
+    usage: { input: inputTokens, output: outputTokens },
+    usageRaw: usage as Record<string, number>,
+  };
 }
 
 // Grounding citation URIs are short-lived Google redirect links, not the primary

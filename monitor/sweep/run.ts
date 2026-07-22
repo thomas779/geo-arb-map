@@ -78,6 +78,7 @@ interface SweepReport {
   input_tokens: number;
   output_tokens: number;
   estimated_cost_usd: number;
+  token_usage: Record<string, number>;
   findings: number;
   by_status: Record<string, number>;
   affects_dataset: number;
@@ -398,6 +399,7 @@ export async function runSweep(
   let skippedNoSearch = 0;
   let inputTokens = 0;
   let outputTokens = 0;
+  const rawUsageTotals: Record<string, number> = {};
 
   if (!fixtureRaw && !llm) {
     console.warn('::warning title=Monitor sweep skipped::No monitoring LLM is configured');
@@ -408,14 +410,14 @@ export async function runSweep(
       if (fixtureRaw) {
         const normalized = normalizeFindings(fixtureRaw, entry, FIXTURE_GROUNDED);
         console.log(`${entry.iso_n3} ${entry.name}: ${normalized.length} findings`);
-        return { findings: normalized, made: 0, queries: 0, citations: 0, skipped: false, input: 0, output: 0 };
+        return { findings: normalized, made: 0, queries: 0, citations: 0, skipped: false, input: 0, output: 0, raw: {} as Record<string, number> };
       }
       let result: GroundedResult;
       try {
         result = await generateGroundedText(buildSweepPrompt(entry, context, rssExcerpts), llm!, { maxTokens: 8192 });
       } catch (error) {
         console.error(`::warning title=Sweep call failed::${entry.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
-        return { findings: [] as Finding[], made: 0, queries: 0, citations: 0, skipped: false, input: 0, output: 0 };
+        return { findings: [] as Finding[], made: 0, queries: 0, citations: 0, skipped: false, input: 0, output: 0, raw: {} as Record<string, number> };
       }
       let normalized: Finding[] = [];
       try {
@@ -428,7 +430,7 @@ export async function runSweep(
       return {
         findings: normalized, made: 1,
         queries: result.searchQueries.length, citations: result.citations.length, skipped,
-        input: result.usage.input, output: result.usage.output,
+        input: result.usage.input, output: result.usage.output, raw: result.usageRaw,
       };
     });
     for (const outcome of outcomes) {
@@ -438,6 +440,9 @@ export async function runSweep(
       citationsSeen += outcome.citations;
       inputTokens += outcome.input;
       outputTokens += outcome.output;
+      for (const [key, value] of Object.entries(outcome.raw)) {
+        rawUsageTotals[key] = (rawUsageTotals[key] ?? 0) + (typeof value === 'number' ? value : 0);
+      }
       if (outcome.skipped) skippedNoSearch += 1;
     }
   }
@@ -476,6 +481,7 @@ export async function runSweep(
     input_tokens: inputTokens,
     output_tokens: outputTokens,
     estimated_cost_usd: estimatedCostUsd,
+    token_usage: rawUsageTotals,
     findings: findings.length,
     by_status: byStatus,
     affects_dataset: leads.length,
