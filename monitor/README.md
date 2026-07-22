@@ -1,140 +1,118 @@
 # Source monitor
 
-This directory contains the review-first monitoring loop for Flag Paths.
+The review-first monitoring loop for Flag Paths. It discovers possible mobility-rule
+changes, **verifies them against current primary sources with a grounded LLM**, publishes
+verified news to the public Telegram channel, and opens human-review issues for anything
+that would change the dataset.
 
-**Operator path to Telegram posts:** see [`PUBLISHING_RUNBOOK.md`](PUBLISHING_RUNBOOK.md)
-(connectivity, bootstrap post, email self-send fixtures, cheap verify LLM, local discovery).
+It never edits the public datasets directly. **AI ranks and challenges evidence; it never
+approves or publishes a legal fact into the canonical data.** A finding only becomes a data
+change through the normal primary-source review, test, and pull-request process.
+
+**Operator guide:** see [`PUBLISHING_RUNBOOK.md`](PUBLISHING_RUNBOOK.md).
 
 ```text
-source manifest → collectors → signals → LLM triage → issue drafts → human review
+discovery feeds (RSS + aggregators + country locals + curated Telegram)
+    │  cheap keyword pre-filter (no AI)
+    ▼
+AI per-jurisdiction sweep  (Gemini + Google Search grounding, delta-aware)
+    ▼
+findings.json ──► confirmed news ──► Telegram @flagpaths   (LLM evidence-audit + dedup)
+              └─► affects_dataset ─► GitHub issue (ChangeProposal) ─► human review ─► dataset
 ```
-
-It never edits the public datasets. A lead only becomes a data change through the
-normal primary-source review, test, and pull-request process.
 
 ## Commands
 
 ```sh
-# Fetch active sources from the last 14 days without persistent state.
-bun run monitor:collect
+# Collect discovery signals (RSS + curated Telegram only; official-page crawl retired).
+bun run monitor:collect -- --adapters rss,telegram_html --lookback-days 1
 
-# Stateful local run. The collector reads the last hash/validators from SQLite
-# and emits portable D1 mutations for this run.
-bun run monitor:collect -- \
-  --state-db .generated/data-canonical/canonical.sqlite \
-  --state-sql monitor/.out/monitor-state.sql
+# Grounded per-jurisdiction sweep. Reads .out/signals.json for hybrid RSS hints.
+#   --mode discovery : verify only jurisdictions with fresh, relevant signals (default cadence)
+#   --mode rotation  : rotate through all registry jurisdictions (backstop)
+#   --only 470,124   : force specific iso_n3
+bun run monitor:sweep -- --mode discovery --concurrency 5 --max-calls 12
 
-# Triage unseen signals. With no LLM config this safely writes an empty lead file
-# and a report explaining that triage was skipped.
-MONITOR_LLM_PROVIDER=openai-compatible \
-MONITOR_LLM_BASE_URL=https://gateway.example/v1 \
-MONITOR_LLM_API_KEY=... \
-MONITOR_LLM_MODEL=creator/model \
-bun run monitor:triage
+# Preview / publish the confirmed findings to Telegram (audit-gated, deduped).
+bun run monitor:news -- --dry-run
+bun run monitor:news -- --apply --state-db <d1-export.sql> --state-sql .out/monitor-posts.sql
 
-# Render monitor/.out/issue-drafts.json. This is always a dry run.
-bun run monitor:draft
+# Render / open reviewed-lead issues for dataset-affecting findings.
+bun run monitor:draft            # dry run → .out/issue-drafts.json
+GH_TOKEN=... bun run monitor:open  # --apply, creates issues
 
-# Explicitly publish drafts with the GitHub CLI.
-GH_TOKEN=... bun run monitor:open
+# Verify the Telegram bot/channel without posting.
+bun run monitor:telegram -- --check
 
-# Preview a fully reviewed GitHub issue as a Telegram brief.
-bun run monitor:telegram -- --issue 123 --dry-run
-
-# Normalize a local repository-dispatch fixture.
-bun run monitor:email:dispatch \
-  --event tests/fixtures/monitor/newsletter-dispatch.json
+# Newsletter push path (Cloudflare email Worker → repository_dispatch).
+bun run monitor:email:dispatch --event tests/fixtures/monitor/newsletter-dispatch.json
 ```
 
-Do not paste API keys into chat or commit them. The provider-neutral configuration is:
+Offline: `monitor:sweep --fixture-response <array.json>` and `monitor:collect --fixture-dir …`
+run the full path with zero API calls.
 
-| Name | Kind | Purpose |
-| --- | --- | --- |
-| `MONITOR_LLM_PROVIDER` | variable | `anthropic` or `openai-compatible` |
-| `MONITOR_LLM_BASE_URL` | variable | Required for an OpenAI-compatible endpoint |
-| `MONITOR_LLM_MODEL` | variable | Provider model ID |
-| `MONITOR_LLM_API_KEY` | secret | Credential for that provider or endpoint |
-| `MONITOR_LLM_TIMEOUT_MS` | variable | Optional; defaults to 10 minutes for cold starts |
+## LLM configuration
 
-Runpod Serverless vLLM and Vercel AI Gateway both use
-`MONITOR_LLM_PROVIDER=openai-compatible`. Existing `ANTHROPIC_API_KEY` and
-`MONITOR_TRIAGE_MODEL` settings remain supported for backwards compatibility.
+Provider-neutral; do not commit keys.
 
-For an entirely offline smoke test:
+| Variable | Purpose |
+| --- | --- |
+| `MONITOR_LLM_PROVIDER` | `anthropic` or `openai-compatible` (Gemini via its OpenAI-compatible base) |
+| `MONITOR_LLM_BASE_URL` / `MONITOR_GEMINI_BASE_URL` | OpenAI-compatible base / native Gemini base for grounding |
+| `MONITOR_LLM_MODEL` | Cheap model for the non-grounded audit + triage (e.g. `gemini-3.5-flash-lite`) |
+| `MONITOR_SWEEP_MODEL` | Model for the grounded sweep (e.g. `gemini-3.5-flash-lite`; `gemini-3.5-flash` for fuller coverage) |
+| `MONITOR_LLM_API_KEY` | Credential (secret) |
 
-```sh
-bun run monitor:collect --source globalcit-rss \
-  --fixture-dir tests/fixtures/monitor --lookback-days 0
-bun run monitor:triage \
-  --fixture-response tests/fixtures/monitor/triage-response.json
-bun run monitor:draft
-```
+Grounding uses the **native Gemini Interactions API** (`/v1beta/interactions`, `tools:[{type:google_search}]`);
+the OpenAI-compatible endpoint cannot ground. The sweep asks for a few targeted searches to keep cost low.
 
-The `.github/workflows/monitor.yml` workflow runs weekly in strict collection
-mode, so any active source failure fails the job instead of silently shrinking
-coverage. It uploads every
-collection report, triage report, signal file, lead file, and issue draft as a
-30-day artifact. It creates issues only when:
+## Cadence & cost
 
-- a manual run checks `open_issues`; or
-- the repository variable `MONITOR_OPEN_ISSUES` is exactly `true`.
+`.github/workflows/monitor.yml` runs **daily** in `discovery` mode: the RSS scan is free, a
+keyword pre-filter drops off-topic items before any AI call, and the grounded sweep fires
+**only for jurisdictions with fresh relevant news** (zero calls on a quiet day). Knobs:
+`MONITOR_SWEEP_MODE`, `MONITOR_SWEEP_MAX_CALLS` (hard cap), `MONITOR_SWEEP_CONCURRENCY`.
+`rotation` mode (via `workflow_dispatch`) sweeps the full registry as a backstop.
 
-## Operating boundaries
+## How a verified change reaches the dataset
 
-- RSS, newsletters, specialist publishers, and Telegram are discovery only.
-- Stable official pages without feeds are polled by normalized content hash.
-  D1 retains the last successful hash, ETag, Last-Modified value, final URL,
-  health state, previous/current normalized text, and immutable observation
-  history. A changed page creates a review signal with a textual diff; the first
-  observation establishes a silent baseline. Scripts, styles, comments, and SVG
-  markup are ignored to reduce deployment noise.
-- Conditional HTTP requests avoid downloading unchanged pages when the server
-  supports ETag or Last-Modified. Redirects, 404/410 responses, login pages,
-  bot-protection screens, and consecutive failures are recorded without erasing
-  the last known-good text.
-- `pages` in the source manifest lets one authority/source own several stable
-  pages. Page IDs remain stable even when URLs redirect.
-- A page diff is never treated as a legal change automatically. The triage model
-  must classify it as editorial/navigation, operational guidance, or a possible
-  substantive change; a reviewer still resolves it to primary evidence.
-- A verified change requires a current primary legal, government, court, or
-  tax-authority source plus an effective date or an explicit unknown date.
-- AI ranks and challenges evidence; it never approves or publishes a fact.
-- The first real runs stay draft-only. Inspect `issue-drafts.json` before
-  enabling issue creation.
-- Tax claims must distinguish residence, source, filing, treaty, and incentive
-  rules rather than collapsing them into a country label.
+The sweep **compares** each jurisdiction against what we already record (delta-aware prompt) and
+flags `affects_dataset` findings. Those open a `ChangeProposal`-shaped GitHub issue (see
+`scripts/lib/canonical-schema.ts`). A reviewer confirms the primary source, then the change enters
+the canonical store as a **draft revision → approved** (`data:db` / `data:stage`), is compiled by
+`data:build`, and shipped by `data:promote`. The dataset is never hand-edited or auto-written from a
+finding — that gate + the regression invariants are the integrity guarantee.
 
 ## Telegram publication
 
-The public destination is `@flagpaths`. GitHub environment
-`telegram-publication` holds `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHANNEL_ID`.
-The bot needs only permission to post.
+Public channel `@flagpaths`. Confirmed news auto-publishes when `MONITOR_AUTO_PUBLISH=true`, through
+`publish/telegram.ts`'s LLM evidence-audit (every claim must be backed by cited evidence) and the
+`monitor_posts` D1 dedup ledger. Set `MONITOR_AUTO_PUBLISH=false` to pause instantly. GitHub environment
+`telegram-publication` holds `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHANNEL_ID`.
 
-To publish, a monitoring issue must contain primary evidence, a completed
-reviewer checklist, and exact copy under `## Public brief`. Then run the
-`publish-telegram.yml` workflow with the issue number. The workflow previews the
-post, performs a claim-versus-evidence audit, refuses duplicate publication, and
-posts only after every gate passes.
+## Operating boundaries
+
+- Discovery (RSS, aggregators, country locals, curated Telegram, email) can only propose leads.
+- A `confirmed` finding requires the model to have actually searched (proof-of-search gate) and to
+  carry a primary/official-source URL; auto-publish is `confirmed`-only.
+- A dataset change additionally requires human review against a current primary legal, government,
+  court, or tax-authority source plus an effective date (or explicit unknown).
+- Tax claims must distinguish residence, source, filing, treaty, and incentive rules.
 
 ## Layout
 
 ```text
-sources/manifest.json       watched and planned sources
-sources/CONTRIBUTING.md     source quality and contribution rules
-schema/signal.ts            shared, validated Signal contract
-state.ts                    D1-backed page state and observation mutations
-collectors/                 feeds, curated Telegram, typed email boundary
-cloudflare/                  Email Worker, D1 migration, and deployment guide
-llm/client.ts               Anthropic and OpenAI-compatible model boundary
-triage/context.ts           dataset context and country inference
-triage/triage.ts            bounded LLM triage and output validation
-triage/issues.ts            pure issue-draft renderer
-triage/open-issues.ts       dry-run by default; --apply publishes
-publish/telegram.ts         reviewed-issue gate and Telegram Bot API publisher
-.out/                       generated local/CI run artifacts (gitignored)
+sources/manifest.json    watched discovery + reference (official-source lookup) sources
+schema/signal.ts         shared Signal contract
+collectors/              rss, curated Telegram, typed email boundary (+ run.ts orchestrator)
+llm/client.ts            Anthropic / OpenAI-compatible + native Gemini grounded generation
+sweep/run.ts             registry-driven grounded per-jurisdiction sweep → findings + leads
+triage/                  dataset context, bounded email-signal triage, issue renderer/opener
+publish/telegram.ts      reviewed-issue Telegram gate + evidence audit
+publish/news.ts          auto-publish confirmed findings + monitor_posts dedup
+cloudflare/              email intake Worker, D1 migrations, deploy guide
+.out/                    generated run artifacts (gitignored)
 ```
 
-The source watchlist and onboarding state live in
-[`sources/README.md`](sources/README.md). Email intake deployment is documented
-in [`cloudflare/README.md`](cloudflare/README.md).
+Email intake deployment: [`cloudflare/README.md`](cloudflare/README.md). Source watchlist:
+[`sources/README.md`](sources/README.md). Community growth: [`../docs/community-distribution.md`](../docs/community-distribution.md).
