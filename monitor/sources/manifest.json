@@ -857,6 +857,66 @@
       "jurisdictions": ["076"],
       "keywords": ["cidadania", "nacionalidade", "naturalização", "residência", "migração", "estrangeiros"],
       "notes": "Official access point for Brazil's Diário Oficial da União. Build a keyword/API query for nationality, naturalization, migration, residence, and visa instruments."
+    },
+    {
+      "id": "egypt-citizenship-investment",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://egyptcitizenship.gov.eg/",
+      "jurisdictions": ["818"],
+      "pages": [
+        { "id": "cbi-programme", "url": "https://egyptcitizenship.gov.eg/" },
+        { "id": "gafi-citizenship-unit", "url": "https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx" },
+        { "id": "nationality-law-text", "url": "https://manshurat.org/node/7358" }
+      ],
+      "keywords": ["جنسية", "استثمار", "naturalization", "nationality", "citizenship", "وديعة", "عقار", "descent", "birth"],
+      "notes": "Official Cabinet CBI programme and GAFI intake unit, plus the commonly published Nationality Law text. Track investment thresholds separately from ordinary naturalization and parentage rules. Live-fetch results must be recorded honestly."
+    },
+    {
+      "id": "jordan-investor-citizenship",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://invest.jo/en/node/123",
+      "jurisdictions": ["400"],
+      "pages": [
+        { "id": "cabinet-investor-criteria", "url": "https://invest.jo/en/node/123" },
+        { "id": "petra-cabinet-decision", "url": "https://petra.gov.jo/en/news/government-revamps-investor-citizenship-rules-to-funnel-capital-into-provinces" }
+      ],
+      "keywords": ["جنسية", "استثمار", "citizenship", "residency", "naturalization", "Amman Stock Exchange", "Amrah", "employment", "Social Security"],
+      "notes": "Official Invest Jordan and Petra pages for the Cabinet investor-citizenship criteria. Property purchase alone is residency, not direct citizenship. Nationality Law descent and ordinary naturalization remain primary-law evidence outside this monitor."
+    },
+    {
+      "id": "nauru-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.ecrcp.gov.nr/",
+      "jurisdictions": ["520"],
+      "pages": [
+        { "id": "ecrcp-programme", "url": "https://www.ecrcp.gov.nr/" },
+        { "id": "citizenship-act", "url": "https://justice.gov.nr/wp-content/uploads/2023/12/Naoero-Citizenship-Act-2017.pdf" },
+        { "id": "ecrcp-act", "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf" },
+        { "id": "programme-launch", "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "descent", "birth", "contribution", "climate resilience", "Program Office", "Agent"],
+      "notes": "Official Program Office, Citizenship Act and ECRCP Act materials. Contribution amounts and limited-time offers are volatile; ordinary descent, birth and marriage naturalization remain in the 2017 Act."
+    },
+    {
+      "id": "sao-tome-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/",
+      "jurisdictions": ["678"],
+      "pages": [
+        { "id": "consular-cbi", "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/" },
+        { "id": "nationality-law", "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf" },
+        { "id": "rnid-regulation", "url": "https://www.imidaily.com/wp-content/uploads/2025/08/STP-CBI-Act-01082025-1.pdf" }
+      ],
+      "keywords": ["nacionalidade", "cidadania", "naturalização", "investimento", "doação", "nascimento", "descendência", "residência", "Fundo Nacional de Transformação"],
+      "notes": "Consular programme page plus hosted Diário texts of Lei 07/2022 and Decreto-Lei 07/2025. Prefer a future official Diário da República endpoint when a stable government index is available. Commercial hosting of the decree is discovery-adjacent evidence of the gazette text, not a commercial claim."
     }
   ]
 }

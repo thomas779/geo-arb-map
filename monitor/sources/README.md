@@ -54,6 +54,10 @@ legal conclusion.
 | UAE nationality and Golden Visa | HTML content hash, three pages | Official nationality nomination and investor-residence verification | Active; government guidance and Golden Visa pages healthy, e-laws endpoint is monitored for recovery |
 | Brazil Justice and Federal Police guidance | HTML content hash, four pages | Official nationality, reduced naturalization, and family-reunification verification | Active; parent/ascendant pages added 2026-07-21 |
 | Mexico Foreign Ministry naturalization | HTML content hash, three pages | Official ordinary, origin-preference, and Mexican-child parent-route verification | Active; parent route added 2026-07-21 |
+| Egypt Cabinet CBI and GAFI unit | HTML content hash, three pages | Official investment citizenship and nationality-law text verification | Active; live fetch verified 2026-07-22 |
+| Jordan Invest and Petra investor criteria | HTML content hash, two pages | Official Cabinet investor-citizenship criteria verification | Active; live fetch verified 2026-07-22 |
+| Nauru Program Office and citizenship acts | HTML content hash, four pages | Official ECRCP and ordinary Citizenship Act verification | Active; live fetch verified 2026-07-22 |
+| São Tomé nationality law and CBI regulation | HTML content hash, three pages | Official nationality statute, RNID decree text, and consular programme verification | Active; live fetch verified 2026-07-22 |
 | Nomad Capitalist Weekly Rundown | Email Worker | Newsletter discovery | Subscribed through the shared intake address on 2026-07-19; awaiting first delivery |
 | The Wandering Investor Notes from the Road | Email Worker | Private-list and early discovery | Intake active; publisher form returned a subscription error on 2026-07-18 |
 
