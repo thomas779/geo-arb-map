@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 185,
+      "routes": 197,
       "by_mode": {
-        "ancestry": 55,
-        "naturalization": 57,
-        "birth": 55,
+        "ancestry": 59,
+        "naturalization": 61,
+        "birth": 59,
         "investment": 18
       },
       "by_status": {
-        "active": 179,
+        "active": 191,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -299,12 +299,16 @@
       "name": "Bolivia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "bolivia-citizenship-by-parent",
+        "bolivia-naturalization",
+        "bolivia-citizenship-by-birth"
+      ]
     },
     {
       "iso_n3": "070",
@@ -796,12 +800,16 @@
       "name": "Ecuador",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "ecuador-citizenship-by-parent",
+        "ecuador-naturalization",
+        "ecuador-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "222",
@@ -1654,12 +1662,16 @@
       "name": "Malaysia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "malaysia-citizenship-by-parent",
+        "malaysia-naturalization",
+        "malaysia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "462",
@@ -2179,12 +2191,16 @@
       "name": "Peru",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "peru-citizenship-by-parent",
+        "peru-naturalization",
+        "peru-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "608",
@@ -3793,6 +3809,111 @@
       ]
     },
     {
+      "id": "bolivia-citizenship-by-birth",
+      "country": {
+        "iso_n3": "068",
+        "name": "Bolivia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Bolivia or through a Bolivian parent",
+      "summary": "Persons born in Bolivian territory are Bolivian by birth (with the constitutional foreign-service exceptions). Parentage rules also transmit Bolivian nationality.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bolivia-citizenship-by-birth-principal",
+          "label": "Citizenship by birth in Bolivia or through a Bolivian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Bolivia 2009 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bolivia_2009"
+        }
+      ]
+    },
+    {
+      "id": "bolivia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "068",
+        "name": "Bolivia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Bolivian nationality through a Bolivian parent",
+      "summary": "Children of a Bolivian parent are Bolivian by birth under the Constitution, including birth abroad subject to the statutory rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bolivia-citizenship-by-parent-principal",
+          "label": "Bolivian nationality through a Bolivian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Bolivia 2009 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bolivia_2009"
+        }
+      ]
+    },
+    {
+      "id": "bolivia-naturalization",
+      "country": {
+        "iso_n3": "068",
+        "name": "Bolivia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after continuous residence",
+      "summary": "Foreigners may naturalize after more than three years uninterrupted legal residence, or two years with a Bolivian spouse, child, or foster parent, subject to legal status and statutory process.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bolivia-naturalization-principal",
+          "label": "Naturalization after continuous residence",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Bolivia 2009 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bolivia_2009"
+        }
+      ]
+    },
+    {
       "id": "brazil-citizenship-by-birth",
       "country": {
         "iso_n3": "076",
@@ -4962,6 +5083,111 @@
         {
           "title": "Dominica Government — Citizenship forms",
           "url": "https://www.dominica.gov.dm/forms"
+        }
+      ]
+    },
+    {
+      "id": "ecuador-citizenship-at-birth",
+      "country": {
+        "iso_n3": "218",
+        "name": "Ecuador"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Ecuadorian parent or birth in Ecuador",
+      "summary": "Birth to an Ecuadorian parent, or birth in Ecuador under the Constitution, creates Ecuadorian nationality.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ecuador-citizenship-at-birth-principal",
+          "label": "Citizenship at birth through an Ecuadorian parent or birth in Ecuador",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ecuador 2021 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ecuador_2021"
+        }
+      ]
+    },
+    {
+      "id": "ecuador-citizenship-by-parent",
+      "country": {
+        "iso_n3": "218",
+        "name": "Ecuador"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Ecuadorian nationality through an Ecuadorian parent",
+      "summary": "A person born to an Ecuadorian father or mother is Ecuadorian, including birth abroad subject to registration rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ecuador-citizenship-by-parent-principal",
+          "label": "Ecuadorian nationality through an Ecuadorian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ecuador 2021 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ecuador_2021"
+        }
+      ]
+    },
+    {
+      "id": "ecuador-naturalization",
+      "country": {
+        "iso_n3": "218",
+        "name": "Ecuador"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after legal residence",
+      "summary": "Foreign adults may seek naturalization after three years of continuous legal residence under the nationality and immigration framework, with shorter tracks for spouses and other statutory categories. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ecuador-naturalization-principal",
+          "label": "Naturalization after legal residence",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ecuador 2021 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ecuador_2021"
         }
       ]
     },
@@ -6602,6 +6828,115 @@
       ]
     },
     {
+      "id": "malaysia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Malaysian parent",
+      "summary": "A person born to a Malaysian citizen parent is Malaysian under the Constitution’s operation-of-law and registration rules. Birth in Malaysia to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malaysia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Malaysian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malaysia Federal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+        }
+      ]
+    },
+    {
+      "id": "malaysia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Malaysian citizenship through a Malaysian parent",
+      "summary": "A child of a Malaysian citizen parent may hold or register Malaysian citizenship under the Federal Constitution, subject to the birthplace and registration rules in force.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malaysia-citizenship-by-parent-principal",
+          "label": "Malaysian citizenship through a Malaysian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malaysia Federal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+        }
+      ]
+    },
+    {
+      "id": "malaysia-naturalization",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after long residence",
+      "summary": "Federal Constitution naturalization generally requires ten years residence within the twelve years before application, including twelve months immediately before applying, Malay language ability, good character, and renunciation of prior nationality. Approval is highly discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "malaysia-naturalization-principal",
+          "label": "Naturalization after long residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malaysia Federal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+        },
+        {
+          "title": "Malaysia Immigration — Residence Pass",
+          "url": "https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/"
+        }
+      ]
+    },
+    {
       "id": "malta-citizenship-by-birth",
       "country": {
         "iso_n3": "470",
@@ -7948,6 +8283,119 @@
         {
           "title": "Paraguay Dirección General de Migraciones",
           "url": "https://migraciones.gov.py/"
+        }
+      ]
+    },
+    {
+      "id": "peru-citizenship-at-birth",
+      "country": {
+        "iso_n3": "604",
+        "name": "Peru"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Peruvian parent or birth in Peru",
+      "summary": "Birth to a Peruvian parent, or birth in Peru under the Nationality Law, creates Peruvian nationality. Ordinary foreign-parent temporary presence is not a general unrestricted jus soli path.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "peru-citizenship-at-birth-principal",
+          "label": "Citizenship at birth through a Peruvian parent or birth in Peru",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Peru Migraciones — naturalization procedure",
+          "url": "https://www.gob.pe/12580"
+        }
+      ]
+    },
+    {
+      "id": "peru-citizenship-by-parent",
+      "country": {
+        "iso_n3": "604",
+        "name": "Peru"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Peruvian nationality through a Peruvian parent",
+      "summary": "A child of a Peruvian parent is Peruvian under the Nationality Law lineage rules, including birth abroad subject to registration.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "peru-citizenship-by-parent-principal",
+          "label": "Peruvian nationality through a Peruvian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Peru Migraciones — naturalization procedure",
+          "url": "https://www.gob.pe/12580"
+        },
+        {
+          "title": "Peru Superintendencia Nacional de Migraciones",
+          "url": "https://www.migraciones.gob.pe/"
+        }
+      ]
+    },
+    {
+      "id": "peru-naturalization",
+      "country": {
+        "iso_n3": "604",
+        "name": "Peru"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after two years legal residence",
+      "summary": "Adult foreigners may apply after at least two consecutive years of legal residence, subject to Migraciones conditions (means, good conduct, exam) for their migration quality. Marriage to a Peruvian has a parallel two-year continuous residence track.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "peru-naturalization-principal",
+          "label": "Naturalization after two years legal residence",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Peru Migraciones — naturalization procedure",
+          "url": "https://www.gob.pe/12580"
+        },
+        {
+          "title": "Peru Migraciones — nationality by marriage",
+          "url": "https://www.gob.pe/12574-obtener-la-nacionalidad-peruana-por-matrimonio"
         }
       ]
     },

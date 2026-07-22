@@ -1168,6 +1168,61 @@
       ],
       "keywords": ["citizenship", "naturalization", "naturalisation", "registration", "Constitution", "fifteen", "birth", "renounce", "Interior"],
       "notes": "Ministry of Interior requirements PDF plus published Constitution Chapter III texts. Portal login page is not a monitoring target; track the public requirements PDF and constitutional sources."
+    },
+    {
+      "id": "peru-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gob.pe/12580",
+      "jurisdictions": ["604"],
+      "pages": [
+        { "id": "naturalization", "url": "https://www.gob.pe/12580" },
+        { "id": "marriage", "url": "https://www.gob.pe/12574-obtener-la-nacionalidad-peruana-por-matrimonio" },
+        { "id": "migraciones", "url": "https://www.migraciones.gob.pe/" }
+      ],
+      "keywords": ["nacionalidad", "naturalización", "residencia", "matrimonio", "Migraciones"],
+      "notes": "Official Migraciones nationality procedures. Investor is a residence quality for ordinary naturalization, not CBI."
+    },
+    {
+      "id": "bolivia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Bolivia_2009",
+      "jurisdictions": ["068"],
+      "pages": [
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Bolivia_2009" }
+      ],
+      "keywords": ["nationality", "naturalization", "citizenship", "Bolivia", "residence", "birth"],
+      "notes": "2009 Constitution nationality articles. Prefer a future stable migracion.gob.bo endpoint when TLS works in the collector."
+    },
+    {
+      "id": "ecuador-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Ecuador_2021",
+      "jurisdictions": ["218"],
+      "pages": [
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Ecuador_2021" }
+      ],
+      "keywords": ["nationality", "naturalization", "citizenship", "Ecuador", "residence", "birth"],
+      "notes": "Constitution nationality framework. Cancilleria portal failed TLS in the collector (2026-07-22)."
+    },
+    {
+      "id": "malaysia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Malaysia_2007",
+      "jurisdictions": ["458"],
+      "pages": [
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Malaysia_2007" },
+        { "id": "residence-pass", "url": "https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "Federal Constitution", "residence", "Malay"],
+      "notes": "Federal Constitution plus Immigration Residence Pass page. JPN citizenship portal failed TLS in the collector."
     }
   ]
 }

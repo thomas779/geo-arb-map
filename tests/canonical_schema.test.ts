@@ -40,6 +40,9 @@ describe('canonical data schemas', () => {
       'barbados-citizenship-by-parent',
       'barbados-naturalization',
       'barbados-citizenship-by-birth',
+      'bolivia-citizenship-by-parent',
+      'bolivia-naturalization',
+      'bolivia-citizenship-by-birth',
       'brazil-citizenship-by-parent',
       'brazil-naturalization-by-residence',
       'brazil-citizenship-by-birth',
@@ -67,6 +70,9 @@ describe('canonical data schemas', () => {
       'dominica-naturalization-after-residence',
       'dominica-citizenship-by-birth',
       'dominica-cbi',
+      'ecuador-citizenship-by-parent',
+      'ecuador-naturalization',
+      'ecuador-citizenship-at-birth',
       'egypt-citizenship-by-parent',
       'egypt-naturalization',
       'egypt-citizenship-by-birth',
@@ -112,6 +118,9 @@ describe('canonical data schemas', () => {
       'korea-citizenship-by-parent-or-simple-origin',
       'korea-general-naturalization',
       'korea-citizenship-at-birth-by-parent',
+      'malaysia-citizenship-by-parent',
+      'malaysia-naturalization',
+      'malaysia-citizenship-at-birth-by-parent',
       'malta-registration-family-descent',
       'malta-residence-naturalization',
       'malta-citizenship-by-birth',
@@ -147,6 +156,9 @@ describe('canonical data schemas', () => {
       'paraguay-citizenship-by-parent',
       'paraguay-naturalization',
       'paraguay-citizenship-by-birth',
+      'peru-citizenship-by-parent',
+      'peru-naturalization',
+      'peru-citizenship-at-birth',
       'philippines-citizenship-by-parent-or-reacquisition',
       'philippines-naturalization',
       'philippines-citizenship-at-birth-by-parent',
@@ -428,6 +440,19 @@ describe('canonical data schemas', () => {
       ?.variants[0]?.timeline.eligibility_minimum_months).toBe(180);
     expect(nigeria.coverage.find(item => item.mode === 'investment')?.finding)
       .toBe('verified_none');
+
+    expect(byIso.get('604')!.routes.find(r => r.id === 'peru-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(24);
+    expect(byIso.get('068')!.routes.find(r => r.id === 'bolivia-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(36);
+    expect(byIso.get('218')!.routes.find(r => r.id === 'ecuador-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(36);
+    expect(byIso.get('458')!.routes.find(r => r.id === 'malaysia-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(120);
+    for (const iso of ['604', '068', '218', '458']) {
+      expect(byIso.get(iso)!.coverage.find(c => c.mode === 'investment')?.finding)
+        .toBe('verified_none');
+    }
   });
 
   test('models eligibility time separately from processing time', () => {

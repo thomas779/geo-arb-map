@@ -312,6 +312,13 @@ const OFFICIAL_URLS = {
   nigeria_constitution_citizenship: 'https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/',
   nigeria_interior_requirements: 'https://candb.interior.gov.ng/wp-content/uploads/2025/05/CB-Citizenship-Requirements.pdf',
   nigeria_constitute: 'https://www.constituteproject.org/constitution/Nigeria_2011',
+  peru_naturalization: 'https://www.gob.pe/12580',
+  peru_marriage_nationality: 'https://www.gob.pe/12574-obtener-la-nacionalidad-peruana-por-matrimonio',
+  peru_migraciones: 'https://www.migraciones.gob.pe/',
+  bolivia_constitution: 'https://www.constituteproject.org/constitution/Bolivia_2009',
+  ecuador_constitution: 'https://www.constituteproject.org/constitution/Ecuador_2021',
+  malaysia_constitution: 'https://www.constituteproject.org/constitution/Malaysia_2007',
+  malaysia_residence_pass: 'https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -753,6 +760,13 @@ function jurisdictionSources(): SourceRecord[] {
       ['Nigeria Constitution 1999 — Chapter III Citizenship (published text)', OFFICIAL_URLS.nigeria_constitution_citizenship, '566', 'en', 'primary_law', 'nigeria-citizenship-law'],
       ['Nigeria Ministry of Interior — Citizenship requirements PDF', OFFICIAL_URLS.nigeria_interior_requirements, '566', 'en', 'official_guidance', 'nigeria-citizenship-law'],
       ['Constitute Project — Constitution of Nigeria 1999 (as amended)', OFFICIAL_URLS.nigeria_constitute, '566', 'en', 'primary_law', 'nigeria-citizenship-law'],
+      ['Peru Migraciones — naturalization procedure', OFFICIAL_URLS.peru_naturalization, '604', 'es', 'official_guidance', 'peru-citizenship-law'],
+      ['Peru Migraciones — nationality by marriage', OFFICIAL_URLS.peru_marriage_nationality, '604', 'es', 'official_guidance', 'peru-citizenship-law'],
+      ['Peru Superintendencia Nacional de Migraciones', OFFICIAL_URLS.peru_migraciones, '604', 'es', 'official_guidance', 'peru-citizenship-law'],
+      ['Bolivia 2009 Constitution (Constitute Project)', OFFICIAL_URLS.bolivia_constitution, '068', 'en', 'primary_law', 'bolivia-citizenship-law'],
+      ['Ecuador 2021 Constitution (Constitute Project)', OFFICIAL_URLS.ecuador_constitution, '218', 'en', 'primary_law', 'ecuador-citizenship-law'],
+      ['Malaysia Federal Constitution (Constitute Project)', OFFICIAL_URLS.malaysia_constitution, '458', 'en', 'primary_law', 'malaysia-citizenship-law'],
+      ['Malaysia Immigration — Residence Pass', OFFICIAL_URLS.malaysia_residence_pass, '458', 'en', 'official_guidance', 'malaysia-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -4461,6 +4475,251 @@ function nigeriaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
   });
 }
 
+function peruRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const naturalization = requireSource(officialSources, OFFICIAL_URLS.peru_naturalization);
+  const marriage = requireSource(officialSources, OFFICIAL_URLS.peru_marriage_nationality);
+  const migraciones = requireSource(officialSources, OFFICIAL_URLS.peru_migraciones);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '604',
+    note: 'Reviewed against Migraciones naturalization guidance. Investor migration quality supports ordinary naturalization paperwork only — not CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [naturalization, migraciones] },
+      { mode: 'naturalization', finding: 'present', sources: [naturalization, marriage] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [naturalization],
+        note: 'Peruvian parent or birth in Peru under nationality law; not only pure jus soli for all foreign-parent cases without lineage rules.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [naturalization, migraciones],
+        note: 'No citizenship-by-investment. Investor is a residence quality used when applying for ordinary naturalization.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'peru-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Peruvian nationality through a Peruvian parent',
+        summary: 'A child of a Peruvian parent is Peruvian under the Nationality Law lineage rules, including birth abroad subject to registration.',
+        source: [naturalization, migraciones],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '604' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'peru-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after two years legal residence',
+        summary: 'Adult foreigners may apply after at least two consecutive years of legal residence, subject to Migraciones conditions (means, good conduct, exam) for their migration quality. Marriage to a Peruvian has a parallel two-year continuous residence track.',
+        source: [naturalization, marriage],
+        eligibility: [
+          { field: 'residence.consecutive_years', operator: 'gte', value: 2, unit: 'years' },
+        ],
+        months: 24,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'peru-citizenship-at-birth',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Peruvian parent or birth in Peru',
+        summary: 'Birth to a Peruvian parent, or birth in Peru under the Nationality Law, creates Peruvian nationality. Ordinary foreign-parent temporary presence is not a general unrestricted jus soli path.',
+        source: naturalization,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '604' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function boliviaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.bolivia_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '068',
+    note: 'Reviewed against the 2009 Constitution nationality articles. No citizenship-by-investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Birth in Bolivia generally confers nationality; parent Bolivian rules also apply.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No direct citizenship-by-investment grant.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'bolivia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Bolivian nationality through a Bolivian parent',
+        summary: 'Children of a Bolivian parent are Bolivian by birth under the Constitution, including birth abroad subject to the statutory rules.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '068' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'bolivia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after continuous residence',
+        summary: 'Foreigners may naturalize after more than three years uninterrupted legal residence, or two years with a Bolivian spouse, child, or foster parent, subject to legal status and statutory process.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.uninterrupted_years', operator: 'gte', value: 3, unit: 'years' },
+        ],
+        months: 36,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'bolivia-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Citizenship by birth in Bolivia or through a Bolivian parent',
+        summary: 'Persons born in Bolivian territory are Bolivian by birth (with the constitutional foreign-service exceptions). Parentage rules also transmit Bolivian nationality.',
+        source: constitution,
+        eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: '068' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function ecuadorRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.ecuador_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '218',
+    note: 'Reviewed against the Constitution nationality framework. No citizenship-by-investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Ecuadorian parent or birth in Ecuador under constitutional rules.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No direct citizenship-by-investment grant. Investor visas are residence only.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'ecuador-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Ecuadorian nationality through an Ecuadorian parent',
+        summary: 'A person born to an Ecuadorian father or mother is Ecuadorian, including birth abroad subject to registration rules.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '218' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'ecuador-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after legal residence',
+        summary: 'Foreign adults may seek naturalization after three years of continuous legal residence under the nationality and immigration framework, with shorter tracks for spouses and other statutory categories. Grant is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 3, unit: 'years' },
+        ],
+        months: 36,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'ecuador-citizenship-at-birth',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Ecuadorian parent or birth in Ecuador',
+        summary: 'Birth to an Ecuadorian parent, or birth in Ecuador under the Constitution, creates Ecuadorian nationality.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '218' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function malaysiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.malaysia_constitution);
+  const residence = requireSource(officialSources, OFFICIAL_URLS.malaysia_residence_pass);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '458',
+    note: 'Reviewed against Federal Constitution citizenship parts and Immigration residence guidance. Naturalization requires renunciation of prior nationality.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, residence] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [constitution],
+        note: 'Primarily parent Malaysian citizen; birth in Malaysia alone is not general jus soli for two foreign parents.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution, residence],
+        note: 'No citizenship-by-investment. MM2H and related residence products are not citizenship.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'malaysia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Malaysian citizenship through a Malaysian parent',
+        summary: 'A child of a Malaysian citizen parent may hold or register Malaysian citizenship under the Federal Constitution, subject to the birthplace and registration rules in force.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '458' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'malaysia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after long residence',
+        summary: 'Federal Constitution naturalization generally requires ten years residence within the twelve years before application, including twelve months immediately before applying, Malay language ability, good character, and renunciation of prior nationality. Approval is highly discretionary.',
+        source: [constitution, residence],
+        eligibility: [
+          { field: 'residence.years_in_prior_twelve', operator: 'gte', value: 10, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+          { field: 'language.malay', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'malaysia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Malaysian parent',
+        summary: 'A person born to a Malaysian citizen parent is Malaysian under the Constitution’s operation-of-law and registration rules. Birth in Malaysia to two foreign parents is not general jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '458' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -6353,6 +6612,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     australiaRecord(shadow, countrySources),
     bahamasRecord(shadow, countrySources),
     barbadosRecord(shadow, countrySources),
+    boliviaRecord(shadow, countrySources),
     brazilRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
@@ -6361,6 +6621,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     colombiaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
     dominicaRecord(shadow, countrySources),
+    ecuadorRecord(shadow, countrySources),
     egyptRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
     georgiaRecord(shadow, countrySources),
@@ -6375,6 +6636,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     japanRecord(shadow, countrySources),
     jordanRecord(shadow, countrySources),
     koreaRecord(shadow, countrySources),
+    malaysiaRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
     mauritiusRecord(shadow, countrySources),
     mexicoRecord(shadow, countrySources),
@@ -6385,6 +6647,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     nigeriaRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
     paraguayRecord(shadow, countrySources),
+    peruRecord(shadow, countrySources),
     philippinesRecord(shadow, countrySources),
     polandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
