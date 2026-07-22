@@ -213,6 +213,10 @@ export async function generateGroundedText(
     }>;
   };
   const candidate = body.candidates?.[0];
+  if (process.env.MONITOR_GROUNDING_DEBUG) {
+    console.error('[grounding-debug] candidateKeys=' + JSON.stringify(Object.keys(candidate ?? {}))
+      + ' gm=' + JSON.stringify((candidate as Record<string, unknown> | undefined)?.groundingMetadata ?? null).slice(0, 1200));
+  }
   const text = (candidate?.content?.parts ?? [])
     .map(part => part.text ?? '')
     .join('')
