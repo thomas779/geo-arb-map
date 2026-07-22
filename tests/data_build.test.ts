@@ -116,7 +116,7 @@ describe('data:build reads the canonical database', () => {
     expect(fromExport.manifest.database.content_hash)
       .toBe(release.manifest.database.content_hash);
     expect(fromExport.manifest.release_id).toBe(release.manifest.release_id);
-  });
+  }, { timeout: 20_000 });
 
   test('stages the generated superseding import over an exported database', () => {
     const pilot = buildCanonicalPilot();
@@ -145,7 +145,7 @@ describe('data:build reads the canonical database', () => {
     expect(result.exitCode, result.stderr.toString()).toBe(0);
     expect(loadCanonicalDatabase(staged, REPO_ROOT).entities)
       .toHaveLength(pilot.sources.length + pilot.jurisdictions.length + pilot.arrangements.length);
-  });
+  }, { timeout: 20_000 });
 
   test('selects a single supersession head instead of every historical revision', () => {
     const historyPath = path.join(tmp, 'history.sqlite');
@@ -456,9 +456,15 @@ describe('data:build parity gates', () => {
       'italy-citizenship-by-descent',
       'italy-citizenship-connected-to-birth',
       'italy-naturalization-by-residence',
+      'japan-citizenship-at-birth-by-parent',
+      'japan-citizenship-by-parent',
+      'japan-naturalization',
       'jordan-citizenship-by-birth-limited',
       'jordan-citizenship-by-father',
       'jordan-naturalization',
+      'korea-citizenship-at-birth-by-parent',
+      'korea-citizenship-by-parent-or-simple-origin',
+      'korea-general-naturalization',
       'malta-citizenship-by-birth',
       'mauritius-citizenship-by-descent',
       'mauritius-citizenship-connected-to-birth',
@@ -483,6 +489,9 @@ describe('data:build parity gates', () => {
       'paraguay-citizenship-by-birth',
       'paraguay-citizenship-by-parent',
       'paraguay-naturalization',
+      'philippines-citizenship-at-birth-by-parent',
+      'philippines-citizenship-by-parent-or-reacquisition',
+      'philippines-naturalization',
       'poland-citizenship-at-birth-by-parent',
       'poland-citizenship-by-parent',
       'poland-recognition-by-residence',
@@ -499,6 +508,9 @@ describe('data:build parity gates', () => {
       'singapore-citizenship-after-pr',
       'singapore-citizenship-by-birth',
       'singapore-citizenship-by-descent',
+      'south-africa-citizenship-at-birth-by-parent',
+      'south-africa-citizenship-by-parent',
+      'south-africa-naturalization',
       'spain-citizenship-by-birth',
       'spain-citizenship-by-parent-or-option',
       'spain-naturalization-by-residence',

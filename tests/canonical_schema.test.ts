@@ -99,10 +99,16 @@ describe('canonical data schemas', () => {
       'italy-citizenship-by-descent',
       'italy-naturalization-by-residence',
       'italy-citizenship-connected-to-birth',
+      'japan-citizenship-by-parent',
+      'japan-naturalization',
+      'japan-citizenship-at-birth-by-parent',
       'jordan-citizenship-by-father',
       'jordan-naturalization',
       'jordan-citizenship-by-birth-limited',
       'jordan-investor-citizenship',
+      'korea-citizenship-by-parent-or-simple-origin',
+      'korea-general-naturalization',
+      'korea-citizenship-at-birth-by-parent',
       'malta-registration-family-descent',
       'malta-residence-naturalization',
       'malta-citizenship-by-birth',
@@ -135,6 +141,9 @@ describe('canonical data schemas', () => {
       'paraguay-citizenship-by-parent',
       'paraguay-naturalization',
       'paraguay-citizenship-by-birth',
+      'philippines-citizenship-by-parent-or-reacquisition',
+      'philippines-naturalization',
+      'philippines-citizenship-at-birth-by-parent',
       'poland-citizenship-by-parent',
       'poland-recognition-by-residence',
       'poland-citizenship-at-birth-by-parent',
@@ -159,6 +168,9 @@ describe('canonical data schemas', () => {
       'singapore-citizenship-by-descent',
       'singapore-citizenship-after-pr',
       'singapore-citizenship-by-birth',
+      'south-africa-citizenship-by-parent',
+      'south-africa-naturalization',
+      'south-africa-citizenship-at-birth-by-parent',
       'spain-citizenship-by-parent-or-option',
       'spain-citizenship-by-birth',
       'spain-naturalization-by-residence',
@@ -339,6 +351,42 @@ describe('canonical data schemas', () => {
     expect(hungary.routes.find(route => route.id === 'hungary-ordinary-naturalization')
       ?.variants[0]?.timeline.eligibility_minimum_months).toBe(96);
     expect(hungary.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const japan = byIso.get('392')!;
+    expect(japan.routes.find(route => route.id === 'japan-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(60);
+    expect(japan.routes.find(route => route.id === 'japan-naturalization')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'prior_nationality.renounced_or_will_cease', value: true }),
+      );
+    expect(japan.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const korea = byIso.get('410')!;
+    expect(korea.routes.find(route => route.id === 'korea-general-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(60);
+    expect(korea.routes.find(route => route.id === 'korea-general-naturalization')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'status.permanent_residence', value: true }),
+      );
+    expect(korea.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const philippines = byIso.get('608')!;
+    expect(philippines.routes.find(route => route.id === 'philippines-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(120);
+    expect(philippines.coverage.find(item => item.mode === 'investment')?.finding)
+      .toBe('verified_none');
+
+    const southAfrica = byIso.get('710')!;
+    expect(southAfrica.routes.find(route => route.id === 'south-africa-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(60);
+    expect(southAfrica.routes.find(route => route.id === 'south-africa-naturalization')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'status.permanent_residence', value: true }),
+      );
+    expect(southAfrica.coverage.find(item => item.mode === 'investment')?.finding)
       .toBe('verified_none');
   });
 

@@ -293,6 +293,15 @@ const OFFICIAL_URLS = {
   hungary_acquisition: 'https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality',
   hungary_simplified: 'https://www.kormanyhivatal.hu/hu/budapest/jarasok/egyszerusitett-honositasi-eljaras',
   hungary_simplified_en: 'https://telaviv.mfa.gov.hu/eng/page/egyszerusitett-honositas',
+  japan_nationality_act: 'https://www.japaneselawtranslation.go.jp/en/laws/view/3784/en',
+  japan_nationality_qa: 'https://www.moj.go.jp/EN/MINJI/minji78.html',
+  korea_general_naturalization: 'https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN',
+  korea_simple_naturalization: 'https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=201&PARENT_ID=148&locale=EN',
+  philippines_ca_473: 'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227',
+  philippines_osg_scn: 'https://www.osg.gov.ph/page?call=scn',
+  south_africa_citizenship_act: 'https://www.gov.za/sites/default/files/gcis_document/201409/act88of1995.pdf',
+  south_africa_citizenship_act_page: 'https://www.gov.za/documents/south-african-citizenship-act',
+  south_africa_amendment_2010: 'https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -715,6 +724,15 @@ function jurisdictionSources(): SourceRecord[] {
       ['Hungary Government — acquisition of Hungarian nationality', OFFICIAL_URLS.hungary_acquisition, '348', 'en', 'official_guidance', 'hungary-citizenship-law'],
       ['Hungary Government Office — simplified naturalization', OFFICIAL_URLS.hungary_simplified, '348', 'hu', 'official_guidance', 'hungary-citizenship-law'],
       ['Hungary MFA — simplified naturalization (English)', OFFICIAL_URLS.hungary_simplified_en, '348', 'en', 'official_guidance', 'hungary-citizenship-law'],
+      ['Japan Nationality Act (Japanese Law Translation)', OFFICIAL_URLS.japan_nationality_act, '392', 'en', 'primary_law', 'japan-nationality-law'],
+      ['Japan Ministry of Justice — Nationality Q&A', OFFICIAL_URLS.japan_nationality_qa, '392', 'en', 'official_guidance', 'japan-nationality-law'],
+      ['HiKorea — General naturalization (5 years)', OFFICIAL_URLS.korea_general_naturalization, '410', 'en', 'official_guidance', 'korea-nationality-law'],
+      ['HiKorea — Simple naturalization', OFFICIAL_URLS.korea_simple_naturalization, '410', 'en', 'official_guidance', 'korea-nationality-law'],
+      ['Philippines Commonwealth Act No. 473 — Revised Naturalization Law', OFFICIAL_URLS.philippines_ca_473, '608', 'en', 'primary_law', 'philippines-citizenship-law'],
+      ['Office of the Solicitor General — Special Committee on Naturalization', OFFICIAL_URLS.philippines_osg_scn, '608', 'en', 'official_guidance', 'philippines-citizenship-law'],
+      ['South African Citizenship Act 88 of 1995 (gov.za PDF)', OFFICIAL_URLS.south_africa_citizenship_act, '710', 'en', 'primary_law', 'south-africa-citizenship-law'],
+      ['South African Government — Citizenship Act document page', OFFICIAL_URLS.south_africa_citizenship_act_page, '710', 'en', 'official_guidance', 'south-africa-citizenship-law'],
+      ['South African Citizenship Amendment Act 17 of 2010', OFFICIAL_URLS.south_africa_amendment_2010, '710', 'en', 'primary_law', 'south-africa-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -3893,6 +3911,277 @@ function hungaryRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
   });
 }
 
+function japanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.japan_nationality_act);
+  const qa = requireSource(officialSources, OFFICIAL_URLS.japan_nationality_qa);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '392',
+    note: 'All acquisition modes reviewed against the Japanese Law Translation Nationality Act and MOJ Nationality Q&A. Naturalization remains ministerial permission; dual nationality is generally not retained on naturalization.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act, qa] },
+      { mode: 'naturalization', finding: 'present', sources: [act, qa] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [act, qa],
+        note: 'Japan follows jus sanguinis: a child of a Japanese father or mother is Japanese at birth. Birth in Japan alone to identified foreign parents is not general jus soli; foundling/unknown-parents rules apply.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [act, qa],
+        note: 'Japan has no citizenship-by-investment programme. Business or highly skilled residence may support later naturalization but is not citizenship.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'japan-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Japanese nationality through a Japanese parent',
+        summary: 'A child is a Japanese citizen if the father or mother is a Japanese citizen at the time of birth, or if the father died before birth while a Japanese citizen. Acknowledgment after birth by a Japanese father can support nationality acquisition by notification under Article 3 when statutory age and status conditions are met.',
+        source: [act, qa],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '392' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+        note: 'Children born abroad who also acquire a foreign nationality at birth must retain Japanese nationality within the Family Register Act period or may lose it retroactively, subject to reacquisition routes.',
+      }),
+      principalCitizenshipRoute({
+        id: 'japan-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization with permission of the Minister of Justice',
+        summary: 'A foreign national may acquire Japanese nationality by naturalization with permission of the Minister of Justice. Ordinary minimum conditions include five or more years continuous domicile in Japan, majority and capacity, good conduct, livelihood, and renunciation or loss of prior nationality, plus constitutional-compliance conditions. Meeting the statutory minima does not create an entitlement to permission.',
+        source: [act, qa],
+        eligibility: [
+          { field: 'residence.continuous_domicile_years', operator: 'gte', value: 5, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+          { field: 'means.livelihood', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        note: 'Article 5 of the Nationality Act still states five years continuous domicile. Screening is discretionary and relaxed statutory periods exist for spouses, Japanese-born applicants and other special relationships under Articles 6–8. Administrative practice may apply stricter documentary or continuity expectations than the statutory floor.',
+      }),
+      principalCitizenshipRoute({
+        id: 'japan-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Japanese parent or foundling rule',
+        summary: 'A person born to a Japanese father or mother is Japanese at birth. A person born in Japan whose parents are both unknown or without nationality is also Japanese. Birth in Japan alone to identified foreign parents is not general jus soli.',
+        source: [act, qa],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '392' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function koreaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const general = requireSource(officialSources, OFFICIAL_URLS.korea_general_naturalization);
+  const simple = requireSource(officialSources, OFFICIAL_URLS.korea_simple_naturalization);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '410',
+    note: 'All acquisition modes reviewed against official HiKorea nationality/naturalization guidance. Overseas Korean F-4 residence is not citizenship. Dual nationality is generally restricted on naturalization with statutory exceptions.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [simple, general] },
+      { mode: 'naturalization', finding: 'present', sources: [general, simple] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [general],
+        note: 'Korean nationality at birth follows a Korean national parent (jus sanguinis). Birth in Korea alone to two foreign parents is not general jus soli.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [general],
+        note: 'South Korea has no direct citizenship-by-investment programme. Investor or talent residence may support later naturalization but is not a citizenship grant.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'korea-citizenship-by-parent-or-simple-origin',
+        mode: 'ancestry',
+        title: 'Citizenship through a Korean parent or simplified origin naturalization',
+        summary: 'A child acquires Korean nationality when a parent is a Korean national at birth. Separately, simplified naturalization routes exist for persons with a Korean parent, former Korean nationals, or other statutory family/origin links after shorter residence than ordinary naturalization, subject to Nationality Act conditions and Ministry of Justice screening.',
+        source: [simple, general],
+        eligibility: [
+          {
+            field: 'parent_or_origin.korean_nationality_or_lineage',
+            operator: 'eq',
+            value: true,
+          },
+        ],
+        months: 0,
+        lastChecked: '2026-07-22',
+        note: 'Parent-at-birth status is recognition of existing nationality. Simplified naturalization for adult applicants remains discretionary and is not automatic multi-generation jus sanguinis without process.',
+      }),
+      principalCitizenshipRoute({
+        id: 'korea-general-naturalization',
+        mode: 'naturalization',
+        title: 'General naturalization after five years domicile and permanent residence',
+        summary: 'General naturalization requires more than five consecutive years of domicile in the Republic of Korea, permanent residency status, legal majority under Korean civil law, good conduct, livelihood ability, basic Korean language and cultural knowledge, and no national-security or public-order obstacle. Permission is granted by the Minister of Justice; eligibility is not an entitlement.',
+        source: general,
+        eligibility: [
+          { field: 'residence.continuous_domicile_years', operator: 'gte', value: 5, unit: 'years' },
+          { field: 'status.permanent_residence', operator: 'eq', value: true },
+          { field: 'language.korean_basic_knowledge', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        note: 'Applicants generally must renounce prior nationality after permission, subject to dual-nationality exceptions for marriage migrants, outstanding talent and other Nationality Act categories. Spousal and origin simplified tracks use shorter residence floors.',
+      }),
+      principalCitizenshipRoute({
+        id: 'korea-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Korean parent',
+        summary: 'A person born to a Korean national parent acquires Korean nationality at birth. Birth in Korea alone to two foreign parents is not general jus soli under the Nationality Act.',
+        source: general,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '410' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function philippinesRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const ca473 = requireSource(officialSources, OFFICIAL_URLS.philippines_ca_473);
+  const scn = requireSource(officialSources, OFFICIAL_URLS.philippines_osg_scn);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '608',
+    note: 'All acquisition modes reviewed against Commonwealth Act 473 (judicial naturalization), OSG administrative naturalization under RA 9139, and constitutional jus sanguinis principles. No direct citizenship-by-investment programme.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [ca473, scn] },
+      { mode: 'naturalization', finding: 'present', sources: [ca473, scn] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [ca473],
+        note: 'Philippine citizenship is primarily jus sanguinis through a Filipino parent. Birth in the Philippines alone to two foreign parents is not general jus soli.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [ca473, scn],
+        note: 'The Philippines has no direct citizenship-by-investment programme. Special investor residence visas support residence only.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'philippines-citizenship-by-parent-or-reacquisition',
+        mode: 'ancestry',
+        title: 'Citizenship through a Filipino parent or natural-born reacquisition',
+        summary: 'A person is a Filipino citizen when at least one parent is a Filipino citizen, subject to constitutional and statutory lineage rules. Natural-born Filipinos who lost Philippine citizenship by naturalization abroad may reacquire and retain dual citizenship under Republic Act No. 9225 by taking the oath of allegiance and meeting documentary requirements.',
+        source: [ca473, scn],
+        eligibility: [
+          {
+            field: 'parent_or_natural_born.filipino_citizenship',
+            operator: 'eq',
+            value: true,
+          },
+        ],
+        months: 0,
+        lastChecked: '2026-07-22',
+        note: 'RA 9225 reacquisition is for natural-born Filipinos who previously lost citizenship; it is not a general multi-generation registration without lineage proof.',
+      }),
+      principalCitizenshipRoute({
+        id: 'philippines-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization by judicial petition or administrative RA 9139 process',
+        summary: 'Ordinary naturalization for foreign adults is available by judicial petition under Commonwealth Act No. 473 after continuous residence of not less than ten years (with shorter statutory periods for specified categories), good moral character, means of support, language and civics knowledge, and other qualifications and disqualifications. Separately, Republic Act No. 9139 provides an administrative naturalization path through the Special Committee on Naturalization for persons born in the Philippines who meet native-born residence and other statutory conditions.',
+        source: [ca473, scn],
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 10, unit: 'years' },
+          { field: 'character.good_moral', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        note: 'CA 473 is the general judicial track; RA 9139 is a narrower administrative track for persons born and residing in the Philippines. Neither route is an entitlement after residence alone.',
+      }),
+      principalCitizenshipRoute({
+        id: 'philippines-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Filipino parent',
+        summary: 'A person born to a Filipino father or mother is a Filipino citizen under the 1987 Constitution. Birth in the Philippines alone to two foreign parents does not generally create citizenship by soil.',
+        source: ca473,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '608' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function southAfricaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.south_africa_citizenship_act);
+  const page = requireSource(officialSources, OFFICIAL_URLS.south_africa_citizenship_act_page);
+  const amendment = requireSource(officialSources, OFFICIAL_URLS.south_africa_amendment_2010);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '710',
+    note: 'All acquisition modes reviewed against the South African Citizenship Act 88 of 1995 as amended (including Act 17 of 2010). Investor visas are residence products only.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act, amendment] },
+      { mode: 'naturalization', finding: 'present', sources: [act, amendment, page] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [act, amendment],
+        note: 'Citizenship by birth follows a South African citizen parent or adoption by a citizen in the statutory cases. Additional birth-in-the-Republic pathways exist under the amended Act for specified parent-status and major-age registration situations; it is not unconditional jus soli for two foreign temporary residents.',
+      },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [act, page],
+        note: 'South Africa has no direct citizenship-by-investment programme. Business or critical-skills residence and permanent residence remain residence, not citizenship.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'south-africa-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Citizenship through a South African parent or descent',
+        summary: 'A person is a South African citizen by birth or descent when a parent is a South African citizen under the Citizenship Act, including citizenship transmitted through a citizen parent regardless of birthplace in the ordinary jus sanguinis cases, subject to registration and historical continuity rules.',
+        source: [act, amendment],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '710' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'south-africa-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalisation after permanent residence and ordinary residence',
+        summary: 'The Minister may grant a certificate of naturalisation to an adult foreigner who has been admitted for permanent residence and has been ordinarily resident in the Republic for a continuous period of not less than five years immediately preceding the application (as amended by Act 17 of 2010), is of good character, intends continued residence or qualifying service, can communicate in an official language, and has adequate knowledge of the responsibilities and privileges of citizenship. Naturalisation remains discretionary.',
+        source: [act, amendment, page],
+        eligibility: [
+          { field: 'status.permanent_residence', operator: 'eq', value: true },
+          { field: 'residence.continuous_ordinary_years', operator: 'gte', value: 5, unit: 'years' },
+          { field: 'language.official_language_communication', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+        note: 'Regulations may impose additional presence limits within the five-year ordinary-residence period. Spousal and exceptional ministerial routes exist with different residence floors.',
+      }),
+      principalCitizenshipRoute({
+        id: 'south-africa-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a South African parent',
+        summary: 'A person born to a South African citizen parent is a South African citizen by birth under the Citizenship Act. Birth in the Republic to two foreign parents is not unconditional jus soli; specified later naturalisation or registration routes may apply in limited statutory cases.',
+        source: [act, amendment],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '710' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -5803,7 +6092,9 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     irelandRecord(shadow, countrySources),
     israelRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
+    japanRecord(shadow, countrySources),
     jordanRecord(shadow, countrySources),
+    koreaRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
     mauritiusRecord(shadow, countrySources),
     mexicoRecord(shadow, countrySources),
@@ -5813,6 +6104,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     newZealandRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
     paraguayRecord(shadow, countrySources),
+    philippinesRecord(shadow, countrySources),
     polandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
     saintLuciaRecord(shadow, countrySources),
@@ -5820,6 +6112,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     stKittsNevisRecord(shadow, countrySources),
     serbiaRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),
+    southAfricaRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),
     switzerlandRecord(shadow, countrySources),
     turkiyeRecord(shadow, countrySources),

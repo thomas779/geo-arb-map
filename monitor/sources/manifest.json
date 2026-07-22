@@ -1016,6 +1016,76 @@
       ],
       "keywords": ["citizenship", "nationality", "naturalisation", "naturalization", "residence", "Hungarian"],
       "notes": "Official ordinary acquisition guidance. Activate once the host certificate chain validates in the Bun/CI collector (TLS local-issuer failure recorded 2026-07-22)."
+    },
+    {
+      "id": "japan-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.moj.go.jp/EN/MINJI/minji78.html",
+      "jurisdictions": ["392"],
+      "pages": [
+        { "id": "moj-nationality-qa", "url": "https://www.moj.go.jp/EN/MINJI/minji78.html" },
+        { "id": "nationality-act-en", "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/3784/en" }
+      ],
+      "keywords": ["nationality", "naturalization", "naturalisation", "citizenship", "Japanese", "domicile", "birth", "renounce", "Nationality Act"],
+      "notes": "Official MOJ Nationality Q&A and Japanese Law Translation Nationality Act text. Statute still states five years continuous domicile for ordinary naturalization; administrative screening remains discretionary."
+    },
+    {
+      "id": "korea-nationality-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN",
+      "jurisdictions": ["410"],
+      "pages": [
+        { "id": "general-naturalization", "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN" },
+        { "id": "simple-naturalization", "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=201&PARENT_ID=148&locale=EN" }
+      ],
+      "keywords": ["nationality", "naturalization", "naturalisation", "citizenship", "Korean", "residence", "permanent residency", "simple naturalization", "birth"],
+      "notes": "Official HiKorea immigration nationality guidance for general and simplified naturalization. Track dual-nationality choice and PR prerequisites separately from F-4 overseas Korean residence."
+    },
+    {
+      "id": "philippines-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.osg.gov.ph/page?call=scn",
+      "jurisdictions": ["608"],
+      "pages": [
+        { "id": "osg-scn", "url": "https://www.osg.gov.ph/page?call=scn" },
+        { "id": "immigration-home", "url": "https://immigration.gov.ph/" }
+      ],
+      "keywords": ["naturalization", "citizenship", "nationality", "Commonwealth Act", "RA 9139", "RA 9225", "Filipino", "dual", "birth", "descent", "alien", "immigration"],
+      "notes": "OSG Special Committee on Naturalization (RA 9139 administrative path) plus Bureau of Immigration home for operational changes. Commonwealth Act 473 judiciary e-library text remains canonical primary-law evidence but failed TLS verification in the collector and is not listed as an active page."
+    },
+    {
+      "id": "philippines-ca-473-elibrary",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "planned",
+      "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227",
+      "jurisdictions": ["608"],
+      "pages": [
+        { "id": "ca-473", "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227" }
+      ],
+      "keywords": ["naturalization", "citizenship", "Commonwealth Act"],
+      "notes": "Judiciary e-library text of CA 473. Activate once the host certificate chain validates in the Bun/CI collector (TLS first-certificate failure recorded 2026-07-22)."
+    },
+    {
+      "id": "south-africa-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.za/documents/south-african-citizenship-act",
+      "jurisdictions": ["710"],
+      "pages": [
+        { "id": "citizenship-act-page", "url": "https://www.gov.za/documents/south-african-citizenship-act" },
+        { "id": "citizenship-act-pdf", "url": "https://www.gov.za/sites/default/files/gcis_document/201409/act88of1995.pdf" },
+        { "id": "amendment-2010", "url": "https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "naturalization", "permanent residence", "birth", "descent", "South African", "Minister"],
+      "notes": "Official gov.za Citizenship Act 88 of 1995 and 2010 amendment texts. Ordinary naturalization uses the amended five-year continuous ordinary residence after permanent residence. Dual-citizenship loss under s 6(1)(a) has been constitutionally curtailed — track carefully."
     }
   ]
 }

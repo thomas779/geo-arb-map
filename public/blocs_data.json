@@ -2726,6 +2726,13 @@
           "eGov.kz citizenship guidance"
         ]
       },
+      "410": {
+        "status": "banned",
+        "note": "South Korea: naturalizers generally must renounce prior nationality; limited dual-nationality exceptions exist (e.g. marriage migrants, outstanding talent).",
+        "sources": [
+          "Nationality Act / HiKorea naturalization guidance"
+        ]
+      },
       "643": {
         "status": "allowed",
         "volatility": "high",
