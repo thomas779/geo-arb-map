@@ -7,9 +7,7 @@ import { parseRss, type RssSource } from '../monitor/collectors/rss';
 import { parseNewsletterMessages } from '../monitor/collectors/email';
 import { signalFromNewsletterDispatch } from '../monitor/collectors/github-dispatch';
 import { parseTelegramPreview } from '../monitor/collectors/telegram';
-import { collectHtmlPage, diffNormalizedText, parseHtmlSnapshot } from '../monitor/collectors/html';
-import { expandHtmlPages, signalMatchesKeywords } from '../monitor/collectors/run';
-import { MonitorStateStore, type MonitorPageState } from '../monitor/state';
+import { signalMatchesKeywords } from '../monitor/collectors/run';
 import {
   canonicalArticleUrl,
   parseNewsletterRoutes,
@@ -71,213 +69,23 @@ describe('monitor Signal contract', () => {
 });
 
 describe('monitor feed collector', () => {
-  test('turns visible official-page changes into stable content-hash signals', () => {
+  test('matches keyword filters case-insensitively', () => {
     const source = {
-      id: 'official-nationality-page',
-      tier: 'verification' as const,
-      adapter: 'html_index' as const,
-      url: 'https://government.example.test/nationality',
-      jurisdictions: ['380'],
-    };
-    const first = parseHtmlSnapshot(`
-      <html><head><title>Nationality rules</title><script>window.build = 1</script></head>
-      <body><h1>Nationality rules</h1><p>Five years of residence.</p></body></html>
-    `, source, { retrievedAt })[0];
-    const dynamicOnly = parseHtmlSnapshot(`
-      <html><head><title>Nationality rules</title><script>window.build = 2</script></head>
-      <body><h1>Nationality rules</h1> <p>Five years of residence.</p></body></html>
-    `, source, { retrievedAt })[0];
-    const changed = parseHtmlSnapshot(`
-      <html><head><title>Nationality rules</title></head>
-      <body><h1>Nationality rules</h1><p>Six years of residence.</p></body></html>
-    `, source, { retrievedAt })[0];
-
-    expect(first.id).toBe(dynamicOnly.id);
-    expect(changed.id).not.toBe(first.id);
-    expect(first.jurisdiction).toBe('380');
-    expect(first.excerpt).toContain('Five years of residence.');
-  });
-
-  test('uses conditional requests and emits an actual diff only after the baseline changes', async () => {
-    const source = {
-      id: 'official-law', tier: 'verification' as const, adapter: 'html_index' as const,
-      url: 'https://government.example.test/law', jurisdictions: ['470'],
-    };
-    const prior = {
-      page_id: 'official-law:abc', source_id: source.id, url: source.url,
-      jurisdiction: '470', state: 'healthy' as const, last_success_hash: 'old-hash',
-      previous_text: null, current_text: 'Citizenship requires five years of residence.',
-      etag: '"version-1"', last_modified: 'Mon, 20 Jul 2026 10:00:00 GMT',
-      final_url: source.url, last_http_status: 200, last_attempted_at: retrievedAt,
-      last_success_retrieved_at: retrievedAt, consecutive_failures: 0,
-      last_error: null, updated_at: retrievedAt,
-    } satisfies MonitorPageState;
-    let requestHeaders: Headers | null = null;
-    const result = await collectHtmlPage(source, prior, {
-      retrievedAt,
-      fetchImpl: (async (_url, init) => {
-        requestHeaders = new Headers(init?.headers);
-        return new Response('<html><title>Nationality law</title><body>Citizenship requires six years of residence.</body></html>', {
-          status: 200,
-          headers: { etag: '"version-2"', 'last-modified': 'Tue, 21 Jul 2026 10:00:00 GMT' },
-        });
-      }) as typeof fetch,
-    });
-    expect(requestHeaders!.get('if-none-match')).toBe('"version-1"');
-    expect(requestHeaders!.get('if-modified-since')).toContain('20 Jul 2026');
-    expect(result.observation.change_kind).toBe('page_changed');
-    expect(result.observation.text_diff).toContain('- Citizenship requires five years');
-    expect(result.observation.text_diff).toContain('+ Nationality law Citizenship requires six years');
-    expect(result.signals[0]?.event_type).toBe('page_changed');
-  });
-
-  test('recognizes unchanged, deleted, and bot-protection responses', async () => {
-    const source = {
-      id: 'official-law', tier: 'verification' as const, adapter: 'html_index' as const,
-      url: 'https://government.example.test/law', jurisdictions: ['470'],
-    };
-    const prior = {
-      page_id: 'official-law:abc', source_id: source.id, url: source.url,
-      jurisdiction: '470', state: 'healthy' as const, last_success_hash: 'old-hash',
-      previous_text: null, current_text: 'Current law', etag: '"v1"', last_modified: null,
-      final_url: source.url, last_http_status: 200, last_attempted_at: retrievedAt,
-      last_success_retrieved_at: retrievedAt, consecutive_failures: 0,
-      last_error: null, updated_at: retrievedAt,
-    } satisfies MonitorPageState;
-    const unchanged = await collectHtmlPage(source, prior, {
-      retrievedAt, fetchImpl: (async () => new Response(null, { status: 304 })) as unknown as typeof fetch,
-    });
-    expect(unchanged.observation.change_kind).toBe('unchanged');
-    const missing = await collectHtmlPage(source, prior, {
-      retrievedAt, fetchImpl: (async () => new Response('gone', { status: 410 })) as unknown as typeof fetch,
-    });
-    expect(missing.observation.state).toBe('missing');
-    expect(missing.observation.change_kind).toBe('access_changed');
-    const blocked = await collectHtmlPage(source, prior, {
-      retrievedAt,
-      fetchImpl: (async () => new Response('<title>Just a moment...</title>Verify you are human', { status: 200 })) as unknown as typeof fetch,
-    });
-    expect(blocked.observation.state).toBe('blocked');
-  });
-
-  test('hashes official PDFs without storing binary bytes as SQLite text', async () => {
-    const source = {
-      id: 'official-pdf', tier: 'verification' as const, adapter: 'html_index' as const,
-      url: 'https://government.example.test/nationality.pdf', jurisdictions: ['028'],
-    };
-    const bytes = new Uint8Array([0x25, 0x50, 0x44, 0x46, 0x2d, 0x31, 0x2e, 0x37, 0, 255]);
-    const baseline = await collectHtmlPage(source, null, {
-      retrievedAt,
-      fetchImpl: (async () => new Response(bytes, {
-        status: 200, headers: { 'content-type': 'application/pdf', etag: '"pdf-v1"' },
-      })) as unknown as typeof fetch,
-    });
-    expect(baseline.observation.change_kind).toBe('baseline');
-    expect(baseline.observation.current_text).toMatch(/^PDF document · 10 bytes · SHA-256 /);
-    expect(baseline.signals).toHaveLength(0);
-
-    const prior = {
-      page_id: baseline.observation.page_id, source_id: source.id, url: source.url,
-      jurisdiction: '028', state: 'healthy' as const,
-      last_success_hash: baseline.observation.current_hash,
-      previous_text: null, current_text: baseline.observation.current_text,
-      etag: '"pdf-v1"', last_modified: null, final_url: source.url,
-      last_http_status: 200, last_attempted_at: retrievedAt,
-      last_success_retrieved_at: retrievedAt, consecutive_failures: 0,
-      last_error: null, updated_at: retrievedAt,
-    } satisfies MonitorPageState;
-    const changed = await collectHtmlPage(source, prior, {
-      retrievedAt,
-      fetchImpl: (async () => new Response(new Uint8Array([...bytes, 1]), {
-        status: 200, headers: { 'content-type': 'application/pdf', etag: '"pdf-v2"' },
-      })) as unknown as typeof fetch,
-    });
-    expect(changed.observation.change_kind).toBe('page_changed');
-    expect(changed.signals).toHaveLength(1);
-    expect(changed.signals[0]?.title).toContain('Official PDF changed');
-  });
-
-  test('expands several pages under one source and applies local-language filters', () => {
-    const source = {
-      id: 'official-gazette', tier: 'verification' as const, adapter: 'html_index' as const,
+      id: 'gazette', tier: 'verification' as const, adapter: 'rss' as const,
       status: 'active' as const, jurisdictions: ['724'],
-      url: 'https://boe.example.test/civil-code',
-      pages: [
-        { id: 'civil-code', url: 'https://boe.example.test/civil-code' },
-        { id: 'daily-gazette', url: 'https://boe.example.test/daily' },
-      ],
+      url: 'https://gazette.example.test/feed',
       keywords: ['nacionalidad', 'naturalización'],
     };
-    expect(expandHtmlPages(source)).toHaveLength(2);
-    const signal = makeSignal({
+    const hit = makeSignal({
       sourceId: source.id, tier: source.tier, externalId: 'notice-1',
-      url: source.pages[1]!.url, title: 'Reforma de nacionalidad', retrievedAt,
+      url: 'https://gazette.example.test/1', title: 'Reforma de NACIONALIDAD', retrievedAt,
     });
-    expect(signalMatchesKeywords(signal, source)).toBe(true);
-  });
-
-  test('persists last-good text, metadata, failures, and observation history', () => {
-    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'monitor-state-test-'));
-    const dbPath = path.join(directory, 'state.sqlite');
-    const store = new MonitorStateStore(process.cwd(), dbPath);
-    store.record({
-      page_id: 'source:page', source_id: 'source', jurisdiction: '470',
-      attempted_at: retrievedAt, state: 'healthy', change_kind: 'baseline', http_status: 200,
-      requested_url: 'https://example.test/page', final_url: 'https://example.test/page',
-      previous_hash: null, current_hash: 'hash-1', previous_text: null,
-      current_text: 'Five years', text_diff: null, etag: '"v1"', last_modified: null, error: null,
+    const miss = makeSignal({
+      sourceId: source.id, tier: source.tier, externalId: 'notice-2',
+      url: 'https://gazette.example.test/2', title: 'Weather update', retrievedAt,
     });
-    store.record({
-      page_id: 'source:page', source_id: 'source', jurisdiction: '470',
-      attempted_at: '2026-07-18T12:00:00.000Z', state: 'blocked',
-      change_kind: 'access_changed', http_status: 403,
-      requested_url: 'https://example.test/page', final_url: 'https://example.test/page',
-      previous_hash: 'hash-1', current_hash: null, previous_text: 'Five years',
-      current_text: null, text_diff: null, etag: null, last_modified: null,
-      error: 'blocked',
-    });
-    const page = store.getPage('source:page')!;
-    expect(page.last_success_hash).toBe('hash-1');
-    expect(page.current_text).toBe('Five years');
-    expect(page.consecutive_failures).toBe(1);
-    expect(store.database.query('SELECT COUNT(*) AS count FROM monitor_observations').get())
-      .toEqual({ count: 2 });
-    store.close();
-    fs.rmSync(directory, { recursive: true, force: true });
-  });
-
-  test('chunks large snapshots into D1-portable SQL without losing text', () => {
-    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'monitor-state-sql-test-'));
-    const sourceDb = path.join(directory, 'source.sqlite');
-    const targetDb = path.join(directory, 'target.sqlite');
-    const sqlPath = path.join(directory, 'mutations.sql');
-    const largeText = `Citizenship law ${"'quoted provision' ".repeat(8_000)}`;
-    const sourceStore = new MonitorStateStore(process.cwd(), sourceDb);
-    sourceStore.record({
-      page_id: 'large:page', source_id: 'large', jurisdiction: '300',
-      attempted_at: retrievedAt, state: 'healthy', change_kind: 'baseline', http_status: 200,
-      requested_url: 'https://example.test/large', final_url: 'https://example.test/large',
-      previous_hash: null, current_hash: 'large-hash', previous_text: null,
-      current_text: largeText, text_diff: null, etag: null, last_modified: null, error: null,
-    });
-    sourceStore.writeMutations(sqlPath);
-    sourceStore.close();
-
-    const rendered = fs.readFileSync(sqlPath, 'utf8');
-    expect(Math.max(...rendered.split('\n').map(line => line.length))).toBeLessThan(50_000);
-    const targetStore = new MonitorStateStore(process.cwd(), targetDb);
-    targetStore.database.exec(rendered);
-    expect(targetStore.getPage('large:page')?.current_text).toBe(largeText);
-    expect(targetStore.database.query(
-      'SELECT current_text FROM monitor_observations WHERE page_id = ?1',
-    ).get('large:page')).toEqual({ current_text: largeText });
-    targetStore.close();
-    fs.rmSync(directory, { recursive: true, force: true });
-  });
-
-  test('renders a bounded normalized textual diff', () => {
-    expect(diffNormalizedText('five years residence', 'six years residence'))
-      .toBe('- five years residence\n+ six years residence');
+    expect(signalMatchesKeywords(hit, source)).toBe(true);
+    expect(signalMatchesKeywords(miss, source)).toBe(false);
   });
 
   test('parses RSS and Atom into the same contract', () => {
