@@ -2282,8 +2282,16 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Costa_Rica_2020",
-      "jurisdictions": ["188"],
-      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Costa Rica", "residencia"],
+      "jurisdictions": [
+        "188"
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "citizenship",
+        "Costa Rica",
+        "residencia"
+      ],
       "notes": "Constitution Articles 13 to 15: birth, five-year Central American/Spanish/Spanish-American floor, seven-year ordinary floor."
     },
     {
@@ -2292,8 +2300,16 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/El_Salvador_2014",
-      "jurisdictions": ["222"],
-      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "El Salvador", "hispanoamericanos"],
+      "jurisdictions": [
+        "222"
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "citizenship",
+        "El Salvador",
+        "hispanoamericanos"
+      ],
       "notes": "Constitution Articles 90 to 92: one-year Spanish/Hispano-American naturalization floor; Central American option by declaration."
     },
     {
@@ -2302,7 +2318,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Guatemala_1993",
-      "jurisdictions": ["320"],
+      "jurisdictions": [
+        "320"
+      ],
       "pages": [
         {
           "id": "constitution",
@@ -2313,7 +2331,13 @@
           "url": "https://www.acnur.org/fileadmin/Documentos/BDL/2001/0135.pdf"
         }
       ],
-      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Guatemala", "concesiva"],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "citizenship",
+        "Guatemala",
+        "concesiva"
+      ],
       "notes": "Constitution nationality framework plus Nationality Law Decree 1613 five-year ordinary / two-year special tracks."
     },
     {
@@ -2322,8 +2346,16 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Honduras_2013",
-      "jurisdictions": ["340"],
-      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Honduras", "iberoamericanos"],
+      "jurisdictions": [
+        "340"
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "citizenship",
+        "Honduras",
+        "iberoamericanos"
+      ],
       "notes": "Constitution Articles 22 to 24: one-year Central American, two-year Spanish/Ibero-American, three-year ordinary floors."
     },
     {
@@ -2332,8 +2364,16 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Nicaragua_2014",
-      "jurisdictions": ["558"],
-      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Nicaragua", "centroamericanos"],
+      "jurisdictions": [
+        "558"
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "citizenship",
+        "Nicaragua",
+        "centroamericanos"
+      ],
       "notes": "Constitution Articles 15 to 21: Central American option; ordinary naturalization delegated to statute."
     },
     {
@@ -2342,8 +2382,16 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Dominican_Republic_2015",
-      "jurisdictions": ["214"],
-      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Dominican Republic", "nacimiento"],
+      "jurisdictions": [
+        "214"
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "citizenship",
+        "Dominican Republic",
+        "nacimiento"
+      ],
       "notes": "Constitution Articles 18 to 20: parentage and restricted jus soli; naturalization by statute."
     },
     {
@@ -2352,8 +2400,16 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Venezuela_2009",
-      "jurisdictions": ["862"],
-      "keywords": ["nacionalidad", "naturalizaci\u00f3n", "citizenship", "Venezuela", "residencia"],
+      "jurisdictions": [
+        "862"
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "citizenship",
+        "Venezuela",
+        "residencia"
+      ],
       "notes": "Constitution Articles 32 to 33: ten-year ordinary floor; five years for Spain/Portugal/Italy/Latin America/Caribbean origin."
     },
     {
@@ -3674,6 +3730,329 @@
         "naturalization"
       ],
       "notes": "Constitution nationality articles."
+    },
+    {
+      "id": "benin-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Benin_1990",
+      "jurisdictions": [
+        "204"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Benin",
+        "residence",
+        "birth"
+      ],
+      "notes": "Benin constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "burkina-faso-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Burkina_Faso_2012",
+      "jurisdictions": [
+        "854"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Burkina Faso",
+        "residence",
+        "birth"
+      ],
+      "notes": "Burkina Faso constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "congo-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Congo_2015",
+      "jurisdictions": [
+        "178"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Republic of the Congo",
+        "residence",
+        "birth"
+      ],
+      "notes": "Republic of the Congo constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "drc-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Democratic_Republic_of_the_Congo_2011",
+      "jurisdictions": [
+        "180"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Democratic Republic of the Congo",
+        "residence",
+        "birth"
+      ],
+      "notes": "Democratic Republic of the Congo constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "eswatini-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Swaziland_2005",
+      "jurisdictions": [
+        "748"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Eswatini",
+        "residence",
+        "birth"
+      ],
+      "notes": "Eswatini constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "gabon-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Gabon_2011",
+      "jurisdictions": [
+        "266"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Gabon",
+        "residence",
+        "birth"
+      ],
+      "notes": "Gabon constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "gambia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Gambia_2019",
+      "jurisdictions": [
+        "270"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "The Gambia",
+        "residence",
+        "birth"
+      ],
+      "notes": "The Gambia constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "lesotho-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Lesotho_2018",
+      "jurisdictions": [
+        "426"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Lesotho",
+        "residence",
+        "birth"
+      ],
+      "notes": "Lesotho constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "liberia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Liberia_1986",
+      "jurisdictions": [
+        "430"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Liberia",
+        "residence",
+        "birth"
+      ],
+      "notes": "Liberia constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "libya-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Libya_2011",
+      "jurisdictions": [
+        "434"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Libya",
+        "residence",
+        "birth"
+      ],
+      "notes": "Libya constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "madagascar-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Madagascar_2010",
+      "jurisdictions": [
+        "450"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Madagascar",
+        "residence",
+        "birth"
+      ],
+      "notes": "Madagascar constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "malawi-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Malawi_2017",
+      "jurisdictions": [
+        "454"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Malawi",
+        "residence",
+        "birth"
+      ],
+      "notes": "Malawi constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "mali-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Mali_1992",
+      "jurisdictions": [
+        "466"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Mali",
+        "residence",
+        "birth"
+      ],
+      "notes": "Mali constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "niger-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Niger_2010",
+      "jurisdictions": [
+        "562"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Niger",
+        "residence",
+        "birth"
+      ],
+      "notes": "Niger constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "sierra-leone-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Sierra_Leone_2013",
+      "jurisdictions": [
+        "694"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Sierra Leone",
+        "residence",
+        "birth"
+      ],
+      "notes": "Sierra Leone constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "sudan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Sudan_2019",
+      "jurisdictions": [
+        "729"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Sudan",
+        "residence",
+        "birth"
+      ],
+      "notes": "Sudan constitutional nationality framework via Constitute Project text."
+    },
+    {
+      "id": "togo-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Togo_2007",
+      "jurisdictions": [
+        "768"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Togo",
+        "residence",
+        "birth"
+      ],
+      "notes": "Togo constitutional nationality framework via Constitute Project text."
     }
   ]
 }

@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 384,
+      "routes": 435,
       "by_mode": {
-        "ancestry": 120,
-        "naturalization": 125,
-        "birth": 120,
+        "ancestry": 137,
+        "naturalization": 142,
+        "birth": 137,
         "investment": 19
       },
       "by_status": {
-        "active": 377,
+        "active": 428,
         "pending_verification": 4,
         "inactive": 2,
         "verified_negative": 1
@@ -694,24 +694,32 @@
       "name": "Congo",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "congo-citizenship-by-parent",
+        "congo-naturalization",
+        "congo-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "180",
       "name": "Dem. Rep. Congo",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "drc-citizenship-by-parent",
+        "drc-naturalization",
+        "drc-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "184",
@@ -806,12 +814,16 @@
       "name": "Benin",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "benin-citizenship-by-parent",
+        "benin-naturalization",
+        "benin-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "208",
@@ -1088,12 +1100,16 @@
       "name": "Gabon",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "gabon-citizenship-by-parent",
+        "gabon-naturalization",
+        "gabon-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "268",
@@ -1116,12 +1132,16 @@
       "name": "Gambia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "gambia-citizenship-by-parent",
+        "gambia-naturalization",
+        "gambia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "275",
@@ -1662,12 +1682,16 @@
       "name": "Lesotho",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "lesotho-citizenship-by-parent",
+        "lesotho-naturalization",
+        "lesotho-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "428",
@@ -1690,24 +1714,32 @@
       "name": "Liberia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "liberia-citizenship-by-parent",
+        "liberia-naturalization",
+        "liberia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "434",
       "name": "Libya",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "libya-citizenship-by-parent",
+        "libya-naturalization",
+        "libya-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "438",
@@ -1774,24 +1806,32 @@
       "name": "Madagascar",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "madagascar-citizenship-by-parent",
+        "madagascar-naturalization",
+        "madagascar-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "454",
       "name": "Malawi",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "malawi-citizenship-by-parent",
+        "malawi-naturalization",
+        "malawi-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "458",
@@ -1826,12 +1866,16 @@
       "name": "Mali",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "mali-citizenship-by-parent",
+        "mali-naturalization",
+        "mali-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "470",
@@ -2179,12 +2223,16 @@
       "name": "Niger",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "niger-citizenship-by-parent",
+        "niger-naturalization",
+        "niger-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "566",
@@ -2737,12 +2785,16 @@
       "name": "Sierra Leone",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "sierra-leone-citizenship-by-parent",
+        "sierra-leone-naturalization",
+        "sierra-leone-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "702",
@@ -2881,12 +2933,16 @@
       "name": "Sudan",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "sudan-citizenship-by-parent",
+        "sudan-naturalization",
+        "sudan-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "732",
@@ -2917,12 +2973,16 @@
       "name": "eSwatini",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "eswatini-citizenship-by-parent",
+        "eswatini-naturalization",
+        "eswatini-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "752",
@@ -3001,12 +3061,16 @@
       "name": "Togo",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "togo-citizenship-by-parent",
+        "togo-naturalization",
+        "togo-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "772",
@@ -3296,12 +3360,16 @@
       "name": "Burkina Faso",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "burkina-faso-citizenship-by-parent",
+        "burkina-faso-naturalization",
+        "burkina-faso-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "858",
@@ -6389,6 +6457,218 @@
       ]
     },
     {
+      "id": "congo-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "178",
+        "name": "Congo"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Republic of the Congo parent",
+      "summary": "Birth to a Republic of the Congo parent creates nationality. Birth in Republic of the Congo alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "congo-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Republic of the Congo parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Congo_2015"
+        }
+      ]
+    },
+    {
+      "id": "congo-citizenship-by-parent",
+      "country": {
+        "iso_n3": "178",
+        "name": "Congo"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Republic of the Congo nationality through a Republic of the Congo parent",
+      "summary": "A child of a Republic of the Congo parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "congo-citizenship-by-parent-principal",
+          "label": "Republic of the Congo nationality through a Republic of the Congo parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Congo_2015"
+        }
+      ]
+    },
+    {
+      "id": "congo-naturalization",
+      "country": {
+        "iso_n3": "178",
+        "name": "Congo"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 10 years residence",
+      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "congo-naturalization-principal",
+          "label": "Naturalization after about 10 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Congo_2015"
+        }
+      ]
+    },
+    {
+      "id": "drc-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "180",
+        "name": "Dem. Rep. Congo"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Democratic Republic of the Congo parent",
+      "summary": "Birth to a Democratic Republic of the Congo parent creates nationality. Birth in Democratic Republic of the Congo alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "drc-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Democratic Republic of the Congo parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Democratic Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Democratic_Republic_of_the_Congo_2011"
+        }
+      ]
+    },
+    {
+      "id": "drc-citizenship-by-parent",
+      "country": {
+        "iso_n3": "180",
+        "name": "Dem. Rep. Congo"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Democratic Republic of the Congo nationality through a Democratic Republic of the Congo parent",
+      "summary": "A child of a Democratic Republic of the Congo parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "drc-citizenship-by-parent-principal",
+          "label": "Democratic Republic of the Congo nationality through a Democratic Republic of the Congo parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Democratic Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Democratic_Republic_of_the_Congo_2011"
+        }
+      ]
+    },
+    {
+      "id": "drc-naturalization",
+      "country": {
+        "iso_n3": "180",
+        "name": "Dem. Rep. Congo"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 7 years residence",
+      "summary": "Adults generally need about 7 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "drc-naturalization-principal",
+          "label": "Naturalization after about 7 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Democratic Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Democratic_Republic_of_the_Congo_2011"
+        }
+      ]
+    },
+    {
       "id": "costa-rica-citizenship-by-birth",
       "country": {
         "iso_n3": "188",
@@ -6822,6 +7102,112 @@
         {
           "title": "Czech Ministry of Interior - citizenship",
           "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx"
+        }
+      ]
+    },
+    {
+      "id": "benin-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "204",
+        "name": "Benin"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Benin parent",
+      "summary": "Birth to a Benin parent creates nationality. Birth in Benin alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "benin-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Benin parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Benin Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Benin_1990"
+        }
+      ]
+    },
+    {
+      "id": "benin-citizenship-by-parent",
+      "country": {
+        "iso_n3": "204",
+        "name": "Benin"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Benin nationality through a Benin parent",
+      "summary": "A child of a Benin parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "benin-citizenship-by-parent-principal",
+          "label": "Benin nationality through a Benin parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Benin Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Benin_1990"
+        }
+      ]
+    },
+    {
+      "id": "benin-naturalization",
+      "country": {
+        "iso_n3": "204",
+        "name": "Benin"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "benin-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Benin Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Benin_1990"
         }
       ]
     },
@@ -8059,6 +8445,112 @@
       ]
     },
     {
+      "id": "gabon-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "266",
+        "name": "Gabon"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Gabon parent",
+      "summary": "Birth to a Gabon parent creates nationality. Birth in Gabon alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "gabon-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Gabon parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Gabon Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gabon_2011"
+        }
+      ]
+    },
+    {
+      "id": "gabon-citizenship-by-parent",
+      "country": {
+        "iso_n3": "266",
+        "name": "Gabon"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Gabon nationality through a Gabon parent",
+      "summary": "A child of a Gabon parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "gabon-citizenship-by-parent-principal",
+          "label": "Gabon nationality through a Gabon parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Gabon Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gabon_2011"
+        }
+      ]
+    },
+    {
+      "id": "gabon-naturalization",
+      "country": {
+        "iso_n3": "266",
+        "name": "Gabon"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "gabon-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Gabon Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gabon_2011"
+        }
+      ]
+    },
+    {
       "id": "georgia-citizenship-by-parent",
       "country": {
         "iso_n3": "268",
@@ -8173,6 +8665,112 @@
         {
           "title": "Georgia Public Service Development Agency — Citizenship",
           "url": "https://sda.gov.ge/en/products/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "gambia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "270",
+        "name": "Gambia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a The Gambia parent",
+      "summary": "Birth to a The Gambia parent creates nationality. Birth in The Gambia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "gambia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a The Gambia parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "The Gambia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gambia_2019"
+        }
+      ]
+    },
+    {
+      "id": "gambia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "270",
+        "name": "Gambia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "The Gambia nationality through a The Gambia parent",
+      "summary": "A child of a The Gambia parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "gambia-citizenship-by-parent-principal",
+          "label": "The Gambia nationality through a The Gambia parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "The Gambia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gambia_2019"
+        }
+      ]
+    },
+    {
+      "id": "gambia-naturalization",
+      "country": {
+        "iso_n3": "270",
+        "name": "Gambia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "gambia-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "The Gambia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gambia_2019"
         }
       ]
     },
@@ -10414,6 +11012,112 @@
       ]
     },
     {
+      "id": "lesotho-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "426",
+        "name": "Lesotho"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Lesotho parent",
+      "summary": "Birth to a Lesotho parent creates nationality. Birth in Lesotho alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "lesotho-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Lesotho parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Lesotho Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lesotho_2018"
+        }
+      ]
+    },
+    {
+      "id": "lesotho-citizenship-by-parent",
+      "country": {
+        "iso_n3": "426",
+        "name": "Lesotho"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Lesotho nationality through a Lesotho parent",
+      "summary": "A child of a Lesotho parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "lesotho-citizenship-by-parent-principal",
+          "label": "Lesotho nationality through a Lesotho parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Lesotho Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lesotho_2018"
+        }
+      ]
+    },
+    {
+      "id": "lesotho-naturalization",
+      "country": {
+        "iso_n3": "426",
+        "name": "Lesotho"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "lesotho-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Lesotho Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lesotho_2018"
+        }
+      ]
+    },
+    {
       "id": "latvia-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "428",
@@ -10515,6 +11219,218 @@
         {
           "title": "Latvia OCMA/PMLP - naturalisation",
           "url": "https://www.pmlp.gov.lv/en/naturalisation"
+        }
+      ]
+    },
+    {
+      "id": "liberia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "430",
+        "name": "Liberia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Liberia parent",
+      "summary": "Birth to a Liberia parent creates nationality. Birth in Liberia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "liberia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Liberia parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Liberia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Liberia_1986"
+        }
+      ]
+    },
+    {
+      "id": "liberia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "430",
+        "name": "Liberia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Liberia nationality through a Liberia parent",
+      "summary": "A child of a Liberia parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "liberia-citizenship-by-parent-principal",
+          "label": "Liberia nationality through a Liberia parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Liberia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Liberia_1986"
+        }
+      ]
+    },
+    {
+      "id": "liberia-naturalization",
+      "country": {
+        "iso_n3": "430",
+        "name": "Liberia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 10 years residence",
+      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "liberia-naturalization-principal",
+          "label": "Naturalization after about 10 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Liberia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Liberia_1986"
+        }
+      ]
+    },
+    {
+      "id": "libya-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "434",
+        "name": "Libya"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Libya parent",
+      "summary": "Birth to a Libya parent creates nationality. Birth in Libya alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "libya-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Libya parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Libya Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Libya_2011"
+        }
+      ]
+    },
+    {
+      "id": "libya-citizenship-by-parent",
+      "country": {
+        "iso_n3": "434",
+        "name": "Libya"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Libya nationality through a Libya parent",
+      "summary": "A child of a Libya parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "libya-citizenship-by-parent-principal",
+          "label": "Libya nationality through a Libya parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Libya Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Libya_2011"
+        }
+      ]
+    },
+    {
+      "id": "libya-naturalization",
+      "country": {
+        "iso_n3": "434",
+        "name": "Libya"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 10 years residence",
+      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "libya-naturalization-principal",
+          "label": "Naturalization after about 10 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Libya Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Libya_2011"
         }
       ]
     },
@@ -10842,6 +11758,218 @@
       ]
     },
     {
+      "id": "madagascar-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "450",
+        "name": "Madagascar"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Madagascar parent",
+      "summary": "Birth to a Madagascar parent creates nationality. Birth in Madagascar alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "madagascar-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Madagascar parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Madagascar Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Madagascar_2010"
+        }
+      ]
+    },
+    {
+      "id": "madagascar-citizenship-by-parent",
+      "country": {
+        "iso_n3": "450",
+        "name": "Madagascar"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Madagascar nationality through a Madagascar parent",
+      "summary": "A child of a Madagascar parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "madagascar-citizenship-by-parent-principal",
+          "label": "Madagascar nationality through a Madagascar parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Madagascar Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Madagascar_2010"
+        }
+      ]
+    },
+    {
+      "id": "madagascar-naturalization",
+      "country": {
+        "iso_n3": "450",
+        "name": "Madagascar"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "madagascar-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Madagascar Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Madagascar_2010"
+        }
+      ]
+    },
+    {
+      "id": "malawi-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "454",
+        "name": "Malawi"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Malawi parent",
+      "summary": "Birth to a Malawi parent creates nationality. Birth in Malawi alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malawi-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Malawi parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malawi Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malawi_2017"
+        }
+      ]
+    },
+    {
+      "id": "malawi-citizenship-by-parent",
+      "country": {
+        "iso_n3": "454",
+        "name": "Malawi"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Malawi nationality through a Malawi parent",
+      "summary": "A child of a Malawi parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malawi-citizenship-by-parent-principal",
+          "label": "Malawi nationality through a Malawi parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malawi Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malawi_2017"
+        }
+      ]
+    },
+    {
+      "id": "malawi-naturalization",
+      "country": {
+        "iso_n3": "454",
+        "name": "Malawi"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 7 years residence",
+      "summary": "Adults generally need about 7 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "malawi-naturalization-principal",
+          "label": "Naturalization after about 7 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malawi Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malawi_2017"
+        }
+      ]
+    },
+    {
       "id": "malaysia-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "458",
@@ -10947,6 +12075,112 @@
         {
           "title": "Malaysia Immigration — Residence Pass",
           "url": "https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/"
+        }
+      ]
+    },
+    {
+      "id": "mali-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "466",
+        "name": "Mali"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Mali parent",
+      "summary": "Birth to a Mali parent creates nationality. Birth in Mali alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mali-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Mali parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mali Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mali_1992"
+        }
+      ]
+    },
+    {
+      "id": "mali-citizenship-by-parent",
+      "country": {
+        "iso_n3": "466",
+        "name": "Mali"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Mali nationality through a Mali parent",
+      "summary": "A child of a Mali parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mali-citizenship-by-parent-principal",
+          "label": "Mali nationality through a Mali parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mali Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mali_1992"
+        }
+      ]
+    },
+    {
+      "id": "mali-naturalization",
+      "country": {
+        "iso_n3": "466",
+        "name": "Mali"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 10 years residence",
+      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mali-naturalization-principal",
+          "label": "Naturalization after about 10 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mali Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mali_1992"
         }
       ]
     },
@@ -12473,6 +13707,112 @@
         {
           "title": "Nicaragua Constitution — nationality (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Nicaragua_2014"
+        }
+      ]
+    },
+    {
+      "id": "niger-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "562",
+        "name": "Niger"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Niger parent",
+      "summary": "Birth to a Niger parent creates nationality. Birth in Niger alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "niger-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Niger parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Niger Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Niger_2010"
+        }
+      ]
+    },
+    {
+      "id": "niger-citizenship-by-parent",
+      "country": {
+        "iso_n3": "562",
+        "name": "Niger"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Niger nationality through a Niger parent",
+      "summary": "A child of a Niger parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "niger-citizenship-by-parent-principal",
+          "label": "Niger nationality through a Niger parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Niger Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Niger_2010"
+        }
+      ]
+    },
+    {
+      "id": "niger-naturalization",
+      "country": {
+        "iso_n3": "562",
+        "name": "Niger"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 10 years residence",
+      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "niger-naturalization-principal",
+          "label": "Naturalization after about 10 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Niger Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Niger_2010"
         }
       ]
     },
@@ -15062,6 +16402,112 @@
       ]
     },
     {
+      "id": "sierra-leone-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "694",
+        "name": "Sierra Leone"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Sierra Leone parent",
+      "summary": "Birth to a Sierra Leone parent creates nationality. Birth in Sierra Leone alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sierra-leone-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Sierra Leone parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Sierra Leone Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sierra_Leone_2013"
+        }
+      ]
+    },
+    {
+      "id": "sierra-leone-citizenship-by-parent",
+      "country": {
+        "iso_n3": "694",
+        "name": "Sierra Leone"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Sierra Leone nationality through a Sierra Leone parent",
+      "summary": "A child of a Sierra Leone parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sierra-leone-citizenship-by-parent-principal",
+          "label": "Sierra Leone nationality through a Sierra Leone parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Sierra Leone Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sierra_Leone_2013"
+        }
+      ]
+    },
+    {
+      "id": "sierra-leone-naturalization",
+      "country": {
+        "iso_n3": "694",
+        "name": "Sierra Leone"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sierra-leone-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Sierra Leone Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sierra_Leone_2013"
+        }
+      ]
+    },
+    {
       "id": "singapore-citizenship-after-pr",
       "country": {
         "iso_n3": "702",
@@ -15787,6 +17233,218 @@
       ]
     },
     {
+      "id": "sudan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "729",
+        "name": "Sudan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Sudan parent",
+      "summary": "Birth to a Sudan parent creates nationality. Birth in Sudan alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sudan-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Sudan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Sudan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sudan_2019"
+        }
+      ]
+    },
+    {
+      "id": "sudan-citizenship-by-parent",
+      "country": {
+        "iso_n3": "729",
+        "name": "Sudan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Sudan nationality through a Sudan parent",
+      "summary": "A child of a Sudan parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sudan-citizenship-by-parent-principal",
+          "label": "Sudan nationality through a Sudan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Sudan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sudan_2019"
+        }
+      ]
+    },
+    {
+      "id": "sudan-naturalization",
+      "country": {
+        "iso_n3": "729",
+        "name": "Sudan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 10 years residence",
+      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sudan-naturalization-principal",
+          "label": "Naturalization after about 10 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Sudan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sudan_2019"
+        }
+      ]
+    },
+    {
+      "id": "eswatini-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "748",
+        "name": "eSwatini"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Eswatini parent",
+      "summary": "Birth to a Eswatini parent creates nationality. Birth in Eswatini alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "eswatini-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Eswatini parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Eswatini Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Swaziland_2005"
+        }
+      ]
+    },
+    {
+      "id": "eswatini-citizenship-by-parent",
+      "country": {
+        "iso_n3": "748",
+        "name": "eSwatini"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Eswatini nationality through a Eswatini parent",
+      "summary": "A child of a Eswatini parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "eswatini-citizenship-by-parent-principal",
+          "label": "Eswatini nationality through a Eswatini parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Eswatini Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Swaziland_2005"
+        }
+      ]
+    },
+    {
+      "id": "eswatini-naturalization",
+      "country": {
+        "iso_n3": "748",
+        "name": "eSwatini"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "eswatini-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Eswatini Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Swaziland_2005"
+        }
+      ]
+    },
+    {
       "id": "sweden-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "752",
@@ -16103,6 +17761,112 @@
         {
           "title": "Thailand Nationality Act B.E. 2508 (amended; UNHCR English text)",
           "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733"
+        }
+      ]
+    },
+    {
+      "id": "togo-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "768",
+        "name": "Togo"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Togo parent",
+      "summary": "Birth to a Togo parent creates nationality. Birth in Togo alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "togo-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Togo parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Togo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Togo_2007"
+        }
+      ]
+    },
+    {
+      "id": "togo-citizenship-by-parent",
+      "country": {
+        "iso_n3": "768",
+        "name": "Togo"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Togo nationality through a Togo parent",
+      "summary": "A child of a Togo parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "togo-citizenship-by-parent-principal",
+          "label": "Togo nationality through a Togo parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Togo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Togo_2007"
+        }
+      ]
+    },
+    {
+      "id": "togo-naturalization",
+      "country": {
+        "iso_n3": "768",
+        "name": "Togo"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "togo-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Togo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Togo_2007"
         }
       ]
     },
@@ -17291,6 +19055,112 @@
         {
           "title": "USCIS — Naturalization for lawful permanent residents",
           "url": "https://www.uscis.gov/sites/default/files/document/fact-sheets/DO_FactSheet_NaturalizationForLawfulPermanentResidents_wTorUNonimmigrantStatus_V3_508.pdf"
+        }
+      ]
+    },
+    {
+      "id": "burkina-faso-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "854",
+        "name": "Burkina Faso"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Burkina Faso parent",
+      "summary": "Birth to a Burkina Faso parent creates nationality. Birth in Burkina Faso alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "burkina-faso-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Burkina Faso parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Burkina Faso Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Burkina_Faso_2012"
+        }
+      ]
+    },
+    {
+      "id": "burkina-faso-citizenship-by-parent",
+      "country": {
+        "iso_n3": "854",
+        "name": "Burkina Faso"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Burkina Faso nationality through a Burkina Faso parent",
+      "summary": "A child of a Burkina Faso parent is a national under the constitutional nationality framework and nationality statute.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "burkina-faso-citizenship-by-parent-principal",
+          "label": "Burkina Faso nationality through a Burkina Faso parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Burkina Faso Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Burkina_Faso_2012"
+        }
+      ]
+    },
+    {
+      "id": "burkina-faso-naturalization",
+      "country": {
+        "iso_n3": "854",
+        "name": "Burkina Faso"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 10 years residence",
+      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "burkina-faso-naturalization-principal",
+          "label": "Naturalization after about 10 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Residence floor modeled from the ordinary naturalization track in comparative African nationality sources against the constitutional framework; case-check the current nationality statute for reductions (marriage, birth in country) and renunciation rules."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Burkina Faso Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Burkina_Faso_2012"
         }
       ]
     },
