@@ -197,7 +197,9 @@ export async function generateGroundedText(
       },
       body: JSON.stringify({
         contents: [{ role: 'user', parts: [{ text: prompt }] }],
-        tools: [{ google_search: {} }],
+        // camelCase per the v1beta REST/JSON API; snake_case is silently ignored,
+        // which leaves the model answering from memory with no grounding.
+        tools: [{ googleSearch: {} }],
         generationConfig: { maxOutputTokens: maxTokens },
       }),
     },
