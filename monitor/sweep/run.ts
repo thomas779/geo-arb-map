@@ -99,7 +99,7 @@ function readArgs(argv: string[]): SweepOptions {
   const outDir = path.join(ROOT, '.out');
   const options: SweepOptions = {
     only: null,
-    maxCalls: Number(process.env.MONITOR_SWEEP_MAX_CALLS ?? 300),
+    maxCalls: Number(process.env.MONITOR_SWEEP_MAX_CALLS) || 300,
     output: path.join(outDir, 'findings.json'),
     leadsOutput: path.join(outDir, 'leads.json'),
     report: path.join(outDir, 'sweep-report.json'),

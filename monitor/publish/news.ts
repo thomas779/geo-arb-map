@@ -135,7 +135,7 @@ function readArgs(argv: string[]): NewsOptions {
     apply: false,
     stateDb: process.env.MONITOR_STATE_DB ? path.resolve(process.env.MONITOR_STATE_DB) : null,
     stateSql: path.join(outDir, 'monitor-posts.sql'),
-    max: Number(process.env.MONITOR_NEWS_MAX ?? 20),
+    max: Number(process.env.MONITOR_NEWS_MAX) || 20,
   };
   for (let index = 0; index < argv.length; index += 1) {
     const value = argv[index];
