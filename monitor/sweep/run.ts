@@ -70,6 +70,7 @@ interface SweepReport {
   jurisdictions_selected: number;
   calls_made: number;
   grounded_queries: number;
+  citations_seen: number;
   findings: number;
   by_status: Record<string, number>;
   affects_dataset: number;
@@ -290,6 +291,7 @@ export async function runSweep(
   const findings: Finding[] = [];
   let callsMade = 0;
   let groundedQueries = 0;
+  let citationsSeen = 0;
   let skippedNoSearch = 0;
 
   if (!fixtureRaw && !llm) {
@@ -312,6 +314,7 @@ export async function runSweep(
           );
           callsMade += 1;
           groundedQueries += result.searchQueries.length;
+          citationsSeen += result.citations.length;
           grounded = result;
           raw = parseJsonArray(result.text);
         }
@@ -350,6 +353,7 @@ export async function runSweep(
     jurisdictions_selected: capped.length,
     calls_made: callsMade,
     grounded_queries: groundedQueries,
+    citations_seen: citationsSeen,
     findings: findings.length,
     by_status: byStatus,
     affects_dataset: leads.length,
