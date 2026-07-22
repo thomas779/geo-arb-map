@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 161,
+      "routes": 173,
       "by_mode": {
-        "ancestry": 47,
-        "naturalization": 49,
-        "birth": 47,
+        "ancestry": 51,
+        "naturalization": 53,
+        "birth": 51,
         "investment": 18
       },
       "by_status": {
-        "active": 155,
+        "active": 167,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -1393,12 +1393,16 @@
       "name": "Japan",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "japan-citizenship-by-parent",
+        "japan-naturalization",
+        "japan-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "398",
@@ -1458,12 +1462,16 @@
       "name": "South Korea",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "partial",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "korea-citizenship-by-parent-or-simple-origin",
+        "korea-general-naturalization",
+        "korea-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "414",
@@ -2171,12 +2179,16 @@
       "name": "Philippines",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "philippines-citizenship-by-parent-or-reacquisition",
+        "philippines-naturalization",
+        "philippines-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "612",
@@ -2574,12 +2586,16 @@
       "name": "South Africa",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "south-africa-citizenship-by-parent",
+        "south-africa-naturalization",
+        "south-africa-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "716",
@@ -5976,6 +5992,125 @@
       ]
     },
     {
+      "id": "japan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Japanese parent or foundling rule",
+      "summary": "A person born to a Japanese father or mother is Japanese at birth. A person born in Japan whose parents are both unknown or without nationality is also Japanese. Birth in Japan alone to identified foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "japan-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Japanese parent or foundling rule",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Japan Nationality Act (Japanese Law Translation)",
+          "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/3784/en"
+        },
+        {
+          "title": "Japan Ministry of Justice — Nationality Q&A",
+          "url": "https://www.moj.go.jp/EN/MINJI/minji78.html"
+        }
+      ]
+    },
+    {
+      "id": "japan-citizenship-by-parent",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Japanese nationality through a Japanese parent",
+      "summary": "A child is a Japanese citizen if the father or mother is a Japanese citizen at the time of birth, or if the father died before birth while a Japanese citizen. Acknowledgment after birth by a Japanese father can support nationality acquisition by notification under Article 3 when statutory age and status conditions are met.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "japan-citizenship-by-parent-principal",
+          "label": "Japanese nationality through a Japanese parent",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Children born abroad who also acquire a foreign nationality at birth must retain Japanese nationality within the Family Register Act period or may lose it retroactively, subject to reacquisition routes."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Japan Nationality Act (Japanese Law Translation)",
+          "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/3784/en"
+        },
+        {
+          "title": "Japan Ministry of Justice — Nationality Q&A",
+          "url": "https://www.moj.go.jp/EN/MINJI/minji78.html"
+        }
+      ]
+    },
+    {
+      "id": "japan-naturalization",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization with permission of the Minister of Justice",
+      "summary": "A foreign national may acquire Japanese nationality by naturalization with permission of the Minister of Justice. Ordinary minimum conditions include five or more years continuous domicile in Japan, majority and capacity, good conduct, livelihood, and renunciation or loss of prior nationality, plus constitutional-compliance conditions. Meeting the statutory minima does not create an entitlement to permission.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "japan-naturalization-principal",
+          "label": "Naturalization with permission of the Minister of Justice",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Article 5 of the Nationality Act still states five years continuous domicile. Screening is discretionary and relaxed statutory periods exist for spouses, Japanese-born applicants and other special relationships under Articles 6–8. Administrative practice may apply stricter documentary or continuity expectations than the statutory floor."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Japan Nationality Act (Japanese Law Translation)",
+          "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/3784/en"
+        },
+        {
+          "title": "Japan Ministry of Justice — Nationality Q&A",
+          "url": "https://www.moj.go.jp/EN/MINJI/minji78.html"
+        }
+      ]
+    },
+    {
       "id": "jordan-citizenship-by-birth-limited",
       "country": {
         "iso_n3": "400",
@@ -6120,6 +6255,117 @@
         {
           "title": "Jordanian Nationality Law No. 6 of 1954 (as amended)",
           "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Jordan%20Law%20No.%206%20of%201954%20on%20Nationality%20%28last%20amended%201987%29%20English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "korea-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Korean parent",
+      "summary": "A person born to a Korean national parent acquires Korean nationality at birth. Birth in Korea alone to two foreign parents is not general jus soli under the Nationality Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "korea-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Korean parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "HiKorea — General naturalization (5 years)",
+          "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN"
+        }
+      ]
+    },
+    {
+      "id": "korea-citizenship-by-parent-or-simple-origin",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a Korean parent or simplified origin naturalization",
+      "summary": "A child acquires Korean nationality when a parent is a Korean national at birth. Separately, simplified naturalization routes exist for persons with a Korean parent, former Korean nationals, or other statutory family/origin links after shorter residence than ordinary naturalization, subject to Nationality Act conditions and Ministry of Justice screening.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "korea-citizenship-by-parent-or-simple-origin-principal",
+          "label": "Citizenship through a Korean parent or simplified origin naturalization",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Parent-at-birth status is recognition of existing nationality. Simplified naturalization for adult applicants remains discretionary and is not automatic multi-generation jus sanguinis without process."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "HiKorea — Simple naturalization",
+          "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=201&PARENT_ID=148&locale=EN"
+        },
+        {
+          "title": "HiKorea — General naturalization (5 years)",
+          "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN"
+        }
+      ]
+    },
+    {
+      "id": "korea-general-naturalization",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "General naturalization after five years domicile and permanent residence",
+      "summary": "General naturalization requires more than five consecutive years of domicile in the Republic of Korea, permanent residency status, legal majority under Korean civil law, good conduct, livelihood ability, basic Korean language and cultural knowledge, and no national-security or public-order obstacle. Permission is granted by the Minister of Justice; eligibility is not an entitlement.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "korea-general-naturalization-principal",
+          "label": "General naturalization after five years domicile and permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Applicants generally must renounce prior nationality after permission, subject to dual-nationality exceptions for marriage migrants, outstanding talent and other Nationality Act categories. Spousal and origin simplified tracks use shorter residence floors."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "HiKorea — General naturalization (5 years)",
+          "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN"
         }
       ]
     },
@@ -7351,6 +7597,121 @@
       ]
     },
     {
+      "id": "philippines-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "608",
+        "name": "Philippines"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Filipino parent",
+      "summary": "A person born to a Filipino father or mother is a Filipino citizen under the 1987 Constitution. Birth in the Philippines alone to two foreign parents does not generally create citizenship by soil.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "philippines-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Filipino parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Philippines Commonwealth Act No. 473 — Revised Naturalization Law",
+          "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227"
+        }
+      ]
+    },
+    {
+      "id": "philippines-citizenship-by-parent-or-reacquisition",
+      "country": {
+        "iso_n3": "608",
+        "name": "Philippines"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a Filipino parent or natural-born reacquisition",
+      "summary": "A person is a Filipino citizen when at least one parent is a Filipino citizen, subject to constitutional and statutory lineage rules. Natural-born Filipinos who lost Philippine citizenship by naturalization abroad may reacquire and retain dual citizenship under Republic Act No. 9225 by taking the oath of allegiance and meeting documentary requirements.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "philippines-citizenship-by-parent-or-reacquisition-principal",
+          "label": "Citizenship through a Filipino parent or natural-born reacquisition",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "RA 9225 reacquisition is for natural-born Filipinos who previously lost citizenship; it is not a general multi-generation registration without lineage proof."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Philippines Commonwealth Act No. 473 — Revised Naturalization Law",
+          "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227"
+        },
+        {
+          "title": "Office of the Solicitor General — Special Committee on Naturalization",
+          "url": "https://www.osg.gov.ph/page?call=scn"
+        }
+      ]
+    },
+    {
+      "id": "philippines-naturalization",
+      "country": {
+        "iso_n3": "608",
+        "name": "Philippines"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization by judicial petition or administrative RA 9139 process",
+      "summary": "Ordinary naturalization for foreign adults is available by judicial petition under Commonwealth Act No. 473 after continuous residence of not less than ten years (with shorter statutory periods for specified categories), good moral character, means of support, language and civics knowledge, and other qualifications and disqualifications. Separately, Republic Act No. 9139 provides an administrative naturalization path through the Special Committee on Naturalization for persons born in the Philippines who meet native-born residence and other statutory conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "philippines-naturalization-principal",
+          "label": "Naturalization by judicial petition or administrative RA 9139 process",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "CA 473 is the general judicial track; RA 9139 is a narrower administrative track for persons born and residing in the Philippines. Neither route is an entitlement after residence alone."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Philippines Commonwealth Act No. 473 — Revised Naturalization Law",
+          "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227"
+        },
+        {
+          "title": "Office of the Solicitor General — Special Committee on Naturalization",
+          "url": "https://www.osg.gov.ph/page?call=scn"
+        }
+      ]
+    },
+    {
       "id": "poland-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "616",
@@ -8261,6 +8622,128 @@
         {
           "title": "Singapore ICA — Becoming a Singapore citizen",
           "url": "https://www.ica.gov.sg/reside/citizenship"
+        }
+      ]
+    },
+    {
+      "id": "south-africa-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "710",
+        "name": "South Africa"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a South African parent",
+      "summary": "A person born to a South African citizen parent is a South African citizen by birth under the Citizenship Act. Birth in the Republic to two foreign parents is not unconditional jus soli; specified later naturalisation or registration routes may apply in limited statutory cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "south-africa-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a South African parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "South African Citizenship Act 88 of 1995 (gov.za PDF)",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/act88of1995.pdf"
+        },
+        {
+          "title": "South African Citizenship Amendment Act 17 of 2010",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf"
+        }
+      ]
+    },
+    {
+      "id": "south-africa-citizenship-by-parent",
+      "country": {
+        "iso_n3": "710",
+        "name": "South Africa"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through a South African parent or descent",
+      "summary": "A person is a South African citizen by birth or descent when a parent is a South African citizen under the Citizenship Act, including citizenship transmitted through a citizen parent regardless of birthplace in the ordinary jus sanguinis cases, subject to registration and historical continuity rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "south-africa-citizenship-by-parent-principal",
+          "label": "Citizenship through a South African parent or descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "South African Citizenship Act 88 of 1995 (gov.za PDF)",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/act88of1995.pdf"
+        },
+        {
+          "title": "South African Citizenship Amendment Act 17 of 2010",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf"
+        }
+      ]
+    },
+    {
+      "id": "south-africa-naturalization",
+      "country": {
+        "iso_n3": "710",
+        "name": "South Africa"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalisation after permanent residence and ordinary residence",
+      "summary": "The Minister may grant a certificate of naturalisation to an adult foreigner who has been admitted for permanent residence and has been ordinarily resident in the Republic for a continuous period of not less than five years immediately preceding the application (as amended by Act 17 of 2010), is of good character, intends continued residence or qualifying service, can communicate in an official language, and has adequate knowledge of the responsibilities and privileges of citizenship. Naturalisation remains discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "south-africa-naturalization-principal",
+          "label": "Naturalisation after permanent residence and ordinary residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Regulations may impose additional presence limits within the five-year ordinary-residence period. Spousal and exceptional ministerial routes exist with different residence floors."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "South African Citizenship Act 88 of 1995 (gov.za PDF)",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/act88of1995.pdf"
+        },
+        {
+          "title": "South African Citizenship Amendment Act 17 of 2010",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf"
+        },
+        {
+          "title": "South African Government — Citizenship Act document page",
+          "url": "https://www.gov.za/documents/south-african-citizenship-act"
         }
       ]
     },
