@@ -171,6 +171,7 @@ First, use Google Search to find the most recent OFFICIAL / primary sources (gov
 or tax authority; native language is fine) on ${entry.name}'s citizenship, residency, visa, and
 citizenship/residency-by-investment (CBI/RBI) rules — prioritise the last 12 months and anything
 announced or upcoming. You MUST search before answering; do not rely on prior knowledge alone.
+Keep it efficient: run a few targeted searches (about 3-5), not an exhaustive sweep.
 Then report ONLY changes that are already in force OR announced/upcoming and are NOT already reflected
 in what we record below. Ignore evergreen explainers, opinion, and anything that merely restates a
 known rule.
