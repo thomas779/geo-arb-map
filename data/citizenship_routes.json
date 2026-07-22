@@ -170,10 +170,10 @@
       "mode": "investment",
       "status": "active",
       "title": "Egyptian citizenship through investment programmes",
-      "summary": "The Prime Minister's citizenship unit administers direct routes through a non-refundable contribution, property, an investment project or a central-bank deposit.",
+      "summary": "The Prime Minister's citizenship unit administers direct routes through a non-refundable contribution, property, an investment project or a central-bank deposit. No multi-year residence period is required before the investment programme grant.",
       "facts": { "programme_type": "direct_citizenship_by_investment", "residence_required": false, "discretionary_decision": true },
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-22",
       "sources": [
         { "title": "Egyptian Cabinet — Citizenship through Investment Programmes", "url": "https://egyptcitizenship.gov.eg/" },
         { "title": "GAFI — Unit for Granting Egyptian Citizenship in Exchange for Investment", "url": "https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx" }
@@ -185,12 +185,13 @@
       "mode": "investment",
       "status": "active",
       "title": "Investor citizenship criteria",
-      "summary": "Jordan's Cabinet-approved criteria provide citizenship routes through qualifying securities, productive projects, business expansion or sustained job creation; several project routes require a three-year compliance period.",
+      "summary": "Jordan's Cabinet-approved criteria provide citizenship routes through qualifying securities, productive projects, business expansion or sustained job creation. Several project routes require a multi-year compliance period, often with a temporary three-year passport before a recommendation for full citizenship.",
       "facts": { "programme_type": "investor_citizenship", "residence_required": false, "discretionary_decision": true },
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-22",
       "sources": [
-        { "title": "Jordanian Prime Ministry — Cabinet decisions of 15 July 2026", "url": "https://www.pm.gov.jo/AR/NewsDetails/am0847" }
+        { "title": "Invest Jordan — Cabinet investor residency and citizenship criteria", "url": "https://invest.jo/en/node/123" },
+        { "title": "Jordan News Agency (Petra) — Cabinet investor citizenship amendments", "url": "https://petra.gov.jo/en/news/government-revamps-investor-citizenship-rules-to-funnel-capital-into-provinces" }
       ]
     },
     {
@@ -214,13 +215,14 @@
       "mode": "investment",
       "status": "active",
       "title": "Economic and Climate Resilience Citizenship Program",
-      "summary": "A statutory contribution programme administered by the Nauru Program Office to fund economic development and climate resilience.",
+      "summary": "A statutory contribution programme administered by the Nauru Program Office under the 2024 Act, under which a foreign adult may acquire economic and climate resilience citizenship after a prescribed contribution and due diligence, without a residence requirement.",
       "facts": { "programme_type": "direct_citizenship_by_contribution", "residence_required": false },
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-22",
       "sources": [
-        { "title": "Government of Nauru — programme launch", "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx" },
-        { "title": "Nauru Economic and Climate Resilience Citizenship Act 2024", "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf" }
+        { "title": "Nauru Economic and Climate Resilience Citizenship Act 2024", "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf" },
+        { "title": "Nauru Program Office — Economic and Climate Resilience Citizenship Program", "url": "https://www.ecrcp.gov.nr/" },
+        { "title": "Government of Nauru — programme launch", "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx" }
       ]
     },
     {
@@ -229,11 +231,13 @@
       "mode": "investment",
       "status": "active",
       "title": "Citizenship by Investment Programme",
-      "summary": "A direct contribution route created under Decree-Law 07/2025 and promoted through the country's official consular network.",
+      "summary": "A direct contribution route created under Decreto-Lei n.º 07/2025 as a special naturalization mechanism under Lei n.º 07/2022 for investment or donation to the National Transformation Fund, administered through the Citizenship by Investment and Donation Unit.",
       "facts": { "programme_type": "direct_citizenship_by_contribution", "residence_required": false },
-      "confidence": "medium",
-      "last_checked": "2026-07-17",
+      "confidence": "high",
+      "last_checked": "2026-07-22",
       "sources": [
+        { "title": "São Tomé and Príncipe — Decreto-Lei n.º 07/2025 RNID", "url": "https://www.imidaily.com/wp-content/uploads/2025/08/STP-CBI-Act-01082025-1.pdf" },
+        { "title": "São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade", "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf" },
         { "title": "Honorary Consulate of São Tomé and Príncipe — Citizenship by Investment", "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/" }
       ]
     },

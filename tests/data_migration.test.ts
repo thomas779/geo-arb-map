@@ -36,9 +36,11 @@ describe('data migration shadow', () => {
       '308',
       '372',
       '380',
+      '400',
       '470',
       '480',
       '484',
+      '520',
       '528',
       '548',
       '554',
@@ -46,12 +48,14 @@ describe('data migration shadow', () => {
       '620',
       '659',
       '662',
+      '678',
       '688',
       '702',
       '724',
       '756',
       '784',
       '792',
+      '818',
       '826',
       '840',
       '858',
@@ -62,9 +66,9 @@ describe('data migration shadow', () => {
       'spain_iberoamerican',
     ]);
     expect(shadow.manifest.counts).toEqual({
-      jurisdictions: 38,
+      jurisdictions: 42,
       arrangements: 3,
-      citizenship_routes: 19,
+      citizenship_routes: 23,
     });
   });
 

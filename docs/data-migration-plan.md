@@ -49,7 +49,8 @@ Completed:
 - reviewed four-mode records for the United States, Canada, Australia, New
   Zealand, United Kingdom, Ireland, Germany, France, Portugal, Spain, Italy,
   Netherlands, Switzerland, Singapore, Malta, Cyprus, Türkiye, Uruguay,
-  Bulgaria, Greece, Serbia, and the United Arab Emirates; and
+  Bulgaria, Greece, Serbia, the United Arab Emirates, Egypt, Jordan, Nauru,
+  and São Tomé and Príncipe; and
 - active dedicated official-page monitoring for every reviewed jurisdiction.
 
 Still required:

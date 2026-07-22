@@ -265,6 +265,20 @@ const OFFICIAL_URLS = {
   vanuatu_citizenship_types: 'https://vancitizenship.gov.vu/index.php/citizenship/types-of-citizenship',
   vanuatu_legislative_framework: 'https://vancitizenship.gov.vu/index.php/about-us/legislative-framework',
   vanuatu_dsp_regulations: 'https://vancitizenship.gov.vu/images/Order_No_33_of_2019_-_New_DSP_Regulations.pdf',
+  egypt_nationality_law: 'https://manshurat.org/node/7358',
+  egypt_nationality_amendment_2004: 'https://learningpartnership.org/sites/default/files/resources/pdfs/Egypt%20-%20Nationality%20Law%20-%202004%20-%20English.pdf',
+  egypt_cbi_programme: 'https://egyptcitizenship.gov.eg/',
+  egypt_gafi_citizenship: 'https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx',
+  jordan_nationality_law: 'https://learningpartnership.org/sites/default/files/resources/pdfs/Jordan%20Law%20No.%206%20of%201954%20on%20Nationality%20%28last%20amended%201987%29%20English.pdf',
+  jordan_investor_criteria: 'https://invest.jo/en/node/123',
+  jordan_petra_investor_citizenship: 'https://petra.gov.jo/en/news/government-revamps-investor-citizenship-rules-to-funnel-capital-into-provinces',
+  nauru_citizenship_act: 'https://justice.gov.nr/wp-content/uploads/2023/12/Naoero-Citizenship-Act-2017.pdf',
+  nauru_ecrcp_act: 'https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf',
+  nauru_ecrcp_programme: 'https://www.ecrcp.gov.nr/',
+  nauru_ecrcp_launch: 'https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx',
+  sao_tome_nationality_law: 'https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf',
+  sao_tome_cbi_regulation: 'https://www.imidaily.com/wp-content/uploads/2025/08/STP-CBI-Act-01082025-1.pdf',
+  sao_tome_cbi_consulate: 'https://saotomeprincipe.de/pt/cidadania-por-investimento/',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -659,6 +673,20 @@ function jurisdictionSources(): SourceRecord[] {
       ['Vanuatu Citizenship Commission — Types of Citizenship', OFFICIAL_URLS.vanuatu_citizenship_types, '548', 'en', 'official_guidance', 'vanuatu-citizenship-law'],
       ['Vanuatu Citizenship Commission — Legislative Framework', OFFICIAL_URLS.vanuatu_legislative_framework, '548', 'en', 'official_guidance', 'vanuatu-citizenship-law'],
       ['Vanuatu Development Support Program Regulations', OFFICIAL_URLS.vanuatu_dsp_regulations, '548', 'en', 'primary_law', 'vanuatu-citizenship-law'],
+      ['Egyptian Nationality Law No. 26 of 1975', OFFICIAL_URLS.egypt_nationality_law, '818', 'ar', 'primary_law', 'egypt-citizenship-investment'],
+      ['Egypt Law No. 154 of 2004 amending the Nationality Law', OFFICIAL_URLS.egypt_nationality_amendment_2004, '818', 'en', 'primary_law', 'egypt-citizenship-investment'],
+      ['Egyptian Cabinet — Citizenship through Investment Programmes', OFFICIAL_URLS.egypt_cbi_programme, '818', 'ar', 'official_guidance', 'egypt-citizenship-investment'],
+      ['GAFI — Unit for Granting Egyptian Citizenship in Exchange for Investment', OFFICIAL_URLS.egypt_gafi_citizenship, '818', 'en', 'official_guidance', 'egypt-citizenship-investment'],
+      ['Jordanian Nationality Law No. 6 of 1954 (as amended)', OFFICIAL_URLS.jordan_nationality_law, '400', 'en', 'primary_law', 'jordan-investor-citizenship'],
+      ['Invest Jordan — Cabinet investor residency and citizenship criteria', OFFICIAL_URLS.jordan_investor_criteria, '400', 'en', 'official_guidance', 'jordan-investor-citizenship'],
+      ['Jordan News Agency (Petra) — Cabinet investor citizenship amendments', OFFICIAL_URLS.jordan_petra_investor_citizenship, '400', 'en', 'official_guidance', 'jordan-investor-citizenship'],
+      ['Naoero Citizenship Act 2017', OFFICIAL_URLS.nauru_citizenship_act, '520', 'en', 'primary_law', 'nauru-citizenship-law'],
+      ['Nauru Economic and Climate Resilience Citizenship Act 2024', OFFICIAL_URLS.nauru_ecrcp_act, '520', 'en', 'primary_law', 'nauru-citizenship-law'],
+      ['Nauru Program Office — Economic and Climate Resilience Citizenship Program', OFFICIAL_URLS.nauru_ecrcp_programme, '520', 'en', 'official_guidance', 'nauru-citizenship-law'],
+      ['Government of Nauru — climate resilience citizenship programme launch', OFFICIAL_URLS.nauru_ecrcp_launch, '520', 'en', 'official_guidance', 'nauru-citizenship-law'],
+      ['São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade', OFFICIAL_URLS.sao_tome_nationality_law, '678', 'pt', 'primary_law', 'sao-tome-citizenship-law'],
+      ['São Tomé and Príncipe — Decreto-Lei n.º 07/2025 RNID', OFFICIAL_URLS.sao_tome_cbi_regulation, '678', 'pt', 'primary_law', 'sao-tome-citizenship-law'],
+      ['Honorary Consulate of São Tomé and Príncipe — Citizenship by Investment', OFFICIAL_URLS.sao_tome_cbi_consulate, '678', 'pt', 'official_guidance', 'sao-tome-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -3140,6 +3168,362 @@ function vanuatuRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
   });
 }
 
+function egyptRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.egypt_nationality_law);
+  const amendment = requireSource(officialSources, OFFICIAL_URLS.egypt_nationality_amendment_2004);
+  const cbi = requireSource(officialSources, OFFICIAL_URLS.egypt_cbi_programme);
+  const gafi = requireSource(officialSources, OFFICIAL_URLS.egypt_gafi_citizenship);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '818',
+    note: 'All acquisition modes reviewed against Nationality Law No. 26 of 1975 as amended in 2004 and the Cabinet/GAFI citizenship-by-investment programme pages.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law, amendment] },
+      {
+        mode: 'naturalization',
+        finding: 'present',
+        sources: [law],
+        note: 'Ordinary naturalization remains a discretionary Interior Ministry decision after a long residence period; Arabic language and character conditions apply.',
+      },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [law, amendment],
+        note: 'Citizenship at birth follows Egyptian parentage or the foundling/unknown-parents rule. Birth in Egypt to two foreign parents is not general jus soli.',
+      },
+      { mode: 'investment', finding: 'present', sources: [cbi, gafi] },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'egypt-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Egyptian nationality through an Egyptian parent',
+        summary: 'A person born of an Egyptian father or an Egyptian mother is Egyptian under Law No. 26 of 1975 as equalized by Law No. 154 of 2004.',
+        source: [law, amendment],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '818' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'egypt-naturalization',
+        mode: 'naturalization',
+        title: 'Ordinary naturalization after long residence',
+        summary: 'A foreign adult may seek discretionary Egyptian nationality after a long period of lawful residence, with Arabic-language, means and character review by the Minister of Interior under the Nationality Law.',
+        source: law,
+        eligibility: [
+          { field: 'residence.lawful_years', operator: 'gte', value: 10, unit: 'years' },
+          { field: 'language.arabic_sufficient', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        note: 'Residence eligibility is not an automatic grant. Special shorter routes exist for some Arab or Muslim-majority affiliations and other statutory categories; those are not collapsed into this ordinary record.',
+      }),
+      principalCitizenshipRoute({
+        id: 'egypt-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Citizenship at birth through parentage or foundling status',
+        summary: 'A person is Egyptian at birth when born to an Egyptian father or mother. A person born in Egypt of unknown parents, including a foundling presumed born in Egypt, is also Egyptian. Birth in Egypt alone to identified foreign parents is not general jus soli.',
+        source: [law, amendment],
+        eligibility: [
+          {
+            field: 'parent.egyptian_or_unknown_parents_in_egypt',
+            operator: 'eq',
+            value: true,
+          },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'egypt-investor-citizenship',
+        mode: 'investment',
+        title: 'Egyptian citizenship through investment programmes',
+        summary: 'The Prime Minister\'s citizenship unit administers direct routes through a non-refundable contribution, property, an investment project or a central-bank deposit. No multi-year residence period is required before the investment programme grant.',
+        source: [cbi, gafi],
+        eligibility: [
+          {
+            field: 'investment.qualifying_option',
+            operator: 'in',
+            value: [
+              'treasury_contribution_usd_250000',
+              'property_usd_300000',
+              'deposit_usd_500000_three_years',
+              'investment_project_usd_450000',
+            ],
+          },
+          { field: 'compliance.security_and_due_diligence_passed', operator: 'eq', value: true },
+        ],
+        months: 0,
+        allocation: 'discretionary',
+        note: 'Official programme pages list four investment options starting at USD 250,000. Approval remains discretionary after security review; temporary residence may be issued only to complete the chosen investment programme.',
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function jordanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.jordan_nationality_law);
+  const investor = requireSource(officialSources, OFFICIAL_URLS.jordan_investor_criteria);
+  const petra = requireSource(officialSources, OFFICIAL_URLS.jordan_petra_investor_citizenship);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '400',
+    note: 'All acquisition modes reviewed against Nationality Law No. 6 of 1954 as amended and the July 2026 Cabinet investor-citizenship criteria published by Invest Jordan and Petra.',
+    coverage: [
+      {
+        mode: 'ancestry',
+        finding: 'present',
+        sources: [law],
+        note: 'Descent is primarily through a Jordanian father. A Jordanian mother transmits nationality at birth only with an unknown, stateless or unestablished father, or through later discretionary routes.',
+      },
+      { mode: 'naturalization', finding: 'present', sources: [law] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [law],
+        note: 'Territorial birth is limited to foundlings and a child born in Jordan to a Jordanian mother and unknown/stateless father. It is not general jus soli.',
+      },
+      {
+        mode: 'investment',
+        finding: 'present',
+        sources: [investor, petra],
+        note: 'Investor citizenship is a Cabinet discretionary route under investment criteria, not an amendment of the Nationality Law itself. Several productive-project routes use a temporary passport and multi-year compliance period before full citizenship is recommended.',
+      },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'jordan-citizenship-by-father',
+        mode: 'ancestry',
+        title: 'Jordanian nationality through a Jordanian father',
+        summary: 'A person whose father holds Jordanian nationality is Jordanian, and the children of a Jordanian man are Jordanian wherever they are born.',
+        source: law,
+        eligibility: [{ field: 'father.citizenship.iso_n3', operator: 'eq', value: '400' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'jordan-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after four years of regular residence',
+        summary: 'A non-Jordanian adult may apply to the Council of Ministers after four years of regular residence and an intention to reside in Jordan. The Cabinet may grant or refuse the certificate, may waive the residence period for an Arab applicant or in the public interest with royal approval, and the ordinary certificate historically required loss of prior nationality.',
+        source: law,
+        eligibility: [
+          { field: 'residence.regular_months', operator: 'gte', value: 48, unit: 'months' },
+          { field: 'residence.intention_to_reside', operator: 'eq', value: true },
+        ],
+        months: 48,
+        allocation: 'discretionary',
+        note: 'Eligibility to apply is not a right to citizenship. Political and public-office restrictions apply for years after naturalization.',
+      }),
+      principalCitizenshipRoute({
+        id: 'jordan-citizenship-by-birth-limited',
+        mode: 'birth',
+        title: 'Limited citizenship connected to birth in Jordan',
+        summary: 'A person born in Jordan to a Jordanian mother and a father who is unknown, stateless or whose filiation is not established is Jordanian. A foundling in Jordan is presumed born there and is Jordanian unless the contrary is proved. Birth in Jordan to two foreign parents is not general jus soli.',
+        source: law,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '400' },
+          {
+            field: 'birth.foundling_or_jordanian_mother_unknown_father',
+            operator: 'eq',
+            value: true,
+          },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'jordan-investor-citizenship',
+        mode: 'investment',
+        title: 'Investor citizenship criteria',
+        summary: 'Jordan\'s Cabinet-approved criteria provide citizenship routes through qualifying securities, productive projects, business expansion or sustained job creation. Several project routes require a multi-year compliance period, often with a temporary three-year passport before a recommendation for full citizenship.',
+        source: [investor, petra],
+        eligibility: [
+          {
+            field: 'investment.qualifying_cabinet_route',
+            operator: 'in',
+            value: [
+              'listed_shares_jod_1500000',
+              'new_productive_project',
+              'existing_project_expansion',
+              'large_scale_employment',
+              'amrah_city_project',
+            ],
+          },
+          { field: 'compliance.employment_or_holding_conditions_met', operator: 'eq', value: true },
+        ],
+        months: 36,
+        allocation: 'discretionary',
+        note: 'Property purchase alone is a residence route, not direct citizenship. Thresholds and employment numbers change by Cabinet decision; verify the current Invest Jordan publication before relying on a quote.',
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function nauruRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.nauru_citizenship_act);
+  const ecrcpAct = requireSource(officialSources, OFFICIAL_URLS.nauru_ecrcp_act);
+  const programme = requireSource(officialSources, OFFICIAL_URLS.nauru_ecrcp_programme);
+  const launch = requireSource(officialSources, OFFICIAL_URLS.nauru_ecrcp_launch);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '520',
+    note: 'All acquisition modes reviewed against the Naoero Citizenship Act 2017 and the 2024 Economic and Climate Resilience Citizenship Act administered by the Nauru Program Office.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act] },
+      {
+        mode: 'naturalization',
+        finding: 'present',
+        sources: [act],
+        note: 'There is no general residence-only naturalization. Marriage and other relationship-based grants are the ordinary non-investment naturalization routes.',
+      },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [act],
+        note: 'Citizenship at birth generally requires a citizen parent. A later application exists for a person born in Nauru to non-citizen parents after twenty years of residence.',
+      },
+      { mode: 'investment', finding: 'present', sources: [ecrcpAct, programme, launch] },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'nauru-citizenship-by-descent',
+        mode: 'ancestry',
+        title: 'Citizenship by descent through a Nauruan parent',
+        summary: 'A person born outside Nauru is a citizen if, at the time of birth, either parent was a citizen.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '520' }],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'nauru-naturalization-by-marriage',
+        mode: 'naturalization',
+        title: 'Naturalization through marriage to a Nauruan citizen',
+        summary: 'A foreign spouse may apply after seven continuous years of lawful marriage and residence with the Nauruan spouse, subject to character, health, commitment to reside and no-criminal-conviction conditions. Cabinet may waive the residence period.',
+        source: act,
+        eligibility: [
+          { field: 'spouse.citizenship.iso_n3', operator: 'eq', value: '520' },
+          { field: 'marriage_and_residence.continuous_months', operator: 'gte', value: 84, unit: 'months' },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        note: 'The grant is made by the Minister in consultation with Cabinet and is final without court appeal under the Act.',
+      }),
+      principalCitizenshipRoute({
+        id: 'nauru-citizenship-connected-to-birth',
+        mode: 'birth',
+        title: 'Citizenship connected to birth in Nauru',
+        summary: 'A person born in Nauru is a citizen at birth if either parent is a citizen. A person born in Nauru to non-citizen parents may later apply after twenty continuous years of residence. Foundling and otherwise-stateless birth situations are also protected under the constitutional and statutory framework.',
+        source: act,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '520' },
+          {
+            field: 'parent.citizen_or_twenty_year_residence_application',
+            operator: 'eq',
+            value: true,
+          },
+        ],
+        months: 0,
+        note: 'The twenty-year route is later discretionary acquisition connected to birthplace, not citizenship at birth.',
+      }),
+      principalCitizenshipRoute({
+        id: 'nauru-climate-resilience-citizenship',
+        mode: 'investment',
+        title: 'Economic and Climate Resilience Citizenship Program',
+        summary: 'A statutory contribution programme administered by the Nauru Program Office under the 2024 Act, under which a foreign adult may acquire economic and climate resilience citizenship after a prescribed contribution and due diligence, without a residence requirement.',
+        source: [ecrcpAct, programme, launch],
+        eligibility: [
+          { field: 'applicant.age_years', operator: 'gte', value: 18 },
+          { field: 'contribution.programme_prescribed', operator: 'eq', value: true },
+          { field: 'compliance.due_diligence_passed', operator: 'eq', value: true },
+        ],
+        months: 0,
+        allocation: 'discretionary',
+        note: 'Contribution amounts and limited-time offers are prescribed by regulation and programme materials and change; verify current Program Office figures before relying on a quote.',
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function saoTomePrincipeRecord(
+  shadow: DataShadow,
+  officialSources: SourceRecord[],
+): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.sao_tome_nationality_law);
+  const regulation = requireSource(officialSources, OFFICIAL_URLS.sao_tome_cbi_regulation);
+  const consulate = requireSource(officialSources, OFFICIAL_URLS.sao_tome_cbi_consulate);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '678',
+    name: 'São Tomé and Príncipe',
+    note: 'All acquisition modes reviewed against Lei n.º 07/2022 and the Decreto-Lei n.º 07/2025 investment/donation regulation, with the honorary-consulate programme page used only as operational guidance.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law] },
+      { mode: 'naturalization', finding: 'present', sources: [law] },
+      {
+        mode: 'birth',
+        finding: 'present',
+        sources: [law],
+        note: 'Origin nationality covers birth in the country to a São-tomense parent, birth abroad with declaration, grandchildren, foundlings/stateless parents, and children of foreign parents who reside in the territory and are not in the service of another state.',
+      },
+      { mode: 'investment', finding: 'present', sources: [law, regulation, consulate] },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'sao-tome-citizenship-by-parent-or-grandparent',
+        mode: 'ancestry',
+        title: 'Citizenship through a São-tomense parent or grandparent',
+        summary: 'Origin nationality covers a person born abroad to a São-tomense parent who declares the wish to be São-tomense, and descendants who are grandchildren of a São-tomense national born abroad.',
+        source: law,
+        eligibility: [
+          { field: 'parent_or_grandparent.citizenship.iso_n3', operator: 'eq', value: '678' },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'sao-tome-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years of legal residence',
+        summary: 'The Government may naturalize a foreign adult or stateless person after at least five years of legal residence, Portuguese or national-language knowledge, clean criminal record, national-security clearance and means of subsistence. The grant is by government decree after a Public Prosecutor prior review.',
+        source: law,
+        eligibility: [
+          { field: 'residence.legal_months', operator: 'gte', value: 60, unit: 'months' },
+          { field: 'language.portuguese_or_national', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        note: 'Naturalization is discretionary and may be refused even when the formal residence period is met. Dual-nationality caps apply to some naturalized persons.',
+      }),
+      principalCitizenshipRoute({
+        id: 'sao-tome-citizenship-by-birth',
+        mode: 'birth',
+        title: 'Citizenship connected to birth in São Tomé and Príncipe',
+        summary: 'A person born in São Tomé and Príncipe is of origin nationality when a parent is São-tomense, when the parents are stateless or of unknown nationality, or when foreign parents reside in the territory and are not in the service of another state. Foundling and parental-status conditions remain statutory.',
+        source: law,
+        eligibility: [
+          { field: 'birth.jurisdiction', operator: 'eq', value: '678' },
+          { field: 'birth.statutory_origin_condition', operator: 'eq', value: true },
+        ],
+        months: 0,
+      }),
+      principalCitizenshipRoute({
+        id: 'sao-tome-principe-cbi',
+        mode: 'investment',
+        title: 'Citizenship by Investment Programme',
+        summary: 'A direct contribution route created under Decreto-Lei n.º 07/2025 as a special naturalization mechanism under Lei n.º 07/2022 for investment or donation to the National Transformation Fund, administered through the Citizenship by Investment and Donation Unit.',
+        source: [regulation, law, consulate],
+        eligibility: [
+          { field: 'contribution.national_transformation_fund', operator: 'eq', value: true },
+          { field: 'compliance.due_diligence_and_mp_prior_review', operator: 'eq', value: true },
+        ],
+        months: 0,
+        allocation: 'discretionary',
+        note: 'The regulation frames the programme as naturalization for investment or donation, not residence-free passport purchase without process. Minimum contribution figures are set in the regulation annex and programme materials and should be re-checked before reliance.',
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -5039,6 +5423,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     colombiaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
     dominicaRecord(shadow, countrySources),
+    egyptRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
     georgiaRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
@@ -5046,15 +5431,18 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     greeceRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
+    jordanRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
     mauritiusRecord(shadow, countrySources),
     mexicoRecord(shadow, countrySources),
+    nauruRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
     vanuatuRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
     saintLuciaRecord(shadow, countrySources),
+    saoTomePrincipeRecord(shadow, countrySources),
     stKittsNevisRecord(shadow, countrySources),
     serbiaRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),

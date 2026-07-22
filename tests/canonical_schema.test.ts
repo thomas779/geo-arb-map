@@ -64,6 +64,10 @@ describe('canonical data schemas', () => {
       'dominica-naturalization-after-residence',
       'dominica-citizenship-by-birth',
       'dominica-cbi',
+      'egypt-citizenship-by-parent',
+      'egypt-naturalization',
+      'egypt-citizenship-by-birth',
+      'egypt-investor-citizenship',
       'france-citizenship-by-parent',
       'france-study-naturalization-residence',
       'france-birth-and-residence',
@@ -86,6 +90,10 @@ describe('canonical data schemas', () => {
       'italy-citizenship-by-descent',
       'italy-naturalization-by-residence',
       'italy-citizenship-connected-to-birth',
+      'jordan-citizenship-by-father',
+      'jordan-naturalization',
+      'jordan-citizenship-by-birth-limited',
+      'jordan-investor-citizenship',
       'malta-registration-family-descent',
       'malta-residence-naturalization',
       'malta-citizenship-by-birth',
@@ -97,6 +105,10 @@ describe('canonical data schemas', () => {
       'mexico-citizenship-by-parent',
       'mexico-naturalization-by-residence',
       'mexico-citizenship-by-birth',
+      'nauru-citizenship-by-descent',
+      'nauru-naturalization-by-marriage',
+      'nauru-citizenship-connected-to-birth',
+      'nauru-climate-resilience-citizenship',
       'netherlands-citizenship-by-parent',
       'netherlands-naturalization-by-residence',
       'netherlands-third-generation-birth',
@@ -118,6 +130,10 @@ describe('canonical data schemas', () => {
       'saint-lucia-naturalization',
       'saint-lucia-citizenship-by-birth',
       'saint-lucia-cip',
+      'sao-tome-citizenship-by-parent-or-grandparent',
+      'sao-tome-naturalization',
+      'sao-tome-citizenship-by-birth',
+      'sao-tome-principe-cbi',
       'st-kitts-nevis-citizenship-by-parent',
       'st-kitts-nevis-naturalization',
       'st-kitts-nevis-citizenship-by-birth',
@@ -237,6 +253,32 @@ describe('canonical data schemas', () => {
       ?.variants[0]?.timeline.eligibility_minimum_months).toBe(120);
     expect(vanuatu.routes.find(route => route.id === 'vanuatu-investor-citizenship')
       ?.review.last_checked).toBe('2026-07-17');
+
+    const egypt = byIso.get('818')!;
+    expect(egypt.routes.find(route => route.id === 'egypt-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(120);
+    expect(egypt.routes.find(route => route.id === 'egypt-investor-citizenship')
+      ?.variants[0]?.allocation).toBe('discretionary');
+
+    const jordan = byIso.get('400')!;
+    expect(jordan.routes.find(route => route.id === 'jordan-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(48);
+    expect(jordan.coverage.find(item => item.mode === 'birth')?.review.note)
+      .toMatch(/not general jus soli/i);
+
+    const nauru = byIso.get('520')!;
+    expect(nauru.routes.find(route => route.id === 'nauru-naturalization-by-marriage')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(84);
+    expect(nauru.routes.find(route => route.id === 'nauru-climate-resilience-citizenship')
+      ?.variants[0]?.allocation).toBe('discretionary');
+
+    const saoTome = byIso.get('678')!;
+    expect(saoTome.routes.find(route => route.id === 'sao-tome-naturalization')
+      ?.variants[0]?.timeline.eligibility_minimum_months).toBe(60);
+    expect(saoTome.routes.find(route => route.id === 'sao-tome-principe-cbi')
+      ?.variants[0]?.eligibility).toContainEqual(
+        expect.objectContaining({ field: 'contribution.national_transformation_fund', value: true }),
+      );
   });
 
   test('models eligibility time separately from processing time', () => {
