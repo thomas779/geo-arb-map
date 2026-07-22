@@ -310,7 +310,7 @@ export async function runSweep(
           const result = await generateGroundedText(
             buildSweepPrompt(entry, context, rssExcerpts),
             llm!,
-            { maxTokens: 2048 },
+            { maxTokens: 8192 },
           );
           callsMade += 1;
           groundedQueries += result.searchQueries.length;
