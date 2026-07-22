@@ -203,34 +203,36 @@ export async function generateGroundedText(
     }),
   });
   if (!response.ok) throw await responseError(response, 'gemini-grounded');
+  // The Interactions response is a list of steps: google-search calls (which
+  // carry `arguments.queries`), their results, and a final message step whose
+  // `content[]` holds the answer text and `annotations[].url_citation` sources.
   const body = await response.json() as {
-    output_text?: string;
     steps?: Array<{
-      google_search_call?: { arguments?: { queries?: string[] } };
-      model_output?: {
-        content?: Array<{
-          text?: string;
-          annotations?: Array<{ url_citation?: { url?: string; title?: string } }>;
-        }>;
-      };
+      type?: string;
+      arguments?: { queries?: string[] };
+      content?: Array<{
+        type?: string;
+        text?: string;
+        annotations?: Array<{ url_citation?: { url?: string; title?: string } }>;
+      }>;
     }>;
   };
   const steps = body.steps ?? [];
-  if (process.env.MONITOR_GROUNDING_DEBUG) {
-    console.error('[grounding-debug] topKeys=' + JSON.stringify(Object.keys(body))
-      + ' steps=' + steps.length + ' stepKinds=' + JSON.stringify(steps.map(step => Object.keys(step))));
-  }
-  const outputContents = steps.flatMap(step => step.model_output?.content ?? []);
-  const text = (typeof body.output_text === 'string' && body.output_text.trim()
-    ? body.output_text
-    : outputContents.map(item => item.text ?? '').join('')).trim();
-  if (!text) throw new Error('Gemini grounded response did not contain text');
-  const searchQueries = steps.flatMap(step => step.google_search_call?.arguments?.queries ?? []);
-  const citations: GroundingCitation[] = outputContents
+  const contentItems = steps.flatMap(step => step.content ?? []);
+  const text = contentItems.map(item => item.text ?? '').join('').trim();
+  const searchQueries = steps.flatMap(step => step.arguments?.queries ?? []);
+  const citations: GroundingCitation[] = contentItems
     .flatMap(item => item.annotations ?? [])
     .flatMap(annotation => (annotation.url_citation?.url
       ? [{ uri: annotation.url_citation.url, title: annotation.url_citation.title ?? '' }]
       : []));
+  if (process.env.MONITOR_GROUNDING_DEBUG) {
+    console.error('[grounding-debug] steps=' + steps.length + ' contentItems=' + contentItems.length
+      + ' itemKeys=' + JSON.stringify(contentItems.map(item => Object.keys(item)))
+      + ' queries=' + searchQueries.length + ' citations=' + citations.length
+      + ' textHead=' + JSON.stringify(text.slice(0, 200)));
+  }
+  if (!text) throw new Error('Gemini grounded response did not contain text');
   return { text, citations, searchQueries };
 }
 

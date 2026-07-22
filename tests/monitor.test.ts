@@ -318,14 +318,14 @@ describe('monitor triage', () => {
 describe('AI sweep + grounded verify', () => {
   const groundedBody = {
     steps: [
-      { google_search_call: { arguments: { queries: ['malta citizenship 2026'] } } },
+      { type: 'google_search_call', arguments: { queries: ['malta citizenship 2026'] } },
       {
-        model_output: {
-          content: [{
-            text: '[{"iso_n3":"470","claim":"x"}]',
-            annotations: [{ url_citation: { url: 'https://gov.mt/x', title: 'Gov MT' } }],
-          }],
-        },
+        type: 'message',
+        content: [{
+          type: 'output_text',
+          text: '[{"iso_n3":"470","claim":"x"}]',
+          annotations: [{ url_citation: { url: 'https://gov.mt/x', title: 'Gov MT' } }],
+        }],
       },
     ],
   };
