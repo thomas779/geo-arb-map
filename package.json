@@ -19,10 +19,12 @@
     "monitor:email:dispatch": "bun monitor/collectors/github-dispatch.ts",
     "monitor:email:dev": "wrangler dev --config monitor/cloudflare/wrangler.jsonc",
     "monitor:email:deploy": "wrangler deploy --config monitor/cloudflare/wrangler.jsonc",
+    "monitor:sweep": "bun monitor/sweep/run.ts",
     "monitor:triage": "bun monitor/triage/triage.ts",
     "monitor:draft": "bun monitor/triage/open-issues.ts --dry-run",
     "monitor:open": "bun monitor/triage/open-issues.ts --apply",
     "monitor:telegram": "bun monitor/publish/telegram.ts",
+    "monitor:news": "bun monitor/publish/news.ts",
     "monitor:test": "bun test tests/monitor.test.ts",
     "preview": "vite preview",
     "test": "bun test"

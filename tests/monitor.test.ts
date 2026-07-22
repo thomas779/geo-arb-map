@@ -15,8 +15,19 @@ import {
   parseNewsletterRoutes,
   routeForMessage,
   routesForRecipient,
+  routesFromRows,
   senderAllowed,
 } from '../monitor/cloudflare/intake';
+import { generateGroundedText } from '../monitor/llm/client';
+import {
+  buildSweepPrompt,
+  findingToLead,
+  loadRegistry,
+  normalizeFindings,
+  type Finding,
+} from '../monitor/sweep/run';
+import { datasetContextForJurisdiction } from '../monitor/triage/context';
+import { buildNewsPost, fingerprint, synthesizeIssue } from '../monitor/publish/news';
 import { inferJurisdictions } from '../monitor/triage/context';
 import { normalizeRulings, parseJsonArray, seenSignalIds } from '../monitor/triage/triage';
 import { buildIssueDraft } from '../monitor/triage/issues';
@@ -367,6 +378,42 @@ describe('monitor feed collector', () => {
     }]))).toThrow('Ambiguous SOURCE_ROUTES sender mapping');
   });
 
+  test('builds validated routes from monitor_routes D1 rows', () => {
+    const routes = routesFromRows([{
+      source_id: 'expathub-georgia-newsletter',
+      recipient: 'newsletters@atlas.example.test',
+      allowed_sender_domains: '["expathub.ge"]',
+      canonical_hosts: '["expathub.ge"]',
+    }]);
+    expect(routes).toHaveLength(1);
+    expect(routes[0].allowed_sender_domains).toEqual(['expathub.ge']);
+    const route = routeForMessage(routes, 'newsletters@atlas.example.test', 'news@expathub.ge');
+    expect(route?.source_id).toBe('expathub-georgia-newsletter');
+  });
+
+  test('applies the same overlap invariant to D1 rows as to the secret', () => {
+    expect(() => routesFromRows([{
+      source_id: 'source-a',
+      recipient: 'newsletters@atlas.example.test',
+      allowed_sender_domains: '["mailer.example.test"]',
+      canonical_hosts: '["example.test"]',
+    }, {
+      source_id: 'source-b',
+      recipient: 'newsletters@atlas.example.test',
+      allowed_sender_domains: '["news.mailer.example.test"]',
+      canonical_hosts: '["example.test"]',
+    }])).toThrow('Ambiguous SOURCE_ROUTES sender mapping');
+  });
+
+  test('rejects a monitor_routes row whose list column is not a JSON array', () => {
+    expect(() => routesFromRows([{
+      source_id: 'source-a',
+      recipient: 'newsletters@atlas.example.test',
+      allowed_sender_domains: 'expathub.ge',
+      canonical_hosts: '["example.test"]',
+    }])).toThrow('must be a non-empty string array');
+  });
+
   test('normalizes a repository dispatch from a registered email source', async () => {
     const event = await Bun.file(
       new URL('./fixtures/monitor/newsletter-dispatch.json', import.meta.url),
@@ -457,5 +504,116 @@ describe('monitor triage', () => {
     expect(draft.title).toContain('[Monitor lead]');
     expect(draft.body).toContain('Locate and cite the current primary');
     expect(draft.body).toContain(`<!-- signal:${signal.id} -->`);
+  });
+});
+
+describe('AI sweep + grounded verify', () => {
+  const groundedBody = {
+    candidates: [{
+      content: { parts: [{ text: '[{"iso_n3":"470","claim":"x"}]' }] },
+      groundingMetadata: {
+        groundingChunks: [{ web: { uri: 'https://redirect.example/abc', title: 'Gov MT' } }],
+        webSearchQueries: ['malta citizenship 2026'],
+      },
+    }],
+  };
+
+  test('generateGroundedText sends the google_search tool, no JSON schema, and extracts citations', async () => {
+    const calls: Array<{ url: string; init: RequestInit }> = [];
+    const fetcher = (async (url: string, init: RequestInit) => {
+      calls.push({ url, init });
+      return new Response(JSON.stringify(groundedBody), { status: 200, headers: { 'content-type': 'application/json' } });
+    }) as unknown as typeof fetch;
+    const result = await generateGroundedText('find changes', {
+      provider: 'openai-compatible', apiKey: 'secret-key', model: 'gemini-flash-latest',
+      googleApiBaseUrl: 'https://gen.example/v1beta', timeoutMs: 1000,
+    }, { fetcher });
+
+    expect(result.text).toContain('"iso_n3":"470"');
+    expect(result.citations).toEqual([{ uri: 'https://redirect.example/abc', title: 'Gov MT' }]);
+    expect(result.searchQueries).toEqual(['malta citizenship 2026']);
+    expect(calls[0].url).toBe('https://gen.example/v1beta/models/gemini-flash-latest:generateContent');
+    expect((calls[0].init.headers as Record<string, string>)['x-goog-api-key']).toBe('secret-key');
+    const sent = JSON.parse(String(calls[0].init.body));
+    expect(sent.tools).toEqual([{ google_search: {} }]);
+    expect(sent.generationConfig.responseSchema).toBeUndefined();
+    expect(sent.generationConfig.responseMimeType).toBeUndefined();
+  });
+
+  const entry = { iso_n3: '470', name: 'Malta' };
+  const searched = { citations: [{ uri: 'https://x', title: 'x' }], searchQueries: ['q'] };
+
+  test('normalizeFindings keeps sourced changes, drops not_found and sourceless confirmed', () => {
+    const findings = normalizeFindings([
+      { iso_n3: '470', claim: 'CBI closed', status: 'confirmed', primary_urls: ['https://gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true, category: 'investment', brief: 'b' },
+      { iso_n3: '470', claim: 'confirmed but no source', status: 'confirmed', primary_urls: [], brief: 'b' },
+      { iso_n3: '470', claim: 'nothing', status: 'not_found', primary_urls: [], brief: 'b' },
+      { iso_n3: '470', claim: 'a rumour', status: 'rumour', primary_urls: [], brief: 'b' },
+    ], entry, searched);
+    expect(findings.map(f => f.status)).toEqual(['confirmed', 'rumour']);
+    expect(findings[0].effective_date).toBe('2025-07-23');
+  });
+
+  test('normalizeFindings drops everything when the model did not actually search', () => {
+    const findings = normalizeFindings(
+      [{ iso_n3: '470', claim: 'CBI closed', status: 'confirmed', primary_urls: ['https://gov.mt/x'], brief: 'b' }],
+      entry,
+      { citations: [], searchQueries: [] },
+    );
+    expect(findings).toEqual([]);
+  });
+
+  test('findingToLead maps a dataset-affecting finding to a Lead with a sourced signal', () => {
+    const finding: Finding = {
+      iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', status: 'confirmed',
+      primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
+      category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: ['q'],
+    };
+    const lead = findingToLead(finding);
+    expect(lead?.impact_type).toBe('cost_or_investment_threshold');
+    expect(lead?.confidence).toBe('high');
+    expect(lead?.signal.url).toBe('https://komunita.gov.mt/x');
+    expect(lead?.signal.excerpt).toContain('Sources: https://komunita.gov.mt/x');
+    expect(findingToLead({ ...finding, primary_urls: [] })).toBeNull();
+  });
+
+  test('loadRegistry flattens all three arrays and maps special.id to iso_n3', () => {
+    const entries = loadRegistry({
+      sovereigns: [{ iso_n3: '004', name: 'Afghanistan' }],
+      territories: [{ iso_n3: '660', name: 'Anguilla' }],
+      special: [{ id: 'XKX', name: 'Kosovo' }],
+    });
+    expect(entries).toHaveLength(3);
+    expect(entries[2]).toEqual({ iso_n3: 'XKX', name: 'Kosovo' });
+  });
+
+  test('buildSweepPrompt is delta-scoped and asks for a JSON array', () => {
+    const context = datasetContextForJurisdiction('470', {
+      jurisdictions: [{ iso_n3: '470', name: 'Malta', coverage: { ancestry: 'reviewed', naturalization: 'reviewed', birth: 'reviewed', investment: 'reviewed' } }],
+      routes: [{ id: 'r1', country: { iso_n3: '470', name: 'Malta' }, mode: 'investment', status: 'inactive', title: 't', summary: 's', last_checked: '2026-01-01' }],
+    }, { blocs: [], bilateral_lanes: [] });
+    expect(context.signal_jurisdictions).toEqual({});
+    expect(context.citizenship_routes).toHaveLength(1);
+    const prompt = buildSweepPrompt(entry, context, ['ExpatHub: residence permit change']);
+    expect(prompt).toContain('Malta');
+    expect(prompt).toContain('JSON array');
+    expect(prompt).toContain('residence permit change');
+  });
+
+  test('buildNewsPost + fingerprint + synthesizeIssue', () => {
+    const finding: Finding = {
+      iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', status: 'confirmed',
+      primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
+      category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: [],
+    };
+    const post = buildNewsPost(finding);
+    expect(post.text).toContain('Malta: CBI closed');
+    expect(post.text).toContain('https://komunita.gov.mt/x');
+    expect(post.text).toContain('Information only');
+    expect(() => buildNewsPost({ ...finding, primary_urls: [] })).toThrow('primary source');
+
+    expect(fingerprint(finding)).toBe(fingerprint(finding));
+    expect(fingerprint(finding)).not.toBe(fingerprint({ ...finding, effective_date: '2026-01-01' }));
+    expect(synthesizeIssue(finding).body).toContain('## Verified evidence');
   });
 });

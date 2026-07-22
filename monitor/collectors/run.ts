@@ -44,6 +44,7 @@ interface SourceManifest {
 export interface CollectorOptions {
   fixtureDir: string | null;
   sourceId: string | null;
+  adapters: string[] | null;
   strict: boolean;
   output: string;
   report: string;
@@ -78,6 +79,7 @@ function readArgs(argv: string[]): CollectorOptions {
   const options: CollectorOptions = {
     fixtureDir: null,
     sourceId: null,
+    adapters: null,
     strict: false,
     output: path.join(ROOT, '.out', 'signals.json'),
     report: path.join(ROOT, '.out', 'collection-report.json'),
@@ -90,6 +92,7 @@ function readArgs(argv: string[]): CollectorOptions {
     if (value === '--strict') options.strict = true;
     else if (value === '--fixture-dir') options.fixtureDir = path.resolve(argv[++index]);
     else if (value === '--source') options.sourceId = argv[++index];
+    else if (value === '--adapters') options.adapters = String(argv[++index]).split(',').map(item => item.trim()).filter(Boolean);
     else if (value === '--output') options.output = path.resolve(argv[++index]);
     else if (value === '--report') options.report = path.resolve(argv[++index]);
     else if (value === '--lookback-days') options.lookbackDays = Number(argv[++index]);
@@ -166,7 +169,9 @@ export async function runCollectors(
     fs.readFileSync(path.join(ROOT, 'sources', 'manifest.json'), 'utf8'),
   ) as SourceManifest;
   const active = manifest.sources.filter(source =>
-    source.status === 'active' && (!options.sourceId || source.id === options.sourceId));
+    source.status === 'active'
+    && (!options.sourceId || source.id === options.sourceId)
+    && (!options.adapters || options.adapters.includes(source.adapter)));
   if (options.sourceId && active.length === 0) {
     throw new Error(`No active source found with id "${options.sourceId}"`);
   }
