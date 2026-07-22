@@ -2,6 +2,39 @@
   "$comment": "Every collector must emit the Signal shape in monitor/schema/signal.ts. Active sources use implemented RSS, public Telegram, or stable HTML snapshot transports. Planned sources still need credentials, onboarding, a specialized query, or a proven reliable endpoint. Independent agencies and country specialists are preferred over broad social monitoring.",
   "sources": [
     {
+      "id": "schengenvisainfo-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://schengenvisainfo.com/news/feed/",
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "SchengenVisaInfo news feed. Regional aggregator for EU/Schengen visa, residence, ETIAS/EES, and nationality changes; article text infers the specific jurisdiction. Discovery only; verify against official EU/national sources."
+    },
+    {
+      "id": "visasnews-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://visasnews.com/feed/",
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "VisasNews aggregator. Multi-country visa, entry, and immigration news (mixed languages). Discovery only; verify against primary sources."
+    },
+    {
+      "id": "visaguide-world-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://visaguide.world/news/feed/",
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "VisaGuide.World news feed. Global visa and immigration policy aggregator; article text infers the specific jurisdiction. Discovery only; verify against primary sources."
+    },
+    {
       "id": "globalcit-rss",
       "tier": "discovery",
       "adapter": "rss",
