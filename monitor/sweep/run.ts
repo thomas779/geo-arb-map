@@ -58,6 +58,7 @@ interface SweepOptions {
   maxCalls: number;
   concurrency: number;
   rotationIndex: number | null;
+  mode: 'discovery' | 'rotation';
   output: string;
   leadsOutput: string;
   report: string;
@@ -106,6 +107,7 @@ function readArgs(argv: string[]): SweepOptions {
     maxCalls: Number(process.env.MONITOR_SWEEP_MAX_CALLS) || 300,
     concurrency: Number(process.env.MONITOR_SWEEP_CONCURRENCY) || 5,
     rotationIndex: null,
+    mode: process.env.MONITOR_SWEEP_MODE === 'discovery' ? 'discovery' : 'rotation',
     output: path.join(outDir, 'findings.json'),
     leadsOutput: path.join(outDir, 'leads.json'),
     report: path.join(outDir, 'sweep-report.json'),
@@ -119,6 +121,7 @@ function readArgs(argv: string[]): SweepOptions {
     else if (value === '--max-calls') options.maxCalls = Number(argv[++index]);
     else if (value === '--concurrency') options.concurrency = Number(argv[++index]);
     else if (value === '--rotation-index') options.rotationIndex = Number(argv[++index]);
+    else if (value === '--mode') options.mode = argv[++index] === 'discovery' ? 'discovery' : 'rotation';
     else if (value === '--output') options.output = path.resolve(argv[++index]);
     else if (value === '--leads-output') options.leadsOutput = path.resolve(argv[++index]);
     else if (value === '--report') options.report = path.resolve(argv[++index]);
@@ -268,13 +271,22 @@ export function findingToLead(finding: Finding): Lead | null {
 // are covered over several runs with no persisted cursor.
 export function selectJurisdictions(
   registry: RegistryEntry[],
-  options: { only: string[] | null; rssFlagged: Set<string>; maxCalls: number; rotationIndex: number },
+  options: {
+    only: string[] | null;
+    rssFlagged: Set<string>;
+    maxCalls: number;
+    rotationIndex: number;
+    mode?: 'discovery' | 'rotation';
+  },
 ): RegistryEntry[] {
   if (options.only) {
     const wanted = new Set(options.only);
     return registry.filter(entry => wanted.has(entry.iso_n3)).slice(0, options.maxCalls);
   }
   const flagged = registry.filter(entry => options.rssFlagged.has(entry.iso_n3));
+  // Discovery mode: only verify jurisdictions surfaced by fresh discovery signals —
+  // no grounded call happens on a day with no relevant news. Rotation is the backstop.
+  if (options.mode === 'discovery') return flagged.slice(0, options.maxCalls);
   const rest = registry.filter(entry => !options.rssFlagged.has(entry.iso_n3));
   const budgetForRest = Math.max(0, options.maxCalls - flagged.length);
   if (budgetForRest === 0 || rest.length === 0) return flagged.slice(0, options.maxCalls);
@@ -309,6 +321,21 @@ const FIXTURE_GROUNDED: Pick<GroundedResult, 'citations' | 'searchQueries'> = {
   searchQueries: ['fixture'],
 };
 
+// Free, pre-AI relevance gate: a discovery signal only flags its jurisdiction for
+// a (costly) grounded verify if its text mentions a mobility topic. Keeps daily
+// runs cheap — no grounded call for off-topic news.
+const MOBILITY_KEYWORDS = [
+  'visa', 'residence', 'residency', 'citizenship', 'nationality', 'naturaliz', 'permit',
+  'immigration', 'immigrant', 'migration', 'passport', 'golden visa', 'investment migration',
+  'citizenship by investment', 'cbi', 'rbi', 'descent', 'ancestry', 'work permit',
+  'digital nomad', 'asylum', 'deportation', 'expat', 'green card',
+];
+
+function isMobilityRelevant(signal: Signal): boolean {
+  const haystack = `${signal.title} ${signal.excerpt}`.toLowerCase();
+  return MOBILITY_KEYWORDS.some(keyword => haystack.includes(keyword));
+}
+
 export async function runSweep(
   options: SweepOptions,
 ): Promise<{ findings: Finding[]; leads: Lead[]; report: SweepReport }> {
@@ -329,6 +356,7 @@ export async function runSweep(
   if (fs.existsSync(signalsPath)) {
     const signals = JSON.parse(fs.readFileSync(signalsPath, 'utf8')) as Signal[];
     for (const signal of signals) {
+      if (!isMobilityRelevant(signal)) continue;
       for (const iso of inferJurisdictions(signal, citizenshipData.jurisdictions)) {
         const excerpt = `${signal.title} — ${signal.excerpt}`.slice(0, 240);
         rssByIso.set(iso, [...(rssByIso.get(iso) ?? []), excerpt]);
@@ -343,6 +371,7 @@ export async function runSweep(
     rssFlagged: new Set(rssByIso.keys()),
     maxCalls: options.maxCalls,
     rotationIndex,
+    mode: options.mode,
   });
 
   const fixtureRaw = options.fixtureResponse

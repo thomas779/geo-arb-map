@@ -409,6 +409,10 @@ describe('AI sweep + grounded verify', () => {
     // --only bypasses rotation.
     const onlyPick = selectJurisdictions(registry, { only: ['105', '107'], rssFlagged: empty, maxCalls: 4, rotationIndex: 5 });
     expect(onlyPick.map(entry => entry.iso_n3).sort()).toEqual(['105', '107']);
+
+    // discovery mode: only RSS-flagged jurisdictions are swept (no rotation fill).
+    const discovery = selectJurisdictions(registry, { only: null, rssFlagged: new Set(['103', '105']), maxCalls: 4, rotationIndex: 0, mode: 'discovery' });
+    expect(discovery.map(entry => entry.iso_n3).sort()).toEqual(['103', '105']);
   });
 
   test('loadRegistry flattens all three arrays and maps special.id to iso_n3', () => {
