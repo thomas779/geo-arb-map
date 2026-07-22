@@ -16,6 +16,10 @@ on:
         description: "Optional comma-separated iso_n3 to limit the sweep (e.g. 470,659,268)"
         required: false
         type: string
+      model:
+        description: "Optional sweep model override for this run (e.g. gemini-2.5-flash-lite)"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -33,7 +37,7 @@ jobs:
       MONITOR_LLM_BASE_URL: ${{ vars.MONITOR_LLM_BASE_URL }}
       MONITOR_GEMINI_BASE_URL: ${{ vars.MONITOR_GEMINI_BASE_URL }}
       MONITOR_LLM_MODEL: ${{ vars.MONITOR_LLM_MODEL }}
-      MONITOR_SWEEP_MODEL: ${{ vars.MONITOR_SWEEP_MODEL }}
+      MONITOR_SWEEP_MODEL: ${{ inputs.model || vars.MONITOR_SWEEP_MODEL }}
       MONITOR_SWEEP_MAX_CALLS: ${{ vars.MONITOR_SWEEP_MAX_CALLS }}
       MONITOR_SWEEP_CONCURRENCY: ${{ vars.MONITOR_SWEEP_CONCURRENCY }}
       MONITOR_LLM_TIMEOUT_MS: ${{ vars.MONITOR_LLM_TIMEOUT_MS }}
