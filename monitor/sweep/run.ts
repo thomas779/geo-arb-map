@@ -142,11 +142,13 @@ export function buildSweepPrompt(
   context: DatasetContext,
   rssExcerpts: string[],
 ): string {
-  return `You track citizenship, residency, visa, and citizenship/residency-by-investment (CBI/RBI)
-rule changes for a global mobility dataset. For ${entry.name} (ISO ${entry.iso_n3}), report any change
-that is already in force OR announced/upcoming and is NOT already reflected in what we record below.
-Confirm each against a CURRENT primary or official source (government, gazette, court, or tax authority;
-native language is fine). Ignore evergreen explainers, opinion, and anything that merely restates a
+  return `You are fact-checking government mobility rules for ${entry.name} (ISO ${entry.iso_n3}).
+First, use Google Search to find the most recent OFFICIAL / primary sources (government, gazette, court,
+or tax authority; native language is fine) on ${entry.name}'s citizenship, residency, visa, and
+citizenship/residency-by-investment (CBI/RBI) rules — prioritise the last 12 months and anything
+announced or upcoming. You MUST search before answering; do not rely on prior knowledge alone.
+Then report ONLY changes that are already in force OR announced/upcoming and are NOT already reflected
+in what we record below. Ignore evergreen explainers, opinion, and anything that merely restates a
 known rule.
 
 What we already record for ${entry.name} (absence is not evidence a route does not exist):
