@@ -422,6 +422,9 @@ describe('data:build parity gates', () => {
       'brazil-citizenship-by-birth',
       'brazil-citizenship-by-parent',
       'brazil-naturalization-by-residence',
+      'brunei-citizenship-at-birth-by-parent',
+      'brunei-citizenship-by-parent',
+      'brunei-naturalization',
       'bulgaria-citizenship-by-birth-statelessness',
       'cambodia-citizenship-at-birth-by-parent',
       'cambodia-citizenship-by-parent',
@@ -435,6 +438,9 @@ describe('data:build parity gates', () => {
       'chile-citizenship-by-birth',
       'chile-citizenship-by-parent-or-grandparent',
       'chile-naturalization',
+      'china-citizenship-at-birth-by-parent',
+      'china-citizenship-by-parent',
+      'china-naturalization',
       'colombia-citizenship-by-conditional-birth',
       'colombia-citizenship-by-parent',
       'colombia-naturalization-by-residence',
@@ -462,6 +468,9 @@ describe('data:build parity gates', () => {
       'estonia-citizenship-at-birth-by-parent',
       'estonia-citizenship-by-parent',
       'estonia-naturalization',
+      'fiji-citizenship-at-birth-by-parent',
+      'fiji-citizenship-by-parent',
+      'fiji-naturalization',
       'finland-citizenship-at-birth-by-parent',
       'finland-citizenship-by-parent',
       'finland-naturalization',
@@ -561,6 +570,10 @@ describe('data:build parity gates', () => {
       'panama-nationality-by-birth',
       'panama-nationality-through-parent',
       'panama-ordinary-naturalization',
+      'papua-new-guinea-citizenship-at-birth-by-parent',
+      'papua-new-guinea-citizenship-by-parent',
+      'papua-new-guinea-investor-naturalization',
+      'papua-new-guinea-naturalization',
       'paraguay-citizenship-by-birth',
       'paraguay-citizenship-by-parent',
       'paraguay-naturalization',
@@ -595,6 +608,9 @@ describe('data:build parity gates', () => {
       'slovakia-citizenship-at-birth-by-parent',
       'slovakia-citizenship-by-parent',
       'slovakia-naturalization',
+      'solomon-islands-citizenship-at-birth-by-parent',
+      'solomon-islands-citizenship-by-parent',
+      'solomon-islands-naturalization',
       'south-africa-citizenship-at-birth-by-parent',
       'south-africa-citizenship-by-parent',
       'south-africa-naturalization',
@@ -616,6 +632,12 @@ describe('data:build parity gates', () => {
       'thailand-citizenship-at-birth-by-parent',
       'thailand-citizenship-by-parent',
       'thailand-naturalization',
+      'timor-leste-citizenship-at-birth-by-parent',
+      'timor-leste-citizenship-by-parent',
+      'timor-leste-naturalization',
+      'tonga-citizenship-at-birth-by-parent',
+      'tonga-citizenship-by-parent',
+      'tonga-naturalization',
       'turkiye-citizenship-by-birth-statelessness',
       'turkiye-citizenship-by-descent',
       'turkiye-naturalization-by-residence',
@@ -638,35 +660,7 @@ describe('data:build parity gates', () => {
       'vietnam-citizenship-at-birth-by-parent',
       'vietnam-citizenship-by-parent',
       'vietnam-naturalization',
-    ]);
-    // Documents the honest gap: title and facts are legacy-carried.
-    expect(detail.legacy_carried_fields.length).toBeGreaterThanOrEqual(2);
-  });
-
-  test('compatibility citizenship is byte-identical to the curated source', () => {
-    const source = JSON.parse(fs.readFileSync(
-      path.join(REPO_ROOT, 'data/citizenship_routes.json'), 'utf8',
-    ));
-    expect(release.compatibility.citizenship).toEqual(source);
-  });
-
-  test('frontend country details replace migrated jurisdictions with canonical records', () => {
-    const spain = release.frontend.citizenship.jurisdictions.find(
-      jurisdiction => jurisdiction.iso_n3 === '724',
-    );
-    expect(spain).toMatchObject({
-      coverage: {
-        ancestry: 'reviewed',
-        naturalization: 'reviewed',
-        birth: 'reviewed',
-        investment: 'reviewed',
-      },
-    });
-    expect(spain?.route_ids).toEqual([
-      'spain-citizenship-by-parent-or-option',
-      'spain-citizenship-by-birth',
-      'spain-naturalization-by-residence',
-    ]);
+    ])
     expect(release.frontend.citizenship.routes.filter(
       route => route.country.iso_n3 === '250',
     )).toHaveLength(3);

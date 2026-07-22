@@ -16,16 +16,16 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 272,
+      "routes": 294,
       "by_mode": {
-        "ancestry": 84,
-        "naturalization": 86,
-        "birth": 84,
-        "investment": 18
+        "ancestry": 91,
+        "naturalization": 93,
+        "birth": 91,
+        "investment": 19
       },
       "by_status": {
-        "active": 266,
-        "pending_verification": 3,
+        "active": 287,
+        "pending_verification": 4,
         "inactive": 2,
         "verified_negative": 1
       }
@@ -391,12 +391,16 @@
       "name": "Solomon Is.",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "solomon-islands-citizenship-by-parent",
+        "solomon-islands-naturalization",
+        "solomon-islands-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "092",
@@ -415,12 +419,16 @@
       "name": "Brunei",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "brunei-citizenship-by-parent",
+        "brunei-naturalization",
+        "brunei-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "100",
@@ -605,12 +613,16 @@
       "name": "China",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "china-citizenship-by-parent",
+        "china-naturalization",
+        "china-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "158",
@@ -943,12 +955,16 @@
       "name": "Fiji",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "fiji-citizenship-by-parent",
+        "fiji-naturalization",
+        "fiji-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "246",
@@ -2242,12 +2258,17 @@
       "name": "Papua New Guinea",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "papua-new-guinea-citizenship-by-parent",
+        "papua-new-guinea-naturalization",
+        "papua-new-guinea-citizenship-at-birth-by-parent",
+        "papua-new-guinea-investor-naturalization"
+      ]
     },
     {
       "iso_n3": "600",
@@ -2358,12 +2379,16 @@
       "name": "Timor-Leste",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "timor-leste-citizenship-by-parent",
+        "timor-leste-naturalization",
+        "timor-leste-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "630",
@@ -2905,12 +2930,16 @@
       "name": "Tonga",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "tonga-citizenship-by-parent",
+        "tonga-naturalization",
+        "tonga-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "780",
@@ -4476,6 +4505,216 @@
       ]
     },
     {
+      "id": "solomon-islands-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "090",
+        "name": "Solomon Is."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a citizen parent",
+      "summary": "Birth to a Solomon Islands citizen parent creates citizenship. Birth in the Solomon Islands alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "solomon-islands-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a citizen parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Solomon Islands government - obtain citizenship",
+          "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "solomon-islands-citizenship-by-parent",
+      "country": {
+        "iso_n3": "090",
+        "name": "Solomon Is."
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Solomon Islands citizenship through a citizen parent",
+      "summary": "A child of a Solomon Islands citizen parent is a citizen under nationality law, subject to registration rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "solomon-islands-citizenship-by-parent-principal",
+          "label": "Solomon Islands citizenship through a citizen parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Solomon Islands government - obtain citizenship",
+          "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "solomon-islands-naturalization",
+      "country": {
+        "iso_n3": "090",
+        "name": "Solomon Is."
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Adults generally need about five years residence (commonly framed as five of the preceding ten years), good character, and language or cultural integration. Dual nationality is now generally permitted. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "solomon-islands-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Solomon Islands government - obtain citizenship",
+          "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "brunei-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "096",
+        "name": "Brunei"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Bruneian parent",
+      "summary": "Birth to a Bruneian parent creates Bruneian nationality. Birth in Brunei alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "brunei-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Bruneian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Brunei Nationality Act (AGC)",
+          "url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf"
+        }
+      ]
+    },
+    {
+      "id": "brunei-citizenship-by-parent",
+      "country": {
+        "iso_n3": "096",
+        "name": "Brunei"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Bruneian nationality through a Bruneian parent",
+      "summary": "A child of a subject of His Majesty is Bruneian under the Nationality Act, subject to registration rules for birth abroad.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "brunei-citizenship-by-parent-principal",
+          "label": "Bruneian nationality through a Bruneian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Brunei Nationality Act (AGC)",
+          "url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf"
+        }
+      ]
+    },
+    {
+      "id": "brunei-naturalization",
+      "country": {
+        "iso_n3": "096",
+        "name": "Brunei"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after twenty years residence",
+      "summary": "Adults generally need twenty years aggregate residence in the preceding twenty-five years, including the two years immediately before application, Malay language proficiency, good character, and intention to settle. Dual nationality is not recognized; prior nationality must cease. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          240
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "brunei-naturalization-principal",
+          "label": "Naturalization after twenty years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 240
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Brunei Nationality Act (AGC)",
+          "url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf"
+        }
+      ]
+    },
+    {
       "id": "bulgaria-bulgarian-origin-naturalization",
       "country": {
         "iso_n3": "100",
@@ -5115,6 +5354,109 @@
         {
           "title": "Chile SERMIG — Chilean citizenship / Carta de Nacionalización",
           "url": "https://serviciomigraciones.cl/en/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "china-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "156",
+        "name": "China"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Chinese parent",
+      "summary": "Birth to a Chinese parent generally creates Chinese nationality. The PRC does not recognize dual nationality for Chinese nationals.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "china-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Chinese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "PRC Nationality Law (IMMD published text)",
+          "url": "https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html"
+        }
+      ]
+    },
+    {
+      "id": "china-citizenship-by-parent",
+      "country": {
+        "iso_n3": "156",
+        "name": "China"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Chinese nationality through a Chinese parent",
+      "summary": "A child of a Chinese national parent is Chinese under the Nationality Law, subject to rules for births abroad where the parent has settled abroad and acquired foreign nationality.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "china-citizenship-by-parent-principal",
+          "label": "Chinese nationality through a Chinese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "PRC Nationality Law (IMMD published text)",
+          "url": "https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html"
+        }
+      ]
+    },
+    {
+      "id": "china-naturalization",
+      "country": {
+        "iso_n3": "156",
+        "name": "China"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as a Chinese national",
+      "summary": "Foreign nationals or stateless persons may apply if they are near relatives of Chinese nationals, have settled in China, or have other legitimate reasons, and are willing to abide by the Constitution and laws. Approved naturalizers must not retain foreign nationality. Grant is discretionary and uncommon.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "china-naturalization-principal",
+          "label": "Naturalization as a Chinese national",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "PRC Nationality Law (IMMD published text)",
+          "url": "https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html"
         }
       ]
     },
@@ -6162,6 +6504,115 @@
         {
           "title": "Estonia Citizenship Act (Riigi Teataja)",
           "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide"
+        }
+      ]
+    },
+    {
+      "id": "fiji-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "242",
+        "name": "Fiji"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Fijian parent",
+      "summary": "Birth to a Fijian parent creates Fijian citizenship under nationality law. Birth in Fiji alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "fiji-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Fijian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Fiji Ministry of Immigration - citizenship by registration and naturalization",
+          "url": "https://www.immigration.gov.fj/by-registration/"
+        }
+      ]
+    },
+    {
+      "id": "fiji-citizenship-by-parent",
+      "country": {
+        "iso_n3": "242",
+        "name": "Fiji"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Fijian citizenship through a Fijian parent",
+      "summary": "A child of a Fijian citizen parent may register as a citizen. Adult children of citizens use a registration track with residence conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "fiji-citizenship-by-parent-principal",
+          "label": "Fijian citizenship through a Fijian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Fiji Ministry of Immigration - citizenship by registration and naturalization",
+          "url": "https://www.immigration.gov.fj/by-registration/"
+        }
+      ]
+    },
+    {
+      "id": "fiji-naturalization",
+      "country": {
+        "iso_n3": "242",
+        "name": "Fiji"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five of ten years lawful presence",
+      "summary": "Adults may naturalize after lawful presence in Fiji for a total of five of the ten years immediately before application (visitor and student time excluded). Dual nationality is generally allowed. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "fiji-naturalization-principal",
+          "label": "Naturalization after five of ten years lawful presence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Fiji Ministry of Immigration - citizenship by registration and naturalization",
+          "url": "https://www.immigration.gov.fj/by-registration/"
+        },
+        {
+          "title": "Fiji Ministry of Foreign Affairs - Fiji citizenship",
+          "url": "https://www.foreignaffairs.gov.fj/fiji-high-commission-new-zealand/fiji-citizenship/"
         }
       ]
     },
@@ -10444,6 +10895,148 @@
       ]
     },
     {
+      "id": "papua-new-guinea-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "598",
+        "name": "Papua New Guinea"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a PNG parent",
+      "summary": "Birth to a PNG citizen parent creates PNG citizenship. Birth in PNG alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "papua-new-guinea-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a PNG parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "PNG ICA - eligibility for citizenship",
+          "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "papua-new-guinea-citizenship-by-parent",
+      "country": {
+        "iso_n3": "598",
+        "name": "Papua New Guinea"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "PNG citizenship through a PNG parent",
+      "summary": "A child of a Papua New Guinean citizen parent is a citizen under the Constitution and Citizenship Act, subject to registration rules for birth abroad.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "papua-new-guinea-citizenship-by-parent-principal",
+          "label": "PNG citizenship through a PNG parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "PNG ICA - eligibility for citizenship",
+          "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "papua-new-guinea-investor-naturalization",
+      "country": {
+        "iso_n3": "598",
+        "name": "Papua New Guinea"
+      },
+      "mode": "investment",
+      "status": "pending_verification",
+      "title": "Investor naturalization category",
+      "summary": "PNG ICA lists an investor naturalization request form as a discretionary ministerial track. It is not a published fixed-price citizenship-by-investment programme and still depends on statutory naturalization conditions and Cabinet or ministerial approval.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "papua-new-guinea-investor-naturalization-principal",
+          "label": "Investor naturalization category",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "PNG ICA - citizenship and dual citizenship",
+          "url": "https://ica.gov.pg/citizenship/citizenship-and-dual-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "papua-new-guinea-naturalization",
+      "country": {
+        "iso_n3": "598",
+        "name": "Papua New Guinea"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after eight years residence",
+      "summary": "Adults with eight years continuous residence may apply. Applicants must show character, language or vernacular knowledge, respect for customs, self-support, civic knowledge, and generally renounce other citizenship unless dual nationality with a prescribed country is approved. Ministerial grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "papua-new-guinea-naturalization-principal",
+          "label": "Naturalization after eight years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "PNG ICA - eligibility for citizenship",
+          "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship"
+        },
+        {
+          "title": "PNG ICA - citizenship and dual citizenship",
+          "url": "https://ica.gov.pg/citizenship/citizenship-and-dual-citizenship"
+        }
+      ]
+    },
+    {
       "id": "paraguay-citizenship-by-birth",
       "country": {
         "iso_n3": "600",
@@ -11024,6 +11617,115 @@
         {
           "title": "Portuguese Ministry of Justice — Portuguese nationality",
           "url": "https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa"
+        }
+      ]
+    },
+    {
+      "id": "timor-leste-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "626",
+        "name": "Timor-Leste"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Original citizenship at birth through a Timorese parent",
+      "summary": "Birth to a Timorese parent creates original citizenship under the Constitution. Additional birth-in-territory rules apply for certain parentage and declaration cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "timor-leste-citizenship-at-birth-by-parent-principal",
+          "label": "Original citizenship at birth through a Timorese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Timor-Leste Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/East_Timor_2002"
+        }
+      ]
+    },
+    {
+      "id": "timor-leste-citizenship-by-parent",
+      "country": {
+        "iso_n3": "626",
+        "name": "Timor-Leste"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Timorese citizenship through a Timorese parent",
+      "summary": "A child of a Timorese father or mother is an original citizen under the Constitution, including many births abroad in the direct line.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "timor-leste-citizenship-by-parent-principal",
+          "label": "Timorese citizenship through a Timorese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Timor-Leste Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/East_Timor_2002"
+        },
+        {
+          "title": "Timor-Leste Citizenship Law (Migration Service PDF)",
+          "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf"
+        }
+      ]
+    },
+    {
+      "id": "timor-leste-naturalization",
+      "country": {
+        "iso_n3": "626",
+        "name": "Timor-Leste"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after ten years residence",
+      "summary": "Adults generally need usual and regular residence for at least ten years after 20 May 2002 (or qualifying pre-1975 residence), official language ability, livelihood, good character, and knowledge of Timorese history and culture. Occupation-era transmigration residence does not count. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "timor-leste-naturalization-principal",
+          "label": "Naturalization after ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Timor-Leste Citizenship Law (Migration Service PDF)",
+          "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf"
         }
       ]
     },
@@ -12608,6 +13310,111 @@
         {
           "title": "Thailand Nationality Act B.E. 2508 (amended; UNHCR English text)",
           "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733"
+        }
+      ]
+    },
+    {
+      "id": "tonga-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "776",
+        "name": "Tonga"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tongan parent",
+      "summary": "Birth to a Tongan parent creates Tongan nationality. Birth in Tonga alone to two foreign parents is not a general open jus soli path for ordinary foreign residents.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tonga-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Tongan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tonga Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tonga_2013"
+        }
+      ]
+    },
+    {
+      "id": "tonga-citizenship-by-parent",
+      "country": {
+        "iso_n3": "776",
+        "name": "Tonga"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Tongan nationality through a Tongan parent",
+      "summary": "A child of a Tongan national parent is Tongan under nationality law, subject to registration rules for birth abroad.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tonga-citizenship-by-parent-principal",
+          "label": "Tongan nationality through a Tongan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tonga Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tonga_2013"
+        }
+      ]
+    },
+    {
+      "id": "tonga-naturalization",
+      "country": {
+        "iso_n3": "776",
+        "name": "Tonga"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Foreigners who have resided in Tonga for five years or more may, with the consent of the King, take the oath of allegiance and receive a certificate of naturalization. Language, character, and permanent settlement intent apply under the Nationality Act framework. Grant is highly discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "tonga-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tonga Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tonga_2013"
         }
       ]
     },

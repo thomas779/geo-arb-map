@@ -357,6 +357,16 @@ const OFFICIAL_URLS = {
   liechtenstein_naturalization: 'https://www.llv.li/en/individuals/migration-and-integration/naturalization',
   iceland_citizenship_when: 'https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply',
   iceland_government_citizenship: 'https://www.government.is/topics/foreign-nationals/citizenship/',
+  fiji_citizenship_registration: 'https://www.immigration.gov.fj/by-registration/',
+  fiji_foreign_affairs_citizenship: 'https://www.foreignaffairs.gov.fj/fiji-high-commission-new-zealand/fiji-citizenship/',
+  png_citizenship_eligibility: 'https://ica.gov.pg/citizenship/eligibility-for-png-citizenship',
+  png_dual_citizenship: 'https://ica.gov.pg/citizenship/citizenship-and-dual-citizenship',
+  solomon_citizenship: 'https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/',
+  tonga_constitution: 'https://www.constituteproject.org/constitution/Tonga_2013',
+  timor_leste_citizenship_law: 'https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf',
+  timor_leste_constitution: 'https://www.constituteproject.org/constitution/East_Timor_2002',
+  brunei_nationality_act: 'https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf',
+  china_nationality_law: 'https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -843,6 +853,16 @@ function jurisdictionSources(): SourceRecord[] {
       ['Liechtenstein National Administration - naturalization', OFFICIAL_URLS.liechtenstein_naturalization, '438', 'en', 'official_guidance', 'liechtenstein-citizenship-law'],
       ['Island.is - Icelandic citizenship residence length', OFFICIAL_URLS.iceland_citizenship_when, '352', 'en', 'official_guidance', 'iceland-citizenship-law'],
       ['Government of Iceland - citizenship', OFFICIAL_URLS.iceland_government_citizenship, '352', 'en', 'official_guidance', 'iceland-citizenship-law'],
+      ['Fiji Ministry of Immigration - citizenship by registration and naturalization', OFFICIAL_URLS.fiji_citizenship_registration, '242', 'en', 'official_guidance', 'fiji-citizenship-law'],
+      ['Fiji Ministry of Foreign Affairs - Fiji citizenship', OFFICIAL_URLS.fiji_foreign_affairs_citizenship, '242', 'en', 'official_guidance', 'fiji-citizenship-law'],
+      ['PNG ICA - eligibility for citizenship', OFFICIAL_URLS.png_citizenship_eligibility, '598', 'en', 'official_guidance', 'png-citizenship-law'],
+      ['PNG ICA - citizenship and dual citizenship', OFFICIAL_URLS.png_dual_citizenship, '598', 'en', 'official_guidance', 'png-citizenship-law'],
+      ['Solomon Islands government - obtain citizenship', OFFICIAL_URLS.solomon_citizenship, '090', 'en', 'official_guidance', 'solomon-islands-citizenship-law'],
+      ['Tonga Constitution (Constitute Project)', OFFICIAL_URLS.tonga_constitution, '776', 'en', 'primary_law', 'tonga-citizenship-law'],
+      ['Timor-Leste Citizenship Law (Migration Service PDF)', OFFICIAL_URLS.timor_leste_citizenship_law, '626', 'en', 'primary_law', 'timor-leste-citizenship-law'],
+      ['Timor-Leste Constitution (Constitute Project)', OFFICIAL_URLS.timor_leste_constitution, '626', 'en', 'primary_law', 'timor-leste-citizenship-law'],
+      ['Brunei Nationality Act (AGC)', OFFICIAL_URLS.brunei_nationality_act, '096', 'en', 'primary_law', 'brunei-citizenship-law'],
+      ['PRC Nationality Law (IMMD published text)', OFFICIAL_URLS.china_nationality_law, '156', 'en', 'primary_law', 'china-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -6124,6 +6144,376 @@ function icelandRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
   });
 }
 
+function fijiRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const immigration = requireSource(officialSources, OFFICIAL_URLS.fiji_citizenship_registration);
+  const foreignAffairs = requireSource(officialSources, OFFICIAL_URLS.fiji_foreign_affairs_citizenship);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '242',
+    note: 'Reviewed against Fiji Immigration and Foreign Affairs citizenship guidance. Dual nationality generally allowed. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [immigration] },
+      { mode: 'naturalization', finding: 'present', sources: [immigration, foreignAffairs] },
+      { mode: 'birth', finding: 'present', sources: [immigration], note: 'Parent Fijian; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [immigration], note: 'Investor permits are residence, not direct citizenship.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'fiji-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Fijian citizenship through a Fijian parent',
+        summary: 'A child of a Fijian citizen parent may register as a citizen. Adult children of citizens use a registration track with residence conditions.',
+        source: immigration,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '242' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'fiji-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five of ten years lawful presence',
+        summary: 'Adults may naturalize after lawful presence in Fiji for a total of five of the ten years immediately before application (visitor and student time excluded). Dual nationality is generally allowed. Grant is discretionary.',
+        source: [immigration, foreignAffairs],
+        eligibility: [
+          { field: 'residence.lawful_years_in_prior_ten', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'fiji-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Fijian parent',
+        summary: 'Birth to a Fijian parent creates Fijian citizenship under nationality law. Birth in Fiji alone to two foreign parents is not unrestricted jus soli.',
+        source: immigration,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '242' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function papuaNewGuineaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const eligibility = requireSource(officialSources, OFFICIAL_URLS.png_citizenship_eligibility);
+  const dual = requireSource(officialSources, OFFICIAL_URLS.png_dual_citizenship);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '598',
+    note: 'Reviewed against PNG ICA citizenship guidance. Dual nationality limited to prescribed countries. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [eligibility] },
+      { mode: 'naturalization', finding: 'present', sources: [eligibility, dual] },
+      { mode: 'birth', finding: 'present', sources: [eligibility], note: 'Parent PNG citizen; not general jus soli.' },
+      { mode: 'investment', finding: 'present', sources: [dual], note: 'Investor naturalization is a discretionary category, not a published buy-a-passport product.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'papua-new-guinea-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'PNG citizenship through a PNG parent',
+        summary: 'A child of a Papua New Guinean citizen parent is a citizen under the Constitution and Citizenship Act, subject to registration rules for birth abroad.',
+        source: eligibility,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '598' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'papua-new-guinea-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after eight years residence',
+        summary: 'Adults with eight years continuous residence may apply. Applicants must show character, language or vernacular knowledge, respect for customs, self-support, civic knowledge, and generally renounce other citizenship unless dual nationality with a prescribed country is approved. Ministerial grant is discretionary.',
+        source: [eligibility, dual],
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 8, unit: 'years' },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'papua-new-guinea-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a PNG parent',
+        summary: 'Birth to a PNG citizen parent creates PNG citizenship. Birth in PNG alone to two foreign parents is not general jus soli.',
+        source: eligibility,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '598' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'papua-new-guinea-investor-naturalization',
+        mode: 'investment',
+        title: 'Investor naturalization category',
+        summary: 'PNG ICA lists an investor naturalization request form as a discretionary ministerial track. It is not a published fixed-price citizenship-by-investment programme and still depends on statutory naturalization conditions and Cabinet or ministerial approval.',
+        source: dual,
+        eligibility: [
+          { field: 'programme.published_transactional_cbi', operator: 'eq', value: false },
+        ],
+        months: null,
+        allocation: 'discretionary',
+        status: 'pending_verification',
+        confidence: 'medium',
+        reviewState: 'pending',
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function solomonIslandsRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const gov = requireSource(officialSources, OFFICIAL_URLS.solomon_citizenship);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '090',
+    note: 'Reviewed against Solomon Islands government citizenship service guidance. Dual nationality reforms apply. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [gov] },
+      { mode: 'naturalization', finding: 'present', sources: [gov] },
+      { mode: 'birth', finding: 'present', sources: [gov], note: 'Parent Solomon Islands citizen; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [gov], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'solomon-islands-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Solomon Islands citizenship through a citizen parent',
+        summary: 'A child of a Solomon Islands citizen parent is a citizen under nationality law, subject to registration rules.',
+        source: gov,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '090' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'solomon-islands-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Adults generally need about five years residence (commonly framed as five of the preceding ten years), good character, and language or cultural integration. Dual nationality is now generally permitted. Grant is discretionary.',
+        source: gov,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'solomon-islands-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a citizen parent',
+        summary: 'Birth to a Solomon Islands citizen parent creates citizenship. Birth in the Solomon Islands alone to two foreign parents is not general jus soli.',
+        source: gov,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '090' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function tongaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.tonga_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '776',
+    note: 'Reviewed against the Tongan Constitution naturalization clause. Royal grant is discretionary. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Tongan; not unrestricted jus soli for foreigners.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'tonga-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Tongan nationality through a Tongan parent',
+        summary: 'A child of a Tongan national parent is Tongan under nationality law, subject to registration rules for birth abroad.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '776' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'tonga-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Foreigners who have resided in Tonga for five years or more may, with the consent of the King, take the oath of allegiance and receive a certificate of naturalization. Language, character, and permanent settlement intent apply under the Nationality Act framework. Grant is highly discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'tonga-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Tongan parent',
+        summary: 'Birth to a Tongan parent creates Tongan nationality. Birth in Tonga alone to two foreign parents is not a general open jus soli path for ordinary foreign residents.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '776' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function timorLesteRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.timor_leste_citizenship_law);
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.timor_leste_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '626',
+    note: 'Reviewed against Timor-Leste Citizenship Law and Constitution. Dual nationality generally allowed. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, law] },
+      { mode: 'naturalization', finding: 'present', sources: [law] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Original citizenship rules in Constitution; not unrestricted jus soli for all births.' },
+      { mode: 'investment', finding: 'verified_none', sources: [law], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'timor-leste-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Timorese citizenship through a Timorese parent',
+        summary: 'A child of a Timorese father or mother is an original citizen under the Constitution, including many births abroad in the direct line.',
+        source: [constitution, law],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '626' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'timor-leste-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after ten years residence',
+        summary: 'Adults generally need usual and regular residence for at least ten years after 20 May 2002 (or qualifying pre-1975 residence), official language ability, livelihood, good character, and knowledge of Timorese history and culture. Occupation-era transmigration residence does not count. Grant is discretionary.',
+        source: law,
+        eligibility: [
+          { field: 'residence.regular_years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'timor-leste-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Original citizenship at birth through a Timorese parent',
+        summary: 'Birth to a Timorese parent creates original citizenship under the Constitution. Additional birth-in-territory rules apply for certain parentage and declaration cases.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '626' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function bruneiRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.brunei_nationality_act);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '096',
+    note: 'Reviewed against the Brunei Nationality Act. Naturalization requires long residence and renunciation of prior nationality. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act] },
+      { mode: 'naturalization', finding: 'present', sources: [act] },
+      { mode: 'birth', finding: 'present', sources: [act], note: 'Parent Bruneian subject; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [act], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'brunei-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Bruneian nationality through a Bruneian parent',
+        summary: 'A child of a subject of His Majesty is Bruneian under the Nationality Act, subject to registration rules for birth abroad.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '096' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'brunei-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after twenty years residence',
+        summary: 'Adults generally need twenty years aggregate residence in the preceding twenty-five years, including the two years immediately before application, Malay language proficiency, good character, and intention to settle. Dual nationality is not recognized; prior nationality must cease. Grant is discretionary.',
+        source: act,
+        eligibility: [
+          { field: 'residence.years_in_prior_twenty_five', operator: 'gte', value: 20, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 240,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'brunei-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Bruneian parent',
+        summary: 'Birth to a Bruneian parent creates Bruneian nationality. Birth in Brunei alone to two foreign parents is not general jus soli.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '096' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function chinaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.china_nationality_law);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '156',
+    note: 'Reviewed against the PRC Nationality Law (IMMD published text). Dual nationality not recognized. Naturalization is rare and discretionary. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law] },
+      { mode: 'naturalization', finding: 'present', sources: [law] },
+      { mode: 'birth', finding: 'present', sources: [law], note: 'Parent Chinese or conditional birth rules; dual nationality not recognized.' },
+      { mode: 'investment', finding: 'verified_none', sources: [law], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'china-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Chinese nationality through a Chinese parent',
+        summary: 'A child of a Chinese national parent is Chinese under the Nationality Law, subject to rules for births abroad where the parent has settled abroad and acquired foreign nationality.',
+        source: law,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '156' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'china-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization as a Chinese national',
+        summary: 'Foreign nationals or stateless persons may apply if they are near relatives of Chinese nationals, have settled in China, or have other legitimate reasons, and are willing to abide by the Constitution and laws. Approved naturalizers must not retain foreign nationality. Grant is discretionary and uncommon.',
+        source: law,
+        eligibility: [
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: null,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'china-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Chinese parent',
+        summary: 'Birth to a Chinese parent generally creates Chinese nationality. The PRC does not recognize dual nationality for Chinese nationals.',
+        source: law,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '156' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -8021,11 +8411,13 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     belgiumRecord(shadow, countrySources),
     boliviaRecord(shadow, countrySources),
     brazilRecord(shadow, countrySources),
+    bruneiRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
     cambodiaRecord(shadow, countrySources),
     canadaRecord(shadow, countrySources),
     caymanIslandsRecord(shadow, countrySources),
     chileRecord(shadow, countrySources),
+    chinaRecord(shadow, countrySources),
     colombiaRecord(shadow, countrySources),
     croatiaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
@@ -8035,6 +8427,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     ecuadorRecord(shadow, countrySources),
     egyptRecord(shadow, countrySources),
     estoniaRecord(shadow, countrySources),
+    fijiRecord(shadow, countrySources),
     finlandRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
     georgiaRecord(shadow, countrySources),
@@ -8070,6 +8463,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     nigeriaRecord(shadow, countrySources),
     norwayRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
+    papuaNewGuineaRecord(shadow, countrySources),
     paraguayRecord(shadow, countrySources),
     peruRecord(shadow, countrySources),
     philippinesRecord(shadow, countrySources),
@@ -8083,12 +8477,15 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     serbiaRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),
     slovakiaRecord(shadow, countrySources),
+    solomonIslandsRecord(shadow, countrySources),
     southAfricaRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),
     swedenRecord(shadow, countrySources),
     switzerlandRecord(shadow, countrySources),
     taiwanRecord(shadow, countrySources),
     thailandRecord(shadow, countrySources),
+    timorLesteRecord(shadow, countrySources),
+    tongaRecord(shadow, countrySources),
     turkiyeRecord(shadow, countrySources),
     unitedArabEmiratesRecord(shadow, countrySources),
     unitedKingdomRecord(shadow, countrySources),

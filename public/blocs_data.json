@@ -2842,6 +2842,13 @@
         "sources": [
           "Monaco mon service public nationality guidance"
         ]
+      },
+      "096": {
+        "status": "banned",
+        "note": "Brunei: dual nationality not recognized; naturalizers must not retain foreign nationality.",
+        "sources": [
+          "Brunei Nationality Act"
+        ]
       }
     },
     "treaty_exceptions": [

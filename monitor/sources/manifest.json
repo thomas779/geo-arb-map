@@ -1528,6 +1528,92 @@
       ],
       "keywords": ["citizenship", "Icelandic", "residence", "seven years"],
       "notes": "Island.is Directorate of Immigration residence rules plus government citizenship overview."
+    },
+    {
+      "id": "fiji-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.immigration.gov.fj/by-registration/",
+      "jurisdictions": ["242"],
+      "pages": [
+        { "id": "by-registration", "url": "https://www.immigration.gov.fj/by-registration/" },
+        { "id": "foreign-affairs", "url": "https://www.foreignaffairs.gov.fj/fiji-high-commission-new-zealand/fiji-citizenship/" }
+      ],
+      "keywords": ["citizenship", "naturalization", "Fiji", "registration"],
+      "notes": "Fiji Immigration registration/naturalization pages. Five of ten years lawful presence."
+    },
+    {
+      "id": "png-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship",
+      "jurisdictions": ["598"],
+      "pages": [
+        { "id": "eligibility", "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship" },
+        { "id": "dual", "url": "https://ica.gov.pg/citizenship/citizenship-and-dual-citizenship" }
+      ],
+      "keywords": ["citizenship", "naturalization", "PNG", "dual", "eight years"],
+      "notes": "PNG ICA eligibility and dual citizenship pages. Dual limited to prescribed countries."
+    },
+    {
+      "id": "solomon-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/",
+      "jurisdictions": ["090"],
+      "pages": [{ "id": "obtain-citizenship", "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/" }],
+      "keywords": ["citizenship", "naturalization", "Solomon Islands", "residence"],
+      "notes": "Solomon Islands government citizenship service page."
+    },
+    {
+      "id": "tonga-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Tonga_2013",
+      "jurisdictions": ["776"],
+      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Tonga_2013" }],
+      "keywords": ["nationality", "naturalization", "Tonga", "King"],
+      "notes": "Constitution naturalization clause. Prefer a stable Nationality Act page when available."
+    },
+    {
+      "id": "timor-leste-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf",
+      "jurisdictions": ["626"],
+      "pages": [
+        { "id": "citizenship-law", "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf" },
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/East_Timor_2002" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "Timor-Leste", "ten years"],
+      "notes": "Citizenship Law PDF plus Constitution original citizenship rules."
+    },
+    {
+      "id": "brunei-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf",
+      "jurisdictions": ["096"],
+      "pages": [{ "id": "nationality-act", "url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf" }],
+      "keywords": ["nationality", "naturalisation", "Brunei", "twenty years"],
+      "notes": "Brunei Nationality Act PDF. Long residence path; dual not recognized."
+    },
+    {
+      "id": "china-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html",
+      "jurisdictions": ["156"],
+      "pages": [{ "id": "nationality-law", "url": "https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html" }],
+      "keywords": ["nationality", "naturalization", "China", "dual"],
+      "notes": "PRC Nationality Law English text via IMMD. Dual nationality not recognized."
     }
   ]
 }

@@ -317,7 +317,7 @@ describe('citizenship route database', () => {
       route.mode === 'investment' && route.status === 'pending_verification');
     expect(active.length).toBe(13);
     expect(active.map(route => route.id)).toContain('mauritius-investor-naturalization');
-    expect(pending.map(route => route.country.iso_n3).sort()).toEqual(['032', '116', '882']);
+    expect(pending.map(route => route.country.iso_n3).sort()).toEqual(['032', '116', '598', '882']);
   });
 
   test('Portugal records preserve the 2026 transition and nationality-dependent periods', () => {
