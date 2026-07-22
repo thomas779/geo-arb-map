@@ -226,12 +226,6 @@ export async function generateGroundedText(
     .flatMap(annotation => (annotation.url_citation?.url
       ? [{ uri: annotation.url_citation.url, title: annotation.url_citation.title ?? '' }]
       : []));
-  if (process.env.MONITOR_GROUNDING_DEBUG) {
-    console.error('[grounding-debug] steps=' + steps.length + ' contentItems=' + contentItems.length
-      + ' itemKeys=' + JSON.stringify(contentItems.map(item => Object.keys(item)))
-      + ' queries=' + searchQueries.length + ' citations=' + citations.length
-      + ' textHead=' + JSON.stringify(text.slice(0, 200)));
-  }
   if (!text) throw new Error('Gemini grounded response did not contain text');
   return { text, citations, searchQueries };
 }
