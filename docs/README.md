@@ -13,6 +13,8 @@ Operational instructions live beside the code they operate:
   and the offline pipeline test.
 - [`../monitor/cloudflare/README.md`](../monitor/cloudflare/README.md) — email
   intake deployment.
+- [`community-distribution.md`](community-distribution.md) — authentic, no-ads
+  playbook for growing the Telegram channel and Atlas.
 - [`../data/d1/README.md`](../data/d1/README.md) — canonical D1, backups, restore,
   review, and release commands.
 
