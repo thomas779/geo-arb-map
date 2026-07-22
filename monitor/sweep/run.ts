@@ -75,6 +75,9 @@ interface SweepReport {
   calls_made: number;
   grounded_queries: number;
   citations_seen: number;
+  input_tokens: number;
+  output_tokens: number;
+  estimated_cost_usd: number;
   findings: number;
   by_status: Record<string, number>;
   affects_dataset: number;
@@ -393,6 +396,8 @@ export async function runSweep(
   let groundedQueries = 0;
   let citationsSeen = 0;
   let skippedNoSearch = 0;
+  let inputTokens = 0;
+  let outputTokens = 0;
 
   if (!fixtureRaw && !llm) {
     console.warn('::warning title=Monitor sweep skipped::No monitoring LLM is configured');
@@ -403,14 +408,14 @@ export async function runSweep(
       if (fixtureRaw) {
         const normalized = normalizeFindings(fixtureRaw, entry, FIXTURE_GROUNDED);
         console.log(`${entry.iso_n3} ${entry.name}: ${normalized.length} findings`);
-        return { findings: normalized, made: 0, queries: 0, citations: 0, skipped: false };
+        return { findings: normalized, made: 0, queries: 0, citations: 0, skipped: false, input: 0, output: 0 };
       }
       let result: GroundedResult;
       try {
         result = await generateGroundedText(buildSweepPrompt(entry, context, rssExcerpts), llm!, { maxTokens: 8192 });
       } catch (error) {
         console.error(`::warning title=Sweep call failed::${entry.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
-        return { findings: [] as Finding[], made: 0, queries: 0, citations: 0, skipped: false };
+        return { findings: [] as Finding[], made: 0, queries: 0, citations: 0, skipped: false, input: 0, output: 0 };
       }
       let normalized: Finding[] = [];
       try {
@@ -420,13 +425,19 @@ export async function runSweep(
       }
       const skipped = normalized.length === 0 && result.citations.length === 0 && result.searchQueries.length === 0;
       console.log(`${entry.iso_n3} ${entry.name}: ${normalized.length} findings`);
-      return { findings: normalized, made: 1, queries: result.searchQueries.length, citations: result.citations.length, skipped };
+      return {
+        findings: normalized, made: 1,
+        queries: result.searchQueries.length, citations: result.citations.length, skipped,
+        input: result.usage.input, output: result.usage.output,
+      };
     });
     for (const outcome of outcomes) {
       findings.push(...outcome.findings);
       callsMade += outcome.made;
       groundedQueries += outcome.queries;
       citationsSeen += outcome.citations;
+      inputTokens += outcome.input;
+      outputTokens += outcome.output;
       if (outcome.skipped) skippedNoSearch += 1;
     }
   }
@@ -446,6 +457,14 @@ export async function runSweep(
   const byStatus: Record<string, number> = {};
   for (const finding of findings) byStatus[finding.status] = (byStatus[finding.status] ?? 0) + 1;
 
+  // Rough per-run token cost (grounding searches are free within the daily tier).
+  // Defaults ~gemini-3.5-flash-lite; override with the env rates if pricing changes.
+  const inputRate = Number(process.env.MONITOR_COST_INPUT_USD_PER_M) || 0.10;
+  const outputRate = Number(process.env.MONITOR_COST_OUTPUT_USD_PER_M) || 0.40;
+  const estimatedCostUsd = Number(
+    ((inputTokens / 1_000_000) * inputRate + (outputTokens / 1_000_000) * outputRate).toFixed(4),
+  );
+
   const report: SweepReport = {
     ran_at: new Date().toISOString(),
     mode,
@@ -454,6 +473,9 @@ export async function runSweep(
     calls_made: callsMade,
     grounded_queries: groundedQueries,
     citations_seen: citationsSeen,
+    input_tokens: inputTokens,
+    output_tokens: outputTokens,
+    estimated_cost_usd: estimatedCostUsd,
     findings: findings.length,
     by_status: byStatus,
     affects_dataset: leads.length,
