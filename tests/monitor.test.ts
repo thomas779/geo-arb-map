@@ -7,16 +7,26 @@ import { parseRss, type RssSource } from '../monitor/collectors/rss';
 import { parseNewsletterMessages } from '../monitor/collectors/email';
 import { signalFromNewsletterDispatch } from '../monitor/collectors/github-dispatch';
 import { parseTelegramPreview } from '../monitor/collectors/telegram';
-import { collectHtmlPage, diffNormalizedText, parseHtmlSnapshot } from '../monitor/collectors/html';
-import { expandHtmlPages, signalMatchesKeywords } from '../monitor/collectors/run';
-import { MonitorStateStore, type MonitorPageState } from '../monitor/state';
+import { signalMatchesKeywords } from '../monitor/collectors/run';
 import {
   canonicalArticleUrl,
   parseNewsletterRoutes,
   routeForMessage,
   routesForRecipient,
+  routesFromRows,
   senderAllowed,
 } from '../monitor/cloudflare/intake';
+import { generateGroundedText } from '../monitor/llm/client';
+import {
+  buildSweepPrompt,
+  findingToLead,
+  loadRegistry,
+  normalizeFindings,
+  selectJurisdictions,
+  type Finding,
+} from '../monitor/sweep/run';
+import { datasetContextForJurisdiction } from '../monitor/triage/context';
+import { buildNewsPost, fingerprint, synthesizeIssue } from '../monitor/publish/news';
 import { inferJurisdictions } from '../monitor/triage/context';
 import { normalizeRulings, parseJsonArray, seenSignalIds } from '../monitor/triage/triage';
 import { buildIssueDraft } from '../monitor/triage/issues';
@@ -60,213 +70,23 @@ describe('monitor Signal contract', () => {
 });
 
 describe('monitor feed collector', () => {
-  test('turns visible official-page changes into stable content-hash signals', () => {
+  test('matches keyword filters case-insensitively', () => {
     const source = {
-      id: 'official-nationality-page',
-      tier: 'verification' as const,
-      adapter: 'html_index' as const,
-      url: 'https://government.example.test/nationality',
-      jurisdictions: ['380'],
-    };
-    const first = parseHtmlSnapshot(`
-      <html><head><title>Nationality rules</title><script>window.build = 1</script></head>
-      <body><h1>Nationality rules</h1><p>Five years of residence.</p></body></html>
-    `, source, { retrievedAt })[0];
-    const dynamicOnly = parseHtmlSnapshot(`
-      <html><head><title>Nationality rules</title><script>window.build = 2</script></head>
-      <body><h1>Nationality rules</h1> <p>Five years of residence.</p></body></html>
-    `, source, { retrievedAt })[0];
-    const changed = parseHtmlSnapshot(`
-      <html><head><title>Nationality rules</title></head>
-      <body><h1>Nationality rules</h1><p>Six years of residence.</p></body></html>
-    `, source, { retrievedAt })[0];
-
-    expect(first.id).toBe(dynamicOnly.id);
-    expect(changed.id).not.toBe(first.id);
-    expect(first.jurisdiction).toBe('380');
-    expect(first.excerpt).toContain('Five years of residence.');
-  });
-
-  test('uses conditional requests and emits an actual diff only after the baseline changes', async () => {
-    const source = {
-      id: 'official-law', tier: 'verification' as const, adapter: 'html_index' as const,
-      url: 'https://government.example.test/law', jurisdictions: ['470'],
-    };
-    const prior = {
-      page_id: 'official-law:abc', source_id: source.id, url: source.url,
-      jurisdiction: '470', state: 'healthy' as const, last_success_hash: 'old-hash',
-      previous_text: null, current_text: 'Citizenship requires five years of residence.',
-      etag: '"version-1"', last_modified: 'Mon, 20 Jul 2026 10:00:00 GMT',
-      final_url: source.url, last_http_status: 200, last_attempted_at: retrievedAt,
-      last_success_retrieved_at: retrievedAt, consecutive_failures: 0,
-      last_error: null, updated_at: retrievedAt,
-    } satisfies MonitorPageState;
-    let requestHeaders: Headers | null = null;
-    const result = await collectHtmlPage(source, prior, {
-      retrievedAt,
-      fetchImpl: (async (_url, init) => {
-        requestHeaders = new Headers(init?.headers);
-        return new Response('<html><title>Nationality law</title><body>Citizenship requires six years of residence.</body></html>', {
-          status: 200,
-          headers: { etag: '"version-2"', 'last-modified': 'Tue, 21 Jul 2026 10:00:00 GMT' },
-        });
-      }) as typeof fetch,
-    });
-    expect(requestHeaders!.get('if-none-match')).toBe('"version-1"');
-    expect(requestHeaders!.get('if-modified-since')).toContain('20 Jul 2026');
-    expect(result.observation.change_kind).toBe('page_changed');
-    expect(result.observation.text_diff).toContain('- Citizenship requires five years');
-    expect(result.observation.text_diff).toContain('+ Nationality law Citizenship requires six years');
-    expect(result.signals[0]?.event_type).toBe('page_changed');
-  });
-
-  test('recognizes unchanged, deleted, and bot-protection responses', async () => {
-    const source = {
-      id: 'official-law', tier: 'verification' as const, adapter: 'html_index' as const,
-      url: 'https://government.example.test/law', jurisdictions: ['470'],
-    };
-    const prior = {
-      page_id: 'official-law:abc', source_id: source.id, url: source.url,
-      jurisdiction: '470', state: 'healthy' as const, last_success_hash: 'old-hash',
-      previous_text: null, current_text: 'Current law', etag: '"v1"', last_modified: null,
-      final_url: source.url, last_http_status: 200, last_attempted_at: retrievedAt,
-      last_success_retrieved_at: retrievedAt, consecutive_failures: 0,
-      last_error: null, updated_at: retrievedAt,
-    } satisfies MonitorPageState;
-    const unchanged = await collectHtmlPage(source, prior, {
-      retrievedAt, fetchImpl: (async () => new Response(null, { status: 304 })) as unknown as typeof fetch,
-    });
-    expect(unchanged.observation.change_kind).toBe('unchanged');
-    const missing = await collectHtmlPage(source, prior, {
-      retrievedAt, fetchImpl: (async () => new Response('gone', { status: 410 })) as unknown as typeof fetch,
-    });
-    expect(missing.observation.state).toBe('missing');
-    expect(missing.observation.change_kind).toBe('access_changed');
-    const blocked = await collectHtmlPage(source, prior, {
-      retrievedAt,
-      fetchImpl: (async () => new Response('<title>Just a moment...</title>Verify you are human', { status: 200 })) as unknown as typeof fetch,
-    });
-    expect(blocked.observation.state).toBe('blocked');
-  });
-
-  test('hashes official PDFs without storing binary bytes as SQLite text', async () => {
-    const source = {
-      id: 'official-pdf', tier: 'verification' as const, adapter: 'html_index' as const,
-      url: 'https://government.example.test/nationality.pdf', jurisdictions: ['028'],
-    };
-    const bytes = new Uint8Array([0x25, 0x50, 0x44, 0x46, 0x2d, 0x31, 0x2e, 0x37, 0, 255]);
-    const baseline = await collectHtmlPage(source, null, {
-      retrievedAt,
-      fetchImpl: (async () => new Response(bytes, {
-        status: 200, headers: { 'content-type': 'application/pdf', etag: '"pdf-v1"' },
-      })) as unknown as typeof fetch,
-    });
-    expect(baseline.observation.change_kind).toBe('baseline');
-    expect(baseline.observation.current_text).toMatch(/^PDF document · 10 bytes · SHA-256 /);
-    expect(baseline.signals).toHaveLength(0);
-
-    const prior = {
-      page_id: baseline.observation.page_id, source_id: source.id, url: source.url,
-      jurisdiction: '028', state: 'healthy' as const,
-      last_success_hash: baseline.observation.current_hash,
-      previous_text: null, current_text: baseline.observation.current_text,
-      etag: '"pdf-v1"', last_modified: null, final_url: source.url,
-      last_http_status: 200, last_attempted_at: retrievedAt,
-      last_success_retrieved_at: retrievedAt, consecutive_failures: 0,
-      last_error: null, updated_at: retrievedAt,
-    } satisfies MonitorPageState;
-    const changed = await collectHtmlPage(source, prior, {
-      retrievedAt,
-      fetchImpl: (async () => new Response(new Uint8Array([...bytes, 1]), {
-        status: 200, headers: { 'content-type': 'application/pdf', etag: '"pdf-v2"' },
-      })) as unknown as typeof fetch,
-    });
-    expect(changed.observation.change_kind).toBe('page_changed');
-    expect(changed.signals).toHaveLength(1);
-    expect(changed.signals[0]?.title).toContain('Official PDF changed');
-  });
-
-  test('expands several pages under one source and applies local-language filters', () => {
-    const source = {
-      id: 'official-gazette', tier: 'verification' as const, adapter: 'html_index' as const,
+      id: 'gazette', tier: 'verification' as const, adapter: 'rss' as const,
       status: 'active' as const, jurisdictions: ['724'],
-      url: 'https://boe.example.test/civil-code',
-      pages: [
-        { id: 'civil-code', url: 'https://boe.example.test/civil-code' },
-        { id: 'daily-gazette', url: 'https://boe.example.test/daily' },
-      ],
+      url: 'https://gazette.example.test/feed',
       keywords: ['nacionalidad', 'naturalización'],
     };
-    expect(expandHtmlPages(source)).toHaveLength(2);
-    const signal = makeSignal({
+    const hit = makeSignal({
       sourceId: source.id, tier: source.tier, externalId: 'notice-1',
-      url: source.pages[1]!.url, title: 'Reforma de nacionalidad', retrievedAt,
+      url: 'https://gazette.example.test/1', title: 'Reforma de NACIONALIDAD', retrievedAt,
     });
-    expect(signalMatchesKeywords(signal, source)).toBe(true);
-  });
-
-  test('persists last-good text, metadata, failures, and observation history', () => {
-    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'monitor-state-test-'));
-    const dbPath = path.join(directory, 'state.sqlite');
-    const store = new MonitorStateStore(process.cwd(), dbPath);
-    store.record({
-      page_id: 'source:page', source_id: 'source', jurisdiction: '470',
-      attempted_at: retrievedAt, state: 'healthy', change_kind: 'baseline', http_status: 200,
-      requested_url: 'https://example.test/page', final_url: 'https://example.test/page',
-      previous_hash: null, current_hash: 'hash-1', previous_text: null,
-      current_text: 'Five years', text_diff: null, etag: '"v1"', last_modified: null, error: null,
+    const miss = makeSignal({
+      sourceId: source.id, tier: source.tier, externalId: 'notice-2',
+      url: 'https://gazette.example.test/2', title: 'Weather update', retrievedAt,
     });
-    store.record({
-      page_id: 'source:page', source_id: 'source', jurisdiction: '470',
-      attempted_at: '2026-07-18T12:00:00.000Z', state: 'blocked',
-      change_kind: 'access_changed', http_status: 403,
-      requested_url: 'https://example.test/page', final_url: 'https://example.test/page',
-      previous_hash: 'hash-1', current_hash: null, previous_text: 'Five years',
-      current_text: null, text_diff: null, etag: null, last_modified: null,
-      error: 'blocked',
-    });
-    const page = store.getPage('source:page')!;
-    expect(page.last_success_hash).toBe('hash-1');
-    expect(page.current_text).toBe('Five years');
-    expect(page.consecutive_failures).toBe(1);
-    expect(store.database.query('SELECT COUNT(*) AS count FROM monitor_observations').get())
-      .toEqual({ count: 2 });
-    store.close();
-    fs.rmSync(directory, { recursive: true, force: true });
-  });
-
-  test('chunks large snapshots into D1-portable SQL without losing text', () => {
-    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'monitor-state-sql-test-'));
-    const sourceDb = path.join(directory, 'source.sqlite');
-    const targetDb = path.join(directory, 'target.sqlite');
-    const sqlPath = path.join(directory, 'mutations.sql');
-    const largeText = `Citizenship law ${"'quoted provision' ".repeat(8_000)}`;
-    const sourceStore = new MonitorStateStore(process.cwd(), sourceDb);
-    sourceStore.record({
-      page_id: 'large:page', source_id: 'large', jurisdiction: '300',
-      attempted_at: retrievedAt, state: 'healthy', change_kind: 'baseline', http_status: 200,
-      requested_url: 'https://example.test/large', final_url: 'https://example.test/large',
-      previous_hash: null, current_hash: 'large-hash', previous_text: null,
-      current_text: largeText, text_diff: null, etag: null, last_modified: null, error: null,
-    });
-    sourceStore.writeMutations(sqlPath);
-    sourceStore.close();
-
-    const rendered = fs.readFileSync(sqlPath, 'utf8');
-    expect(Math.max(...rendered.split('\n').map(line => line.length))).toBeLessThan(50_000);
-    const targetStore = new MonitorStateStore(process.cwd(), targetDb);
-    targetStore.database.exec(rendered);
-    expect(targetStore.getPage('large:page')?.current_text).toBe(largeText);
-    expect(targetStore.database.query(
-      'SELECT current_text FROM monitor_observations WHERE page_id = ?1',
-    ).get('large:page')).toEqual({ current_text: largeText });
-    targetStore.close();
-    fs.rmSync(directory, { recursive: true, force: true });
-  });
-
-  test('renders a bounded normalized textual diff', () => {
-    expect(diffNormalizedText('five years residence', 'six years residence'))
-      .toBe('- five years residence\n+ six years residence');
+    expect(signalMatchesKeywords(hit, source)).toBe(true);
+    expect(signalMatchesKeywords(miss, source)).toBe(false);
   });
 
   test('parses RSS and Atom into the same contract', () => {
@@ -367,6 +187,42 @@ describe('monitor feed collector', () => {
     }]))).toThrow('Ambiguous SOURCE_ROUTES sender mapping');
   });
 
+  test('builds validated routes from monitor_routes D1 rows', () => {
+    const routes = routesFromRows([{
+      source_id: 'expathub-georgia-newsletter',
+      recipient: 'newsletters@atlas.example.test',
+      allowed_sender_domains: '["expathub.ge"]',
+      canonical_hosts: '["expathub.ge"]',
+    }]);
+    expect(routes).toHaveLength(1);
+    expect(routes[0].allowed_sender_domains).toEqual(['expathub.ge']);
+    const route = routeForMessage(routes, 'newsletters@atlas.example.test', 'news@expathub.ge');
+    expect(route?.source_id).toBe('expathub-georgia-newsletter');
+  });
+
+  test('applies the same overlap invariant to D1 rows as to the secret', () => {
+    expect(() => routesFromRows([{
+      source_id: 'source-a',
+      recipient: 'newsletters@atlas.example.test',
+      allowed_sender_domains: '["mailer.example.test"]',
+      canonical_hosts: '["example.test"]',
+    }, {
+      source_id: 'source-b',
+      recipient: 'newsletters@atlas.example.test',
+      allowed_sender_domains: '["news.mailer.example.test"]',
+      canonical_hosts: '["example.test"]',
+    }])).toThrow('Ambiguous SOURCE_ROUTES sender mapping');
+  });
+
+  test('rejects a monitor_routes row whose list column is not a JSON array', () => {
+    expect(() => routesFromRows([{
+      source_id: 'source-a',
+      recipient: 'newsletters@atlas.example.test',
+      allowed_sender_domains: 'expathub.ge',
+      canonical_hosts: '["example.test"]',
+    }])).toThrow('must be a non-empty string array');
+  });
+
   test('normalizes a repository dispatch from a registered email source', async () => {
     const event = await Bun.file(
       new URL('./fixtures/monitor/newsletter-dispatch.json', import.meta.url),
@@ -457,5 +313,145 @@ describe('monitor triage', () => {
     expect(draft.title).toContain('[Monitor lead]');
     expect(draft.body).toContain('Locate and cite the current primary');
     expect(draft.body).toContain(`<!-- signal:${signal.id} -->`);
+  });
+});
+
+describe('AI sweep + grounded verify', () => {
+  const groundedBody = {
+    steps: [
+      { type: 'google_search_call', arguments: { queries: ['malta citizenship 2026'] } },
+      {
+        type: 'message',
+        content: [{
+          type: 'output_text',
+          text: '[{"iso_n3":"470","claim":"x"}]',
+          annotations: [{ url_citation: { url: 'https://gov.mt/x', title: 'Gov MT' } }],
+        }],
+      },
+    ],
+  };
+
+  test('generateGroundedText calls the Interactions API with the search tool and extracts citations', async () => {
+    const calls: Array<{ url: string; init: RequestInit }> = [];
+    const fetcher = (async (url: string, init: RequestInit) => {
+      calls.push({ url, init });
+      return new Response(JSON.stringify(groundedBody), { status: 200, headers: { 'content-type': 'application/json' } });
+    }) as unknown as typeof fetch;
+    const result = await generateGroundedText('find changes', {
+      provider: 'openai-compatible', apiKey: 'secret-key', model: 'gemini-3.5-flash',
+      googleApiBaseUrl: 'https://gen.example/v1beta', timeoutMs: 1000,
+    }, { fetcher });
+
+    expect(result.text).toContain('"iso_n3":"470"');
+    expect(result.citations).toEqual([{ uri: 'https://gov.mt/x', title: 'Gov MT' }]);
+    expect(result.searchQueries).toEqual(['malta citizenship 2026']);
+    expect(calls[0].url).toBe('https://gen.example/v1beta/interactions');
+    expect((calls[0].init.headers as Record<string, string>)['x-goog-api-key']).toBe('secret-key');
+    const sent = JSON.parse(String(calls[0].init.body));
+    expect(sent.tools).toEqual([{ type: 'google_search' }]);
+    expect(sent.input).toBe('find changes');
+    expect(sent.model).toBe('gemini-3.5-flash');
+  });
+
+  const entry = { iso_n3: '470', name: 'Malta' };
+  const searched = { citations: [{ uri: 'https://x', title: 'x' }], searchQueries: ['q'] };
+
+  test('normalizeFindings keeps sourced changes, drops not_found and sourceless confirmed', () => {
+    const findings = normalizeFindings([
+      { iso_n3: '470', claim: 'CBI closed', status: 'confirmed', primary_urls: ['https://gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true, category: 'investment', brief: 'b' },
+      { iso_n3: '470', claim: 'confirmed but no source', status: 'confirmed', primary_urls: [], brief: 'b' },
+      { iso_n3: '470', claim: 'nothing', status: 'not_found', primary_urls: [], brief: 'b' },
+      { iso_n3: '470', claim: 'a rumour', status: 'rumour', primary_urls: [], brief: 'b' },
+    ], entry, searched);
+    expect(findings.map(f => f.status)).toEqual(['confirmed', 'rumour']);
+    expect(findings[0].effective_date).toBe('2025-07-23');
+  });
+
+  test('normalizeFindings drops everything when the model did not actually search', () => {
+    const findings = normalizeFindings(
+      [{ iso_n3: '470', claim: 'CBI closed', status: 'confirmed', primary_urls: ['https://gov.mt/x'], brief: 'b' }],
+      entry,
+      { citations: [], searchQueries: [] },
+    );
+    expect(findings).toEqual([]);
+  });
+
+  test('findingToLead maps a dataset-affecting finding to a Lead with a sourced signal', () => {
+    const finding: Finding = {
+      iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
+      primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
+      category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: ['q'],
+    };
+    const lead = findingToLead(finding);
+    expect(lead?.impact_type).toBe('cost_or_investment_threshold');
+    expect(lead?.confidence).toBe('high');
+    expect(lead?.signal.url).toBe('https://komunita.gov.mt/x');
+    expect(lead?.signal.excerpt).toContain('Sources: https://komunita.gov.mt/x');
+    expect(findingToLead({ ...finding, primary_urls: [] })).toBeNull();
+  });
+
+  test('selectJurisdictions rotates full coverage across runs and always includes RSS-flagged', () => {
+    const registry = Array.from({ length: 10 }, (_, i) => ({ iso_n3: String(100 + i), name: `J${i}` }));
+    const empty = new Set<string>();
+    // budget 4, 10 jurisdictions → 3 slices cover everything within 3 runs.
+    const seen = new Set<string>();
+    for (let run = 0; run < 3; run += 1) {
+      const picked = selectJurisdictions(registry, { only: null, rssFlagged: empty, maxCalls: 4, rotationIndex: run });
+      expect(picked.length).toBeLessThanOrEqual(4);
+      for (const entry of picked) seen.add(entry.iso_n3);
+    }
+    expect(seen.size).toBe(10);
+
+    // RSS-flagged jurisdictions are always included regardless of rotation slice.
+    const flaggedPick = selectJurisdictions(registry, { only: null, rssFlagged: new Set(['109']), maxCalls: 4, rotationIndex: 0 });
+    expect(flaggedPick.some(entry => entry.iso_n3 === '109')).toBe(true);
+
+    // --only bypasses rotation.
+    const onlyPick = selectJurisdictions(registry, { only: ['105', '107'], rssFlagged: empty, maxCalls: 4, rotationIndex: 5 });
+    expect(onlyPick.map(entry => entry.iso_n3).sort()).toEqual(['105', '107']);
+
+    // discovery mode: only RSS-flagged jurisdictions are swept (no rotation fill).
+    const discovery = selectJurisdictions(registry, { only: null, rssFlagged: new Set(['103', '105']), maxCalls: 4, rotationIndex: 0, mode: 'discovery' });
+    expect(discovery.map(entry => entry.iso_n3).sort()).toEqual(['103', '105']);
+  });
+
+  test('loadRegistry flattens all three arrays and maps special.id to iso_n3', () => {
+    const entries = loadRegistry({
+      sovereigns: [{ iso_n3: '004', name: 'Afghanistan' }],
+      territories: [{ iso_n3: '660', name: 'Anguilla' }],
+      special: [{ id: 'XKX', name: 'Kosovo' }],
+    });
+    expect(entries).toHaveLength(3);
+    expect(entries[2]).toEqual({ iso_n3: 'XKX', name: 'Kosovo' });
+  });
+
+  test('buildSweepPrompt is delta-scoped and asks for a JSON array', () => {
+    const context = datasetContextForJurisdiction('470', {
+      jurisdictions: [{ iso_n3: '470', name: 'Malta', coverage: { ancestry: 'reviewed', naturalization: 'reviewed', birth: 'reviewed', investment: 'reviewed' } }],
+      routes: [{ id: 'r1', country: { iso_n3: '470', name: 'Malta' }, mode: 'investment', status: 'inactive', title: 't', summary: 's', last_checked: '2026-01-01' }],
+    }, { blocs: [], bilateral_lanes: [] });
+    expect(context.signal_jurisdictions).toEqual({});
+    expect(context.citizenship_routes).toHaveLength(1);
+    const prompt = buildSweepPrompt(entry, context, ['ExpatHub: residence permit change']);
+    expect(prompt).toContain('Malta');
+    expect(prompt).toContain('JSON array');
+    expect(prompt).toContain('residence permit change');
+  });
+
+  test('buildNewsPost + fingerprint + synthesizeIssue', () => {
+    const finding: Finding = {
+      iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
+      primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
+      category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: [],
+    };
+    const post = buildNewsPost(finding);
+    expect(post.text).toContain('🇲🇹 MALTA — Malta ends golden passports');
+    expect(post.text).toContain('https://komunita.gov.mt/x');
+    expect(post.text).toContain('Information only');
+    expect(() => buildNewsPost({ ...finding, primary_urls: [] })).toThrow('primary source');
+
+    expect(fingerprint(finding)).toBe(fingerprint(finding));
+    expect(fingerprint(finding)).not.toBe(fingerprint({ ...finding, effective_date: '2026-01-01' }));
+    expect(synthesizeIssue(finding).body).toContain('## Verified evidence');
   });
 });

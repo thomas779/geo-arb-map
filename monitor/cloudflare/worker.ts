@@ -3,19 +3,39 @@ import {
   parseNewsletterRoutes,
   routeForMessage,
   routesForRecipient,
+  routesFromRows,
   sha256,
+  type MonitorRouteRow,
   type NewsletterRoute,
 } from './intake';
 
 interface Env {
   DB: D1Database;
   RAW_EMAILS: R2Bucket;
-  SOURCE_ROUTES: string;
+  SOURCE_ROUTES?: string;
   GITHUB_TOKEN: string;
   GITHUB_OWNER: string;
   GITHUB_REPO: string;
   GITHUB_EVENT_TYPE?: string;
   MAX_EMAIL_BYTES?: string;
+}
+
+// Routing policy lives in the `monitor_routes` D1 table so it can be managed as
+// data. The SOURCE_ROUTES secret remains a fallback for transition/DR: it is
+// used only when the table is empty or unreadable.
+async function loadRoutes(env: Env): Promise<NewsletterRoute[]> {
+  try {
+    const { results } = await env.DB
+      .prepare(
+        'SELECT source_id, recipient, allowed_sender_domains, canonical_hosts FROM monitor_routes WHERE enabled = 1',
+      )
+      .all<MonitorRouteRow>();
+    if (results && results.length > 0) return routesFromRows(results);
+  } catch (error) {
+    console.error('monitor_routes lookup failed; falling back to SOURCE_ROUTES', error);
+  }
+  if (env.SOURCE_ROUTES) return parseNewsletterRoutes(env.SOURCE_ROUTES);
+  throw new Error('No newsletter routes are configured');
 }
 
 type IntakeStatus = 'processing' | 'ignored' | 'dispatched' | 'failed';
@@ -137,9 +157,9 @@ export default {
   async email(message, env): Promise<void> {
     let routes: NewsletterRoute[];
     try {
-      routes = parseNewsletterRoutes(env.SOURCE_ROUTES);
+      routes = await loadRoutes(env);
     } catch (error) {
-      console.error('Invalid SOURCE_ROUTES configuration', error);
+      console.error('Invalid newsletter route configuration', error);
       message.setReject('Newsletter intake is not configured');
       return;
     }

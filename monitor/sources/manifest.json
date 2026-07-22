@@ -2,6 +2,105 @@
   "$comment": "Every collector must emit the Signal shape in monitor/schema/signal.ts. Active sources use implemented RSS, public Telegram, or stable HTML snapshot transports. Planned sources still need credentials, onboarding, a specialized query, or a proven reliable endpoint. Independent agencies and country specialists are preferred over broad social monitoring.",
   "sources": [
     {
+      "id": "schengenvisainfo-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://schengenvisainfo.com/news/feed/",
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "SchengenVisaInfo news feed. Regional aggregator for EU/Schengen visa, residence, ETIAS/EES, and nationality changes; article text infers the specific jurisdiction. Discovery only; verify against official EU/national sources."
+    },
+    {
+      "id": "visasnews-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://visasnews.com/feed/",
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "VisasNews aggregator. Multi-country visa, entry, and immigration news (mixed languages). Discovery only; verify against primary sources."
+    },
+    {
+      "id": "visaguide-world-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://visaguide.world/news/feed/",
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "VisaGuide.World news feed. Global visa and immigration policy aggregator; article text infers the specific jurisdiction. Discovery only; verify against primary sources."
+    },
+    {
+      "id": "mexico-news-daily-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://mexiconewsdaily.com/feed/",
+      "jurisdictions": ["484"],
+      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "temporary resident", "permanent resident", "expat"],
+      "keyword_match": "any",
+      "notes": "Mexico News Daily (English). Local outlet, keyword-filtered to mobility items. Discovery only; verify against SRE/INM primary sources."
+    },
+    {
+      "id": "portugal-news-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://www.theportugalnews.com/rss",
+      "jurisdictions": ["620"],
+      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "golden visa", "D7", "D8", "AIMA", "expat"],
+      "keyword_match": "any",
+      "notes": "The Portugal News (English). Local outlet, keyword-filtered. Discovery only; verify against AIMA/official sources."
+    },
+    {
+      "id": "bali-sun-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://thebalisun.com/feed/",
+      "jurisdictions": ["360"],
+      "keywords": ["visa", "immigration", "residence", "residency", "permit", "KITAS", "second home visa", "citizenship", "expat", "golden visa"],
+      "keyword_match": "any",
+      "notes": "The Bali Sun (English). Indonesia expat/visa coverage, keyword-filtered. Discovery only; verify against Indonesian immigration primary sources."
+    },
+    {
+      "id": "tico-times-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://ticotimes.net/feed/",
+      "jurisdictions": ["188"],
+      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "rentista", "pensionado", "expat"],
+      "keyword_match": "any",
+      "notes": "The Tico Times (English). Costa Rica local outlet, keyword-filtered. Discovery only; verify against Migracion CR primary sources."
+    },
+    {
+      "id": "thai-examiner-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://www.thaiexaminer.com/feed/",
+      "jurisdictions": ["764"],
+      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "DTV", "LTR", "retirement visa", "Elite visa", "expat"],
+      "keyword_match": "any",
+      "notes": "Thai Examiner (English). Thailand foreigner/visa coverage, keyword-filtered. Discovery only; verify against Thai Immigration Bureau primary sources."
+    },
+    {
+      "id": "vnexpress-intl-rss",
+      "tier": "discovery",
+      "adapter": "rss",
+      "status": "active",
+      "url": "https://e.vnexpress.net/rss/news.rss",
+      "jurisdictions": ["704"],
+      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "temporary residence", "e-visa", "expat"],
+      "keyword_match": "any",
+      "notes": "VnExpress International (English). Vietnam local outlet, keyword-filtered. Discovery only; verify against Vietnamese immigration primary sources."
+    },
+    {
       "id": "globalcit-rss",
       "tier": "discovery",
       "adapter": "rss",
@@ -209,7 +308,7 @@
       "jurisdictions": [
         "268"
       ],
-      "notes": "Tbilisi Expat e-Newsletter from ExpatHub.GE. User has prior mail worth replaying for intake tests. Map sender domain after first real delivery. Discovery only; many posts are forward-looking (programme openings/closings) and need official confirmation."
+      "notes": "Tbilisi Expat e-Newsletter from ExpatHub.GE. Superseded for discovery by expathub-georgia-rss: the e-News is a BirdSend-tracked aggregator digest whose links resolve to outside primary sources (matsne.gov.ge, info.parliament.ge, news) rather than expathub.ge articles, so the email intake cannot extract a canonical URL and archives it as ignored. Ingest ExpatHub via RSS; reserve email intake for publisher newsletters that link to their own articles. Kept planned only as an intake-format reference."
     },
     {
       "id": "bal-insights-rss",

@@ -92,8 +92,13 @@ export async function collectRss(
   source: RssSource,
   { fetchImpl = fetch, retrievedAt }: ParseOptions & { fetchImpl?: typeof fetch } = {},
 ): Promise<Signal[]> {
+  // A browser-like User-Agent + Accept header clears naive bot blocks that reject
+  // obvious crawler UAs; hard blocks still fail and are reported per source.
   const response = await fetchImpl(source.url, {
-    headers: { 'User-Agent': 'flag-paths-monitor/0.1 (+https://github.com/thomas779/geo-arb-map)' },
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36 flag-paths-monitor',
+      Accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*',
+    },
   });
   if (!response.ok) throw new Error(`${source.id}: RSS fetch failed (${response.status})`);
   return parseRss(await response.text(), source, { retrievedAt });

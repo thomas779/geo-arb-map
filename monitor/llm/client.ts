@@ -5,8 +5,24 @@ export interface LlmConfig {
   apiKey: string;
   model: string;
   baseUrl?: string;
+  // Native Gemini API base (…/v1beta). Google Search grounding is only available
+  // on the native :generateContent endpoint, not the OpenAI-compatible shim.
+  googleApiBaseUrl?: string;
   timeoutMs: number;
 }
+
+export interface GroundingCitation {
+  uri: string;
+  title: string;
+}
+
+export interface GroundedResult {
+  text: string;
+  citations: GroundingCitation[];
+  searchQueries: string[];
+}
+
+const DEFAULT_GEMINI_BASE_URL = 'https://generativelanguage.googleapis.com/v1beta';
 
 interface Environment {
   [key: string]: string | undefined;
@@ -71,10 +87,22 @@ export function llmConfigFromEnv(env: Environment = process.env): LlmConfig | nu
     }
     config.baseUrl = baseUrl;
   }
+  // Attach a native Gemini base for grounded calls only when this is actually a
+  // Gemini setup (explicit override, or an OpenAI-compatible base that points at
+  // Google) so non-Google gateways keep a clean config. Grounded calls fall back
+  // to the public Gemini endpoint when this is unset.
+  const explicitGeminiBase = env.MONITOR_GEMINI_BASE_URL?.trim();
+  const derivedGeminiBase = env.MONITOR_LLM_BASE_URL
+    && /generativelanguage\.googleapis\.com/i.test(env.MONITOR_LLM_BASE_URL)
+    ? normalizedBaseUrl(env.MONITOR_LLM_BASE_URL).replace(/\/openai$/, '')
+    : '';
+  if (explicitGeminiBase || derivedGeminiBase) {
+    config.googleApiBaseUrl = normalizedBaseUrl(explicitGeminiBase || derivedGeminiBase);
+  }
   return config;
 }
 
-async function responseError(response: Response, provider: LlmProvider): Promise<Error> {
+async function responseError(response: Response, provider: string): Promise<Error> {
   const body = (await response.text()).slice(0, 1000);
   return new Error(
     `${provider} LLM request failed (${response.status})${body ? `: ${body}` : ''}`,
@@ -140,4 +168,82 @@ export async function generateLlmText(
   const text = body.choices?.[0]?.message?.content;
   if (!text) throw new Error('OpenAI-compatible response did not contain text');
   return text;
+}
+
+// Grounded generation via the native Gemini API with Google Search. This is a
+// separate function (not a provider mode) because grounding is a capability of
+// the native :generateContent endpoint only; the OpenAI-compatible shim cannot
+// ground. Grounding is also incompatible with structured JSON output, so callers
+// must request JSON in the prompt and parse it tolerantly.
+export async function generateGroundedText(
+  prompt: string,
+  config: LlmConfig,
+  { maxTokens = 4096, fetcher = fetch }: GenerateOptions = {},
+): Promise<GroundedResult> {
+  if (!prompt.trim()) throw new Error('LLM prompt cannot be empty');
+  if (!Number.isInteger(maxTokens) || maxTokens < 1) {
+    throw new Error('maxTokens must be a positive integer');
+  }
+  const baseUrl = normalizedBaseUrl(config.googleApiBaseUrl || DEFAULT_GEMINI_BASE_URL);
+  const signal = AbortSignal.timeout(config.timeoutMs);
+  // Google Search grounding for current Gemini models runs on the Interactions
+  // API; the search tool is declared as {type:'google_search'} and the grounded
+  // answer plus citations come back in the response `steps[]`.
+  const response = await fetcher(`${baseUrl}/interactions`, {
+    method: 'POST',
+    signal,
+    headers: {
+      'x-goog-api-key': config.apiKey,
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: config.model,
+      input: prompt,
+      tools: [{ type: 'google_search' }],
+    }),
+  });
+  if (!response.ok) throw await responseError(response, 'gemini-grounded');
+  // The Interactions response is a list of steps: google-search calls (which
+  // carry `arguments.queries`), their results, and a final message step whose
+  // `content[]` holds the answer text and `annotations[].url_citation` sources.
+  const body = await response.json() as {
+    steps?: Array<{
+      type?: string;
+      arguments?: { queries?: string[] };
+      content?: Array<{
+        type?: string;
+        text?: string;
+        annotations?: Array<{ url_citation?: { url?: string; title?: string } }>;
+      }>;
+    }>;
+  };
+  const steps = body.steps ?? [];
+  const contentItems = steps.flatMap(step => step.content ?? []);
+  const text = contentItems.map(item => item.text ?? '').join('').trim();
+  const searchQueries = steps.flatMap(step => step.arguments?.queries ?? []);
+  const citations: GroundingCitation[] = contentItems
+    .flatMap(item => item.annotations ?? [])
+    .flatMap(annotation => (annotation.url_citation?.url
+      ? [{ uri: annotation.url_citation.url, title: annotation.url_citation.title ?? '' }]
+      : []));
+  if (!text) throw new Error('Gemini grounded response did not contain text');
+  return { text, citations, searchQueries };
+}
+
+// Grounding citation URIs are short-lived Google redirect links, not the primary
+// source. Follow one to recover the real destination host for cross-checking.
+export async function resolveRedirect(
+  uri: string,
+  { fetcher = fetch, timeoutMs = 10_000 }: { fetcher?: typeof fetch; timeoutMs?: number } = {},
+): Promise<string> {
+  try {
+    const response = await fetcher(uri, {
+      method: 'GET',
+      redirect: 'follow',
+      signal: AbortSignal.timeout(timeoutMs),
+    });
+    return response.url || uri;
+  } catch {
+    return uri;
+  }
 }

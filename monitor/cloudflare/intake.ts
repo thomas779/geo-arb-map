@@ -58,37 +58,42 @@ function hostnameMatches(hostname: string, allowed: string[]): boolean {
   return allowed.some(host => candidate === host || candidate.endsWith(`.${host}`));
 }
 
-export function parseNewsletterRoutes(raw: string): NewsletterRoute[] {
-  let parsed: unknown;
-  try {
-    parsed = JSON.parse(raw);
-  } catch {
-    throw new TypeError('SOURCE_ROUTES must be valid JSON');
-  }
-  if (!Array.isArray(parsed) || parsed.length === 0) {
-    throw new TypeError('SOURCE_ROUTES must contain at least one route');
-  }
+/**
+ * One row of the `monitor_routes` D1 table. The two list columns are stored as
+ * JSON-array text so the routing policy can be managed as data instead of a
+ * write-only Worker secret.
+ */
+export interface MonitorRouteRow {
+  source_id: string;
+  recipient: string;
+  allowed_sender_domains: string;
+  canonical_hosts: string;
+}
 
-  const routes = parsed.map((value, index) => {
-    if (!value || typeof value !== 'object') {
-      throw new TypeError(`SOURCE_ROUTES[${index}] must be an object`);
-    }
-    const route = value as Record<string, unknown>;
-    const recipient = canonicalAddress(requiredString(route.recipient, `SOURCE_ROUTES[${index}].recipient`));
-    return {
-      source_id: requiredString(route.source_id, `SOURCE_ROUTES[${index}].source_id`),
-      recipient,
-      allowed_sender_domains: stringList(
-        route.allowed_sender_domains,
-        `SOURCE_ROUTES[${index}].allowed_sender_domains`,
-      ),
-      canonical_hosts: stringList(
-        route.canonical_hosts,
-        `SOURCE_ROUTES[${index}].canonical_hosts`,
-      ),
-    };
-  });
+function buildRoute(value: unknown, index: number): NewsletterRoute {
+  if (!value || typeof value !== 'object') {
+    throw new TypeError(`SOURCE_ROUTES[${index}] must be an object`);
+  }
+  const route = value as Record<string, unknown>;
+  const recipient = canonicalAddress(requiredString(route.recipient, `SOURCE_ROUTES[${index}].recipient`));
+  return {
+    source_id: requiredString(route.source_id, `SOURCE_ROUTES[${index}].source_id`),
+    recipient,
+    allowed_sender_domains: stringList(
+      route.allowed_sender_domains,
+      `SOURCE_ROUTES[${index}].allowed_sender_domains`,
+    ),
+    canonical_hosts: stringList(
+      route.canonical_hosts,
+      `SOURCE_ROUTES[${index}].canonical_hosts`,
+    ),
+  };
+}
 
+// Shared invariant check for any route source: unique source ids, and — for a
+// shared intake address — non-overlapping sender-domain allowlists so every
+// message attributes to exactly one source.
+function assertRouteSet(routes: NewsletterRoute[]): NewsletterRoute[] {
   const sourceIds = new Set<string>();
   routes.forEach((route, index) => {
     if (sourceIds.has(route.source_id)) {
@@ -111,8 +116,46 @@ export function parseNewsletterRoutes(raw: string): NewsletterRoute[] {
       }
     }
   });
-
   return routes;
+}
+
+export function normalizeRoutes(entries: unknown[]): NewsletterRoute[] {
+  if (!Array.isArray(entries) || entries.length === 0) {
+    throw new TypeError('Newsletter routes must contain at least one route');
+  }
+  return assertRouteSet(entries.map((value, index) => buildRoute(value, index)));
+}
+
+export function parseNewsletterRoutes(raw: string): NewsletterRoute[] {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    throw new TypeError('SOURCE_ROUTES must be valid JSON');
+  }
+  if (!Array.isArray(parsed) || parsed.length === 0) {
+    throw new TypeError('SOURCE_ROUTES must contain at least one route');
+  }
+  return normalizeRoutes(parsed);
+}
+
+// Build validated routes from `monitor_routes` rows. The JSON-array columns are
+// parsed here; malformed text falls through to stringList, which rejects it.
+export function routesFromRows(rows: MonitorRouteRow[]): NewsletterRoute[] {
+  return normalizeRoutes(rows.map(row => ({
+    source_id: row.source_id,
+    recipient: row.recipient,
+    allowed_sender_domains: safeJsonParse(row.allowed_sender_domains),
+    canonical_hosts: safeJsonParse(row.canonical_hosts),
+  })));
+}
+
+function safeJsonParse(raw: string): unknown {
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return raw;
+  }
 }
 
 export function routesForRecipient(

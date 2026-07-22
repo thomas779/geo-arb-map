@@ -106,21 +106,18 @@ export function inferJurisdictions(
   return [...new Set(matches)].slice(0, 6);
 }
 
-export function buildDatasetContext(
-  signals: Signal[],
+// The dataset slice for a set of iso_n3 ids: what we already record for those
+// jurisdictions (coverage review-states, routes, regional access). Shared by the
+// signal-driven context and the per-jurisdiction sweep context.
+function contextForIds(
+  ids: Set<string>,
   citizenshipData: CitizenshipData,
   blocsData: BlocsData,
-): DatasetContext {
+): Omit<DatasetContext, 'signal_jurisdictions'> {
   const jurisdictionById = new Map(
     citizenshipData.jurisdictions.map(item => [item.iso_n3, item]),
   );
-  const signalJurisdictions = Object.fromEntries(
-    signals.map(signal => [signal.id, inferJurisdictions(signal, citizenshipData.jurisdictions)]),
-  ) as Record<string, string[]>;
-  const ids = new Set(Object.values(signalJurisdictions).flat());
-
   return {
-    signal_jurisdictions: signalJurisdictions,
     jurisdictions: [...ids].flatMap(id => {
       const item = jurisdictionById.get(id);
       return item ? [{ iso_n3: item.iso_n3, name: item.name, coverage: item.coverage }] : [];
@@ -152,5 +149,33 @@ export function buildDatasetContext(
           beneficiaries: lane.beneficiaries,
         })),
     ],
+  };
+}
+
+export function buildDatasetContext(
+  signals: Signal[],
+  citizenshipData: CitizenshipData,
+  blocsData: BlocsData,
+): DatasetContext {
+  const signalJurisdictions = Object.fromEntries(
+    signals.map(signal => [signal.id, inferJurisdictions(signal, citizenshipData.jurisdictions)]),
+  ) as Record<string, string[]>;
+  const ids = new Set(Object.values(signalJurisdictions).flat());
+  return {
+    signal_jurisdictions: signalJurisdictions,
+    ...contextForIds(ids, citizenshipData, blocsData),
+  };
+}
+
+// Delta context for the AI sweep: what we already record for one jurisdiction,
+// so the model reports changes rather than restating known rules.
+export function datasetContextForJurisdiction(
+  isoN3: string,
+  citizenshipData: CitizenshipData,
+  blocsData: BlocsData,
+): DatasetContext {
+  return {
+    signal_jurisdictions: {},
+    ...contextForIds(new Set([isoN3]), citizenshipData, blocsData),
   };
 }

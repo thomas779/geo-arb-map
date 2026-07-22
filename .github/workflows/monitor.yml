@@ -2,16 +2,20 @@ name: Monitor mobility sources
 
 on:
   schedule:
-    - cron: "17 7 * * 1"
+    - cron: "17 7 * * *"
   repository_dispatch:
     types: [newsletter_signal]
   workflow_dispatch:
     inputs:
       open_issues:
-        description: Create GitHub issues after triage
+        description: Create GitHub issues for data-changing findings
         required: false
         default: false
         type: boolean
+      only:
+        description: "Optional comma-separated iso_n3 to limit the sweep (e.g. 470,659,268)"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -27,12 +31,15 @@ jobs:
     env:
       MONITOR_LLM_PROVIDER: ${{ vars.MONITOR_LLM_PROVIDER }}
       MONITOR_LLM_BASE_URL: ${{ vars.MONITOR_LLM_BASE_URL }}
+      MONITOR_GEMINI_BASE_URL: ${{ vars.MONITOR_GEMINI_BASE_URL }}
       MONITOR_LLM_MODEL: ${{ vars.MONITOR_LLM_MODEL }}
+      MONITOR_SWEEP_MODEL: ${{ vars.MONITOR_SWEEP_MODEL }}
+      MONITOR_SWEEP_MAX_CALLS: ${{ vars.MONITOR_SWEEP_MAX_CALLS }}
+      MONITOR_SWEEP_CONCURRENCY: ${{ vars.MONITOR_SWEEP_CONCURRENCY }}
       MONITOR_LLM_TIMEOUT_MS: ${{ vars.MONITOR_LLM_TIMEOUT_MS }}
       MONITOR_LLM_API_KEY: ${{ secrets.MONITOR_LLM_API_KEY }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MONITOR_TRIAGE_MODEL: ${{ vars.MONITOR_TRIAGE_MODEL }}
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -43,43 +50,37 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Prepare persistent monitor state
-        if: github.event_name != 'repository_dispatch'
+      - name: Read existing issue markers
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          bunx wrangler d1 migrations apply flag-paths-data \
-            --remote --config data/d1/wrangler.jsonc
           mkdir -p monitor/.out
-          bunx wrangler d1 export flag-paths-data \
-            --remote --config data/d1/wrangler.jsonc \
-            --output monitor/.out/monitor-state-before.sql \
-            --skip-confirmation
+          gh issue list --state all --limit 1000 --json number,body > monitor/.out/existing-issues.json
 
-      - name: Collect recent signals
+      # Discovery is RSS + curated Telegram only. The official-page HTML crawl is
+      # retired in favour of the grounded AI sweep below.
+      - name: Collect discovery signals
         if: github.event_name != 'repository_dispatch'
-        run: >-
-          bun run monitor:collect --strict
-          --state-db monitor/.out/monitor-state-before.sql
-          --state-sql monitor/.out/monitor-state.sql
+        run: bun run monitor:collect -- --adapters rss,telegram_html --lookback-days 2
 
-      - name: Persist monitor observations
-        if: always() && github.event_name != 'repository_dispatch'
-        run: |
-          test -s monitor/.out/monitor-state.sql
-          bunx wrangler d1 execute flag-paths-data \
-            --remote --config data/d1/wrangler.jsonc \
-            --file monitor/.out/monitor-state.sql
-
+      # The newsletter push path keeps the existing single-signal normalization.
       - name: Normalize newsletter dispatch
         if: github.event_name == 'repository_dispatch'
         run: bun run monitor:email:dispatch
 
-      - name: Read existing issue markers
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh issue list --state all --limit 1000 --json number,body > monitor/.out/existing-issues.json
+      - name: AI per-jurisdiction sweep
+        if: github.event_name != 'repository_dispatch'
+        run: bun run monitor:sweep ${{ (github.event_name == 'workflow_dispatch' && inputs.only) && format('-- --only {0}', inputs.only) || '' }}
 
-      - name: Triage new signals
+      - name: Triage newsletter signal
+        if: github.event_name == 'repository_dispatch'
         run: bun run monitor:triage
+
+      - name: Summarize sweep
+        if: always() && github.event_name != 'repository_dispatch'
+        run: |
+          echo "--- sweep-report.json ---"; cat monitor/.out/sweep-report.json 2>/dev/null || echo "(none)"
+          echo "--- findings.json ---"; cat monitor/.out/findings.json 2>/dev/null || echo "(none)"
 
       - name: Render issue drafts
         run: bun run monitor:draft
@@ -87,7 +88,8 @@ jobs:
       - name: Create reviewed-lead issues
         if: >-
           (github.event_name == 'workflow_dispatch' && inputs.open_issues) ||
-          (github.event_name == 'schedule' && vars.MONITOR_OPEN_ISSUES == 'true')
+          (github.event_name == 'schedule' && vars.MONITOR_OPEN_ISSUES == 'true') ||
+          github.event_name == 'repository_dispatch'
         env:
           GH_TOKEN: ${{ github.token }}
         run: bun run monitor:open
@@ -98,5 +100,65 @@ jobs:
         with:
           name: monitor-run-${{ github.run_id }}
           path: monitor/.out/
+          include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30
+
+  # Auto-publish confirmed news to Telegram. Isolated in the telegram-publication
+  # environment and OFF unless the MONITOR_AUTO_PUBLISH repo variable is "true",
+  # so nothing is posted until publishing is explicitly enabled.
+  publish-news:
+    needs: monitor
+    if: >-
+      (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') &&
+      vars.MONITOR_AUTO_PUBLISH == 'true'
+    runs-on: ubuntu-latest
+    environment: telegram-publication
+    env:
+      MONITOR_LLM_PROVIDER: ${{ vars.MONITOR_LLM_PROVIDER }}
+      MONITOR_LLM_BASE_URL: ${{ vars.MONITOR_LLM_BASE_URL }}
+      MONITOR_GEMINI_BASE_URL: ${{ vars.MONITOR_GEMINI_BASE_URL }}
+      MONITOR_LLM_MODEL: ${{ vars.MONITOR_LLM_MODEL }}
+      MONITOR_LLM_API_KEY: ${{ secrets.MONITOR_LLM_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHANNEL_ID: ${{ vars.TELEGRAM_CHANNEL_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Download sweep findings
+        uses: actions/download-artifact@v4
+        with:
+          name: monitor-run-${{ github.run_id }}
+          path: monitor/.out
+
+      - name: Prepare dedup state
+        run: |
+          bunx wrangler d1 migrations apply flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc
+          bunx wrangler d1 export flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc \
+            --output monitor/.out/news-state-before.sql \
+            --skip-confirmation
+
+      - name: Publish confirmed news
+        run: >-
+          bun run monitor:news -- --apply
+          --state-db monitor/.out/news-state-before.sql
+          --state-sql monitor/.out/monitor-posts.sql
+
+      - name: Persist news dedup ledger
+        if: always()
+        run: |
+          test -s monitor/.out/monitor-posts.sql || exit 0
+          bunx wrangler d1 execute flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc \
+            --file monitor/.out/monitor-posts.sql
