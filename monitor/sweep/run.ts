@@ -151,6 +151,16 @@ export function loadRegistry(registry: {
   ];
 }
 
+// A compact view of what we already record, to keep sweep-prompt input tokens low:
+// per-mode coverage states + terse route labels + region names, not full summaries.
+function compactContext(context: DatasetContext): unknown {
+  return {
+    coverage: context.jurisdictions.map(j => ({ name: j.name, ...j.coverage })),
+    routes: context.citizenship_routes.map(route => `${route.mode}/${route.status}: ${route.title}`),
+    regions: context.regional_access.map(region => region.name),
+  };
+}
+
 export function buildSweepPrompt(
   entry: RegistryEntry,
   context: DatasetContext,
@@ -166,11 +176,7 @@ in what we record below. Ignore evergreen explainers, opinion, and anything that
 known rule.
 
 What we already record for ${entry.name} (absence is not evidence a route does not exist):
-${JSON.stringify({
-  jurisdictions: context.jurisdictions,
-  citizenship_routes: context.citizenship_routes,
-  regional_access: context.regional_access,
-})}
+${JSON.stringify(compactContext(context))}
 ${rssExcerpts.length ? `\nRecent discovery leads to check (verify independently):\n${rssExcerpts.map(text => `- ${text}`).join('\n')}` : ''}
 
 Return ONLY a JSON array (no prose, no code fences). Return [] if nothing new. Each entry:

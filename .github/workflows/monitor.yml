@@ -61,7 +61,7 @@ jobs:
       # retired in favour of the grounded AI sweep below.
       - name: Collect discovery signals
         if: github.event_name != 'repository_dispatch'
-        run: bun run monitor:collect -- --adapters rss,telegram_html --lookback-days 2
+        run: bun run monitor:collect -- --adapters rss,telegram_html --lookback-days 1
 
       # The newsletter push path keeps the existing single-signal normalization.
       - name: Normalize newsletter dispatch
