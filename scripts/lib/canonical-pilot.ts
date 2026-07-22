@@ -367,6 +367,18 @@ const OFFICIAL_URLS = {
   timor_leste_constitution: 'https://www.constituteproject.org/constitution/East_Timor_2002',
   brunei_nationality_act: 'https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf',
   china_nationality_law: 'https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html',
+  kiribati_constitution: 'https://www.constituteproject.org/constitution/Kiribati_2013',
+  tuvalu_citizenship_act: 'https://tuvalu-legislation.tv/cms/images/LEGISLATION/PRINCIPAL/1979/1979-0005/1979-0005_1.pdf',
+  marshall_islands_citizenship_act: 'https://www.refworld.org/legal/legislation/natlegbod/1984/123580',
+  palau_constitution: 'https://www.constituteproject.org/constitution/Palau_2008',
+  fsm_citizenship_code: 'https://fsmlaw.org/fsm/code/title07/T07_Ch02.htm',
+  rwanda_citizenship: 'https://www.migration.gov.rw/our-services/citizenshipss',
+  senegal_constitution: 'https://www.constituteproject.org/constitution/Senegal_2016',
+  botswana_citizenship_act: 'https://citizenshiprightsafrica.org/wp-content/uploads/2016/01/Botswana_Citizenship_Act_Cap0101_2004.pdf',
+  namibia_constitution: 'https://www.constituteproject.org/constitution/Namibia_2014',
+  ethiopia_nationality_proclamation: 'https://www.refworld.org/docid/409100414.html',
+  tanzania_naturalization: 'https://www.immigration.go.tz/index.php/3-0-citizenship-by-naturalization',
+  uganda_naturalization: 'https://www.immigration.go.ug/node/235',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -863,6 +875,18 @@ function jurisdictionSources(): SourceRecord[] {
       ['Timor-Leste Constitution (Constitute Project)', OFFICIAL_URLS.timor_leste_constitution, '626', 'en', 'primary_law', 'timor-leste-citizenship-law'],
       ['Brunei Nationality Act (AGC)', OFFICIAL_URLS.brunei_nationality_act, '096', 'en', 'primary_law', 'brunei-citizenship-law'],
       ['PRC Nationality Law (IMMD published text)', OFFICIAL_URLS.china_nationality_law, '156', 'en', 'primary_law', 'china-citizenship-law'],
+      ['Kiribati Constitution (Constitute Project)', OFFICIAL_URLS.kiribati_constitution, '296', 'en', 'primary_law', 'kiribati-citizenship-law'],
+      ['Tuvalu Citizenship Act 1979 (official legislation PDF)', OFFICIAL_URLS.tuvalu_citizenship_act, '798', 'en', 'primary_law', 'tuvalu-citizenship-law'],
+      ['Marshall Islands Citizenship Act 1984 (Refworld)', OFFICIAL_URLS.marshall_islands_citizenship_act, '584', 'en', 'primary_law', 'marshall-islands-citizenship-law'],
+      ['Palau Constitution (Constitute Project)', OFFICIAL_URLS.palau_constitution, '585', 'en', 'primary_law', 'palau-citizenship-law'],
+      ['FSM Code Title 7 Chapter 2 Citizenship', OFFICIAL_URLS.fsm_citizenship_code, '583', 'en', 'primary_law', 'fsm-citizenship-law'],
+      ['Rwanda DGIE - citizenship services', OFFICIAL_URLS.rwanda_citizenship, '646', 'en', 'official_guidance', 'rwanda-citizenship-law'],
+      ['Senegal Constitution (Constitute Project)', OFFICIAL_URLS.senegal_constitution, '686', 'en', 'primary_law', 'senegal-citizenship-law'],
+      ['Botswana Citizenship Act Cap 01:01', OFFICIAL_URLS.botswana_citizenship_act, '072', 'en', 'primary_law', 'botswana-citizenship-law'],
+      ['Namibia Constitution (Constitute Project)', OFFICIAL_URLS.namibia_constitution, '516', 'en', 'primary_law', 'namibia-citizenship-law'],
+      ['Ethiopia Proclamation on Ethiopian Nationality 378/2003', OFFICIAL_URLS.ethiopia_nationality_proclamation, '231', 'en', 'primary_law', 'ethiopia-citizenship-law'],
+      ['Tanzania Immigration - citizenship by naturalization', OFFICIAL_URLS.tanzania_naturalization, '834', 'en', 'official_guidance', 'tanzania-citizenship-law'],
+      ['Uganda Immigration - naturalization', OFFICIAL_URLS.uganda_naturalization, '800', 'en', 'official_guidance', 'uganda-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -6514,6 +6538,612 @@ function chinaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
   });
 }
 
+
+function kiribatiRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.kiribati_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '296',
+    note: 'Reviewed against Kiribati constitutional citizenship framework and published Citizenship Act practice. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Kiribati; descent rules apply.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'kiribati-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Kiribati citizenship through a Kiribati parent',
+        summary: 'A child of a Kiribati citizen parent is a citizen under constitutional and Citizenship Act rules, subject to registration for some births abroad.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '296' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'kiribati-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after long permanent residence',
+        summary: 'Adults of full capacity may apply after long permanent residence (commonly framed as about seven to ten years under the Citizenship Act and later amendments), language and character requirements, and intention to remain. Naturalizers generally renounce prior nationality. Grant is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.permanent_years', operator: 'gte', value: 10, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'kiribati-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Kiribati parent',
+        summary: 'Birth to a Kiribati parent creates citizenship under nationality law. Birth in Kiribati alone to two foreign parents is not general jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '296' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function tuvaluRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.tuvalu_citizenship_act);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '798',
+    note: 'Reviewed against the Tuvalu Citizenship Act. Dual nationality generally restricted for voluntary acquisition. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act] },
+      { mode: 'naturalization', finding: 'present', sources: [act] },
+      { mode: 'birth', finding: 'present', sources: [act], note: 'Parent Tuvaluan; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [act], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'tuvalu-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Tuvaluan citizenship through a Tuvaluan parent',
+        summary: 'A child of a Tuvaluan citizen parent is a citizen under the Constitution and Citizenship Act.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '798' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'tuvalu-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after seven years residence',
+        summary: 'Adults may apply after about seven years legal residence, good character, knowledge of Tuvaluan laws and customs, and intention to reside permanently. Dual nationality from voluntary acts other than marriage is generally restricted. Grant is discretionary.',
+        source: act,
+        eligibility: [
+          { field: 'residence.legal_years', operator: 'gte', value: 7, unit: 'years' },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'tuvalu-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Tuvaluan parent',
+        summary: 'Birth to a Tuvaluan parent creates citizenship. Birth in Tuvalu alone to two foreign parents is not unrestricted jus soli.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '798' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function marshallIslandsRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.marshall_islands_citizenship_act);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '584',
+    note: 'Reviewed against the Marshall Islands Citizenship Act. Naturalization requires renunciation and is numerically limited. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act] },
+      { mode: 'naturalization', finding: 'present', sources: [act] },
+      { mode: 'birth', finding: 'present', sources: [act], note: 'Parent Marshallese; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [act], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'marshall-islands-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Marshallese citizenship through a Marshallese parent',
+        summary: 'A child of a Marshall Islands citizen parent is a citizen under the Citizenship Act.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '584' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'marshall-islands-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after ten years residence',
+        summary: 'Adults generally need about ten years ordinary residence, good character, Marshallese language and customs knowledge, self-support, and renunciation of prior nationality. Annual naturalization numbers are tightly limited. Cabinet grant is discretionary.',
+        source: act,
+        eligibility: [
+          { field: 'residence.ordinary_years', operator: 'gte', value: 10, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'marshall-islands-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Marshallese parent',
+        summary: 'Birth to a Marshallese parent creates citizenship. Birth in the Marshall Islands alone to two foreign parents is not general jus soli.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '584' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function palauRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.palau_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '585',
+    note: 'Reviewed against Palau constitutional citizenship framework. Ordinary naturalization is limited to persons of Palauan ancestry. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution], note: 'Naturalization tracks are ancestry-limited, not open residence naturalization for unrelated foreigners.' },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Palauan; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'palau-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Palauan citizenship through a Palauan parent',
+        summary: 'A child of a Palauan citizen parent is a citizen under constitutional citizenship rules, subject to dual-nationality declaration rules at majority in some cases.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '585' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'palau-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization limited to Palauan ancestry',
+        summary: 'Palau does not operate an open residence naturalization path for unrelated foreigners. Statutory naturalization eligibility is limited to persons of recognized Palauan ancestry who meet age, residence, and other Citizenship Act conditions. Grant remains discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'ancestry.palauan_recognized', operator: 'eq', value: true },
+        ],
+        months: null,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'palau-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Palauan parent',
+        summary: 'Birth to a Palauan parent creates citizenship. Birth in Palau alone to two foreign parents is not general jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '585' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function micronesiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const code = requireSource(officialSources, OFFICIAL_URLS.fsm_citizenship_code);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '583',
+    note: 'Reviewed against FSM Code Title 7 citizenship provisions. Naturalization requires Congress recommendation. Dual nationality rules have been evolving. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [code] },
+      { mode: 'naturalization', finding: 'present', sources: [code] },
+      { mode: 'birth', finding: 'present', sources: [code], note: 'Parent FSM citizen; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [code], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'micronesia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'FSM citizenship through an FSM parent',
+        summary: 'A child of an FSM citizen parent is a citizen under constitutional and code rules, subject to registration and dual-nationality choice rules in some cases.',
+        source: code,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '583' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'micronesia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'The President may naturalize a person on Congress recommendation after at least five years lawful residence immediately before the petition, good character, knowledge of the Constitution and customs, and other statutory conditions. Naturalization is exceptional and highly discretionary.',
+        source: code,
+        eligibility: [
+          { field: 'residence.legal_years', operator: 'gte', value: 5, unit: 'years' },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'micronesia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an FSM parent',
+        summary: 'Birth to an FSM parent creates citizenship under the code. Birth in the FSM alone to two foreign parents is not general jus soli.',
+        source: code,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '583' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function rwandaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const dgie = requireSource(officialSources, OFFICIAL_URLS.rwanda_citizenship);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '646',
+    note: 'Reviewed against Rwanda DGIE citizenship service guidance. Dual nationality generally allowed. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [dgie] },
+      { mode: 'naturalization', finding: 'present', sources: [dgie] },
+      { mode: 'birth', finding: 'present', sources: [dgie], note: 'Parent Rwandan; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [dgie], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'rwanda-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Rwandan nationality through a Rwandan parent',
+        summary: 'A child of a Rwandan parent is Rwandan by origin. Separate origin and recovery routes exist for Rwandans in the diaspora.',
+        source: dgie,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '646' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'rwanda-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after fifteen years residence',
+        summary: 'Adults generally need about fifteen years consecutive legal residence with permits, good conduct, knowledge of Rwandan culture, and livelihood. Spouses of Rwandans use a shorter marriage track. Dual nationality is generally allowed. Grant is discretionary.',
+        source: dgie,
+        eligibility: [
+          { field: 'residence.consecutive_years', operator: 'gte', value: 15, unit: 'years' },
+        ],
+        months: 180,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'rwanda-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Rwandan parent',
+        summary: 'Birth to a Rwandan parent creates Rwandan nationality. Birth in Rwanda alone to two foreign parents is not unrestricted jus soli.',
+        source: dgie,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '646' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function senegalRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.senegal_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '686',
+    note: 'Reviewed against Senegalese nationality framework. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Senegalese; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'senegal-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Senegalese nationality through a Senegalese parent',
+        summary: 'A child of a Senegalese parent is Senegalese under the nationality code.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '686' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'senegal-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after ten years residence',
+        summary: 'Adults generally need about ten years ordinary residence in Senegal. Five years can suffice for spouses, public-service cases, or exceptional contribution. Naturalization is by decree and discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.ordinary_years', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'senegal-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Senegalese parent',
+        summary: 'Birth to a Senegalese parent creates Senegalese nationality. Birth in Senegal alone to two foreign parents is not unrestricted jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '686' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function botswanaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.botswana_citizenship_act);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '072',
+    note: 'Reviewed against the Botswana Citizenship Act. Dual nationality rules are limited for adults. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act] },
+      { mode: 'naturalization', finding: 'present', sources: [act] },
+      { mode: 'birth', finding: 'present', sources: [act], note: 'Parent Motswana; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [act], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'botswana-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Botswana citizenship through a Motswana parent',
+        summary: 'A child of a Botswana citizen parent is a citizen under the Citizenship Act.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '072' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'botswana-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after ten years residence',
+        summary: 'Adults need twelve months continuous residence immediately before application and at least ten years aggregate residence in the preceding twelve years, plus good character and knowledge of Setswana or a tribal language. Ministerial grant is discretionary.',
+        source: act,
+        eligibility: [
+          { field: 'residence.aggregate_years_in_prior_twelve', operator: 'gte', value: 10, unit: 'years' },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'botswana-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Motswana parent',
+        summary: 'Birth to a Botswana citizen parent creates citizenship. Birth in Botswana alone to two foreign parents is not general jus soli.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '072' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function namibiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.namibia_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '516',
+    note: 'Reviewed against Namibian Constitution citizenship provisions. Naturalizers renounce prior nationality. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Namibian or conditional birth rules; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'namibia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Namibian citizenship through a Namibian parent',
+        summary: 'A child of a Namibian citizen parent is a citizen by descent under the Constitution and Citizenship Act.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '516' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'namibia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after ten years ordinary residence',
+        summary: 'Adults generally need ten years ordinary residence (not mere temporary permits), legal entry, good character, and renunciation of prior nationality. Ministerial grant is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'residence.ordinary_years', operator: 'gte', value: 10, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'namibia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Namibian parent',
+        summary: 'Birth to a Namibian parent creates citizenship. Birth in Namibia alone to two foreign parents is not unrestricted jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '516' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function ethiopiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const proclamation = requireSource(officialSources, OFFICIAL_URLS.ethiopia_nationality_proclamation);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '231',
+    note: 'Reviewed against Proclamation No. 378/2003 on Ethiopian Nationality. Dual nationality not recognized. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [proclamation] },
+      { mode: 'naturalization', finding: 'present', sources: [proclamation] },
+      { mode: 'birth', finding: 'present', sources: [proclamation], note: 'Parent Ethiopian; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [proclamation], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'ethiopia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Ethiopian nationality through an Ethiopian parent',
+        summary: 'A child of an Ethiopian parent is Ethiopian by descent under the Nationality Proclamation.',
+        source: proclamation,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '231' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'ethiopia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after four years domicile',
+        summary: 'Adults generally need about four years domicile in Ethiopia, lawful income, good character, ability to communicate in a national language, and release from prior nationality. Dual nationality is not recognized. Grant is discretionary.',
+        source: proclamation,
+        eligibility: [
+          { field: 'residence.domicile_years', operator: 'gte', value: 4, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 48,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'ethiopia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Ethiopian parent',
+        summary: 'Birth to an Ethiopian parent creates Ethiopian nationality. Birth in Ethiopia alone to two foreign parents is not general jus soli.',
+        source: proclamation,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '231' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function tanzaniaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const immigration = requireSource(officialSources, OFFICIAL_URLS.tanzania_naturalization);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '834',
+    note: 'Reviewed against Tanzania Immigration naturalization guidance. Dual nationality not allowed for adults. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [immigration] },
+      { mode: 'naturalization', finding: 'present', sources: [immigration] },
+      { mode: 'birth', finding: 'present', sources: [immigration], note: 'Parent Tanzanian; not unrestricted jus soli in practice.' },
+      { mode: 'investment', finding: 'verified_none', sources: [immigration], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'tanzania-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Tanzanian citizenship through a Tanzanian parent',
+        summary: 'A child of a Tanzanian citizen parent is a citizen by descent under the Citizenship Act.',
+        source: immigration,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '834' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'tanzania-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after seven years residence',
+        summary: 'Adults need twelve months residence immediately before application and at least seven years aggregate residence in the preceding ten years, plus language, character, and intention to remain. Adults generally may not retain another nationality. Grant is discretionary.',
+        source: immigration,
+        eligibility: [
+          { field: 'residence.years_in_prior_ten', operator: 'gte', value: 7, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'tanzania-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Tanzanian parent',
+        summary: 'Birth to a Tanzanian parent creates citizenship. Birth in Tanzania alone to two foreign parents is not treated as open jus soli in practice.',
+        source: immigration,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '834' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function ugandaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const immigration = requireSource(officialSources, OFFICIAL_URLS.uganda_naturalization);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '800',
+    note: 'Reviewed against Uganda Immigration naturalization guidance. Dual nationality generally allowed. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [immigration] },
+      { mode: 'naturalization', finding: 'present', sources: [immigration] },
+      { mode: 'birth', finding: 'present', sources: [immigration], note: 'Parent Ugandan or constitutional birth categories; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [immigration], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'uganda-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Ugandan citizenship through a Ugandan parent',
+        summary: 'A child of a Ugandan citizen parent is a citizen under the Constitution and Citizenship and Immigration Control Act. Separate registration tracks exist for some long-resident families.',
+        source: immigration,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '800' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'uganda-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after twenty years residence',
+        summary: 'Adults generally need about twenty years aggregate residence and twenty-four months continuous residence immediately before application, plus language, character, and integration conditions. Dual nationality is generally allowed. Grant is discretionary.',
+        source: immigration,
+        eligibility: [
+          { field: 'residence.aggregate_years', operator: 'gte', value: 20, unit: 'years' },
+        ],
+        months: 240,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'uganda-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Ugandan parent',
+        summary: 'Birth to a Ugandan parent creates citizenship under constitutional categories. Birth in Uganda alone to two foreign parents is not unrestricted jus soli.',
+        source: immigration,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '800' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -8410,6 +9040,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     barbadosRecord(shadow, countrySources),
     belgiumRecord(shadow, countrySources),
     boliviaRecord(shadow, countrySources),
+    botswanaRecord(shadow, countrySources),
     brazilRecord(shadow, countrySources),
     bruneiRecord(shadow, countrySources),
     bulgariaRecord(shadow, countrySources),
@@ -8427,6 +9058,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     ecuadorRecord(shadow, countrySources),
     egyptRecord(shadow, countrySources),
     estoniaRecord(shadow, countrySources),
+    ethiopiaRecord(shadow, countrySources),
     fijiRecord(shadow, countrySources),
     finlandRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
@@ -8445,6 +9077,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     japanRecord(shadow, countrySources),
     jordanRecord(shadow, countrySources),
     kenyaRecord(shadow, countrySources),
+    kiribatiRecord(shadow, countrySources),
     koreaRecord(shadow, countrySources),
     latviaRecord(shadow, countrySources),
     liechtensteinRecord(shadow, countrySources),
@@ -8452,16 +9085,20 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     luxembourgRecord(shadow, countrySources),
     malaysiaRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
+    marshallIslandsRecord(shadow, countrySources),
     mauritiusRecord(shadow, countrySources),
     mexicoRecord(shadow, countrySources),
+    micronesiaRecord(shadow, countrySources),
     monacoRecord(shadow, countrySources),
     moroccoRecord(shadow, countrySources),
+    namibiaRecord(shadow, countrySources),
     nauruRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
     vanuatuRecord(shadow, countrySources),
     newZealandRecord(shadow, countrySources),
     nigeriaRecord(shadow, countrySources),
     norwayRecord(shadow, countrySources),
+    palauRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
     papuaNewGuineaRecord(shadow, countrySources),
     paraguayRecord(shadow, countrySources),
@@ -8470,8 +9107,10 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     polandRecord(shadow, countrySources),
     portugalRecord(shadow, countrySources),
     romaniaRecord(shadow, countrySources),
+    rwandaRecord(shadow, countrySources),
     saintLuciaRecord(shadow, countrySources),
     samoaRecord(shadow, countrySources),
+    senegalRecord(shadow, countrySources),
     saoTomePrincipeRecord(shadow, countrySources),
     stKittsNevisRecord(shadow, countrySources),
     serbiaRecord(shadow, countrySources),
@@ -8483,10 +9122,13 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     swedenRecord(shadow, countrySources),
     switzerlandRecord(shadow, countrySources),
     taiwanRecord(shadow, countrySources),
+    tanzaniaRecord(shadow, countrySources),
     thailandRecord(shadow, countrySources),
     timorLesteRecord(shadow, countrySources),
     tongaRecord(shadow, countrySources),
+    tuvaluRecord(shadow, countrySources),
     turkiyeRecord(shadow, countrySources),
+    ugandaRecord(shadow, countrySources),
     unitedArabEmiratesRecord(shadow, countrySources),
     unitedKingdomRecord(shadow, countrySources),
     unitedStatesRecord(shadow, countrySources),

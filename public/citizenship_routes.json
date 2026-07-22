@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 294,
+      "routes": 330,
       "by_mode": {
-        "ancestry": 91,
-        "naturalization": 93,
-        "birth": 91,
+        "ancestry": 103,
+        "naturalization": 105,
+        "birth": 103,
         "investment": 19
       },
       "by_status": {
-        "active": 287,
+        "active": 323,
         "pending_verification": 4,
         "inactive": 2,
         "verified_negative": 1
@@ -339,12 +339,16 @@
       "name": "Botswana",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "botswana-citizenship-by-parent",
+        "botswana-naturalization",
+        "botswana-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "076",
@@ -879,12 +883,16 @@
       "name": "Ethiopia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "ethiopia-citizenship-by-parent",
+        "ethiopia-naturalization",
+        "ethiopia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "232",
@@ -1147,12 +1155,16 @@
       "name": "Kiribati",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "kiribati-citizenship-by-parent",
+        "kiribati-naturalization",
+        "kiribati-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "300",
@@ -1951,12 +1963,16 @@
       "name": "Namibia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "namibia-citizenship-by-parent",
+        "namibia-naturalization",
+        "namibia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "520",
@@ -2193,36 +2209,48 @@
       "name": "Micronesia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "micronesia-citizenship-by-parent",
+        "micronesia-naturalization",
+        "micronesia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "584",
       "name": "Marshall Is.",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "marshall-islands-citizenship-by-parent",
+        "marshall-islands-naturalization",
+        "marshall-islands-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "585",
       "name": "Palau",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "palau-citizenship-by-parent",
+        "palau-naturalization",
+        "palau-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "586",
@@ -2447,12 +2475,16 @@
       "name": "Rwanda",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "rwanda-citizenship-by-parent",
+        "rwanda-naturalization",
+        "rwanda-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "652",
@@ -2606,12 +2638,16 @@
       "name": "Senegal",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "senegal-citizenship-by-parent",
+        "senegal-naturalization",
+        "senegal-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "688",
@@ -3028,24 +3064,32 @@
       "name": "Tuvalu",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "tuvalu-citizenship-by-parent",
+        "tuvalu-naturalization",
+        "tuvalu-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "800",
       "name": "Uganda",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "uganda-citizenship-by-parent",
+        "uganda-naturalization",
+        "uganda-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "804",
@@ -3145,12 +3189,16 @@
       "name": "Tanzania",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "tanzania-citizenship-by-parent",
+        "tanzania-naturalization",
+        "tanzania-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "840",
@@ -4368,6 +4416,111 @@
         {
           "title": "Bolivia 2009 Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Bolivia_2009"
+        }
+      ]
+    },
+    {
+      "id": "botswana-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "072",
+        "name": "Botswana"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Motswana parent",
+      "summary": "Birth to a Botswana citizen parent creates citizenship. Birth in Botswana alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "botswana-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Motswana parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Botswana Citizenship Act Cap 01:01",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/01/Botswana_Citizenship_Act_Cap0101_2004.pdf"
+        }
+      ]
+    },
+    {
+      "id": "botswana-citizenship-by-parent",
+      "country": {
+        "iso_n3": "072",
+        "name": "Botswana"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Botswana citizenship through a Motswana parent",
+      "summary": "A child of a Botswana citizen parent is a citizen under the Citizenship Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "botswana-citizenship-by-parent-principal",
+          "label": "Botswana citizenship through a Motswana parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Botswana Citizenship Act Cap 01:01",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/01/Botswana_Citizenship_Act_Cap0101_2004.pdf"
+        }
+      ]
+    },
+    {
+      "id": "botswana-naturalization",
+      "country": {
+        "iso_n3": "072",
+        "name": "Botswana"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after ten years residence",
+      "summary": "Adults need twelve months continuous residence immediately before application and at least ten years aggregate residence in the preceding twelve years, plus good character and knowledge of Setswana or a tribal language. Ministerial grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "botswana-naturalization-principal",
+          "label": "Naturalization after ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Botswana Citizenship Act Cap 01:01",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/01/Botswana_Citizenship_Act_Cap0101_2004.pdf"
         }
       ]
     },
@@ -6403,6 +6556,111 @@
       ]
     },
     {
+      "id": "ethiopia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "231",
+        "name": "Ethiopia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Ethiopian parent",
+      "summary": "Birth to an Ethiopian parent creates Ethiopian nationality. Birth in Ethiopia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ethiopia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Ethiopian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ethiopia Proclamation on Ethiopian Nationality 378/2003",
+          "url": "https://www.refworld.org/docid/409100414.html"
+        }
+      ]
+    },
+    {
+      "id": "ethiopia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "231",
+        "name": "Ethiopia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Ethiopian nationality through an Ethiopian parent",
+      "summary": "A child of an Ethiopian parent is Ethiopian by descent under the Nationality Proclamation.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ethiopia-citizenship-by-parent-principal",
+          "label": "Ethiopian nationality through an Ethiopian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ethiopia Proclamation on Ethiopian Nationality 378/2003",
+          "url": "https://www.refworld.org/docid/409100414.html"
+        }
+      ]
+    },
+    {
+      "id": "ethiopia-naturalization",
+      "country": {
+        "iso_n3": "231",
+        "name": "Ethiopia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after four years domicile",
+      "summary": "Adults generally need about four years domicile in Ethiopia, lawful income, good character, ability to communicate in a national language, and release from prior nationality. Dual nationality is not recognized. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          48
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ethiopia-naturalization-principal",
+          "label": "Naturalization after four years domicile",
+          "allocation": "discretionary",
+          "eligibility_months": 48
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ethiopia Proclamation on Ethiopian Nationality 378/2003",
+          "url": "https://www.refworld.org/docid/409100414.html"
+        }
+      ]
+    },
+    {
       "id": "estonia-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "233",
@@ -7248,6 +7506,111 @@
         {
           "title": "Ghana Ministry of Interior — naturalization",
           "url": "https://www.mint.gov.gh/e-services-portal/naturalization-as-ghanaian-citizen/"
+        }
+      ]
+    },
+    {
+      "id": "kiribati-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "296",
+        "name": "Kiribati"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Kiribati parent",
+      "summary": "Birth to a Kiribati parent creates citizenship under nationality law. Birth in Kiribati alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kiribati-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Kiribati parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Kiribati Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kiribati_2013"
+        }
+      ]
+    },
+    {
+      "id": "kiribati-citizenship-by-parent",
+      "country": {
+        "iso_n3": "296",
+        "name": "Kiribati"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Kiribati citizenship through a Kiribati parent",
+      "summary": "A child of a Kiribati citizen parent is a citizen under constitutional and Citizenship Act rules, subject to registration for some births abroad.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kiribati-citizenship-by-parent-principal",
+          "label": "Kiribati citizenship through a Kiribati parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Kiribati Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kiribati_2013"
+        }
+      ]
+    },
+    {
+      "id": "kiribati-naturalization",
+      "country": {
+        "iso_n3": "296",
+        "name": "Kiribati"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after long permanent residence",
+      "summary": "Adults of full capacity may apply after long permanent residence (commonly framed as about seven to ten years under the Citizenship Act and later amendments), language and character requirements, and intention to remain. Naturalizers generally renounce prior nationality. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "kiribati-naturalization-principal",
+          "label": "Naturalization after long permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Kiribati Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kiribati_2013"
         }
       ]
     },
@@ -9990,6 +10353,111 @@
       ]
     },
     {
+      "id": "namibia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "516",
+        "name": "Namibia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Namibian parent",
+      "summary": "Birth to a Namibian parent creates citizenship. Birth in Namibia alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "namibia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Namibian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Namibia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Namibia_2014"
+        }
+      ]
+    },
+    {
+      "id": "namibia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "516",
+        "name": "Namibia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Namibian citizenship through a Namibian parent",
+      "summary": "A child of a Namibian citizen parent is a citizen by descent under the Constitution and Citizenship Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "namibia-citizenship-by-parent-principal",
+          "label": "Namibian citizenship through a Namibian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Namibia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Namibia_2014"
+        }
+      ]
+    },
+    {
+      "id": "namibia-naturalization",
+      "country": {
+        "iso_n3": "516",
+        "name": "Namibia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after ten years ordinary residence",
+      "summary": "Adults generally need ten years ordinary residence (not mere temporary permits), legal entry, good character, and renunciation of prior nationality. Ministerial grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "namibia-naturalization-principal",
+          "label": "Naturalization after ten years ordinary residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Namibia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Namibia_2014"
+        }
+      ]
+    },
+    {
       "id": "nauru-citizenship-by-descent",
       "country": {
         "iso_n3": "520",
@@ -10745,6 +11213,319 @@
         {
           "title": "Norway UDI - citizenship",
           "url": "https://www.udi.no/en/want-to-apply/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "micronesia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "583",
+        "name": "Micronesia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an FSM parent",
+      "summary": "Birth to an FSM parent creates citizenship under the code. Birth in the FSM alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "micronesia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an FSM parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "FSM Code Title 7 Chapter 2 Citizenship",
+          "url": "https://fsmlaw.org/fsm/code/title07/T07_Ch02.htm"
+        }
+      ]
+    },
+    {
+      "id": "micronesia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "583",
+        "name": "Micronesia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "FSM citizenship through an FSM parent",
+      "summary": "A child of an FSM citizen parent is a citizen under constitutional and code rules, subject to registration and dual-nationality choice rules in some cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "micronesia-citizenship-by-parent-principal",
+          "label": "FSM citizenship through an FSM parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "FSM Code Title 7 Chapter 2 Citizenship",
+          "url": "https://fsmlaw.org/fsm/code/title07/T07_Ch02.htm"
+        }
+      ]
+    },
+    {
+      "id": "micronesia-naturalization",
+      "country": {
+        "iso_n3": "583",
+        "name": "Micronesia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "The President may naturalize a person on Congress recommendation after at least five years lawful residence immediately before the petition, good character, knowledge of the Constitution and customs, and other statutory conditions. Naturalization is exceptional and highly discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "micronesia-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "FSM Code Title 7 Chapter 2 Citizenship",
+          "url": "https://fsmlaw.org/fsm/code/title07/T07_Ch02.htm"
+        }
+      ]
+    },
+    {
+      "id": "marshall-islands-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "584",
+        "name": "Marshall Is."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Marshallese parent",
+      "summary": "Birth to a Marshallese parent creates citizenship. Birth in the Marshall Islands alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "marshall-islands-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Marshallese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Marshall Islands Citizenship Act 1984 (Refworld)",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/1984/123580"
+        }
+      ]
+    },
+    {
+      "id": "marshall-islands-citizenship-by-parent",
+      "country": {
+        "iso_n3": "584",
+        "name": "Marshall Is."
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Marshallese citizenship through a Marshallese parent",
+      "summary": "A child of a Marshall Islands citizen parent is a citizen under the Citizenship Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "marshall-islands-citizenship-by-parent-principal",
+          "label": "Marshallese citizenship through a Marshallese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Marshall Islands Citizenship Act 1984 (Refworld)",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/1984/123580"
+        }
+      ]
+    },
+    {
+      "id": "marshall-islands-naturalization",
+      "country": {
+        "iso_n3": "584",
+        "name": "Marshall Is."
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after ten years residence",
+      "summary": "Adults generally need about ten years ordinary residence, good character, Marshallese language and customs knowledge, self-support, and renunciation of prior nationality. Annual naturalization numbers are tightly limited. Cabinet grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "marshall-islands-naturalization-principal",
+          "label": "Naturalization after ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Marshall Islands Citizenship Act 1984 (Refworld)",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/1984/123580"
+        }
+      ]
+    },
+    {
+      "id": "palau-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "585",
+        "name": "Palau"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Palauan parent",
+      "summary": "Birth to a Palauan parent creates citizenship. Birth in Palau alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "palau-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Palauan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Palau Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Palau_2008"
+        }
+      ]
+    },
+    {
+      "id": "palau-citizenship-by-parent",
+      "country": {
+        "iso_n3": "585",
+        "name": "Palau"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Palauan citizenship through a Palauan parent",
+      "summary": "A child of a Palauan citizen parent is a citizen under constitutional citizenship rules, subject to dual-nationality declaration rules at majority in some cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "palau-citizenship-by-parent-principal",
+          "label": "Palauan citizenship through a Palauan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Palau Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Palau_2008"
+        }
+      ]
+    },
+    {
+      "id": "palau-naturalization",
+      "country": {
+        "iso_n3": "585",
+        "name": "Palau"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization limited to Palauan ancestry",
+      "summary": "Palau does not operate an open residence naturalization path for unrelated foreigners. Statutory naturalization eligibility is limited to persons of recognized Palauan ancestry who meet age, residence, and other Citizenship Act conditions. Grant remains discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "palau-naturalization-principal",
+          "label": "Naturalization limited to Palauan ancestry",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Palau Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Palau_2008"
         }
       ]
     },
@@ -11843,6 +12624,111 @@
       ]
     },
     {
+      "id": "rwanda-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "646",
+        "name": "Rwanda"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Rwandan parent",
+      "summary": "Birth to a Rwandan parent creates Rwandan nationality. Birth in Rwanda alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "rwanda-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Rwandan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Rwanda DGIE - citizenship services",
+          "url": "https://www.migration.gov.rw/our-services/citizenshipss"
+        }
+      ]
+    },
+    {
+      "id": "rwanda-citizenship-by-parent",
+      "country": {
+        "iso_n3": "646",
+        "name": "Rwanda"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Rwandan nationality through a Rwandan parent",
+      "summary": "A child of a Rwandan parent is Rwandan by origin. Separate origin and recovery routes exist for Rwandans in the diaspora.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "rwanda-citizenship-by-parent-principal",
+          "label": "Rwandan nationality through a Rwandan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Rwanda DGIE - citizenship services",
+          "url": "https://www.migration.gov.rw/our-services/citizenshipss"
+        }
+      ]
+    },
+    {
+      "id": "rwanda-naturalization",
+      "country": {
+        "iso_n3": "646",
+        "name": "Rwanda"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after fifteen years residence",
+      "summary": "Adults generally need about fifteen years consecutive legal residence with permits, good conduct, knowledge of Rwandan culture, and livelihood. Spouses of Rwandans use a shorter marriage track. Dual nationality is generally allowed. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          180
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "rwanda-naturalization-principal",
+          "label": "Naturalization after fifteen years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 180
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Rwanda DGIE - citizenship services",
+          "url": "https://www.migration.gov.rw/our-services/citizenshipss"
+        }
+      ]
+    },
+    {
       "id": "st-kitts-nevis-citizenship-by-birth",
       "country": {
         "iso_n3": "659",
@@ -12290,6 +13176,111 @@
         {
           "title": "Honorary Consulate of São Tomé and Príncipe — Citizenship by Investment",
           "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/"
+        }
+      ]
+    },
+    {
+      "id": "senegal-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "686",
+        "name": "Senegal"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Senegalese parent",
+      "summary": "Birth to a Senegalese parent creates Senegalese nationality. Birth in Senegal alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "senegal-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Senegalese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Senegal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Senegal_2016"
+        }
+      ]
+    },
+    {
+      "id": "senegal-citizenship-by-parent",
+      "country": {
+        "iso_n3": "686",
+        "name": "Senegal"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Senegalese nationality through a Senegalese parent",
+      "summary": "A child of a Senegalese parent is Senegalese under the nationality code.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "senegal-citizenship-by-parent-principal",
+          "label": "Senegalese nationality through a Senegalese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Senegal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Senegal_2016"
+        }
+      ]
+    },
+    {
+      "id": "senegal-naturalization",
+      "country": {
+        "iso_n3": "686",
+        "name": "Senegal"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after ten years residence",
+      "summary": "Adults generally need about ten years ordinary residence in Senegal. Five years can suffice for spouses, public-service cases, or exceptional contribution. Naturalization is by decree and discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "senegal-naturalization-principal",
+          "label": "Naturalization after ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Senegal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Senegal_2016"
         }
       ]
     },
@@ -13704,6 +14695,216 @@
       ]
     },
     {
+      "id": "tuvalu-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "798",
+        "name": "Tuvalu"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tuvaluan parent",
+      "summary": "Birth to a Tuvaluan parent creates citizenship. Birth in Tuvalu alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tuvalu-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Tuvaluan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tuvalu Citizenship Act 1979 (official legislation PDF)",
+          "url": "https://tuvalu-legislation.tv/cms/images/LEGISLATION/PRINCIPAL/1979/1979-0005/1979-0005_1.pdf"
+        }
+      ]
+    },
+    {
+      "id": "tuvalu-citizenship-by-parent",
+      "country": {
+        "iso_n3": "798",
+        "name": "Tuvalu"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Tuvaluan citizenship through a Tuvaluan parent",
+      "summary": "A child of a Tuvaluan citizen parent is a citizen under the Constitution and Citizenship Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tuvalu-citizenship-by-parent-principal",
+          "label": "Tuvaluan citizenship through a Tuvaluan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tuvalu Citizenship Act 1979 (official legislation PDF)",
+          "url": "https://tuvalu-legislation.tv/cms/images/LEGISLATION/PRINCIPAL/1979/1979-0005/1979-0005_1.pdf"
+        }
+      ]
+    },
+    {
+      "id": "tuvalu-naturalization",
+      "country": {
+        "iso_n3": "798",
+        "name": "Tuvalu"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after seven years residence",
+      "summary": "Adults may apply after about seven years legal residence, good character, knowledge of Tuvaluan laws and customs, and intention to reside permanently. Dual nationality from voluntary acts other than marriage is generally restricted. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "tuvalu-naturalization-principal",
+          "label": "Naturalization after seven years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tuvalu Citizenship Act 1979 (official legislation PDF)",
+          "url": "https://tuvalu-legislation.tv/cms/images/LEGISLATION/PRINCIPAL/1979/1979-0005/1979-0005_1.pdf"
+        }
+      ]
+    },
+    {
+      "id": "uganda-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "800",
+        "name": "Uganda"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Ugandan parent",
+      "summary": "Birth to a Ugandan parent creates citizenship under constitutional categories. Birth in Uganda alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uganda-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Ugandan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Uganda Immigration - naturalization",
+          "url": "https://www.immigration.go.ug/node/235"
+        }
+      ]
+    },
+    {
+      "id": "uganda-citizenship-by-parent",
+      "country": {
+        "iso_n3": "800",
+        "name": "Uganda"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Ugandan citizenship through a Ugandan parent",
+      "summary": "A child of a Ugandan citizen parent is a citizen under the Constitution and Citizenship and Immigration Control Act. Separate registration tracks exist for some long-resident families.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uganda-citizenship-by-parent-principal",
+          "label": "Ugandan citizenship through a Ugandan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Uganda Immigration - naturalization",
+          "url": "https://www.immigration.go.ug/node/235"
+        }
+      ]
+    },
+    {
+      "id": "uganda-naturalization",
+      "country": {
+        "iso_n3": "800",
+        "name": "Uganda"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after twenty years residence",
+      "summary": "Adults generally need about twenty years aggregate residence and twenty-four months continuous residence immediately before application, plus language, character, and integration conditions. Dual nationality is generally allowed. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          240
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "uganda-naturalization-principal",
+          "label": "Naturalization after twenty years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 240
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Uganda Immigration - naturalization",
+          "url": "https://www.immigration.go.ug/node/235"
+        }
+      ]
+    },
+    {
       "id": "egypt-citizenship-by-birth",
       "country": {
         "iso_n3": "818",
@@ -13971,6 +15172,111 @@
         {
           "title": "GOV.UK — Naturalization with indefinite leave or settled status",
           "url": "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain"
+        }
+      ]
+    },
+    {
+      "id": "tanzania-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "834",
+        "name": "Tanzania"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tanzanian parent",
+      "summary": "Birth to a Tanzanian parent creates citizenship. Birth in Tanzania alone to two foreign parents is not treated as open jus soli in practice.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tanzania-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Tanzanian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tanzania Immigration - citizenship by naturalization",
+          "url": "https://www.immigration.go.tz/index.php/3-0-citizenship-by-naturalization"
+        }
+      ]
+    },
+    {
+      "id": "tanzania-citizenship-by-parent",
+      "country": {
+        "iso_n3": "834",
+        "name": "Tanzania"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Tanzanian citizenship through a Tanzanian parent",
+      "summary": "A child of a Tanzanian citizen parent is a citizen by descent under the Citizenship Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tanzania-citizenship-by-parent-principal",
+          "label": "Tanzanian citizenship through a Tanzanian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tanzania Immigration - citizenship by naturalization",
+          "url": "https://www.immigration.go.tz/index.php/3-0-citizenship-by-naturalization"
+        }
+      ]
+    },
+    {
+      "id": "tanzania-naturalization",
+      "country": {
+        "iso_n3": "834",
+        "name": "Tanzania"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after seven years residence",
+      "summary": "Adults need twelve months residence immediately before application and at least seven years aggregate residence in the preceding ten years, plus language, character, and intention to remain. Adults generally may not retain another nationality. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "tanzania-naturalization-principal",
+          "label": "Naturalization after seven years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tanzania Immigration - citizenship by naturalization",
+          "url": "https://www.immigration.go.tz/index.php/3-0-citizenship-by-naturalization"
         }
       ]
     },

@@ -2849,6 +2849,41 @@
         "sources": [
           "Brunei Nationality Act"
         ]
+      },
+      "231": {
+        "status": "banned",
+        "note": "Ethiopia: dual nationality not recognized; naturalizers must be released from prior nationality.",
+        "sources": [
+          "Proclamation No. 378/2003"
+        ]
+      },
+      "516": {
+        "status": "banned",
+        "note": "Namibia: naturalization and registration generally require renunciation of prior nationality.",
+        "sources": [
+          "Namibian Constitution / Citizenship Act"
+        ]
+      },
+      "584": {
+        "status": "banned",
+        "note": "Marshall Islands: naturalizers renounce prior nationality; dual generally not recognized for adults.",
+        "sources": [
+          "Citizenship Act 1984"
+        ]
+      },
+      "834": {
+        "status": "banned",
+        "note": "Tanzania: dual nationality not allowed for adults; naturalizers renounce prior nationality.",
+        "sources": [
+          "Citizenship Act / Immigration naturalization guidance"
+        ]
+      },
+      "296": {
+        "status": "banned",
+        "note": "Kiribati: naturalizers generally renounce prior nationality.",
+        "sources": [
+          "Citizenship Act"
+        ]
       }
     },
     "treaty_exceptions": [

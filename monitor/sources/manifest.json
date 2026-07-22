@@ -7,8 +7,10 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://globalcit.eu/feed/",
-      "jurisdictions": ["multi"],
-      "notes": "EUI Global Citizenship Observatory — academic tracking of nationality-law changes worldwide."
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "EUI Global Citizenship Observatory \u2014 academic tracking of nationality-law changes worldwide."
     },
     {
       "id": "imidaily-rss",
@@ -16,8 +18,10 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://www.imidaily.com/feed/",
-      "jurisdictions": ["multi"],
-      "notes": "Investment-migration trade press — CBI/RBI program changes, often ahead of official gazettes."
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "Investment-migration trade press \u2014 CBI/RBI program changes, often ahead of official gazettes."
     },
     {
       "id": "settled-nomad-visas",
@@ -25,8 +29,19 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://settlednomad.com/visas/",
-      "jurisdictions": ["multi"],
-      "keywords": ["residence", "residency", "permanent residence", "permanent residency", "citizenship", "naturalization", "renewable", "convertible"],
+      "jurisdictions": [
+        "multi"
+      ],
+      "keywords": [
+        "residence",
+        "residency",
+        "permanent residence",
+        "permanent residency",
+        "citizenship",
+        "naturalization",
+        "renewable",
+        "convertible"
+      ],
       "notes": "Commercial digital-nomad and residence-visa index. Use it to discover missing permits and claimed transitions only. Every duration, renewal, tax, PR-credit, and citizenship-credit claim must be resolved to current official evidence before entering D1. Affiliate and promotional content is never verification."
     },
     {
@@ -35,8 +50,10 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://thewanderinginvestor.com/feed/",
-      "jurisdictions": ["multi"],
-      "notes": "Ladislas Maurice — independent, on-the-ground residency/citizenship reporting; has broken program changes (e.g. Argentina CBI) ahead of trade press."
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "Ladislas Maurice \u2014 independent, on-the-ground residency/citizenship reporting; has broken program changes (e.g. Argentina CBI) ahead of trade press."
     },
     {
       "id": "wandering-investor-telegram",
@@ -45,7 +62,9 @@
       "status": "active",
       "url": "https://t.me/s/thewanderinginvestor",
       "channel": "thewanderinginvestor",
-      "jurisdictions": ["multi"],
+      "jurisdictions": [
+        "multi"
+      ],
       "max_items": 25,
       "notes": "Curated exception to the no-broad-social rule. Public channel preview by Ladislas Maurice; often contains residency/citizenship findings and links before the main blog. Discovery only and always requires primary-source verification."
     },
@@ -56,7 +75,9 @@
       "status": "planned",
       "subscription_url": "https://thewanderinginvestor.com/blog/",
       "archive_url": "https://thewanderinginvestor.com/category/private-list-update/",
-      "jurisdictions": ["multi"],
+      "jurisdictions": [
+        "multi"
+      ],
       "notes": "Free Notes from the Road newsletter. Keep separate from the blog RSS and public Telegram preview so private-list or early updates can be captured, then deduplicate by canonical article URL."
     },
     {
@@ -66,7 +87,9 @@
       "status": "planned",
       "subscription_url": "https://www.fragomen.com/subscribe-fragomen-insights/subscribe.html",
       "archive_url": "https://www.fragomen.com/insights/index.html?type=news",
-      "jurisdictions": ["multi"],
+      "jurisdictions": [
+        "multi"
+      ],
       "notes": "Global immigration law-firm client alerts with country labels, dates, summaries, and public canonical articles. High-value newsletter candidate for changes to visas, residence, citizenship applications, fees, and processing."
     },
     {
@@ -76,7 +99,9 @@
       "status": "planned",
       "subscription_url": "https://investmentmigration.org/newsletter/",
       "archive_url": "https://investmentmigration.org/newsletter-archive/",
-      "jurisdictions": ["multi"],
+      "jurisdictions": [
+        "multi"
+      ],
       "notes": "Industry-body newsletter and archive focused on investment migration. Useful for programme and regulatory leads; commercial or opinion content must be discarded by triage."
     },
     {
@@ -85,7 +110,9 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://www.latitudeworld.com/news/",
-      "jurisdictions": ["multi"],
+      "jurisdictions": [
+        "multi"
+      ],
       "notes": "Agency news index with dated residence, citizenship, descent, and CBI updates. No verified feed was found, so this needs a narrow HTML index adapter and per-article canonical URLs."
     },
     {
@@ -94,8 +121,10 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://nomadcapitalist.libsyn.com/rss",
-      "jurisdictions": ["multi"],
-      "notes": "Andrew Henderson — high volume, uneven signal-to-noise, but covers program changes fast (e.g. 'Armenia's New Fast-Track Residence for 2026'). Blog has no discoverable RSS; podcast feed does."
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "Andrew Henderson \u2014 high volume, uneven signal-to-noise, but covers program changes fast (e.g. 'Armenia's New Fast-Track Residence for 2026'). Blog has no discoverable RSS; podcast feed does."
     },
     {
       "id": "nomad-capitalist-newsletter",
@@ -103,7 +132,9 @@
       "adapter": "email",
       "status": "planned",
       "subscription_url": "https://nomadcapitalist.com/email/",
-      "jurisdictions": ["multi"],
+      "jurisdictions": [
+        "multi"
+      ],
       "notes": "Nomad Capitalist Weekly Rundown. The publisher says it covers citizenship programme changes, offshore news, and global updates. Keep separate from the active podcast feed for independent deduplication; discovery only."
     },
     {
@@ -113,7 +144,9 @@
       "status": "planned",
       "subscription_url": "https://www.bal.com/newsletter-sign-up/",
       "archive_url": "https://www.bal.com/insights/",
-      "jurisdictions": ["multi"],
+      "jurisdictions": [
+        "multi"
+      ],
       "notes": "Berry Appleman & Leiden global immigration alerts. Strong coverage of work, residence, student, and permanent-residence rule changes; employment-heavy and discovery only."
     },
     {
@@ -122,7 +155,9 @@
       "adapter": "email",
       "status": "planned",
       "subscription_url": "https://www.fosterglobal.com/subscribe-to-our-immigration-updates/",
-      "jurisdictions": ["multi"],
+      "jurisdictions": [
+        "multi"
+      ],
       "notes": "Law-firm immigration updates with selectable global coverage. Useful as a second legal-practitioner signal after Fragomen and BAL; discovery only."
     },
     {
@@ -131,7 +166,9 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://www.henleyglobal.com/newsroom",
-      "jurisdictions": ["multi"],
+      "jurisdictions": [
+        "multi"
+      ],
       "notes": "Residence- and citizenship-planning firm newsroom. Useful for CBI/RBI launches and closures, but commercial claims require primary-source verification and aggressive deduplication."
     },
     {
@@ -140,8 +177,15 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763",
-      "jurisdictions": ["724"],
-      "keywords": ["nacionalidad", "naturalización", "residencia", "ciudadanía"],
+      "jurisdictions": [
+        "724"
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "residencia",
+        "ciudadan\u00eda"
+      ],
       "notes": "Official consolidated Civil Code. Monitor nationality provisions and amendment metadata; BOE gazette discovery remains a separate planned adapter."
     },
     {
@@ -151,8 +195,16 @@
       "status": "planned",
       "kind": "gazette_search",
       "url": "https://www.boe.es/datosabiertos/api/api.php",
-      "jurisdictions": ["724"],
-      "keywords": ["ciudadanía", "nacionalidad", "naturalización", "residencia", "extranjería"],
+      "jurisdictions": [
+        "724"
+      ],
+      "keywords": [
+        "ciudadan\u00eda",
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "residencia",
+        "extranjer\u00eda"
+      ],
       "notes": "Official BOE open API for daily gazette summaries and consolidated legislation. Monitor Civil Code BOE-A-1889-4763 plus nationality-related new instruments."
     },
     {
@@ -161,9 +213,17 @@
       "adapter": "api",
       "status": "planned",
       "kind": "gazette_search",
-      "jurisdictions": ["620"],
-      "keywords": ["cidadania", "nacionalidade", "naturalização", "residência", "estrangeiros"],
-      "notes": "Diário da República Eletrónico open data — verifies the 2026 nationality-law transition already recorded in citizenship_routes.json."
+      "jurisdictions": [
+        "620"
+      ],
+      "keywords": [
+        "cidadania",
+        "nacionalidade",
+        "naturaliza\u00e7\u00e3o",
+        "resid\u00eancia",
+        "estrangeiros"
+      ],
+      "notes": "Di\u00e1rio da Rep\u00fablica Eletr\u00f3nico open data \u2014 verifies the 2026 nationality-law transition already recorded in citizenship_routes.json."
     },
     {
       "id": "boletin-argentina",
@@ -171,9 +231,17 @@
       "adapter": "rss",
       "status": "planned",
       "kind": "gazette_search",
-      "jurisdictions": ["032"],
-      "keywords": ["ciudadanía", "nacionalidad", "naturalización", "residencia", "migraciones"],
-      "notes": "Boletín Oficial de la República Argentina — flagged volatile in dual_citizenship / generational_events (pending decree)."
+      "jurisdictions": [
+        "032"
+      ],
+      "keywords": [
+        "ciudadan\u00eda",
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "residencia",
+        "migraciones"
+      ],
+      "notes": "Bolet\u00edn Oficial de la Rep\u00fablica Argentina \u2014 flagged volatile in dual_citizenship / generational_events (pending decree)."
     },
     {
       "id": "argentina-citizenship-law",
@@ -181,12 +249,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion",
-      "jurisdictions": ["032"],
-      "pages": [
-        { "id": "citizenship-law-346", "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion" },
-        { "id": "investment-decree-524-2025", "url": "https://www.argentina.gob.ar/normativa/nacional/decreto-524-2025-415710/texto" }
+      "jurisdictions": [
+        "032"
       ],
-      "keywords": ["ciudadanía", "naturalización", "residencia", "inversión relevante", "Agencia de Programas de Ciudadanía por Inversión"],
+      "pages": [
+        {
+          "id": "citizenship-law-346",
+          "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion"
+        },
+        {
+          "id": "investment-decree-524-2025",
+          "url": "https://www.argentina.gob.ar/normativa/nacional/decreto-524-2025-415710/texto"
+        }
+      ],
+      "keywords": [
+        "ciudadan\u00eda",
+        "naturalizaci\u00f3n",
+        "residencia",
+        "inversi\u00f3n relevante",
+        "Agencia de Programas de Ciudadan\u00eda por Inversi\u00f3n"
+      ],
       "notes": "Official consolidated Citizenship Law and Decree 524/2025. Monitor Article 2 and the investment agency framework; any investment threshold requires an official Ministry of Economy instrument before publication."
     },
     {
@@ -195,14 +277,37 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao",
-      "jurisdictions": ["076"],
-      "pages": [
-        { "id": "nationality-overview", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao" },
-        { "id": "ordinary-naturalization", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria" },
-        { "id": "residence-period", "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria/ter-residencia-em-territorio-nacional-pelo-prazo-estabelecido-pela-lei-brasileira" },
-        { "id": "family-reunification", "url": "https://www.gov.br/pf/pt-br/assuntos/imigracao/duvidas-frequentes" }
+      "jurisdictions": [
+        "076"
       ],
-      "keywords": ["nacionalidade", "naturalização", "residência", "filho brasileiro", "reunião familiar", "ascendente", "países de língua portuguesa", "migração"],
+      "pages": [
+        {
+          "id": "nationality-overview",
+          "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao"
+        },
+        {
+          "id": "ordinary-naturalization",
+          "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria"
+        },
+        {
+          "id": "residence-period",
+          "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes/naturalizacao/o-que-e-naturalizacao/naturalizacao-ordinaria/ter-residencia-em-territorio-nacional-pelo-prazo-estabelecido-pela-lei-brasileira"
+        },
+        {
+          "id": "family-reunification",
+          "url": "https://www.gov.br/pf/pt-br/assuntos/imigracao/duvidas-frequentes"
+        }
+      ],
+      "keywords": [
+        "nacionalidade",
+        "naturaliza\u00e7\u00e3o",
+        "resid\u00eancia",
+        "filho brasileiro",
+        "reuni\u00e3o familiar",
+        "ascendente",
+        "pa\u00edses de l\u00edngua portuguesa",
+        "migra\u00e7\u00e3o"
+      ],
       "notes": "Official Ministry of Justice nationality and naturalization guidance plus Federal Police family-reunification guidance. Resolve substantive changes against Article 12 of the Constitution and Migration Law No. 13,445. The Planalto endpoints closed the collector socket during the 2026-07-21 live test, so they remain canonical evidence but are not the scheduled transport."
     },
     {
@@ -211,13 +316,31 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-residencia",
-      "jurisdictions": ["484"],
-      "pages": [
-        { "id": "ordinary-naturalization", "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-residencia" },
-        { "id": "latin-american-or-iberian-origin", "url": "https://sre.gob.mx/carta-de-naturalizacion-por-ser-originario-de-un-pais-latinoamericano-o-de-la-peninsula-iberica" },
-        { "id": "parent-of-mexican-child", "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-tener-hijos-mexicanos-por-nacimiento" }
+      "jurisdictions": [
+        "484"
       ],
-      "keywords": ["nacionalidad", "naturalización", "residencia", "hijos mexicanos por nacimiento", "latinoamericano", "Península Ibérica"],
+      "pages": [
+        {
+          "id": "ordinary-naturalization",
+          "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-residencia"
+        },
+        {
+          "id": "latin-american-or-iberian-origin",
+          "url": "https://sre.gob.mx/carta-de-naturalizacion-por-ser-originario-de-un-pais-latinoamericano-o-de-la-peninsula-iberica"
+        },
+        {
+          "id": "parent-of-mexican-child",
+          "url": "https://portales.sre.gob.mx/tramites-dgaj/naturalizacion/carta-de-naturalizacion-por-tener-hijos-mexicanos-por-nacimiento"
+        }
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "residencia",
+        "hijos mexicanos por nacimiento",
+        "latinoamericano",
+        "Pen\u00ednsula Ib\u00e9rica"
+      ],
       "notes": "Official Foreign Ministry guidance for the five-year ordinary route, the two-year Latin American or Iberian Peninsula route, and the two-year route for parents of Mexican-born children. Resolve substantive changes against the Chamber of Deputies current Constitution, Nationality Law, and Migration Law. The Chamber index did not complete reliably in the 2026-07-21 collector test, so SRE guidance is the scheduled transport."
     },
     {
@@ -227,9 +350,17 @@
       "status": "planned",
       "kind": "gazette_search",
       "url": "https://www.dof.gob.mx/",
-      "jurisdictions": ["484"],
-      "keywords": ["nacionalidad", "naturalización", "residencia", "migración", "extranjeros"],
-      "notes": "Official Diario Oficial de la Federación. Add a narrow saved search or supported API query before activation."
+      "jurisdictions": [
+        "484"
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "residencia",
+        "migraci\u00f3n",
+        "extranjeros"
+      ],
+      "notes": "Official Diario Oficial de la Federaci\u00f3n. Add a narrow saved search or supported API query before activation."
     },
     {
       "id": "colombia-nationality-law",
@@ -237,16 +368,39 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm",
-      "jurisdictions": ["170"],
-      "pages": [
-        { "id": "nationality-law-2332-2023", "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm" },
-        { "id": "naturalization-guidance", "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/nacionalidad/naturalizacion" },
-        { "id": "visa-faq", "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/abece-de-visas" },
-        { "id": "visa-resolution-5477-2022", "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm" },
-        { "id": "student-visa", "url": "https://www.cancilleria.gov.co/node/26940" }
+      "jurisdictions": [
+        "170"
       ],
-      "keywords": ["nacionalidad", "naturalización", "domicilio", "visa de residente", "visa de estudiante"],
-      "notes": "Official Foreign Ministry current nationality law, naturalization guidance and visa rules. Law 2332/2023 controls current nationality findings; older Law 43 is not treated as current authority. The Función Pública mirror failed certificate verification in the 2026-07-21 collector test, so the Cancillería copy is the scheduled transport."
+      "pages": [
+        {
+          "id": "nationality-law-2332-2023",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm"
+        },
+        {
+          "id": "naturalization-guidance",
+          "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/nacionalidad/naturalizacion"
+        },
+        {
+          "id": "visa-faq",
+          "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/abece-de-visas"
+        },
+        {
+          "id": "visa-resolution-5477-2022",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm"
+        },
+        {
+          "id": "student-visa",
+          "url": "https://www.cancilleria.gov.co/node/26940"
+        }
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "domicilio",
+        "visa de residente",
+        "visa de estudiante"
+      ],
+      "notes": "Official Foreign Ministry current nationality law, naturalization guidance and visa rules. Law 2332/2023 controls current nationality findings; older Law 43 is not treated as current authority. The Funci\u00f3n P\u00fablica mirror failed certificate verification in the 2026-07-21 collector test, so the Canciller\u00eda copy is the scheduled transport."
     },
     {
       "id": "legislation-gov-uk",
@@ -254,9 +408,17 @@
       "adapter": "api",
       "status": "planned",
       "kind": "gazette_search",
-      "jurisdictions": ["826"],
-      "keywords": ["citizenship", "nationality", "naturalisation", "residence", "immigration"],
-      "notes": "legislation.gov.uk API — verifies BN(O)/ILR changes flagged volatile in the dataset."
+      "jurisdictions": [
+        "826"
+      ],
+      "keywords": [
+        "citizenship",
+        "nationality",
+        "naturalisation",
+        "residence",
+        "immigration"
+      ],
+      "notes": "legislation.gov.uk API \u2014 verifies BN(O)/ILR changes flagged volatile in the dataset."
     },
     {
       "id": "gov-uk-citizenship",
@@ -264,12 +426,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.gov.uk/browse/citizenship/citizenship",
-      "jurisdictions": ["826"],
+      "jurisdictions": [
+        "826"
+      ],
       "pages": [
-        { "id": "citizenship-index", "url": "https://www.gov.uk/browse/citizenship/citizenship" },
-        { "id": "citizenship-by-parent", "url": "https://www.gov.uk/apply-citizenship-british-parent" },
-        { "id": "citizenship-by-birth", "url": "https://www.gov.uk/apply-citizenship-born-uk/eligibility" },
-        { "id": "naturalisation", "url": "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain" }
+        {
+          "id": "citizenship-index",
+          "url": "https://www.gov.uk/browse/citizenship/citizenship"
+        },
+        {
+          "id": "citizenship-by-parent",
+          "url": "https://www.gov.uk/apply-citizenship-british-parent"
+        },
+        {
+          "id": "citizenship-by-birth",
+          "url": "https://www.gov.uk/apply-citizenship-born-uk/eligibility"
+        },
+        {
+          "id": "naturalisation",
+          "url": "https://www.gov.uk/apply-citizenship-indefinite-leave-to-remain"
+        }
       ],
       "notes": "Official GOV.UK citizenship guidance index. Diff the index and linked birth, descent, registration, and naturalization guidance; resolve legal changes to legislation.gov.uk before publishing."
     },
@@ -279,8 +455,10 @@
       "adapter": "api",
       "status": "planned",
       "url": "https://piste.gouv.fr/",
-      "jurisdictions": ["250"],
-      "notes": "Légifrance via the PISTE gateway — requires human developer registration before an adapter can be built."
+      "jurisdictions": [
+        "250"
+      ],
+      "notes": "L\u00e9gifrance via the PISTE gateway \u2014 requires human developer registration before an adapter can be built."
     },
     {
       "id": "france-service-public-nationality",
@@ -288,12 +466,20 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/N111",
-      "jurisdictions": ["250"],
-      "pages": [
-        { "id": "nationality-index", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/N111" },
-        { "id": "birth-in-france", "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F295" }
+      "jurisdictions": [
+        "250"
       ],
-      "notes": "Official French nationality guidance index. Diff the index and linked birth, descent, declaration, and naturalization guidance; resolve substantive changes to Légifrance before publishing."
+      "pages": [
+        {
+          "id": "nationality-index",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/N111"
+        },
+        {
+          "id": "birth-in-france",
+          "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F295"
+        }
+      ],
+      "notes": "Official French nationality guidance index. Diff the index and linked birth, descent, declaration, and naturalization guidance; resolve substantive changes to L\u00e9gifrance before publishing."
     },
     {
       "id": "portugal-justice-nationality",
@@ -301,13 +487,24 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa",
-      "jurisdictions": ["620"],
-      "pages": [
-        { "id": "nationality-overview", "url": "https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa" },
-        { "id": "nationality-guide", "url": "https://justica.gov.pt/Guias/como-obter-nacionalidade-portuguesa" },
-        { "id": "submit-application", "url": "https://justica.gov.pt/Servicos/Submeter-pedido-de-nacionalidade" }
+      "jurisdictions": [
+        "620"
       ],
-      "notes": "Official Ministry of Justice nationality guide and application profiles. Page diffs are useful operational signals; verify legal changes against Diário da República."
+      "pages": [
+        {
+          "id": "nationality-overview",
+          "url": "https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa"
+        },
+        {
+          "id": "nationality-guide",
+          "url": "https://justica.gov.pt/Guias/como-obter-nacionalidade-portuguesa"
+        },
+        {
+          "id": "submit-application",
+          "url": "https://justica.gov.pt/Servicos/Submeter-pedido-de-nacionalidade"
+        }
+      ],
+      "notes": "Official Ministry of Justice nationality guide and application profiles. Page diffs are useful operational signals; verify legal changes against Di\u00e1rio da Rep\u00fablica."
     },
     {
       "id": "germany-nationality-act",
@@ -315,7 +512,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.gesetze-im-internet.de/stag/",
-      "jurisdictions": ["276"],
+      "jurisdictions": [
+        "276"
+      ],
       "notes": "Current German text of the Nationality Act from the Federal Ministry of Justice and Federal Office of Justice. Monitor the consolidated HTML/XML and amendment history; translations are review aids, not controlling text."
     },
     {
@@ -324,10 +523,18 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.dfa.ie/citizenship/",
-      "jurisdictions": ["372"],
+      "jurisdictions": [
+        "372"
+      ],
       "pages": [
-        { "id": "citizenship-index", "url": "https://www.dfa.ie/citizenship/" },
-        { "id": "born-abroad", "url": "https://www.dfa.ie/citizenship/born-abroad/" }
+        {
+          "id": "citizenship-index",
+          "url": "https://www.dfa.ie/citizenship/"
+        },
+        {
+          "id": "born-abroad",
+          "url": "https://www.dfa.ie/citizenship/born-abroad/"
+        }
       ],
       "notes": "Official Department of Foreign Affairs citizenship guidance, including the Foreign Births Register and citizenship by descent. Diff the index and linked guidance."
     },
@@ -337,7 +544,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.irishimmigration.ie/how-to-become-an-irish-citizen-guide/",
-      "jurisdictions": ["372"],
+      "jurisdictions": [
+        "372"
+      ],
       "notes": "Official Immigration Service Delivery naturalization guidance. Monitor eligibility, reckonable residence, application procedure, fees, and linked notices."
     },
     {
@@ -346,7 +555,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.irishstatutebook.ie/eli/2004/act/38/section/4/enacted/en/html",
-      "jurisdictions": ["372"],
+      "jurisdictions": [
+        "372"
+      ],
       "notes": "Official Irish Statute Book. Monitor nationality acts and amending instruments referenced by reviewed canonical claims."
     },
     {
@@ -355,12 +566,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.legislation.gov.au/C2007A00020/latest/text",
-      "jurisdictions": ["036"],
+      "jurisdictions": [
+        "036"
+      ],
       "pages": [
-        { "id": "citizenship-act", "url": "https://www.legislation.gov.au/C2007A00020/latest/text" },
-        { "id": "citizenship-by-descent", "url": "https://immi.homeaffairs.gov.au/citizenship/become-a-citizen/by-descent" },
-        { "id": "residence-calculator", "url": "https://immi.homeaffairs.gov.au/help-support/tools/residence-calculator" },
-        { "id": "migration-program-changes", "url": "https://immi.homeaffairs.gov.au/what-we-do/skilled-migration-program/recent-changes" }
+        {
+          "id": "citizenship-act",
+          "url": "https://www.legislation.gov.au/C2007A00020/latest/text"
+        },
+        {
+          "id": "citizenship-by-descent",
+          "url": "https://immi.homeaffairs.gov.au/citizenship/become-a-citizen/by-descent"
+        },
+        {
+          "id": "residence-calculator",
+          "url": "https://immi.homeaffairs.gov.au/help-support/tools/residence-calculator"
+        },
+        {
+          "id": "migration-program-changes",
+          "url": "https://immi.homeaffairs.gov.au/what-we-do/skilled-migration-program/recent-changes"
+        }
       ],
       "notes": "Monitor the Australian Citizenship Act plus Home Affairs descent, conferral, residence, and migration-program guidance linked by canonical claims."
     },
@@ -370,7 +595,9 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship.html",
-      "jurisdictions": ["124"],
+      "jurisdictions": [
+        "124"
+      ],
       "notes": "Monitor current IRCC citizenship status, descent, birth, physical-presence, and permanent-residence guidance, including the post-15 December 2025 descent rules."
     },
     {
@@ -379,12 +606,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/",
-      "jurisdictions": ["554"],
+      "jurisdictions": [
+        "554"
+      ],
       "pages": [
-        { "id": "citizenship-index", "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/" },
-        { "id": "citizenship-types", "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/" },
-        { "id": "presence-requirements", "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/requirements-for-nz-citizenship/presence-requirements/" },
-        { "id": "active-investor-plus", "url": "https://www.immigration.govt.nz/visas/active-investor-plus-visa/" }
+        {
+          "id": "citizenship-index",
+          "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/"
+        },
+        {
+          "id": "citizenship-types",
+          "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/"
+        },
+        {
+          "id": "presence-requirements",
+          "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/requirements-for-nz-citizenship/presence-requirements/"
+        },
+        {
+          "id": "active-investor-plus",
+          "url": "https://www.immigration.govt.nz/visas/active-investor-plus-visa/"
+        }
       ],
       "notes": "Monitor New Zealand citizenship by birth, descent, and grant guidance plus linked investor-residence pages."
     },
@@ -394,11 +635,22 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.uscis.gov/citizenship",
-      "jurisdictions": ["840"],
+      "jurisdictions": [
+        "840"
+      ],
       "pages": [
-        { "id": "citizenship-index", "url": "https://www.uscis.gov/citizenship" },
-        { "id": "naturalization", "url": "https://www.uscis.gov/citizenship/learn-about-citizenship/citizenship-and-naturalization" },
-        { "id": "eb5-investor", "url": "https://www.uscis.gov/eb-5" }
+        {
+          "id": "citizenship-index",
+          "url": "https://www.uscis.gov/citizenship"
+        },
+        {
+          "id": "naturalization",
+          "url": "https://www.uscis.gov/citizenship/learn-about-citizenship/citizenship-and-naturalization"
+        },
+        {
+          "id": "eb5-investor",
+          "url": "https://www.uscis.gov/eb-5"
+        }
       ],
       "notes": "Monitor USCIS and Department of State citizenship-at-birth, naturalization, and investor-residence guidance, resolving legal changes to the U.S. Code."
     },
@@ -408,7 +660,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.esteri.it/it/servizi-consolari-e-visti/normativa_consolare/serviziconsolari/cittadinanza/",
-      "jurisdictions": ["380"],
+      "jurisdictions": [
+        "380"
+      ],
       "notes": "Monitor current Foreign Ministry citizenship guidance, including the 2025 descent reform and later circulars; resolve amendments to official legislation before publishing."
     },
     {
@@ -417,7 +671,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://ind.nl/en/dutch-citizenship",
-      "jurisdictions": ["528"],
+      "jurisdictions": [
+        "528"
+      ],
       "notes": "Monitor IND birth, option, naturalization, loss, and procedure guidance and cross-check changes against the Netherlands Nationality Act."
     },
     {
@@ -426,7 +682,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.ica.gov.sg/reside/citizenship",
-      "jurisdictions": ["702"],
+      "jurisdictions": [
+        "702"
+      ],
       "notes": "Monitor ICA citizenship eligibility and procedure guidance; resolve substantive changes against Part 10 of the Constitution and current subsidiary legislation."
     },
     {
@@ -435,7 +693,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html",
-      "jurisdictions": ["756"],
+      "jurisdictions": [
+        "756"
+      ],
       "notes": "Monitor SEM descent, ordinary, facilitated, and third-generation guidance; resolve changes to Fedlex and applicable cantonal rules."
     },
     {
@@ -444,7 +704,9 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://api.io.canada.ca/io-server/gc/news/en/v2?dept=departmentofcitizenshipandimmigration&sort=publishedDate&orderBy=desc&publishedDate%3E=2021-07-23&pick=50&format=atom&atomtitle=Immigration,%20Refugees%20and%20Citizenship%20Canada",
-      "jurisdictions": ["124"],
+      "jurisdictions": [
+        "124"
+      ],
       "max_items": 50,
       "notes": "Official IRCC Atom feed for Canadian immigration and citizenship announcements. Verification tier, although a reviewer must still resolve announcements to the underlying regulation, instruction, or public policy."
     },
@@ -454,7 +716,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.uscis.gov/newsroom/alerts",
-      "jurisdictions": ["840"],
+      "jurisdictions": [
+        "840"
+      ],
       "notes": "Official USCIS alert index for naturalization, permanent residence, work authorization, fees, forms, and policy-manual changes. Needs a narrow paginated index adapter."
     },
     {
@@ -464,8 +728,22 @@
       "status": "planned",
       "kind": "gazette_search",
       "url": "https://eur-lex.europa.eu/oj/direct-access.html?locale=en",
-      "jurisdictions": ["eu"],
-      "keywords": ["citizenship", "nationality", "naturalisation", "residence", "free movement", "migration", "ciudadanía", "nacionalidad", "cittadinanza", "nationalité", "Staatsangehörigkeit"],
+      "jurisdictions": [
+        "eu"
+      ],
+      "keywords": [
+        "citizenship",
+        "nationality",
+        "naturalisation",
+        "residence",
+        "free movement",
+        "migration",
+        "ciudadan\u00eda",
+        "nacionalidad",
+        "cittadinanza",
+        "nationalit\u00e9",
+        "Staatsangeh\u00f6rigkeit"
+      ],
       "notes": "Authentic Official Journal of the European Union. Configure a focused EUR-Lex RSS search for nationality, residence, migration, accession, and free-movement instruments rather than ingesting the entire journal."
     },
     {
@@ -474,8 +752,15 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.ypes.gr/kodikas-ellinikis-ithageneias/",
-      "jurisdictions": ["300"],
-      "keywords": ["ιθαγένεια", "πολιτογράφηση", "γέννηση", "διαμονή"],
+      "jurisdictions": [
+        "300"
+      ],
+      "keywords": [
+        "\u03b9\u03b8\u03b1\u03b3\u03ad\u03bd\u03b5\u03b9\u03b1",
+        "\u03c0\u03bf\u03bb\u03b9\u03c4\u03bf\u03b3\u03c1\u03ac\u03c6\u03b7\u03c3\u03b7",
+        "\u03b3\u03ad\u03bd\u03bd\u03b7\u03c3\u03b7",
+        "\u03b4\u03b9\u03b1\u03bc\u03bf\u03bd\u03ae"
+      ],
       "notes": "Official Ministry of Interior consolidated Citizenship Code, including descent, conditional birth and schooling routes, and ordinary naturalization."
     },
     {
@@ -484,8 +769,15 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://migration.gov.gr/en/golden-visa/",
-      "jurisdictions": ["300"],
-      "keywords": ["investor", "residence permit", "golden visa", "investment"],
+      "jurisdictions": [
+        "300"
+      ],
+      "keywords": [
+        "investor",
+        "residence permit",
+        "golden visa",
+        "investment"
+      ],
       "notes": "Official investor-residence guidance used to keep Golden Visa residence separate from direct citizenship."
     },
     {
@@ -494,12 +786,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://justice.government.bg/home/normdoc/2134446592",
-      "jurisdictions": ["100"],
-      "pages": [
-        { "id": "citizenship-act", "url": "https://justice.government.bg/home/normdoc/2134446592" },
-        { "id": "citizenship-directorate", "url": "https://mjs.bg/home/index/dbg?top=1" }
+      "jurisdictions": [
+        "100"
       ],
-      "keywords": ["гражданство", "натурализация", "произход", "месторождение", "инвестиции"],
+      "pages": [
+        {
+          "id": "citizenship-act",
+          "url": "https://justice.government.bg/home/normdoc/2134446592"
+        },
+        {
+          "id": "citizenship-directorate",
+          "url": "https://mjs.bg/home/index/dbg?top=1"
+        }
+      ],
+      "keywords": [
+        "\u0433\u0440\u0430\u0436\u0434\u0430\u043d\u0441\u0442\u0432\u043e",
+        "\u043d\u0430\u0442\u0443\u0440\u0430\u043b\u0438\u0437\u0430\u0446\u0438\u044f",
+        "\u043f\u0440\u043e\u0438\u0437\u0445\u043e\u0434",
+        "\u043c\u0435\u0441\u0442\u043e\u0440\u043e\u0436\u0434\u0435\u043d\u0438\u0435",
+        "\u0438\u043d\u0432\u0435\u0441\u0442\u0438\u0446\u0438\u0438"
+      ],
       "notes": "Official Citizenship Act and Ministry of Justice citizenship procedures; the Act records repeal of investment-naturalization Articles 12a and 14a."
     },
     {
@@ -508,8 +814,16 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://mup.gov.rs/wps/portal/sr/gradjani/dokumenta/Drzavljanstvo/",
-      "jurisdictions": ["688"],
-      "keywords": ["држављанство", "državljanstvo", "пореклом", "пријем", "рођењем"],
+      "jurisdictions": [
+        "688"
+      ],
+      "keywords": [
+        "\u0434\u0440\u0436\u0430\u0432\u0459\u0430\u043d\u0441\u0442\u0432\u043e",
+        "dr\u017eavljanstvo",
+        "\u043f\u043e\u0440\u0435\u043a\u043b\u043e\u043c",
+        "\u043f\u0440\u0438\u0458\u0435\u043c",
+        "\u0440\u043e\u0452\u0435\u045a\u0435\u043c"
+      ],
       "notes": "Official Ministry of Interior citizenship index and linked Citizenship Act covering descent, territorial statelessness safeguards, and admission."
     },
     {
@@ -518,12 +832,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1",
-      "jurisdictions": ["784"],
-      "pages": [
-        { "id": "nationality-law", "url": "https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1" },
-        { "id": "exceptional-nationality-guidance", "url": "https://u.ae/en/information-and-services/passports-and-traveling/emirati-nationality" }
+      "jurisdictions": [
+        "784"
       ],
-      "keywords": ["nationality", "naturalisation", "naturalization", "investor", "citizen"],
+      "pages": [
+        {
+          "id": "nationality-law",
+          "url": "https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1"
+        },
+        {
+          "id": "exceptional-nationality-guidance",
+          "url": "https://u.ae/en/information-and-services/passports-and-traveling/emirati-nationality"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalisation",
+        "naturalization",
+        "investor",
+        "citizen"
+      ],
       "notes": "Federal nationality law plus official guidance for the nomination-based exceptional categories introduced in 2021."
     },
     {
@@ -532,8 +860,15 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
-      "jurisdictions": ["784"],
-      "keywords": ["golden visa", "residence", "investor", "investment fund"],
+      "jurisdictions": [
+        "784"
+      ],
+      "keywords": [
+        "golden visa",
+        "residence",
+        "investor",
+        "investment fund"
+      ],
       "notes": "Official Golden Visa guidance used to prevent investor residence from being misclassified as direct citizenship."
     },
     {
@@ -542,7 +877,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/",
-      "jurisdictions": ["470"],
+      "jurisdictions": [
+        "470"
+      ],
       "pages": [
         {
           "id": "acquisition-guidance",
@@ -565,7 +902,9 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://legislation.mt/eli/cap/188/eng/pdf",
-      "jurisdictions": ["470"],
+      "jurisdictions": [
+        "470"
+      ],
       "notes": "Consolidated Maltese Citizenship Act. Add a PDF text/hash adapter and monitor amendment metadata before activating."
     },
     {
@@ -574,7 +913,9 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://www.gov.cy/moi/en/ministry/departments/civil-registry-section/registry-office-2/cypriot-citizenship-nationality/",
-      "jurisdictions": ["196"],
+      "jurisdictions": [
+        "196"
+      ],
       "notes": "Official Ministry of Interior citizenship hub linking origin, marriage and residence-naturalization procedures. Direct collection returned HTTP 403 on 2026-07-21; add a permitted feed/API or resilient browser-backed adapter before activation."
     },
     {
@@ -583,7 +924,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://cipregistry.mof.gov.cy/en/",
-      "jurisdictions": ["196"],
+      "jurisdictions": [
+        "196"
+      ],
       "notes": "Official Ministry of Finance registry page recording that the Cyprus Investment Programme was terminated and accepts no new applications."
     },
     {
@@ -592,7 +935,9 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://migration.gov.gr/nomothesia-1-2/nomothesia-archi-prosfygon/",
-      "jurisdictions": ["300"],
+      "jurisdictions": [
+        "300"
+      ],
       "notes": "Official Greek Ministry of Migration and Asylum legislation index. Monitor new laws and gazette references, then resolve nationality-specific changes through the competent ministry and Government Gazette."
     },
     {
@@ -601,7 +946,9 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://www.funcionpublica.gov.co/eva/gestornormativo/",
-      "jurisdictions": ["170"],
+      "jurisdictions": [
+        "170"
+      ],
       "notes": "Official Colombian public-service normative repository. Build a saved-query adapter for nationality, residence-credit, visa, and naturalization terms instead of crawling the full corpus."
     },
     {
@@ -610,8 +957,10 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://nvi.gov.tr/turk-vatandasliginin-kazanilmasi",
-      "jurisdictions": ["792"],
-      "notes": "Official NVI citizenship-acquisition guidance covering descent, stateless birth, general five-year naturalization and exceptional acquisition. Pair diffs with Law No. 5901 and Resmî Gazete."
+      "jurisdictions": [
+        "792"
+      ],
+      "notes": "Official NVI citizenship-acquisition guidance covering descent, stateless birth, general five-year naturalization and exceptional acquisition. Pair diffs with Law No. 5901 and Resm\u00ee Gazete."
     },
     {
       "id": "turkiye-investment-guidance",
@@ -619,8 +968,10 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.invest.gov.tr/en/investmentguide/pages/acquiring-property-and-citizenship.aspx",
-      "jurisdictions": ["792"],
-      "notes": "Official Invest in Türkiye page listing current exceptional-citizenship investment thresholds and holding periods."
+      "jurisdictions": [
+        "792"
+      ],
+      "notes": "Official Invest in T\u00fcrkiye page listing current exceptional-citizenship investment thresholds and holding periods."
     },
     {
       "id": "uruguay-nationality-law",
@@ -628,7 +979,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.impo.com.uy/bases/leyes/16021-1989",
-      "jurisdictions": ["858"],
+      "jurisdictions": [
+        "858"
+      ],
       "notes": "Official IMPO updated-law page for nationality by territorial birth and Uruguayan parentage."
     },
     {
@@ -637,7 +990,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.gub.uy/tramites/carta-ciudadania",
-      "jurisdictions": ["858"],
+      "jurisdictions": [
+        "858"
+      ],
       "notes": "Official Electoral Court legal-citizenship procedure, including three/five-year habitual-residence rules and reset conditions."
     },
     {
@@ -646,7 +1001,9 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.gub.uy/direccion-general-impositiva/comunicacion/publicaciones/causales-residencia-fiscal",
-      "jurisdictions": ["858"],
+      "jurisdictions": [
+        "858"
+      ],
       "notes": "Official DGI tax-residence page used to prevent investment-based tax residence from being misclassified as direct citizenship."
     },
     {
@@ -655,12 +1012,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://sda.gov.ge/en/products/citizenship/",
-      "jurisdictions": ["268"],
-      "pages": [
-        { "id": "citizenship-guidance", "url": "https://sda.gov.ge/en/products/citizenship/" },
-        { "id": "organic-law", "url": "https://matsne.gov.ge/en/document/view/2342552?publication=7" }
+      "jurisdictions": [
+        "268"
       ],
-      "keywords": ["citizenship", "naturalization", "lawful residence", "საქართველოს მოქალაქეობა", "ნატურალიზაცია"],
+      "pages": [
+        {
+          "id": "citizenship-guidance",
+          "url": "https://sda.gov.ge/en/products/citizenship/"
+        },
+        {
+          "id": "organic-law",
+          "url": "https://matsne.gov.ge/en/document/view/2342552?publication=7"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "lawful residence",
+        "\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10db\u10dd\u10e5\u10d0\u10da\u10d0\u10e5\u10d4\u10dd\u10d1\u10d0",
+        "\u10dc\u10d0\u10e2\u10e3\u10e0\u10d0\u10da\u10d8\u10d6\u10d0\u10ea\u10d8\u10d0"
+      ],
       "notes": "Official service guidance plus the consolidated Organic Law. Monitor ordinary and simplified residence periods, birth safeguards and exceptional-citizenship provisions."
     },
     {
@@ -669,13 +1040,30 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://otp.gov.ky/web/odg/botc-registration-and-naturalisation",
-      "jurisdictions": ["136"],
-      "pages": [
-        { "id": "botc-registration-naturalisation", "url": "https://otp.gov.ky/web/odg/botc-registration-and-naturalisation" },
-        { "id": "caymanian-status-reform", "url": "https://gov.ky/web/mcei/immigrationreform" },
-        { "id": "british-nationality-act", "url": "https://www.legislation.gov.uk/ukpga/1981/61/contents" }
+      "jurisdictions": [
+        "136"
       ],
-      "keywords": ["BOTC", "naturalisation", "registration", "Caymanian status", "lawful and ordinary residence"],
+      "pages": [
+        {
+          "id": "botc-registration-naturalisation",
+          "url": "https://otp.gov.ky/web/odg/botc-registration-and-naturalisation"
+        },
+        {
+          "id": "caymanian-status-reform",
+          "url": "https://gov.ky/web/mcei/immigrationreform"
+        },
+        {
+          "id": "british-nationality-act",
+          "url": "https://www.legislation.gov.uk/ukpga/1981/61/contents"
+        }
+      ],
+      "keywords": [
+        "BOTC",
+        "naturalisation",
+        "registration",
+        "Caymanian status",
+        "lawful and ordinary residence"
+      ],
       "notes": "Tracks BOTC rules and Caymanian status separately. Investment-linked residence must never be promoted as direct citizenship."
     },
     {
@@ -684,14 +1072,36 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.dominica.gov.dm/services/citizenship/how-do-i-apply-for-citizenship-of-the-commonwealth-of-dominica",
-      "jurisdictions": ["212"],
-      "pages": [
-        { "id": "citizenship-application", "url": "https://www.dominica.gov.dm/services/citizenship/how-do-i-apply-for-citizenship-of-the-commonwealth-of-dominica" },
-        { "id": "citizenship-forms", "url": "https://www.dominica.gov.dm/forms" },
-        { "id": "cbi-legislation", "url": "https://www.cbiu.gov.dm/dominica-citizenship/legislation/" },
-        { "id": "cbi-options", "url": "https://www.cbiu.gov.dm/faqs/" }
+      "jurisdictions": [
+        "212"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "seven years", "Economic Diversification Fund", "approved real estate", "minimum investment"],
+      "pages": [
+        {
+          "id": "citizenship-application",
+          "url": "https://www.dominica.gov.dm/services/citizenship/how-do-i-apply-for-citizenship-of-the-commonwealth-of-dominica"
+        },
+        {
+          "id": "citizenship-forms",
+          "url": "https://www.dominica.gov.dm/forms"
+        },
+        {
+          "id": "cbi-legislation",
+          "url": "https://www.cbiu.gov.dm/dominica-citizenship/legislation/"
+        },
+        {
+          "id": "cbi-options",
+          "url": "https://www.cbiu.gov.dm/faqs/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "seven years",
+        "Economic Diversification Fund",
+        "approved real estate",
+        "minimum investment"
+      ],
       "notes": "Official general-citizenship and CBI sources. CBI thresholds are volatile and require a current regulation or CBIU page before publication."
     },
     {
@@ -700,13 +1110,31 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://ciu.gov.kn/cbi-options/",
-      "jurisdictions": ["659"],
-      "pages": [
-        { "id": "cbi-options", "url": "https://ciu.gov.kn/cbi-options/" },
-        { "id": "government-notices", "url": "https://ciu.gov.kn/government-notices/" },
-        { "id": "application-process", "url": "https://ciu.gov.kn/application-process/" }
+      "jurisdictions": [
+        "659"
       ],
-      "keywords": ["citizenship", "naturalisation", "Sustainable Island State Contribution", "Public Benefit Option", "real estate", "minimum investment"],
+      "pages": [
+        {
+          "id": "cbi-options",
+          "url": "https://ciu.gov.kn/cbi-options/"
+        },
+        {
+          "id": "government-notices",
+          "url": "https://ciu.gov.kn/government-notices/"
+        },
+        {
+          "id": "application-process",
+          "url": "https://ciu.gov.kn/application-process/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "Sustainable Island State Contribution",
+        "Public Benefit Option",
+        "real estate",
+        "minimum investment"
+      ],
       "notes": "Official Citizenship Unit pages for current CBI options and notices. Constitution and Citizenship Act PDFs remain canonical primary evidence for birth, descent and ordinary naturalisation."
     },
     {
@@ -715,13 +1143,31 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made",
-      "jurisdictions": ["028"],
-      "pages": [
-        { "id": "constitution", "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made" },
-        { "id": "cbi-act", "url": "https://cip.gov.ag/wp-content/uploads/2013/10/Antigua-and-Barbuda-Citizenship-by-Investment-Act-2013.pdf" },
-        { "id": "cbi-options", "url": "https://cip.gov.ag/citizenship/" }
+      "jurisdictions": [
+        "028"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "National Development Fund", "approved real estate", "minimum investment"],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made"
+        },
+        {
+          "id": "cbi-act",
+          "url": "https://cip.gov.ag/wp-content/uploads/2013/10/Antigua-and-Barbuda-Citizenship-by-Investment-Act-2013.pdf"
+        },
+        {
+          "id": "cbi-options",
+          "url": "https://cip.gov.ag/citizenship/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "National Development Fund",
+        "approved real estate",
+        "minimum investment"
+      ],
       "notes": "Official Constitution and CIU pages are polled. The Antigua laws and immigration hosts currently fail automated TLS verification, so the Citizenship Act remains canonical evidence but requires manual retrieval until the authority fixes its certificate. Track the presence rule and volatile investment minimums separately from ordinary naturalisation."
     },
     {
@@ -730,14 +1176,35 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.gov.gd/government/the-constitution",
-      "jurisdictions": ["308"],
-      "pages": [
-        { "id": "constitution", "url": "https://www.gov.gd/government/the-constitution" },
-        { "id": "citizenship-act-index", "url": "https://www.laws.gov.gd/index.php/chapters/c-39a-75d/92-chapter-54-citizenship-act" },
-        { "id": "naturalisation-form", "url": "https://gndembassyprc.mofa.gov.gd/wp-content/uploads/2023/09/Schedule-5-Regulation-7.pdf" },
-        { "id": "cbi-programme", "url": "https://www.cbi.gov.gd/index_php/" }
+      "jurisdictions": [
+        "308"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "National Transformation Fund", "approved project", "minimum contribution"],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.gov.gd/government/the-constitution"
+        },
+        {
+          "id": "citizenship-act-index",
+          "url": "https://www.laws.gov.gd/index.php/chapters/c-39a-75d/92-chapter-54-citizenship-act"
+        },
+        {
+          "id": "naturalisation-form",
+          "url": "https://gndembassyprc.mofa.gov.gd/wp-content/uploads/2023/09/Schedule-5-Regulation-7.pdf"
+        },
+        {
+          "id": "cbi-programme",
+          "url": "https://www.cbi.gov.gd/index_php/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "National Transformation Fund",
+        "approved project",
+        "minimum contribution"
+      ],
       "notes": "Official constitutional, legal, consular and CBI pages. The programme landing page currently exposes an older minimum, so fee changes require a current regulation or official circular before publication."
     },
     {
@@ -746,15 +1213,39 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.govt.lc/constitution7",
-      "jurisdictions": ["662"],
-      "pages": [
-        { "id": "constitution", "url": "https://www.govt.lc/constitution7" },
-        { "id": "citizenship-amendment-2024", "url": "https://npc.govt.lc/files/laws/acts/2024/Act%20No%207%20of%202024%20Citizenship%20of%20Saint%20Lucia.pdf" },
-        { "id": "descent-guidance", "url": "https://homeaffairs.govt.lc/news/the-citizenship-of-saint-lucia-act-is-amended" },
-        { "id": "cbi-act", "url": "https://pmd.govt.lc/wp-content/uploads/2025/10/Citizenship-by-Investment-Act-Cap.1.20.pdf" },
-        { "id": "cbi-options", "url": "https://www.cipsaintlucia.com/citizenship-by-investment" }
+      "jurisdictions": [
+        "662"
       ],
-      "keywords": ["citizenship", "naturalisation", "grandfather", "grandmother", "National Economic Fund", "minimum qualifying investment"],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.govt.lc/constitution7"
+        },
+        {
+          "id": "citizenship-amendment-2024",
+          "url": "https://npc.govt.lc/files/laws/acts/2024/Act%20No%207%20of%202024%20Citizenship%20of%20Saint%20Lucia.pdf"
+        },
+        {
+          "id": "descent-guidance",
+          "url": "https://homeaffairs.govt.lc/news/the-citizenship-of-saint-lucia-act-is-amended"
+        },
+        {
+          "id": "cbi-act",
+          "url": "https://pmd.govt.lc/wp-content/uploads/2025/10/Citizenship-by-Investment-Act-Cap.1.20.pdf"
+        },
+        {
+          "id": "cbi-options",
+          "url": "https://www.cipsaintlucia.com/citizenship-by-investment"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "grandfather",
+        "grandmother",
+        "National Economic Fund",
+        "minimum qualifying investment"
+      ],
       "notes": "Official Constitution, 2024 descent amendment and current CIP sources. Track later amendments and programme price changes without conflating registration, naturalisation and CBI."
     },
     {
@@ -763,13 +1254,31 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf",
-      "jurisdictions": ["044"],
-      "pages": [
-        { "id": "constitution", "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf" },
-        { "id": "nationality-act", "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-0018/1973-0018.pdf" },
-        { "id": "economic-permanent-residence", "url": "https://www.immigration.gov.bs/wp-content/uploads/2019/10/PERMANENT-RESIDENCE-FORM-ECONOMIC.pdf" }
+      "jurisdictions": [
+        "044"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "registration", "economic permanent residence", "investment"],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf"
+        },
+        {
+          "id": "nationality-act",
+          "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-0018/1973-0018.pdf"
+        },
+        {
+          "id": "economic-permanent-residence",
+          "url": "https://www.immigration.gov.bs/wp-content/uploads/2019/10/PERMANENT-RESIDENCE-FORM-ECONOMIC.pdf"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "registration",
+        "economic permanent residence",
+        "investment"
+      ],
       "notes": "Official Constitution, Nationality Act and economic-PR form. The investment page is a classification safeguard: permanent residence must not be represented as direct citizenship."
     },
     {
@@ -778,14 +1287,35 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://immigration.gov.bb/pages/Citizenship.aspx",
-      "jurisdictions": ["052"],
-      "pages": [
-        { "id": "constitution", "url": "https://www.electoral.barbados.gov.bb/wp-content/uploads/2021/10/The_Constitution_of_Barbados.pdf" },
-        { "id": "citizenship-act", "url": "https://www.barbadoslawcourts.gov.bb/assets/content/pdfs/statutes/BarbadosCitizenshipCAP186.pdf" },
-        { "id": "citizenship-guidance", "url": "https://immigration.gov.bb/pages/Citizenship.aspx" },
-        { "id": "citizenship-bills", "url": "https://governmentprintery.gov.bb/category/bills/" }
+      "jurisdictions": [
+        "052"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "born in Barbados", "ordinary residence", "Citizenship Bill"],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.electoral.barbados.gov.bb/wp-content/uploads/2021/10/The_Constitution_of_Barbados.pdf"
+        },
+        {
+          "id": "citizenship-act",
+          "url": "https://www.barbadoslawcourts.gov.bb/assets/content/pdfs/statutes/BarbadosCitizenshipCAP186.pdf"
+        },
+        {
+          "id": "citizenship-guidance",
+          "url": "https://immigration.gov.bb/pages/Citizenship.aspx"
+        },
+        {
+          "id": "citizenship-bills",
+          "url": "https://governmentprintery.gov.bb/category/bills/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "born in Barbados",
+        "ordinary residence",
+        "Citizenship Bill"
+      ],
       "notes": "Official constitutional, statutory, administrative and bills sources. Proposed bills are review signals only and must not alter the canonical law until enacted and commenced."
     },
     {
@@ -794,13 +1324,29 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx",
-      "jurisdictions": ["480"],
-      "pages": [
-        { "id": "citizenship-act", "url": "https://lawsofmauritius.govmu.org/portal/viewlegislationdocument/web/?docnumber=&doctitle=TWF1cml0aXVzIENpdGl6ZW5zaGlwIEFjdA%3D%3D&doctype=act" },
-        { "id": "citizenship-guidance", "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx" }
+      "jurisdictions": [
+        "480"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "invested", "500,000 US dollars", "1 October 1995", "residence permit"],
-      "notes": "Official current Act and Prime Minister’s Office guidance. Monitor the special investor-naturalization threshold and residence condition separately from residence-by-investment programmes."
+      "pages": [
+        {
+          "id": "citizenship-act",
+          "url": "https://lawsofmauritius.govmu.org/portal/viewlegislationdocument/web/?docnumber=&doctitle=TWF1cml0aXVzIENpdGl6ZW5zaGlwIEFjdA%3D%3D&doctype=act"
+        },
+        {
+          "id": "citizenship-guidance",
+          "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "invested",
+        "500,000 US dollars",
+        "1 October 1995",
+        "residence permit"
+      ],
+      "notes": "Official current Act and Prime Minister\u2019s Office guidance. Monitor the special investor-naturalization threshold and residence condition separately from residence-by-investment programmes."
     },
     {
       "id": "panama-nationality-law",
@@ -808,13 +1354,32 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://constitucion.te.gob.pa/constitucion-vigente/",
-      "jurisdictions": ["591"],
-      "pages": [
-        { "id": "current-constitution", "url": "https://constitucion.te.gob.pa/constitucion-vigente/" },
-        { "id": "naturalization-requirements", "url": "https://www.migracion.gob.pa/wp-content/uploads/REQUISITOS-DE-NATURALIZACION-ACTUALIZADO.pdf" },
-        { "id": "constitutional-reforms", "url": "https://constitucion.te.gob.pa/reformas-a-la-constitucion-de-1972/" }
+      "jurisdictions": [
+        "591"
       ],
-      "keywords": ["nacionalidad", "naturalización", "carta de naturaleza", "cinco años", "tres años", "residencia permanente", "Artículo 10"],
+      "pages": [
+        {
+          "id": "current-constitution",
+          "url": "https://constitucion.te.gob.pa/constitucion-vigente/"
+        },
+        {
+          "id": "naturalization-requirements",
+          "url": "https://www.migracion.gob.pa/wp-content/uploads/REQUISITOS-DE-NATURALIZACION-ACTUALIZADO.pdf"
+        },
+        {
+          "id": "constitutional-reforms",
+          "url": "https://constitucion.te.gob.pa/reformas-a-la-constitucion-de-1972/"
+        }
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "carta de naturaleza",
+        "cinco a\u00f1os",
+        "tres a\u00f1os",
+        "residencia permanente",
+        "Art\u00edculo 10"
+      ],
       "notes": "Official Constitution, current naturalization checklist and reform history. Friendly Nations and investor permits are residence mechanisms, not direct citizenship."
     },
     {
@@ -823,12 +1388,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://crvsd.gov.vu/services/registration-of-new-citizens",
-      "jurisdictions": ["548"],
-      "pages": [
-        { "id": "new-citizen-registration", "url": "https://crvsd.gov.vu/services/registration-of-new-citizens" }
+      "jurisdictions": [
+        "548"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "Development Support Program", "Contribution Program", "fees", "dual citizenship", "designated agents"],
-      "notes": "Official civil-registry page listing naturalization and current investor citizenship categories. The Commission, Parliament and Prime Minister’s Office materials remain canonical evidence but fail Bun TLS verification; those endpoints are tracked separately as planned until their certificate chains work in CI."
+      "pages": [
+        {
+          "id": "new-citizen-registration",
+          "url": "https://crvsd.gov.vu/services/registration-of-new-citizens"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "Development Support Program",
+        "Contribution Program",
+        "fees",
+        "dual citizenship",
+        "designated agents"
+      ],
+      "notes": "Official civil-registry page listing naturalization and current investor citizenship categories. The Commission, Parliament and Prime Minister\u2019s Office materials remain canonical evidence but fail Bun TLS verification; those endpoints are tracked separately as planned until their certificate chains work in CI."
     },
     {
       "id": "vanuatu-primary-law",
@@ -836,15 +1415,39 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://parliament.gov.vu/images/constitution.pdf",
-      "jurisdictions": ["548"],
-      "pages": [
-        { "id": "constitutional-citizenship", "url": "https://parliament.gov.vu/images/constitution.pdf" },
-        { "id": "citizenship-types", "url": "https://vancitizenship.gov.vu/index.php/citizenship/types-of-citizenship" },
-        { "id": "legislative-framework", "url": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework" },
-        { "id": "cbi-review", "url": "https://pmo.gov.vu/en/public-information/press-release/1150-coi-report-and-recommendations.html" },
-        { "id": "citizenship-amendment-bill", "url": "https://parliament.gov.vu/images/Bills/Second%20Ordinary%20session%202025/Bill%20for%20the%20Citizenship/Bill%20for%20the%20Citizenship%20Am%20Act%20No.%20%20of%202025.pdf" }
+      "jurisdictions": [
+        "548"
       ],
-      "keywords": ["citizenship", "naturalisation", "Development Support Program", "Contribution Program", "amendment", "fees"],
+      "pages": [
+        {
+          "id": "constitutional-citizenship",
+          "url": "https://parliament.gov.vu/images/constitution.pdf"
+        },
+        {
+          "id": "citizenship-types",
+          "url": "https://vancitizenship.gov.vu/index.php/citizenship/types-of-citizenship"
+        },
+        {
+          "id": "legislative-framework",
+          "url": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework"
+        },
+        {
+          "id": "cbi-review",
+          "url": "https://pmo.gov.vu/en/public-information/press-release/1150-coi-report-and-recommendations.html"
+        },
+        {
+          "id": "citizenship-amendment-bill",
+          "url": "https://parliament.gov.vu/images/Bills/Second%20Ordinary%20session%202025/Bill%20for%20the%20Citizenship/Bill%20for%20the%20Citizenship%20Am%20Act%20No.%20%20of%202025.pdf"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "Development Support Program",
+        "Contribution Program",
+        "amendment",
+        "fees"
+      ],
       "notes": "Official primary-law and programme sources. Activate once their TLS certificate chains validate in the strict Bun/CI collector. Bills and review notices are signals only, not enacted-law changes."
     },
     {
@@ -854,9 +1457,18 @@
       "status": "planned",
       "kind": "gazette_search",
       "url": "https://www.gov.br/pt-br/servicos/acessar-o-diario-oficial-da-uniao",
-      "jurisdictions": ["076"],
-      "keywords": ["cidadania", "nacionalidade", "naturalização", "residência", "migração", "estrangeiros"],
-      "notes": "Official access point for Brazil's Diário Oficial da União. Build a keyword/API query for nationality, naturalization, migration, residence, and visa instruments."
+      "jurisdictions": [
+        "076"
+      ],
+      "keywords": [
+        "cidadania",
+        "nacionalidade",
+        "naturaliza\u00e7\u00e3o",
+        "resid\u00eancia",
+        "migra\u00e7\u00e3o",
+        "estrangeiros"
+      ],
+      "notes": "Official access point for Brazil's Di\u00e1rio Oficial da Uni\u00e3o. Build a keyword/API query for nationality, naturalization, migration, residence, and visa instruments."
     },
     {
       "id": "egypt-citizenship-investment",
@@ -864,13 +1476,34 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://egyptcitizenship.gov.eg/",
-      "jurisdictions": ["818"],
-      "pages": [
-        { "id": "cbi-programme", "url": "https://egyptcitizenship.gov.eg/" },
-        { "id": "gafi-citizenship-unit", "url": "https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx" },
-        { "id": "nationality-law-text", "url": "https://manshurat.org/node/7358" }
+      "jurisdictions": [
+        "818"
       ],
-      "keywords": ["جنسية", "استثمار", "naturalization", "nationality", "citizenship", "وديعة", "عقار", "descent", "birth"],
+      "pages": [
+        {
+          "id": "cbi-programme",
+          "url": "https://egyptcitizenship.gov.eg/"
+        },
+        {
+          "id": "gafi-citizenship-unit",
+          "url": "https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx"
+        },
+        {
+          "id": "nationality-law-text",
+          "url": "https://manshurat.org/node/7358"
+        }
+      ],
+      "keywords": [
+        "\u062c\u0646\u0633\u064a\u0629",
+        "\u0627\u0633\u062a\u062b\u0645\u0627\u0631",
+        "naturalization",
+        "nationality",
+        "citizenship",
+        "\u0648\u062f\u064a\u0639\u0629",
+        "\u0639\u0642\u0627\u0631",
+        "descent",
+        "birth"
+      ],
       "notes": "Official Cabinet CBI programme and GAFI intake unit, plus the commonly published Nationality Law text. Track investment thresholds separately from ordinary naturalization and parentage rules. Live-fetch results must be recorded honestly."
     },
     {
@@ -879,12 +1512,30 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://invest.jo/en/node/123",
-      "jurisdictions": ["400"],
-      "pages": [
-        { "id": "cabinet-investor-criteria", "url": "https://invest.jo/en/node/123" },
-        { "id": "petra-cabinet-decision", "url": "https://petra.gov.jo/en/news/government-revamps-investor-citizenship-rules-to-funnel-capital-into-provinces" }
+      "jurisdictions": [
+        "400"
       ],
-      "keywords": ["جنسية", "استثمار", "citizenship", "residency", "naturalization", "Amman Stock Exchange", "Amrah", "employment", "Social Security"],
+      "pages": [
+        {
+          "id": "cabinet-investor-criteria",
+          "url": "https://invest.jo/en/node/123"
+        },
+        {
+          "id": "petra-cabinet-decision",
+          "url": "https://petra.gov.jo/en/news/government-revamps-investor-citizenship-rules-to-funnel-capital-into-provinces"
+        }
+      ],
+      "keywords": [
+        "\u062c\u0646\u0633\u064a\u0629",
+        "\u0627\u0633\u062a\u062b\u0645\u0627\u0631",
+        "citizenship",
+        "residency",
+        "naturalization",
+        "Amman Stock Exchange",
+        "Amrah",
+        "employment",
+        "Social Security"
+      ],
       "notes": "Official Invest Jordan and Petra pages for the Cabinet investor-citizenship criteria. Property purchase alone is residency, not direct citizenship. Nationality Law descent and ordinary naturalization remain primary-law evidence outside this monitor."
     },
     {
@@ -893,14 +1544,38 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.ecrcp.gov.nr/",
-      "jurisdictions": ["520"],
-      "pages": [
-        { "id": "ecrcp-programme", "url": "https://www.ecrcp.gov.nr/" },
-        { "id": "citizenship-act", "url": "https://justice.gov.nr/wp-content/uploads/2023/12/Naoero-Citizenship-Act-2017.pdf" },
-        { "id": "ecrcp-act", "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf" },
-        { "id": "programme-launch", "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx" }
+      "jurisdictions": [
+        "520"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "descent", "birth", "contribution", "climate resilience", "Program Office", "Agent"],
+      "pages": [
+        {
+          "id": "ecrcp-programme",
+          "url": "https://www.ecrcp.gov.nr/"
+        },
+        {
+          "id": "citizenship-act",
+          "url": "https://justice.gov.nr/wp-content/uploads/2023/12/Naoero-Citizenship-Act-2017.pdf"
+        },
+        {
+          "id": "ecrcp-act",
+          "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf"
+        },
+        {
+          "id": "programme-launch",
+          "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "descent",
+        "birth",
+        "contribution",
+        "climate resilience",
+        "Program Office",
+        "Agent"
+      ],
       "notes": "Official Program Office, Citizenship Act and ECRCP Act materials. Contribution amounts and limited-time offers are volatile; ordinary descent, birth and marriage naturalization remain in the 2017 Act."
     },
     {
@@ -909,14 +1584,35 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/",
-      "jurisdictions": ["678"],
-      "pages": [
-        { "id": "consular-cbi", "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/" },
-        { "id": "nationality-law", "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf" },
-        { "id": "rnid-regulation", "url": "https://www.imidaily.com/wp-content/uploads/2025/08/STP-CBI-Act-01082025-1.pdf" }
+      "jurisdictions": [
+        "678"
       ],
-      "keywords": ["nacionalidade", "cidadania", "naturalização", "investimento", "doação", "nascimento", "descendência", "residência", "Fundo Nacional de Transformação"],
-      "notes": "Consular programme page plus hosted Diário texts of Lei 07/2022 and Decreto-Lei 07/2025. Prefer a future official Diário da República endpoint when a stable government index is available. Commercial hosting of the decree is discovery-adjacent evidence of the gazette text, not a commercial claim."
+      "pages": [
+        {
+          "id": "consular-cbi",
+          "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/"
+        },
+        {
+          "id": "nationality-law",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf"
+        },
+        {
+          "id": "rnid-regulation",
+          "url": "https://www.imidaily.com/wp-content/uploads/2025/08/STP-CBI-Act-01082025-1.pdf"
+        }
+      ],
+      "keywords": [
+        "nacionalidade",
+        "cidadania",
+        "naturaliza\u00e7\u00e3o",
+        "investimento",
+        "doa\u00e7\u00e3o",
+        "nascimento",
+        "descend\u00eancia",
+        "resid\u00eancia",
+        "Fundo Nacional de Transforma\u00e7\u00e3o"
+      ],
+      "notes": "Consular programme page plus hosted Di\u00e1rio texts of Lei 07/2022 and Decreto-Lei 07/2025. Prefer a future official Di\u00e1rio da Rep\u00fablica endpoint when a stable government index is available. Commercial hosting of the decree is discovery-adjacent evidence of the gazette text, not a commercial claim."
     },
     {
       "id": "paraguay-nationality-law",
@@ -924,14 +1620,37 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.bacn.gov.py/leyes-paraguayas/9580/constitucion-nacional-",
-      "jurisdictions": ["600"],
-      "pages": [
-        { "id": "constitution-index", "url": "https://www.bacn.gov.py/leyes-paraguayas/9580/constitucion-nacional-" },
-        { "id": "constitution-pdf", "url": "https://www.bacn.gov.py/archivos/9580/CONSTITUCION_ORIGINAL_FIRMADA.pdf" },
-        { "id": "descent-guidance", "url": "https://repatriados.gov.py/inclusion-a-la-identidad-nacional/" },
-        { "id": "migration", "url": "https://migraciones.gov.py/" }
+      "jurisdictions": [
+        "600"
       ],
-      "keywords": ["nacionalidad", "naturalización", "ciudadanía", "residencia", "nacimiento", "descendencia", "inversión", "radicación"],
+      "pages": [
+        {
+          "id": "constitution-index",
+          "url": "https://www.bacn.gov.py/leyes-paraguayas/9580/constitucion-nacional-"
+        },
+        {
+          "id": "constitution-pdf",
+          "url": "https://www.bacn.gov.py/archivos/9580/CONSTITUCION_ORIGINAL_FIRMADA.pdf"
+        },
+        {
+          "id": "descent-guidance",
+          "url": "https://repatriados.gov.py/inclusion-a-la-identidad-nacional/"
+        },
+        {
+          "id": "migration",
+          "url": "https://migraciones.gov.py/"
+        }
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "ciudadan\u00eda",
+        "residencia",
+        "nacimiento",
+        "descendencia",
+        "inversi\u00f3n",
+        "radicaci\u00f3n"
+      ],
       "notes": "Official Constitution and migration/descent guidance. Investor residence is a classification safeguard only and must not be treated as direct CBI."
     },
     {
@@ -940,12 +1659,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://serviciomigraciones.cl/en/citizenship/",
-      "jurisdictions": ["152"],
-      "pages": [
-        { "id": "sermig-citizenship", "url": "https://serviciomigraciones.cl/en/citizenship/" }
+      "jurisdictions": [
+        "152"
       ],
-      "keywords": ["nacionalización", "nacionalidad", "Residencia Definitiva", "citizenship", "naturalization", "birth", "descent", "inversión"],
-      "notes": "Official SERMIG Carta de Nacionalización guidance. BCN Constitution Article 10 is canonical primary evidence but returned HTTP 401 to the collector and is not listed as a healthy active page until the endpoint permits automated retrieval."
+      "pages": [
+        {
+          "id": "sermig-citizenship",
+          "url": "https://serviciomigraciones.cl/en/citizenship/"
+        }
+      ],
+      "keywords": [
+        "nacionalizaci\u00f3n",
+        "nacionalidad",
+        "Residencia Definitiva",
+        "citizenship",
+        "naturalization",
+        "birth",
+        "descent",
+        "inversi\u00f3n"
+      ],
+      "notes": "Official SERMIG Carta de Nacionalizaci\u00f3n guidance. BCN Constitution Article 10 is canonical primary evidence but returned HTTP 401 to the collector and is not listed as a healthy active page until the endpoint permits automated retrieval."
     },
     {
       "id": "israel-nationality-law",
@@ -953,12 +1686,30 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf",
-      "jurisdictions": ["376"],
-      "pages": [
-        { "id": "nationality-law-text", "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf" },
-        { "id": "law-of-return-text", "url": "https://www.jewishvirtuallibrary.org/law-of-return" }
+      "jurisdictions": [
+        "376"
       ],
-      "keywords": ["nationality", "citizenship", "Law of Return", "oleh", "naturalisation", "naturalization", "Hebrew", "birth", "aliyah"],
+      "pages": [
+        {
+          "id": "nationality-law-text",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf"
+        },
+        {
+          "id": "law-of-return-text",
+          "url": "https://www.jewishvirtuallibrary.org/law-of-return"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Law of Return",
+        "oleh",
+        "naturalisation",
+        "naturalization",
+        "Hebrew",
+        "birth",
+        "aliyah"
+      ],
       "notes": "Published Nationality Law and Law of Return texts. Official gov.il Population Authority pages currently return 403 to the bounded collector and are tracked as planned until a resilient adapter is available."
     },
     {
@@ -967,12 +1718,27 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://www.gov.il/en/departments/population_and_immigration_authority/govil-landing-page",
-      "jurisdictions": ["376"],
-      "pages": [
-        { "id": "population-authority", "url": "https://www.gov.il/en/departments/population_and_immigration_authority/govil-landing-page" },
-        { "id": "law-of-return-page", "url": "https://www.gov.il/en/pages/law_of_return" }
+      "jurisdictions": [
+        "376"
       ],
-      "keywords": ["citizenship", "nationality", "Law of Return", "naturalization", "aliyah", "Hebrew"],
+      "pages": [
+        {
+          "id": "population-authority",
+          "url": "https://www.gov.il/en/departments/population_and_immigration_authority/govil-landing-page"
+        },
+        {
+          "id": "law-of-return-page",
+          "url": "https://www.gov.il/en/pages/law_of_return"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "nationality",
+        "Law of Return",
+        "naturalization",
+        "aliyah",
+        "Hebrew"
+      ],
       "notes": "Official Population and Immigration Authority endpoints returned HTTP 403 to the collector on 2026-07-22. Keep planned until a permitted feed or resilient adapter works."
     },
     {
@@ -981,13 +1747,37 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.gov.pl/web/mswia-en/apply-to-be-recognised-as-a-polish-citizen",
-      "jurisdictions": ["616"],
-      "pages": [
-        { "id": "recognition", "url": "https://www.gov.pl/web/mswia-en/apply-to-be-recognised-as-a-polish-citizen" },
-        { "id": "citizenship-en", "url": "https://www.gov.pl/web/mswia-en/citizenship" },
-        { "id": "obywatelstwo", "url": "https://www.gov.pl/web/mswia/obywatelstwo" }
+      "jurisdictions": [
+        "616"
       ],
-      "keywords": ["obywatelstwo", "citizenship", "citizen", "naturalisation", "naturalization", "recognition", "recognised", "recognized", "B1", "permanent residence", "Karta Polaka", "descent"],
+      "pages": [
+        {
+          "id": "recognition",
+          "url": "https://www.gov.pl/web/mswia-en/apply-to-be-recognised-as-a-polish-citizen"
+        },
+        {
+          "id": "citizenship-en",
+          "url": "https://www.gov.pl/web/mswia-en/citizenship"
+        },
+        {
+          "id": "obywatelstwo",
+          "url": "https://www.gov.pl/web/mswia/obywatelstwo"
+        }
+      ],
+      "keywords": [
+        "obywatelstwo",
+        "citizenship",
+        "citizen",
+        "naturalisation",
+        "naturalization",
+        "recognition",
+        "recognised",
+        "recognized",
+        "B1",
+        "permanent residence",
+        "Karta Polaka",
+        "descent"
+      ],
       "notes": "Official MSWiA citizenship hubs. Track residence recognition periods and language B1 separately from presidential grant of citizenship."
     },
     {
@@ -996,12 +1786,33 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://telaviv.mfa.gov.hu/eng/page/egyszerusitett-honositas",
-      "jurisdictions": ["348"],
-      "pages": [
-        { "id": "simplified-en", "url": "https://telaviv.mfa.gov.hu/eng/page/egyszerusitett-honositas" },
-        { "id": "simplified-hu", "url": "https://www.kormanyhivatal.hu/hu/budapest/jarasok/egyszerusitett-honositasi-eljaras" }
+      "jurisdictions": [
+        "348"
       ],
-      "keywords": ["állampolgárság", "honosítás", "citizenship", "citizen", "naturalisation", "naturalization", "simplified", "egyszerűsített", "descent", "nyelv", "residence", "Hungarian"],
+      "pages": [
+        {
+          "id": "simplified-en",
+          "url": "https://telaviv.mfa.gov.hu/eng/page/egyszerusitett-honositas"
+        },
+        {
+          "id": "simplified-hu",
+          "url": "https://www.kormanyhivatal.hu/hu/budapest/jarasok/egyszerusitett-honositasi-eljaras"
+        }
+      ],
+      "keywords": [
+        "\u00e1llampolg\u00e1rs\u00e1g",
+        "honos\u00edt\u00e1s",
+        "citizenship",
+        "citizen",
+        "naturalisation",
+        "naturalization",
+        "simplified",
+        "egyszer\u0171s\u00edtett",
+        "descent",
+        "nyelv",
+        "residence",
+        "Hungarian"
+      ],
       "notes": "Official simplified-naturalization guidance pages that validate under Bun TLS. The emberijogok.kormany.hu ordinary-acquisition page remains canonical evidence but fails automated TLS verification and is tracked as planned until the certificate chain works in CI."
     },
     {
@@ -1010,11 +1821,23 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality",
-      "jurisdictions": ["348"],
-      "pages": [
-        { "id": "acquisition", "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality" }
+      "jurisdictions": [
+        "348"
       ],
-      "keywords": ["citizenship", "nationality", "naturalisation", "naturalization", "residence", "Hungarian"],
+      "pages": [
+        {
+          "id": "acquisition",
+          "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "nationality",
+        "naturalisation",
+        "naturalization",
+        "residence",
+        "Hungarian"
+      ],
       "notes": "Official ordinary acquisition guidance. Activate once the host certificate chain validates in the Bun/CI collector (TLS local-issuer failure recorded 2026-07-22)."
     },
     {
@@ -1023,12 +1846,30 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.moj.go.jp/EN/MINJI/minji78.html",
-      "jurisdictions": ["392"],
-      "pages": [
-        { "id": "moj-nationality-qa", "url": "https://www.moj.go.jp/EN/MINJI/minji78.html" },
-        { "id": "nationality-act-en", "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/3784/en" }
+      "jurisdictions": [
+        "392"
       ],
-      "keywords": ["nationality", "naturalization", "naturalisation", "citizenship", "Japanese", "domicile", "birth", "renounce", "Nationality Act"],
+      "pages": [
+        {
+          "id": "moj-nationality-qa",
+          "url": "https://www.moj.go.jp/EN/MINJI/minji78.html"
+        },
+        {
+          "id": "nationality-act-en",
+          "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/3784/en"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "naturalisation",
+        "citizenship",
+        "Japanese",
+        "domicile",
+        "birth",
+        "renounce",
+        "Nationality Act"
+      ],
       "notes": "Official MOJ Nationality Q&A and Japanese Law Translation Nationality Act text. Statute still states five years continuous domicile for ordinary naturalization; administrative screening remains discretionary."
     },
     {
@@ -1037,12 +1878,30 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN",
-      "jurisdictions": ["410"],
-      "pages": [
-        { "id": "general-naturalization", "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN" },
-        { "id": "simple-naturalization", "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=201&PARENT_ID=148&locale=EN" }
+      "jurisdictions": [
+        "410"
       ],
-      "keywords": ["nationality", "naturalization", "naturalisation", "citizenship", "Korean", "residence", "permanent residency", "simple naturalization", "birth"],
+      "pages": [
+        {
+          "id": "general-naturalization",
+          "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN"
+        },
+        {
+          "id": "simple-naturalization",
+          "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=201&PARENT_ID=148&locale=EN"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "naturalisation",
+        "citizenship",
+        "Korean",
+        "residence",
+        "permanent residency",
+        "simple naturalization",
+        "birth"
+      ],
       "notes": "Official HiKorea immigration nationality guidance for general and simplified naturalization. Track dual-nationality choice and PR prerequisites separately from F-4 overseas Korean residence."
     },
     {
@@ -1051,12 +1910,33 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.osg.gov.ph/page?call=scn",
-      "jurisdictions": ["608"],
-      "pages": [
-        { "id": "osg-scn", "url": "https://www.osg.gov.ph/page?call=scn" },
-        { "id": "immigration-home", "url": "https://immigration.gov.ph/" }
+      "jurisdictions": [
+        "608"
       ],
-      "keywords": ["naturalization", "citizenship", "nationality", "Commonwealth Act", "RA 9139", "RA 9225", "Filipino", "dual", "birth", "descent", "alien", "immigration"],
+      "pages": [
+        {
+          "id": "osg-scn",
+          "url": "https://www.osg.gov.ph/page?call=scn"
+        },
+        {
+          "id": "immigration-home",
+          "url": "https://immigration.gov.ph/"
+        }
+      ],
+      "keywords": [
+        "naturalization",
+        "citizenship",
+        "nationality",
+        "Commonwealth Act",
+        "RA 9139",
+        "RA 9225",
+        "Filipino",
+        "dual",
+        "birth",
+        "descent",
+        "alien",
+        "immigration"
+      ],
       "notes": "OSG Special Committee on Naturalization (RA 9139 administrative path) plus Bureau of Immigration home for operational changes. Commonwealth Act 473 judiciary e-library text remains canonical primary-law evidence but failed TLS verification in the collector and is not listed as an active page."
     },
     {
@@ -1065,11 +1945,20 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227",
-      "jurisdictions": ["608"],
-      "pages": [
-        { "id": "ca-473", "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227" }
+      "jurisdictions": [
+        "608"
       ],
-      "keywords": ["naturalization", "citizenship", "Commonwealth Act"],
+      "pages": [
+        {
+          "id": "ca-473",
+          "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227"
+        }
+      ],
+      "keywords": [
+        "naturalization",
+        "citizenship",
+        "Commonwealth Act"
+      ],
       "notes": "Judiciary e-library text of CA 473. Activate once the host certificate chain validates in the Bun/CI collector (TLS first-certificate failure recorded 2026-07-22)."
     },
     {
@@ -1078,14 +1967,34 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.gov.za/documents/south-african-citizenship-act",
-      "jurisdictions": ["710"],
-      "pages": [
-        { "id": "citizenship-act-page", "url": "https://www.gov.za/documents/south-african-citizenship-act" },
-        { "id": "citizenship-act-pdf", "url": "https://www.gov.za/sites/default/files/gcis_document/201409/act88of1995.pdf" },
-        { "id": "amendment-2010", "url": "https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf" }
+      "jurisdictions": [
+        "710"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "permanent residence", "birth", "descent", "South African", "Minister"],
-      "notes": "Official gov.za Citizenship Act 88 of 1995 and 2010 amendment texts. Ordinary naturalization uses the amended five-year continuous ordinary residence after permanent residence. Dual-citizenship loss under s 6(1)(a) has been constitutionally curtailed — track carefully."
+      "pages": [
+        {
+          "id": "citizenship-act-page",
+          "url": "https://www.gov.za/documents/south-african-citizenship-act"
+        },
+        {
+          "id": "citizenship-act-pdf",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/act88of1995.pdf"
+        },
+        {
+          "id": "amendment-2010",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "permanent residence",
+        "birth",
+        "descent",
+        "South African",
+        "Minister"
+      ],
+      "notes": "Official gov.za Citizenship Act 88 of 1995 and 2010 amendment texts. Ordinary naturalization uses the amended five-year continuous ordinary residence after permanent residence. Dual-citizenship loss under s 6(1)(a) has been constitutionally curtailed \u2014 track carefully."
     },
     {
       "id": "taiwan-nationality-law",
@@ -1093,12 +2002,27 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001",
-      "jurisdictions": ["158"],
-      "pages": [
-        { "id": "nationality-act", "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001" }
+      "jurisdictions": [
+        "158"
       ],
-      "keywords": ["nationality", "naturalization", "naturalisation", "citizenship", "R.O.C.", "domicile", "birth", "renounce", "Ministry of the Interior"],
-      "notes": "Official Laws & Regulations Database English Nationality Act. Track Article 3 five-year residence floor, Article 9 loss-of-prior-nationality certificate, and Article 5–6 merit exceptions."
+      "pages": [
+        {
+          "id": "nationality-act",
+          "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "naturalisation",
+        "citizenship",
+        "R.O.C.",
+        "domicile",
+        "birth",
+        "renounce",
+        "Ministry of the Interior"
+      ],
+      "notes": "Official Laws & Regulations Database English Nationality Act. Track Article 3 five-year residence floor, Article 9 loss-of-prior-nationality certificate, and Article 5\u20136 merit exceptions."
     },
     {
       "id": "taiwan-employment-gold-card",
@@ -1106,12 +2030,29 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://goldcard.nat.gov.tw/en/",
-      "jurisdictions": ["158"],
-      "pages": [
-        { "id": "gold-card-home", "url": "https://goldcard.nat.gov.tw/en/" },
-        { "id": "nia-aprc-guidelines", "url": "https://www.immigration.gov.tw/5475/5478/141465/141808/411648/cp_news" }
+      "jurisdictions": [
+        "158"
       ],
-      "keywords": ["Gold Card", "permanent residency", "APRC", "residence", "foreign professional", "investment", "naturalization", "citizenship"],
+      "pages": [
+        {
+          "id": "gold-card-home",
+          "url": "https://goldcard.nat.gov.tw/en/"
+        },
+        {
+          "id": "nia-aprc-guidelines",
+          "url": "https://www.immigration.gov.tw/5475/5478/141465/141808/411648/cp_news"
+        }
+      ],
+      "keywords": [
+        "Gold Card",
+        "permanent residency",
+        "APRC",
+        "residence",
+        "foreign professional",
+        "investment",
+        "naturalization",
+        "citizenship"
+      ],
       "notes": "Employment Gold Card and NIA APRC guidelines are residence tracks that funnel into ordinary naturalization; never treat them as citizenship-by-investment."
     },
     {
@@ -1120,12 +2061,30 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.imigrasi.go.id/",
-      "jurisdictions": ["360"],
-      "pages": [
-        { "id": "imigrasi-home", "url": "https://www.imigrasi.go.id/" },
-        { "id": "law-12-2006-en", "url": "https://www.ecoi.net/en/file/local/1170232/1504_1217488313_law-of-the-republic-of-indonesia-no-12-on-citizenship-of-the-republic-of-indonesia.pdf" }
+      "jurisdictions": [
+        "360"
       ],
-      "keywords": ["kewarganegaraan", "citizenship", "naturalization", "naturalisation", "warga negara", "birth", "descent", "dual", "Pancasila"],
+      "pages": [
+        {
+          "id": "imigrasi-home",
+          "url": "https://www.imigrasi.go.id/"
+        },
+        {
+          "id": "law-12-2006-en",
+          "url": "https://www.ecoi.net/en/file/local/1170232/1504_1217488313_law-of-the-republic-of-indonesia-no-12-on-citizenship-of-the-republic-of-indonesia.pdf"
+        }
+      ],
+      "keywords": [
+        "kewarganegaraan",
+        "citizenship",
+        "naturalization",
+        "naturalisation",
+        "warga negara",
+        "birth",
+        "descent",
+        "dual",
+        "Pancasila"
+      ],
       "notes": "Imigrasi portal plus hosted English text of Law 12/2006. Prefer a future stable peraturan.go.id endpoint when collector access is reliable (BPK returned 403 on 2026-07-22)."
     },
     {
@@ -1134,11 +2093,27 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.boi.go.th/index.php?page=eligibility",
-      "jurisdictions": ["764"],
-      "pages": [
-        { "id": "boi-eligibility", "url": "https://www.boi.go.th/index.php?page=eligibility" }
+      "jurisdictions": [
+        "764"
       ],
-      "keywords": ["nationality", "citizenship", "naturalization", "naturalisation", "Thai", "permanent residence", "residence", "investment", "BOI", "privilege"],
+      "pages": [
+        {
+          "id": "boi-eligibility",
+          "url": "https://www.boi.go.th/index.php?page=eligibility"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "naturalization",
+        "naturalisation",
+        "Thai",
+        "permanent residence",
+        "residence",
+        "investment",
+        "BOI",
+        "privilege"
+      ],
       "notes": "BOI eligibility is an active residence classification safeguard (not citizenship). Primary Nationality Act B.E. 2508 English text remains canonical evidence via Refworld but returned HTTP 403 to the collector (2026-07-22) and is tracked as planned."
     },
     {
@@ -1147,11 +2122,22 @@
       "adapter": "html_index",
       "status": "planned",
       "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733",
-      "jurisdictions": ["764"],
-      "pages": [
-        { "id": "nationality-act-refworld", "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733" }
+      "jurisdictions": [
+        "764"
       ],
-      "keywords": ["nationality", "citizenship", "naturalization", "Thai", "Cabinet"],
+      "pages": [
+        {
+          "id": "nationality-act-refworld",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "naturalization",
+        "Thai",
+        "Cabinet"
+      ],
       "notes": "UNHCR English Nationality Act B.E. 2508 (as amended). Activate once Refworld permits automated retrieval (HTTP 403 recorded 2026-07-22)."
     },
     {
@@ -1160,13 +2146,34 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://candb.interior.gov.ng/wp-content/uploads/2025/05/CB-Citizenship-Requirements.pdf",
-      "jurisdictions": ["566"],
-      "pages": [
-        { "id": "interior-requirements", "url": "https://candb.interior.gov.ng/wp-content/uploads/2025/05/CB-Citizenship-Requirements.pdf" },
-        { "id": "constitution-chapter-iii", "url": "https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/" },
-        { "id": "constitute-nigeria", "url": "https://www.constituteproject.org/constitution/Nigeria_2011" }
+      "jurisdictions": [
+        "566"
       ],
-      "keywords": ["citizenship", "naturalization", "naturalisation", "registration", "Constitution", "fifteen", "birth", "renounce", "Interior"],
+      "pages": [
+        {
+          "id": "interior-requirements",
+          "url": "https://candb.interior.gov.ng/wp-content/uploads/2025/05/CB-Citizenship-Requirements.pdf"
+        },
+        {
+          "id": "constitution-chapter-iii",
+          "url": "https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/"
+        },
+        {
+          "id": "constitute-nigeria",
+          "url": "https://www.constituteproject.org/constitution/Nigeria_2011"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "naturalisation",
+        "registration",
+        "Constitution",
+        "fifteen",
+        "birth",
+        "renounce",
+        "Interior"
+      ],
       "notes": "Ministry of Interior requirements PDF plus published Constitution Chapter III texts. Portal login page is not a monitoring target; track the public requirements PDF and constitutional sources."
     },
     {
@@ -1175,13 +2182,30 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.gob.pe/12580",
-      "jurisdictions": ["604"],
-      "pages": [
-        { "id": "naturalization", "url": "https://www.gob.pe/12580" },
-        { "id": "marriage", "url": "https://www.gob.pe/12574-obtener-la-nacionalidad-peruana-por-matrimonio" },
-        { "id": "migraciones", "url": "https://www.migraciones.gob.pe/" }
+      "jurisdictions": [
+        "604"
       ],
-      "keywords": ["nacionalidad", "naturalización", "residencia", "matrimonio", "Migraciones"],
+      "pages": [
+        {
+          "id": "naturalization",
+          "url": "https://www.gob.pe/12580"
+        },
+        {
+          "id": "marriage",
+          "url": "https://www.gob.pe/12574-obtener-la-nacionalidad-peruana-por-matrimonio"
+        },
+        {
+          "id": "migraciones",
+          "url": "https://www.migraciones.gob.pe/"
+        }
+      ],
+      "keywords": [
+        "nacionalidad",
+        "naturalizaci\u00f3n",
+        "residencia",
+        "matrimonio",
+        "Migraciones"
+      ],
       "notes": "Official Migraciones nationality procedures. Investor is a residence quality for ordinary naturalization, not CBI."
     },
     {
@@ -1190,11 +2214,23 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Bolivia_2009",
-      "jurisdictions": ["068"],
-      "pages": [
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Bolivia_2009" }
+      "jurisdictions": [
+        "068"
       ],
-      "keywords": ["nationality", "naturalization", "citizenship", "Bolivia", "residence", "birth"],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Bolivia_2009"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Bolivia",
+        "residence",
+        "birth"
+      ],
       "notes": "2009 Constitution nationality articles. Prefer a future stable migracion.gob.bo endpoint when TLS works in the collector."
     },
     {
@@ -1203,11 +2239,23 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Ecuador_2021",
-      "jurisdictions": ["218"],
-      "pages": [
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Ecuador_2021" }
+      "jurisdictions": [
+        "218"
       ],
-      "keywords": ["nationality", "naturalization", "citizenship", "Ecuador", "residence", "birth"],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Ecuador_2021"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Ecuador",
+        "residence",
+        "birth"
+      ],
       "notes": "Constitution nationality framework. Cancilleria portal failed TLS in the collector (2026-07-22)."
     },
     {
@@ -1216,12 +2264,27 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Malaysia_2007",
-      "jurisdictions": ["458"],
-      "pages": [
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Malaysia_2007" },
-        { "id": "residence-pass", "url": "https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/" }
+      "jurisdictions": [
+        "458"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "Federal Constitution", "residence", "Malay"],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+        },
+        {
+          "id": "residence-pass",
+          "url": "https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "Federal Constitution",
+        "residence",
+        "Malay"
+      ],
       "notes": "Federal Constitution plus Immigration Residence Pass page. JPN citizenship portal failed TLS in the collector."
     },
     {
@@ -1230,9 +2293,22 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html",
-      "jurisdictions": ["704"],
-      "pages": [{ "id": "nationality-law-2008", "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html" }],
-      "keywords": ["nationality", "naturalization", "citizenship", "Vietnam", "residence"],
+      "jurisdictions": [
+        "704"
+      ],
+      "pages": [
+        {
+          "id": "nationality-law-2008",
+          "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Vietnam",
+        "residence"
+      ],
       "notes": "English Law on Vietnamese Nationality 2008 text."
     },
     {
@@ -1241,9 +2317,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Cambodia_2008",
-      "jurisdictions": ["116"],
-      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Cambodia_2008" }],
-      "keywords": ["nationality", "citizenship", "naturalization", "Cambodia"],
+      "jurisdictions": [
+        "116"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Cambodia_2008"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "naturalization",
+        "Cambodia"
+      ],
       "notes": "Constitution nationality framework."
     },
     {
@@ -1252,12 +2340,27 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://immigration.go.ke/citizenship-section/",
-      "jurisdictions": ["404"],
-      "pages": [
-        { "id": "immigration-citizenship", "url": "https://immigration.go.ke/citizenship-section/" },
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Kenya_2010" }
+      "jurisdictions": [
+        "404"
       ],
-      "keywords": ["citizenship", "registration", "naturalization", "birth", "Kenya", "seven years"],
+      "pages": [
+        {
+          "id": "immigration-citizenship",
+          "url": "https://immigration.go.ke/citizenship-section/"
+        },
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Kenya_2010"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "registration",
+        "naturalization",
+        "birth",
+        "Kenya",
+        "seven years"
+      ],
       "notes": "Immigration Department citizenship page plus 2010 Constitution."
     },
     {
@@ -1266,12 +2369,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.mint.gov.gh/e-services-portal/naturalization-as-ghanaian-citizen/",
-      "jurisdictions": ["288"],
-      "pages": [
-        { "id": "mint-naturalization", "url": "https://www.mint.gov.gh/e-services-portal/naturalization-as-ghanaian-citizen/" },
-        { "id": "citizenship-act", "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/02/Ghana_Citizenship_Act_with_forms_591_2000.pdf" }
+      "jurisdictions": [
+        "288"
       ],
-      "keywords": ["naturalization", "citizenship", "Ghana", "residence", "Citizenship Act"],
+      "pages": [
+        {
+          "id": "mint-naturalization",
+          "url": "https://www.mint.gov.gh/e-services-portal/naturalization-as-ghanaian-citizen/"
+        },
+        {
+          "id": "citizenship-act",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/02/Ghana_Citizenship_Act_with_forms_591_2000.pdf"
+        }
+      ],
+      "keywords": [
+        "naturalization",
+        "citizenship",
+        "Ghana",
+        "residence",
+        "Citizenship Act"
+      ],
       "notes": "Interior naturalization service page plus Citizenship Act 2000 PDF."
     },
     {
@@ -1280,9 +2397,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Morocco_2011",
-      "jurisdictions": ["504"],
-      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Morocco_2011" }],
-      "keywords": ["nationality", "citizenship", "naturalization", "Morocco"],
+      "jurisdictions": [
+        "504"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Morocco_2011"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "naturalization",
+        "Morocco"
+      ],
       "notes": "2011 Constitution nationality framework."
     },
     {
@@ -1291,12 +2420,27 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme",
-      "jurisdictions": ["356"],
-      "pages": [
-        { "id": "oci-scheme", "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme" },
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/India_2016" }
+      "jurisdictions": [
+        "356"
       ],
-      "keywords": ["citizenship", "naturalisation", "naturalization", "OCI", "Overseas Citizen", "India"],
+      "pages": [
+        {
+          "id": "oci-scheme",
+          "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme"
+        },
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/India_2016"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "naturalization",
+        "OCI",
+        "Overseas Citizen",
+        "India"
+      ],
       "notes": "MEA OCI scheme (not dual citizenship) plus Constitution. Dual nationality banned for full citizens."
     },
     {
@@ -1305,9 +2449,22 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Samoa_2017",
-      "jurisdictions": ["882"],
-      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Samoa_2017" }],
-      "keywords": ["citizenship", "nationality", "naturalization", "Samoa", "residence"],
+      "jurisdictions": [
+        "882"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Samoa_2017"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "nationality",
+        "naturalization",
+        "Samoa",
+        "residence"
+      ],
       "notes": "Constitution citizenship framework. NZ Samoan Quota remains a separate mobility ballot."
     },
     {
@@ -1316,12 +2473,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/",
-      "jurisdictions": ["040"],
-      "pages": [
-        { "id": "migration-citizenship", "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/" },
-        { "id": "oesterreich-citizenship", "url": "https://www.oesterreich.gv.at/en/themen/menschen_aus_anderen_staaten/staatsbuergerschaft" }
+      "jurisdictions": [
+        "040"
       ],
-      "keywords": ["citizenship", "naturalization", "naturalisation", "residence", "Austrian"],
+      "pages": [
+        {
+          "id": "migration-citizenship",
+          "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/"
+        },
+        {
+          "id": "oesterreich-citizenship",
+          "url": "https://www.oesterreich.gv.at/en/themen/menschen_aus_anderen_staaten/staatsbuergerschaft"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "naturalisation",
+        "residence",
+        "Austrian"
+      ],
       "notes": "Official Austrian citizenship guidance."
     },
     {
@@ -1330,9 +2501,20 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Belgium_2014",
-      "jurisdictions": ["056"],
-      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Belgium_2014" }],
-      "keywords": ["nationality", "citizenship", "Belgium"],
+      "jurisdictions": [
+        "056"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Belgium"
+      ],
       "notes": "Constitution framework. Prefer a future stable IBZ nationality page when available."
     },
     {
@@ -1341,9 +2523,22 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html",
-      "jurisdictions": ["752"],
-      "pages": [{ "id": "adults", "url": "https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html" }],
-      "keywords": ["citizenship", "residence", "eight years", "Swedish", "naturalisation"],
+      "jurisdictions": [
+        "752"
+      ],
+      "pages": [
+        {
+          "id": "adults",
+          "url": "https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "residence",
+        "eight years",
+        "Swedish",
+        "naturalisation"
+      ],
       "notes": "Migrationsverket adult citizenship page; track residence-period reforms."
     },
     {
@@ -1352,9 +2547,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.udi.no/en/want-to-apply/citizenship/",
-      "jurisdictions": ["578"],
-      "pages": [{ "id": "udi-citizenship", "url": "https://www.udi.no/en/want-to-apply/citizenship/" }],
-      "keywords": ["citizenship", "Norwegian", "residence", "language"],
+      "jurisdictions": [
+        "578"
+      ],
+      "pages": [
+        {
+          "id": "udi-citizenship",
+          "url": "https://www.udi.no/en/want-to-apply/citizenship/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "Norwegian",
+        "residence",
+        "language"
+      ],
       "notes": "UDI citizenship hub."
     },
     {
@@ -1363,9 +2570,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://uim.dk/arbejdsomraader/statsborgerskab/",
-      "jurisdictions": ["208"],
-      "pages": [{ "id": "uim-citizenship", "url": "https://uim.dk/arbejdsomraader/statsborgerskab/" }],
-      "keywords": ["statsborgerskab", "citizenship", "Danish", "naturalisation"],
+      "jurisdictions": [
+        "208"
+      ],
+      "pages": [
+        {
+          "id": "uim-citizenship",
+          "url": "https://uim.dk/arbejdsomraader/statsborgerskab/"
+        }
+      ],
+      "keywords": [
+        "statsborgerskab",
+        "citizenship",
+        "Danish",
+        "naturalisation"
+      ],
       "notes": "Danish government citizenship area."
     },
     {
@@ -1374,9 +2593,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx",
-      "jurisdictions": ["203"],
-      "pages": [{ "id": "mvcr-citizenship", "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx" }],
-      "keywords": ["obcanstvi", "citizenship", "naturalization", "Czech"],
+      "jurisdictions": [
+        "203"
+      ],
+      "pages": [
+        {
+          "id": "mvcr-citizenship",
+          "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx"
+        }
+      ],
+      "keywords": [
+        "obcanstvi",
+        "citizenship",
+        "naturalization",
+        "Czech"
+      ],
       "notes": "Ministry of Interior citizenship page."
     },
     {
@@ -1385,12 +2616,25 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://igi.mai.gov.ro/en/",
-      "jurisdictions": ["642"],
-      "pages": [
-        { "id": "igi", "url": "https://igi.mai.gov.ro/en/" },
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Romania_2003" }
+      "jurisdictions": [
+        "642"
       ],
-      "keywords": ["citizenship", "nationality", "Romania", "residence"],
+      "pages": [
+        {
+          "id": "igi",
+          "url": "https://igi.mai.gov.ro/en/"
+        },
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Romania_2003"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "nationality",
+        "Romania",
+        "residence"
+      ],
       "notes": "Immigration inspectorate plus Constitution."
     },
     {
@@ -1399,12 +2643,25 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.govern.ad/en",
-      "jurisdictions": ["020"],
-      "pages": [
-        { "id": "government", "url": "https://www.govern.ad/en" },
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Andorra_1993" }
+      "jurisdictions": [
+        "020"
       ],
-      "keywords": ["nationality", "citizenship", "Andorra", "residence"],
+      "pages": [
+        {
+          "id": "government",
+          "url": "https://www.govern.ad/en"
+        },
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Andorra_1993"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Andorra",
+        "residence"
+      ],
       "notes": "Government portal plus Constitution. Long naturalization path; renunciation required."
     },
     {
@@ -1413,12 +2670,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://migri.fi/en/finnish-citizenship",
-      "jurisdictions": ["246"],
-      "pages": [
-        { "id": "finnish-citizenship", "url": "https://migri.fi/en/finnish-citizenship" },
-        { "id": "period-of-residence", "url": "https://migri.fi/en/period-of-residence" }
+      "jurisdictions": [
+        "246"
       ],
-      "keywords": ["citizenship", "residence", "Finnish", "naturalisation", "eight years"],
+      "pages": [
+        {
+          "id": "finnish-citizenship",
+          "url": "https://migri.fi/en/finnish-citizenship"
+        },
+        {
+          "id": "period-of-residence",
+          "url": "https://migri.fi/en/period-of-residence"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "residence",
+        "Finnish",
+        "naturalisation",
+        "eight years"
+      ],
       "notes": "Migri citizenship hub after the October 2024 residence reform."
     },
     {
@@ -1427,9 +2698,22 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide",
-      "jurisdictions": ["233"],
-      "pages": [{ "id": "citizenship-act", "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide" }],
-      "keywords": ["citizenship", "naturalisation", "Estonian", "residence", "eight years"],
+      "jurisdictions": [
+        "233"
+      ],
+      "pages": [
+        {
+          "id": "citizenship-act",
+          "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "Estonian",
+        "residence",
+        "eight years"
+      ],
       "notes": "Estonian Citizenship Act consolidation. Naturalizers renounce prior nationality."
     },
     {
@@ -1438,9 +2722,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.pmlp.gov.lv/en/naturalisation",
-      "jurisdictions": ["428"],
-      "pages": [{ "id": "naturalisation", "url": "https://www.pmlp.gov.lv/en/naturalisation" }],
-      "keywords": ["naturalisation", "citizenship", "Latvian", "permanent residence"],
+      "jurisdictions": [
+        "428"
+      ],
+      "pages": [
+        {
+          "id": "naturalisation",
+          "url": "https://www.pmlp.gov.lv/en/naturalisation"
+        }
+      ],
+      "keywords": [
+        "naturalisation",
+        "citizenship",
+        "Latvian",
+        "permanent residence"
+      ],
       "notes": "OCMA/PMLP naturalisation guidance."
     },
     {
@@ -1449,12 +2745,25 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.migracija.lt/home?lang=en",
-      "jurisdictions": ["440"],
-      "pages": [
-        { "id": "migracija", "url": "https://www.migracija.lt/home?lang=en" },
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Lithuania_2019" }
+      "jurisdictions": [
+        "440"
       ],
-      "keywords": ["citizenship", "naturalisation", "Lithuanian", "permanent residence"],
+      "pages": [
+        {
+          "id": "migracija",
+          "url": "https://www.migracija.lt/home?lang=en"
+        },
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Lithuania_2019"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "Lithuanian",
+        "permanent residence"
+      ],
       "notes": "Migration Department plus Constitution. Ten-year ordinary path; renunciation required."
     },
     {
@@ -1463,9 +2772,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://gov.hr/en/acquiring-croatian-citizenship/460",
-      "jurisdictions": ["191"],
-      "pages": [{ "id": "acquiring", "url": "https://gov.hr/en/acquiring-croatian-citizenship/460" }],
-      "keywords": ["citizenship", "naturalization", "Croatian", "residence"],
+      "jurisdictions": [
+        "191"
+      ],
+      "pages": [
+        {
+          "id": "acquiring",
+          "url": "https://gov.hr/en/acquiring-croatian-citizenship/460"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Croatian",
+        "residence"
+      ],
       "notes": "gov.hr citizenship acquisition guidance. Ordinary residence path generally requires renunciation."
     },
     {
@@ -1474,12 +2795,25 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html",
-      "jurisdictions": ["703"],
-      "pages": [
-        { "id": "naturalization", "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html" },
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Slovakia_2017" }
+      "jurisdictions": [
+        "703"
       ],
-      "keywords": ["citizenship", "naturalization", "Slovak", "permanent residence"],
+      "pages": [
+        {
+          "id": "naturalization",
+          "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html"
+        },
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Slovakia_2017"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Slovak",
+        "permanent residence"
+      ],
       "notes": "IOM Migration Information Centre naturalization conditions plus Constitution."
     },
     {
@@ -1488,9 +2822,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html",
-      "jurisdictions": ["442"],
-      "pages": [{ "id": "naturalisation", "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html" }],
-      "keywords": ["nationality", "naturalisation", "Luxembourgish", "residence"],
+      "jurisdictions": [
+        "442"
+      ],
+      "pages": [
+        {
+          "id": "naturalisation",
+          "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalisation",
+        "Luxembourgish",
+        "residence"
+      ],
       "notes": "Guichet.lu naturalisation procedure. Five-year residence plus language and living-together requirements."
     },
     {
@@ -1499,9 +2845,22 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality",
-      "jurisdictions": ["492"],
-      "pages": [{ "id": "acquiring", "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality" }],
-      "keywords": ["nationality", "naturalisation", "Monegasque", "residence", "renunciation"],
+      "jurisdictions": [
+        "492"
+      ],
+      "pages": [
+        {
+          "id": "acquiring",
+          "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalisation",
+        "Monegasque",
+        "residence",
+        "renunciation"
+      ],
       "notes": "Official Monaco nationality acquisition page. Ten years after majority; renunciation required."
     },
     {
@@ -1510,9 +2869,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization",
-      "jurisdictions": ["438"],
-      "pages": [{ "id": "naturalization", "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization" }],
-      "keywords": ["naturalization", "citizenship", "Liechtenstein", "residence"],
+      "jurisdictions": [
+        "438"
+      ],
+      "pages": [
+        {
+          "id": "naturalization",
+          "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization"
+        }
+      ],
+      "keywords": [
+        "naturalization",
+        "citizenship",
+        "Liechtenstein",
+        "residence"
+      ],
       "notes": "LLV naturalization hub. Ordinary path is discretionary; renunciation required."
     },
     {
@@ -1521,12 +2892,25 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply",
-      "jurisdictions": ["352"],
-      "pages": [
-        { "id": "when-can-i-apply", "url": "https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply" },
-        { "id": "government-citizenship", "url": "https://www.government.is/topics/foreign-nationals/citizenship/" }
+      "jurisdictions": [
+        "352"
       ],
-      "keywords": ["citizenship", "Icelandic", "residence", "seven years"],
+      "pages": [
+        {
+          "id": "when-can-i-apply",
+          "url": "https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply"
+        },
+        {
+          "id": "government-citizenship",
+          "url": "https://www.government.is/topics/foreign-nationals/citizenship/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "Icelandic",
+        "residence",
+        "seven years"
+      ],
       "notes": "Island.is Directorate of Immigration residence rules plus government citizenship overview."
     },
     {
@@ -1535,12 +2919,25 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.immigration.gov.fj/by-registration/",
-      "jurisdictions": ["242"],
-      "pages": [
-        { "id": "by-registration", "url": "https://www.immigration.gov.fj/by-registration/" },
-        { "id": "foreign-affairs", "url": "https://www.foreignaffairs.gov.fj/fiji-high-commission-new-zealand/fiji-citizenship/" }
+      "jurisdictions": [
+        "242"
       ],
-      "keywords": ["citizenship", "naturalization", "Fiji", "registration"],
+      "pages": [
+        {
+          "id": "by-registration",
+          "url": "https://www.immigration.gov.fj/by-registration/"
+        },
+        {
+          "id": "foreign-affairs",
+          "url": "https://www.foreignaffairs.gov.fj/fiji-high-commission-new-zealand/fiji-citizenship/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Fiji",
+        "registration"
+      ],
       "notes": "Fiji Immigration registration/naturalization pages. Five of ten years lawful presence."
     },
     {
@@ -1549,12 +2946,26 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship",
-      "jurisdictions": ["598"],
-      "pages": [
-        { "id": "eligibility", "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship" },
-        { "id": "dual", "url": "https://ica.gov.pg/citizenship/citizenship-and-dual-citizenship" }
+      "jurisdictions": [
+        "598"
       ],
-      "keywords": ["citizenship", "naturalization", "PNG", "dual", "eight years"],
+      "pages": [
+        {
+          "id": "eligibility",
+          "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship"
+        },
+        {
+          "id": "dual",
+          "url": "https://ica.gov.pg/citizenship/citizenship-and-dual-citizenship"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "PNG",
+        "dual",
+        "eight years"
+      ],
       "notes": "PNG ICA eligibility and dual citizenship pages. Dual limited to prescribed countries."
     },
     {
@@ -1563,9 +2974,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/",
-      "jurisdictions": ["090"],
-      "pages": [{ "id": "obtain-citizenship", "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/" }],
-      "keywords": ["citizenship", "naturalization", "Solomon Islands", "residence"],
+      "jurisdictions": [
+        "090"
+      ],
+      "pages": [
+        {
+          "id": "obtain-citizenship",
+          "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Solomon Islands",
+        "residence"
+      ],
       "notes": "Solomon Islands government citizenship service page."
     },
     {
@@ -1574,9 +2997,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.constituteproject.org/constitution/Tonga_2013",
-      "jurisdictions": ["776"],
-      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Tonga_2013" }],
-      "keywords": ["nationality", "naturalization", "Tonga", "King"],
+      "jurisdictions": [
+        "776"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Tonga_2013"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "Tonga",
+        "King"
+      ],
       "notes": "Constitution naturalization clause. Prefer a stable Nationality Act page when available."
     },
     {
@@ -1585,12 +3020,25 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf",
-      "jurisdictions": ["626"],
-      "pages": [
-        { "id": "citizenship-law", "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf" },
-        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/East_Timor_2002" }
+      "jurisdictions": [
+        "626"
       ],
-      "keywords": ["citizenship", "naturalisation", "Timor-Leste", "ten years"],
+      "pages": [
+        {
+          "id": "citizenship-law",
+          "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf"
+        },
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/East_Timor_2002"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalisation",
+        "Timor-Leste",
+        "ten years"
+      ],
       "notes": "Citizenship Law PDF plus Constitution original citizenship rules."
     },
     {
@@ -1599,9 +3047,21 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf",
-      "jurisdictions": ["096"],
-      "pages": [{ "id": "nationality-act", "url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf" }],
-      "keywords": ["nationality", "naturalisation", "Brunei", "twenty years"],
+      "jurisdictions": [
+        "096"
+      ],
+      "pages": [
+        {
+          "id": "nationality-act",
+          "url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalisation",
+        "Brunei",
+        "twenty years"
+      ],
       "notes": "Brunei Nationality Act PDF. Long residence path; dual not recognized."
     },
     {
@@ -1610,10 +3070,290 @@
       "adapter": "html_index",
       "status": "active",
       "url": "https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html",
-      "jurisdictions": ["156"],
-      "pages": [{ "id": "nationality-law", "url": "https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html" }],
-      "keywords": ["nationality", "naturalization", "China", "dual"],
+      "jurisdictions": [
+        "156"
+      ],
+      "pages": [
+        {
+          "id": "nationality-law",
+          "url": "https://www.immd.gov.hk/eng/residents/immigration/chinese/law.html"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "China",
+        "dual"
+      ],
       "notes": "PRC Nationality Law English text via IMMD. Dual nationality not recognized."
+    },
+    {
+      "id": "kiribati-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Kiribati_2013",
+      "jurisdictions": [
+        "296"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Kiribati_2013"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Kiribati"
+      ],
+      "notes": "Constitution framework. Prefer a stable Citizenship Act amendment page when available."
+    },
+    {
+      "id": "tuvalu-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://tuvalu-legislation.tv/cms/images/LEGISLATION/PRINCIPAL/1979/1979-0005/1979-0005_1.pdf",
+      "jurisdictions": [
+        "798"
+      ],
+      "pages": [
+        {
+          "id": "citizenship-act",
+          "url": "https://tuvalu-legislation.tv/cms/images/LEGISLATION/PRINCIPAL/1979/1979-0005/1979-0005_1.pdf"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Tuvalu"
+      ],
+      "notes": "Citizenship Act official legislation PDF."
+    },
+    {
+      "id": "marshall-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.refworld.org/legal/legislation/natlegbod/1984/123580",
+      "jurisdictions": [
+        "584"
+      ],
+      "pages": [
+        {
+          "id": "citizenship-act",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/1984/123580"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Marshall Islands"
+      ],
+      "notes": "Citizenship Act 1984. Renunciation and annual caps apply."
+    },
+    {
+      "id": "palau-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Palau_2008",
+      "jurisdictions": [
+        "585"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Palau_2008"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "nationality",
+        "Palau"
+      ],
+      "notes": "Constitution. Naturalization limited to Palauan ancestry."
+    },
+    {
+      "id": "fsm-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://fsmlaw.org/fsm/code/title07/T07_Ch02.htm",
+      "jurisdictions": [
+        "583"
+      ],
+      "pages": [
+        {
+          "id": "title-7-ch2",
+          "url": "https://fsmlaw.org/fsm/code/title07/T07_Ch02.htm"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Micronesia",
+        "FSM"
+      ],
+      "notes": "FSM Code Title 7 Chapter 2 citizenship and naturalization."
+    },
+    {
+      "id": "rwanda-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.migration.gov.rw/our-services/citizenshipss",
+      "jurisdictions": [
+        "646"
+      ],
+      "pages": [
+        {
+          "id": "citizenship",
+          "url": "https://www.migration.gov.rw/our-services/citizenshipss"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Rwanda",
+        "fifteen years"
+      ],
+      "notes": "DGIE citizenship services page."
+    },
+    {
+      "id": "senegal-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Senegal_2016",
+      "jurisdictions": [
+        "686"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Senegal_2016"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Senegal"
+      ],
+      "notes": "Constitution framework for nationality."
+    },
+    {
+      "id": "botswana-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/01/Botswana_Citizenship_Act_Cap0101_2004.pdf",
+      "jurisdictions": [
+        "072"
+      ],
+      "pages": [
+        {
+          "id": "citizenship-act",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/01/Botswana_Citizenship_Act_Cap0101_2004.pdf"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Botswana",
+        "ten years"
+      ],
+      "notes": "Citizenship Act Cap 01:01 text."
+    },
+    {
+      "id": "namibia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Namibia_2014",
+      "jurisdictions": [
+        "516"
+      ],
+      "pages": [
+        {
+          "id": "constitution",
+          "url": "https://www.constituteproject.org/constitution/Namibia_2014"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Namibia"
+      ],
+      "notes": "Constitution Art 4 citizenship framework."
+    },
+    {
+      "id": "ethiopia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.refworld.org/docid/409100414.html",
+      "jurisdictions": [
+        "231"
+      ],
+      "pages": [
+        {
+          "id": "proclamation",
+          "url": "https://www.refworld.org/docid/409100414.html"
+        }
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "Ethiopia"
+      ],
+      "notes": "Proclamation on Ethiopian Nationality 378/2003."
+    },
+    {
+      "id": "tanzania-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.immigration.go.tz/index.php/3-0-citizenship-by-naturalization",
+      "jurisdictions": [
+        "834"
+      ],
+      "pages": [
+        {
+          "id": "naturalization",
+          "url": "https://www.immigration.go.tz/index.php/3-0-citizenship-by-naturalization"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Tanzania"
+      ],
+      "notes": "Official Immigration naturalization conditions."
+    },
+    {
+      "id": "uganda-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.immigration.go.ug/node/235",
+      "jurisdictions": [
+        "800"
+      ],
+      "pages": [
+        {
+          "id": "naturalization",
+          "url": "https://www.immigration.go.ug/node/235"
+        }
+      ],
+      "keywords": [
+        "citizenship",
+        "naturalization",
+        "Uganda",
+        "twenty years"
+      ],
+      "notes": "Uganda Immigration naturalization guidance."
     }
   ]
 }
