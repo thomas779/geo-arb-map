@@ -187,6 +187,10 @@ const OFFICIAL_URLS = {
   cyprus_origin: 'https://www.gov.cy/moi/en/ministry/departments/civil-registry-section/registry-office-2/cypriot-citizenship-nationality/acquisition-of-cypriot-citizenship-due-to-cypriot-origin/',
   cyprus_naturalization: 'https://www.gov.cy/moi/en/documents/acquisition-of-cypriot-citizenship-by-naturalization-due-to-years-of-residence-form-m127/',
   cyprus_investment_termination: 'https://cipregistry.mof.gov.cy/en/',
+  belize_economic_citizenship_abolition: 'https://www.nationalassembly.gov.bz/wp-content/uploads/2023/12/Act-No.-54-of-2023-economic-citizenship.pdf',
+  belize_immigration_citizenship: 'https://immigration.gov.bz/citizenship/citizenship-do-i-qualify/',
+  montenegro_eu_report_2023: 'https://enlargement.ec.europa.eu/montenegro-report-2023_en',
+  comoros_economic_citizenship_state: 'https://www.state.gov/reports/2023-country-reports-on-human-rights-practices/comoros/',
   turkiye_citizenship: 'https://nvi.gov.tr/turk-vatandasliginin-kazanilmasi',
   turkiye_citizenship_law: 'https://www.nvi.gov.tr/kurumlar/nvi.gov.tr/mevzuat/nufusmevzuat/ingilizce/TURKISH_CITIZENSHIP_LAW_5901.pdf',
   turkiye_investment: 'https://f.invest.gov.tr/en/investmentguide/pages/acquiring-property-and-citizenship.aspx',
@@ -756,6 +760,10 @@ function jurisdictionSources(): SourceRecord[] {
       ['Cyprus Ministry of Interior — Citizenship due to Cypriot origin', OFFICIAL_URLS.cyprus_origin, '196', 'en', 'official_guidance', 'cyprus-citizenship-guidance'],
       ['Cyprus Ministry of Interior — Naturalization due to residence', OFFICIAL_URLS.cyprus_naturalization, '196', 'en', 'official_guidance', 'cyprus-citizenship-guidance'],
       ['Cyprus Ministry of Finance — Investment Programme termination', OFFICIAL_URLS.cyprus_investment_termination, '196', 'en', 'official_guidance', 'cyprus-investment-programme'],
+      ['Belize Economic Citizenship (Abolition of Rights) Act 2023', OFFICIAL_URLS.belize_economic_citizenship_abolition, '084', 'en', 'primary_law', 'belize-citizenship-law'],
+      ['Belize Immigration — Citizenship eligibility', OFFICIAL_URLS.belize_immigration_citizenship, '084', 'en', 'official_guidance', 'belize-citizenship-law'],
+      ['European Commission — Montenegro Report 2023 (ECP discontinued)', OFFICIAL_URLS.montenegro_eu_report_2023, '499', 'en', 'official_guidance', 'montenegro-citizenship-law'],
+      ['US State Department — Comoros 2023 Human Rights Report', OFFICIAL_URLS.comoros_economic_citizenship_state, '174', 'en', 'official_guidance', 'comoros-citizenship-law'],
       ['Türkiye NVI — Acquisition of Turkish citizenship', OFFICIAL_URLS.turkiye_citizenship, '792', 'tr', 'official_guidance', 'turkiye-citizenship-guidance'],
       ['Turkish Citizenship Law No. 5901', OFFICIAL_URLS.turkiye_citizenship_law, '792', 'en', 'primary_law', 'turkiye-citizenship-guidance'],
       ['Invest in Türkiye — Acquiring Property and Citizenship', OFFICIAL_URLS.turkiye_investment, '792', 'en', 'official_guidance', 'turkiye-investment-guidance'],
@@ -9307,22 +9315,31 @@ function chadRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jurisd
 
 function comorosRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const constitution = requireSource(officialSources, OFFICIAL_URLS.comoros_constitution);
+  const economicCitizenship = requireSource(
+    officialSources,
+    OFFICIAL_URLS.comoros_economic_citizenship_state,
+  );
   return reviewedCountryRecord({
     shadow,
     iso: '174',
-    note: "Reviewed against Comorian constitutional nationality framework. No CBI. No modeled CBI route without a current official programme source.",
+    note: 'Reviewed against Comorian constitutional nationality framework. Historical economic citizenship (passport sales) is modeled as an inactive investment route; it is not open to new applicants.',
     coverage: [
       { mode: 'ancestry', finding: 'present', sources: [constitution] },
       { mode: 'naturalization', finding: 'present', sources: [constitution] },
-      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Comoros national; not unrestricted jus soli.' },
-      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Comorian national; not unrestricted jus soli.' },
+      {
+        mode: 'investment',
+        finding: 'present',
+        sources: [constitution, economicCitizenship],
+        note: 'A former economic-citizenship / passport-sale programme operated and was later suspended; no current open CBI is modeled as active.',
+      },
     ],
     routes: [
       principalCitizenshipRoute({
         id: 'comoros-citizenship-by-parent',
         mode: 'ancestry',
-        title: 'Comoros nationality through a Comoros parent',
-        summary: 'A child of a Comoros parent is a national under the constitutional nationality framework and nationality statute.',
+        title: 'Comorian nationality through a Comorian parent',
+        summary: 'A child of a Comorian parent is a national under the constitutional nationality framework and nationality statute.',
         source: constitution,
         eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '174' }],
         months: 0,
@@ -9341,17 +9358,31 @@ function comorosRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
         allocation: 'discretionary',
         lastChecked: '2026-07-22',
         confidence: 'medium',
-        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+        note: 'Residence floor modeled from the ordinary naturalization track; case-check the current nationality statute.',
       }),
       principalCitizenshipRoute({
         id: 'comoros-citizenship-at-birth-by-parent',
         mode: 'birth',
-        title: 'Citizenship at birth through a Comoros parent',
-        summary: 'Birth to a Comoros parent creates nationality. Birth in Comoros alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        title: 'Citizenship at birth through a Comorian parent',
+        summary: 'Birth to a Comorian parent creates nationality. Birth in Comoros alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
         source: constitution,
         eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '174' }],
         months: 0,
         lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'comoros-economic-citizenship-closed',
+        mode: 'investment',
+        title: 'Former economic citizenship / passport programme (closed)',
+        summary: 'Comoros previously operated an economic-citizenship programme under which foreigners obtained nationality and passports for payment. The programme was suspended; new grants are not treated as available. Existing grants remain a historical fact and should not be presented as a live CBI product.',
+        source: [constitution, economicCitizenship],
+        eligibility: [{ field: 'programme.accepting_new_applications', operator: 'eq', value: false }],
+        months: null,
+        allocation: 'discretionary',
+        status: 'inactive',
+        lastChecked: '2026-07-22',
+        confidence: 'medium',
+        note: 'Historical negative retained so the atlas does not treat Comoros as a current CBI market. Verify any claimed current programme against primary Comorian law before modeling it as active.',
       }),
     ],
   });
@@ -9943,22 +9974,28 @@ function moldovaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
 
 function montenegroRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const constitution = requireSource(officialSources, OFFICIAL_URLS.montenegro_constitution);
+  const ecpClosure = requireSource(officialSources, OFFICIAL_URLS.montenegro_eu_report_2023);
   return reviewedCountryRecord({
     shadow,
     iso: '499',
-    note: "Reviewed against Montenegrin constitutional nationality framework. Ordinary naturalization commonly about ten years lawful residence. No CBI.",
+    note: 'Reviewed against Montenegrin constitutional nationality framework. Ordinary naturalization commonly about ten years lawful residence. The former Economic Citizenship Programme is modeled as inactive (closed end-2022); it is not a current CBI product.',
     coverage: [
       { mode: 'ancestry', finding: 'present', sources: [constitution] },
       { mode: 'naturalization', finding: 'present', sources: [constitution] },
-      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Montenegro national; not unrestricted jus soli.' },
-      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Montenegrin national; not unrestricted jus soli.' },
+      {
+        mode: 'investment',
+        finding: 'present',
+        sources: [constitution, ecpClosure],
+        note: 'Economic Citizenship Programme operated and was discontinued; no active open CBI is modeled.',
+      },
     ],
     routes: [
       principalCitizenshipRoute({
         id: 'montenegro-citizenship-by-parent',
         mode: 'ancestry',
-        title: 'Montenegro nationality through a Montenegro parent',
-        summary: 'A child of a Montenegro parent is a national under the constitutional nationality framework and nationality statute.',
+        title: 'Montenegrin nationality through a Montenegrin parent',
+        summary: 'A child of a Montenegrin parent is a national under the constitutional nationality framework and nationality statute.',
         source: constitution,
         eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '499' }],
         months: 0,
@@ -9977,17 +10014,30 @@ function montenegroRecord(shadow: DataShadow, officialSources: SourceRecord[]): 
         allocation: 'discretionary',
         lastChecked: '2026-07-22',
         confidence: 'medium',
-        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+        note: 'Residence floor modeled from the ordinary naturalization track; case-check the current nationality statute.',
       }),
       principalCitizenshipRoute({
         id: 'montenegro-citizenship-at-birth-by-parent',
         mode: 'birth',
-        title: 'Citizenship at birth through a Montenegro parent',
-        summary: 'Birth to a Montenegro parent creates nationality. Birth in Montenegro alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
+        title: 'Citizenship at birth through a Montenegrin parent',
+        summary: 'Birth to a Montenegrin parent creates nationality. Birth in Montenegro alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
         source: constitution,
         eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '499' }],
         months: 0,
         lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'montenegro-economic-citizenship-closed',
+        mode: 'investment',
+        title: 'Former Economic Citizenship Programme (closed)',
+        summary: 'Montenegro operated an Economic Citizenship Programme allowing foreign investors to acquire citizenship by admission for investment of special state importance. The programme stopped accepting new applications after 31 December 2022. It must not be recommended as a live CBI path.',
+        source: [constitution, ecpClosure],
+        eligibility: [{ field: 'programme.accepting_new_applications', operator: 'eq', value: false }],
+        months: null,
+        allocation: 'discretionary',
+        status: 'inactive',
+        lastChecked: '2026-07-22',
+        note: 'Historical negative retained to prevent stale passport-for-investment recommendations. The European Commission 2023 Montenegro Report records the programme as discontinued.',
       }),
     ],
   });
@@ -10049,23 +10099,36 @@ function ukraineRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
 
 function belizeRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const constitution = requireSource(officialSources, OFFICIAL_URLS.belize_constitution);
+  const abolition = requireSource(
+    officialSources,
+    OFFICIAL_URLS.belize_economic_citizenship_abolition,
+  );
+  const immigration = requireSource(
+    officialSources,
+    OFFICIAL_URLS.belize_immigration_citizenship,
+  );
   return reviewedCountryRecord({
     shadow,
     iso: '084',
-    note: "Reviewed against Belize constitutional nationality framework. Ordinary naturalization commonly about five years residence. No CBI.",
+    note: 'Reviewed against Belize nationality framework and the Economic Citizenship (Abolition of Rights) Act 2023. Ordinary naturalization commonly about five years residence. Historical BECIP economic citizenship is modeled as inactive; there is no current open CBI product.',
     coverage: [
-      { mode: 'ancestry', finding: 'present', sources: [constitution] },
-      { mode: 'naturalization', finding: 'present', sources: [constitution] },
-      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Belize national; not unrestricted jus soli.' },
-      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+      { mode: 'ancestry', finding: 'present', sources: [constitution, immigration] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution, immigration] },
+      { mode: 'birth', finding: 'present', sources: [constitution, immigration], note: 'Parent Belizean national / constitutional birth rules; not marketed as unrestricted jus soli for all foreign parents.' },
+      {
+        mode: 'investment',
+        finding: 'present',
+        sources: [abolition, immigration],
+        note: 'Belize Economic Citizenship Investment Programme ended in 2001; the 2023 Act abolishes further nationality claims derived from those grants. Investor or QRP residence is not direct citizenship.',
+      },
     ],
     routes: [
       principalCitizenshipRoute({
         id: 'belize-citizenship-by-parent',
         mode: 'ancestry',
-        title: 'Belize nationality through a Belize parent',
-        summary: 'A child of a Belize parent is a national under the constitutional nationality framework and nationality statute.',
-        source: constitution,
+        title: 'Belizean nationality through a Belizean parent',
+        summary: 'A child of a Belizean parent is a national under the constitutional nationality framework and nationality statute, subject to registration where birth is abroad.',
+        source: [constitution, immigration],
         eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '084' }],
         months: 0,
         lastChecked: '2026-07-22',
@@ -10074,8 +10137,8 @@ function belizeRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
         id: 'belize-naturalization',
         mode: 'naturalization',
         title: 'Naturalization after about 5 years residence',
-        summary: 'Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.',
-        source: constitution,
+        summary: 'Adults generally need about five years residence or permanent residence before ordinary naturalization under the Belizean Nationality Act framework, plus character and other statutory conditions. Marriage to a Belizean has a shorter track. Grant is discretionary.',
+        source: [constitution, immigration],
         eligibility: [
           { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' },
         ],
@@ -10083,17 +10146,30 @@ function belizeRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
         allocation: 'discretionary',
         lastChecked: '2026-07-22',
         confidence: 'medium',
-        note: 'Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules.',
+        note: 'Immigration Department eligibility pages list descent, marriage, and residence tracks; case-check current Nationality Act practice.',
       }),
       principalCitizenshipRoute({
         id: 'belize-citizenship-at-birth-by-parent',
         mode: 'birth',
-        title: 'Citizenship at birth through a Belize parent',
-        summary: 'Birth to a Belize parent creates nationality. Birth in Belize alone to two foreign parents is not unrestricted jus soli under the modeled framework.',
-        source: constitution,
+        title: 'Citizenship at birth through a Belizean parent',
+        summary: 'Birth to a Belizean parent creates nationality under the constitutional and nationality-act framework.',
+        source: [constitution, immigration],
         eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '084' }],
         months: 0,
         lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'belize-economic-citizenship-closed',
+        mode: 'investment',
+        title: 'Former Economic Citizenship Investment Programme (closed)',
+        summary: 'Belize previously operated the Belize Economic Citizenship Investment Programme (BECIP). It was ended in 2001 under constitutional and nationality amendments. The Economic Citizenship (Abolition of Rights) Act 2023 abolishes further nationality claims based on descent or marriage traced to a person who obtained nationality by economic citizenship. There is no current open CBI product.',
+        source: [abolition, immigration],
+        eligibility: [{ field: 'programme.accepting_new_applications', operator: 'eq', value: false }],
+        months: null,
+        allocation: 'discretionary',
+        status: 'inactive',
+        lastChecked: '2026-07-22',
+        note: 'Historical negative retained so Belize is not recommended as live CBI. QRP or investor residence remain immigration products that may lead only to ordinary naturalization later.',
       }),
     ],
   });
@@ -10211,12 +10287,17 @@ function jamaicaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
   return reviewedCountryRecord({
     shadow,
     iso: '388',
-    note: "Reviewed against Jamaican constitutional nationality framework. Ordinary naturalization commonly about five years residence. No CBI.",
+    note: 'Reviewed against Jamaican constitutional nationality framework. Ordinary naturalization commonly about five years residence. Jamaica is not an OECS CIP state and has no official citizenship-by-investment unit.',
     coverage: [
       { mode: 'ancestry', finding: 'present', sources: [constitution] },
       { mode: 'naturalization', finding: 'present', sources: [constitution] },
-      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Jamaica national; not unrestricted jus soli.' },
-      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Jamaican national; not unrestricted jus soli.' },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No official CIP/CBI programme. Unlike St Kitts, Antigua, Dominica, Grenada, and St Lucia, Jamaica does not operate a contribution-based citizenship unit.',
+      },
     ],
     routes: [
       principalCitizenshipRoute({
@@ -10264,12 +10345,17 @@ function saintVincentRecord(shadow: DataShadow, officialSources: SourceRecord[])
   return reviewedCountryRecord({
     shadow,
     iso: '670',
-    note: "Reviewed against Vincentian constitutional nationality framework. Ordinary naturalization commonly about seven years. CIP/CBI is separate if an active programme exists and is not modeled without official programme sources here. No modeled CBI route.",
+    note: 'Reviewed against Vincentian constitutional nationality framework. Ordinary naturalization commonly about seven years. SVG has no official CIP unit; the government has publicly opposed introducing CBI (unlike other OECS CIP states).',
     coverage: [
       { mode: 'ancestry', finding: 'present', sources: [constitution] },
       { mode: 'naturalization', finding: 'present', sources: [constitution] },
-      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Saint Vincent and the Grenadines national; not unrestricted jus soli.' },
-      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Vincentian national; not unrestricted jus soli.' },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No official CIP/CBI programme or contribution unit. Do not confuse with St Kitts, Antigua, Dominica, Grenada, or St Lucia.',
+      },
     ],
     routes: [
       principalCitizenshipRoute({
@@ -10370,12 +10456,17 @@ function trinidadAndTobagoRecord(shadow: DataShadow, officialSources: SourceReco
   return reviewedCountryRecord({
     shadow,
     iso: '780',
-    note: "Reviewed against Trinidad and Tobago constitutional nationality framework. Ordinary naturalization commonly about eight years residence (five years in some marriage tracks). No CBI.",
+    note: 'Reviewed against Trinidad and Tobago constitutional nationality framework. Ordinary naturalization commonly about eight years residence (shorter marriage tracks exist). No official CIP/CBI programme.',
     coverage: [
       { mode: 'ancestry', finding: 'present', sources: [constitution] },
       { mode: 'naturalization', finding: 'present', sources: [constitution] },
       { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Trinidad and Tobago national; not unrestricted jus soli.' },
-      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme modeled.' },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [constitution],
+        note: 'No official citizenship-by-investment unit or contribution programme. Investor residence, if any, is not direct citizenship.',
+      },
     ],
     routes: [
       principalCitizenshipRoute({
@@ -11026,12 +11117,17 @@ function caboVerdeRecord(shadow: DataShadow, officialSources: SourceRecord[]): J
   return reviewedCountryRecord({
     shadow,
     iso: '132',
-    note: 'Reviewed against Cape Verde embassy citizenship overview. Dual nationality generally allowed. No transactional CBI product modeled.',
+    note: 'Reviewed against Cape Verde embassy citizenship overview. Dual nationality generally allowed. No formal open CIP/CBI unit is modeled; investment may support residence and later ordinary naturalization only.',
     coverage: [
       { mode: 'ancestry', finding: 'present', sources: [guide] },
       { mode: 'naturalization', finding: 'present', sources: [guide] },
       { mode: 'birth', finding: 'present', sources: [guide], note: 'Parent Cape Verdean or conditional birth rules.' },
-      { mode: 'investment', finding: 'verified_none', sources: [guide], note: 'Historical economic-citizenship products are not modeled as current transactional CBI.' },
+      {
+        mode: 'investment',
+        finding: 'verified_none',
+        sources: [guide],
+        note: 'No official mass-market CBI programme with published contribution tiers is treated as active. Large investment may support residence or discretionary nationality claims under nationality law, but that is not modeled as passport-for-cash CBI.',
+      },
     ],
     routes: [
       principalCitizenshipRoute({
@@ -11258,12 +11354,30 @@ function cyprusRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
       { mode: 'ancestry', finding: 'present', sources: [origin] },
       { mode: 'naturalization', finding: 'present', sources: [naturalization] },
       { mode: 'birth', finding: 'present', sources: [origin], note: 'The principal birth-related route is citizenship through a Cypriot parent, including consular registration for a person born abroad; Cyprus does not operate general territorial jus soli.' },
-      { mode: 'investment', finding: 'verified_none', sources: [termination], note: 'The Cyprus Investment Programme stopped accepting new applications from 1 November 2020.' },
+      {
+        mode: 'investment',
+        finding: 'present',
+        sources: [termination],
+        note: 'The Cyprus Investment Programme stopped accepting new applications from 1 November 2020; modeled as inactive investment route.',
+      },
     ],
     routes: [
       principalCitizenshipRoute({ id: 'cyprus-citizenship-by-origin', mode: 'ancestry', title: 'Cypriot citizenship due to origin', summary: 'Cypriot-origin registration routes cover people born abroad and specified descendants, using the applicable M121, M123, M124 or M126 procedure.', source: origin, eligibility: [{ field: 'ancestor.citizenship_or_origin.iso_n3', operator: 'eq', value: '196' }], months: 0 }),
       principalCitizenshipRoute({ id: 'cyprus-naturalization-by-residence', mode: 'naturalization', title: 'Cypriot naturalization by residence', summary: 'The ordinary route requires twelve continuous months immediately before application and at least seven cumulative lawful years in the preceding ten years, plus language, civic, character and resources tests.', source: naturalization, eligibility: [{ field: 'residence.immediately_preceding_months', operator: 'gte', value: 12, unit: 'months' }, { field: 'residence.prior_ten_years_months', operator: 'gte', value: 84, unit: 'months' }, { field: 'language.greek_level', operator: 'eq', value: 'B1' }], months: 96, allocation: 'discretionary' }),
       principalCitizenshipRoute({ id: 'cyprus-citizenship-at-birth-by-parent', mode: 'birth', title: 'Citizenship at birth through a Cypriot parent', summary: 'A person born abroad after 16 August 1960 can use the consular-birth route where a mother or father was a Cypriot citizen at the time of birth, subject to statutory exceptions and registration.', source: origin, eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '196' }, { field: 'parent.citizenship_at_child_birth', operator: 'eq', value: true }], months: 0 }),
+      principalCitizenshipRoute({
+        id: 'cyprus-investment-programme-closed',
+        mode: 'investment',
+        title: 'Former Cyprus Investment Programme (closed)',
+        summary: 'The Cyprus Investment Programme granted citizenship linked to qualifying investment. Official records show it stopped accepting new applications from 1 November 2020. It must not be recommended as a live CBI path.',
+        source: termination,
+        eligibility: [{ field: 'programme.accepting_new_applications', operator: 'eq', value: false }],
+        months: null,
+        allocation: 'discretionary',
+        status: 'inactive',
+        lastChecked: '2026-07-22',
+        note: 'Historical negative retained so the atlas does not revive CIP recommendations.',
+      }),
     ],
   });
 }

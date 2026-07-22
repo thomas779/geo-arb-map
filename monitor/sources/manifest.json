@@ -4185,7 +4185,13 @@
         "residence",
         "birth"
       ],
-      "notes": "Comoros constitutional nationality framework via Constitute Project text."
+      "notes": "Comoros constitutional nationality framework via Constitute Project text.",
+      "pages": [
+        {
+          "id": "us-state-hr-report-2023",
+          "url": "https://www.state.gov/reports/2023-country-reports-on-human-rights-practices/comoros/"
+        }
+      ]
     },
     {
       "id": "djibouti-citizenship-law",
@@ -4413,7 +4419,13 @@
         "residence",
         "birth"
       ],
-      "notes": "Montenegro constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+      "notes": "Montenegro constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit. EU 2023 report used as verification signal for discontinued Economic Citizenship Programme.",
+      "pages": [
+        {
+          "id": "eu-montenegro-report-2023",
+          "url": "https://enlargement.ec.europa.eu/montenegro-report-2023_en"
+        }
+      ]
     },
     {
       "id": "ukraine-citizenship-law",
@@ -4439,7 +4451,7 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Belize_2011",
+      "url": "https://immigration.gov.bz/citizenship/citizenship-do-i-qualify/",
       "jurisdictions": [
         "084"
       ],
@@ -4451,7 +4463,17 @@
         "residence",
         "birth"
       ],
-      "notes": "Belize constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+      "notes": "Official immigration citizenship eligibility plus National Assembly Act abolishing economic-citizenship residual rights (BECIP closed 2001).",
+      "pages": [
+        {
+          "id": "eligibility",
+          "url": "https://immigration.gov.bz/citizenship/citizenship-do-i-qualify/"
+        },
+        {
+          "id": "economic-citizenship-abolition-2023",
+          "url": "https://www.nationalassembly.gov.bz/wp-content/uploads/2023/12/Act-No.-54-of-2023-economic-citizenship.pdf"
+        }
+      ]
     },
     {
       "id": "guyana-citizenship-law",
