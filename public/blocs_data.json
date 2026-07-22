@@ -1616,8 +1616,8 @@
           "iso_n3": "020"
         }
       ],
-      "grants": "Naturalization after 2 years of legal residence (vs 10 standard), dual citizenship permitted. Result: full EU/EEA citizenship. Requires DELE A2 Spanish + civics test; processing backlogs add 1-2+ yrs.",
-      "limits": "Residence must be legal and continuous immediately before applying.",
+      "grants": "Naturalization after 2 years of legal residence (vs 10 standard) under Civil Code Article 22 for nationals of Ibero-American countries, Andorra, Philippines, Equatorial Guinea, or Portugal. Dual citizenship generally retained for these nationalities. Result: full EU/EEA citizenship. DELE A2 Spanish (where required) + civics test; processing backlogs often add years beyond eligibility.",
+      "limits": "Residence must be legal, continuous, and immediately before applying. Preferential floors are also modeled on Spain's country naturalization route (iberoamerican_two_years variant) so country detail and this lane stay aligned. Sephardic-origin and family one-year floors are separate Article 22 tracks, not this lane.",
       "leads_to_settlement": true
     },
     {

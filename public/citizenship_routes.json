@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 360,
+      "routes": 361,
       "by_mode": {
         "ancestry": 113,
-        "naturalization": 115,
+        "naturalization": 116,
         "birth": 113,
         "investment": 19
       },
       "by_status": {
-        "active": 353,
+        "active": 354,
         "pending_verification": 4,
         "inactive": 2,
         "verified_negative": 1
@@ -2302,6 +2302,7 @@
         "panama-nationality-through-parent",
         "panama-ordinary-naturalization",
         "panama-family-naturalization",
+        "panama-spain-latin-american-reciprocity-naturalization",
         "panama-nationality-by-birth"
       ]
     },
@@ -6258,10 +6259,10 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Colombian naturalization after residence",
-      "summary": "Law 2332 generally requires five years of continuous domicile as a Resident Visa holder, reduced to two years for a qualifying Colombian spouse or permanent partner, Colombian child, or verified reciprocal treatment.",
+      "summary": "Law 2332 generally requires five years of continuous domicile as a Resident Visa holder counted from Resident Visa issuance. The domicile floor falls to two years for a Colombian spouse or permanent partner, a Colombian child, a Spanish national, or where reciprocal treatment by the origin state is verified. Naturalization remains discretionary.",
       "facts": {
         "canonical": true,
-        "variant_count": 2,
+        "variant_count": 4,
         "eligibility_months": [
           24,
           60
@@ -6274,22 +6275,40 @@
           "label": "Ordinary five-year Resident Visa route",
           "allocation": "discretionary",
           "eligibility_months": 60,
-          "note": "Naturalization remains a sovereign and discretionary decision."
+          "note": "Default domicile floor. Naturalization remains a sovereign and discretionary decision."
         },
         {
-          "id": "reduced_two_years",
-          "label": "Two-year family or reciprocity route",
+          "id": "family_two_years",
+          "label": "Two-year family route (Colombian spouse, partner, or child)",
           "allocation": "discretionary",
           "eligibility_months": 24,
-          "note": "The reduction applies to a Colombian spouse or permanent partner, Colombian children, or verified reciprocal treatment by the origin state."
+          "note": "Preferential domicile reduction for marriage/permanent partnership with a Colombian or Colombian children."
+        },
+        {
+          "id": "spanish_national_two_years",
+          "label": "Two-year route for Spanish nationals",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Cancilleria naturalization guidance expressly lists Spanish nationality as a two-year domicile reduction ground under Law 2332. This is the clearest Spain-into-Colombia naturalization fast lane in the dataset."
+        },
+        {
+          "id": "reciprocal_origin_two_years",
+          "label": "Two-year route for verified reciprocal treatment",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Law 2332 also reduces domicile to two years when reciprocal treatment by the origin state is verified. Spanish nationals are listed separately by Cancilleria; other origin states require case-by-case verification and are not enumerated here."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-22",
       "sources": [
         {
           "title": "Colombia Law 2332 of 2023 — nationality",
           "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm"
+        },
+        {
+          "title": "Colombia Cancilleria — naturalization requirements",
+          "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/nacionalidad/naturalizacion"
         }
       ]
     },
@@ -12208,7 +12227,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization through a qualifying family connection",
-      "summary": "The Constitution reduces the residence period to three consecutive years for an applicant with a child born in Panama, a Panamanian parent, or a Panamanian spouse, while retaining the other Article 10 requirements.",
+      "summary": "Article 10(2) reduces the residence period to three consecutive years for an applicant with a child born in Panama to a Panamanian parent, or a Panamanian spouse, while retaining renunciation, Spanish, and civic-knowledge requirements.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -12226,7 +12245,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-22",
       "sources": [
         {
           "title": "Constitution of Panama — nationality and naturalization",
@@ -12315,7 +12334,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Ordinary naturalization",
-      "summary": "A permanent resident may apply after five consecutive years in Panama, subject to the constitutional declaration, nationality-renunciation, Spanish and civic-knowledge requirements.",
+      "summary": "Article 10(1): a permanent resident may apply after five consecutive years in Panama, with the constitutional declaration, renunciation of other nationality, Spanish language, and elementary civic knowledge.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -12327,13 +12346,61 @@
       "pathways": [
         {
           "id": "panama-ordinary-naturalization-principal",
-          "label": "Ordinary naturalization",
+          "label": "Ordinary five-year naturalization",
           "allocation": "discretionary",
-          "eligibility_months": 60
+          "eligibility_months": 60,
+          "note": "Default Article 10(1) floor when no family or Spain/Latin American reciprocity track applies."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Constitution of Panama — nationality and naturalization",
+          "url": "https://constitucion.te.gob.pa/constitucion-vigente/"
+        },
+        {
+          "title": "Panama Migration — Naturalization requirements",
+          "url": "https://www.migracion.gob.pa/wp-content/uploads/REQUISITOS-DE-NATURALIZACION-ACTUALIZADO.pdf"
+        }
+      ]
+    },
+    {
+      "id": "panama-spain-latin-american-reciprocity-naturalization",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization for Spanish or Latin American birth nationals (reciprocity)",
+      "summary": "Article 10(3) lets nationals by birth of Spain or any Latin American state request naturalization if they meet the same requirements their origin state imposes on Panamanians. For Spanish birth nationals that reciprocal floor is two years of continuous residence (matching Spain Article 22 treatment of Panamanians). Other Latin American origin periods depend on reciprocity and commonly range from about one to three years. Renunciation, Spanish, and civic knowledge still apply.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 2,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "spanish_birth_national_two_years",
+          "label": "Spanish birth nationals (two years by reciprocity with Spain)",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Article 10(3) reciprocity: Spain grants Panamanians the two-year Ibero-American naturalization floor, so Spanish birth nationals are modeled at two years continuous residence in Panama."
+        },
+        {
+          "id": "latin_american_birth_national_reciprocity",
+          "label": "Latin American birth nationals (reciprocal period)",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Article 10(3) sets the residence floor to whatever the origin Latin American state requires of Panamanians. Administrative practice often cites about one year (e.g. Colombia, El Salvador), two years (e.g. Argentina, Ecuador, Mexico, Peru), or three years (e.g. Uruguay), but the constitutional rule is reciprocity, not a single fixed number. Case-check the origin state before relying on a shorter floor."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
       "sources": [
         {
           "title": "Constitution of Panama — nationality and naturalization",
@@ -14821,12 +14888,13 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after legal residence",
-      "summary": "The general residence period is ten years and five years for recognized refugees. A person born in Spain who is not already Spanish by origin can apply after one year of legal, continuous residence immediately before applying; the grant is not automatic.",
+      "summary": "Civil Code Article 22 sets stacked residence floors: ten years ordinary; five for recognized refugees; two for nationals of Ibero-American countries, Andorra, the Philippines, Equatorial Guinea, or Portugal, and for persons of Sephardic origin; and one year for several family and birth-in-Spain categories (including marriage to a Spaniard). Residence must be legal, continuous, and immediately before applying. Integration (DELE/CCSE where required) and good civic conduct apply. Dual nationality is generally retained for the two-year preferential nationalities. The grant remains discretionary. Processing time is separate and often long.",
       "facts": {
         "canonical": true,
-        "variant_count": 3,
+        "variant_count": 6,
         "eligibility_months": [
           12,
+          24,
           60,
           120
         ],
@@ -14835,32 +14903,57 @@
       "pathways": [
         {
           "id": "ordinary",
-          "label": "Ordinary residence",
+          "label": "Ordinary ten-year residence",
           "allocation": "discretionary",
           "eligibility_months": 120,
-          "note": "Eligibility period only; the grant is not automatic."
+          "note": "Default Article 22 floor for nationalities without a preferential reduction. Eligibility period only; the grant is not automatic."
         },
         {
           "id": "recognized_refugee",
-          "label": "Recognized refugee",
+          "label": "Recognized refugee (five years)",
           "allocation": "discretionary",
           "eligibility_months": 60,
-          "note": "Five-year residence period for a person recognized as a refugee."
+          "note": "Preferential Article 22 floor for a person recognized as a refugee."
+        },
+        {
+          "id": "iberoamerican_two_years",
+          "label": "Ibero-American, Andorra, Philippines, Equatorial Guinea, or Portugal (two years)",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Article 22 two-year preferential floor. Same beneficiary set as the spain_iberoamerican bilateral lane. Dual nationality is generally retained for these nationalities. Processing backlogs remain separate."
+        },
+        {
+          "id": "sephardic_two_years",
+          "label": "Sephardic origin (two years)",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Article 22 also applies the two-year residence floor to persons of Sephardic origin. Distinct from the closed 2015 Sephardic carta-de-naturaleza programme."
+        },
+        {
+          "id": "married_to_spanish_one_year",
+          "label": "Married to a Spaniard (one year)",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "Article 22 one-year floor when married to a Spaniard for one year at application and not legally or de facto separated. Other one-year family categories (widowhood, guardianship, Spanish grandparents of origin) exist and are not fully enumerated here."
         },
         {
           "id": "born_in_spain",
-          "label": "Born in Spain",
+          "label": "Born in Spain (one year)",
           "allocation": "discretionary",
           "eligibility_months": 12,
-          "note": "One year of legal, continuous residence immediately before the application. Article 22 also requires good civic conduct and sufficient integration; the grant is not automatic."
+          "note": "One year of legal, continuous residence immediately before the application for a person born in Spain who is not already Spanish by origin. Good civic conduct and integration remain required; the grant is not automatic."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-22",
       "sources": [
         {
           "title": "Spanish Civil Code — Articles 17, 20 and 22",
           "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763"
+        },
+        {
+          "title": "Spain General Administration — acquisition of nationality by residence",
+          "url": "https://administracion.gob.es/pag_Home/Tu-espacio-europeo/derechos-obligaciones/ciudadanos/residencia/obtencion-nacionalidad.html"
         }
       ]
     },

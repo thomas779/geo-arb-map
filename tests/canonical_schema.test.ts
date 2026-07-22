@@ -261,6 +261,7 @@ describe('canonical data schemas', () => {
       'panama-nationality-through-parent',
       'panama-ordinary-naturalization',
       'panama-family-naturalization',
+      'panama-spain-latin-american-reciprocity-naturalization',
       'panama-nationality-by-birth',
       'papua-new-guinea-citizenship-by-parent',
       'papua-new-guinea-naturalization',
@@ -664,6 +665,37 @@ describe('canonical data schemas', () => {
       variant.id === 'parent_of_mexican_child_by_birth')?.timeline.note).toContain(
         'Parents and grandparents can qualify for permanent residence',
       );
+
+    const spainNaturalization = byIso.get('724')!.routes.find(route =>
+      route.id === 'spain-naturalization-by-residence')!;
+    expect(spainNaturalization.variants.map(variant => variant.id)).toEqual([
+      'ordinary',
+      'recognized_refugee',
+      'iberoamerican_two_years',
+      'sephardic_two_years',
+      'married_to_spanish_one_year',
+      'born_in_spain',
+    ]);
+    expect(spainNaturalization.variants.find(variant =>
+      variant.id === 'iberoamerican_two_years')?.timeline.eligibility_minimum_months).toBe(24);
+    expect(spainNaturalization.variants.find(variant =>
+      variant.id === 'iberoamerican_two_years')?.eligibility).toContainEqual(
+      expect.objectContaining({ field: 'citizenship.iso_n3', operator: 'in' }),
+    );
+
+    const colombiaNaturalization = byIso.get('170')!.routes.find(route =>
+      route.id === 'colombia-naturalization-by-residence')!;
+    expect(colombiaNaturalization.variants.find(variant =>
+      variant.id === 'spanish_national_two_years')?.timeline.eligibility_minimum_months).toBe(24);
+    expect(colombiaNaturalization.variants.find(variant =>
+      variant.id === 'spanish_national_two_years')?.eligibility).toContainEqual(
+      expect.objectContaining({ field: 'citizenship.iso_n3', value: '724' }),
+    );
+
+    const panamaReciprocity = byIso.get('591')!.routes.find(route =>
+      route.id === 'panama-spain-latin-american-reciprocity-naturalization')!;
+    expect(panamaReciprocity.variants.find(variant =>
+      variant.id === 'spanish_birth_national_two_years')?.timeline.eligibility_minimum_months).toBe(24);
 
     const colombiaBirth = byIso.get('170')!.routes.find(route =>
       route.id === 'colombia-citizenship-by-conditional-birth')!;

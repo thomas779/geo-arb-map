@@ -189,6 +189,24 @@
       "notes": "Official consolidated Civil Code. Monitor nationality provisions and amendment metadata; BOE gazette discovery remains a separate planned adapter."
     },
     {
+      "id": "spain-residence-nationality",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://administracion.gob.es/pag_Home/Tu-espacio-europeo/derechos-obligaciones/ciudadanos/residencia/obtencion-nacionalidad.html",
+      "jurisdictions": [
+        "724"
+      ],
+      "keywords": [
+        "nacionalidad",
+        "residencia",
+        "iberoamericanos",
+        "naturalizaci\u00f3n",
+        "art\u00edculo 22"
+      ],
+      "notes": "Official General Administration guidance on nationality by residence (Civil Code Art. 22 reductions: ordinary 10y, refugees 5y, Ibero-American/Andorra/Philippines/Equatorial Guinea/Portugal/Sephardic 2y, spouse/born-in-Spain 1y)."
+    },
+    {
       "id": "boe-spain",
       "tier": "verification",
       "adapter": "api",

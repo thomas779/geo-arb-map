@@ -143,6 +143,8 @@ const OFFICIAL_URLS = {
   portugal_nationality: 'https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa',
   portugal_applications: 'https://justica.gov.pt/Servicos/Submeter-pedido-de-nacionalidade',
   spain_civil_code: 'https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763',
+  spain_residence_nationality: 'https://administracion.gob.es/pag_Home/Tu-espacio-europeo/derechos-obligaciones/ciudadanos/residencia/obtencion-nacionalidad.html',
+  colombia_naturalization_guidance: 'https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/nacionalidad/naturalizacion',
   germany_nationality_act: 'https://www.gesetze-im-internet.de/stag/',
   ireland_born_abroad: 'https://www.dfa.ie/citizenship/born-abroad/',
   ireland_naturalization: 'https://www.irishimmigration.ie/how-to-become-an-irish-citizen-guide/',
@@ -537,6 +539,19 @@ function jurisdictionSources(): SourceRecord[] {
       },
     }),
     officialSource({
+      title: 'Spain General Administration — acquisition of nationality by residence',
+      url: OFFICIAL_URLS.spain_residence_nationality,
+      source_type: 'official_guidance',
+      jurisdictions: ['724'],
+      language: 'es',
+      monitoring: {
+        source_id: 'spain-residence-nationality',
+        method: 'http',
+        url: OFFICIAL_URLS.spain_residence_nationality,
+        status: 'active',
+      },
+    }),
+    officialSource({
       title: 'German Nationality Act (Staatsangehörigkeitsgesetz)',
       url: OFFICIAL_URLS.germany_nationality_act,
       source_type: 'primary_law',
@@ -733,6 +748,7 @@ function jurisdictionSources(): SourceRecord[] {
       ['Mexico Foreign Ministry — naturalization for parents of Mexican-born children', OFFICIAL_URLS.mexico_child_naturalization, '484', 'es', 'official_guidance', 'mexico-nationality-law'],
       ['Mexico INM — permanent residence through family relationship', OFFICIAL_URLS.mexico_family_residence, '484', 'es', 'official_guidance', 'mexico-nationality-law'],
       ['Colombia Law 2332 of 2023 — nationality', OFFICIAL_URLS.colombia_nationality_law, '170', 'es', 'primary_law', 'colombia-nationality-law'],
+      ['Colombia Cancilleria — naturalization requirements', OFFICIAL_URLS.colombia_naturalization_guidance, '170', 'es', 'official_guidance', 'colombia-nationality-law'],
       ['Colombia Foreign Ministry — Visa FAQ', OFFICIAL_URLS.colombia_visa_faq, '170', 'es', 'official_guidance', 'colombia-nationality-law'],
       ['Colombia Resolution 5477 of 2022', OFFICIAL_URLS.colombia_visa_resolution, '170', 'es', 'primary_law', 'colombia-nationality-law'],
       ['Colombia Foreign Ministry — V Student Visa', OFFICIAL_URLS.colombia_student_visa, '170', 'es', 'official_guidance', 'colombia-nationality-law'],
@@ -1670,6 +1686,7 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
   const candidate = shadow.jurisdictions.find(item => item.jurisdiction.iso_n3 === '724');
   if (!candidate) throw new Error('Spain pilot jurisdiction is missing');
   const civilCode = requireSource(officialSources, OFFICIAL_URLS.spain_civil_code);
+  const residenceGuide = requireSource(officialSources, OFFICIAL_URLS.spain_residence_nationality);
   return JurisdictionRecordSchema.parse({
     schema_version: 2,
     entity_type: 'jurisdiction',
@@ -1678,26 +1695,26 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
     review: {
       state: 'reviewed',
       confidence: 'high',
-      last_checked: '2026-07-21',
-      note: 'All acquisition modes reviewed; the modeled routes focus on the principal public paths.',
+      last_checked: '2026-07-22',
+      note: 'All acquisition modes reviewed. Civil Code Article 22 reduced residence periods (Ibero-American, Sephardic, family, birth-in-Spain) are modeled as explicit naturalization variants.',
     },
     coverage: [
       {
         mode: 'ancestry',
         finding: 'present',
-        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
         source_refs: refs([civilCode], ['/coverage/ancestry']),
       },
       {
         mode: 'naturalization',
         finding: 'present',
-        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
-        source_refs: refs([civilCode], ['/coverage/naturalization']),
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
+        source_refs: refs([civilCode, residenceGuide], ['/coverage/naturalization']),
       },
       {
         mode: 'birth',
         finding: 'present',
-        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
         source_refs: refs([civilCode], ['/coverage/birth']),
       },
       {
@@ -1706,7 +1723,7 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
         review: {
           state: 'reviewed',
           confidence: 'high',
-          last_checked: '2026-07-21',
+          last_checked: '2026-07-22',
           note: 'The reviewed Civil Code nationality provisions contain no direct citizenship-by-investment route; investment residence is separate.',
         },
         source_refs: refs([civilCode], ['/coverage/investment']),
@@ -1856,13 +1873,13 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
         mode: 'naturalization',
         status: 'active',
         title: 'Naturalization after legal residence',
-        summary: 'The general residence period is ten years and five years for recognized refugees. A person born in Spain who is not already Spanish by origin can apply after one year of legal, continuous residence immediately before applying; the grant is not automatic.',
+        summary: 'Civil Code Article 22 sets stacked residence floors: ten years ordinary; five for recognized refugees; two for nationals of Ibero-American countries, Andorra, the Philippines, Equatorial Guinea, or Portugal, and for persons of Sephardic origin; and one year for several family and birth-in-Spain categories (including marriage to a Spaniard). Residence must be legal, continuous, and immediately before applying. Integration (DELE/CCSE where required) and good civic conduct apply. Dual nationality is generally retained for the two-year preferential nationalities. The grant remains discretionary. Processing time is separate and often long.',
         effective: { from: null, to: null, supersedes: [] },
-        review: { state: 'partial', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
         variants: [
           {
             id: 'ordinary',
-            label: 'Ordinary residence',
+            label: 'Ordinary ten-year residence',
             outcome: 'citizenship',
             allocation: 'discretionary',
             eligibility: [{
@@ -1879,9 +1896,9 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
               eligibility_minimum_months: 120,
               processing_typical_months: null,
               confidence: 'high',
-              note: 'Eligibility period only; the grant is not automatic.',
+              note: 'Default Article 22 floor for nationalities without a preferential reduction. Eligibility period only; the grant is not automatic.',
             },
-            source_refs: refs([civilCode], [
+            source_refs: refs([civilCode, residenceGuide], [
               '/routes/spain-naturalization-by-residence/variants/ordinary/eligibility',
               '/routes/spain-naturalization-by-residence/variants/ordinary/timeline/eligibility_minimum_months',
               '/routes/spain-naturalization-by-residence/variants/ordinary/allocation',
@@ -1889,7 +1906,7 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
           },
           {
             id: 'recognized_refugee',
-            label: 'Recognized refugee',
+            label: 'Recognized refugee (five years)',
             outcome: 'citizenship',
             allocation: 'discretionary',
             eligibility: [
@@ -1909,16 +1926,108 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
               eligibility_minimum_months: 60,
               processing_typical_months: null,
               confidence: 'high',
-              note: 'Five-year residence period for a person recognized as a refugee.',
+              note: 'Preferential Article 22 floor for a person recognized as a refugee.',
             },
-            source_refs: refs([civilCode], [
+            source_refs: refs([civilCode, residenceGuide], [
               '/routes/spain-naturalization-by-residence/variants/recognized_refugee/eligibility',
               '/routes/spain-naturalization-by-residence/variants/recognized_refugee/timeline/eligibility_minimum_months',
             ]),
           },
           {
+            id: 'iberoamerican_two_years',
+            label: 'Ibero-American, Andorra, Philippines, Equatorial Guinea, or Portugal (two years)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              {
+                field: 'citizenship.iso_n3',
+                operator: 'in',
+                value: [...IBERO_AMERICAN_BENEFICIARIES],
+              },
+              {
+                field: 'residence.lawful_months',
+                operator: 'gte',
+                value: 24,
+                unit: 'months',
+              },
+            ],
+            milestones: [
+              { status: 'lawful_residence', minimum_months: 24 },
+              { status: 'citizenship_application', minimum_months: 0 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Article 22 two-year preferential floor. Same beneficiary set as the spain_iberoamerican bilateral lane. Dual nationality is generally retained for these nationalities. Processing backlogs remain separate.',
+            },
+            source_refs: refs([civilCode, residenceGuide], [
+              '/routes/spain-naturalization-by-residence/variants/iberoamerican_two_years/eligibility',
+              '/routes/spain-naturalization-by-residence/variants/iberoamerican_two_years/timeline/eligibility_minimum_months',
+            ]),
+          },
+          {
+            id: 'sephardic_two_years',
+            label: 'Sephardic origin (two years)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'origin.sephardic', operator: 'eq', value: true },
+              {
+                field: 'residence.lawful_months',
+                operator: 'gte',
+                value: 24,
+                unit: 'months',
+              },
+            ],
+            milestones: [
+              { status: 'lawful_residence', minimum_months: 24 },
+              { status: 'citizenship_application', minimum_months: 0 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Article 22 also applies the two-year residence floor to persons of Sephardic origin. Distinct from the closed 2015 Sephardic carta-de-naturaleza programme.',
+            },
+            source_refs: refs([civilCode, residenceGuide], [
+              '/routes/spain-naturalization-by-residence/variants/sephardic_two_years/eligibility',
+              '/routes/spain-naturalization-by-residence/variants/sephardic_two_years/timeline/eligibility_minimum_months',
+            ]),
+          },
+          {
+            id: 'married_to_spanish_one_year',
+            label: 'Married to a Spaniard (one year)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'spouse.citizenship.iso_n3', operator: 'eq', value: '724' },
+              { field: 'marriage.not_separated', operator: 'eq', value: true },
+              {
+                field: 'residence.lawful_months',
+                operator: 'gte',
+                value: 12,
+                unit: 'months',
+              },
+            ],
+            milestones: [
+              { status: 'lawful_residence', minimum_months: 12 },
+              { status: 'citizenship_application', minimum_months: 0 },
+            ],
+            timeline: {
+              eligibility_minimum_months: 12,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Article 22 one-year floor when married to a Spaniard for one year at application and not legally or de facto separated. Other one-year family categories (widowhood, guardianship, Spanish grandparents of origin) exist and are not fully enumerated here.',
+            },
+            source_refs: refs([civilCode, residenceGuide], [
+              '/routes/spain-naturalization-by-residence/variants/married_to_spanish_one_year/eligibility',
+              '/routes/spain-naturalization-by-residence/variants/married_to_spanish_one_year/timeline/eligibility_minimum_months',
+            ]),
+          },
+          {
             id: 'born_in_spain',
-            label: 'Born in Spain',
+            label: 'Born in Spain (one year)',
             outcome: 'citizenship',
             allocation: 'discretionary',
             eligibility: [
@@ -1938,9 +2047,9 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
               eligibility_minimum_months: 12,
               processing_typical_months: null,
               confidence: 'high',
-              note: 'One year of legal, continuous residence immediately before the application. Article 22 also requires good civic conduct and sufficient integration; the grant is not automatic.',
+              note: 'One year of legal, continuous residence immediately before the application for a person born in Spain who is not already Spanish by origin. Good civic conduct and integration remain required; the grant is not automatic.',
             },
-            source_refs: refs([civilCode], [
+            source_refs: refs([civilCode, residenceGuide], [
               '/routes/spain-naturalization-by-residence/variants/born_in_spain/eligibility',
               '/routes/spain-naturalization-by-residence/variants/born_in_spain/timeline/eligibility_minimum_months',
             ]),
@@ -2430,6 +2539,10 @@ function colombiaRecord(
   officialSources: SourceRecord[],
 ): JurisdictionRecord {
   const law = requireSource(officialSources, OFFICIAL_URLS.colombia_nationality_law);
+  const naturalizationGuide = requireSource(
+    officialSources,
+    OFFICIAL_URLS.colombia_naturalization_guidance,
+  );
   const visaFaq = requireSource(officialSources, OFFICIAL_URLS.colombia_visa_faq);
   const visaResolution = requireSource(officialSources, OFFICIAL_URLS.colombia_visa_resolution);
   const studentVisa = requireSource(officialSources, OFFICIAL_URLS.colombia_student_visa);
@@ -2440,10 +2553,10 @@ function colombiaRecord(
   return reviewedCountryRecord({
     shadow,
     iso: '170',
-    note: 'All acquisition modes reviewed against Law 2332 of 2023. Conditional territorial birth and the distinction between student status, permanent residence and naturalization are preserved.',
+    note: 'All acquisition modes reviewed against Law 2332 of 2023 and Cancilleria naturalization guidance. Preferential two-year domicile reductions for family ties and Spanish nationals are modeled as explicit variants.',
     coverage: [
       { mode: 'ancestry', finding: 'present', sources: [law] },
-      { mode: 'naturalization', finding: 'present', sources: [law, visaFaq, visaResolution, studentVisa] },
+      { mode: 'naturalization', finding: 'present', sources: [law, naturalizationGuide, visaFaq, visaResolution, studentVisa] },
       {
         mode: 'birth',
         finding: 'present',
@@ -2475,9 +2588,9 @@ function colombiaRecord(
         mode: 'naturalization',
         status: 'active',
         title: 'Colombian naturalization after residence',
-        summary: 'Law 2332 generally requires five years of continuous domicile as a Resident Visa holder, reduced to two years for a qualifying Colombian spouse or permanent partner, Colombian child, or verified reciprocal treatment.',
+        summary: 'Law 2332 generally requires five years of continuous domicile as a Resident Visa holder counted from Resident Visa issuance. The domicile floor falls to two years for a Colombian spouse or permanent partner, a Colombian child, a Spanish national, or where reciprocal treatment by the origin state is verified. Naturalization remains discretionary.',
         effective: { from: '2023-09-25', to: null, supersedes: [] },
-        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-21' },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
         variants: [
           {
             id: 'ordinary_five_years',
@@ -2489,29 +2602,80 @@ function colombiaRecord(
               { field: 'domicile.continuous_months', operator: 'gte', value: 60, unit: 'months' },
             ],
             milestones: [{ status: 'resident_visa_domicile', minimum_months: 60 }],
-            timeline: { eligibility_minimum_months: 60, processing_typical_months: null, confidence: 'high', note: 'Naturalization remains a sovereign and discretionary decision.' },
-            source_refs: refs([law], [
+            timeline: { eligibility_minimum_months: 60, processing_typical_months: null, confidence: 'high', note: 'Default domicile floor. Naturalization remains a sovereign and discretionary decision.' },
+            source_refs: refs([law, naturalizationGuide], [
               `/routes/${naturalizationId}/summary`,
               `/routes/${naturalizationId}/variants/ordinary_five_years/eligibility`,
               `/routes/${naturalizationId}/variants/ordinary_five_years/timeline`,
             ]),
           },
           {
-            id: 'reduced_two_years',
-            label: 'Two-year family or reciprocity route',
+            id: 'family_two_years',
+            label: 'Two-year family route (Colombian spouse, partner, or child)',
             outcome: 'citizenship',
             allocation: 'discretionary',
             eligibility: [
               { field: 'visa.resident_holder', operator: 'eq', value: true },
               { field: 'domicile.continuous_months', operator: 'gte', value: 24, unit: 'months' },
-              { field: 'reduction.family_or_reciprocity', operator: 'eq', value: true },
+              { field: 'family.colombian_spouse_partner_or_child', operator: 'eq', value: true },
             ],
             milestones: [{ status: 'resident_visa_domicile', minimum_months: 24 }],
-            timeline: { eligibility_minimum_months: 24, processing_typical_months: null, confidence: 'high', note: 'The reduction applies to a Colombian spouse or permanent partner, Colombian children, or verified reciprocal treatment by the origin state.' },
-            source_refs: refs([law], [
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Preferential domicile reduction for marriage/permanent partnership with a Colombian or Colombian children.',
+            },
+            source_refs: refs([law, naturalizationGuide], [
               `/routes/${naturalizationId}/summary`,
-              `/routes/${naturalizationId}/variants/reduced_two_years/eligibility`,
-              `/routes/${naturalizationId}/variants/reduced_two_years/timeline`,
+              `/routes/${naturalizationId}/variants/family_two_years/eligibility`,
+              `/routes/${naturalizationId}/variants/family_two_years/timeline`,
+            ]),
+          },
+          {
+            id: 'spanish_national_two_years',
+            label: 'Two-year route for Spanish nationals',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'visa.resident_holder', operator: 'eq', value: true },
+              { field: 'citizenship.iso_n3', operator: 'eq', value: '724' },
+              { field: 'domicile.continuous_months', operator: 'gte', value: 24, unit: 'months' },
+            ],
+            milestones: [{ status: 'resident_visa_domicile', minimum_months: 24 }],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Cancilleria naturalization guidance expressly lists Spanish nationality as a two-year domicile reduction ground under Law 2332. This is the clearest Spain-into-Colombia naturalization fast lane in the dataset.',
+            },
+            source_refs: refs([law, naturalizationGuide], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/spanish_national_two_years/eligibility`,
+              `/routes/${naturalizationId}/variants/spanish_national_two_years/timeline`,
+            ]),
+          },
+          {
+            id: 'reciprocal_origin_two_years',
+            label: 'Two-year route for verified reciprocal treatment',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'visa.resident_holder', operator: 'eq', value: true },
+              { field: 'domicile.continuous_months', operator: 'gte', value: 24, unit: 'months' },
+              { field: 'origin.reciprocal_treatment_verified', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'resident_visa_domicile', minimum_months: 24 }],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'medium',
+              note: 'Law 2332 also reduces domicile to two years when reciprocal treatment by the origin state is verified. Spanish nationals are listed separately by Cancilleria; other origin states require case-by-case verification and are not enumerated here.',
+            },
+            source_refs: refs([law, naturalizationGuide], [
+              `/routes/${naturalizationId}/summary`,
+              `/routes/${naturalizationId}/variants/reciprocal_origin_two_years/eligibility`,
+              `/routes/${naturalizationId}/variants/reciprocal_origin_two_years/timeline`,
             ]),
           },
         ],
@@ -3255,10 +3419,12 @@ function panamaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
     officialSources,
     OFFICIAL_URLS.panama_naturalization_requirements,
   );
+  const ordinaryId = 'panama-ordinary-naturalization';
+  const reciprocityId = 'panama-spain-latin-american-reciprocity-naturalization';
   return reviewedCountryRecord({
     shadow,
     iso: '591',
-    note: 'All acquisition modes reviewed against the current Constitution and National Migration Service requirements. Investor and Friendly Nations residence routes remain separate from citizenship.',
+    note: 'All acquisition modes reviewed against the current Constitution and National Migration Service requirements. Article 10 preferential tracks (family; Spain/Latin American birth nationals on reciprocity) are modeled as explicit routes. Investor and Friendly Nations residence remain separate from citizenship.',
     coverage: [
       { mode: 'ancestry', finding: 'present', sources: [constitution] },
       { mode: 'naturalization', finding: 'present', sources: [constitution, requirements] },
@@ -3283,25 +3449,42 @@ function panamaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
         ],
         months: null,
       }),
-      principalCitizenshipRoute({
-        id: 'panama-ordinary-naturalization',
+      {
+        id: ordinaryId,
         mode: 'naturalization',
+        status: 'active',
         title: 'Ordinary naturalization',
-        summary: 'A permanent resident may apply after five consecutive years in Panama, subject to the constitutional declaration, nationality-renunciation, Spanish and civic-knowledge requirements.',
-        source: [constitution, requirements],
-        eligibility: [
-          { field: 'residence.consecutive_months', operator: 'gte', value: 60, unit: 'months' },
-          { field: 'residence.status', operator: 'eq', value: 'permanent_resident' },
-          { field: 'integration.spanish_and_civics', operator: 'eq', value: true },
-        ],
-        months: 60,
-        allocation: 'discretionary',
-      }),
+        summary: 'Article 10(1): a permanent resident may apply after five consecutive years in Panama, with the constitutional declaration, renunciation of other nationality, Spanish language, and elementary civic knowledge.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
+        variants: [{
+          id: `${ordinaryId}-principal`,
+          label: 'Ordinary five-year naturalization',
+          outcome: 'citizenship',
+          allocation: 'discretionary',
+          eligibility: [
+            { field: 'residence.consecutive_months', operator: 'gte', value: 60, unit: 'months' },
+            { field: 'residence.status', operator: 'eq', value: 'permanent_resident' },
+            { field: 'integration.spanish_and_civics', operator: 'eq', value: true },
+          ],
+          milestones: [{ status: 'permanent_residence', minimum_months: 60 }],
+          timeline: {
+            eligibility_minimum_months: 60,
+            processing_typical_months: null,
+            confidence: 'high',
+            note: 'Default Article 10(1) floor when no family or Spain/Latin American reciprocity track applies.',
+          },
+          source_refs: refs([constitution, requirements], [
+            `/routes/${ordinaryId}/summary`,
+            `/routes/${ordinaryId}/variants/${ordinaryId}-principal/eligibility`,
+          ]),
+        }],
+      },
       principalCitizenshipRoute({
         id: 'panama-family-naturalization',
         mode: 'naturalization',
         title: 'Naturalization through a qualifying family connection',
-        summary: 'The Constitution reduces the residence period to three consecutive years for an applicant with a child born in Panama, a Panamanian parent, or a Panamanian spouse, while retaining the other Article 10 requirements.',
+        summary: 'Article 10(2) reduces the residence period to three consecutive years for an applicant with a child born in Panama to a Panamanian parent, or a Panamanian spouse, while retaining renunciation, Spanish, and civic-knowledge requirements.',
         source: [constitution, requirements],
         eligibility: [
           { field: 'residence.consecutive_months', operator: 'gte', value: 36, unit: 'months' },
@@ -3309,7 +3492,65 @@ function panamaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
         ],
         months: 36,
         allocation: 'discretionary',
+        lastChecked: '2026-07-22',
       }),
+      {
+        id: reciprocityId,
+        mode: 'naturalization',
+        status: 'active',
+        title: 'Naturalization for Spanish or Latin American birth nationals (reciprocity)',
+        summary: 'Article 10(3) lets nationals by birth of Spain or any Latin American state request naturalization if they meet the same requirements their origin state imposes on Panamanians. For Spanish birth nationals that reciprocal floor is two years of continuous residence (matching Spain Article 22 treatment of Panamanians). Other Latin American origin periods depend on reciprocity and commonly range from about one to three years. Renunciation, Spanish, and civic knowledge still apply.',
+        effective: { from: null, to: null, supersedes: [] },
+        review: { state: 'reviewed', confidence: 'high', last_checked: '2026-07-22' },
+        variants: [
+          {
+            id: 'spanish_birth_national_two_years',
+            label: 'Spanish birth nationals (two years by reciprocity with Spain)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'citizenship.by_birth.iso_n3', operator: 'eq', value: '724' },
+              { field: 'residence.consecutive_months', operator: 'gte', value: 24, unit: 'months' },
+              { field: 'integration.spanish_and_civics', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'permanent_residence', minimum_months: 24 }],
+            timeline: {
+              eligibility_minimum_months: 24,
+              processing_typical_months: null,
+              confidence: 'high',
+              note: 'Article 10(3) reciprocity: Spain grants Panamanians the two-year Ibero-American naturalization floor, so Spanish birth nationals are modeled at two years continuous residence in Panama.',
+            },
+            source_refs: refs([constitution, requirements], [
+              `/routes/${reciprocityId}/summary`,
+              `/routes/${reciprocityId}/variants/spanish_birth_national_two_years/eligibility`,
+              `/routes/${reciprocityId}/variants/spanish_birth_national_two_years/timeline`,
+            ]),
+          },
+          {
+            id: 'latin_american_birth_national_reciprocity',
+            label: 'Latin American birth nationals (reciprocal period)',
+            outcome: 'citizenship',
+            allocation: 'discretionary',
+            eligibility: [
+              { field: 'citizenship.by_birth.region', operator: 'eq', value: 'latin_america' },
+              { field: 'origin.reciprocal_treatment_of_panamanians', operator: 'eq', value: true },
+              { field: 'integration.spanish_and_civics', operator: 'eq', value: true },
+            ],
+            milestones: [{ status: 'permanent_residence', minimum_months: 0 }],
+            timeline: {
+              eligibility_minimum_months: null,
+              processing_typical_months: null,
+              confidence: 'medium',
+              note: 'Article 10(3) sets the residence floor to whatever the origin Latin American state requires of Panamanians. Administrative practice often cites about one year (e.g. Colombia, El Salvador), two years (e.g. Argentina, Ecuador, Mexico, Peru), or three years (e.g. Uruguay), but the constitutional rule is reciprocity, not a single fixed number. Case-check the origin state before relying on a shorter floor.',
+            },
+            source_refs: refs([constitution, requirements], [
+              `/routes/${reciprocityId}/summary`,
+              `/routes/${reciprocityId}/variants/latin_american_birth_national_reciprocity/eligibility`,
+              `/routes/${reciprocityId}/variants/latin_american_birth_national_reciprocity/timeline`,
+            ]),
+          },
+        ],
+      },
       principalCitizenshipRoute({
         id: 'panama-nationality-by-birth',
         mode: 'birth',

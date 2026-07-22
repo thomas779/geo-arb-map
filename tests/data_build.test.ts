@@ -609,6 +609,7 @@ describe('data:build parity gates', () => {
       'panama-nationality-by-birth',
       'panama-nationality-through-parent',
       'panama-ordinary-naturalization',
+      'panama-spain-latin-american-reciprocity-naturalization',
       'papua-new-guinea-citizenship-at-birth-by-parent',
       'papua-new-guinea-citizenship-by-parent',
       'papua-new-guinea-investor-naturalization',
@@ -739,12 +740,49 @@ describe('data:build parity gates', () => {
     const spainResidence = release.frontend.citizenship.routes.find(
       route => route.id === 'spain-naturalization-by-residence',
     );
+    expect(spainResidence?.pathways?.map(pathway => pathway.id)).toEqual([
+      'ordinary',
+      'recognized_refugee',
+      'iberoamerican_two_years',
+      'sephardic_two_years',
+      'married_to_spanish_one_year',
+      'born_in_spain',
+    ]);
+    expect(spainResidence?.pathways).toContainEqual(expect.objectContaining({
+      id: 'iberoamerican_two_years',
+      eligibility_months: 24,
+      allocation: 'discretionary',
+    }));
     expect(spainResidence?.pathways).toContainEqual(expect.objectContaining({
       id: 'born_in_spain',
       eligibility_months: 12,
       allocation: 'discretionary',
     }));
-    expect(spainResidence?.summary).toContain('one year of legal, continuous residence');
+    expect(spainResidence?.summary).toContain('two for nationals of Ibero-American countries');
+
+    const colombiaNat = release.frontend.citizenship.routes.find(
+      route => route.id === 'colombia-naturalization-by-residence',
+    );
+    expect(colombiaNat?.pathways?.map(pathway => pathway.id)).toEqual([
+      'ordinary_five_years',
+      'family_two_years',
+      'spanish_national_two_years',
+      'reciprocal_origin_two_years',
+    ]);
+    expect(colombiaNat?.pathways).toContainEqual(expect.objectContaining({
+      id: 'spanish_national_two_years',
+      eligibility_months: 24,
+    }));
+    expect(colombiaNat?.summary).toContain('Spanish national');
+
+    const panamaReciprocity = release.frontend.citizenship.routes.find(
+      route => route.id === 'panama-spain-latin-american-reciprocity-naturalization',
+    );
+    expect(panamaReciprocity?.pathways).toContainEqual(expect.objectContaining({
+      id: 'spanish_birth_national_two_years',
+      eligibility_months: 24,
+    }));
+    expect(panamaReciprocity?.summary).toContain('Article 10(3)');
 
     const franceBirth = release.frontend.citizenship.routes.find(
       route => route.id === 'france-birth-and-residence',
