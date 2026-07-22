@@ -343,6 +343,20 @@ const OFFICIAL_URLS = {
   romania_constitution: 'https://www.constituteproject.org/constitution/Romania_2003',
   andorra_government: 'https://www.govern.ad/en',
   andorra_constitution: 'https://www.constituteproject.org/constitution/Andorra_1993',
+  finland_citizenship: 'https://migri.fi/en/finnish-citizenship',
+  finland_period_of_residence: 'https://migri.fi/en/period-of-residence',
+  estonia_citizenship_act: 'https://www.riigiteataja.ee/en/eli/523012024006/consolide',
+  latvia_naturalisation: 'https://www.pmlp.gov.lv/en/naturalisation',
+  lithuania_migracija: 'https://www.migracija.lt/home?lang=en',
+  lithuania_constitution: 'https://www.constituteproject.org/constitution/Lithuania_2019',
+  croatia_citizenship: 'https://gov.hr/en/acquiring-croatian-citizenship/460',
+  slovakia_naturalization: 'https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html',
+  slovakia_constitution: 'https://www.constituteproject.org/constitution/Slovakia_2017',
+  luxembourg_naturalisation: 'https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html',
+  monaco_nationality: 'https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality',
+  liechtenstein_naturalization: 'https://www.llv.li/en/individuals/migration-and-integration/naturalization',
+  iceland_citizenship_when: 'https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply',
+  iceland_government_citizenship: 'https://www.government.is/topics/foreign-nationals/citizenship/',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -815,6 +829,20 @@ function jurisdictionSources(): SourceRecord[] {
       ['Romania Constitution (Constitute Project)', OFFICIAL_URLS.romania_constitution, '642', 'en', 'primary_law', 'romania-citizenship-law'],
       ['Government of Andorra', OFFICIAL_URLS.andorra_government, '020', 'en', 'official_guidance', 'andorra-citizenship-law'],
       ['Andorra Constitution (Constitute Project)', OFFICIAL_URLS.andorra_constitution, '020', 'en', 'primary_law', 'andorra-citizenship-law'],
+      ['Finnish Immigration Service - Finnish citizenship', OFFICIAL_URLS.finland_citizenship, '246', 'en', 'official_guidance', 'finland-citizenship-law'],
+      ['Finnish Immigration Service - period of residence', OFFICIAL_URLS.finland_period_of_residence, '246', 'en', 'official_guidance', 'finland-citizenship-law'],
+      ['Estonia Citizenship Act (Riigi Teataja)', OFFICIAL_URLS.estonia_citizenship_act, '233', 'en', 'primary_law', 'estonia-citizenship-law'],
+      ['Latvia OCMA/PMLP - naturalisation', OFFICIAL_URLS.latvia_naturalisation, '428', 'en', 'official_guidance', 'latvia-citizenship-law'],
+      ['Lithuania Migration Department', OFFICIAL_URLS.lithuania_migracija, '440', 'en', 'official_guidance', 'lithuania-citizenship-law'],
+      ['Lithuania Constitution (Constitute Project)', OFFICIAL_URLS.lithuania_constitution, '440', 'en', 'primary_law', 'lithuania-citizenship-law'],
+      ['Croatia gov.hr - acquiring Croatian citizenship', OFFICIAL_URLS.croatia_citizenship, '191', 'en', 'official_guidance', 'croatia-citizenship-law'],
+      ['Slovakia IOM MIC - naturalization conditions', OFFICIAL_URLS.slovakia_naturalization, '703', 'en', 'official_guidance', 'slovakia-citizenship-law'],
+      ['Slovakia Constitution (Constitute Project)', OFFICIAL_URLS.slovakia_constitution, '703', 'en', 'primary_law', 'slovakia-citizenship-law'],
+      ['Luxembourg Guichet - naturalisation', OFFICIAL_URLS.luxembourg_naturalisation, '442', 'en', 'official_guidance', 'luxembourg-citizenship-law'],
+      ['Monaco mon service public - acquiring nationality', OFFICIAL_URLS.monaco_nationality, '492', 'en', 'official_guidance', 'monaco-citizenship-law'],
+      ['Liechtenstein National Administration - naturalization', OFFICIAL_URLS.liechtenstein_naturalization, '438', 'en', 'official_guidance', 'liechtenstein-citizenship-law'],
+      ['Island.is - Icelandic citizenship residence length', OFFICIAL_URLS.iceland_citizenship_when, '352', 'en', 'official_guidance', 'iceland-citizenship-law'],
+      ['Government of Iceland - citizenship', OFFICIAL_URLS.iceland_government_citizenship, '352', 'en', 'official_guidance', 'iceland-citizenship-law'],
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
       url,
@@ -5585,6 +5613,517 @@ function andorraRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
   });
 }
 
+function finlandRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const migri = requireSource(officialSources, OFFICIAL_URLS.finland_citizenship);
+  const residence = requireSource(officialSources, OFFICIAL_URLS.finland_period_of_residence);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '246',
+    note: 'Reviewed against Migri citizenship guidance after the October 2024 residence reform. Dual nationality generally allowed. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [migri] },
+      { mode: 'naturalization', finding: 'present', sources: [migri, residence] },
+      { mode: 'birth', finding: 'present', sources: [migri], note: 'Parent Finnish; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [migri], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'finland-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Finnish citizenship through a Finnish parent',
+        summary: 'A child of a Finnish citizen parent is Finnish under the Citizenship Act. Declaration routes also exist for former citizens and certain Nordic cases.',
+        source: migri,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '246' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'finland-naturalization',
+        mode: 'naturalization',
+        title: 'Citizenship after eight years residence',
+        summary: 'Adults generally need eight years legal residence in Finland. Five years can suffice with the required language skills, a Finnish spouse, or statelessness. Dual nationality is generally allowed. Grant is discretionary.',
+        source: [migri, residence],
+        eligibility: [
+          { field: 'residence.legal_years', operator: 'gte', value: 8, unit: 'years' },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'finland-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Finnish parent',
+        summary: 'Birth to a Finnish parent creates Finnish citizenship. Birth in Finland alone to two foreign parents is not general jus soli.',
+        source: migri,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '246' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function estoniaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const act = requireSource(officialSources, OFFICIAL_URLS.estonia_citizenship_act);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '233',
+    note: 'Reviewed against the Estonian Citizenship Act. Naturalizers must renounce prior nationality. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [act] },
+      { mode: 'naturalization', finding: 'present', sources: [act] },
+      { mode: 'birth', finding: 'present', sources: [act], note: 'Parent Estonian; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [act], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'estonia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Estonian citizenship through an Estonian parent',
+        summary: 'A child of an Estonian citizen parent is Estonian under the Citizenship Act. Birth citizenship has different dual-nationality treatment than naturalization.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '233' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'estonia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after eight years residence',
+        summary: 'Adults generally need eight years residence on a permit or right of residence, Estonian language and civics knowledge, permanent residence, livelihood, and renunciation of prior nationality. Grant follows statutory conditions.',
+        source: act,
+        eligibility: [
+          { field: 'residence.legal_years', operator: 'gte', value: 8, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'estonia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Estonian parent',
+        summary: 'Birth to an Estonian parent creates Estonian citizenship. Birth in Estonia alone to two foreign parents is not general jus soli.',
+        source: act,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '233' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function latviaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const pmlp = requireSource(officialSources, OFFICIAL_URLS.latvia_naturalisation);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '428',
+    note: 'Reviewed against OCMA/PMLP naturalisation guidance. Dual nationality rules are limited and category-specific. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [pmlp] },
+      { mode: 'naturalization', finding: 'present', sources: [pmlp] },
+      { mode: 'birth', finding: 'present', sources: [pmlp], note: 'Parent Latvian; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [pmlp], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'latvia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Latvian citizenship through a Latvian parent',
+        summary: 'A child of a Latvian citizen parent is Latvian under the Citizenship Law. Separate registration routes exist for certain descendants of former citizens.',
+        source: pmlp,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '428' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'latvia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years permanent residence',
+        summary: 'From age 15, applicants generally need five years permanent residence in Latvia, Latvian language and civics knowledge, livelihood, and loyalty. Dual nationality is limited to statutory categories. Grant follows examination and decision.',
+        source: pmlp,
+        eligibility: [
+          { field: 'residence.permanent_years', operator: 'gte', value: 5, unit: 'years' },
+          { field: 'language.latvian', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'latvia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Latvian parent',
+        summary: 'Birth to a Latvian parent creates Latvian citizenship. Birth in Latvia alone to two foreign parents is not general jus soli.',
+        source: pmlp,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '428' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function lithuaniaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const migracija = requireSource(officialSources, OFFICIAL_URLS.lithuania_migracija);
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.lithuania_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '440',
+    note: 'Reviewed against Migration Department materials and Constitution. Naturalizers generally renounce prior nationality. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, migracija] },
+      { mode: 'naturalization', finding: 'present', sources: [migracija, constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Lithuanian; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [migracija], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'lithuania-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Lithuanian citizenship through a Lithuanian parent',
+        summary: 'A child of a Lithuanian citizen parent is Lithuanian. Separate restoration routes exist for pre-1940 citizens and their descendants.',
+        source: [constitution, migracija],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '440' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'lithuania-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after ten years permanent residence',
+        summary: 'Adults generally need ten years permanent legal residence (seven if married to a Lithuanian), permanent residence status, Lithuanian language and Constitution exams, livelihood, and renunciation of prior nationality after grant. Decision is discretionary.',
+        source: [migracija, constitution],
+        eligibility: [
+          { field: 'residence.permanent_years', operator: 'gte', value: 10, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'lithuania-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Lithuanian parent',
+        summary: 'Birth to a Lithuanian parent creates Lithuanian citizenship. Birth in Lithuania alone to two foreign parents is not general jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '440' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function croatiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const gov = requireSource(officialSources, OFFICIAL_URLS.croatia_citizenship);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '191',
+    note: 'Reviewed against gov.hr citizenship guidance. Ordinary residence naturalization generally requires renunciation. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [gov] },
+      { mode: 'naturalization', finding: 'present', sources: [gov] },
+      { mode: 'birth', finding: 'present', sources: [gov], note: 'Parent Croatian; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [gov], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'croatia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Croatian citizenship through a Croatian parent',
+        summary: 'A child of a Croatian citizen parent is Croatian. Separate naturalization tracks exist for emigrant descendants and affiliation with the Croatian nation.',
+        source: gov,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '191' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'croatia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after eight years residence',
+        summary: 'Ordinary residence naturalization generally needs eight years continuous registered residence with permanent residence status, Croatian language and culture knowledge, and usually renunciation of prior nationality. Separate tracks exist for marriage, emigrants, and national interest.',
+        source: gov,
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 8, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'croatia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Croatian parent',
+        summary: 'Birth to a Croatian parent creates Croatian citizenship. Birth in Croatia alone to two foreign parents is not general jus soli.',
+        source: gov,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '191' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function slovakiaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const mic = requireSource(officialSources, OFFICIAL_URLS.slovakia_naturalization);
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.slovakia_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '703',
+    note: 'Reviewed against IOM MIC naturalization guidance and Constitution. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution, mic] },
+      { mode: 'naturalization', finding: 'present', sources: [mic] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Slovak; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [mic], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'slovakia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Slovak citizenship through a Slovak parent',
+        summary: 'A child of a Slovak citizen parent is Slovak. Descent and restoration routes also cover certain Czechoslovak-line ancestors and former citizens.',
+        source: [constitution, mic],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '703' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'slovakia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after eight years permanent residence',
+        summary: 'Adults generally need eight years continuous permanent residence immediately before applying, Slovak language knowledge, livelihood, and good conduct. Shorter paths exist for spouses and some descent categories. Grant is discretionary.',
+        source: mic,
+        eligibility: [
+          { field: 'residence.permanent_years', operator: 'gte', value: 8, unit: 'years' },
+        ],
+        months: 96,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'slovakia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Slovak parent',
+        summary: 'Birth to a Slovak parent creates Slovak citizenship. Birth in Slovakia alone to two foreign parents is not general jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '703' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function luxembourgRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const guichet = requireSource(officialSources, OFFICIAL_URLS.luxembourg_naturalisation);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '442',
+    note: 'Reviewed against Guichet.lu nationality naturalisation guidance. Dual nationality generally allowed. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [guichet] },
+      { mode: 'naturalization', finding: 'present', sources: [guichet] },
+      { mode: 'birth', finding: 'present', sources: [guichet], note: 'Parent Luxembourgish or conditional birth rules; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [guichet], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'luxembourg-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Luxembourgish nationality through a Luxembourgish parent',
+        summary: 'A child of a Luxembourgish parent is Luxembourgish under the nationality law. Option and reclamation routes cover additional family and historical cases.',
+        source: guichet,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '442' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'luxembourg-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after five years residence',
+        summary: 'Adults with five years legal residence (final year uninterrupted), Luxembourgish language certificate, and the Living Together course or exam may apply. Good repute rules apply. Dual nationality is generally allowed.',
+        source: guichet,
+        eligibility: [
+          { field: 'residence.legal_years', operator: 'gte', value: 5, unit: 'years' },
+          { field: 'language.luxembourgish', operator: 'eq', value: true },
+        ],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'luxembourg-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Luxembourgish parent',
+        summary: 'Birth to a Luxembourgish parent creates Luxembourgish nationality. Birth in Luxembourg alone to two foreign parents is not unrestricted jus soli.',
+        source: guichet,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '442' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function monacoRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const portal = requireSource(officialSources, OFFICIAL_URLS.monaco_nationality);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '492',
+    note: 'Reviewed against Monaco mon service public nationality guidance. Naturalization requires renunciation and is discretionary. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [portal] },
+      { mode: 'naturalization', finding: 'present', sources: [portal] },
+      { mode: 'birth', finding: 'present', sources: [portal], note: 'Parent Monegasque; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [portal], note: 'Residence products are not citizenship.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'monaco-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Monegasque nationality through a Monegasque parent',
+        summary: 'A child of a Monegasque parent is Monegasque under nationality law, with detailed maternal and paternal transmission rules.',
+        source: portal,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '492' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'monaco-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after ten years residence',
+        summary: 'Adults with ordinary residence in Monaco for at least ten years after age eighteen may petition the Sovereign Prince. Naturalization is discretionary and requires renunciation of prior nationality and freedom from foreign military service obligations.',
+        source: portal,
+        eligibility: [
+          { field: 'residence.ordinary_years_after_majority', operator: 'gte', value: 10, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'monaco-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Monegasque parent',
+        summary: 'Birth to a Monegasque parent creates Monegasque nationality. Birth in Monaco alone to two foreign parents is not general jus soli.',
+        source: portal,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '492' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function liechtensteinRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const llv = requireSource(officialSources, OFFICIAL_URLS.liechtenstein_naturalization);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '438',
+    note: 'Reviewed against LLV naturalization guidance. Naturalization requires renunciation of prior nationality. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [llv] },
+      { mode: 'naturalization', finding: 'present', sources: [llv] },
+      { mode: 'birth', finding: 'present', sources: [llv], note: 'Parent Liechtenstein; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [llv], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'liechtenstein-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Liechtenstein citizenship through a Liechtenstein parent',
+        summary: 'A child of a Liechtenstein citizen parent is Liechtenstein under nationality law, subject to registration rules for birth abroad.',
+        source: llv,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '438' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'liechtenstein-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after long residence',
+        summary: 'Ordinary naturalization is highly discretionary and typically involves about ten years residence plus municipal approval. Facilitated naturalization after about thirty years residence (years under twenty count double) or marriage routes also exist. Renunciation of prior nationality is required.',
+        source: llv,
+        eligibility: [
+          { field: 'residence.years', operator: 'gte', value: 10, unit: 'years' },
+          { field: 'prior_nationality.renounced_or_will_cease', operator: 'eq', value: true },
+        ],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'liechtenstein-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Liechtenstein parent',
+        summary: 'Birth to a Liechtenstein parent creates Liechtenstein citizenship. Birth in Liechtenstein alone to two foreign parents is not general jus soli.',
+        source: llv,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '438' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
+function icelandRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const island = requireSource(officialSources, OFFICIAL_URLS.iceland_citizenship_when);
+  const government = requireSource(officialSources, OFFICIAL_URLS.iceland_government_citizenship);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '352',
+    note: 'Reviewed against Island.is and Government of Iceland citizenship guidance. Dual nationality generally allowed. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [government, island] },
+      { mode: 'naturalization', finding: 'present', sources: [island, government] },
+      { mode: 'birth', finding: 'present', sources: [government], note: 'Parent Icelandic; not general jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [government], note: 'No citizenship-by-investment.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'iceland-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Icelandic citizenship through an Icelandic parent',
+        summary: 'A child of an Icelandic citizen parent is Icelandic under the Nationality Act. Separate routes exist for children of citizens living in Iceland and for restoration.',
+        source: [government, island],
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '352' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'iceland-naturalization',
+        mode: 'naturalization',
+        title: 'Citizenship after seven years residence',
+        summary: 'Adults generally need seven years continuous legal domicile in Iceland, Icelandic language, self-support, and good conduct. Shorter periods apply for Nordic citizens, spouses, refugees, and other statutory categories. Dual nationality is generally allowed.',
+        source: [island, government],
+        eligibility: [
+          { field: 'residence.continuous_years', operator: 'gte', value: 7, unit: 'years' },
+        ],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-22',
+      }),
+      principalCitizenshipRoute({
+        id: 'iceland-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Icelandic parent',
+        summary: 'Birth to an Icelandic parent creates Icelandic citizenship. Birth in Iceland alone to two foreign parents is not general jus soli.',
+        source: government,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '352' }],
+        months: 0,
+        lastChecked: '2026-07-22',
+      }),
+    ],
+  });
+}
+
 function maltaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
   const guidance = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship);
   const act = requireSource(officialSources, OFFICIAL_URLS.malta_citizenship_act);
@@ -7488,12 +8027,15 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     caymanIslandsRecord(shadow, countrySources),
     chileRecord(shadow, countrySources),
     colombiaRecord(shadow, countrySources),
+    croatiaRecord(shadow, countrySources),
     cyprusRecord(shadow, countrySources),
     czechiaRecord(shadow, countrySources),
     denmarkRecord(shadow, countrySources),
     dominicaRecord(shadow, countrySources),
     ecuadorRecord(shadow, countrySources),
     egyptRecord(shadow, countrySources),
+    estoniaRecord(shadow, countrySources),
+    finlandRecord(shadow, countrySources),
     franceRecord(shadow, countrySources),
     georgiaRecord(shadow, countrySources),
     germanyRecord(shadow, countrySources),
@@ -7501,6 +8043,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     grenadaRecord(shadow, countrySources),
     greeceRecord(shadow, countrySources),
     hungaryRecord(shadow, countrySources),
+    icelandRecord(shadow, countrySources),
     indiaRecord(shadow, countrySources),
     indonesiaRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
@@ -7510,10 +8053,15 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     jordanRecord(shadow, countrySources),
     kenyaRecord(shadow, countrySources),
     koreaRecord(shadow, countrySources),
+    latviaRecord(shadow, countrySources),
+    liechtensteinRecord(shadow, countrySources),
+    lithuaniaRecord(shadow, countrySources),
+    luxembourgRecord(shadow, countrySources),
     malaysiaRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
     mauritiusRecord(shadow, countrySources),
     mexicoRecord(shadow, countrySources),
+    monacoRecord(shadow, countrySources),
     moroccoRecord(shadow, countrySources),
     nauruRecord(shadow, countrySources),
     netherlandsRecord(shadow, countrySources),
@@ -7534,6 +8082,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     stKittsNevisRecord(shadow, countrySources),
     serbiaRecord(shadow, countrySources),
     singaporeRecord(shadow, countrySources),
+    slovakiaRecord(shadow, countrySources),
     southAfricaRecord(shadow, countrySources),
     spainRecord(shadow, countrySources),
     swedenRecord(shadow, countrySources),

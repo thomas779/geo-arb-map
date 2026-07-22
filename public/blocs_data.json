@@ -2807,6 +2807,41 @@
         "sources": [
           "Austrian Citizenship Act / migration.gv.at"
         ]
+      },
+      "191": {
+        "status": "banned",
+        "note": "Croatia: ordinary residence naturalization generally requires renunciation of prior nationality (exceptions for emigrant and some other tracks).",
+        "sources": [
+          "Croatian Citizenship Act / gov.hr"
+        ]
+      },
+      "233": {
+        "status": "banned",
+        "note": "Estonia: naturalizers may not retain another nationality; birth citizens have different dual-nationality treatment.",
+        "sources": [
+          "Estonian Citizenship Act"
+        ]
+      },
+      "438": {
+        "status": "banned",
+        "note": "Liechtenstein: naturalization requires renouncing prior nationality (asymmetric dual rules for birth citizens).",
+        "sources": [
+          "Liechtenstein naturalization / LLV"
+        ]
+      },
+      "440": {
+        "status": "banned",
+        "note": "Lithuania: naturalizers must renounce prior nationality after grant.",
+        "sources": [
+          "Law on Citizenship / Migration Department"
+        ]
+      },
+      "492": {
+        "status": "banned",
+        "note": "Monaco: naturalization requires renunciation of previous nationality.",
+        "sources": [
+          "Monaco mon service public nationality guidance"
+        ]
       }
     },
     "treaty_exceptions": [

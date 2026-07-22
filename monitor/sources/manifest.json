@@ -1406,6 +1406,128 @@
       ],
       "keywords": ["nationality", "citizenship", "Andorra", "residence"],
       "notes": "Government portal plus Constitution. Long naturalization path; renunciation required."
+    },
+    {
+      "id": "finland-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://migri.fi/en/finnish-citizenship",
+      "jurisdictions": ["246"],
+      "pages": [
+        { "id": "finnish-citizenship", "url": "https://migri.fi/en/finnish-citizenship" },
+        { "id": "period-of-residence", "url": "https://migri.fi/en/period-of-residence" }
+      ],
+      "keywords": ["citizenship", "residence", "Finnish", "naturalisation", "eight years"],
+      "notes": "Migri citizenship hub after the October 2024 residence reform."
+    },
+    {
+      "id": "estonia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide",
+      "jurisdictions": ["233"],
+      "pages": [{ "id": "citizenship-act", "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide" }],
+      "keywords": ["citizenship", "naturalisation", "Estonian", "residence", "eight years"],
+      "notes": "Estonian Citizenship Act consolidation. Naturalizers renounce prior nationality."
+    },
+    {
+      "id": "latvia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.pmlp.gov.lv/en/naturalisation",
+      "jurisdictions": ["428"],
+      "pages": [{ "id": "naturalisation", "url": "https://www.pmlp.gov.lv/en/naturalisation" }],
+      "keywords": ["naturalisation", "citizenship", "Latvian", "permanent residence"],
+      "notes": "OCMA/PMLP naturalisation guidance."
+    },
+    {
+      "id": "lithuania-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.migracija.lt/home?lang=en",
+      "jurisdictions": ["440"],
+      "pages": [
+        { "id": "migracija", "url": "https://www.migracija.lt/home?lang=en" },
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Lithuania_2019" }
+      ],
+      "keywords": ["citizenship", "naturalisation", "Lithuanian", "permanent residence"],
+      "notes": "Migration Department plus Constitution. Ten-year ordinary path; renunciation required."
+    },
+    {
+      "id": "croatia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://gov.hr/en/acquiring-croatian-citizenship/460",
+      "jurisdictions": ["191"],
+      "pages": [{ "id": "acquiring", "url": "https://gov.hr/en/acquiring-croatian-citizenship/460" }],
+      "keywords": ["citizenship", "naturalization", "Croatian", "residence"],
+      "notes": "gov.hr citizenship acquisition guidance. Ordinary residence path generally requires renunciation."
+    },
+    {
+      "id": "slovakia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html",
+      "jurisdictions": ["703"],
+      "pages": [
+        { "id": "naturalization", "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html" },
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Slovakia_2017" }
+      ],
+      "keywords": ["citizenship", "naturalization", "Slovak", "permanent residence"],
+      "notes": "IOM Migration Information Centre naturalization conditions plus Constitution."
+    },
+    {
+      "id": "luxembourg-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html",
+      "jurisdictions": ["442"],
+      "pages": [{ "id": "naturalisation", "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html" }],
+      "keywords": ["nationality", "naturalisation", "Luxembourgish", "residence"],
+      "notes": "Guichet.lu naturalisation procedure. Five-year residence plus language and living-together requirements."
+    },
+    {
+      "id": "monaco-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality",
+      "jurisdictions": ["492"],
+      "pages": [{ "id": "acquiring", "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality" }],
+      "keywords": ["nationality", "naturalisation", "Monegasque", "residence", "renunciation"],
+      "notes": "Official Monaco nationality acquisition page. Ten years after majority; renunciation required."
+    },
+    {
+      "id": "liechtenstein-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization",
+      "jurisdictions": ["438"],
+      "pages": [{ "id": "naturalization", "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization" }],
+      "keywords": ["naturalization", "citizenship", "Liechtenstein", "residence"],
+      "notes": "LLV naturalization hub. Ordinary path is discretionary; renunciation required."
+    },
+    {
+      "id": "iceland-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply",
+      "jurisdictions": ["352"],
+      "pages": [
+        { "id": "when-can-i-apply", "url": "https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply" },
+        { "id": "government-citizenship", "url": "https://www.government.is/topics/foreign-nationals/citizenship/" }
+      ],
+      "keywords": ["citizenship", "Icelandic", "residence", "seven years"],
+      "notes": "Island.is Directorate of Immigration residence rules plus government citizenship overview."
     }
   ]
 }

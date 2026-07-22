@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 242,
+      "routes": 272,
       "by_mode": {
-        "ancestry": 74,
-        "naturalization": 76,
-        "birth": 74,
+        "ancestry": 84,
+        "naturalization": 86,
+        "birth": 84,
         "investment": 18
       },
       "by_status": {
-        "active": 236,
+        "active": 266,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -710,12 +710,16 @@
       "name": "Croatia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "croatia-citizenship-by-parent",
+        "croatia-naturalization",
+        "croatia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "192",
@@ -887,12 +891,16 @@
       "name": "Estonia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "estonia-citizenship-by-parent",
+        "estonia-naturalization",
+        "estonia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "234",
@@ -947,12 +955,16 @@
       "name": "Finland",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "finland-citizenship-by-parent",
+        "finland-naturalization",
+        "finland-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "248",
@@ -1300,12 +1312,16 @@
       "name": "Iceland",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "iceland-citizenship-by-parent",
+        "iceland-naturalization",
+        "iceland-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "356",
@@ -1589,12 +1605,16 @@
       "name": "Latvia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "latvia-citizenship-by-parent",
+        "latvia-naturalization",
+        "latvia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "430",
@@ -1625,36 +1645,48 @@
       "name": "Liechtenstein",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "liechtenstein-citizenship-by-parent",
+        "liechtenstein-naturalization",
+        "liechtenstein-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "440",
       "name": "Lithuania",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "lithuania-citizenship-by-parent",
+        "lithuania-naturalization",
+        "lithuania-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "442",
       "name": "Luxembourg",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "luxembourg-citizenship-by-parent",
+        "luxembourg-naturalization",
+        "luxembourg-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "446",
@@ -1799,12 +1831,16 @@
       "name": "Monaco",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "monaco-citizenship-by-parent",
+        "monaco-naturalization",
+        "monaco-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "496",
@@ -2613,12 +2649,16 @@
       "name": "Slovakia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "slovakia-citizenship-by-parent",
+        "slovakia-naturalization",
+        "slovakia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "704",
@@ -5345,6 +5385,111 @@
       ]
     },
     {
+      "id": "croatia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "191",
+        "name": "Croatia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Croatian parent",
+      "summary": "Birth to a Croatian parent creates Croatian citizenship. Birth in Croatia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "croatia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Croatian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Croatia gov.hr - acquiring Croatian citizenship",
+          "url": "https://gov.hr/en/acquiring-croatian-citizenship/460"
+        }
+      ]
+    },
+    {
+      "id": "croatia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "191",
+        "name": "Croatia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Croatian citizenship through a Croatian parent",
+      "summary": "A child of a Croatian citizen parent is Croatian. Separate naturalization tracks exist for emigrant descendants and affiliation with the Croatian nation.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "croatia-citizenship-by-parent-principal",
+          "label": "Croatian citizenship through a Croatian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Croatia gov.hr - acquiring Croatian citizenship",
+          "url": "https://gov.hr/en/acquiring-croatian-citizenship/460"
+        }
+      ]
+    },
+    {
+      "id": "croatia-naturalization",
+      "country": {
+        "iso_n3": "191",
+        "name": "Croatia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after eight years residence",
+      "summary": "Ordinary residence naturalization generally needs eight years continuous registered residence with permanent residence status, Croatian language and culture knowledge, and usually renunciation of prior nationality. Separate tracks exist for marriage, emigrants, and national interest.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "croatia-naturalization-principal",
+          "label": "Naturalization after eight years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Croatia gov.hr - acquiring Croatian citizenship",
+          "url": "https://gov.hr/en/acquiring-croatian-citizenship/460"
+        }
+      ]
+    },
+    {
       "id": "cyprus-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "196",
@@ -5912,6 +6057,220 @@
         {
           "title": "Ecuador 2021 Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Ecuador_2021"
+        }
+      ]
+    },
+    {
+      "id": "estonia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "233",
+        "name": "Estonia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Estonian parent",
+      "summary": "Birth to an Estonian parent creates Estonian citizenship. Birth in Estonia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "estonia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Estonian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Estonia Citizenship Act (Riigi Teataja)",
+          "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide"
+        }
+      ]
+    },
+    {
+      "id": "estonia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "233",
+        "name": "Estonia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Estonian citizenship through an Estonian parent",
+      "summary": "A child of an Estonian citizen parent is Estonian under the Citizenship Act. Birth citizenship has different dual-nationality treatment than naturalization.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "estonia-citizenship-by-parent-principal",
+          "label": "Estonian citizenship through an Estonian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Estonia Citizenship Act (Riigi Teataja)",
+          "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide"
+        }
+      ]
+    },
+    {
+      "id": "estonia-naturalization",
+      "country": {
+        "iso_n3": "233",
+        "name": "Estonia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after eight years residence",
+      "summary": "Adults generally need eight years residence on a permit or right of residence, Estonian language and civics knowledge, permanent residence, livelihood, and renunciation of prior nationality. Grant follows statutory conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "estonia-naturalization-principal",
+          "label": "Naturalization after eight years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Estonia Citizenship Act (Riigi Teataja)",
+          "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide"
+        }
+      ]
+    },
+    {
+      "id": "finland-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "246",
+        "name": "Finland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Finnish parent",
+      "summary": "Birth to a Finnish parent creates Finnish citizenship. Birth in Finland alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "finland-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Finnish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Finnish Immigration Service - Finnish citizenship",
+          "url": "https://migri.fi/en/finnish-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "finland-citizenship-by-parent",
+      "country": {
+        "iso_n3": "246",
+        "name": "Finland"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Finnish citizenship through a Finnish parent",
+      "summary": "A child of a Finnish citizen parent is Finnish under the Citizenship Act. Declaration routes also exist for former citizens and certain Nordic cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "finland-citizenship-by-parent-principal",
+          "label": "Finnish citizenship through a Finnish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Finnish Immigration Service - Finnish citizenship",
+          "url": "https://migri.fi/en/finnish-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "finland-naturalization",
+      "country": {
+        "iso_n3": "246",
+        "name": "Finland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship after eight years residence",
+      "summary": "Adults generally need eight years legal residence in Finland. Five years can suffice with the required language skills, a Finnish spouse, or statelessness. Dual nationality is generally allowed. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "finland-naturalization-principal",
+          "label": "Citizenship after eight years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Finnish Immigration Service - Finnish citizenship",
+          "url": "https://migri.fi/en/finnish-citizenship"
+        },
+        {
+          "title": "Finnish Immigration Service - period of residence",
+          "url": "https://migri.fi/en/period-of-residence"
         }
       ]
     },
@@ -6815,6 +7174,119 @@
         {
           "title": "Hungary Government — acquisition of Hungarian nationality",
           "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality"
+        }
+      ]
+    },
+    {
+      "id": "iceland-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "352",
+        "name": "Iceland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Icelandic parent",
+      "summary": "Birth to an Icelandic parent creates Icelandic citizenship. Birth in Iceland alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "iceland-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Icelandic parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Government of Iceland - citizenship",
+          "url": "https://www.government.is/topics/foreign-nationals/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "iceland-citizenship-by-parent",
+      "country": {
+        "iso_n3": "352",
+        "name": "Iceland"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Icelandic citizenship through an Icelandic parent",
+      "summary": "A child of an Icelandic citizen parent is Icelandic under the Nationality Act. Separate routes exist for children of citizens living in Iceland and for restoration.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "iceland-citizenship-by-parent-principal",
+          "label": "Icelandic citizenship through an Icelandic parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Government of Iceland - citizenship",
+          "url": "https://www.government.is/topics/foreign-nationals/citizenship/"
+        },
+        {
+          "title": "Island.is - Icelandic citizenship residence length",
+          "url": "https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply"
+        }
+      ]
+    },
+    {
+      "id": "iceland-naturalization",
+      "country": {
+        "iso_n3": "352",
+        "name": "Iceland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship after seven years residence",
+      "summary": "Adults generally need seven years continuous legal domicile in Iceland, Icelandic language, self-support, and good conduct. Shorter periods apply for Nordic citizens, spouses, refugees, and other statutory categories. Dual nationality is generally allowed.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "iceland-naturalization-principal",
+          "label": "Citizenship after seven years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Island.is - Icelandic citizenship residence length",
+          "url": "https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply"
+        },
+        {
+          "title": "Government of Iceland - citizenship",
+          "url": "https://www.government.is/topics/foreign-nationals/citizenship/"
         }
       ]
     },
@@ -7884,6 +8356,434 @@
       ]
     },
     {
+      "id": "latvia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "428",
+        "name": "Latvia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Latvian parent",
+      "summary": "Birth to a Latvian parent creates Latvian citizenship. Birth in Latvia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "latvia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Latvian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Latvia OCMA/PMLP - naturalisation",
+          "url": "https://www.pmlp.gov.lv/en/naturalisation"
+        }
+      ]
+    },
+    {
+      "id": "latvia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "428",
+        "name": "Latvia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Latvian citizenship through a Latvian parent",
+      "summary": "A child of a Latvian citizen parent is Latvian under the Citizenship Law. Separate registration routes exist for certain descendants of former citizens.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "latvia-citizenship-by-parent-principal",
+          "label": "Latvian citizenship through a Latvian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Latvia OCMA/PMLP - naturalisation",
+          "url": "https://www.pmlp.gov.lv/en/naturalisation"
+        }
+      ]
+    },
+    {
+      "id": "latvia-naturalization",
+      "country": {
+        "iso_n3": "428",
+        "name": "Latvia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years permanent residence",
+      "summary": "From age 15, applicants generally need five years permanent residence in Latvia, Latvian language and civics knowledge, livelihood, and loyalty. Dual nationality is limited to statutory categories. Grant follows examination and decision.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "latvia-naturalization-principal",
+          "label": "Naturalization after five years permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Latvia OCMA/PMLP - naturalisation",
+          "url": "https://www.pmlp.gov.lv/en/naturalisation"
+        }
+      ]
+    },
+    {
+      "id": "liechtenstein-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "438",
+        "name": "Liechtenstein"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Liechtenstein parent",
+      "summary": "Birth to a Liechtenstein parent creates Liechtenstein citizenship. Birth in Liechtenstein alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "liechtenstein-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Liechtenstein parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Liechtenstein National Administration - naturalization",
+          "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization"
+        }
+      ]
+    },
+    {
+      "id": "liechtenstein-citizenship-by-parent",
+      "country": {
+        "iso_n3": "438",
+        "name": "Liechtenstein"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Liechtenstein citizenship through a Liechtenstein parent",
+      "summary": "A child of a Liechtenstein citizen parent is Liechtenstein under nationality law, subject to registration rules for birth abroad.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "liechtenstein-citizenship-by-parent-principal",
+          "label": "Liechtenstein citizenship through a Liechtenstein parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Liechtenstein National Administration - naturalization",
+          "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization"
+        }
+      ]
+    },
+    {
+      "id": "liechtenstein-naturalization",
+      "country": {
+        "iso_n3": "438",
+        "name": "Liechtenstein"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after long residence",
+      "summary": "Ordinary naturalization is highly discretionary and typically involves about ten years residence plus municipal approval. Facilitated naturalization after about thirty years residence (years under twenty count double) or marriage routes also exist. Renunciation of prior nationality is required.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "liechtenstein-naturalization-principal",
+          "label": "Naturalization after long residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Liechtenstein National Administration - naturalization",
+          "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization"
+        }
+      ]
+    },
+    {
+      "id": "lithuania-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "440",
+        "name": "Lithuania"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Lithuanian parent",
+      "summary": "Birth to a Lithuanian parent creates Lithuanian citizenship. Birth in Lithuania alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "lithuania-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Lithuanian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Lithuania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lithuania_2019"
+        }
+      ]
+    },
+    {
+      "id": "lithuania-citizenship-by-parent",
+      "country": {
+        "iso_n3": "440",
+        "name": "Lithuania"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Lithuanian citizenship through a Lithuanian parent",
+      "summary": "A child of a Lithuanian citizen parent is Lithuanian. Separate restoration routes exist for pre-1940 citizens and their descendants.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "lithuania-citizenship-by-parent-principal",
+          "label": "Lithuanian citizenship through a Lithuanian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Lithuania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lithuania_2019"
+        },
+        {
+          "title": "Lithuania Migration Department",
+          "url": "https://www.migracija.lt/home?lang=en"
+        }
+      ]
+    },
+    {
+      "id": "lithuania-naturalization",
+      "country": {
+        "iso_n3": "440",
+        "name": "Lithuania"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after ten years permanent residence",
+      "summary": "Adults generally need ten years permanent legal residence (seven if married to a Lithuanian), permanent residence status, Lithuanian language and Constitution exams, livelihood, and renunciation of prior nationality after grant. Decision is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "lithuania-naturalization-principal",
+          "label": "Naturalization after ten years permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Lithuania Migration Department",
+          "url": "https://www.migracija.lt/home?lang=en"
+        },
+        {
+          "title": "Lithuania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lithuania_2019"
+        }
+      ]
+    },
+    {
+      "id": "luxembourg-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "442",
+        "name": "Luxembourg"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Luxembourgish parent",
+      "summary": "Birth to a Luxembourgish parent creates Luxembourgish nationality. Birth in Luxembourg alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "luxembourg-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Luxembourgish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Luxembourg Guichet - naturalisation",
+          "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html"
+        }
+      ]
+    },
+    {
+      "id": "luxembourg-citizenship-by-parent",
+      "country": {
+        "iso_n3": "442",
+        "name": "Luxembourg"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Luxembourgish nationality through a Luxembourgish parent",
+      "summary": "A child of a Luxembourgish parent is Luxembourgish under the nationality law. Option and reclamation routes cover additional family and historical cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "luxembourg-citizenship-by-parent-principal",
+          "label": "Luxembourgish nationality through a Luxembourgish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Luxembourg Guichet - naturalisation",
+          "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html"
+        }
+      ]
+    },
+    {
+      "id": "luxembourg-naturalization",
+      "country": {
+        "iso_n3": "442",
+        "name": "Luxembourg"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five years residence",
+      "summary": "Adults with five years legal residence (final year uninterrupted), Luxembourgish language certificate, and the Living Together course or exam may apply. Good repute rules apply. Dual nationality is generally allowed.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "luxembourg-naturalization-principal",
+          "label": "Naturalization after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Luxembourg Guichet - naturalisation",
+          "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html"
+        }
+      ]
+    },
+    {
       "id": "malaysia-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "458",
@@ -8425,6 +9325,111 @@
         {
           "title": "Mexico INM — permanent residence through family relationship",
           "url": "https://www.inm.gob.mx/static/Tramites/cambio_de_condicion_estancia/Residente_permanente_por_vinculo_familiar.pdf"
+        }
+      ]
+    },
+    {
+      "id": "monaco-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "492",
+        "name": "Monaco"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Monegasque parent",
+      "summary": "Birth to a Monegasque parent creates Monegasque nationality. Birth in Monaco alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "monaco-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Monegasque parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Monaco mon service public - acquiring nationality",
+          "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality"
+        }
+      ]
+    },
+    {
+      "id": "monaco-citizenship-by-parent",
+      "country": {
+        "iso_n3": "492",
+        "name": "Monaco"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Monegasque nationality through a Monegasque parent",
+      "summary": "A child of a Monegasque parent is Monegasque under nationality law, with detailed maternal and paternal transmission rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "monaco-citizenship-by-parent-principal",
+          "label": "Monegasque nationality through a Monegasque parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Monaco mon service public - acquiring nationality",
+          "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality"
+        }
+      ]
+    },
+    {
+      "id": "monaco-naturalization",
+      "country": {
+        "iso_n3": "492",
+        "name": "Monaco"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after ten years residence",
+      "summary": "Adults with ordinary residence in Monaco for at least ten years after age eighteen may petition the Sovereign Prince. Naturalization is discretionary and requires renunciation of prior nationality and freedom from foreign military service obligations.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "monaco-naturalization-principal",
+          "label": "Naturalization after ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Monaco mon service public - acquiring nationality",
+          "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality"
         }
       ]
     },
@@ -10804,6 +11809,115 @@
         {
           "title": "Singapore ICA — Becoming a Singapore citizen",
           "url": "https://www.ica.gov.sg/reside/citizenship"
+        }
+      ]
+    },
+    {
+      "id": "slovakia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "703",
+        "name": "Slovakia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Slovak parent",
+      "summary": "Birth to a Slovak parent creates Slovak citizenship. Birth in Slovakia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "slovakia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Slovak parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Slovakia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Slovakia_2017"
+        }
+      ]
+    },
+    {
+      "id": "slovakia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "703",
+        "name": "Slovakia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Slovak citizenship through a Slovak parent",
+      "summary": "A child of a Slovak citizen parent is Slovak. Descent and restoration routes also cover certain Czechoslovak-line ancestors and former citizens.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "slovakia-citizenship-by-parent-principal",
+          "label": "Slovak citizenship through a Slovak parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Slovakia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Slovakia_2017"
+        },
+        {
+          "title": "Slovakia IOM MIC - naturalization conditions",
+          "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html"
+        }
+      ]
+    },
+    {
+      "id": "slovakia-naturalization",
+      "country": {
+        "iso_n3": "703",
+        "name": "Slovakia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after eight years permanent residence",
+      "summary": "Adults generally need eight years continuous permanent residence immediately before applying, Slovak language knowledge, livelihood, and good conduct. Shorter paths exist for spouses and some descent categories. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "slovakia-naturalization-principal",
+          "label": "Naturalization after eight years permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Slovakia IOM MIC - naturalization conditions",
+          "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html"
         }
       ]
     },
