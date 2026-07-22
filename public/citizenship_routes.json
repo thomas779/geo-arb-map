@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 173,
+      "routes": 185,
       "by_mode": {
-        "ancestry": 51,
-        "naturalization": 53,
-        "birth": 51,
+        "ancestry": 55,
+        "naturalization": 57,
+        "birth": 55,
         "investment": 18
       },
       "by_status": {
-        "active": 167,
+        "active": 179,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -596,14 +596,18 @@
     {
       "iso_n3": "158",
       "name": "Taiwan",
-      "type": "territory",
+      "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "taiwan-citizenship-by-parent",
+        "taiwan-naturalization",
+        "taiwan-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "170",
@@ -1285,12 +1289,16 @@
       "name": "Indonesia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "indonesia-citizenship-by-parent",
+        "indonesia-naturalization",
+        "indonesia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "364",
@@ -2014,12 +2022,16 @@
       "name": "Nigeria",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "nigeria-citizenship-by-parent",
+        "nigeria-naturalization",
+        "nigeria-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "570",
@@ -2742,12 +2754,16 @@
       "name": "Thailand",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "thailand-citizenship-by-parent",
+        "thailand-naturalization",
+        "thailand-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "768",
@@ -4428,6 +4444,112 @@
       ]
     },
     {
+      "id": "taiwan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a R.O.C. parent or foundling rule",
+      "summary": "A person born to a R.O.C. national parent is a R.O.C. national at birth. A person born in the territory whose parents cannot be ascertained or were both stateless is also a national. Birth in Taiwan alone to identified foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "taiwan-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a R.O.C. parent or foundling rule",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Taiwan (R.O.C.) Nationality Act — Laws & Regulations Database",
+          "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001"
+        }
+      ]
+    },
+    {
+      "id": "taiwan-citizenship-by-parent",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "R.O.C. nationality through a R.O.C. parent",
+      "summary": "A person has R.O.C. nationality if the father or mother was a R.O.C. national at the time of birth, or if a parent died before the birth while a R.O.C. national. Restoration routes exist for persons who previously lost nationality under the Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "taiwan-citizenship-by-parent-principal",
+          "label": "R.O.C. nationality through a R.O.C. parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Taiwan (R.O.C.) Nationality Act — Laws & Regulations Database",
+          "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001"
+        }
+      ]
+    },
+    {
+      "id": "taiwan-naturalization",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after consecutive legal residence",
+      "summary": "A foreign national or stateless person domiciled in the R.O.C. may apply for naturalization after legally residing more than 183 days each year for at least five consecutive years, with capacity, good conduct, livelihood, and basic national-language and civic knowledge. Shorter three-year floors apply for spouses, certain family ties, persons born in the territory, and other Article 4 categories. Permission is granted by the Ministry of the Interior; eligibility is not an entitlement.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "taiwan-naturalization-principal",
+          "label": "Naturalization after consecutive legal residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Article 9 generally requires a certificate of loss of original nationality within one year of naturalization permission, with exemptions for high-level professionals, special contribution, and cases where loss is impossible for reasons not attributable to the applicant."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Taiwan (R.O.C.) Nationality Act — Laws & Regulations Database",
+          "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001"
+        }
+      ]
+    },
+    {
       "id": "colombia-citizenship-by-conditional-birth",
       "country": {
         "iso_n3": "170",
@@ -5634,6 +5756,116 @@
         {
           "title": "Hungary Government — acquisition of Hungarian nationality",
           "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality"
+        }
+      ]
+    },
+    {
+      "id": "indonesia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Indonesian parent",
+      "summary": "A person born to an Indonesian citizen parent acquires Indonesian citizenship under Law No. 12 of 2006. Birth in Indonesia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "indonesia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Indonesian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Indonesia Law No. 12 of 2006 on Citizenship (English text)",
+          "url": "https://www.ecoi.net/en/file/local/1170232/1504_1217488313_law-of-the-republic-of-indonesia-no-12-on-citizenship-of-the-republic-of-indonesia.pdf"
+        }
+      ]
+    },
+    {
+      "id": "indonesia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship through an Indonesian parent",
+      "summary": "A child acquires Indonesian citizenship when a parent is an Indonesian citizen under the lineage rules of Law No. 12 of 2006, including specified mixed-nationality and acknowledgment situations. Limited dual citizenship for children ends when the child must choose nationality at majority or marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "indonesia-citizenship-by-parent-principal",
+          "label": "Citizenship through an Indonesian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Indonesia Law No. 12 of 2006 on Citizenship (English text)",
+          "url": "https://www.ecoi.net/en/file/local/1170232/1504_1217488313_law-of-the-republic-of-indonesia-no-12-on-citizenship-of-the-republic-of-indonesia.pdf"
+        }
+      ]
+    },
+    {
+      "id": "indonesia-naturalization",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after five consecutive or ten intermittent years",
+      "summary": "A foreign adult (or married applicant) may request naturalization after residing in Indonesian territory for at least five consecutive years or at least ten years intermittently, with capacity, Indonesian language ability, acceptance of Pancasila and the Constitution, good health, no serious criminal conviction, livelihood, payment of the statutory fee, and no dual citizenship upon becoming Indonesian. Approval is discretionary at the presidential level after ministerial process.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "indonesia-naturalization-principal",
+          "label": "Naturalization after five consecutive or ten intermittent years",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "The five-year consecutive floor is the ordinary continuous path; the ten-year intermittent alternative is statutory. Special contribution naturalization under Article 20 is exceptional and not modeled as CBI."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Indonesia Law No. 12 of 2006 on Citizenship (English text)",
+          "url": "https://www.ecoi.net/en/file/local/1170232/1504_1217488313_law-of-the-republic-of-indonesia-no-12-on-citizenship-of-the-republic-of-indonesia.pdf"
+        },
+        {
+          "title": "Direktorat Jenderal Imigrasi — official portal",
+          "url": "https://www.imigrasi.go.id/"
         }
       ]
     },
@@ -7337,6 +7569,129 @@
       ]
     },
     {
+      "id": "nigeria-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "566",
+        "name": "Nigeria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Nigerian parent or grandparent rules",
+      "summary": "A person born outside Nigeria either of whose parents is a citizen of Nigeria is a citizen by birth. Birth in Nigeria after independence with a citizen parent or grandparent also creates citizenship by birth under section 25. Birth in Nigeria alone to two foreign parents without qualifying lineage is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nigeria-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Nigerian parent or grandparent rules",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nigeria Constitution 1999 — Chapter III Citizenship (published text)",
+          "url": "https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/"
+        },
+        {
+          "title": "Constitute Project — Constitution of Nigeria 1999 (as amended)",
+          "url": "https://www.constituteproject.org/constitution/Nigeria_2011"
+        }
+      ]
+    },
+    {
+      "id": "nigeria-citizenship-by-parent",
+      "country": {
+        "iso_n3": "566",
+        "name": "Nigeria"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Citizenship by birth through a Nigerian parent",
+      "summary": "Under section 25 of the 1999 Constitution, a person is a citizen of Nigeria by birth if born outside Nigeria to a Nigerian citizen parent, or if born in Nigeria after independence to a parent or grandparent who is a citizen, subject to the indigenous-community and historical rules for pre-independence births.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nigeria-citizenship-by-parent-principal",
+          "label": "Citizenship by birth through a Nigerian parent",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Registration under section 26 is a separate discretionary channel for certain spouses and persons of Nigerian origin and is not collapsed into ordinary naturalization."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nigeria Constitution 1999 — Chapter III Citizenship (published text)",
+          "url": "https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/"
+        },
+        {
+          "title": "Constitute Project — Constitution of Nigeria 1999 (as amended)",
+          "url": "https://www.constituteproject.org/constitution/Nigeria_2011"
+        }
+      ]
+    },
+    {
+      "id": "nigeria-naturalization",
+      "country": {
+        "iso_n3": "566",
+        "name": "Nigeria"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after fifteen years continuous residence",
+      "summary": "Section 27 of the 1999 Constitution allows the President to grant a certificate of naturalization to a person who satisfies the constitutional qualifications, including continuous residence in Nigeria for a period of fifteen years, majority, good character, intention to reside, community acceptability, and capacity to make a useful contribution. Section 28 requires renunciation of other nationalities except citizenship of a country acquired by birth. The Ministry of Interior administers applications; grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          180
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "nigeria-naturalization-principal",
+          "label": "Naturalization after fifteen years continuous residence",
+          "allocation": "discretionary",
+          "eligibility_months": 180,
+          "note": "Interior guidance lists documentary requirements for naturalization under section 27. Registration under section 26 (including certain spouses) uses different constitutional criteria and is not modeled as a separate principal route here."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nigeria Constitution 1999 — Chapter III Citizenship (published text)",
+          "url": "https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/"
+        },
+        {
+          "title": "Nigeria Ministry of Interior — Citizenship requirements PDF",
+          "url": "https://candb.interior.gov.ng/wp-content/uploads/2025/05/CB-Citizenship-Requirements.pdf"
+        },
+        {
+          "title": "Constitute Project — Constitution of Nigeria 1999 (as amended)",
+          "url": "https://www.constituteproject.org/constitution/Nigeria_2011"
+        }
+      ]
+    },
+    {
       "id": "panama-family-naturalization",
       "country": {
         "iso_n3": "591",
@@ -8996,6 +9351,112 @@
         {
           "title": "Swiss SEM — Acquiring Swiss citizenship",
           "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html"
+        }
+      ]
+    },
+    {
+      "id": "thailand-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "764",
+        "name": "Thailand"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Thai parent",
+      "summary": "A person born to a Thai national parent is a Thai national at birth under the Nationality Act. Birth in Thailand alone to two foreign parents is not unconditional jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "thailand-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Thai parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Thailand Nationality Act B.E. 2508 (amended; UNHCR English text)",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733"
+        }
+      ]
+    },
+    {
+      "id": "thailand-citizenship-by-parent",
+      "country": {
+        "iso_n3": "764",
+        "name": "Thailand"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Thai nationality through a Thai parent",
+      "summary": "A person acquires Thai nationality by birth when a parent is a Thai national under the Nationality Act lineage rules, including specified transmission through a Thai father or mother and related acknowledgment situations.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "thailand-citizenship-by-parent-principal",
+          "label": "Thai nationality through a Thai parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Thailand Nationality Act B.E. 2508 (amended; UNHCR English text)",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733"
+        }
+      ]
+    },
+    {
+      "id": "thailand-naturalization",
+      "country": {
+        "iso_n3": "764",
+        "name": "Thailand"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization with ministerial and Cabinet approval",
+      "summary": "A foreigner may be naturalized as a Thai national with permission of the Minister of Interior and Cabinet approval after meeting the statutory conditions of the Nationality Act, which ordinarily include majority and capacity, good conduct, lawful occupation, knowledge of Thai sufficient for communication, and domicile in Thailand for not less than five consecutive years under a permanent-residence qualification, unless a shorter statutory path applies (for example certain spouses of Thai nationals). Naturalization remains highly discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "thailand-naturalization-principal",
+          "label": "Naturalization with ministerial and Cabinet approval",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Permanent residence is itself discretionary and quota-limited. Marriage to a Thai national may shorten residence floors but does not create automatic citizenship."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Thailand Nationality Act B.E. 2508 (amended; UNHCR English text)",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733"
         }
       ]
     },
