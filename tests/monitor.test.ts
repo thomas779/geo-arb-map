@@ -445,7 +445,7 @@ describe('AI sweep + grounded verify', () => {
       category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: [],
     };
     const post = buildNewsPost(finding);
-    expect(post.text).toContain('🇲🇹 MALTA — Malta ends golden passports');
+    expect(post.text).toContain('🇲🇹 Malta — Malta ends golden passports');
     expect(post.text).toContain('https://komunita.gov.mt/x');
     expect(post.text).toContain('Information only');
     expect(() => buildNewsPost({ ...finding, primary_urls: [] })).toThrow('primary source');

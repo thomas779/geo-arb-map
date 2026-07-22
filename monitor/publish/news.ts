@@ -64,7 +64,7 @@ export function buildNewsPost(finding: Finding): TelegramPost {
     finding.category,
   ].filter(Boolean).join(' · ');
 
-  const lines = [`${flagEmoji(finding.iso_n3)} ${finding.jurisdiction.toUpperCase()} — ${headline}`, '', finding.brief];
+  const lines = [`${flagEmoji(finding.iso_n3)} ${finding.jurisdiction} — ${headline}`, '', finding.brief];
   if (meta) lines.push('', `📌 ${meta}`);
   lines.push('');
   if (sources.length === 1) lines.push(`🔗 ${sources[0]}`);
