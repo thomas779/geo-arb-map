@@ -2793,6 +2793,20 @@
           "Russian MFA dual-citizenship guidance",
           "Constitutional Court 2025 statement"
         ]
+      },
+      "020": {
+        "status": "banned",
+        "note": "Andorra: naturalizers renounce prior nationality.",
+        "sources": [
+          "Andorran nationality law"
+        ]
+      },
+      "040": {
+        "status": "banned",
+        "note": "Austria: naturalization generally requires renouncing prior nationality.",
+        "sources": [
+          "Austrian Citizenship Act / migration.gv.at"
+        ]
       }
     },
     "treaty_exceptions": [

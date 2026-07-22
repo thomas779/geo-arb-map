@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 218,
+      "routes": 242,
       "by_mode": {
-        "ancestry": 66,
-        "naturalization": 68,
-        "birth": 66,
+        "ancestry": 74,
+        "naturalization": 76,
+        "birth": 74,
         "investment": 18
       },
       "by_status": {
-        "active": 212,
+        "active": 236,
         "pending_verification": 3,
         "inactive": 2,
         "verified_negative": 1
@@ -97,12 +97,16 @@
       "name": "Andorra",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "andorra-citizenship-by-parent",
+        "andorra-naturalization",
+        "andorra-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "024",
@@ -183,12 +187,16 @@
       "name": "Austria",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "austria-citizenship-by-parent",
+        "austria-naturalization",
+        "austria-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "044",
@@ -263,12 +271,16 @@
       "name": "Belgium",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "belgium-citizenship-by-parent",
+        "belgium-naturalization",
+        "belgium-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "060",
@@ -738,12 +750,16 @@
       "name": "Czechia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "czechia-citizenship-by-parent",
+        "czechia-naturalization",
+        "czechia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "204",
@@ -762,12 +778,16 @@
       "name": "Denmark",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "denmark-citizenship-by-parent",
+        "denmark-naturalization",
+        "denmark-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "212",
@@ -2093,12 +2113,16 @@
       "name": "Norway",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "norway-citizenship-by-parent",
+        "norway-naturalization",
+        "norway-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "580",
@@ -2334,12 +2358,16 @@
       "name": "Romania",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "romania-citizenship-by-parent",
+        "romania-naturalization",
+        "romania-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "643",
@@ -2741,12 +2769,16 @@
       "name": "Sweden",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "sweden-citizenship-by-parent",
+        "sweden-naturalization",
+        "sweden-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "756",
@@ -3199,6 +3231,119 @@
   ],
   "routes": [
     {
+      "id": "andorra-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "020",
+        "name": "Andorra"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Andorran parent",
+      "summary": "Birth to an Andorran parent creates Andorran nationality. Birth in Andorra alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "andorra-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Andorran parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Andorra Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Andorra_1993"
+        }
+      ]
+    },
+    {
+      "id": "andorra-citizenship-by-parent",
+      "country": {
+        "iso_n3": "020",
+        "name": "Andorra"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Andorran nationality through an Andorran parent",
+      "summary": "A child of an Andorran parent is Andorran under nationality law, subject to registration rules for birth abroad.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "andorra-citizenship-by-parent-principal",
+          "label": "Andorran nationality through an Andorran parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Andorra Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Andorra_1993"
+        },
+        {
+          "title": "Government of Andorra",
+          "url": "https://www.govern.ad/en"
+        }
+      ]
+    },
+    {
+      "id": "andorra-naturalization",
+      "country": {
+        "iso_n3": "020",
+        "name": "Andorra"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after long residence",
+      "summary": "Ordinary naturalization generally requires about twenty years permanent residence (ten if educated in Andorra), integration, and renunciation of prior nationality. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          240
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "andorra-naturalization-principal",
+          "label": "Naturalization after long residence",
+          "allocation": "discretionary",
+          "eligibility_months": 240
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Andorra Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Andorra_1993"
+        },
+        {
+          "title": "Government of Andorra",
+          "url": "https://www.govern.ad/en"
+        }
+      ]
+    },
+    {
       "id": "antigua-barbuda-cip",
       "country": {
         "iso_n3": "028",
@@ -3616,6 +3761,119 @@
       ]
     },
     {
+      "id": "austria-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "040",
+        "name": "Austria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Austrian parent",
+      "summary": "Birth to an Austrian parent creates Austrian citizenship. Birth in Austria alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "austria-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Austrian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Austria migration.gv.at - citizenship",
+          "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "austria-citizenship-by-parent",
+      "country": {
+        "iso_n3": "040",
+        "name": "Austria"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Austrian citizenship through an Austrian parent",
+      "summary": "A child of an Austrian citizen parent is Austrian under the Citizenship Act. Separate declaration routes exist for certain descendants of Nazi-era victims.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "austria-citizenship-by-parent-principal",
+          "label": "Austrian citizenship through an Austrian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Austria migration.gv.at - citizenship",
+          "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/"
+        },
+        {
+          "title": "Austria oesterreich.gv.at - citizenship",
+          "url": "https://www.oesterreich.gv.at/en/themen/menschen_aus_anderen_staaten/staatsbuergerschaft"
+        }
+      ]
+    },
+    {
+      "id": "austria-naturalization",
+      "country": {
+        "iso_n3": "040",
+        "name": "Austria"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after ten years residence",
+      "summary": "Ordinary naturalization generally needs ten years continuous legal residence (including at least five with a settlement permit), German language, civic knowledge, livelihood, and usually renunciation of prior nationality. Shorter paths exist for EEA citizens and other statutory categories. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "austria-naturalization-principal",
+          "label": "Naturalization after ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Austria migration.gv.at - citizenship",
+          "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/"
+        },
+        {
+          "title": "Austria oesterreich.gv.at - citizenship",
+          "url": "https://www.oesterreich.gv.at/en/themen/menschen_aus_anderen_staaten/staatsbuergerschaft"
+        }
+      ]
+    },
+    {
       "id": "bahamas-citizenship-by-parent",
       "country": {
         "iso_n3": "044",
@@ -3831,6 +4089,111 @@
         {
           "title": "Barbados Citizenship Act",
           "url": "https://www.barbadoslawcourts.gov.bb/assets/content/pdfs/statutes/BarbadosCitizenshipCAP186.pdf"
+        }
+      ]
+    },
+    {
+      "id": "belgium-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "056",
+        "name": "Belgium"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Belgian parent",
+      "summary": "Birth to a Belgian parent creates Belgian nationality. Birth in Belgium alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "belgium-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Belgian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Belgium Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
+        }
+      ]
+    },
+    {
+      "id": "belgium-citizenship-by-parent",
+      "country": {
+        "iso_n3": "056",
+        "name": "Belgium"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Belgian nationality through a Belgian parent",
+      "summary": "A child of a Belgian parent is Belgian under the nationality code, subject to registration rules for birth abroad.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "belgium-citizenship-by-parent-principal",
+          "label": "Belgian nationality through a Belgian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Belgium Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
+        }
+      ]
+    },
+    {
+      "id": "belgium-naturalization",
+      "country": {
+        "iso_n3": "056",
+        "name": "Belgium"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Nationality declaration after five years residence",
+      "summary": "Adults with five years legal residence may apply for Belgian nationality by declaration if they meet integration, language, and economic participation conditions. Naturalization by parliament remains a separate exceptional track. Not automatic after five years.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "belgium-naturalization-principal",
+          "label": "Nationality declaration after five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Belgium Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
         }
       ]
     },
@@ -5083,6 +5446,216 @@
         {
           "title": "Cyprus Ministry of Interior — Naturalization due to residence",
           "url": "https://www.gov.cy/moi/en/documents/acquisition-of-cypriot-citizenship-by-naturalization-due-to-years-of-residence-form-m127/"
+        }
+      ]
+    },
+    {
+      "id": "czechia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "203",
+        "name": "Czechia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Czech parent",
+      "summary": "Birth to a Czech parent creates Czech citizenship. Birth in Czechia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "czechia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Czech parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Czech Ministry of Interior - citizenship",
+          "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx"
+        }
+      ]
+    },
+    {
+      "id": "czechia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "203",
+        "name": "Czechia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Czech citizenship through a Czech parent",
+      "summary": "A child of a Czech citizen parent is Czech under the Citizenship Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "czechia-citizenship-by-parent-principal",
+          "label": "Czech citizenship through a Czech parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Czech Ministry of Interior - citizenship",
+          "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx"
+        }
+      ]
+    },
+    {
+      "id": "czechia-naturalization",
+      "country": {
+        "iso_n3": "203",
+        "name": "Czechia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after permanent residence",
+      "summary": "Adults generally need five years of permanent residence (or three for EU citizens and some family categories), Czech language and civics, livelihood, and good conduct. Dual nationality is generally allowed. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "czechia-naturalization-principal",
+          "label": "Naturalization after permanent residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Czech Ministry of Interior - citizenship",
+          "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx"
+        }
+      ]
+    },
+    {
+      "id": "denmark-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "208",
+        "name": "Denmark"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Danish parent",
+      "summary": "Birth to a Danish parent creates Danish citizenship. Birth in Denmark alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "denmark-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Danish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Denmark UIM - citizenship",
+          "url": "https://uim.dk/arbejdsomraader/statsborgerskab/"
+        }
+      ]
+    },
+    {
+      "id": "denmark-citizenship-by-parent",
+      "country": {
+        "iso_n3": "208",
+        "name": "Denmark"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Danish citizenship through a Danish parent",
+      "summary": "A child of a Danish citizen parent is Danish under the Nationality Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "denmark-citizenship-by-parent-principal",
+          "label": "Danish citizenship through a Danish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Denmark UIM - citizenship",
+          "url": "https://uim.dk/arbejdsomraader/statsborgerskab/"
+        }
+      ]
+    },
+    {
+      "id": "denmark-naturalization",
+      "country": {
+        "iso_n3": "208",
+        "name": "Denmark"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after long residence",
+      "summary": "Adults generally need about nine years continuous residence, permanent residence, Danish language and civics tests, self-support, and good conduct. Parliament grants nationality by statute. Dual nationality is generally allowed.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          108
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "denmark-naturalization-principal",
+          "label": "Naturalization after long residence",
+          "allocation": "discretionary",
+          "eligibility_months": 108
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Denmark UIM - citizenship",
+          "url": "https://uim.dk/arbejdsomraader/statsborgerskab/"
         }
       ]
     },
@@ -8615,6 +9188,111 @@
       ]
     },
     {
+      "id": "norway-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "578",
+        "name": "Norway"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Norwegian parent",
+      "summary": "Birth to a Norwegian parent creates Norwegian citizenship. Birth in Norway alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "norway-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Norwegian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Norway UDI - citizenship",
+          "url": "https://www.udi.no/en/want-to-apply/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "norway-citizenship-by-parent",
+      "country": {
+        "iso_n3": "578",
+        "name": "Norway"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Norwegian citizenship through a Norwegian parent",
+      "summary": "A child of a Norwegian citizen parent is Norwegian under the Nationality Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "norway-citizenship-by-parent-principal",
+          "label": "Norwegian citizenship through a Norwegian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Norway UDI - citizenship",
+          "url": "https://www.udi.no/en/want-to-apply/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "norway-naturalization",
+      "country": {
+        "iso_n3": "578",
+        "name": "Norway"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship after residence and language requirements",
+      "summary": "Adults generally need a long period of continuous residence (commonly eight years within the last eleven), permanent residence, Norwegian language, social studies, and good conduct. Dual nationality is now generally permitted. Grant follows statutory conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "norway-naturalization-principal",
+          "label": "Citizenship after residence and language requirements",
+          "allocation": "discretionary",
+          "eligibility_months": 96
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Norway UDI - citizenship",
+          "url": "https://www.udi.no/en/want-to-apply/citizenship/"
+        }
+      ]
+    },
+    {
       "id": "panama-family-naturalization",
       "country": {
         "iso_n3": "591",
@@ -9341,6 +10019,119 @@
         {
           "title": "Portuguese Ministry of Justice — Portuguese nationality",
           "url": "https://justica.gov.pt/registos/nacionalidade/nacionalidade-portuguesa"
+        }
+      ]
+    },
+    {
+      "id": "romania-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "642",
+        "name": "Romania"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Romanian parent",
+      "summary": "Birth to a Romanian parent creates Romanian citizenship. Birth in Romania alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "romania-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Romanian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Romania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Romania_2003"
+        }
+      ]
+    },
+    {
+      "id": "romania-citizenship-by-parent",
+      "country": {
+        "iso_n3": "642",
+        "name": "Romania"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Romanian citizenship through a Romanian parent",
+      "summary": "A child of a Romanian citizen parent is Romanian. Separate restoration and origin routes exist for descendants of former citizens.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "romania-citizenship-by-parent-principal",
+          "label": "Romanian citizenship through a Romanian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Romania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Romania_2003"
+        },
+        {
+          "title": "Romania General Inspectorate for Immigration",
+          "url": "https://igi.mai.gov.ro/en/"
+        }
+      ]
+    },
+    {
+      "id": "romania-naturalization",
+      "country": {
+        "iso_n3": "642",
+        "name": "Romania"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after eight years residence",
+      "summary": "Adults generally need eight years legal residence (five if married to a Romanian), Romanian language and culture knowledge, livelihood, and good conduct. Dual nationality is generally allowed. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "romania-naturalization-principal",
+          "label": "Naturalization after eight years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Romania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Romania_2003"
+        },
+        {
+          "title": "Romania General Inspectorate for Immigration",
+          "url": "https://igi.mai.gov.ro/en/"
         }
       ]
     },
@@ -10383,6 +11174,111 @@
         {
           "title": "Spanish Civil Code — Articles 17, 20 and 22",
           "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763"
+        }
+      ]
+    },
+    {
+      "id": "sweden-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "752",
+        "name": "Sweden"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Swedish parent",
+      "summary": "Birth to a Swedish parent creates Swedish citizenship. Birth in Sweden alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sweden-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Swedish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Swedish Migration Agency - citizenship for adults",
+          "url": "https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html"
+        }
+      ]
+    },
+    {
+      "id": "sweden-citizenship-by-parent",
+      "country": {
+        "iso_n3": "752",
+        "name": "Sweden"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Swedish citizenship through a Swedish parent",
+      "summary": "A child of a Swedish citizen parent is Swedish under the Citizenship Act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sweden-citizenship-by-parent-principal",
+          "label": "Swedish citizenship through a Swedish parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Swedish Migration Agency - citizenship for adults",
+          "url": "https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html"
+        }
+      ]
+    },
+    {
+      "id": "sweden-naturalization",
+      "country": {
+        "iso_n3": "752",
+        "name": "Sweden"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship after eight years residence",
+      "summary": "Adults generally need continuous residence of at least eight years, permanent residence status, identity proof, and good conduct. Shorter periods apply for Nordic citizens, spouses, and other statutory categories. Language and knowledge requirements apply under the current rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          96
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sweden-naturalization-principal",
+          "label": "Citizenship after eight years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 96
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Swedish Migration Agency - citizenship for adults",
+          "url": "https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html"
         }
       ]
     },
@@ -11473,7 +12369,7 @@
           "url": "https://www.ag.gov.ws/wp-content/uploads/2024/02/Citizenship-Investment-Act-2015.pdf"
         },
         {
-          "title": "Samoa MCIL — 2025 policy framework workshop",
+          "title": "Samoa MCIL - 2025 policy framework workshop",
           "url": "https://mcil.gov.ws/node/89"
         }
       ]

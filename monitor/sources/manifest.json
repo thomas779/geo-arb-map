@@ -1309,6 +1309,103 @@
       "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Samoa_2017" }],
       "keywords": ["citizenship", "nationality", "naturalization", "Samoa", "residence"],
       "notes": "Constitution citizenship framework. NZ Samoan Quota remains a separate mobility ballot."
+    },
+    {
+      "id": "austria-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/",
+      "jurisdictions": ["040"],
+      "pages": [
+        { "id": "migration-citizenship", "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/" },
+        { "id": "oesterreich-citizenship", "url": "https://www.oesterreich.gv.at/en/themen/menschen_aus_anderen_staaten/staatsbuergerschaft" }
+      ],
+      "keywords": ["citizenship", "naturalization", "naturalisation", "residence", "Austrian"],
+      "notes": "Official Austrian citizenship guidance."
+    },
+    {
+      "id": "belgium-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Belgium_2014",
+      "jurisdictions": ["056"],
+      "pages": [{ "id": "constitution", "url": "https://www.constituteproject.org/constitution/Belgium_2014" }],
+      "keywords": ["nationality", "citizenship", "Belgium"],
+      "notes": "Constitution framework. Prefer a future stable IBZ nationality page when available."
+    },
+    {
+      "id": "sweden-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html",
+      "jurisdictions": ["752"],
+      "pages": [{ "id": "adults", "url": "https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html" }],
+      "keywords": ["citizenship", "residence", "eight years", "Swedish", "naturalisation"],
+      "notes": "Migrationsverket adult citizenship page; track residence-period reforms."
+    },
+    {
+      "id": "norway-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.udi.no/en/want-to-apply/citizenship/",
+      "jurisdictions": ["578"],
+      "pages": [{ "id": "udi-citizenship", "url": "https://www.udi.no/en/want-to-apply/citizenship/" }],
+      "keywords": ["citizenship", "Norwegian", "residence", "language"],
+      "notes": "UDI citizenship hub."
+    },
+    {
+      "id": "denmark-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://uim.dk/arbejdsomraader/statsborgerskab/",
+      "jurisdictions": ["208"],
+      "pages": [{ "id": "uim-citizenship", "url": "https://uim.dk/arbejdsomraader/statsborgerskab/" }],
+      "keywords": ["statsborgerskab", "citizenship", "Danish", "naturalisation"],
+      "notes": "Danish government citizenship area."
+    },
+    {
+      "id": "czechia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx",
+      "jurisdictions": ["203"],
+      "pages": [{ "id": "mvcr-citizenship", "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx" }],
+      "keywords": ["obcanstvi", "citizenship", "naturalization", "Czech"],
+      "notes": "Ministry of Interior citizenship page."
+    },
+    {
+      "id": "romania-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://igi.mai.gov.ro/en/",
+      "jurisdictions": ["642"],
+      "pages": [
+        { "id": "igi", "url": "https://igi.mai.gov.ro/en/" },
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Romania_2003" }
+      ],
+      "keywords": ["citizenship", "nationality", "Romania", "residence"],
+      "notes": "Immigration inspectorate plus Constitution."
+    },
+    {
+      "id": "andorra-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.govern.ad/en",
+      "jurisdictions": ["020"],
+      "pages": [
+        { "id": "government", "url": "https://www.govern.ad/en" },
+        { "id": "constitution", "url": "https://www.constituteproject.org/constitution/Andorra_1993" }
+      ],
+      "keywords": ["nationality", "citizenship", "Andorra", "residence"],
+      "notes": "Government portal plus Constitution. Long naturalization path; renunciation required."
     }
   ]
 }
