@@ -1444,7 +1444,11 @@ function franceRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juri
         source_refs: refs([nationalityCode], ['/coverage/investment']),
       },
     ],
-    routes: [{
+    routes: [
+      principalCitizenshipRoute({ id: 'france-citizenship-by-marriage', mode: 'naturalization', title: 'Acquisition by marriage to a French national', summary: 'A foreign spouse of a French national may acquire nationality by declaration after four years of marriage (five if the couple cannot show three years of continuous residence in France), with continuing community of life and French-language knowledge.', source: nationalityCode, eligibility: [{ field: 'spouse.citizenship.iso_n3', operator: 'eq', value: '250' }, { field: 'marriage.duration_months', operator: 'gte', value: 48, unit: 'months' }], months: 48, allocation: 'right', lastChecked: '2026-07-23', note: 'Code civil art. 21-2 (declaration). A B2 French-language level applies from 1 January 2026; the government may oppose within two years.' }),
+      principalCitizenshipRoute({ id: 'france-reintegration', mode: 'naturalization', title: 'Reintegration into French nationality', summary: 'A person who formerly held French nationality (for example lost through marriage to a foreigner or acquisition of another nationality) may be reintegrated — by declaration where manifest ties with France are shown, or otherwise by decree with no residence stage.', source: nationalityCode, eligibility: [{ field: 'former_citizen', operator: 'eq', value: true }], months: 0, allocation: 'discretionary', lastChecked: '2026-07-23', note: 'Code civil arts. 24 to 24-3 (réintégration).' }),
+      principalCitizenshipRoute({ id: 'france-exceptional-naturalization', mode: 'naturalization', title: 'Naturalization without residence for exceptional merit or francophone ties', summary: 'Naturalization by decree with no residence stage for those who rendered exceptional services to France, for wartime military service, and for members of the French cultural and linguistic community.', source: nationalityCode, eligibility: [{ field: 'exceptional_merit_or_francophone', operator: 'eq', value: true }], months: 0, allocation: 'discretionary', confidence: 'medium', lastChecked: '2026-07-23', note: 'Code civil arts. 21-19 (no stage; exceptional service/military) and 21-20 (francophone).' }),
+      {
       id: 'france-citizenship-by-parent',
       mode: 'ancestry',
       status: 'active',
@@ -1793,6 +1797,9 @@ function portugalRecord(shadow: DataShadow, officialSources: SourceRecord[]): Ju
       },
     ],
     routes: [
+      principalCitizenshipRoute({ id: 'portugal-citizenship-by-marriage', mode: 'naturalization', title: 'Acquisition by marriage or de facto union', summary: 'A foreign spouse or de facto partner of a Portuguese citizen may acquire nationality by declaration, on proof of effective ties to the national community, without a residence requirement.', source: nationalitySource, eligibility: [{ field: 'spouse.citizenship.iso_n3', operator: 'eq', value: '620' }], months: 0, allocation: 'right', lastChecked: '2026-07-23', note: 'Nationality Act art. 3 (declaration). The 2026 reform (Lei Orgânica 1/2026) tightened the effective-ties and good-character tests.' }),
+      principalCitizenshipRoute({ id: 'portugal-great-grandchild-naturalization', mode: 'ancestry', title: 'Facilitated naturalization for great-grandchildren', summary: 'Great-grandchildren of a Portuguese citizen may naturalize on proof of lineage plus five years of legal residence in Portugal.', source: nationalitySource, eligibility: [{ field: 'heritage.portuguese_great_grandparent', operator: 'eq', value: true }, { field: 'residence.years', operator: 'gte', value: 5, unit: 'years' }], months: 60, allocation: 'discretionary', confidence: 'medium', lastChecked: '2026-07-23', note: 'New route added by the 2026 reform (Lei Orgânica 1/2026).' }),
+      principalCitizenshipRoute({ id: 'portugal-sephardic-naturalization', mode: 'naturalization', title: 'Sephardic-heritage naturalization (closed)', summary: 'Facilitated naturalization for descendants of Portuguese Sephardic Jews.', source: nationalitySource, eligibility: [{ field: 'heritage.portuguese_sephardic', operator: 'eq', value: true }], months: 0, allocation: 'right', status: 'inactive', lastChecked: '2026-07-23', note: 'Introduced 2015 (art. 6(7)), tightened 2022 and 2024, and abolished for new applicants by Lei Orgânica 1/2026 (in force 19 May 2026).' }),
       {
         id: 'portugal-citizenship-by-parent',
         mode: 'ancestry',
@@ -1990,6 +1997,8 @@ function spainRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
       },
     ],
     routes: [
+      principalCitizenshipRoute({ id: 'spain-carta-de-naturaleza', mode: 'naturalization', title: 'Carta de naturaleza (discretionary grant)', summary: 'Spanish nationality granted discretionally by Royal Decree in exceptional circumstances, with no residence requirement — historically used for notable athletes and cultural figures and for victims of terrorist attacks.', source: civilCode, eligibility: [{ field: 'exceptional_circumstances', operator: 'eq', value: true }], months: 0, allocation: 'discretionary', lastChecked: '2026-07-23', note: 'Código Civil art. 21.1; a pure executive grant with no appeal to a right.' }),
+      principalCitizenshipRoute({ id: 'spain-democratic-memory-option', mode: 'ancestry', title: 'Democratic Memory Law option (closed)', summary: 'A time-limited right of option, with no residence, for children and grandchildren of Spaniards who lost or renounced nationality through exile, and for descendants of Spanish women who lost it by marriage before 1978.', source: civilCode, eligibility: [{ field: 'heritage.spanish_exile_descendant', operator: 'eq', value: true }], months: 0, allocation: 'right', status: 'inactive', lastChecked: '2026-07-23', note: 'Ley 20/2022 (Ley de Memoria Democrática), 8th additional provision. Window closed to new applications on 22 October 2025.' }),
       {
         id: 'spain-citizenship-by-parent-or-option',
         mode: 'ancestry',
@@ -12160,6 +12169,9 @@ function italyRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
       },
     ],
     routes: [
+      principalCitizenshipRoute({ id: 'italy-citizenship-by-marriage', mode: 'naturalization', title: 'Acquisition by marriage to an Italian citizen', summary: 'A foreign or stateless spouse of an Italian citizen may acquire citizenship after two years of legal residence in Italy following the marriage (three years if resident abroad), halved where there are minor children, subject to a B1 Italian-language requirement.', source: citizenship, eligibility: [{ field: 'spouse.citizenship.iso_n3', operator: 'eq', value: '380' }, { field: 'residence.legal_months', operator: 'gte', value: 24, unit: 'months' }], months: 24, allocation: 'right', lastChecked: '2026-07-23', note: 'Law 91/1992 art. 5; B1 language required since 2018.' }),
+      principalCitizenshipRoute({ id: 'italy-reacquisition', mode: 'naturalization', title: 'Reacquisition of former Italian citizenship', summary: 'Former Italian citizens may reacquire citizenship — by declaration for certain historical losses, or after one year of residence in Italy under the general track.', source: citizenship, eligibility: [{ field: 'former_citizen', operator: 'eq', value: true }], months: 0, allocation: 'right', lastChecked: '2026-07-23', note: 'Law 91/1992 arts. 13 and 17. Law 74/2025 opened a declaration window (1 July 2025 – 31 December 2027) for those who lost citizenship under Law 555/1912.' }),
+      principalCitizenshipRoute({ id: 'italy-exceptional-merit', mode: 'naturalization', title: 'Naturalization for exceptional service to Italy', summary: 'Naturalization by decree of the President of the Republic, with no residence requirement, for those who rendered exceptional service to Italy or where there is an exceptional State interest.', source: citizenship, eligibility: [{ field: 'exceptional_merit', operator: 'eq', value: true }], months: 0, allocation: 'discretionary', lastChecked: '2026-07-23', note: 'Law 91/1992 art. 9(2); used for elite athletes, scientists, and cultural figures.' }),
       {
         id: 'italy-citizenship-by-descent',
         mode: 'ancestry',
@@ -12636,6 +12648,7 @@ function germanyRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
       },
     ],
     routes: [
+      principalCitizenshipRoute({ id: 'germany-restoration-nazi-persecution', mode: 'naturalization', title: 'Restitution for descendants of Nazi-era persecuted Germans', summary: 'Persons who lost or were denied German citizenship through Nazi persecution (1933–1945), and their descendants, have an entitlement to (re)naturalisation with no residence requirement and may apply from abroad.', source: law, eligibility: [{ field: 'heritage.nazi_persecution_descendant', operator: 'eq', value: true }], months: 0, allocation: 'right', lastChecked: '2026-07-23', note: 'Constitutional restoration under Art. 116(2) Basic Law (active deprivation) plus the broader § 15 StAG entitlement.' }),
       {
         id: 'germany-citizenship-by-parent',
         mode: 'ancestry',
@@ -12813,6 +12826,9 @@ function irelandRecord(shadow: DataShadow, officialSources: SourceRecord[]): Jur
       },
     ],
     routes: [
+      principalCitizenshipRoute({ id: 'ireland-citizenship-by-marriage', mode: 'naturalization', title: 'Naturalization as a spouse or civil partner of an Irish citizen', summary: 'A spouse or civil partner of an Irish citizen may naturalize with three years of reckonable residence on the island of Ireland and three years of marriage or civil partnership, including twelve months continuous residence before applying.', source: naturalization, eligibility: [{ field: 'spouse.citizenship.iso_n3', operator: 'eq', value: '372' }, { field: 'residence.reckonable_months', operator: 'gte', value: 36, unit: 'months' }], months: 36, allocation: 'discretionary', lastChecked: '2026-07-23', note: 'Irish Nationality and Citizenship Act 1956 s. 15A (inserted 2001).' }),
+      principalCitizenshipRoute({ id: 'ireland-irish-associations', mode: 'naturalization', title: 'Naturalization based on Irish associations (discretionary)', summary: 'The Minister may waive naturalization conditions, including residence, for a person of "Irish associations" — related by blood, affinity or adoption to an Irish citizen — the route relevant to great-grandparent and remoter ancestry outside the Foreign Births Register entitlement.', source: naturalization, eligibility: [{ field: 'heritage.irish_associations', operator: 'eq', value: true }], months: 0, allocation: 'discretionary', lastChecked: '2026-07-23', note: 'Irish Nationality and Citizenship Act 1956 s. 16 (absolute Ministerial discretion).' }),
+      principalCitizenshipRoute({ id: 'ireland-resumption', mode: 'naturalization', title: 'Resumption of renounced Irish citizenship', summary: 'A person who renounced Irish citizenship may resume it, generally only where they were born on the island of Ireland, by declaration.', source: naturalization, eligibility: [{ field: 'former_citizen', operator: 'eq', value: true }], months: 0, allocation: 'discretionary', confidence: 'medium', lastChecked: '2026-07-23', note: 'Those who held citizenship only by descent or naturalization generally cannot resume after renouncing.' }),
       {
         id: 'ireland-citizenship-by-descent',
         mode: 'ancestry',
