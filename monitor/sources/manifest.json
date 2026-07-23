@@ -5358,6 +5358,44 @@
         "office"
       ],
       "notes": "Holy See official overview of Vatican citizenship (office-based, Law CXXXI/2011). Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "north-korea-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Peoples_Republic_of_Korea_2016",
+      "jurisdictions": [
+        "408"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Korea",
+        "residence",
+        "birth"
+      ],
+      "notes": "DPRK constitutional framework via Constitute Project text; cross-check the Nationality Law (1963, amended 1995/1999). Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "palestine-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Palestine_2005",
+      "jurisdictions": [
+        "275"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Palestine",
+        "population registry",
+        "residence",
+        "birth"
+      ],
+      "notes": "Palestinian Amended Basic Law (art. 7) via Constitute Project text; nationality is otherwise unsettled and registry-based under the Oslo framework. Active verification monitor for canonical coverage audit."
     }
   ]
 }
