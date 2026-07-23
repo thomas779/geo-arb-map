@@ -47,7 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version: latest
 
@@ -74,7 +74,14 @@ jobs:
 
       - name: AI per-jurisdiction sweep
         if: github.event_name != 'repository_dispatch'
-        run: bun run monitor:sweep ${{ (github.event_name == 'workflow_dispatch' && inputs.only) && format('-- --only {0}', inputs.only) || '' }}
+        env:
+          ONLY: ${{ github.event_name == 'workflow_dispatch' && inputs.only || '' }}
+        run: |
+          if [ -n "$ONLY" ]; then
+            bun run monitor:sweep -- --only "$ONLY"
+          else
+            bun run monitor:sweep
+          fi
 
       - name: Triage newsletter signal
         if: github.event_name == 'repository_dispatch'
@@ -131,7 +138,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: oven-sh/setup-bun@v2
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
         with:
           bun-version: latest
 

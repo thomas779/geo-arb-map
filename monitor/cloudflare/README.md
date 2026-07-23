@@ -31,7 +31,10 @@ direct article URLs. ExpatHub, for example, is covered by `expathub-georgia-rss`
 
 ## Account setup
 
-Do not commit tokens, real intake addresses, or Cloudflare resource IDs.
+Do not commit tokens or real intake addresses. Cloudflare resource IDs
+(`account_id`, `database_id`, R2 bucket names) are non-secret identifiers —
+they are safe to keep in the `wrangler.jsonc` configs and cannot be used
+without an API token.
 
 ```sh
 # Authenticate Wrangler.
