@@ -471,6 +471,13 @@ const OFFICIAL_URLS = {
   afghanistan_constitution: 'https://www.constituteproject.org/constitution/Afghanistan_2004',
   mongolia_constitution: 'https://www.constituteproject.org/constitution/Mongolia_2001',
   maldives_constitution: 'https://www.constituteproject.org/constitution/Maldives_2008',
+  bhutan_constitution: 'https://www.constituteproject.org/constitution/Bhutan_2008',
+  myanmar_constitution: 'https://www.constituteproject.org/constitution/Myanmar_2015',
+  laos_constitution: 'https://www.constituteproject.org/constitution/Laos_2015',
+  syria_constitution: 'https://www.constituteproject.org/constitution/Syria_2012',
+  yemen_constitution: 'https://www.constituteproject.org/constitution/Yemen_2015',
+  san_marino_citizenship_law: 'https://www.consigliograndeegenerale.sm/on-line/documento17134125.html',
+  vatican_citizenship_law: 'https://www.vatican.va/roman_curia/secretariat_state/documents/informazione_generale/cittadini-vaticani_en.html',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -1083,6 +1090,13 @@ function jurisdictionSources(): SourceRecord[] {
       ['Afghanistan Constitution (Constitute Project)', OFFICIAL_URLS.afghanistan_constitution, '004', 'en', 'primary_law', 'afghanistan-citizenship-law'],
       ['Mongolia Constitution (Constitute Project)', OFFICIAL_URLS.mongolia_constitution, '496', 'en', 'primary_law', 'mongolia-citizenship-law'],
       ['Maldives Constitution (Constitute Project)', OFFICIAL_URLS.maldives_constitution, '462', 'en', 'primary_law', 'maldives-citizenship-law'],
+      ['Bhutan Constitution (Constitute Project)', OFFICIAL_URLS.bhutan_constitution, '064', 'en', 'primary_law', 'bhutan-citizenship-law'],
+      ['Myanmar Constitution (Constitute Project)', OFFICIAL_URLS.myanmar_constitution, '104', 'en', 'primary_law', 'myanmar-citizenship-law'],
+      ['Laos Constitution (Constitute Project)', OFFICIAL_URLS.laos_constitution, '418', 'en', 'primary_law', 'laos-citizenship-law'],
+      ['Syria Constitution (Constitute Project)', OFFICIAL_URLS.syria_constitution, '760', 'en', 'primary_law', 'syria-citizenship-law'],
+      ['Yemen Constitution (Constitute Project)', OFFICIAL_URLS.yemen_constitution, '887', 'en', 'primary_law', 'yemen-citizenship-law'],
+      ['San Marino Citizenship Law No. 114/2000 (Consiglio Grande e Generale)', OFFICIAL_URLS.san_marino_citizenship_law, '674', 'en', 'primary_law', 'san-marino-citizenship-law'],
+      ['Vatican City citizenship (Holy See official overview)', OFFICIAL_URLS.vatican_citizenship_law, '336', 'en', 'official_guidance', 'vatican-citizenship-law'],
 
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
@@ -14626,6 +14640,351 @@ function uzbekistanRecord(shadow: DataShadow, officialSources: SourceRecord[]): 
   });
 }
 
+function bhutanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.bhutan_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '064',
+    note: 'Reviewed against the Bhutanese constitutional framework (art. 6) and the Citizenship Act 1985. Citizenship by birth requires both parents to be Bhutanese, and naturalization is among the most restrictive worldwide. Dual citizenship is not permitted. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution], note: 'Both parents must be Bhutanese citizens.' },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Both parents Bhutanese; no unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'bhutan-citizenship-by-parents',
+        mode: 'ancestry',
+        title: 'Bhutanese citizenship where both parents are citizens',
+        summary: 'A person is a natural-born Bhutanese citizen only if both parents are citizens of Bhutan (Constitution art. 6); a single Bhutanese parent does not by itself transmit citizenship.',
+        source: constitution,
+        eligibility: [{ field: 'parent.both_citizens.iso_n3', operator: 'eq', value: '064' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'bhutan-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after 15 to 20 years residence',
+        summary: 'Naturalization requires at least fifteen years of residence (twenty years for applicants without a Bhutanese parent) plus Dzongkha proficiency, knowledge of culture and history, a clean record, and an oath; grant is discretionary (Cabinet/Royal approval).',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 15, unit: 'years' }],
+        months: 180,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Fifteen-year tier applies with a Bhutanese parent or government service; twenty years otherwise. Among the most restrictive regimes.',
+      }),
+      principalCitizenshipRoute({
+        id: 'bhutan-citizenship-at-birth-by-parents',
+        mode: 'birth',
+        title: 'Citizenship at birth where both parents are Bhutanese',
+        summary: 'Citizenship transmits at birth only where both parents are Bhutanese citizens; Bhutan has no unrestricted jus soli and limited anti-statelessness safeguards.',
+        source: constitution,
+        eligibility: [{ field: 'parent.both_citizens.iso_n3', operator: 'eq', value: '064' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function laosRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.laos_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '418',
+    note: 'Reviewed against the Lao constitutional framework and the Law on Lao Nationality (2004). Dual citizenship is generally not permitted, with a narrow ethnic-Lao exception. No CBI (an honorary-citizenship scheme is not full citizenship).',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Lao national; conditional anti-statelessness only, not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No direct citizenship-by-investment; a floated honorary-citizenship scheme is not full nationality.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'laos-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Lao citizenship through a Lao parent',
+        summary: 'A child of two Lao citizens is Lao regardless of birthplace; a child of one Lao parent is Lao automatically if born in Laos, and if born abroad requires the Lao parent to be a permanent resident.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '418' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'laos-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about ten years residence',
+        summary: 'Ordinary naturalization requires about ten years of continuous residence plus renunciation of prior nationality, Lao-language fluency, and financial independence; grant is discretionary.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 10, unit: 'years' }],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Ten-year figure from the 2004 nationality law as summarized in reference sources; a reduced five-year track exists for persons of Lao ethnicity.',
+      }),
+      principalCitizenshipRoute({
+        id: 'laos-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Lao parent',
+        summary: 'Birth to a Lao parent creates nationality. Birth in Laos alone to foreign parents is not unrestricted jus soli, though foundlings are presumed Lao and conditional anti-statelessness protections exist.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '418' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function myanmarRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.myanmar_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '104',
+    note: 'Reviewed against the Myanmar constitutional framework and the 1982 Citizenship Law, which creates a three-tier (full, associate, naturalized) system tied to recognized national races. The law is the principal instrument rendering the Rohingya stateless. Dual citizenship is not permitted. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution], note: 'Tiered and ethnicity-linked under the 1982 law.' },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Descent/ethnic lineage; no unrestricted jus soli and minimal anti-statelessness protection.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'myanmar-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Myanmar citizenship through citizen parentage or a national race',
+        summary: 'Full citizenship flows to members of the recognized national races and to children of citizen parents; the 1982 law conditions citizenship on ancestral ethnic membership rather than pure jus sanguinis, producing associate and naturalized sub-tiers.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '104' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Per-tier descent mechanics under the 1982 Citizenship Law are complex; treat exact tier rules as requiring verification.',
+      }),
+      principalCitizenshipRoute({
+        id: 'myanmar-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalized-citizen category (1982 law), effectively closed',
+        summary: 'The naturalized-citizen category is essentially limited to persons resident before 4 January 1948 (and their offspring) who furnish conclusive evidence; there is no ordinary open naturalization track by a fixed rolling residence term.',
+        source: constitution,
+        eligibility: [{ field: 'residence.pre_1948_anchored', operator: 'exists', value: true }],
+        months: null,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'No clean residence-year figure: the 1982 law anchors naturalized status to a 1948 residence threshold rather than a rolling term.',
+      }),
+      principalCitizenshipRoute({
+        id: 'myanmar-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through citizen/national-race parentage',
+        summary: 'Citizenship at birth is by descent and national-race lineage, not by birth on territory; there is minimal anti-statelessness protection, which excludes the Rohingya.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '104' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function sanMarinoRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.san_marino_citizenship_law);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '674',
+    note: 'Reviewed against San Marino Citizenship Law No. 114/2000 (as amended). Naturalization famously requires about thirty years of residence (fifteen by marriage) and a two-thirds parliamentary vote. Dual citizenship was historically restricted; a 2024 reform is reported to remove the renunciation requirement. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law] },
+      { mode: 'naturalization', finding: 'present', sources: [law] },
+      { mode: 'birth', finding: 'present', sources: [law], note: 'Jus sanguinis; only a foundling rule applies territorially, no unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [law], note: 'No citizenship-by-investment programme; residency/tax-residence schemes are not citizenship.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'san-marino-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'San Marino citizenship by origin through a Sammarinese parent',
+        summary: 'Citizenship by origin arises where a person is born of two San Marino citizens, or of one San Marino parent with a declaration of intent within twelve months of majority, or where the other parent is unknown or stateless.',
+        source: law,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '674' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'san-marino-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about thirty years residence (fifteen by marriage)',
+        summary: 'Ordinary naturalization requires about thirty continuous years of registered residence (halved to fifteen for spouses of citizens), a clean record, and an oath; it is granted only by the Great and General Council through a special law passed by a two-thirds majority.',
+        source: law,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 30, unit: 'years' }],
+        months: 360,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Thirty-year ordinary / fifteen-year marriage figures from Law 114/2000 as amended; a widely cited 20/10 reduction could not be corroborated against the statute.',
+      }),
+      principalCitizenshipRoute({
+        id: 'san-marino-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Sammarinese parent',
+        summary: 'Citizenship at birth is by descent from a San Marino parent; the only territorial rule is a foundling provision for children born on the territory to unknown or stateless parents.',
+        source: law,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '674' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function syriaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.syria_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '760',
+    note: 'Reviewed against the Syrian constitutional framework and Legislative Decree 276 of 1969. Descent runs primarily through the paternal line, a documented driver of Kurdish statelessness. Dual citizenship is permitted. Administration is disrupted amid the post-2024 transition. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Paternal jus sanguinis; no unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'syria-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Syrian citizenship through a Syrian father',
+        summary: 'A child born to a Syrian father acquires Syrian nationality automatically whether born inside or outside Syria; a Syrian mother transmits nationality only in narrow cases such as an unknown or stateless father.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '760' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'syria-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about five years residence',
+        summary: 'Ordinary naturalization requires roughly five years of continuous residence under Decree 276/1969, with facilitated criteria for other Arab nationals; grant is discretionary (by decree).',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 5, unit: 'years' }],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Five-year ordinary figure (the frequently cited ten years is the constitutional presidential residency bar, not ordinary naturalization); administration is disrupted amid the post-2024 transition.',
+      }),
+      principalCitizenshipRoute({
+        id: 'syria-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Syrian father',
+        summary: 'Citizenship at birth flows from a Syrian father regardless of birthplace; birth on Syrian soil alone confers nothing, a paternal-line model linked to protracted Kurdish statelessness.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '760' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function vaticanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const law = requireSource(officialSources, OFFICIAL_URLS.vatican_citizenship_law);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '336',
+    type: 'sovereign',
+    note: 'Reviewed against Vatican City Law No. CXXXI of 2011 on citizenship, residence and access. Citizenship is granted ex officio for the duration of an office or service (cardinals resident in Rome, Holy See diplomats, Swiss Guards, officials) and lapses when the office ends; there is no jus soli, no jus sanguinis as of right, and no investment route. A person left stateless on loss reverts to Italian nationality.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [law], note: 'Only limited derivative citizenship for the co-residing spouse and children of a citizen, lapsing when the tie or residence ends.' },
+      { mode: 'naturalization', finding: 'present', sources: [law], note: 'The office/appointment-based grant is the only acquisition channel.' },
+      { mode: 'birth', finding: 'verified_none', sources: [law], note: 'Citizenship is not acquired by birth in the territory.' },
+      { mode: 'investment', finding: 'verified_none', sources: [law], note: 'No investment route; acquisition is exclusively office-based.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'vatican-derivative-family-citizenship',
+        mode: 'ancestry',
+        title: 'Derivative citizenship for the family of a Vatican citizen',
+        summary: 'The spouse and children of a Vatican citizen who co-reside in Vatican City may obtain citizenship by authorization; it is derivative of the citizen’s office and lapses when the qualifying tie or residence ends (children on reaching majority).',
+        source: law,
+        eligibility: [{ field: 'family.co_resident_of_citizen', operator: 'eq', value: true }],
+        months: null,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Not jus sanguinis as of right; conditional and lapsing.',
+      }),
+      principalCitizenshipRoute({
+        id: 'vatican-citizenship-by-office',
+        mode: 'naturalization',
+        title: 'Citizenship ex officio by appointment or service',
+        summary: 'Citizenship is conferred by reason of office or service — cardinals resident in Rome or Vatican City, the Pope, accredited Holy See diplomats, members of the Pontifical Swiss Guard, and certain officials — and ceases when the office, service, or authorized residence ends.',
+        source: law,
+        eligibility: [{ field: 'appointment.holy_see_office', operator: 'exists', value: true }],
+        months: null,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        note: 'Not residence-duration naturalization; held for life only by the Pope.',
+      }),
+    ],
+  });
+}
+
+function yemenRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.yemen_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '887',
+    note: 'Reviewed against the Yemeni constitutional framework and Law No. 6 of 1990 on Yemeni nationality. Descent runs primarily through the paternal line. Dual citizenship is officially restricted (loss on voluntary foreign acquisition absent permission) though often tolerated in practice. Administration is disrupted by the ongoing civil war. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Paternal jus sanguinis; no unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'yemen-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Yemeni citizenship through a Yemeni father',
+        summary: 'A child of a Yemeni father acquires Yemeni nationality automatically regardless of birthplace; the mother transmits nationality only where the father is unknown, stateless, or of unknown nationality.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '887' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'yemen-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about ten years residence',
+        summary: 'Ordinary naturalization requires about ten years of continuous lawful residence plus good character, Arabic knowledge, and lawful income (reduced to about five years for persons of Yemeni origin); grant is discretionary.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 10, unit: 'years' }],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Ten-year ordinary figure from Law No. 6 of 1990; administration is disrupted by the civil war.',
+      }),
+      principalCitizenshipRoute({
+        id: 'yemen-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Yemeni father',
+        summary: 'Nationality at birth derives from a Yemeni father regardless of place of birth; birth in Yemen alone does not confer citizenship, with a limited safeguard for children of unknown or stateless fathers.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '887' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
   const jurisdictions = [
@@ -14648,6 +15007,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     belgiumRecord(shadow, countrySources),
     belizeRecord(shadow, countrySources),
     beninRecord(shadow, countrySources),
+    bhutanRecord(shadow, countrySources),
     boliviaRecord(shadow, countrySources),
     bosniaHerzegovinaRecord(shadow, countrySources),
     botswanaRecord(shadow, countrySources),
@@ -14721,6 +15081,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     koreaRecord(shadow, countrySources),
     kuwaitRecord(shadow, countrySources),
     kyrgyzstanRecord(shadow, countrySources),
+    laosRecord(shadow, countrySources),
     latviaRecord(shadow, countrySources),
     lebanonRecord(shadow, countrySources),
     lesothoRecord(shadow, countrySources),
@@ -14746,6 +15107,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     montenegroRecord(shadow, countrySources),
     moroccoRecord(shadow, countrySources),
     mozambiqueRecord(shadow, countrySources),
+    myanmarRecord(shadow, countrySources),
     namibiaRecord(shadow, countrySources),
     nauruRecord(shadow, countrySources),
     nepalRecord(shadow, countrySources),
@@ -14773,6 +15135,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     saintLuciaRecord(shadow, countrySources),
     saintVincentRecord(shadow, countrySources),
     samoaRecord(shadow, countrySources),
+    sanMarinoRecord(shadow, countrySources),
     saoTomePrincipeRecord(shadow, countrySources),
     saudiArabiaRecord(shadow, countrySources),
     senegalRecord(shadow, countrySources),
@@ -14793,6 +15156,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     surinameRecord(shadow, countrySources),
     swedenRecord(shadow, countrySources),
     switzerlandRecord(shadow, countrySources),
+    syriaRecord(shadow, countrySources),
     taiwanRecord(shadow, countrySources),
     tajikistanRecord(shadow, countrySources),
     tanzaniaRecord(shadow, countrySources),
@@ -14813,8 +15177,10 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     uruguayRecord(shadow, countrySources),
     uzbekistanRecord(shadow, countrySources),
     vanuatuRecord(shadow, countrySources),
+    vaticanRecord(shadow, countrySources),
     venezuelaRecord(shadow, countrySources),
     vietnamRecord(shadow, countrySources),
+    yemenRecord(shadow, countrySources),
     zambiaRecord(shadow, countrySources),
     zimbabweRecord(shadow, countrySources),
 

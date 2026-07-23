@@ -5226,6 +5226,138 @@
         "birth"
       ],
       "notes": "Maldivian constitutional framework (art. 9, incl. the Muslim requirement) via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "bhutan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Bhutan_2008",
+      "jurisdictions": [
+        "064"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Bhutan",
+        "residence",
+        "birth"
+      ],
+      "notes": "Bhutanese constitutional framework (art. 6) via Constitute Project text; cross-check the Citizenship Act 1985. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "myanmar-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Myanmar_2015",
+      "jurisdictions": [
+        "104"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Myanmar",
+        "residence",
+        "birth"
+      ],
+      "notes": "Myanmar constitutional framework via Constitute Project text; cross-check the 1982 Citizenship Law. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "laos-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Laos_2015",
+      "jurisdictions": [
+        "418"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Laos",
+        "residence",
+        "birth"
+      ],
+      "notes": "Lao constitutional framework via Constitute Project text; cross-check the Law on Lao Nationality (2004). Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "syria-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Syria_2012",
+      "jurisdictions": [
+        "760"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Syria",
+        "residence",
+        "birth"
+      ],
+      "notes": "Syrian constitutional framework via Constitute Project text; cross-check Legislative Decree 276 of 1969. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "yemen-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Yemen_2015",
+      "jurisdictions": [
+        "887"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Yemen",
+        "residence",
+        "birth"
+      ],
+      "notes": "Yemeni constitutional framework via Constitute Project text; cross-check Law No. 6 of 1990. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "san-marino-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.consigliograndeegenerale.sm/on-line/documento17134125.html",
+      "jurisdictions": [
+        "674"
+      ],
+      "keywords": [
+        "cittadinanza",
+        "naturalizzazione",
+        "nationality",
+        "citizenship",
+        "San Marino",
+        "residenza"
+      ],
+      "notes": "San Marino Citizenship Law No. 114/2000 via the Great and General Council site. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "vatican-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.vatican.va/roman_curia/secretariat_state/documents/informazione_generale/cittadini-vaticani_en.html",
+      "jurisdictions": [
+        "336"
+      ],
+      "keywords": [
+        "citizenship",
+        "Vatican",
+        "Holy See",
+        "residence",
+        "office"
+      ],
+      "notes": "Holy See official overview of Vatican citizenship (office-based, Law CXXXI/2011). Active verification monitor for canonical coverage audit."
     }
   ]
 }

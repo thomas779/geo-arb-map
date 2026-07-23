@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 598,
+      "routes": 618,
       "by_mode": {
-        "ancestry": 191,
-        "naturalization": 194,
-        "birth": 188,
+        "ancestry": 198,
+        "naturalization": 201,
+        "birth": 194,
         "investment": 25
       },
       "by_status": {
-        "active": 585,
+        "active": 605,
         "pending_verification": 6,
         "inactive": 6,
         "verified_negative": 1
@@ -333,12 +333,16 @@
       "name": "Bhutan",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "bhutan-citizenship-by-parents",
+        "bhutan-naturalization",
+        "bhutan-citizenship-at-birth-by-parents"
+      ]
     },
     {
       "iso_n3": "068",
@@ -499,12 +503,16 @@
       "name": "Myanmar",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "myanmar-citizenship-by-parent",
+        "myanmar-naturalization",
+        "myanmar-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "108",
@@ -1430,12 +1438,15 @@
       "name": "Vatican",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "vatican-derivative-family-citizenship",
+        "vatican-citizenship-by-office"
+      ]
     },
     {
       "iso_n3": "340",
@@ -1773,12 +1784,16 @@
       "name": "Laos",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "laos-citizenship-by-parent",
+        "laos-naturalization",
+        "laos-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "422",
@@ -2866,12 +2881,16 @@
       "name": "San Marino",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "san-marino-citizenship-by-parent",
+        "san-marino-naturalization",
+        "san-marino-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "678",
@@ -3211,12 +3230,16 @@
       "name": "Syria",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "syria-citizenship-by-parent",
+        "syria-naturalization",
+        "syria-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "762",
@@ -3663,12 +3686,16 @@
       "name": "Yemen",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "yemen-citizenship-by-parent",
+        "yemen-naturalization",
+        "yemen-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "894",
@@ -5584,6 +5611,112 @@
       ]
     },
     {
+      "id": "bhutan-citizenship-at-birth-by-parents",
+      "country": {
+        "iso_n3": "064",
+        "name": "Bhutan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth where both parents are Bhutanese",
+      "summary": "Citizenship transmits at birth only where both parents are Bhutanese citizens; Bhutan has no unrestricted jus soli and limited anti-statelessness safeguards.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bhutan-citizenship-at-birth-by-parents-principal",
+          "label": "Citizenship at birth where both parents are Bhutanese",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bhutan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+        }
+      ]
+    },
+    {
+      "id": "bhutan-citizenship-by-parents",
+      "country": {
+        "iso_n3": "064",
+        "name": "Bhutan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Bhutanese citizenship where both parents are citizens",
+      "summary": "A person is a natural-born Bhutanese citizen only if both parents are citizens of Bhutan (Constitution art. 6); a single Bhutanese parent does not by itself transmit citizenship.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bhutan-citizenship-by-parents-principal",
+          "label": "Bhutanese citizenship where both parents are citizens",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bhutan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+        }
+      ]
+    },
+    {
+      "id": "bhutan-naturalization",
+      "country": {
+        "iso_n3": "064",
+        "name": "Bhutan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after 15 to 20 years residence",
+      "summary": "Naturalization requires at least fifteen years of residence (twenty years for applicants without a Bhutanese parent) plus Dzongkha proficiency, knowledge of culture and history, a clean record, and an oath; grant is discretionary (Cabinet/Royal approval).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          180
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bhutan-naturalization-principal",
+          "label": "Naturalization after 15 to 20 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 180,
+          "note": "Fifteen-year tier applies with a Bhutanese parent or government service; twenty years otherwise. Among the most restrictive regimes."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bhutan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+        }
+      ]
+    },
+    {
       "id": "bolivia-citizenship-by-birth",
       "country": {
         "iso_n3": "068",
@@ -6554,6 +6687,111 @@
         {
           "title": "Bulgarian Ministry of Justice — Citizenship Directorate",
           "url": "https://justice.government.bg/home/index/dbg"
+        }
+      ]
+    },
+    {
+      "id": "myanmar-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "104",
+        "name": "Myanmar"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through citizen/national-race parentage",
+      "summary": "Citizenship at birth is by descent and national-race lineage, not by birth on territory; there is minimal anti-statelessness protection, which excludes the Rohingya.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "myanmar-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through citizen/national-race parentage",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Myanmar Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Myanmar_2015"
+        }
+      ]
+    },
+    {
+      "id": "myanmar-citizenship-by-parent",
+      "country": {
+        "iso_n3": "104",
+        "name": "Myanmar"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Myanmar citizenship through citizen parentage or a national race",
+      "summary": "Full citizenship flows to members of the recognized national races and to children of citizen parents; the 1982 law conditions citizenship on ancestral ethnic membership rather than pure jus sanguinis, producing associate and naturalized sub-tiers.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "myanmar-citizenship-by-parent-principal",
+          "label": "Myanmar citizenship through citizen parentage or a national race",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Per-tier descent mechanics under the 1982 Citizenship Law are complex; treat exact tier rules as requiring verification."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Myanmar Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Myanmar_2015"
+        }
+      ]
+    },
+    {
+      "id": "myanmar-naturalization",
+      "country": {
+        "iso_n3": "104",
+        "name": "Myanmar"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalized-citizen category (1982 law), effectively closed",
+      "summary": "The naturalized-citizen category is essentially limited to persons resident before 4 January 1948 (and their offspring) who furnish conclusive evidence; there is no ordinary open naturalization track by a fixed rolling residence term.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "myanmar-naturalization-principal",
+          "label": "Naturalized-citizen category (1982 law), effectively closed",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "No clean residence-year figure: the 1982 law anchors naturalized status to a 1948 residence threshold rather than a rolling term."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Myanmar Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Myanmar_2015"
         }
       ]
     },
@@ -12120,6 +12358,74 @@
       ]
     },
     {
+      "id": "vatican-citizenship-by-office",
+      "country": {
+        "iso_n3": "336",
+        "name": "Vatican"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship ex officio by appointment or service",
+      "summary": "Citizenship is conferred by reason of office or service — cardinals resident in Rome or Vatican City, the Pope, accredited Holy See diplomats, members of the Pontifical Swiss Guard, and certain officials — and ceases when the office, service, or authorized residence ends.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "vatican-citizenship-by-office-principal",
+          "label": "Citizenship ex officio by appointment or service",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Not residence-duration naturalization; held for life only by the Pope."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Vatican City citizenship (Holy See official overview)",
+          "url": "https://www.vatican.va/roman_curia/secretariat_state/documents/informazione_generale/cittadini-vaticani_en.html"
+        }
+      ]
+    },
+    {
+      "id": "vatican-derivative-family-citizenship",
+      "country": {
+        "iso_n3": "336",
+        "name": "Vatican"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Derivative citizenship for the family of a Vatican citizen",
+      "summary": "The spouse and children of a Vatican citizen who co-reside in Vatican City may obtain citizenship by authorization; it is derivative of the citizen’s office and lapses when the qualifying tie or residence ends (children on reaching majority).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "vatican-derivative-family-citizenship-principal",
+          "label": "Derivative citizenship for the family of a Vatican citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Not jus sanguinis as of right; conditional and lapsing."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Vatican City citizenship (Holy See official overview)",
+          "url": "https://www.vatican.va/roman_curia/secretariat_state/documents/informazione_generale/cittadini-vaticani_en.html"
+        }
+      ]
+    },
+    {
       "id": "honduras-citizenship-by-birth",
       "country": {
         "iso_n3": "340",
@@ -14348,6 +14654,112 @@
         {
           "title": "Kyrgyz Republic Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Kyrgyz_Republic_2021"
+        }
+      ]
+    },
+    {
+      "id": "laos-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "418",
+        "name": "Laos"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Lao parent",
+      "summary": "Birth to a Lao parent creates nationality. Birth in Laos alone to foreign parents is not unrestricted jus soli, though foundlings are presumed Lao and conditional anti-statelessness protections exist.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "laos-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Lao parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Laos Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Laos_2015"
+        }
+      ]
+    },
+    {
+      "id": "laos-citizenship-by-parent",
+      "country": {
+        "iso_n3": "418",
+        "name": "Laos"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Lao citizenship through a Lao parent",
+      "summary": "A child of two Lao citizens is Lao regardless of birthplace; a child of one Lao parent is Lao automatically if born in Laos, and if born abroad requires the Lao parent to be a permanent resident.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "laos-citizenship-by-parent-principal",
+          "label": "Lao citizenship through a Lao parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Laos Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Laos_2015"
+        }
+      ]
+    },
+    {
+      "id": "laos-naturalization",
+      "country": {
+        "iso_n3": "418",
+        "name": "Laos"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about ten years residence",
+      "summary": "Ordinary naturalization requires about ten years of continuous residence plus renunciation of prior nationality, Lao-language fluency, and financial independence; grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "laos-naturalization-principal",
+          "label": "Naturalization after about ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Ten-year figure from the 2004 nationality law as summarized in reference sources; a reduced five-year track exists for persons of Lao ethnicity."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Laos Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Laos_2015"
         }
       ]
     },
@@ -20760,6 +21172,112 @@
       ]
     },
     {
+      "id": "san-marino-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "674",
+        "name": "San Marino"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Sammarinese parent",
+      "summary": "Citizenship at birth is by descent from a San Marino parent; the only territorial rule is a foundling provision for children born on the territory to unknown or stateless parents.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "san-marino-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Sammarinese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "San Marino Citizenship Law No. 114/2000 (Consiglio Grande e Generale)",
+          "url": "https://www.consigliograndeegenerale.sm/on-line/documento17134125.html"
+        }
+      ]
+    },
+    {
+      "id": "san-marino-citizenship-by-parent",
+      "country": {
+        "iso_n3": "674",
+        "name": "San Marino"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "San Marino citizenship by origin through a Sammarinese parent",
+      "summary": "Citizenship by origin arises where a person is born of two San Marino citizens, or of one San Marino parent with a declaration of intent within twelve months of majority, or where the other parent is unknown or stateless.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "san-marino-citizenship-by-parent-principal",
+          "label": "San Marino citizenship by origin through a Sammarinese parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "San Marino Citizenship Law No. 114/2000 (Consiglio Grande e Generale)",
+          "url": "https://www.consigliograndeegenerale.sm/on-line/documento17134125.html"
+        }
+      ]
+    },
+    {
+      "id": "san-marino-naturalization",
+      "country": {
+        "iso_n3": "674",
+        "name": "San Marino"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about thirty years residence (fifteen by marriage)",
+      "summary": "Ordinary naturalization requires about thirty continuous years of registered residence (halved to fifteen for spouses of citizens), a clean record, and an oath; it is granted only by the Great and General Council through a special law passed by a two-thirds majority.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          360
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "san-marino-naturalization-principal",
+          "label": "Naturalization after about thirty years residence (fifteen by marriage)",
+          "allocation": "discretionary",
+          "eligibility_months": 360,
+          "note": "Thirty-year ordinary / fifteen-year marriage figures from Law 114/2000 as amended; a widely cited 20/10 reduction could not be corroborated against the statute."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "San Marino Citizenship Law No. 114/2000 (Consiglio Grande e Generale)",
+          "url": "https://www.consigliograndeegenerale.sm/on-line/documento17134125.html"
+        }
+      ]
+    },
+    {
       "id": "sao-tome-citizenship-by-birth",
       "country": {
         "iso_n3": "678",
@@ -23011,6 +23529,112 @@
         {
           "title": "Swiss SEM — Acquiring Swiss citizenship",
           "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html"
+        }
+      ]
+    },
+    {
+      "id": "syria-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "760",
+        "name": "Syria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Syrian father",
+      "summary": "Citizenship at birth flows from a Syrian father regardless of birthplace; birth on Syrian soil alone confers nothing, a paternal-line model linked to protracted Kurdish statelessness.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "syria-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Syrian father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Syria Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Syria_2012"
+        }
+      ]
+    },
+    {
+      "id": "syria-citizenship-by-parent",
+      "country": {
+        "iso_n3": "760",
+        "name": "Syria"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Syrian citizenship through a Syrian father",
+      "summary": "A child born to a Syrian father acquires Syrian nationality automatically whether born inside or outside Syria; a Syrian mother transmits nationality only in narrow cases such as an unknown or stateless father.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "syria-citizenship-by-parent-principal",
+          "label": "Syrian citizenship through a Syrian father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Syria Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Syria_2012"
+        }
+      ]
+    },
+    {
+      "id": "syria-naturalization",
+      "country": {
+        "iso_n3": "760",
+        "name": "Syria"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about five years residence",
+      "summary": "Ordinary naturalization requires roughly five years of continuous residence under Decree 276/1969, with facilitated criteria for other Arab nationals; grant is discretionary (by decree).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "syria-naturalization-principal",
+          "label": "Naturalization after about five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Five-year ordinary figure (the frequently cited ten years is the constitutional presidential residency bar, not ordinary naturalization); administration is disrupted amid the post-2024 transition."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Syria Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Syria_2012"
         }
       ]
     },
@@ -25522,6 +26146,112 @@
         {
           "title": "Samoa Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Samoa_2017"
+        }
+      ]
+    },
+    {
+      "id": "yemen-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "887",
+        "name": "Yemen"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Yemeni father",
+      "summary": "Nationality at birth derives from a Yemeni father regardless of place of birth; birth in Yemen alone does not confer citizenship, with a limited safeguard for children of unknown or stateless fathers.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "yemen-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Yemeni father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Yemen Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Yemen_2015"
+        }
+      ]
+    },
+    {
+      "id": "yemen-citizenship-by-parent",
+      "country": {
+        "iso_n3": "887",
+        "name": "Yemen"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Yemeni citizenship through a Yemeni father",
+      "summary": "A child of a Yemeni father acquires Yemeni nationality automatically regardless of birthplace; the mother transmits nationality only where the father is unknown, stateless, or of unknown nationality.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "yemen-citizenship-by-parent-principal",
+          "label": "Yemeni citizenship through a Yemeni father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Yemen Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Yemen_2015"
+        }
+      ]
+    },
+    {
+      "id": "yemen-naturalization",
+      "country": {
+        "iso_n3": "887",
+        "name": "Yemen"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about ten years residence",
+      "summary": "Ordinary naturalization requires about ten years of continuous lawful residence plus good character, Arabic knowledge, and lawful income (reduced to about five years for persons of Yemeni origin); grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "yemen-naturalization-principal",
+          "label": "Naturalization after about ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Ten-year ordinary figure from Law No. 6 of 1990; administration is disrupted by the civil war."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Yemen Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Yemen_2015"
         }
       ]
     },
