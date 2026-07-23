@@ -239,6 +239,13 @@
   stroke-dasharray: 1 13;
 }
 
+/* Short intra-bloc hops: the faintest, thinnest tier. */
+.planner-globe-route-bloc {
+  opacity: 0.2;
+  stroke-width: 0.8;
+  stroke-dasharray: 1 16;
+}
+
 .planner-globe-traveler {
   fill: var(--primary);
   stroke: var(--background);

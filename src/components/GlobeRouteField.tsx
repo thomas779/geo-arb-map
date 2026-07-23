@@ -45,7 +45,7 @@ interface RouteDefinition {
   to: Destination;
   duration: number;
   offset: number;
-  tier: 'primary' | 'ambient';
+  tier: 'primary' | 'ambient' | 'bloc';
 }
 
 const destinations: Record<string, Destination> = {
@@ -131,23 +131,95 @@ const destinations: Record<string, Destination> = {
     featured: true,
     labelOffset: { dx: -14, dy: -12, anchor: 'end' as const },
   },
+  panama: {
+    id: 'panama',
+    label: 'Panama',
+    coordinates: [-80, 9] as [number, number],
+  },
+  stKitts: {
+    id: 'st-kitts-nevis',
+    label: 'St Kitts & Nevis',
+    coordinates: [-62.7, 17.3] as [number, number],
+  },
+  uae: {
+    id: 'uae',
+    label: 'UAE',
+    coordinates: [54.4, 24.3] as [number, number],
+    featured: true,
+    labelOffset: { dx: 14, dy: -12, anchor: 'start' as const },
+  },
+  georgia: {
+    id: 'georgia',
+    label: 'Georgia',
+    coordinates: [43.4, 42] as [number, number],
+  },
+  turkiye: {
+    id: 'turkiye',
+    label: 'Türkiye',
+    coordinates: [35, 39] as [number, number],
+  },
+  southAfrica: {
+    id: 'south-africa',
+    label: 'South Africa',
+    coordinates: [24.5, -29] as [number, number],
+    featured: true,
+    labelOffset: { dx: 14, dy: 20, anchor: 'start' as const },
+  },
+  mauritius: {
+    id: 'mauritius',
+    label: 'Mauritius',
+    coordinates: [57.5, -20.3] as [number, number],
+  },
+  kenya: {
+    id: 'kenya',
+    label: 'Kenya',
+    coordinates: [37.9, 0.5] as [number, number],
+  },
+  japan: {
+    id: 'japan',
+    label: 'Japan',
+    coordinates: [138, 37] as [number, number],
+    featured: true,
+    labelOffset: { dx: 14, dy: -12, anchor: 'start' as const },
+  },
+  thailand: {
+    id: 'thailand',
+    label: 'Thailand',
+    coordinates: [101, 15] as [number, number],
+  },
 };
 
 // A deliberately small, legible projection of real route families in the
 // current atlas. This is an editorial sample, not a popularity ranking.
 const routes: RouteDefinition[] = [
+  // Primary corridors — bold, with animated travellers.
   { id: 'argentina-spain', from: destinations.argentina, to: destinations.spain, duration: 12_500, offset: 0.08, tier: 'primary' },
   { id: 'brazil-portugal', from: destinations.brazil, to: destinations.portugal, duration: 11_600, offset: 0.41, tier: 'primary' },
   { id: 'canada-us-tn', from: destinations.canada, to: destinations.unitedStates, duration: 8_600, offset: 0.25, tier: 'primary' },
   { id: 'us-netherlands-daft', from: destinations.unitedStates, to: destinations.netherlands, duration: 13_800, offset: 0.63, tier: 'primary' },
   { id: 'australia-uk', from: destinations.australia, to: destinations.unitedKingdom, duration: 15_800, offset: 0.78, tier: 'primary' },
   { id: 'singapore-us', from: destinations.singapore, to: destinations.unitedStates, duration: 17_200, offset: 0.52, tier: 'primary' },
+  { id: 'uae-uk', from: destinations.uae, to: destinations.unitedKingdom, duration: 12_600, offset: 0.19, tier: 'primary' },
+  { id: 'south-africa-uk', from: destinations.southAfrica, to: destinations.unitedKingdom, duration: 14_400, offset: 0.86, tier: 'primary' },
+  // Ambient corridors — medium weight, spread across regions.
   { id: 'mexico-us-tn', from: destinations.mexico, to: destinations.unitedStates, duration: 9_200, offset: 0.16, tier: 'ambient' },
   { id: 'chile-us', from: destinations.chile, to: destinations.unitedStates, duration: 13_400, offset: 0.71, tier: 'ambient' },
   { id: 'new-zealand-australia', from: destinations.newZealand, to: destinations.australia, duration: 8_800, offset: 0.34, tier: 'ambient' },
   { id: 'portugal-germany-eu', from: destinations.portugal, to: destinations.germany, duration: 8_200, offset: 0.58, tier: 'ambient' },
   { id: 'portugal-us-e2', from: destinations.portugal, to: destinations.unitedStates, duration: 12_900, offset: 0.84, tier: 'ambient' },
-  { id: 'brazil-spain', from: destinations.brazil, to: destinations.spain, duration: 12_200, offset: 0.93, tier: 'ambient' },
+  { id: 'turkiye-germany', from: destinations.turkiye, to: destinations.germany, duration: 9_400, offset: 0.47, tier: 'ambient' },
+  { id: 'georgia-germany', from: destinations.georgia, to: destinations.germany, duration: 10_100, offset: 0.29, tier: 'ambient' },
+  { id: 'japan-singapore', from: destinations.japan, to: destinations.singapore, duration: 10_800, offset: 0.66, tier: 'ambient' },
+  { id: 'panama-us', from: destinations.panama, to: destinations.unitedStates, duration: 9_600, offset: 0.12, tier: 'ambient' },
+  { id: 'st-kitts-us', from: destinations.stKitts, to: destinations.unitedStates, duration: 9_000, offset: 0.55, tier: 'ambient' },
+  { id: 'kenya-uae', from: destinations.kenya, to: destinations.uae, duration: 10_400, offset: 0.73, tier: 'ambient' },
+  // Intra-bloc short hops — thin and faint, movement within regions.
+  { id: 'germany-netherlands-eu', from: destinations.germany, to: destinations.netherlands, duration: 6_200, offset: 0.22, tier: 'bloc' },
+  { id: 'spain-portugal-eu', from: destinations.spain, to: destinations.portugal, duration: 6_000, offset: 0.61, tier: 'bloc' },
+  { id: 'argentina-chile-mercosur', from: destinations.argentina, to: destinations.chile, duration: 6_400, offset: 0.37, tier: 'bloc' },
+  { id: 'argentina-brazil-mercosur', from: destinations.argentina, to: destinations.brazil, duration: 6_800, offset: 0.09, tier: 'bloc' },
+  { id: 'south-africa-mauritius', from: destinations.southAfrica, to: destinations.mauritius, duration: 6_600, offset: 0.82, tier: 'bloc' },
+  { id: 'singapore-thailand-asean', from: destinations.singapore, to: destinations.thailand, duration: 6_100, offset: 0.44, tier: 'bloc' },
 ];
 
 const routeGeometry = routes.map(route => {
@@ -228,9 +300,7 @@ export function GlobeRouteField({ className, regionIsos = [] }: Props) {
         .selectAll('path')
         .data(routeGeometry)
         .join('path')
-        .attr('class', route => route.tier === 'primary'
-          ? 'planner-globe-route planner-globe-route-primary'
-          : 'planner-globe-route planner-globe-route-ambient')
+        .attr('class', route => `planner-globe-route planner-globe-route-${route.tier}`)
         .style('--route-index', (_, index) => index);
 
       const travelerNodes = svg.append('g')
