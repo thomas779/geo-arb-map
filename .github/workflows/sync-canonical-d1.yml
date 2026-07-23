@@ -1,0 +1,65 @@
+name: Sync canonical to D1
+
+# Re-imports the committed canonical (canonical-pilot.ts) into the remote
+# flag-paths-data D1 so the live database matches the source of truth. The
+# generated import is idempotent (every INSERT is ON CONFLICT ... DO
+# UPDATE/NOTHING and revision ids are content-addressed), so this is safe to
+# run repeatedly. Builds only from the checked-out commit — never local WIP.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: canonical-d1-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Require Cloudflare credentials
+        run: test -n "$CLOUDFLARE_API_TOKEN"
+
+      - name: Rebuild canonical import from committed source
+        run: bun run data:db
+
+      - name: Apply schema migrations to remote D1
+        run: |
+          set -euo pipefail
+          bunx wrangler d1 migrations apply flag-paths-data \
+            --remote \
+            --config data/d1/wrangler.jsonc
+
+      - name: Import canonical into remote D1
+        run: |
+          set -euo pipefail
+          bunx wrangler d1 execute flag-paths-data \
+            --remote \
+            --config data/d1/wrangler.jsonc \
+            --file .generated/data-canonical/canonical-import.sql
+
+      - name: Export remote D1 and validate the release
+        run: |
+          set -euo pipefail
+          mkdir -p .generated/data-canonical/remote
+          bunx wrangler d1 export flag-paths-data \
+            --remote \
+            --config data/d1/wrangler.jsonc \
+            --output .generated/data-canonical/remote/flag-paths-data.sql \
+            --skip-confirmation
+          bun run data:build -- \
+            --db .generated/data-canonical/remote/flag-paths-data.sql
