@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 753,
+      "routes": 780,
       "by_mode": {
         "ancestry": 237,
-        "naturalization": 260,
+        "naturalization": 287,
         "birth": 231,
         "investment": 25
       },
       "by_status": {
-        "active": 738,
+        "active": 765,
         "pending_verification": 6,
         "inactive": 8,
         "verified_negative": 1
@@ -73,7 +73,8 @@
       "route_ids": [
         "albania-citizenship-by-parent",
         "albania-naturalization",
-        "albania-citizenship-at-birth-by-parent"
+        "albania-citizenship-at-birth-by-parent",
+        "albania-citizenship-by-marriage"
       ]
     },
     {
@@ -217,7 +218,8 @@
       "route_ids": [
         "austria-citizenship-by-parent",
         "austria-naturalization",
-        "austria-citizenship-at-birth-by-parent"
+        "austria-citizenship-at-birth-by-parent",
+        "austria-citizenship-by-marriage"
       ]
     },
     {
@@ -380,7 +382,8 @@
       "route_ids": [
         "bosnia-herzegovina-citizenship-by-parent",
         "bosnia-herzegovina-naturalization",
-        "bosnia-herzegovina-citizenship-at-birth-by-parent"
+        "bosnia-herzegovina-citizenship-at-birth-by-parent",
+        "bosnia-herzegovina-citizenship-by-marriage"
       ]
     },
     {
@@ -507,7 +510,8 @@
         "bulgaria-bulgarian-origin-naturalization",
         "bulgaria-ordinary-naturalization",
         "bulgaria-citizenship-by-birth-statelessness",
-        "bulgaria-investor-citizenship-repealed"
+        "bulgaria-investor-citizenship-repealed",
+        "bulgaria-citizenship-by-marriage"
       ]
     },
     {
@@ -848,7 +852,8 @@
       "route_ids": [
         "croatia-citizenship-by-parent",
         "croatia-naturalization",
-        "croatia-citizenship-at-birth-by-parent"
+        "croatia-citizenship-at-birth-by-parent",
+        "croatia-citizenship-by-marriage"
       ]
     },
     {
@@ -881,7 +886,8 @@
         "cyprus-citizenship-by-origin",
         "cyprus-naturalization-by-residence",
         "cyprus-citizenship-at-birth-by-parent",
-        "cyprus-investment-programme-closed"
+        "cyprus-investment-programme-closed",
+        "cyprus-citizenship-by-marriage"
       ]
     },
     {
@@ -929,7 +935,8 @@
       "route_ids": [
         "denmark-citizenship-by-parent",
         "denmark-naturalization",
-        "denmark-citizenship-at-birth-by-parent"
+        "denmark-citizenship-at-birth-by-parent",
+        "denmark-citizenship-by-marriage"
       ]
     },
     {
@@ -1136,7 +1143,8 @@
       "route_ids": [
         "finland-citizenship-by-parent",
         "finland-naturalization",
-        "finland-citizenship-at-birth-by-parent"
+        "finland-citizenship-at-birth-by-parent",
+        "finland-citizenship-by-marriage"
       ]
     },
     {
@@ -1547,7 +1555,8 @@
       "route_ids": [
         "hungary-citizenship-by-parent-or-simplified-origin",
         "hungary-ordinary-naturalization",
-        "hungary-citizenship-at-birth-by-parent"
+        "hungary-citizenship-at-birth-by-parent",
+        "hungary-citizenship-by-marriage"
       ]
     },
     {
@@ -1563,7 +1572,8 @@
       "route_ids": [
         "iceland-citizenship-by-parent",
         "iceland-naturalization",
-        "iceland-citizenship-at-birth-by-parent"
+        "iceland-citizenship-at-birth-by-parent",
+        "iceland-citizenship-by-marriage"
       ]
     },
     {
@@ -1956,7 +1966,8 @@
       "route_ids": [
         "liechtenstein-citizenship-by-parent",
         "liechtenstein-naturalization",
-        "liechtenstein-citizenship-at-birth-by-parent"
+        "liechtenstein-citizenship-at-birth-by-parent",
+        "liechtenstein-citizenship-by-marriage"
       ]
     },
     {
@@ -1972,7 +1983,8 @@
       "route_ids": [
         "lithuania-citizenship-by-parent",
         "lithuania-naturalization",
-        "lithuania-citizenship-at-birth-by-parent"
+        "lithuania-citizenship-at-birth-by-parent",
+        "lithuania-citizenship-by-marriage"
       ]
     },
     {
@@ -1988,7 +2000,8 @@
       "route_ids": [
         "luxembourg-citizenship-by-parent",
         "luxembourg-naturalization",
-        "luxembourg-citizenship-at-birth-by-parent"
+        "luxembourg-citizenship-at-birth-by-parent",
+        "luxembourg-citizenship-by-marriage"
       ]
     },
     {
@@ -2101,7 +2114,8 @@
         "malta-registration-family-descent",
         "malta-residence-naturalization",
         "malta-citizenship-by-birth",
-        "malta-transactional-investor-citizenship-ended"
+        "malta-transactional-investor-citizenship-ended",
+        "malta-citizenship-by-marriage"
       ]
     },
     {
@@ -2167,7 +2181,8 @@
       "route_ids": [
         "monaco-citizenship-by-parent",
         "monaco-naturalization",
-        "monaco-citizenship-at-birth-by-parent"
+        "monaco-citizenship-at-birth-by-parent",
+        "monaco-citizenship-by-marriage"
       ]
     },
     {
@@ -2199,7 +2214,8 @@
       "route_ids": [
         "moldova-citizenship-by-parent",
         "moldova-naturalization",
-        "moldova-citizenship-at-birth-by-parent"
+        "moldova-citizenship-at-birth-by-parent",
+        "moldova-citizenship-by-marriage"
       ]
     },
     {
@@ -2216,7 +2232,8 @@
         "montenegro-citizenship-by-parent",
         "montenegro-naturalization",
         "montenegro-citizenship-at-birth-by-parent",
-        "montenegro-economic-citizenship-closed"
+        "montenegro-economic-citizenship-closed",
+        "montenegro-citizenship-by-marriage"
       ]
     },
     {
@@ -2345,7 +2362,8 @@
       "route_ids": [
         "netherlands-citizenship-by-parent",
         "netherlands-naturalization-by-residence",
-        "netherlands-third-generation-birth"
+        "netherlands-third-generation-birth",
+        "netherlands-citizenship-by-marriage"
       ]
     },
     {
@@ -2555,7 +2573,8 @@
       "route_ids": [
         "norway-citizenship-by-parent",
         "norway-naturalization",
-        "norway-citizenship-at-birth-by-parent"
+        "norway-citizenship-at-birth-by-parent",
+        "norway-citizenship-by-marriage"
       ]
     },
     {
@@ -2752,7 +2771,8 @@
       "route_ids": [
         "poland-citizenship-by-parent",
         "poland-recognition-by-residence",
-        "poland-citizenship-at-birth-by-parent"
+        "poland-citizenship-at-birth-by-parent",
+        "poland-citizenship-by-marriage"
       ]
     },
     {
@@ -2851,7 +2871,8 @@
       "route_ids": [
         "romania-citizenship-by-parent",
         "romania-naturalization",
-        "romania-citizenship-at-birth-by-parent"
+        "romania-citizenship-at-birth-by-parent",
+        "romania-citizenship-by-marriage"
       ]
     },
     {
@@ -3095,7 +3116,8 @@
       "route_ids": [
         "serbia-citizenship-by-descent",
         "serbia-admission-after-permanent-residence",
-        "serbia-citizenship-by-birth-statelessness"
+        "serbia-citizenship-by-birth-statelessness",
+        "serbia-citizenship-by-marriage"
       ]
     },
     {
@@ -3159,7 +3181,8 @@
       "route_ids": [
         "slovakia-citizenship-by-parent",
         "slovakia-naturalization",
-        "slovakia-citizenship-at-birth-by-parent"
+        "slovakia-citizenship-at-birth-by-parent",
+        "slovakia-citizenship-by-marriage"
       ]
     },
     {
@@ -3191,7 +3214,8 @@
       "route_ids": [
         "slovenia-citizenship-by-parent",
         "slovenia-naturalization",
-        "slovenia-citizenship-at-birth-by-parent"
+        "slovenia-citizenship-at-birth-by-parent",
+        "slovenia-citizenship-by-marriage"
       ]
     },
     {
@@ -3365,7 +3389,8 @@
       "route_ids": [
         "switzerland-citizenship-by-descent",
         "switzerland-ordinary-naturalization",
-        "switzerland-third-generation-naturalization"
+        "switzerland-third-generation-naturalization",
+        "switzerland-citizenship-by-marriage"
       ]
     },
     {
@@ -3607,7 +3632,8 @@
       "route_ids": [
         "ukraine-citizenship-by-parent",
         "ukraine-naturalization",
-        "ukraine-citizenship-at-birth-by-parent"
+        "ukraine-citizenship-at-birth-by-parent",
+        "ukraine-citizenship-by-marriage"
       ]
     },
     {
@@ -3623,7 +3649,8 @@
       "route_ids": [
         "north-macedonia-citizenship-by-parent",
         "north-macedonia-naturalization",
-        "north-macedonia-citizenship-at-birth-by-parent"
+        "north-macedonia-citizenship-at-birth-by-parent",
+        "north-macedonia-citizenship-by-marriage"
       ]
     },
     {
@@ -4034,6 +4061,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Albania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Albania_2016"
+        }
+      ]
+    },
+    {
+      "id": "albania-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "008",
+        "name": "Albania"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may naturalize after three years of marriage and one year of residence, exempt from the seven-year bar.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "albania-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "The one-year residence reading is the stronger one; some secondary sources cite three years."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Albania Constitution (Constitute Project)",
@@ -5020,6 +5083,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Austria migration.gv.at - citizenship",
+          "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "austria-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "040",
+        "name": "Austria"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of an Austrian has a legal entitlement to naturalize after six years of residence and five years of marriage in a common household, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          72
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "austria-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 72,
+          "note": "§11a StbG; general conditions (German, income) still apply."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Austria migration.gv.at - citizenship",
@@ -6206,6 +6305,42 @@
       ]
     },
     {
+      "id": "bosnia-herzegovina-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "070",
+        "name": "Bosnia and Herz."
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Facilitated naturalization for a spouse with three years of permanent residence and a marriage lasting at least five years.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bosnia-herzegovina-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Renunciation required unless a bilateral treaty applies."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bosnia and Herzegovina Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bosnia_Herzegovina_2009"
+        }
+      ]
+    },
+    {
       "id": "bosnia-herzegovina-citizenship-by-parent",
       "country": {
         "iso_n3": "070",
@@ -7090,6 +7225,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Bulgarian Ministry of Justice — Citizenship Act",
+          "url": "https://justice.government.bg/home/normdoc/2134446592"
+        }
+      ]
+    },
+    {
+      "id": "bulgaria-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may naturalize after three years of marriage and three years of legal residence, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bulgaria-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Bulgarian Citizenship Act."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Bulgarian Ministry of Justice — Citizenship Act",
@@ -9587,6 +9758,40 @@
       ]
     },
     {
+      "id": "croatia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "191",
+        "name": "Croatia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Croatian who holds permanent residence and lives in Croatia may naturalize, exempt from the ordinary residence bar.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "croatia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Citizenship Act art. 10; the gate is permanent residence rather than a fixed spousal clock."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Croatia gov.hr - acquiring Croatian citizenship",
+          "url": "https://gov.hr/en/acquiring-croatian-citizenship/460"
+        }
+      ]
+    },
+    {
       "id": "croatia-citizenship-by-parent",
       "country": {
         "iso_n3": "191",
@@ -9790,6 +9995,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Cyprus Ministry of Interior — Citizenship due to Cypriot origin",
+          "url": "https://www.gov.cy/moi/en/ministry/departments/civil-registry-section/registry-office-2/cypriot-citizenship-nationality/acquisition-of-cypriot-citizenship-due-to-cypriot-origin/"
+        }
+      ]
+    },
+    {
+      "id": "cyprus-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "196",
+        "name": "Cyprus"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Registration as a spouse after three years of marriage and cohabitation.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cyprus-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Residence waived where living abroad and married at least two years."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Cyprus Ministry of Interior — Citizenship due to Cypriot origin",
@@ -10140,6 +10379,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Denmark UIM - citizenship",
+          "url": "https://uim.dk/arbejdsomraader/statsborgerskab/"
+        }
+      ]
+    },
+    {
+      "id": "denmark-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "208",
+        "name": "Denmark"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Dane may naturalize after six years of residence (vs nine), on a sliding scale by marriage length.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          72
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "denmark-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 72,
+          "note": "Six to eight years by marriage duration; the Danish spouse must have held citizenship ≥3 years. Granted by Act of Parliament."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Denmark UIM - citizenship",
@@ -11539,6 +11814,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Finnish Immigration Service - Finnish citizenship",
+          "url": "https://migri.fi/en/finnish-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "finland-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "246",
+        "name": "Finland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Finn may naturalize after five years of residence, instead of eight.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "finland-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Requires ≥3 years married or cohabiting; the ordinary period rose to eight years in October 2024."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Finnish Immigration Service - Finnish citizenship",
@@ -14353,6 +14664,42 @@
       ]
     },
     {
+      "id": "hungary-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "348",
+        "name": "Hungary"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Preferential naturalization for a spouse after three years of residence and three years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "hungary-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Act LV of 1993 §4(2)."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Hungary Government — acquisition of Hungarian nationality",
+          "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality"
+        }
+      ]
+    },
+    {
       "id": "hungary-citizenship-by-parent-or-simplified-origin",
       "country": {
         "iso_n3": "348",
@@ -14460,6 +14807,42 @@
         {
           "title": "Government of Iceland - citizenship",
           "url": "https://www.government.is/topics/foreign-nationals/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "iceland-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "352",
+        "name": "Iceland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of an Icelander may naturalize after four years of domicile since the marriage, instead of seven.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          48
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "iceland-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 48,
+          "note": "The Icelandic spouse must have been a citizen for at least five years."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Island.is - Icelandic citizenship residence length",
+          "url": "https://island.is/en/electronic-application-for-icelandic-citizenship/when-can-I-apply"
         }
       ]
     },
@@ -17412,6 +17795,42 @@
       ]
     },
     {
+      "id": "liechtenstein-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "438",
+        "name": "Liechtenstein"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Facilitated naturalization for a spouse: post-marriage years count double, so about five years of residence instead of thirty.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "liechtenstein-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Renunciation and German B1 required."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Liechtenstein National Administration - naturalization",
+          "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization"
+        }
+      ]
+    },
+    {
       "id": "liechtenstein-citizenship-by-parent",
       "country": {
         "iso_n3": "438",
@@ -17513,6 +17932,42 @@
         {
           "title": "Lithuania Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Lithuania_2019"
+        }
+      ]
+    },
+    {
+      "id": "lithuania-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "440",
+        "name": "Lithuania"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Lithuanian may naturalize after seven years married and resident, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "lithuania-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Reduced to five years in special cases; granted by presidential decree."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Lithuania Migration Department",
+          "url": "https://www.migracija.lt/home?lang=en"
         }
       ]
     },
@@ -17622,6 +18077,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Luxembourg Guichet - naturalisation",
+          "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html"
+        }
+      ]
+    },
+    {
+      "id": "luxembourg-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "442",
+        "name": "Luxembourg"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Option by marriage: a resident spouse of a Luxembourger has no minimum residence or marriage-duration requirement (language and integration course only).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "luxembourg-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Law of 8 March 2017 art. 21; a non-resident spouse needs three years of marriage."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Luxembourg Guichet - naturalisation",
@@ -18373,6 +18862,40 @@
       ]
     },
     {
+      "id": "malta-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Registration as a spouse after five years of marriage and cohabitation.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malta-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "A marriage-duration route rather than a residence route."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Community Malta Agency — Acquisition of Citizenship",
+          "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/"
+        }
+      ]
+    },
+    {
       "id": "malta-registration-family-descent",
       "country": {
         "iso_n3": "470",
@@ -18951,6 +19474,40 @@
       ]
     },
     {
+      "id": "monaco-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "492",
+        "name": "Monaco"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may acquire Monégasque nationality by declaration after twenty years of marriage and cohabitation (approval-gated).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "monaco-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Loi 1.155/1992; the marriage-duration rule replaces a residence count."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Monaco mon service public - acquiring nationality",
+          "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality"
+        }
+      ]
+    },
+    {
       "id": "monaco-citizenship-by-parent",
       "country": {
         "iso_n3": "492",
@@ -19162,6 +19719,42 @@
       ]
     },
     {
+      "id": "moldova-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "498",
+        "name": "Moldova"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse married to a Moldovan for at least three years may naturalize, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "moldova-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Law on Citizenship 1024/2000."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Moldova Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Moldova_2016"
+        }
+      ]
+    },
+    {
       "id": "moldova-citizenship-by-parent",
       "country": {
         "iso_n3": "498",
@@ -19264,6 +19857,42 @@
         {
           "title": "Montenegro Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Montenegro_2013"
+        }
+      ]
+    },
+    {
+      "id": "montenegro-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "499",
+        "name": "Montenegro"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may naturalize after three years of marriage and five years of lawful residence, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "montenegro-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Renunciation required; language test applies."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "European Commission — Montenegro Report 2023 (ECP discontinued)",
+          "url": "https://enlargement.ec.europa.eu/montenegro-report-2023_en"
         }
       ]
     },
@@ -20160,6 +20789,40 @@
         {
           "title": "Nepal Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Nepal_2015"
+        }
+      ]
+    },
+    {
+      "id": "netherlands-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "528",
+        "name": "Netherlands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The five-year residence rule is waived for a spouse or registered partner; qualify after at least three years living together.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "netherlands-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Can be done from abroad; naturalization is by Royal Decree but granted when conditions are met."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Netherlands — Becoming a Dutch citizen",
+          "url": "https://www.government.nl/themes/migration-and-travel/dutch-citizenship/becoming-a-dutch-citizen"
         }
       ]
     },
@@ -21685,6 +22348,42 @@
       ]
     },
     {
+      "id": "norway-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "578",
+        "name": "Norway"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Norwegian may naturalize after three of the last ten years of residence, instead of eight of eleven.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "norway-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Nationality Act §12; combined marriage and residence must total about seven years."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Norway UDI - citizenship",
+          "url": "https://www.udi.no/en/want-to-apply/citizenship/"
+        }
+      ]
+    },
+    {
       "id": "norway-citizenship-by-parent",
       "country": {
         "iso_n3": "578",
@@ -23200,6 +23899,42 @@
       ]
     },
     {
+      "id": "poland-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "616",
+        "name": "Poland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Recognition as a Polish citizen after two years of permanent/long-term residence and three years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "poland-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 24,
+          "note": "Requires Polish B1; a bound decision refusable only on security grounds."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Poland MSWiA — recognition as a Polish citizen",
+          "url": "https://www.gov.pl/web/mswia-en/apply-to-be-recognised-as-a-polish-citizen"
+        }
+      ]
+    },
+    {
       "id": "poland-citizenship-by-parent",
       "country": {
         "iso_n3": "616",
@@ -23973,6 +24708,42 @@
         {
           "title": "Romania Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Romania_2003"
+        }
+      ]
+    },
+    {
+      "id": "romania-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "642",
+        "name": "Romania"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse resident in and married to a Romanian for at least five years (concurrent) may naturalize, instead of eight.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "romania-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Law 21/1991."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Romania General Inspectorate for Immigration",
+          "url": "https://igi.mai.gov.ro/en/"
         }
       ]
     },
@@ -25810,6 +26581,40 @@
       ]
     },
     {
+      "id": "serbia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "688",
+        "name": "Serbia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of at least three years who holds permanent residence may naturalize, with no separate residence-year count.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "serbia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Citizenship Act art. 12."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Serbian Ministry of Interior — Citizenship",
+          "url": "https://mup.gov.rs/wps/portal/sr/gradjani/dokumenta/Drzavljanstvo/"
+        }
+      ]
+    },
+    {
       "id": "seychelles-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "690",
@@ -26171,6 +26976,42 @@
       ]
     },
     {
+      "id": "slovakia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "703",
+        "name": "Slovakia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Slovak may naturalize after permanent residence and about five years in a common household, instead of eight years of permanent residence.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "slovakia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Act 40/1993 §7; the spouse must already have been Slovak at marriage."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Slovakia IOM MIC - naturalization conditions",
+          "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html"
+        }
+      ]
+    },
+    {
       "id": "slovakia-citizenship-by-parent",
       "country": {
         "iso_n3": "703",
@@ -26377,6 +27218,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Slovenia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Slovenia_2016"
+        }
+      ]
+    },
+    {
+      "id": "slovenia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "705",
+        "name": "Slovenia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Slovenian may naturalize after three years of marriage and one year of continuous residence, exempt from the ten-year bar.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "slovenia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "Citizenship Act art. 12; language test applies."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Slovenia Constitution (Constitute Project)",
@@ -27586,6 +28463,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Swiss SEM — Acquiring Swiss citizenship",
+          "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html"
+        }
+      ]
+    },
+    {
+      "id": "switzerland-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "756",
+        "name": "Switzerland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Facilitated naturalization for a spouse after five years of residence and three years married and living together.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "switzerland-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Alternative from abroad: six years of marriage plus close ties, with no residence."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Swiss SEM — Acquiring Swiss citizenship",
@@ -29255,6 +30168,42 @@
       ]
     },
     {
+      "id": "ukraine-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "804",
+        "name": "Ukraine"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse married for more than two years may naturalize after two years of residence, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ukraine-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Law on Citizenship art. 9."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Ukraine Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+        }
+      ]
+    },
+    {
       "id": "ukraine-citizenship-by-parent",
       "country": {
         "iso_n3": "804",
@@ -29353,6 +30302,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "North Macedonia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Macedonia_2011"
+        }
+      ]
+    },
+    {
+      "id": "north-macedonia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "807",
+        "name": "Macedonia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may naturalize after three years of marriage and one year of residence.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "north-macedonia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "Alternative: married ≥8 years living abroad with effective ties, no residence."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "North Macedonia Constitution (Constitute Project)",
