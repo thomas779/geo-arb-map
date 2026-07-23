@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 618,
+      "routes": 623,
       "by_mode": {
-        "ancestry": 198,
-        "naturalization": 201,
-        "birth": 194,
+        "ancestry": 200,
+        "naturalization": 202,
+        "birth": 196,
         "investment": 25
       },
       "by_status": {
-        "active": 605,
+        "active": 610,
         "pending_verification": 6,
         "inactive": 6,
         "verified_negative": 1
@@ -1233,12 +1233,15 @@
       "name": "Palestine",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "palestine-status-by-descent",
+        "palestine-status-at-birth"
+      ]
     },
     {
       "iso_n3": "276",
@@ -1723,12 +1726,16 @@
       "name": "North Korea",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "north-korea-citizenship-by-parent",
+        "north-korea-naturalization-by-petition",
+        "north-korea-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "410",
@@ -11326,6 +11333,78 @@
       ]
     },
     {
+      "id": "palestine-status-at-birth",
+      "country": {
+        "iso_n3": "275",
+        "name": "Palestine"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Status at birth through a registered parent",
+      "summary": "A child’s status derives from registration in the Palestinian population registry through a registered parent; there is no documented unrestricted birthright (jus soli).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "palestine-status-at-birth-principal",
+          "label": "Status at birth through a registered parent",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Low confidence: registry-based practice under the Oslo framework, not an enacted statute."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Palestine Amended Basic Law (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Palestine_2005"
+        }
+      ]
+    },
+    {
+      "id": "palestine-status-by-descent",
+      "country": {
+        "iso_n3": "275",
+        "name": "Palestine"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Palestinian status/ID through a registered parent",
+      "summary": "In practice, Palestinian hawiya ID and PA-passport eligibility pass to children of those recorded in the Palestinian population registry (parentage plus registration), rather than under a codified sovereign nationality-by-descent law.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "palestine-status-by-descent-principal",
+          "label": "Palestinian status/ID through a registered parent",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Low confidence: rests on the Oslo-era registry system under Israeli control, not settled statute."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Palestine Amended Basic Law (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Palestine_2005"
+        }
+      ]
+    },
+    {
       "id": "germany-citizenship-by-birth",
       "country": {
         "iso_n3": "276",
@@ -14295,6 +14374,110 @@
         {
           "title": "Kenya Immigration — Citizenship section",
           "url": "https://immigration.go.ke/citizenship-section/"
+        }
+      ]
+    },
+    {
+      "id": "north-korea-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "408",
+        "name": "North Korea"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a DPRK parent",
+      "summary": "Citizenship at birth is chiefly by descent from a DPRK parent. A limited territorial provision covers a child of one citizen and one foreign or stateless parent residing in the DPRK; there is no unrestricted jus soli.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "north-korea-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a DPRK parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "North Korea (DPRK) Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Peoples_Republic_of_Korea_2016"
+        }
+      ]
+    },
+    {
+      "id": "north-korea-citizenship-by-parent",
+      "country": {
+        "iso_n3": "408",
+        "name": "North Korea"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "DPRK citizenship through a DPRK parent",
+      "summary": "A child of a DPRK citizen parent is a DPRK citizen by descent (jus sanguinis); conditions apply for children born abroad to a mixed-nationality couple.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "north-korea-citizenship-by-parent-principal",
+          "label": "DPRK citizenship through a DPRK parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "North Korea (DPRK) Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Peoples_Republic_of_Korea_2016"
+        }
+      ]
+    },
+    {
+      "id": "north-korea-naturalization-by-petition",
+      "country": {
+        "iso_n3": "408",
+        "name": "North Korea"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization by petition (discretionary)",
+      "summary": "A stateless person or a foreign citizen may acquire DPRK citizenship by petition to the Presidium of the Supreme People’s Assembly; the law states no explicit residence threshold and grants are rare and opaque.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "north-korea-naturalization-by-petition-principal",
+          "label": "Naturalization by petition (discretionary)",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Low confidence: the petition route is reported in the Nationality Law but procedure and any residence requirement are unverified."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "North Korea (DPRK) Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Peoples_Republic_of_Korea_2016"
         }
       ]
     },

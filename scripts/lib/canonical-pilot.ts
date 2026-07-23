@@ -478,6 +478,8 @@ const OFFICIAL_URLS = {
   yemen_constitution: 'https://www.constituteproject.org/constitution/Yemen_2015',
   san_marino_citizenship_law: 'https://www.consigliograndeegenerale.sm/on-line/documento17134125.html',
   vatican_citizenship_law: 'https://www.vatican.va/roman_curia/secretariat_state/documents/informazione_generale/cittadini-vaticani_en.html',
+  north_korea_constitution: 'https://www.constituteproject.org/constitution/Peoples_Republic_of_Korea_2016',
+  palestine_basic_law: 'https://www.constituteproject.org/constitution/Palestine_2005',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -1097,6 +1099,8 @@ function jurisdictionSources(): SourceRecord[] {
       ['Yemen Constitution (Constitute Project)', OFFICIAL_URLS.yemen_constitution, '887', 'en', 'primary_law', 'yemen-citizenship-law'],
       ['San Marino Citizenship Law No. 114/2000 (Consiglio Grande e Generale)', OFFICIAL_URLS.san_marino_citizenship_law, '674', 'en', 'primary_law', 'san-marino-citizenship-law'],
       ['Vatican City citizenship (Holy See official overview)', OFFICIAL_URLS.vatican_citizenship_law, '336', 'en', 'official_guidance', 'vatican-citizenship-law'],
+      ['North Korea (DPRK) Constitution (Constitute Project)', OFFICIAL_URLS.north_korea_constitution, '408', 'en', 'primary_law', 'north-korea-citizenship-law'],
+      ['Palestine Amended Basic Law (Constitute Project)', OFFICIAL_URLS.palestine_basic_law, '275', 'en', 'primary_law', 'palestine-citizenship-law'],
 
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
@@ -14985,6 +14989,101 @@ function yemenRecord(shadow: DataShadow, officialSources: SourceRecord[]): Juris
   });
 }
 
+function northKoreaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.north_korea_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '408',
+    note: 'Reviewed against the DPRK constitutional framework and the Nationality Law (1963, amended 1995/1999). DPRK nationality information is opaque and rests on an unofficial English translation; confidence is limited. Dual nationality is unclear (bilateral treaties may override the law). No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution], note: 'A petition route exists on paper; procedure and any residence requirement are unverified.' },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent DPRK national; limited territorial provisions, no unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme; naturalization is discretionary by petition only.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'north-korea-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'DPRK citizenship through a DPRK parent',
+        summary: 'A child of a DPRK citizen parent is a DPRK citizen by descent (jus sanguinis); conditions apply for children born abroad to a mixed-nationality couple.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '408' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+      }),
+      principalCitizenshipRoute({
+        id: 'north-korea-naturalization-by-petition',
+        mode: 'naturalization',
+        title: 'Naturalization by petition (discretionary)',
+        summary: 'A stateless person or a foreign citizen may acquire DPRK citizenship by petition to the Presidium of the Supreme People’s Assembly; the law states no explicit residence threshold and grants are rare and opaque.',
+        source: constitution,
+        eligibility: [{ field: 'application.petition', operator: 'exists', value: true }],
+        months: null,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Low confidence: the petition route is reported in the Nationality Law but procedure and any residence requirement are unverified.',
+      }),
+      principalCitizenshipRoute({
+        id: 'north-korea-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a DPRK parent',
+        summary: 'Citizenship at birth is chiefly by descent from a DPRK parent. A limited territorial provision covers a child of one citizen and one foreign or stateless parent residing in the DPRK; there is no unrestricted jus soli.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '408' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+      }),
+    ],
+  });
+}
+
+function palestineRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const basicLaw = requireSource(officialSources, OFFICIAL_URLS.palestine_basic_law);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '275',
+    note: 'Reviewed against the Palestinian Amended Basic Law (art. 7: "Palestinian citizenship shall be regulated by law"). Note: there is no single settled, in-force sovereign nationality law; in practice status flows through the Oslo-era population registry, the hawiya ID, and the PA passport, subject to Israeli control over the registry. UNRWA refugee registration and other nationalities held (notably Jordanian) are distinct from Palestinian nationality, and PA-passport recognition by some states does not imply recognition of citizenship. All findings are provisional and low-confidence; this record takes no political position. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [basicLaw], note: 'Low confidence: registry/parentage practice, not an enacted nationality-by-descent statute.' },
+      { mode: 'naturalization', finding: 'verified_none', sources: [basicLaw], note: 'No operative codified route: the Basic Law defers citizenship to a law not comprehensively enacted, and the 2012 draft nationality law was never adopted.' },
+      { mode: 'birth', finding: 'present', sources: [basicLaw], note: 'Low confidence: status at birth via population registry and parentage; no unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [basicLaw], note: 'No citizenship- or residency-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'palestine-status-by-descent',
+        mode: 'ancestry',
+        title: 'Palestinian status/ID through a registered parent',
+        summary: 'In practice, Palestinian hawiya ID and PA-passport eligibility pass to children of those recorded in the Palestinian population registry (parentage plus registration), rather than under a codified sovereign nationality-by-descent law.',
+        source: basicLaw,
+        eligibility: [{ field: 'parent.in_palestinian_population_registry', operator: 'eq', value: true }],
+        months: 0,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Low confidence: rests on the Oslo-era registry system under Israeli control, not settled statute.',
+      }),
+      principalCitizenshipRoute({
+        id: 'palestine-status-at-birth',
+        mode: 'birth',
+        title: 'Status at birth through a registered parent',
+        summary: 'A child’s status derives from registration in the Palestinian population registry through a registered parent; there is no documented unrestricted birthright (jus soli).',
+        source: basicLaw,
+        eligibility: [{ field: 'parent.in_palestinian_population_registry', operator: 'eq', value: true }],
+        months: 0,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Low confidence: registry-based practice under the Oslo framework, not an enacted statute.',
+      }),
+    ],
+  });
+}
+
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
   const jurisdictions = [
@@ -15116,11 +15215,13 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     nicaraguaRecord(shadow, countrySources),
     nigeriaRecord(shadow, countrySources),
     nigerRecord(shadow, countrySources),
+    northKoreaRecord(shadow, countrySources),
     northMacedoniaRecord(shadow, countrySources),
     norwayRecord(shadow, countrySources),
     omanRecord(shadow, countrySources),
     pakistanRecord(shadow, countrySources),
     palauRecord(shadow, countrySources),
+    palestineRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
     papuaNewGuineaRecord(shadow, countrySources),
     paraguayRecord(shadow, countrySources),
