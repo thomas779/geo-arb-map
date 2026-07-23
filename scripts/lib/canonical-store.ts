@@ -7,7 +7,7 @@ import type {
   SourceRecord,
 } from './canonical-schema';
 import { JurisdictionRecordV1Schema } from './canonical-schema';
-import type { CanonicalPilot } from './canonical-pilot';
+import type { CanonicalPilot } from './canonical-pilot-types';
 
 type CanonicalRecord = SourceRecord | JurisdictionRecord | JurisdictionRecordV1 | ArrangementRecord;
 export type CanonicalSqlValue = string | number | null;

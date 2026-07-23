@@ -6,9 +6,9 @@ import {
   type JurisdictionRegistry,
   type SourceManifest,
 } from '../monitor/sources/audit';
-import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
+import { buildCanonicalPilot, CANONICAL_SOURCE_IS_SAMPLE } from '../scripts/lib/canonical-source';
 
-describe('monitoring source coverage audit', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('monitoring source coverage audit', () => {
   const canonical = buildCanonicalPilot();
   const audit = buildMonitoringCoverageAudit(
     registry as JurisdictionRegistry,

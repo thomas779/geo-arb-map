@@ -2,7 +2,7 @@ import { Database } from 'bun:sqlite';
 import { describe, expect, test } from 'bun:test';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
+import { buildCanonicalPilot, CANONICAL_SOURCE_IS_SAMPLE } from '../scripts/lib/canonical-source';
 import { readCanonicalMigrations } from '../scripts/lib/d1-migrations';
 import {
   applyCanonicalMutations,
@@ -34,7 +34,7 @@ function importedDatabase(): {
   };
 }
 
-describe('canonical SQL import and projections', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('canonical SQL import and projections', () => {
   test('imports every pilot entity deterministically as an unpublished draft', () => {
     const first = importedDatabase();
     const second = importedDatabase();

@@ -3,11 +3,11 @@ import {
   CANONICAL_SCHEMAS,
   ChangeProposalSchema,
 } from '../scripts/lib/canonical-schema';
-import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
+import { buildCanonicalPilot, CANONICAL_SOURCE_IS_SAMPLE } from '../scripts/lib/canonical-source';
 
 const pilot = buildCanonicalPilot();
 
-describe('canonical data schemas', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('canonical data schemas', () => {
   test('all pilot candidates validate against executable schemas', () => {
     for (const source of pilot.sources) {
       expect(CANONICAL_SCHEMAS.source.safeParse(source).success).toBe(true);

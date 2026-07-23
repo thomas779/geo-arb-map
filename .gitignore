@@ -18,6 +18,11 @@ monitor/cloudflare/.wrangler/
 .env.*
 claude_code_zai_env.sh
 
+# private master dataset — kept local, synced to D1 (backed up to R2).
+# Forks/CI fall back to canonical-pilot.sample.json via canonical-source.ts.
+# See docs/adding-jurisdictions.md.
+scripts/lib/canonical-pilot.ts
+
 # OS / editor noise
 .DS_Store
 Thumbs.db

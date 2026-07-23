@@ -24,9 +24,18 @@ its mode-coverage cells are `reviewed`, each finding is `present` or a sourced
 
 ## Files you touch per batch
 
+> **Private dataset.** `scripts/lib/canonical-pilot.ts` is the master dataset
+> and is **gitignored** — it lives only in the maintainer's environment and is
+> synced to the D1 canonical store (backed up to R2). It is never committed;
+> keep your local copy backed up. Forks and public CI fall back to
+> `canonical-pilot.sample.json` through `scripts/lib/canonical-source.ts`. After
+> editing the master, refresh the public sample with
+> `bun scripts/build_canonical_sample.ts`.
+
 Hand-edited inputs:
 
-1. **`scripts/lib/canonical-pilot.ts`** — the authoring source of truth.
+1. **`scripts/lib/canonical-pilot.ts`** — the authoring source of truth
+   (private; see the note above).
    - Add the official source URL(s) to the `OFFICIAL_URLS` map.
    - Add a row to the `jurisdictionSources()` tuple table:
      `['<Title>', OFFICIAL_URLS.<key>, '<iso_n3>', '<lang>', '<source_type>', '<monitor-id>']`.

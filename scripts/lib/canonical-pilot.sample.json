@@ -1,0 +1,1903 @@
+{
+  "shadow_release_id": "d35f913f2267c8b4",
+  "sources": [
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:cip_gov_ag:4ea5c592d5",
+      "title": "Antigua and Barbuda CIU — Investment options",
+      "url": "https://cip.gov.ag/citizenship/",
+      "publisher": "cip.gov.ag",
+      "source_type": "official_guidance",
+      "jurisdictions": [
+        "028"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "antigua-citizenship-law",
+        "method": "http",
+        "url": "https://cip.gov.ag/citizenship/",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:cip_gov_ag:6322eb0964",
+      "title": "Antigua and Barbuda Citizenship by Investment Act",
+      "url": "https://cip.gov.ag/wp-content/uploads/2013/10/Antigua-and-Barbuda-Citizenship-by-Investment-Act-2013.pdf",
+      "publisher": "cip.gov.ag",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "028"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "antigua-citizenship-law",
+        "method": "http",
+        "url": "https://cip.gov.ag/wp-content/uploads/2013/10/Antigua-and-Barbuda-Citizenship-by-Investment-Act-2013.pdf",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:cip_gov_ag:ba26d76912",
+      "title": "Antigua and Barbuda Citizenship by Investment Unit",
+      "url": "https://cip.gov.ag/home",
+      "publisher": "cip.gov.ag",
+      "source_type": "official_guidance",
+      "jurisdictions": [
+        "028"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "antigua-citizenship-law",
+        "method": "http",
+        "url": "https://cip.gov.ag/home",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:constituteproject_org:61e09516b9",
+      "title": "Afghanistan Constitution (Constitute Project)",
+      "url": "https://www.constituteproject.org/constitution/Afghanistan_2004",
+      "publisher": "constituteproject.org",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "004"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "afghanistan-citizenship-law",
+        "method": "http",
+        "url": "https://www.constituteproject.org/constitution/Afghanistan_2004",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:constituteproject_org:e8720794fa",
+      "title": "Andorra Constitution (Constitute Project)",
+      "url": "https://www.constituteproject.org/constitution/Andorra_1993",
+      "publisher": "constituteproject.org",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "020"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "andorra-citizenship-law",
+        "method": "http",
+        "url": "https://www.constituteproject.org/constitution/Andorra_1993",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:constituteproject_org:ea9670bc71",
+      "title": "Angola Constitution (Constitute Project)",
+      "url": "https://www.constituteproject.org/constitution/Angola_2010",
+      "publisher": "constituteproject.org",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "024"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "angola-citizenship-law",
+        "method": "http",
+        "url": "https://www.constituteproject.org/constitution/Angola_2010",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:constituteproject_org:facdfc6d39",
+      "title": "Albania Constitution (Constitute Project)",
+      "url": "https://www.constituteproject.org/constitution/Albania_2016",
+      "publisher": "constituteproject.org",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "008"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "albania-citizenship-law",
+        "method": "http",
+        "url": "https://www.constituteproject.org/constitution/Albania_2016",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:data_globalcit_eu:d50a69a54f",
+      "title": "Algeria Nationality Code (English text)",
+      "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf",
+      "publisher": "data.globalcit.eu",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "012"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "algeria-citizenship-law",
+        "method": "http",
+        "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:govern_ad:d03556c426",
+      "title": "Government of Andorra",
+      "url": "https://www.govern.ad/en",
+      "publisher": "govern.ad",
+      "source_type": "official_guidance",
+      "jurisdictions": [
+        "020"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "andorra-citizenship-law",
+        "method": "http",
+        "url": "https://www.govern.ad/en",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:immigration_gov_ag:a8c9cb21c0",
+      "title": "Antigua and Barbuda Immigration — Citizenship FAQs",
+      "url": "https://immigration.gov.ag/frequently-asked-questions/citizenship-permit-faqs/",
+      "publisher": "immigration.gov.ag",
+      "source_type": "official_guidance",
+      "jurisdictions": [
+        "028"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "antigua-citizenship-law",
+        "method": "http",
+        "url": "https://immigration.gov.ag/frequently-asked-questions/citizenship-permit-faqs/",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:laws_gov_ag:74d7f19d29",
+      "title": "Antigua and Barbuda Citizenship Act",
+      "url": "https://laws.gov.ag/wp-content/uploads/2018/08/cap-22.pdf",
+      "publisher": "laws.gov.ag",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "028"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "antigua-citizenship-law",
+        "method": "http",
+        "url": "https://laws.gov.ag/wp-content/uploads/2018/08/cap-22.pdf",
+        "status": "active"
+      }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:legislation_gov_uk:36c6a8f610",
+      "title": "Constitution of Antigua and Barbuda",
+      "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made",
+      "publisher": "legislation.gov.uk",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "028"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-21",
+      "monitoring": {
+        "source_id": "antigua-citizenship-law",
+        "method": "http",
+        "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made",
+        "status": "active"
+      }
+    }
+  ],
+  "jurisdictions": [
+    {
+      "schema_version": 2,
+      "entity_type": "jurisdiction",
+      "id": "jurisdiction:004",
+      "jurisdiction": {
+        "iso_n3": "004",
+        "name": "Afghanistan",
+        "type": "sovereign"
+      },
+      "review": {
+        "state": "reviewed",
+        "confidence": "high",
+        "last_checked": "2026-07-21",
+        "note": "Reviewed against the Afghan constitutional and nationality-law framework. Descent is the dominant route; dual citizenship is not officially recognized. Administration of naturalization is operationally uncertain under the current de facto authorities. No CBI."
+      },
+      "coverage": [
+        {
+          "mode": "ancestry",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:61e09516b9",
+              "supports_fields": [
+                "/coverage/ancestry"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "naturalization",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:61e09516b9",
+              "supports_fields": [
+                "/coverage/naturalization"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "birth",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "Parent Afghan national; not unrestricted jus soli."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:61e09516b9",
+              "supports_fields": [
+                "/coverage/birth"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "investment",
+          "finding": "verified_none",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "No citizenship-by-investment programme."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:61e09516b9",
+              "supports_fields": [
+                "/coverage/investment"
+              ]
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "afghanistan-citizenship-by-parent",
+          "mode": "ancestry",
+          "status": "active",
+          "title": "Afghan citizenship through an Afghan parent",
+          "summary": "A child with at least one Afghan citizen parent is an Afghan citizen (jus sanguinis), regardless of birthplace; paternal transmission is clearly established, maternal transmission less certain in practice.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-23"
+          },
+          "variants": [
+            {
+              "id": "afghanistan-citizenship-by-parent-principal",
+              "label": "Afghan citizenship through an Afghan parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "004"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:61e09516b9",
+                  "supports_fields": [
+                    "/routes/afghanistan-citizenship-by-parent/summary",
+                    "/routes/afghanistan-citizenship-by-parent/variants/afghanistan-citizenship-by-parent-principal/eligibility",
+                    "/routes/afghanistan-citizenship-by-parent/variants/afghanistan-citizenship-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "afghanistan-naturalization",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization after about five years residence",
+          "summary": "The nationality law provides for naturalization after roughly five years of lawful residence plus integration and Ministry of Interior approval; grant is discretionary.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "medium",
+            "last_checked": "2026-07-23"
+          },
+          "variants": [
+            {
+              "id": "afghanistan-naturalization-principal",
+              "label": "Naturalization after about five years residence",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "residence.years",
+                  "operator": "gte",
+                  "value": 5,
+                  "unit": "years"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 60
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 60,
+                "processing_typical_months": null,
+                "confidence": "medium",
+                "note": "Five-year figure from secondary sources; current administration of naturalization under the de facto authorities is uncertain and requires verification."
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:61e09516b9",
+                  "supports_fields": [
+                    "/routes/afghanistan-naturalization/summary",
+                    "/routes/afghanistan-naturalization/variants/afghanistan-naturalization-principal/eligibility",
+                    "/routes/afghanistan-naturalization/variants/afghanistan-naturalization-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "afghanistan-citizenship-at-birth-by-parent",
+          "mode": "birth",
+          "status": "active",
+          "title": "Citizenship at birth through an Afghan parent",
+          "summary": "Birth to an Afghan parent creates nationality. Birth in Afghanistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-23"
+          },
+          "variants": [
+            {
+              "id": "afghanistan-citizenship-at-birth-by-parent-principal",
+              "label": "Citizenship at birth through an Afghan parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "004"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:61e09516b9",
+                  "supports_fields": [
+                    "/routes/afghanistan-citizenship-at-birth-by-parent/summary",
+                    "/routes/afghanistan-citizenship-at-birth-by-parent/variants/afghanistan-citizenship-at-birth-by-parent-principal/eligibility",
+                    "/routes/afghanistan-citizenship-at-birth-by-parent/variants/afghanistan-citizenship-at-birth-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schema_version": 2,
+      "entity_type": "jurisdiction",
+      "id": "jurisdiction:008",
+      "jurisdiction": {
+        "iso_n3": "008",
+        "name": "Albania",
+        "type": "sovereign"
+      },
+      "review": {
+        "state": "reviewed",
+        "confidence": "high",
+        "last_checked": "2026-07-21",
+        "note": "Reviewed against Albanian constitutional nationality framework. Ordinary naturalization commonly about five years residence. No CBI."
+      },
+      "coverage": [
+        {
+          "mode": "ancestry",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:facdfc6d39",
+              "supports_fields": [
+                "/coverage/ancestry"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "naturalization",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:facdfc6d39",
+              "supports_fields": [
+                "/coverage/naturalization"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "birth",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "Parent Albania national; not unrestricted jus soli."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:facdfc6d39",
+              "supports_fields": [
+                "/coverage/birth"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "investment",
+          "finding": "verified_none",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "No citizenship-by-investment programme modeled."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:facdfc6d39",
+              "supports_fields": [
+                "/coverage/investment"
+              ]
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "albania-citizenship-by-parent",
+          "mode": "ancestry",
+          "status": "active",
+          "title": "Albania nationality through a Albania parent",
+          "summary": "A child of a Albania parent is a national under the constitutional nationality framework and nationality statute.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "albania-citizenship-by-parent-principal",
+              "label": "Albania nationality through a Albania parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "008"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:facdfc6d39",
+                  "supports_fields": [
+                    "/routes/albania-citizenship-by-parent/summary",
+                    "/routes/albania-citizenship-by-parent/variants/albania-citizenship-by-parent-principal/eligibility",
+                    "/routes/albania-citizenship-by-parent/variants/albania-citizenship-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "albania-naturalization",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization after about 5 years residence",
+          "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "medium",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "albania-naturalization-principal",
+              "label": "Naturalization after about 5 years residence",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "residence.years",
+                  "operator": "gte",
+                  "value": 5,
+                  "unit": "years"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 60
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 60,
+                "processing_typical_months": null,
+                "confidence": "medium",
+                "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:facdfc6d39",
+                  "supports_fields": [
+                    "/routes/albania-naturalization/summary",
+                    "/routes/albania-naturalization/variants/albania-naturalization-principal/eligibility",
+                    "/routes/albania-naturalization/variants/albania-naturalization-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "albania-citizenship-at-birth-by-parent",
+          "mode": "birth",
+          "status": "active",
+          "title": "Citizenship at birth through a Albania parent",
+          "summary": "Birth to a Albania parent creates nationality. Birth in Albania alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "albania-citizenship-at-birth-by-parent-principal",
+              "label": "Citizenship at birth through a Albania parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "008"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:facdfc6d39",
+                  "supports_fields": [
+                    "/routes/albania-citizenship-at-birth-by-parent/summary",
+                    "/routes/albania-citizenship-at-birth-by-parent/variants/albania-citizenship-at-birth-by-parent-principal/eligibility",
+                    "/routes/albania-citizenship-at-birth-by-parent/variants/albania-citizenship-at-birth-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schema_version": 2,
+      "entity_type": "jurisdiction",
+      "id": "jurisdiction:012",
+      "jurisdiction": {
+        "iso_n3": "012",
+        "name": "Algeria",
+        "type": "sovereign"
+      },
+      "review": {
+        "state": "reviewed",
+        "confidence": "high",
+        "last_checked": "2026-07-21",
+        "note": "Reviewed against the Algerian Nationality Code. No CBI."
+      },
+      "coverage": [
+        {
+          "mode": "ancestry",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:data_globalcit_eu:d50a69a54f",
+              "supports_fields": [
+                "/coverage/ancestry"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "naturalization",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:data_globalcit_eu:d50a69a54f",
+              "supports_fields": [
+                "/coverage/naturalization"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "birth",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "Parent Algerian; not unrestricted jus soli."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:data_globalcit_eu:d50a69a54f",
+              "supports_fields": [
+                "/coverage/birth"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "investment",
+          "finding": "verified_none",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "No citizenship-by-investment programme."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:data_globalcit_eu:d50a69a54f",
+              "supports_fields": [
+                "/coverage/investment"
+              ]
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "algeria-citizenship-by-parent",
+          "mode": "ancestry",
+          "status": "active",
+          "title": "Algerian nationality through an Algerian parent",
+          "summary": "A child of an Algerian parent is Algerian under the Nationality Code.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "algeria-citizenship-by-parent-principal",
+              "label": "Algerian nationality through an Algerian parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "012"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:data_globalcit_eu:d50a69a54f",
+                  "supports_fields": [
+                    "/routes/algeria-citizenship-by-parent/summary",
+                    "/routes/algeria-citizenship-by-parent/variants/algeria-citizenship-by-parent-principal/eligibility",
+                    "/routes/algeria-citizenship-by-parent/variants/algeria-citizenship-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "algeria-naturalization",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization after seven years residence",
+          "summary": "Adults generally need seven years residence in Algeria, assimilation into Algerian society, livelihood, good character, and majority. Naturalization is by decree and discretionary.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "algeria-naturalization-principal",
+              "label": "Naturalization after seven years residence",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "residence.years",
+                  "operator": "gte",
+                  "value": 7,
+                  "unit": "years"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 84
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 84,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:data_globalcit_eu:d50a69a54f",
+                  "supports_fields": [
+                    "/routes/algeria-naturalization/summary",
+                    "/routes/algeria-naturalization/variants/algeria-naturalization-principal/eligibility",
+                    "/routes/algeria-naturalization/variants/algeria-naturalization-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "algeria-citizenship-at-birth-by-parent",
+          "mode": "birth",
+          "status": "active",
+          "title": "Citizenship at birth through an Algerian parent",
+          "summary": "Birth to an Algerian parent creates Algerian nationality. Birth in Algeria alone to two foreign parents is not unrestricted jus soli.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "algeria-citizenship-at-birth-by-parent-principal",
+              "label": "Citizenship at birth through an Algerian parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "012"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:data_globalcit_eu:d50a69a54f",
+                  "supports_fields": [
+                    "/routes/algeria-citizenship-at-birth-by-parent/summary",
+                    "/routes/algeria-citizenship-at-birth-by-parent/variants/algeria-citizenship-at-birth-by-parent-principal/eligibility",
+                    "/routes/algeria-citizenship-at-birth-by-parent/variants/algeria-citizenship-at-birth-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schema_version": 2,
+      "entity_type": "jurisdiction",
+      "id": "jurisdiction:020",
+      "jurisdiction": {
+        "iso_n3": "020",
+        "name": "Andorra",
+        "type": "sovereign"
+      },
+      "review": {
+        "state": "reviewed",
+        "confidence": "high",
+        "last_checked": "2026-07-21",
+        "note": "Reviewed against Andorran nationality framework. Long residence path; renunciation of prior nationality required. No CBI."
+      },
+      "coverage": [
+        {
+          "mode": "ancestry",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:e8720794fa",
+              "supports_fields": [
+                "/coverage/ancestry"
+              ]
+            },
+            {
+              "source_id": "source:govern_ad:d03556c426",
+              "supports_fields": [
+                "/coverage/ancestry"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "naturalization",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:e8720794fa",
+              "supports_fields": [
+                "/coverage/naturalization"
+              ]
+            },
+            {
+              "source_id": "source:govern_ad:d03556c426",
+              "supports_fields": [
+                "/coverage/naturalization"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "birth",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "Parent Andorran; not general jus soli."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:e8720794fa",
+              "supports_fields": [
+                "/coverage/birth"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "investment",
+          "finding": "verified_none",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "Residence by investment products are not citizenship."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:govern_ad:d03556c426",
+              "supports_fields": [
+                "/coverage/investment"
+              ]
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "andorra-citizenship-by-parent",
+          "mode": "ancestry",
+          "status": "active",
+          "title": "Andorran nationality through an Andorran parent",
+          "summary": "A child of an Andorran parent is Andorran under nationality law, subject to registration rules for birth abroad.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "andorra-citizenship-by-parent-principal",
+              "label": "Andorran nationality through an Andorran parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "020"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:e8720794fa",
+                  "supports_fields": [
+                    "/routes/andorra-citizenship-by-parent/summary",
+                    "/routes/andorra-citizenship-by-parent/variants/andorra-citizenship-by-parent-principal/eligibility",
+                    "/routes/andorra-citizenship-by-parent/variants/andorra-citizenship-by-parent-principal/timeline"
+                  ]
+                },
+                {
+                  "source_id": "source:govern_ad:d03556c426",
+                  "supports_fields": [
+                    "/routes/andorra-citizenship-by-parent/summary",
+                    "/routes/andorra-citizenship-by-parent/variants/andorra-citizenship-by-parent-principal/eligibility",
+                    "/routes/andorra-citizenship-by-parent/variants/andorra-citizenship-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "andorra-naturalization",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization after long residence",
+          "summary": "Ordinary naturalization generally requires about twenty years permanent residence (ten if educated in Andorra), integration, and renunciation of prior nationality. Grant is discretionary.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "andorra-naturalization-principal",
+              "label": "Naturalization after long residence",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "residence.permanent_years",
+                  "operator": "gte",
+                  "value": 20,
+                  "unit": "years"
+                },
+                {
+                  "field": "prior_nationality.renounced_or_will_cease",
+                  "operator": "eq",
+                  "value": true
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 240
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 240,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:e8720794fa",
+                  "supports_fields": [
+                    "/routes/andorra-naturalization/summary",
+                    "/routes/andorra-naturalization/variants/andorra-naturalization-principal/eligibility",
+                    "/routes/andorra-naturalization/variants/andorra-naturalization-principal/timeline"
+                  ]
+                },
+                {
+                  "source_id": "source:govern_ad:d03556c426",
+                  "supports_fields": [
+                    "/routes/andorra-naturalization/summary",
+                    "/routes/andorra-naturalization/variants/andorra-naturalization-principal/eligibility",
+                    "/routes/andorra-naturalization/variants/andorra-naturalization-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "andorra-citizenship-at-birth-by-parent",
+          "mode": "birth",
+          "status": "active",
+          "title": "Citizenship at birth through an Andorran parent",
+          "summary": "Birth to an Andorran parent creates Andorran nationality. Birth in Andorra alone to two foreign parents is not general jus soli.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "andorra-citizenship-at-birth-by-parent-principal",
+              "label": "Citizenship at birth through an Andorran parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "020"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:e8720794fa",
+                  "supports_fields": [
+                    "/routes/andorra-citizenship-at-birth-by-parent/summary",
+                    "/routes/andorra-citizenship-at-birth-by-parent/variants/andorra-citizenship-at-birth-by-parent-principal/eligibility",
+                    "/routes/andorra-citizenship-at-birth-by-parent/variants/andorra-citizenship-at-birth-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schema_version": 2,
+      "entity_type": "jurisdiction",
+      "id": "jurisdiction:024",
+      "jurisdiction": {
+        "iso_n3": "024",
+        "name": "Angola",
+        "type": "sovereign"
+      },
+      "review": {
+        "state": "reviewed",
+        "confidence": "high",
+        "last_checked": "2026-07-21",
+        "note": "Reviewed against Angolan constitutional nationality framework. Ordinary naturalization after long residence. No CBI."
+      },
+      "coverage": [
+        {
+          "mode": "ancestry",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:ea9670bc71",
+              "supports_fields": [
+                "/coverage/ancestry"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "naturalization",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:ea9670bc71",
+              "supports_fields": [
+                "/coverage/naturalization"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "birth",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "Parent Angolan; not unrestricted jus soli."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:ea9670bc71",
+              "supports_fields": [
+                "/coverage/birth"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "investment",
+          "finding": "verified_none",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21",
+            "note": "No citizenship-by-investment programme."
+          },
+          "source_refs": [
+            {
+              "source_id": "source:constituteproject_org:ea9670bc71",
+              "supports_fields": [
+                "/coverage/investment"
+              ]
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "angola-citizenship-by-parent",
+          "mode": "ancestry",
+          "status": "active",
+          "title": "Angolan nationality through an Angolan parent",
+          "summary": "A child of an Angolan parent is Angolan under nationality law.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "angola-citizenship-by-parent-principal",
+              "label": "Angolan nationality through an Angolan parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "024"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:ea9670bc71",
+                  "supports_fields": [
+                    "/routes/angola-citizenship-by-parent/summary",
+                    "/routes/angola-citizenship-by-parent/variants/angola-citizenship-by-parent-principal/eligibility",
+                    "/routes/angola-citizenship-by-parent/variants/angola-citizenship-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "angola-naturalization",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization after ten years residence",
+          "summary": "Adults generally need about ten years habitual and regular residence, Portuguese language and civic knowledge, livelihood, and good character. Naturalization is discretionary.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "angola-naturalization-principal",
+              "label": "Naturalization after ten years residence",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "residence.regular_years",
+                  "operator": "gte",
+                  "value": 10,
+                  "unit": "years"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 120
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 120,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:ea9670bc71",
+                  "supports_fields": [
+                    "/routes/angola-naturalization/summary",
+                    "/routes/angola-naturalization/variants/angola-naturalization-principal/eligibility",
+                    "/routes/angola-naturalization/variants/angola-naturalization-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "angola-citizenship-at-birth-by-parent",
+          "mode": "birth",
+          "status": "active",
+          "title": "Citizenship at birth through an Angolan parent",
+          "summary": "Birth to an Angolan parent creates Angolan nationality. Birth in Angola alone to two foreign parents is not unrestricted jus soli.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-22"
+          },
+          "variants": [
+            {
+              "id": "angola-citizenship-at-birth-by-parent-principal",
+              "label": "Citizenship at birth through an Angolan parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "024"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:ea9670bc71",
+                  "supports_fields": [
+                    "/routes/angola-citizenship-at-birth-by-parent/summary",
+                    "/routes/angola-citizenship-at-birth-by-parent/variants/angola-citizenship-at-birth-by-parent-principal/eligibility",
+                    "/routes/angola-citizenship-at-birth-by-parent/variants/angola-citizenship-at-birth-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "schema_version": 2,
+      "entity_type": "jurisdiction",
+      "id": "jurisdiction:028",
+      "jurisdiction": {
+        "iso_n3": "028",
+        "name": "Antigua and Barbuda",
+        "type": "sovereign"
+      },
+      "review": {
+        "state": "reviewed",
+        "confidence": "high",
+        "last_checked": "2026-07-21",
+        "note": "All acquisition modes reviewed against the Constitution, Citizenship Act and current Citizenship by Investment Unit options."
+      },
+      "coverage": [
+        {
+          "mode": "ancestry",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:legislation_gov_uk:36c6a8f610",
+              "supports_fields": [
+                "/coverage/ancestry"
+              ]
+            },
+            {
+              "source_id": "source:laws_gov_ag:74d7f19d29",
+              "supports_fields": [
+                "/coverage/ancestry"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "naturalization",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:laws_gov_ag:74d7f19d29",
+              "supports_fields": [
+                "/coverage/naturalization"
+              ]
+            },
+            {
+              "source_id": "source:immigration_gov_ag:a8c9cb21c0",
+              "supports_fields": [
+                "/coverage/naturalization"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "birth",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:legislation_gov_uk:36c6a8f610",
+              "supports_fields": [
+                "/coverage/birth"
+              ]
+            }
+          ]
+        },
+        {
+          "mode": "investment",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:cip_gov_ag:6322eb0964",
+              "supports_fields": [
+                "/coverage/investment"
+              ]
+            },
+            {
+              "source_id": "source:cip_gov_ag:4ea5c592d5",
+              "supports_fields": [
+                "/coverage/investment"
+              ]
+            }
+          ]
+        }
+      ],
+      "routes": [
+        {
+          "id": "antigua-barbuda-citizenship-by-parent",
+          "mode": "ancestry",
+          "status": "active",
+          "title": "Citizenship through a citizen parent",
+          "summary": "A person born abroad acquires citizenship at birth through a qualifying Antigua and Barbuda citizen parent under section 113 of the Constitution.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "variants": [
+            {
+              "id": "antigua-barbuda-citizenship-by-parent-principal",
+              "label": "Citizenship through a citizen parent",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "parent.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "028"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:legislation_gov_uk:36c6a8f610",
+                  "supports_fields": [
+                    "/routes/antigua-barbuda-citizenship-by-parent/summary",
+                    "/routes/antigua-barbuda-citizenship-by-parent/variants/antigua-barbuda-citizenship-by-parent-principal/eligibility",
+                    "/routes/antigua-barbuda-citizenship-by-parent/variants/antigua-barbuda-citizenship-by-parent-principal/timeline"
+                  ]
+                },
+                {
+                  "source_id": "source:laws_gov_ag:74d7f19d29",
+                  "supports_fields": [
+                    "/routes/antigua-barbuda-citizenship-by-parent/summary",
+                    "/routes/antigua-barbuda-citizenship-by-parent/variants/antigua-barbuda-citizenship-by-parent-principal/eligibility",
+                    "/routes/antigua-barbuda-citizenship-by-parent/variants/antigua-barbuda-citizenship-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "antigua-barbuda-naturalization",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization after a qualifying residence period",
+          "summary": "The Citizenship Act requires residence throughout the twelve months immediately before application and at least five aggregate years during the preceding seven-year period.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "variants": [
+            {
+              "id": "antigua-barbuda-naturalization-principal",
+              "label": "Naturalization after a qualifying residence period",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "residence.final_twelve_months_continuous",
+                  "operator": "eq",
+                  "value": true
+                },
+                {
+                  "field": "residence.prior_seven_years_months",
+                  "operator": "gte",
+                  "value": 60,
+                  "unit": "months"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 96
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 96,
+                "processing_typical_months": null,
+                "confidence": "high",
+                "note": "The eight-year window contains a continuous final year plus five aggregate years in the preceding seven; it is not an eight-year continuous-residence rule."
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:laws_gov_ag:74d7f19d29",
+                  "supports_fields": [
+                    "/routes/antigua-barbuda-naturalization/summary",
+                    "/routes/antigua-barbuda-naturalization/variants/antigua-barbuda-naturalization-principal/eligibility",
+                    "/routes/antigua-barbuda-naturalization/variants/antigua-barbuda-naturalization-principal/timeline"
+                  ]
+                },
+                {
+                  "source_id": "source:immigration_gov_ag:a8c9cb21c0",
+                  "supports_fields": [
+                    "/routes/antigua-barbuda-naturalization/summary",
+                    "/routes/antigua-barbuda-naturalization/variants/antigua-barbuda-naturalization-principal/eligibility",
+                    "/routes/antigua-barbuda-naturalization/variants/antigua-barbuda-naturalization-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "antigua-barbuda-citizenship-by-birth",
+          "mode": "birth",
+          "status": "active",
+          "title": "Citizenship by birth in Antigua and Barbuda",
+          "summary": "A person born in Antigua and Barbuda acquires citizenship at birth, subject to the Constitution’s diplomatic-immunity and hostile-occupation exceptions.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-21"
+          },
+          "variants": [
+            {
+              "id": "antigua-barbuda-citizenship-by-birth-principal",
+              "label": "Citizenship by birth in Antigua and Barbuda",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "birth.jurisdiction",
+                  "operator": "eq",
+                  "value": "028"
+                },
+                {
+                  "field": "birth.constitutional_exception",
+                  "operator": "eq",
+                  "value": false
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:legislation_gov_uk:36c6a8f610",
+                  "supports_fields": [
+                    "/routes/antigua-barbuda-citizenship-by-birth/summary",
+                    "/routes/antigua-barbuda-citizenship-by-birth/variants/antigua-barbuda-citizenship-by-birth-principal/eligibility",
+                    "/routes/antigua-barbuda-citizenship-by-birth/variants/antigua-barbuda-citizenship-by-birth-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "antigua-barbuda-cip",
+          "mode": "investment",
+          "status": "active",
+          "title": "Citizenship by Investment Programme",
+          "summary": "Government-administered direct citizenship programme with contribution, real-estate and other approved investment options.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-17"
+          },
+          "variants": [
+            {
+              "id": "antigua-barbuda-cip-principal",
+              "label": "Citizenship by Investment Programme",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "investment.minimum_usd",
+                  "operator": "gte",
+                  "value": 230000
+                },
+                {
+                  "field": "compliance.due_diligence_passed",
+                  "operator": "eq",
+                  "value": true
+                },
+                {
+                  "field": "residence.first_five_years_days",
+                  "operator": "gte",
+                  "value": 5,
+                  "unit": "days"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "high",
+                "note": "The National Development Fund option currently starts at US$230,000. Other approved routes and fees differ, and the principal applicant must spend at least five days in Antigua and Barbuda during the first five calendar years."
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:cip_gov_ag:ba26d76912",
+                  "supports_fields": [
+                    "/routes/antigua-barbuda-cip/summary",
+                    "/routes/antigua-barbuda-cip/variants/antigua-barbuda-cip-principal/eligibility",
+                    "/routes/antigua-barbuda-cip/variants/antigua-barbuda-cip-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "arrangements": []
+}

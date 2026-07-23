@@ -15,7 +15,9 @@ bun run build
 ```
 
 The canonical jurisdiction facts and field-level evidence are authored in
-`scripts/lib/canonical-pilot.ts`. `data/migration-pilot.json` lists the country
+`scripts/lib/canonical-pilot.ts` (a gitignored, maintainer-local file synced to
+D1 — see [`adding-jurisdictions.md`](adding-jurisdictions.md)).
+`data/migration-pilot.json` lists the country
 records owned by D1. The generated review packet is written to
 `.generated/data-canonical/reviews/<release-id>.md`; the country/source coverage
 audit is `.generated/monitor/source-coverage.json`.

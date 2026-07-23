@@ -3,7 +3,7 @@ import { Database } from 'bun:sqlite';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildCanonicalPilot } from './lib/canonical-pilot';
+import { buildCanonicalPilot } from './lib/canonical-source';
 import { readCanonicalHeadIds } from './lib/data-build';
 import { readCanonicalMigrations } from './lib/d1-migrations';
 import {

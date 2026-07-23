@@ -37,6 +37,19 @@ jobs:
       - name: Rebuild canonical import from committed source
         run: bun run data:db
 
+      # Safety gate: the master canonical-pilot.ts is gitignored and absent in
+      # public CI, so a build here would fall back to the tiny public sample.
+      # Refuse to touch production D1 unless the real dataset is present.
+      - name: Guard against publishing the sample dataset
+        run: |
+          set -euo pipefail
+          COUNT=$(bun -e "const m = await import('./scripts/lib/canonical-source.ts'); process.stdout.write(String(m.buildCanonicalPilot().jurisdictions.length))")
+          echo "resolved canonical: ${COUNT} jurisdictions"
+          if [ "${COUNT}" -lt 100 ]; then
+            echo "::error::Refusing to sync — only ${COUNT} jurisdictions resolved (this is the public sample, not the private master). The real scripts/lib/canonical-pilot.ts must be present. Aborting before any D1 write."
+            exit 1
+          fi
+
       - name: Apply schema migrations to remote D1
         run: |
           set -euo pipefail
