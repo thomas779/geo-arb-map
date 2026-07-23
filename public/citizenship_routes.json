@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 744,
+      "routes": 753,
       "by_mode": {
         "ancestry": 237,
-        "naturalization": 251,
+        "naturalization": 260,
         "birth": 231,
         "investment": 25
       },
       "by_status": {
-        "active": 729,
+        "active": 738,
         "pending_verification": 6,
         "inactive": 8,
         "verified_negative": 1
@@ -363,7 +363,8 @@
       "route_ids": [
         "bolivia-citizenship-by-parent",
         "bolivia-naturalization",
-        "bolivia-citizenship-by-birth"
+        "bolivia-citizenship-by-birth",
+        "bolivia-citizenship-by-marriage"
       ]
     },
     {
@@ -411,7 +412,8 @@
       "route_ids": [
         "brazil-citizenship-by-parent",
         "brazil-naturalization-by-residence",
-        "brazil-citizenship-by-birth"
+        "brazil-citizenship-by-birth",
+        "brazil-citizenship-by-marriage"
       ]
     },
     {
@@ -698,7 +700,8 @@
       "route_ids": [
         "chile-citizenship-by-parent-or-grandparent",
         "chile-naturalization",
-        "chile-citizenship-by-birth"
+        "chile-citizenship-by-birth",
+        "chile-citizenship-by-marriage"
       ]
     },
     {
@@ -747,7 +750,8 @@
         "colombia-citizenship-by-parent",
         "colombia-naturalization-by-residence",
         "colombia-citizenship-by-conditional-birth",
-        "colombia-study-permanent-residence-credit"
+        "colombia-study-permanent-residence-credit",
+        "colombia-citizenship-by-marriage"
       ]
     },
     {
@@ -974,7 +978,8 @@
       "route_ids": [
         "ecuador-citizenship-by-parent",
         "ecuador-naturalization",
-        "ecuador-citizenship-at-birth"
+        "ecuador-citizenship-at-birth",
+        "ecuador-citizenship-by-marriage"
       ]
     },
     {
@@ -2145,7 +2150,8 @@
       "route_ids": [
         "mexico-citizenship-by-parent",
         "mexico-naturalization-by-residence",
-        "mexico-citizenship-by-birth"
+        "mexico-citizenship-by-birth",
+        "mexico-citizenship-by-marriage"
       ]
     },
     {
@@ -2697,7 +2703,8 @@
       "route_ids": [
         "peru-citizenship-by-parent",
         "peru-naturalization",
-        "peru-citizenship-at-birth"
+        "peru-citizenship-at-birth",
+        "peru-citizenship-by-marriage"
       ]
     },
     {
@@ -3729,7 +3736,8 @@
       "route_ids": [
         "us-citizenship-at-birth-abroad",
         "us-naturalization-after-lpr",
-        "us-citizenship-by-birth"
+        "us-citizenship-by-birth",
+        "us-citizenship-by-marriage"
       ]
     },
     {
@@ -3777,7 +3785,8 @@
       "route_ids": [
         "uruguay-nationality-by-parent",
         "uruguay-legal-citizenship-by-residence",
-        "uruguay-nationality-by-birth"
+        "uruguay-nationality-by-birth",
+        "uruguay-citizenship-by-marriage"
       ]
     },
     {
@@ -6056,6 +6065,42 @@
       ]
     },
     {
+      "id": "bolivia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "068",
+        "name": "Bolivia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Bolivian (or a person with Bolivian children) may naturalize after two years of residence, instead of three.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bolivia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 24,
+          "note": "Constitution art. 142; not lost on widowhood or divorce."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bolivia 2009 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bolivia_2009"
+        }
+      ]
+    },
+    {
       "id": "bolivia-citizenship-by-parent",
       "country": {
         "iso_n3": "068",
@@ -6364,6 +6409,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Brazil — Article 12",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm"
+        }
+      ]
+    },
+    {
+      "id": "brazil-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "076",
+        "name": "Brazil"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreigner with a Brazilian spouse or partner (or a Brazilian child) may naturalize after one year of residence, instead of four.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "brazil-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 12,
+          "note": "Lei 13.445/2017 art. 66."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Constitution of Brazil — Article 12",
@@ -8354,6 +8435,42 @@
       ]
     },
     {
+      "id": "chile-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "152",
+        "name": "Chile"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Chilean may naturalize after about two years (vs five), with roughly two years of marriage and cohabitation.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "chile-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Ley 21.325; the carta de nacionalización is discretionary."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Chile SERMIG — Chilean citizenship / Carta de Nacionalización",
+          "url": "https://serviciomigraciones.cl/en/citizenship/"
+        }
+      ]
+    },
+    {
       "id": "chile-citizenship-by-parent-or-grandparent",
       "country": {
         "iso_n3": "152",
@@ -8665,6 +8782,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Colombia Law 2332 of 2023 — nationality",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm"
+        }
+      ]
+    },
+    {
+      "id": "colombia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreigner married to a Colombian may obtain nationality after two years of domicile, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "colombia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Discretionary grant (nacionalidad por adopción); a continuous year abroad breaks the term."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Colombia Law 2332 of 2023 — nationality",
@@ -10347,6 +10500,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ecuador 2021 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ecuador_2021"
+        }
+      ]
+    },
+    {
+      "id": "ecuador-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "218",
+        "name": "Ecuador"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Nationality by marriage or de facto union is available two years after the marriage or union is registered, for a holder of a residence category.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ecuador-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Ley Orgánica de Movilidad Humana; a mandatory interview applies."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Ecuador 2021 Constitution (Constitute Project)",
@@ -18595,6 +18784,42 @@
       ]
     },
     {
+      "id": "mexico-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "484",
+        "name": "Mexico"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Mexican may naturalize after two years of residence living together at the marital domicile in Mexico, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mexico-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 24,
+          "note": "Ley de Nacionalidad art. 20(II); the SRE verifies cohabitation."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Political Constitution of Mexico — Article 30",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+        }
+      ]
+    },
+    {
       "id": "mexico-citizenship-by-parent",
       "country": {
         "iso_n3": "484",
@@ -22596,6 +22821,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Peru Migraciones — naturalization procedure",
+          "url": "https://www.gob.pe/12580"
+        }
+      ]
+    },
+    {
+      "id": "peru-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "604",
+        "name": "Peru"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A person married to a Peruvian and resident in that condition for two years may acquire nationality by option.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "peru-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 24,
+          "note": "Ley 26574 art. 4; not lost on divorce or death. A proposed increase to four years is not yet in force."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Peru Migraciones — naturalization procedure",
@@ -29936,6 +30197,42 @@
       ]
     },
     {
+      "id": "us-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A permanent resident married to and living with a US citizen for the three years before filing may naturalize after three years, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "us-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 36,
+          "note": "INA §319(a); also requires 18 months physical presence within those 3 years."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "U.S. Department of State — Citizenship at birth abroad",
+          "url": "https://travel.state.gov/content/travel/en/legal/travel-legal-considerations/us-citizenship/Acquisition-US-Citizenship-Child-Born-Abroad.html"
+        }
+      ]
+    },
+    {
       "id": "us-naturalization-after-lpr",
       "country": {
         "iso_n3": "840",
@@ -30180,6 +30477,42 @@
         {
           "title": "Burkina Faso Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Burkina_Faso_2012"
+        }
+      ]
+    },
+    {
+      "id": "uruguay-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "858",
+        "name": "Uruguay"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreigner of good conduct with a family constituted in Uruguay (including a Uruguayan spouse) is entitled to legal citizenship after three years of habitual residence, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uruguay-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 36,
+          "note": "Constitution art. 75(A)."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Uruguay Constitution — Article 74",
+          "url": "https://www.impo.com.uy/bases/constitucion/1967-1967/74"
         }
       ]
     },
