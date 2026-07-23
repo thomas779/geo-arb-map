@@ -6,6 +6,8 @@ The repository intentionally keeps only two detailed design documents:
   releases, country-review order, and cutover gates.
 - [`explorer-spec.md`](explorer-spec.md) — pathfinding invariants that remain
   enforced by tests while the planner is a preview.
+- [`adding-jurisdictions.md`](adding-jurisdictions.md) — turnkey procedure for
+  adding reviewed jurisdictions and expanding route-level coverage.
 
 Operational instructions live beside the code they operate:
 

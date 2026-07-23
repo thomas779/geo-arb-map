@@ -172,13 +172,20 @@ export function buildSweepPrompt(
 ): string {
   return `You are fact-checking government mobility rules for ${entry.name} (ISO ${entry.iso_n3}).
 First, use Google Search to find the most recent OFFICIAL / primary sources (government, gazette, court,
-or tax authority; native language is fine) on ${entry.name}'s citizenship, residency, visa, and
-citizenship/residency-by-investment (CBI/RBI) rules — prioritise the last 12 months and anything
-announced or upcoming. You MUST search before answering; do not rely on prior knowledge alone.
-Keep it efficient: run a few targeted searches (about 3-5), not an exhaustive sweep.
+or tax authority; native language is fine) on ${entry.name}'s rules for lasting mobility: citizenship and
+naturalisation, permanent and long-term residency, ancestry/descent, citizenship/residency-by-investment
+(CBI/RBI), AND tax-residence rules (who becomes tax-resident, non-dom/territorial regimes, exit tax).
+Prioritise the last 12 months and anything announced or upcoming. You MUST search before answering; do
+not rely on prior knowledge alone. Keep it efficient: run a few targeted searches (about 3-5), not an
+exhaustive sweep.
 Then report ONLY changes that are already in force OR announced/upcoming and are NOT already reflected
-in what we record below. Ignore evergreen explainers, opinion, and anything that merely restates a
-known rule.
+in what we record below.
+Report a change ONLY if it alters WHO QUALIFIES, an investment/income threshold or fee that gates a route,
+a required residence period or processing timeline, the existence of a route, or a tax-residence rule.
+Do NOT report administrative or cosmetic changes that leave eligibility unchanged: visa-sticker-to-eVisa
+or digital-format switches, appointment/portal/website changes, biometrics logistics, form renumbering,
+short-stay tourist-visa mechanics, or minor fees that do not gate a mobility route. Ignore evergreen
+explainers, opinion, and anything that merely restates a known rule. When in doubt, prefer NOT reporting.
 
 What we already record for ${entry.name} (absence is not evidence a route does not exist):
 ${JSON.stringify(compactContext(context))}
@@ -187,9 +194,10 @@ ${rssExcerpts.length ? `\nRecent discovery leads to check (verify independently)
 Return ONLY a JSON array (no prose, no code fences). Return [] if nothing new. Each entry:
 {"iso_n3":"${entry.iso_n3}","claim":"one precise, factual sentence on what changed (for the record)",
 "status":"confirmed|proposed|rumour|not_found","primary_urls":["https://official-source"],
-"effective_date":"YYYY-MM-DD or null","affects_dataset":boolean,
-"category":"ancestry|naturalization|birth|investment|visa|residency|cbi",
-"headline":"a clean 6-12 word news headline that NAMES the country and states the change, readable in a phone notification (e.g. 'Guernsey replaces visa stickers with eVisas'); do not start with the ISO code and do not repeat the country name twice",
+"effective_date":"YYYY-MM-DD or null",
+"affects_dataset":boolean (true ONLY if it changes eligibility, a gating threshold/fee, a residence period or timeline, a route's existence, or a tax-residence rule; false for administrative/format/procedural changes),
+"category":"ancestry|naturalization|birth|investment|visa|residency|cbi|tax",
+"headline":"a clean 6-12 word news headline that NAMES the country and states the change, readable in a phone notification (e.g. 'Georgia raises residency property threshold to 150,000 dollars'); do not start with the ISO code and do not repeat the country name twice",
 "brief":"1-2 tight sentences a subscriber wants to read: what changed, why it matters, and one concrete number, date, or detail"}
 Voice for headline and brief: plain, confident, and specific; lead with the change or the number; no clickbait,
 no hype, no exclamation marks, and never legal advice. Put ONLY official/primary URLs in primary_urls — never
@@ -340,6 +348,7 @@ const MOBILITY_KEYWORDS = [
   'immigration', 'immigrant', 'migration', 'passport', 'golden visa', 'investment migration',
   'citizenship by investment', 'cbi', 'rbi', 'descent', 'ancestry', 'work permit',
   'digital nomad', 'asylum', 'deportation', 'expat', 'green card',
+  'tax resident', 'tax residency', 'tax residence', 'non-dom', 'territorial tax', 'exit tax',
 ];
 
 function isMobilityRelevant(signal: Signal): boolean {

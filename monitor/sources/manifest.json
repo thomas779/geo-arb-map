@@ -4764,6 +4764,239 @@
         "birth"
       ],
       "notes": "Trinidad and Tobago constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "russia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Russia_2014",
+      "jurisdictions": [
+        "643"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Russia",
+        "residence",
+        "birth"
+      ],
+      "notes": "Russian constitutional nationality framework via Constitute Project text; cross-check the 2023 citizenship law (Federal Law 138-FZ). Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "armenia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Armenia_2015",
+      "jurisdictions": [
+        "051"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Armenia",
+        "descent",
+        "residence",
+        "birth"
+      ],
+      "notes": "Armenian constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "azerbaijan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Azerbaijan_2016",
+      "jurisdictions": [
+        "031"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Azerbaijan",
+        "residence",
+        "birth"
+      ],
+      "notes": "Azerbaijani constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "kazakhstan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017",
+      "jurisdictions": [
+        "398"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Kazakhstan",
+        "kandas",
+        "residence",
+        "birth"
+      ],
+      "notes": "Kazakhstani constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "pakistan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Pakistan_2018",
+      "jurisdictions": [
+        "586"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Pakistan",
+        "dual nationality",
+        "residence",
+        "birth"
+      ],
+      "notes": "Pakistani constitutional nationality framework via Constitute Project text; cross-check the Pakistan Citizenship Act 1951. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "bangladesh-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Bangladesh_2014",
+      "jurisdictions": [
+        "050"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Bangladesh",
+        "dual nationality",
+        "residence",
+        "birth"
+      ],
+      "notes": "Bangladeshi constitutional nationality framework via Constitute Project text; cross-check the Citizenship Act 1951. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "sri-lanka-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Sri_Lanka_2015",
+      "jurisdictions": [
+        "144"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Sri Lanka",
+        "dual citizenship",
+        "residence",
+        "birth"
+      ],
+      "notes": "Sri Lankan constitutional nationality framework via Constitute Project text; cross-check the Citizenship Act No. 18 of 1948. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "nepal-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Nepal_2015",
+      "jurisdictions": [
+        "524"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Nepal",
+        "residence",
+        "birth"
+      ],
+      "notes": "Nepali constitutional nationality framework via Constitute Project text; cross-check the Nepal Citizenship Act. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "iran-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Iran_1989",
+      "jurisdictions": [
+        "364"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Iran",
+        "residence",
+        "birth"
+      ],
+      "notes": "Iranian constitutional framework via Constitute Project text; cross-check the Civil Code nationality provisions. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "lebanon-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Lebanon_2004",
+      "jurisdictions": [
+        "422"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Lebanon",
+        "residence",
+        "birth"
+      ],
+      "notes": "Lebanese constitutional framework via Constitute Project text; cross-check the 1925 nationality decree and Law 41/2015. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "saudi-arabia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.ecoi.net/en/file/local/1098597/1504_1217587365_saudi-arabian-nationality-regulations.pdf",
+      "jurisdictions": [
+        "682"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Saudi Arabia",
+        "residence",
+        "birth"
+      ],
+      "notes": "Saudi Arabian Nationality Regulations text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "qatar-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.almeezan.qa/LawView.aspx?opt=&LawID=2591&language=en",
+      "jurisdictions": [
+        "634"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Qatar",
+        "residence",
+        "birth"
+      ],
+      "notes": "Qatar Law No. 38 of 2005 on Qatari Nationality via the Al Meezan legal portal. Active verification monitor for canonical coverage audit."
     }
   ]
 }
