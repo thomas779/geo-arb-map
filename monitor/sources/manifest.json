@@ -5396,6 +5396,636 @@
         "birth"
       ],
       "notes": "Palestinian Amended Basic Law (art. 7) via Constitute Project text; nationality is otherwise unsettled and registry-based under the Oslo framework. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "bermuda-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.bm/department/immigration",
+      "jurisdictions": [
+        "060"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Bermuda",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of Bermuda — Department of Immigration — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "british-virgin-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://gov.vg/service-details/apply-belonger-status-through-immigration",
+      "jurisdictions": [
+        "092"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "British Virgin Islands",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of the Virgin Islands — Belonger status — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "gibraltar-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gibraltarlaws.gov.gi/papers/gibraltar-constitution-order-2006-6",
+      "jurisdictions": [
+        "292"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Gibraltar",
+        "residence",
+        "birth"
+      ],
+      "notes": "Gibraltar Constitution Order 2006 — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "falkland-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.fk/customs/falkland-islands-status/",
+      "jurisdictions": [
+        "238"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Falkland Islands",
+        "residence",
+        "birth"
+      ],
+      "notes": "Falkland Islands Government — Falkland Islands status — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "montserrat-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.ms/government/non-ministerial-departments/office-of-the-deputy-governor/citizenship-residence-information/",
+      "jurisdictions": [
+        "500"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Montserrat",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of Montserrat — Citizenship & residence — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "pitcairn-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.government.pn/immigration",
+      "jurisdictions": [
+        "612"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Pitcairn Islands",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of the Pitcairn Islands — Immigration — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "saint-helena-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.sainthelena.gov.sh/public-services/immigration/st-helenian-status/",
+      "jurisdictions": [
+        "654"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Saint Helena, Ascension and Tristan da Cunha",
+        "residence",
+        "birth"
+      ],
+      "notes": "St Helena Government — St Helenian status — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "anguilla-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://gov.ai/service/immigration--labour-anguilla-status",
+      "jurisdictions": [
+        "660"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Anguilla",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of Anguilla — Anguillian status — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "turks-and-caicos-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.legislation.gov.uk/uksi/2011/1681/contents/made",
+      "jurisdictions": [
+        "796"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Turks and Caicos Islands",
+        "residence",
+        "birth"
+      ],
+      "notes": "Turks and Caicos Islands Constitution Order 2011 — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "guernsey-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.gg/immigration",
+      "jurisdictions": [
+        "831"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Guernsey",
+        "residence",
+        "birth"
+      ],
+      "notes": "States of Guernsey — Immigration — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "jersey-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.je/LifeEvents/CitizenshipSettlingInJersey/pages/default.aspx",
+      "jurisdictions": [
+        "832"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Jersey",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of Jersey — Citizenship & settling in Jersey — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "isle-of-man-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.im/categories/travel-traffic-and-motoring/immigration/",
+      "jurisdictions": [
+        "833"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Isle of Man",
+        "residence",
+        "birth"
+      ],
+      "notes": "Isle of Man Government — Immigration — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "puerto-rico-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.law.cornell.edu/uscode/text/8/1402",
+      "jurisdictions": [
+        "630"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Puerto Rico",
+        "residence",
+        "birth"
+      ],
+      "notes": "8 USC 1402 — Persons born in Puerto Rico — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "guam-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.law.cornell.edu/uscode/text/8/1407",
+      "jurisdictions": [
+        "316"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Guam",
+        "residence",
+        "birth"
+      ],
+      "notes": "8 USC 1407 — Persons born in Guam — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "us-virgin-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.law.cornell.edu/uscode/text/8/1406",
+      "jurisdictions": [
+        "850"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "United States Virgin Islands",
+        "residence",
+        "birth"
+      ],
+      "notes": "8 USC 1406 — Persons born in the Virgin Islands — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "northern-mariana-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.law.cornell.edu/uscode/text/48/1801",
+      "jurisdictions": [
+        "580"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Northern Mariana Islands",
+        "residence",
+        "birth"
+      ],
+      "notes": "48 USC 1801 — Covenant establishing the CNMI — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "american-samoa-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.law.cornell.edu/uscode/text/8/1408",
+      "jurisdictions": [
+        "016"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "American Samoa",
+        "residence",
+        "birth"
+      ],
+      "notes": "8 USC 1408 — Nationals but not citizens at birth — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "norfolk-island-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.legislation.gov.au/C2015A00059/latest/text",
+      "jurisdictions": [
+        "574"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Norfolk Island",
+        "residence",
+        "birth"
+      ],
+      "notes": "Norfolk Island Legislation Amendment Act 2015 — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "french-polynesia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.presidence.pf/",
+      "jurisdictions": [
+        "258"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "French Polynesia",
+        "residence",
+        "birth"
+      ],
+      "notes": "Présidence de la Polynésie française — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "new-caledonia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gouv.nc/",
+      "jurisdictions": [
+        "540"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "New Caledonia",
+        "residence",
+        "birth"
+      ],
+      "notes": "Gouvernement de la Nouvelle-Calédonie — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "saint-barthelemy-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.comstbarth.fr/",
+      "jurisdictions": [
+        "652"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Saint-Barthélemy",
+        "residence",
+        "birth"
+      ],
+      "notes": "Collectivité de Saint-Barthélemy — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "saint-martin-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.com-saint-martin.fr/",
+      "jurisdictions": [
+        "663"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Saint-Martin",
+        "residence",
+        "birth"
+      ],
+      "notes": "Collectivité de Saint-Martin — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "saint-pierre-and-miquelon-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://lannuaire.service-public.gouv.fr/collectivites-d-outre-mer/saint-pierre-et-miquelon/ed2ce256-ce24-4a37-9df1-13ce1eef8812",
+      "jurisdictions": [
+        "666"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Saint-Pierre-et-Miquelon",
+        "residence",
+        "birth"
+      ],
+      "notes": "Service-Public — Saint-Pierre-et-Miquelon — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "wallis-and-futuna-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.assembleeterritoriale.wf/",
+      "jurisdictions": [
+        "876"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Wallis and Futuna",
+        "residence",
+        "birth"
+      ],
+      "notes": "Assemblée territoriale des îles Wallis et Futuna — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "aruba-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gobierno.aw/en/work-and-residence-permit",
+      "jurisdictions": [
+        "533"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Aruba",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of Aruba — Work & residence — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "curacao-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gobiernu.cw/",
+      "jurisdictions": [
+        "531"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Curaçao",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of Curaçao — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "sint-maarten-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.sintmaartengov.org/",
+      "jurisdictions": [
+        "534"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Sint Maarten",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of Sint Maarten — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "caribbean-netherlands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.rijksdienstcn.com/",
+      "jurisdictions": [
+        "535"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Caribbean Netherlands",
+        "residence",
+        "birth"
+      ],
+      "notes": "Rijksdienst Caribisch Nederland — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "greenland-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://naalakkersuisut.gl/",
+      "jurisdictions": [
+        "304"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Greenland",
+        "residence",
+        "birth"
+      ],
+      "notes": "Naalakkersuisut — Government of Greenland — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "faroe-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.government.fo/",
+      "jurisdictions": [
+        "234"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Faroe Islands",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of the Faroe Islands — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "cook-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.psc.gov.ck/post/mfai-media-release-applications-open-for-cook-islands-permanent-residency",
+      "jurisdictions": [
+        "184"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Cook Islands",
+        "residence",
+        "birth"
+      ],
+      "notes": "Cook Islands Government — permanent residency — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "niue-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.nu/",
+      "jurisdictions": [
+        "570"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Niue",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of Niue — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "tokelau-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.tokelau.org.nz/",
+      "jurisdictions": [
+        "772"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Tokelau",
+        "residence",
+        "birth"
+      ],
+      "notes": "Tokelau (Government) — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "hong-kong-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.immd.gov.hk/eng/services/chinese_nationality.html",
+      "jurisdictions": [
+        "344"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Hong Kong",
+        "residence",
+        "birth"
+      ],
+      "notes": "HK Immigration Department — Chinese nationality — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "macao-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.gov.mo/en/services/ps-1071/",
+      "jurisdictions": [
+        "446"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Macao",
+        "residence",
+        "birth"
+      ],
+      "notes": "Macao SAR Government — right of abode — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     }
   ]
 }

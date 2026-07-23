@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 623,
+      "routes": 726,
       "by_mode": {
-        "ancestry": 200,
-        "naturalization": 202,
-        "birth": 196,
+        "ancestry": 234,
+        "naturalization": 237,
+        "birth": 230,
         "investment": 25
       },
       "by_status": {
-        "active": 610,
+        "active": 713,
         "pending_verification": 6,
         "inactive": 6,
         "verified_negative": 1
@@ -97,12 +97,14 @@
       "name": "American Samoa",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "american-samoa-naturalization"
+      ]
     },
     {
       "iso_n3": "020",
@@ -321,12 +323,16 @@
       "name": "Bermuda",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "bermuda-nationality-by-descent",
+        "bermuda-naturalization",
+        "bermuda-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "064",
@@ -455,15 +461,19 @@
     },
     {
       "iso_n3": "092",
-      "name": "British Virgin Is.",
+      "name": "British Virgin Islands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "british-virgin-islands-nationality-by-descent",
+        "british-virgin-islands-naturalization",
+        "british-virgin-islands-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "096",
@@ -791,15 +801,19 @@
     },
     {
       "iso_n3": "184",
-      "name": "Cook Is.",
+      "name": "Cook Islands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "cook-islands-nationality-by-descent",
+        "cook-islands-naturalization",
+        "cook-islands-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "188",
@@ -1046,27 +1060,35 @@
     },
     {
       "iso_n3": "234",
-      "name": "Faeroe Is.",
+      "name": "Faroe Islands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "faroe-islands-nationality-by-descent",
+        "faroe-islands-naturalization",
+        "faroe-islands-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "238",
-      "name": "Falkland Is.",
+      "name": "Falkland Islands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "falkland-islands-nationality-by-descent",
+        "falkland-islands-naturalization",
+        "falkland-islands-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "239",
@@ -1142,15 +1164,19 @@
     },
     {
       "iso_n3": "258",
-      "name": "Fr. Polynesia",
+      "name": "French Polynesia",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "french-polynesia-nationality-by-descent",
+        "french-polynesia-naturalization",
+        "french-polynesia-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "260",
@@ -1280,12 +1306,16 @@
       "name": "Gibraltar",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "gibraltar-nationality-by-descent",
+        "gibraltar-naturalization",
+        "gibraltar-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "296",
@@ -1324,12 +1354,16 @@
       "name": "Greenland",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "greenland-nationality-by-descent",
+        "greenland-naturalization",
+        "greenland-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "308",
@@ -1353,12 +1387,16 @@
       "name": "Guam",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "guam-nationality-by-descent",
+        "guam-naturalization",
+        "guam-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "320",
@@ -1472,12 +1510,16 @@
       "name": "Hong Kong",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "hong-kong-nationality-by-descent",
+        "hong-kong-naturalization",
+        "hong-kong-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "348",
@@ -1935,12 +1977,16 @@
       "name": "Macao",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "macao-nationality-by-descent",
+        "macao-naturalization",
+        "macao-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "450",
@@ -2158,12 +2204,16 @@
       "name": "Montserrat",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "montserrat-nationality-by-descent",
+        "montserrat-naturalization",
+        "montserrat-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "504",
@@ -2283,60 +2333,80 @@
       "name": "Curaçao",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "curacao-nationality-by-descent",
+        "curacao-naturalization",
+        "curacao-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "533",
       "name": "Aruba",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "aruba-nationality-by-descent",
+        "aruba-naturalization",
+        "aruba-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "534",
       "name": "Sint Maarten",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "sint-maarten-nationality-by-descent",
+        "sint-maarten-naturalization",
+        "sint-maarten-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "535",
-      "name": "Bonaire, Sint Eustatius and Saba",
+      "name": "Caribbean Netherlands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "caribbean-netherlands-nationality-by-descent",
+        "caribbean-netherlands-naturalization",
+        "caribbean-netherlands-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "540",
       "name": "New Caledonia",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "new-caledonia-nationality-by-descent",
+        "new-caledonia-naturalization",
+        "new-caledonia-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "548",
@@ -2425,24 +2495,32 @@
       "name": "Niue",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "niue-nationality-by-descent",
+        "niue-naturalization",
+        "niue-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "574",
       "name": "Norfolk Island",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "norfolk-island-nationality-by-descent",
+        "norfolk-island-naturalization",
+        "norfolk-island-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "578",
@@ -2462,15 +2540,19 @@
     },
     {
       "iso_n3": "580",
-      "name": "N. Mariana Is.",
+      "name": "Northern Mariana Islands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "northern-mariana-islands-nationality-by-descent",
+        "northern-mariana-islands-naturalization",
+        "northern-mariana-islands-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "583",
@@ -2622,15 +2704,19 @@
     },
     {
       "iso_n3": "612",
-      "name": "Pitcairn Is.",
+      "name": "Pitcairn Islands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "pitcairn-islands-nationality-by-descent",
+        "pitcairn-islands-naturalization",
+        "pitcairn-islands-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "616",
@@ -2701,12 +2787,16 @@
       "name": "Puerto Rico",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "puerto-rico-nationality-by-descent",
+        "puerto-rico-naturalization",
+        "puerto-rico-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "634",
@@ -2775,27 +2865,35 @@
     },
     {
       "iso_n3": "652",
-      "name": "St-Barthélemy",
+      "name": "Saint-Barthélemy",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "saint-barthelemy-nationality-by-descent",
+        "saint-barthelemy-naturalization",
+        "saint-barthelemy-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "654",
-      "name": "Saint Helena",
+      "name": "Saint Helena, Ascension and Tristan da Cunha",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "saint-helena-nationality-by-descent",
+        "saint-helena-naturalization",
+        "saint-helena-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "659",
@@ -2819,12 +2917,16 @@
       "name": "Anguilla",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "anguilla-nationality-by-descent",
+        "anguilla-naturalization",
+        "anguilla-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "662",
@@ -2845,27 +2947,35 @@
     },
     {
       "iso_n3": "663",
-      "name": "St-Martin",
+      "name": "Saint-Martin",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "saint-martin-nationality-by-descent",
+        "saint-martin-naturalization",
+        "saint-martin-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "666",
-      "name": "St. Pierre and Miquelon",
+      "name": "Saint-Pierre-et-Miquelon",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "saint-pierre-and-miquelon-nationality-by-descent",
+        "saint-pierre-and-miquelon-naturalization",
+        "saint-pierre-and-miquelon-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "670",
@@ -3301,12 +3411,16 @@
       "name": "Tokelau",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "tokelau-nationality-by-descent",
+        "tokelau-naturalization",
+        "tokelau-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "776",
@@ -3408,15 +3522,19 @@
     },
     {
       "iso_n3": "796",
-      "name": "Turks and Caicos Is.",
+      "name": "Turks and Caicos Islands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "turks-and-caicos-nationality-by-descent",
+        "turks-and-caicos-naturalization",
+        "turks-and-caicos-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "798",
@@ -3520,36 +3638,48 @@
       "name": "Guernsey",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "guernsey-nationality-by-descent",
+        "guernsey-naturalization",
+        "guernsey-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "832",
       "name": "Jersey",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "jersey-nationality-by-descent",
+        "jersey-naturalization",
+        "jersey-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "833",
       "name": "Isle of Man",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "isle-of-man-nationality-by-descent",
+        "isle-of-man-naturalization",
+        "isle-of-man-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "834",
@@ -3585,15 +3715,19 @@
     },
     {
       "iso_n3": "850",
-      "name": "U.S. Virgin Is.",
+      "name": "United States Virgin Islands",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "us-virgin-islands-nationality-by-descent",
+        "us-virgin-islands-naturalization",
+        "us-virgin-islands-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "854",
@@ -3661,15 +3795,19 @@
     },
     {
       "iso_n3": "876",
-      "name": "Wallis and Futuna Is.",
+      "name": "Wallis and Futuna",
       "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "wallis-and-futuna-nationality-by-descent",
+        "wallis-and-futuna-naturalization",
+        "wallis-and-futuna-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "882",
@@ -4048,6 +4186,40 @@
         {
           "title": "Algeria Nationality Code (English text)",
           "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf"
+        }
+      ]
+    },
+    {
+      "id": "american-samoa-naturalization",
+      "country": {
+        "iso_n3": "016",
+        "name": "American Samoa"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under the parent sovereign",
+      "summary": "United States nationality can be acquired by naturalization under the parent sovereign’s law; local residence in American Samoa is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "american-samoa-naturalization-principal",
+          "label": "Naturalization under the parent sovereign",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "US national to US citizen via naturalization (no immigrant visa required, subject to INA requirements)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1408 — Nationals but not citizens at birth",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1408"
         }
       ]
     },
@@ -5618,6 +5790,112 @@
       ]
     },
     {
+      "id": "bermuda-citizenship-at-birth",
+      "country": {
+        "iso_n3": "060",
+        "name": "Bermuda"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship at birth",
+      "summary": "Citizenship at birth in Bermuda follows British Overseas Territories Citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bermuda-citizenship-at-birth-principal",
+          "label": "British Overseas Territories Citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Bermuda — Department of Immigration",
+          "url": "https://www.gov.bm/department/immigration"
+        }
+      ]
+    },
+    {
+      "id": "bermuda-nationality-by-descent",
+      "country": {
+        "iso_n3": "060",
+        "name": "Bermuda"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship by descent",
+      "summary": "Bermuda confers British Overseas Territories Citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bermuda-nationality-by-descent-principal",
+          "label": "British Overseas Territories Citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Bermuda — Department of Immigration",
+          "url": "https://www.gov.bm/department/immigration"
+        }
+      ]
+    },
+    {
+      "id": "bermuda-naturalization",
+      "country": {
+        "iso_n3": "060",
+        "name": "Bermuda"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British Overseas Territories Citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Bermuda is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bermuda-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Bermuda — Department of Immigration",
+          "url": "https://www.gov.bm/department/immigration"
+        }
+      ]
+    },
+    {
       "id": "bhutan-citizenship-at-birth-by-parents",
       "country": {
         "iso_n3": "064",
@@ -6430,6 +6708,112 @@
         {
           "title": "Solomon Islands government - obtain citizenship",
           "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "british-virgin-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "092",
+        "name": "British Virgin Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship at birth",
+      "summary": "Citizenship at birth in British Virgin Islands follows British Overseas Territories Citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "british-virgin-islands-citizenship-at-birth-principal",
+          "label": "British Overseas Territories Citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Virgin Islands — Belonger status",
+          "url": "https://gov.vg/service-details/apply-belonger-status-through-immigration"
+        }
+      ]
+    },
+    {
+      "id": "british-virgin-islands-nationality-by-descent",
+      "country": {
+        "iso_n3": "092",
+        "name": "British Virgin Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship by descent",
+      "summary": "British Virgin Islands confers British Overseas Territories Citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "british-virgin-islands-nationality-by-descent-principal",
+          "label": "British Overseas Territories Citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Virgin Islands — Belonger status",
+          "url": "https://gov.vg/service-details/apply-belonger-status-through-immigration"
+        }
+      ]
+    },
+    {
+      "id": "british-virgin-islands-naturalization",
+      "country": {
+        "iso_n3": "092",
+        "name": "British Virgin Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British Overseas Territories Citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in British Virgin Islands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "british-virgin-islands-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Virgin Islands — Belonger status",
+          "url": "https://gov.vg/service-details/apply-belonger-status-through-immigration"
         }
       ]
     },
@@ -8769,6 +9153,111 @@
       ]
     },
     {
+      "id": "cook-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "184",
+        "name": "Cook Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "New Zealand citizenship at birth",
+      "summary": "Citizenship at birth in Cook Islands follows New Zealand citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cook-islands-citizenship-at-birth-principal",
+          "label": "New Zealand citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Birth in the Realm confers NZ citizenship if a parent is an NZ citizen or entitled to reside indefinitely (post-2006)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Cook Islands Government — permanent residency",
+          "url": "https://www.psc.gov.ck/post/mfai-media-release-applications-open-for-cook-islands-permanent-residency"
+        }
+      ]
+    },
+    {
+      "id": "cook-islands-nationality-by-descent",
+      "country": {
+        "iso_n3": "184",
+        "name": "Cook Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "New Zealand citizenship by descent",
+      "summary": "Cook Islands confers New Zealand citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cook-islands-nationality-by-descent-principal",
+          "label": "New Zealand citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Cook Islands Government — permanent residency",
+          "url": "https://www.psc.gov.ck/post/mfai-media-release-applications-open-for-cook-islands-permanent-residency"
+        }
+      ]
+    },
+    {
+      "id": "cook-islands-naturalization",
+      "country": {
+        "iso_n3": "184",
+        "name": "Cook Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under the parent sovereign",
+      "summary": "New Zealand citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Cook Islands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cook-islands-naturalization-principal",
+          "label": "Naturalization under the parent sovereign",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "NZ citizenship by grant requires residence in New Zealand itself; Cook Islands residence does not directly qualify."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Cook Islands Government — permanent residency",
+          "url": "https://www.psc.gov.ck/post/mfai-media-release-applications-open-for-cook-islands-permanent-residency"
+        }
+      ]
+    },
+    {
       "id": "costa-rica-citizenship-by-birth",
       "country": {
         "iso_n3": "188",
@@ -10496,6 +10985,216 @@
       ]
     },
     {
+      "id": "faroe-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "234",
+        "name": "Faroe Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Danish nationality at birth",
+      "summary": "Citizenship at birth in Faroe Islands follows Danish nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "faroe-islands-citizenship-at-birth-principal",
+          "label": "Danish nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Faroe Islands",
+          "url": "https://www.government.fo/"
+        }
+      ]
+    },
+    {
+      "id": "faroe-islands-nationality-by-descent",
+      "country": {
+        "iso_n3": "234",
+        "name": "Faroe Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Danish nationality by descent",
+      "summary": "Faroe Islands confers Danish nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "faroe-islands-nationality-by-descent-principal",
+          "label": "Danish nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Faroe Islands",
+          "url": "https://www.government.fo/"
+        }
+      ]
+    },
+    {
+      "id": "faroe-islands-naturalization",
+      "country": {
+        "iso_n3": "234",
+        "name": "Faroe Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under the parent sovereign",
+      "summary": "Danish nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Faroe Islands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "faroe-islands-naturalization-principal",
+          "label": "Naturalization under the parent sovereign",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Faroe Islands",
+          "url": "https://www.government.fo/"
+        }
+      ]
+    },
+    {
+      "id": "falkland-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "238",
+        "name": "Falkland Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship at birth",
+      "summary": "Citizenship at birth in Falkland Islands follows British Overseas Territories Citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "falkland-islands-citizenship-at-birth-principal",
+          "label": "British Overseas Territories Citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Falkland Islands Government — Falkland Islands status",
+          "url": "https://www.gov.fk/customs/falkland-islands-status/"
+        }
+      ]
+    },
+    {
+      "id": "falkland-islands-nationality-by-descent",
+      "country": {
+        "iso_n3": "238",
+        "name": "Falkland Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship by descent",
+      "summary": "Falkland Islands confers British Overseas Territories Citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "falkland-islands-nationality-by-descent-principal",
+          "label": "British Overseas Territories Citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Falkland Islands Government — Falkland Islands status",
+          "url": "https://www.gov.fk/customs/falkland-islands-status/"
+        }
+      ]
+    },
+    {
+      "id": "falkland-islands-naturalization",
+      "country": {
+        "iso_n3": "238",
+        "name": "Falkland Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British Overseas Territories Citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Falkland Islands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "falkland-islands-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Falkland Islands Government — Falkland Islands status",
+          "url": "https://www.gov.fk/customs/falkland-islands-status/"
+        }
+      ]
+    },
+    {
       "id": "fiji-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "242",
@@ -10893,6 +11592,112 @@
         {
           "title": "CESEDA — student residence permits",
           "url": "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070158/LEGISCTA000042771650/"
+        }
+      ]
+    },
+    {
+      "id": "french-polynesia-citizenship-at-birth",
+      "country": {
+        "iso_n3": "258",
+        "name": "French Polynesia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in French Polynesia follows French nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "french-polynesia-citizenship-at-birth-principal",
+          "label": "French nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "French conditional jus soli applies (automatic at birth only under double jus soli)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Présidence de la Polynésie française",
+          "url": "https://www.presidence.pf/"
+        }
+      ]
+    },
+    {
+      "id": "french-polynesia-nationality-by-descent",
+      "country": {
+        "iso_n3": "258",
+        "name": "French Polynesia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "French nationality by descent",
+      "summary": "French Polynesia confers French nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "french-polynesia-nationality-by-descent-principal",
+          "label": "French nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Présidence de la Polynésie française",
+          "url": "https://www.presidence.pf/"
+        }
+      ]
+    },
+    {
+      "id": "french-polynesia-naturalization",
+      "country": {
+        "iso_n3": "258",
+        "name": "French Polynesia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "French nationality can be acquired by naturalization under the parent sovereign’s law; local residence in French Polynesia is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "french-polynesia-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Présidence de la Polynésie française",
+          "url": "https://www.presidence.pf/"
         }
       ]
     },
@@ -11630,6 +12435,112 @@
       ]
     },
     {
+      "id": "gibraltar-citizenship-at-birth",
+      "country": {
+        "iso_n3": "292",
+        "name": "Gibraltar"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship at birth",
+      "summary": "Citizenship at birth in Gibraltar follows British Overseas Territories Citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "gibraltar-citizenship-at-birth-principal",
+          "label": "British Overseas Territories Citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Gibraltar Constitution Order 2006",
+          "url": "https://www.gibraltarlaws.gov.gi/papers/gibraltar-constitution-order-2006-6"
+        }
+      ]
+    },
+    {
+      "id": "gibraltar-nationality-by-descent",
+      "country": {
+        "iso_n3": "292",
+        "name": "Gibraltar"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship by descent",
+      "summary": "Gibraltar confers British Overseas Territories Citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "gibraltar-nationality-by-descent-principal",
+          "label": "British Overseas Territories Citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Gibraltar Constitution Order 2006",
+          "url": "https://www.gibraltarlaws.gov.gi/papers/gibraltar-constitution-order-2006-6"
+        }
+      ]
+    },
+    {
+      "id": "gibraltar-naturalization",
+      "country": {
+        "iso_n3": "292",
+        "name": "Gibraltar"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British Overseas Territories Citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Gibraltar is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "gibraltar-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Gibraltar Constitution Order 2006",
+          "url": "https://www.gibraltarlaws.gov.gi/papers/gibraltar-constitution-order-2006-6"
+        }
+      ]
+    },
+    {
       "id": "kiribati-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "296",
@@ -11849,6 +12760,110 @@
       ]
     },
     {
+      "id": "greenland-citizenship-at-birth",
+      "country": {
+        "iso_n3": "304",
+        "name": "Greenland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Danish nationality at birth",
+      "summary": "Citizenship at birth in Greenland follows Danish nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "greenland-citizenship-at-birth-principal",
+          "label": "Danish nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Naalakkersuisut — Government of Greenland",
+          "url": "https://naalakkersuisut.gl/"
+        }
+      ]
+    },
+    {
+      "id": "greenland-nationality-by-descent",
+      "country": {
+        "iso_n3": "304",
+        "name": "Greenland"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Danish nationality by descent",
+      "summary": "Greenland confers Danish nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "greenland-nationality-by-descent-principal",
+          "label": "Danish nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Naalakkersuisut — Government of Greenland",
+          "url": "https://naalakkersuisut.gl/"
+        }
+      ]
+    },
+    {
+      "id": "greenland-naturalization",
+      "country": {
+        "iso_n3": "304",
+        "name": "Greenland"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under the parent sovereign",
+      "summary": "Danish nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Greenland is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "greenland-naturalization-principal",
+          "label": "Naturalization under the parent sovereign",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Naalakkersuisut — Government of Greenland",
+          "url": "https://naalakkersuisut.gl/"
+        }
+      ]
+    },
+    {
       "id": "grenada-cbi",
       "country": {
         "iso_n3": "308",
@@ -11997,6 +13012,112 @@
         {
           "title": "Grenada — application for naturalisation",
           "url": "https://gndembassyprc.mofa.gov.gd/wp-content/uploads/2023/09/Schedule-5-Regulation-7.pdf"
+        }
+      ]
+    },
+    {
+      "id": "guam-citizenship-at-birth",
+      "country": {
+        "iso_n3": "316",
+        "name": "Guam"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "United States citizenship at birth",
+      "summary": "Citizenship at birth in Guam follows United States citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guam-citizenship-at-birth-principal",
+          "label": "United States citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Persons born in Guam are US citizens at birth (8 USC 1407)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1407 — Persons born in Guam",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1407"
+        }
+      ]
+    },
+    {
+      "id": "guam-nationality-by-descent",
+      "country": {
+        "iso_n3": "316",
+        "name": "Guam"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "United States citizenship by descent",
+      "summary": "Guam confers United States citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guam-nationality-by-descent-principal",
+          "label": "United States citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1407 — Persons born in Guam",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1407"
+        }
+      ]
+    },
+    {
+      "id": "guam-naturalization",
+      "country": {
+        "iso_n3": "316",
+        "name": "Guam"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "United States citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Guam is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "guam-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1407 — Persons born in Guam",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1407"
         }
       ]
     },
@@ -12630,6 +13751,111 @@
         {
           "title": "Honduras Constitution — nationality (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Honduras_2013"
+        }
+      ]
+    },
+    {
+      "id": "hong-kong-citizenship-at-birth",
+      "country": {
+        "iso_n3": "344",
+        "name": "Hong Kong"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Chinese nationality at birth",
+      "summary": "Citizenship at birth in Hong Kong follows Chinese nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "hong-kong-citizenship-at-birth-principal",
+          "label": "Chinese nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "A person of Chinese descent born in Hong Kong is a Chinese national; there is no jus soli for children of foreign parents."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "HK Immigration Department — Chinese nationality",
+          "url": "https://www.immd.gov.hk/eng/services/chinese_nationality.html"
+        }
+      ]
+    },
+    {
+      "id": "hong-kong-nationality-by-descent",
+      "country": {
+        "iso_n3": "344",
+        "name": "Hong Kong"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Chinese nationality by descent",
+      "summary": "Hong Kong confers Chinese nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "hong-kong-nationality-by-descent-principal",
+          "label": "Chinese nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "HK Immigration Department — Chinese nationality",
+          "url": "https://www.immd.gov.hk/eng/services/chinese_nationality.html"
+        }
+      ]
+    },
+    {
+      "id": "hong-kong-naturalization",
+      "country": {
+        "iso_n3": "344",
+        "name": "Hong Kong"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under the parent sovereign",
+      "summary": "Chinese nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Hong Kong is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "hong-kong-naturalization-principal",
+          "label": "Naturalization under the parent sovereign",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "PRC naturalization is rarely granted; applied via HK Immigration."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "HK Immigration Department — Chinese nationality",
+          "url": "https://www.immd.gov.hk/eng/services/chinese_nationality.html"
         }
       ]
     },
@@ -15800,6 +17026,111 @@
       ]
     },
     {
+      "id": "macao-citizenship-at-birth",
+      "country": {
+        "iso_n3": "446",
+        "name": "Macao"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Chinese nationality at birth",
+      "summary": "Citizenship at birth in Macao follows Chinese nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "macao-citizenship-at-birth-principal",
+          "label": "Chinese nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "A person of Chinese descent born in Macao is a Chinese national; there is no jus soli for children of foreign parents."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Macao SAR Government — right of abode",
+          "url": "https://www.gov.mo/en/services/ps-1071/"
+        }
+      ]
+    },
+    {
+      "id": "macao-nationality-by-descent",
+      "country": {
+        "iso_n3": "446",
+        "name": "Macao"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Chinese nationality by descent",
+      "summary": "Macao confers Chinese nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "macao-nationality-by-descent-principal",
+          "label": "Chinese nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Macao SAR Government — right of abode",
+          "url": "https://www.gov.mo/en/services/ps-1071/"
+        }
+      ]
+    },
+    {
+      "id": "macao-naturalization",
+      "country": {
+        "iso_n3": "446",
+        "name": "Macao"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under the parent sovereign",
+      "summary": "Chinese nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Macao is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "macao-naturalization-principal",
+          "label": "Naturalization under the parent sovereign",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "PRC naturalization is rarely granted; applied via Macao."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Macao SAR Government — right of abode",
+          "url": "https://www.gov.mo/en/services/ps-1071/"
+        }
+      ]
+    },
+    {
       "id": "madagascar-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "450",
@@ -17336,6 +18667,112 @@
       ]
     },
     {
+      "id": "montserrat-citizenship-at-birth",
+      "country": {
+        "iso_n3": "500",
+        "name": "Montserrat"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship at birth",
+      "summary": "Citizenship at birth in Montserrat follows British Overseas Territories Citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "montserrat-citizenship-at-birth-principal",
+          "label": "British Overseas Territories Citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Montserrat — Citizenship & residence",
+          "url": "https://www.gov.ms/government/non-ministerial-departments/office-of-the-deputy-governor/citizenship-residence-information/"
+        }
+      ]
+    },
+    {
+      "id": "montserrat-nationality-by-descent",
+      "country": {
+        "iso_n3": "500",
+        "name": "Montserrat"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship by descent",
+      "summary": "Montserrat confers British Overseas Territories Citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "montserrat-nationality-by-descent-principal",
+          "label": "British Overseas Territories Citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Montserrat — Citizenship & residence",
+          "url": "https://www.gov.ms/government/non-ministerial-departments/office-of-the-deputy-governor/citizenship-residence-information/"
+        }
+      ]
+    },
+    {
+      "id": "montserrat-naturalization",
+      "country": {
+        "iso_n3": "500",
+        "name": "Montserrat"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British Overseas Territories Citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Montserrat is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "montserrat-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Montserrat — Citizenship & residence",
+          "url": "https://www.gov.ms/government/non-ministerial-departments/office-of-the-deputy-governor/citizenship-residence-information/"
+        }
+      ]
+    },
+    {
       "id": "morocco-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "504",
@@ -18135,6 +19572,536 @@
       ]
     },
     {
+      "id": "curacao-citizenship-at-birth",
+      "country": {
+        "iso_n3": "531",
+        "name": "Curaçao"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Dutch nationality at birth",
+      "summary": "Citizenship at birth in Curaçao follows Dutch nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "curacao-citizenship-at-birth-principal",
+          "label": "Dutch nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Curaçao",
+          "url": "https://www.gobiernu.cw/"
+        }
+      ]
+    },
+    {
+      "id": "curacao-nationality-by-descent",
+      "country": {
+        "iso_n3": "531",
+        "name": "Curaçao"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Dutch nationality by descent",
+      "summary": "Curaçao confers Dutch nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "curacao-nationality-by-descent-principal",
+          "label": "Dutch nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Curaçao",
+          "url": "https://www.gobiernu.cw/"
+        }
+      ]
+    },
+    {
+      "id": "curacao-naturalization",
+      "country": {
+        "iso_n3": "531",
+        "name": "Curaçao"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Dutch nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Curaçao is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "curacao-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Curaçao",
+          "url": "https://www.gobiernu.cw/"
+        }
+      ]
+    },
+    {
+      "id": "aruba-citizenship-at-birth",
+      "country": {
+        "iso_n3": "533",
+        "name": "Aruba"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Dutch nationality at birth",
+      "summary": "Citizenship at birth in Aruba follows Dutch nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "aruba-citizenship-at-birth-principal",
+          "label": "Dutch nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Aruba — Work & residence",
+          "url": "https://www.gobierno.aw/en/work-and-residence-permit"
+        }
+      ]
+    },
+    {
+      "id": "aruba-nationality-by-descent",
+      "country": {
+        "iso_n3": "533",
+        "name": "Aruba"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Dutch nationality by descent",
+      "summary": "Aruba confers Dutch nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "aruba-nationality-by-descent-principal",
+          "label": "Dutch nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Aruba — Work & residence",
+          "url": "https://www.gobierno.aw/en/work-and-residence-permit"
+        }
+      ]
+    },
+    {
+      "id": "aruba-naturalization",
+      "country": {
+        "iso_n3": "533",
+        "name": "Aruba"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Dutch nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Aruba is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "aruba-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Aruba — Work & residence",
+          "url": "https://www.gobierno.aw/en/work-and-residence-permit"
+        }
+      ]
+    },
+    {
+      "id": "sint-maarten-citizenship-at-birth",
+      "country": {
+        "iso_n3": "534",
+        "name": "Sint Maarten"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Dutch nationality at birth",
+      "summary": "Citizenship at birth in Sint Maarten follows Dutch nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sint-maarten-citizenship-at-birth-principal",
+          "label": "Dutch nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Sint Maarten",
+          "url": "https://www.sintmaartengov.org/"
+        }
+      ]
+    },
+    {
+      "id": "sint-maarten-nationality-by-descent",
+      "country": {
+        "iso_n3": "534",
+        "name": "Sint Maarten"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Dutch nationality by descent",
+      "summary": "Sint Maarten confers Dutch nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "sint-maarten-nationality-by-descent-principal",
+          "label": "Dutch nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Sint Maarten",
+          "url": "https://www.sintmaartengov.org/"
+        }
+      ]
+    },
+    {
+      "id": "sint-maarten-naturalization",
+      "country": {
+        "iso_n3": "534",
+        "name": "Sint Maarten"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Dutch nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Sint Maarten is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sint-maarten-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Sint Maarten",
+          "url": "https://www.sintmaartengov.org/"
+        }
+      ]
+    },
+    {
+      "id": "caribbean-netherlands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "535",
+        "name": "Caribbean Netherlands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Dutch nationality at birth",
+      "summary": "Citizenship at birth in Caribbean Netherlands follows Dutch nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "caribbean-netherlands-citizenship-at-birth-principal",
+          "label": "Dutch nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Rijksdienst Caribisch Nederland",
+          "url": "https://www.rijksdienstcn.com/"
+        }
+      ]
+    },
+    {
+      "id": "caribbean-netherlands-nationality-by-descent",
+      "country": {
+        "iso_n3": "535",
+        "name": "Caribbean Netherlands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Dutch nationality by descent",
+      "summary": "Caribbean Netherlands confers Dutch nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "caribbean-netherlands-nationality-by-descent-principal",
+          "label": "Dutch nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Rijksdienst Caribisch Nederland",
+          "url": "https://www.rijksdienstcn.com/"
+        }
+      ]
+    },
+    {
+      "id": "caribbean-netherlands-naturalization",
+      "country": {
+        "iso_n3": "535",
+        "name": "Caribbean Netherlands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Dutch nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Caribbean Netherlands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "caribbean-netherlands-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Rijksdienst Caribisch Nederland",
+          "url": "https://www.rijksdienstcn.com/"
+        }
+      ]
+    },
+    {
+      "id": "new-caledonia-citizenship-at-birth",
+      "country": {
+        "iso_n3": "540",
+        "name": "New Caledonia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in New Caledonia follows French nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "new-caledonia-citizenship-at-birth-principal",
+          "label": "French nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "French conditional jus soli applies (automatic at birth only under double jus soli)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Gouvernement de la Nouvelle-Calédonie",
+          "url": "https://www.gouv.nc/"
+        }
+      ]
+    },
+    {
+      "id": "new-caledonia-nationality-by-descent",
+      "country": {
+        "iso_n3": "540",
+        "name": "New Caledonia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "French nationality by descent",
+      "summary": "New Caledonia confers French nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "new-caledonia-nationality-by-descent-principal",
+          "label": "French nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Gouvernement de la Nouvelle-Calédonie",
+          "url": "https://www.gouv.nc/"
+        }
+      ]
+    },
+    {
+      "id": "new-caledonia-naturalization",
+      "country": {
+        "iso_n3": "540",
+        "name": "New Caledonia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "French nationality can be acquired by naturalization under the parent sovereign’s law; local residence in New Caledonia is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "new-caledonia-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Gouvernement de la Nouvelle-Calédonie",
+          "url": "https://www.gouv.nc/"
+        }
+      ]
+    },
+    {
       "id": "vanuatu-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "548",
@@ -18763,6 +20730,216 @@
       ]
     },
     {
+      "id": "niue-citizenship-at-birth",
+      "country": {
+        "iso_n3": "570",
+        "name": "Niue"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "New Zealand citizenship at birth",
+      "summary": "Citizenship at birth in Niue follows New Zealand citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "niue-citizenship-at-birth-principal",
+          "label": "New Zealand citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Birth in the Realm confers NZ citizenship if a parent is an NZ citizen or entitled to reside indefinitely (post-2006)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Niue",
+          "url": "https://www.gov.nu/"
+        }
+      ]
+    },
+    {
+      "id": "niue-nationality-by-descent",
+      "country": {
+        "iso_n3": "570",
+        "name": "Niue"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "New Zealand citizenship by descent",
+      "summary": "Niue confers New Zealand citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "niue-nationality-by-descent-principal",
+          "label": "New Zealand citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Niue",
+          "url": "https://www.gov.nu/"
+        }
+      ]
+    },
+    {
+      "id": "niue-naturalization",
+      "country": {
+        "iso_n3": "570",
+        "name": "Niue"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under the parent sovereign",
+      "summary": "New Zealand citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Niue is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "niue-naturalization-principal",
+          "label": "Naturalization under the parent sovereign",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "NZ citizenship by grant requires residence in New Zealand itself; Niue residence does not directly qualify."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Niue",
+          "url": "https://www.gov.nu/"
+        }
+      ]
+    },
+    {
+      "id": "norfolk-island-citizenship-at-birth",
+      "country": {
+        "iso_n3": "574",
+        "name": "Norfolk Island"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Australian citizenship at birth",
+      "summary": "Citizenship at birth in Norfolk Island follows Australian citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "norfolk-island-citizenship-at-birth-principal",
+          "label": "Australian citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Australian citizenship at birth requires a parent who is a citizen or permanent resident (or 10 years ordinary residence)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Norfolk Island Legislation Amendment Act 2015",
+          "url": "https://www.legislation.gov.au/C2015A00059/latest/text"
+        }
+      ]
+    },
+    {
+      "id": "norfolk-island-nationality-by-descent",
+      "country": {
+        "iso_n3": "574",
+        "name": "Norfolk Island"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Australian citizenship by descent",
+      "summary": "Norfolk Island confers Australian citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "norfolk-island-nationality-by-descent-principal",
+          "label": "Australian citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Norfolk Island Legislation Amendment Act 2015",
+          "url": "https://www.legislation.gov.au/C2015A00059/latest/text"
+        }
+      ]
+    },
+    {
+      "id": "norfolk-island-naturalization",
+      "country": {
+        "iso_n3": "574",
+        "name": "Norfolk Island"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under the parent sovereign",
+      "summary": "Australian citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Norfolk Island is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "norfolk-island-naturalization-principal",
+          "label": "Naturalization under the parent sovereign",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Standard Australian residence/PR pathways apply since 2016 migration-zone integration."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Norfolk Island Legislation Amendment Act 2015",
+          "url": "https://www.legislation.gov.au/C2015A00059/latest/text"
+        }
+      ]
+    },
+    {
       "id": "norway-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "578",
@@ -18864,6 +21041,112 @@
         {
           "title": "Norway UDI - citizenship",
           "url": "https://www.udi.no/en/want-to-apply/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "northern-mariana-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "580",
+        "name": "Northern Mariana Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "United States citizenship at birth",
+      "summary": "Citizenship at birth in Northern Mariana Islands follows United States citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "northern-mariana-islands-citizenship-at-birth-principal",
+          "label": "United States citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Persons born in the CNMI are US citizens at birth under Covenant §301 (approved at 48 USC 1801)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "48 USC 1801 — Covenant establishing the CNMI",
+          "url": "https://www.law.cornell.edu/uscode/text/48/1801"
+        }
+      ]
+    },
+    {
+      "id": "northern-mariana-islands-nationality-by-descent",
+      "country": {
+        "iso_n3": "580",
+        "name": "Northern Mariana Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "United States citizenship by descent",
+      "summary": "Northern Mariana Islands confers United States citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "northern-mariana-islands-nationality-by-descent-principal",
+          "label": "United States citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "48 USC 1801 — Covenant establishing the CNMI",
+          "url": "https://www.law.cornell.edu/uscode/text/48/1801"
+        }
+      ]
+    },
+    {
+      "id": "northern-mariana-islands-naturalization",
+      "country": {
+        "iso_n3": "580",
+        "name": "Northern Mariana Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "United States citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Northern Mariana Islands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "northern-mariana-islands-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "48 USC 1801 — Covenant establishing the CNMI",
+          "url": "https://www.law.cornell.edu/uscode/text/48/1801"
         }
       ]
     },
@@ -20029,6 +22312,113 @@
       ]
     },
     {
+      "id": "pitcairn-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "612",
+        "name": "Pitcairn Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship at birth",
+      "summary": "Citizenship at birth in Pitcairn Islands follows British Overseas Territories Citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "pitcairn-islands-citizenship-at-birth-principal",
+          "label": "British Overseas Territories Citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Pitcairn Islands — Immigration",
+          "url": "https://www.government.pn/immigration"
+        }
+      ]
+    },
+    {
+      "id": "pitcairn-islands-nationality-by-descent",
+      "country": {
+        "iso_n3": "612",
+        "name": "Pitcairn Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship by descent",
+      "summary": "Pitcairn Islands confers British Overseas Territories Citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "pitcairn-islands-nationality-by-descent-principal",
+          "label": "British Overseas Territories Citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Pitcairn Islands — Immigration",
+          "url": "https://www.government.pn/immigration"
+        }
+      ]
+    },
+    {
+      "id": "pitcairn-islands-naturalization",
+      "country": {
+        "iso_n3": "612",
+        "name": "Pitcairn Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British Overseas Territories Citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Pitcairn Islands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "pitcairn-islands-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Nominal in practice: the settled population is only a few dozen and settlement is granted exceptionally."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of the Pitcairn Islands — Immigration",
+          "url": "https://www.government.pn/immigration"
+        }
+      ]
+    },
+    {
       "id": "poland-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "616",
@@ -20482,6 +22872,112 @@
         {
           "title": "Timor-Leste Citizenship Law (Migration Service PDF)",
           "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf"
+        }
+      ]
+    },
+    {
+      "id": "puerto-rico-citizenship-at-birth",
+      "country": {
+        "iso_n3": "630",
+        "name": "Puerto Rico"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "United States citizenship at birth",
+      "summary": "Citizenship at birth in Puerto Rico follows United States citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "puerto-rico-citizenship-at-birth-principal",
+          "label": "United States citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Persons born in Puerto Rico are US citizens at birth (statutory jus soli, 8 USC 1402)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1402 — Persons born in Puerto Rico",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1402"
+        }
+      ]
+    },
+    {
+      "id": "puerto-rico-nationality-by-descent",
+      "country": {
+        "iso_n3": "630",
+        "name": "Puerto Rico"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "United States citizenship by descent",
+      "summary": "Puerto Rico confers United States citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "puerto-rico-nationality-by-descent-principal",
+          "label": "United States citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1402 — Persons born in Puerto Rico",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1402"
+        }
+      ]
+    },
+    {
+      "id": "puerto-rico-naturalization",
+      "country": {
+        "iso_n3": "630",
+        "name": "Puerto Rico"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "United States citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Puerto Rico is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "puerto-rico-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1402 — Persons born in Puerto Rico",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1402"
         }
       ]
     },
@@ -20950,6 +23446,218 @@
       ]
     },
     {
+      "id": "saint-barthelemy-citizenship-at-birth",
+      "country": {
+        "iso_n3": "652",
+        "name": "Saint-Barthélemy"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in Saint-Barthélemy follows French nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-barthelemy-citizenship-at-birth-principal",
+          "label": "French nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "French conditional jus soli applies (automatic at birth only under double jus soli)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Collectivité de Saint-Barthélemy",
+          "url": "https://www.comstbarth.fr/"
+        }
+      ]
+    },
+    {
+      "id": "saint-barthelemy-nationality-by-descent",
+      "country": {
+        "iso_n3": "652",
+        "name": "Saint-Barthélemy"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "French nationality by descent",
+      "summary": "Saint-Barthélemy confers French nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-barthelemy-nationality-by-descent-principal",
+          "label": "French nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Collectivité de Saint-Barthélemy",
+          "url": "https://www.comstbarth.fr/"
+        }
+      ]
+    },
+    {
+      "id": "saint-barthelemy-naturalization",
+      "country": {
+        "iso_n3": "652",
+        "name": "Saint-Barthélemy"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "French nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Saint-Barthélemy is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "saint-barthelemy-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Collectivité de Saint-Barthélemy",
+          "url": "https://www.comstbarth.fr/"
+        }
+      ]
+    },
+    {
+      "id": "saint-helena-citizenship-at-birth",
+      "country": {
+        "iso_n3": "654",
+        "name": "Saint Helena, Ascension and Tristan da Cunha"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship at birth",
+      "summary": "Citizenship at birth in Saint Helena, Ascension and Tristan da Cunha follows British Overseas Territories Citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-helena-citizenship-at-birth-principal",
+          "label": "British Overseas Territories Citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "St Helena Government — St Helenian status",
+          "url": "https://www.sainthelena.gov.sh/public-services/immigration/st-helenian-status/"
+        }
+      ]
+    },
+    {
+      "id": "saint-helena-nationality-by-descent",
+      "country": {
+        "iso_n3": "654",
+        "name": "Saint Helena, Ascension and Tristan da Cunha"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship by descent",
+      "summary": "Saint Helena, Ascension and Tristan da Cunha confers British Overseas Territories Citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-helena-nationality-by-descent-principal",
+          "label": "British Overseas Territories Citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "St Helena Government — St Helenian status",
+          "url": "https://www.sainthelena.gov.sh/public-services/immigration/st-helenian-status/"
+        }
+      ]
+    },
+    {
+      "id": "saint-helena-naturalization",
+      "country": {
+        "iso_n3": "654",
+        "name": "Saint Helena, Ascension and Tristan da Cunha"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British Overseas Territories Citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Saint Helena, Ascension and Tristan da Cunha is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "saint-helena-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "St Helena Government — St Helenian status",
+          "url": "https://www.sainthelena.gov.sh/public-services/immigration/st-helenian-status/"
+        }
+      ]
+    },
+    {
       "id": "st-kitts-nevis-citizenship-by-birth",
       "country": {
         "iso_n3": "659",
@@ -21094,6 +23802,112 @@
         {
           "title": "St Christopher and Nevis Citizenship Act",
           "url": "https://lawcommission.gov.kn/wp-content/documents/Revised-Acts-of-St-Kitts-and-Nevis/Revised-Acts-of-St-Kitts-and-Nevis-2020/Ch-01_05-Saint-Christopher-and-Nevis-Citizenship-Act.pdf"
+        }
+      ]
+    },
+    {
+      "id": "anguilla-citizenship-at-birth",
+      "country": {
+        "iso_n3": "660",
+        "name": "Anguilla"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship at birth",
+      "summary": "Citizenship at birth in Anguilla follows British Overseas Territories Citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "anguilla-citizenship-at-birth-principal",
+          "label": "British Overseas Territories Citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Anguilla — Anguillian status",
+          "url": "https://gov.ai/service/immigration--labour-anguilla-status"
+        }
+      ]
+    },
+    {
+      "id": "anguilla-nationality-by-descent",
+      "country": {
+        "iso_n3": "660",
+        "name": "Anguilla"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship by descent",
+      "summary": "Anguilla confers British Overseas Territories Citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "anguilla-nationality-by-descent-principal",
+          "label": "British Overseas Territories Citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Anguilla — Anguillian status",
+          "url": "https://gov.ai/service/immigration--labour-anguilla-status"
+        }
+      ]
+    },
+    {
+      "id": "anguilla-naturalization",
+      "country": {
+        "iso_n3": "660",
+        "name": "Anguilla"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British Overseas Territories Citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Anguilla is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "anguilla-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Anguilla — Anguillian status",
+          "url": "https://gov.ai/service/immigration--labour-anguilla-status"
         }
       ]
     },
@@ -21245,6 +24059,218 @@
         {
           "title": "Constitution of Saint Lucia — citizenship",
           "url": "https://www.govt.lc/constitution7"
+        }
+      ]
+    },
+    {
+      "id": "saint-martin-citizenship-at-birth",
+      "country": {
+        "iso_n3": "663",
+        "name": "Saint-Martin"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in Saint-Martin follows French nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-martin-citizenship-at-birth-principal",
+          "label": "French nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "French conditional jus soli applies (automatic at birth only under double jus soli)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Collectivité de Saint-Martin",
+          "url": "https://www.com-saint-martin.fr/"
+        }
+      ]
+    },
+    {
+      "id": "saint-martin-nationality-by-descent",
+      "country": {
+        "iso_n3": "663",
+        "name": "Saint-Martin"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "French nationality by descent",
+      "summary": "Saint-Martin confers French nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-martin-nationality-by-descent-principal",
+          "label": "French nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Collectivité de Saint-Martin",
+          "url": "https://www.com-saint-martin.fr/"
+        }
+      ]
+    },
+    {
+      "id": "saint-martin-naturalization",
+      "country": {
+        "iso_n3": "663",
+        "name": "Saint-Martin"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "French nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Saint-Martin is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "saint-martin-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Collectivité de Saint-Martin",
+          "url": "https://www.com-saint-martin.fr/"
+        }
+      ]
+    },
+    {
+      "id": "saint-pierre-and-miquelon-citizenship-at-birth",
+      "country": {
+        "iso_n3": "666",
+        "name": "Saint-Pierre-et-Miquelon"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in Saint-Pierre-et-Miquelon follows French nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-pierre-and-miquelon-citizenship-at-birth-principal",
+          "label": "French nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "French conditional jus soli applies (automatic at birth only under double jus soli)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Service-Public — Saint-Pierre-et-Miquelon",
+          "url": "https://lannuaire.service-public.gouv.fr/collectivites-d-outre-mer/saint-pierre-et-miquelon/ed2ce256-ce24-4a37-9df1-13ce1eef8812"
+        }
+      ]
+    },
+    {
+      "id": "saint-pierre-and-miquelon-nationality-by-descent",
+      "country": {
+        "iso_n3": "666",
+        "name": "Saint-Pierre-et-Miquelon"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "French nationality by descent",
+      "summary": "Saint-Pierre-et-Miquelon confers French nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-pierre-and-miquelon-nationality-by-descent-principal",
+          "label": "French nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Service-Public — Saint-Pierre-et-Miquelon",
+          "url": "https://lannuaire.service-public.gouv.fr/collectivites-d-outre-mer/saint-pierre-et-miquelon/ed2ce256-ce24-4a37-9df1-13ce1eef8812"
+        }
+      ]
+    },
+    {
+      "id": "saint-pierre-and-miquelon-naturalization",
+      "country": {
+        "iso_n3": "666",
+        "name": "Saint-Pierre-et-Miquelon"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "French nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Saint-Pierre-et-Miquelon is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "saint-pierre-and-miquelon-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Service-Public — Saint-Pierre-et-Miquelon",
+          "url": "https://lannuaire.service-public.gouv.fr/collectivites-d-outre-mer/saint-pierre-et-miquelon/ed2ce256-ce24-4a37-9df1-13ce1eef8812"
         }
       ]
     },
@@ -24140,6 +27166,111 @@
       ]
     },
     {
+      "id": "tokelau-citizenship-at-birth",
+      "country": {
+        "iso_n3": "772",
+        "name": "Tokelau"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "New Zealand citizenship at birth",
+      "summary": "Citizenship at birth in Tokelau follows New Zealand citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tokelau-citizenship-at-birth-principal",
+          "label": "New Zealand citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Birth in the Realm confers NZ citizenship if a parent is an NZ citizen or entitled to reside indefinitely (post-2006)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Tokelau (Government)",
+          "url": "https://www.tokelau.org.nz/"
+        }
+      ]
+    },
+    {
+      "id": "tokelau-nationality-by-descent",
+      "country": {
+        "iso_n3": "772",
+        "name": "Tokelau"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "New Zealand citizenship by descent",
+      "summary": "Tokelau confers New Zealand citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tokelau-nationality-by-descent-principal",
+          "label": "New Zealand citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Tokelau (Government)",
+          "url": "https://www.tokelau.org.nz/"
+        }
+      ]
+    },
+    {
+      "id": "tokelau-naturalization",
+      "country": {
+        "iso_n3": "772",
+        "name": "Tokelau"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization under the parent sovereign",
+      "summary": "New Zealand citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Tokelau is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "tokelau-naturalization-principal",
+          "label": "Naturalization under the parent sovereign",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "NZ citizenship by grant requires residence in New Zealand itself."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Tokelau (Government)",
+          "url": "https://www.tokelau.org.nz/"
+        }
+      ]
+    },
+    {
       "id": "tonga-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "776",
@@ -24847,6 +27978,112 @@
       ]
     },
     {
+      "id": "turks-and-caicos-citizenship-at-birth",
+      "country": {
+        "iso_n3": "796",
+        "name": "Turks and Caicos Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship at birth",
+      "summary": "Citizenship at birth in Turks and Caicos Islands follows British Overseas Territories Citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "turks-and-caicos-citizenship-at-birth-principal",
+          "label": "British Overseas Territories Citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Turks and Caicos Islands Constitution Order 2011",
+          "url": "https://www.legislation.gov.uk/uksi/2011/1681/contents/made"
+        }
+      ]
+    },
+    {
+      "id": "turks-and-caicos-nationality-by-descent",
+      "country": {
+        "iso_n3": "796",
+        "name": "Turks and Caicos Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British Overseas Territories Citizenship by descent",
+      "summary": "Turks and Caicos Islands confers British Overseas Territories Citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "turks-and-caicos-nationality-by-descent-principal",
+          "label": "British Overseas Territories Citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Turks and Caicos Islands Constitution Order 2011",
+          "url": "https://www.legislation.gov.uk/uksi/2011/1681/contents/made"
+        }
+      ]
+    },
+    {
+      "id": "turks-and-caicos-naturalization",
+      "country": {
+        "iso_n3": "796",
+        "name": "Turks and Caicos Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British Overseas Territories Citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Turks and Caicos Islands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "turks-and-caicos-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Turks and Caicos Islands Constitution Order 2011",
+          "url": "https://www.legislation.gov.uk/uksi/2011/1681/contents/made"
+        }
+      ]
+    },
+    {
       "id": "tuvalu-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "798",
@@ -25540,6 +28777,324 @@
       ]
     },
     {
+      "id": "guernsey-citizenship-at-birth",
+      "country": {
+        "iso_n3": "831",
+        "name": "Guernsey"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British citizenship at birth",
+      "summary": "Citizenship at birth in Guernsey follows British citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guernsey-citizenship-at-birth-principal",
+          "label": "British citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "States of Guernsey — Immigration",
+          "url": "https://www.gov.gg/immigration"
+        }
+      ]
+    },
+    {
+      "id": "guernsey-nationality-by-descent",
+      "country": {
+        "iso_n3": "831",
+        "name": "Guernsey"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British citizenship by descent",
+      "summary": "Guernsey confers British citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guernsey-nationality-by-descent-principal",
+          "label": "British citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "States of Guernsey — Immigration",
+          "url": "https://www.gov.gg/immigration"
+        }
+      ]
+    },
+    {
+      "id": "guernsey-naturalization",
+      "country": {
+        "iso_n3": "831",
+        "name": "Guernsey"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Guernsey is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "guernsey-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "States of Guernsey — Immigration",
+          "url": "https://www.gov.gg/immigration"
+        }
+      ]
+    },
+    {
+      "id": "jersey-citizenship-at-birth",
+      "country": {
+        "iso_n3": "832",
+        "name": "Jersey"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British citizenship at birth",
+      "summary": "Citizenship at birth in Jersey follows British citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "jersey-citizenship-at-birth-principal",
+          "label": "British citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Jersey — Citizenship & settling in Jersey",
+          "url": "https://www.gov.je/LifeEvents/CitizenshipSettlingInJersey/pages/default.aspx"
+        }
+      ]
+    },
+    {
+      "id": "jersey-nationality-by-descent",
+      "country": {
+        "iso_n3": "832",
+        "name": "Jersey"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British citizenship by descent",
+      "summary": "Jersey confers British citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "jersey-nationality-by-descent-principal",
+          "label": "British citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Jersey — Citizenship & settling in Jersey",
+          "url": "https://www.gov.je/LifeEvents/CitizenshipSettlingInJersey/pages/default.aspx"
+        }
+      ]
+    },
+    {
+      "id": "jersey-naturalization",
+      "country": {
+        "iso_n3": "832",
+        "name": "Jersey"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Jersey is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "jersey-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Jersey — Citizenship & settling in Jersey",
+          "url": "https://www.gov.je/LifeEvents/CitizenshipSettlingInJersey/pages/default.aspx"
+        }
+      ]
+    },
+    {
+      "id": "isle-of-man-citizenship-at-birth",
+      "country": {
+        "iso_n3": "833",
+        "name": "Isle of Man"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British citizenship at birth",
+      "summary": "Citizenship at birth in Isle of Man follows British citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "isle-of-man-citizenship-at-birth-principal",
+          "label": "British citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Follows the parent sovereign’s nationality at birth; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Isle of Man Government — Immigration",
+          "url": "https://www.gov.im/categories/travel-traffic-and-motoring/immigration/"
+        }
+      ]
+    },
+    {
+      "id": "isle-of-man-nationality-by-descent",
+      "country": {
+        "iso_n3": "833",
+        "name": "Isle of Man"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "British citizenship by descent",
+      "summary": "Isle of Man confers British citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "isle-of-man-nationality-by-descent-principal",
+          "label": "British citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Isle of Man Government — Immigration",
+          "url": "https://www.gov.im/categories/travel-traffic-and-motoring/immigration/"
+        }
+      ]
+    },
+    {
+      "id": "isle-of-man-naturalization",
+      "country": {
+        "iso_n3": "833",
+        "name": "Isle of Man"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "British citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in Isle of Man is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "isle-of-man-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Isle of Man Government — Immigration",
+          "url": "https://www.gov.im/categories/travel-traffic-and-motoring/immigration/"
+        }
+      ]
+    },
+    {
       "id": "tanzania-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "834",
@@ -25748,6 +29303,112 @@
         {
           "title": "USCIS — Naturalization for lawful permanent residents",
           "url": "https://www.uscis.gov/sites/default/files/document/fact-sheets/DO_FactSheet_NaturalizationForLawfulPermanentResidents_wTorUNonimmigrantStatus_V3_508.pdf"
+        }
+      ]
+    },
+    {
+      "id": "us-virgin-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "850",
+        "name": "United States Virgin Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "United States citizenship at birth",
+      "summary": "Citizenship at birth in United States Virgin Islands follows United States citizenship rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "us-virgin-islands-citizenship-at-birth-principal",
+          "label": "United States citizenship at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Persons born in the US Virgin Islands are US citizens at birth (8 USC 1406)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1406 — Persons born in the Virgin Islands",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1406"
+        }
+      ]
+    },
+    {
+      "id": "us-virgin-islands-nationality-by-descent",
+      "country": {
+        "iso_n3": "850",
+        "name": "United States Virgin Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "United States citizenship by descent",
+      "summary": "United States Virgin Islands confers United States citizenship; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "us-virgin-islands-nationality-by-descent-principal",
+          "label": "United States citizenship by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1406 — Persons born in the Virgin Islands",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1406"
+        }
+      ]
+    },
+    {
+      "id": "us-virgin-islands-naturalization",
+      "country": {
+        "iso_n3": "850",
+        "name": "United States Virgin Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "United States citizenship can be acquired by naturalization under the parent sovereign’s law; local residence in United States Virgin Islands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "us-virgin-islands-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1406 — Persons born in the Virgin Islands",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1406"
         }
       ]
     },
@@ -26186,6 +29847,112 @@
         {
           "title": "Venezuela Constitution — nationality (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Venezuela_2009"
+        }
+      ]
+    },
+    {
+      "id": "wallis-and-futuna-citizenship-at-birth",
+      "country": {
+        "iso_n3": "876",
+        "name": "Wallis and Futuna"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in Wallis and Futuna follows French nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "wallis-and-futuna-citizenship-at-birth-principal",
+          "label": "French nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "French conditional jus soli applies (automatic at birth only under double jus soli)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Assemblée territoriale des îles Wallis et Futuna",
+          "url": "https://www.assembleeterritoriale.wf/"
+        }
+      ]
+    },
+    {
+      "id": "wallis-and-futuna-nationality-by-descent",
+      "country": {
+        "iso_n3": "876",
+        "name": "Wallis and Futuna"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "French nationality by descent",
+      "summary": "Wallis and Futuna confers French nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "wallis-and-futuna-nationality-by-descent-principal",
+          "label": "French nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Assemblée territoriale des îles Wallis et Futuna",
+          "url": "https://www.assembleeterritoriale.wf/"
+        }
+      ]
+    },
+    {
+      "id": "wallis-and-futuna-naturalization",
+      "country": {
+        "iso_n3": "876",
+        "name": "Wallis and Futuna"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "French nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Wallis and Futuna is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "wallis-and-futuna-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Assemblée territoriale des îles Wallis et Futuna",
+          "url": "https://www.assembleeterritoriale.wf/"
         }
       ]
     },

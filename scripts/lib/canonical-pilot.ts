@@ -482,6 +482,78 @@ const OFFICIAL_URLS = {
   palestine_basic_law: 'https://www.constituteproject.org/constitution/Palestine_2005',
 } as const;
 
+// Dependent territories confer a parent sovereign's nationality (birth/descent),
+// usually alongside a distinct local "belonger"/right-of-abode residence status
+// that is not itself a nationality. These records model the citizenship modes
+// against the parent sovereign, with the local status noted. `findings` overrides
+// the default (ancestry/naturalization/birth present, investment verified_none)
+// for special cases such as American Samoa (US nationals, not citizens).
+interface TerritorySpec {
+  iso: string;
+  slug: string;
+  name: string;
+  nationalityLabel: string;
+  parentIso: string;
+  url: string;
+  sourceType: SourceRecord['source_type'];
+  monitorId: string;
+  sourceTitle: string;
+  note: string;
+  natMonths: number | null;
+  natNote?: string;
+  birthNote?: string;
+  ancestryNote?: string;
+  investmentNote?: string;
+  findings?: Partial<Record<'ancestry' | 'naturalization' | 'birth' | 'investment', 'present' | 'verified_none'>>;
+}
+
+export const TERRITORY_SPECS: TerritorySpec[] = [
+  // British Overseas Territories (BOTC + since 2002 British citizenship; local belonger status)
+  { iso: '060', slug: 'bermuda', name: 'Bermuda', nationalityLabel: 'British Overseas Territories Citizenship', parentIso: '826', url: 'https://www.gov.bm/department/immigration', sourceType: 'official_guidance', monitorId: 'bermuda-citizenship-law', sourceTitle: 'Government of Bermuda — Department of Immigration', natMonths: 60, note: 'British Overseas Territory conferring BOTC (and, since 2002, British citizenship). "Bermudian status" and the Permanent Resident’s Certificate are separate local immigration statuses. No CBI.' },
+  { iso: '092', slug: 'british-virgin-islands', name: 'British Virgin Islands', nationalityLabel: 'British Overseas Territories Citizenship', parentIso: '826', url: 'https://gov.vg/service-details/apply-belonger-status-through-immigration', sourceType: 'official_guidance', monitorId: 'british-virgin-islands-citizenship-law', sourceTitle: 'Government of the Virgin Islands — Belonger status', natMonths: 60, note: 'British Overseas Territory conferring BOTC (and British citizenship). "Belonger status" is a separate local immigration status. No CBI.' },
+  { iso: '292', slug: 'gibraltar', name: 'Gibraltar', nationalityLabel: 'British Overseas Territories Citizenship', parentIso: '826', url: 'https://www.gibraltarlaws.gov.gi/papers/gibraltar-constitution-order-2006-6', sourceType: 'primary_law', monitorId: 'gibraltar-citizenship-law', sourceTitle: 'Gibraltar Constitution Order 2006', natMonths: 60, note: 'British Overseas Territory conferring BOTC (and British citizenship). "Gibraltarian status" is a separate local status; Gibraltarians held EU free movement via the UK until 31 Jan 2020. No CBI.' },
+  { iso: '238', slug: 'falkland-islands', name: 'Falkland Islands', nationalityLabel: 'British Overseas Territories Citizenship', parentIso: '826', url: 'https://www.gov.fk/customs/falkland-islands-status/', sourceType: 'official_guidance', monitorId: 'falkland-islands-citizenship-law', sourceTitle: 'Falkland Islands Government — Falkland Islands status', natMonths: 60, note: 'British Overseas Territory conferring BOTC (and British citizenship). A Permanent Residence Permit and "Falkland Islands status" are separate local statuses. No CBI.' },
+  { iso: '500', slug: 'montserrat', name: 'Montserrat', nationalityLabel: 'British Overseas Territories Citizenship', parentIso: '826', url: 'https://www.gov.ms/government/non-ministerial-departments/office-of-the-deputy-governor/citizenship-residence-information/', sourceType: 'official_guidance', monitorId: 'montserrat-citizenship-law', sourceTitle: 'Government of Montserrat — Citizenship & residence', natMonths: 60, note: 'British Overseas Territory conferring BOTC (and British citizenship). "Belonger status" is a separate local status. No CBI.' },
+  { iso: '612', slug: 'pitcairn-islands', name: 'Pitcairn Islands', nationalityLabel: 'British Overseas Territories Citizenship', parentIso: '826', url: 'https://www.government.pn/immigration', sourceType: 'official_guidance', monitorId: 'pitcairn-islands-citizenship-law', sourceTitle: 'Government of the Pitcairn Islands — Immigration', natMonths: 60, natNote: 'Nominal in practice: the settled population is only a few dozen and settlement is granted exceptionally.', note: 'British Overseas Territory conferring BOTC (and British citizenship). Settlement to this ~50-person territory is granted only exceptionally. No CBI.' },
+  { iso: '654', slug: 'saint-helena', name: 'Saint Helena, Ascension and Tristan da Cunha', nationalityLabel: 'British Overseas Territories Citizenship', parentIso: '826', url: 'https://www.sainthelena.gov.sh/public-services/immigration/st-helenian-status/', sourceType: 'official_guidance', monitorId: 'saint-helena-citizenship-law', sourceTitle: 'St Helena Government — St Helenian status', natMonths: 60, note: 'British Overseas Territory conferring BOTC (and British citizenship). "St Helenian status" is a separate local status; Ascension and Tristan da Cunha run their own residence controls. No CBI.' },
+  { iso: '660', slug: 'anguilla', name: 'Anguilla', nationalityLabel: 'British Overseas Territories Citizenship', parentIso: '826', url: 'https://gov.ai/service/immigration--labour-anguilla-status', sourceType: 'official_guidance', monitorId: 'anguilla-citizenship-law', sourceTitle: 'Government of Anguilla — Anguillian status', natMonths: 60, note: 'British Overseas Territory conferring BOTC (and British citizenship). "Anguillian status" (Anguillian Status Act 2019) is a separate local status; investment routes give residence only. No CBI.' },
+  { iso: '796', slug: 'turks-and-caicos', name: 'Turks and Caicos Islands', nationalityLabel: 'British Overseas Territories Citizenship', parentIso: '826', url: 'https://www.legislation.gov.uk/uksi/2011/1681/contents/made', sourceType: 'primary_law', monitorId: 'turks-and-caicos-citizenship-law', sourceTitle: 'Turks and Caicos Islands Constitution Order 2011', natMonths: 60, note: 'British Overseas Territory conferring BOTC (and British citizenship). "Turks and Caicos Islander status" is a separate local status; investment routes give residence only. No CBI.' },
+  // British Crown Dependencies (British citizens; own immigration control; CTA)
+  { iso: '831', slug: 'guernsey', name: 'Guernsey', nationalityLabel: 'British citizenship', parentIso: '826', url: 'https://www.gov.gg/immigration', sourceType: 'official_guidance', monitorId: 'guernsey-citizenship-law', sourceTitle: 'States of Guernsey — Immigration', natMonths: 60, note: 'Crown Dependency; people are British citizens under the British Nationality Act 1981. Guernsey runs its own immigration control and local housing/work qualifications. No CBI.' },
+  { iso: '832', slug: 'jersey', name: 'Jersey', nationalityLabel: 'British citizenship', parentIso: '826', url: 'https://www.gov.je/LifeEvents/CitizenshipSettlingInJersey/pages/default.aspx', sourceType: 'official_guidance', monitorId: 'jersey-citizenship-law', sourceTitle: 'Government of Jersey — Citizenship & settling in Jersey', natMonths: 60, note: 'Crown Dependency; people are British citizens under the British Nationality Act 1981. Jersey runs its own immigration control and local residential/work qualifications. No CBI.' },
+  { iso: '833', slug: 'isle-of-man', name: 'Isle of Man', nationalityLabel: 'British citizenship', parentIso: '826', url: 'https://www.gov.im/categories/travel-traffic-and-motoring/immigration/', sourceType: 'official_guidance', monitorId: 'isle-of-man-citizenship-law', sourceTitle: 'Isle of Man Government — Immigration', natMonths: 60, note: 'Crown Dependency; people are British citizens under the British Nationality Act 1981. The island runs its own immigration and work-permit control. No CBI.' },
+  // United States territories
+  { iso: '630', slug: 'puerto-rico', name: 'Puerto Rico', nationalityLabel: 'United States citizenship', parentIso: '840', url: 'https://www.law.cornell.edu/uscode/text/8/1402', sourceType: 'primary_law', monitorId: 'puerto-rico-citizenship-law', sourceTitle: '8 USC 1402 — Persons born in Puerto Rico', natMonths: 60, birthNote: 'Persons born in Puerto Rico are US citizens at birth (statutory jus soli, 8 USC 1402).', note: 'Unincorporated organized US territory; persons born there are US citizens at birth. No CBI.' },
+  { iso: '316', slug: 'guam', name: 'Guam', nationalityLabel: 'United States citizenship', parentIso: '840', url: 'https://www.law.cornell.edu/uscode/text/8/1407', sourceType: 'primary_law', monitorId: 'guam-citizenship-law', sourceTitle: '8 USC 1407 — Persons born in Guam', natMonths: 60, birthNote: 'Persons born in Guam are US citizens at birth (8 USC 1407).', note: 'Unincorporated organized US territory; persons born there are US citizens at birth. No CBI.' },
+  { iso: '850', slug: 'us-virgin-islands', name: 'United States Virgin Islands', nationalityLabel: 'United States citizenship', parentIso: '840', url: 'https://www.law.cornell.edu/uscode/text/8/1406', sourceType: 'primary_law', monitorId: 'us-virgin-islands-citizenship-law', sourceTitle: '8 USC 1406 — Persons born in the Virgin Islands', natMonths: 60, birthNote: 'Persons born in the US Virgin Islands are US citizens at birth (8 USC 1406).', note: 'Unincorporated organized US territory; persons born there are US citizens at birth. No CBI.' },
+  { iso: '580', slug: 'northern-mariana-islands', name: 'Northern Mariana Islands', nationalityLabel: 'United States citizenship', parentIso: '840', url: 'https://www.law.cornell.edu/uscode/text/48/1801', sourceType: 'primary_law', monitorId: 'northern-mariana-islands-citizenship-law', sourceTitle: '48 USC 1801 — Covenant establishing the CNMI', natMonths: 60, birthNote: 'Persons born in the CNMI are US citizens at birth under Covenant §301 (approved at 48 USC 1801).', note: 'Commonwealth in political union with the US; persons born there are US citizens at birth. No CBI.' },
+  { iso: '016', slug: 'american-samoa', name: 'American Samoa', nationalityLabel: 'United States nationality', parentIso: '840', url: 'https://www.law.cornell.edu/uscode/text/8/1408', sourceType: 'primary_law', monitorId: 'american-samoa-citizenship-law', natMonths: null, findings: { ancestry: 'verified_none', birth: 'verified_none' }, ancestryNote: 'American Samoan national status does not transmit US citizenship; US citizenship by descent requires a US-citizen parent under federal law.', birthNote: 'Persons born in American Samoa are US nationals, not US citizens (8 USC 1408); citizenship is not conferred at birth.', natNote: 'US national to US citizen via naturalization (no immigrant visa required, subject to INA requirements).', sourceTitle: '8 USC 1408 — Nationals but not citizens at birth', note: 'Unincorporated unorganized US territory. Persons born here are US NATIONALS, not US citizens (8 USC 1408); becoming a citizen requires naturalization. No CBI.' },
+  // Australia
+  { iso: '574', slug: 'norfolk-island', name: 'Norfolk Island', nationalityLabel: 'Australian citizenship', parentIso: '036', url: 'https://www.legislation.gov.au/C2015A00059/latest/text', sourceType: 'primary_law', monitorId: 'norfolk-island-citizenship-law', sourceTitle: 'Norfolk Island Legislation Amendment Act 2015', natMonths: null, natNote: 'Standard Australian residence/PR pathways apply since 2016 migration-zone integration.', birthNote: 'Australian citizenship at birth requires a parent who is a citizen or permanent resident (or 10 years ordinary residence).', note: 'Australian external territory, integrated into Australia’s migration zone since 2016; residents are Australian citizens. No CBI.' },
+  // French overseas territories/collectivities (full French nationality; EU citizens)
+  { iso: '258', slug: 'french-polynesia', name: 'French Polynesia', nationalityLabel: 'French nationality', parentIso: '250', url: 'https://www.presidence.pf/', sourceType: 'official_guidance', monitorId: 'french-polynesia-citizenship-law', sourceTitle: 'Présidence de la Polynésie française', natMonths: 60, birthNote: 'French conditional jus soli applies (automatic at birth only under double jus soli).', note: 'French overseas collectivity (OCT); confers full French nationality and EU citizenship. No CBI.' },
+  { iso: '540', slug: 'new-caledonia', name: 'New Caledonia', nationalityLabel: 'French nationality', parentIso: '250', url: 'https://www.gouv.nc/', sourceType: 'official_guidance', monitorId: 'new-caledonia-citizenship-law', sourceTitle: 'Gouvernement de la Nouvelle-Calédonie', natMonths: 60, birthNote: 'French conditional jus soli applies (automatic at birth only under double jus soli).', note: 'French sui generis collectivity (OCT); confers full French nationality and EU citizenship. A distinct "New Caledonian citizenship" under the Nouméa Accord governs local voting/employment only and is not a nationality. No CBI.' },
+  { iso: '652', slug: 'saint-barthelemy', name: 'Saint-Barthélemy', nationalityLabel: 'French nationality', parentIso: '250', url: 'https://www.comstbarth.fr/', sourceType: 'official_guidance', monitorId: 'saint-barthelemy-citizenship-law', sourceTitle: 'Collectivité de Saint-Barthélemy', natMonths: 60, birthNote: 'French conditional jus soli applies (automatic at birth only under double jus soli).', note: 'French overseas collectivity (OCT since 2012); confers full French nationality and EU citizenship. No CBI.' },
+  { iso: '663', slug: 'saint-martin', name: 'Saint-Martin', nationalityLabel: 'French nationality', parentIso: '250', url: 'https://www.com-saint-martin.fr/', sourceType: 'official_guidance', monitorId: 'saint-martin-citizenship-law', sourceTitle: 'Collectivité de Saint-Martin', natMonths: 60, birthNote: 'French conditional jus soli applies (automatic at birth only under double jus soli).', note: 'French overseas collectivity and EU outermost region; confers full French nationality and EU citizenship. No CBI.' },
+  { iso: '666', slug: 'saint-pierre-and-miquelon', name: 'Saint-Pierre-et-Miquelon', nationalityLabel: 'French nationality', parentIso: '250', url: 'https://lannuaire.service-public.gouv.fr/collectivites-d-outre-mer/saint-pierre-et-miquelon/ed2ce256-ce24-4a37-9df1-13ce1eef8812', sourceType: 'official_guidance', monitorId: 'saint-pierre-and-miquelon-citizenship-law', sourceTitle: 'Service-Public — Saint-Pierre-et-Miquelon', natMonths: 60, birthNote: 'French conditional jus soli applies (automatic at birth only under double jus soli).', note: 'French overseas collectivity (OCT); confers full French nationality and EU citizenship. No CBI.' },
+  { iso: '876', slug: 'wallis-and-futuna', name: 'Wallis and Futuna', nationalityLabel: 'French nationality', parentIso: '250', url: 'https://www.assembleeterritoriale.wf/', sourceType: 'official_guidance', monitorId: 'wallis-and-futuna-citizenship-law', sourceTitle: 'Assemblée territoriale des îles Wallis et Futuna', natMonths: 60, birthNote: 'French conditional jus soli applies (automatic at birth only under double jus soli).', note: 'French overseas collectivity (OCT); confers full French nationality and EU citizenship. No CBI.' },
+  // Kingdom of the Netherlands (Dutch nationality; local admission is separate)
+  { iso: '533', slug: 'aruba', name: 'Aruba', nationalityLabel: 'Dutch nationality', parentIso: '528', url: 'https://www.gobierno.aw/en/work-and-residence-permit', sourceType: 'official_guidance', monitorId: 'aruba-citizenship-law', sourceTitle: 'Government of Aruba — Work & residence', natMonths: 60, note: 'Constituent country of the Kingdom of the Netherlands; confers Dutch nationality. Local admission (toelating) is a separate status. No CBI.' },
+  { iso: '531', slug: 'curacao', name: 'Curaçao', nationalityLabel: 'Dutch nationality', parentIso: '528', url: 'https://www.gobiernu.cw/', sourceType: 'official_guidance', monitorId: 'curacao-citizenship-law', sourceTitle: 'Government of Curaçao', natMonths: 60, note: 'Constituent country of the Kingdom of the Netherlands; confers Dutch nationality. Local admission (toelating) is a separate status. No CBI.' },
+  { iso: '534', slug: 'sint-maarten', name: 'Sint Maarten', nationalityLabel: 'Dutch nationality', parentIso: '528', url: 'https://www.sintmaartengov.org/', sourceType: 'official_guidance', monitorId: 'sint-maarten-citizenship-law', sourceTitle: 'Government of Sint Maarten', natMonths: 60, note: 'Constituent country of the Kingdom of the Netherlands; confers Dutch nationality. Local admission is a separate status. No CBI.' },
+  { iso: '535', slug: 'caribbean-netherlands', name: 'Caribbean Netherlands', nationalityLabel: 'Dutch nationality', parentIso: '528', url: 'https://www.rijksdienstcn.com/', sourceType: 'official_guidance', monitorId: 'caribbean-netherlands-citizenship-law', sourceTitle: 'Rijksdienst Caribisch Nederland', natMonths: 60, note: 'Special municipalities (Bonaire, Sint Eustatius, Saba) of the Netherlands; confer Dutch nationality. Local admission is a separate status. No CBI.' },
+  // Kingdom of Denmark (Danish nationality; outside the EU)
+  { iso: '304', slug: 'greenland', name: 'Greenland', nationalityLabel: 'Danish nationality', parentIso: '208', url: 'https://naalakkersuisut.gl/', sourceType: 'official_guidance', monitorId: 'greenland-citizenship-law', sourceTitle: 'Naalakkersuisut — Government of Greenland', natMonths: null, note: 'Self-governing territory of the Kingdom of Denmark; confers Danish nationality but sits OUTSIDE the EU. No CBI.' },
+  { iso: '234', slug: 'faroe-islands', name: 'Faroe Islands', nationalityLabel: 'Danish nationality', parentIso: '208', url: 'https://www.government.fo/', sourceType: 'official_guidance', monitorId: 'faroe-islands-citizenship-law', sourceTitle: 'Government of the Faroe Islands', natMonths: null, note: 'Self-governing territory of the Kingdom of Denmark; confers Danish nationality but sits OUTSIDE the EU. No CBI.' },
+  // Realm of New Zealand (New Zealand citizenship)
+  { iso: '184', slug: 'cook-islands', name: 'Cook Islands', nationalityLabel: 'New Zealand citizenship', parentIso: '554', url: 'https://www.psc.gov.ck/post/mfai-media-release-applications-open-for-cook-islands-permanent-residency', sourceType: 'official_guidance', monitorId: 'cook-islands-citizenship-law', sourceTitle: 'Cook Islands Government — permanent residency', natMonths: null, natNote: 'NZ citizenship by grant requires residence in New Zealand itself; Cook Islands residence does not directly qualify.', birthNote: 'Birth in the Realm confers NZ citizenship if a parent is an NZ citizen or entitled to reside indefinitely (post-2006).', note: 'Self-governing state in free association with New Zealand; people are New Zealand citizens. Local permanent residence is a separate status. No CBI.' },
+  { iso: '570', slug: 'niue', name: 'Niue', nationalityLabel: 'New Zealand citizenship', parentIso: '554', url: 'https://www.gov.nu/', sourceType: 'official_guidance', monitorId: 'niue-citizenship-law', sourceTitle: 'Government of Niue', natMonths: null, natNote: 'NZ citizenship by grant requires residence in New Zealand itself; Niue residence does not directly qualify.', birthNote: 'Birth in the Realm confers NZ citizenship if a parent is an NZ citizen or entitled to reside indefinitely (post-2006).', note: 'Self-governing state in free association with New Zealand; people are New Zealand citizens. Local permanent residence is a separate status. No CBI.' },
+  { iso: '772', slug: 'tokelau', name: 'Tokelau', nationalityLabel: 'New Zealand citizenship', parentIso: '554', url: 'https://www.tokelau.org.nz/', sourceType: 'official_guidance', monitorId: 'tokelau-citizenship-law', sourceTitle: 'Tokelau (Government)', natMonths: null, natNote: 'NZ citizenship by grant requires residence in New Zealand itself.', birthNote: 'Birth in the Realm confers NZ citizenship if a parent is an NZ citizen or entitled to reside indefinitely (post-2006).', note: 'Non-self-governing territory of New Zealand; people are New Zealand citizens. No CBI.' },
+  // Chinese Special Administrative Regions (Chinese nationality; right of abode is separate)
+  { iso: '344', slug: 'hong-kong', name: 'Hong Kong', nationalityLabel: 'Chinese nationality', parentIso: '156', url: 'https://www.immd.gov.hk/eng/services/chinese_nationality.html', sourceType: 'official_guidance', monitorId: 'hong-kong-citizenship-law', sourceTitle: 'HK Immigration Department — Chinese nationality', natMonths: null, natNote: 'PRC naturalization is rarely granted; applied via HK Immigration.', birthNote: 'A person of Chinese descent born in Hong Kong is a Chinese national; there is no jus soli for children of foreign parents.', note: 'Special Administrative Region; Chinese nationals hold Chinese nationality. Right of abode/permanent residency (typically 7 years) is a separate local status. BN(O) is a residual British status, historically not full British citizenship. No CBI.' },
+  { iso: '446', slug: 'macao', name: 'Macao', nationalityLabel: 'Chinese nationality', parentIso: '156', url: 'https://www.gov.mo/en/services/ps-1071/', sourceType: 'official_guidance', monitorId: 'macao-citizenship-law', sourceTitle: 'Macao SAR Government — right of abode', natMonths: null, natNote: 'PRC naturalization is rarely granted; applied via Macao.', birthNote: 'A person of Chinese descent born in Macao is a Chinese national; there is no jus soli for children of foreign parents.', note: 'Special Administrative Region; Chinese nationals hold Chinese nationality. Right of abode/permanent residency is a separate local status. Some residents also hold Portuguese nationality retained from before 1999. No CBI.' },
+];
+
 function jurisdictionSources(): SourceRecord[] {
   return [
     officialSource({
@@ -1114,6 +1186,14 @@ function jurisdictionSources(): SourceRecord[] {
         url,
         status: 'active',
       },
+    })),
+    ...TERRITORY_SPECS.map(spec => officialSource({
+      title: spec.sourceTitle,
+      url: spec.url,
+      source_type: spec.sourceType,
+      jurisdictions: [spec.iso],
+      language: 'en',
+      monitoring: { source_id: spec.monitorId, method: 'http', url: spec.url, status: 'active' },
     })),
   ];
 }
@@ -15084,6 +15164,99 @@ function palestineRecord(shadow: DataShadow, officialSources: SourceRecord[]): J
   });
 }
 
+function territoryRecord(
+  shadow: DataShadow,
+  officialSources: SourceRecord[],
+  spec: TerritorySpec,
+): JurisdictionRecord {
+  const source = requireSource(officialSources, spec.url);
+  const findings: Record<'ancestry' | 'naturalization' | 'birth' | 'investment', 'present' | 'verified_none'> = {
+    ancestry: 'present',
+    naturalization: 'present',
+    birth: 'present',
+    investment: 'verified_none',
+    ...spec.findings,
+  };
+  const birthNote = spec.birthNote
+    ?? 'Follows the parent sovereign’s nationality at birth; not unconditional jus soli.';
+  const investmentNote = spec.investmentNote
+    ?? 'No citizenship-by-investment programme; the parent sovereign does not operate CBI.';
+  const coverageNotes: Record<'ancestry' | 'naturalization' | 'birth' | 'investment', string | undefined> = {
+    ancestry: spec.ancestryNote,
+    naturalization: undefined,
+    birth: birthNote,
+    investment: investmentNote,
+  };
+  const modes = ['ancestry', 'naturalization', 'birth', 'investment'] as const;
+  const coverage = modes.map(mode => ({
+    mode,
+    finding: findings[mode],
+    sources: [source],
+    confidence: 'medium' as const,
+    note: coverageNotes[mode],
+  }));
+
+  const routes: JurisdictionRecord['routes'] = [];
+  if (findings.ancestry === 'present') {
+    routes.push(principalCitizenshipRoute({
+      id: `${spec.slug}-nationality-by-descent`,
+      mode: 'ancestry',
+      title: `${spec.nationalityLabel} by descent`,
+      summary: `${spec.name} confers ${spec.nationalityLabel}; it passes by descent to the child of a qualifying parent.`,
+      source,
+      eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: spec.parentIso }],
+      months: 0,
+      confidence: 'medium',
+      lastChecked: '2026-07-23',
+      note: spec.ancestryNote,
+    }));
+  }
+  if (findings.naturalization === 'present') {
+    const natYears = spec.natMonths != null ? Math.round(spec.natMonths / 12) : null;
+    routes.push(principalCitizenshipRoute({
+      id: `${spec.slug}-naturalization`,
+      mode: 'naturalization',
+      title: natYears != null
+        ? `Naturalization after about ${natYears} years residence`
+        : 'Naturalization under the parent sovereign',
+      summary: `${spec.nationalityLabel} can be acquired by naturalization under the parent sovereign’s law; local residence in ${spec.name} is a separate status.`,
+      source,
+      eligibility: natYears != null
+        ? [{ field: 'residence.years', operator: 'gte', value: natYears, unit: 'years' }]
+        : [{ field: 'residence.qualifying', operator: 'exists', value: true }],
+      months: spec.natMonths,
+      allocation: 'discretionary',
+      confidence: 'medium',
+      lastChecked: '2026-07-23',
+      note: spec.natNote,
+    }));
+  }
+  if (findings.birth === 'present') {
+    routes.push(principalCitizenshipRoute({
+      id: `${spec.slug}-citizenship-at-birth`,
+      mode: 'birth',
+      title: `${spec.nationalityLabel} at birth`,
+      summary: `Citizenship at birth in ${spec.name} follows ${spec.nationalityLabel} rules.`,
+      source,
+      eligibility: [{ field: 'birth.jurisdiction', operator: 'eq', value: spec.iso }],
+      months: 0,
+      confidence: 'medium',
+      lastChecked: '2026-07-23',
+      note: birthNote,
+    }));
+  }
+
+  return reviewedCountryRecord({
+    shadow,
+    iso: spec.iso,
+    name: spec.name,
+    type: 'territory',
+    note: spec.note,
+    coverage,
+    routes,
+  });
+}
+
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
   const jurisdictions = [
@@ -15284,6 +15457,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     yemenRecord(shadow, countrySources),
     zambiaRecord(shadow, countrySources),
     zimbabweRecord(shadow, countrySources),
+    ...TERRITORY_SPECS.map(spec => territoryRecord(shadow, countrySources, spec)),
 
   ];
   const manualSources = arrangementSources(shadow);
