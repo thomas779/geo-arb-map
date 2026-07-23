@@ -189,7 +189,7 @@ Return ONLY a JSON array (no prose, no code fences). Return [] if nothing new. E
 "status":"confirmed|proposed|rumour|not_found","primary_urls":["https://official-source"],
 "effective_date":"YYYY-MM-DD or null","affects_dataset":boolean,
 "category":"ancestry|naturalization|birth|investment|visa|residency|cbi",
-"headline":"a punchy, specific 4-9 word hook — the change as it matters to a globally mobile reader",
+"headline":"a clean 6-12 word news headline that NAMES the country and states the change, readable in a phone notification (e.g. 'Guernsey replaces visa stickers with eVisas'); do not start with the ISO code and do not repeat the country name twice",
 "brief":"1-2 tight sentences a subscriber wants to read: what changed, why it matters, and one concrete number, date, or detail"}
 Voice for headline and brief: plain, confident, and specific; lead with the change or the number; no clickbait,
 no hype, no exclamation marks, and never legal advice. Put ONLY official/primary URLs in primary_urls — never

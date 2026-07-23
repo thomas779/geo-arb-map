@@ -159,10 +159,14 @@ export async function sendTelegramPost(
     token,
     channelId,
     fetcher = fetch,
+    parseMode,
+    disablePreview = false,
   }: {
     token: string;
     channelId: string;
     fetcher?: typeof fetch;
+    parseMode?: string;
+    disablePreview?: boolean;
   },
 ): Promise<number> {
   if (!token.trim()) throw new Error('TELEGRAM_BOT_TOKEN is not configured');
@@ -176,7 +180,8 @@ export async function sendTelegramPost(
       body: JSON.stringify({
         chat_id: channelId.trim(),
         text: post.text,
-        link_preview_options: { is_disabled: false },
+        ...(parseMode ? { parse_mode: parseMode } : {}),
+        link_preview_options: { is_disabled: disablePreview },
       }),
     },
   );

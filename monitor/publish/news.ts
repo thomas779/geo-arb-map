@@ -25,7 +25,14 @@ import type { Finding } from '../sweep/run';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TELEGRAM_MESSAGE_LIMIT = 4096;
-const DISCLAIMER = 'ℹ️ Information only — verify the rule for your situation before acting.';
+
+function escapeHtml(value: string): string {
+  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function escapeAttr(value: string): string {
+  return value.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+}
 
 // Country flag emoji from an ISO-3166 numeric code, for an eye-catching, scannable
 // channel. Falls back to a globe for territories/specials without a flag.
@@ -59,19 +66,17 @@ export function buildNewsPost(finding: Finding): TelegramPost {
   const sources = finding.primary_urls;
   if (sources.length === 0) throw new Error('finding has no primary source URL');
   const headline = (finding.headline || finding.claim).slice(0, 160);
-  const meta = [
-    finding.effective_date ? `Effective ${finding.effective_date}` : null,
-    finding.category,
-  ].filter(Boolean).join(' · ');
+  const link = sources.length === 1
+    ? `<a href="${escapeAttr(sources[0])}">Source</a>`
+    : sources.map((url, index) => `<a href="${escapeAttr(url)}">Source ${index + 1}</a>`).join(' · ');
 
-  const lines = [`${flagEmoji(finding.iso_n3)} ${finding.jurisdiction} — ${headline}`, '', finding.brief];
-  if (meta) lines.push('', `📌 ${meta}`);
-  lines.push('');
-  if (sources.length === 1) lines.push(`🔗 ${sources[0]}`);
-  else lines.push('🔗 Sources:', ...sources.map(url => `• ${url}`));
-  lines.push('', DISCLAIMER);
-
-  const text = lines.join('\n');
+  const text = [
+    `${flagEmoji(finding.iso_n3)} ${escapeHtml(headline)}`,
+    '',
+    escapeHtml(finding.brief),
+    '',
+    link,
+  ].join('\n');
   if (text.length > TELEGRAM_MESSAGE_LIMIT) {
     throw new Error(`News post is ${text.length} characters; maximum is ${TELEGRAM_MESSAGE_LIMIT}`);
   }
@@ -207,6 +212,8 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
     const messageId = await sendTelegramPost(post, {
       token: process.env.TELEGRAM_BOT_TOKEN ?? '',
       channelId: process.env.TELEGRAM_CHANNEL_ID ?? '',
+      parseMode: 'HTML',
+      disablePreview: true,
     });
     store?.record(fp, finding, messageId, new Date().toISOString());
     published += 1;
