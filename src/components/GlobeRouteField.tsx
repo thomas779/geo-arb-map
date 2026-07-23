@@ -165,6 +165,12 @@ interface Props {
   regionIsos?: string[];
 }
 
+// Accumulated rotation time (ms), persisted across mounts so navigating away
+// from and back to the planner resumes the spin where it froze instead of
+// snapping back to the base angle. Module scope survives SPA route changes
+// (but not a hard reload, which is the intended reset point).
+let persistedRotationMs = 0;
+
 export function GlobeRouteField({ className, regionIsos = [] }: Props) {
   const svgRef = useRef<SVGSVGElement>(null);
   const regionKey = [...regionIsos].sort().join(',');
@@ -175,6 +181,7 @@ export function GlobeRouteField({ className, regionIsos = [] }: Props) {
 
     let cancelled = false;
     let frame = 0;
+    let latestElapsed = persistedRotationMs;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const highlighted = new Set(regionIsos);
     const svg = d3.select(svgElement);
@@ -255,7 +262,8 @@ export function GlobeRouteField({ className, regionIsos = [] }: Props) {
         .attr('text-anchor', destination => destination.labelOffset?.anchor ?? 'start')
         .text(destination => destination.label);
 
-      const started = performance.now();
+      // Rewind the clock by the persisted elapsed so the spin resumes mid-rotation.
+      const started = performance.now() - persistedRotationMs;
       // Keep north upright so the geography reads immediately as an atlas.
       const baseRotation: [number, number, number] = [20, -14, 0];
       let lastPaint = -Infinity;
@@ -268,6 +276,7 @@ export function GlobeRouteField({ className, regionIsos = [] }: Props) {
         }
         lastPaint = now;
         const elapsed = now - started;
+        latestElapsed = elapsed;
         const rotation: [number, number, number] = reduceMotion
           ? baseRotation
           : [baseRotation[0] + elapsed * 0.00115, baseRotation[1], baseRotation[2]];
@@ -318,6 +327,8 @@ export function GlobeRouteField({ className, regionIsos = [] }: Props) {
     return () => {
       cancelled = true;
       cancelAnimationFrame(frame);
+      // Freeze the spin: remember how far we've rotated so the next mount resumes.
+      persistedRotationMs = latestElapsed;
       svg.selectAll('*').remove();
     };
   // The stable ISO signature is the meaningful dependency.
