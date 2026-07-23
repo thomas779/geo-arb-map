@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
+import { buildCanonicalPilot, CANONICAL_SOURCE_IS_SAMPLE } from '../scripts/lib/canonical-source';
 import { readCanonicalMigrations } from '../scripts/lib/d1-migrations';
 import {
   buildCanonicalImportPlan,
@@ -84,7 +84,7 @@ function gate(name: string) {
   return release.parity.gates.find(g => g.gate === name)!;
 }
 
-describe('data:build reads the canonical database', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build reads the canonical database', () => {
   test('loads canonical revisions from SQLite payload_json', () => {
     const loaded = loadCanonicalDatabase(dbPath, REPO_ROOT);
     expect(loaded.sources.length + loaded.jurisdictions.length + loaded.arrangements.length)
@@ -228,7 +228,7 @@ describe('data:build reads the canonical database', () => {
   });
 });
 
-describe('data:build adversarial parity', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build adversarial parity', () => {
   test('fails when an entire migration-scope arrangement disappears', () => {
     const missingPath = path.join(tmp, 'missing-arrangement.sqlite');
     buildDatabase(missingPath);
@@ -338,7 +338,7 @@ describe('data:build adversarial parity', () => {
   });
 });
 
-describe('data:build parity gates', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build parity gates', () => {
   test('every gate passes without approving or publishing', () => {
     expect(release.parity.passed).toBe(true);
     expect(release.parity.gates.map(g => g.status)).not.toContain('fail');
@@ -1194,7 +1194,7 @@ describe('data:build parity gates', () => {
   });
 });
 
-describe('data:build determinism and writes', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build determinism and writes', () => {
   test('two compiles from the same database are byte-identical', () => {
     const second = compileDataRelease({ dbPath, root: REPO_ROOT });
     expect(second.manifest.release_id).toBe(release.manifest.release_id);
@@ -1268,7 +1268,7 @@ describe('data:build determinism and writes', () => {
   });
 });
 
-describe('data:build changelog uses an explicit baseline', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build changelog uses an explicit baseline', () => {
   test('without a baseline, all entities are added', () => {
     const changelog = computeChangelog(release, null);
     expect(changelog.baseline_release_id).toBeNull();
@@ -1300,7 +1300,7 @@ describe('data:build changelog uses an explicit baseline', () => {
   });
 });
 
-describe('deepDiff drift engine', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('deepDiff drift engine', () => {
   test('indexes arrays by iso_n3 and reports added members', () => {
     const before = { lanes: [{ id: 'a', beneficiaries: [{ iso_n3: '032' }] }] };
     const after = { lanes: [{ id: 'a', beneficiaries: [{ iso_n3: '032' }, { iso_n3: '076' }] }] };

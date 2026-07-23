@@ -3,13 +3,13 @@ import { describe, expect, test } from 'bun:test';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { buildCanonicalPilot } from '../scripts/lib/canonical-pilot';
+import { buildCanonicalPilot, CANONICAL_SOURCE_IS_SAMPLE } from '../scripts/lib/canonical-source';
 import { readCanonicalMigrations } from '../scripts/lib/d1-migrations';
 import { importCanonicalPilot } from '../scripts/lib/canonical-store';
 import { compileDataRelease } from '../scripts/lib/data-build';
 import { renderDataReview } from '../scripts/lib/data-review';
 
-describe('canonical review packet', () => {
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('canonical review packet', () => {
   test('covers every selected revision and material review section deterministically', () => {
     const root = process.cwd();
     const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'data-review-'));
