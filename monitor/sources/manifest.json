@@ -4997,6 +4997,367 @@
         "birth"
       ],
       "notes": "Qatar Law No. 38 of 2005 on Qatari Nationality via the Al Meezan legal portal. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "uzbekistan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Uzbekistan_2023",
+      "jurisdictions": [
+        "860"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Uzbekistan",
+        "residence",
+        "birth"
+      ],
+      "notes": "Uzbek constitutional nationality framework via Constitute Project text; cross-check the 2020 citizenship law. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "kyrgyzstan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Kyrgyz_Republic_2021",
+      "jurisdictions": [
+        "417"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Kyrgyzstan",
+        "kairylman",
+        "residence",
+        "birth"
+      ],
+      "notes": "Kyrgyz constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "tajikistan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Tajikistan_2016",
+      "jurisdictions": [
+        "762"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Tajikistan",
+        "residence",
+        "birth"
+      ],
+      "notes": "Tajik constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "turkmenistan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Turkmenistan_2016",
+      "jurisdictions": [
+        "795"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Turkmenistan",
+        "residence",
+        "birth"
+      ],
+      "notes": "Turkmen constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "kuwait-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Kuwait_1992",
+      "jurisdictions": [
+        "414"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Kuwait",
+        "residence",
+        "birth"
+      ],
+      "notes": "Kuwaiti constitutional framework via Constitute Project text; cross-check the Nationality Law of 1959. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "bahrain-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Bahrain_2017",
+      "jurisdictions": [
+        "048"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Bahrain",
+        "residence",
+        "birth"
+      ],
+      "notes": "Bahraini constitutional framework via Constitute Project text; cross-check the Citizenship Act 1963. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "oman-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Oman_2011",
+      "jurisdictions": [
+        "512"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Oman",
+        "residence",
+        "birth"
+      ],
+      "notes": "Omani Basic Statute via Constitute Project text; cross-check the 2025 nationality law (RD 17/2025). Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "belarus-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Belarus_2004",
+      "jurisdictions": [
+        "112"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Belarus",
+        "residence",
+        "birth"
+      ],
+      "notes": "Belarusian constitutional framework via Constitute Project text; cross-check the citizenship law. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "iraq-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Iraq_2005",
+      "jurisdictions": [
+        "368"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Iraq",
+        "residence",
+        "birth"
+      ],
+      "notes": "Iraqi constitutional framework (art. 18) via Constitute Project text; cross-check Nationality Law No. 26 of 2006. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "afghanistan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Afghanistan_2004",
+      "jurisdictions": [
+        "004"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Afghanistan",
+        "residence",
+        "birth"
+      ],
+      "notes": "Afghan constitutional framework via Constitute Project text (2004 constitution; current legal force uncertain under de facto authorities). Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "mongolia-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Mongolia_2001",
+      "jurisdictions": [
+        "496"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Mongolia",
+        "residence",
+        "birth"
+      ],
+      "notes": "Mongolian constitutional framework via Constitute Project text; cross-check the Law on Citizenship (1995). Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "maldives-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Maldives_2008",
+      "jurisdictions": [
+        "462"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Maldives",
+        "residence",
+        "birth"
+      ],
+      "notes": "Maldivian constitutional framework (art. 9, incl. the Muslim requirement) via Constitute Project text. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "bhutan-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Bhutan_2008",
+      "jurisdictions": [
+        "064"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Bhutan",
+        "residence",
+        "birth"
+      ],
+      "notes": "Bhutanese constitutional framework (art. 6) via Constitute Project text; cross-check the Citizenship Act 1985. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "myanmar-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Myanmar_2015",
+      "jurisdictions": [
+        "104"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Myanmar",
+        "residence",
+        "birth"
+      ],
+      "notes": "Myanmar constitutional framework via Constitute Project text; cross-check the 1982 Citizenship Law. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "laos-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Laos_2015",
+      "jurisdictions": [
+        "418"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Laos",
+        "residence",
+        "birth"
+      ],
+      "notes": "Lao constitutional framework via Constitute Project text; cross-check the Law on Lao Nationality (2004). Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "syria-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Syria_2012",
+      "jurisdictions": [
+        "760"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Syria",
+        "residence",
+        "birth"
+      ],
+      "notes": "Syrian constitutional framework via Constitute Project text; cross-check Legislative Decree 276 of 1969. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "yemen-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.constituteproject.org/constitution/Yemen_2015",
+      "jurisdictions": [
+        "887"
+      ],
+      "keywords": [
+        "nationality",
+        "naturalization",
+        "citizenship",
+        "Yemen",
+        "residence",
+        "birth"
+      ],
+      "notes": "Yemeni constitutional framework via Constitute Project text; cross-check Law No. 6 of 1990. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "san-marino-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.consigliograndeegenerale.sm/on-line/documento17134125.html",
+      "jurisdictions": [
+        "674"
+      ],
+      "keywords": [
+        "cittadinanza",
+        "naturalizzazione",
+        "nationality",
+        "citizenship",
+        "San Marino",
+        "residenza"
+      ],
+      "notes": "San Marino Citizenship Law No. 114/2000 via the Great and General Council site. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "vatican-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.vatican.va/roman_curia/secretariat_state/documents/informazione_generale/cittadini-vaticani_en.html",
+      "jurisdictions": [
+        "336"
+      ],
+      "keywords": [
+        "citizenship",
+        "Vatican",
+        "Holy See",
+        "residence",
+        "office"
+      ],
+      "notes": "Holy See official overview of Vatican citizenship (office-based, Law CXXXI/2011). Active verification monitor for canonical coverage audit."
     }
   ]
 }
