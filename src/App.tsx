@@ -107,6 +107,12 @@ export default function App() {
     evidenceDates.sort();
     const updatedAt = evidenceDates[evidenceDates.length - 1] ?? '—';
     const jurisdictions = citizenshipRoutes?.meta.counts.jurisdictions ?? 0;
+    // Uninhabited entries with no permanent population confer no nationality, so
+    // they are excluded from the coverage denominator (not from the tracked map).
+    const NON_APPLICABLE_JURISDICTIONS = new Set(['086', '239', '260', '334']);
+    const applicableJurisdictions = citizenshipRoutes?.jurisdictions.filter(jurisdiction =>
+      !NON_APPLICABLE_JURISDICTIONS.has(jurisdiction.iso_n3),
+    ).length ?? 0;
     const reviewedJurisdictions = citizenshipRoutes?.jurisdictions.filter(jurisdiction =>
       Object.values(jurisdiction.coverage).every(state => state === 'reviewed'),
     ).length ?? 0;
@@ -119,6 +125,7 @@ export default function App() {
     return {
       updatedAt,
       jurisdictions,
+      applicableJurisdictions,
       reviewedJurisdictions,
       reviewedModes,
       totalModes: jurisdictions * 4,

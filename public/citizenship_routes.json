@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 726,
+      "routes": 729,
       "by_mode": {
-        "ancestry": 234,
-        "naturalization": 237,
-        "birth": 230,
+        "ancestry": 235,
+        "naturalization": 238,
+        "birth": 231,
         "investment": 25
       },
       "by_status": {
-        "active": 713,
+        "active": 716,
         "pending_verification": 6,
         "inactive": 6,
         "verified_negative": 1
@@ -1136,15 +1136,19 @@
     },
     {
       "iso_n3": "248",
-      "name": "Åland",
-      "type": "sovereign",
+      "name": "Åland Islands",
+      "type": "territory",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "aland-islands-nationality-by-descent",
+        "aland-islands-naturalization",
+        "aland-islands-citizenship-at-birth"
+      ]
     },
     {
       "iso_n3": "250",
@@ -11409,6 +11413,112 @@
         {
           "title": "Finnish Immigration Service - period of residence",
           "url": "https://migri.fi/en/period-of-residence"
+        }
+      ]
+    },
+    {
+      "id": "aland-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "248",
+        "name": "Åland Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Finnish nationality at birth",
+      "summary": "Citizenship at birth in Åland Islands follows Finnish nationality rules.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "aland-islands-citizenship-at-birth-principal",
+          "label": "Finnish nationality at birth",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Finnish citizenship passes at birth by descent; not unconditional jus soli."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Åland (Ålands landskapsregering)",
+          "url": "https://www.regeringen.ax/"
+        }
+      ]
+    },
+    {
+      "id": "aland-islands-nationality-by-descent",
+      "country": {
+        "iso_n3": "248",
+        "name": "Åland Islands"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Finnish nationality by descent",
+      "summary": "Åland Islands confers Finnish nationality; it passes by descent to the child of a qualifying parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "aland-islands-nationality-by-descent-principal",
+          "label": "Finnish nationality by descent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Åland (Ålands landskapsregering)",
+          "url": "https://www.regeringen.ax/"
+        }
+      ]
+    },
+    {
+      "id": "aland-islands-naturalization",
+      "country": {
+        "iso_n3": "248",
+        "name": "Åland Islands"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about 5 years residence",
+      "summary": "Finnish nationality can be acquired by naturalization under the parent sovereign’s law; local residence in Åland Islands is a separate status.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "aland-islands-naturalization-principal",
+          "label": "Naturalization after about 5 years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Åland (Ålands landskapsregering)",
+          "url": "https://www.regeringen.ax/"
         }
       ]
     },
