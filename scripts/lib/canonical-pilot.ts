@@ -556,6 +556,87 @@ export const TERRITORY_SPECS: TerritorySpec[] = [
   { iso: '248', slug: 'aland-islands', name: 'Åland Islands', nationalityLabel: 'Finnish nationality', parentIso: '246', url: 'https://www.regeringen.ax/', sourceType: 'official_guidance', monitorId: 'aland-islands-citizenship-law', sourceTitle: 'Government of Åland (Ålands landskapsregering)', natMonths: 60, birthNote: 'Finnish citizenship passes at birth by descent; not unconditional jus soli.', note: 'Autonomous, demilitarised region of Finland; residents are Finnish nationals and EU citizens. A separate Åland "right of domicile" (hembygdsrätt) governs local land ownership, voting, and business. No CBI.' },
 ];
 
+// Marriage / spousal naturalization is a facilitated sub-route of naturalization
+// present in most countries. This table drives a build-time injector that adds one
+// spousal route per country (skipping any country that already models one). Only
+// countries with a genuine spousal benefit are listed; where marriage gives no
+// residence reduction the country is omitted (its ordinary route already applies).
+interface MarriageSpec {
+  slug: string;
+  months: number | null;   // reduced spousal residence in months (null = by declaration / no residence stage)
+  byDeclaration?: boolean;  // true => acquisition is a right (declaration), not discretionary
+  marriageMonths?: number;  // required marriage duration, if any
+  note: string;
+  confidence?: 'high' | 'medium';
+  summary?: string;
+}
+
+const MARRIAGE_SPECS: Record<string, MarriageSpec> = {
+  // populated region by region
+  // Anglosphere — only the US gives a spousal residence reduction that isn't already
+  // modeled; the UK already carries a spouse variant, and Canada/Australia/New Zealand
+  // give no reduction (spouses use the ordinary route).
+  '840': { slug: 'us', months: 36, byDeclaration: true, marriageMonths: 36, confidence: 'high', summary: 'A permanent resident married to and living with a US citizen for the three years before filing may naturalize after three years, instead of five.', note: 'INA §319(a); also requires 18 months physical presence within those 3 years.' },
+  // Latin America — Argentina (flat 2 years for all) and Paraguay (flat 3 years) give no
+  // spousal reduction; Venezuela already carries a spouse variant.
+  '076': { slug: 'brazil', months: 12, byDeclaration: true, confidence: 'high', summary: 'A foreigner with a Brazilian spouse or partner (or a Brazilian child) may naturalize after one year of residence, instead of four.', note: 'Lei 13.445/2017 art. 66.' },
+  '484': { slug: 'mexico', months: 24, byDeclaration: true, marriageMonths: 24, confidence: 'high', summary: 'A spouse of a Mexican may naturalize after two years of residence living together at the marital domicile in Mexico, instead of five.', note: 'Ley de Nacionalidad art. 20(II); the SRE verifies cohabitation.' },
+  '170': { slug: 'colombia', months: 24, confidence: 'high', summary: 'A foreigner married to a Colombian may obtain nationality after two years of domicile, instead of five.', note: 'Discretionary grant (nacionalidad por adopción); a continuous year abroad breaks the term.' },
+  '152': { slug: 'chile', months: 24, marriageMonths: 24, confidence: 'medium', summary: 'A spouse of a Chilean may naturalize after about two years (vs five), with roughly two years of marriage and cohabitation.', note: 'Ley 21.325; the carta de nacionalización is discretionary.' },
+  '604': { slug: 'peru', months: 24, byDeclaration: true, marriageMonths: 24, confidence: 'high', summary: 'A person married to a Peruvian and resident in that condition for two years may acquire nationality by option.', note: 'Ley 26574 art. 4; not lost on divorce or death. A proposed increase to four years is not yet in force.' },
+  '858': { slug: 'uruguay', months: 36, byDeclaration: true, confidence: 'high', summary: 'A foreigner of good conduct with a family constituted in Uruguay (including a Uruguayan spouse) is entitled to legal citizenship after three years of habitual residence, instead of five.', note: 'Constitution art. 75(A).' },
+  '218': { slug: 'ecuador', months: 24, marriageMonths: 24, confidence: 'high', summary: 'Nationality by marriage or de facto union is available two years after the marriage or union is registered, for a holder of a residence category.', note: 'Ley Orgánica de Movilidad Humana; a mandatory interview applies.' },
+  '068': { slug: 'bolivia', months: 24, byDeclaration: true, confidence: 'high', summary: 'A spouse of a Bolivian (or a person with Bolivian children) may naturalize after two years of residence, instead of three.', note: 'Constitution art. 142; not lost on widowhood or divorce.' },
+};
+
+function withMarriageRoutes(
+  records: JurisdictionRecord[],
+  officialSources: SourceRecord[],
+): JurisdictionRecord[] {
+  type Cond = Parameters<typeof principalCitizenshipRoute>[0]['eligibility'][number];
+  return records.map(record => {
+    const iso = record.jurisdiction.iso_n3;
+    const spec = MARRIAGE_SPECS[iso];
+    if (!spec) return record;
+    const alreadyHasMarriage = record.routes.some(route =>
+      route.mode === 'naturalization'
+      && (route.id.includes('marriage')
+        || route.variants.some(variant =>
+          variant.eligibility.some(cond =>
+            cond.field.startsWith('spouse') || cond.field.startsWith('partner')))));
+    if (alreadyHasMarriage) return record;
+    const source = officialSources.find(item =>
+      item.jurisdictions.includes(iso) && item.source_type !== 'discovery')
+      ?? officialSources.find(item => item.jurisdictions.includes(iso));
+    if (!source) return record;
+    const years = spec.months != null ? Math.round(spec.months / 12) : null;
+    const eligibility: Cond[] = [
+      { field: 'spouse.citizenship.iso_n3', operator: 'eq', value: iso },
+    ];
+    if (years != null) {
+      eligibility.push({ field: 'residence.years', operator: 'gte', value: years, unit: 'years' });
+    }
+    if (spec.marriageMonths != null) {
+      eligibility.push({ field: 'marriage.duration_months', operator: 'gte', value: spec.marriageMonths, unit: 'months' });
+    }
+    const route = principalCitizenshipRoute({
+      id: `${spec.slug}-citizenship-by-marriage`,
+      mode: 'naturalization',
+      title: 'Naturalization as the spouse of a citizen',
+      summary: spec.summary
+        ?? 'A foreign spouse of a citizen may naturalize on a reduced or facilitated residence requirement.',
+      source,
+      eligibility,
+      months: spec.months,
+      allocation: spec.byDeclaration ? 'right' : 'discretionary',
+      confidence: spec.confidence ?? 'medium',
+      lastChecked: '2026-07-23',
+      note: spec.note,
+    });
+    return JurisdictionRecordSchema.parse({ ...record, routes: [...record.routes, route] });
+  });
+}
+
 function jurisdictionSources(): SourceRecord[] {
   return [
     officialSource({
@@ -15277,7 +15358,7 @@ function territoryRecord(
 
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
-  const jurisdictions = [
+  const jurisdictionRecords = [
     afghanistanRecord(shadow, countrySources),
     albaniaRecord(shadow, countrySources),
     algeriaRecord(shadow, countrySources),
@@ -15478,6 +15559,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     ...TERRITORY_SPECS.map(spec => territoryRecord(shadow, countrySources, spec)),
 
   ];
+  const jurisdictions = withMarriageRoutes(jurisdictionRecords, countrySources);
   const manualSources = arrangementSources(shadow);
   const sourcesById = new Map<string, SourceRecord>();
   for (const jurisdiction of shadow.jurisdictions) {
