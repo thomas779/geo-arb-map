@@ -27,6 +27,7 @@ interface Props {
 interface DataStatus {
   updatedAt: string;
   jurisdictions: number;
+  applicableJurisdictions: number;
   reviewedJurisdictions: number;
   reviewedModes: number;
   totalModes: number;
@@ -51,8 +52,8 @@ const evidenceSteps = [
 ];
 
 function Methodology({ dataStatus }: { dataStatus: DataStatus }) {
-  const coveragePercent = dataStatus.jurisdictions > 0
-    ? Math.round((dataStatus.reviewedJurisdictions / dataStatus.jurisdictions) * 100)
+  const coveragePercent = dataStatus.applicableJurisdictions > 0
+    ? Math.round((dataStatus.reviewedJurisdictions / dataStatus.applicableJurisdictions) * 100)
     : 0;
 
   return (
@@ -82,7 +83,7 @@ function Methodology({ dataStatus }: { dataStatus: DataStatus }) {
           <div>
             <p className="text-xs font-semibold">Reviewed coverage</p>
             <p className="mt-0.5 text-[11px] text-muted-foreground">
-              {dataStatus.reviewedJurisdictions} of {dataStatus.jurisdictions} countries and territories fully reviewed
+              {dataStatus.reviewedJurisdictions} of {dataStatus.applicableJurisdictions} countries and territories fully reviewed
             </p>
           </div>
           <span className="font-mono text-sm font-semibold text-primary">{coveragePercent}%</span>

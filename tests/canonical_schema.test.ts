@@ -749,6 +749,9 @@ describe('canonical data schemas', () => {
       'macao-nationality-by-descent',
       'macao-naturalization',
       'macao-citizenship-at-birth',
+      'aland-islands-nationality-by-descent',
+      'aland-islands-naturalization',
+      'aland-islands-citizenship-at-birth',
     ])
     for (const jurisdiction of pilot.jurisdictions) {
       for (const route of jurisdiction.routes) {

@@ -6026,6 +6026,24 @@
         "birth"
       ],
       "notes": "Macao SAR Government — right of abode — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+    },
+    {
+      "id": "aland-islands-citizenship-law",
+      "tier": "verification",
+      "adapter": "html_index",
+      "status": "active",
+      "url": "https://www.regeringen.ax/",
+      "jurisdictions": [
+        "248"
+      ],
+      "keywords": [
+        "nationality",
+        "citizenship",
+        "Åland Islands",
+        "residence",
+        "birth"
+      ],
+      "notes": "Government of Åland (Ålands landskapsregering) — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     }
   ]
 }

@@ -207,6 +207,7 @@ describe('canonical SQL import and projections', () => {
       '238',
       '242',
       '246',
+      '248',
       '250',
       '258',
       '262',
