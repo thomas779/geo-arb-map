@@ -11,6 +11,8 @@ The repository intentionally keeps only two detailed design documents:
 
 Operational instructions live beside the code they operate:
 
+- [`operations.md`](operations.md) — deploy pipeline, Cloudflare API tokens,
+  the private canonical-data flow, GitHub Actions, and security posture.
 - [`../monitor/README.md`](../monitor/README.md) — collection, triage, Telegram,
   and the offline pipeline test.
 - [`../monitor/cloudflare/README.md`](../monitor/cloudflare/README.md) — email
