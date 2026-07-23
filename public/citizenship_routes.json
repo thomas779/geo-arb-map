@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 561,
+      "routes": 598,
       "by_mode": {
-        "ancestry": 178,
-        "naturalization": 182,
-        "birth": 176,
+        "ancestry": 191,
+        "naturalization": 194,
+        "birth": 188,
         "investment": 25
       },
       "by_status": {
-        "active": 548,
+        "active": 585,
         "pending_verification": 6,
         "inactive": 6,
         "verified_negative": 1
@@ -49,12 +49,16 @@
       "name": "Afghanistan",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "afghanistan-citizenship-by-parent",
+        "afghanistan-naturalization",
+        "afghanistan-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "008",
@@ -235,12 +239,16 @@
       "name": "Bahrain",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "bahrain-citizenship-by-parent",
+        "bahrain-naturalization",
+        "bahrain-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "050",
@@ -519,12 +527,16 @@
       "name": "Belarus",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "belarus-citizenship-by-parent",
+        "belarus-naturalization",
+        "belarus-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "116",
@@ -1538,12 +1550,16 @@
       "name": "Iraq",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "iraq-citizenship-by-parent",
+        "iraq-naturalization",
+        "iraq-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "372",
@@ -1724,24 +1740,33 @@
       "name": "Kuwait",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "kuwait-citizenship-by-parent",
+        "kuwait-naturalization",
+        "kuwait-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "417",
       "name": "Kyrgyzstan",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "kyrgyzstan-citizenship-by-parent",
+        "kyrgyzstan-citizenship-by-kyrgyz-origin",
+        "kyrgyzstan-naturalization",
+        "kyrgyzstan-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "418",
@@ -1948,12 +1973,16 @@
       "name": "Maldives",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "maldives-citizenship-by-parent",
+        "maldives-naturalization",
+        "maldives-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "466",
@@ -2058,12 +2087,16 @@
       "name": "Mongolia",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "mongolia-citizenship-by-parent",
+        "mongolia-naturalization",
+        "mongolia-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "498",
@@ -2147,12 +2180,16 @@
       "name": "Oman",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "oman-citizenship-by-parent",
+        "oman-naturalization",
+        "oman-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "516",
@@ -3186,12 +3223,16 @@
       "name": "Tajikistan",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "tajikistan-citizenship-by-parent",
+        "tajikistan-naturalization",
+        "tajikistan-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "764",
@@ -3324,12 +3365,16 @@
       "name": "Turkmenistan",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "turkmenistan-citizenship-by-parent",
+        "turkmenistan-naturalization",
+        "turkmenistan-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "796",
@@ -3557,12 +3602,16 @@
       "name": "Uzbekistan",
       "type": "sovereign",
       "coverage": {
-        "ancestry": "unchecked",
-        "naturalization": "unchecked",
-        "birth": "unchecked",
-        "investment": "unchecked"
+        "ancestry": "reviewed",
+        "naturalization": "reviewed",
+        "birth": "reviewed",
+        "investment": "reviewed"
       },
-      "route_ids": []
+      "route_ids": [
+        "uzbekistan-citizenship-by-parent",
+        "uzbekistan-naturalization",
+        "uzbekistan-citizenship-at-birth-by-parent"
+      ]
     },
     {
       "iso_n3": "862",
@@ -3651,6 +3700,112 @@
     }
   ],
   "routes": [
+    {
+      "id": "afghanistan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "004",
+        "name": "Afghanistan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Afghan parent",
+      "summary": "Birth to an Afghan parent creates nationality. Birth in Afghanistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "afghanistan-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Afghan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Afghanistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Afghanistan_2004"
+        }
+      ]
+    },
+    {
+      "id": "afghanistan-citizenship-by-parent",
+      "country": {
+        "iso_n3": "004",
+        "name": "Afghanistan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Afghan citizenship through an Afghan parent",
+      "summary": "A child with at least one Afghan citizen parent is an Afghan citizen (jus sanguinis), regardless of birthplace; paternal transmission is clearly established, maternal transmission less certain in practice.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "afghanistan-citizenship-by-parent-principal",
+          "label": "Afghan citizenship through an Afghan parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Afghanistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Afghanistan_2004"
+        }
+      ]
+    },
+    {
+      "id": "afghanistan-naturalization",
+      "country": {
+        "iso_n3": "004",
+        "name": "Afghanistan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about five years residence",
+      "summary": "The nationality law provides for naturalization after roughly five years of lawful residence plus integration and Ministry of Interior approval; grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "afghanistan-naturalization-principal",
+          "label": "Naturalization after about five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Five-year figure from secondary sources; current administration of naturalization under the de facto authorities is uncertain and requires verification."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Afghanistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Afghanistan_2004"
+        }
+      ]
+    },
     {
       "id": "albania-citizenship-at-birth-by-parent",
       "country": {
@@ -4824,6 +4979,112 @@
         {
           "title": "Bahamas Nationality Act",
           "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-0018/1973-0018.pdf"
+        }
+      ]
+    },
+    {
+      "id": "bahrain-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "048",
+        "name": "Bahrain"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Bahraini father",
+      "summary": "Bahraini nationality descends from a Bahraini father; birth on Bahraini territory alone confers no citizenship.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahrain-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Bahraini father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bahrain Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bahrain_2017"
+        }
+      ]
+    },
+    {
+      "id": "bahrain-citizenship-by-parent",
+      "country": {
+        "iso_n3": "048",
+        "name": "Bahrain"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Bahraini citizenship through a Bahraini father",
+      "summary": "A child of a Bahraini father is Bahraini by descent regardless of birthplace; a child of a Bahraini mother and foreign father is generally not entitled except where the father is unknown.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahrain-citizenship-by-parent-principal",
+          "label": "Bahraini citizenship through a Bahraini father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bahrain Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bahrain_2017"
+        }
+      ]
+    },
+    {
+      "id": "bahrain-naturalization",
+      "country": {
+        "iso_n3": "048",
+        "name": "Bahrain"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after long residence (about 25 years, 15 for Arabs)",
+      "summary": "Ordinary naturalization requires about twenty-five years of residence (about fifteen for nationals of Arab states) plus good conduct, Arabic fluency, and registered real estate; it is highly discretionary and rare.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          300
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bahrain-naturalization-principal",
+          "label": "Naturalization after long residence (about 25 years, 15 for Arabs)",
+          "allocation": "discretionary",
+          "eligibility_months": 300,
+          "note": "Residence figures from the Citizenship Act 1963 (25 years; 15 for Arab nationals); grants are rare and discretionary."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bahrain Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bahrain_2017"
         }
       ]
     },
@@ -6399,6 +6660,112 @@
         {
           "title": "Burundi Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Burundi_2018"
+        }
+      ]
+    },
+    {
+      "id": "belarus-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "112",
+        "name": "Belarus"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Belarusian parent",
+      "summary": "Birth to a Belarusian parent creates nationality. Birth in Belarus alone to foreign parents is not unrestricted jus soli; territorial rules cover children who would otherwise be stateless.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "belarus-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Belarusian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Belarus Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belarus_2004"
+        }
+      ]
+    },
+    {
+      "id": "belarus-citizenship-by-parent",
+      "country": {
+        "iso_n3": "112",
+        "name": "Belarus"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Belarusian citizenship through a Belarusian parent",
+      "summary": "A child at least one of whose parents is a Belarusian citizen at birth acquires citizenship by descent (jus sanguinis), regardless of birthplace.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "belarus-citizenship-by-parent-principal",
+          "label": "Belarusian citizenship through a Belarusian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Belarus Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belarus_2004"
+        }
+      ]
+    },
+    {
+      "id": "belarus-naturalization",
+      "country": {
+        "iso_n3": "112",
+        "name": "Belarus"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about seven years residence",
+      "summary": "Ordinary naturalization generally requires about seven years of residence plus knowledge of a state language and a lawful source of income; spouses of citizens and persons of Belarusian descent qualify on a sharply reduced (about one-year) term. Grant is discretionary (presidential).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "belarus-naturalization-principal",
+          "label": "Naturalization after about seven years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Seven-year figure from secondary sources; 2020 amendments may have reduced the ordinary term toward five years — verify the current statute."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Belarus Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belarus_2004"
         }
       ]
     },
@@ -12433,6 +12800,112 @@
       ]
     },
     {
+      "id": "iraq-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "368",
+        "name": "Iraq"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Iraqi parent",
+      "summary": "Nationality follows parentage under art. 18; there is no general birthright citizenship, only limited anti-statelessness and foundling provisions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "iraq-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Iraqi parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Iraq Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Iraq_2005"
+        }
+      ]
+    },
+    {
+      "id": "iraq-citizenship-by-parent",
+      "country": {
+        "iso_n3": "368",
+        "name": "Iraq"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Iraqi citizenship through an Iraqi parent",
+      "summary": "A child born to an Iraqi father or an Iraqi mother is Iraqi by descent (Constitution art. 18); for some children born outside Iraq to an Iraqi mother, recognition is conditional and discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "iraq-citizenship-by-parent-principal",
+          "label": "Iraqi citizenship through an Iraqi parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Iraq Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Iraq_2005"
+        }
+      ]
+    },
+    {
+      "id": "iraq-naturalization",
+      "country": {
+        "iso_n3": "368",
+        "name": "Iraq"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about ten years residence",
+      "summary": "Ordinary naturalization requires about ten years of lawful residence plus good conduct and self-sufficiency, subject to ministerial approval; a foreign woman married to an Iraqi man has a shorter path. Naturalized citizens face limits on high office.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "iraq-naturalization-principal",
+          "label": "Naturalization after about ten years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Ten-year figure from Nationality Law No. 26 of 2006 as summarized in reference sources; case-check the current statute."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Iraq Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Iraq_2005"
+        }
+      ]
+    },
+    {
       "id": "ireland-citizenship-by-birth",
       "country": {
         "iso_n3": "372",
@@ -13631,6 +14104,254 @@
       ]
     },
     {
+      "id": "kuwait-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "414",
+        "name": "Kuwait"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Kuwaiti father",
+      "summary": "Kuwaiti nationality descends from a Kuwaiti father; birth on Kuwaiti soil alone confers no citizenship.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kuwait-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Kuwaiti father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kuwait Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kuwait_1992"
+        }
+      ]
+    },
+    {
+      "id": "kuwait-citizenship-by-parent",
+      "country": {
+        "iso_n3": "414",
+        "name": "Kuwait"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Kuwaiti citizenship through a Kuwaiti father",
+      "summary": "A person born to a Kuwaiti father acquires Kuwaiti nationality automatically regardless of birthplace; the maternal line does not transmit automatically except in limited cases such as an unknown father.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kuwait-citizenship-by-parent-principal",
+          "label": "Kuwaiti citizenship through a Kuwaiti father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kuwait Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kuwait_1992"
+        }
+      ]
+    },
+    {
+      "id": "kuwait-naturalization",
+      "country": {
+        "iso_n3": "414",
+        "name": "Kuwait"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after long residence (about 20 years, 15 for Arabs)",
+      "summary": "Ordinary naturalization requires about twenty years of residence (about fifteen for nationals of Arab states) plus good character, Arabic knowledge, and being Muslim; it is granted by decree subject to an annual cap and is rare.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          240
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "kuwait-naturalization-principal",
+          "label": "Naturalization after long residence (about 20 years, 15 for Arabs)",
+          "allocation": "discretionary",
+          "eligibility_months": 240,
+          "note": "Residence figures from the Nationality Law of 1959 (20 years; 15 for Arab nationals); grants are capped and discretionary."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kuwait Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kuwait_1992"
+        }
+      ]
+    },
+    {
+      "id": "kyrgyzstan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "417",
+        "name": "Kyrgyzstan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Kyrgyz parent",
+      "summary": "Birth to a Kyrgyz parent creates nationality. Birth in Kyrgyzstan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kyrgyzstan-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Kyrgyz parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kyrgyz Republic Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kyrgyz_Republic_2021"
+        }
+      ]
+    },
+    {
+      "id": "kyrgyzstan-citizenship-by-kyrgyz-origin",
+      "country": {
+        "iso_n3": "417",
+        "name": "Kyrgyzstan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Simplified citizenship for ethnic Kyrgyz (kairylman)",
+      "summary": "Ethnic Kyrgyz and persons who prove affiliation with the people of Kyrgyzstan may acquire citizenship on simplified terms, constitutionally guaranteed and available while holding another nationality.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kyrgyzstan-citizenship-by-kyrgyz-origin-principal",
+          "label": "Simplified citizenship for ethnic Kyrgyz (kairylman)",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Diaspora/kairylman simplified route grounded in the constitution; verify current documentary and quota conditions at application."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kyrgyz Republic Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kyrgyz_Republic_2021"
+        }
+      ]
+    },
+    {
+      "id": "kyrgyzstan-citizenship-by-parent",
+      "country": {
+        "iso_n3": "417",
+        "name": "Kyrgyzstan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Kyrgyz citizenship through a Kyrgyz parent",
+      "summary": "A child at least one of whose parents is a Kyrgyz citizen is a citizen (jus sanguinis), regardless of birthplace.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kyrgyzstan-citizenship-by-parent-principal",
+          "label": "Kyrgyz citizenship through a Kyrgyz parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kyrgyz Republic Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kyrgyz_Republic_2021"
+        }
+      ]
+    },
+    {
+      "id": "kyrgyzstan-naturalization",
+      "country": {
+        "iso_n3": "417",
+        "name": "Kyrgyzstan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about five years residence",
+      "summary": "Ordinary naturalization requires about five years of continuous residence plus Kyrgyz-language knowledge and a lawful income; reduced terms (about three or one years) apply for high achievement or family/heritage ties. Grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "kyrgyzstan-naturalization-principal",
+          "label": "Naturalization after about five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Five-year base residence from the citizenship law; renunciation is not strictly required (dual tolerated)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kyrgyz Republic Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kyrgyz_Republic_2021"
+        }
+      ]
+    },
+    {
       "id": "lebanon-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "422",
@@ -14805,6 +15526,112 @@
       ]
     },
     {
+      "id": "maldives-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "462",
+        "name": "Maldives"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Maldivian parent",
+      "summary": "Citizenship passes from a Maldivian citizen parent; there is no unrestricted birthright-by-territory rule, and citizens must be Muslim.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "maldives-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Maldivian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Maldives Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Maldives_2008"
+        }
+      ]
+    },
+    {
+      "id": "maldives-citizenship-by-parent",
+      "country": {
+        "iso_n3": "462",
+        "name": "Maldives"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Maldivian citizenship through a Maldivian parent",
+      "summary": "A child born to a Maldivian citizen is a citizen by descent regardless of birthplace (Constitution art. 9).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "maldives-citizenship-by-parent-principal",
+          "label": "Maldivian citizenship through a Maldivian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Maldives Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Maldives_2008"
+        }
+      ]
+    },
+    {
+      "id": "maldives-naturalization",
+      "country": {
+        "iso_n3": "462",
+        "name": "Maldives"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after long residence, for Muslims only",
+      "summary": "Naturalization is highly restrictive: an applicant must be Muslim (a non-Muslim cannot become a citizen under Constitution art. 9(d)), with roughly twelve years of legal residence, Dhivehi proficiency, and good character; grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          144
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "maldives-naturalization-principal",
+          "label": "Naturalization after long residence, for Muslims only",
+          "allocation": "discretionary",
+          "eligibility_months": 144,
+          "note": "The Muslim requirement is constitutionally certain; the twelve-year residence figure is from secondary sources and should be case-checked against the citizenship statute."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Maldives Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Maldives_2008"
+        }
+      ]
+    },
+    {
       "id": "mali-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "466",
@@ -15558,6 +16385,112 @@
       ]
     },
     {
+      "id": "mongolia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "496",
+        "name": "Mongolia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Mongolian parent",
+      "summary": "Mongolia confers citizenship by descent from a citizen parent, not by birth on territory alone (no unrestricted jus soli).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mongolia-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Mongolian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Mongolia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mongolia_2001"
+        }
+      ]
+    },
+    {
+      "id": "mongolia-citizenship-by-parent",
+      "country": {
+        "iso_n3": "496",
+        "name": "Mongolia"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Mongolian citizenship through a Mongolian parent",
+      "summary": "A child at least one of whose parents is a Mongolian citizen acquires citizenship regardless of birthplace (jus sanguinis).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mongolia-citizenship-by-parent-principal",
+          "label": "Mongolian citizenship through a Mongolian parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Mongolia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mongolia_2001"
+        }
+      ]
+    },
+    {
+      "id": "mongolia-naturalization",
+      "country": {
+        "iso_n3": "496",
+        "name": "Mongolia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about five years residence",
+      "summary": "Ordinary naturalization requires about five years of permanent residence plus Mongolian-language fluency, knowledge of history and law, financial self-sufficiency, and renunciation of prior citizenship; grant is a discretionary state act.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mongolia-naturalization-principal",
+          "label": "Naturalization after about five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Five-year figure from official guidance and the Law on Citizenship; a monthly-income threshold applies in practice."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Mongolia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mongolia_2001"
+        }
+      ]
+    },
+    {
       "id": "moldova-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "498",
@@ -16014,6 +16947,112 @@
         {
           "title": "Mozambique Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Mozambique_2007"
+        }
+      ]
+    },
+    {
+      "id": "oman-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "512",
+        "name": "Oman"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Omani father",
+      "summary": "Omani nationality descends from an Omani father; birth in Oman alone confers no automatic citizenship.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "oman-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Omani father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Oman Basic Statute (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Oman_2011"
+        }
+      ]
+    },
+    {
+      "id": "oman-citizenship-by-parent",
+      "country": {
+        "iso_n3": "512",
+        "name": "Oman"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Omani citizenship through an Omani father",
+      "summary": "A child born to an Omani father by origin is Omani; children of an Omani mother generally do not acquire nationality automatically except in limited cases.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "oman-citizenship-by-parent-principal",
+          "label": "Omani citizenship through an Omani father",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Oman Basic Statute (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Oman_2011"
+        }
+      ]
+    },
+    {
+      "id": "oman-naturalization",
+      "country": {
+        "iso_n3": "512",
+        "name": "Oman"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about fifteen years residence",
+      "summary": "Ordinary naturalization under Royal Decree 17/2025 requires about fifteen years of residence (with shorter tiers for family ties) plus Arabic proficiency, good conduct, lawful income, and a pledge to renounce prior nationality; decisions are largely non-justiciable.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          180
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "oman-naturalization-principal",
+          "label": "Naturalization after about fifteen years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 180,
+          "note": "Fifteen-year headline from the 2025 nationality law (reduced from twenty under the prior decree); family-tie tiers are shorter."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Oman Basic Statute (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Oman_2011"
         }
       ]
     },
@@ -21976,6 +23015,112 @@
       ]
     },
     {
+      "id": "tajikistan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "762",
+        "name": "Tajikistan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tajik parent",
+      "summary": "Birth to a Tajik parent creates nationality. Birth in Tajikistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tajikistan-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Tajik parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Tajikistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tajikistan_2016"
+        }
+      ]
+    },
+    {
+      "id": "tajikistan-citizenship-by-parent",
+      "country": {
+        "iso_n3": "762",
+        "name": "Tajikistan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Tajik citizenship through a Tajik parent",
+      "summary": "A child at least one of whose parents is a Tajik citizen is a citizen (jus sanguinis), regardless of birthplace, with conditions for some children born abroad to one citizen parent.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tajikistan-citizenship-by-parent-principal",
+          "label": "Tajik citizenship through a Tajik parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Tajikistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tajikistan_2016"
+        }
+      ]
+    },
+    {
+      "id": "tajikistan-naturalization",
+      "country": {
+        "iso_n3": "762",
+        "name": "Tajikistan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about five years residence",
+      "summary": "Ordinary naturalization requires about five years of permanent residence plus basic Tajik-language knowledge; grant is discretionary. Renunciation of prior nationality is generally required except where the Russia treaty applies.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "tajikistan-naturalization-principal",
+          "label": "Naturalization after about five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Five-year figure from official MFA guidance and reference sources; case-check the current constitutional law on nationality."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Tajikistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tajikistan_2016"
+        }
+      ]
+    },
+    {
       "id": "thailand-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "764",
@@ -22785,6 +23930,112 @@
         {
           "title": "Türkiye NVI — Acquisition of Turkish citizenship",
           "url": "https://nvi.gov.tr/turk-vatandasliginin-kazanilmasi"
+        }
+      ]
+    },
+    {
+      "id": "turkmenistan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "795",
+        "name": "Turkmenistan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Turkmen parent",
+      "summary": "Birth to a Turkmen parent creates nationality. Birth in Turkmenistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "turkmenistan-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through a Turkmen parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Turkmenistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Turkmenistan_2016"
+        }
+      ]
+    },
+    {
+      "id": "turkmenistan-citizenship-by-parent",
+      "country": {
+        "iso_n3": "795",
+        "name": "Turkmenistan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Turkmen citizenship through a Turkmen parent",
+      "summary": "A child of a Turkmen citizen parent is a citizen (jus sanguinis), regardless of birthplace.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "turkmenistan-citizenship-by-parent-principal",
+          "label": "Turkmen citizenship through a Turkmen parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Turkmenistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Turkmenistan_2016"
+        }
+      ]
+    },
+    {
+      "id": "turkmenistan-naturalization",
+      "country": {
+        "iso_n3": "795",
+        "name": "Turkmenistan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about seven years residence",
+      "summary": "Ordinary naturalization requires about seven years of permanent residence plus sufficient Turkmen-language fluency and a legitimate source of income; grant is discretionary and renunciation of prior nationality is effectively required.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "turkmenistan-naturalization-principal",
+          "label": "Naturalization after about seven years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Seven-year figure is well-corroborated across secondary sources; the exact statute article was not pinned."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Turkmenistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Turkmenistan_2016"
         }
       ]
     },
@@ -23902,6 +25153,112 @@
         {
           "title": "Uruguay Law No. 16.021 — Nationality",
           "url": "https://www.impo.com.uy/bases/leyes/16021-1989"
+        }
+      ]
+    },
+    {
+      "id": "uzbekistan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "860",
+        "name": "Uzbekistan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Uzbek parent",
+      "summary": "Birth to an Uzbek parent creates nationality. Birth in Uzbekistan alone to two foreign parents is not unrestricted jus soli; anti-statelessness safeguards cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uzbekistan-citizenship-at-birth-by-parent-principal",
+          "label": "Citizenship at birth through an Uzbek parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Uzbekistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Uzbekistan_2023"
+        }
+      ]
+    },
+    {
+      "id": "uzbekistan-citizenship-by-parent",
+      "country": {
+        "iso_n3": "860",
+        "name": "Uzbekistan"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Uzbek citizenship through an Uzbek parent",
+      "summary": "A child at least one of whose parents is an Uzbek citizen is a citizen (jus sanguinis), regardless of birthplace.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uzbekistan-citizenship-by-parent-principal",
+          "label": "Uzbek citizenship through an Uzbek parent",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Uzbekistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Uzbekistan_2023"
+        }
+      ]
+    },
+    {
+      "id": "uzbekistan-naturalization",
+      "country": {
+        "iso_n3": "860",
+        "name": "Uzbekistan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization after about five years residence",
+      "summary": "Ordinary naturalization requires about five years of continuous permanent residence plus a lawful income, basic Uzbek-language proficiency, and renunciation of prior citizenship; grant is discretionary.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "uzbekistan-naturalization-principal",
+          "label": "Naturalization after about five years residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Five-year figure from the 2020 citizenship law and official guidance; renunciation of prior nationality is mandatory."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Uzbekistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Uzbekistan_2023"
         }
       ]
     },

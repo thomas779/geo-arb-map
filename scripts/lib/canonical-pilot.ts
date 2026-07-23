@@ -459,6 +459,18 @@ const OFFICIAL_URLS = {
   lebanon_constitution: 'https://www.constituteproject.org/constitution/Lebanon_2004',
   saudi_arabia_nationality_regulations: 'https://www.ecoi.net/en/file/local/1098597/1504_1217587365_saudi-arabian-nationality-regulations.pdf',
   qatar_nationality_law: 'https://www.almeezan.qa/LawView.aspx?opt=&LawID=2591&language=en',
+  uzbekistan_constitution: 'https://www.constituteproject.org/constitution/Uzbekistan_2023',
+  kyrgyzstan_constitution: 'https://www.constituteproject.org/constitution/Kyrgyz_Republic_2021',
+  tajikistan_constitution: 'https://www.constituteproject.org/constitution/Tajikistan_2016',
+  turkmenistan_constitution: 'https://www.constituteproject.org/constitution/Turkmenistan_2016',
+  kuwait_constitution: 'https://www.constituteproject.org/constitution/Kuwait_1992',
+  bahrain_constitution: 'https://www.constituteproject.org/constitution/Bahrain_2017',
+  oman_basic_law: 'https://www.constituteproject.org/constitution/Oman_2011',
+  belarus_constitution: 'https://www.constituteproject.org/constitution/Belarus_2004',
+  iraq_constitution: 'https://www.constituteproject.org/constitution/Iraq_2005',
+  afghanistan_constitution: 'https://www.constituteproject.org/constitution/Afghanistan_2004',
+  mongolia_constitution: 'https://www.constituteproject.org/constitution/Mongolia_2001',
+  maldives_constitution: 'https://www.constituteproject.org/constitution/Maldives_2008',
 } as const;
 
 function jurisdictionSources(): SourceRecord[] {
@@ -1059,6 +1071,18 @@ function jurisdictionSources(): SourceRecord[] {
       ['Lebanon Constitution (Constitute Project)', OFFICIAL_URLS.lebanon_constitution, '422', 'en', 'primary_law', 'lebanon-citizenship-law'],
       ['Saudi Arabian Nationality Regulations (1374 H)', OFFICIAL_URLS.saudi_arabia_nationality_regulations, '682', 'en', 'primary_law', 'saudi-arabia-citizenship-law'],
       ['Qatar Law No. 38 of 2005 on Qatari Nationality (Al Meezan)', OFFICIAL_URLS.qatar_nationality_law, '634', 'en', 'primary_law', 'qatar-citizenship-law'],
+      ['Uzbekistan Constitution (Constitute Project)', OFFICIAL_URLS.uzbekistan_constitution, '860', 'en', 'primary_law', 'uzbekistan-citizenship-law'],
+      ['Kyrgyz Republic Constitution (Constitute Project)', OFFICIAL_URLS.kyrgyzstan_constitution, '417', 'en', 'primary_law', 'kyrgyzstan-citizenship-law'],
+      ['Tajikistan Constitution (Constitute Project)', OFFICIAL_URLS.tajikistan_constitution, '762', 'en', 'primary_law', 'tajikistan-citizenship-law'],
+      ['Turkmenistan Constitution (Constitute Project)', OFFICIAL_URLS.turkmenistan_constitution, '795', 'en', 'primary_law', 'turkmenistan-citizenship-law'],
+      ['Kuwait Constitution (Constitute Project)', OFFICIAL_URLS.kuwait_constitution, '414', 'en', 'primary_law', 'kuwait-citizenship-law'],
+      ['Bahrain Constitution (Constitute Project)', OFFICIAL_URLS.bahrain_constitution, '048', 'en', 'primary_law', 'bahrain-citizenship-law'],
+      ['Oman Basic Statute (Constitute Project)', OFFICIAL_URLS.oman_basic_law, '512', 'en', 'primary_law', 'oman-citizenship-law'],
+      ['Belarus Constitution (Constitute Project)', OFFICIAL_URLS.belarus_constitution, '112', 'en', 'primary_law', 'belarus-citizenship-law'],
+      ['Iraq Constitution (Constitute Project)', OFFICIAL_URLS.iraq_constitution, '368', 'en', 'primary_law', 'iraq-citizenship-law'],
+      ['Afghanistan Constitution (Constitute Project)', OFFICIAL_URLS.afghanistan_constitution, '004', 'en', 'primary_law', 'afghanistan-citizenship-law'],
+      ['Mongolia Constitution (Constitute Project)', OFFICIAL_URLS.mongolia_constitution, '496', 'en', 'primary_law', 'mongolia-citizenship-law'],
+      ['Maldives Constitution (Constitute Project)', OFFICIAL_URLS.maldives_constitution, '462', 'en', 'primary_law', 'maldives-citizenship-law'],
 
     ].map(([title, url, jurisdiction, language, sourceType, monitorId]) => officialSource({
       title,
@@ -13986,9 +14010,626 @@ function sriLankaRecord(shadow: DataShadow, officialSources: SourceRecord[]): Ju
   });
 }
 
+function afghanistanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.afghanistan_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '004',
+    note: 'Reviewed against the Afghan constitutional and nationality-law framework. Descent is the dominant route; dual citizenship is not officially recognized. Administration of naturalization is operationally uncertain under the current de facto authorities. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Afghan national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'afghanistan-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Afghan citizenship through an Afghan parent',
+        summary: 'A child with at least one Afghan citizen parent is an Afghan citizen (jus sanguinis), regardless of birthplace; paternal transmission is clearly established, maternal transmission less certain in practice.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '004' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'afghanistan-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about five years residence',
+        summary: 'The nationality law provides for naturalization after roughly five years of lawful residence plus integration and Ministry of Interior approval; grant is discretionary.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 5, unit: 'years' }],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Five-year figure from secondary sources; current administration of naturalization under the de facto authorities is uncertain and requires verification.',
+      }),
+      principalCitizenshipRoute({
+        id: 'afghanistan-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Afghan parent',
+        summary: 'Birth to an Afghan parent creates nationality. Birth in Afghanistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '004' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function bahrainRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.bahrain_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '048',
+    note: 'Reviewed against the Bahraini constitutional framework and the Citizenship Act 1963. Nationality descends through the paternal line. Naturalization requires long residence and is highly discretionary. Dual citizenship is generally not permitted. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Paternal jus sanguinis; no unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme; the Golden Residency grants residence only.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'bahrain-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Bahraini citizenship through a Bahraini father',
+        summary: 'A child of a Bahraini father is Bahraini by descent regardless of birthplace; a child of a Bahraini mother and foreign father is generally not entitled except where the father is unknown.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '048' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'bahrain-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after long residence (about 25 years, 15 for Arabs)',
+        summary: 'Ordinary naturalization requires about twenty-five years of residence (about fifteen for nationals of Arab states) plus good conduct, Arabic fluency, and registered real estate; it is highly discretionary and rare.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 25, unit: 'years' }],
+        months: 300,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Residence figures from the Citizenship Act 1963 (25 years; 15 for Arab nationals); grants are rare and discretionary.',
+      }),
+      principalCitizenshipRoute({
+        id: 'bahrain-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Bahraini father',
+        summary: 'Bahraini nationality descends from a Bahraini father; birth on Bahraini territory alone confers no citizenship.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '048' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function belarusRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.belarus_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '112',
+    note: 'Reviewed against the Belarusian constitutional framework and the citizenship law. Dual citizenship is not recognized. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Belarusian national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'belarus-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Belarusian citizenship through a Belarusian parent',
+        summary: 'A child at least one of whose parents is a Belarusian citizen at birth acquires citizenship by descent (jus sanguinis), regardless of birthplace.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '112' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'belarus-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about seven years residence',
+        summary: 'Ordinary naturalization generally requires about seven years of residence plus knowledge of a state language and a lawful source of income; spouses of citizens and persons of Belarusian descent qualify on a sharply reduced (about one-year) term. Grant is discretionary (presidential).',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 7, unit: 'years' }],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Seven-year figure from secondary sources; 2020 amendments may have reduced the ordinary term toward five years — verify the current statute.',
+      }),
+      principalCitizenshipRoute({
+        id: 'belarus-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Belarusian parent',
+        summary: 'Birth to a Belarusian parent creates nationality. Birth in Belarus alone to foreign parents is not unrestricted jus soli; territorial rules cover children who would otherwise be stateless.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '112' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function iraqRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.iraq_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '368',
+    note: 'Reviewed against the Iraqi constitutional framework (art. 18) and Nationality Law No. 26 of 2006. Descent runs through an Iraqi father or mother, with conditions for some children born abroad to an Iraqi mother. Dual citizenship is permitted. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Iraqi national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'iraq-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Iraqi citizenship through an Iraqi parent',
+        summary: 'A child born to an Iraqi father or an Iraqi mother is Iraqi by descent (Constitution art. 18); for some children born outside Iraq to an Iraqi mother, recognition is conditional and discretionary.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '368' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'iraq-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about ten years residence',
+        summary: 'Ordinary naturalization requires about ten years of lawful residence plus good conduct and self-sufficiency, subject to ministerial approval; a foreign woman married to an Iraqi man has a shorter path. Naturalized citizens face limits on high office.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 10, unit: 'years' }],
+        months: 120,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Ten-year figure from Nationality Law No. 26 of 2006 as summarized in reference sources; case-check the current statute.',
+      }),
+      principalCitizenshipRoute({
+        id: 'iraq-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Iraqi parent',
+        summary: 'Nationality follows parentage under art. 18; there is no general birthright citizenship, only limited anti-statelessness and foundling provisions.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '368' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function kuwaitRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.kuwait_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '414',
+    note: 'Reviewed against the Kuwaiti constitutional framework and the Nationality Law of 1959. Nationality descends through the paternal line. Naturalization requires long residence, is subject to an annual cap, and is highly discretionary. Dual citizenship is generally not permitted. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Paternal jus sanguinis; no unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme; investor and property residency do not lead to citizenship.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'kuwait-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Kuwaiti citizenship through a Kuwaiti father',
+        summary: 'A person born to a Kuwaiti father acquires Kuwaiti nationality automatically regardless of birthplace; the maternal line does not transmit automatically except in limited cases such as an unknown father.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '414' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'kuwait-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after long residence (about 20 years, 15 for Arabs)',
+        summary: 'Ordinary naturalization requires about twenty years of residence (about fifteen for nationals of Arab states) plus good character, Arabic knowledge, and being Muslim; it is granted by decree subject to an annual cap and is rare.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 20, unit: 'years' }],
+        months: 240,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Residence figures from the Nationality Law of 1959 (20 years; 15 for Arab nationals); grants are capped and discretionary.',
+      }),
+      principalCitizenshipRoute({
+        id: 'kuwait-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Kuwaiti father',
+        summary: 'Kuwaiti nationality descends from a Kuwaiti father; birth on Kuwaiti soil alone confers no citizenship.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '414' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function kyrgyzstanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.kyrgyzstan_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '417',
+    note: 'Reviewed against the Kyrgyz constitutional and citizenship-law framework. Ethnic Kyrgyz (kairylman) and persons proving affiliation with the people of Kyrgyzstan access simplified citizenship. Dual citizenship is comparatively permitted. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Kyrgyz national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme; investor visas grant residence only.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'kyrgyzstan-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Kyrgyz citizenship through a Kyrgyz parent',
+        summary: 'A child at least one of whose parents is a Kyrgyz citizen is a citizen (jus sanguinis), regardless of birthplace.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '417' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'kyrgyzstan-citizenship-by-kyrgyz-origin',
+        mode: 'ancestry',
+        title: 'Simplified citizenship for ethnic Kyrgyz (kairylman)',
+        summary: 'Ethnic Kyrgyz and persons who prove affiliation with the people of Kyrgyzstan may acquire citizenship on simplified terms, constitutionally guaranteed and available while holding another nationality.',
+        source: constitution,
+        eligibility: [{ field: 'heritage.ethnic_kyrgyz_kairylman', operator: 'eq', value: true }],
+        months: 0,
+        allocation: 'right',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Diaspora/kairylman simplified route grounded in the constitution; verify current documentary and quota conditions at application.',
+      }),
+      principalCitizenshipRoute({
+        id: 'kyrgyzstan-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about five years residence',
+        summary: 'Ordinary naturalization requires about five years of continuous residence plus Kyrgyz-language knowledge and a lawful income; reduced terms (about three or one years) apply for high achievement or family/heritage ties. Grant is discretionary.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 5, unit: 'years' }],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Five-year base residence from the citizenship law; renunciation is not strictly required (dual tolerated).',
+      }),
+      principalCitizenshipRoute({
+        id: 'kyrgyzstan-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Kyrgyz parent',
+        summary: 'Birth to a Kyrgyz parent creates nationality. Birth in Kyrgyzstan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '417' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function maldivesRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.maldives_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '462',
+    note: 'Reviewed against the Maldivian constitutional framework (art. 9). Nationality passes by descent; the constitution requires citizens to be Muslim, so a non-Muslim cannot become or remain a citizen. Dual citizenship is tolerated for citizens by descent but restricted for naturalized persons. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution], note: 'Being Muslim is a constitutional prerequisite for citizenship.' },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Maldivian national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme; investor and resort schemes grant residence only.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'maldives-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Maldivian citizenship through a Maldivian parent',
+        summary: 'A child born to a Maldivian citizen is a citizen by descent regardless of birthplace (Constitution art. 9).',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '462' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'maldives-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after long residence, for Muslims only',
+        summary: 'Naturalization is highly restrictive: an applicant must be Muslim (a non-Muslim cannot become a citizen under Constitution art. 9(d)), with roughly twelve years of legal residence, Dhivehi proficiency, and good character; grant is discretionary.',
+        source: constitution,
+        eligibility: [
+          { field: 'applicant.religion', operator: 'eq', value: 'muslim', note: 'Constitutional prerequisite under art. 9(d).' },
+          { field: 'residence.years', operator: 'gte', value: 12, unit: 'years' },
+        ],
+        months: 144,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'The Muslim requirement is constitutionally certain; the twelve-year residence figure is from secondary sources and should be case-checked against the citizenship statute.',
+      }),
+      principalCitizenshipRoute({
+        id: 'maldives-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Maldivian parent',
+        summary: 'Citizenship passes from a Maldivian citizen parent; there is no unrestricted birthright-by-territory rule, and citizens must be Muslim.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '462' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function mongoliaRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.mongolia_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '496',
+    note: 'Reviewed against the Mongolian constitutional framework and the Law on Citizenship (1995, as amended). Dual citizenship is generally prohibited. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Mongolian national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'mongolia-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Mongolian citizenship through a Mongolian parent',
+        summary: 'A child at least one of whose parents is a Mongolian citizen acquires citizenship regardless of birthplace (jus sanguinis).',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '496' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'mongolia-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about five years residence',
+        summary: 'Ordinary naturalization requires about five years of permanent residence plus Mongolian-language fluency, knowledge of history and law, financial self-sufficiency, and renunciation of prior citizenship; grant is a discretionary state act.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 5, unit: 'years' }],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Five-year figure from official guidance and the Law on Citizenship; a monthly-income threshold applies in practice.',
+      }),
+      principalCitizenshipRoute({
+        id: 'mongolia-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Mongolian parent',
+        summary: 'Mongolia confers citizenship by descent from a citizen parent, not by birth on territory alone (no unrestricted jus soli).',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '496' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function omanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const basicLaw = requireSource(officialSources, OFFICIAL_URLS.oman_basic_law);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '512',
+    note: 'Reviewed against the Omani Basic Statute and the Nationality Law (Royal Decree 17/2025). Nationality descends through the paternal line. Naturalization requires about fifteen years of residence and is highly discretionary. Dual citizenship is not permitted. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [basicLaw] },
+      { mode: 'naturalization', finding: 'present', sources: [basicLaw] },
+      { mode: 'birth', finding: 'present', sources: [basicLaw], note: 'Paternal jus sanguinis; no unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [basicLaw], note: 'No citizenship-by-investment programme; the 2025 law affirms citizenship cannot be purchased, and investor residency does not lead to citizenship.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'oman-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Omani citizenship through an Omani father',
+        summary: 'A child born to an Omani father by origin is Omani; children of an Omani mother generally do not acquire nationality automatically except in limited cases.',
+        source: basicLaw,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '512' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'oman-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about fifteen years residence',
+        summary: 'Ordinary naturalization under Royal Decree 17/2025 requires about fifteen years of residence (with shorter tiers for family ties) plus Arabic proficiency, good conduct, lawful income, and a pledge to renounce prior nationality; decisions are largely non-justiciable.',
+        source: basicLaw,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 15, unit: 'years' }],
+        months: 180,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Fifteen-year headline from the 2025 nationality law (reduced from twenty under the prior decree); family-tie tiers are shorter.',
+      }),
+      principalCitizenshipRoute({
+        id: 'oman-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Omani father',
+        summary: 'Omani nationality descends from an Omani father; birth in Oman alone confers no automatic citizenship.',
+        source: basicLaw,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '512' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function tajikistanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.tajikistan_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '762',
+    note: 'Reviewed against the Tajik constitutional framework and the constitutional law on nationality. Dual citizenship is not recognized except with Russia under the 1995 treaty. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Tajik national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme; investor visas grant residence only.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'tajikistan-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Tajik citizenship through a Tajik parent',
+        summary: 'A child at least one of whose parents is a Tajik citizen is a citizen (jus sanguinis), regardless of birthplace, with conditions for some children born abroad to one citizen parent.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '762' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'tajikistan-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about five years residence',
+        summary: 'Ordinary naturalization requires about five years of permanent residence plus basic Tajik-language knowledge; grant is discretionary. Renunciation of prior nationality is generally required except where the Russia treaty applies.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 5, unit: 'years' }],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Five-year figure from official MFA guidance and reference sources; case-check the current constitutional law on nationality.',
+      }),
+      principalCitizenshipRoute({
+        id: 'tajikistan-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Tajik parent',
+        summary: 'Birth to a Tajik parent creates nationality. Birth in Tajikistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '762' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function turkmenistanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.turkmenistan_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '795',
+    note: 'Reviewed against the Turkmen constitutional framework and the citizenship act. Dual citizenship is not recognized (Constitution art. 10). No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Turkmen national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'turkmenistan-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Turkmen citizenship through a Turkmen parent',
+        summary: 'A child of a Turkmen citizen parent is a citizen (jus sanguinis), regardless of birthplace.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '795' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'turkmenistan-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about seven years residence',
+        summary: 'Ordinary naturalization requires about seven years of permanent residence plus sufficient Turkmen-language fluency and a legitimate source of income; grant is discretionary and renunciation of prior nationality is effectively required.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 7, unit: 'years' }],
+        months: 84,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Seven-year figure is well-corroborated across secondary sources; the exact statute article was not pinned.',
+      }),
+      principalCitizenshipRoute({
+        id: 'turkmenistan-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through a Turkmen parent',
+        summary: 'Birth to a Turkmen parent creates nationality. Birth in Turkmenistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '795' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
+function uzbekistanRecord(shadow: DataShadow, officialSources: SourceRecord[]): JurisdictionRecord {
+  const constitution = requireSource(officialSources, OFFICIAL_URLS.uzbekistan_constitution);
+  return reviewedCountryRecord({
+    shadow,
+    iso: '860',
+    note: 'Reviewed against the Uzbek constitutional framework and the 2020 citizenship law. Dual citizenship is prohibited; naturalization requires renunciation of prior nationality. No CBI.',
+    coverage: [
+      { mode: 'ancestry', finding: 'present', sources: [constitution] },
+      { mode: 'naturalization', finding: 'present', sources: [constitution] },
+      { mode: 'birth', finding: 'present', sources: [constitution], note: 'Parent Uzbek national; not unrestricted jus soli.' },
+      { mode: 'investment', finding: 'verified_none', sources: [constitution], note: 'No citizenship-by-investment programme; a CBI bill was proposed but not enacted, and the golden visa grants residence only.' },
+    ],
+    routes: [
+      principalCitizenshipRoute({
+        id: 'uzbekistan-citizenship-by-parent',
+        mode: 'ancestry',
+        title: 'Uzbek citizenship through an Uzbek parent',
+        summary: 'A child at least one of whose parents is an Uzbek citizen is a citizen (jus sanguinis), regardless of birthplace.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '860' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+      principalCitizenshipRoute({
+        id: 'uzbekistan-naturalization',
+        mode: 'naturalization',
+        title: 'Naturalization after about five years residence',
+        summary: 'Ordinary naturalization requires about five years of continuous permanent residence plus a lawful income, basic Uzbek-language proficiency, and renunciation of prior citizenship; grant is discretionary.',
+        source: constitution,
+        eligibility: [{ field: 'residence.years', operator: 'gte', value: 5, unit: 'years' }],
+        months: 60,
+        allocation: 'discretionary',
+        lastChecked: '2026-07-23',
+        confidence: 'medium',
+        note: 'Five-year figure from the 2020 citizenship law and official guidance; renunciation of prior nationality is mandatory.',
+      }),
+      principalCitizenshipRoute({
+        id: 'uzbekistan-citizenship-at-birth-by-parent',
+        mode: 'birth',
+        title: 'Citizenship at birth through an Uzbek parent',
+        summary: 'Birth to an Uzbek parent creates nationality. Birth in Uzbekistan alone to two foreign parents is not unrestricted jus soli; anti-statelessness safeguards cover foundlings and otherwise-stateless children.',
+        source: constitution,
+        eligibility: [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '860' }],
+        months: 0,
+        lastChecked: '2026-07-23',
+      }),
+    ],
+  });
+}
+
 export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot {
   const countrySources = jurisdictionSources();
   const jurisdictions = [
+    afghanistanRecord(shadow, countrySources),
     albaniaRecord(shadow, countrySources),
     algeriaRecord(shadow, countrySources),
     andorraRecord(shadow, countrySources),
@@ -14000,8 +14641,10 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     austriaRecord(shadow, countrySources),
     azerbaijanRecord(shadow, countrySources),
     bahamasRecord(shadow, countrySources),
+    bahrainRecord(shadow, countrySources),
     bangladeshRecord(shadow, countrySources),
     barbadosRecord(shadow, countrySources),
+    belarusRecord(shadow, countrySources),
     belgiumRecord(shadow, countrySources),
     belizeRecord(shadow, countrySources),
     beninRecord(shadow, countrySources),
@@ -14065,6 +14708,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     indiaRecord(shadow, countrySources),
     indonesiaRecord(shadow, countrySources),
     iranRecord(shadow, countrySources),
+    iraqRecord(shadow, countrySources),
     irelandRecord(shadow, countrySources),
     israelRecord(shadow, countrySources),
     italyRecord(shadow, countrySources),
@@ -14075,6 +14719,8 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     kenyaRecord(shadow, countrySources),
     kiribatiRecord(shadow, countrySources),
     koreaRecord(shadow, countrySources),
+    kuwaitRecord(shadow, countrySources),
+    kyrgyzstanRecord(shadow, countrySources),
     latviaRecord(shadow, countrySources),
     lebanonRecord(shadow, countrySources),
     lesothoRecord(shadow, countrySources),
@@ -14086,6 +14732,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     madagascarRecord(shadow, countrySources),
     malawiRecord(shadow, countrySources),
     malaysiaRecord(shadow, countrySources),
+    maldivesRecord(shadow, countrySources),
     maliRecord(shadow, countrySources),
     maltaRecord(shadow, countrySources),
     marshallIslandsRecord(shadow, countrySources),
@@ -14095,6 +14742,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     micronesiaRecord(shadow, countrySources),
     moldovaRecord(shadow, countrySources),
     monacoRecord(shadow, countrySources),
+    mongoliaRecord(shadow, countrySources),
     montenegroRecord(shadow, countrySources),
     moroccoRecord(shadow, countrySources),
     mozambiqueRecord(shadow, countrySources),
@@ -14108,6 +14756,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     nigerRecord(shadow, countrySources),
     northMacedoniaRecord(shadow, countrySources),
     norwayRecord(shadow, countrySources),
+    omanRecord(shadow, countrySources),
     pakistanRecord(shadow, countrySources),
     palauRecord(shadow, countrySources),
     panamaRecord(shadow, countrySources),
@@ -14145,6 +14794,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     swedenRecord(shadow, countrySources),
     switzerlandRecord(shadow, countrySources),
     taiwanRecord(shadow, countrySources),
+    tajikistanRecord(shadow, countrySources),
     tanzaniaRecord(shadow, countrySources),
     thailandRecord(shadow, countrySources),
     timorLesteRecord(shadow, countrySources),
@@ -14153,6 +14803,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     trinidadAndTobagoRecord(shadow, countrySources),
     tunisiaRecord(shadow, countrySources),
     turkiyeRecord(shadow, countrySources),
+    turkmenistanRecord(shadow, countrySources),
     tuvaluRecord(shadow, countrySources),
     ugandaRecord(shadow, countrySources),
     ukraineRecord(shadow, countrySources),
@@ -14160,6 +14811,7 @@ export function buildCanonicalPilot(shadow = buildDataShadow()): CanonicalPilot 
     unitedKingdomRecord(shadow, countrySources),
     unitedStatesRecord(shadow, countrySources),
     uruguayRecord(shadow, countrySources),
+    uzbekistanRecord(shadow, countrySources),
     vanuatuRecord(shadow, countrySources),
     venezuelaRecord(shadow, countrySources),
     vietnamRecord(shadow, countrySources),
