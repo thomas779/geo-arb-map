@@ -121,7 +121,10 @@ The concise documentation index is [`docs/README.md`](docs/README.md).
 
 ## License
 
-Code is licensed under [MIT](LICENSE). The dataset
-(`public/*.json`, `data/`) is licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — attribute
+Code is licensed under [AGPL-3.0](LICENSE): you may use and modify it, but
+running a modified version as a network service requires publishing your
+source. The dataset (`public/*.json`, `data/`, `scripts/lib/canonical-pilot.ts`)
+is licensed separately under
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (see
+[`data/LICENSE`](data/LICENSE)) — non-commercial use only, with attribution to
 "geo-arb-map contributors".

@@ -47,4 +47,5 @@ watch every country.
 A link to a changed law or a "this looks stale" note with a source is a
 perfectly good contribution.
 
-Dataset: CC BY 4.0 · Code: MIT · Nothing here is legal advice.
+Dataset: CC BY-NC 4.0 · Code: AGPL-3.0 · Contributions are accepted under these
+same licenses (inbound = outbound) · Nothing here is legal advice.
