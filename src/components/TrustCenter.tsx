@@ -51,8 +51,8 @@ const evidenceSteps = [
 ];
 
 function Methodology({ dataStatus }: { dataStatus: DataStatus }) {
-  const coveragePercent = dataStatus.totalModes > 0
-    ? Math.round((dataStatus.reviewedModes / dataStatus.totalModes) * 100)
+  const coveragePercent = dataStatus.jurisdictions > 0
+    ? Math.round((dataStatus.reviewedJurisdictions / dataStatus.jurisdictions) * 100)
     : 0;
 
   return (
@@ -80,9 +80,9 @@ function Methodology({ dataStatus }: { dataStatus: DataStatus }) {
       <div className="rounded-lg border bg-background/45 p-4">
         <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold">Route-level coverage</p>
+            <p className="text-xs font-semibold">Reviewed coverage</p>
             <p className="mt-0.5 text-[11px] text-muted-foreground">
-              {dataStatus.reviewedModes} of {dataStatus.totalModes} country × acquisition-mode checks
+              {dataStatus.reviewedJurisdictions} of {dataStatus.jurisdictions} countries and territories fully reviewed
             </p>
           </div>
           <span className="font-mono text-sm font-semibold text-primary">{coveragePercent}%</span>
