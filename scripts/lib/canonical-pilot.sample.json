@@ -754,6 +754,72 @@
               ]
             }
           ]
+        },
+        {
+          "id": "albania-citizenship-by-marriage",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization as the spouse of a citizen",
+          "summary": "A spouse may naturalize after three years of marriage and one year of residence, exempt from the seven-year bar.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "medium",
+            "last_checked": "2026-07-23"
+          },
+          "variants": [
+            {
+              "id": "albania-citizenship-by-marriage-principal",
+              "label": "Naturalization as the spouse of a citizen",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "spouse.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "008"
+                },
+                {
+                  "field": "residence.years",
+                  "operator": "gte",
+                  "value": 1,
+                  "unit": "years"
+                },
+                {
+                  "field": "marriage.duration_months",
+                  "operator": "gte",
+                  "value": 36,
+                  "unit": "months"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 12
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 12,
+                "processing_typical_months": null,
+                "confidence": "medium",
+                "note": "The one-year residence reading is the stronger one; some secondary sources cite three years."
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:facdfc6d39",
+                  "supports_fields": [
+                    "/routes/albania-citizenship-by-marriage/summary",
+                    "/routes/albania-citizenship-by-marriage/variants/albania-citizenship-by-marriage-principal/eligibility",
+                    "/routes/albania-citizenship-by-marriage/variants/albania-citizenship-by-marriage-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
