@@ -376,7 +376,7 @@ describe('canonical SQL import and projections', () => {
       '894',
     ])
     expect(projections.coverage.find(row => row.iso_n3 === '250')).toMatchObject({
-      route_count: 3,
+      route_count: 6,
       route_modes: ['ancestry', 'birth', 'naturalization'],
     });
     expect(projections.mode_coverage).toHaveLength(pilot.jurisdictions.length * 4);
@@ -384,7 +384,7 @@ describe('canonical SQL import and projections', () => {
       row.iso_n3 === '250' && row.mode === 'naturalization')).toMatchObject({
         finding: 'present',
       review_state: 'reviewed',
-        route_count: 1,
+        route_count: 4,
       });
     expect(projections.mode_coverage.find(row =>
       row.iso_n3 === '724' && row.mode === 'birth')).toMatchObject({
