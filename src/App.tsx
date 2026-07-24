@@ -38,6 +38,11 @@ import { cn } from '@/lib/utils';
 import { SiteHeader } from '@/components/SiteHeader';
 import type { TrustSection } from './url';
 
+/** md breakpoint — the side panels dock beside the map above this, and are
+ *  full-screen overlays below it. Evaluated per-call (not reactive). */
+const isDesktopViewport = () =>
+  typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches;
+
 function initialProfile(): Profile {
   // Tooling/demo override: ?flags=372c,840p,356d&born=344&ancestors=380,616&heritage=israel_law_of_return
   const fromUrl = import.meta.env.DEV ? url.readProfile() : null;
@@ -174,6 +179,10 @@ export default function App() {
   /** Toggle a bloc in the compare set; null clears the whole selection. */
   const toggleBloc = useCallback((id: string | null) => {
     setMobileList(false);
+    // Desktop: picking a route from the sidebar auto-opens the detail panel so
+    // the details aren't hidden behind a second click. Mobile keeps the map
+    // in view (the panel is a full-screen overlay there).
+    if (id !== null && isDesktopViewport()) setRoutePanelOpen(true);
     setState(s => ({
       ...s,
       view: 'map', // selecting from the sidebar always shows the map
@@ -187,6 +196,7 @@ export default function App() {
   }, []);
   const selectLane = useCallback((id: string | null) => {
     setMobileList(false);
+    if (id !== null && isDesktopViewport()) setRoutePanelOpen(true);
     patch({ view: 'map', lane: id, blocs: [], country: null, countryName: null });
   }, [patch]);
   const clearMapSelection = useCallback(() => {
@@ -295,8 +305,6 @@ export default function App() {
               state={state}
               onBloc={toggleBloc}
               onLane={selectLane}
-              onClear={clearMapSelection}
-              onInspect={inspectRouteSelection}
             />
           </div>
         )}
@@ -339,8 +347,6 @@ export default function App() {
                 state={state}
                 onBloc={toggleBloc}
                 onLane={selectLane}
-                onClear={clearMapSelection}
-                onInspect={inspectRouteSelection}
               />
             </div>
           )}
@@ -456,7 +462,7 @@ export default function App() {
                     data={data}
                     blocIds={state.blocs}
                     laneId={state.lane}
-                    onClose={() => setRoutePanelOpen(false)}
+                    onClose={clearMapSelection}
                     onSelectCountry={selectCountry}
                   />
                 )}
@@ -484,7 +490,7 @@ export default function App() {
                   data={data}
                   blocIds={state.blocs}
                   laneId={state.lane}
-                  onClose={() => setRoutePanelOpen(false)}
+                  onClose={clearMapSelection}
                   onSelectCountry={selectCountry}
                 />
               )}

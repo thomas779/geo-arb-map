@@ -210,6 +210,11 @@ function LaneDetail({
 
   return (
     <div className="space-y-3">
+      {lane.beneficiaries.length === 0 && (
+        <Button asChild variant="outline" size="sm" className="w-full">
+          <a href={`/route/${entitySlug(lane.id)}`}>View full page →</a>
+        </Button>
+      )}
       <button
         type="button"
         className="flex w-full items-center gap-2 rounded-lg border bg-card px-3 py-2.5 text-left hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
@@ -298,15 +303,6 @@ function LaneDetail({
         </div>
       )}
 
-      {lane.beneficiaries.length === 0 && (
-        <a
-          href={`/route/${entitySlug(lane.id)}`}
-          className="inline-flex items-center gap-1 text-xs font-medium text-primary underline underline-offset-2 hover:brightness-110"
-        >
-          View full page →
-        </a>
-      )}
-
       <a
         href={dataCorrectionUrl(lane.name, `lane:${lane.id}`)}
         target="_blank"
@@ -393,12 +389,9 @@ export function RouteDetailPanel({
           <p className="mb-3 text-xs leading-relaxed text-muted-foreground">
             This guide explains the shared arrangement. Country-specific citizenship timelines live in each member’s country guide.
           </p>
-          <a
-            href={`/rights/${entitySlug(singleBloc.id)}`}
-            className="mb-4 inline-flex items-center gap-1 text-xs font-medium text-primary underline underline-offset-2 hover:brightness-110"
-          >
-            View full page →
-          </a>
+          <Button asChild variant="outline" size="sm" className="mb-4 w-full">
+            <a href={`/rights/${entitySlug(singleBloc.id)}`}>View full page →</a>
+          </Button>
           <BlocDetail bloc={singleBloc} onSelectCountry={onSelectCountry} />
         </>
       )}

@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 38
+      "residence_routes": 39
     }
   },
   "jurisdictions": [
@@ -4071,7 +4071,13 @@
         "uzbekistan-citizenship-by-parent",
         "uzbekistan-naturalization",
         "uzbekistan-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "uzbekistan-investment-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "862",
@@ -37405,6 +37411,48 @@
         {
           "title": "Uruguay — Dirección Nacional de Migración",
           "url": "https://migracion.gub.uy/"
+        }
+      ]
+    },
+    {
+      "id": "uzbekistan-investment-residence",
+      "country": {
+        "iso_n3": "860",
+        "name": "Uzbekistan"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investment residence permit (5-year)",
+      "summary": "Five-year residence permit granted under a simplified procedure to foreign nationals who make a qualifying investment payment, with a lower amount per accompanying family member.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 250000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uzbekistan-investment-residence-principal",
+          "label": "Investment residence permit (5-year)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Uzbekistan — Presidential Decree PF-67 (lex.uz)",
+          "url": "https://lex.uz/ru/docs/7483820"
         }
       ]
     }

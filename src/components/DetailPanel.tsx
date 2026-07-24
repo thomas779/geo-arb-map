@@ -214,12 +214,9 @@ export function DetailPanel({
           {routes.length} country rule{routes.length === 1 ? '' : 's'}{residenceRoutes.length > 0 ? ` · ${residenceRoutes.length} residence route${residenceRoutes.length === 1 ? '' : 's'}` : ''} · {regionalCount} regional system{regionalCount === 1 ? '' : 's'} · {laneCount} treaty path{laneCount === 1 ? '' : 's'}
         </p>
         {countrySlug && (
-          <a
-            href={`/country/${countrySlug}/`}
-            className="mt-2.5 block rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground hover:brightness-105"
-          >
-            Full country profile →
-          </a>
+          <Button asChild variant="outline" size="sm" className="mt-2.5 w-full">
+            <a href={`/country/${countrySlug}/`}>View full page →</a>
+          </Button>
         )}
       </div>
 
