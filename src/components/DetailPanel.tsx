@@ -214,7 +214,7 @@ export function DetailPanel({
           {routes.length} country rule{routes.length === 1 ? '' : 's'}{residenceRoutes.length > 0 ? ` · ${residenceRoutes.length} residence route${residenceRoutes.length === 1 ? '' : 's'}` : ''} · {regionalCount} regional system{regionalCount === 1 ? '' : 's'} · {laneCount} treaty path{laneCount === 1 ? '' : 's'}
         </p>
         {countrySlug && (
-          <Button asChild variant="outline" size="sm" className="mt-2.5 w-full">
+          <Button asChild variant="secondary" size="sm" className="mt-2.5 w-full">
             <a href={`/country/${countrySlug}/`}>View full page →</a>
           </Button>
         )}

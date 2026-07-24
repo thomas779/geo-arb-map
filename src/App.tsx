@@ -38,11 +38,6 @@ import { cn } from '@/lib/utils';
 import { SiteHeader } from '@/components/SiteHeader';
 import type { TrustSection } from './url';
 
-/** md breakpoint — the side panels dock beside the map above this, and are
- *  full-screen overlays below it. Evaluated per-call (not reactive). */
-const isDesktopViewport = () =>
-  typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches;
-
 function initialProfile(): Profile {
   // Tooling/demo override: ?flags=372c,840p,356d&born=344&ancestors=380,616&heritage=israel_law_of_return
   const fromUrl = import.meta.env.DEV ? url.readProfile() : null;
@@ -179,10 +174,10 @@ export default function App() {
   /** Toggle a bloc in the compare set; null clears the whole selection. */
   const toggleBloc = useCallback((id: string | null) => {
     setMobileList(false);
-    // Desktop: picking a route from the sidebar auto-opens the detail panel so
-    // the details aren't hidden behind a second click. Mobile keeps the map
-    // in view (the panel is a full-screen overlay there).
-    if (id !== null && isDesktopViewport()) setRoutePanelOpen(true);
+    // Picking a route auto-opens the detail panel (desktop: docks instantly;
+    // mobile: the bottom sheet slides up after the map's zoom, see the sheet's
+    // transition delay) so the details are never hidden behind a second click.
+    if (id !== null) setRoutePanelOpen(true);
     setState(s => ({
       ...s,
       view: 'map', // selecting from the sidebar always shows the map
@@ -196,7 +191,7 @@ export default function App() {
   }, []);
   const selectLane = useCallback((id: string | null) => {
     setMobileList(false);
-    if (id !== null && isDesktopViewport()) setRoutePanelOpen(true);
+    if (id !== null) setRoutePanelOpen(true);
     patch({ view: 'map', lane: id, blocs: [], country: null, countryName: null });
   }, [patch]);
   const clearMapSelection = useCallback(() => {
@@ -368,17 +363,6 @@ export default function App() {
                 {mobileList ? <MapIcon /> : <List />}
                 {mobileList ? 'Map' : 'List'}
               </Button>
-              {!mobileList && hasRouteSelection && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="min-h-11 gap-2 bg-background/90 px-4 shadow-lg backdrop-blur-sm"
-                  onClick={inspectRouteSelection}
-                >
-                  <PanelRightOpen aria-hidden />
-                  Route guide
-                </Button>
-              )}
             </div>
           )}
           {data && state.view === 'stacking' && (
@@ -447,25 +431,39 @@ export default function App() {
         </div>
         {data && state.view === 'map' && (state.country || hasRouteSelection) && (
           <>
+            {/* Mobile: a bottom sheet — the map (zoomed to the selection) peeks
+                above a light scrim, and the sheet slides up after a short beat
+                so the zoom reads first. Tap the map / scrim to dismiss. */}
             {rightPanelOpen && (
-              <div className="absolute inset-0 z-40 bg-background md:hidden">
-                {state.country ? (
-                  <DetailPanel
-                    data={data}
-                    citizenshipRoutes={citizenshipRoutes}
-                    state={state}
-                    onClose={closeDetail}
-                    onBackToRoutes={hasRouteSelection ? backToRouteSelection : undefined}
-                  />
-                ) : (
-                  <RouteDetailPanel
-                    data={data}
-                    blocIds={state.blocs}
-                    laneId={state.lane}
-                    onClose={clearMapSelection}
-                    onSelectCountry={selectCountry}
-                  />
-                )}
+              <div className="absolute inset-0 z-40 md:hidden">
+                <button
+                  type="button"
+                  aria-label="Close details"
+                  className="absolute inset-0 bg-background/30 animate-in fade-in duration-200 motion-reduce:animate-none"
+                  onClick={clearMapSelection}
+                />
+                <div className="absolute inset-x-0 bottom-0 top-[36%] flex flex-col overflow-hidden rounded-t-2xl border-t bg-background shadow-2xl animate-in slide-in-from-bottom fill-mode-both delay-150 duration-300 motion-reduce:animate-none motion-reduce:delay-0">
+                  <div className="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-border" aria-hidden />
+                  <div className="min-h-0 flex-1 overflow-hidden">
+                    {state.country ? (
+                      <DetailPanel
+                        data={data}
+                        citizenshipRoutes={citizenshipRoutes}
+                        state={state}
+                        onClose={closeDetail}
+                        onBackToRoutes={hasRouteSelection ? backToRouteSelection : undefined}
+                      />
+                    ) : (
+                      <RouteDetailPanel
+                        data={data}
+                        blocIds={state.blocs}
+                        laneId={state.lane}
+                        onClose={clearMapSelection}
+                        onSelectCountry={selectCountry}
+                      />
+                    )}
+                  </div>
+                </div>
               </div>
             )}
             <div

@@ -211,7 +211,7 @@ function LaneDetail({
   return (
     <div className="space-y-3">
       {lane.beneficiaries.length === 0 && (
-        <Button asChild variant="outline" size="sm" className="w-full">
+        <Button asChild variant="secondary" size="sm" className="w-full">
           <a href={`/route/${entitySlug(lane.id)}`}>View full page →</a>
         </Button>
       )}
@@ -389,7 +389,7 @@ export function RouteDetailPanel({
           <p className="mb-3 text-xs leading-relaxed text-muted-foreground">
             This guide explains the shared arrangement. Country-specific citizenship timelines live in each member’s country guide.
           </p>
-          <Button asChild variant="outline" size="sm" className="mb-4 w-full">
+          <Button asChild variant="secondary" size="sm" className="mb-4 w-full">
             <a href={`/rights/${entitySlug(singleBloc.id)}`}>View full page →</a>
           </Button>
           <BlocDetail bloc={singleBloc} onSelectCountry={onSelectCountry} />

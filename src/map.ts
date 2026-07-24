@@ -378,9 +378,16 @@ function resetZoom(): void {
 
 /** Frame the current selection; called by render() when focus changes. */
 function frameSelection(state: AppState, data: BlocsData): void {
+  // On mobile, selecting a country zooms to it — the animation doubles as the
+  // "reveal" latency before the bottom sheet slides up. Desktop docks the panel
+  // beside the map, so a single-country zoom would just be disruptive there.
+  const mobile = typeof window !== 'undefined'
+    && window.matchMedia('(max-width: 767px)').matches;
   const focus = state.blocs.length
     ? state.blocs.join(',')
-    : (state.lane ? `lane:${state.lane}` : null);
+    : state.lane ? `lane:${state.lane}`
+      : (mobile && state.country) ? `country:${state.country}`
+        : null;
   if (focus === _lastFocus) return;
   _lastFocus = focus;
 
@@ -395,6 +402,8 @@ function frameSelection(state: AppState, data: BlocsData): void {
     const l = data.bilateral_lanes.find(x => x.id === state.lane);
     if (!l) return resetZoom();
     zoomToIsos([l.destination.iso_n3, ...l.beneficiaries.map(m => m.iso_n3)]);
+  } else if (mobile && state.country) {
+    zoomToIsos([state.country]);
   } else {
     resetZoom();
   }
