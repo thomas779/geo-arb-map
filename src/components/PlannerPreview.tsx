@@ -5,7 +5,6 @@ import type { BlocsData } from '@/types';
 
 interface Props {
   data: BlocsData;
-  onBackToAtlas: () => void;
 }
 
 const futureCapabilities = [
@@ -25,7 +24,7 @@ const futureCapabilities = [
 
 const CARTOGRAPHIC_BLOCS = new Set(['eu_eea', 'mercosur', 'asean']);
 
-export function PlannerPreview({ data, onBackToAtlas }: Props) {
+export function PlannerPreview({ data }: Props) {
   const regionIsos = data.blocs
     .filter(bloc => CARTOGRAPHIC_BLOCS.has(bloc.id))
     .flatMap(bloc => bloc.members.map(member => member.iso_n3));
@@ -51,7 +50,7 @@ export function PlannerPreview({ data, onBackToAtlas }: Props) {
               rules. A later planner release will turn the facts you choose to share
               into source-backed routes worth investigating.
             </p>
-            <div className="planner-preview-actions mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="planner-preview-actions mt-8">
               <Button asChild size="lg" className="min-h-11 gap-2">
                 <a
                   href="https://t.me/flagpaths"
@@ -62,17 +61,10 @@ export function PlannerPreview({ data, onBackToAtlas }: Props) {
                   Join for updates
                 </a>
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="min-h-11 bg-card/70 text-foreground hover:bg-accent"
-                onClick={onBackToAtlas}
-              >
-                Explore the atlas
-              </Button>
             </div>
-            <p className="planner-preview-note mt-3 text-xs text-muted-foreground">
-              No account is needed to use the atlas today.
+            <p className="planner-preview-note mt-3 max-w-md text-xs leading-relaxed text-muted-foreground">
+              Reviewed changes to citizenship, residence, visa, and tax-residence rules,
+              delivered on Telegram. No account is needed to use the atlas today.
             </p>
           </div>
 

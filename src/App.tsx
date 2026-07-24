@@ -376,7 +376,7 @@ export default function App() {
             </div>
           )}
           {data && state.view === 'stacking' && (
-            <PlannerPreview data={data} onBackToAtlas={() => selectView('map')} />
+            <PlannerPreview data={data} />
           )}
           {state.view === 'countries' && (() => {
             const slug = /^\/country\/([^/]+)\/?$/.exec(window.location.pathname)?.[1] ?? null;

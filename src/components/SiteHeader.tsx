@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -61,6 +61,26 @@ function Underline({ show }: { show: boolean }) {
  * prerendered SEO pages, so the navbar can never drift between them.
  */
 export function SiteHeader({ active, onSelectView, right }: Props) {
+  // Native <details> stays open on outside click — close it on an outside
+  // pointer or Escape (app only; static pages don't hydrate this effect).
+  const browseRef = useRef<HTMLDetailsElement>(null);
+  useEffect(() => {
+    const details = browseRef.current;
+    if (!details) return;
+    const onPointer = (e: PointerEvent) => {
+      if (details.open && !details.contains(e.target as Node)) details.open = false;
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && details.open) details.open = false;
+    };
+    document.addEventListener('pointerdown', onPointer);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('pointerdown', onPointer);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, []);
+
   const item = (
     def: { key: NavKey; label: string; href: string; view: View },
   ) => {
@@ -118,7 +138,7 @@ export function SiteHeader({ active, onSelectView, right }: Props) {
       </a>
       <nav aria-label="Primary" className="flex shrink-0 items-center gap-4 sm:gap-6">
         {item(ATLAS)}
-        <details className="group relative">
+        <details ref={browseRef} className="group relative">
           <summary
             className={cn(itemClass(browseActive), 'cursor-pointer list-none [&::-webkit-details-marker]:hidden')}
             aria-current={browseActive ? 'page' : undefined}
