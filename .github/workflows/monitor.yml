@@ -2,7 +2,7 @@ name: Monitor mobility sources
 
 on:
   schedule:
-    - cron: "17 7 * * *"
+    - cron: "17 */6 * * *"
   repository_dispatch:
     types: [newsletter_signal]
   workflow_dispatch:

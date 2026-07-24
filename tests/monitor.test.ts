@@ -26,7 +26,7 @@ import {
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
-import { buildNewsPost, fingerprint, synthesizeIssue } from '../monitor/publish/news';
+import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl } from '../monitor/publish/news';
 import { inferJurisdictions } from '../monitor/triage/context';
 import { normalizeRulings, parseJsonArray, seenSignalIds } from '../monitor/triage/triage';
 import { buildIssueDraft } from '../monitor/triage/issues';
@@ -445,7 +445,7 @@ describe('AI sweep + grounded verify', () => {
       category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: [],
     };
     const post = buildNewsPost(finding);
-    expect(post.text).toContain('🇲🇹 Malta ends golden passports');
+    expect(post.text).toContain('🇲🇹 <b>Malta ends golden passports</b>');
     expect(post.text).not.toContain('Malta — Malta');
     expect(post.text).toContain('<a href="https://komunita.gov.mt/x">Source</a>');
     expect(post.text).not.toContain('Information only');
@@ -455,5 +455,17 @@ describe('AI sweep + grounded verify', () => {
     expect(fingerprint(finding)).toBe(fingerprint(finding));
     expect(fingerprint(finding)).not.toBe(fingerprint({ ...finding, effective_date: '2026-01-01' }));
     expect(synthesizeIssue(finding).body).toContain('## Verified evidence');
+  });
+
+  test('verifySourceUrl keeps resolving links, falls back to domain root otherwise', async () => {
+    const deep = 'https://dre.pt/pesquisa/-/search/257321289/details/maximized';
+    const ok = ((_url: string) => Promise.resolve({ ok: true, url: deep } as Response)) as typeof fetch;
+    expect(await verifySourceUrl(deep, ok)).toBe(deep);
+
+    const notFound = ((_url: string) => Promise.resolve({ ok: false, url: deep } as Response)) as typeof fetch;
+    expect(await verifySourceUrl(deep, notFound)).toBe('https://dre.pt');
+
+    const boom = (() => Promise.reject(new Error('blocked'))) as unknown as typeof fetch;
+    expect(await verifySourceUrl('https://lex.uz/deep/404', boom)).toBe('https://lex.uz');
   });
 });
