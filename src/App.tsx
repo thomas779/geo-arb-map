@@ -351,14 +351,8 @@ export default function App() {
             </div>
           )}
           {data && state.view === 'map' && (
-            <div
-              className={cn(
-                'absolute left-1/2 z-20 flex -translate-x-1/2 gap-2 transition-[bottom] md:hidden',
-                mobileList && hasRouteSelection
-                  ? 'bottom-[max(7rem,calc(env(safe-area-inset-bottom)+6.5rem))]'
-                  : 'bottom-[max(1rem,env(safe-area-inset-bottom))]',
-              )}
-            >
+            // Bottom-LEFT so it never overlaps the bottom-right Map Key.
+            <div className="absolute bottom-[max(1rem,env(safe-area-inset-bottom))] left-3 z-20 md:hidden">
               <Button
                 variant="secondary"
                 size="sm"
