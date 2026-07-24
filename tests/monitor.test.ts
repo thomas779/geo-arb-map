@@ -380,7 +380,7 @@ describe('AI sweep + grounded verify', () => {
     const finding: Finding = {
       iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
       primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
-      category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: ['q'],
+      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', citations: [], search_queries: ['q'],
     };
     const lead = findingToLead(finding);
     expect(lead?.impact_type).toBe('cost_or_investment_threshold');
@@ -442,7 +442,7 @@ describe('AI sweep + grounded verify', () => {
     const finding: Finding = {
       iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
       primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
-      category: 'investment', brief: 'Malta ended CBI.', citations: [], search_queries: [],
+      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', citations: [], search_queries: [],
     };
     const post = buildNewsPost(finding);
     expect(post.text).toContain('🇲🇹 <b>Malta ends golden passports</b>');

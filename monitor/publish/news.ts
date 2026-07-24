@@ -124,6 +124,7 @@ export function synthesizeIssue(finding: Finding): ReviewIssue {
   const body = [
     '## Verified evidence',
     '',
+    finding.evidence_quote ? `Source passage: "${finding.evidence_quote}"` : '',
     finding.claim,
     finding.brief,
     finding.effective_date ? `Effective date: ${finding.effective_date}.` : '',
