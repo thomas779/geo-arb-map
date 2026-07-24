@@ -62,22 +62,6 @@ export function fingerprint(finding: Pick<Finding, 'iso_n3' | 'claim' | 'effecti
     .slice(0, 16);
 }
 
-// News is recent-first: only publish changes effective within the window, plus
-// upcoming or undated (just-announced) ones. Older-but-unrecorded changes still
-// get GitHub issues; they just don't post to the channel as "news".
-export function isNewsRecent(
-  finding: Pick<Finding, 'effective_date'>,
-  maxAgeDays: number,
-  now: Date = new Date(),
-): boolean {
-  if (!finding.effective_date) return true;
-  const effective = new Date(`${finding.effective_date}T00:00:00Z`);
-  if (Number.isNaN(effective.getTime())) return true;
-  if (effective.getTime() > now.getTime()) return true; // upcoming
-  const ageDays = (now.getTime() - effective.getTime()) / 86_400_000;
-  return ageDays <= maxAgeDays;
-}
-
 // Resolve a source URL to something that actually opens. The grounded model
 // sometimes fabricates deep-link paths/ids (e.g. a gazette search with a made-up
 // id) that 404. Keep the link if it resolves; otherwise fall back to the
@@ -227,7 +211,6 @@ function readArgs(argv: string[]): NewsOptions {
 export async function runNews(options: NewsOptions): Promise<{ published: number; skipped: number }> {
   const findings = JSON.parse(fs.readFileSync(options.findings, 'utf8')) as Finding[];
   const confirmed = findings.filter(finding => finding.status === 'confirmed').slice(0, options.max);
-  const maxAgeDays = Number(process.env.MONITOR_NEWS_MAX_AGE_DAYS) || 90;
   const store = options.stateDb ? new NewsPostStore(path.resolve(ROOT, '..'), options.stateDb) : null;
   const llm = llmConfigFromEnv();
   if (options.apply && !llm) throw new Error('A monitoring LLM must be configured to auto-publish news');
@@ -237,11 +220,6 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
   for (const finding of confirmed) {
     const fp = fingerprint(finding);
     if (store?.has(fp)) { skipped += 1; console.log(`skip (already posted): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`); continue; }
-    if (!isNewsRecent(finding, maxAgeDays)) {
-      skipped += 1;
-      console.log(`skip (stale, effective ${finding.effective_date ?? 'n/a'}): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`);
-      continue;
-    }
     // Make sure the "Source" link opens; fall back to the domain root if not.
     finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
     let post: TelegramPost;

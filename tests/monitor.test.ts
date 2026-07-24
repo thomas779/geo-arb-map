@@ -26,7 +26,7 @@ import {
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
-import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, isNewsRecent } from '../monitor/publish/news';
+import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl } from '../monitor/publish/news';
 import { inferJurisdictions } from '../monitor/triage/context';
 import { normalizeRulings, parseJsonArray, seenSignalIds } from '../monitor/triage/triage';
 import { buildIssueDraft } from '../monitor/triage/issues';
@@ -467,13 +467,5 @@ describe('AI sweep + grounded verify', () => {
 
     const boom = (() => Promise.reject(new Error('blocked'))) as unknown as typeof fetch;
     expect(await verifySourceUrl('https://lex.uz/deep/404', boom)).toBe('https://lex.uz');
-  });
-
-  test('isNewsRecent keeps recent/upcoming/undated, drops stale changes', () => {
-    const now = new Date('2026-07-24T00:00:00Z');
-    expect(isNewsRecent({ effective_date: '2026-07-01' }, 90, now)).toBe(true);  // recent
-    expect(isNewsRecent({ effective_date: '2026-12-01' }, 90, now)).toBe(true);  // upcoming
-    expect(isNewsRecent({ effective_date: null }, 90, now)).toBe(true);          // just announced
-    expect(isNewsRecent({ effective_date: '2025-06-01' }, 90, now)).toBe(false); // ~14 months old
   });
 });
