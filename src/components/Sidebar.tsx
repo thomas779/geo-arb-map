@@ -1,5 +1,5 @@
-import { useId, useState } from 'react';
-import { Check, ChevronDown, Info, SlidersHorizontal, X } from 'lucide-react';
+import { useState } from 'react';
+import { Check, ChevronDown, Info, X } from 'lucide-react';
 import type { AppState, BilateralLane, Bloc, BlocsData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -14,7 +14,7 @@ import {
 import { cn } from '@/lib/utils';
 import { displayColor } from '@/lib/color';
 import { useTheme } from '@/components/theme-provider';
-import { countryFlag, countryLabel } from '@/lib/country';
+import { countryFlag } from '@/lib/country';
 import { displayRouteTitle } from '@/lib/display-title';
 
 const REGIONAL_GROUPS: Array<{
@@ -137,38 +137,12 @@ function LaneDirection({ lane }: { lane: BilateralLane }) {
 export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Props) {
   const { theme } = useTheme();
   const dark = theme === 'dark';
-  const filterPanelId = useId();
   const [query, setQuery] = useState('');
-  const [filtersOpen, setFiltersOpen] = useState(false);
-  const [fromIso, setFromIso] = useState('');
-  const [toIso, setToIso] = useState('');
-  const [routeType, setRouteType] = useState<'any' | 'settlement' | 'work' | 'edge'>('any');
   const q = query.trim().toLowerCase();
-  const activeFilterCount = Number(Boolean(fromIso))
-    + Number(Boolean(toIso))
-    + Number(routeType !== 'any');
-  const isFiltering = Boolean(q || activeFilterCount);
-
-  const countryOptions = Array.from(
-    data.blocs.reduce((countries, bloc) => {
-      bloc.members.forEach(member => countries.set(member.iso_n3, member));
-      return countries;
-    }, data.bilateral_lanes.reduce((countries, lane) => {
-      countries.set(lane.destination.iso_n3, lane.destination);
-      lane.beneficiaries.forEach(member => countries.set(member.iso_n3, member));
-      return countries;
-    }, new Map<string, { name: string; iso_n3: string }>())),
-  )
-    .map(([, member]) => member)
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const isFiltering = Boolean(q);
 
   const blocMatches = (bloc: Bloc) => {
-    const memberCodes = new Set(bloc.members.map(member => member.iso_n3));
-    const matchesRoute = (!fromIso || memberCodes.has(fromIso))
-      && (!toIso || memberCodes.has(toIso));
-    const matchesRouteType = routeType === 'any'
-      || routeType === 'settlement'
-      || (routeType === 'edge' && !['full', 'closed'].includes(bloc.category));
+    if (!q) return true;
     const searchable = [
       bloc.name,
       ...bloc.members.map(member => member.name),
@@ -178,23 +152,11 @@ export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Pro
       bloc.fastest_entry,
       bloc.notes,
     ];
-    return matchesRoute
-      && matchesRouteType
-      && (!q || searchable.some(value => value.toLowerCase().includes(q)));
+    return searchable.some(value => value.toLowerCase().includes(q));
   };
 
   const laneMatches = (lane: BilateralLane) => {
-    const matchesRoute = (!fromIso
-      || lane.beneficiaries.some(member => member.iso_n3 === fromIso))
-      && (!toIso || lane.destination.iso_n3 === toIso);
-    const allocation = lane.allocation ?? 'right';
-    const matchesRouteType = routeType === 'any'
-      || (routeType === 'settlement' && lane.leads_to_settlement && allocation === 'right')
-      || (routeType === 'work' && !lane.leads_to_settlement && allocation === 'right')
-      || (routeType === 'edge' && (
-        allocation !== 'right'
-        || lane.beneficiaries.length === 0
-      ));
+    if (!q) return true;
     const searchable = [
       lane.name,
       lane.destination.name,
@@ -203,9 +165,7 @@ export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Pro
       lane.grants,
       lane.limits,
     ];
-    return matchesRoute
-      && matchesRouteType
-      && (!q || searchable.some(value => value.toLowerCase().includes(q)));
+    return searchable.some(value => value.toLowerCase().includes(q));
   };
 
   const regionalGroups = REGIONAL_GROUPS.map(group => ({
@@ -365,122 +325,13 @@ export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Pro
   return (
     <aside className="flex h-full w-full flex-col overflow-hidden bg-sidebar">
       <div className="shrink-0 border-b border-sidebar-border px-3 py-3">
-        <div className="flex items-center gap-2">
-          <Input
-            type="search"
-            placeholder="Search countries, routes, or rights…"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            className="h-11 min-w-0 flex-1 text-base placeholder:text-[13px] md:h-8 md:text-sm md:placeholder:text-sm"
-          />
-          <Button
-            type="button"
-            variant={activeFilterCount > 0 ? 'secondary' : 'outline'}
-            size="icon"
-            className="relative size-11 shrink-0 md:size-8"
-            aria-label={activeFilterCount > 0
-              ? `Route filters, ${activeFilterCount} active`
-              : 'Route filters'}
-            aria-expanded={filtersOpen}
-            aria-controls={filterPanelId}
-            onClick={() => setFiltersOpen(open => !open)}
-          >
-            <SlidersHorizontal className="size-4" aria-hidden />
-            {activeFilterCount > 0 && (
-              <span className="absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-primary font-mono text-[9px] text-primary-foreground">
-                {activeFilterCount}
-              </span>
-            )}
-          </Button>
-        </div>
-
-        {filtersOpen && (
-          <div id={filterPanelId} className="mt-2 rounded-md border bg-card p-2.5 shadow-sm">
-            <div className="grid grid-cols-1 gap-2 min-[440px]:grid-cols-2">
-              <label className="grid gap-1">
-                <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-                  From
-                </span>
-                <select
-                  value={fromIso}
-                  onChange={event => setFromIso(event.target.value)}
-                  className="h-10 w-full rounded-md border border-input bg-background px-2 font-sans text-base font-normal text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 md:h-8 md:text-xs"
-                >
-                  <option value="">Passport</option>
-                  {countryOptions.map(country => (
-                    <option key={country.iso_n3} value={country.iso_n3}>
-                      {countryLabel(country.name, country.iso_n3)}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <label className="grid gap-1">
-                <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-                  To
-                </span>
-                <select
-                  value={toIso}
-                  onChange={event => setToIso(event.target.value)}
-                  className="h-10 w-full rounded-md border border-input bg-background px-2 font-sans text-base font-normal text-foreground outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30 md:h-8 md:text-xs"
-                >
-                  <option value="">Destination</option>
-                  {countryOptions.map(country => (
-                    <option key={country.iso_n3} value={country.iso_n3}>
-                      {countryLabel(country.name, country.iso_n3)}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-
-            <div className="mt-2">
-              <span className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
-                Route type
-              </span>
-              <div className="mt-1 grid grid-cols-2 gap-1 rounded-md bg-muted/50 p-1">
-                {([
-                  ['any', 'Any'],
-                  ['settlement', 'Can settle'],
-                  ['work', 'Work only'],
-                  ['edge', 'Edge cases'],
-                ] as const).map(([value, label]) => (
-                  <Button
-                    key={value}
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    className={cn(
-                      'h-8 w-full justify-start px-2.5 text-xs',
-                      routeType === value
-                      && 'bg-background text-foreground shadow-sm hover:bg-background',
-                    )}
-                    aria-pressed={routeType === value}
-                    onClick={() => setRouteType(value)}
-                  >
-                    {label}
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {activeFilterCount > 0 && (
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                className="mt-1 h-8 px-1.5 text-xs text-muted-foreground"
-                onClick={() => {
-                  setFromIso('');
-                  setToIso('');
-                  setRouteType('any');
-                }}
-              >
-                <X className="size-3.5" aria-hidden />
-                Clear filters
-              </Button>
-            )}
-          </div>
-        )}
+        <Input
+          type="search"
+          placeholder="Search countries, routes, or rights…"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          className="h-11 w-full text-base placeholder:text-[13px] md:h-8 md:text-sm md:placeholder:text-sm"
+        />
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-6">
@@ -558,7 +409,7 @@ export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Pro
 
         {isFiltering && regionalCount === 0 && countryLaneCount === 0 && heritageLanes.length === 0 && (
           <p className="mx-2 mt-4 text-xs text-muted-foreground">
-            No routes match these filters.
+            No routes match your search.
           </p>
         )}
       </div>
