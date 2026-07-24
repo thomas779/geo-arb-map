@@ -277,7 +277,11 @@ export function findingToLead(finding: Finding): Lead | null {
     sourceId: 'ai-sweep',
     tier: 'verification',
     jurisdiction: finding.iso_n3,
-    externalId: `${finding.iso_n3}:${finding.claim}`,
+    // Stable across re-phrasings: key the signal (and thus the issue-dedup
+    // marker) on the SHAPE of the change, not the model's free-text claim — the
+    // grounded model rewords the same change every run, which previously opened
+    // a fresh issue each time (Portugal: #31 → #55 → #60).
+    externalId: `${finding.iso_n3}:${finding.category}:${finding.effective_date ?? ''}`,
     url,
     title: finding.claim,
     excerpt,
