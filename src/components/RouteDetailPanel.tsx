@@ -134,7 +134,7 @@ function BlocDetail({
 }) {
   const dark = useTheme().theme === 'dark';
   const body = (
-    <div className={compact ? 'border-t px-3 pb-3 pt-3' : 'space-y-3'}>
+    <div className={compact ? 'space-y-3 border-t px-3 pb-3 pt-3' : 'space-y-3'}>
       <SectionLabel
         title="Rights by status"
         description="Read the row matching the status you would hold. Domestic citizenship rules remain country-specific."
@@ -349,8 +349,8 @@ export function RouteDetailPanel({
     : `${selectedCount} system${selectedCount === 1 ? '' : 's'} · ${uniqueMembers.length} distinct countries`;
 
   return (
-    <section className="h-full w-full overflow-y-auto bg-background px-3 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-4 md:pt-4 md:pb-8">
-      <div className="sticky top-0 z-10 -mx-3 mb-4 flex items-start justify-between gap-2 border-b bg-background/95 px-3 py-3 backdrop-blur-sm sm:-mx-4 sm:px-4 md:static md:mx-0 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
+    <section className="h-full w-full overflow-y-auto bg-background px-3 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-4 md:pb-8">
+      <div className="sticky top-0 z-10 -mx-3 mb-4 flex items-start justify-between gap-2 border-b bg-background px-3 py-3 sm:-mx-4 sm:px-4">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
             <Route className="size-4 shrink-0 text-muted-foreground" aria-hidden />
