@@ -18,6 +18,7 @@ import { useTheme } from '@/components/theme-provider';
 import { countryFlag } from '@/lib/country';
 import { displayRouteTitle } from '@/lib/display-title';
 import { dataCorrectionUrl, sourceUrl } from '@/lib/trust';
+import { buildCountrySlugMap } from '@/lib/slug';
 
 interface Props {
   data: BlocsData;
@@ -436,6 +437,9 @@ export function DetailPanel({
   const residenceRoutes = citizenshipRoutes?.residence_routes?.filter(
     route => route.country.iso_n3 === iso,
   ) ?? [];
+  const countrySlug = citizenshipRoutes
+    ? buildCountrySlugMap(citizenshipRoutes.jurisdictions).get(iso)
+    : undefined;
 
   const nameFromData = jurisdiction?.name ?? data.blocs
     .flatMap(b => [...b.members, ...(b.former_members ?? [])])
@@ -467,6 +471,14 @@ export function DetailPanel({
           <p className="mt-1 text-xs text-muted-foreground">
             {routes.length} country rule{routes.length === 1 ? '' : 's'}{residenceRoutes.length > 0 ? ` · ${residenceRoutes.length} residence route${residenceRoutes.length === 1 ? '' : 's'}` : ''} · {regionalCount} regional system{regionalCount === 1 ? '' : 's'} · {laneCount} treaty path{laneCount === 1 ? '' : 's'}
           </p>
+          {countrySlug && (
+            <a
+              href={`/country/${countrySlug}/`}
+              className="mt-1 inline-block text-xs font-medium text-muted-foreground underline underline-offset-2 hover:text-foreground"
+            >
+              Full country profile →
+            </a>
+          )}
         </div>
         <div className="-mr-1 -mt-1 flex shrink-0 items-center gap-0.5">
           {onCollapse && (
