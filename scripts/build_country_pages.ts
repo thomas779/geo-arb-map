@@ -47,25 +47,56 @@ function esc(value: string): string {
     .replace(/'/g, '&#39;');
 }
 
+const FONT_LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com">'
+  + '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+  + '<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">';
+
+const THEME_META = '<meta name="theme-color" content="#EFEDE7" media="(prefers-color-scheme: light)">'
+  + '<meta name="theme-color" content="#191A18" media="(prefers-color-scheme: dark)">';
+
+// Flag Paths design system (mirrors src/index.css tokens + the site typography).
 const PAGE_STYLE = `
-:root{--bg:#faf9f6;--fg:#1a1b19;--muted:#5f6360;--card:#fff;--border:#e4e1d9;--accent:#2f6f4f}
-@media(prefers-color-scheme:dark){:root{--bg:#141513;--fg:#eceae4;--muted:#a0a39d;--card:#1d1f1c;--border:#2c2e2a;--accent:#6fbf8f}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:820px;margin:0 auto;padding:2rem 1.25rem 4rem}
-a{color:var(--accent)}
-header nav{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem}
-h1{font-size:2rem;margin:.2rem 0 .3rem;display:flex;align-items:center;gap:.5rem}
-.lede{color:var(--muted);margin:0 0 1.5rem}
-h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin:2rem 0 .75rem;border-top:1px solid var(--border);padding-top:1.25rem}
-.card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;margin:.6rem 0}
-.card h3{margin:0 0 .3rem;font-size:1rem}
-.tag{display:inline-block;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-right:.5rem}
-.badge{display:inline-block;font-size:.7rem;border:1px solid var(--border);border-radius:99px;padding:.05rem .5rem;color:var(--muted)}
-.chips{margin:.4rem 0 0}.chips span{display:inline-block;font-size:.72rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.1rem .45rem;margin:.15rem .3rem .15rem 0}
-.src{font-size:.8rem;margin:.4rem 0 0}.src a{color:var(--muted)}
-.cta{display:inline-block;margin:1.5rem 0 0;background:var(--accent);color:#fff;padding:.6rem 1rem;border-radius:8px;text-decoration:none;font-weight:600}
-.muted{color:var(--muted)}footer{margin-top:3rem;font-size:.8rem;color:var(--muted)}
+:root{--bg:#EFEDE7;--fg:#222321;--card:#F9F7F1;--primary:#3552B8;--muted:#62645F;--border:#C9C9C1;--secondary:#DEDFDA;--verified:#3F755E;--radius:.5rem}
+@media(prefers-color-scheme:dark){:root{--bg:#191A18;--fg:#EEEAE1;--card:#23241F;--primary:#91A4FF;--muted:#A8AAA3;--border:#3B3D36;--secondary:#2E302A;--verified:#7DB18F}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.5rem;border-bottom:1px solid var(--border)}
+.nav .brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;color:var(--fg);letter-spacing:-.01em}
+.nav .brand:hover{text-decoration:none}
+.nav .to-atlas{font-size:.82rem;font-weight:500;color:var(--muted)}
+.wrap{max-width:720px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
+.crumbs{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:2rem}
+.crumbs a{color:var(--muted);text-decoration:underline}
+.flag{font-size:2.75rem;line-height:1}
+h1{font-family:'Fraunces',serif;font-weight:700;font-size:2.6rem;line-height:1.04;letter-spacing:-.02em;text-wrap:balance;margin:.4rem 0 .5rem}
+.lede{color:var(--muted);font-size:1.05rem;max-width:60ch;margin:0 0 1.6rem}
+.cta{display:inline-block;background:var(--primary);color:#fff;font-weight:600;font-size:.9rem;padding:.7rem 1.15rem;border-radius:var(--radius)}
+.cta:hover{text-decoration:none;filter:brightness(1.06)}
+section{margin-top:2.5rem}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin:0 0 1rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.15rem;margin:.7rem 0}
+.card-head{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-bottom:.4rem}
+.label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.pill{font-family:'IBM Plex Mono',monospace;font-size:.66rem;border:1px solid var(--border);border-radius:999px;padding:.1rem .55rem;color:var(--muted)}
+.pill.lead{background:color-mix(in srgb,var(--verified) 15%,transparent);border-color:transparent;color:var(--verified)}
+.card h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.18rem;line-height:1.2;margin:0 0 .35rem}
+.summary{color:var(--muted);font-size:.92rem;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:.65rem 0 0}
+.chips span{font-family:'IBM Plex Mono',monospace;font-size:.72rem;background:var(--secondary);border-radius:.35rem;padding:.14rem .5rem;color:var(--fg)}
+.sources{font-size:.8rem;color:var(--muted);margin:.75rem 0 0;border-top:1px dashed var(--border);padding-top:.6rem}
+.sources a{color:var(--muted);text-decoration:underline}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tags span{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:.35rem .8rem;font-size:.85rem}
+.empty{color:var(--muted);font-size:.92rem;border:1px dashed var(--border);border-radius:var(--radius);padding:.9rem 1.1rem;margin:.7rem 0}
+footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--muted)}
+footer a{color:var(--muted);text-decoration:underline}
+@media(max-width:560px){h1{font-size:2.1rem}.wrap{padding:2rem 1.15rem 4rem}}
 `.trim();
+
+const CITIZENSHIP_MODE_LABELS: Record<string, string> = {
+  ancestry: 'Ancestry', naturalization: 'Naturalization', birth: 'Birth', investment: 'Investment',
+};
 
 function jsonLd(obj: unknown): string {
   return `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
@@ -91,7 +122,7 @@ function countryPage(iso: string, ctx: Ctx): string {
 
   const presentModes = Object.entries(jur.coverage)
     .filter(([, state]) => state === 'reviewed' || state === 'partial')
-    .map(([mode]) => mode);
+    .map(([mode]) => CITIZENSHIP_MODE_LABELS[mode] ?? mode);
   const residenceCats = [...new Set(residence.map(r => r.category))]
     .map(c => RESIDENCE_CATEGORY_LABELS[c]);
 
@@ -100,30 +131,35 @@ function countryPage(iso: string, ctx: Ctx): string {
     + (residence.length ? ` and ${residence.length} residence programme${residence.length === 1 ? '' : 's'} (${residenceCats.join(', ')})` : '')
     + `, with official sources. Part of the Flag Paths atlas.`;
 
+  const sourcesRow = (sources: Array<{ title: string; url: string }>) => sources.length
+    ? `<p class="sources">Sources: ${sources.map(s => `<a href="${esc(s.url)}" rel="nofollow noreferrer">${esc(s.title)}</a>`).join(' · ')}</p>`
+    : '';
+
   const routeCard = (r: typeof routes[number]) => `
-    <div class="card">
-      <span class="tag">${esc(r.mode)}</span><span class="badge">${esc(r.status.replace(/_/g, ' '))}</span>
-      <h3>${esc(r.title)}</h3>
-      <p class="muted">${esc(r.summary)}</p>
-      ${r.sources.length ? `<p class="src">Sources: ${r.sources.map(s => `<a href="${esc(s.url)}" rel="nofollow noreferrer">${esc(s.title)}</a>`).join(' · ')}</p>` : ''}
-    </div>`;
+      <article class="card">
+        <div class="card-head"><span class="label">${esc(CITIZENSHIP_MODE_LABELS[r.mode] ?? r.mode)}</span><span class="pill">${esc(r.status.replace(/_/g, ' '))}</span></div>
+        <h3>${esc(r.title)}</h3>
+        <p class="summary">${esc(r.summary)}</p>
+        ${sourcesRow(r.sources)}
+      </article>`;
 
   const resCard = (r: typeof residence[number]) => {
     const chips: string[] = [];
     if (r.min_investment) chips.push(`from ${r.min_investment.currency} ${r.min_investment.amount.toLocaleString('en-US')}`);
     if (r.min_income_monthly) chips.push(`${r.min_income_monthly.currency} ${r.min_income_monthly.amount.toLocaleString('en-US')}/mo`);
     if (r.physical_presence_days_per_year !== null) chips.push(r.physical_presence_days_per_year === 0 ? 'no stay required' : `${r.physical_presence_days_per_year} days/yr`);
-    const leadsTo = r.counts_toward_naturalization ? 'leads to citizenship'
-      : r.counts_toward_permanent_residence ? 'leads to permanent residence'
-      : 'renewable — no PR/citizenship';
+    const leadsTo = r.counts_toward_naturalization ? '→ citizenship'
+      : r.counts_toward_permanent_residence ? '→ permanent residence'
+      : 'renewable — no PR';
+    const leadClass = (r.counts_toward_naturalization || r.counts_toward_permanent_residence) ? 'pill lead' : 'pill';
     return `
-    <div class="card">
-      <span class="tag">${esc(RESIDENCE_CATEGORY_LABELS[r.category])}</span><span class="badge">${esc(leadsTo)}</span>
-      <h3>${esc(r.title)}</h3>
-      <p class="muted">${esc(r.summary)}</p>
-      ${chips.length ? `<p class="chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</p>` : ''}
-      ${r.sources.length ? `<p class="src">Sources: ${r.sources.map(s => `<a href="${esc(s.url)}" rel="nofollow noreferrer">${esc(s.title)}</a>`).join(' · ')}</p>` : ''}
-    </div>`;
+      <article class="card">
+        <div class="card-head"><span class="label">${esc(RESIDENCE_CATEGORY_LABELS[r.category])}</span><span class="${leadClass}">${esc(leadsTo)}</span></div>
+        <h3>${esc(r.title)}</h3>
+        <p class="summary">${esc(r.summary)}</p>
+        ${chips.length ? `<div class="chips">${chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>` : ''}
+        ${sourcesRow(r.sources)}
+      </article>`;
   };
 
   const faq = {
@@ -164,31 +200,38 @@ function countryPage(iso: string, ctx: Ctx): string {
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="${url}">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+${THEME_META}
 <meta property="og:type" content="article"><meta property="og:site_name" content="Flag Paths">
 <meta property="og:url" content="${url}"><meta property="og:title" content="${esc(name)} — Citizenship &amp; Residence Routes">
 <meta property="og:description" content="${esc(desc)}"><meta property="og:image" content="${SITE}/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
+${FONT_LINKS}
 ${jsonLd(place)}${jsonLd(breadcrumb)}${jsonLd(faq)}
 <style>${PAGE_STYLE}</style>
-</head><body><div class="wrap">
-<header><nav><a href="/">Flag Paths</a> › <a href="/country/">Countries</a> › ${esc(name)}</nav></header>
-<h1>${flag ? `<span aria-hidden="true">${flag}</span>` : ''}${esc(name)}</h1>
+</head><body>
+<nav class="nav"><a class="brand" href="/">Flag Paths</a><a class="to-atlas" href="/?country=${esc(iso)}">Interactive atlas →</a></nav>
+<main class="wrap">
+<div class="crumbs"><a href="/">Flag Paths</a> › <a href="/country/">Countries</a> › ${esc(name)}</div>
+${flag ? `<div class="flag" aria-hidden="true">${flag}</div>` : ''}
+<h1>${esc(name)}</h1>
 <p class="lede">${esc(desc)}</p>
 <a class="cta" href="/?country=${esc(iso)}">Explore ${esc(name)} on the interactive map →</a>
 
-<h2>Citizenship routes</h2>
-${routes.length ? routes.map(routeCard).join('') : '<p class="muted">Not yet reviewed at route level — a coverage gap, not a claim that no path exists.</p>'}
+<section>
+<h2 class="eyebrow">Citizenship routes</h2>
+${routes.length ? routes.map(routeCard).join('') : '<p class="empty">Not yet reviewed at route level — a coverage gap, not a claim that no path exists.</p>'}
+</section>
 
-${residence.length ? `<h2>Residence &amp; settlement</h2>${residence.map(resCard).join('')}` : ''}
+${residence.length ? `<section><h2 class="eyebrow">Residence &amp; settlement</h2>${residence.map(resCard).join('')}</section>` : ''}
 
-${blocs.length ? `<h2>Regional rights</h2><p class="muted">Member of: ${blocs.map(b => esc(b.name)).join(', ')}.</p>` : ''}
-${lanesIn.length ? `<h2>Treaty &amp; country paths</h2><p class="muted">${lanesIn.map(l => esc(l.name)).join(', ')}.</p>` : ''}
+${blocs.length ? `<section><h2 class="eyebrow">Regional rights</h2><div class="tags">${blocs.map(b => `<span>${esc(b.name)}</span>`).join('')}</div></section>` : ''}
+${lanesIn.length ? `<section><h2 class="eyebrow">Treaty &amp; country paths</h2><div class="tags">${lanesIn.map(l => `<span>${esc(l.name)}</span>`).join('')}</div></section>` : ''}
 
 <footer>
 <p>Data is compiled from official and primary legal sources and reviewed for the Flag Paths atlas. Programmes — especially residence-by-investment — change frequently; verify against the linked official sources before acting.</p>
 <p><a href="/country/">All countries</a> · <a href="/">Interactive atlas</a></p>
 </footer>
-</div></body></html>`;
+</main></body></html>`;
 }
 
 function indexPage(ctx: Ctx, isos: string[]): string {
@@ -210,14 +253,19 @@ function indexPage(ctx: Ctx, isos: string[]): string {
 <meta name="description" content="Browse citizenship and residence routes for ${items.length} countries and territories: naturalization, ancestry, birth, investment, golden visas, digital-nomad and retirement residence.">
 <meta name="robots" content="index, follow"><link rel="canonical" href="${SITE}/country/">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+${THEME_META}
+${FONT_LINKS}
 ${jsonLd(breadcrumb)}
-<style>${PAGE_STYLE} ul{columns:2;gap:2rem;list-style:none;padding:0}@media(max-width:560px){ul{columns:1}}li{margin:.25rem 0}</style>
-</head><body><div class="wrap">
-<header><nav><a href="/">Flag Paths</a> › Countries</nav></header>
+<style>${PAGE_STYLE} .country-list{columns:2;column-gap:2rem;list-style:none;padding:0;margin:1.5rem 0 0}@media(max-width:560px){.country-list{columns:1}}.country-list li{margin:.3rem 0;break-inside:avoid}</style>
+</head><body>
+<nav class="nav"><a class="brand" href="/">Flag Paths</a><a class="to-atlas" href="/">Interactive atlas →</a></nav>
+<main class="wrap">
+<div class="crumbs"><a href="/">Flag Paths</a> › Countries</div>
 <h1>All countries &amp; territories</h1>
-<p class="lede">Citizenship and residence routes for ${items.length} jurisdictions. <a href="/">Open the interactive atlas →</a></p>
-<ul>${links}</ul>
-</div></body></html>`;
+<p class="lede">Citizenship and residence routes for ${items.length} jurisdictions — naturalization, ancestry, birth, investment, and residence programmes, each with official sources.</p>
+<a class="cta" href="/">Open the interactive atlas →</a>
+<ul class="country-list">${links}</ul>
+</main></body></html>`;
 }
 
 // --- generate ---
