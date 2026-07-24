@@ -1070,6 +1070,72 @@
               ]
             }
           ]
+        },
+        {
+          "id": "algeria-citizenship-by-marriage",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization as the spouse of a citizen",
+          "summary": "A spouse of an Algerian may naturalize after two years of residence (vs seven).",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-23"
+          },
+          "variants": [
+            {
+              "id": "algeria-citizenship-by-marriage-principal",
+              "label": "Naturalization as the spouse of a citizen",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "spouse.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "012"
+                },
+                {
+                  "field": "residence.years",
+                  "operator": "gte",
+                  "value": 2,
+                  "unit": "years"
+                },
+                {
+                  "field": "marriage.duration_months",
+                  "operator": "gte",
+                  "value": 36,
+                  "unit": "months"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 24
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 24,
+                "processing_typical_months": null,
+                "confidence": "high",
+                "note": "Ordinance 70-86 art. 9 bis; gender-neutral since the 2005 reform."
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:data_globalcit_eu:d50a69a54f",
+                  "supports_fields": [
+                    "/routes/algeria-citizenship-by-marriage/summary",
+                    "/routes/algeria-citizenship-by-marriage/variants/algeria-citizenship-by-marriage-principal/eligibility",
+                    "/routes/algeria-citizenship-by-marriage/variants/algeria-citizenship-by-marriage-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -1598,6 +1664,66 @@
                     "/routes/angola-citizenship-at-birth-by-parent/summary",
                     "/routes/angola-citizenship-at-birth-by-parent/variants/angola-citizenship-at-birth-by-parent-principal/eligibility",
                     "/routes/angola-citizenship-at-birth-by-parent/variants/angola-citizenship-at-birth-by-parent-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "angola-citizenship-by-marriage",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization as the spouse of a citizen",
+          "summary": "A spouse may acquire nationality where the union predates the request by at least five years.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "medium",
+            "last_checked": "2026-07-23"
+          },
+          "variants": [
+            {
+              "id": "angola-citizenship-by-marriage-principal",
+              "label": "Naturalization as the spouse of a citizen",
+              "outcome": "citizenship",
+              "allocation": "discretionary",
+              "eligibility": [
+                {
+                  "field": "spouse.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "024"
+                },
+                {
+                  "field": "marriage.duration_months",
+                  "operator": "gte",
+                  "value": 60,
+                  "unit": "months"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": null
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": null,
+                "processing_typical_months": null,
+                "confidence": "medium",
+                "note": "Lei 2/2016; spousal consent plus character and integration criteria."
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:constituteproject_org:ea9670bc71",
+                  "supports_fields": [
+                    "/routes/angola-citizenship-by-marriage/summary",
+                    "/routes/angola-citizenship-by-marriage/variants/angola-citizenship-by-marriage-principal/eligibility",
+                    "/routes/angola-citizenship-by-marriage/variants/angola-citizenship-by-marriage-principal/timeline"
                   ]
                 }
               ]
