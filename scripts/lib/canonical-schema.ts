@@ -138,6 +138,61 @@ export const ModeCoverageSchema = z.strictObject({
   source_refs: z.array(SourceReferenceSchema),
 });
 
+// --- Residence layer (parallel family; keeps the 4-mode citizenship taxonomy untouched) ---
+
+const MoneySchema = z.strictObject({
+  amount: z.number().positive(),
+  currency: z.string().regex(/^[A-Z]{3}$/, 'Expected an ISO 4217 currency code'),
+});
+
+export const ResidenceCategorySchema = z.enum([
+  'investment', // golden visa / residence-by-investment
+  'digital_nomad',
+  'retirement_pension',
+  'talent_skilled',
+  'general_permanent_residence',
+]);
+
+export const ResidenceRouteSchema = z.strictObject({
+  id: EntityId,
+  category: ResidenceCategorySchema,
+  status: z.enum(['active', 'inactive', 'verified_negative', 'pending_verification']),
+  title: z.string().min(1),
+  summary: z.string().min(1),
+  effective: z.strictObject({
+    from: NullableDate,
+    to: NullableDate,
+    supersedes: z.array(EntityId),
+  }),
+  review: ReviewSchema,
+  // Residence-specific dimensions (see docs/fact-check-handoff.md): a renewable
+  // long-stay permit is not necessarily a settlement route, so record explicitly
+  // whether time under this permit counts toward PR and toward naturalization.
+  counts_toward_permanent_residence: z.boolean(),
+  counts_toward_naturalization: z.boolean(),
+  min_investment: MoneySchema.nullable(),
+  min_income_monthly: MoneySchema.nullable(),
+  physical_presence_days_per_year: z.number().int().nonnegative().nullable(),
+  variants: z.array(RouteVariantSchema).min(1),
+}).superRefine((route, context) => {
+  route.variants.forEach((variant, index) => {
+    if (variant.outcome !== 'residence' && variant.outcome !== 'permanent_residence') {
+      context.addIssue({
+        code: 'custom',
+        path: ['variants', index, 'outcome'],
+        message: 'Residence route variants must resolve to residence or permanent_residence',
+      });
+    }
+  });
+});
+
+export const ResidenceCoverageSchema = z.strictObject({
+  category: ResidenceCategorySchema,
+  finding: z.enum(['unknown', 'present', 'verified_none']),
+  review: ReviewSchema,
+  source_refs: z.array(SourceReferenceSchema),
+});
+
 const REQUIRED_MODES = AcquisitionModeSchema.options;
 
 export const JurisdictionRecordSchema = z.strictObject({
@@ -148,6 +203,9 @@ export const JurisdictionRecordSchema = z.strictObject({
   review: ReviewSchema,
   coverage: z.array(ModeCoverageSchema).length(REQUIRED_MODES.length),
   routes: z.array(RouteSchema),
+  // Residence layer — optional and separate from the 4-mode citizenship coverage.
+  residence_routes: z.array(ResidenceRouteSchema).optional(),
+  residence_coverage: z.array(ResidenceCoverageSchema).optional(),
 }).superRefine((record, context) => {
   const modes = record.coverage.map(item => item.mode);
   for (const mode of REQUIRED_MODES) {
@@ -184,6 +242,55 @@ export const JurisdictionRecordSchema = z.strictObject({
       });
     }
   }
+
+  // Residence layer consistency (mirrors the citizenship coverage discipline).
+  const residenceRoutes = record.residence_routes ?? [];
+  const residenceCoverage = record.residence_coverage ?? [];
+  const seenCategories = new Set<string>();
+  residenceCoverage.forEach((item, index) => {
+    if (seenCategories.has(item.category)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['residence_coverage', index, 'category'],
+        message: `Duplicate residence coverage for ${item.category}`,
+      });
+    }
+    seenCategories.add(item.category);
+    const routeCount = residenceRoutes.filter(route => route.category === item.category).length;
+    if (item.finding === 'present' && routeCount === 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['residence_coverage', index, 'finding'],
+        message: `Coverage finding present requires a ${item.category} residence route`,
+      });
+    }
+    if (item.finding === 'verified_none' && routeCount > 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['residence_coverage', index, 'finding'],
+        message: `Coverage finding verified_none cannot have a ${item.category} residence route`,
+      });
+    }
+    if (item.finding === 'verified_none'
+      && (item.review.state !== 'reviewed' || item.source_refs.length === 0)) {
+      context.addIssue({
+        code: 'custom',
+        path: ['residence_coverage', index],
+        message: 'A reviewed residence negative requires reviewed state and evidence',
+      });
+    }
+  });
+  // Every residence route needs a matching present coverage entry (no orphan routes).
+  residenceRoutes.forEach((route, index) => {
+    const cover = residenceCoverage.find(item => item.category === route.category);
+    if (!cover || cover.finding !== 'present') {
+      context.addIssue({
+        code: 'custom',
+        path: ['residence_routes', index],
+        message: `Residence route ${route.id} requires a present ${route.category} residence_coverage entry`,
+      });
+    }
+  });
 });
 
 export const JurisdictionPayloadSchema = z.union([
@@ -250,6 +357,9 @@ export const ChangeProposalSchema = z.strictObject({
 export type SourceRecord = z.infer<typeof SourceRecordSchema>;
 export type AcquisitionMode = z.infer<typeof AcquisitionModeSchema>;
 export type ModeCoverage = z.infer<typeof ModeCoverageSchema>;
+export type ResidenceCategory = z.infer<typeof ResidenceCategorySchema>;
+export type ResidenceRoute = z.infer<typeof ResidenceRouteSchema>;
+export type ResidenceCoverage = z.infer<typeof ResidenceCoverageSchema>;
 export type JurisdictionRecordV1 = z.infer<typeof JurisdictionRecordV1Schema>;
 export type JurisdictionRecord = z.infer<typeof JurisdictionRecordSchema>;
 export type JurisdictionPayload = z.infer<typeof JurisdictionPayloadSchema>;
