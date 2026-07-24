@@ -42,5 +42,5 @@ export function productFeedbackUrl(): string {
   return url.toString();
 }
 
-export const METHODOLOGY_URL = `${REPOSITORY_URL}#where-the-data-comes-from`;
+export const METHODOLOGY_URL = `${REPOSITORY_URL}#data-pipeline`;
 
