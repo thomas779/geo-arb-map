@@ -13,6 +13,7 @@ import type {
   CitizenshipRoute,
   CitizenshipRoutesData,
   Member,
+  ResidenceRoute,
 } from '../../src/types';
 import {
   CANONICAL_SCHEMAS,
@@ -773,6 +774,71 @@ function canonicalRouteFacts(
   };
 }
 
+type CanonicalResidenceRoute = NonNullable<JurisdictionRecord['residence_routes']>[number];
+
+function residenceRouteSources(
+  route: CanonicalResidenceRoute,
+  sourceIndex: Map<string, SourceRecord>,
+): Array<{ title: string; url: string }> {
+  const seen = new Set<string>();
+  const out: Array<{ title: string; url: string }> = [];
+  for (const variant of route.variants) {
+    for (const reference of variant.source_refs) {
+      if (seen.has(reference.source_id)) continue;
+      seen.add(reference.source_id);
+      const source = sourceIndex.get(reference.source_id);
+      if (!source) {
+        throw new Error(`Residence route ${route.id} references missing source ${reference.source_id}`);
+      }
+      out.push({ title: source.title, url: source.url });
+    }
+  }
+  return out;
+}
+
+function projectResidenceRoute(
+  route: CanonicalResidenceRoute,
+  iso: string,
+  name: string,
+  sourceIndex: Map<string, SourceRecord>,
+): ResidenceRoute {
+  const eligibilityMonths = [...new Set(route.variants
+    .map(variant => variant.timeline.eligibility_minimum_months)
+    .filter((months): months is number => months !== null))].sort((a, b) => a - b);
+  return {
+    id: route.id,
+    country: { iso_n3: iso, name },
+    category: route.category,
+    status: route.status,
+    title: route.title,
+    summary: route.summary,
+    outcome: route.variants.some(variant => variant.outcome === 'permanent_residence')
+      ? 'permanent_residence'
+      : 'residence',
+    counts_toward_permanent_residence: route.counts_toward_permanent_residence,
+    counts_toward_naturalization: route.counts_toward_naturalization,
+    min_investment: route.min_investment,
+    min_income_monthly: route.min_income_monthly,
+    physical_presence_days_per_year: route.physical_presence_days_per_year,
+    facts: {
+      canonical: true,
+      variant_count: route.variants.length,
+      eligibility_months: eligibilityMonths,
+      discretionary_decision: route.variants.some(variant => variant.allocation === 'discretionary'),
+    },
+    pathways: route.variants.map(variant => ({
+      id: variant.id,
+      label: variant.label,
+      allocation: variant.allocation,
+      eligibility_months: variant.timeline.eligibility_minimum_months,
+      ...(variant.timeline.note ? { note: variant.timeline.note } : {}),
+    })),
+    confidence: route.review.confidence,
+    last_checked: route.review.last_checked ?? '2026-07-21',
+    sources: residenceRouteSources(route, sourceIndex),
+  };
+}
+
 function buildLegacyCountryDetails(
   registry: Registry,
   mobility: BlocsData,
@@ -849,6 +915,7 @@ function buildLegacyCountryDetails(
     },
     jurisdictions: jurisdictions.sort((a, b) => a.iso_n3.localeCompare(b.iso_n3)),
     routes,
+    residence_routes: [],
   };
 }
 
@@ -907,7 +974,26 @@ function projectFrontendCitizenship(
         sources: canonicalRouteSources(route, sourceIndex, []),
       });
     }
+
+    const residenceRoutes = jurisdiction.residence_routes ?? [];
+    const residenceCoverage = jurisdiction.residence_coverage ?? [];
+    if (residenceRoutes.length > 0 || residenceCoverage.length > 0) {
+      row.residence_route_ids = residenceRoutes.map(route => route.id);
+      row.residence_coverage = Object.fromEntries(residenceCoverage.map(item => [
+        item.category,
+        coverageState(item.review.state),
+      ]));
+      for (const route of residenceRoutes) {
+        frontend.residence_routes!.push(
+          projectResidenceRoute(route, iso, jurisdiction.jurisdiction.name, sourceIndex),
+        );
+      }
+    }
   }
+
+  frontend.residence_routes!.sort((a, b) =>
+    a.country.iso_n3.localeCompare(b.country.iso_n3) || a.id.localeCompare(b.id));
+  frontend.meta.counts.residence_routes = frontend.residence_routes!.length;
 
   frontend.routes.sort((a, b) =>
     a.country.iso_n3.localeCompare(b.country.iso_n3) || a.id.localeCompare(b.id));
