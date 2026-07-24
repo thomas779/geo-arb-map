@@ -220,35 +220,43 @@ ${jsonLd(breadcrumb)}
 </div></body></html>`;
 }
 
-// --- run ---
-const citizenship = readJson<CitizenshipRoutesData>('public/citizenship_routes.json');
-const mobility = readJson<BlocsData>('public/blocs_data.json');
-const slugByIso = buildCountrySlugMap(citizenship.jurisdictions);
-const ctx: Ctx = { citizenship, mobility, slugByIso };
+// --- generate ---
+// Callable from the Vite build (see vite.config.ts) so `vite build` alone emits
+// the pages, and runnable directly as `bun scripts/build_country_pages.ts`.
+export function generateCountryPages(distDir: string = dist): void {
+  const citizenship = readJson<CitizenshipRoutesData>('public/citizenship_routes.json');
+  const mobility = readJson<BlocsData>('public/blocs_data.json');
+  const slugByIso = buildCountrySlugMap(citizenship.jurisdictions);
+  const ctx: Ctx = { citizenship, mobility, slugByIso };
 
-if (!fs.existsSync(dist)) {
-  throw new Error(`dist/ not found — run "vite build" before build_country_pages.`);
-}
+  if (!fs.existsSync(distDir)) {
+    throw new Error(`dist/ not found at ${distDir} — run "vite build" before generating country pages.`);
+  }
 
-const isos = citizenship.jurisdictions
-  .map(j => j.iso_n3)
-  .filter(iso => !NON_APPLICABLE.has(iso));
+  const isos = citizenship.jurisdictions
+    .map(j => j.iso_n3)
+    .filter(iso => !NON_APPLICABLE.has(iso));
 
-for (const iso of isos) {
-  const slug = slugByIso.get(iso)!;
-  const dir = path.join(dist, 'country', slug);
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(path.join(dir, 'index.html'), countryPage(iso, ctx));
-}
-fs.writeFileSync(path.join(dist, 'country', 'index.html'), indexPage(ctx, isos));
+  for (const iso of isos) {
+    const slug = slugByIso.get(iso)!;
+    const dir = path.join(distDir, 'country', slug);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'index.html'), countryPage(iso, ctx));
+  }
+  fs.writeFileSync(path.join(distDir, 'country', 'index.html'), indexPage(ctx, isos));
 
-// Sitemap: root + hub + every country page.
-const urls = [`${SITE}/`, `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`)];
-const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+  // Sitemap: root + hub + every country page.
+  const urls = [`${SITE}/`, `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`)];
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}
 </urlset>
 `;
-fs.writeFileSync(path.join(dist, 'sitemap.xml'), sitemap);
+  fs.writeFileSync(path.join(distDir, 'sitemap.xml'), sitemap);
 
-console.log(`build_country_pages: ${isos.length} country pages + hub + sitemap (${urls.length} urls) -> dist/`);
+  console.log(`build_country_pages: ${isos.length} country pages + hub + sitemap (${urls.length} urls) -> ${distDir}`);
+}
+
+if (import.meta.main) {
+  generateCountryPages();
+}
