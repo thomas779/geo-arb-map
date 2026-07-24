@@ -28,6 +28,7 @@ import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
 import { clearStoredProfile, LEGACY_FLAGS_KEY, PROFILE_KEY } from '@/lib/profile-storage';
 import { cn } from '@/lib/utils';
+import { SiteHeader } from '@/components/SiteHeader';
 import type { TrustSection } from './url';
 
 function initialProfile(): Profile {
@@ -59,26 +60,6 @@ const initialState: AppState = {
   countryName: null,
   ...url.read(),
 };
-
-function BrandMark() {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 32 32"
-      className="size-8 shrink-0"
-      fill="none"
-    >
-      <path
-        d="M5.5 24.5c0-7.2 4.1-9.8 9.1-9.8 5.8 0 6.1-7.2 11.9-7.2"
-        className="stroke-primary"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      <circle cx="5.5" cy="24.5" r="3" className="fill-card stroke-foreground" strokeWidth="1.5" />
-      <circle cx="26.5" cy="7.5" r="3" className="fill-primary stroke-card" strokeWidth="1.5" />
-    </svg>
-  );
-}
 
 export default function App() {
   const [state, setState] = useState<AppState>(initialState);
@@ -235,45 +216,11 @@ export default function App() {
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
-      <header className="flex h-14 shrink-0 items-center gap-1.5 border-b bg-card/90 px-2.5 backdrop-blur-sm sm:h-16 sm:gap-4 sm:px-5">
-        <div className="flex min-w-0 items-center gap-2.5">
-          <BrandMark />
-          <div className="hidden min-w-0 sm:block">
-            <h1 className="whitespace-nowrap font-heading text-xl font-bold tracking-[-0.035em] sm:text-[1.45rem]">
-              Flag Paths
-              <span className="sr-only"> — citizenship and residency paths atlas</span>
-            </h1>
-            <span className="hidden font-mono text-[8px] font-semibold uppercase tracking-[0.2em] text-muted-foreground sm:block">
-              Mobility atlas
-            </span>
-          </div>
-        </div>
-        <nav aria-label="Primary" className="flex shrink-0 items-center gap-4 sm:gap-6">
-          {([['map', 'Atlas'], ['stacking', 'Planner']] as const).map(([v, label]) => (
-            <button
-              key={v}
-              aria-current={state.view === v ? 'page' : undefined}
-              aria-label={v === 'stacking' ? 'Planner — coming soon' : label}
-              className={cn(
-                'relative flex h-9 items-center justify-center text-xs font-semibold outline-none transition-colors focus-visible:text-primary',
-                state.view === v ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
-              )}
-              onClick={() => selectView(v)}
-            >
-              {label}
-              {state.view === v && (
-                <span aria-hidden className="absolute inset-x-0 bottom-0 h-0.5 bg-primary" />
-              )}
-            </button>
-          ))}
-          <a
-            href="/country/"
-            className="flex h-9 items-center justify-center text-xs font-semibold text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-primary"
-          >
-            Countries
-          </a>
-        </nav>
-        <div className="ml-auto flex shrink-0 items-center gap-0.5">
+      <SiteHeader
+        active={state.view === 'stacking' ? 'planner' : 'atlas'}
+        onSelectView={selectView}
+        right={(
+          <>
           {data && (
             <>
               <Popover>
@@ -374,8 +321,9 @@ export default function App() {
           >
             {theme === 'dark' ? <Sun /> : <Moon />}
           </Button>
-        </div>
-      </header>
+          </>
+        )}
+      />
       <main className="relative flex min-h-0 flex-1 overflow-hidden">
         {data && state.view === 'map' && (
           <div
