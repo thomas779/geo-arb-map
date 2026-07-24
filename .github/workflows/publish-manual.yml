@@ -1,11 +1,18 @@
 name: Publish reviewed news (manual)
 
-# Manually publish human-reviewed news items (monitor/publish/manual-posts.json)
-# to the Telegram channel, using the same clean format as the automated news
-# path. For leads the auto-audit held but a reviewer has verified.
+# Manually publish human-reviewed news items to the Telegram channel, using the
+# same clean format as the automated news path. Pass the posts as a JSON array
+# via the `posts` input — nothing post-specific is committed to the repo.
+#
+#   gh workflow run publish-manual.yml -f posts="$(cat posts.json)"
 
 on:
   workflow_dispatch:
+    inputs:
+      posts:
+        description: "JSON array of findings to publish (iso_n3, headline, brief, primary_urls, …)"
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -21,6 +28,7 @@ jobs:
     env:
       TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
       TELEGRAM_CHANNEL_ID: ${{ vars.TELEGRAM_CHANNEL_ID }}
+      MANUAL_POSTS: ${{ inputs.posts }}
     steps:
       - uses: actions/checkout@v4
 
