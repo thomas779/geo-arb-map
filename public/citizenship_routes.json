@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 780,
+      "routes": 823,
       "by_mode": {
         "ancestry": 237,
-        "naturalization": 287,
+        "naturalization": 330,
         "birth": 231,
         "investment": 25
       },
       "by_status": {
-        "active": 765,
+        "active": 808,
         "pending_verification": 6,
         "inactive": 8,
         "verified_negative": 1
@@ -90,7 +90,8 @@
       "route_ids": [
         "algeria-citizenship-by-parent",
         "algeria-naturalization",
-        "algeria-citizenship-at-birth-by-parent"
+        "algeria-citizenship-at-birth-by-parent",
+        "algeria-citizenship-by-marriage"
       ]
     },
     {
@@ -136,7 +137,8 @@
       "route_ids": [
         "angola-citizenship-by-parent",
         "angola-naturalization",
-        "angola-citizenship-at-birth-by-parent"
+        "angola-citizenship-at-birth-by-parent",
+        "angola-citizenship-by-marriage"
       ]
     },
     {
@@ -543,7 +545,8 @@
       "route_ids": [
         "burundi-citizenship-by-parent",
         "burundi-naturalization",
-        "burundi-citizenship-at-birth-by-parent"
+        "burundi-citizenship-at-birth-by-parent",
+        "burundi-citizenship-by-marriage"
       ]
     },
     {
@@ -592,7 +595,8 @@
       "route_ids": [
         "cameroon-citizenship-by-parent",
         "cameroon-naturalization",
-        "cameroon-citizenship-at-birth-by-parent"
+        "cameroon-citizenship-at-birth-by-parent",
+        "cameroon-citizenship-by-marriage"
       ]
     },
     {
@@ -656,7 +660,8 @@
       "route_ids": [
         "central-african-republic-citizenship-by-parent",
         "central-african-republic-naturalization",
-        "central-african-republic-citizenship-at-birth-by-parent"
+        "central-african-republic-citizenship-at-birth-by-parent",
+        "central-african-republic-citizenship-by-marriage"
       ]
     },
     {
@@ -788,7 +793,8 @@
       "route_ids": [
         "congo-citizenship-by-parent",
         "congo-naturalization",
-        "congo-citizenship-at-birth-by-parent"
+        "congo-citizenship-at-birth-by-parent",
+        "congo-citizenship-by-marriage"
       ]
     },
     {
@@ -804,7 +810,8 @@
       "route_ids": [
         "drc-citizenship-by-parent",
         "drc-naturalization",
-        "drc-citizenship-at-birth-by-parent"
+        "drc-citizenship-at-birth-by-parent",
+        "drc-citizenship-by-marriage"
       ]
     },
     {
@@ -919,7 +926,8 @@
       "route_ids": [
         "benin-citizenship-by-parent",
         "benin-naturalization",
-        "benin-citizenship-at-birth-by-parent"
+        "benin-citizenship-at-birth-by-parent",
+        "benin-citizenship-by-marriage"
       ]
     },
     {
@@ -1019,7 +1027,8 @@
       "route_ids": [
         "equatorial-guinea-citizenship-by-parent",
         "equatorial-guinea-naturalization",
-        "equatorial-guinea-citizenship-at-birth-by-parent"
+        "equatorial-guinea-citizenship-at-birth-by-parent",
+        "equatorial-guinea-citizenship-by-marriage"
       ]
     },
     {
@@ -1035,7 +1044,8 @@
       "route_ids": [
         "ethiopia-citizenship-by-parent",
         "ethiopia-naturalization",
-        "ethiopia-citizenship-at-birth-by-parent"
+        "ethiopia-citizenship-at-birth-by-parent",
+        "ethiopia-citizenship-by-marriage"
       ]
     },
     {
@@ -1051,7 +1061,8 @@
       "route_ids": [
         "eritrea-citizenship-by-parent",
         "eritrea-naturalization",
-        "eritrea-citizenship-at-birth-by-parent"
+        "eritrea-citizenship-at-birth-by-parent",
+        "eritrea-citizenship-by-marriage"
       ]
     },
     {
@@ -1223,7 +1234,8 @@
       "route_ids": [
         "djibouti-citizenship-by-parent",
         "djibouti-naturalization",
-        "djibouti-citizenship-at-birth-by-parent"
+        "djibouti-citizenship-at-birth-by-parent",
+        "djibouti-citizenship-by-marriage"
       ]
     },
     {
@@ -1239,7 +1251,8 @@
       "route_ids": [
         "gabon-citizenship-by-parent",
         "gabon-naturalization",
-        "gabon-citizenship-at-birth-by-parent"
+        "gabon-citizenship-at-birth-by-parent",
+        "gabon-citizenship-by-marriage"
       ]
     },
     {
@@ -1271,7 +1284,8 @@
       "route_ids": [
         "gambia-citizenship-by-parent",
         "gambia-naturalization",
-        "gambia-citizenship-at-birth-by-parent"
+        "gambia-citizenship-at-birth-by-parent",
+        "gambia-citizenship-by-marriage"
       ]
     },
     {
@@ -1319,7 +1333,8 @@
       "route_ids": [
         "ghana-citizenship-by-parent",
         "ghana-naturalization",
-        "ghana-citizenship-at-birth-by-parent"
+        "ghana-citizenship-at-birth-by-parent",
+        "ghana-citizenship-by-marriage"
       ]
     },
     {
@@ -1448,7 +1463,8 @@
       "route_ids": [
         "guinea-citizenship-by-parent",
         "guinea-naturalization",
-        "guinea-citizenship-at-birth-by-parent"
+        "guinea-citizenship-at-birth-by-parent",
+        "guinea-citizenship-by-marriage"
       ]
     },
     {
@@ -1707,7 +1723,8 @@
       "route_ids": [
         "cote-divoire-citizenship-by-parent",
         "cote-divoire-naturalization",
-        "cote-divoire-citizenship-at-birth-by-parent"
+        "cote-divoire-citizenship-at-birth-by-parent",
+        "cote-divoire-citizenship-by-marriage"
       ]
     },
     {
@@ -1789,7 +1806,8 @@
       "route_ids": [
         "kenya-citizenship-by-parent",
         "kenya-registration-by-residence",
-        "kenya-citizenship-at-birth-by-parent"
+        "kenya-citizenship-at-birth-by-parent",
+        "kenya-citizenship-by-marriage"
       ]
     },
     {
@@ -1902,7 +1920,8 @@
       "route_ids": [
         "lesotho-citizenship-by-parent",
         "lesotho-naturalization",
-        "lesotho-citizenship-at-birth-by-parent"
+        "lesotho-citizenship-at-birth-by-parent",
+        "lesotho-citizenship-by-marriage"
       ]
     },
     {
@@ -1950,7 +1969,8 @@
       "route_ids": [
         "libya-citizenship-by-parent",
         "libya-naturalization",
-        "libya-citizenship-at-birth-by-parent"
+        "libya-citizenship-at-birth-by-parent",
+        "libya-citizenship-by-marriage"
       ]
     },
     {
@@ -2033,7 +2053,8 @@
       "route_ids": [
         "madagascar-citizenship-by-parent",
         "madagascar-naturalization",
-        "madagascar-citizenship-at-birth-by-parent"
+        "madagascar-citizenship-at-birth-by-parent",
+        "madagascar-citizenship-by-marriage"
       ]
     },
     {
@@ -2049,7 +2070,8 @@
       "route_ids": [
         "malawi-citizenship-by-parent",
         "malawi-naturalization",
-        "malawi-citizenship-at-birth-by-parent"
+        "malawi-citizenship-at-birth-by-parent",
+        "malawi-citizenship-by-marriage"
       ]
     },
     {
@@ -2131,7 +2153,8 @@
       "route_ids": [
         "mauritania-citizenship-by-parent",
         "mauritania-naturalization",
-        "mauritania-citizenship-at-birth-by-parent"
+        "mauritania-citizenship-at-birth-by-parent",
+        "mauritania-citizenship-by-marriage"
       ]
     },
     {
@@ -2148,7 +2171,8 @@
         "mauritius-citizenship-by-descent",
         "mauritius-naturalization",
         "mauritius-citizenship-connected-to-birth",
-        "mauritius-investor-naturalization"
+        "mauritius-investor-naturalization",
+        "mauritius-citizenship-by-marriage"
       ]
     },
     {
@@ -2265,7 +2289,8 @@
       "route_ids": [
         "morocco-citizenship-by-parent",
         "morocco-naturalization",
-        "morocco-citizenship-at-birth-by-parent"
+        "morocco-citizenship-at-birth-by-parent",
+        "morocco-citizenship-by-marriage"
       ]
     },
     {
@@ -2281,7 +2306,8 @@
       "route_ids": [
         "mozambique-citizenship-by-parent",
         "mozambique-naturalization",
-        "mozambique-citizenship-at-birth-by-parent"
+        "mozambique-citizenship-at-birth-by-parent",
+        "mozambique-citizenship-by-marriage"
       ]
     },
     {
@@ -2525,7 +2551,8 @@
       "route_ids": [
         "nigeria-citizenship-by-parent",
         "nigeria-naturalization",
-        "nigeria-citizenship-at-birth-by-parent"
+        "nigeria-citizenship-at-birth-by-parent",
+        "nigeria-citizenship-by-marriage"
       ]
     },
     {
@@ -2807,7 +2834,8 @@
       "route_ids": [
         "guinea-bissau-citizenship-by-parent",
         "guinea-bissau-naturalization",
-        "guinea-bissau-citizenship-at-birth-by-parent"
+        "guinea-bissau-citizenship-at-birth-by-parent",
+        "guinea-bissau-citizenship-by-marriage"
       ]
     },
     {
@@ -2905,7 +2933,8 @@
       "route_ids": [
         "rwanda-citizenship-by-parent",
         "rwanda-naturalization",
-        "rwanda-citizenship-at-birth-by-parent"
+        "rwanda-citizenship-at-birth-by-parent",
+        "rwanda-citizenship-by-marriage"
       ]
     },
     {
@@ -3068,7 +3097,8 @@
         "sao-tome-citizenship-by-parent-or-grandparent",
         "sao-tome-naturalization",
         "sao-tome-citizenship-by-birth",
-        "sao-tome-principe-cbi"
+        "sao-tome-principe-cbi",
+        "sao-tome-citizenship-by-marriage"
       ]
     },
     {
@@ -3100,7 +3130,8 @@
       "route_ids": [
         "senegal-citizenship-by-parent",
         "senegal-naturalization",
-        "senegal-citizenship-at-birth-by-parent"
+        "senegal-citizenship-at-birth-by-parent",
+        "senegal-citizenship-by-marriage"
       ]
     },
     {
@@ -3231,7 +3262,8 @@
       "route_ids": [
         "somalia-citizenship-by-parent",
         "somalia-naturalization",
-        "somalia-citizenship-at-birth-by-parent"
+        "somalia-citizenship-at-birth-by-parent",
+        "somalia-citizenship-by-marriage"
       ]
     },
     {
@@ -3247,7 +3279,8 @@
       "route_ids": [
         "south-africa-citizenship-by-parent",
         "south-africa-naturalization",
-        "south-africa-citizenship-at-birth-by-parent"
+        "south-africa-citizenship-at-birth-by-parent",
+        "south-africa-citizenship-by-marriage"
       ]
     },
     {
@@ -3263,7 +3296,8 @@
       "route_ids": [
         "zimbabwe-citizenship-by-parent",
         "zimbabwe-naturalization",
-        "zimbabwe-citizenship-at-birth-by-parent"
+        "zimbabwe-citizenship-at-birth-by-parent",
+        "zimbabwe-citizenship-by-marriage"
       ]
     },
     {
@@ -3297,7 +3331,8 @@
       "route_ids": [
         "south-sudan-citizenship-by-parent",
         "south-sudan-naturalization",
-        "south-sudan-citizenship-at-birth-by-parent"
+        "south-sudan-citizenship-at-birth-by-parent",
+        "south-sudan-citizenship-by-marriage"
       ]
     },
     {
@@ -3313,7 +3348,8 @@
       "route_ids": [
         "sudan-citizenship-by-parent",
         "sudan-naturalization",
-        "sudan-citizenship-at-birth-by-parent"
+        "sudan-citizenship-at-birth-by-parent",
+        "sudan-citizenship-by-marriage"
       ]
     },
     {
@@ -3357,7 +3393,8 @@
       "route_ids": [
         "eswatini-citizenship-by-parent",
         "eswatini-naturalization",
-        "eswatini-citizenship-at-birth-by-parent"
+        "eswatini-citizenship-at-birth-by-parent",
+        "eswatini-citizenship-by-marriage"
       ]
     },
     {
@@ -3454,7 +3491,8 @@
       "route_ids": [
         "togo-citizenship-by-parent",
         "togo-naturalization",
-        "togo-citizenship-at-birth-by-parent"
+        "togo-citizenship-at-birth-by-parent",
+        "togo-citizenship-by-marriage"
       ]
     },
     {
@@ -3535,7 +3573,8 @@
       "route_ids": [
         "tunisia-citizenship-by-parent",
         "tunisia-naturalization",
-        "tunisia-citizenship-at-birth-by-parent"
+        "tunisia-citizenship-at-birth-by-parent",
+        "tunisia-citizenship-by-marriage"
       ]
     },
     {
@@ -3616,7 +3655,8 @@
       "route_ids": [
         "uganda-citizenship-by-parent",
         "uganda-naturalization",
-        "uganda-citizenship-at-birth-by-parent"
+        "uganda-citizenship-at-birth-by-parent",
+        "uganda-citizenship-by-marriage"
       ]
     },
     {
@@ -3667,7 +3707,8 @@
         "egypt-citizenship-by-parent",
         "egypt-naturalization",
         "egypt-citizenship-by-birth",
-        "egypt-investor-citizenship"
+        "egypt-investor-citizenship",
+        "egypt-citizenship-by-marriage"
       ]
     },
     {
@@ -3747,7 +3788,8 @@
       "route_ids": [
         "tanzania-citizenship-by-parent",
         "tanzania-naturalization",
-        "tanzania-citizenship-at-birth-by-parent"
+        "tanzania-citizenship-at-birth-by-parent",
+        "tanzania-citizenship-by-marriage"
       ]
     },
     {
@@ -3910,7 +3952,8 @@
       "route_ids": [
         "zambia-citizenship-by-parent",
         "zambia-naturalization",
-        "zambia-citizenship-at-birth-by-parent"
+        "zambia-citizenship-at-birth-by-parent",
+        "zambia-citizenship-by-marriage"
       ]
     },
     {
@@ -4211,6 +4254,42 @@
       ]
     },
     {
+      "id": "algeria-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "012",
+        "name": "Algeria"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of an Algerian may naturalize after two years of residence (vs seven).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "algeria-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Ordinance 70-86 art. 9 bis; gender-neutral since the 2005 reform."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Algeria Nationality Code (English text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf"
+        }
+      ]
+    },
+    {
       "id": "algeria-citizenship-by-parent",
       "country": {
         "iso_n3": "012",
@@ -4455,6 +4534,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Angola Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Angola_2010"
+        }
+      ]
+    },
+    {
+      "id": "angola-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "024",
+        "name": "Angola"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may acquire nationality where the union predates the request by at least five years.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "angola-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Lei 2/2016; spousal consent plus character and integration criteria."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Angola Constitution (Constitute Project)",
@@ -7493,6 +7606,42 @@
       ]
     },
     {
+      "id": "burundi-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "108",
+        "name": "Burundi"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Burundian acquires nationality by declaration on marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "burundi-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Code de la nationalité 2000. A foreign husband must naturalize after five years of residence."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Burundi Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Burundi_2018"
+        }
+      ]
+    },
+    {
       "id": "burundi-citizenship-by-parent",
       "country": {
         "iso_n3": "108",
@@ -7844,6 +7993,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cameroon Ministry of Justice - who is a Cameroonian",
+          "url": "https://minjustice.cm/ova_sev/who-is-a-cameroonian/"
+        }
+      ]
+    },
+    {
+      "id": "cameroon-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "120",
+        "name": "Cameroon"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Cameroonian acquires nationality by declaration on marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cameroon-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Loi 1968-LF-3. Gender-asymmetric: a foreign husband may naturalize with the residence period waived."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Cameroon Ministry of Justice - who is a Cameroonian",
@@ -8281,6 +8466,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Central African Republic Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Central_African_Republic_2016"
+        }
+      ]
+    },
+    {
+      "id": "central-african-republic-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "140",
+        "name": "Central African Rep."
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Central African derives nationality on marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "central-african-republic-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Loi 1961.212. A foreign husband uses facilitated naturalization after two years of residence."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Central African Republic Constitution (Constitute Project)",
@@ -9319,6 +9540,42 @@
       ]
     },
     {
+      "id": "congo-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "178",
+        "name": "Congo"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Congolese acquires nationality after five years of residence.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "congo-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Loi 35-61. No marriage route for a foreign husband."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Congo_2015"
+        }
+      ]
+    },
+    {
       "id": "congo-citizenship-by-parent",
       "country": {
         "iso_n3": "178",
@@ -9417,6 +9674,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Democratic Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Democratic_Republic_of_the_Congo_2011"
+        }
+      ]
+    },
+    {
+      "id": "drc-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "180",
+        "name": "Dem. Rep. Congo"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may acquire nationality by marriage after seven years.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "drc-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Loi 04/024 (2004); gender-neutral. The DRC bars dual nationality."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Democratic Republic of the Congo Constitution (Constitute Project)",
@@ -10281,6 +10572,40 @@
       ]
     },
     {
+      "id": "benin-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "204",
+        "name": "Benin"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign spouse may acquire nationality by declaration after five years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "benin-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "2022 Code de la nationalité (Loi 2022-32); gender-neutral."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Benin Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Benin_1990"
+        }
+      ]
+    },
+    {
       "id": "benin-citizenship-by-parent",
       "country": {
         "iso_n3": "204",
@@ -11081,6 +11406,42 @@
       ]
     },
     {
+      "id": "equatorial-guinea-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "226",
+        "name": "Eq. Guinea"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may naturalize after ten years of residence and cohabitation, instead of the very long ordinary rule.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "equatorial-guinea-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Ley 3/2011; gender-equal."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Equatorial Guinea Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Equatorial_Guinea_2012"
+        }
+      ]
+    },
+    {
       "id": "equatorial-guinea-citizenship-by-parent",
       "country": {
         "iso_n3": "226",
@@ -11187,6 +11548,42 @@
       ]
     },
     {
+      "id": "ethiopia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "231",
+        "name": "Ethiopia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of an Ethiopian may naturalize after two years of marriage and one year of residence, instead of four years.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ethiopia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "Proclamation 378/2003 art. 6; gender-neutral."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Ethiopia Proclamation on Ethiopian Nationality 378/2003",
+          "url": "https://www.refworld.org/docid/409100414.html"
+        }
+      ]
+    },
+    {
       "id": "ethiopia-citizenship-by-parent",
       "country": {
         "iso_n3": "231",
@@ -11284,6 +11681,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Eritrea Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Eritrea_1997"
+        }
+      ]
+    },
+    {
+      "id": "eritrea-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "232",
+        "name": "Eritrea"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of an Eritrean may naturalize after about three years of post-marriage residence.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "eritrea-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Proclamation 21/1992; ordinary residence is very long."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Eritrea Constitution (Constitute Project)",
@@ -12470,6 +12903,40 @@
       ]
     },
     {
+      "id": "djibouti-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "262",
+        "name": "Djibouti"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Djiboutian may naturalize after ten years of marriage (five if the couple have children).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "djibouti-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Gender-neutral since 2004; a marriage-duration route rather than a residence count."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Djibouti Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Djibouti_2010"
+        }
+      ]
+    },
+    {
       "id": "djibouti-citizenship-by-parent",
       "country": {
         "iso_n3": "262",
@@ -12568,6 +13035,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Gabon Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gabon_2011"
+        }
+      ]
+    },
+    {
+      "id": "gabon-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "266",
+        "name": "Gabon"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may naturalize after three years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "gabon-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Loi 37/1998; gender-equal."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Gabon Constitution (Constitute Project)",
@@ -12792,6 +13293,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "The Gambia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gambia_2019"
+        }
+      ]
+    },
+    {
+      "id": "gambia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "270",
+        "name": "Gambia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A husband or wife of a Gambian may register after seven years of residence, instead of fifteen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "gambia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 84,
+          "note": "Nationality & Citizenship Act; gender-neutral. Naturalized persons are barred from dual nationality."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "The Gambia Constitution (Constitute Project)",
@@ -13126,6 +13663,40 @@
         {
           "title": "Ghana Citizenship Act 2000 (Act 591)",
           "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/02/Ghana_Citizenship_Act_with_forms_591_2000.pdf"
+        }
+      ]
+    },
+    {
+      "id": "ghana-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "288",
+        "name": "Ghana"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign spouse of a Ghanaian may be registered as a citizen on application.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ghana-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Citizenship Act 2000 (Act 591) s.10; in practice favours the foreign wife."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Ghana Ministry of Interior — naturalization",
+          "url": "https://www.mint.gov.gh/e-services-portal/naturalization-as-ghanaian-citizen/"
         }
       ]
     },
@@ -14036,6 +14607,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guinea Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guinea_2020"
+        }
+      ]
+    },
+    {
+      "id": "guinea-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "324",
+        "name": "Guinea"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign spouse may naturalize after five years of marriage and three years of residence (three years of marriage if a child of the union).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "guinea-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "2019 Civil Code; gender-neutral."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Guinea Constitution (Constitute Project)",
@@ -15963,6 +16570,40 @@
       ]
     },
     {
+      "id": "cote-divoire-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "384",
+        "name": "Côte d'Ivoire"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign spouse may acquire nationality by option after two years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cote-divoire-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Loi 61-415 as amended in 2013 (gender-neutral)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Cote d'Ivoire Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cote_dIvoire_2016"
+        }
+      ]
+    },
+    {
       "id": "cote-divoire-citizenship-by-parent",
       "country": {
         "iso_n3": "384",
@@ -16579,6 +17220,40 @@
         {
           "title": "Kenya 2010 Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Kenya_2010"
+        }
+      ]
+    },
+    {
+      "id": "kenya-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A person married to a Kenyan for at least seven years is entitled, on application, to be registered as a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kenya-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Constitution 2010 art. 15(1); gender-neutral."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kenya Immigration — Citizenship section",
+          "url": "https://immigration.go.ke/citizenship-section/"
         }
       ]
     },
@@ -17372,6 +18047,42 @@
       ]
     },
     {
+      "id": "lesotho-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "426",
+        "name": "Lesotho"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse who has lived in Lesotho with the citizen for five years is entitled, on application, to be registered.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "lesotho-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Constitution s.40; gender-neutral; a widowed spouse may also register."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Lesotho Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lesotho_2018"
+        }
+      ]
+    },
+    {
       "id": "lesotho-citizenship-by-parent",
       "country": {
         "iso_n3": "426",
@@ -17681,6 +18392,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Libya Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Libya_2011"
+        }
+      ]
+    },
+    {
+      "id": "libya-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "434",
+        "name": "Libya"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Libyan may acquire nationality after about two years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "libya-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Law 24/2010. Wife-of-citizen only; foreign husbands have no route."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Libya Constitution (Constitute Project)",
@@ -18329,6 +19074,40 @@
       ]
     },
     {
+      "id": "madagascar-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "450",
+        "name": "Madagascar"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign woman married to a Malagasy man may acquire nationality on request.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "madagascar-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Nationality Code art. 22. No marriage route for a foreign man."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Madagascar Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Madagascar_2010"
+        }
+      ]
+    },
+    {
       "id": "madagascar-citizenship-by-parent",
       "country": {
         "iso_n3": "450",
@@ -18427,6 +19206,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malawi Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malawi_2017"
+        }
+      ]
+    },
+    {
+      "id": "malawi-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "454",
+        "name": "Malawi"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Malawian may be registered as a citizen with no residence period.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malawi-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Citizenship Act 1966 s.16 (\"registration of wives\"). Foreign husbands have no equivalent route."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Malawi Constitution (Constitute Project)",
@@ -19054,6 +19867,42 @@
       ]
     },
     {
+      "id": "mauritania-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "478",
+        "name": "Mauritania"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Mauritanian may acquire nationality after five years of residence.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mauritania-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Loi 61-112 (amended 2010, 2021). Wife only; a foreign husband generally cannot acquire by marriage."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Mauritania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mauritania_2012"
+        }
+      ]
+    },
+    {
       "id": "mauritania-citizenship-by-parent",
       "country": {
         "iso_n3": "478",
@@ -19156,6 +20005,40 @@
         {
           "title": "Mauritius Prime Minister’s Office — Citizenship",
           "url": "https://dha.govmu.org/Pages/Services/Citizenship.aspx"
+        }
+      ]
+    },
+    {
+      "id": "mauritius-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "480",
+        "name": "Mauritius"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may be registered as a citizen, subject to national-security and public-policy exceptions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mauritius-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Constitution s.24; gender-neutral for marriages after 11 March 1968."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Mauritius Citizenship Act",
+          "url": "https://lawsofmauritius.govmu.org/portal/viewlegislationdocument/web/?docnumber=&doctitle=TWF1cml0aXVzIENpdGl6ZW5zaGlwIEFjdA%3D%3D&doctype=act"
         }
       ]
     },
@@ -20147,6 +21030,42 @@
       ]
     },
     {
+      "id": "morocco-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "504",
+        "name": "Morocco"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Moroccan may acquire nationality by declaration after five years of regular residence during the marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "morocco-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Dahir 1-58-250 art. 10. Wife-of-citizen only; a foreign husband has no route. By declaration (right), Minister may object within a year."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Morocco 2011 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Morocco_2011"
+        }
+      ]
+    },
+    {
       "id": "morocco-citizenship-by-parent",
       "country": {
         "iso_n3": "504",
@@ -20244,6 +21163,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mozambique Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mozambique_2007"
+        }
+      ]
+    },
+    {
+      "id": "mozambique-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "508",
+        "name": "Mozambique"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may acquire nationality by declaration after five years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mozambique-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Constitution art. 26; gender-neutral; nationality is not lost on later dissolution."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Mozambique Constitution (Constitute Project)",
@@ -22015,6 +22968,42 @@
         {
           "title": "Constitute Project — Constitution of Nigeria 1999 (as amended)",
           "url": "https://www.constituteproject.org/constitution/Nigeria_2011"
+        }
+      ]
+    },
+    {
+      "id": "nigeria-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "566",
+        "name": "Nigeria"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Nigerian man may register as a citizen with no residence requirement.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nigeria-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "1999 Constitution s.26(2)(a). Wife only — a foreign husband of a Nigerian woman has no facilitated route (ordinary 15 years)."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Nigeria Constitution 1999 — Chapter III Citizenship (published text)",
+          "url": "https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/"
         }
       ]
     },
@@ -24285,6 +25274,42 @@
       ]
     },
     {
+      "id": "guinea-bissau-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "624",
+        "name": "Guinea-Bissau"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign spouse may naturalize after three years of marriage and one year of residence.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "guinea-bissau-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "Decreto-Lei 6/2011; gender-neutral."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Guinea-Bissau Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guinea_Bissau_1996"
+        }
+      ]
+    },
+    {
       "id": "guinea-bissau-citizenship-by-parent",
       "country": {
         "iso_n3": "624",
@@ -24993,6 +26018,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Rwanda DGIE - citizenship services",
+          "url": "https://www.migration.gov.rw/our-services/citizenshipss"
+        }
+      ]
+    },
+    {
+      "id": "rwanda-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "646",
+        "name": "Rwanda"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may apply for nationality after five years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "rwanda-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Organic Law 002/2021; gender-neutral, subject to conduct and means conditions."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Rwanda DGIE - citizenship services",
@@ -26147,6 +27206,40 @@
       ]
     },
     {
+      "id": "sao-tome-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "678",
+        "name": "São Tomé and Príncipe"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse or registered partner of a São Toméan may acquire nationality.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sao-tome-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Lei da Nacionalidade 07/2022 art. 6; gender-neutral; the implementing regulation is still pending."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf"
+        }
+      ]
+    },
+    {
       "id": "sao-tome-citizenship-by-parent-or-grandparent",
       "country": {
         "iso_n3": "678",
@@ -26397,6 +27490,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Senegal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Senegal_2016"
+        }
+      ]
+    },
+    {
+      "id": "senegal-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "686",
+        "name": "Senegal"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign spouse may acquire nationality by declaration after about five years of marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "senegal-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Code 61-10 as amended by Loi 2013-05 (gender-neutral since 2013)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Senegal Constitution (Constitute Project)",
@@ -27368,6 +28495,40 @@
       ]
     },
     {
+      "id": "somalia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "706",
+        "name": "Somalia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Somali may acquire nationality on marriage (near-automatic).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "somalia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Citizenship Law 28/1962. Wife-of-citizen only; a foreign husband has no facilitation (ordinary 7 years)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Somalia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Somalia_2012"
+        }
+      ]
+    },
+    {
       "id": "somalia-citizenship-by-parent",
       "country": {
         "iso_n3": "706",
@@ -27474,6 +28635,42 @@
         {
           "title": "South African Citizenship Amendment Act 17 of 2010",
           "url": "https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf"
+        }
+      ]
+    },
+    {
+      "id": "south-africa-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "710",
+        "name": "South Africa"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a South African may naturalize after two years of permanent-resident residence following the marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "south-africa-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Citizenship Act 88/1995 s.5(5); gender-neutral; requires permanent residence."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "South African Citizenship Act 88 of 1995 (gov.za PDF)",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/act88of1995.pdf"
         }
       ]
     },
@@ -27588,6 +28785,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Zimbabwe Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Zimbabwe_2013"
+        }
+      ]
+    },
+    {
+      "id": "zimbabwe-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "716",
+        "name": "Zimbabwe"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A person married to a Zimbabwean for five years is entitled, on application, to be registered.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "zimbabwe-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Constitution 2013 s.38; gender-neutral."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Zimbabwe Constitution (Constitute Project)",
@@ -27942,6 +29173,42 @@
       ]
     },
     {
+      "id": "south-sudan-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "728",
+        "name": "S. Sudan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a South Sudanese may naturalize after about five years, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "south-sudan-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Nationality Act 2011; gender-neutral."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "South Sudan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/South_Sudan_2011"
+        }
+      ]
+    },
+    {
       "id": "south-sudan-citizenship-by-parent",
       "country": {
         "iso_n3": "728",
@@ -28040,6 +29307,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Sudan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sudan_2019"
+        }
+      ]
+    },
+    {
+      "id": "sudan-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "729",
+        "name": "Sudan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The spouse of a Sudanese may naturalize after about two years, tied to post-marriage residence.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sudan-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Nationality Act 1994 (amended 2011, 2018); the husband-of-citizen route is unclear. Ordinary 10 years."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Sudan Constitution (Constitute Project)",
@@ -28252,6 +29555,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Eswatini Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Swaziland_2005"
+        }
+      ]
+    },
+    {
+      "id": "eswatini-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "748",
+        "name": "eSwatini"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A woman married to a citizen acquires nationality by declaration.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "eswatini-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Constitution 2005 s.44. No reciprocal provision for men."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Eswatini Constitution (Constitute Project)",
@@ -28934,6 +30271,42 @@
       ]
     },
     {
+      "id": "togo-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "768",
+        "name": "Togo"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Togolese man acquires nationality on marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "togo-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "1978 Nationality Code. Wife only; a foreign husband must naturalize."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Togo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Togo_2007"
+        }
+      ]
+    },
+    {
       "id": "togo-citizenship-by-parent",
       "country": {
         "iso_n3": "768",
@@ -29486,6 +30859,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tunisia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tunisia_2022"
+        }
+      ]
+    },
+    {
+      "id": "tunisia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "788",
+        "name": "Tunisia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Tunisian may acquire nationality by declaration.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tunisia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 24,
+          "note": "Décret-Loi 63-6 arts. 13–14. Women cannot transmit nationality to a foreign husband."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Tunisia Constitution (Constitute Project)",
@@ -30063,6 +31472,40 @@
       ]
     },
     {
+      "id": "uganda-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "800",
+        "name": "Uganda"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A person married to a Ugandan for at least three years is entitled, on application, to be registered.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uganda-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Constitution art. 12(2)(a); gender-neutral."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Uganda Immigration - naturalization",
+          "url": "https://www.immigration.go.ug/node/235"
+        }
+      ]
+    },
+    {
       "id": "uganda-citizenship-by-parent",
       "country": {
         "iso_n3": "800",
@@ -30452,6 +31895,40 @@
         {
           "title": "Egypt Law No. 154 of 2004 amending the Nationality Law",
           "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Egypt%20-%20Nationality%20Law%20-%202004%20-%20English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "egypt-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "818",
+        "name": "Egypt"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of an Egyptian may acquire nationality by declaration once the marriage has lasted two years.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "egypt-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Law 26/1975 art. 7. Wife-of-citizen only — a foreign husband of an Egyptian woman has no facilitated route (ordinary 10 years)."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Egyptian Nationality Law No. 26 of 1975",
+          "url": "https://manshurat.org/node/7358"
         }
       ]
     },
@@ -31033,6 +32510,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tanzania Immigration - citizenship by naturalization",
+          "url": "https://www.immigration.go.tz/index.php/3-0-citizenship-by-naturalization"
+        }
+      ]
+    },
+    {
+      "id": "tanzania-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "834",
+        "name": "Tanzania"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Tanzanian may register on request.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tanzania-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Citizenship Act 1995. No equivalent for a foreign husband (ordinary naturalization applies)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Tanzania Immigration - citizenship by naturalization",
@@ -32216,6 +33729,40 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Zambia Citizenship of Zambia Act 2016",
+          "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07"
+        }
+      ]
+    },
+    {
+      "id": "zambia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "894",
+        "name": "Zambia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A person married to a Zambian for five years is entitled to apply to be registered.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "zambia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": null,
+          "note": "Constitution 2016 art. 37."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Zambia Citizenship of Zambia Act 2016",
