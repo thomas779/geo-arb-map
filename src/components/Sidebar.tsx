@@ -490,6 +490,12 @@ export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Pro
         onValueChange={setOpenSections}
         className="w-full"
       >
+        {/*
+          * Lead with regional systems: blocs like EU/EEA and Mercosur paint
+          * settlement rights across whole regions — the strongest, most
+          * visible cross-border routes on the map — before the country- and
+          * heritage-specific lanes.
+          */}
         {regionalCount > 0 && (
           <AccordionItem value="regional" className="border-b">
             <AccordionTrigger className={catTrigger}>

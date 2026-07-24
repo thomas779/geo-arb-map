@@ -13,6 +13,7 @@ import { useTheme } from '@/components/theme-provider';
 import { countryFlag } from '@/lib/country';
 import { displayColor } from '@/lib/color';
 import { displayRouteTitle } from '@/lib/display-title';
+import { entitySlug } from '@/lib/slug';
 import { dataCorrectionUrl, sourceUrl } from '@/lib/trust';
 
 interface Props {
@@ -297,6 +298,15 @@ function LaneDetail({
         </div>
       )}
 
+      {lane.beneficiaries.length === 0 && (
+        <a
+          href={`/route/${entitySlug(lane.id)}`}
+          className="inline-flex items-center gap-1 text-xs font-medium text-primary underline underline-offset-2 hover:brightness-110"
+        >
+          View full page →
+        </a>
+      )}
+
       <a
         href={dataCorrectionUrl(lane.name, `lane:${lane.id}`)}
         target="_blank"
@@ -380,9 +390,15 @@ export function RouteDetailPanel({
               {singleBloc.members.length} members
             </Badge>
           </div>
-          <p className="mb-4 text-xs leading-relaxed text-muted-foreground">
+          <p className="mb-3 text-xs leading-relaxed text-muted-foreground">
             This guide explains the shared arrangement. Country-specific citizenship timelines live in each member’s country guide.
           </p>
+          <a
+            href={`/rights/${entitySlug(singleBloc.id)}`}
+            className="mb-4 inline-flex items-center gap-1 text-xs font-medium text-primary underline underline-offset-2 hover:brightness-110"
+          >
+            View full page →
+          </a>
           <BlocDetail bloc={singleBloc} onSelectCountry={onSelectCountry} />
         </>
       )}

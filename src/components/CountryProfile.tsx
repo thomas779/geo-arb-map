@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import type { BlocsData, CitizenshipRoute, CitizenshipRoutesData, ResidenceCategory, ResidenceRoute } from '@/types';
-import { buildCountrySlugMap } from '@/lib/slug';
+import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
 
 // Shared per-country page derivation + labels, used by the interactive app
@@ -87,7 +87,11 @@ function RouteCard({ route }: { route: CitizenshipRoute }) {
         <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">
           {CITIZENSHIP_MODE_LABELS[route.mode] ?? route.mode}
         </span>
-        <span className="rounded-full border px-1.5 font-mono text-[0.66rem] text-muted-foreground">
+        <span
+          className={`rounded-full px-1.5 font-mono text-[0.66rem] ${
+            route.status === 'active' ? 'bg-verified/15 text-verified' : 'border text-muted-foreground'
+          }`}
+        >
           {route.status.replace(/_/g, ' ')}
         </span>
       </div>
@@ -213,7 +217,7 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
               <Eyebrow>Regional rights</Eyebrow>
               <div className="flex flex-wrap gap-2">
                 {blocs.map(b => (
-                  <a key={b.id} href={`/?blocs=${b.id}`} className="rounded-full border bg-card px-3 py-1.5 text-sm hover:border-primary">{b.name}</a>
+                  <a key={b.id} href={`/rights/${entitySlug(b.id)}`} className="rounded-full border bg-card px-3 py-1.5 text-sm hover:border-primary">{b.name}</a>
                 ))}
               </div>
             </section>
@@ -223,7 +227,13 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
               <Eyebrow>Treaty &amp; country paths</Eyebrow>
               <div className="flex flex-wrap gap-2">
                 {lanesIn.map(l => (
-                  <a key={l.id} href={`/?lane=${l.id}`} className="rounded-full border bg-card px-3 py-1.5 text-sm hover:border-primary">{l.name}</a>
+                  <a
+                    key={l.id}
+                    href={l.beneficiaries.length === 0 ? `/route/${entitySlug(l.id)}` : `/?lane=${l.id}`}
+                    className="rounded-full border bg-card px-3 py-1.5 text-sm hover:border-primary"
+                  >
+                    {l.name}
+                  </a>
                 ))}
               </div>
             </section>

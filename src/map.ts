@@ -62,6 +62,9 @@ let _projection: d3.GeoProjection;
 let _path: d3.GeoPath;
 let _byCountry: Map<string, Bloc[]>;
 let _formerByCountry: Map<string, Bloc[]>;
+// ISOs reachable via a bilateral/heritage lane (destination or beneficiary) —
+// surfaced on the idle map so those routes aren't invisible grey.
+let _laneByCountry: Set<string> = new Set();
 let _currentK = 1;
 
 let _gMap: d3.Selection<SVGGElement, unknown, HTMLElement, unknown>;
@@ -98,6 +101,15 @@ export function init(
       if (!_formerByCountry.has(m.iso_n3)) _formerByCountry.set(m.iso_n3, []);
       _formerByCountry.get(m.iso_n3)!.push(b);
     });
+  });
+
+  // Lanes never contribute to bloc membership, but a country that is a lane
+  // destination or beneficiary IS reachable — surface it on the idle map so
+  // heritage/ancestry routes aren't invisible grey.
+  _laneByCountry = new Set();
+  data.bilateral_lanes.forEach(l => {
+    _laneByCountry.add(l.destination.iso_n3);
+    l.beneficiaries.forEach(m => _laneByCountry.add(m.iso_n3));
   });
 
   _tooltip = document.getElementById('tooltip')!;
@@ -410,6 +422,35 @@ function hideTooltip(): void {
   _tooltip.style.display = 'none';
 }
 
+/*
+ * Idle-map encoding (nothing selected): CATEGORICAL by the strongest right a
+ * country has, strongest wins. Replaces the old count ramp, which flattened
+ * proto/one-way frameworks into the same weight as citizenship blocs and left
+ * 79% of colored countries at one indistinguishable shade. Fills are CSS
+ * tokens so a theme flip repaints via variables, no per-theme recompute.
+ */
+type IdleBucket = 'strong' | 'limited' | 'lane' | 'none';
+
+// Fill-only encoding (standard for a categorical choropleth — outlines are for
+// borders/selection, not data). The blue-hued tiers are the ramp of route
+// strength; neutral grey is "no cross-border framework".
+const IDLE_FILL: Record<IdleBucket, string> = {
+  strong: 'var(--map-strong)',
+  limited: 'var(--map-limited)',
+  lane: 'var(--map-lane)',
+  none: 'var(--map-land)',
+};
+
+function idleBucket(lookupIso: string): IdleBucket {
+  const blocs = _byCountry?.get(lookupIso) ?? [];
+  // full/closed = durable settlement/citizenship systems; the rest (partial,
+  // hub_spoke, one_way, proto) are weaker frameworks that shouldn't outrank them.
+  if (blocs.some(b => b.category === 'full' || b.category === 'closed')) return 'strong';
+  if (blocs.length) return 'limited';
+  if (_laneByCountry.has(lookupIso)) return 'lane';
+  return 'none';
+}
+
 function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   const lookupIso = mobilityIso(iso);
   const dark = isDarkTheme();
@@ -453,13 +494,7 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
     }
     return 'var(--map-land)';
   }
-  const count = (_byCountry?.get(lookupIso) ?? []).length;
-  if (!count) return 'var(--map-land)';
-  // Count overlay gets its own ramp per theme (light needs darker blues)
-  const t = Math.min((count - 1) / 3, 1);
-  return dark
-    ? d3.interpolateRgb('#555C73', '#91A4FF')(t)
-    : d3.interpolateRgb('#AEB9D7', '#3552B8')(t);
+  return IDLE_FILL[idleBucket(lookupIso)];
 }
 
 function paintAll(state: AppState, data: BlocsData): void {
@@ -467,6 +502,8 @@ function paintAll(state: AppState, data: BlocsData): void {
   _gMap.selectAll<SVGPathElement, any>('.country')
     .attr('fill', d => colorForIso(String(d.id).padStart(3, '0'), state, data));
 
+  // Dots get an accent ring only when they belong to a selected bloc — a
+  // legitimate highlight, unlike using an outline to encode an idle category.
   _gDots.selectAll<SVGCircleElement, MicroState>('.micro-dot')
     .attr('fill', d => colorForIso(d.iso, state, data))
     .attr('stroke', d => {

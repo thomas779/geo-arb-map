@@ -40,3 +40,25 @@ export function buildSlugToIso(jurisdictions: SlugJurisdiction[]): Map<string, s
   for (const [iso, slug] of buildCountrySlugMap(jurisdictions)) reverse.set(slug, iso);
   return reverse;
 }
+
+/**
+ * Slug for an id-keyed entity (bloc, lane): `eu_eea` → `eu-eea`. A pure function
+ * of the id so a single forward link never needs the full set and can't drift
+ * from the map. Ids are unique; a uniqueness test guards against slug collisions.
+ */
+export function entitySlug(id: string): string {
+  return slugify(id.replace(/_/g, ' ')) || id;
+}
+
+/** Shared by the rights/route SSR generator and the client "full page" links. */
+export function buildEntitySlugMap(items: Array<{ id: string }>): Map<string, string> {
+  const byId = new Map<string, string>();
+  for (const item of items) byId.set(item.id, entitySlug(item.id));
+  return byId;
+}
+
+export function buildEntitySlugToId(items: Array<{ id: string }>): Map<string, string> {
+  const reverse = new Map<string, string>();
+  for (const [id, slug] of buildEntitySlugMap(items)) reverse.set(slug, id);
+  return reverse;
+}

@@ -18,6 +18,10 @@
   --map-ink: #222321;
   --map-muted: #62645F;
   --map-accent: #3552B8;
+  /* Idle-map categorical scale: strongest right → weakest → unknown. */
+  --map-strong: #4C64C0;
+  --map-limited: #93A0CB;
+  --map-lane: #C7CEE6;
   --map-mono: "IBM Plex Mono", monospace;
 }
 
@@ -30,6 +34,9 @@
   --map-ink: #EEEAE1;
   --map-muted: #A8AAA3;
   --map-accent: #91A4FF;
+  --map-strong: #8093E8;
+  --map-limited: #565E7A;
+  --map-lane: #3F4657;
 }
 
 /* ── Map layer (imperative D3 — not React) ── */
@@ -106,6 +113,22 @@
 }
 
 .tt-blocs { color: var(--map-muted); font-size: 11px; margin-top: 2px; }
+
+/* ── Map-key swatches (the card itself is a shadcn Card in WorldMap.tsx;
+      only the color chips live here since they reference the --map-* tokens) ── */
+.legend-sw {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid var(--map-panel-edge);
+}
+
+.sw-strong { background: var(--map-strong); }
+.sw-limited { background: var(--map-limited); }
+.sw-lane { background: var(--map-lane); }
+.sw-none { background: var(--map-land); }
 
 /* ── Shared chips (bloc/lane color swatches) ── */
 .chip {

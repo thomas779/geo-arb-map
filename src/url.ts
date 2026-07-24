@@ -55,6 +55,8 @@ export function readProfile(params = new URLSearchParams(window.location.search)
 export function viewFromPath(pathname = window.location.pathname): AppState['view'] {
   if (pathname === '/planner' || pathname.startsWith('/planner/')) return 'stacking';
   if (pathname === '/country' || pathname.startsWith('/country')) return 'countries';
+  if (pathname === '/rights' || pathname.startsWith('/rights')) return 'rights';
+  if (pathname === '/route' || pathname.startsWith('/route')) return 'route';
   return 'map';
 }
 
@@ -64,6 +66,9 @@ function pathForView(view: AppState['view'], currentPath = window.location.pathn
     // Preserve a specific /country/<slug> detail path; only the list is bare /country.
     return /^\/country\/[^/]+/.test(currentPath) ? currentPath : '/country';
   }
+  // Rights/route detail paths are preserved; the bare path is the hub.
+  if (view === 'rights') return /^\/rights\/[^/]+/.test(currentPath) ? currentPath : '/rights';
+  if (view === 'route') return /^\/route\/[^/]+/.test(currentPath) ? currentPath : '/route';
   return '/';
 }
 

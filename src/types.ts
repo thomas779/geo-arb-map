@@ -215,7 +215,7 @@ export interface DataReleaseMeta {
 }
 
 export interface AppState {
-  view: 'map' | 'stacking' | 'countries';
+  view: 'map' | 'stacking' | 'countries' | 'rights' | 'route';
   /** Multi-select compare: countries in 2+ selected blocs render blended. */
   blocs: string[];
   lane: string | null;

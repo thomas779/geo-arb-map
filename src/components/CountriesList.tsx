@@ -25,6 +25,8 @@ export function CountriesList({
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">
           Citizenship and residence routes for {items.length} jurisdictions — open any country for its
           full profile, or explore them on the <a href="/" className="underline underline-offset-2 hover:text-foreground">interactive atlas</a>.
+          Also browse <a href="/rights" className="underline underline-offset-2 hover:text-foreground">regional systems</a> and{' '}
+          <a href="/route" className="underline underline-offset-2 hover:text-foreground">heritage routes</a>.
         </p>
         <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-0.5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map(item => (

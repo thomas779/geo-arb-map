@@ -21,6 +21,14 @@ import {
   RESIDENCE_CATEGORY_LABELS,
   CITIZENSHIP_MODE_LABELS,
 } from '../src/components/CountryProfile';
+import {
+  RightsProfile,
+  RightsList,
+  RouteList,
+  deriveBlocProfile,
+  deriveRouteProfile,
+  routeLanesForPages,
+} from '../src/components/RightsProfile';
 import { buildCountrySlugMap } from '../src/lib/slug';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 
@@ -172,11 +180,120 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     bodyHtml: hubBody,
   }));
 
-  const urls = [`${SITE}/`, `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`)];
+  // ── Regional-system pages (/rights/<slug>) + hub ──
+  const rightsUrls: string[] = [];
+  for (const bloc of mobility.blocs) {
+    const data = deriveBlocProfile(bloc.id, mobility, citizenship);
+    if (!data) continue;
+    const url = `${SITE}/rights/${data.slug}/`;
+    const bodyHtml = renderToStaticMarkup(createElement(
+      Fragment, null,
+      createElement(SiteHeader, { active: 'rights' }),
+      createElement(RightsProfile, { data }),
+    ));
+    const headExtra = [
+      `<meta property="og:type" content="article"><meta property="og:site_name" content="Flag Paths">`,
+      `<meta property="og:url" content="${url}"><meta property="og:title" content="${esc(`${data.name} — Residence & Citizenship Rights`)}">`,
+      `<meta property="og:description" content="${esc(data.description)}"><meta property="og:image" content="${SITE}/og-image.png">`,
+      `<meta name="twitter:card" content="summary_large_image">`,
+      jsonLd({
+        '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Flag Paths', item: `${SITE}/` },
+          { '@type': 'ListItem', position: 2, name: 'Rights', item: `${SITE}/rights/` },
+          { '@type': 'ListItem', position: 3, name: data.name, item: url },
+        ],
+      }),
+    ].join('\n');
+    const dir = path.join(distDir, 'rights', data.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'index.html'), htmlDoc({
+      title: `${data.name} — Residence & Citizenship Rights | Flag Paths`,
+      description: data.description, canonical: url, cssHref, headExtra, bodyHtml,
+    }));
+    rightsUrls.push(url);
+  }
+  const rightsHub = renderToStaticMarkup(createElement(
+    Fragment, null,
+    createElement(SiteHeader, { active: 'rights' }),
+    createElement(RightsList, { mobility }),
+  ));
+  fs.writeFileSync(path.join(distDir, 'rights', 'index.html'), htmlDoc({
+    title: 'Regional systems — Residence & Citizenship Blocs | Flag Paths',
+    description: `Browse ${mobility.blocs.length} regional systems that grant residence or citizenship rights across their members.`,
+    canonical: `${SITE}/rights/`, cssHref,
+    headExtra: jsonLd({
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Flag Paths', item: `${SITE}/` },
+        { '@type': 'ListItem', position: 2, name: 'Rights', item: `${SITE}/rights/` },
+      ],
+    }),
+    bodyHtml: rightsHub,
+  }));
+
+  // ── Heritage/ancestry route pages (/route/<slug>) + hub ──
+  const routeUrls: string[] = [];
+  for (const lane of routeLanesForPages(mobility)) {
+    const data = deriveRouteProfile(lane.id, mobility, citizenship);
+    if (!data) continue;
+    const url = `${SITE}/route/${data.slug}/`;
+    const bodyHtml = renderToStaticMarkup(createElement(
+      Fragment, null,
+      createElement(SiteHeader, { active: 'route' }),
+      createElement(RightsProfile, { data }),
+    ));
+    const headExtra = [
+      `<meta property="og:type" content="article"><meta property="og:site_name" content="Flag Paths">`,
+      `<meta property="og:url" content="${url}"><meta property="og:title" content="${esc(`${data.name} — Citizenship by Heritage`)}">`,
+      `<meta property="og:description" content="${esc(data.description)}"><meta property="og:image" content="${SITE}/og-image.png">`,
+      `<meta name="twitter:card" content="summary_large_image">`,
+      jsonLd({
+        '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Flag Paths', item: `${SITE}/` },
+          { '@type': 'ListItem', position: 2, name: 'Routes', item: `${SITE}/route/` },
+          { '@type': 'ListItem', position: 3, name: data.name, item: url },
+        ],
+      }),
+    ].join('\n');
+    const dir = path.join(distDir, 'route', data.slug);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'index.html'), htmlDoc({
+      title: `${data.name} — Citizenship by Heritage | Flag Paths`,
+      description: data.description, canonical: url, cssHref, headExtra, bodyHtml,
+    }));
+    routeUrls.push(url);
+  }
+  const routeHub = renderToStaticMarkup(createElement(
+    Fragment, null,
+    createElement(SiteHeader, { active: 'route' }),
+    createElement(RouteList, { mobility }),
+  ));
+  fs.writeFileSync(path.join(distDir, 'route', 'index.html'), htmlDoc({
+    title: 'Heritage & ancestry routes — Citizenship by Descent | Flag Paths',
+    description: `Browse ${routeUrls.length} citizenship and residence routes claimable through ancestry, ethnicity, or diaspora ties.`,
+    canonical: `${SITE}/route/`, cssHref,
+    headExtra: jsonLd({
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Flag Paths', item: `${SITE}/` },
+        { '@type': 'ListItem', position: 2, name: 'Routes', item: `${SITE}/route/` },
+      ],
+    }),
+    bodyHtml: routeHub,
+  }));
+
+  const urls = [
+    `${SITE}/`,
+    `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`),
+    `${SITE}/rights/`, ...rightsUrls,
+    `${SITE}/route/`, ...routeUrls,
+  ];
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 
-  console.log(`build_country_pages: ${isos.length} SSR country pages + hub + sitemap -> ${distDir}`);
+  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + sitemap -> ${distDir}`);
 }
 
 if (import.meta.main) {

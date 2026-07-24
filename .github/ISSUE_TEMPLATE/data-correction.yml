@@ -6,11 +6,24 @@ body:
     attributes:
       value: |
         Thank you for helping improve the atlas. Do not include passport numbers, application files, private profile facts, or other sensitive personal information.
+  - type: dropdown
+    id: entry_type
+    attributes:
+      label: What kind of entry?
+      description: Helps route the fix to the right dataset.
+      options:
+        - Country profile (citizenship / residence routes)
+        - Regional system / bloc (/rights page)
+        - Heritage or treaty route (/route or lane)
+        - Map coloring or coverage state
+        - Other
+    validations:
+      required: true
   - type: input
     id: context
     attributes:
       label: Country, route, or arrangement
-      description: Include the route or lane ID if the product supplied one.
+      description: "Keep the ID the product added to this report's title if there is one — e.g. country:724, bloc:eu_eea, lane:israel_law_of_return."
       placeholder: "Example: Spain Ibero-American naturalization — spain_iberoamerican"
     validations:
       required: true

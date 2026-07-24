@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
-  ChevronDown,
   ExternalLink,
-  Layers3,
   List,
   Map as MapIcon,
   Moon,
@@ -16,7 +14,6 @@ import {
 import type { AppState, BlocsData, CitizenshipRoutesData, DataReleaseMeta } from './types';
 import * as url from './url';
 import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
@@ -25,7 +22,14 @@ import { RouteDetailPanel } from '@/components/RouteDetailPanel';
 import { PlannerPreview } from '@/components/PlannerPreview';
 import { CountriesList } from '@/components/CountriesList';
 import { CountryProfile, deriveCountryProfile } from '@/components/CountryProfile';
-import { buildSlugToIso } from '@/lib/slug';
+import {
+  RightsProfile,
+  RightsList,
+  RouteList,
+  deriveBlocProfile,
+  deriveRouteProfile,
+} from '@/components/RightsProfile';
+import { buildSlugToIso, buildEntitySlugToId } from '@/lib/slug';
 import { TrustCenter } from '@/components/TrustCenter';
 import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
@@ -220,69 +224,18 @@ export default function App() {
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
       <SiteHeader
-        active={state.view === 'stacking' ? 'planner' : state.view === 'countries' ? 'countries' : 'atlas'}
+        active={
+          state.view === 'stacking' ? 'planner'
+            : state.view === 'countries' ? 'countries'
+              : state.view === 'rights' ? 'rights'
+                : state.view === 'route' ? 'route'
+                  : 'atlas'
+        }
         onSelectView={selectView}
         right={(
           <>
           {data && (
             <>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="hidden h-8 min-w-8 gap-1.5 px-2 text-xs text-muted-foreground sm:inline-flex"
-                    aria-label="Open access levels"
-                  >
-                    <Layers3 aria-hidden />
-                    <span className="hidden lg:inline">Rights</span>
-                    <ChevronDown className="hidden size-3 lg:block" aria-hidden />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent align="end" className="w-[min(360px,calc(100vw-24px))] overflow-hidden p-0">
-                  <div className="border-b px-4 py-3.5">
-                    <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-primary">
-                      Map legend
-                    </p>
-                    <div className="mt-1 flex items-baseline justify-between gap-4">
-                      <p className="font-heading text-lg font-semibold">Access levels</p>
-                      <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">Less → more</p>
-                    </div>
-                  </div>
-                  <div className="divide-y">
-                    {([
-                      ['TR', 'Temporary residence', 'Time-limited residence and attached work rights.'],
-                      ['PR', 'Permanent residence', 'Durable settlement rights without citizenship.'],
-                      ['CIT', 'Citizenship', 'Nationality, passport, and political rights.'],
-                    ] as const).map(([tier, title, detail], index) => (
-                      <div key={tier} className="grid grid-cols-[34px_48px_1fr] items-center gap-3 px-4 py-3.5">
-                        <span className="font-mono text-[11px] font-semibold text-foreground">
-                          {tier}
-                        </span>
-                        <span className="flex gap-1" aria-label={`Level ${index + 1} of 3`}>
-                          {[0, 1, 2].map(step => (
-                            <span
-                              key={step}
-                              aria-hidden
-                              className={cn(
-                                'h-1.5 w-3 rounded-full',
-                                step <= index ? 'bg-primary' : 'bg-muted',
-                              )}
-                            />
-                          ))}
-                        </span>
-                        <span className="min-w-0">
-                          <span className="block text-xs font-semibold text-foreground">{title}</span>
-                          <span className="mt-0.5 block text-[11px] leading-snug text-muted-foreground">{detail}</span>
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="border-t bg-muted/25 px-4 py-2.5 text-[10px] text-muted-foreground">
-                    Exact rights vary by country and permit.
-                  </p>
-                </PopoverContent>
-              </Popover>
               <Button
                 variant="ghost"
                 size="sm"
@@ -348,7 +301,15 @@ export default function App() {
           </div>
         )}
         <div id="map-wrap" className="cartographic-surface relative min-w-0 flex-1 overflow-hidden">
-          <WorldMap data={data} state={state} theme={theme} profile={profile} onSelect={selectCountry} />
+          <WorldMap
+            data={data}
+            state={state}
+            theme={theme}
+            profile={profile}
+            onSelect={selectCountry}
+            dataUpdatedAt={dataStatus.updatedAt}
+            onOpenInfo={() => changeInfo('methodology')}
+          />
           {data && state.view === 'map' && (
             <Tooltip>
               <TooltipTrigger asChild>
@@ -433,19 +394,26 @@ export default function App() {
               </div>
             );
           })()}
-          {data && (
-            <button
-              className="absolute right-3 bottom-3 z-10 hidden items-center gap-1.5 rounded-full border bg-background/90 px-2.5 py-1 font-mono text-xs text-muted-foreground shadow-sm backdrop-blur-sm hover:text-foreground sm:inline-flex"
-              aria-label={`Data evidence updated ${dataStatus.updatedAt}. Open methodology.`}
-              onClick={() => changeInfo('methodology')}
-            >
-              <span className="relative flex size-2" aria-hidden>
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-verified/55 motion-reduce:hidden" />
-                <span className="relative inline-flex size-2 rounded-full bg-verified" />
-              </span>
-              <span>updated&nbsp;·&nbsp;{dataStatus.updatedAt}</span>
-            </button>
-          )}
+          {state.view === 'rights' && data && (() => {
+            const slug = /^\/rights\/([^/]+)\/?$/.exec(window.location.pathname)?.[1] ?? null;
+            const id = slug ? buildEntitySlugToId(data.blocs).get(slug) : null;
+            const profile = id && citizenshipRoutes ? deriveBlocProfile(id, data, citizenshipRoutes) : null;
+            return (
+              <div className="absolute inset-0 z-30 overflow-y-auto bg-background">
+                {profile ? <RightsProfile data={profile} /> : <RightsList mobility={data} />}
+              </div>
+            );
+          })()}
+          {state.view === 'route' && data && (() => {
+            const slug = /^\/route\/([^/]+)\/?$/.exec(window.location.pathname)?.[1] ?? null;
+            const id = slug ? buildEntitySlugToId(data.bilateral_lanes).get(slug) : null;
+            const profile = id && citizenshipRoutes ? deriveRouteProfile(id, data, citizenshipRoutes) : null;
+            return (
+              <div className="absolute inset-0 z-30 overflow-y-auto bg-background">
+                {profile ? <RightsProfile data={profile} /> : <RouteList mobility={data} />}
+              </div>
+            );
+          })()}
           {data && state.view === 'map' && (
             (state.country && !detailPanelOpen)
             || (!state.country && hasRouteSelection && !routePanelOpen)

@@ -311,7 +311,8 @@ describe('profile and URL regressions', () => {
     const correction = new URL(dataCorrectionUrl('Spain route', 'goal:live:724'));
     expect(correction.hostname).toBe('github.com');
     expect(correction.searchParams.get('template')).toBe('data-correction.yml');
-    expect(correction.searchParams.get('title')).toContain('goal:live:724');
+    // Route context prefills the form's `context` field (not dumped in the title).
+    expect(correction.searchParams.get('context')).toContain('goal:live:724');
     expect(correction.toString()).not.toContain('partner=');
     expect(correction.toString()).not.toContain('flags=');
   });
