@@ -137,16 +137,16 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
   );
 }
 
-function Eyebrow({ children }: { children: ReactNode }) {
+function Eyebrow({ children, divider = true }: { children: ReactNode; divider?: boolean }) {
   return (
-    <h2 className="mb-3 border-t pt-5 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+    <h2 className={`mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground${divider ? ' border-t pt-5' : ''}`}>
       {children}
     </h2>
   );
 }
 
 export function CountryProfile({ data }: { data: CountryProfileData }) {
-  const { iso, name, routes, residence, blocs, lanesIn, reviewedModes, cheapest, description } = data;
+  const { iso, name, routes, residence, blocs, lanesIn, reviewedModes, cheapest } = data;
   const facts: Array<[string, string]> = [
     ['Citizenship', `${reviewedModes} of 4 modes reviewed`],
     ...(routes.length ? [['Citizenship routes', String(routes.length)] as [string, string]] : []),
@@ -183,9 +183,8 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
           </nav>
         </aside>
         <div>
-          <p className="mb-6 max-w-[62ch] text-muted-foreground">{description}</p>
           <section id="citizenship" className="scroll-mt-20">
-            <Eyebrow>Citizenship routes</Eyebrow>
+            <Eyebrow divider={false}>Citizenship routes</Eyebrow>
             <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
               {COVERAGE_ORDER.map(mode => {
                 const state = data.coverage[mode] ?? 'unchecked';

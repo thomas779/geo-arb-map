@@ -138,9 +138,9 @@ export function deriveRouteProfile(
   };
 }
 
-function Eyebrow({ children }: { children: ReactNode }) {
+function Eyebrow({ children, divider = true }: { children: ReactNode; divider?: boolean }) {
   return (
-    <h2 className="mb-3 border-t pt-5 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+    <h2 className={`mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground${divider ? ' border-t pt-5' : ''}`}>
       {children}
     </h2>
   );
@@ -252,7 +252,7 @@ function BlocPage({ data }: { data: BlocProfileData }) {
       footerExtra={<a href="/rights" className="underline underline-offset-2">All regional systems</a>}
     >
       <section id="rights" className="scroll-mt-20">
-        <Eyebrow>Rights by status</Eyebrow>
+        <Eyebrow divider={false}>Rights by status</Eyebrow>
         <p className="mb-3 max-w-[62ch] text-sm text-muted-foreground">
           Read the row matching the status you would hold. Domestic citizenship rules remain country-specific.
         </p>
@@ -300,7 +300,7 @@ function RoutePage({ data }: { data: RouteProfileData }) {
       footerExtra={<a href="/route" className="underline underline-offset-2">All heritage routes</a>}
     >
       <section id="grants" className="scroll-mt-20">
-        <Eyebrow>What this path provides</Eyebrow>
+        <Eyebrow divider={false}>What this path provides</Eyebrow>
         <div className="grid gap-px overflow-hidden rounded-lg border bg-border">
           <div className="grid grid-cols-[56px_1fr] gap-3 bg-card px-4 py-3">
             <span className="pt-0.5 font-mono text-[11px] font-semibold text-verified">GET</span>
