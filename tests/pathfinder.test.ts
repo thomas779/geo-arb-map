@@ -284,7 +284,8 @@ describe('profile and URL regressions', () => {
     const params = paramsForState(
       new URLSearchParams('flags=840c&born=344&partner=724&theme=light&info=privacy&bloc=legacy'),
       {
-        view: 'stacking',
+        // Map sub-state (blocs/lane/country) lives in the query only on the atlas route.
+        view: 'map',
         blocs: ['eu_eea'],
         lane: null,
         country: null,

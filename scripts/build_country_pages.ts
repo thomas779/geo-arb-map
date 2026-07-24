@@ -122,7 +122,8 @@ function siteHeader(active: 'atlas' | 'countries'): string {
   return `<header class="hdr">`
     + `<a class="brand" href="/">${BRAND_MARK}<span><span class="name">Flag Paths</span><span class="sub">Mobility atlas</span></span></a>`
     + `<nav><a href="/"${active === 'atlas' ? ' aria-current="page"' : ''}>Atlas</a>`
-    + `<a href="/country/"${active === 'countries' ? ' aria-current="page"' : ''}>Countries</a></nav>`
+    + `<a href="/planner">Planner</a>`
+    + `<a href="/country"${active === 'countries' ? ' aria-current="page"' : ''}>Countries</a></nav>`
     + `</header>`;
 }
 
@@ -302,7 +303,7 @@ function indexPage(ctx: Ctx, isos: string[]): string {
   const items = isos
     .map(iso => ({ iso, name: ctx.citizenship.jurisdictions.find(j => j.iso_n3 === iso)!.name, slug: ctx.slugByIso.get(iso)! }))
     .sort((a, b) => a.name.localeCompare(b.name));
-  const links = items.map(i => `<li><a href="/country/${i.slug}/">${esc(i.name)}</a></li>`).join('');
+  const links = items.map(i => `<li><a href="/country/${i.slug}/"><span aria-hidden="true">${countryFlag(i.iso)}</span> ${esc(i.name)}</a></li>`).join('');
   const breadcrumb = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
     itemListElement: [

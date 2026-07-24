@@ -23,6 +23,7 @@ import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { RouteDetailPanel } from '@/components/RouteDetailPanel';
 import { PlannerPreview } from '@/components/PlannerPreview';
+import { CountriesList } from '@/components/CountriesList';
 import { TrustCenter } from '@/components/TrustCenter';
 import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
@@ -186,7 +187,7 @@ export default function App() {
     setRoutePanelOpen(false);
     patch({ blocs: [], lane: null, country: null, countryName: null });
   }, [patch]);
-  const selectView = useCallback((v: 'map' | 'stacking') =>
+  const selectView = useCallback((v: AppState['view']) =>
     patch({ view: v }), [patch]);
   const selectCountry = useCallback((iso: string, name: string) => {
     setRoutePanelOpen(false);
@@ -217,7 +218,7 @@ export default function App() {
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
       <SiteHeader
-        active={state.view === 'stacking' ? 'planner' : 'atlas'}
+        active={state.view === 'stacking' ? 'planner' : state.view === 'countries' ? 'countries' : 'atlas'}
         onSelectView={selectView}
         right={(
           <>
@@ -413,6 +414,9 @@ export default function App() {
           )}
           {data && state.view === 'stacking' && (
             <PlannerPreview data={data} onBackToAtlas={() => selectView('map')} />
+          )}
+          {state.view === 'countries' && (
+            <CountriesList citizenshipRoutes={citizenshipRoutes} />
           )}
           {data && (
             <button

@@ -19,10 +19,12 @@ export function BrandMark() {
   );
 }
 
-const NAV_ITEMS: { key: NavKey; label: string; href: string; view?: 'map' | 'stacking' }[] = [
+type View = 'map' | 'stacking' | 'countries';
+
+const NAV_ITEMS: { key: NavKey; label: string; href: string; view: View }[] = [
   { key: 'atlas', label: 'Atlas', href: '/', view: 'map' },
   { key: 'planner', label: 'Planner', href: '/planner', view: 'stacking' },
-  { key: 'countries', label: 'Countries', href: '/country/' },
+  { key: 'countries', label: 'Countries', href: '/country', view: 'countries' },
 ];
 
 interface Props {
@@ -33,7 +35,7 @@ interface Props {
    * view-switch buttons. When omitted (prerendered static pages), every item
    * renders as a plain link so navigation just works without the SPA.
    */
-  onSelectView?: (view: 'map' | 'stacking') => void;
+  onSelectView?: (view: View) => void;
   /** App-specific controls (Rights / Trust / Updates / theme) rendered on the right. */
   right?: ReactNode;
 }
