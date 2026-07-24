@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Country citizenship routes compiled from a canonical D1 release plus the read-only legacy remainder.",
-    "last_updated": "2026-07-22",
+    "last_updated": "2026-07-24",
     "acquisition_modes": {
       "ancestry": "Citizenship through a parent, grandparent, wider descent rule, restoration, or documented heritage connection.",
       "naturalization": "Citizenship after residence or another qualifying domestic status.",
@@ -28,7 +28,8 @@
         "pending_verification": 6,
         "inactive": 8,
         "verified_negative": 1
-      }
+      },
+      "residence_routes": 26
     }
   },
   "jurisdictions": [
@@ -852,7 +853,16 @@
         "costa-rica-citizenship-by-parent",
         "costa-rica-naturalization-by-residence",
         "costa-rica-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "costa-rica-rentista",
+        "costa-rica-pensionado",
+        "costa-rica-inversionista"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "191",
@@ -1397,7 +1407,17 @@
         "greece-citizenship-by-greek-parent",
         "greece-ordinary-naturalization",
         "greece-citizenship-birth-and-school"
-      ]
+      ],
+      "residence_route_ids": [
+        "greece-golden-visa",
+        "greece-digital-nomad",
+        "greece-financially-independent"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "digital_nomad": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "304",
@@ -2116,7 +2136,15 @@
         "malaysia-naturalization",
         "malaysia-citizenship-at-birth-by-parent",
         "malaysia-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "malaysia-mm2h-silver",
+        "malaysia-de-rantau-nomad"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "462",
@@ -2218,7 +2246,15 @@
         "mexico-naturalization-by-residence",
         "mexico-citizenship-by-birth",
         "mexico-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "mexico-temporary-residency-solvency",
+        "mexico-residency-by-investment"
+      ],
+      "residence_coverage": {
+        "general_permanent_residence": "reviewed",
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "492",
@@ -2735,7 +2771,16 @@
         "panama-spain-latin-american-reciprocity-naturalization",
         "panama-nationality-by-birth",
         "panama-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "panama-friendly-nations-visa",
+        "panama-qualified-investor-visa",
+        "panama-pensionado"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "598",
@@ -2855,7 +2900,17 @@
         "portugal-citizenship-by-parent",
         "portugal-ordinary-naturalization-2026",
         "portugal-birth-parent-residence-2026"
-      ]
+      ],
+      "residence_route_ids": [
+        "portugal-golden-visa",
+        "portugal-d8-digital-nomad",
+        "portugal-d7-passive-income"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "digital_nomad": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "624",
@@ -3360,7 +3415,15 @@
         "spain-citizenship-by-parent-or-option",
         "spain-citizenship-by-birth",
         "spain-naturalization-by-residence"
-      ]
+      ],
+      "residence_route_ids": [
+        "spain-digital-nomad",
+        "spain-non-lucrative-visa"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "728",
@@ -3522,7 +3585,17 @@
         "thailand-naturalization",
         "thailand-citizenship-at-birth-by-parent",
         "thailand-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "thailand-ltr-wealthy-global-citizen",
+        "thailand-ltr-wealthy-pensioner",
+        "thailand-ltr-work-from-thailand"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed",
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "768",
@@ -3606,7 +3679,19 @@
         "uae-citizenship-at-birth-qualifying-parent",
         "uae-investor-nationality-nomination",
         "uae-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "uae-golden-visa-investor",
+        "uae-golden-visa-talent",
+        "uae-retirement-visa",
+        "uae-remote-work-visa"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "talent_skilled": "reviewed",
+        "retirement_pension": "reviewed",
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "788",
@@ -3904,7 +3989,13 @@
         "uruguay-legal-citizenship-by-residence",
         "uruguay-nationality-by-birth",
         "uruguay-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "uruguay-legal-residence"
+      ],
+      "residence_coverage": {
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "860",
@@ -35613,6 +35704,1122 @@
         {
           "title": "Zambia Citizenship of Zambia Act 2016",
           "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07"
+        }
+      ]
+    }
+  ],
+  "residence_routes": [
+    {
+      "id": "costa-rica-inversionista",
+      "country": {
+        "iso_n3": "188",
+        "name": "Costa Rica"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Inversionista (investor) residence",
+      "summary": "Temporary residence for qualifying investors in real estate, business, or approved sectors.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 150000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "costa-rica-inversionista-principal",
+          "label": "Inversionista (investor) residence",
+          "allocation": "right",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Costa Rica — Dirección General de Migración",
+          "url": "https://migracion.go.cr/"
+        }
+      ]
+    },
+    {
+      "id": "costa-rica-pensionado",
+      "country": {
+        "iso_n3": "188",
+        "name": "Costa Rica"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Pensionado (retiree) residence",
+      "summary": "Temporary residence for retirees with a guaranteed lifetime pension.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "costa-rica-pensionado-principal",
+          "label": "Pensionado (retiree) residence",
+          "allocation": "right",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Costa Rica — Dirección General de Migración",
+          "url": "https://migracion.go.cr/"
+        }
+      ]
+    },
+    {
+      "id": "costa-rica-rentista",
+      "country": {
+        "iso_n3": "188",
+        "name": "Costa Rica"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Rentista (guaranteed income) residence",
+      "summary": "Temporary residence for those with stable unearned income, typically evidenced by a bank guarantee.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 2500,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "costa-rica-rentista-principal",
+          "label": "Rentista (guaranteed income) residence",
+          "allocation": "right",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Costa Rica — Dirección General de Migración",
+          "url": "https://migracion.go.cr/"
+        }
+      ]
+    },
+    {
+      "id": "greece-digital-nomad",
+      "country": {
+        "iso_n3": "300",
+        "name": "Greece"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Digital nomad residence permit",
+      "summary": "Residence permit for remote workers with foreign-source income (Law 4825/2021).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3500,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "greece-digital-nomad-principal",
+          "label": "Digital nomad residence permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Greece Ministry of Migration",
+          "url": "https://migration.gov.gr/"
+        }
+      ]
+    },
+    {
+      "id": "greece-financially-independent",
+      "country": {
+        "iso_n3": "300",
+        "name": "Greece"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Financially independent person (FIP) visa",
+      "summary": "Residence for retirees and financially independent persons with stable passive income who live in Greece.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3500,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "greece-financially-independent-principal",
+          "label": "Financially independent person (FIP) visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Greece Ministry of Migration",
+          "url": "https://migration.gov.gr/"
+        }
+      ]
+    },
+    {
+      "id": "greece-golden-visa",
+      "country": {
+        "iso_n3": "300",
+        "name": "Greece"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Golden Visa — investor permanent residence (art. 20B)",
+      "summary": "Five-year renewable permanent residence for real-estate (or other qualifying) investment, with tiered thresholds by region.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 400000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "greece-golden-visa-principal",
+          "label": "Golden Visa — investor permanent residence (art. 20B)",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Greek Ministry of Migration — Golden Visa",
+          "url": "https://migration.gov.gr/en/golden-visa/"
+        }
+      ]
+    },
+    {
+      "id": "malaysia-de-rantau-nomad",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "DE Rantau Nomad Pass",
+      "summary": "Digital nomad pass (MDEC) for remote tech professionals and freelancers.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 2000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malaysia-de-rantau-nomad-principal",
+          "label": "DE Rantau Nomad Pass",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Malaysia DE Rantau — MDEC",
+          "url": "https://mdec.my/derantau"
+        }
+      ]
+    },
+    {
+      "id": "malaysia-mm2h-silver",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "MM2H — Silver tier",
+      "summary": "Malaysia My Second Home long-stay pass requiring a fixed deposit and property purchase.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 150000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 60,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malaysia-mm2h-silver-principal",
+          "label": "MM2H — Silver tier",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Malaysia MM2H — official programme",
+          "url": "https://mm2h.gov.my/"
+        }
+      ]
+    },
+    {
+      "id": "mexico-residency-by-investment",
+      "country": {
+        "iso_n3": "484",
+        "name": "Mexico"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Temporary residency by investment",
+      "summary": "Residence for those investing in Mexican real estate, a business, or company shares (enters via temporary residency).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 320000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          48
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mexico-residency-by-investment-principal",
+          "label": "Temporary residency by investment",
+          "allocation": "right",
+          "eligibility_months": 48
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Mexico — Instituto Nacional de Migración",
+          "url": "https://www.gob.mx/inm"
+        }
+      ]
+    },
+    {
+      "id": "mexico-temporary-residency-solvency",
+      "country": {
+        "iso_n3": "484",
+        "name": "Mexico"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Temporary residency by economic solvency",
+      "summary": "Residence granted to applicants proving sufficient income or savings; the standard self-funded pathway.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 4300,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          48
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mexico-temporary-residency-solvency-principal",
+          "label": "Temporary residency by economic solvency",
+          "allocation": "right",
+          "eligibility_months": 48
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Mexico — Instituto Nacional de Migración",
+          "url": "https://www.gob.mx/inm"
+        }
+      ]
+    },
+    {
+      "id": "panama-friendly-nations-visa",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Friendly Nations visa",
+      "summary": "Two-year temporary residence for nationals of designated countries with a qualifying economic tie, convertible to permanent residence.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 200000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "panama-friendly-nations-visa-principal",
+          "label": "Friendly Nations visa",
+          "allocation": "right",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Panama — Servicio Nacional de Migración",
+          "url": "https://www.migracion.gob.pa/permisos-migratorios/"
+        }
+      ]
+    },
+    {
+      "id": "panama-pensionado",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Pensionado (retiree) permanent residence",
+      "summary": "Permanent residence for retirees with a guaranteed lifetime pension.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "panama-pensionado-principal",
+          "label": "Pensionado (retiree) permanent residence",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Panama — Servicio Nacional de Migración",
+          "url": "https://www.migracion.gob.pa/permisos-migratorios/"
+        }
+      ]
+    },
+    {
+      "id": "panama-qualified-investor-visa",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Qualified Investor permanent residence",
+      "summary": "Direct permanent residence for a large qualifying investment, with no prior temporary period.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 500000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "panama-qualified-investor-visa-principal",
+          "label": "Qualified Investor permanent residence",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Panama — Servicio Nacional de Migración",
+          "url": "https://www.migracion.gob.pa/permisos-migratorios/"
+        }
+      ]
+    },
+    {
+      "id": "portugal-d7-passive-income",
+      "country": {
+        "iso_n3": "620",
+        "name": "Portugal"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "D7 passive-income / retirement visa",
+      "summary": "Residence for retirees and holders of stable passive income (pensions, rents, dividends).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 870,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "portugal-d7-passive-income-principal",
+          "label": "D7 passive-income / retirement visa",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Portugal visas portal (MNE) — D8",
+          "url": "https://vistos.mne.gov.pt/"
+        }
+      ]
+    },
+    {
+      "id": "portugal-d8-digital-nomad",
+      "country": {
+        "iso_n3": "620",
+        "name": "Portugal"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "D8 digital nomad residence visa",
+      "summary": "Residence for remote workers and self-employed with foreign-source income.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3480,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "portugal-d8-digital-nomad-principal",
+          "label": "D8 digital nomad residence visa",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Portugal visas portal (MNE) — D8",
+          "url": "https://vistos.mne.gov.pt/"
+        }
+      ]
+    },
+    {
+      "id": "portugal-golden-visa",
+      "country": {
+        "iso_n3": "620",
+        "name": "Portugal"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Golden Visa (ARI) — investment residence",
+      "summary": "Residence-by-investment via qualifying funds, job creation, or cultural contribution; real-estate routes were removed in October 2023.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 500000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 7,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "portugal-golden-visa-principal",
+          "label": "Golden Visa (ARI) — investment residence",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "AIMA — Autorização de Residência para Atividade de Investimento",
+          "url": "https://aima.gov.pt/"
+        }
+      ]
+    },
+    {
+      "id": "spain-digital-nomad",
+      "country": {
+        "iso_n3": "724",
+        "name": "Spain"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Digital nomad (international teleworking) residence",
+      "summary": "Residence for non-EU remote workers under the 2022 Startups Law; unaffected by the golden-visa repeal.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 2760,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "spain-digital-nomad-principal",
+          "label": "Digital nomad (international teleworking) residence",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Spain — Ministerio de Inclusión (extranjería)",
+          "url": "https://extranjeros.inclusion.gob.es/"
+        }
+      ]
+    },
+    {
+      "id": "spain-non-lucrative-visa",
+      "country": {
+        "iso_n3": "724",
+        "name": "Spain"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Non-lucrative residence visa",
+      "summary": "Residence for those with sufficient passive income/savings who will not work in Spain; popular with retirees.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 2400,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": 183,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "spain-non-lucrative-visa-principal",
+          "label": "Non-lucrative residence visa",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Spain — Ministerio de Inclusión (extranjería)",
+          "url": "https://extranjeros.inclusion.gob.es/"
+        }
+      ]
+    },
+    {
+      "id": "thailand-ltr-wealthy-global-citizen",
+      "country": {
+        "iso_n3": "764",
+        "name": "Thailand"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "LTR — Wealthy Global Citizen",
+      "summary": "10-year Long-Term Resident visa for high-net-worth individuals investing in Thailand.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 500000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "thailand-ltr-wealthy-global-citizen-principal",
+          "label": "LTR — Wealthy Global Citizen",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Thailand LTR Visa — BOI",
+          "url": "https://ltr.boi.go.th/"
+        }
+      ]
+    },
+    {
+      "id": "thailand-ltr-wealthy-pensioner",
+      "country": {
+        "iso_n3": "764",
+        "name": "Thailand"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "LTR — Wealthy Pensioner",
+      "summary": "10-year Long-Term Resident visa for retirees aged 50+ with sufficient passive income.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 6667,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "thailand-ltr-wealthy-pensioner-principal",
+          "label": "LTR — Wealthy Pensioner",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Thailand LTR Visa — BOI",
+          "url": "https://ltr.boi.go.th/"
+        }
+      ]
+    },
+    {
+      "id": "thailand-ltr-work-from-thailand",
+      "country": {
+        "iso_n3": "764",
+        "name": "Thailand"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "LTR — Work-from-Thailand professional",
+      "summary": "10-year Long-Term Resident visa for remote employees of established foreign companies.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 6667,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "thailand-ltr-work-from-thailand-principal",
+          "label": "LTR — Work-from-Thailand professional",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Thailand LTR Visa — BOI",
+          "url": "https://ltr.boi.go.th/"
+        }
+      ]
+    },
+    {
+      "id": "uae-golden-visa-investor",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Golden Visa — investor",
+      "summary": "10-year renewable residence for a qualifying capital, fund, or property investment.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 2000000,
+        "currency": "AED"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uae-golden-visa-investor-principal",
+          "label": "Golden Visa — investor",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "UAE Government — Golden Visa",
+          "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa"
+        }
+      ]
+    },
+    {
+      "id": "uae-golden-visa-talent",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Golden Visa — specialized talent",
+      "summary": "10-year residence for scientists, doctors, PhD holders, inventors, top professionals, creatives, and athletes.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uae-golden-visa-talent-principal",
+          "label": "Golden Visa — specialized talent",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "UAE Government — Golden Visa",
+          "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa"
+        }
+      ]
+    },
+    {
+      "id": "uae-remote-work-visa",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Virtual working (remote work) programme",
+      "summary": "One-year renewable residence for remote workers employed by or owning a company outside the UAE.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3500,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uae-remote-work-visa-principal",
+          "label": "Virtual working (remote work) programme",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "UAE residence visas — u.ae",
+          "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas"
+        }
+      ]
+    },
+    {
+      "id": "uae-retirement-visa",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Retire in the UAE (5-year)",
+      "summary": "Five-year renewable residence for applicants aged 55+ meeting a financial-means test.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "AED"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uae-retirement-visa-principal",
+          "label": "Retire in the UAE (5-year)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "UAE residence visas — u.ae",
+          "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas"
+        }
+      ]
+    },
+    {
+      "id": "uruguay-legal-residence",
+      "country": {
+        "iso_n3": "858",
+        "name": "Uruguay"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Legal (permanent) residence",
+      "summary": "Permanent legal residence for those who prove lawful means of living and genuine intent to reside.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uruguay-legal-residence-principal",
+          "label": "Legal (permanent) residence",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Uruguay — Dirección Nacional de Migración",
+          "url": "https://migracion.gub.uy/"
         }
       ]
     }
