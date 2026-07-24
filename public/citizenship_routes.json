@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 26
+      "residence_routes": 38
     }
   },
   "jurisdictions": [
@@ -1100,7 +1100,13 @@
         "estonia-citizenship-by-parent",
         "estonia-naturalization",
         "estonia-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "estonia-digital-nomad"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "234",
@@ -1609,7 +1615,13 @@
         "hungary-ordinary-naturalization",
         "hungary-citizenship-at-birth-by-parent",
         "hungary-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "hungary-guest-investor"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "352",
@@ -1749,7 +1761,13 @@
         "italy-citizenship-by-descent",
         "italy-naturalization-by-residence",
         "italy-citizenship-connected-to-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "italy-investor-visa"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "384",
@@ -1985,7 +2003,13 @@
         "latvia-citizenship-by-parent",
         "latvia-naturalization",
         "latvia-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "latvia-investor-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "430",
@@ -2194,7 +2218,15 @@
         "malta-citizenship-by-birth",
         "malta-transactional-investor-citizenship-ended",
         "malta-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "malta-nomad-residence",
+        "malta-mprp"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed",
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "478",
@@ -2229,7 +2261,15 @@
         "mauritius-citizenship-connected-to-birth",
         "mauritius-investor-naturalization",
         "mauritius-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "mauritius-retired-residence",
+        "mauritius-occupation-permit-investor"
+      ],
+      "residence_coverage": {
+        "retirement_pension": "reviewed",
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "484",
@@ -2456,7 +2496,13 @@
         "netherlands-naturalization-by-residence",
         "netherlands-third-generation-birth",
         "netherlands-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "netherlands-self-employed-daft"
+      ],
+      "residence_coverage": {
+        "talent_skilled": "reviewed"
+      }
     },
     {
       "iso_n3": "531",
@@ -2848,7 +2894,13 @@
         "philippines-naturalization",
         "philippines-citizenship-at-birth-by-parent",
         "philippines-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "philippines-srrv-classic"
+      ],
+      "residence_coverage": {
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "612",
@@ -3380,7 +3432,15 @@
         "south-africa-naturalization",
         "south-africa-citizenship-at-birth-by-parent",
         "south-africa-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "south-africa-retired-person",
+        "south-africa-financially-independent"
+      ],
+      "residence_coverage": {
+        "retirement_pension": "reviewed",
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "716",
@@ -35842,6 +35902,48 @@
       ]
     },
     {
+      "id": "estonia-digital-nomad",
+      "country": {
+        "iso_n3": "233",
+        "name": "Estonia"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Digital Nomad Visa",
+      "summary": "Long-stay visa for location-independent non-EU workers with foreign employers or clients.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 4500,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "estonia-digital-nomad-principal",
+          "label": "Digital Nomad Visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Estonia Digital Nomad Visa — e-Residency",
+          "url": "https://www.e-resident.gov.ee/nomadvisa/"
+        }
+      ]
+    },
+    {
       "id": "greece-digital-nomad",
       "country": {
         "iso_n3": "300",
@@ -35970,6 +36072,136 @@
       ]
     },
     {
+      "id": "hungary-guest-investor",
+      "country": {
+        "iso_n3": "348",
+        "name": "Hungary"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Guest Investor residence permit",
+      "summary": "Long-term residence for non-EU investors via a regulated real-estate fund or a university donation.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 250000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "hungary-guest-investor-principal",
+          "label": "Guest Investor residence permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Hungary Guest Investor Programme — OIF",
+          "url": "https://oif.gov.hu/"
+        }
+      ]
+    },
+    {
+      "id": "italy-investor-visa",
+      "country": {
+        "iso_n3": "380",
+        "name": "Italy"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor Visa for Italy",
+      "summary": "Residence for non-EU nationals making a qualifying investment or philanthropic donation in Italy.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 250000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "italy-investor-visa-principal",
+          "label": "Investor Visa for Italy",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Investor Visa for Italy — MISE",
+          "url": "https://investorvisa.mise.gov.it/"
+        }
+      ]
+    },
+    {
+      "id": "latvia-investor-residence",
+      "country": {
+        "iso_n3": "428",
+        "name": "Latvia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residence permit for investors",
+      "summary": "Temporary residence via a subordinated bank deposit, real estate, company equity, or government bonds.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 280000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "latvia-investor-residence-principal",
+          "label": "Residence permit for investors",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Latvia — Office of Citizenship and Migration Affairs",
+          "url": "https://www.pmlp.gov.lv/en/residence-permit"
+        }
+      ]
+    },
+    {
       "id": "malaysia-de-rantau-nomad",
       "country": {
         "iso_n3": "458",
@@ -36050,6 +36282,180 @@
         {
           "title": "Malaysia MM2H — official programme",
           "url": "https://mm2h.gov.my/"
+        }
+      ]
+    },
+    {
+      "id": "malta-mprp",
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Malta Permanent Residence Programme (MPRP)",
+      "summary": "Immediate permanent residence via property, a government contribution, and a donation.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 350000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malta-mprp-principal",
+          "label": "Malta Permanent Residence Programme (MPRP)",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Malta Permanent Residence Programme — Residency Malta",
+          "url": "https://residencymalta.gov.mt/"
+        }
+      ]
+    },
+    {
+      "id": "malta-nomad-residence",
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Nomad Residence Permit",
+      "summary": "One-year renewable residence permit for non-EU remote workers with foreign employers or clients.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3500,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malta-nomad-residence-principal",
+          "label": "Nomad Residence Permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Malta Nomad Residence Permit — Residency Malta",
+          "url": "https://nomad.residencymalta.gov.mt/"
+        }
+      ]
+    },
+    {
+      "id": "mauritius-occupation-permit-investor",
+      "country": {
+        "iso_n3": "480",
+        "name": "Mauritius"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Occupation Permit — Investor",
+      "summary": "10-year combined work/residence permit for investors in a Mauritian company.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 50000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mauritius-occupation-permit-investor-principal",
+          "label": "Occupation Permit — Investor",
+          "allocation": "right",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Mauritius EDB — Residency",
+          "url": "https://residency.mu/"
+        }
+      ]
+    },
+    {
+      "id": "mauritius-retired-residence",
+      "country": {
+        "iso_n3": "480",
+        "name": "Mauritius"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Retired Non-Citizen residence permit",
+      "summary": "10-year residence permit for persons aged 50+ transferring a set income into Mauritius.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 2000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mauritius-retired-residence-principal",
+          "label": "Retired Non-Citizen residence permit",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Mauritius EDB — Retired Non-Citizen",
+          "url": "https://residency.mu/retired-non-citizen/"
         }
       ]
     },
@@ -36138,6 +36544,50 @@
         {
           "title": "Mexico — Instituto Nacional de Migración",
           "url": "https://www.gob.mx/inm"
+        }
+      ]
+    },
+    {
+      "id": "netherlands-self-employed-daft",
+      "country": {
+        "iso_n3": "528",
+        "name": "Netherlands"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Self-employed residence (incl. DAFT)",
+      "summary": "Residence for self-employed non-EU nationals; US citizens qualify under the Dutch-American Friendship Treaty at a low capital bar.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 4500,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "netherlands-self-employed-daft-principal",
+          "label": "Self-employed residence (incl. DAFT)",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Netherlands — IND self-employed residence",
+          "url": "https://www.ind.nl/en/residence-permits/work/residence-permit-self-employed-person"
         }
       ]
     },
@@ -36274,6 +36724,53 @@
       ]
     },
     {
+      "id": "philippines-srrv-classic",
+      "country": {
+        "iso_n3": "608",
+        "name": "Philippines"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "SRRV Classic (retirement residence)",
+      "summary": "Permanent non-immigrant retiree residence granting indefinite stay, backed by a bank deposit.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 15000,
+        "currency": "USD"
+      },
+      "min_income_monthly": {
+        "amount": 800,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "philippines-srrv-classic-principal",
+          "label": "SRRV Classic (retirement residence)",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "Philippine Retirement Authority — SRRV",
+          "url": "https://pra.gov.ph/SRRVisa"
+        }
+      ]
+    },
+    {
       "id": "portugal-d7-passive-income",
       "country": {
         "iso_n3": "620",
@@ -36402,6 +36899,94 @@
         {
           "title": "AIMA — Autorização de Residência para Atividade de Investimento",
           "url": "https://aima.gov.pt/"
+        }
+      ]
+    },
+    {
+      "id": "south-africa-financially-independent",
+      "country": {
+        "iso_n3": "710",
+        "name": "South Africa"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Financially Independent permit",
+      "summary": "Direct permanent residence for applicants proving substantial net worth.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 12000000,
+        "currency": "ZAR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "south-africa-financially-independent-principal",
+          "label": "Financially Independent permit",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "South Africa — Department of Home Affairs",
+          "url": "https://www.dha.gov.za/"
+        }
+      ]
+    },
+    {
+      "id": "south-africa-retired-person",
+      "country": {
+        "iso_n3": "710",
+        "name": "South Africa"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Retired Person visa",
+      "summary": "Residence for retirees with guaranteed lifelong income; available as temporary or direct permanent residence.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 37000,
+        "currency": "ZAR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "south-africa-retired-person-principal",
+          "label": "Retired Person visa",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-24",
+      "sources": [
+        {
+          "title": "South Africa — Department of Home Affairs",
+          "url": "https://www.dha.gov.za/"
         }
       ]
     },

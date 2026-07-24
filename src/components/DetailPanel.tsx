@@ -450,9 +450,11 @@ export function DetailPanel({
   const laneCount = lanesIn.length + lanesOut.length;
 
   return (
-    <section className="h-full w-full overflow-y-auto bg-background px-3 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-4 md:pt-4 md:pb-8">
-      {/* Sticky bar: country name + minimize/close stay pinned while scrolling. */}
-      <div className="sticky top-0 z-10 -mx-3 flex items-center justify-between gap-2 border-b bg-background/95 px-3 py-2.5 backdrop-blur-sm sm:-mx-4 sm:px-4">
+    <section className="h-full w-full overflow-y-auto bg-background px-3 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-4 md:pb-8">
+      {/* Sticky bar: country name + minimize/close stay pinned while scrolling.
+          Sits flush to the scroll-container top (no pt gap) so content scrolls
+          cleanly under it; opaque background prevents bleed-through. */}
+      <div className="sticky top-0 z-10 -mx-3 flex items-center justify-between gap-2 border-b bg-background px-3 py-2.5 sm:-mx-4 sm:px-4">
         <h2 className="flex min-w-0 items-center gap-2 text-base font-semibold">
           {flag && <span aria-hidden>{flag}</span>}
           <span className="truncate">{countryName}</span>
