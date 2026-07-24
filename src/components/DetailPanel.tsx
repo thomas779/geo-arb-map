@@ -8,6 +8,8 @@ import type {
   CitizenshipCoverageState,
   CitizenshipRoute,
   CitizenshipRoutesData,
+  ResidenceCategory,
+  ResidenceRoute,
 } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -220,6 +222,87 @@ function RouteCard({ route }: { route: CitizenshipRoute }) {
   );
 }
 
+const RESIDENCE_CATEGORY_LABELS: Record<ResidenceCategory, string> = {
+  investment: 'Investment',
+  digital_nomad: 'Digital nomad',
+  retirement_pension: 'Retirement',
+  talent_skilled: 'Talent',
+  general_permanent_residence: 'Permanent residence',
+};
+
+function formatMoney(money: { amount: number; currency: string } | null): string | null {
+  if (!money) return null;
+  return `${money.currency} ${money.amount.toLocaleString('en-US')}`;
+}
+
+function ResidenceCard({ route }: { route: ResidenceRoute }) {
+  const chips: string[] = [];
+  const investment = formatMoney(route.min_investment);
+  if (investment) chips.push(`from ${investment}`);
+  const income = formatMoney(route.min_income_monthly);
+  if (income) chips.push(`${income}/mo`);
+  if (route.physical_presence_days_per_year !== null) {
+    chips.push(
+      route.physical_presence_days_per_year === 0
+        ? 'no stay required'
+        : `${route.physical_presence_days_per_year} days/yr`,
+    );
+  }
+  return (
+    <details className="group overflow-hidden rounded-lg border bg-card">
+      <summary className="flex min-h-14 cursor-pointer list-none items-start gap-2.5 px-3 py-3">
+        <div className="min-w-0 flex-1">
+          <div className="mb-1 flex flex-wrap items-center gap-1.5">
+            <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+              {RESIDENCE_CATEGORY_LABELS[route.category]}
+            </span>
+            {route.counts_toward_naturalization ? (
+              <Badge variant="verified" className="h-4 px-1.5 text-[9px]">→ citizenship</Badge>
+            ) : route.counts_toward_permanent_residence ? (
+              <Badge variant="outline" className="h-4 px-1.5 text-[9px]">→ permanent residence</Badge>
+            ) : (
+              <Badge variant="outline" className="h-4 px-1.5 text-[9px]">renewable — no PR</Badge>
+            )}
+          </div>
+          <span className="block text-sm font-medium leading-snug">{route.title}</span>
+        </div>
+        <ChevronDown className="mt-1 size-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+      </summary>
+      <div className="border-t px-3 py-3">
+        <p className="text-xs leading-relaxed text-muted-foreground">{route.summary}</p>
+        {chips.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {chips.map(chip => (
+              <Badge key={chip} variant="secondary" className="text-[10px]">{chip}</Badge>
+            ))}
+          </div>
+        )}
+        <div className="mt-3 border-t border-dashed pt-2">
+          <div className="flex items-center justify-between gap-2 text-[10px] text-muted-foreground">
+            <span className="font-semibold uppercase tracking-wider">Official sources</span>
+            <span>Checked {route.last_checked}</span>
+          </div>
+          <ul className="mt-1.5 space-y-1.5">
+            {route.sources.map(source => (
+              <li key={source.url}>
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-start gap-1 text-xs leading-snug text-muted-foreground underline decoration-border underline-offset-2 hover:text-foreground"
+                >
+                  <span>{source.title}</span>
+                  <ExternalLink className="mt-0.5 size-3 shrink-0" aria-hidden />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </details>
+  );
+}
+
 function BlocCard({ bloc, iso, former }: { bloc: Bloc; iso: string; former: boolean }) {
   const dark = useTheme().theme === 'dark';
   const inSubBloc = !former && bloc.sub_bloc?.members_iso.includes(iso);
@@ -350,6 +433,9 @@ export function DetailPanel({
   const lanesOut = data.bilateral_lanes.filter(l => l.beneficiaries.some(m => m.iso_n3 === iso));
   const jurisdiction = citizenshipRoutes?.jurisdictions.find(row => row.iso_n3 === iso);
   const routes = citizenshipRoutes?.routes.filter(route => route.country.iso_n3 === iso) ?? [];
+  const residenceRoutes = citizenshipRoutes?.residence_routes?.filter(
+    route => route.country.iso_n3 === iso,
+  ) ?? [];
 
   const nameFromData = jurisdiction?.name ?? data.blocs
     .flatMap(b => [...b.members, ...(b.former_members ?? [])])
@@ -379,7 +465,7 @@ export function DetailPanel({
             <span className="truncate">{countryName}</span>
           </h2>
           <p className="mt-1 text-xs text-muted-foreground">
-            {routes.length} country rule{routes.length === 1 ? '' : 's'} · {regionalCount} regional system{regionalCount === 1 ? '' : 's'} · {laneCount} treaty path{laneCount === 1 ? '' : 's'}
+            {routes.length} country rule{routes.length === 1 ? '' : 's'}{residenceRoutes.length > 0 ? ` · ${residenceRoutes.length} residence route${residenceRoutes.length === 1 ? '' : 's'}` : ''} · {regionalCount} regional system{regionalCount === 1 ? '' : 's'} · {laneCount} treaty path{laneCount === 1 ? '' : 's'}
           </p>
         </div>
         <div className="-mr-1 -mt-1 flex shrink-0 items-center gap-0.5">
@@ -418,6 +504,18 @@ export function DetailPanel({
         <div className="mt-2 rounded-lg border border-dashed px-3 py-3 text-xs leading-relaxed text-muted-foreground">
           Country law has not been reviewed at route level yet. This is a coverage gap, not a claim that no path exists.
         </div>
+      )}
+
+      {residenceRoutes.length > 0 && (
+        <>
+          <SectionHeading
+            title="Residence & settlement"
+            description="Live-here routes (golden visas, digital-nomad, retirement, talent). Each notes whether the time counts toward permanent residence and citizenship."
+          />
+          <div className="space-y-2">
+            {residenceRoutes.map(route => <ResidenceCard key={route.id} route={route} />)}
+          </div>
+        </>
       )}
 
       {regionalCount > 0 && (
