@@ -44,6 +44,7 @@ export interface Finding {
   affects_dataset: boolean;
   category: string;
   brief: string;
+  evidence_quote: string;
   citations: GroundingCitation[];
   search_queries: string[];
 }
@@ -172,12 +173,15 @@ export function buildSweepPrompt(
 ): string {
   return `You are fact-checking government mobility rules for ${entry.name} (ISO ${entry.iso_n3}).
 First, use Google Search to find the most recent OFFICIAL / primary sources (government, gazette, court,
-or tax authority; native language is fine) on ${entry.name}'s rules for lasting mobility: citizenship and
+or tax authority) on ${entry.name}'s rules for lasting mobility: citizenship and
 naturalisation, permanent and long-term residency, ancestry/descent, citizenship/residency-by-investment
 (CBI/RBI), AND tax-residence rules (who becomes tax-resident, non-dom/territorial regimes, exit tax).
-Prioritise the last 12 months and anything announced or upcoming. You MUST search before answering; do
-not rely on prior knowledge alone. Keep it efficient: run a few targeted searches (about 3-5), not an
-exhaustive sweep.
+Search in ${entry.name}'s official language(s) as well as English — primary legal sources are usually
+published in the local language, so query the local gazette/ministry terms (not only English) to reach them.
+Prioritise changes announced, enacted, or taking effect in the last ~90 days, plus anything upcoming.
+Do NOT report changes older than about six months unless they are upcoming or have only just come to light.
+You MUST search before answering; do not rely on prior knowledge alone. Keep it efficient: run a few
+targeted searches (about 3-5), not an exhaustive sweep.
 Then report ONLY changes that are already in force OR announced/upcoming and are NOT already reflected
 in what we record below.
 Report a change ONLY if it alters WHO QUALIFIES, an investment/income threshold or fee that gates a route,
@@ -198,7 +202,8 @@ Return ONLY a JSON array (no prose, no code fences). Return [] if nothing new. E
 "affects_dataset":boolean (true ONLY if it changes eligibility, a gating threshold/fee, a residence period or timeline, a route's existence, or a tax-residence rule; false for administrative/format/procedural changes),
 "category":"ancestry|naturalization|birth|investment|visa|residency|cbi|tax",
 "headline":"a clean 6-12 word news headline that NAMES the country and states the change, readable in a phone notification (e.g. 'Georgia raises residency property threshold to 150,000 dollars'); do not start with the ISO code and do not repeat the country name twice",
-"brief":"1-2 tight sentences a subscriber wants to read: what changed, why it matters, and one concrete number, date, or detail"}
+"brief":"1-2 tight sentences a subscriber wants to read: what changed, why it matters, and one concrete number, date, or detail",
+"evidence_quote":"a short verbatim passage (max 200 chars) quoted from the primary source that directly supports the claim's key figure(s) and effective date; translate to English if the source is in another language, keeping it faithful"}
 Voice for headline and brief: plain, confident, and specific; lead with the change or the number; no clickbait,
 no hype, no exclamation marks, and never legal advice. Put ONLY official/primary URLs in primary_urls — never
 blogs or aggregators. Use status "confirmed" only when a primary source supports it.`;
@@ -246,6 +251,7 @@ export function normalizeFindings(
       affects_dataset: item.affects_dataset === true,
       category: String(item.category ?? '').trim().slice(0, 40) || 'residency',
       brief: String(item.brief ?? claim).trim().replace(/\s+/g, ' ').slice(0, 500),
+      evidence_quote: String(item.evidence_quote ?? '').trim().replace(/\s+/g, ' ').slice(0, 300),
       citations: grounded.citations,
       search_queries: grounded.searchQueries,
     }];
