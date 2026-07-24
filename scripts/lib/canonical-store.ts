@@ -172,7 +172,12 @@ function insertRevision(
 }
 
 function legacyJurisdictionRevision(record: JurisdictionRecord): JurisdictionRecordV1 {
-  const { coverage: _coverage, ...legacy } = record;
+  const {
+    coverage: _coverage,
+    residence_routes: _residenceRoutes,
+    residence_coverage: _residenceCoverage,
+    ...legacy
+  } = record;
   return JurisdictionRecordV1Schema.parse({
     ...legacy,
     schema_version: 1,
