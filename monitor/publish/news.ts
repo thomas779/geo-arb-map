@@ -62,6 +62,40 @@ export function fingerprint(finding: Pick<Finding, 'iso_n3' | 'claim' | 'effecti
     .slice(0, 16);
 }
 
+// Resolve a source URL to something that actually opens. The grounded model
+// sometimes fabricates deep-link paths/ids (e.g. a gazette search with a made-up
+// id) that 404. Keep the link if it resolves; otherwise fall back to the
+// official domain root, which always works and is the correct publisher. Never
+// blocks publishing — on any failure it degrades to the domain root.
+export async function verifySourceUrl(
+  url: string,
+  fetcher: typeof fetch = fetch,
+): Promise<string> {
+  let origin = '';
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'https:' && parsed.protocol !== 'http:') return url;
+    origin = parsed.origin;
+  } catch {
+    return url;
+  }
+  try {
+    const response = await fetcher(url, {
+      method: 'GET',
+      redirect: 'follow',
+      signal: AbortSignal.timeout(8000),
+      headers: {
+        'user-agent':
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+      },
+    });
+    if (response.ok) return response.url || url;
+  } catch {
+    // network error / timeout / bot-block — fall back to the domain root
+  }
+  return origin || url;
+}
+
 export function buildNewsPost(finding: Finding): TelegramPost {
   const sources = finding.primary_urls;
   if (sources.length === 0) throw new Error('finding has no primary source URL');
@@ -71,7 +105,7 @@ export function buildNewsPost(finding: Finding): TelegramPost {
     : sources.map((url, index) => `<a href="${escapeAttr(url)}">Source ${index + 1}</a>`).join(' · ');
 
   const text = [
-    `${flagEmoji(finding.iso_n3)} ${escapeHtml(headline)}`,
+    `${flagEmoji(finding.iso_n3)} <b>${escapeHtml(headline)}</b>`,
     '',
     escapeHtml(finding.brief),
     '',
@@ -185,6 +219,8 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
   for (const finding of confirmed) {
     const fp = fingerprint(finding);
     if (store?.has(fp)) { skipped += 1; console.log(`skip (already posted): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`); continue; }
+    // Make sure the "Source" link opens; fall back to the domain root if not.
+    finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
     let post: TelegramPost;
     try {
       post = buildNewsPost(finding);
