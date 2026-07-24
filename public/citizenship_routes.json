@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 850,
+      "routes": 871,
       "by_mode": {
         "ancestry": 237,
-        "naturalization": 357,
+        "naturalization": 378,
         "birth": 231,
         "investment": 25
       },
       "by_status": {
-        "active": 835,
+        "active": 856,
         "pending_verification": 6,
         "inactive": 8,
         "verified_negative": 1
@@ -155,7 +155,8 @@
         "antigua-barbuda-citizenship-by-parent",
         "antigua-barbuda-naturalization",
         "antigua-barbuda-citizenship-by-birth",
-        "antigua-barbuda-cip"
+        "antigua-barbuda-cip",
+        "antigua-barbuda-citizenship-by-marriage"
       ]
     },
     {
@@ -237,7 +238,8 @@
       "route_ids": [
         "bahamas-citizenship-by-parent",
         "bahamas-naturalization",
-        "bahamas-citizenship-connected-to-birth"
+        "bahamas-citizenship-connected-to-birth",
+        "bahamas-citizenship-by-marriage"
       ]
     },
     {
@@ -304,7 +306,8 @@
       "route_ids": [
         "barbados-citizenship-by-parent",
         "barbados-naturalization",
-        "barbados-citizenship-by-birth"
+        "barbados-citizenship-by-birth",
+        "barbados-citizenship-by-marriage"
       ]
     },
     {
@@ -437,7 +440,8 @@
         "belize-citizenship-by-parent",
         "belize-naturalization",
         "belize-citizenship-at-birth-by-parent",
-        "belize-economic-citizenship-closed"
+        "belize-economic-citizenship-closed",
+        "belize-citizenship-by-marriage"
       ]
     },
     {
@@ -880,7 +884,8 @@
       "route_ids": [
         "cuba-citizenship-by-parent",
         "cuba-naturalization",
-        "cuba-citizenship-at-birth-by-parent"
+        "cuba-citizenship-at-birth-by-parent",
+        "cuba-citizenship-by-marriage"
       ]
     },
     {
@@ -965,7 +970,8 @@
         "dominica-citizenship-by-parent",
         "dominica-naturalization-after-residence",
         "dominica-citizenship-by-birth",
-        "dominica-cbi"
+        "dominica-cbi",
+        "dominica-citizenship-by-marriage"
       ]
     },
     {
@@ -981,7 +987,8 @@
       "route_ids": [
         "dominican-republic-citizenship-by-parent",
         "dominican-republic-naturalization",
-        "dominican-republic-citizenship-by-birth"
+        "dominican-republic-citizenship-by-birth",
+        "dominican-republic-citizenship-by-marriage"
       ]
     },
     {
@@ -1142,7 +1149,8 @@
       "route_ids": [
         "fiji-citizenship-by-parent",
         "fiji-naturalization",
-        "fiji-citizenship-at-birth-by-parent"
+        "fiji-citizenship-at-birth-by-parent",
+        "fiji-citizenship-by-marriage"
       ]
     },
     {
@@ -1371,7 +1379,8 @@
       "route_ids": [
         "kiribati-citizenship-by-parent",
         "kiribati-naturalization",
-        "kiribati-citizenship-at-birth-by-parent"
+        "kiribati-citizenship-at-birth-by-parent",
+        "kiribati-citizenship-by-marriage"
       ]
     },
     {
@@ -1420,7 +1429,8 @@
         "grenada-citizenship-by-parent",
         "grenada-naturalization",
         "grenada-citizenship-by-birth",
-        "grenada-cbi"
+        "grenada-cbi",
+        "grenada-citizenship-by-marriage"
       ]
     },
     {
@@ -1485,7 +1495,8 @@
       "route_ids": [
         "guyana-citizenship-by-parent",
         "guyana-naturalization",
-        "guyana-citizenship-at-birth-by-parent"
+        "guyana-citizenship-at-birth-by-parent",
+        "guyana-citizenship-by-marriage"
       ]
     },
     {
@@ -1750,7 +1761,8 @@
       "route_ids": [
         "jamaica-citizenship-by-parent",
         "jamaica-naturalization",
-        "jamaica-citizenship-at-birth-by-parent"
+        "jamaica-citizenship-at-birth-by-parent",
+        "jamaica-citizenship-by-marriage"
       ]
     },
     {
@@ -2504,7 +2516,8 @@
         "vanuatu-citizenship-by-parent",
         "vanuatu-naturalization",
         "vanuatu-citizenship-at-birth-by-parent",
-        "vanuatu-investor-citizenship"
+        "vanuatu-investor-citizenship",
+        "vanuatu-citizenship-by-marriage"
       ]
     },
     {
@@ -2537,7 +2550,8 @@
         "nicaragua-citizenship-by-parent",
         "nicaragua-central-american-option",
         "nicaragua-naturalization",
-        "nicaragua-citizenship-by-birth"
+        "nicaragua-citizenship-by-birth",
+        "nicaragua-citizenship-by-marriage"
       ]
     },
     {
@@ -2719,7 +2733,8 @@
         "panama-ordinary-naturalization",
         "panama-family-naturalization",
         "panama-spain-latin-american-reciprocity-naturalization",
-        "panama-nationality-by-birth"
+        "panama-nationality-by-birth",
+        "panama-citizenship-by-marriage"
       ]
     },
     {
@@ -2736,7 +2751,8 @@
         "papua-new-guinea-citizenship-by-parent",
         "papua-new-guinea-naturalization",
         "papua-new-guinea-citizenship-at-birth-by-parent",
-        "papua-new-guinea-investor-naturalization"
+        "papua-new-guinea-investor-naturalization",
+        "papua-new-guinea-citizenship-by-marriage"
       ]
     },
     {
@@ -3006,7 +3022,8 @@
         "st-kitts-nevis-citizenship-by-parent",
         "st-kitts-nevis-naturalization",
         "st-kitts-nevis-citizenship-by-birth",
-        "st-kitts-nevis-citizenship-programme"
+        "st-kitts-nevis-citizenship-programme",
+        "st-kitts-nevis-citizenship-by-marriage"
       ]
     },
     {
@@ -3039,7 +3056,8 @@
         "saint-lucia-citizenship-by-parent-or-grandparent",
         "saint-lucia-naturalization",
         "saint-lucia-citizenship-by-birth",
-        "saint-lucia-cip"
+        "saint-lucia-cip",
+        "saint-lucia-citizenship-by-marriage"
       ]
     },
     {
@@ -3087,7 +3105,8 @@
       "route_ids": [
         "saint-vincent-citizenship-by-parent",
         "saint-vincent-naturalization",
-        "saint-vincent-citizenship-at-birth-by-parent"
+        "saint-vincent-citizenship-at-birth-by-parent",
+        "saint-vincent-citizenship-by-marriage"
       ]
     },
     {
@@ -3402,7 +3421,8 @@
       "route_ids": [
         "suriname-citizenship-by-parent",
         "suriname-naturalization",
-        "suriname-citizenship-at-birth-by-parent"
+        "suriname-citizenship-at-birth-by-parent",
+        "suriname-citizenship-by-marriage"
       ]
     },
     {
@@ -3566,7 +3586,8 @@
       "route_ids": [
         "trinidad-and-tobago-citizenship-by-parent",
         "trinidad-and-tobago-naturalization",
-        "trinidad-and-tobago-citizenship-at-birth-by-parent"
+        "trinidad-and-tobago-citizenship-at-birth-by-parent",
+        "trinidad-and-tobago-citizenship-by-marriage"
       ]
     },
     {
@@ -4746,6 +4767,42 @@
       ]
     },
     {
+      "id": "antigua-barbuda-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "028",
+        "name": "Antigua and Barbuda"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse married to and living with a national for three years may register as a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "antigua-barbuda-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Registration (entitlement); gender-neutral."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Constitution of Antigua and Barbuda",
+          "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made"
+        }
+      ]
+    },
+    {
       "id": "antigua-barbuda-citizenship-by-parent",
       "country": {
         "iso_n3": "028",
@@ -5345,6 +5402,42 @@
       ]
     },
     {
+      "id": "bahamas-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "044",
+        "name": "Bahamas"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Bahamian man may register as a citizen with no residence requirement.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahamas-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Wife only — a foreign husband of a Bahamian woman cannot register (a 2016 equalization referendum failed)."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Constitution of The Bahamas — citizenship",
+          "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf"
+        }
+      ]
+    },
+    {
       "id": "bahamas-citizenship-by-parent",
       "country": {
         "iso_n3": "044",
@@ -5907,6 +6000,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Barbados — citizenship",
+          "url": "https://www.electoral.barbados.gov.bb/wp-content/uploads/2021/10/The_Constitution_of_Barbados.pdf"
+        }
+      ]
+    },
+    {
+      "id": "barbados-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "052",
+        "name": "Barbados"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Barbadian may register on oath.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "barbados-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Foreign husbands cannot derive nationality by marriage."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Constitution of Barbados — citizenship",
@@ -6933,6 +7062,42 @@
         {
           "title": "Belize Immigration — Citizenship eligibility",
           "url": "https://immigration.gov.bz/citizenship/citizenship-do-i-qualify/"
+        }
+      ]
+    },
+    {
+      "id": "belize-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "084",
+        "name": "Belize"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Belizean may register after one year of residence, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "belize-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "Minister's discretion; gender-neutral."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Belize Economic Citizenship (Abolition of Rights) Act 2023",
+          "url": "https://www.nationalassembly.gov.bz/wp-content/uploads/2023/12/Act-No.-54-of-2023-economic-citizenship.pdf"
         }
       ]
     },
@@ -10359,6 +10524,42 @@
       ]
     },
     {
+      "id": "cuba-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "192",
+        "name": "Cuba"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Residence is reduced to two years for a spouse of a Cuban (or a parent of a Cuban-born child), instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cuba-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Cuban naturalization is a discretionary state grant."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Cuba Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cuba_2019"
+        }
+      ]
+    },
+    {
       "id": "cuba-citizenship-by-parent",
       "country": {
         "iso_n3": "192",
@@ -11062,6 +11263,42 @@
       ]
     },
     {
+      "id": "dominica-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "212",
+        "name": "Dominica"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse married to and living with a national for three years may register as a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "dominica-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Gender-neutral; English and an oath required."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Dominica Government — Citizenship applications",
+          "url": "https://www.dominica.gov.dm/services/citizenship/how-do-i-apply-for-citizenship-of-the-commonwealth-of-dominica"
+        }
+      ]
+    },
+    {
       "id": "dominica-citizenship-by-parent",
       "country": {
         "iso_n3": "212",
@@ -11167,6 +11404,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Dominican Republic Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Dominican_Republic_2015"
+        }
+      ]
+    },
+    {
+      "id": "dominican-republic-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "214",
+        "name": "Dominican Rep."
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign husband of a Dominican woman may naturalize after six months of residence; a foreign wife of a Dominican man has residence waived at presidential discretion.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          6
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "dominican-republic-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 6,
+          "note": "Gender-asymmetric; vs ordinary ~7 years."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Dominican Republic Constitution — nationality (Constitute Project)",
@@ -12309,6 +12582,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Fiji Ministry of Immigration - citizenship by registration and naturalization",
+          "url": "https://www.immigration.gov.fj/by-registration/"
+        }
+      ]
+    },
+    {
+      "id": "fiji-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "242",
+        "name": "Fiji"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Fijian may register after three of the last five years of residence.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "fiji-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Citizenship of Fiji Act 2009; gender-neutral; dual citizenship allowed."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Fiji Ministry of Immigration - citizenship by registration and naturalization",
@@ -14123,6 +14432,42 @@
       ]
     },
     {
+      "id": "kiribati-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "296",
+        "name": "Kiribati"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of an I-Kiribati man may register by marriage with no residence requirement.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kiribati-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Wife only — foreign husbands cannot register (the last Oceania state retaining this asymmetry)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kiribati Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kiribati_2013"
+        }
+      ]
+    },
+    {
       "id": "kiribati-citizenship-by-parent",
       "country": {
         "iso_n3": "296",
@@ -14476,6 +14821,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Grenada",
+          "url": "https://www.gov.gd/government/the-constitution"
+        }
+      ]
+    },
+    {
+      "id": "grenada-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "308",
+        "name": "Grenada"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Grenadian may register as a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "grenada-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Registration route; gender-neutral."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Constitution of Grenada",
@@ -14956,6 +15337,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guyana Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guyana_2016"
+        }
+      ]
+    },
+    {
+      "id": "guyana-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "328",
+        "name": "Guyana"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Any spouse may be registered as a citizen upon marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guyana-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "1970 Constitution; subject to no national-security threat."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Guyana Constitution (Constitute Project)",
@@ -17088,6 +17505,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Jamaica Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Jamaica_2015"
+        }
+      ]
+    },
+    {
+      "id": "jamaica-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "388",
+        "name": "Jamaica"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "Any person married to a Jamaican is entitled to be registered as a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "jamaica-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Constitution s.7; gender-neutral; refusable only for a sham marriage."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Jamaica Constitution (Constitute Project)",
@@ -23138,6 +23591,42 @@
       ]
     },
     {
+      "id": "vanuatu-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "548",
+        "name": "Vanuatu"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Ni-Vanuatu may naturalize after two years of residence, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "vanuatu-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "A 2013 amendment removed the gender asymmetry; renunciation normally required."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Constitution of Vanuatu — citizenship",
+          "url": "https://parliament.gov.vu/images/constitution.pdf"
+        }
+      ]
+    },
+    {
       "id": "vanuatu-citizenship-by-parent",
       "country": {
         "iso_n3": "548",
@@ -23425,6 +23914,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nicaragua Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Nicaragua_2014"
+        }
+      ]
+    },
+    {
+      "id": "nicaragua-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "558",
+        "name": "Nicaragua"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Nicaraguan may naturalize after two years of residence, instead of four.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "nicaragua-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Central American nationals are exempt from residence and renunciation."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Nicaragua Constitution — nationality (Constitute Project)",
@@ -24713,6 +25238,42 @@
       ]
     },
     {
+      "id": "panama-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Panamanian (or a parent of Panamanian children) may naturalize after three years of residence, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "panama-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Petition to the President; not automatic."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Constitution of Panama — nationality and naturalization",
+          "url": "https://constitucion.te.gob.pa/constitucion-vigente/"
+        }
+      ]
+    },
+    {
       "id": "panama-family-naturalization",
       "country": {
         "iso_n3": "591",
@@ -24964,6 +25525,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "PNG ICA - eligibility for citizenship",
+          "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "papua-new-guinea-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "598",
+        "name": "Papua New Guinea"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a citizen may naturalize after one of the last three years of residence, instead of about eight.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "papua-new-guinea-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "A 2016 amendment removed the earlier wife-only asymmetry; dual nationality is limited to listed countries."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "PNG ICA - eligibility for citizenship",
@@ -27232,6 +27829,42 @@
       ]
     },
     {
+      "id": "st-kitts-nevis-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "659",
+        "name": "St. Kitts and Nevis"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a national may register as a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "st-kitts-nevis-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Registration route; gender-neutral."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Constitution of St Christopher and Nevis",
+          "url": "https://lawcommission.gov.kn/wp-content/documents/Annual-Laws/The-Constitution-of-St-Christopher-and-Nevis.pdf"
+        }
+      ]
+    },
+    {
       "id": "st-kitts-nevis-citizenship-by-parent",
       "country": {
         "iso_n3": "659",
@@ -27524,6 +28157,42 @@
         {
           "title": "Citizenship of Saint Lucia (Amendment) Act 2024",
           "url": "https://npc.govt.lc/files/laws/acts/2024/Act%20No%207%20of%202024%20Citizenship%20of%20Saint%20Lucia.pdf"
+        }
+      ]
+    },
+    {
+      "id": "saint-lucia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "662",
+        "name": "Saint Lucia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Saint Lucian may register as a citizen as of right.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-lucia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Gender-neutral."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Constitution of Saint Lucia — citizenship",
+          "url": "https://www.govt.lc/constitution7"
         }
       ]
     },
@@ -27841,6 +28510,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Saint Vincent and the Grenadines Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Saint_Vincent_and_the_Grenadines_2009"
+        }
+      ]
+    },
+    {
+      "id": "saint-vincent-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "670",
+        "name": "St. Vin. and Gren."
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a national may register as a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saint-vincent-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Gender-neutral since independence (1979)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Saint Vincent and the Grenadines Constitution (Constitute Project)",
@@ -30384,6 +31089,42 @@
       ]
     },
     {
+      "id": "suriname-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "740",
+        "name": "Suriname"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign spouse may acquire nationality by declaration after two years of marriage and domicile, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "suriname-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 24,
+          "note": "Gender-neutral since the 2014 revision."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Suriname Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Suriname_1992"
+        }
+      ]
+    },
+    {
       "id": "suriname-citizenship-by-parent",
       "country": {
         "iso_n3": "740",
@@ -31578,6 +32319,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Trinidad and Tobago Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Trinidad_and_Tobago_2007"
+        }
+      ]
+    },
+    {
+      "id": "trinidad-and-tobago-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "780",
+        "name": "Trinidad and Tobago"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign spouse may register as a citizen.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "trinidad-and-tobago-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Gender-neutral since the 1976 Citizenship Act; requires renunciation of prior nationality."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Trinidad and Tobago Constitution (Constitute Project)",

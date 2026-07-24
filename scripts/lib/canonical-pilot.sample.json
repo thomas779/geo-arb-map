@@ -2087,6 +2087,72 @@
               ]
             }
           ]
+        },
+        {
+          "id": "antigua-barbuda-citizenship-by-marriage",
+          "mode": "naturalization",
+          "status": "active",
+          "title": "Naturalization as the spouse of a citizen",
+          "summary": "A spouse married to and living with a national for three years may register as a citizen.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "medium",
+            "last_checked": "2026-07-23"
+          },
+          "variants": [
+            {
+              "id": "antigua-barbuda-citizenship-by-marriage-principal",
+              "label": "Naturalization as the spouse of a citizen",
+              "outcome": "citizenship",
+              "allocation": "right",
+              "eligibility": [
+                {
+                  "field": "spouse.citizenship.iso_n3",
+                  "operator": "eq",
+                  "value": "028"
+                },
+                {
+                  "field": "residence.years",
+                  "operator": "gte",
+                  "value": 0,
+                  "unit": "years"
+                },
+                {
+                  "field": "marriage.duration_months",
+                  "operator": "gte",
+                  "value": 36,
+                  "unit": "months"
+                }
+              ],
+              "milestones": [
+                {
+                  "status": "citizenship_application",
+                  "minimum_months": 0
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": 0,
+                "processing_typical_months": null,
+                "confidence": "medium",
+                "note": "Registration (entitlement); gender-neutral."
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:legislation_gov_uk:36c6a8f610",
+                  "supports_fields": [
+                    "/routes/antigua-barbuda-citizenship-by-marriage/summary",
+                    "/routes/antigua-barbuda-citizenship-by-marriage/variants/antigua-barbuda-citizenship-by-marriage-principal/eligibility",
+                    "/routes/antigua-barbuda-citizenship-by-marriage/variants/antigua-barbuda-citizenship-by-marriage-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }
