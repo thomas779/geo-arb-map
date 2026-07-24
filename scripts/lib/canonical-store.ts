@@ -360,6 +360,9 @@ function evidenceReferences(record: JurisdictionRecord | ArrangementRecord): Arr
       ...record.coverage.flatMap(item => item.source_refs),
       ...record.routes.flatMap(route =>
         route.variants.flatMap(variant => variant.source_refs)),
+      ...(record.residence_coverage ?? []).flatMap(item => item.source_refs),
+      ...(record.residence_routes ?? []).flatMap(route =>
+        route.variants.flatMap(variant => variant.source_refs)),
     ];
   }
   return [

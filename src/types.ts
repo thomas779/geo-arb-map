@@ -147,6 +147,39 @@ export interface CitizenshipRoute {
   sources: CitizenshipRouteSource[];
 }
 
+export type ResidenceCategory =
+  | 'investment'
+  | 'digital_nomad'
+  | 'retirement_pension'
+  | 'talent_skilled'
+  | 'general_permanent_residence';
+
+export interface ResidenceMoney {
+  amount: number;
+  currency: string;
+}
+
+export interface ResidenceRoute {
+  id: string;
+  country: Member;
+  category: ResidenceCategory;
+  status: CitizenshipRouteStatus;
+  title: string;
+  summary: string;
+  /** Best outcome across variants: permanent_residence if any variant reaches PR, else residence. */
+  outcome: 'residence' | 'permanent_residence';
+  counts_toward_permanent_residence: boolean;
+  counts_toward_naturalization: boolean;
+  min_investment: ResidenceMoney | null;
+  min_income_monthly: ResidenceMoney | null;
+  physical_presence_days_per_year: number | null;
+  facts: Record<string, unknown>;
+  pathways?: CitizenshipRoutePathway[];
+  confidence: 'high' | 'medium' | 'low';
+  last_checked: string;
+  sources: CitizenshipRouteSource[];
+}
+
 export interface CitizenshipRoutesData {
   meta: {
     description: string;
@@ -158,6 +191,7 @@ export interface CitizenshipRoutesData {
       routes: number;
       by_mode: Record<CitizenshipAcquisitionMode, number>;
       by_status: Partial<Record<CitizenshipRouteStatus, number>>;
+      residence_routes?: number;
     };
   };
   jurisdictions: Array<{
@@ -166,9 +200,12 @@ export interface CitizenshipRoutesData {
     type: 'sovereign' | 'territory' | 'special';
     coverage: Record<CitizenshipAcquisitionMode, CitizenshipCoverageState>;
     route_ids: string[];
+    residence_coverage?: Partial<Record<ResidenceCategory, CitizenshipCoverageState>>;
+    residence_route_ids?: string[];
     registry_note?: string;
   }>;
   routes: CitizenshipRoute[];
+  residence_routes?: ResidenceRoute[];
 }
 
 export interface DataReleaseMeta {
