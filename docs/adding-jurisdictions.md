@@ -111,6 +111,27 @@ bun test                               # regenerate the pinned lists (below) unt
 bun run build                          # tsc + monitor tsc + tests + vite (what CI runs)
 ```
 
+### Persisting to the D1 canonical store
+
+The committed `public/*.json` is what the live site serves, but the durable
+canonical store is D1 (backed up to R2). Because `canonical-pilot.ts` is
+gitignored, **CI cannot sync it** — `sync-canonical-d1.yml` only ever sees the
+public sample. Persist from your local machine with:
+
+```sh
+export CLOUDFLARE_API_TOKEN=…          # scoped: Account · D1:Edit is enough
+bun run data:sync -- verify            # counts + head-ambiguity report (read-only)
+bun run data:sync -- sync              # backup → wipe canonical tables → fresh import → verify
+```
+
+`data:sync` talks to the D1 **REST API**, not `wrangler`: a least-privilege
+`D1:Edit` token cannot use `wrangler d1 export` or `execute --remote --file`
+(both stage through R2 and silently no-op). `sync` is a clean rebuild — it backs
+up the current canonical tables to `.generated/data-canonical/backups/` first,
+never touches the `monitor_*` tables, and refuses to run against the sample
+dataset. It resolves drifted/ambiguous revision heads that the additive
+`sync-canonical-d1.yml` import cannot.
+
 ### Regenerating the pinned test lists
 
 After `data:db`, print the exact arrays and paste them into the four test files

@@ -14,6 +14,7 @@
     "data:promote": "bun scripts/promote_data_release.ts",
     "data:review": "bun scripts/build_data_review.ts",
     "data:stage": "bun scripts/stage_canonical_database.ts",
+    "data:sync": "bun scripts/sync_canonical_d1.ts",
     "data:timelines": "bun scripts/build_timeline_rules.js",
     "monitor:collect": "bun monitor/collectors/run.ts",
     "monitor:audit": "bun monitor/sources/audit.ts",
