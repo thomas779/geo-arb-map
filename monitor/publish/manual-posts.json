@@ -1,0 +1,32 @@
+[
+  {
+    "iso_n3": "858",
+    "jurisdiction": "Uruguay",
+    "claim": "Uruguay's Budget Law 20.446 replaces the prior tax-holiday regime with a 10-year IRNR option conditional on a real-estate investment over ~USD 2M or ~USD 100k/year in productive funds, effective 2026-01-01.",
+    "headline": "Uruguay overhauls tax residency with a 10-year non-resident tax option",
+    "status": "confirmed",
+    "primary_urls": ["https://www.impo.com.uy/bases/leyes-originales/20446-2025/648"],
+    "effective_date": "2026-01-01",
+    "affects_dataset": true,
+    "category": "tax",
+    "brief": "Budget Law 20.446 replaces Uruguay's old tax-holiday regime with a 10-year non-resident income tax (IRNR) option, now conditional on investing over ~USD 2 million in real estate or ~USD 100,000 a year in productive funds. It takes effect on 1 January 2026.",
+    "evidence_quote": "Individuals who acquire the status of fiscal resident as of 1 January 2026 may opt to pay the Non-Residents' Income Tax (IRNR) ... for the ten following fiscal years; (a) invest in real estate exceeding UI 12,500,000.",
+    "citations": [],
+    "search_queries": []
+  },
+  {
+    "iso_n3": "860",
+    "jurisdiction": "Uzbekistan",
+    "claim": "Uzbekistan's Presidential Decree PF-67 grants a five-year residence permit for a USD 250,000 investment payment (USD 150,000 per family member), effective 2025-06-01.",
+    "headline": "Uzbekistan launches a 5-year residency for a $250,000 investment",
+    "status": "confirmed",
+    "primary_urls": ["https://lex.uz/ru/docs/7483820"],
+    "effective_date": "2025-06-01",
+    "affects_dataset": true,
+    "category": "residency",
+    "brief": "Under Presidential Decree PF-67, foreign nationals can obtain a five-year Uzbek residence permit in exchange for a USD 250,000 investment payment, plus USD 150,000 for each family member. The route took effect on 1 June 2025.",
+    "evidence_quote": "Foreign nationals ... shall be granted a residence permit for a term of 5 years under a simplified procedure in exchange for payments amounting to USD 250,000 and USD 150,000 for each family member.",
+    "citations": [],
+    "search_queries": []
+  }
+]
