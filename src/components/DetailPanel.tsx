@@ -451,36 +451,13 @@ export function DetailPanel({
 
   return (
     <section className="h-full w-full overflow-y-auto bg-background px-3 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-4 md:pt-4 md:pb-8">
-      <div className="sticky top-0 z-10 -mx-3 mb-3 flex items-start justify-between gap-2 border-b bg-background/95 px-3 py-3 backdrop-blur-sm sm:-mx-4 sm:px-4 md:static md:mx-0 md:border-0 md:bg-transparent md:p-0 md:backdrop-blur-none">
-        <div className="min-w-0">
-          {onBackToRoutes && (
-            <Button
-              variant="ghost"
-              size="sm"
-              className="-ml-2 mb-1 h-7 gap-1 px-2 text-xs text-muted-foreground"
-              onClick={onBackToRoutes}
-            >
-              <ArrowLeft className="size-3.5" aria-hidden />
-              {state.blocs.length > 1 ? 'Back to comparison' : 'Back to route guide'}
-            </Button>
-          )}
-          <h2 className="flex items-center gap-2 text-xl font-semibold">
-            {flag && <span aria-hidden>{flag}</span>}
-            <span className="truncate">{countryName}</span>
-          </h2>
-          <p className="mt-1 text-xs text-muted-foreground">
-            {routes.length} country rule{routes.length === 1 ? '' : 's'}{residenceRoutes.length > 0 ? ` · ${residenceRoutes.length} residence route${residenceRoutes.length === 1 ? '' : 's'}` : ''} · {regionalCount} regional system{regionalCount === 1 ? '' : 's'} · {laneCount} treaty path{laneCount === 1 ? '' : 's'}
-          </p>
-          {countrySlug && (
-            <a
-              href={`/country/${countrySlug}/`}
-              className="mt-1 inline-block text-xs font-medium text-muted-foreground underline underline-offset-2 hover:text-foreground"
-            >
-              Full country profile →
-            </a>
-          )}
-        </div>
-        <div className="-mr-1 -mt-1 flex shrink-0 items-center gap-0.5">
+      {/* Sticky bar: country name + minimize/close stay pinned while scrolling. */}
+      <div className="sticky top-0 z-10 -mx-3 flex items-center justify-between gap-2 border-b bg-background/95 px-3 py-2.5 backdrop-blur-sm sm:-mx-4 sm:px-4">
+        <h2 className="flex min-w-0 items-center gap-2 text-base font-semibold">
+          {flag && <span aria-hidden>{flag}</span>}
+          <span className="truncate">{countryName}</span>
+        </h2>
+        <div className="-mr-1 flex shrink-0 items-center gap-0.5">
           {onCollapse && (
             <Button
               variant="ghost"
@@ -502,6 +479,31 @@ export function DetailPanel({
             <X className="size-5" />
           </Button>
         </div>
+      </div>
+
+      <div className="mb-3 mt-3">
+        {onBackToRoutes && (
+          <Button
+            variant="ghost"
+            size="sm"
+            className="-ml-2 mb-1 h-7 gap-1 px-2 text-xs text-muted-foreground"
+            onClick={onBackToRoutes}
+          >
+            <ArrowLeft className="size-3.5" aria-hidden />
+            {state.blocs.length > 1 ? 'Back to comparison' : 'Back to route guide'}
+          </Button>
+        )}
+        <p className="text-xs text-muted-foreground">
+          {routes.length} country rule{routes.length === 1 ? '' : 's'}{residenceRoutes.length > 0 ? ` · ${residenceRoutes.length} residence route${residenceRoutes.length === 1 ? '' : 's'}` : ''} · {regionalCount} regional system{regionalCount === 1 ? '' : 's'} · {laneCount} treaty path{laneCount === 1 ? '' : 's'}
+        </p>
+        {countrySlug && (
+          <a
+            href={`/country/${countrySlug}/`}
+            className="mt-1 inline-block text-xs font-medium text-muted-foreground underline underline-offset-2 hover:text-foreground"
+          >
+            Full country profile →
+          </a>
+        )}
       </div>
 
       <SectionHeading
