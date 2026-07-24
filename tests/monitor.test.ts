@@ -453,7 +453,11 @@ describe('AI sweep + grounded verify', () => {
     expect(() => buildNewsPost({ ...finding, primary_urls: [] })).toThrow('primary source');
 
     expect(fingerprint(finding)).toBe(fingerprint(finding));
+    // Re-phrasings of the same change collapse (claim is not part of the key)...
+    expect(fingerprint(finding)).toBe(fingerprint({ ...finding, claim: 'Malta scrapped its golden-passport programme entirely' }));
+    // ...but a different date or category is treated as a different change.
     expect(fingerprint(finding)).not.toBe(fingerprint({ ...finding, effective_date: '2026-01-01' }));
+    expect(fingerprint(finding)).not.toBe(fingerprint({ ...finding, category: 'naturalization' }));
     expect(synthesizeIssue(finding).body).toContain('## Verified evidence');
   });
 

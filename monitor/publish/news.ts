@@ -54,10 +54,16 @@ interface NewsOptions {
   max: number;
 }
 
-export function fingerprint(finding: Pick<Finding, 'iso_n3' | 'claim' | 'effective_date'>): string {
-  const normalizedClaim = finding.claim.toLowerCase().replace(/\s+/g, ' ').trim();
+// Dedup key. Uses the STABLE shape of a change — jurisdiction + acquisition
+// category + effective date — not the free-text claim. The grounded model
+// rephrases the same change every run, so a claim-based key reposted the same
+// story every 6h (e.g. Portugal went out 3x in one day). Keying on
+// iso+category+effective_date collapses re-phrasings while still letting a
+// genuinely different change (new date) through.
+export function fingerprint(finding: Pick<Finding, 'iso_n3' | 'category' | 'effective_date'>): string {
+  const category = (finding.category ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
   return createHash('sha1')
-    .update(`${finding.iso_n3}|${normalizedClaim}|${finding.effective_date ?? ''}`)
+    .update(`${finding.iso_n3}|${category}|${finding.effective_date ?? ''}`)
     .digest('hex')
     .slice(0, 16);
 }
