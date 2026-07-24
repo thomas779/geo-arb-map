@@ -1,0 +1,42 @@
+name: Delete Telegram messages (manual)
+
+# Delete channel messages by id (e.g. duplicate posts). Bot must be admin with
+# delete rights. Ids passed as a workflow input; nothing is committed.
+#
+#   gh workflow run delete-telegram.yml -f message_ids="8,14"
+
+on:
+  workflow_dispatch:
+    inputs:
+      message_ids:
+        description: "Comma-separated Telegram message ids to delete (e.g. 8,14)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: telegram-manual
+  cancel-in-progress: false
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    environment: telegram-publication
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHANNEL_ID: ${{ vars.TELEGRAM_CHANNEL_ID }}
+      MESSAGE_IDS: ${{ inputs.message_ids }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Delete messages
+        run: bun scripts/delete_telegram.ts --apply
