@@ -19,6 +19,7 @@ import { Sidebar } from '@/components/Sidebar';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { RouteDetailPanel } from '@/components/RouteDetailPanel';
+import { MobileDetailSheet } from '@/components/MobileDetailSheet';
 import { PlannerPreview } from '@/components/PlannerPreview';
 import { CountriesList } from '@/components/CountriesList';
 import { CountryProfile, deriveCountryProfile } from '@/components/CountryProfile';
@@ -77,7 +78,11 @@ export default function App() {
   const [infoSection, setInfoSection] = useState<TrustSection | null>(() => url.readInfo());
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
   const [detailPanelOpen, setDetailPanelOpen] = useState(Boolean(initialState.country));
-  const [routePanelOpen, setRoutePanelOpen] = useState(false);
+  // Open on load when a shared/deep-linked selection is present (there's no
+  // separate "open panel" affordance now — selection and panel are one).
+  const [routePanelOpen, setRoutePanelOpen] = useState(
+    Boolean(initialState.lane) || initialState.blocs.length > 0,
+  );
   // Portrait phones browse a LIST first; the map is on demand. Shared links
   // with a selection land straight on the framed map.
   const [mobileList, setMobileList] = useState<boolean>(
@@ -431,40 +436,26 @@ export default function App() {
         </div>
         {data && state.view === 'map' && (state.country || hasRouteSelection) && (
           <>
-            {/* Mobile: a bottom sheet — the map (zoomed to the selection) peeks
-                above a light scrim, and the sheet slides up after a short beat
-                so the zoom reads first. Tap the map / scrim to dismiss. */}
             {rightPanelOpen && (
-              <div className="absolute inset-0 z-40 md:hidden">
-                <button
-                  type="button"
-                  aria-label="Close details"
-                  className="absolute inset-0 bg-background/30 animate-in fade-in duration-200 motion-reduce:animate-none"
-                  onClick={clearMapSelection}
-                />
-                <div className="absolute inset-x-0 bottom-0 top-[36%] flex flex-col overflow-hidden rounded-t-2xl border-t bg-background shadow-2xl animate-in slide-in-from-bottom fill-mode-both delay-150 duration-300 motion-reduce:animate-none motion-reduce:delay-0">
-                  <div className="mx-auto mt-2 h-1 w-9 shrink-0 rounded-full bg-border" aria-hidden />
-                  <div className="min-h-0 flex-1 overflow-hidden">
-                    {state.country ? (
-                      <DetailPanel
-                        data={data}
-                        citizenshipRoutes={citizenshipRoutes}
-                        state={state}
-                        onClose={closeDetail}
-                        onBackToRoutes={hasRouteSelection ? backToRouteSelection : undefined}
-                      />
-                    ) : (
-                      <RouteDetailPanel
-                        data={data}
-                        blocIds={state.blocs}
-                        laneId={state.lane}
-                        onClose={clearMapSelection}
-                        onSelectCountry={selectCountry}
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
+              <MobileDetailSheet onDismiss={clearMapSelection}>
+                {state.country ? (
+                  <DetailPanel
+                    data={data}
+                    citizenshipRoutes={citizenshipRoutes}
+                    state={state}
+                    onClose={closeDetail}
+                    onBackToRoutes={hasRouteSelection ? backToRouteSelection : undefined}
+                  />
+                ) : (
+                  <RouteDetailPanel
+                    data={data}
+                    blocIds={state.blocs}
+                    laneId={state.lane}
+                    onClose={clearMapSelection}
+                    onSelectCountry={selectCountry}
+                  />
+                )}
+              </MobileDetailSheet>
             )}
             <div
               className={cn(

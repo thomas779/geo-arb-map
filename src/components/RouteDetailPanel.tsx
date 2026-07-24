@@ -203,9 +203,6 @@ function LaneDetail({
   lane: BilateralLane;
   onSelectCountry: (iso: string, name: string) => void;
 }) {
-  const originLabel = lane.beneficiaries.length > 0
-    ? `${lane.beneficiaries.length} eligible countr${lane.beneficiaries.length === 1 ? 'y' : 'ies'}`
-    : 'Eligibility-based heritage route';
   const allocation = lane.allocation ?? 'right';
 
   return (
@@ -247,17 +244,21 @@ function LaneDetail({
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-1.5">
-        <Badge variant="secondary" className="text-[10px]">{originLabel}</Badge>
-        {allocation !== 'right' && (
-          <Badge variant="outline" className="text-[10px]">
-            {allocation.replace('_', ' ')}
-          </Badge>
-        )}
-        {lane.renounces_previous && (
-          <Badge variant="destructive" className="text-[10px]">May require renunciation</Badge>
-        )}
-      </div>
+      {(lane.beneficiaries.length === 0 || allocation !== 'right' || lane.renounces_previous) && (
+        <div className="flex flex-wrap gap-1.5">
+          {lane.beneficiaries.length === 0 && (
+            <Badge variant="secondary" className="text-[10px]">Eligibility-based heritage route</Badge>
+          )}
+          {allocation !== 'right' && (
+            <Badge variant="outline" className="text-[10px]">
+              {allocation.replace('_', ' ')}
+            </Badge>
+          )}
+          {lane.renounces_previous && (
+            <Badge variant="destructive" className="text-[10px]">May require renunciation</Badge>
+          )}
+        </div>
+      )}
 
       {lane.beneficiaries_note && (
         <p className="text-xs leading-relaxed text-muted-foreground">{lane.beneficiaries_note}</p>
@@ -267,6 +268,9 @@ function LaneDetail({
         <details className="group rounded-lg border bg-card">
           <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 px-3 text-xs font-medium">
             <span>Eligible countries</span>
+            <span className="font-mono text-[10px] font-normal tabular-nums text-muted-foreground">
+              {lane.beneficiaries.length}
+            </span>
             <ChevronDown className="ml-auto size-3.5 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
           </summary>
           <div className="border-t px-3 py-3">
