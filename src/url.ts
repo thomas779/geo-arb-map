@@ -58,9 +58,12 @@ export function viewFromPath(pathname = window.location.pathname): AppState['vie
   return 'map';
 }
 
-function pathForView(view: AppState['view']): string {
+function pathForView(view: AppState['view'], currentPath = window.location.pathname): string {
   if (view === 'stacking') return '/planner';
-  if (view === 'countries') return '/country';
+  if (view === 'countries') {
+    // Preserve a specific /country/<slug> detail path; only the list is bare /country.
+    return /^\/country\/[^/]+/.test(currentPath) ? currentPath : '/country';
+  }
   return '/';
 }
 

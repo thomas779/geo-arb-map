@@ -24,6 +24,8 @@ import { DetailPanel } from '@/components/DetailPanel';
 import { RouteDetailPanel } from '@/components/RouteDetailPanel';
 import { PlannerPreview } from '@/components/PlannerPreview';
 import { CountriesList } from '@/components/CountriesList';
+import { CountryProfile, deriveCountryProfile } from '@/components/CountryProfile';
+import { buildSlugToIso } from '@/lib/slug';
 import { TrustCenter } from '@/components/TrustCenter';
 import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
@@ -415,9 +417,22 @@ export default function App() {
           {data && state.view === 'stacking' && (
             <PlannerPreview data={data} onBackToAtlas={() => selectView('map')} />
           )}
-          {state.view === 'countries' && (
-            <CountriesList citizenshipRoutes={citizenshipRoutes} />
-          )}
+          {state.view === 'countries' && (() => {
+            const slug = /^\/country\/([^/]+)\/?$/.exec(window.location.pathname)?.[1] ?? null;
+            const iso = slug && citizenshipRoutes
+              ? buildSlugToIso(citizenshipRoutes.jurisdictions).get(slug)
+              : null;
+            const profile = iso && citizenshipRoutes && data
+              ? deriveCountryProfile(iso, citizenshipRoutes, data)
+              : null;
+            return (
+              <div className="absolute inset-0 z-30 overflow-y-auto bg-background">
+                {profile
+                  ? <CountryProfile data={profile} />
+                  : <CountriesList citizenshipRoutes={citizenshipRoutes} />}
+              </div>
+            );
+          })()}
           {data && (
             <button
               className="absolute right-3 bottom-3 z-10 hidden items-center gap-1.5 rounded-full border bg-background/90 px-2.5 py-1 font-mono text-xs text-muted-foreground shadow-sm backdrop-blur-sm hover:text-foreground sm:inline-flex"
