@@ -54,49 +54,82 @@ const FONT_LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com">'
 const THEME_META = '<meta name="theme-color" content="#EFEDE7" media="(prefers-color-scheme: light)">'
   + '<meta name="theme-color" content="#191A18" media="(prefers-color-scheme: dark)">';
 
-// Flag Paths design system (mirrors src/index.css tokens + the site typography).
+// Flag Paths design system (mirrors src/index.css tokens + the site typography + app header).
 const PAGE_STYLE = `
 :root{--bg:#EFEDE7;--fg:#222321;--card:#F9F7F1;--primary:#3552B8;--muted:#62645F;--border:#C9C9C1;--secondary:#DEDFDA;--verified:#3F755E;--radius:.5rem}
 @media(prefers-color-scheme:dark){:root{--bg:#191A18;--fg:#EEEAE1;--card:#23241F;--primary:#91A4FF;--muted:#A8AAA3;--border:#3B3D36;--secondary:#2E302A;--verified:#7DB18F}}
-*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 1.5rem;border-bottom:1px solid var(--border)}
-.nav .brand{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;color:var(--fg);letter-spacing:-.01em}
-.nav .brand:hover{text-decoration:none}
-.nav .to-atlas{font-size:.82rem;font-weight:500;color:var(--muted)}
-.wrap{max-width:720px;margin:0 auto;padding:2.5rem 1.5rem 5rem}
-.crumbs{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:2rem}
+.hdr{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:.7rem;height:56px;padding:0 1.25rem;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(8px)}
+.hdr .mark{width:32px;height:32px;flex:none}
+.hdr .brand{display:flex;align-items:center;gap:.6rem}.hdr .brand:hover{text-decoration:none}
+.hdr .name{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;letter-spacing:-.035em;color:var(--fg);display:block;line-height:1}
+.hdr .sub{font-family:'IBM Plex Mono',monospace;font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);display:block;margin-top:3px}
+.hdr nav{margin-left:auto;display:flex;align-items:center;gap:1.5rem}
+.hdr nav a{font-size:.8rem;font-weight:600;color:var(--muted)}.hdr nav a:hover{color:var(--fg);text-decoration:none}
+.hdr nav a[aria-current]{color:var(--fg)}
+.wrap{max-width:1060px;margin:0 auto;padding:2rem 1.5rem 5rem}
+.crumbs{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin-bottom:1.5rem}
 .crumbs a{color:var(--muted);text-decoration:underline}
-.flag{font-size:2.75rem;line-height:1}
-h1{font-family:'Fraunces',serif;font-weight:700;font-size:2.6rem;line-height:1.04;letter-spacing:-.02em;text-wrap:balance;margin:.4rem 0 .5rem}
-.lede{color:var(--muted);font-size:1.05rem;max-width:60ch;margin:0 0 1.6rem}
-.cta{display:inline-block;background:var(--primary);color:#fff;font-weight:600;font-size:.9rem;padding:.7rem 1.15rem;border-radius:var(--radius)}
+.layout{display:grid;grid-template-columns:1fr;gap:1.75rem}
+@media(min-width:880px){.layout{grid-template-columns:266px 1fr;gap:3rem;align-items:start}.rail{position:sticky;top:80px}}
+.rail .flag{font-size:3rem;line-height:1}
+.rail h1{font-family:'Fraunces',serif;font-weight:700;font-size:2rem;line-height:1.04;letter-spacing:-.02em;text-wrap:balance;margin:.35rem 0 1rem}
+.facts{display:flex;flex-direction:column;gap:.8rem;padding:1rem 1.1rem;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.1rem}
+.fact .k{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);display:block}
+.fact .v{font-size:.95rem;font-weight:600;margin-top:.1rem}
+.cta{display:block;text-align:center;background:var(--primary);color:#fff;font-weight:600;font-size:.9rem;padding:.7rem 1rem;border-radius:var(--radius)}
 .cta:hover{text-decoration:none;filter:brightness(1.06)}
-section{margin-top:2.5rem}
-.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin:0 0 1rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.jump{display:flex;flex-wrap:wrap;gap:.45rem .9rem;margin-top:1.1rem;font-family:'IBM Plex Mono',monospace;font-size:.72rem}
+.jump a{color:var(--muted)}
+.lede{color:var(--muted);font-size:1.02rem;margin:0 0 1.75rem;max-width:62ch}
+section{scroll-margin-top:72px}section+section{margin-top:2.25rem}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin:0 0 1rem;padding-top:1.4rem;border-top:1px solid var(--border)}
+.coverage{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem;margin:0 0 1.1rem}
+@media(min-width:520px){.coverage{grid-template-columns:repeat(4,1fr)}}
+.cov{border:1px solid var(--border);border-radius:var(--radius);padding:.55rem .65rem;background:var(--card)}
+.cov .m{font-family:'IBM Plex Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block}
+.cov .s{font-size:.8rem;font-weight:600;margin-top:.2rem;display:flex;align-items:center;gap:.35rem;text-transform:capitalize}
+.cov .dot{width:.5rem;height:.5rem;border-radius:999px;background:var(--muted);flex:none}
+.cov.reviewed .dot{background:var(--verified)}.cov.partial .dot{background:var(--primary)}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.15rem;margin:.7rem 0}
 .card-head{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin-bottom:.4rem}
 .label{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
 .pill{font-family:'IBM Plex Mono',monospace;font-size:.66rem;border:1px solid var(--border);border-radius:999px;padding:.1rem .55rem;color:var(--muted)}
 .pill.lead{background:color-mix(in srgb,var(--verified) 15%,transparent);border-color:transparent;color:var(--verified)}
-.card h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.18rem;line-height:1.2;margin:0 0 .35rem}
+.card h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;line-height:1.2;margin:0 0 .35rem}
 .summary{color:var(--muted);font-size:.92rem;margin:0}
 .chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:.65rem 0 0}
 .chips span{font-family:'IBM Plex Mono',monospace;font-size:.72rem;background:var(--secondary);border-radius:.35rem;padding:.14rem .5rem;color:var(--fg)}
 .sources{font-size:.8rem;color:var(--muted);margin:.75rem 0 0;border-top:1px dashed var(--border);padding-top:.6rem}
 .sources a{color:var(--muted);text-decoration:underline}
 .tags{display:flex;flex-wrap:wrap;gap:.4rem}
-.tags span{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:.35rem .8rem;font-size:.85rem}
+.tags a,.tags span{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:.35rem .8rem;font-size:.85rem;color:var(--fg)}
+.tags a:hover{border-color:var(--primary);text-decoration:none}
 .empty{color:var(--muted);font-size:.92rem;border:1px dashed var(--border);border-radius:var(--radius);padding:.9rem 1.1rem;margin:.7rem 0}
-footer{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--muted)}
+footer{margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.82rem;color:var(--muted)}
 footer a{color:var(--muted);text-decoration:underline}
-@media(max-width:560px){h1{font-size:2.1rem}.wrap{padding:2rem 1.15rem 4rem}}
+@media(max-width:560px){.rail h1{font-size:1.75rem}.wrap{padding:1.5rem 1.15rem 4rem}}
 `.trim();
+
+const BRAND_MARK = '<svg class="mark" aria-hidden="true" viewBox="0 0 32 32" fill="none">'
+  + '<path d="M5.5 24.5c0-7.2 4.1-9.8 9.1-9.8 5.8 0 6.1-7.2 11.9-7.2" stroke="var(--primary)" stroke-width="2" stroke-linecap="round"/>'
+  + '<circle cx="5.5" cy="24.5" r="3" fill="var(--card)" stroke="var(--fg)" stroke-width="1.5"/>'
+  + '<circle cx="26.5" cy="7.5" r="3" fill="var(--primary)" stroke="var(--card)" stroke-width="1.5"/></svg>';
+
+function siteHeader(active: 'atlas' | 'countries'): string {
+  return `<header class="hdr">`
+    + `<a class="brand" href="/">${BRAND_MARK}<span><span class="name">Flag Paths</span><span class="sub">Mobility atlas</span></span></a>`
+    + `<nav><a href="/"${active === 'atlas' ? ' aria-current="page"' : ''}>Atlas</a>`
+    + `<a href="/country/"${active === 'countries' ? ' aria-current="page"' : ''}>Countries</a></nav>`
+    + `</header>`;
+}
 
 const CITIZENSHIP_MODE_LABELS: Record<string, string> = {
   ancestry: 'Ancestry', naturalization: 'Naturalization', birth: 'Birth', investment: 'Investment',
 };
+const COVERAGE_ORDER = ['ancestry', 'naturalization', 'birth', 'investment'] as const;
 
 function jsonLd(obj: unknown): string {
   return `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
@@ -192,6 +225,32 @@ function countryPage(iso: string, ctx: Ctx): string {
     url, description: desc,
   };
 
+  const reviewedModes = Object.values(jur.coverage).filter(state => state === 'reviewed').length;
+  const investmentResidence = residence
+    .filter(r => r.min_investment)
+    .sort((a, b) => a.min_investment!.amount - b.min_investment!.amount);
+  const cheapest = investmentResidence[0]?.min_investment ?? null;
+
+  const coverageStrip = `<div class="coverage">${COVERAGE_ORDER.map(mode => {
+    const state = jur.coverage[mode] ?? 'unchecked';
+    return `<div class="cov ${esc(state)}"><span class="m">${esc(CITIZENSHIP_MODE_LABELS[mode])}</span><span class="s"><span class="dot"></span>${esc(state)}</span></div>`;
+  }).join('')}</div>`;
+
+  const facts = [
+    `<div class="fact"><span class="k">Citizenship</span><span class="v">${reviewedModes} of 4 modes reviewed</span></div>`,
+    routes.length ? `<div class="fact"><span class="k">Citizenship routes</span><span class="v">${routes.length}</span></div>` : '',
+    residence.length ? `<div class="fact"><span class="k">Residence programmes</span><span class="v">${residence.length}</span></div>` : '',
+    cheapest ? `<div class="fact"><span class="k">Residence by investment from</span><span class="v">${esc(cheapest.currency)} ${cheapest.amount.toLocaleString('en-US')}</span></div>` : '',
+    blocs.length ? `<div class="fact"><span class="k">Regional systems</span><span class="v">${blocs.length}</span></div>` : '',
+  ].filter(Boolean).join('');
+
+  const jump = [
+    '<a href="#citizenship">Citizenship</a>',
+    residence.length ? '<a href="#residence">Residence</a>' : '',
+    blocs.length ? '<a href="#regional">Regional</a>' : '',
+    lanesIn.length ? '<a href="#treaties">Treaties</a>' : '',
+  ].filter(Boolean).join('');
+
   return `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -209,28 +268,33 @@ ${FONT_LINKS}
 ${jsonLd(place)}${jsonLd(breadcrumb)}${jsonLd(faq)}
 <style>${PAGE_STYLE}</style>
 </head><body>
-<nav class="nav"><a class="brand" href="/">Flag Paths</a><a class="to-atlas" href="/?country=${esc(iso)}">Interactive atlas →</a></nav>
+${siteHeader('countries')}
 <main class="wrap">
 <div class="crumbs"><a href="/">Flag Paths</a> › <a href="/country/">Countries</a> › ${esc(name)}</div>
+<div class="layout">
+<aside class="rail">
 ${flag ? `<div class="flag" aria-hidden="true">${flag}</div>` : ''}
 <h1>${esc(name)}</h1>
+<div class="facts">${facts}</div>
+<a class="cta" href="/?country=${esc(iso)}">Open in the interactive atlas →</a>
+<nav class="jump">${jump}</nav>
+</aside>
+<div class="content">
 <p class="lede">${esc(desc)}</p>
-<a class="cta" href="/?country=${esc(iso)}">Explore ${esc(name)} on the interactive map →</a>
-
-<section>
+<section id="citizenship">
 <h2 class="eyebrow">Citizenship routes</h2>
+${coverageStrip}
 ${routes.length ? routes.map(routeCard).join('') : '<p class="empty">Not yet reviewed at route level — a coverage gap, not a claim that no path exists.</p>'}
 </section>
-
-${residence.length ? `<section><h2 class="eyebrow">Residence &amp; settlement</h2>${residence.map(resCard).join('')}</section>` : ''}
-
-${blocs.length ? `<section><h2 class="eyebrow">Regional rights</h2><div class="tags">${blocs.map(b => `<span>${esc(b.name)}</span>`).join('')}</div></section>` : ''}
-${lanesIn.length ? `<section><h2 class="eyebrow">Treaty &amp; country paths</h2><div class="tags">${lanesIn.map(l => `<span>${esc(l.name)}</span>`).join('')}</div></section>` : ''}
-
+${residence.length ? `<section id="residence"><h2 class="eyebrow">Residence &amp; settlement</h2>${residence.map(resCard).join('')}</section>` : ''}
+${blocs.length ? `<section id="regional"><h2 class="eyebrow">Regional rights</h2><div class="tags">${blocs.map(b => `<a href="/?blocs=${esc(b.id)}">${esc(b.name)}</a>`).join('')}</div></section>` : ''}
+${lanesIn.length ? `<section id="treaties"><h2 class="eyebrow">Treaty &amp; country paths</h2><div class="tags">${lanesIn.map(l => `<a href="/?lane=${esc(l.id)}">${esc(l.name)}</a>`).join('')}</div></section>` : ''}
 <footer>
 <p>Data is compiled from official and primary legal sources and reviewed for the Flag Paths atlas. Programmes — especially residence-by-investment — change frequently; verify against the linked official sources before acting.</p>
-<p><a href="/country/">All countries</a> · <a href="/">Interactive atlas</a></p>
+<p><a href="/country/">All countries</a> · <a href="/?country=${esc(iso)}">Open ${esc(name)} in the atlas</a></p>
 </footer>
+</div>
+</div>
 </main></body></html>`;
 }
 
@@ -256,12 +320,12 @@ function indexPage(ctx: Ctx, isos: string[]): string {
 ${THEME_META}
 ${FONT_LINKS}
 ${jsonLd(breadcrumb)}
-<style>${PAGE_STYLE} .country-list{columns:2;column-gap:2rem;list-style:none;padding:0;margin:1.5rem 0 0}@media(max-width:560px){.country-list{columns:1}}.country-list li{margin:.3rem 0;break-inside:avoid}</style>
+<style>${PAGE_STYLE} .hub-h1{font-family:'Fraunces',serif;font-weight:700;font-size:2.4rem;line-height:1.05;letter-spacing:-.02em;text-wrap:balance;margin:.2rem 0 .6rem}.wrap .cta{display:inline-block}.country-list{columns:3;column-gap:2rem;list-style:none;padding:0;margin:1.75rem 0 0}@media(max-width:760px){.country-list{columns:2}}@media(max-width:480px){.country-list{columns:1}}.country-list li{margin:.35rem 0;break-inside:avoid}</style>
 </head><body>
-<nav class="nav"><a class="brand" href="/">Flag Paths</a><a class="to-atlas" href="/">Interactive atlas →</a></nav>
+${siteHeader('countries')}
 <main class="wrap">
 <div class="crumbs"><a href="/">Flag Paths</a> › Countries</div>
-<h1>All countries &amp; territories</h1>
+<h1 class="hub-h1">All countries &amp; territories</h1>
 <p class="lede">Citizenship and residence routes for ${items.length} jurisdictions — naturalization, ancestry, birth, investment, and residence programmes, each with official sources.</p>
 <a class="cta" href="/">Open the interactive atlas →</a>
 <ul class="country-list">${links}</ul>

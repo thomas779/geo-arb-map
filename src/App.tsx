@@ -266,6 +266,12 @@ export default function App() {
               )}
             </button>
           ))}
+          <a
+            href="/country/"
+            className="flex h-9 items-center justify-center text-xs font-semibold text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:text-primary"
+          >
+            Countries
+          </a>
         </nav>
         <div className="ml-auto flex shrink-0 items-center gap-0.5">
           {data && (
