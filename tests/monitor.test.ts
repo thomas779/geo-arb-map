@@ -454,7 +454,8 @@ describe('AI sweep + grounded verify', () => {
 
     expect(fingerprint(finding)).toBe(fingerprint(finding));
     // Re-phrasings of the same change collapse (claim is not part of the key)...
-    expect(fingerprint(finding)).toBe(fingerprint({ ...finding, claim: 'Malta scrapped its golden-passport programme entirely' }));
+    const reworded: Finding = { ...finding, claim: 'Malta scrapped its golden-passport programme entirely' };
+    expect(fingerprint(finding)).toBe(fingerprint(reworded));
     // ...but a different date or category is treated as a different change.
     expect(fingerprint(finding)).not.toBe(fingerprint({ ...finding, effective_date: '2026-01-01' }));
     expect(fingerprint(finding)).not.toBe(fingerprint({ ...finding, category: 'naturalization' }));
