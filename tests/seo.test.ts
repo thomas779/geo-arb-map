@@ -39,6 +39,8 @@ describe('public SEO contract', () => {
     const workerConfig = readFileSync(new URL('../wrangler.web.jsonc', import.meta.url), 'utf8');
     expect(headers).toContain('https://flag-paths-web.thomas779.workers.dev/*');
     expect(headers).toContain('X-Robots-Tag: noindex, nofollow');
-    expect(workerConfig).toContain('"not_found_handling": "none"');
+    // SPA fallback so client routes (/planner, /country) resolve on direct hits;
+    // the workers.dev origin stays out of the index via _headers above.
+    expect(workerConfig).toContain('"not_found_handling": "single-page-application"');
   });
 });

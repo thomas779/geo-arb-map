@@ -51,12 +51,26 @@ export function readProfile(params = new URLSearchParams(window.location.search)
   };
 }
 
+/** Route is the pathname: / = atlas, /planner = planner, /country = country list. */
+export function viewFromPath(pathname = window.location.pathname): AppState['view'] {
+  if (pathname === '/planner' || pathname.startsWith('/planner/')) return 'stacking';
+  if (pathname === '/country' || pathname.startsWith('/country')) return 'countries';
+  return 'map';
+}
+
+function pathForView(view: AppState['view']): string {
+  if (view === 'stacking') return '/planner';
+  if (view === 'countries') return '/country';
+  return '/';
+}
+
 export function read(): Partial<AppState> {
   const params = new URLSearchParams(window.location.search);
   const state: Partial<AppState> = {};
 
-  const view = params.get('view');
-  if (view === 'stacking') state.view = 'stacking';
+  state.view = viewFromPath();
+  // Back-compat: old ?view=stacking links (before path routing).
+  if (state.view === 'map' && params.get('view') === 'stacking') state.view = 'stacking';
 
   const blocs = params.get('blocs');
   if (blocs) {
@@ -82,11 +96,11 @@ export function readInfo(params = new URLSearchParams(window.location.search)): 
 }
 
 export function sync(state: AppState): void {
-  // Preserve tooling/profile/theme parameters; this function owns map state
-  // only. Starting from an empty query silently destroyed profile demo URLs.
+  // Preserve tooling/profile/theme parameters; this function owns route + map
+  // state only. The route lives in the pathname (/ , /planner, /country).
   const params = paramsForState(new URLSearchParams(window.location.search), state);
   const qs = params.toString();
-  history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
+  history.replaceState(null, '', `${pathForView(state.view)}${qs ? `?${qs}` : ''}${location.hash}`);
 }
 
 export function paramsForState(current: URLSearchParams, state: AppState): URLSearchParams {
@@ -95,10 +109,12 @@ export function paramsForState(current: URLSearchParams, state: AppState): URLSe
   // Profile-shaped query parameters are accepted as a one-time tooling import,
   // then removed so they cannot be copied, retained in history, or forwarded.
   PROFILE_PARAMS.forEach(key => params.delete(key));
-  if (state.view === 'stacking') params.set('view', 'stacking');
-  if (state.blocs.length) params.set('blocs', state.blocs.join(','));
-  if (state.lane) params.set('lane', state.lane);
-  if (state.country) params.set('country', state.country);
+  // Map sub-state (selected country / blocs / lane) only applies on the atlas.
+  if (state.view === 'map') {
+    if (state.blocs.length) params.set('blocs', state.blocs.join(','));
+    if (state.lane) params.set('lane', state.lane);
+    if (state.country) params.set('country', state.country);
+  }
   return params;
 }
 
