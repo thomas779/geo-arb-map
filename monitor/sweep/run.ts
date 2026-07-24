@@ -199,7 +199,7 @@ Return ONLY a JSON array (no prose, no code fences). Return [] if nothing new. E
 {"iso_n3":"${entry.iso_n3}","claim":"one precise, factual sentence on what changed (for the record)",
 "status":"confirmed|proposed|rumour|not_found","primary_urls":["https://official-source"],
 "effective_date":"YYYY-MM-DD or null",
-"affects_dataset":boolean (true ONLY if it changes eligibility, a gating threshold/fee, a residence period or timeline, a route's existence, or a tax-residence rule; false for administrative/format/procedural changes),
+"affects_dataset":boolean (true ONLY if it changes citizenship or residence eligibility, a gating investment threshold/fee, a required residence period/timeline, or a route's existence; set FALSE for tax-residence changes — still report them, they publish as news, but the v1 Atlas does not model tax — and false for administrative/procedural changes),
 "category":"ancestry|naturalization|birth|investment|visa|residency|cbi|tax",
 "headline":"a clean 6-12 word news headline that NAMES the country and states the change, readable in a phone notification (e.g. 'Georgia raises residency property threshold to 150,000 dollars'); do not start with the ISO code and do not repeat the country name twice",
 "brief":"1-2 tight sentences a subscriber wants to read: what changed, why it matters, and one concrete number, date, or detail",
@@ -248,7 +248,10 @@ export function normalizeFindings(
       status: status as Finding['status'],
       primary_urls: primaryUrls,
       effective_date: effectiveDate,
-      affects_dataset: item.affects_dataset === true,
+      // Tax-residence changes are newsworthy (they still publish) but the v1
+      // Atlas has no tax layer, so they must NOT open dataset issues.
+      affects_dataset: item.affects_dataset === true
+        && !/^tax$/i.test(String(item.category ?? '').trim()),
       category: String(item.category ?? '').trim().slice(0, 40) || 'residency',
       brief: String(item.brief ?? claim).trim().replace(/\s+/g, ' ').slice(0, 500),
       evidence_quote: String(item.evidence_quote ?? '').trim().replace(/\s+/g, ' ').slice(0, 300),
