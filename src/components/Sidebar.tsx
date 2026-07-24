@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, ChevronDown, Info, X } from 'lucide-react';
+import { Check, ChevronDown, Info, Search, X } from 'lucide-react';
 import type { AppState, BilateralLane, Bloc, BlocsData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -325,13 +325,19 @@ export function Sidebar({ data, state, onBloc, onLane, onClear, onInspect }: Pro
   return (
     <aside className="flex h-full w-full flex-col overflow-hidden bg-sidebar">
       <div className="shrink-0 border-b border-sidebar-border px-3 py-3">
-        <Input
-          type="search"
-          placeholder="Search countries, routes, or rights…"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          className="h-11 w-full text-base placeholder:text-[13px] md:h-8 md:text-sm md:placeholder:text-sm"
-        />
+        <div className="relative">
+          <Search
+            className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
+            aria-hidden
+          />
+          <Input
+            type="search"
+            placeholder="Search countries, routes, or rights…"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+            className="h-11 w-full pl-8 text-base placeholder:text-[13px] md:h-8 md:text-sm md:placeholder:text-sm"
+          />
+        </div>
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-6">
