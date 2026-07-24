@@ -16,15 +16,15 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 823,
+      "routes": 850,
       "by_mode": {
         "ancestry": 237,
-        "naturalization": 330,
+        "naturalization": 357,
         "birth": 231,
         "investment": 25
       },
       "by_status": {
-        "active": 808,
+        "active": 835,
         "pending_verification": 6,
         "inactive": 8,
         "verified_negative": 1
@@ -287,7 +287,8 @@
         "armenia-citizenship-by-parent",
         "armenia-citizenship-by-armenian-descent",
         "armenia-naturalization",
-        "armenia-citizenship-at-birth-by-parent"
+        "armenia-citizenship-at-birth-by-parent",
+        "armenia-citizenship-by-marriage"
       ]
     },
     {
@@ -351,7 +352,8 @@
       "route_ids": [
         "bhutan-citizenship-by-parents",
         "bhutan-naturalization",
-        "bhutan-citizenship-at-birth-by-parents"
+        "bhutan-citizenship-at-birth-by-parents",
+        "bhutan-citizenship-by-marriage"
       ]
     },
     {
@@ -579,7 +581,8 @@
         "cambodia-citizenship-by-parent",
         "cambodia-naturalization",
         "cambodia-citizenship-at-birth-by-parent",
-        "cambodia-investor-naturalization-status"
+        "cambodia-investor-naturalization-status",
+        "cambodia-citizenship-by-marriage"
       ]
     },
     {
@@ -742,7 +745,8 @@
       "route_ids": [
         "taiwan-citizenship-by-parent",
         "taiwan-naturalization",
-        "taiwan-citizenship-at-birth-by-parent"
+        "taiwan-citizenship-at-birth-by-parent",
+        "taiwan-citizenship-by-marriage"
       ]
     },
     {
@@ -1268,7 +1272,8 @@
       "route_ids": [
         "georgia-citizenship-by-parent",
         "georgia-ordinary-naturalization",
-        "georgia-citizenship-by-protected-birth"
+        "georgia-citizenship-by-protected-birth",
+        "georgia-citizenship-by-marriage"
       ]
     },
     {
@@ -1605,7 +1610,8 @@
       "route_ids": [
         "india-citizenship-by-parent",
         "india-naturalization",
-        "india-citizenship-at-birth-by-parent"
+        "india-citizenship-at-birth-by-parent",
+        "india-citizenship-by-marriage"
       ]
     },
     {
@@ -1621,7 +1627,8 @@
       "route_ids": [
         "indonesia-citizenship-by-parent",
         "indonesia-naturalization",
-        "indonesia-citizenship-at-birth-by-parent"
+        "indonesia-citizenship-at-birth-by-parent",
+        "indonesia-citizenship-by-marriage"
       ]
     },
     {
@@ -1637,7 +1644,8 @@
       "route_ids": [
         "iran-citizenship-by-parent",
         "iran-naturalization",
-        "iran-citizenship-at-birth-by-parent"
+        "iran-citizenship-at-birth-by-parent",
+        "iran-citizenship-by-marriage"
       ]
     },
     {
@@ -1653,7 +1661,8 @@
       "route_ids": [
         "iraq-citizenship-by-parent",
         "iraq-naturalization",
-        "iraq-citizenship-at-birth-by-parent"
+        "iraq-citizenship-at-birth-by-parent",
+        "iraq-citizenship-by-marriage"
       ]
     },
     {
@@ -1688,7 +1697,8 @@
       "route_ids": [
         "israel-citizenship-by-return-or-parent",
         "israel-naturalization",
-        "israel-citizenship-at-birth-by-parent"
+        "israel-citizenship-at-birth-by-parent",
+        "israel-citizenship-by-marriage"
       ]
     },
     {
@@ -1756,7 +1766,8 @@
       "route_ids": [
         "japan-citizenship-by-parent",
         "japan-naturalization",
-        "japan-citizenship-at-birth-by-parent"
+        "japan-citizenship-at-birth-by-parent",
+        "japan-citizenship-by-marriage"
       ]
     },
     {
@@ -1773,7 +1784,8 @@
         "kazakhstan-citizenship-by-parent",
         "kazakhstan-citizenship-by-kandas-status",
         "kazakhstan-naturalization",
-        "kazakhstan-citizenship-at-birth-by-parent"
+        "kazakhstan-citizenship-at-birth-by-parent",
+        "kazakhstan-citizenship-by-marriage"
       ]
     },
     {
@@ -1790,7 +1802,8 @@
         "jordan-citizenship-by-father",
         "jordan-naturalization",
         "jordan-citizenship-by-birth-limited",
-        "jordan-investor-citizenship"
+        "jordan-investor-citizenship",
+        "jordan-citizenship-by-marriage"
       ]
     },
     {
@@ -1839,7 +1852,8 @@
       "route_ids": [
         "korea-citizenship-by-parent-or-simple-origin",
         "korea-general-naturalization",
-        "korea-citizenship-at-birth-by-parent"
+        "korea-citizenship-at-birth-by-parent",
+        "korea-citizenship-by-marriage"
       ]
     },
     {
@@ -1904,7 +1918,8 @@
       "route_ids": [
         "lebanon-citizenship-by-parent",
         "lebanon-naturalization",
-        "lebanon-citizenship-at-birth-by-parent"
+        "lebanon-citizenship-at-birth-by-parent",
+        "lebanon-citizenship-by-marriage"
       ]
     },
     {
@@ -2087,7 +2102,8 @@
       "route_ids": [
         "malaysia-citizenship-by-parent",
         "malaysia-naturalization",
-        "malaysia-citizenship-at-birth-by-parent"
+        "malaysia-citizenship-at-birth-by-parent",
+        "malaysia-citizenship-by-marriage"
       ]
     },
     {
@@ -2323,7 +2339,8 @@
       "route_ids": [
         "oman-citizenship-by-parent",
         "oman-naturalization",
-        "oman-citizenship-at-birth-by-parent"
+        "oman-citizenship-at-birth-by-parent",
+        "oman-citizenship-by-marriage"
       ]
     },
     {
@@ -2372,7 +2389,8 @@
       "route_ids": [
         "nepal-citizenship-by-descent",
         "nepal-naturalization",
-        "nepal-citizenship-at-birth-by-parent"
+        "nepal-citizenship-at-birth-by-parent",
+        "nepal-citizenship-by-marriage"
       ]
     },
     {
@@ -2682,7 +2700,8 @@
         "pakistan-citizenship-by-parent",
         "pakistan-naturalization",
         "pakistan-citizenship-at-birth-by-parent",
-        "pakistan-commonwealth-investment-citizenship"
+        "pakistan-commonwealth-investment-citizenship",
+        "pakistan-citizenship-by-marriage"
       ]
     },
     {
@@ -2766,7 +2785,8 @@
       "route_ids": [
         "philippines-citizenship-by-parent-or-reacquisition",
         "philippines-naturalization",
-        "philippines-citizenship-at-birth-by-parent"
+        "philippines-citizenship-at-birth-by-parent",
+        "philippines-citizenship-by-marriage"
       ]
     },
     {
@@ -2851,7 +2871,8 @@
       "route_ids": [
         "timor-leste-citizenship-by-parent",
         "timor-leste-naturalization",
-        "timor-leste-citizenship-at-birth-by-parent"
+        "timor-leste-citizenship-at-birth-by-parent",
+        "timor-leste-citizenship-by-marriage"
       ]
     },
     {
@@ -2883,7 +2904,8 @@
       "route_ids": [
         "qatar-citizenship-by-parent",
         "qatar-naturalization",
-        "qatar-citizenship-at-birth-by-parent"
+        "qatar-citizenship-at-birth-by-parent",
+        "qatar-citizenship-by-marriage"
       ]
     },
     {
@@ -2917,7 +2939,8 @@
         "russia-citizenship-by-parent",
         "russia-naturalization",
         "russia-simplified-naturalization-heritage",
-        "russia-citizenship-at-birth-by-parent"
+        "russia-citizenship-at-birth-by-parent",
+        "russia-citizenship-by-marriage"
       ]
     },
     {
@@ -3196,7 +3219,8 @@
       "route_ids": [
         "singapore-citizenship-by-descent",
         "singapore-citizenship-after-pr",
-        "singapore-citizenship-by-birth"
+        "singapore-citizenship-by-birth",
+        "singapore-citizenship-by-marriage"
       ]
     },
     {
@@ -3229,7 +3253,8 @@
       "route_ids": [
         "vietnam-citizenship-by-parent",
         "vietnam-naturalization",
-        "vietnam-citizenship-at-birth-by-parent"
+        "vietnam-citizenship-at-birth-by-parent",
+        "vietnam-citizenship-by-marriage"
       ]
     },
     {
@@ -3475,7 +3500,8 @@
       "route_ids": [
         "thailand-citizenship-by-parent",
         "thailand-naturalization",
-        "thailand-citizenship-at-birth-by-parent"
+        "thailand-citizenship-at-birth-by-parent",
+        "thailand-citizenship-by-marriage"
       ]
     },
     {
@@ -3557,7 +3583,8 @@
         "uae-citizenship-by-father",
         "uae-exceptional-naturalization",
         "uae-citizenship-at-birth-qualifying-parent",
-        "uae-investor-nationality-nomination"
+        "uae-investor-nationality-nomination",
+        "uae-citizenship-by-marriage"
       ]
     },
     {
@@ -5746,6 +5773,42 @@
       ]
     },
     {
+      "id": "armenia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "051",
+        "name": "Armenia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of an Armenian is exempt from the language test and residency, on about two years of marriage or a common child.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "armenia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Citizenship Law art. 13; ordinary period is three years."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Armenia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Armenia_2015"
+        }
+      ]
+    },
+    {
       "id": "armenia-citizenship-by-parent",
       "country": {
         "iso_n3": "051",
@@ -6162,6 +6225,42 @@
         }
       ],
       "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bhutan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+        }
+      ]
+    },
+    {
+      "id": "bhutan-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "064",
+        "name": "Bhutan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Bhutanese may naturalize after fifteen years of residence, instead of twenty.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          180
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bhutan-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 180,
+          "note": "Very restrictive; female foreign spouses obtain residence rights, male foreign spouses only immigration cards."
+        }
+      ],
+      "confidence": "medium",
       "last_checked": "2026-07-23",
       "sources": [
         {
@@ -7854,6 +7953,42 @@
       ]
     },
     {
+      "id": "cambodia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "116",
+        "name": "Cambodia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Khmer citizen may naturalize after three years of marriage and living together, instead of seven.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cambodia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Gender-neutral; framed as a favour rather than a right."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Cambodia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cambodia_2008"
+        }
+      ]
+    },
+    {
       "id": "cambodia-citizenship-by-parent",
       "country": {
         "iso_n3": "116",
@@ -9068,6 +9203,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Taiwan (R.O.C.) Nationality Act — Laws & Regulations Database",
+          "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001"
+        }
+      ]
+    },
+    {
+      "id": "taiwan-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of an ROC national may naturalize after three years of continuous residence, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "taiwan-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Gender-neutral."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Taiwan (R.O.C.) Nationality Act — Laws & Regulations Database",
@@ -13148,6 +13319,42 @@
       ]
     },
     {
+      "id": "georgia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse may obtain nationality after five years of marriage to a Georgian, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "georgia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Children strengthen the application."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Georgia Public Service Development Agency — Citizenship",
+          "url": "https://sda.gov.ge/en/products/citizenship/"
+        }
+      ]
+    },
+    {
       "id": "georgia-citizenship-by-parent",
       "country": {
         "iso_n3": "268",
@@ -15567,6 +15774,42 @@
       ]
     },
     {
+      "id": "india-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "356",
+        "name": "India"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of an Indian may register as a citizen after seven years of ordinary residence, instead of twelve.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "india-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 84,
+          "note": "Citizenship Act s.5(1)(c); gender-neutral."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "India Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/India_2016"
+        }
+      ]
+    },
+    {
       "id": "india-citizenship-by-parent",
       "country": {
         "iso_n3": "356",
@@ -15669,6 +15912,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Indonesia Law No. 12 of 2006 on Citizenship (English text)",
+          "url": "https://www.ecoi.net/en/file/local/1170232/1504_1217488313_law-of-the-republic-of-indonesia-no-12-on-citizenship-of-the-republic-of-indonesia.pdf"
+        }
+      ]
+    },
+    {
+      "id": "indonesia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A legally married foreign spouse acquires nationality by declaration rather than presidential-discretion naturalization.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "indonesia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Law 12/2006 art. 19; residence stays around five years but the mechanism is a declaration; gender-symmetric since 2006."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Indonesia Law No. 12 of 2006 on Citizenship (English text)",
@@ -15787,6 +16066,42 @@
       ]
     },
     {
+      "id": "iran-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "364",
+        "name": "Iran"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of an Iranian man becomes Iranian automatically on marriage.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "iran-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Civil Code art. 976(6). A foreign husband of an Iranian woman has no automatic route."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Iran Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Iran_1989"
+        }
+      ]
+    },
+    {
       "id": "iran-citizenship-by-parent",
       "country": {
         "iso_n3": "364",
@@ -15885,6 +16200,42 @@
         }
       ],
       "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Iraq Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Iraq_2005"
+        }
+      ]
+    },
+    {
+      "id": "iraq-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "368",
+        "name": "Iraq"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse married to an Iraqi for five years, with residence, may naturalize, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "iraq-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Nationality Law 26/2006 art. 11."
+        }
+      ],
+      "confidence": "medium",
       "last_checked": "2026-07-23",
       "sources": [
         {
@@ -16221,6 +16572,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Israel Nationality Law 5712-1952 (amended text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf"
+        }
+      ]
+    },
+    {
+      "id": "israel-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "376",
+        "name": "Israel"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of an Israeli naturalizes under the Nationality Law (not the Law of Return) over roughly a four-and-a-half-year graduated process.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          54
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "israel-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 54,
+          "note": "Nationality Law 5712-1952 §7 (Minister may waive ordinary conditions); gender-neutral. The Citizenship & Entry Law bars this track for spouses from the West Bank/Gaza."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Israel Nationality Law 5712-1952 (amended text)",
@@ -16819,6 +17206,42 @@
       ]
     },
     {
+      "id": "japan-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Japanese may naturalize after three years of residence (or one year if married three or more years), instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "japan-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Nationality Act art. 7; discretionary (Minister of Justice); gender-neutral."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Japan Nationality Act (Japanese Law Translation)",
+          "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/3784/en"
+        }
+      ]
+    },
+    {
       "id": "japan-citizenship-by-parent",
       "country": {
         "iso_n3": "392",
@@ -16970,6 +17393,42 @@
       ]
     },
     {
+      "id": "kazakhstan-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "398",
+        "name": "Kazakhstan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Kazakh may naturalize after three years of residence, instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "kazakhstan-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Discretionary (application)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kazakhstan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017"
+        }
+      ]
+    },
+    {
       "id": "kazakhstan-citizenship-by-parent",
       "country": {
         "iso_n3": "398",
@@ -17103,6 +17562,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Jordanian Nationality Law No. 6 of 1954 (as amended)",
+          "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Jordan%20Law%20No.%206%20of%201954%20on%20Nationality%20%28last%20amended%201987%29%20English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "jordan-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "400",
+        "name": "Jordan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Jordanian may naturalize after five years of marriage (three if from an Arab League state).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "jordan-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Law 6/1954. Does not extend to foreign husbands of Jordanian women."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Jordanian Nationality Law No. 6 of 1954 (as amended)",
@@ -17467,6 +17962,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "HiKorea — General naturalization (5 years)",
+          "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN"
+        }
+      ]
+    },
+    {
+      "id": "korea-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Korean may naturalize after two years of residence while married (or one year if married three or more years), instead of five.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "korea-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Simplified naturalization; gender-neutral since 1998."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "HiKorea — General naturalization (5 years)",
@@ -17931,6 +18462,42 @@
         }
       ],
       "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Lebanon Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lebanon_2004"
+        }
+      ]
+    },
+    {
+      "id": "lebanon-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "422",
+        "name": "Lebanon"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Lebanese may apply for nationality one year after the marriage is registered.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "lebanon-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 12,
+          "note": "Decree 15/S of 1925. A foreign husband of a Lebanese woman cannot acquire by marriage."
+        }
+      ],
+      "confidence": "medium",
       "last_checked": "2026-07-23",
       "sources": [
         {
@@ -19346,6 +19913,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malaysia Federal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+        }
+      ]
+    },
+    {
+      "id": "malaysia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Malaysian man may register after two years of residence, instead of about ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "malaysia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "Federal Constitution art. 15(2). Foreign husbands of Malaysian women have no facilitation."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Malaysia Federal Constitution (Constitute Project)",
@@ -21310,6 +21913,42 @@
       ]
     },
     {
+      "id": "oman-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "512",
+        "name": "Oman"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of an Omani may naturalize after ten years of cohabitation in Oman.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "oman-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 120,
+          "note": "Royal Decree 38/2014; also requires a child, Arabic, and ministerial marriage approval. Not for husbands of Omani women."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Oman Basic Statute (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Oman_2011"
+        }
+      ]
+    },
+    {
       "id": "oman-citizenship-by-parent",
       "country": {
         "iso_n3": "512",
@@ -21701,6 +22340,42 @@
         }
       ],
       "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Nepal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Nepal_2015"
+        }
+      ]
+    },
+    {
+      "id": "nepal-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "524",
+        "name": "Nepal"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Nepali man may acquire nationality on marriage (on initiating renunciation of her foreign citizenship).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "nepal-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Wife only — a foreign husband of a Nepali woman has no route (ordinary 15 years)."
+        }
+      ],
+      "confidence": "medium",
       "last_checked": "2026-07-23",
       "sources": [
         {
@@ -23897,6 +24572,42 @@
       ]
     },
     {
+      "id": "pakistan-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "586",
+        "name": "Pakistan"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Pakistani man is entitled to citizenship with no residence requirement.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "pakistan-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Citizenship Act s.10. Wife only — a foreign husband of a Pakistani woman has no facilitated route."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Pakistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Pakistan_2018"
+        }
+      ]
+    },
+    {
       "id": "pakistan-citizenship-by-parent",
       "country": {
         "iso_n3": "586",
@@ -24666,6 +25377,42 @@
       ]
     },
     {
+      "id": "philippines-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "608",
+        "name": "Philippines"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreigner married to a Filipino may naturalize after five years of residence, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "philippines-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Commonwealth Act 473 §3; judicial process; favours foreign husbands of Filipinas."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Philippines Commonwealth Act No. 473 — Revised Naturalization Law",
+          "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227"
+        }
+      ]
+    },
+    {
       "id": "philippines-citizenship-by-parent-or-reacquisition",
       "country": {
         "iso_n3": "608",
@@ -25416,6 +26163,42 @@
       ]
     },
     {
+      "id": "timor-leste-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "626",
+        "name": "Timor-Leste"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse married for at least five years, with two years of continuous residence, may acquire nationality, instead of ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "timor-leste-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "right",
+          "eligibility_months": 24,
+          "note": "Gender-neutral; Portuguese or Tetum required."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Timor-Leste Citizenship Law (Migration Service PDF)",
+          "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf"
+        }
+      ]
+    },
+    {
       "id": "timor-leste-citizenship-by-parent",
       "country": {
         "iso_n3": "626",
@@ -25622,6 +26405,42 @@
         }
       ],
       "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Qatar Law No. 38 of 2005 on Qatari Nationality (Al Meezan)",
+          "url": "https://www.almeezan.qa/LawView.aspx?opt=&LawID=2591&language=en"
+        }
+      ]
+    },
+    {
+      "id": "qatar-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "634",
+        "name": "Qatar"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of a Qatari may naturalize after five years living with her husband.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "qatar-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 60,
+          "note": "Law 38/2005; not lost on divorce. No route for a foreign husband of a Qatari woman."
+        }
+      ],
+      "confidence": "medium",
       "last_checked": "2026-07-23",
       "sources": [
         {
@@ -25874,6 +26693,42 @@
           "label": "Citizenship at birth through a Russian parent",
           "allocation": "right",
           "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Russia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Russia_2014"
+        }
+      ]
+    },
+    {
+      "id": "russia-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "643",
+        "name": "Russia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse married to a Russian for at least three years may use the simplified order, without the minimum residence requirement.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "russia-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Federal Law 138-FZ; a residence permit is still needed."
         }
       ],
       "confidence": "high",
@@ -28068,6 +28923,42 @@
       ]
     },
     {
+      "id": "singapore-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "702",
+        "name": "Singapore"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign woman who marries a Singaporean man is eligible for a reduced two-year residence, instead of about ten.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "singapore-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 24,
+          "note": "No facilitated path for male spouses of citizens."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Constitution of the Republic of Singapore — Citizenship",
+          "url": "https://sso.agc.gov.sg/Act/CONS1963?ProvIds=P110-&ViewType=Advance"
+        }
+      ]
+    },
+    {
       "id": "slovakia-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "703",
@@ -28240,6 +29131,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Vietnam Law on Vietnamese Nationality 2008 (English)",
+          "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html"
+        }
+      ]
+    },
+    {
+      "id": "vietnam-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "704",
+        "name": "Vietnam"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A spouse of a Vietnamese may be naturalized without meeting the five-year residence, language, or means conditions.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "vietnam-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Law on Nationality 2008 art. 19; discretionary (presidential); gender-neutral."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "Vietnam Law on Vietnamese Nationality 2008 (English)",
@@ -30165,6 +31092,42 @@
       ]
     },
     {
+      "id": "thailand-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "764",
+        "name": "Thailand"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "A foreign woman married to a Thai man may naturalize after about three years of residence, with a lower income threshold and no language test.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "thailand-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 36,
+          "note": "Foreign husbands of Thai women have no such facilitation."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Thailand Nationality Act B.E. 2508 (amended; UNHCR English text)",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733"
+        }
+      ]
+    },
+    {
       "id": "thailand-citizenship-by-parent",
       "country": {
         "iso_n3": "764",
@@ -30756,6 +31719,42 @@
       ],
       "confidence": "high",
       "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "UAE Ministry of Justice — Nationality and Passports Law",
+          "url": "https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1"
+        }
+      ]
+    },
+    {
+      "id": "uae-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization as the spouse of a citizen",
+      "summary": "The foreign wife of an Emirati may acquire nationality after seven years of marriage with a child (or ten years without).",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "uae-citizenship-by-marriage-principal",
+          "label": "Naturalization as the spouse of a citizen",
+          "allocation": "discretionary",
+          "eligibility_months": 84,
+          "note": "Federal Law 17/1972. No equivalent for a foreign husband of an Emirati woman."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
       "sources": [
         {
           "title": "UAE Ministry of Justice — Nationality and Passports Law",
