@@ -7,7 +7,7 @@
   "packageManager": "bun",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && tsc -p monitor/cloudflare/tsconfig.json && bun test && vite build",
+    "build": "tsc && tsc -p monitor/cloudflare/tsconfig.json && bun test && vite build && bun scripts/build_country_pages.ts",
     "deploy:web": "bun run build && bun scripts/deploy_web.ts",
     "data:build": "bun scripts/build_data_release.ts",
     "data:db": "bun scripts/build_canonical_database.ts",
