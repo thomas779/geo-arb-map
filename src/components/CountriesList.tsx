@@ -18,8 +18,7 @@ export function CountriesList({
     .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <div className="absolute inset-0 z-30 overflow-y-auto bg-background">
-      <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
+    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10">
         <h1 className="font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">
           All countries &amp; territories
         </h1>
@@ -40,7 +39,6 @@ export function CountriesList({
             </li>
           ))}
         </ul>
-      </div>
     </div>
   );
 }

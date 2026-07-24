@@ -46,7 +46,7 @@ interface Props {
  */
 export function SiteHeader({ active, onSelectView, right }: Props) {
   return (
-    <header className="flex h-14 shrink-0 items-center gap-1.5 border-b bg-card/90 px-2.5 backdrop-blur-sm sm:h-16 sm:gap-4 sm:px-5">
+    <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-1.5 border-b bg-card/90 px-2.5 backdrop-blur-sm sm:h-16 sm:gap-4 sm:px-5">
       <a href="/" className="flex min-w-0 items-center gap-2.5" aria-label="Flag Paths home">
         <BrandMark />
         <span className="hidden min-w-0 sm:block">
