@@ -45,8 +45,41 @@ export interface Finding {
   category: string;
   brief: string;
   evidence_quote: string;
+  // The official identifier of the law/decree/act (e.g. "1/2026", "PF-67",
+  // "20.446"), when the change enacts one. This is the STABLE identity of the
+  // event: outlets reword the claim and wobble the effective_date, but the
+  // underlying instrument number is fixed — so it drives dedup (see changeKey).
+  legal_instrument: string;
   citations: GroundingCitation[];
   search_queries: string[];
+}
+
+// Reduce a law/decree citation to a stable dedup token. Different outlets and
+// languages phrase the same instrument differently ("Lei Orgânica n.º 1/2026",
+// "Organic Law 1/2026"), but the number/year (or letter-number code) is fixed,
+// so we extract just that. Returns '' when no id is present.
+export function normalizeInstrument(raw?: string | null): string {
+  if (!raw) return '';
+  const source = raw.toLowerCase();
+  const numberYear = source.match(/\d+\s*[/.\-]\s*\d+/); // 1/2026, 20.446, 92/2026
+  if (numberYear) return numberYear[0].replace(/\s+/g, '');
+  const code = source.match(/[a-z]{1,4}\s*-?\s*\d+/); // pf-67, up-180
+  if (code) return code[0].replace(/\s+/g, '');
+  const digits = source.match(/\d+/);
+  return digits ? digits[0] : '';
+}
+
+// The canonical identity of a change, used for both Telegram dedup (fingerprint)
+// and issue dedup (findingToLead). Prefer the legal instrument — a law is one
+// event however many outlets report it, whatever date they attach. Fall back to
+// iso+category+effective_date when no instrument is cited.
+export function changeKey(
+  finding: Pick<Finding, 'iso_n3' | 'category' | 'effective_date' | 'legal_instrument'>,
+): string {
+  const instrument = normalizeInstrument(finding.legal_instrument);
+  if (instrument) return `${finding.iso_n3}|${instrument}`;
+  const category = (finding.category ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
+  return `${finding.iso_n3}|${category}|${finding.effective_date ?? ''}`;
 }
 
 interface RegistryEntry {
@@ -203,7 +236,8 @@ Return ONLY a JSON array (no prose, no code fences). Return [] if nothing new. E
 "category":"ancestry|naturalization|birth|investment|visa|residency|cbi|tax",
 "headline":"a clean 6-12 word news headline that NAMES the country and states the change, readable in a phone notification (e.g. 'Georgia raises residency property threshold to 150,000 dollars'); do not start with the ISO code and do not repeat the country name twice",
 "brief":"1-2 tight sentences a subscriber wants to read: what changed, why it matters, and one concrete number, date, or detail",
-"evidence_quote":"a short verbatim passage (max 200 chars) quoted from the primary source that directly supports the claim's key figure(s) and effective date; translate to English if the source is in another language, keeping it faithful"}
+"evidence_quote":"a short verbatim passage (max 200 chars) quoted from the primary source that directly supports the claim's key figure(s) and effective date; translate to English if the source is in another language, keeping it faithful",
+"legal_instrument":"the SHORT official identifier of the law/decree/act this change enacts — its number and year only, e.g. '1/2026', 'PF-67', '20.446'; empty string if the change cites no specific instrument"}
 Voice for headline and brief: plain, confident, and specific; lead with the change or the number; no clickbait,
 no hype, no exclamation marks, and never legal advice. Put ONLY official/primary URLs in primary_urls — never
 blogs or aggregators. Use status "confirmed" only when a primary source supports it.`;
@@ -255,6 +289,7 @@ export function normalizeFindings(
       category: String(item.category ?? '').trim().slice(0, 40) || 'residency',
       brief: String(item.brief ?? claim).trim().replace(/\s+/g, ' ').slice(0, 500),
       evidence_quote: String(item.evidence_quote ?? '').trim().replace(/\s+/g, ' ').slice(0, 300),
+      legal_instrument: String(item.legal_instrument ?? '').trim().replace(/\s+/g, ' ').slice(0, 60),
       citations: grounded.citations,
       search_queries: grounded.searchQueries,
     }];
@@ -278,10 +313,11 @@ export function findingToLead(finding: Finding): Lead | null {
     tier: 'verification',
     jurisdiction: finding.iso_n3,
     // Stable across re-phrasings: key the signal (and thus the issue-dedup
-    // marker) on the SHAPE of the change, not the model's free-text claim — the
+    // marker) on the change's identity, not the model's free-text claim — the
     // grounded model rewords the same change every run, which previously opened
-    // a fresh issue each time (Portugal: #31 → #55 → #60).
-    externalId: `${finding.iso_n3}:${finding.category}:${finding.effective_date ?? ''}`,
+    // a fresh issue each time (Portugal: #31 → #55 → #60). Prefer the legal
+    // instrument; fall back to iso+category+effective_date.
+    externalId: changeKey(finding),
     url,
     title: finding.claim,
     excerpt,
