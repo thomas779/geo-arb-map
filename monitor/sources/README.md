@@ -105,6 +105,23 @@ permitted feed/API or resilient browser-backed adapter is available.
    their reports as leads, discard promotional copy, and resolve every accepted
    signal to an official source.
 
+## Finding new sources (citation mining)
+
+Don't guess which outlets to subscribe to — let the sweep tell you. Every
+grounded sweep cites the outlets it read to surface a change, and those
+citations accumulate in the `monitor_citations` D1 ledger (recorded each run by
+`monitor:sources:record`). The **Discovery source candidates** workflow (or
+`bun run monitor:sources:candidates -- --state-db <d1-export.sql>`) ranks those
+cited domains by how often — and for how many jurisdictions — they surfaced real
+changes, excludes hosts already in this manifest, probes each for an RSS/Atom
+feed, and writes a report with ready-to-paste manifest entries.
+
+Use it as the primary way to grow the list: run it, take the top candidates that
+have a discovered feed (Mastodon accounts expose `/@user.rss`, which the existing
+RSS adapter reads directly), and add them below. Social accounts without RSS
+(Bluesky/X) are flagged for a dedicated adapter rather than dropped. The report
+is a lead generator, not an auto-subscriber — a human still admits each source.
+
 ## Admission rules
 
 - Prefer RSS, Atom, APIs, gazettes, and stable document indexes over scraping.

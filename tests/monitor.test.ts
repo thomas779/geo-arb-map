@@ -29,6 +29,16 @@ import {
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
 import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, NewsPostStore } from '../monitor/publish/news';
+import {
+  CitationStore,
+  discoverFeed,
+  feedCandidateUrls,
+  hostFromUrl,
+  isGovish,
+  isSocialHost,
+  manifestHosts,
+  sourceKeyFromUrl,
+} from '../monitor/discovery/citations';
 import { inferJurisdictions } from '../monitor/triage/context';
 import { normalizeRulings, parseJsonArray, seenSignalIds } from '../monitor/triage/triage';
 import { buildIssueDraft } from '../monitor/triage/issues';
@@ -510,5 +520,74 @@ describe('AI sweep + grounded verify', () => {
 
     const boom = (() => Promise.reject(new Error('blocked'))) as unknown as typeof fetch;
     expect(await verifySourceUrl('https://lex.uz/deep/404', boom)).toBe('https://lex.uz');
+  });
+});
+
+describe('discovery citation mining', () => {
+  const root = path.resolve(import.meta.dir, '..');
+  const cite = (uri: string, title = '') => ({ uri, title });
+  const finding = (iso: string, status: string, uris: string[]): Finding => ({
+    iso_n3: iso, jurisdiction: 'X', claim: 'c', headline: 'h', status: status as Finding['status'],
+    primary_urls: uris, effective_date: null, affects_dataset: false, category: 'residency',
+    brief: 'b', evidence_quote: 'e', legal_instrument: '', citations: uris.map(u => cite(u, 'sample')), search_queries: [],
+  });
+
+  test('url helpers classify host, social account, and government sources', () => {
+    expect(hostFromUrl('https://www.Publico.pt/a/b')).toBe('publico.pt');
+    expect(hostFromUrl('not a url')).toBeNull();
+    expect(sourceKeyFromUrl('https://publico.pt/a')).toBe('publico.pt');
+    expect(sourceKeyFromUrl('https://mastodon.social/@ImmLawyer/123')).toBe('mastodon.social/@immlawyer');
+    expect(isSocialHost('mastodon.social')).toBe(true);
+    expect(isSocialHost('bsky.app')).toBe(true);
+    expect(isSocialHost('publico.pt')).toBe(false);
+    expect(isGovish('gov.uk')).toBe(true);
+    expect(isGovish('sre.gob.mx')).toBe(true);
+    expect(isGovish('ircc.gc.ca')).toBe(true);
+    expect(isGovish('publico.pt')).toBe(false);
+  });
+
+  test('feedCandidateUrls is deterministic for Mastodon and pathful for sites', () => {
+    expect(feedCandidateUrls('https://mastodon.social/@lawyer/123')).toEqual(['https://mastodon.social/@lawyer.rss']);
+    expect(feedCandidateUrls('https://publico.pt/a')).toContain('https://publico.pt/feed/');
+    expect(feedCandidateUrls('https://bsky.app/profile/x')).toEqual([]);
+  });
+
+  test('CitationStore ranks cited outlets and excludes manifest hosts', () => {
+    const store = new CitationStore(root, null);
+    store.recordFindings([
+      finding('620', 'confirmed', ['https://publico.pt/a', 'https://schengenvisainfo.com/x']),
+      finding('620', 'confirmed', ['https://publico.pt/b']),
+      finding('250', 'proposed', ['https://mastodon.social/@lawyer/1']),
+    ], '2026-07-25T00:00:00Z');
+    const ranked = store.topCandidates({ excludeHosts: manifestHosts(root) });
+    store.close();
+
+    // schengenvisainfo.com is already in the manifest → never proposed.
+    expect(ranked.some(c => c.domain === 'schengenvisainfo.com')).toBe(false);
+    // publico.pt surfaced two confirmed changes → top candidate.
+    expect(ranked[0].source_key).toBe('publico.pt');
+    expect(ranked[0].confirmed).toBe(2);
+    expect(ranked[0].jurisdictions).toBe(1);
+    // the Mastodon account is grouped per-account and flagged social.
+    const mastodon = ranked.find(c => c.source_key === 'mastodon.social/@lawyer');
+    expect(mastodon?.social).toBe(true);
+    expect(mastodon?.confirmed).toBe(0);
+  });
+
+  test('discoverFeed prefers deterministic Mastodon, then autodiscovery', async () => {
+    const noFetch = (() => { throw new Error('should not fetch'); }) as unknown as typeof fetch;
+    expect(await discoverFeed('https://mastodon.social/@lawyer/1', noFetch)).toBe('https://mastodon.social/@lawyer.rss');
+
+    const fakeFetch = (async (input: unknown) => {
+      const url = String(input);
+      if (url === 'https://publico.pt') {
+        return new Response('<html><head><link rel="alternate" type="application/rss+xml" href="/rss"></head></html>', { status: 200 });
+      }
+      if (url === 'https://publico.pt/rss') {
+        return new Response('<?xml version="1.0"?><rss version="2.0"><channel></channel></rss>', { status: 200 });
+      }
+      return new Response('nope', { status: 404 });
+    }) as unknown as typeof fetch;
+    expect(await discoverFeed('https://publico.pt/a', fakeFetch)).toBe('https://publico.pt/rss');
   });
 });

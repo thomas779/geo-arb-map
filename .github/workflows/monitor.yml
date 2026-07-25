@@ -44,6 +44,7 @@ jobs:
       MONITOR_LLM_API_KEY: ${{ secrets.MONITOR_LLM_API_KEY }}
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MONITOR_TRIAGE_MODEL: ${{ vars.MONITOR_TRIAGE_MODEL }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -104,6 +105,24 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: bun run monitor:open
+
+      # Accumulate the outlets the sweep cited into the discovery ledger, so the
+      # candidate-source analyzer (monitor:sources:candidates) can rank which
+      # feeds are worth subscribing to. Idempotent (INSERT OR IGNORE on the URL);
+      # never fails the run — a missing findings file just writes nothing.
+      - name: Record sweep citations
+        if: always() && github.event_name != 'repository_dispatch'
+        run: bun run monitor:sources:record
+
+      - name: Persist citation ledger
+        if: always() && github.event_name != 'repository_dispatch'
+        run: |
+          test -s monitor/.out/monitor-citations.sql || exit 0
+          bunx wrangler d1 migrations apply flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc
+          bunx wrangler d1 execute flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc \
+            --file monitor/.out/monitor-citations.sql
 
       - name: Upload monitor run
         if: always()
