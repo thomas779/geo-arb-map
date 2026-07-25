@@ -43,6 +43,7 @@ import {
   changeKey,
   findingToLead,
   loadRegistry,
+  normalizeCategory,
   normalizeFindings,
   normalizeInstrument,
   officialSourcesByJurisdiction,
@@ -473,8 +474,20 @@ describe('AI sweep + grounded verify', () => {
     expect(prompt).toContain('residence permit change');
     expect(prompt).toContain('Known authoritative source');
     expect(prompt).toContain('https://komunita.gov.mt/en/citizenship');
+    // untrusted discovery excerpts are fenced + labelled, not presented as evidence
+    expect(prompt).toContain('UNTRUSTED');
     // no official source → no hint block
     expect(buildSweepPrompt(entry, context, [])).not.toContain('Known authoritative source');
+  });
+
+  test('normalizeCategory canonicalises free-text categories to the enum (fixes dedup wobble)', () => {
+    expect(normalizeCategory('Naturalization')).toBe('naturalization');
+    expect(normalizeCategory('citizenship')).toBe('naturalization');
+    expect(normalizeCategory('Citizenship by Investment')).toBe('cbi');
+    expect(normalizeCategory('golden visa')).toBe('investment');
+    expect(normalizeCategory('permanent residence')).toBe('residency');
+    expect(normalizeCategory('tax residence')).toBe('tax');
+    expect(normalizeCategory('weather report')).toBe('residency');
   });
 
   test('officialSourcesByJurisdiction maps active verification sources per iso (excludes multi)', () => {
