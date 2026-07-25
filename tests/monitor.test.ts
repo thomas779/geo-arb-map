@@ -610,7 +610,7 @@ describe('X (Twitter) discovery via xAI', () => {
   const root = path.resolve(import.meta.dir, '..');
   const xConfig: XSearchConfig = {
     apiKey: 'k', baseUrl: 'https://api.x.ai/v1', model: 'grok-4.3',
-    maxResults: 15, lookbackHours: 6, sourceId: 'x-search', tier: 'discovery',
+    maxResults: 15, lookbackHours: 6, timeoutMs: 180000, sourceId: 'x-search', tier: 'discovery',
   };
 
   test('resolveIso maps M49, alpha-2/3, and country names to M49', () => {

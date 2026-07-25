@@ -49,6 +49,7 @@ jobs:
       MONITOR_XAI_MODEL: ${{ vars.MONITOR_XAI_MODEL }}
       MONITOR_XAI_LOOKBACK_HOURS: ${{ vars.MONITOR_XAI_LOOKBACK_HOURS }}
       MONITOR_XAI_MAX_RESULTS: ${{ vars.MONITOR_XAI_MAX_RESULTS }}
+      MONITOR_XAI_TIMEOUT_MS: ${{ vars.MONITOR_XAI_TIMEOUT_MS }}
     steps:
       - uses: actions/checkout@v4
 
@@ -70,7 +71,15 @@ jobs:
       # retired in favour of the grounded AI sweep below.
       - name: Collect discovery signals
         if: github.event_name != 'repository_dispatch'
-        run: bun run monitor:collect -- --adapters rss,telegram_html,x_search,bluesky,bluesky_search --lookback-days 1
+        run: |
+          ADAPTERS="rss,telegram_html,bluesky,bluesky_search"
+          # X search is metered (xAI). Run it once/day — on the ~06:00 UTC cron
+          # cycle, or on any manual dispatch — to keep spend near $1/month.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$(date -u +%H)" = "06" ]; then
+            ADAPTERS="$ADAPTERS,x_search"
+          fi
+          echo "collect adapters: $ADAPTERS"
+          bun run monitor:collect -- --adapters "$ADAPTERS" --lookback-days 1
 
       # The newsletter push path keeps the existing single-signal normalization.
       - name: Normalize newsletter dispatch
