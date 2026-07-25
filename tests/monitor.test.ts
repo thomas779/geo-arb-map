@@ -50,7 +50,7 @@ import {
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
-import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, NewsPostStore } from '../monitor/publish/news';
+import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, NewsPostStore, runNews } from '../monitor/publish/news';
 import {
   CitationStore,
   discoverFeed,
@@ -542,6 +542,14 @@ describe('AI sweep + grounded verify', () => {
     expect(store.hasRecentChange('124', 'naturalization', 120, now)).toBe(false);  // different jurisdiction
     expect(store.hasRecentChange('620', 'naturalization', 0, now)).toBe(false);     // outside the window
     store.close();
+  });
+
+  test('runNews refuses --apply without a dedup ledger (would otherwise repost every run)', async () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'news-apply-'));
+    const findingsPath = path.join(dir, 'findings.json');
+    fs.writeFileSync(findingsPath, '[]');
+    await expect(runNews({ findings: findingsPath, apply: true, stateDb: null, stateSql: path.join(dir, 'out.sql'), max: 20 }))
+      .rejects.toThrow('--apply requires');
   });
 
   test('verifySourceUrl keeps resolving links, falls back to domain root otherwise', async () => {

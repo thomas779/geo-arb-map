@@ -72,6 +72,7 @@ export async function collectTelegramPreview(
   { fetchImpl = fetch, retrievedAt }: ParseOptions & { fetchImpl?: typeof fetch } = {},
 ): Promise<Signal[]> {
   const response = await fetchImpl(source.url, {
+    signal: AbortSignal.timeout(20_000),
     headers: { 'User-Agent': 'flag-paths-monitor/0.1 (+https://github.com/thomas779/geo-arb-map)' },
   });
   if (!response.ok) {
