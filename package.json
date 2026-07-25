@@ -27,6 +27,8 @@
     "monitor:open": "bun monitor/triage/open-issues.ts --apply",
     "monitor:telegram": "bun monitor/publish/telegram.ts",
     "monitor:news": "bun monitor/publish/news.ts",
+    "monitor:sources:record": "bun monitor/discovery/record.ts",
+    "monitor:sources:candidates": "bun monitor/discovery/candidates.ts",
     "monitor:test": "bun test tests/monitor.test.ts",
     "preview": "vite preview",
     "test": "bun test"

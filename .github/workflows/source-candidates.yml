@@ -1,0 +1,64 @@
+name: Discovery source candidates
+
+# Rank the outlets the grounded sweep keeps citing into a "subscribe to these"
+# report: which feeds surface real changes, for which countries, and whether an
+# RSS/Atom feed exists. Read-only — it never subscribes; a human/assistant picks
+# from the report and adds manifest entries.
+
+on:
+  workflow_dispatch:
+    inputs:
+      since_days:
+        description: Recency window for citations (days)
+        required: false
+        default: "180"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-candidates
+  cancel-in-progress: true
+
+jobs:
+  candidates:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Export citation ledger
+        run: |
+          mkdir -p .out
+          bunx wrangler d1 migrations apply flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc
+          bunx wrangler d1 export flag-paths-data \
+            --remote --config data/d1/wrangler.jsonc \
+            --output .out/citations.sql --skip-confirmation
+
+      - name: Rank candidate sources
+        run: >-
+          bun run monitor:sources:candidates --
+          --state-db .out/citations.sql
+          --since-days "${{ inputs.since_days || '180' }}"
+
+      - name: Report summary
+        if: always()
+        run: cat .generated/monitor/source-candidates.md >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || echo "no report generated"
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-candidates
+          path: .generated/monitor/
+          if-no-files-found: warn
