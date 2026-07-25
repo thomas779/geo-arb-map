@@ -623,28 +623,29 @@ describe('X (Twitter) discovery via xAI', () => {
   });
 
   test('parseXSearchResponse builds discovery signals, dedupes, and drops url-less items', () => {
-    const body = { choices: [{ message: { content: JSON.stringify([
+    const body = { output_text: JSON.stringify([
       { iso_n3: '620', jurisdiction: 'Portugal', headline: 'Portugal raises naturalization to 10 years', summary: 's', url: 'https://x.com/immlawyer/status/1' },
       { iso_n3: '', jurisdiction: 'Spain', headline: 'Spain reforms nationality law', summary: 's', url: 'https://x.com/reporter/status/2' },
       { jurisdiction: 'France', headline: 'no url — dropped', summary: 's' },
       { iso_n3: '620', jurisdiction: 'Portugal', headline: 'duplicate url — dropped', summary: 's', url: 'https://x.com/immlawyer/status/1' },
-    ]) } }] };
+    ]) };
     const signals = parseXSearchResponse(body, xConfig, { retrievedAt });
     expect(signals).toHaveLength(2);
     expect(signals[0].source_id).toBe('x-search');
     expect(signals[0].tier).toBe('discovery');
     expect(signals[0].jurisdiction).toBe('620');
     expect(signals[1].jurisdiction).toBe('724'); // resolved from the name "Spain"
-    expect(parseXSearchResponse({ choices: [{ message: { content: 'not json' } }] }, xConfig)).toEqual([]);
+    expect(parseXSearchResponse({ output_text: 'not json' }, xConfig)).toEqual([]);
+    expect(parseXSearchResponse({ output: [{ content: [{ text: '[]' }] }] }, xConfig)).toEqual([]);
   });
 
-  test('xSearchConfigFromEnv is null without a key and defaults grok-4.3 with one', () => {
+  test('xSearchConfigFromEnv is null without a key and defaults grok-4.5 with one', () => {
     const saved = process.env.MONITOR_XAI_API_KEY;
     delete process.env.MONITOR_XAI_API_KEY;
     expect(xSearchConfigFromEnv()).toBeNull();
     process.env.MONITOR_XAI_API_KEY = 'test-key';
     const config = xSearchConfigFromEnv();
-    expect(config?.model).toBe('grok-4.3');
+    expect(config?.model).toBe('grok-4.5');
     expect(config?.tier).toBe('discovery');
     if (saved === undefined) delete process.env.MONITOR_XAI_API_KEY;
     else process.env.MONITOR_XAI_API_KEY = saved;
