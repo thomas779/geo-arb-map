@@ -1,14 +1,34 @@
-// X (Twitter) discovery via the xAI Live Search API. Immigration lawyers and
-// agencies post rule changes on X hours-to-days before news or Google indexes
-// them, and xAI is the only provider that grounds on X's live social graph.
-// This asks Grok to search X for recent official mobility-law changes and emits
-// one Signal per post, which flags the jurisdiction for the verify sweep. It is
+// X (Twitter) discovery via the xAI Agent Tools API (server-side x_search tool).
+// Immigration lawyers and agencies post rule changes on X hours-to-days before
+// news or Google indexes them, and xAI is the only provider that grounds on X's
+// live social graph. To avoid the firehose burying small, high-signal niche
+// accounts, the search is scoped to a curated watchlist (with a broad fallback).
+// Emits one Signal per post, flagging the jurisdiction for the verify sweep.
 // DISCOVERY ONLY — the primary-source + evidence-audit gate still guards every
 // publication; an X post can never verify a dataset change on its own.
 
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import countries from 'i18n-iso-countries';
 import { makeSignal, type Signal, type SignalTier } from '../schema/signal';
 import { parseJsonArray } from '../triage/triage';
+
+const WATCHLIST_PATH = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'sources', 'x-watchlist.json');
+
+// Curated X handles to prioritise. Open search buries small, high-signal niche
+// accounts; scoping to a watchlist makes coverage of them reliable. The list is
+// grown by the reverse-discovery seed job and the citation-mining candidate
+// report, not hand-guessed. Returns [] (→ broad search) if the file is absent.
+export function loadWatchlist(file: string = WATCHLIST_PATH): string[] {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(file, 'utf8')) as { handles?: unknown };
+    if (!Array.isArray(parsed.handles)) return [];
+    return [...new Set(parsed.handles.map(handle => String(handle).trim().replace(/^@/, '').toLowerCase()).filter(Boolean))];
+  } catch {
+    return [];
+  }
+}
 
 export interface XSearchConfig {
   apiKey: string;
@@ -17,6 +37,7 @@ export interface XSearchConfig {
   maxResults: number;
   lookbackHours: number;
   timeoutMs: number;
+  watchlist: string[];
   sourceId: string;
   tier: SignalTier;
 }
@@ -35,6 +56,7 @@ export function xSearchConfigFromEnv(): XSearchConfig | null {
     // Agentic tool calls + reasoning can take a couple of minutes; keep a
     // generous ceiling. It runs once/day, so a slow call barely matters.
     timeoutMs: Number(process.env.MONITOR_XAI_TIMEOUT_MS) || 180_000,
+    watchlist: loadWatchlist(),
     sourceId: 'x-search',
     tier: 'discovery',
   };
@@ -46,8 +68,14 @@ const SYSTEM_PROMPT =
   + 'about actual government/policy changes with a concrete source — never opinion, ads, promotions, or generic '
   + 'commentary. Prefer official agencies, immigration lawyers, and specialist reporters.';
 
-function userPrompt(hours: number): string {
-  return `Search X for posts from roughly the last ${hours} hours about such changes. `
+export function buildUserPrompt(hours: number, watchlist: string[] = []): string {
+  // Hybrid: give priority to the curated accounts (so small niche accounts are
+  // never buried), but still surface anything else — so coverage never regresses
+  // while the watchlist is small.
+  const priority = watchlist.length
+    ? `Give priority to recent posts from these accounts, searching each explicitly: ${watchlist.map(handle => `from:${handle}`).join(' OR ')}. Also include any other qualifying official change you find. `
+    : '';
+  return `${priority}Search X for posts from roughly the last ${hours} hours about such changes. `
     + 'Return ONLY a JSON array (no prose, no code fences); return [] if nothing qualifies. Each item:\n'
     + '{"iso_n3":"UN M49 numeric country code of the jurisdiction, or \'\' if unclear",'
     + '"jurisdiction":"country name",'
@@ -136,7 +164,7 @@ export async function collectXSearch(
   const requestBody = {
     model: config.model,
     instructions: SYSTEM_PROMPT,
-    input: [{ role: 'user', content: userPrompt(config.lookbackHours) }],
+    input: [{ role: 'user', content: buildUserPrompt(config.lookbackHours, config.watchlist) }],
     tools: [{ type: 'x_search' }],
     stream: false,
   };
