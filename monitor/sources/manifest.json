@@ -9,7 +9,7 @@
       "jurisdictions": [
         "multi"
       ],
-      "notes": "X (Twitter) via the xAI Live Search API (grok-4.3, x_search tool). Real-time discovery of officially announced/proposed mobility-law changes; flags jurisdictions for the verify sweep and feeds the citation loop. Skipped unless MONITOR_XAI_API_KEY is set. Discovery only; verify against primary sources."
+      "notes": "X (Twitter) via the xAI Agent Tools API (grok-4.5, x_search tool). Real-time discovery of officially announced/proposed mobility-law changes; flags jurisdictions for the verify sweep and feeds the citation loop. Skipped unless MONITOR_XAI_API_KEY is set. Discovery only; verify against primary sources."
     },
     {
       "id": "schengenvisainfo-rss",

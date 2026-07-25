@@ -28,7 +28,7 @@ export function xSearchConfigFromEnv(): XSearchConfig | null {
   return {
     apiKey,
     baseUrl: process.env.MONITOR_XAI_BASE_URL || 'https://api.x.ai/v1',
-    model: process.env.MONITOR_XAI_MODEL || 'grok-4.3',
+    model: process.env.MONITOR_XAI_MODEL || 'grok-4.5',
     maxResults: Number(process.env.MONITOR_XAI_MAX_RESULTS) || 15,
     lookbackHours: Number(process.env.MONITOR_XAI_LOOKBACK_HOURS) || 6,
     sourceId: 'x-search',
@@ -66,8 +66,22 @@ export function resolveIso(value: unknown): string {
 }
 
 interface XSearchBody {
-  choices?: Array<{ message?: { content?: string; citations?: unknown[] } }>;
+  output_text?: string;
+  output?: Array<{ content?: Array<{ text?: string }> }>;
   citations?: unknown[];
+}
+
+// The Responses API returns the model text either as a convenience `output_text`
+// string or split across `output[].content[].text`. Handle both.
+function extractText(body: XSearchBody): string {
+  if (typeof body.output_text === 'string') return body.output_text;
+  if (Array.isArray(body.output)) {
+    return body.output
+      .flatMap(item => (Array.isArray(item?.content) ? item.content : []))
+      .map(part => (typeof part?.text === 'string' ? part.text : ''))
+      .join('');
+  }
+  return '';
 }
 
 // Turn the xAI response into signals. Tolerant: a non-JSON body yields no
@@ -77,8 +91,7 @@ export function parseXSearchResponse(
   config: XSearchConfig,
   { retrievedAt }: { retrievedAt?: string } = {},
 ): Signal[] {
-  const parsed = body as XSearchBody;
-  const content = parsed.choices?.[0]?.message?.content ?? '';
+  const content = extractText(body as XSearchBody);
   let items: unknown[];
   try {
     items = parseJsonArray(content);
@@ -111,35 +124,32 @@ export function parseXSearchResponse(
 
 export async function collectXSearch(
   config: XSearchConfig,
-  { fetchImpl = fetch, retrievedAt, now }: { fetchImpl?: typeof fetch; retrievedAt?: string; now?: Date } = {},
+  { fetchImpl = fetch, retrievedAt }: { fetchImpl?: typeof fetch; retrievedAt?: string } = {},
 ): Promise<Signal[]> {
-  const fromDate = new Date((now ?? new Date()).getTime() - config.lookbackHours * 3_600_000)
-    .toISOString()
-    .slice(0, 10);
+  // Agent Tools API (the current interface — Live Search was retired). The
+  // server-side x_search tool grounds the answer on X; the model decides how
+  // many searches to run for the query.
   const requestBody = {
     model: config.model,
-    temperature: 0,
-    messages: [
-      { role: 'system', content: SYSTEM_PROMPT },
-      { role: 'user', content: userPrompt(config.lookbackHours) },
-    ],
-    search_parameters: {
-      mode: 'on',
-      return_citations: true,
-      from_date: fromDate,
-      max_search_results: config.maxResults,
-      sources: [{ type: 'x' }],
-    },
+    instructions: SYSTEM_PROMPT,
+    input: [{ role: 'user', content: userPrompt(config.lookbackHours) }],
+    tools: [{ type: 'x_search' }],
+    stream: false,
   };
-  const response = await fetchImpl(`${config.baseUrl}/chat/completions`, {
+  const response = await fetchImpl(`${config.baseUrl}/responses`, {
     method: 'POST',
     headers: { Authorization: `Bearer ${config.apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(requestBody),
-    signal: AbortSignal.timeout(60_000),
+    signal: AbortSignal.timeout(90_000),
   });
   if (!response.ok) {
     const detail = await response.text().catch(() => '');
-    throw new Error(`x-search: xAI request failed (${response.status}) ${detail}`.slice(0, 200));
+    throw new Error(`x-search: xAI request failed (${response.status}) ${detail}`.slice(0, 300));
   }
-  return parseXSearchResponse(await response.json(), config, { retrievedAt });
+  const body = await response.json();
+  // Surface token/tool usage in the run log so the real cost is visible without
+  // opening the xAI console.
+  const usage = (body as { usage?: unknown }).usage;
+  if (usage) console.log(`x-search usage: ${JSON.stringify(usage)}`);
+  return parseXSearchResponse(body, config, { retrievedAt });
 }
