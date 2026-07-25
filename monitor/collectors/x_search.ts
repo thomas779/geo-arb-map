@@ -76,6 +76,8 @@ export function buildUserPrompt(hours: number, watchlist: string[] = []): string
     ? `Give priority to recent posts from these accounts, searching each explicitly: ${watchlist.map(handle => `from:${handle}`).join(' OR ')}. Also include any other qualifying official change you find. `
     : '';
   return `${priority}Search X for posts from roughly the last ${hours} hours about such changes. `
+    + 'Search in English AND in the local language of the country involved (e.g. Spanish, Portuguese, French, '
+    + 'Arabic, Vietnamese) — official changes are often announced or discussed in local language first. '
     + 'Return ONLY a JSON array (no prose, no code fences); return [] if nothing qualifies. Each item:\n'
     + '{"iso_n3":"UN M49 numeric country code of the jurisdiction, or \'\' if unclear",'
     + '"jurisdiction":"country name",'
