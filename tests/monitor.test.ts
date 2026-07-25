@@ -19,9 +19,11 @@ import {
 import { generateGroundedText } from '../monitor/llm/client';
 import {
   buildSweepPrompt,
+  changeKey,
   findingToLead,
   loadRegistry,
   normalizeFindings,
+  normalizeInstrument,
   selectJurisdictions,
   type Finding,
 } from '../monitor/sweep/run';
@@ -380,7 +382,7 @@ describe('AI sweep + grounded verify', () => {
     const finding: Finding = {
       iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
       primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
-      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', citations: [], search_queries: ['q'],
+      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', legal_instrument: '', citations: [], search_queries: ['q'],
     };
     const lead = findingToLead(finding);
     expect(lead?.impact_type).toBe('cost_or_investment_threshold');
@@ -442,7 +444,7 @@ describe('AI sweep + grounded verify', () => {
     const finding: Finding = {
       iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
       primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
-      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', citations: [], search_queries: [],
+      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', legal_instrument: '', citations: [], search_queries: [],
     };
     const post = buildNewsPost(finding);
     expect(post.text).toContain('🇲🇹 <b>Malta ends golden passports</b>');
@@ -462,12 +464,32 @@ describe('AI sweep + grounded verify', () => {
     expect(synthesizeIssue(finding).body).toContain('## Verified evidence');
   });
 
+  test('fingerprint keys on the legal instrument when present', () => {
+    const base: Finding = {
+      iso_n3: '620', jurisdiction: 'Portugal', claim: 'Portugal raised naturalization to 10 years',
+      headline: 'h', status: 'confirmed', primary_urls: ['https://dre.pt'], effective_date: '2026-05-19',
+      affects_dataset: true, category: 'naturalization', brief: 'b', evidence_quote: 'e',
+      legal_instrument: 'Lei Orgânica 1/2026', citations: [], search_queries: [],
+    };
+    expect(changeKey(base)).toBe('620|1/2026');
+    // Same law, different outlet wording AND a wobbled date/category → same fingerprint.
+    const otherOutlet: Finding = { ...base, claim: 'Portugal doubles residency requirement', effective_date: '2026-05-18', category: 'residency', legal_instrument: 'Organic Law No. 1/2026' };
+    expect(fingerprint(base)).toBe(fingerprint(otherOutlet));
+    // A genuinely different law for the same country → different fingerprint.
+    expect(fingerprint(base)).not.toBe(fingerprint({ ...base, legal_instrument: '2/2027' }));
+    // Extracts the stable number/year or letter-number core; '' falls back to iso+category+date.
+    expect(normalizeInstrument('Lei Orgânica n.º 1/2026')).toBe('1/2026');
+    expect(normalizeInstrument('Presidential Decree PF-67')).toBe('pf-67');
+    expect(normalizeInstrument('Law No. 20.446')).toBe('20.446');
+    expect(normalizeInstrument('')).toBe('');
+  });
+
   test('hasRecentChange dedups the same jurisdiction+category within the window', () => {
     const store = new NewsPostStore(path.resolve(import.meta.dir, '..'), null);
     const f: Finding = {
       iso_n3: '620', jurisdiction: 'Portugal', claim: 'Portugal raised naturalization to 10 years', headline: 'h',
       status: 'confirmed', primary_urls: ['https://dre.pt'], effective_date: '2026-05-19', affects_dataset: true,
-      category: 'naturalization', brief: 'b', evidence_quote: 'e', citations: [], search_queries: [],
+      category: 'naturalization', brief: 'b', evidence_quote: 'e', legal_instrument: '', citations: [], search_queries: [],
     };
     const now = new Date('2026-07-25T00:00:00Z');
     store.record(fingerprint(f), f, 17, '2026-07-24T00:00:00Z');

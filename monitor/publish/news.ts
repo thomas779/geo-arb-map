@@ -21,7 +21,7 @@ import {
 } from './telegram';
 import countries from 'i18n-iso-countries';
 import { llmConfigFromEnv } from '../llm/client';
-import type { Finding } from '../sweep/run';
+import { changeKey, type Finding } from '../sweep/run';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TELEGRAM_MESSAGE_LIMIT = 4096;
@@ -54,18 +54,17 @@ interface NewsOptions {
   max: number;
 }
 
-// Dedup key. Uses the STABLE shape of a change — jurisdiction + acquisition
-// category + effective date — not the free-text claim. The grounded model
-// rephrases the same change every run, so a claim-based key reposted the same
-// story every 6h (e.g. Portugal went out 3x in one day). Keying on
-// iso+category+effective_date collapses re-phrasings while still letting a
-// genuinely different change (new date) through.
-export function fingerprint(finding: Pick<Finding, 'iso_n3' | 'category' | 'effective_date'>): string {
-  const category = (finding.category ?? '').toLowerCase().replace(/\s+/g, ' ').trim();
-  return createHash('sha1')
-    .update(`${finding.iso_n3}|${category}|${finding.effective_date ?? ''}`)
-    .digest('hex')
-    .slice(0, 16);
+// Dedup key. Hashes the change's canonical identity (changeKey): the legal
+// instrument when the change cites one — a law is one event no matter how many
+// outlets report it or what date they attach — else iso+category+effective_date.
+// The grounded model rephrases the same change (and wobbles its date) every run,
+// so a claim- or date-based key reposted the same story every 6h (Portugal went
+// out 4x). The window check in runNews (hasRecentChange) backstops the instrument-
+// less fallback when the date still wobbles.
+export function fingerprint(
+  finding: Pick<Finding, 'iso_n3' | 'category' | 'effective_date' | 'legal_instrument'>,
+): string {
+  return createHash('sha1').update(changeKey(finding)).digest('hex').slice(0, 16);
 }
 
 // Resolve a source URL to something that actually opens. The grounded model
