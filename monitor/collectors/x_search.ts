@@ -16,6 +16,7 @@ export interface XSearchConfig {
   model: string;
   maxResults: number;
   lookbackHours: number;
+  timeoutMs: number;
   sourceId: string;
   tier: SignalTier;
 }
@@ -31,6 +32,9 @@ export function xSearchConfigFromEnv(): XSearchConfig | null {
     model: process.env.MONITOR_XAI_MODEL || 'grok-4.5',
     maxResults: Number(process.env.MONITOR_XAI_MAX_RESULTS) || 15,
     lookbackHours: Number(process.env.MONITOR_XAI_LOOKBACK_HOURS) || 6,
+    // Agentic tool calls + reasoning can take a couple of minutes; keep a
+    // generous ceiling. It runs once/day, so a slow call barely matters.
+    timeoutMs: Number(process.env.MONITOR_XAI_TIMEOUT_MS) || 180_000,
     sourceId: 'x-search',
     tier: 'discovery',
   };
@@ -140,7 +144,7 @@ export async function collectXSearch(
     method: 'POST',
     headers: { Authorization: `Bearer ${config.apiKey}`, 'Content-Type': 'application/json' },
     body: JSON.stringify(requestBody),
-    signal: AbortSignal.timeout(90_000),
+    signal: AbortSignal.timeout(config.timeoutMs),
   });
   if (!response.ok) {
     const detail = await response.text().catch(() => '');
