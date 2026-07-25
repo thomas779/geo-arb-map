@@ -9,6 +9,7 @@ import {
   parseTelegramPreview,
   type TelegramSource,
 } from './telegram';
+import { collectXSearch, xSearchConfigFromEnv } from './x_search';
 import { dedupeSignals, type Signal, type SignalTier } from '../schema/signal';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -16,7 +17,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // Adapters the collector actually fetches. Official-page change-detection
 // (html_index) is retired in favour of the grounded AI sweep; those manifest
 // entries are retained as a per-jurisdiction primary-source lookup, not crawled.
-const IMPLEMENTED_ADAPTERS = new Set(['rss', 'telegram_html']);
+const IMPLEMENTED_ADAPTERS = new Set(['rss', 'telegram_html', 'x_search']);
 
 export interface ManifestSource {
   id: string;
@@ -150,13 +151,22 @@ export async function runCollectors(
   for (const source of active) {
     const startedAt = Date.now();
     try {
+      // X search is a live-API pseudo-source (no fixture, opt-in via API key):
+      // skip it cleanly in fixture mode or when no key is configured.
+      if (source.adapter === 'x_search' && (options.fixtureDir || !xSearchConfigFromEnv())) {
+        sourceResults.push({ source_id: source.id, status: 'ok', fetched: 0, accepted: 0, duration_ms: Date.now() - startedAt });
+        console.log(`${source.id}: skipped (${options.fixtureDir ? 'fixture mode' : 'no MONITOR_XAI_API_KEY'})`);
+        continue;
+      }
       const found = options.fixtureDir
         ? collectFixture(source, options.fixtureDir, retrievedAt)
-        : isRssSource(source)
-          ? await collectRss(source, { retrievedAt })
-          : isTelegramSource(source)
-            ? await collectTelegramPreview(source, { retrievedAt })
-            : [];
+        : source.adapter === 'x_search'
+          ? await collectXSearch(xSearchConfigFromEnv()!, { retrievedAt })
+          : isRssSource(source)
+            ? await collectRss(source, { retrievedAt })
+            : isTelegramSource(source)
+              ? await collectTelegramPreview(source, { retrievedAt })
+              : [];
       const recent = found
         .filter(signal => withinLookback(signal, options.lookbackDays, retrievedAt))
         .filter(signal => signalMatchesKeywords(signal, source));

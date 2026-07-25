@@ -21,6 +21,7 @@ legal conclusion.
 
 | Source | Transport | Role | State |
 | --- | --- | --- | --- |
+| X (Twitter) | xAI Live Search (grok-4.3 `x_search`) | Real-time X discovery of official mobility changes | Active when `MONITOR_XAI_API_KEY` is set; discovery only |
 | GLOBALCIT | RSS | Worldwide nationality-law discovery | Active |
 | IMI Daily | RSS | CBI/RBI trade-press discovery | Active |
 | Settled Nomad visa index | HTML content hash | Missing-visa and claimed PR/CIT-transition discovery | Active; commercial discovery only |
@@ -121,6 +122,22 @@ have a discovered feed (Mastodon accounts expose `/@user.rss`, which the existin
 RSS adapter reads directly), and add them below. Social accounts without RSS
 (Bluesky/X) are flagged for a dedicated adapter rather than dropped. The report
 is a lead generator, not an auto-subscriber — a human still admits each source.
+
+## X (Twitter) via xAI
+
+The `x-search` source uses the xAI Live Search API (`grok-4.3`, `x_search` tool)
+to find recent officially-announced/proposed mobility-law changes posted on X,
+which the RSS layer and Google-grounded sweep miss or lag. It emits one signal
+per X post (flagging the jurisdiction for the verify sweep) and its post URLs
+feed the citation loop, so the candidate report learns which X accounts to
+follow. Discovery only — an X post never verifies a dataset change on its own.
+
+Configure via repository secret `MONITOR_XAI_API_KEY` (from console.x.ai — this
+is the xAI **developer** key, separate from an X Premium or SuperGrok
+subscription). Without it the source skips cleanly. Optional repo variables:
+`MONITOR_XAI_MODEL` (default `grok-4.3`), `MONITOR_XAI_LOOKBACK_HOURS` (6),
+`MONITOR_XAI_MAX_RESULTS` (15). Billing is per `x_search` tool call ($5/1k) plus
+tokens — roughly a few dollars a month at the 6-hourly cadence.
 
 ## Admission rules
 

@@ -191,21 +191,27 @@ export class CitationStore {
     this.database.exec(fs.readFileSync(path.join(root, 'data/d1/migrations/0005_monitor_citations.sql'), 'utf8'));
   }
 
-  // Record every cited URL from the findings. Returns how many new rows landed.
+  // Record a single cited URL. Returns false for an unparseable URL. The URL is
+  // the primary key, so repeats collapse to one row in D1 (INSERT OR IGNORE).
+  recordCitation(url: string, isoN3: string, status: string, title: string, seenAt: string): boolean {
+    const key = sourceKeyFromUrl(url);
+    const domain = hostFromUrl(url);
+    if (!key || !domain) return false;
+    const values = [url, domain, key, isoN3, status, title ?? '', seenAt];
+    const sql = `INSERT OR IGNORE INTO monitor_citations (url, domain, source_key, iso_n3, status, title, seen_at) VALUES (${values
+      .map(value => (value === null ? 'NULL' : `'${String(value).replace(/'/g, "''")}'`))
+      .join(', ')});`;
+    this.database.exec(sql);
+    this.mutations.push(sql);
+    return true;
+  }
+
+  // Record every cited URL from the findings. Returns how many rows landed.
   recordFindings(findings: Finding[], seenAt: string): number {
     let recorded = 0;
     for (const finding of findings) {
       for (const citation of finding.citations ?? []) {
-        const key = sourceKeyFromUrl(citation.uri);
-        const domain = hostFromUrl(citation.uri);
-        if (!key || !domain) continue;
-        const values = [citation.uri, domain, key, finding.iso_n3, finding.status, citation.title ?? '', seenAt];
-        const sql = `INSERT OR IGNORE INTO monitor_citations (url, domain, source_key, iso_n3, status, title, seen_at) VALUES (${values
-          .map(value => (value === null ? 'NULL' : `'${String(value).replace(/'/g, "''")}'`))
-          .join(', ')});`;
-        this.database.exec(sql);
-        this.mutations.push(sql);
-        recorded += 1;
+        if (this.recordCitation(citation.uri, finding.iso_n3, finding.status, citation.title ?? '', seenAt)) recorded += 1;
       }
     }
     return recorded;

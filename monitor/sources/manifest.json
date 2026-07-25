@@ -2,6 +2,16 @@
   "$comment": "Every collector must emit the Signal shape in monitor/schema/signal.ts. Active sources use implemented RSS, public Telegram, or stable HTML snapshot transports. Planned sources still need credentials, onboarding, a specialized query, or a proven reliable endpoint. Independent agencies and country specialists are preferred over broad social monitoring.",
   "sources": [
     {
+      "id": "x-search",
+      "tier": "discovery",
+      "adapter": "x_search",
+      "status": "active",
+      "jurisdictions": [
+        "multi"
+      ],
+      "notes": "X (Twitter) via the xAI Live Search API (grok-4.3, x_search tool). Real-time discovery of officially announced/proposed mobility-law changes; flags jurisdictions for the verify sweep and feeds the citation loop. Skipped unless MONITOR_XAI_API_KEY is set. Discovery only; verify against primary sources."
+    },
+    {
       "id": "schengenvisainfo-rss",
       "tier": "discovery",
       "adapter": "rss",
