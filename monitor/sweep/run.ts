@@ -199,10 +199,34 @@ function compactContext(context: DatasetContext): unknown {
   };
 }
 
+// Known authoritative sources per jurisdiction, from the manifest's active
+// verification-tier entries (excludes the shared 'multi' aggregators). Anchors
+// the grounded sweep on the RIGHT primary source instead of rediscovering it
+// every run — the main failure mode for opaque, low-web-presence jurisdictions.
+export function officialSourcesByJurisdiction(root: string): Map<string, Array<{ title: string; url: string }>> {
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, 'sources', 'manifest.json'), 'utf8')) as {
+    sources?: Array<{ tier?: string; status?: string; url?: string; notes?: string; jurisdictions?: string[] }>;
+  };
+  const map = new Map<string, Array<{ title: string; url: string }>>();
+  for (const source of manifest.sources ?? []) {
+    if (source.tier !== 'verification' || source.status !== 'active' || !source.url) continue;
+    const isos = (source.jurisdictions ?? []).filter(iso => iso && iso !== 'multi');
+    if (!isos.length) continue;
+    const title = (source.notes ?? source.url).split('.')[0].trim().slice(0, 80);
+    for (const iso of isos) {
+      const list = map.get(iso) ?? [];
+      if (list.length < 4) list.push({ title, url: source.url });
+      map.set(iso, list);
+    }
+  }
+  return map;
+}
+
 export function buildSweepPrompt(
   entry: RegistryEntry,
   context: DatasetContext,
   rssExcerpts: string[],
+  officialSources: Array<{ title: string; url: string }> = [],
 ): string {
   return `You are fact-checking government mobility rules for ${entry.name} (ISO ${entry.iso_n3}).
 First, use Google Search to find the most recent OFFICIAL / primary sources (government, gazette, court,
@@ -211,7 +235,7 @@ naturalisation, permanent and long-term residency, ancestry/descent, citizenship
 (CBI/RBI), AND tax-residence rules (who becomes tax-resident, non-dom/territorial regimes, exit tax).
 Search in ${entry.name}'s official language(s) as well as English — primary legal sources are usually
 published in the local language, so query the local gazette/ministry terms (not only English) to reach them.
-Prioritise changes announced, enacted, or taking effect in the last ~90 days, plus anything upcoming.
+${officialSources.length ? `Known authoritative source(s) we already trust for ${entry.name} — start with these and verify any change against them; if a link has moved, find the current official page:\n${officialSources.map(source => `- ${source.title}: ${source.url}`).join('\n')}\n` : ''}Prioritise changes announced, enacted, or taking effect in the last ~90 days, plus anything upcoming.
 Do NOT report changes older than about six months unless they are upcoming or have only just come to light.
 You MUST search before answering; do not rely on prior knowledge alone. Keep it efficient: run a few
 targeted searches (about 3-5), not an exhaustive sweep.
@@ -417,6 +441,7 @@ export async function runSweep(
   const blocsData = JSON.parse(
     fs.readFileSync(path.resolve(ROOT, '..', 'public', 'blocs_data.json'), 'utf8'),
   ) as BlocsData;
+  const officialSourcesByIso = officialSourcesByJurisdiction(ROOT);
 
   // Hybrid: fold in recent RSS discovery signals (if a collect ran) so flagged
   // jurisdictions are prioritized and their excerpts hint the grounded call.
@@ -465,6 +490,7 @@ export async function runSweep(
     const outcomes = await mapPool(capped, options.concurrency, async (entry) => {
       const context = datasetContextForJurisdiction(entry.iso_n3, citizenshipData, blocsData);
       const rssExcerpts = rssByIso.get(entry.iso_n3) ?? [];
+      const officialSources = officialSourcesByIso.get(entry.iso_n3) ?? [];
       if (fixtureRaw) {
         const normalized = normalizeFindings(fixtureRaw, entry, FIXTURE_GROUNDED);
         console.log(`${entry.iso_n3} ${entry.name}: ${normalized.length} findings`);
@@ -472,7 +498,7 @@ export async function runSweep(
       }
       let result: GroundedResult;
       try {
-        result = await generateGroundedText(buildSweepPrompt(entry, context, rssExcerpts), llm!, { maxTokens: 8192 });
+        result = await generateGroundedText(buildSweepPrompt(entry, context, rssExcerpts, officialSources), llm!, { maxTokens: 8192 });
       } catch (error) {
         console.error(`::warning title=Sweep call failed::${entry.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
         return { findings: [] as Finding[], made: 0, queries: 0, citations: 0, skipped: false, input: 0, output: 0, raw: {} as Record<string, number> };
