@@ -1,0 +1,7 @@
+{
+  "$comment": "X (Twitter) handles the x_search collector prioritises each daily run (account-scoped monitoring). Handles only, no @. Seeded small on purpose — the reverse-discovery seed job (which asks Grok who reported changes we've already published) and the citation-mining candidate report grow and verify this list from real data, rather than hand-guessing. Discovery only; the primary-source + evidence gate still applies. The collector keeps a broad fallback, so coverage never regresses while this list is short.",
+  "handles": [
+    "nomadcapitalist",
+    "imidaily"
+  ]
+}

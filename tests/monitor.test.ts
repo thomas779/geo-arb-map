@@ -9,6 +9,8 @@ import { signalFromNewsletterDispatch } from '../monitor/collectors/github-dispa
 import { parseTelegramPreview } from '../monitor/collectors/telegram';
 import { signalMatchesKeywords, runCollectors } from '../monitor/collectors/run';
 import {
+  buildUserPrompt,
+  loadWatchlist,
   parseXSearchResponse,
   resolveIso,
   xSearchConfigFromEnv,
@@ -610,8 +612,26 @@ describe('X (Twitter) discovery via xAI', () => {
   const root = path.resolve(import.meta.dir, '..');
   const xConfig: XSearchConfig = {
     apiKey: 'k', baseUrl: 'https://api.x.ai/v1', model: 'grok-4.3',
-    maxResults: 15, lookbackHours: 6, timeoutMs: 180000, sourceId: 'x-search', tier: 'discovery',
+    maxResults: 15, lookbackHours: 6, timeoutMs: 180000, watchlist: [], sourceId: 'x-search', tier: 'discovery',
   };
+
+  test('loadWatchlist parses handles (strips @/case) and the shipped list loads', () => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'wl-'));
+    const file = path.join(dir, 'x-watchlist.json');
+    fs.writeFileSync(file, JSON.stringify({ handles: ['@NomadCapitalist', 'imidaily', '  '] }));
+    expect(loadWatchlist(file)).toEqual(['nomadcapitalist', 'imidaily']);
+    expect(loadWatchlist('/no/such/file.json')).toEqual([]);
+    expect(loadWatchlist()).toContain('nomadcapitalist'); // the shipped watchlist
+  });
+
+  test('buildUserPrompt scopes to the watchlist when present, broad when empty', () => {
+    const scoped = buildUserPrompt(24, ['nomadcapitalist', 'imidaily']);
+    expect(scoped).toContain('from:nomadcapitalist OR from:imidaily');
+    expect(scoped).toContain('Also include any other qualifying official change');
+    const broad = buildUserPrompt(24, []);
+    expect(broad).not.toContain('from:');
+    expect(broad).toContain('last 24 hours');
+  });
 
   test('resolveIso maps M49, alpha-2/3, and country names to M49', () => {
     expect(resolveIso('620')).toBe('620');
