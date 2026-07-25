@@ -10,6 +10,7 @@ import {
   type TelegramSource,
 } from './telegram';
 import { collectXSearch, xSearchConfigFromEnv } from './x_search';
+import { collectBluesky, type BlueskySource } from './bluesky';
 import { dedupeSignals, type Signal, type SignalTier } from '../schema/signal';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -17,7 +18,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // Adapters the collector actually fetches. Official-page change-detection
 // (html_index) is retired in favour of the grounded AI sweep; those manifest
 // entries are retained as a per-jurisdiction primary-source lookup, not crawled.
-const IMPLEMENTED_ADAPTERS = new Set(['rss', 'telegram_html', 'x_search']);
+const IMPLEMENTED_ADAPTERS = new Set(['rss', 'telegram_html', 'x_search', 'bluesky', 'bluesky_search']);
 
 export interface ManifestSource {
   id: string;
@@ -162,11 +163,13 @@ export async function runCollectors(
         ? collectFixture(source, options.fixtureDir, retrievedAt)
         : source.adapter === 'x_search'
           ? await collectXSearch(xSearchConfigFromEnv()!, { retrievedAt })
-          : isRssSource(source)
-            ? await collectRss(source, { retrievedAt })
-            : isTelegramSource(source)
-              ? await collectTelegramPreview(source, { retrievedAt })
-              : [];
+          : (source.adapter === 'bluesky' || source.adapter === 'bluesky_search')
+            ? await collectBluesky(source as BlueskySource, { retrievedAt })
+            : isRssSource(source)
+              ? await collectRss(source, { retrievedAt })
+              : isTelegramSource(source)
+                ? await collectTelegramPreview(source, { retrievedAt })
+                : [];
       const recent = found
         .filter(signal => withinLookback(signal, options.lookbackDays, retrievedAt))
         .filter(signal => signalMatchesKeywords(signal, source));
