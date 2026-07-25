@@ -94,15 +94,22 @@ returned HTTP 403 to the bounded collector on 2026-07-21. Its official pages
 remain canonical evidence, but the source is correctly marked `planned` until a
 permitted feed/API or resilient browser-backed adapter is available.
 
-1. **P0 — gazettes supplementing active guidance monitors:** Spain BOE,
-   Portugal DRE, France Légifrance, Argentina Boletín Oficial, UK legislation,
-   and the IRCC feed.
-2. **P1 — high-value country coverage gaps:** Colombia's normative repository,
-   Brazil's Diário Oficial, Mexico's Diario Oficial, Israel's official
-   nationality guidance, and Poland and Hungary's consolidated nationality law.
-3. **P1 — European framework changes:** a focused EUR-Lex RSS query for
-   nationality, migration, residence, free movement, and accession.
-4. **P2 — commercial discovery:** Latitude and Henley index adapters. Treat
+**Done (2026-07-26):** Spain **BOE** (Sección I), Portugal **DRE** (Série I), and
+**EUR-Lex** (OJ L) are now active keyword-filtered RSS feeds (verified live). A
+gazette-RSS audit of ~27 jurisdictions found working feeds also for Italy GU,
+Germany BGBl I, Hungary Magyar Közlöny, Mexico DOF, UK legislation.gov.uk (Atom),
+and France JORF via the droit.org mirror — candidates to add next.
+
+The rest have **no RSS** (Argentina, Uruguay, Brazil, Chile, Colombia, Panama,
+Paraguay, Turkey, Greece, Ireland, Cyprus, Malta, Caribbean CBI…). Do NOT build
+bespoke HTML scrapers for them — the grounded sweep already resolves their
+primary sources on demand. Where a clean structured API exists it is the
+efficient exception worth an adapter: **Poland ELI** (`api.sejm.gov.pl/eli`) and
+**Netherlands KOOP SRU** (`officielebekendmakingen.nl`).
+
+1. **P1 — high-value country coverage gaps:** Colombia's normative repository,
+   Israel's official nationality guidance, and a Poland/Netherlands structured-API adapter.
+2. **P2 — commercial discovery:** Latitude and Henley index adapters. Treat
    their reports as leads, discard promotional copy, and resolve every accepted
    signal to an official source.
 

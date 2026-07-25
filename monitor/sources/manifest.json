@@ -395,10 +395,11 @@
     {
       "id": "boe-spain",
       "tier": "verification",
-      "adapter": "api",
-      "status": "planned",
+      "adapter": "rss",
+      "status": "active",
       "kind": "gazette_search",
-      "url": "https://www.boe.es/datosabiertos/api/api.php",
+      "keyword_match": "any",
+      "url": "https://www.boe.es/rss/boe.php?s=1",
       "jurisdictions": [
         "724"
       ],
@@ -414,9 +415,11 @@
     {
       "id": "dre-portugal",
       "tier": "verification",
-      "adapter": "api",
-      "status": "planned",
+      "adapter": "rss",
+      "status": "active",
       "kind": "gazette_search",
+      "keyword_match": "any",
+      "url": "https://files.diariodarepublica.pt/rss/serie1-html.xml",
       "jurisdictions": [
         "620"
       ],
@@ -929,11 +932,12 @@
       "id": "eurlex-official-journal",
       "tier": "verification",
       "adapter": "rss",
-      "status": "planned",
+      "status": "active",
       "kind": "gazette_search",
-      "url": "https://eur-lex.europa.eu/oj/direct-access.html?locale=en",
+      "keyword_match": "any",
+      "url": "https://eur-lex.europa.eu/EN/display-feed.rss?rssId=222",
       "jurisdictions": [
-        "eu"
+        "multi"
       ],
       "keywords": [
         "citizenship",
@@ -948,7 +952,7 @@
         "nationalit\u00e9",
         "Staatsangeh\u00f6rigkeit"
       ],
-      "notes": "Authentic Official Journal of the European Union. Configure a focused EUR-Lex RSS search for nationality, residence, migration, accession, and free-movement instruments rather than ingesting the entire journal."
+      "notes": "Official Journal of the EU (OJ L) RSS — all EU legislation, keyword-filtered to nationality/residence/migration/free-movement items; article text infers the specific jurisdiction. Verified live 2026-07-26."
     },
     {
       "id": "greece-citizenship",
