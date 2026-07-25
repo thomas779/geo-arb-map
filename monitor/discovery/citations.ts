@@ -199,7 +199,7 @@ export class CitationStore {
     if (!key || !domain) return false;
     const values = [url, domain, key, isoN3, status, title ?? '', seenAt];
     const sql = `INSERT OR IGNORE INTO monitor_citations (url, domain, source_key, iso_n3, status, title, seen_at) VALUES (${values
-      .map(value => (value === null ? 'NULL' : `'${String(value).replace(/'/g, "''")}'`))
+      .map(value => (value === null ? 'NULL' : `'${String(value).replace(/[\r\n]+/g, ' ').replace(/'/g, "''")}'`))
       .join(', ')});`;
     this.database.exec(sql);
     this.mutations.push(sql);

@@ -95,6 +95,7 @@ export async function collectRss(
   // A browser-like User-Agent + Accept header clears naive bot blocks that reject
   // obvious crawler UAs; hard blocks still fail and are reported per source.
   const response = await fetchImpl(source.url, {
+    signal: AbortSignal.timeout(20_000),
     headers: {
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36 flag-paths-monitor',
       Accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*',

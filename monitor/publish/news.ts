@@ -185,7 +185,7 @@ export class NewsPostStore {
     const values = [fp, finding.iso_n3, finding.category, finding.status, messageId, finding.primary_urls[0] ?? null, postedAt];
     const sql = `INSERT OR IGNORE INTO monitor_posts
       (fingerprint, iso_n3, category, status, telegram_message_id, primary_url, posted_at)
-      VALUES (${values.map(value => value === null ? 'NULL' : typeof value === 'number' ? String(value) : `'${String(value).replace(/'/g, "''")}'`).join(', ')});`;
+      VALUES (${values.map(value => value === null ? 'NULL' : typeof value === 'number' ? String(value) : `'${String(value).replace(/[\r\n]+/g, ' ').replace(/'/g, "''")}'`).join(', ')});`;
     this.database.exec(sql);
     this.mutations.push(sql);
   }
@@ -230,58 +230,75 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
   const dedupWindowDays = Number(process.env.MONITOR_NEWS_DEDUP_WINDOW_DAYS) || 120;
   const store = options.stateDb ? new NewsPostStore(path.resolve(ROOT, '..'), options.stateDb) : null;
   const llm = llmConfigFromEnv();
+  // Refuse to publish without the dedup ledger — otherwise every run re-posts
+  // every confirmed finding. Dry-run (preview) is still allowed without a store.
+  if (options.apply && !store) throw new Error('--apply requires --state-db (the dedup ledger); refusing to publish without dedup');
   if (options.apply && !llm) throw new Error('A monitoring LLM must be configured to auto-publish news');
 
   let published = 0;
   let skipped = 0;
-  for (const finding of confirmed) {
-    const fp = fingerprint(finding);
-    if (store?.has(fp)) { skipped += 1; console.log(`skip (already posted): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`); continue; }
-    if (store?.hasRecentChange(finding.iso_n3, finding.category, dedupWindowDays, new Date())) {
-      skipped += 1;
-      console.log(`skip (same ${finding.category} change for ${finding.iso_n3} within ${dedupWindowDays}d): ${finding.claim.slice(0, 60)}`);
-      continue;
-    }
-    // Make sure the "Source" link opens; fall back to the domain root if not.
-    finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
-    let post: TelegramPost;
-    try {
-      post = buildNewsPost(finding);
-    } catch (error) {
-      skipped += 1;
-      console.warn(`skip (unpublishable): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
-      continue;
-    }
-    if (llm) {
-      try {
-        await auditTelegramPost(synthesizeIssue(finding), post, { llm });
-      } catch (error) {
+  try {
+    for (const finding of confirmed) {
+      const fp = fingerprint(finding);
+      if (store?.has(fp)) { skipped += 1; console.log(`skip (already posted): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`); continue; }
+      if (store?.hasRecentChange(finding.iso_n3, finding.category, dedupWindowDays, new Date())) {
         skipped += 1;
-        console.warn(`skip (audit blocked): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
+        console.log(`skip (same ${finding.category} change for ${finding.iso_n3} within ${dedupWindowDays}d): ${finding.claim.slice(0, 60)}`);
         continue;
       }
-    } else {
-      console.warn('::warning title=News audit skipped::No LLM configured; dry-run cannot verify evidence');
-    }
-    if (!options.apply) {
-      console.log(`\n--- would publish (${finding.iso_n3}) ---\n${post.text}\n`);
+      // Make sure the "Source" link opens; fall back to the domain root if not.
+      finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
+      let post: TelegramPost;
+      try {
+        post = buildNewsPost(finding);
+      } catch (error) {
+        skipped += 1;
+        console.warn(`skip (unpublishable): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
+        continue;
+      }
+      if (llm) {
+        try {
+          await auditTelegramPost(synthesizeIssue(finding), post, { llm });
+        } catch (error) {
+          skipped += 1;
+          console.warn(`skip (audit blocked): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
+          continue;
+        }
+      } else {
+        console.warn('::warning title=News audit skipped::No LLM configured; dry-run cannot verify evidence');
+      }
+      if (!options.apply) {
+        console.log(`\n--- would publish (${finding.iso_n3}) ---\n${post.text}\n`);
+        published += 1;
+        continue;
+      }
+      // Send, then record immediately. A later finding's send failure must not
+      // lose the ledger of what already posted — that caused duplicate reposts.
+      let messageId: number;
+      try {
+        messageId = await sendTelegramPost(post, {
+          token: process.env.TELEGRAM_BOT_TOKEN ?? '',
+          channelId: process.env.TELEGRAM_CHANNEL_ID ?? '',
+          parseMode: 'HTML',
+          disablePreview: true,
+        });
+      } catch (error) {
+        // Don't record (it may not have posted); keep going so one 429/502
+        // doesn't abort the run and drop the earlier sends from the ledger.
+        skipped += 1;
+        console.warn(`skip (send failed): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
+        continue;
+      }
+      store?.record(fp, finding, messageId, new Date().toISOString());
       published += 1;
-      continue;
+      console.log(`published ${finding.iso_n3} as Telegram message ${messageId}`);
     }
-    const messageId = await sendTelegramPost(post, {
-      token: process.env.TELEGRAM_BOT_TOKEN ?? '',
-      channelId: process.env.TELEGRAM_CHANNEL_ID ?? '',
-      parseMode: 'HTML',
-      disablePreview: true,
-    });
-    store?.record(fp, finding, messageId, new Date().toISOString());
-    published += 1;
-    console.log(`published ${finding.iso_n3} as Telegram message ${messageId}`);
-  }
-
-  if (store) {
-    store.writeMutations(options.stateSql);
-    store.close();
+  } finally {
+    // Always persist what we recorded, even if the loop threw unexpectedly.
+    if (store) {
+      store.writeMutations(options.stateSql);
+      store.close();
+    }
   }
   console.log(`${options.apply ? 'published' : 'previewed'} ${published}, skipped ${skipped}`);
   return { published, skipped };
