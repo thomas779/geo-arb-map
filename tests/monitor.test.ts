@@ -15,6 +15,14 @@ import {
   type XSearchConfig,
 } from '../monitor/collectors/x_search';
 import {
+  blueskyEndpoint,
+  collectBluesky,
+  handleFromProfileUrl,
+  parseBlueskyPosts,
+  postUrl,
+  type BlueskySource,
+} from '../monitor/collectors/bluesky';
+import {
   canonicalArticleUrl,
   parseNewsletterRoutes,
   routeForMessage,
@@ -663,5 +671,60 @@ describe('X (Twitter) discovery via xAI', () => {
     const ranked = store.topCandidates({});
     store.close();
     expect(ranked.find(c => c.source_key === 'x.com/immlawyer')?.social).toBe(true);
+  });
+});
+
+describe('Bluesky discovery via AT Protocol', () => {
+  const authorSource: BlueskySource = {
+    id: 'bsky-immlawyer', tier: 'discovery', adapter: 'bluesky',
+    url: 'https://bsky.app/profile/immlawyer.bsky.social', jurisdictions: ['620'],
+  };
+
+  test('handleFromProfileUrl and postUrl derive handles and public URLs', () => {
+    expect(handleFromProfileUrl('https://bsky.app/profile/immlawyer.bsky.social')).toBe('immlawyer.bsky.social');
+    expect(handleFromProfileUrl('immlawyer.bsky.social')).toBe('immlawyer.bsky.social');
+    expect(handleFromProfileUrl('not a handle!')).toBeNull();
+    expect(postUrl('at://did:plc:abc/app.bsky.feed.post/3xyz', 'immlawyer.bsky.social'))
+      .toBe('https://bsky.app/profile/immlawyer.bsky.social/post/3xyz');
+  });
+
+  test('parseBlueskyPosts handles author-feed and search shapes, dedupes, drops empties', () => {
+    const authorFeed = { feed: [
+      { post: { uri: 'at://did:plc:abc/app.bsky.feed.post/3xyz', author: { handle: 'immlawyer.bsky.social' }, record: { text: 'Portugal raised naturalization residency to 10 years under Lei Orgânica 1/2026.', createdAt: '2026-07-25T09:00:00Z' } } },
+      { post: { uri: 'at://did:plc:abc/app.bsky.feed.post/3xyz', author: { handle: 'immlawyer.bsky.social' }, record: { text: 'duplicate uri' } } },
+      { post: { uri: 'at://did:plc:abc/app.bsky.feed.post/3nop', author: { handle: 'immlawyer.bsky.social' }, record: { text: '' } } },
+    ] };
+    const signals = parseBlueskyPosts(authorFeed, authorSource, { retrievedAt });
+    expect(signals).toHaveLength(1);
+    expect(signals[0].url).toBe('https://bsky.app/profile/immlawyer.bsky.social/post/3xyz');
+    expect(signals[0].jurisdiction).toBe('620');
+    expect(signals[0].source_id).toBe('bsky-immlawyer');
+    expect(signals[0].published_at).toBe('2026-07-25T09:00:00.000Z');
+
+    const search = { posts: [{ uri: 'at://did:plc:def/app.bsky.feed.post/3aaa', author: { handle: 'reporter.bsky.social' }, record: { text: 'Spain reforms nationality law' } }] };
+    const searchSignals = parseBlueskyPosts(search, { id: 'bsky-search', tier: 'discovery', adapter: 'bluesky_search', keywords: ['nationality'] }, { retrievedAt });
+    expect(searchSignals).toHaveLength(1);
+    expect(searchSignals[0].url).toContain('/profile/reporter.bsky.social/post/3aaa');
+  });
+
+  test('blueskyEndpoint builds author-feed and search endpoints', () => {
+    expect(blueskyEndpoint(authorSource)).toBe(
+      'https://public.api.bsky.app/xrpc/app.bsky.feed.getAuthorFeed?actor=immlawyer.bsky.social&limit=25&filter=posts_no_replies',
+    );
+    expect(blueskyEndpoint({ id: 's', tier: 'discovery', adapter: 'bluesky_search', query: 'visa OR citizenship' }))
+      .toBe('https://public.api.bsky.app/xrpc/app.bsky.feed.searchPosts?q=visa%20OR%20citizenship&limit=25&sort=latest');
+    expect(blueskyEndpoint({ id: 's2', tier: 'discovery', adapter: 'bluesky_search', keywords: ['visa', 'permit'] }))
+      .toContain('q=visa%20permit');
+    expect(() => blueskyEndpoint({ id: 'bad', tier: 'discovery', adapter: 'bluesky' })).toThrow('no handle');
+  });
+
+  test('collectBluesky fetches and parses a feed', async () => {
+    const fake = (async () => new Response(
+      JSON.stringify({ feed: [{ post: { uri: 'at://x/app.bsky.feed.post/1', author: { handle: 'a.bsky.social' }, record: { text: 'Change in Portugal citizenship' } } }] }),
+      { status: 200 },
+    )) as unknown as typeof fetch;
+    const signals = await collectBluesky(authorSource, { fetchImpl: fake, retrievedAt });
+    expect(signals).toHaveLength(1);
+    expect(signals[0].url).toContain('a.bsky.social/post/1');
   });
 });

@@ -139,6 +139,25 @@ subscription). Without it the source skips cleanly. Optional repo variables:
 `MONITOR_XAI_MAX_RESULTS` (15). Billing is per `x_search` tool call ($5/1k) plus
 tokens — roughly a few dollars a month at the 6-hourly cadence.
 
+## Bluesky (AT Protocol)
+
+Bluesky's public AppView (`public.api.bsky.app`) is keyless and free, so no
+secret is needed. Two adapters:
+
+- `bluesky` — an account's feed (`getAuthorFeed`, replies excluded). Follow a
+  known immigration lawyer / agency / specialist. Manifest shape:
+  `{"id":"bsky-<name>","tier":"discovery","adapter":"bluesky","url":"https://bsky.app/profile/<handle>","jurisdictions":["<iso>"]}`
+  (a bare `handle` field works instead of `url`).
+- `bluesky_search` — a keyword search across the network (`searchPosts`). Set an
+  explicit `query` (e.g. `"golden visa"`) or `keywords`; keep it specific, since
+  a broad term (e.g. "immigration") returns political noise. Prefer author feeds
+  for signal; use search sparingly.
+
+Both emit one signal per post (flagging the jurisdiction) and feed the citation
+loop. Discovery only. Add author-feed sources as the candidate report surfaces
+real Bluesky handles — don't guess handles, verify each with
+`app.bsky.actor.getProfile` first.
+
 ## Admission rules
 
 - Prefer RSS, Atom, APIs, gazettes, and stable document indexes over scraping.
