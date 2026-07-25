@@ -42,9 +42,16 @@ function excludeClause(watchlist: string[]): string {
   return watchlist.length ? `Do NOT include accounts already on our list: ${watchlist.map(h => `@${h}`).join(', ')}. ` : '';
 }
 
+// Use the current watchlist as ANCHORS — mimicking X's "You might like": the
+// accounts followed alongside / recommended next to known-good mobility-law
+// accounts are themselves usually the niche accounts we want.
 export function buildDirectoryPrompt(watchlist: string[]): string {
-  return 'Use x_search to find X accounts that CONSISTENTLY post official mobility-law updates. '
-    + `${excludeClause(watchlist)}`
+  const anchors = watchlist.length
+    ? `We already follow these accounts, which post exactly the updates we want: ${watchlist.map(h => `@${h}`).join(', ')}. `
+      + 'Find MORE accounts like them — the accounts X would surface under "You might like" next to these, and the accounts they interact with — that also post real mobility-law changes. Do NOT re-list the ones above. '
+    : '';
+  return 'Use x_search to find X accounts that CONSISTENTLY post official mobility-law updates, of ANY follower count. '
+    + `${anchors}`
     + 'Only include an account if it has posted at least 2 relevant updates in roughly the last 6 months and you can cite one. '
     + JSON_SHAPE;
 }

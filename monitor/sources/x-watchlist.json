@@ -1,7 +1,13 @@
 {
-  "$comment": "X (Twitter) handles the x_search collector prioritises each daily run (account-scoped monitoring). Handles only, no @. Seeded small on purpose — the reverse-discovery seed job (which asks Grok who reported changes we've already published) and the citation-mining candidate report grow and verify this list from real data, rather than hand-guessing. Discovery only; the primary-source + evidence gate still applies. The collector keeps a broad fallback, so coverage never regresses while this list is short.",
+  "$comment": "X (Twitter) handles the x_search collector prioritises each daily run (account-scoped monitoring). Handles only, no @. Grown by the reverse-discovery seed job (monitor:sources:x-seed, which requires a real post URL as evidence per account), the citation-mining candidate report, and accounts the owner spots via X's 'You might like'. Discovery only; the primary-source + evidence gate still applies. The collector keeps a broad fallback, so coverage never regresses.",
   "handles": [
     "nomadcapitalist",
-    "imidaily"
+    "imidaily",
+    "ndmlawfirm",
+    "mirabellol",
+    "ec_holdings",
+    "cipsaintlucia",
+    "vertex_alliance",
+    "varnavaslaw"
   ]
 }

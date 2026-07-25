@@ -15,6 +15,11 @@ on:
         default: "directory"
         type: choice
         options: [directory, reverse, both]
+      model:
+        description: "xAI model for this seed run (seeding is occasional, so a stronger model is worth it)"
+        required: false
+        default: "grok-4.5"
+        type: string
 
 permissions:
   contents: read
@@ -28,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MONITOR_XAI_API_KEY: ${{ secrets.MONITOR_XAI_API_KEY }}
-      MONITOR_XAI_MODEL: ${{ vars.MONITOR_XAI_MODEL }}
+      MONITOR_XAI_MODEL: ${{ inputs.model || 'grok-4.5' }}
       MONITOR_XAI_TIMEOUT_MS: ${{ vars.MONITOR_XAI_TIMEOUT_MS }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
