@@ -100,14 +100,18 @@ a raw re-import — see [`../data/d1/README.md`](../data/d1/README.md).
 
 | Workflow | Trigger | Purpose | Cloudflare token |
 | --- | --- | --- | --- |
-| `monitor.yml` | daily cron + dispatch | AI sweep + Telegram publish | D1 (dedup ledger) |
+| `monitor.yml` | daily cron + dispatch | RSS/Telegram/X/Bluesky discovery + AI sweep + citation ledger + Telegram publish | D1 (dedup + citations) |
+| `source-candidates.yml` | manual | rank cited outlets worth subscribing to (from the citation ledger) | D1 |
+| `x-watchlist-seed.yml` | manual | propose X watchlist accounts via Grok (evidence-required, review-first) | D1 (reverse mode) |
 | `backup-d1.yml` | daily cron + dispatch | export D1, validate, upload to R2 | D1 + R2 |
 | `sync-canonical-d1.yml` | manual | re-import canonical → D1 (guarded) | D1 |
 | `publish-telegram.yml` | manual | publish one reviewed brief | — |
 | `check-telegram.yml` | manual | Telegram connection check | — |
 
-Third-party actions are pinned to commit SHAs; dispatch inputs are passed via
-`env:` vars, never interpolated into shell lines.
+X discovery needs the `MONITOR_XAI_API_KEY` secret (optional — X skips cleanly
+without it); the daily X call is ~$0.02, the manual seed ~$0.50–1. Third-party
+actions are pinned to commit SHAs; dispatch inputs are passed via `env:` vars,
+never interpolated into shell lines.
 
 ## Security posture
 
