@@ -7,7 +7,13 @@ import { parseRss, type RssSource } from '../monitor/collectors/rss';
 import { parseNewsletterMessages } from '../monitor/collectors/email';
 import { signalFromNewsletterDispatch } from '../monitor/collectors/github-dispatch';
 import { parseTelegramPreview } from '../monitor/collectors/telegram';
-import { signalMatchesKeywords } from '../monitor/collectors/run';
+import { signalMatchesKeywords, runCollectors } from '../monitor/collectors/run';
+import {
+  parseXSearchResponse,
+  resolveIso,
+  xSearchConfigFromEnv,
+  type XSearchConfig,
+} from '../monitor/collectors/x_search';
 import {
   canonicalArticleUrl,
   parseNewsletterRoutes,
@@ -589,5 +595,73 @@ describe('discovery citation mining', () => {
       return new Response('nope', { status: 404 });
     }) as unknown as typeof fetch;
     expect(await discoverFeed('https://publico.pt/a', fakeFetch)).toBe('https://publico.pt/rss');
+  });
+});
+
+describe('X (Twitter) discovery via xAI', () => {
+  const root = path.resolve(import.meta.dir, '..');
+  const xConfig: XSearchConfig = {
+    apiKey: 'k', baseUrl: 'https://api.x.ai/v1', model: 'grok-4.3',
+    maxResults: 15, lookbackHours: 6, sourceId: 'x-search', tier: 'discovery',
+  };
+
+  test('resolveIso maps M49, alpha-2/3, and country names to M49', () => {
+    expect(resolveIso('620')).toBe('620');
+    expect(resolveIso('PT')).toBe('620');
+    expect(resolveIso('PRT')).toBe('620');
+    expect(resolveIso('Portugal')).toBe('620');
+    expect(resolveIso('Nowhereland')).toBe('');
+    expect(resolveIso('')).toBe('');
+  });
+
+  test('parseXSearchResponse builds discovery signals, dedupes, and drops url-less items', () => {
+    const body = { choices: [{ message: { content: JSON.stringify([
+      { iso_n3: '620', jurisdiction: 'Portugal', headline: 'Portugal raises naturalization to 10 years', summary: 's', url: 'https://x.com/immlawyer/status/1' },
+      { iso_n3: '', jurisdiction: 'Spain', headline: 'Spain reforms nationality law', summary: 's', url: 'https://x.com/reporter/status/2' },
+      { jurisdiction: 'France', headline: 'no url — dropped', summary: 's' },
+      { iso_n3: '620', jurisdiction: 'Portugal', headline: 'duplicate url — dropped', summary: 's', url: 'https://x.com/immlawyer/status/1' },
+    ]) } }] };
+    const signals = parseXSearchResponse(body, xConfig, { retrievedAt });
+    expect(signals).toHaveLength(2);
+    expect(signals[0].source_id).toBe('x-search');
+    expect(signals[0].tier).toBe('discovery');
+    expect(signals[0].jurisdiction).toBe('620');
+    expect(signals[1].jurisdiction).toBe('724'); // resolved from the name "Spain"
+    expect(parseXSearchResponse({ choices: [{ message: { content: 'not json' } }] }, xConfig)).toEqual([]);
+  });
+
+  test('xSearchConfigFromEnv is null without a key and defaults grok-4.3 with one', () => {
+    const saved = process.env.MONITOR_XAI_API_KEY;
+    delete process.env.MONITOR_XAI_API_KEY;
+    expect(xSearchConfigFromEnv()).toBeNull();
+    process.env.MONITOR_XAI_API_KEY = 'test-key';
+    const config = xSearchConfigFromEnv();
+    expect(config?.model).toBe('grok-4.3');
+    expect(config?.tier).toBe('discovery');
+    if (saved === undefined) delete process.env.MONITOR_XAI_API_KEY;
+    else process.env.MONITOR_XAI_API_KEY = saved;
+  });
+
+  test('the x-search source skips cleanly (no network) when no key is set', async () => {
+    const saved = process.env.MONITOR_XAI_API_KEY;
+    delete process.env.MONITOR_XAI_API_KEY;
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'xrun-'));
+    const { signals, report } = await runCollectors({
+      fixtureDir: null, sourceId: 'x-search', adapters: null, strict: false,
+      output: path.join(tmp, 's.json'), report: path.join(tmp, 'r.json'), lookbackDays: 1,
+    });
+    expect(signals).toHaveLength(0);
+    expect(report.sources_attempted).toBe(1);
+    expect(report.sources_failed).toBe(0);
+    if (saved !== undefined) process.env.MONITOR_XAI_API_KEY = saved;
+  });
+
+  test('recordCitation lands an X post as a rankable, social candidate', () => {
+    const store = new CitationStore(root, null);
+    expect(store.recordCitation('not-a-url', '620', 'signal', 't', 'now')).toBe(false);
+    expect(store.recordCitation('https://x.com/immlawyer/status/9', '620', 'signal', 'PT change', '2026-07-25T00:00:00Z')).toBe(true);
+    const ranked = store.topCandidates({});
+    store.close();
+    expect(ranked.find(c => c.source_key === 'x.com/immlawyer')?.social).toBe(true);
   });
 });

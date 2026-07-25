@@ -45,6 +45,10 @@ jobs:
       ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       MONITOR_TRIAGE_MODEL: ${{ vars.MONITOR_TRIAGE_MODEL }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      MONITOR_XAI_API_KEY: ${{ secrets.MONITOR_XAI_API_KEY }}
+      MONITOR_XAI_MODEL: ${{ vars.MONITOR_XAI_MODEL }}
+      MONITOR_XAI_LOOKBACK_HOURS: ${{ vars.MONITOR_XAI_LOOKBACK_HOURS }}
+      MONITOR_XAI_MAX_RESULTS: ${{ vars.MONITOR_XAI_MAX_RESULTS }}
     steps:
       - uses: actions/checkout@v4
 
@@ -66,7 +70,7 @@ jobs:
       # retired in favour of the grounded AI sweep below.
       - name: Collect discovery signals
         if: github.event_name != 'repository_dispatch'
-        run: bun run monitor:collect -- --adapters rss,telegram_html --lookback-days 1
+        run: bun run monitor:collect -- --adapters rss,telegram_html,x_search --lookback-days 1
 
       # The newsletter push path keeps the existing single-signal normalization.
       - name: Normalize newsletter dispatch
