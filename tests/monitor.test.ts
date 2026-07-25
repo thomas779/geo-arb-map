@@ -25,6 +25,11 @@ import {
   type BlueskySource,
 } from '../monitor/collectors/bluesky';
 import {
+  buildDirectoryPrompt,
+  buildReversePrompt,
+  parseSeedCandidates,
+} from '../monitor/discovery/x_seed';
+import {
   canonicalArticleUrl,
   parseNewsletterRoutes,
   routeForMessage,
@@ -747,5 +752,36 @@ describe('Bluesky discovery via AT Protocol', () => {
     const signals = await collectBluesky(authorSource, { fetchImpl: fake, retrievedAt });
     expect(signals).toHaveLength(1);
     expect(signals[0].url).toContain('a.bsky.social/post/1');
+  });
+});
+
+describe('X watchlist reverse-discovery seed', () => {
+  test('buildDirectoryPrompt excludes the watchlist and demands evidence', () => {
+    const prompt = buildDirectoryPrompt(['nomadcapitalist']);
+    expect(prompt).toContain('x_search');
+    expect(prompt).toContain('@nomadcapitalist');       // exclude clause
+    expect(prompt).toContain('at least 2 relevant');
+    expect(prompt).toContain('evidence_url');
+  });
+
+  test('buildReversePrompt lists the changes and demands evidence', () => {
+    const prompt = buildReversePrompt([{ jurisdiction: 'Portugal', category: 'naturalization', url: 'https://dre.pt/x' }], []);
+    expect(prompt).toContain('Portugal — naturalization — https://dre.pt/x');
+    expect(prompt).toContain('evidence_url');
+  });
+
+  test('parseSeedCandidates enforces the guardrails (real handle + x.com evidence, dedupe, exclude watchlist)', () => {
+    const body = { output_text: JSON.stringify([
+      { handle: '@GoodLawyer', jurisdiction: 'Portugal', evidence_url: 'https://x.com/goodlawyer/status/1', why: 'covers PT nationality' },
+      { handle: 'nomadcapitalist', evidence_url: 'https://x.com/nomadcapitalist/status/2', why: 'already on the list' },
+      { handle: 'noevidence', jurisdiction: '', evidence_url: '', why: 'no url — dropped' },
+      { handle: 'bad handle!', evidence_url: 'https://x.com/x/status/3', why: 'invalid handle — dropped' },
+      { handle: 'blogonly', evidence_url: 'https://someblog.com/post', why: 'evidence not on x.com — dropped' },
+      { handle: 'GoodLawyer', evidence_url: 'https://twitter.com/goodlawyer/status/9', why: 'duplicate — dropped' },
+    ]) };
+    const candidates = parseSeedCandidates(body, ['nomadcapitalist']);
+    expect(candidates.map(c => c.handle)).toEqual(['goodlawyer']);
+    expect(candidates[0].evidence_url).toBe('https://x.com/goodlawyer/status/1');
+    expect(parseSeedCandidates({ output_text: 'not json' })).toEqual([]);
   });
 });
