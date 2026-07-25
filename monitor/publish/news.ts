@@ -148,7 +148,7 @@ export function synthesizeIssue(finding: Finding): ReviewIssue {
 // Dedup ledger. Mirrors the collector's state pattern: read from an exported D1
 // snapshot (.sql or .sqlite), buffer portable INSERTs, and write them for the
 // workflow to apply back to D1. In-memory when no path is given (local/dry-run).
-class NewsPostStore {
+export class NewsPostStore {
   readonly database: Database;
   readonly mutations: string[] = [];
   private temporaryDirectory: string | null = null;
@@ -169,6 +169,17 @@ class NewsPostStore {
 
   has(fp: string): boolean {
     return Boolean(this.database.query('SELECT 1 FROM monitor_posts WHERE fingerprint = ?1').get(fp));
+  }
+
+  // Semantic dedup. The same change is reworded across runs and outlets, and its
+  // extracted effective_date wobbles, so exact fingerprints miss it. Treat any
+  // post for the same jurisdiction + acquisition category within the window as
+  // the same event (Portugal naturalization went out 4x before this).
+  hasRecentChange(isoN3: string, category: string, windowDays: number, now: Date): boolean {
+    const cutoff = new Date(now.getTime() - windowDays * 86_400_000).toISOString();
+    return Boolean(this.database
+      .query('SELECT 1 FROM monitor_posts WHERE iso_n3 = ?1 AND category = ?2 AND posted_at >= ?3 LIMIT 1')
+      .get(isoN3, category, cutoff));
   }
 
   record(fp: string, finding: Finding, messageId: number, postedAt: string): void {
@@ -217,6 +228,7 @@ function readArgs(argv: string[]): NewsOptions {
 export async function runNews(options: NewsOptions): Promise<{ published: number; skipped: number }> {
   const findings = JSON.parse(fs.readFileSync(options.findings, 'utf8')) as Finding[];
   const confirmed = findings.filter(finding => finding.status === 'confirmed').slice(0, options.max);
+  const dedupWindowDays = Number(process.env.MONITOR_NEWS_DEDUP_WINDOW_DAYS) || 120;
   const store = options.stateDb ? new NewsPostStore(path.resolve(ROOT, '..'), options.stateDb) : null;
   const llm = llmConfigFromEnv();
   if (options.apply && !llm) throw new Error('A monitoring LLM must be configured to auto-publish news');
@@ -226,6 +238,11 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
   for (const finding of confirmed) {
     const fp = fingerprint(finding);
     if (store?.has(fp)) { skipped += 1; console.log(`skip (already posted): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`); continue; }
+    if (store?.hasRecentChange(finding.iso_n3, finding.category, dedupWindowDays, new Date())) {
+      skipped += 1;
+      console.log(`skip (same ${finding.category} change for ${finding.iso_n3} within ${dedupWindowDays}d): ${finding.claim.slice(0, 60)}`);
+      continue;
+    }
     // Make sure the "Source" link opens; fall back to the domain root if not.
     finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
     let post: TelegramPost;
