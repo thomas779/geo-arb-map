@@ -24,8 +24,9 @@ findings.json ──► confirmed news ──► Telegram @flagpaths   (LLM evid
 ## Commands
 
 ```sh
-# Collect discovery signals (RSS + curated Telegram only; official-page crawl retired).
-bun run monitor:collect -- --adapters rss,telegram_html --lookback-days 1
+# Collect discovery signals (RSS + curated Telegram + X/Bluesky; official-page crawl retired).
+# x_search (xAI, once/day, watchlist-scoped) runs only on the 06:00 UTC cycle or a dispatch.
+bun run monitor:collect -- --adapters rss,telegram_html,x_search,bluesky,bluesky_search --lookback-days 1
 
 # Grounded per-jurisdiction sweep. Reads .out/signals.json for hybrid RSS hints.
 #   --mode discovery : verify only jurisdictions with fresh, relevant signals (default cadence)
@@ -46,6 +47,11 @@ bun run monitor:telegram -- --check
 
 # Newsletter push path (Cloudflare email Worker → repository_dispatch).
 bun run monitor:email:dispatch --event tests/fixtures/monitor/newsletter-dispatch.json
+
+# Discovery-layer growth (self-improving; see monitor/discovery/).
+bun run monitor:sources:record                                    # log the sweep's cited outlets to the D1 citation ledger
+bun run monitor:sources:candidates -- --state-db <d1-export.sql>  # rank cited outlets worth subscribing to (+ probe feeds)
+bun run monitor:sources:x-seed -- --mode directory                # propose X watchlist accounts (evidence-required, review-first)
 ```
 
 Offline: `monitor:sweep --fixture-response <array.json>` and `monitor:collect --fixture-dir …`
@@ -62,6 +68,8 @@ Provider-neutral; do not commit keys.
 | `MONITOR_LLM_MODEL` | Cheap model for the non-grounded audit + triage (e.g. `gemini-3.5-flash-lite`) |
 | `MONITOR_SWEEP_MODEL` | Model for the grounded sweep (e.g. `gemini-3.5-flash-lite`; `gemini-3.5-flash` for fuller coverage) |
 | `MONITOR_LLM_API_KEY` | Credential (secret) |
+| `MONITOR_XAI_API_KEY` | xAI key for X (Twitter) discovery via the Agent Tools `x_search` (secret; optional — X skips cleanly without it) |
+| `MONITOR_XAI_MODEL` / `_LOOKBACK_HOURS` / `_TIMEOUT_MS` | X search model (default `grok-4.3`), lookback window (24h), request timeout |
 
 Grounding uses the **native Gemini Interactions API** (`/v1beta/interactions`, `tools:[{type:google_search}]`);
 the OpenAI-compatible endpoint cannot ground. The sweep asks for a few targeted searches to keep cost low.
@@ -73,6 +81,13 @@ keyword pre-filter drops off-topic items before any AI call, and the grounded sw
 **only for jurisdictions with fresh relevant news** (zero calls on a quiet day). Knobs:
 `MONITOR_SWEEP_MODE`, `MONITOR_SWEEP_MAX_CALLS` (hard cap), `MONITOR_SWEEP_CONCURRENCY`.
 `rotation` mode (via `workflow_dispatch`) sweeps the full registry as a backstop.
+
+**X (Twitter) discovery** runs **once/day** (the 06:00 UTC cycle) via xAI's `x_search`, scoped to a
+curated watchlist (`monitor/sources/x-watchlist.json`) via `from:` operators with a broad, multilingual
+fallback — ≈ **$0.02/run** (grok-4.3). It flags jurisdictions like any other signal; it never verifies.
+Bluesky (keyless AppView) and the citation ledger add no API cost. The manual **`x-watchlist-seed`**
+workflow grows the watchlist from real data (Grok, evidence-required) — agentic, so ≈ **$0.50–1/run**;
+run it sparingly.
 
 ## How a verified change reaches the dataset
 
