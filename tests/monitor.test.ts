@@ -45,6 +45,7 @@ import {
   loadRegistry,
   normalizeFindings,
   normalizeInstrument,
+  officialSourcesByJurisdiction,
   selectJurisdictions,
   type Finding,
 } from '../monitor/sweep/run';
@@ -465,10 +466,22 @@ describe('AI sweep + grounded verify', () => {
     }, { blocs: [], bilateral_lanes: [] });
     expect(context.signal_jurisdictions).toEqual({});
     expect(context.citizenship_routes).toHaveLength(1);
-    const prompt = buildSweepPrompt(entry, context, ['ExpatHub: residence permit change']);
+    const prompt = buildSweepPrompt(entry, context, ['ExpatHub: residence permit change'],
+      [{ title: 'Malta Community Agency citizenship', url: 'https://komunita.gov.mt/en/citizenship' }]);
     expect(prompt).toContain('Malta');
     expect(prompt).toContain('JSON array');
     expect(prompt).toContain('residence permit change');
+    expect(prompt).toContain('Known authoritative source');
+    expect(prompt).toContain('https://komunita.gov.mt/en/citizenship');
+    // no official source → no hint block
+    expect(buildSweepPrompt(entry, context, [])).not.toContain('Known authoritative source');
+  });
+
+  test('officialSourcesByJurisdiction maps active verification sources per iso (excludes multi)', () => {
+    const map = officialSourcesByJurisdiction(path.resolve(import.meta.dir, '..', 'monitor'));
+    expect((map.get('858') ?? []).length).toBeGreaterThan(0); // Uruguay has an active verification source
+    expect((map.get('858') ?? [])[0].url).toMatch(/^https?:\/\//);
+    expect(map.has('multi')).toBe(false);
   });
 
   test('buildNewsPost + fingerprint + synthesizeIssue', () => {
