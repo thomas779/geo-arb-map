@@ -29,6 +29,7 @@
     "monitor:news": "bun monitor/publish/news.ts",
     "monitor:sources:record": "bun monitor/discovery/record.ts",
     "monitor:sources:candidates": "bun monitor/discovery/candidates.ts",
+    "monitor:sources:x-seed": "bun monitor/discovery/x_seed.ts",
     "monitor:test": "bun test tests/monitor.test.ts",
     "preview": "vite preview",
     "test": "bun test"
