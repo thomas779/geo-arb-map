@@ -26,7 +26,7 @@ import {
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
-import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl } from '../monitor/publish/news';
+import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, NewsPostStore } from '../monitor/publish/news';
 import { inferJurisdictions } from '../monitor/triage/context';
 import { normalizeRulings, parseJsonArray, seenSignalIds } from '../monitor/triage/triage';
 import { buildIssueDraft } from '../monitor/triage/issues';
@@ -460,6 +460,22 @@ describe('AI sweep + grounded verify', () => {
     expect(fingerprint(finding)).not.toBe(fingerprint({ ...finding, effective_date: '2026-01-01' }));
     expect(fingerprint(finding)).not.toBe(fingerprint({ ...finding, category: 'naturalization' }));
     expect(synthesizeIssue(finding).body).toContain('## Verified evidence');
+  });
+
+  test('hasRecentChange dedups the same jurisdiction+category within the window', () => {
+    const store = new NewsPostStore(path.resolve(import.meta.dir, '..'), null);
+    const f: Finding = {
+      iso_n3: '620', jurisdiction: 'Portugal', claim: 'Portugal raised naturalization to 10 years', headline: 'h',
+      status: 'confirmed', primary_urls: ['https://dre.pt'], effective_date: '2026-05-19', affects_dataset: true,
+      category: 'naturalization', brief: 'b', evidence_quote: 'e', citations: [], search_queries: [],
+    };
+    const now = new Date('2026-07-25T00:00:00Z');
+    store.record(fingerprint(f), f, 17, '2026-07-24T00:00:00Z');
+    expect(store.hasRecentChange('620', 'naturalization', 120, now)).toBe(true);  // same change, reworded, within window
+    expect(store.hasRecentChange('620', 'investment', 120, now)).toBe(false);      // different category
+    expect(store.hasRecentChange('124', 'naturalization', 120, now)).toBe(false);  // different jurisdiction
+    expect(store.hasRecentChange('620', 'naturalization', 0, now)).toBe(false);     // outside the window
+    store.close();
   });
 
   test('verifySourceUrl keeps resolving links, falls back to domain root otherwise', async () => {
