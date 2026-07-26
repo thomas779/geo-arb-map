@@ -1,5 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { THEME_BOOT_JS } from '../scripts/build_country_pages';
 
 const canonicalUrl = 'https://flagpaths.com/';
 const index = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
@@ -39,6 +41,17 @@ describe('public SEO contract', () => {
     expect(sitemap).toContain(`<loc>${canonicalUrl}</loc>`);
     expect(manifest.start_url).toBe('/');
     expect(manifest.icons.some(icon => icon.src === '/favicon.svg')).toBe(true);
+  });
+
+  test('CSP allows the no-flash theme boot script by hash, everywhere it is inlined', () => {
+    // script-src 'self' blocks inline scripts; a silently-blocked theme boot
+    // left every prerendered page stuck in light mode regardless of the app
+    // theme. The exact script must be hash-allowed and byte-identical in the
+    // SPA shell and the prerendered pages (THEME_BOOT_JS is the source).
+    const headers = readFileSync(new URL('../public/_headers', import.meta.url), 'utf8');
+    const hash = createHash('sha256').update(THEME_BOOT_JS).digest('base64');
+    expect(headers).toContain(`'sha256-${hash}'`);
+    expect(index).toContain(`<script>${THEME_BOOT_JS}</script>`);
   });
 
   test('keeps the workers.dev duplicate out of search indexes', () => {
