@@ -228,6 +228,19 @@ export default {
           rawKey: key,
           error: intake.ignored_reason ?? 'message did not produce a signal',
         });
+        // Route-matched mail that produced no article signal is usually the
+        // publisher's own non-content mail — double-opt-in confirmations,
+        // account notices. Those come FROM the allow-listed domain, so the
+        // unlisted-sender fallback above never sees them; forward here too or
+        // a confirmation can sit unread in R2 while the sign-up stalls
+        // (Fragomen, 2026-07-26).
+        if (env.FALLBACK_FORWARD) {
+          try {
+            await message.forward(env.FALLBACK_FORWARD);
+          } catch (forwardError) {
+            console.error('fallback forward failed', forwardError);
+          }
+        }
         return;
       }
 
