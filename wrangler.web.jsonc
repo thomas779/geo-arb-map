@@ -11,9 +11,12 @@
     "not_found_handling": "single-page-application"
   },
   "routes": [
+    // Custom domain: Cloudflare auto-creates the DNS record + certificate for
+    // the apex on deploy. www + the legacy atlas.thomphreys.com host 301 to
+    // this apex via the flag-paths-redirect worker (scripts/redirect-worker/).
     {
-      "pattern": "atlas.thomphreys.com/*",
-      "zone_name": "thomphreys.com"
+      "pattern": "flagpaths.com",
+      "custom_domain": true
     }
   ]
 }

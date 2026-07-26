@@ -33,7 +33,7 @@ import { buildCountrySlugMap } from '../src/lib/slug';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
-const SITE = 'https://atlas.thomphreys.com';
+const SITE = 'https://flagpaths.com';
 // Uninhabited entries excluded from coverage (see src/App.tsx) — no pages.
 const NON_APPLICABLE = new Set(['086', '239', '260', '334']);
 
