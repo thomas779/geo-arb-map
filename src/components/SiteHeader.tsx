@@ -125,7 +125,9 @@ export function SiteHeader({ active, onSelectView, right }: Props) {
 
   return (
     <header className="sticky top-0 z-40 flex h-14 shrink-0 items-center gap-1.5 border-b bg-card/90 px-2.5 backdrop-blur-sm sm:h-16 sm:gap-4 sm:px-5">
-      <a href="/" className="flex min-w-0 items-center gap-2.5" aria-label="Flag Paths home">
+      {/* No aria-label: the visible text ("Flag Paths · Mobility atlas") IS the
+          accessible name — an override that omits it fails WCAG 2.5.3. */}
+      <a href="/" className="flex min-w-0 items-center gap-2.5">
         <BrandMark />
         <span className="hidden min-w-0 sm:block">
           <span className="block whitespace-nowrap font-heading text-xl font-bold tracking-[-0.035em] text-foreground sm:text-[1.45rem]">
