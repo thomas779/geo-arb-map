@@ -118,10 +118,19 @@ export async function verifyPrimarySource(
   const host = hostFromUrl(url);
   if (!host) return { ok: false, reason: 'unparseable url' };
   if (!isGovish(host) && !allowedHosts.has(host)) return { ok: false, reason: `non-authoritative host (${host})` };
+  // Normalise to a stream of lowercased letter/number "words", dropping tags,
+  // entities, and ALL punctuation — so a curly vs straight apostrophe, entity
+  // encoding, or spacing can't defeat the match. Keeps accented letters (\p{L})
+  // so non-English quotes still verify.
   const normalize = (value: string) => value
-    .replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').toLowerCase().trim();
-  const quote = normalize(originalQuote);
-  if (quote.length < 12) return { ok: false, reason: 'quote too short to verify' };
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z#0-9]+;/gi, ' ')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const quoteWords = normalize(originalQuote).split(' ').filter(Boolean);
+  if (quoteWords.length < 4) return { ok: false, reason: 'quote too short to verify' };
   let body: string;
   try {
     const response = await fetcher(url, {
@@ -136,9 +145,11 @@ export async function verifyPrimarySource(
   } catch {
     return { ok: false, reason: 'source unreachable' };
   }
-  // A real quote (or its first ~60 normalized chars) appears on the page; a
-  // hallucinated quote or a degraded-to-root URL will not.
-  return normalize(body).includes(quote.slice(0, 60))
+  // Require a contiguous run of the quote's first ~10 words to appear on the
+  // page. Robust to punctuation/whitespace/entity differences, but a fabricated
+  // quote (or a degraded-to-root URL) won't contain the passage.
+  const probe = quoteWords.slice(0, Math.min(10, quoteWords.length)).join(' ');
+  return normalize(body).includes(probe)
     ? { ok: true, reason: 'ok' }
     : { ok: false, reason: 'quoted evidence not found on the page' };
 }
