@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Country citizenship routes compiled from a canonical D1 release plus the read-only legacy remainder.",
-    "last_updated": "2026-07-26",
+    "last_updated": "2026-07-27",
     "acquisition_modes": {
       "ancestry": "Citizenship through a parent, grandparent, wider descent rule, restoration, or documented heritage connection.",
       "naturalization": "Citizenship after residence or another qualifying domestic status.",
@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 68
+      "residence_routes": 89
     }
   },
   "jurisdictions": [
@@ -123,7 +123,17 @@
         "andorra-citizenship-by-parent",
         "andorra-naturalization",
         "andorra-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "andorra-passive-residence",
+        "andorra-international-professionals",
+        "andorra-digital-nomad"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "talent_skilled": "reviewed",
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "024",
@@ -234,7 +244,14 @@
         "austria-naturalization",
         "austria-citizenship-at-birth-by-parent",
         "austria-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "austria-settlement-financially-independent",
+        "austria-rwr-card-self-employed-key-worker"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "044",
@@ -335,7 +352,13 @@
         "belgium-citizenship-by-parent",
         "belgium-naturalization",
         "belgium-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "belgium-no-investor-programme-professional-card"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "060",
@@ -933,7 +956,15 @@
         "cyprus-citizenship-at-birth-by-parent",
         "cyprus-investment-programme-closed",
         "cyprus-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "cyprus-immigration-permit-investor",
+        "cyprus-visitor-pink-slip"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "203",
@@ -1238,7 +1269,14 @@
         "france-citizenship-by-parent",
         "france-study-naturalization-residence",
         "france-birth-and-residence"
-      ]
+      ],
+      "residence_route_ids": [
+        "france-talent-investor",
+        "france-talent-business-creator"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "258",
@@ -1374,7 +1412,14 @@
         "germany-citizenship-by-parent",
         "germany-naturalization-by-residence",
         "germany-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "germany-self-employment-21-aufenthg",
+        "germany-golden-visa"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "288",
@@ -1765,7 +1810,14 @@
         "ireland-citizenship-by-descent",
         "ireland-naturalization-by-residence",
         "ireland-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "ireland-iip",
+        "ireland-step"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "376",
@@ -2133,7 +2185,16 @@
         "luxembourg-naturalization",
         "luxembourg-citizenship-at-birth-by-parent",
         "luxembourg-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "luxembourg-investor-existing-business",
+        "luxembourg-investor-new-business",
+        "luxembourg-investor-management-structure",
+        "luxembourg-investor-bank-deposit"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "446",
@@ -2351,7 +2412,13 @@
         "monaco-naturalization",
         "monaco-citizenship-at-birth-by-parent",
         "monaco-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "monaco-independent-means-residence"
+      ],
+      "residence_coverage": {
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "496",
@@ -3662,7 +3729,15 @@
         "switzerland-ordinary-naturalization",
         "switzerland-third-generation-naturalization",
         "switzerland-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "switzerland-lump-sum-residence",
+        "switzerland-retiree-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "760",
@@ -35894,6 +35969,126 @@
   ],
   "residence_routes": [
     {
+      "id": "andorra-digital-nomad",
+      "country": {
+        "iso_n3": "020",
+        "name": "Andorra"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Residència per a nòmada digital",
+      "summary": "Residence for foreigners whose work needs no fixed location and is performed via technology (Llei 42/2022 de l'economia digital; arts. 33 bis and 101 quater-quinquies of the immigration law). Requires a favorable resolution from the economy ministry, sufficient economic means (set by regulation), health insurance, housing, and a commitment to reside at least 90 days/year. No AFA deposit and no minimum investment. Initial permit 2 years, renewals 2 + 3 years, then 10 years; subject to quota; resolution within 2 months.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "andorra-digital-nomad-principal",
+          "label": "Residència per a nòmada digital",
+          "allocation": "quota_queue",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "D.3. Residència per a nòmada digital — Seu Electrònica del Govern d'Andorra",
+          "url": "https://www.e-tramits.ad/tramits/ca/d3-residencia-per-a-nomada-digital/p/GV001311"
+        }
+      ]
+    },
+    {
+      "id": "andorra-international-professionals",
+      "country": {
+        "iso_n3": "020",
+        "name": "Andorra"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Residència per a professionals amb projecció internacional",
+      "summary": "Residence for self-employed professionals based in Andorra whose services are consumed abroad: at least 85% of services used outside Andorra, maximum one employee, 90 days/year effective residence. Requires proof of economic viability, activity in Government-designated sectors, and a non-remunerated refundable AFA deposit of EUR 47,500 (main holder) + EUR 9,500 per dependent. Unchanged by Llei 2/2026.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "andorra-international-professionals-principal",
+          "label": "Residència per a professionals amb projecció internacional",
+          "allocation": "quota_queue",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Llei 9/2012 qualificada d'immigració, arts. 98-99 (text consolidat, Portal Jurídic d'Andorra)",
+          "url": "https://portaljuridicandorra.ad/L2012009_12"
+        }
+      ]
+    },
+    {
+      "id": "andorra-passive-residence",
+      "country": {
+        "iso_n3": "020",
+        "name": "Andorra"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residència sense activitat lucrativa (passive residence)",
+      "summary": "Non-lucrative (passive) residence for non-nationals residing at least 90 days/year without working in Andorra. As of 13 Feb 2026 (Llei 2/2026), requires a permanent investment of at least EUR 1,000,000 in Andorran assets (real estate; shares in resident companies; financial instruments; Andorran public debt; life insurance; non-remunerated AFA deposits), reduced to EUR 400,000 if invested in the Fons d'Habitatge (Housing Fund); each real-estate unit must exceed EUR 800,000. Plus a mandatory NON-refundable payment to the AFA of EUR 50,000 (main holder) + EUR 12,000 per dependent. Investment must complete within 6 months. Initial permit 2 years, renewals 2 + 3 years, then 10 years.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "andorra-passive-residence-principal",
+          "label": "Residència sense activitat lucrativa (passive residence)",
+          "allocation": "quota_queue",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Llei 2/2026, del 22 de gener (BOPA núm. 15, 12-2-2026) — Portal Jurídic d'Andorra",
+          "url": "https://www.portaljuridicandorra.ad/L2026002"
+        }
+      ]
+    },
+    {
       "id": "australia-biip-188",
       "country": {
         "iso_n3": "036",
@@ -35924,7 +36119,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "BIIP closure and refunds — Department of Home Affairs",
@@ -35966,7 +36161,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "BIIP closure and refunds — Department of Home Affairs",
@@ -36010,7 +36205,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Subclass 888 Business Innovation and Investment (Permanent) visa — Department of Home Affairs",
@@ -36049,11 +36244,135 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Subclass 858 National Innovation visa — Department of Home Affairs",
           "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/national-innovation-visa-858"
+        }
+      ]
+    },
+    {
+      "id": "austria-rwr-card-self-employed-key-worker",
+      "country": {
+        "iso_n3": "040",
+        "name": "Austria"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Rot-Weiß-Rot – Karte for self-employed key workers (investor/entrepreneur stream)",
+      "summary": "Active-investment residence route: third-country nationals whose self-employed activity creates macroeconomic benefit qualify for a Red-White-Red Card. Macroeconomic benefit is established in particular by a sustained transfer of investment capital to Austria of at least EUR 100,000, or job creation/securing, or know-how transfer, or regional significance. Assessed via business plan (no points table for this stream). Card issued for 24 months tied to the activity; transition to settlement permit / RWR-Karte plus; long-term resident EU status after 5 years.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 100000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "austria-rwr-card-self-employed-key-worker-principal",
+          "label": "Rot-Weiß-Rot – Karte for self-employed key workers (investor/entrepreneur stream)",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Red-White-Red Card for self-employed key workers (migration.gv.at)",
+          "url": "https://www.migration.gv.at/en/types-of-immigration/permanent-immigration/self-employed-key-workers/"
+        }
+      ]
+    },
+    {
+      "id": "austria-settlement-financially-independent",
+      "country": {
+        "iso_n3": "040",
+        "name": "Austria"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Niederlassungsbewilligung — ausgenommen Erwerbstätigkeit (financially independent persons)",
+      "summary": "Austria's de-facto wealthy-person residence route: a quota-limited settlement permit for third-country nationals settling without gainful employment. 2026 requirements: regular monthly income of at least twice the ASVG standard rate — EUR 2,616.78 single, EUR 4,128.24 couple, plus EUR 403.76 per child — German at A1 at application, all-risk health insurance, standard accommodation, and an available quota place under the annual Niederlassungsverordnung (a few hundred places nationwide, typically exhausted within days each January). Any employment is prohibited. 12-month permit, extendable; long-term resident EU status after 5 years; citizenship eligibility after 10 years.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "austria-settlement-financially-independent-principal",
+          "label": "Niederlassungsbewilligung — ausgenommen Erwerbstätigkeit (financially independent persons)",
+          "allocation": "quota_queue",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Niederlassungsbewilligung – ausgenommen Erwerbstätigkeit – Antrag (oesterreich.gv.at)",
+          "url": "https://www.oesterreich.gv.at/de/themen/menschen_aus_anderen_staaten/aufenthalt/3/2/Seite.120302"
+        }
+      ]
+    },
+    {
+      "id": "belgium-no-investor-programme-professional-card",
+      "country": {
+        "iso_n3": "056",
+        "name": "Belgium"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No residence-by-investment programme — professional card (carte professionnelle) self-employment path",
+      "summary": "Belgium operates NO formal residence-by-investment or golden-visa programme and no fixed investment threshold grants residence. The de-facto route for investor-entrepreneurs is self-employment: obtain a professional card (carte professionnelle / beroepskaart), typically form a Belgian company, then derive a residence permit from the authorised self-employed activity. Competence is regionalized — Flanders, Wallonia and Brussels-Capital each assess under their own criteria (economic added value, innovation, job creation), case by case, with no statutory minimum investment.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "belgium-no-investor-programme-professional-card-principal",
+          "label": "No residence-by-investment programme — professional card (carte professionnelle) self-employment path",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Self-employment — coming to work in Belgium — Belgium.be",
+          "url": "https://www.belgium.be/en/work/coming_to_work_in_belgium/self_employment"
         }
       ]
     },
@@ -36088,7 +36407,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Notice - Termination of the backlog of applications in the federal Immigrant Investor Program and federal Entrepreneur Program (IRCC)",
@@ -36127,7 +36446,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Provincial Nominee Program (IRCC)",
@@ -36171,7 +36490,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Conditions for immigrating to Quebec as an investor (MIFI)",
@@ -36210,7 +36529,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Start-up Visa Program (IRCC); see also Update on Immigration Measures for Entrepreneurs, Dec 2025",
@@ -36254,7 +36573,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Costa Rica — Dirección General de Migración",
@@ -36298,7 +36617,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Costa Rica — Dirección General de Migración",
@@ -36342,11 +36661,92 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Costa Rica — Dirección General de Migración",
           "url": "https://migracion.go.cr/"
+        }
+      ]
+    },
+    {
+      "id": "cyprus-immigration-permit-investor",
+      "country": {
+        "iso_n3": "196",
+        "name": "Cyprus"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Permanent Residence by Investment (Immigration Permit, Regulation 6(2))",
+      "summary": "Expedited Immigration Permit granting permanent residence for life from the outset to third-country nationals who invest at least EUR 300,000 in one of four categories: (A) a new house/apartment bought first-sale from a development company (plus VAT); (B) other real estate such as offices, shops or hotels (resale allowed); (C) share capital of a Cyprus company with physical presence and at least 5 employees; or (D) units of a Cyprus-regulated collective investment fund (AIF, AIFLNP, RAIF). Requires a secured annual income of at least EUR 50,000 (+EUR 15,000 for a spouse, +EUR 10,000 per dependent minor child) from abroad for category A; for B/C/D income may partly derive from Cyprus sources. Official estimated examination time is about 2 months.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 300000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 1,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cyprus-immigration-permit-investor-principal",
+          "label": "Permanent Residence by Investment (Immigration Permit, Regulation 6(2))",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Immigration Permits for Investors — Migration Department, Republic of Cyprus",
+          "url": "https://www.gov.cy/mip-md/en/documents/companies-investors-permanent-residence-3/immigration-permits-for-investors/"
+        }
+      ]
+    },
+    {
+      "id": "cyprus-visitor-pink-slip",
+      "country": {
+        "iso_n3": "196",
+        "name": "Cyprus"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Visitor temporary residence permit ('pink slip') for financially independent persons",
+      "summary": "Temporary residence permit under Regulation 14 of the Aliens and Immigration Regulations for third-country nationals staying beyond 90 days — in practice the route for retirees and financially independent persons living on foreign income. Holders may not carry out any economic activity in the Republic. First permit issued for 1 year, renewable indefinitely while criteria are met; applications (form MVIS8) usually examined within 4 months.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cyprus-visitor-pink-slip-principal",
+          "label": "Visitor temporary residence permit ('pink slip') for financially independent persons",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Visitors and family members — Migration Department, Republic of Cyprus",
+          "url": "https://www.gov.cy/mip-md/en/documents/visitors-and-family-members/"
         }
       ]
     },
@@ -36384,11 +36784,99 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Estonia Digital Nomad Visa — e-Residency",
           "url": "https://www.e-resident.gov.ee/nomadvisa/"
+        }
+      ]
+    },
+    {
+      "id": "france-talent-business-creator",
+      "country": {
+        "iso_n3": "250",
+        "name": "France"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Carte 'talent – porteur de projet' (parcours création d'entreprise)",
+      "summary": "Multi-year 'talent' residence card for business creators: master's-level degree or 5 years of comparable professional experience, a real and serious business-creation project in France, minimum EUR 30,000 project financing, and resources at least equal to the annual gross full-time SMIC (EUR 22,404.20 as of mid-2026). Valid up to 4 years, renewable. Leads to carte de résident after 5 years and naturalization eligibility after 5 years.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 30000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "france-talent-business-creator-principal",
+          "label": "Carte 'talent – porteur de projet' (parcours création d'entreprise)",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Service-Public.fr — Carte talent : carte de séjour pluriannuelle d'un étranger en France (F16922)",
+          "url": "https://www.service-public.fr/particuliers/vosdroits/F16922"
+        }
+      ]
+    },
+    {
+      "id": "france-talent-investor",
+      "country": {
+        "iso_n3": "250",
+        "name": "France"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Carte 'talent – porteur de projet' (parcours investissement économique)",
+      "summary": "Multi-year 'talent' residence card for direct economic investors: minimum EUR 300,000 investment in tangible or intangible fixed assets in France, made personally or via a company the applicant directs or holds at least 30% of, plus a commitment to create or preserve jobs within 4 years. Valid up to 4 years, renewable; spouse/children get 'talent (famille)' cards. Leads to carte de résident after 5 years of regular residence and naturalization eligibility after 5 years.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 300000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "france-talent-investor-principal",
+          "label": "Carte 'talent – porteur de projet' (parcours investissement économique)",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Légifrance — CESEDA art. R421-35 (talent-porteur de projet, investissement économique direct)",
+          "url": "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042807286"
         }
       ]
     },
@@ -36426,7 +36914,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
@@ -36470,7 +36958,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
@@ -36512,11 +37000,91 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
           "url": "https://matsne.gov.ge/en/document/view/2278806"
+        }
+      ]
+    },
+    {
+      "id": "germany-golden-visa",
+      "country": {
+        "iso_n3": "276",
+        "name": "Germany"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "Golden visa / passive residence-by-investment — does not exist",
+      "summary": "Verified negative: Germany has no residence-by-investment or passive 'golden visa' programme as of July 2026. No residence title is obtainable by purchasing real estate, bonds, fund units or any passive capital contribution; the only investment-linked route is the active self-employment permit under § 21 AufenthG. No legislative proposal to introduce an investor visa was in force or pending enactment through July 2026.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "germany-golden-visa-principal",
+          "label": "Golden visa / passive residence-by-investment — does not exist",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Aufenthaltsgesetz (AufenthG) — consolidated text (Gesetze im Internet, BMJ)",
+          "url": "https://www.gesetze-im-internet.de/aufenthg_2004/"
+        }
+      ]
+    },
+    {
+      "id": "germany-self-employment-21-aufenthg",
+      "country": {
+        "iso_n3": "276",
+        "name": "Germany"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residence permit for self-employment (§ 21 AufenthG)",
+      "summary": "Germany's only investment-adjacent route is an active-entrepreneur permit, not a golden visa. § 21(1) AufenthG requires an economic interest or regional need, expected positive economic effects, and financing secured via equity or a loan commitment; authorities assess business-plan viability, entrepreneurial experience, capital, employment effects and innovation, consulting the chambers. The former formal thresholds (EUR 250,000 + 5 jobs) were abolished in 2012 and do not appear in the current statute. Permit limited to 3 years; settlement permit can follow if the business is successfully established (§ 21(4)).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "germany-self-employment-21-aufenthg-principal",
+          "label": "Residence permit for self-employment (§ 21 AufenthG)",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "§ 21 AufenthG — Selbständige Tätigkeit (Gesetze im Internet, BMJ)",
+          "url": "https://www.gesetze-im-internet.de/aufenthg_2004/__21.html"
         }
       ]
     },
@@ -36554,7 +37122,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Greece Ministry of Migration",
@@ -36596,7 +37164,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Greece Ministry of Migration",
@@ -36640,7 +37208,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Greek Ministry of Migration — Golden Visa",
@@ -36679,7 +37247,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Guatemala — IGM, Reglamento de Residencias (Acuerdo IGM-016-2025)",
@@ -36718,7 +37286,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Capital Investment Entrant Scheme (suspended) — Immigration Department",
@@ -36762,7 +37330,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "New CIES — Investment Requirement (InvestHK official portal)",
@@ -36804,11 +37372,95 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Hungary Guest Investor Programme — OIF",
           "url": "https://oif.gov.hu/"
+        }
+      ]
+    },
+    {
+      "id": "ireland-iip",
+      "country": {
+        "iso_n3": "372",
+        "name": "Ireland"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "Immigrant Investor Programme (IIP)",
+      "summary": "Ireland's residence-by-investment route, introduced in 2012, was closed to new applications from close of business on 15 February 2023 by Government decision. Existing approved projects and investors are unaffected and permissions already granted remain renewable, but no new applications are accepted.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 1,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ireland-iip-principal",
+          "label": "Immigrant Investor Programme (IIP)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Minister Harris announces closure of the Immigrant Investor Programme (Department of Justice, Home Affairs and Migration)",
+          "url": "https://www.gov.ie/en/department-of-justice-home-affairs-and-migration/press-releases/minister-harris-announces-closure-of-the-immigrant-investor-programme/"
+        }
+      ]
+    },
+    {
+      "id": "ireland-step",
+      "country": {
+        "iso_n3": "372",
+        "name": "Ireland"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Start-up Entrepreneur Programme (STEP)",
+      "summary": "Residence permission for non-EEA nationals with an innovative, high-potential start-up proposal and at least EUR 50,000 in funding, subject to approval by an independent evaluation committee and the Minister for Justice. The programme remains open in 2026 and applications may be submitted electronically at any time.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 50000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ireland-step-principal",
+          "label": "Start-up Entrepreneur Programme (STEP)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Start-up Entrepreneur Programme (STEP) — Immigration Service Delivery",
+          "url": "https://www.irishimmigration.ie/coming-to-work-in-ireland/what-are-my-options-for-working-in-ireland/coming-to-work-for-more-than-90-days/start-up-entrepreneur-programme-step/"
         }
       ]
     },
@@ -36848,7 +37500,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Investor Visa for Italy — MISE",
@@ -36892,11 +37544,187 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Latvia — Office of Citizenship and Migration Affairs",
           "url": "https://www.pmlp.gov.lv/en/residence-permit"
+        }
+      ]
+    },
+    {
+      "id": "luxembourg-investor-bank-deposit",
+      "country": {
+        "iso_n3": "442",
+        "name": "Luxembourg"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor residence permit — EUR 20M bank deposit",
+      "summary": "At least EUR 20,000,000 deposited with a financial institution established in Luxembourg, with a commitment to keep the deposit for at least 5 years. Permit valid up to 3 years, renewable. Legal basis: Art. 53bis of the amended Law of 29 August 2008, introduced by the Law of 8 March 2017 (Mémorial A no. 298 of 2017).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 20000000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "luxembourg-investor-bank-deposit-principal",
+          "label": "Investor residence permit — EUR 20M bank deposit",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Loi du 8 mars 2017 portant modification de la loi modifiée du 29 août 2008 sur la libre circulation des personnes et l'immigration — Legilux",
+          "url": "https://legilux.public.lu/eli/etat/leg/loi/2017/03/08/a298/jo"
+        }
+      ]
+    },
+    {
+      "id": "luxembourg-investor-existing-business",
+      "country": {
+        "iso_n3": "442",
+        "name": "Luxembourg"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor residence permit — EUR 500k in an existing Luxembourg business",
+      "summary": "Third-country nationals investing at least EUR 500,000 in an existing company with registered office in Luxembourg (commercial, craft or industrial activity), committing to maintain the investment and employment levels for at least 5 years, may obtain an investor residence permit valid up to 3 years, renewable. Direct/indirect real estate investment is excluded. Legal basis: Art. 53bis of the amended Law of 29 August 2008, introduced by the Law of 8 March 2017.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 500000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "luxembourg-investor-existing-business-principal",
+          "label": "Investor residence permit — EUR 500k in an existing Luxembourg business",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Conditions of residence for investors from third countries — Guichet.lu",
+          "url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/investisseur/investisseur-pays-tiers.html"
+        }
+      ]
+    },
+    {
+      "id": "luxembourg-investor-management-structure",
+      "country": {
+        "iso_n3": "442",
+        "name": "Luxembourg"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor residence permit — EUR 3M in a management/investment structure",
+      "summary": "At least EUR 3,000,000 invested in an existing or to-be-created investment and management structure with registered office in Luxembourg, which must maintain appropriate substance (premises, staff) there. The Ministry of Finance issues an opinion on the investment project. Permit valid up to 3 years, renewable. Legal basis: Art. 53bis of the amended Law of 29 August 2008 (Law of 8 March 2017).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 3000000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "luxembourg-investor-management-structure-principal",
+          "label": "Investor residence permit — EUR 3M in a management/investment structure",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Demande de titre de séjour pour investisseur — Ministère des Finances",
+          "url": "https://mfin.gouvernement.lu/fr/demarches/titre-sejour-investisseur.html"
+        }
+      ]
+    },
+    {
+      "id": "luxembourg-investor-new-business",
+      "country": {
+        "iso_n3": "442",
+        "name": "Luxembourg"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor residence permit — EUR 500k in a new Luxembourg business",
+      "summary": "At least EUR 500,000 invested in a business to be created with registered office in Luxembourg (commercial, craft or industrial activity), with a commitment to create at least 5 jobs within 3 years (recruitment coordinated with ADEM). Permit valid up to 3 years, renewable. Real estate excluded. Legal basis: Art. 53bis of the amended Law of 29 August 2008 (Law of 8 March 2017).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 500000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "luxembourg-investor-new-business-principal",
+          "label": "Investor residence permit — EUR 500k in a new Luxembourg business",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Conditions of residence for investors from third countries — Guichet.lu",
+          "url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/investisseur/investisseur-pays-tiers.html"
         }
       ]
     },
@@ -36934,7 +37762,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Malaysia DE Rantau — MDEC",
@@ -36976,7 +37804,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Malaysia MM2H — official programme",
@@ -37020,7 +37848,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Malta Permanent Residence Programme — Residency Malta",
@@ -37062,7 +37890,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Malta Nomad Residence Permit — Residency Malta",
@@ -37106,7 +37934,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Mauritius EDB — Residency",
@@ -37150,7 +37978,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Mauritius EDB — Retired Non-Citizen",
@@ -37194,7 +38022,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Mexico — Instituto Nacional de Migración",
@@ -37238,11 +38066,50 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Mexico — Instituto Nacional de Migración",
           "url": "https://www.gob.mx/inm"
+        }
+      ]
+    },
+    {
+      "id": "monaco-independent-means-residence",
+      "country": {
+        "iso_n3": "492",
+        "name": "Monaco"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Monaco residence permit (carte de séjour) for persons of independent means",
+      "summary": "Monaco has no formal investment programme. Any person over 16 wishing to stay in Monaco more than 3 months per year applies for a carte de séjour: accommodation in Monaco (owned, via company, rented, or hosted by a close relative), sufficient financial resources (savings evidenced by a Monaco bank attestation — the sufficient amount is set by the bank, not by law), and good character. Non-EEA nationals first need a French long-stay (type D) establishment visa. Path: carte temporaire (1 year) → ordinaire after 3 years (3-year validity) → privilégié after 10 years with effective presence (10-year validity).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "monaco-independent-means-residence-principal",
+          "label": "Monaco residence permit (carte de séjour) for persons of independent means",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Demander une carte de séjour — Service Public Particuliers, Principauté de Monaco",
+          "url": "https://service-public-particuliers.gouv.mc/Nationalite-et-residence/Residence/Nouveaux-arrivants/Demander-une-carte-de-sejour"
         }
       ]
     },
@@ -37282,7 +38149,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Netherlands — IND self-employed residence",
@@ -37326,7 +38193,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Immigration New Zealand — Active Investor Plus Visa",
@@ -37370,7 +38237,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Immigration New Zealand — Active Investor Plus Visa",
@@ -37414,7 +38281,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Business Investor Visa offers new immigration options for investors — Immigration New Zealand",
@@ -37458,7 +38325,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Entrepreneur Work Visa — Immigration New Zealand",
@@ -37500,7 +38367,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Investor 1 Resident Visa — Immigration New Zealand",
@@ -37544,7 +38411,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Panama — Servicio Nacional de Migración",
@@ -37588,7 +38455,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Panama — Servicio Nacional de Migración",
@@ -37632,7 +38499,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Panama — Servicio Nacional de Migración",
@@ -37671,7 +38538,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Paraguay — Dirección Nacional de Migraciones (Res. DNM 407/2026)",
@@ -37718,7 +38585,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Philippine Retirement Authority — SRRV",
@@ -37762,7 +38629,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Portugal visas portal (MNE) — D8",
@@ -37806,7 +38673,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Portugal visas portal (MNE) — D8",
@@ -37850,7 +38717,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "AIMA — Autorização de Residência para Atividade de Investimento",
@@ -37889,7 +38756,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "MOM — Eligibility for EntrePass",
@@ -37931,7 +38798,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "EDB Global Investor Programme Factsheet (updated 5 May 2025)",
@@ -37970,7 +38837,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "MOM — Eligibility for Overseas Networks & Expertise Pass",
@@ -38014,7 +38881,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "South Africa — Department of Home Affairs",
@@ -38058,7 +38925,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "South Africa — Department of Home Affairs",
@@ -38102,7 +38969,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Spain — Ministerio de Inclusión (extranjería)",
@@ -38146,11 +39013,93 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Spain — Ministerio de Inclusión (extranjería)",
           "url": "https://extranjeros.inclusion.gob.es/"
+        }
+      ]
+    },
+    {
+      "id": "switzerland-lump-sum-residence",
+      "country": {
+        "iso_n3": "756",
+        "name": "Switzerland"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residence without gainful activity via lump-sum taxation (fiscal-interest admission)",
+      "summary": "Switzerland has NO formal golden-visa programme. The de-facto route is a discretionary residence permit without gainful activity for financially independent non-EU/EFTA nationals under Art. 30(1)(b) FNIA (derogation for 'important public interests'), concretised by Art. 32 VZAE, which lists significant cantonal fiscal interests as a ground. In practice the applicant negotiates expenditure-based ('lump-sum') taxation with a canton under Art. 14 DBG / Art. 6 StHG: tax is assessed on annual living expenditure, with a federal minimum base of CHF 435,000 (2026, indexed) and cantonal minimums the canton sets itself (commonly ~CHF 250,000 to CHF 1,000,000+). No gainful activity in Switzerland permitted; grant is discretionary at cantonal level with federal (SEM) approval. There is no fixed capital investment or donation.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 183,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "switzerland-lump-sum-residence-principal",
+          "label": "Residence without gainful activity via lump-sum taxation (fiscal-interest admission)",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "FNIA (SR 142.20) Art. 30(1)(b); VZAE (SR 142.201) Art. 32; DBG (SR 642.11) Art. 14 — Fedlex",
+          "url": "https://www.fedlex.admin.ch/eli/cc/2007/758/en"
+        }
+      ]
+    },
+    {
+      "id": "switzerland-retiree-residence",
+      "country": {
+        "iso_n3": "756",
+        "name": "Switzerland"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Retiree residence permit (Art. 28 FNIA)",
+      "summary": "Foreign nationals no longer gainfully employed may be admitted if they are at least 55, have special personal ties to Switzerland (proven longer prior stays or close relatives resident there — Art. 25(2) VZAE), and have financial means exceeding the Swiss supplementary-benefits threshold (Art. 25(4) VZAE). No gainful activity permitted in Switzerland or abroad except managing one's own assets. Discretionary cantonal permit; annually renewable B permit. Often combined with lump-sum taxation but legally independent of it.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 183,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "switzerland-retiree-residence-principal",
+          "label": "Retiree residence permit (Art. 28 FNIA)",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "VZAE (SR 142.201), Art. 25 — Rentnerinnen und Rentner (implementing Art. 28 FNIA) — Fedlex",
+          "url": "https://www.fedlex.admin.ch/eli/cc/2007/759/de"
         }
       ]
     },
@@ -38188,7 +39137,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Thailand LTR Visa — BOI",
@@ -38230,7 +39179,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Thailand LTR Visa — BOI",
@@ -38272,7 +39221,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Thailand LTR Visa — BOI",
@@ -38314,7 +39263,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "UAE Government — Golden Visa",
@@ -38353,7 +39302,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "UAE Government — Golden Visa",
@@ -38395,7 +39344,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "UAE residence visas — u.ae",
@@ -38437,7 +39386,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "UAE residence visas — u.ae",
@@ -38478,7 +39427,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Innovator Founder visa - GOV.UK",
@@ -38517,7 +39466,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Statement of changes to the Immigration Rules: CP 632, 17 February 2022",
@@ -38556,7 +39505,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "USCIS - E-2 Treaty Investors",
@@ -38598,7 +39547,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "USCIS - About the EB-5 Visa Classification",
@@ -38640,7 +39589,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "USCIS - About the EB-5 Visa Classification",
@@ -38682,7 +39631,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "USCIS - Form I-140G, Immigrant Petition for the Gold Card Program",
@@ -38721,7 +39670,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Uruguay — Dirección Nacional de Migración",
@@ -38763,7 +39712,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-26",
+      "last_checked": "2026-07-27",
       "sources": [
         {
           "title": "Uzbekistan — Presidential Decree PF-67 (lex.uz)",
