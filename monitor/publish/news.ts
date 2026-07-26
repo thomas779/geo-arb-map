@@ -21,7 +21,8 @@ import {
 } from './telegram';
 import countries from 'i18n-iso-countries';
 import { llmConfigFromEnv } from '../llm/client';
-import { changeKey, type Finding } from '../sweep/run';
+import { changeKey, officialSourcesByJurisdiction, type Finding } from '../sweep/run';
+import { hostFromUrl, isGovish } from '../discovery/citations';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const TELEGRAM_MESSAGE_LIMIT = 4096;
@@ -99,6 +100,47 @@ export async function verifySourceUrl(
     // network error / timeout / bot-block — fall back to the domain root
   }
   return origin || url;
+}
+
+// Auto-publish integrity gate. Before a finding reaches the channel, confirm its
+// primary source is (a) an authoritative host (gov-ish or on the jurisdiction's
+// manifest official-source list), (b) actually reachable, and (c) actually
+// contains the quoted evidence in its original language. This blocks the failure
+// the LLM evidence-audit can't catch: a hallucinated-but-internally-consistent
+// finding, or a fabricated/404'd deep link (which verifySourceUrl would otherwise
+// launder to a domain root). Only used on the live --apply path.
+export async function verifyPrimarySource(
+  url: string,
+  originalQuote: string,
+  allowedHosts: Set<string>,
+  fetcher: typeof fetch = fetch,
+): Promise<{ ok: boolean; reason: string }> {
+  const host = hostFromUrl(url);
+  if (!host) return { ok: false, reason: 'unparseable url' };
+  if (!isGovish(host) && !allowedHosts.has(host)) return { ok: false, reason: `non-authoritative host (${host})` };
+  const normalize = (value: string) => value
+    .replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/gi, ' ').replace(/\s+/g, ' ').toLowerCase().trim();
+  const quote = normalize(originalQuote);
+  if (quote.length < 12) return { ok: false, reason: 'quote too short to verify' };
+  let body: string;
+  try {
+    const response = await fetcher(url, {
+      redirect: 'follow',
+      signal: AbortSignal.timeout(10_000),
+      headers: {
+        'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+      },
+    });
+    if (!response.ok) return { ok: false, reason: `source returned ${response.status}` };
+    body = await response.text();
+  } catch {
+    return { ok: false, reason: 'source unreachable' };
+  }
+  // A real quote (or its first ~60 normalized chars) appears on the page; a
+  // hallucinated quote or a degraded-to-root URL will not.
+  return normalize(body).includes(quote.slice(0, 60))
+    ? { ok: true, reason: 'ok' }
+    : { ok: false, reason: 'quoted evidence not found on the page' };
 }
 
 export function buildNewsPost(finding: Finding): TelegramPost {
@@ -234,6 +276,8 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
   // every confirmed finding. Dry-run (preview) is still allowed without a store.
   if (options.apply && !store) throw new Error('--apply requires --state-db (the dedup ledger); refusing to publish without dedup');
   if (options.apply && !llm) throw new Error('A monitoring LLM must be configured to auto-publish news');
+  // Authoritative-host allowlist per jurisdiction, for the auto-publish gate.
+  const officialHosts = officialSourcesByJurisdiction(ROOT);
 
   let published = 0;
   let skipped = 0;
@@ -246,6 +290,9 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
         console.log(`skip (same ${finding.category} change for ${finding.iso_n3} within ${dedupWindowDays}d): ${finding.claim.slice(0, 60)}`);
         continue;
       }
+      // Keep the un-rewritten primary URL for the integrity gate (verifySourceUrl
+      // below may degrade a dead deep-link to a domain root for the display link).
+      const primaryBefore = finding.primary_urls[0] ?? '';
       // Make sure the "Source" link opens; fall back to the domain root if not.
       finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
       let post: TelegramPost;
@@ -272,6 +319,18 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
         published += 1;
         continue;
       }
+      // Auto-publish integrity gate — the LLM audit checks the post against the
+      // model's own evidence; this checks it against the real primary source.
+      const allowedHosts = new Set((officialHosts.get(finding.iso_n3) ?? [])
+        .map(source => hostFromUrl(source.url))
+        .filter((h): h is string => Boolean(h)));
+      const verdict = await verifyPrimarySource(primaryBefore, finding.original_quote, allowedHosts);
+      if (!verdict.ok) {
+        skipped += 1;
+        console.warn(`skip (source unverified — ${verdict.reason}): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`);
+        continue;
+      }
+
       // Send, then record immediately. A later finding's send failure must not
       // lose the ledger of what already posted — that caused duplicate reposts.
       let messageId: number;
