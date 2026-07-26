@@ -15,7 +15,7 @@
   <!-- No-flash theme boot. Identical to the prerendered pages' script — its
        sha256 is allow-listed in public/_headers (script-src); keep all three
        in sync (scripts/build_country_pages.ts THEME_BOOT_JS is the source). -->
-  <script>try{if(localStorage.getItem('geo-arb-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>
+  <script>try{if(localStorage.getItem('geo-arb-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}document.addEventListener('DOMContentLoaded',function(){var b=document.getElementById('theme-toggle');if(!b)return;b.addEventListener('click',function(){var d=document.documentElement.classList.toggle('dark');try{localStorage.setItem('geo-arb-theme',d?'dark':'light')}catch(e){}})});</script>
 
   <link rel="canonical" href="https://flagpaths.com/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
