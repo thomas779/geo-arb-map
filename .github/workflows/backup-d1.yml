@@ -17,6 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      # Non-secret account identifier. `wrangler r2 object put` does not always
+      # honor the config file's account_id (unlike `d1 export`), and without it
+      # the token can't list accounts — which broke this backup from 2026-07-23.
+      CLOUDFLARE_ACCOUNT_ID: 9fa27a0cad6d1317e96592c85e31f7a6
     steps:
       - uses: actions/checkout@v4
 
