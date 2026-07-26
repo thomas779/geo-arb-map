@@ -1,0 +1,67 @@
+name: IMC map monthly diff
+
+# The IMC homepage map is a compiled index of CBI/RBI programmes. When they
+# update a country entry, that's a review lead (verify vs primary sources —
+# never import IMC's data directly). See monitor/discovery/imc_map.ts and #108.
+
+on:
+  schedule:
+    - cron: "43 5 3 * *" # monthly, 3rd at 05:43 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: imc-map-diff
+  cancel-in-progress: false
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Fetch, diff, and refresh the snapshot
+        run: bun monitor/discovery/imc_map.ts --update
+
+      - name: Open a review-lead issue when the map changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ ! -s monitor/.out/imc-map-diff.txt ]; then
+            echo "no changes — nothing to file"
+            exit 0
+          fi
+          {
+            echo "The IMC world map changed since the last snapshot. Treat each line as a review lead: verify against the official source before touching canonical data (the map has been stale before — never import its figures directly). See #108."
+            echo
+            echo '```'
+            cat monitor/.out/imc-map-diff.txt
+            echo '```'
+          } > /tmp/issue-body.md
+          gh issue create \
+            --title "IMC map changed — $(date -u +%Y-%m) review leads" \
+            --body-file /tmp/issue-body.md
+
+      - name: Commit the refreshed snapshot
+        run: |
+          set -euo pipefail
+          if git diff --quiet monitor/sources/imc-map-snapshot.json 2>/dev/null; then
+            echo "snapshot unchanged"
+            exit 0
+          fi
+          git config user.name "flag-paths-monitor"
+          git config user.email "monitor@flagpaths.com"
+          git add monitor/sources/imc-map-snapshot.json
+          git commit -m "monitor: refresh IMC map snapshot ($(date -u +%Y-%m))"
+          git push

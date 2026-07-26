@@ -867,3 +867,38 @@ describe('X watchlist reverse-discovery seed', () => {
     expect(parseSeedCandidates({ output_text: 'not json' })).toEqual([]);
   });
 });
+
+describe('IMC map discovery watcher', () => {
+  const { extractMapData, parsePlaceContent, diffSnapshots } = require('../monitor/discovery/imc_map') as
+    typeof import('../monitor/discovery/imc_map');
+
+  test('extracts and parses the base64 wpgmp blob into fact fields', () => {
+    const blob = Buffer.from(JSON.stringify({
+      places: [{
+        title: 'Turkey',
+        content: '<strong>B. Citizenship by Investment: </strong>The Program<br/><strong>Minimum Investment: </strong>From USD 250,000 <br/><strong>Further information: </strong>www.invest.gov.tr/en <br/>',
+      }],
+    })).toString('base64');
+    const data = extractMapData(`<script>window.wpgmp.mapdata1 = "${blob}";</script>`);
+    const parsed = parsePlaceContent((data as { places: Array<{ content: string }> }).places[0].content);
+    expect(parsed.fields['Citizenship by Investment']).toEqual(['The Program']);
+    expect(parsed.fields['Minimum Investment']).toEqual(['From USD 250,000']);
+    expect(parsed.urls).toContain('www.invest.gov.tr/en');
+  });
+
+  test('diffSnapshots reports adds, removals, and field changes only', () => {
+    const before = {
+      Turkey: { country: 'Turkey', fields: { 'Minimum Investment': ['USD 250,000'] }, urls: ['a'] },
+      Montenegro: { country: 'Montenegro', fields: {}, urls: [] },
+    };
+    const after = {
+      Turkey: { country: 'Turkey', fields: { 'Minimum Investment': ['USD 400,000'] }, urls: ['a'] },
+      Fiji: { country: 'Fiji', fields: {}, urls: [] },
+    };
+    const diff = diffSnapshots(before, after);
+    expect(diff).toContain('+ Fiji: country ADDED to the IMC map');
+    expect(diff).toContain('- Montenegro: country REMOVED from the IMC map');
+    expect(diff.some(l => l.includes('Turkey') && l.includes('USD 400,000'))).toBe(true);
+    expect(diffSnapshots(after, after)).toEqual([]);
+  });
+});

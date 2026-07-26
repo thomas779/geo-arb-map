@@ -1,0 +1,2535 @@
+{
+ "United States": {
+  "country": "United States",
+  "fields": {
+   "Residence by Investment": [
+    "The US EB-5 Immigrant Investor Program"
+   ],
+   "Residence required": [
+    "2.5 years in a 5 year period"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Contribution": [
+    "USD 900,000"
+   ],
+   "Time to Citizenship": [
+    "5 years, provided a permanent Green Card has been issued"
+   ],
+   "Further information": [
+    "www.uscis.gov/working-in-the-united-states/permanent-workers"
+   ]
+  },
+  "urls": [
+   "www.uscis.gov/working-in-the-united-states/permanent-workers"
+  ]
+ },
+ "Canada": {
+  "country": "Canada",
+  "fields": {
+   "Residence by Investment": [
+    "The Federal Start-Up Visa program; The Provicial Nominee Program (PNP)"
+   ],
+   "Residence required": [
+    "3 years in a 5-year period"
+   ],
+   "Nature of Contribution": [
+    "Investment or employment"
+   ],
+   "Minimum Contribution": [
+    "CAD 150,000 (USD 120,000)"
+   ],
+   "Time to Citizenship": [
+    "3 years after obtaining permanent residence"
+   ],
+   "Further information": [
+    "www.canada.ca/en/services/immigration-citizenship.html"
+   ]
+  },
+  "urls": [
+   "www.canada.ca/en/services/immigration-citizenship.html",
+   "www.immigration-quebec.gouv.qc.ca/en/immigrate-settle/index.html"
+  ]
+ },
+ "Gibraltar": {
+  "country": "Gibraltar",
+  "fields": {
+   "Residence by Investment": [
+    "Residence Program - Category 2 Individuals"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate"
+   ],
+   "Minimum Contribution": [
+    "GBP 2 million in net worth"
+   ],
+   "Time to Citizenship": [
+    "Not applicable"
+   ],
+   "Further information": [
+    "https://www.gibraltar.gov.gi/"
+   ]
+  },
+  "urls": [
+   "https://www.gibraltar.gov.gi/"
+  ]
+ },
+ "France": {
+  "country": "France",
+  "fields": {
+   "Residence by Investment": [
+    "French Tech Visa; Talent Passport for Investor"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "EUR 300,000"
+   ],
+   "Time to Citizenship": [
+    "5 years (under certain conditions)"
+   ],
+   "Further information": [
+    "www.welcometofrance.com/en/"
+   ]
+  },
+  "urls": [
+   "www.welcometofrance.com/en/"
+  ]
+ },
+ "Germany": {
+  "country": "Germany",
+  "fields": {
+   "Residence by Investment": [
+    "Entrepreneurial Residency Program"
+   ],
+   "Residence required": [
+    "One visit every six months"
+   ],
+   "Nature of Contribution": [
+    "Business considered of economic interest"
+   ],
+   "Minimum Contribution": [
+    "Not applicable"
+   ],
+   "Time to Citizenship": [
+    "7 years (under certain conditions)"
+   ],
+   "Further information": [
+    "www.make-it-in-germany.com/en/"
+   ]
+  },
+  "urls": [
+   "www.make-it-in-germany.com/en/"
+  ]
+ },
+ "Isle of Man": {
+  "country": "Isle of Man",
+  "fields": {
+   "Residence by Investment": [
+    "Business Migrant Start-up; Business Migrant Innovator Visa; Tier 1 Investor Visa"
+   ],
+   "Residence required": [
+    "185 days"
+   ],
+   "Nature of Contribution": [
+    "Business, donation"
+   ],
+   "Minimum Contribution": [
+    "GBP 50,000"
+   ],
+   "Time to Citizenship": [
+    "6 years"
+   ],
+   "Further information": [
+    "www.gov.im/categories/travel-traffic-and-motoring/immigration/business/"
+   ]
+  },
+  "urls": [
+   "www.gov.im/categories/travel-traffic-and-motoring/immigration/business/"
+  ]
+ },
+ "Samoa": {
+  "country": "Samoa",
+  "fields": {
+   "Citizenship by Investment": [
+    "Samoa Citizenship by Investment"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "131 destinations"
+   ],
+   "Residence Required": [
+    "15 days a year"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Investment": [
+    "SAT 4 million (USD 1.5 million)"
+   ],
+   "Time to Citizenship": [
+    "3 years"
+   ],
+   "Further information": [
+    "www.mcil.gov.ws/storage/2017/12/FINALinvestment.pdf"
+   ]
+  },
+  "urls": [
+   "www.mcil.gov.ws/storage/2017/12/FINALinvestment.pdf"
+  ]
+ },
+ "Bahrain": {
+  "country": "Bahrain",
+  "fields": {
+   "Residence by Investment": [
+    "Self - Sponsorship Residence Permit"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business, real estate, retirees"
+   ],
+   "Minimum Contribution": [
+    "BHD 50,000 (USD 135,000)"
+   ],
+   "Time to Citizenship": [
+    "15 years"
+   ],
+   "Further information": [
+    "www.bahrain.bh/"
+   ]
+  },
+  "urls": [
+   "www.bahrain.bh/"
+  ]
+ },
+ "Romania": {
+  "country": "Romania",
+  "fields": {
+   "Residence by Investment": [
+    "Romania Residence by Investment"
+   ],
+   "Residence required": [
+    "You cannot be absent for more than 12 months"
+   ],
+   "Nature of Contribution": [
+    "Business and job creation"
+   ],
+   "Minimum Contribution": [
+    "EUR 100,000 and the creation of 10 new jobs"
+   ],
+   "Time to Citizenship": [
+    "8 years (4 years under certain conditions)"
+   ],
+   "Further information": [
+    "https://igi.mai.gov.ro/en/"
+   ]
+  },
+  "urls": [
+   "https://igi.mai.gov.ro/en/"
+  ]
+ },
+ "Jordan": {
+  "country": "Jordan",
+  "fields": {
+   "Citizenship by Investment": [
+    "Citizenship Program"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "51 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Bank deposit, treasury bonds, investment, or business leading to employment creation"
+   ],
+   "Minimum Investment": [
+    "USD 750,000"
+   ],
+   "Time to Citizenship": [
+    "3 months"
+   ],
+   "Further information": [
+    "https://moi.gov.jo/Default/En"
+   ]
+  },
+  "urls": [
+   "https://moi.gov.jo/Default/En"
+  ]
+ },
+ "Italy": {
+  "country": "Italy",
+  "fields": {
+   "Residency by Investment": [
+    "Investor Visa for Italy"
+   ],
+   "Residence required": [
+    "Yes, rented or owned accomodation"
+   ],
+   "Nature of Contribution": [
+    "Investment and/or donation"
+   ],
+   "Minimum Contribution": [
+    "EUR 250,000"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "investorvisa.mise.gov.it/index.php/en/"
+   ]
+  },
+  "urls": []
+ },
+ "Turkey": {
+  "country": "Turkey",
+  "fields": {
+   "Citizenship by Investment": [
+    "The Turkey Citizenship-by-Investment Program"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "110 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate, investment funds, capital investment, bank deposit, employment creation, or government bonds"
+   ],
+   "Minimum Investment": [
+    "From USD 250,000"
+   ],
+   "Time to Citizenship": [
+    "6-9 months"
+   ],
+   "Further information": [
+    "www.invest.gov.tr/en/pages/home-page.aspx"
+   ]
+  },
+  "urls": [
+   "www.invest.gov.tr/en/pages/home-page.aspx"
+  ]
+ },
+ "Saint Lucia": {
+  "country": "Saint Lucia",
+  "fields": {
+   "Citizenship by Investment": [
+    "The St.Lucia Citizenship-by-Investment Program"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "146 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate, enterprises, NEF contribution, or government bonds"
+   ],
+   "Minimum Investment": [
+    "From USD 100,000"
+   ],
+   "Time to Citizenship": [
+    "3-4 months"
+   ],
+   "Further information": [
+    "www.cipsaintlucia.com/"
+   ]
+  },
+  "urls": [
+   "www.cipsaintlucia.com/"
+  ]
+ },
+ "Estonia": {
+  "country": "Estonia",
+  "fields": {
+   "Residence by Investment": [
+    "Residence permit for business"
+   ],
+   "Nature of Contribution": [
+    "Business, contribution"
+   ],
+   "Minimum Contribution": [
+    "EUR 65,000"
+   ],
+   "Time to Citizenship": [
+    "8 years"
+   ],
+   "Further information": [
+    "investinestonia.com/business-in-estonia/coming-and-living/residence-permit-for-business/"
+   ]
+  },
+  "urls": []
+ },
+ "Sint Maarten": {
+  "country": "Sint Maarten",
+  "fields": {
+   "Residence by Investment": [
+    "Investor Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate, business"
+   ],
+   "Minimum Contribution": [
+    "USD 500,000"
+   ],
+   "Time to Citizenship": [
+    "5 years under certain conditions"
+   ],
+   "Further information": [
+    "www.sintmaartengov.org/government/JUS/Immigrationdepartment/Pages/default.aspx"
+   ]
+  },
+  "urls": [
+   "www.sintmaartengov.org/government/JUS/Immigrationdepartment/Pages/default.aspx"
+  ]
+ },
+ "Vietnam": {
+  "country": "Vietnam",
+  "fields": {
+   "Residence by Investment": [
+    "Vietnam Investor Visa (DT visa)"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Capital contribution"
+   ],
+   "Minimum Contribution": [
+    ": VND 100 billion (USD 4.3 million)"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "vbpl.vn/TW/Pages/vbpqen-toanvan.aspx?ItemID=11017"
+   ]
+  },
+  "urls": []
+ },
+ "People's Republic of China": {
+  "country": "People's Republic of China",
+  "fields": {
+   "Residence by Investment": [
+    "Permanent Residency to Foreign Investor"
+   ],
+   "Residence required": [
+    "More than 3 months in accumulation every year"
+   ],
+   "Nature of Contribution": [
+    "Investment, business"
+   ],
+   "Minimum Contribution": [
+    "RMB 10,000,000 (USD 1 million)"
+   ],
+   "Time to Citizenship": [
+    "Not applicable"
+   ],
+   "Further information": [
+    "www.moj.gov.cn/news/content/2020-02/27/zlk_3242559.html"
+   ]
+  },
+  "urls": [
+   "www.moj.gov.cn/news/content/2020-02/27/zlk_3242559.html"
+  ]
+ },
+ "Vanuatu": {
+  "country": "Vanuatu",
+  "fields": {
+   "Citizenship by Investment": [
+    "Vanuatu Contribution Program; Vanuatu Development Support Program (VDSP)"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "130 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Donation"
+   ],
+   "Minimum Investment": [
+    "USD 130,000"
+   ],
+   "Time to Citizenship": [
+    "2-3 months"
+   ],
+   "Further information": [
+    "vancitizenship.gov.vu/"
+   ]
+  },
+  "urls": []
+ },
+ "Montserrat": {
+  "country": "Montserrat",
+  "fields": {
+   "Residence by Investment": [
+    "Permit of Economic Residence"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Bank deposit, real estate, government securities"
+   ],
+   "Minimum Contribution": [
+    "ECD 400,000 (USD 150,000)"
+   ],
+   "Time to Citizenship": [
+    "Application for British Overseas Citizen after 5 years of living"
+   ],
+   "Further information": [
+    "www.gov.ms/government/ministries/non-ministerial-departments/office-of-the-deputy-governor/citizenship-residence-information/"
+   ]
+  },
+  "urls": [
+   "www.gov.ms/government/ministries/non-ministerial-departments/office-of-the-deputy-governor/citizenship-residence-information/"
+  ]
+ },
+ "United Kingdom": {
+  "country": "United Kingdom",
+  "fields": {
+   "Residence by Investment": [
+    "Tier 1 (Investor) Visa; Innovator Visa"
+   ],
+   "Residence required": [
+    "185 days per year"
+   ],
+   "Nature of Contribution": [
+    "Investment, business"
+   ],
+   "Minimum Contribution": [
+    "GBP 50,000"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "www.gov.uk/browse/visas-immigration/work-visas"
+   ]
+  },
+  "urls": [
+   "www.gov.uk/browse/visas-immigration/work-visas"
+  ]
+ },
+ "United Arab Emirates": {
+  "country": "United Arab Emirates",
+  "fields": {
+   "Residence by Investment": [
+    "Residence by Investment Program"
+   ],
+   "Residence required": [
+    "No more than 6 consecutive months spent outside the UAE"
+   ],
+   "Nature of Contribution": [
+    "Real estate, business, or investment"
+   ],
+   "Minimum Contribution": [
+    "AED 5 million (USD 1.4 million)"
+   ],
+   "Time to Citizenship": [
+    "Not applicable"
+   ],
+   "Further information": [
+    "https://u.ae/#/"
+   ]
+  },
+  "urls": [
+   "https://u.ae/#/"
+  ]
+ },
+ "Ukraine": {
+  "country": "Ukraine",
+  "fields": {
+   "Residence by Investment": [
+    "Permanent Residence Permit (Investor Scheme)"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "EUR 100,000"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "dmsu.gov.ua/en-home/services/documenting-foreigners.html"
+   ]
+  },
+  "urls": []
+ },
+ "Uruguay": {
+  "country": "Uruguay",
+  "fields": {
+   "Residence by Investment": [
+    "Tax Residence for Economic Investors"
+   ],
+   "Residence required": [
+    "183 days a year"
+   ],
+   "Nature of Contribution": [
+    "Real estate, business"
+   ],
+   "Minimum Contribution": [
+    "USD 500,000"
+   ],
+   "Time to Citizenship": [
+    "3 years"
+   ],
+   "Further information": [
+    "https://migracion.minterior.gub.uy/"
+   ]
+  },
+  "urls": [
+   "https://migracion.minterior.gub.uy/"
+  ]
+ },
+ "Turks and Caicos Islands": {
+  "country": "Turks and Caicos Islands",
+  "fields": {
+   "Residence by Investment": [
+    "Residence by Investment"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate, business"
+   ],
+   "Minimum Contribution": [
+    "From USD 300,000"
+   ],
+   "Time to Citizenship": [
+    "Application for British Overseas Citizen after 5 years of living"
+   ],
+   "Further information": [
+    "www.gov.tc/bordercontrol/permanent-residence-certificate"
+   ]
+  },
+  "urls": [
+   "www.gov.tc/bordercontrol/permanent-residence-certificate"
+  ]
+ },
+ "Fiji": {
+  "country": "Fiji",
+  "fields": {
+   "Residence by Investment": [
+    "3-year; 7-year Investor"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "FJD 50,000 (USD 25,000)"
+   ],
+   "Time to Citizenship": [
+    "3 years under certain conditions"
+   ],
+   "Further information": [
+    "www.immigration.gov.fj/investor-permit-for-non-citizen-investors"
+   ]
+  },
+  "urls": [
+   "www.immigration.gov.fj/investor-permit-for-non-citizen-investors"
+  ]
+ },
+ "Thailand": {
+  "country": "Thailand",
+  "fields": {
+   "Residence by Investment": [
+    "The Thailand Elite Residence Program"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Single fee; except for the Elite Ultimate Priviledge and Elite Family Premium options"
+   ],
+   "Minimum Contribution": [
+    ": USD 19,000"
+   ],
+   "Time to Citizenship": [
+    "Not applicable"
+   ],
+   "Further information": [
+    "www.thailandelite.com/"
+   ]
+  },
+  "urls": [
+   "www.thailandelite.com/"
+  ]
+ },
+ "Taiwan": {
+  "country": "Taiwan",
+  "fields": {
+   "Residence by Investment": [
+    "Taiwan Entrepreneur Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "NT 2 million (USD 70,000)"
+   ],
+   "Time to Citizenship": [
+    "5 years (under certain conditions)"
+   ],
+   "Further information": [
+    "www.taiwan.gov.tw/3818.php"
+   ]
+  },
+  "urls": [
+   "www.taiwan.gov.tw/3818.php"
+  ]
+ },
+ "Switzerland": {
+  "country": "Switzerland",
+  "fields": {
+   "Residence by Investment": [
+    "Swiss Residence Program"
+   ],
+   "Residence required": [
+    "180 days per year"
+   ],
+   "Nature of Contribution": [
+    "Employment, tax commitment, or self-sufficiency"
+   ],
+   "Minimum Contribution": [
+    ": Annual taxes from CHF 250,000"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "www.ch.ch/en/living-switzerland-foreign-national/"
+   ]
+  },
+  "urls": [
+   "www.ch.ch/en/living-switzerland-foreign-national/"
+  ]
+ },
+ "Sri Lanka": {
+  "country": "Sri Lanka",
+  "fields": {
+   "Residence by Investment": [
+    "Resident Guest Scheme Visa Program (RGSVP)"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Deposit, investment​"
+   ],
+   "Minimum Contribution": [
+    "USD 250,000"
+   ],
+   "Time to Citizenship": [
+    "3 years"
+   ],
+   "Further information": [
+    "www.immigration.gov.lk//web/index.php?lang=en"
+   ]
+  },
+  "urls": [
+   "www.immigration.gov.lk//web/index.php?lang=en"
+  ]
+ },
+ "Spain": {
+  "country": "Spain",
+  "fields": {
+   "Residence by Investment": [
+    "Spain Golden"
+   ],
+   "Residence required": [
+    "1 visit"
+   ],
+   "Nature of Contribution": [
+    "Real estate, business, investment"
+   ],
+   "Minimum Contribution": [
+    "EUR 500,000"
+   ],
+   "Time to Citizenship": [
+    "10 years (2 years under"
+   ],
+   "Further information": [
+    "www.exteriores.gob.es/Portal/es/Paginas/inicio.aspx"
+   ]
+  },
+  "urls": [
+   "www.exteriores.gob.es/Portal/es/Paginas/inicio.aspx"
+  ]
+ },
+ "Singapore": {
+  "country": "Singapore",
+  "fields": {
+   "Residence by Investment": [
+    "Singapore Global Investor Program"
+   ],
+   "Residence required": [
+    "Present for at least 50% of the time"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Contribution": [
+    "SGD 2.5 million (USD 2 million)"
+   ],
+   "Time to Citizenship": [
+    "2 years"
+   ],
+   "Further information": [
+    "https://www.edb.gov.sg/"
+   ]
+  },
+  "urls": [
+   "https://www.edb.gov.sg/"
+  ]
+ },
+ "Republic of Korea (South Korea)": {
+  "country": "Republic of Korea (South Korea)",
+  "fields": {
+   "Residence by Investment": [
+    "D-8 Corporate/Foreign Investor Visa; Immigrant Investor Scheme for Real Estate; Immigrant Investor Scheme for public Business (F-2 visa)"
+   ],
+   "Residence required": [
+    "Evidence of business size, activity and office space in Republic of Korea"
+   ],
+   "Nature of Contribution": [
+    "Business, real estate"
+   ],
+   "Minimum Contribution": [
+    ": KRW 100 million (USD 90,000)"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "www.immigration.go.kr/immigration_eng/index.do"
+   ]
+  },
+  "urls": [
+   "www.immigration.go.kr/immigration_eng/index.do"
+  ]
+ },
+ "South Africa": {
+  "country": "South Africa",
+  "fields": {
+   "Residence by Investment": [
+    "Business Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Capital contribution to business"
+   ],
+   "Minimum Contribution": [
+    "ZAR 5 milion (USD 336,000)"
+   ],
+   "Time to Citizenship": [
+    "4 years"
+   ],
+   "Further information": [
+    "https://www.dha.gov.za/index.php/types-of-visas"
+   ]
+  },
+  "urls": [
+   "https://www.dha.gov.za/index.php/types-of-visas"
+  ]
+ },
+ "Saint Kitts and Nevis": {
+  "country": "Saint Kitts and Nevis",
+  "fields": {
+   "Citizenship by Investment": [
+    "The St.Kitts and Nevis Citizenship Act"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "156 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate or SGF contribution"
+   ],
+   "Minimum Investment": [
+    "From USD 195,000"
+   ],
+   "Time to Citizenship": [
+    "3-4 months (usual route); 45-60 days (accelerated application)"
+   ],
+   "Further information": [
+    "https://www.ciu.gov.kn/"
+   ]
+  },
+  "urls": [
+   "https://www.ciu.gov.kn/"
+  ]
+ },
+ "Slovakia": {
+  "country": "Slovakia",
+  "fields": {
+   "Citizenship by Investment": [
+    "Major Investment Scheme"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "181 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Exceptional contribution to the country in state's interest"
+   ],
+   "Minimum Investment": [
+    "EUR 100 million and creation of 300 new jobs"
+   ],
+   "Time to Citizenship": [
+    "Discretionary"
+   ],
+   "Further information": [
+    "www.mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization/176-conditions-for-granting-slovak-citizenship-naturalization.html"
+   ]
+  },
+  "urls": [
+   "www.mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization/176-conditions-for-granting-slovak-citizenship-naturalization.html"
+  ]
+ },
+ "Seychelles": {
+  "country": "Seychelles",
+  "fields": {
+   "Residence by Investment": [
+    "Investor type 1 or Investor type 2"
+   ],
+   "Residence required": [
+    "1 year"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "USD 1 million"
+   ],
+   "Time to Citizenship": [
+    "11 years"
+   ],
+   "Further information": [
+    "www.statehouse.gov.sc/uploads/downloads/filepath_61.pdf"
+   ]
+  },
+  "urls": [
+   "www.statehouse.gov.sc/uploads/downloads/filepath_61.pdf"
+  ]
+ },
+ "Russia": {
+  "country": "Russia",
+  "fields": {
+   "Citizenship by Investment": [
+    "Citizenship for entrepreneurs and self-employed; Citizenship for highly skilled workers"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "116 destinations"
+   ],
+   "Residence Required": [
+    "90 days during the first year"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Investment": [
+    "RUB 10 million (USD 131,000)"
+   ],
+   "Time to Citizenship": [
+    "3 years"
+   ],
+   "Further information": [
+    "https://www.nalog.ru/eng/how_to/htbie/"
+   ]
+  },
+  "urls": [
+   "https://www.nalog.ru/eng/how_to/htbie/"
+  ]
+ },
+ "Qatar": {
+  "country": "Qatar",
+  "fields": {
+   "Residence by Investment": [
+    "Permanent Residence Card"
+   ],
+   "Residence required": [
+    "20 years"
+   ],
+   "Nature of Contribution": [
+    "Real estate"
+   ],
+   "Minimum Contribution": [
+    "USD 200,000"
+   ],
+   "Time to Citizenship": [
+    "25 years (under certain conditions)"
+   ],
+   "Further information": [
+    "hukoomi.gov.qa/en/"
+   ]
+  },
+  "urls": []
+ },
+ "Portugal": {
+  "country": "Portugal",
+  "fields": {
+   "Residence by Investment": [
+    "Residence permit for investment activity (ARI)"
+   ],
+   "Residence required": [
+    "35 days during a 5 year period"
+   ],
+   "Nature of Contribution": [
+    "Capital transfer, various investment options, real estate, or business"
+   ],
+   "Minimum Contribution": [
+    "EUR 200,000 or creation of 8 jobs"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "www.sef.pt/en/pages/conteudo-detalhe.aspx?nID=21"
+   ]
+  },
+  "urls": [
+   "www.sef.pt/en/pages/conteudo-detalhe.aspx?nID=21"
+  ]
+ },
+ "Saudi Arabia": {
+  "country": "Saudi Arabia",
+  "fields": {
+   "Residence by Investment": [
+    "Premium Residency"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Contribution": [
+    "SAR 100,000 per year (USD 27,000)"
+   ],
+   "Time to Citizenship": [
+    "Not applicable"
+   ],
+   "Further information": [
+    "https://saprc.gov.sa/#/"
+   ]
+  },
+  "urls": [
+   "https://saprc.gov.sa/#/"
+  ]
+ },
+ "Philippines": {
+  "country": "Philippines",
+  "fields": {
+   "Residence by Investment": [
+    "Special Investor's Resident Visa (SIRV)"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    ": USD 75,000"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "boi.gov.ph/wp-content/uploads/2019/11/SIRV-FAQ.pdf"
+   ]
+  },
+  "urls": []
+ },
+ "Peru": {
+  "country": "Peru",
+  "fields": {
+   "Residence by Investment": [
+    "Investment Visa"
+   ],
+   "Residence required": [
+    "183 days a year"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Contribution": [
+    "PEN 500,000 (USD 135,000)"
+   ],
+   "Time to Citizenship": [
+    "2 years under certain conditions"
+   ],
+   "Further information": [
+    "https://www.migraciones.gob.pe/"
+   ]
+  },
+  "urls": [
+   "https://www.migraciones.gob.pe/"
+  ]
+ },
+ "Paraguay": {
+  "country": "Paraguay",
+  "fields": {
+   "Residence by Investment": [
+    "Permanent Residence"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Deposit, real estate"
+   ],
+   "Minimum Contribution": [
+    "USD 5,000"
+   ],
+   "Time to Citizenship": [
+    "3 years under certain conditions"
+   ],
+   "Further information": [
+    "www.mre.gov.py/Sitios/Adjuntos/consulpar-la/Docs/PermanentResidence.pdf"
+   ]
+  },
+  "urls": [
+   "www.mre.gov.py/Sitios/Adjuntos/consulpar-la/Docs/PermanentResidence.pdf"
+  ]
+ },
+ "Panama": {
+  "country": "Panama",
+  "fields": {
+   "Residence by Investment": [
+    "Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Deposit bank, real estate, stocks"
+   ],
+   "Minimum Contribution for Real Estate": [
+    "USD 300,000"
+   ],
+   "Minimum Contribution for Deposit": [
+    "USD 700,000"
+   ],
+   "Minimum Contribution for Stocks": [
+    "USD 500,000"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "www.migracion.gob.pa/"
+   ]
+  },
+  "urls": [
+   "www.migracion.gob.pa/"
+  ]
+ },
+ "Palau": {
+  "country": "Palau",
+  "fields": {
+   "Residence by Investment": [
+    "Elite Resident Visa"
+   ],
+   "Nature of Contribution": [
+    "Real estate"
+   ],
+   "Minimum Contribution": [
+    "USD 250,000"
+   ],
+   "Time to Citizenship": [
+    "Not applicable"
+   ],
+   "Further information": [
+    "www.palaugov.pw/executive-branch/ministries/justice/bureau-of-immigration/"
+   ]
+  },
+  "urls": [
+   "www.palaugov.pw/executive-branch/ministries/justice/bureau-of-immigration/"
+  ]
+ },
+ "Nicaragua": {
+  "country": "Nicaragua",
+  "fields": {
+   "Residence by Investment": [
+    "Investor Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Contribution": [
+    "USD 30,000"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ]
+  },
+  "urls": []
+ },
+ "New Zealand": {
+  "country": "New Zealand",
+  "fields": {
+   "Residence by Investment": [
+    "Investor 1 Resident Visa; Investor 2 Resident Visa"
+   ],
+   "Residence required": [
+    "44 days per year in the last 2 years"
+   ],
+   "Nature of Contribution": [
+    "Investment or business"
+   ],
+   "Minimum Contribution": [
+    "From NZD 3 million (USD 2 million)"
+   ],
+   "Time to Citizenship": [
+    "5 years from resident visa status"
+   ],
+   "Further information": [
+    "www.immigration.govt.nz/new-zealand-visas/options/live-permanently/all-resident-visas"
+   ]
+  },
+  "urls": [
+   "www.immigration.govt.nz/new-zealand-visas/options/live-permanently/all-resident-visas"
+  ]
+ },
+ "Netherlands": {
+  "country": "Netherlands",
+  "fields": {
+   "Residence by Investment": [
+    "Netherlands Investor Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "EUR 1,250,000"
+   ],
+   "Time to Citizenship": [
+    "5 years (under certain conditions)"
+   ],
+   "Further information": [
+    "ind.nl/en/Pages/Investing-in-the-Netherlands.aspx"
+   ]
+  },
+  "urls": []
+ },
+ "Mexico": {
+  "country": "Mexico",
+  "fields": {
+   "Residence by Investment": [
+    "Temporary"
+   ],
+   "Residence required": [
+    "180 days in 4 years"
+   ],
+   "Nature of Contribution": [
+    "Business, real estate"
+   ],
+   "Minimum Contribution": [
+    "Not applicable"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "consulmex.sre.gob.mx/sanjose/images/PDFs/temporaryresidentvisa.pdf"
+   ]
+  },
+  "urls": []
+ },
+ "Mauritius": {
+  "country": "Mauritius",
+  "fields": {
+   "Citizenship by Investment": [
+    "Naturalization for Investors"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "146 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Investment": [
+    "USD 500,000"
+   ],
+   "Time to Citizenship": [
+    "2 years of continuous residence"
+   ],
+   "Further information": [
+    "dha.govmu.org/Pages/Services/Citizenship.aspx"
+   ]
+  },
+  "urls": []
+ },
+ "Montenegro": {
+  "country": "Montenegro",
+  "fields": {
+   "Citizenship by Investment": [
+    "Montenegro Citizenship by Investment Program"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "124 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Government fund donation, real estate"
+   ],
+   "Minimum Investment": [
+    "EUR 350,000"
+   ],
+   "Time to Citizenship": [
+    "3 months"
+   ],
+   "Further information": [
+    "citizenbyinvestment.me/"
+   ]
+  },
+  "urls": []
+ },
+ "Monaco": {
+  "country": "Monaco",
+  "fields": {
+   "Residence by Investment": [
+    "Residence Program"
+   ],
+   "Residence required": [
+    "Proof of presence such as utility bills"
+   ],
+   "Nature of Contribution": [
+    "Business or proof of funds to live in Monaco"
+   ],
+   "Minimum Contribution": [
+    "Not applicable"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "www.gouv.mc/"
+   ]
+  },
+  "urls": [
+   "www.gouv.mc/"
+  ]
+ },
+ "Malaysia": {
+  "country": "Malaysia",
+  "fields": {
+   "Residence by Investment": [
+    "The Malaysia My Second Home Program"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Transfer of minimum amount into Malasyian bank account; proof of income"
+   ],
+   "Minimum Contribution": [
+    "Not applicable"
+   ],
+   "Time to Citizenship": [
+    "Not applicable"
+   ],
+   "Further information": [
+    "www.mm2h.gov.my/"
+   ]
+  },
+  "urls": [
+   "www.mm2h.gov.my/"
+  ]
+ },
+ "Macau, SAR China": {
+  "country": "Macau, SAR China",
+  "fields": {
+   "Residence by Investment": [
+    "Major Investment; Investment Plan"
+   ],
+   "Nature of Contribution": [
+    "Investment that enhances competitiveness of the industry and contributes to local labor market"
+   ],
+   "Minimum Contribution": [
+    "MOP 15,000,000 (USD 1.9 million)"
+   ],
+   "Time to Citizenship": [
+    "Not applicable"
+   ],
+   "Further information": [
+    "www.ipim.gov.mo/en/services/investment-residency/"
+   ]
+  },
+  "urls": [
+   "www.ipim.gov.mo/en/services/investment-residency/"
+  ]
+ },
+ "Luxembourg": {
+  "country": "Luxembourg",
+  "fields": {
+   "Residence by Investment": [
+    "Luxembourg Investor Program"
+   ],
+   "Residence required": [
+    "6 months"
+   ],
+   "Nature of Contribution": [
+    "Investment, business, bank deposit"
+   ],
+   "Minimum Contribution": [
+    "EUR 500,000"
+   ],
+   "Time to Citizenship": [
+    "5 years under conditions"
+   ],
+   "Further information": [
+    "guichet.public.lu/en/entreprises/creation-developpement/projet-creation/entree-sejour/investisseur-pays-tiers.html"
+   ]
+  },
+  "urls": []
+ },
+ "Lithuania": {
+  "country": "Lithuania",
+  "fields": {
+   "Residence by Investment": [
+    "Major Project Investment Agreement"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "EUR 20 million"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "www.migracija.lt/atvykstu-pagal-stambaus-projekto-investiciju-sutarti"
+   ]
+  },
+  "urls": [
+   "www.migracija.lt/atvykstu-pagal-stambaus-projekto-investiciju-sutarti"
+  ]
+ },
+ "Latvia": {
+  "country": "Latvia",
+  "fields": {
+   "Residence by Investment": [
+    "Latvia Residence-by-Investment Program"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate, investment, or government bonds"
+   ],
+   "Minimum Contribution": [
+    "EUR 250,000"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "www.pmlp.gov.lv/en"
+   ]
+  },
+  "urls": [
+   "www.pmlp.gov.lv/en"
+  ]
+ },
+ "Jersey": {
+  "country": "Jersey",
+  "fields": {
+   "Residence by Investment": [
+    "High Value"
+   ],
+   "Residence required": [
+    "More time spent in Jersey"
+   ],
+   "Nature of Contribution": [
+    "Tax contribution"
+   ],
+   "Minimum Contribution": [
+    "GBP 1.75M in real"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "www.gov.je/Home/RentingBuying/HousingLaws/Pages/highvalueresidency.aspx"
+   ]
+  },
+  "urls": [
+   "www.gov.je/Home/RentingBuying/HousingLaws/Pages/highvalueresidency.aspx"
+  ]
+ },
+ "Japan": {
+  "country": "Japan",
+  "fields": {
+   "Residence by Investment": [
+    "The Japan Investor Visa"
+   ],
+   "Residence required": [
+    "Evidence of business size, activity and office space in Japan"
+   ],
+   "Nature of Contribution": [
+    "Investment, business"
+   ],
+   "Minimum Contribution": [
+    ": JPY 5 million (USD 46,000)"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "www.isa.go.jp/en/index.html"
+   ]
+  },
+  "urls": [
+   "www.isa.go.jp/en/index.html"
+  ]
+ },
+ "Ireland": {
+  "country": "Ireland",
+  "fields": {
+   "Residence by Investment": [
+    "Immigrant Investor"
+   ],
+   "Residence required": [
+    "1 day per year"
+   ],
+   "Nature of Contribution": [
+    "Investment or donation"
+   ],
+   "Minimum Contribution": [
+    "EUR 500,000"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "www.inis.gov.ie/en/inis/pages/new%20programmes%20for%20investors%20and%20entrepreneurs"
+   ]
+  },
+  "urls": [
+   "www.inis.gov.ie/en/inis/pages/new%20programmes%20for%20investors%20and%20entrepreneurs"
+  ]
+ },
+ "Indonesia": {
+  "country": "Indonesia",
+  "fields": {
+   "Residence by Investment": [
+    "The Investor KITAS"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business, retirement"
+   ],
+   "Minimum Contribution": [
+    ": 1 billion rupiah (USD 70,000)"
+   ],
+   "Time to Citizenship": [
+    "5 years (under certain conditions)"
+   ],
+   "Further information": [
+    "www.imigrasi.go.id/"
+   ]
+  },
+  "urls": [
+   "www.imigrasi.go.id/"
+  ]
+ },
+ "Denmark": {
+  "country": "Denmark",
+  "fields": {
+   "Residence by Investment": [
+    "Start-Up Denmark"
+   ],
+   "Residence required": [
+    "Physical presence"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    ": Not applicable"
+   ],
+   "Time to Citizenship": [
+    "9 years"
+   ],
+   "Further information": [
+    "https://startupdenmark.info/how-apply"
+   ]
+  },
+  "urls": [
+   "https://startupdenmark.info/how-apply"
+  ]
+ },
+ "Hong Kong, SAR China": {
+  "country": "Hong Kong, SAR China",
+  "fields": {
+   "Residence by Investment": [
+    "Quality Migrant Admission Scheme; General Employment Policy (GEP); Admission Scheme for Mainland Talents and Professionals; Investment as Entrepreneurs"
+   ],
+   "Residence required": [
+    "A continuous period of not less than 7 years"
+   ],
+   "Nature of Contribution": [
+    "Not applicable"
+   ],
+   "Minimum Contribution": [
+    "Not applicable"
+   ],
+   "Time to Citizenship": [
+    "Not applicable"
+   ],
+   "Further information": [
+    "www.immd.gov.hk/eng/services/index.html"
+   ]
+  },
+  "urls": [
+   "www.immd.gov.hk/eng/services/index.html"
+  ]
+ },
+ "Honduras": {
+  "country": "Honduras",
+  "fields": {
+   "Residence by Investment": [
+    "Investor Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "USD 50,000"
+   ],
+   "Time to Citizenship": [
+    "3 years under certain conditions"
+   ],
+   "Further information": [
+    "https://inm.gob.hn/residencias.html"
+   ]
+  },
+  "urls": [
+   "https://inm.gob.hn/residencias.html"
+  ]
+ },
+ "Anguilla": {
+  "country": "Anguilla",
+  "fields": {
+   "Residence by Investment": [
+    "Anguilla Residence by Investment Scheme"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Donation, real estate"
+   ],
+   "Minimum Contribution": [
+    "USD 150,000"
+   ],
+   "Time to Citizenship": [
+    "Application for British Overseas Citizen after 5 years of living"
+   ],
+   "Further information": [
+    "https://www.selectanguilla.com/"
+   ]
+  },
+  "urls": [
+   "https://www.selectanguilla.com/"
+  ]
+ },
+ "Colombia": {
+  "country": "Colombia",
+  "fields": {
+   "Residence by Investment": [
+    "The Resident Colombian Visa (type R)"
+   ],
+   "Residence required": [
+    "You cannot leave"
+   ],
+   "Nature of Contribution": [
+    "Investment,"
+   ],
+   "Minimum Contribution": [
+    "650 times the"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "www.cancilleria.gov.co/en/procedures_services/visa/r-direct-foreign-investment"
+   ]
+  },
+  "urls": [
+   "www.cancilleria.gov.co/en/procedures_services/visa/r-direct-foreign-investment"
+  ]
+ },
+ "Bermuda": {
+  "country": "Bermuda",
+  "fields": {
+   "Residence by Investment": [
+    "Economic Investment Certificate"
+   ],
+   "Residence required": [
+    "90 days a year"
+   ],
+   "Nature of Contribution": [
+    "Investment, real estate, government securities"
+   ],
+   "Minimum Contribution": [
+    "USD 2.5 million"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "www.gov.bm/economic-investment-certificate-and-residential-certificate"
+   ]
+  },
+  "urls": [
+   "www.gov.bm/economic-investment-certificate-and-residential-certificate"
+  ]
+ },
+ "Grenada": {
+  "country": "Grenada",
+  "fields": {
+   "Citizenship by Investment": [
+    "The Grenada Citizenship-by-Investment Program"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "144 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "NTF contribution or investment in an approved real estate project"
+   ],
+   "Minimum Investment": [
+    "From USD 150,000"
+   ],
+   "Time to Citizenship": [
+    "3-4 months"
+   ],
+   "Further information": [
+    "www.cbi.gov.gd/"
+   ]
+  },
+  "urls": [
+   "www.cbi.gov.gd/"
+  ]
+ },
+ "Greece": {
+  "country": "Greece",
+  "fields": {
+   "Residence by Investment": [
+    "Greece Golden Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate, capital contribution, shares, bonds, government bonds, or capital transfers"
+   ],
+   "Minimum Contribution": [
+    "EUR 250,000"
+   ],
+   "Time to Citizenship": [
+    "7 years (under certain conditions)"
+   ],
+   "Further information": [
+    "www.enterprisegreece.gov.gr/en/greece-today/living-in-greece/residence-permits"
+   ]
+  },
+  "urls": [
+   "www.enterprisegreece.gov.gr/en/greece-today/living-in-greece/residence-permits"
+  ]
+ },
+ "Malawi": {
+  "country": "Malawi",
+  "fields": {
+   "Residence by Investment": [
+    "Business Residence Permit"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "USD 50,000"
+   ],
+   "Time to Citizenship": [
+    "7 years under certain conditions"
+   ],
+   "Further information": [
+    "immigration.gov.mw/permits/business-residence-permit/"
+   ]
+  },
+  "urls": []
+ },
+ "Finland": {
+  "country": "Finland",
+  "fields": {
+   "Residence by Investment": [
+    "Start-up Entrepreneur; Entrepreneur Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Start-up investment, business"
+   ],
+   "Minimum Contribution": [
+    "Not applicable"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "migri.fi/en/working-in-finland/applications"
+   ]
+  },
+  "urls": []
+ },
+ "Ecuador": {
+  "country": "Ecuador",
+  "fields": {
+   "Residence by Investment": [
+    "Investor Visa 9-II&9-III"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate"
+   ],
+   "Minimum Contribution": [
+    "USD 40,000"
+   ],
+   "Time to Citizenship": [
+    "3 years under certain conditions"
+   ],
+   "Further information": [
+    "www.cancilleria.gob.ec/2020/06/16/visa-residencia-temporal/"
+   ]
+  },
+  "urls": [
+   "www.cancilleria.gob.ec/2020/06/16/visa-residencia-temporal/"
+  ]
+ },
+ "Dominican Republic": {
+  "country": "Dominican Republic",
+  "fields": {
+   "Residence by Investment": [
+    "Investment Residence"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Contribution": [
+    "USD 200,000"
+   ],
+   "Time to Citizenship": [
+    "2 years"
+   ],
+   "Further information": [
+    "migracion.gob.do/en/servicios/residence/"
+   ]
+  },
+  "urls": []
+ },
+ "Czech Republic": {
+  "country": "Czech Republic",
+  "fields": {
+   "Residence by Investment": [
+    "Long-term residence for the purpose of investing"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business. job creation"
+   ],
+   "Minimum Contribution": [
+    "CZK 75 million (USD 3 million)"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "www.mvcr.cz/mvcren/ministery-interior-czech-republic.aspx"
+   ]
+  },
+  "urls": [
+   "www.mvcr.cz/mvcren/ministery-interior-czech-republic.aspx"
+  ]
+ },
+ "Cyprus": {
+  "country": "Cyprus",
+  "fields": {
+   "Residence by Investment": [
+    "Cyprus Residence Program"
+   ],
+   "Residence required": [
+    "1 visit required every 2 years"
+   ],
+   "Nature of Contribution": [
+    "Real estate"
+   ],
+   "Minimum Contribution": [
+    "EUR 300,000 plus VAT"
+   ],
+   "Time to Citizenship": [
+    "7 years"
+   ],
+   "Further information": [
+    "www.cyprusvisa.eu/"
+   ]
+  },
+  "urls": [
+   "www.cyprusvisa.eu/"
+  ]
+ },
+ "San Marino": {
+  "country": "San Marino",
+  "fields": {
+   "Residence by Investment": [
+    "Economic Residence Scheme"
+   ],
+   "Nature of Contribution": [
+    "Property investment, donation"
+   ],
+   "Minimum Contribution": [
+    ": EUR 500,000"
+   ],
+   "Time to Citizenship": [
+    "30 years"
+   ],
+   "Further information": [
+    "www.esteri.sm/on-line/en/home/link/stay-and-residence-permits.html"
+   ]
+  },
+  "urls": [
+   "www.esteri.sm/on-line/en/home/link/stay-and-residence-permits.html"
+  ]
+ },
+ "Costa Rica": {
+  "country": "Costa Rica",
+  "fields": {
+   "Residence by Investment": [
+    "Investor Visa"
+   ],
+   "Nature of Contribution": [
+    "Business, real estate"
+   ],
+   "Minimum Contribution": [
+    "USD 200,000"
+   ],
+   "Time to Citizenship": [
+    "7 years"
+   ],
+   "Further information": [
+    "www.migracion.go.cr/Paginas/Visas.aspx"
+   ]
+  },
+  "urls": [
+   "www.migracion.go.cr/Paginas/Visas.aspx"
+  ]
+ },
+ "Chile": {
+  "country": "Chile",
+  "fields": {
+   "Residence by Investment": [
+    "Investor Visa TE-7"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "Not applicable"
+   ],
+   "Time to Citizenship": [
+    "5 years"
+   ],
+   "Further information": [
+    "www.extranjeria.gob.cl/vivir-en-chile/visa-temporaria/"
+   ]
+  },
+  "urls": [
+   "www.extranjeria.gob.cl/vivir-en-chile/visa-temporaria/"
+  ]
+ },
+ "Maldives": {
+  "country": "Maldives",
+  "fields": {
+   "Residence by Investment": [
+    "Co-operate Resident Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Investment, deposit, real estate"
+   ],
+   "Minimum Contribution": [
+    "USD 1 million"
+   ],
+   "Time to Citizenship": [
+    "12 years of continuous residence"
+   ],
+   "Further information": [
+    "immigration.gov.mv/co-operate-resident-visa/"
+   ]
+  },
+  "urls": []
+ },
+ "Commonwealth of Dominica": {
+  "country": "Commonwealth of Dominica",
+  "fields": {
+   "Citizenship by Investment": [
+    "The Dominica Citizenship-by-Investment Program"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "143 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Economic contribution or investment in real estate"
+   ],
+   "Minimum Investment": [
+    "USD 100,000"
+   ],
+   "Time to Citizenship": [
+    "3 months"
+   ],
+   "Further information": [
+    "cbiu.gov.dm/"
+   ]
+  },
+  "urls": []
+ },
+ "Cayman Islands": {
+  "country": "Cayman Islands",
+  "fields": {
+   "Residence by Investment": [
+    "Certificate of"
+   ],
+   "Residence required": [
+    "1 day a year"
+   ],
+   "Nature of Contribution": [
+    "Real estate, business"
+   ],
+   "Minimum Contribution": [
+    "From USD 1.2 million"
+   ],
+   "Time to Citizenship": [
+    "Application for a British"
+   ],
+   "Further information": [
+    "www.immigration.gov.ky/portal/page/portal/immhome/livinghere/independentmeans"
+   ]
+  },
+  "urls": [
+   "www.immigration.gov.ky/portal/page/portal/immhome/livinghere/independentmeans"
+  ]
+ },
+ "Georgia": {
+  "country": "Georgia",
+  "fields": {
+   "Residence by Investment": [
+    "Investment Residence Permit"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Contribution": [
+    "GEL 300,000 (USD 90,000)"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "sda.gov.ge/?page_id=7445&lang=en"
+   ]
+  },
+  "urls": []
+ },
+ "Bulgaria": {
+  "country": "Bulgaria",
+  "fields": {
+   "Residence by Investment": [
+    "Bulgarian Investment Immigration Program (BIIP)"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Investment"
+   ],
+   "Minimum Contribution": [
+    "EUR 512,000"
+   ],
+   "Time to Citizenship": [
+    "5 years (ordinary), 1 year (fast track)"
+   ],
+   "Further information": [
+    "bulgarian-citizenship.com/"
+   ]
+  },
+  "urls": []
+ },
+ "Brazil": {
+  "country": "Brazil",
+  "fields": {
+   "Residence by Investment": [
+    "Investor visa (VIPER)"
+   ],
+   "Residence required": [
+    "No more than 24 consecutive months abroad"
+   ],
+   "Nature of Contribution": [
+    "Business, real estate"
+   ],
+   "Minimum Contribution": [
+    "From BRL 150,000 (USD 27,000)"
+   ],
+   "Time to Citizenship": [
+    "4 years"
+   ],
+   "Further information": [
+    "www.brazil.gov.br/about-brazil/coming-to-brazil"
+   ]
+  },
+  "urls": [
+   "www.brazil.gov.br/about-brazil/coming-to-brazil"
+  ]
+ },
+ "Egypt": {
+  "country": "Egypt",
+  "fields": {
+   "Residence by Investment": [
+    "Egypt Residence by Investment"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate",
+    "Real estate, donation, deposit, business"
+   ],
+   "Minimum Contribution": [
+    "From USD 100,000"
+   ],
+   "Time to Citizenship": [
+    "5 years",
+    "3 months"
+   ],
+   "Further information": [
+    "emoves.moi.gov.eg/",
+    "www.egyptcitizenshipbyinvestment.com/"
+   ],
+   "Citizenship by Investment": [
+    "Egypt Citizenship by Investment"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "50 destinations"
+   ],
+   "Minimum Investment": [
+    "USD 250,000"
+   ]
+  },
+  "urls": [
+   "www.egyptcitizenshipbyinvestment.com/"
+  ]
+ },
+ "Belgium": {
+  "country": "Belgium",
+  "fields": {
+   "Residence by Investment": [
+    "Belgium Investor Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "EUR 350,000"
+   ],
+   "Time to Citizenship": [
+    "5 years (under certain conditions)"
+   ],
+   "Further information": [
+    "dofi.ibz.be/sites/dvzoe/EN/Pages/home.aspx"
+   ]
+  },
+  "urls": []
+ },
+ "Kyrgyzstan": {
+  "country": "Kyrgyzstan",
+  "fields": {
+   "Residence by Investment": [
+    "Investment Visa (type I)"
+   ],
+   "Nature of Contribution": [
+    "Business"
+   ],
+   "Minimum Contribution": [
+    "KGS 10 million (USD 118,000) within 3 years"
+   ],
+   "Time to Citizenship": [
+    "5 years of continuous residence"
+   ],
+   "Further information": [
+    "invest.gov.kg/investors-guide/visa/"
+   ]
+  },
+  "urls": []
+ },
+ "Barbados": {
+  "country": "Barbados",
+  "fields": {
+   "Residence by Investment": [
+    "Special Entry"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Net asset"
+   ],
+   "Minimum Contribution": [
+    "USD 2 million"
+   ],
+   "Time to Citizenship": [
+    "7 years"
+   ],
+   "Further information": [
+    "https://immigration.gov.bb/pages/SpecialEntryPermit.aspx"
+   ]
+  },
+  "urls": [
+   "https://immigration.gov.bb/pages/SpecialEntryPermit.aspx"
+  ]
+ },
+ "Bahamas": {
+  "country": "Bahamas",
+  "fields": {
+   "Residence by Investment": [
+    "Investor Visa"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate"
+   ],
+   "Minimum Contribution": [
+    "USD 500,000"
+   ],
+   "Time to Citizenship": [
+    "10 years"
+   ],
+   "Further information": [
+    "www.bahamas.gov.bs/"
+   ]
+  },
+  "urls": [
+   "www.bahamas.gov.bs/"
+  ]
+ },
+ "Austria": {
+  "country": "Austria",
+  "fields": {
+   "Residence by Investment": [
+    "Highly Skilled Category; The Austria Private Residence Program"
+   ],
+   "Residence required": [
+    "183 days per year"
+   ],
+   "Nature of Contribution": [
+    "Not applicable",
+    "Investment, donation"
+   ],
+   "Minimum Contribution": [
+    "Not applicable"
+   ],
+   "Time to Citizenship": [
+    "6-10 years",
+    "2-3 years"
+   ],
+   "Further information": [
+    "www.migration.gv.at/en/types-of-immigration/permanent-immigration/",
+    "https://www.migration.gv.at/en/welcome/?no_cache=1"
+   ],
+   "Citizenship by Investment": [
+    "Austria Citizenship-by-Investment Program"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "187 destinations"
+   ],
+   "Residence Required": [
+    "None"
+   ],
+   "Minimum Investment": [
+    "EUR 3 million"
+   ]
+  },
+  "urls": [
+   "www.migration.gv.at/en/types-of-immigration/permanent-immigration/",
+   "https://www.migration.gv.at/en/welcome/?no_cache=1"
+  ]
+ },
+ "Azerbaijan": {
+  "country": "Azerbaijan",
+  "fields": {
+   "Residence by Investment": [
+    "Azerbaijan Temporary Resident Visa (TRP)"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate, investment"
+   ],
+   "Minimum Contribution": [
+    "AZN 100,000 (USD 60,000)"
+   ],
+   "Time to Citizenship": [
+    "5 years of continuous residence"
+   ],
+   "Further information": [
+    "migration.gov.az/en/page/73"
+   ]
+  },
+  "urls": []
+ },
+ "Antigua and Barbuda": {
+  "country": "Antigua and Barbuda",
+  "fields": {
+   "Citizenship by Investment": [
+    "The Antigua and Barbuda Citizenship-by-Investment Program"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "151 destinations"
+   ],
+   "Residence Required": [
+    "5 days within 5 years"
+   ],
+   "Nature of Contribution": [
+    "Real estate, business investment, NDF contribution, or UWI contribution"
+   ],
+   "Minimum Investment": [
+    "From USD 100,000"
+   ],
+   "Time to Citizenship": [
+    "3-4 months"
+   ],
+   "Further information": [
+    "https://cip.gov.ag/"
+   ]
+  },
+  "urls": [
+   "https://cip.gov.ag/"
+  ]
+ },
+ "Andorra": {
+  "country": "Andorra",
+  "fields": {
+   "Residence by Investment": [
+    "Category A, B or C (passive residence); Category D (active residence)"
+   ],
+   "Residence required": [
+    "90 days per year"
+   ],
+   "Nature of Contribution": [
+    "Donation or business"
+   ],
+   "Minimum Contribution": [
+    "EUR 50,000"
+   ],
+   "Time to Citizenship": [
+    "20 years"
+   ],
+   "Further information": [
+    "www.immigracio.ad/ca/tramits-d-immigracio"
+   ]
+  },
+  "urls": [
+   "www.immigracio.ad/ca/tramits-d-immigracio"
+  ]
+ },
+ "Australia": {
+  "country": "Australia",
+  "fields": {
+   "Residence by Investment": [
+    "Skilled-Investment/Entrepreneurial Program"
+   ],
+   "Residence required": [
+    "2 years in a 5-year period"
+   ],
+   "Nature of Contribution": [
+    "Investment or business"
+   ],
+   "Minimum Contribution": [
+    "From AUD 500,000 (USD 400,000)"
+   ],
+   "Time to Citizenship": [
+    "4 years of lawful residence including 1 year of permanent residence"
+   ],
+   "Further information": [
+    "immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing"
+   ]
+  },
+  "urls": []
+ },
+ "Cambodia": {
+  "country": "Cambodia",
+  "fields": {
+   "Residence by Investment": [
+    "Cambodia My Second Home Program"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Real estate project approved by the government in Cambodia",
+    "Investment or donation"
+   ],
+   "Minimum Contribution": [
+    ": USD 100,000"
+   ],
+   "Time to Citizenship": [
+    "5 years",
+    "3-6 months"
+   ],
+   "Further information": [
+    "https://cm2h.com/",
+    "https://www.interior.gov.kh/"
+   ],
+   "Citizenship by Investment": [
+    "Citizenship Program"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "54 destinations"
+   ],
+   "Residence Required": [
+    "6 or 12 months"
+   ],
+   "Minimum Investment": [
+    "From USD 250,000"
+   ]
+  },
+  "urls": [
+   "https://cm2h.com/",
+   "https://www.interior.gov.kh/"
+  ]
+ },
+ "Malta": {
+  "country": "Malta",
+  "fields": {
+   "Residence by Investment": [
+    "Malta Permanent Residence Program (MPRP)"
+   ],
+   "Residence required": [
+    "None"
+   ],
+   "Nature of Contribution": [
+    "Government contribution and real estate purchase or rental",
+    "Investment, real estate, donation"
+   ],
+   "Minimum Contribution": [
+    ": EUR 330,000"
+   ],
+   "Time to Citizenship": [
+    "Not applicable",
+    "14-38 months"
+   ],
+   "Further information": [
+    "https://residencymalta.gov.mt/",
+    "https://komunita.gov.mt/en/"
+   ],
+   "Citizenship by Investment": [
+    "Maltese Citizenship by Naturalization for Exceptional Services by Direct Investment (MEIN)"
+   ],
+   "Visa-free or Visa-on-arrival Access": [
+    "184 destinations"
+   ],
+   "Residence Required": [
+    "36 months (or 12 months by exception)"
+   ],
+   "Minimum Investment": [
+    "EUR 738,000"
+   ]
+  },
+  "urls": [
+   "https://residencymalta.gov.mt/",
+   "https://komunita.gov.mt/en/"
+  ]
+ }
+}
