@@ -18,6 +18,11 @@ interface Env {
   GITHUB_REPO: string;
   GITHUB_EVENT_TYPE?: string;
   MAX_EMAIL_BYTES?: string;
+  // Verified Email Routing destination for mail to a known intake address from
+  // a sender that matches no route — mostly double-opt-in confirmations, which
+  // MUST reach a human or the newsletter subscription never activates. Secret
+  // (a personal inbox); unset = reject such mail as before.
+  FALLBACK_FORWARD?: string;
 }
 
 // Routing policy lives in the `monitor_routes` D1 table so it can be managed as
@@ -170,6 +175,20 @@ export default {
     }
     const route = routeForMessage(routes, message.to, message.from);
     if (!route) {
+      // A known intake address but an unlisted sender: usually a subscription
+      // confirmation (double-opt-in) or ESP service notice. Rejecting these
+      // silently killed every sign-up — the confirm link never reached anyone.
+      // Forward to a human inbox when configured; publisher content still only
+      // enters the pipeline via the allow-listed routes below.
+      if (env.FALLBACK_FORWARD) {
+        try {
+          await message.forward(env.FALLBACK_FORWARD);
+        } catch (error) {
+          console.error('fallback forward failed', error);
+          message.setReject('Sender domain is not allowed for this intake address');
+        }
+        return;
+      }
       message.setReject('Sender domain is not allowed for this intake address');
       return;
     }

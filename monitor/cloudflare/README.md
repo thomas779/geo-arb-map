@@ -62,6 +62,18 @@ bunx wrangler secret put GITHUB_TOKEN \
   --config monitor/cloudflare/wrangler.jsonc
 ```
 
+Optionally set `FALLBACK_FORWARD` (also a secret — it is a personal inbox) to a
+**verified Email Routing destination address**. Mail sent to a known intake
+address from a sender that matches no route — subscription double-opt-in
+confirmations, ESP service notices — is forwarded there instead of rejected, so
+sign-ups can actually be completed. Publisher content still only enters the
+pipeline via the allow-listed routes.
+
+```sh
+bunx wrangler secret put FALLBACK_FORWARD \
+  --config monitor/cloudflare/wrangler.jsonc
+```
+
 ### Routing policy (`monitor_routes` D1 table)
 
 The Worker reads its routing policy from the `monitor_routes` table in the

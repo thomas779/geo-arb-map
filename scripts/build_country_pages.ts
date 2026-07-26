@@ -13,7 +13,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createElement, Fragment } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { SiteHeader } from '../src/components/SiteHeader';
+import { Moon, Sun } from 'lucide-react';
+import { SiteHeader, type NavKey } from '../src/components/SiteHeader';
 import { CountriesList } from '../src/components/CountriesList';
 import {
   CountryProfile,
@@ -41,14 +42,39 @@ const FONT_LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com">'
   + '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
   + '<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">';
 
-// No-flash theme: match the app (default dark unless the user chose light).
+// No-flash theme boot + toggle wiring: match the app (default dark unless the
+// user chose light), and let prerendered pages flip + persist the theme via the
+// #theme-toggle button (the SPA has no such id — its toggle is React-managed —
+// so the wiring no-ops there and the script stays byte-identical everywhere).
 // Exported so tests can pin its CSP sha256 allowance in public/_headers —
 // `script-src 'self'` blocks inline scripts, and a silently-blocked theme boot
 // left every prerendered page stuck in light mode. If you edit this script you
 // MUST update the hash in public/_headers (the seo test recomputes it).
 export const THEME_BOOT_JS = "try{if(localStorage.getItem('geo-arb-theme')!=='light')"
-  + "document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}";
+  + "document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}"
+  + "document.addEventListener('DOMContentLoaded',function(){"
+  + "var b=document.getElementById('theme-toggle');if(!b)return;"
+  + "b.addEventListener('click',function(){"
+  + "var d=document.documentElement.classList.toggle('dark');"
+  + "try{localStorage.setItem('geo-arb-theme',d?'dark':'light')}catch(e){}})});";
 const THEME_SCRIPT = `<script>${THEME_BOOT_JS}</script>`;
+
+// Static-page theme toggle, wired by THEME_BOOT_JS above. Mirrors the app's
+// header toggle (ghost icon button, Sun in dark / Moon in light via CSS).
+function staticHeader(active: NavKey) {
+  const toggle = createElement(
+    'button',
+    {
+      id: 'theme-toggle',
+      type: 'button',
+      'aria-label': 'Toggle light/dark theme',
+      className: 'inline-flex size-8 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground',
+    },
+    createElement(Sun, { className: 'hidden size-4 dark:block', 'aria-hidden': true }),
+    createElement(Moon, { className: 'size-4 dark:hidden', 'aria-hidden': true }),
+  );
+  return createElement(SiteHeader, { active, right: toggle });
+}
 
 function esc(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -135,7 +161,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     const url = `${SITE}/country/${data.slug}/`;
     const bodyHtml = renderToStaticMarkup(createElement(
       Fragment, null,
-      createElement(SiteHeader, { active: 'countries' }),
+      staticHeader('countries'),
       createElement(CountryProfile, { data }),
     ));
     const presentModes = Object.entries(data.coverage)
@@ -186,7 +212,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   // Hub: same SiteHeader + the shared CountriesList.
   const hubBody = renderToStaticMarkup(createElement(
     Fragment, null,
-    createElement(SiteHeader, { active: 'countries' }),
+    staticHeader('countries'),
     createElement(CountriesList, { citizenshipRoutes: citizenship }),
   ));
   fs.writeFileSync(path.join(distDir, 'country', 'index.html'), htmlDoc({
@@ -212,7 +238,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     const url = `${SITE}/rights/${data.slug}/`;
     const bodyHtml = renderToStaticMarkup(createElement(
       Fragment, null,
-      createElement(SiteHeader, { active: 'rights' }),
+      staticHeader('rights'),
       createElement(RightsProfile, { data }),
     ));
     const headExtra = [
@@ -239,7 +265,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   }
   const rightsHub = renderToStaticMarkup(createElement(
     Fragment, null,
-    createElement(SiteHeader, { active: 'rights' }),
+    staticHeader('rights'),
     createElement(RightsList, { mobility }),
   ));
   fs.writeFileSync(path.join(distDir, 'rights', 'index.html'), htmlDoc({
@@ -264,7 +290,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     const url = `${SITE}/route/${data.slug}/`;
     const bodyHtml = renderToStaticMarkup(createElement(
       Fragment, null,
-      createElement(SiteHeader, { active: 'route' }),
+      staticHeader('route'),
       createElement(RightsProfile, { data }),
     ));
     const headExtra = [
@@ -291,7 +317,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   }
   const routeHub = renderToStaticMarkup(createElement(
     Fragment, null,
-    createElement(SiteHeader, { active: 'route' }),
+    staticHeader('route'),
     createElement(RouteList, { mobility }),
   ));
   fs.writeFileSync(path.join(distDir, 'route', 'index.html'), htmlDoc({
@@ -334,7 +360,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     `<span class="rounded-full bg-verified/15 px-2 py-0.5 font-mono text-[0.66rem] text-verified">high</span>`
     + `<span class="rounded-full bg-secondary px-2 py-0.5 font-mono text-[0.66rem]">medium</span>`
     + `<span class="rounded-full border px-2 py-0.5 font-mono text-[0.66rem] text-muted-foreground">low</span>`;
-  const aboutBody = renderToStaticMarkup(createElement(SiteHeader, { active: 'none' }))
+  const aboutBody = renderToStaticMarkup(staticHeader('none'))
     + `<main class="mx-auto max-w-[1060px] px-4 py-10 sm:px-6">
 <nav class="mb-8 font-mono text-xs text-muted-foreground"><a href="/" class="underline underline-offset-2">Flag Paths</a> › About</nav>
 
