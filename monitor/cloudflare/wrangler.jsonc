@@ -5,6 +5,11 @@
   "compatibility_date": "2026-07-17",
   "workers_dev": false,
   "preview_urls": false,
+  // Persist logs: the unlisted-sender forward path writes nothing to D1, so
+  // without observability a missing confirmation email is undiagnosable.
+  "observability": {
+    "enabled": true
+  },
   "vars": {
     "GITHUB_OWNER": "thomas779",
     "GITHUB_REPO": "geo-arb-map",

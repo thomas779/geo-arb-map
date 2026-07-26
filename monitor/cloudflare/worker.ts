@@ -183,6 +183,7 @@ export default {
       if (env.FALLBACK_FORWARD) {
         try {
           await message.forward(env.FALLBACK_FORWARD);
+          console.log(`forwarded unlisted-sender mail (from ${message.from}) to the fallback inbox`);
         } catch (error) {
           console.error('fallback forward failed', error);
           message.setReject('Sender domain is not allowed for this intake address');
@@ -237,6 +238,7 @@ export default {
         if (env.FALLBACK_FORWARD) {
           try {
             await message.forward(env.FALLBACK_FORWARD);
+            console.log(`forwarded non-content publisher mail (${route.source_id}) to the fallback inbox`);
           } catch (forwardError) {
             console.error('fallback forward failed', forwardError);
           }
