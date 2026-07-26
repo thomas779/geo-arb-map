@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Country citizenship routes compiled from a canonical D1 release plus the read-only legacy remainder.",
-    "last_updated": "2026-07-24",
+    "last_updated": "2026-07-26",
     "acquisition_modes": {
       "ancestry": "Citizenship through a parent, grandparent, wider descent rule, restoration, or documented heritage connection.",
       "naturalization": "Citizenship after residence or another qualifying domestic status.",
@@ -16,20 +16,20 @@
     },
     "counts": {
       "jurisdictions": 240,
-      "routes": 871,
+      "routes": 872,
       "by_mode": {
         "ancestry": 237,
-        "naturalization": 378,
+        "naturalization": 379,
         "birth": 231,
         "investment": 25
       },
       "by_status": {
-        "active": 856,
+        "active": 857,
         "pending_verification": 6,
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 39
+      "residence_routes": 68
     }
   },
   "jurisdictions": [
@@ -207,7 +207,17 @@
         "australia-citizenship-by-descent",
         "australia-citizenship-by-conferral",
         "australia-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "australia-biip-188-significant-investor",
+        "australia-biip-188",
+        "australia-biip-888",
+        "australia-niv-858"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "talent_skilled": "reviewed"
+      }
     },
     {
       "iso_n3": "040",
@@ -621,7 +631,16 @@
         "canada-citizenship-by-descent",
         "canada-citizenship-grant",
         "canada-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "canada-federal-immigrant-investor",
+        "canada-quebec-investor-qiip",
+        "canada-start-up-visa",
+        "canada-pnp-entrepreneur"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "132",
@@ -1298,7 +1317,15 @@
         "georgia-ordinary-naturalization",
         "georgia-citizenship-by-protected-birth",
         "georgia-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "georgia-investment-residence",
+        "georgia-real-estate-short-term-residence",
+        "georgia-permanent-residence-investment"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "270",
@@ -1489,7 +1516,13 @@
         "guatemala-citizenship-by-parent",
         "guatemala-naturalization-by-residence",
         "guatemala-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "guatemala-migrant-worker-residence"
+      ],
+      "residence_coverage": {
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "324",
@@ -1598,7 +1631,14 @@
         "hong-kong-nationality-by-descent",
         "hong-kong-naturalization",
         "hong-kong-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "hong-kong-new-cies",
+        "hong-kong-cies-original"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "348",
@@ -2616,7 +2656,17 @@
         "nz-citizenship-by-descent",
         "nz-citizenship-by-grant",
         "nz-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "nz-active-investor-plus-growth",
+        "nz-active-investor-plus-balanced",
+        "nz-investor-1-2-resident",
+        "nz-business-investor-visa",
+        "nz-entrepreneur-work-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "558",
@@ -2860,7 +2910,13 @@
         "paraguay-citizenship-by-parent",
         "paraguay-naturalization",
         "paraguay-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "paraguay-permanent-residence-solvency"
+      ],
+      "residence_coverage": {
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "604",
@@ -3347,7 +3403,16 @@
         "singapore-citizenship-after-pr",
         "singapore-citizenship-by-birth",
         "singapore-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "singapore-gip",
+        "singapore-one-pass",
+        "singapore-entrepass"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "talent_skilled": "reviewed"
+      }
     },
     {
       "iso_n3": "703",
@@ -3379,6 +3444,7 @@
       "route_ids": [
         "vietnam-citizenship-by-parent",
         "vietnam-naturalization",
+        "vietnam-naturalization-special-talent",
         "vietnam-citizenship-at-birth-by-parent",
         "vietnam-citizenship-by-marriage"
       ]
@@ -3918,7 +3984,14 @@
         "uk-citizenship-by-parent",
         "uk-naturalization-after-settlement",
         "uk-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "uk-tier-1-investor",
+        "uk-innovator-founder"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "831",
@@ -4000,7 +4073,16 @@
         "us-naturalization-after-lpr",
         "us-citizenship-by-birth",
         "us-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "us-eb5-direct-investor",
+        "us-eb5-regional-center",
+        "us-gold-card",
+        "us-e2-treaty-investor"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "850",
@@ -30107,6 +30189,42 @@
       ]
     },
     {
+      "id": "vietnam-naturalization-special-talent",
+      "country": {
+        "iso_n3": "704",
+        "name": "Vietnam"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Naturalization for special contribution or outstanding talent",
+      "summary": "Persons with special/meritorious contributions to Vietnam, or outstanding talent (science, economics, culture, arts, sports, healthcare, education), or whose naturalization benefits the State, may naturalize without the five-year residence, Vietnamese-language, or means-of-living conditions, and may keep their foreign nationality with Presidential approval.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "vietnam-naturalization-special-talent-principal",
+          "label": "Naturalization for special contribution or outstanding talent",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Law No. 79/2025/QH15 amending Art. 19 (in force 1 July 2025), implemented by Decree 191/2025/ND-CP. Waives the 5-year continuous-residence, language, and self-sufficiency conditions for this class; dual nationality permitted with Presidential approval. Discretionary (presidential)."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-25",
+      "sources": [
+        {
+          "title": "Vietnam Law on Vietnamese Nationality 2008 (English)",
+          "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html"
+        }
+      ]
+    },
+    {
       "id": "slovenia-citizenship-at-birth-by-parent",
       "country": {
         "iso_n3": "705",
@@ -35776,6 +35894,331 @@
   ],
   "residence_routes": [
     {
+      "id": "australia-biip-188",
+      "country": {
+        "iso_n3": "036",
+        "name": "Australia"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "Business Innovation and Investment Program (subclass 188, all streams) — CLOSED",
+      "summary": "The umbrella business/investor migration program (Business Innovation, Investor, Significant Investor and Entrepreneur streams) closed permanently to new applications on 31 July 2024 per the Migration Strategy. No replacement investor-specific visa was created; the Government redirected places to skilled and talent routes (National Innovation visa). Business Innovation Extension and Significant Investor Extension applications by existing subclass 188 holders remain open, as do subclass 888 permanent-stage applications.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "australia-biip-188-principal",
+          "label": "Business Innovation and Investment Program (subclass 188, all streams) — CLOSED",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "BIIP closure and refunds — Department of Home Affairs",
+          "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/biip-closure-and-refunds"
+        }
+      ]
+    },
+    {
+      "id": "australia-biip-188-significant-investor",
+      "country": {
+        "iso_n3": "036",
+        "name": "Australia"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "Significant Investor stream, Business Innovation and Investment (Provisional) visa (subclass 188) — CLOSED",
+      "summary": "Australia's 'golden visa': AUD 5 million in complying significant investments (venture capital, emerging companies, balancing investments) for a provisional visa with a pathway to permanent residence via subclass 888. Permanently closed to new applications on 31 July 2024, implementing the December 2023 Migration Strategy which found investor visas delivered poor economic value. Pipeline applications lodged before 31 July 2024 continue to be processed; Significant Investor Extension applications by existing holders are still accepted.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 5000000,
+        "currency": "AUD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 40,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "australia-biip-188-significant-investor-principal",
+          "label": "Significant Investor stream, Business Innovation and Investment (Provisional) visa (subclass 188) — CLOSED",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "BIIP closure and refunds — Department of Home Affairs",
+          "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/biip-closure-and-refunds"
+        }
+      ]
+    },
+    {
+      "id": "australia-biip-888",
+      "country": {
+        "iso_n3": "036",
+        "name": "Australia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Business Innovation and Investment (Permanent) visa (subclass 888) — pipeline only",
+      "summary": "The permanent second stage of the closed BIIP. Still granted (page live and updated 1 July 2026), but only to existing subclass 188 provisional visa holders who complete their stream requirements (e.g. Significant Investor stream holders who maintained the AUD 5m complying investment, typically ~4 years, with 40 days/year presence). Not open to any new entrant who does not already hold a subclass 188 visa, so it is not an available residence-by-investment entry route.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 5000000,
+        "currency": "AUD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 40,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          48
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "australia-biip-888-principal",
+          "label": "Business Innovation and Investment (Permanent) visa (subclass 888) — pipeline only",
+          "allocation": "discretionary",
+          "eligibility_months": 48
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Subclass 888 Business Innovation and Investment (Permanent) visa — Department of Home Affairs",
+          "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/business-innovation-and-investment-888"
+        }
+      ]
+    },
+    {
+      "id": "australia-niv-858",
+      "country": {
+        "iso_n3": "036",
+        "name": "Australia"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "National Innovation visa (subclass 858)",
+      "summary": "Australia's current top-tier talent route and the closest successor to the investor program: a direct permanent visa, by invitation only, for people with an internationally recognised record of exceptional and outstanding achievement. Home Affairs explicitly names 'innovative investors' and 'entrepreneurs' among target cohorts alongside global researchers, athletes and creatives — but it is merit-based with no passive-investment threshold. Requires an Expression of Interest, ministerial invitation (apply within 60 days), and a nominator of national reputation. Commenced 6 December 2024, replacing the Global Talent (subclass 858) visa; processed under Ministerial Direction 112.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "australia-niv-858-principal",
+          "label": "National Innovation visa (subclass 858)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Subclass 858 National Innovation visa — Department of Home Affairs",
+          "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/national-innovation-visa-858"
+        }
+      ]
+    },
+    {
+      "id": "canada-federal-immigrant-investor",
+      "country": {
+        "iso_n3": "124",
+        "name": "Canada"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "Federal Immigrant Investor Program (terminated)",
+      "summary": "Canada's federal passive-investment PR route (CAD 800,000 government loan) was terminated by the Economic Action Plan 2014 Act; the application backlog was cancelled by operation of law and no federal investor program has existed since.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "canada-federal-immigrant-investor-principal",
+          "label": "Federal Immigrant Investor Program (terminated)",
+          "allocation": "quota_queue",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Notice - Termination of the backlog of applications in the federal Immigrant Investor Program and federal Entrepreneur Program (IRCC)",
+          "url": "https://www.canada.ca/en/immigration-refugees-citizenship/news/notices/notice-termination-backlog-applications-federal-immigrant-investor-program-federal-entrepreneur-program.html"
+        }
+      ]
+    },
+    {
+      "id": "canada-pnp-entrepreneur",
+      "country": {
+        "iso_n3": "124",
+        "name": "Canada"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Provincial Nominee Program - entrepreneur streams (representative)",
+      "summary": "Most provinces run entrepreneur streams under the Provincial Nominee Program: candidates invest in and actively manage a local business, typically arriving on a work permit and receiving provincial nomination for PR after meeting business performance conditions. With the federal Start-up Visa paused, these are Canada's main active entrepreneur routes in 2026.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "canada-pnp-entrepreneur-principal",
+          "label": "Provincial Nominee Program - entrepreneur streams (representative)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Provincial Nominee Program (IRCC)",
+          "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/provincial-nominees.html"
+        }
+      ]
+    },
+    {
+      "id": "canada-quebec-investor-qiip",
+      "country": {
+        "iso_n3": "124",
+        "name": "Canada"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Quebec Investor Program (QIIP, relaunched 2024)",
+      "summary": "Quebec's passive-investment selection program, suspended in 2019 and relaunched January 1, 2024 with new terms: CAD 2M lawful net worth, a CAD 1M five-year interest-free guaranteed investment with IQ Immigrants Investisseurs plus a CAD 200,000 non-refundable contribution, oral French at level 7, and a two-step path (work permit, then 12 months in Quebec before permanent selection/CSQ leading to federal PR).",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1200000,
+        "currency": "CAD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 183,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "canada-quebec-investor-qiip-principal",
+          "label": "Quebec Investor Program (QIIP, relaunched 2024)",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Conditions for immigrating to Quebec as an investor (MIFI)",
+          "url": "https://www.quebec.ca/en/immigration/permanent/immigrate-business/investors/conditions"
+        }
+      ]
+    },
+    {
+      "id": "canada-start-up-visa",
+      "country": {
+        "iso_n3": "124",
+        "name": "Canada"
+      },
+      "category": "investment",
+      "status": "inactive",
+      "title": "Start-up Visa Program (paused December 2025)",
+      "summary": "Federal PR program for founders backed by a designated Canadian VC (CAD 200k), angel group (CAD 75k) or incubator (no capital). IRCC stopped accepting new applications at 11:59 p.m. December 31, 2025; only holders of a valid 2025 commitment certificate could apply, by June 30, 2026 - a deadline that has now passed. A new, more selective entrepreneur pilot was announced for 2026.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "canada-start-up-visa-principal",
+          "label": "Start-up Visa Program (paused December 2025)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Start-up Visa Program (IRCC); see also Update on Immigration Measures for Entrepreneurs, Dec 2025",
+          "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa.html"
+        }
+      ]
+    },
+    {
       "id": "costa-rica-inversionista",
       "country": {
         "iso_n3": "188",
@@ -35811,7 +36254,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Costa Rica — Dirección General de Migración",
@@ -35855,7 +36298,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Costa Rica — Dirección General de Migración",
@@ -35899,7 +36342,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Costa Rica — Dirección General de Migración",
@@ -35941,11 +36384,139 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Estonia Digital Nomad Visa — e-Residency",
           "url": "https://www.e-resident.gov.ee/nomadvisa/"
+        }
+      ]
+    },
+    {
+      "id": "georgia-investment-residence",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investment Residence Permit",
+      "summary": "5-year temporary residence permit for an alien and family members who has made an investment in Georgia of at least USD 300,000 equivalent in GEL under the Law on Investment Activity Promotion and Guarantees, or who owns immovable property (except agricultural land) with market value exceeding USD 300,000 equivalent in GEL. Business-investment route carries annual turnover milestones (USD 50,000 yr 1, USD 100,000 yr 2, USD 120,000 yrs 3-5) that gate conversion to the unlimited permit.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 300000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "georgia-investment-residence-principal",
+          "label": "Investment Residence Permit",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
+          "url": "https://matsne.gov.ge/en/document/view/2278806"
+        }
+      ]
+    },
+    {
+      "id": "georgia-permanent-residence-investment",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Unlimited (Permanent) Residence Permit via Investment",
+      "summary": "Indefinite residence permit for an alien and family members who held an investment residence permit and either (a) proved annual turnover of at least USD 50,000 (yr 1), USD 100,000 (yr 2) and USD 120,000 (yrs 3-5) equivalent in GEL from the USD 300,000+ investment, or (b) maintained ownership of immovable property with market value over USD 300,000 equivalent in GEL for 5 years after the investment permit was issued.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 300000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "georgia-permanent-residence-investment-principal",
+          "label": "Unlimited (Permanent) Residence Permit via Investment",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
+          "url": "https://matsne.gov.ge/en/document/view/2278806"
+        }
+      ]
+    },
+    {
+      "id": "georgia-real-estate-short-term-residence",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Short-Term Residence Permit via Real Estate (USD 150,000)",
+      "summary": "1-year renewable residence permit for an alien (plus spouse and children) holding property rights to immovable property in Georgia (except agricultural land) with market value exceeding USD 150,000 equivalent in GEL, valued by a certified assessor accredited by the Georgian Accreditation Centre. Renewable annually for as long as ownership is maintained; multiple properties may be combined.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 150000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "georgia-real-estate-short-term-residence-principal",
+          "label": "Short-Term Residence Permit via Real Estate (USD 150,000)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
+          "url": "https://matsne.gov.ge/en/document/view/2278806"
         }
       ]
     },
@@ -35983,7 +36554,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Greece Ministry of Migration",
@@ -36025,7 +36596,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Greece Ministry of Migration",
@@ -36069,11 +36640,133 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Greek Ministry of Migration — Golden Visa",
           "url": "https://migration.gov.gr/en/golden-visa/"
+        }
+      ]
+    },
+    {
+      "id": "guatemala-migrant-worker-residence",
+      "country": {
+        "iso_n3": "320",
+        "name": "Guatemala"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Migrant-worker residence (employer, foreign-employer, or self-employed)",
+      "summary": "Residence for migrant workers under three modalities: employment with a Guatemalan employer, employment with a foreign employer not established in Guatemala, or self-employment (por cuenta propia).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "guatemala-migrant-worker-residence-principal",
+          "label": "Migrant-worker residence (employer, foreign-employer, or self-employed)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Guatemala — IGM, Reglamento de Residencias (Acuerdo IGM-016-2025)",
+          "url": "https://igm.gob.gt/informacion-residencias-permanentes/"
+        }
+      ]
+    },
+    {
+      "id": "hong-kong-cies-original",
+      "country": {
+        "iso_n3": "344",
+        "name": "Hong Kong"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "Capital Investment Entrant Scheme (original CIES)",
+      "summary": "The original CIES (HKD 10M in permissible financial assets; real estate excluded from 2010) has been suspended since 15 January 2015 and accepts no new applications. It was superseded by the New CIES launched 1 March 2024.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "hong-kong-cies-original-principal",
+          "label": "Capital Investment Entrant Scheme (original CIES)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Capital Investment Entrant Scheme (suspended) — Immigration Department",
+          "url": "https://www.immd.gov.hk/eng/services/visas/capital_investment_entrant_scheme.html"
+        }
+      ]
+    },
+    {
+      "id": "hong-kong-new-cies",
+      "country": {
+        "iso_n3": "344",
+        "name": "Hong Kong"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "New Capital Investment Entrant Scheme (New CIES)",
+      "summary": "Launched 1 March 2024. Requires net assets of at least HKD 30M and investment of HKD 30M: at least HKD 27M in permissible financial assets and/or real estate, plus HKD 3M placed into the CIES Investment Portfolio (supporting innovation/technology and strategic industries). Initial stay 24 months, extendable in blocks of up to 3 years while the investment is maintained. Enhancements: from 16 Oct 2024 residential property allowed (single property priced >= HKD 50M, real estate capped at HKD 10M toward the threshold); from 1 Mar 2025 assets may be held via a wholly-owned private company / FIHV-FSPE structure; from 17 Sep 2025 (2025 Policy Address) the residential price floor was lowered to HKD 30M per property and the aggregate real-estate cap raised to HKD 15M (residential sub-cap HKD 10M); from 1 Mar 2026 an eligible private holding company incorporated less than six months ago may be used, with FIHV substance rules (>= 2 full-time HK employees, >= HKD 2M annual operating expenditure, managed by an eligible single family office with aggregate NAV >= HKD 240M).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 30000000,
+        "currency": "HKD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "hong-kong-new-cies-principal",
+          "label": "New Capital Investment Entrant Scheme (New CIES)",
+          "allocation": "discretionary",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "New CIES — Investment Requirement (InvestHK official portal)",
+          "url": "https://www.newcies.gov.hk/en/application-procedures/application-to-investhk/investment-requirement/"
         }
       ]
     },
@@ -36111,7 +36804,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Hungary Guest Investor Programme — OIF",
@@ -36155,7 +36848,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Investor Visa for Italy — MISE",
@@ -36199,7 +36892,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Latvia — Office of Citizenship and Migration Affairs",
@@ -36241,7 +36934,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Malaysia DE Rantau — MDEC",
@@ -36283,7 +36976,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Malaysia MM2H — official programme",
@@ -36327,7 +37020,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Malta Permanent Residence Programme — Residency Malta",
@@ -36369,7 +37062,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Malta Nomad Residence Permit — Residency Malta",
@@ -36413,7 +37106,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Mauritius EDB — Residency",
@@ -36457,7 +37150,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Mauritius EDB — Retired Non-Citizen",
@@ -36501,7 +37194,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Mexico — Instituto Nacional de Migración",
@@ -36545,7 +37238,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Mexico — Instituto Nacional de Migración",
@@ -36589,11 +37282,229 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Netherlands — IND self-employed residence",
           "url": "https://www.ind.nl/en/residence-permits/work/residence-permit-self-employed-person"
+        }
+      ]
+    },
+    {
+      "id": "nz-active-investor-plus-balanced",
+      "country": {
+        "iso_n3": "554",
+        "name": "New Zealand"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Active Investor Plus Visa — Balanced category",
+      "summary": "Resident visa for investors placing at least NZD 10 million into mixed/lower-risk 'Balanced' acceptable investments (including bonds, listed equities, and qualifying property: new residential developments that add housing stock, or new/value-adding commercial-industrial developments) for a minimum 60-month investment period. Permanent residence available after 5 years once investment conditions are met.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 10000000,
+        "currency": "NZD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 105,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nz-active-investor-plus-balanced-principal",
+          "label": "Active Investor Plus Visa — Balanced category",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Immigration New Zealand — Active Investor Plus Visa",
+          "url": "https://www.immigration.govt.nz/visas/active-investor-plus-visa/"
+        }
+      ]
+    },
+    {
+      "id": "nz-active-investor-plus-growth",
+      "country": {
+        "iso_n3": "554",
+        "name": "New Zealand"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Active Investor Plus Visa — Growth category",
+      "summary": "Resident visa for investors placing at least NZD 5 million into higher-risk 'Growth' acceptable investments (managed funds, direct investments in NZ businesses; from 1 June 2026 philanthropy capped at 20% of total investment) for a minimum 36-month investment period. Live, work and study in New Zealand indefinitely; permanent residence available after 3 years once investment conditions are met.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 5000000,
+        "currency": "NZD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 21,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nz-active-investor-plus-growth-principal",
+          "label": "Active Investor Plus Visa — Growth category",
+          "allocation": "right",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Immigration New Zealand — Active Investor Plus Visa",
+          "url": "https://www.immigration.govt.nz/visas/active-investor-plus-visa/"
+        }
+      ]
+    },
+    {
+      "id": "nz-business-investor-visa",
+      "country": {
+        "iso_n3": "554",
+        "name": "New Zealand"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Business Investor Work Visa (work-to-residence)",
+      "summary": "New two-stage business-investment pathway that replaced the Entrepreneur category. Invest at least NZD 1 million in an established NZ business employing at least 5 full-time-equivalent staff for a 3-year pathway to the Business Investor Resident Visa, or NZD 2 million+ for a 12-month fast-track to residence. Work visa granted for up to 4 years; opened for applications 24 November 2025.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "NZD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nz-business-investor-visa-principal",
+          "label": "Business Investor Work Visa (work-to-residence)",
+          "allocation": "right",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Business Investor Visa offers new immigration options for investors — Immigration New Zealand",
+          "url": "https://www.immigration.govt.nz/about-us/news-centre/business-investor-visa-offers-new-immigration-options-for-investors/"
+        }
+      ]
+    },
+    {
+      "id": "nz-entrepreneur-work-residence",
+      "country": {
+        "iso_n3": "554",
+        "name": "New Zealand"
+      },
+      "category": "investment",
+      "status": "inactive",
+      "title": "Entrepreneur Work Visa / Entrepreneur Resident Visa (closed to new applicants)",
+      "summary": "Former self-employment pathway: NZD 100,000 minimum capital, business plan and 120 points for a work visa of up to 3 years, leading to the Entrepreneur Resident Visa (after 2 years self-employment, or 6 months with NZD 500,000 invested and 3 new jobs created). Closed to new Entrepreneur Work Visa applications from 27 August 2025, replaced by the Business Investor Visa; existing holders can still renew and apply for the Entrepreneur Resident Visa.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 100000,
+        "currency": "NZD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "nz-entrepreneur-work-residence-principal",
+          "label": "Entrepreneur Work Visa / Entrepreneur Resident Visa (closed to new applicants)",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Entrepreneur Work Visa — Immigration New Zealand",
+          "url": "https://www.immigration.govt.nz/visas/entrepreneur-work-visa/"
+        }
+      ]
+    },
+    {
+      "id": "nz-investor-1-2-resident",
+      "country": {
+        "iso_n3": "554",
+        "name": "New Zealand"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "Investor 1 and Investor 2 Resident Visas (closed)",
+      "summary": "Legacy investor residence categories: Investor 1 (NZD 10 million for 3 years) and Investor 2 (NZD 3 million for 4 years, points-based with cap). Closed to new applications on 27 July 2022 and replaced by the Active Investor Plus Visa from 19 September 2022.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 3000000,
+        "currency": "NZD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nz-investor-1-2-resident-principal",
+          "label": "Investor 1 and Investor 2 Resident Visas (closed)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Investor 1 Resident Visa — Immigration New Zealand",
+          "url": "https://www.immigration.govt.nz/visas/investor-1-resident-visa/"
         }
       ]
     },
@@ -36633,7 +37544,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Panama — Servicio Nacional de Migración",
@@ -36677,7 +37588,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Panama — Servicio Nacional de Migración",
@@ -36721,11 +37632,50 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Panama — Servicio Nacional de Migración",
           "url": "https://www.migracion.gob.pa/permisos-migratorios/"
+        }
+      ]
+    },
+    {
+      "id": "paraguay-permanent-residence-solvency",
+      "country": {
+        "iso_n3": "600",
+        "name": "Paraguay"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Permanent residence by economic solvency",
+      "summary": "Definitive (permanent) residence for foreigners who prove lawful means of living through one of twelve economic-solvency profiles.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "paraguay-permanent-residence-solvency-principal",
+          "label": "Permanent residence by economic solvency",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Paraguay — Dirección Nacional de Migraciones (Res. DNM 407/2026)",
+          "url": "https://migraciones.gov.py/migraciones-actualiza-el-regimen-de-acreditacion-de-solvencia-economica-para-extranjeros/"
         }
       ]
     },
@@ -36768,7 +37718,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Philippine Retirement Authority — SRRV",
@@ -36812,7 +37762,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Portugal visas portal (MNE) — D8",
@@ -36856,7 +37806,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Portugal visas portal (MNE) — D8",
@@ -36900,11 +37850,131 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "AIMA — Autorização de Residência para Atividade de Investimento",
           "url": "https://aima.gov.pt/"
+        }
+      ]
+    },
+    {
+      "id": "singapore-entrepass",
+      "country": {
+        "iso_n3": "702",
+        "name": "Singapore"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "EntrePass (Entrepreneur Pass)",
+      "summary": "MOM/EDB pass for foreign entrepreneurs, innovators and investors starting a venture-backed or innovative-technology business in Singapore. No fixed personal capital minimum; applicant must register an ACRA private limited company (min 30% shareholding) and meet at least one qualifying criterion such as raising at least SGD 100,000 from recognised investors, backing by a recognised incubator/accelerator, a prior venture-backed exit, registered IP, or an R&D collaboration with a Singapore institution.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "singapore-entrepass-principal",
+          "label": "EntrePass (Entrepreneur Pass)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "MOM — Eligibility for EntrePass",
+          "url": "https://www.mom.gov.sg/passes-and-permits/entrepass/eligibility"
+        }
+      ]
+    },
+    {
+      "id": "singapore-gip",
+      "country": {
+        "iso_n3": "702",
+        "name": "Singapore"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Global Investor Programme (GIP)",
+      "summary": "EDB-administered programme granting Singapore Permanent Residence directly to established business owners, next-generation family-business leaders, founders of fast-growth companies, and family office principals who commit substantial capital under one of three investment options.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 10000000,
+        "currency": "SGD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "singapore-gip-principal",
+          "label": "Global Investor Programme (GIP)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "EDB Global Investor Programme Factsheet (updated 5 May 2025)",
+          "url": "https://www.edb.gov.sg/content/dam/edb-en/how-we-help/global-investor-programme/GIP%20Factsheet.pdf"
+        }
+      ]
+    },
+    {
+      "id": "singapore-one-pass",
+      "country": {
+        "iso_n3": "702",
+        "name": "Singapore"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Overseas Networks & Expertise (ONE) Pass",
+      "summary": "MOM's 5-year personalised pass for top talent across business, arts, sports, academia and research. No investment requirement; qualification is via a fixed monthly salary of at least SGD 30,000 (over the 12 months before application, or committed by a Singapore employer meeting size tests) or via outstanding achievements. Holders may concurrently work for multiple employers or run a business.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "singapore-one-pass-principal",
+          "label": "Overseas Networks & Expertise (ONE) Pass",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "MOM — Eligibility for Overseas Networks & Expertise Pass",
+          "url": "https://www.mom.gov.sg/passes-and-permits/overseas-networks-expertise-pass/eligibility"
         }
       ]
     },
@@ -36944,7 +38014,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "South Africa — Department of Home Affairs",
@@ -36988,7 +38058,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "South Africa — Department of Home Affairs",
@@ -37032,7 +38102,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Spain — Ministerio de Inclusión (extranjería)",
@@ -37076,7 +38146,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Spain — Ministerio de Inclusión (extranjería)",
@@ -37118,7 +38188,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Thailand LTR Visa — BOI",
@@ -37160,7 +38230,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Thailand LTR Visa — BOI",
@@ -37202,7 +38272,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Thailand LTR Visa — BOI",
@@ -37244,7 +38314,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "UAE Government — Golden Visa",
@@ -37283,7 +38353,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "UAE Government — Golden Visa",
@@ -37325,7 +38395,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "UAE residence visas — u.ae",
@@ -37367,11 +38437,256 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "UAE residence visas — u.ae",
           "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas"
+        }
+      ]
+    },
+    {
+      "id": "uk-innovator-founder",
+      "country": {
+        "iso_n3": "826",
+        "name": "United Kingdom"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Innovator Founder visa",
+      "summary": "The UK's current entrepreneur route: residence for founders of an innovative, viable and scalable new business, endorsed by a Home Office-approved endorsing body. No fixed minimum investment — applicants need 'sufficient funds' as assessed at endorsement. 3-year grants, extendable indefinitely; settlement (ILR) possible after 3 years. Leads to citizenship via ILR.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "uk-innovator-founder-principal",
+          "label": "Innovator Founder visa",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Innovator Founder visa - GOV.UK",
+          "url": "https://www.gov.uk/innovator-founder-visa"
+        }
+      ]
+    },
+    {
+      "id": "uk-tier-1-investor",
+      "country": {
+        "iso_n3": "826",
+        "name": "United Kingdom"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "Tier 1 (Investor) visa",
+      "summary": "The UK's former golden-visa route (GBP 2m+ passive investment) was closed to new applicants with immediate effect at 16:00 on 17 February 2022 over illicit-finance and hostile-state-actor concerns. Transitional cohort only: extension applications had to be made before 17 February 2026 (window now closed), and settlement (ILR) applications must be made before 17 February 2028. No successor investor route had been launched as of July 2026.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "uk-tier-1-investor-principal",
+          "label": "Tier 1 (Investor) visa",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "Statement of changes to the Immigration Rules: CP 632, 17 February 2022",
+          "url": "https://www.gov.uk/government/publications/statement-of-changes-to-the-immigration-rules-cp-632-17-february-2022"
+        }
+      ]
+    },
+    {
+      "id": "us-e2-treaty-investor",
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "E-2 Treaty Investor (nonimmigrant)",
+      "summary": "Nonimmigrant status for nationals of treaty countries who invest a substantial amount of capital in, and develop and direct, a bona fide US enterprise. Granted in periods of up to two years with unlimited extensions, but it is not an immigrant category and provides no path to permanent residence.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "us-e2-treaty-investor-principal",
+          "label": "E-2 Treaty Investor (nonimmigrant)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "USCIS - E-2 Treaty Investors",
+          "url": "https://www.uscis.gov/working-in-the-united-states/temporary-workers/e-2-treaty-investors"
+        }
+      ]
+    },
+    {
+      "id": "us-eb5-direct-investor",
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "EB-5 Immigrant Investor (Standalone/Direct)",
+      "summary": "Employment-based fifth-preference immigrant visa for investors who invest at least USD 1,050,000 (USD 800,000 in a Targeted Employment Area) in a new commercial enterprise creating 10 full-time US jobs. Grants conditional permanent residence, with conditions removed after two years via Form I-829.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1050000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "us-eb5-direct-investor-principal",
+          "label": "EB-5 Immigrant Investor (Standalone/Direct)",
+          "allocation": "quota_queue",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "USCIS - About the EB-5 Visa Classification",
+          "url": "https://www.uscis.gov/working-in-the-united-states/permanent-workers/employment-based-immigration-fifth-preference-eb-5/about-the-eb-5-visa-classification"
+        }
+      ]
+    },
+    {
+      "id": "us-eb5-regional-center",
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "EB-5 Regional Center Program (TEA USD 800,000)",
+      "summary": "Variant of the EB-5 visa for investment through USCIS-designated regional centers, where up to 90% of the 10-job requirement may be met with indirect jobs. Most regional-center projects are structured in Targeted Employment Areas at the USD 800,000 threshold.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 800000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "us-eb5-regional-center-principal",
+          "label": "EB-5 Regional Center Program (TEA USD 800,000)",
+          "allocation": "quota_queue",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "USCIS - About the EB-5 Visa Classification",
+          "url": "https://www.uscis.gov/working-in-the-united-states/permanent-workers/employment-based-immigration-fifth-preference-eb-5/about-the-eb-5-visa-classification"
+        }
+      ]
+    },
+    {
+      "id": "us-gold-card",
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Gold Card Program (donation-based immigrant visa)",
+      "summary": "Created by Executive Order 14351 of 19 Sep 2025, the Gold Card treats an unrestricted gift of USD 1,000,000 (individual) or USD 2,000,000 (entity-sponsored) to the US Department of Commerce as evidence supporting EB-1 extraordinary-ability or EB-2 national-interest-waiver immigrant classification. Petitions are filed on Form I-140G after registration on trumpcard.gov.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "us-gold-card-principal",
+          "label": "Gold Card Program (donation-based immigrant visa)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-26",
+      "sources": [
+        {
+          "title": "USCIS - Form I-140G, Immigrant Petition for the Gold Card Program",
+          "url": "https://www.uscis.gov/i-140g"
         }
       ]
     },
@@ -37406,7 +38721,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Uruguay — Dirección Nacional de Migración",
@@ -37448,7 +38763,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-24",
+      "last_checked": "2026-07-26",
       "sources": [
         {
           "title": "Uzbekistan — Presidential Decree PF-67 (lex.uz)",
