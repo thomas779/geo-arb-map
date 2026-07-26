@@ -51,7 +51,7 @@ import {
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
-import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, NewsPostStore, runNews } from '../monitor/publish/news';
+import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, verifyPrimarySource, NewsPostStore, runNews } from '../monitor/publish/news';
 import {
   CitationStore,
   discoverFeed,
@@ -415,7 +415,7 @@ describe('AI sweep + grounded verify', () => {
     const finding: Finding = {
       iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
       primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
-      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', legal_instrument: '', citations: [], search_queries: ['q'],
+      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', original_quote: 'Malta ended its CBI programme.', legal_instrument: '', citations: [], search_queries: ['q'],
     };
     const lead = findingToLead(finding);
     expect(lead?.impact_type).toBe('cost_or_investment_threshold');
@@ -501,7 +501,7 @@ describe('AI sweep + grounded verify', () => {
     const finding: Finding = {
       iso_n3: '470', jurisdiction: 'Malta', claim: 'CBI closed', headline: 'Malta ends golden passports', status: 'confirmed',
       primary_urls: ['https://komunita.gov.mt/x'], effective_date: '2025-07-23', affects_dataset: true,
-      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', legal_instrument: '', citations: [], search_queries: [],
+      category: 'investment', brief: 'Malta ended CBI.', evidence_quote: 'Malta ended its CBI programme.', original_quote: 'Malta ended its CBI programme.', legal_instrument: '', citations: [], search_queries: [],
     };
     const post = buildNewsPost(finding);
     expect(post.text).toContain('🇲🇹 <b>Malta ends golden passports</b>');
@@ -526,7 +526,7 @@ describe('AI sweep + grounded verify', () => {
       iso_n3: '620', jurisdiction: 'Portugal', claim: 'Portugal raised naturalization to 10 years',
       headline: 'h', status: 'confirmed', primary_urls: ['https://dre.pt'], effective_date: '2026-05-19',
       affects_dataset: true, category: 'naturalization', brief: 'b', evidence_quote: 'e',
-      legal_instrument: 'Lei Orgânica 1/2026', citations: [], search_queries: [],
+      original_quote: 'e', legal_instrument: 'Lei Orgânica 1/2026', citations: [], search_queries: [],
     };
     expect(changeKey(base)).toBe('620|1/2026');
     // Same law, different outlet wording AND a wobbled date/category → same fingerprint.
@@ -546,7 +546,7 @@ describe('AI sweep + grounded verify', () => {
     const f: Finding = {
       iso_n3: '620', jurisdiction: 'Portugal', claim: 'Portugal raised naturalization to 10 years', headline: 'h',
       status: 'confirmed', primary_urls: ['https://dre.pt'], effective_date: '2026-05-19', affects_dataset: true,
-      category: 'naturalization', brief: 'b', evidence_quote: 'e', legal_instrument: '', citations: [], search_queries: [],
+      category: 'naturalization', brief: 'b', evidence_quote: 'e', original_quote: 'e', legal_instrument: '', citations: [], search_queries: [],
     };
     const now = new Date('2026-07-25T00:00:00Z');
     store.record(fingerprint(f), f, 17, '2026-07-24T00:00:00Z');
@@ -555,6 +555,24 @@ describe('AI sweep + grounded verify', () => {
     expect(store.hasRecentChange('124', 'naturalization', 120, now)).toBe(false);  // different jurisdiction
     expect(store.hasRecentChange('620', 'naturalization', 0, now)).toBe(false);     // outside the window
     store.close();
+  });
+
+  test('verifyPrimarySource gates auto-publish on authoritative host + reachable + quote-on-page', async () => {
+    const allowed = new Set(['dre.pt']);
+    const page = '<html><body><p>Lei Orgânica n.º 1/2026 fixa um prazo de dez anos de residência legal para a naturalização.</p></body></html>';
+    const ok = (async () => new Response(page, { status: 200 })) as unknown as typeof fetch;
+    const notFound = (async () => new Response('not found', { status: 404 })) as unknown as typeof fetch;
+    const quote = 'prazo de dez anos de residência legal';
+    // authoritative (allowlisted) host + quote present → passes
+    expect((await verifyPrimarySource('https://dre.pt/lei/1-2026', quote, allowed, ok)).ok).toBe(true);
+    // gov-ish host passes even without an allowlist entry
+    expect((await verifyPrimarySource('https://presidencia.gob.py/x', quote, new Set(), ok)).ok).toBe(true);
+    // non-authoritative host → blocked
+    expect((await verifyPrimarySource('https://randomblog.com/x', quote, allowed, ok)).ok).toBe(false);
+    // quote absent (hallucination / degraded-to-root URL) → blocked
+    expect((await verifyPrimarySource('https://dre.pt/x', 'a fabricated passage that is nowhere on the page', allowed, ok)).ok).toBe(false);
+    // unreachable/404 → blocked
+    expect((await verifyPrimarySource('https://dre.pt/x', quote, allowed, notFound)).ok).toBe(false);
   });
 
   test('runNews refuses --apply without a dedup ledger (would otherwise repost every run)', async () => {
@@ -584,7 +602,7 @@ describe('discovery citation mining', () => {
   const finding = (iso: string, status: string, uris: string[]): Finding => ({
     iso_n3: iso, jurisdiction: 'X', claim: 'c', headline: 'h', status: status as Finding['status'],
     primary_urls: uris, effective_date: null, affects_dataset: false, category: 'residency',
-    brief: 'b', evidence_quote: 'e', legal_instrument: '', citations: uris.map(u => cite(u, 'sample')), search_queries: [],
+    brief: 'b', evidence_quote: 'e', original_quote: 'e', legal_instrument: '', citations: uris.map(u => cite(u, 'sample')), search_queries: [],
   });
 
   test('url helpers classify host, social account, and government sources', () => {

@@ -45,6 +45,10 @@ export interface Finding {
   category: string;
   brief: string;
   evidence_quote: string;
+  // The same passage as evidence_quote but verbatim in the source's ORIGINAL
+  // language — used to verify the finding against the live page before auto-
+  // publishing (a translated quote can't be string-matched against the source).
+  original_quote: string;
   // The official identifier of the law/decree/act (e.g. "1/2026", "PF-67",
   // "20.446"), when the change enacts one. This is the STABLE identity of the
   // event: outlets reword the claim and wobble the effective_date, but the
@@ -280,6 +284,7 @@ Return ONLY a JSON array (no prose, no code fences). Return [] if nothing new. E
 "headline":"a clean 6-12 word news headline that NAMES the country and states the change, readable in a phone notification (e.g. 'Georgia raises residency property threshold to 150,000 dollars'); do not start with the ISO code and do not repeat the country name twice",
 "brief":"1-2 tight sentences a subscriber wants to read: what changed, why it matters, and one concrete number, date, or detail",
 "evidence_quote":"a short verbatim passage (max 200 chars) quoted from the primary source that directly supports the claim's key figure(s) and effective date; translate to English if the source is in another language, keeping it faithful",
+"original_quote":"the SAME passage as evidence_quote, verbatim in the source's ORIGINAL language (do NOT translate); if the source is already in English, repeat it. Must appear word-for-word on the primary_url page — it is used to verify the change before publishing",
 "legal_instrument":"the SHORT official identifier of the law/decree/act this change enacts — its number and year only, e.g. '1/2026', 'PF-67', '20.446'; empty string if the change cites no specific instrument"}
 Voice for headline and brief: plain, confident, and specific; lead with the change or the number; no clickbait,
 no hype, no exclamation marks, and never legal advice. Put ONLY official/primary URLs in primary_urls — never
@@ -331,6 +336,7 @@ export function normalizeFindings(
       category: normalizeCategory(item.category),
       brief: String(item.brief ?? claim).trim().replace(/\s+/g, ' ').slice(0, 500),
       evidence_quote: String(item.evidence_quote ?? '').trim().replace(/\s+/g, ' ').slice(0, 300),
+      original_quote: String(item.original_quote ?? item.evidence_quote ?? '').trim().replace(/\s+/g, ' ').slice(0, 300),
       legal_instrument: String(item.legal_instrument ?? '').trim().replace(/\s+/g, ' ').slice(0, 60),
       citations: grounded.citations,
       search_queries: grounded.searchQueries,
