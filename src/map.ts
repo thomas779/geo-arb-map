@@ -420,10 +420,14 @@ function showTooltip(e: MouseEvent, name: string, iso: string): void {
   _tooltip.style.display = 'block';
   _tooltip.style.left = (e.offsetX + 14) + 'px';
   _tooltip.style.top = (e.offsetY + 14) + 'px';
+  // Escape: `name` comes from the (CDN-fetched) world-atlas and bloc names from
+  // data — never inject them raw into innerHTML.
+  const esc = (value: string) => value
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   _tooltip.innerHTML =
-    `<div>${name}</div>` +
+    `<div>${esc(name)}</div>` +
     (lines.length
-      ? `<div class="tt-blocs">${lines.join(' · ')}</div>`
+      ? `<div class="tt-blocs">${lines.map(esc).join(' · ')}</div>`
       : `<div class="tt-blocs">No bloc membership mapped</div>`);
 }
 

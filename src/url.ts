@@ -54,9 +54,9 @@ export function readProfile(params = new URLSearchParams(window.location.search)
 /** Route is the pathname: / = atlas, /planner = planner, /country = country list. */
 export function viewFromPath(pathname = window.location.pathname): AppState['view'] {
   if (pathname === '/planner' || pathname.startsWith('/planner/')) return 'stacking';
-  if (pathname === '/country' || pathname.startsWith('/country')) return 'countries';
-  if (pathname === '/rights' || pathname.startsWith('/rights')) return 'rights';
-  if (pathname === '/route' || pathname.startsWith('/route')) return 'route';
+  if (pathname === '/country' || pathname.startsWith('/country/')) return 'countries';
+  if (pathname === '/rights' || pathname.startsWith('/rights/')) return 'rights';
+  if (pathname === '/route' || pathname.startsWith('/route/')) return 'route';
   return 'map';
 }
 

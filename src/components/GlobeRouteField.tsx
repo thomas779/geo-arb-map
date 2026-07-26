@@ -22,6 +22,12 @@ function loadAtlasFeatures(): Promise<AtlasFeature[]> {
       .then(world => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return (topojson.feature(world, world.objects.countries) as any).features as AtlasFeature[];
+      })
+      .catch(error => {
+        // Reset the cache so a later mount can retry — otherwise one network
+        // blip leaves the same rejected promise, blanking the globe all session.
+        atlasFeaturesPromise = null;
+        throw error;
       });
   }
   return atlasFeaturesPromise;
