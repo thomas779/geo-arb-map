@@ -74,6 +74,14 @@ export function splitStatements(sql: string): string[] {
   let inStr = false;
   for (let i = 0; i < sql.length; i++) {
     const c = sql[i];
+    // Skip `-- ...` line comments when not inside a string literal, so a comment
+    // containing a quote or semicolon can't throw off the split.
+    if (!inStr && c === '-' && sql[i + 1] === '-') {
+      const nl = sql.indexOf('\n', i);
+      if (nl === -1) break;
+      i = nl;
+      continue;
+    }
     buf += c;
     if (inStr) {
       if (c === "'") {
@@ -93,21 +101,33 @@ export function splitStatements(sql: string): string[] {
   return out;
 }
 
-async function runBatched(statements: string[], label: string, batchSize = 100): Promise<void> {
+// Batch by BYTE size (not statement count) so a cluster of large payload inserts
+// can't overflow D1's request limit, with exponential backoff + per-attempt
+// logging (a silent 3x immediate retry hid the real failure).
+async function runBatched(statements: string[], label: string, maxBytes = 500_000): Promise<void> {
   let done = 0;
-  for (let i = 0; i < statements.length; i += batchSize) {
-    const chunk = statements.slice(i, i + batchSize);
+  let index = 0;
+  while (index < statements.length) {
+    const chunk: string[] = [];
+    let bytes = 0;
+    while (index < statements.length && (chunk.length === 0 || bytes + statements[index].length + 1 <= maxBytes)) {
+      chunk.push(statements[index]);
+      bytes += statements[index].length + 1;
+      index += 1;
+    }
     const sql = chunk.map(s => (s.endsWith(';') ? s : `${s};`)).join('\n');
     for (let attempt = 1; ; attempt++) {
       try { await query(sql); break; }
       catch (error) {
-        if (attempt >= 3) throw new Error(`${label} batch @${i} failed: ${error}`);
+        const message = error instanceof Error ? error.message : String(error);
+        if (attempt >= 4) throw new Error(`${label} batch @${done} (${chunk.length} stmts, ${bytes}B) failed after ${attempt} attempts: ${message}`);
+        const wait = 500 * 2 ** (attempt - 1);
+        console.warn(`${label} batch @${done} attempt ${attempt} failed, retrying in ${wait}ms: ${message}`);
+        await new Promise(resolve => setTimeout(resolve, wait));
       }
     }
     done += chunk.length;
-    if (done % 1000 < batchSize || done === statements.length) {
-      console.log(`${label}: ${done}/${statements.length}`);
-    }
+    console.log(`${label}: ${done}/${statements.length}`);
   }
 }
 
@@ -171,6 +191,7 @@ async function verify(): Promise<void> {
   console.log('OK: every entity resolves to exactly one head');
 }
 
+if (import.meta.main) {
 const [cmd, arg] = process.argv.slice(2);
 const stamp = new Date().toISOString().replace(/[:.]/g, '').replace(/-/g, '');
 
@@ -191,13 +212,21 @@ if (cmd === 'verify') {
   const statements = splitStatements(sql);
   console.log(`  ${statements.length} statements`);
   console.log('== 3. wipe canonical tables (monitor_* untouched) ==');
-  await runBatched(CANONICAL_TABLES_WIPE_ORDER.map(t => `DELETE FROM ${t};`), 'wipe');
-  console.log('== 4. import ==');
-  await runBatched(statements, 'import');
+  try {
+    await runBatched(CANONICAL_TABLES_WIPE_ORDER.map(t => `DELETE FROM ${t};`), 'wipe');
+    console.log('== 4. import ==');
+    await runBatched(statements, 'import');
+  } catch (error) {
+    console.error('\n!! sync FAILED mid-write — remote canonical tables may be PARTIAL.');
+    console.error('   Recover: re-run `bun run data:sync -- sync` (imports are idempotent upserts and converge),');
+    console.error(`   or restore from the pre-wipe backup at ${backupDir}`);
+    throw error;
+  }
   console.log('== 5. verify ==');
   await verify();
   console.log(`sync complete. backup kept at ${backupDir}`);
 } else {
   console.log('Usage: bun run data:sync -- <verify|backup [dir]|sync>');
   process.exit(1);
+}
 }

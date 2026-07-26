@@ -834,7 +834,7 @@ function projectResidenceRoute(
       ...(variant.timeline.note ? { note: variant.timeline.note } : {}),
     })),
     confidence: route.review.confidence,
-    last_checked: route.review.last_checked ?? '2026-07-21',
+    last_checked: route.review.last_checked ?? '',
     sources: residenceRouteSources(route, sourceIndex),
   };
 }
@@ -970,7 +970,7 @@ function projectFrontendCitizenship(
           ...(variant.timeline.note ? { note: variant.timeline.note } : {}),
         })),
         confidence: route.review.confidence,
-        last_checked: route.review.last_checked ?? '2026-07-21',
+        last_checked: route.review.last_checked ?? '',
         sources: canonicalRouteSources(route, sourceIndex, []),
       });
     }
