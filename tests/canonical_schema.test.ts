@@ -775,6 +775,7 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('canonical data schemas', () => {
       'venezuela-citizenship-by-birth',
       'vietnam-citizenship-by-parent',
       'vietnam-naturalization',
+      'vietnam-naturalization-special-talent',
       'vietnam-citizenship-at-birth-by-parent',
       'vietnam-citizenship-by-marriage',
       'yemen-citizenship-by-parent',

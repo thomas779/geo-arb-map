@@ -1223,6 +1223,7 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build parity gates', () => {
       'vietnam-citizenship-by-marriage',
       'vietnam-citizenship-by-parent',
       'vietnam-naturalization',
+      'vietnam-naturalization-special-talent',
       'wallis-and-futuna-citizenship-at-birth',
       'wallis-and-futuna-nationality-by-descent',
       'wallis-and-futuna-naturalization',
