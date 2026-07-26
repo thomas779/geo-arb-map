@@ -13,12 +13,19 @@ describe('public SEO contract', () => {
     expect(index).toContain('<meta name="twitter:card" content="summary_large_image">');
   });
 
-  test('publishes parseable WebSite and WebApplication structured data', () => {
+  test('publishes parseable WebSite, WebApplication, and Organization structured data', () => {
     const match = index.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
     expect(match).not.toBeNull();
-    const schema = JSON.parse(match![1]) as { '@graph': Array<{ '@type': string; url: string }> };
-    expect(schema['@graph'].map(node => node['@type'])).toEqual(['WebSite', 'WebApplication']);
+    const schema = JSON.parse(match![1]) as {
+      '@graph': Array<{ '@type': string; url: string; license?: string; sameAs?: string[] }>;
+    };
+    expect(schema['@graph'].map(node => node['@type'])).toEqual(['WebSite', 'WebApplication', 'Organization']);
     expect(schema['@graph'].every(node => node.url === canonicalUrl)).toBe(true);
+    // The declared license must match the repo's actual LICENSE (AGPL-3.0).
+    const app = schema['@graph'].find(node => node['@type'] === 'WebApplication');
+    expect(app?.license).toBe('https://www.gnu.org/licenses/agpl-3.0.html');
+    const org = schema['@graph'].find(node => node['@type'] === 'Organization');
+    expect(org?.sameAs).toContain('https://t.me/flagpaths');
   });
 
   test('exposes stable crawl and app-discovery files', () => {
