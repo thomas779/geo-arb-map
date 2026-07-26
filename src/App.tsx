@@ -77,6 +77,7 @@ export default function App() {
   const [dataRelease, setDataRelease] = useState<DataReleaseMeta | null>(null);
   const [infoSection, setInfoSection] = useState<TrustSection | null>(() => url.readInfo());
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [detailPanelOpen, setDetailPanelOpen] = useState(Boolean(initialState.country));
   // Open on load when a shared/deep-linked selection is present (there's no
   // separate "open panel" affordance now — selection and panel are one).
@@ -138,9 +139,17 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    fetch(import.meta.env.BASE_URL + 'blocs_data.json')
-      .then(res => res.json())
-      .then((d: BlocsData) => {
+    // A missing JSON is served as index.html (HTTP 200) by the SPA fallback, so
+    // check status + content-type — otherwise a failed data upload silently
+    // renders a blank-but-plausible atlas instead of surfacing an error.
+    const fetchJson = async <T,>(file: string): Promise<T> => {
+      const res = await fetch(import.meta.env.BASE_URL + file);
+      const type = res.headers.get('content-type') ?? '';
+      if (!res.ok || !type.includes('json')) throw new Error(`${file}: ${res.status} (${type || 'no content-type'})`);
+      return res.json() as Promise<T>;
+    };
+    fetchJson<BlocsData>('blocs_data.json')
+      .then((d) => {
         setData(d);
         setProfile(p => ({
           ...p,
@@ -153,15 +162,13 @@ export default function App() {
           }),
         }));
       })
-      .catch(err => console.error('Failed to load blocs_data.json:', err));
-    fetch(import.meta.env.BASE_URL + 'citizenship_routes.json')
-      .then(res => res.json())
-      .then((routes: CitizenshipRoutesData) => setCitizenshipRoutes(routes))
-      .catch(err => console.error('Failed to load citizenship_routes.json:', err));
-    fetch(import.meta.env.BASE_URL + 'data_release.json')
-      .then(res => res.json())
-      .then((release: DataReleaseMeta) => setDataRelease(release))
-      .catch(err => console.error('Failed to load data_release.json:', err));
+      .catch(err => { console.error('Failed to load blocs_data.json:', err); setLoadError(true); });
+    fetchJson<CitizenshipRoutesData>('citizenship_routes.json')
+      .then((routes) => setCitizenshipRoutes(routes))
+      .catch(err => { console.error('Failed to load citizenship_routes.json:', err); setLoadError(true); });
+    fetchJson<DataReleaseMeta>('data_release.json')
+      .then((release) => setDataRelease(release))
+      .catch(err => { console.error('Failed to load data_release.json:', err); setLoadError(true); });
   }, []);
 
   useEffect(() => {
@@ -233,6 +240,12 @@ export default function App() {
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
+      {loadError && (
+        <div role="alert" className="bg-amber-100 px-4 py-2 text-center text-sm text-amber-900">
+          Some map data failed to load.{' '}
+          <button type="button" onClick={() => window.location.reload()} className="underline">Reload</button>
+        </div>
+      )}
       <SiteHeader
         active={
           state.view === 'stacking' ? 'planner'
