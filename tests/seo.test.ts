@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 
-const canonicalUrl = 'https://atlas.thomphreys.com/';
+const canonicalUrl = 'https://flagpaths.com/';
 const index = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 
 describe('public SEO contract', () => {

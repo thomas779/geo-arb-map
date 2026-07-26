@@ -8,7 +8,11 @@ and for licensing see the repo `README.md`.
 ## Architecture at a glance
 
 - **Web app** — a Vite build served as static assets from a Cloudflare Worker
-  (`flag-paths-web`) at `atlas.thomphreys.com`. Config: `wrangler.web.jsonc`.
+  (`flag-paths-web`) at `flagpaths.com`. Config: `wrangler.web.jsonc`.
+- **Legacy redirect** — a tiny Worker (`flag-paths-redirect`) 301s
+  `www.flagpaths.com` and the old `atlas.thomphreys.com` to the apex,
+  preserving paths. Config: `scripts/redirect-worker/wrangler.jsonc`
+  (deployed manually: `bunx wrangler deploy -c scripts/redirect-worker/wrangler.jsonc`).
 - **Email intake** — a separate Worker (`flag-paths-newsletter-intake`) that
   turns allow-listed inbound newsletters into GitHub `repository_dispatch`
   events. Config: `monitor/cloudflare/wrangler.jsonc`.
@@ -44,10 +48,12 @@ There are **two** tokens, deliberately minimal and distinct:
 
 **1. `flag-paths-web build`** — used by Workers Builds to deploy the site.
 - Account → **Workers Scripts: Edit**
-- Zone (`thomphreys.com`) → **Workers Routes: Edit** + **Zone: Read**
+- Zone (`flagpaths.com`) → **Workers Routes: Edit** + **Zone: Read**
+- Zone (`thomphreys.com`) → **Workers Routes: Edit** + **Zone: Read** (legacy
+  `atlas.thomphreys.com` 301-redirect route, `scripts/redirect-worker/`)
 - Account Settings: Read · User Details: Read · Memberships: Read
 - (Cloudflare's "Edit Cloudflare Workers" template, scoped to this account +
-  the `thomphreys.com` zone.)
+  both zones.)
 
 **2. `CLOUDFLARE_API_TOKEN`** (GitHub Actions secret) — used by
 `monitor.yml`, `backup-d1.yml`, `sync-canonical-d1.yml`.

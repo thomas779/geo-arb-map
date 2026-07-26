@@ -89,7 +89,7 @@ bun run monitor:draft
 
 ## Deployment
 
-The public site is deployed to [atlas.thomphreys.com](https://atlas.thomphreys.com/)
+The public site is deployed to [flagpaths.com](https://flagpaths.com/)
 as a Cloudflare Worker with static assets. Cloudflare is the sole production
 host:
 

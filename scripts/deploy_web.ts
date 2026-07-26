@@ -6,7 +6,7 @@ const wranglerEntry = fileURLToPath(
   new URL('../node_modules/wrangler/bin/wrangler.js', import.meta.url),
 );
 const distIndex = fileURLToPath(new URL('../dist/index.html', import.meta.url));
-const productionUrl = 'https://atlas.thomphreys.com/';
+const productionUrl = 'https://flagpaths.com/';
 
 async function findNode(): Promise<string | null> {
   const systemNode = Bun.which('node');
