@@ -12,6 +12,11 @@
   <meta name="theme-color" content="#EFEDE7" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#191A18" media="(prefers-color-scheme: dark)">
 
+  <!-- No-flash theme boot. Identical to the prerendered pages' script — its
+       sha256 is allow-listed in public/_headers (script-src); keep all three
+       in sync (scripts/build_country_pages.ts THEME_BOOT_JS is the source). -->
+  <script>try{if(localStorage.getItem('geo-arb-theme')!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>
+
   <link rel="canonical" href="https://flagpaths.com/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any">
   <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48">

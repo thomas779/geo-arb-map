@@ -42,8 +42,13 @@ const FONT_LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com">'
   + '<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">';
 
 // No-flash theme: match the app (default dark unless the user chose light).
-const THEME_SCRIPT = "<script>try{if(localStorage.getItem('geo-arb-theme')!=='light')"
-  + "document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}</script>";
+// Exported so tests can pin its CSP sha256 allowance in public/_headers —
+// `script-src 'self'` blocks inline scripts, and a silently-blocked theme boot
+// left every prerendered page stuck in light mode. If you edit this script you
+// MUST update the hash in public/_headers (the seo test recomputes it).
+export const THEME_BOOT_JS = "try{if(localStorage.getItem('geo-arb-theme')!=='light')"
+  + "document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}";
+const THEME_SCRIPT = `<script>${THEME_BOOT_JS}</script>`;
 
 function esc(value: string): string {
   return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -65,14 +70,20 @@ function appCssHref(distDir: string): string {
 // Shared footer for every prerendered page: gives crawlers a path to /about/
 // (and readers a path to corrections) from all static pages, and keeps the
 // informational-only stance visible site-wide.
-const FOOTER_HTML = '<footer class="mx-auto max-w-[1060px] px-4 pb-8 sm:px-6">'
-  + '<div class="border-t pt-4 font-mono text-xs text-muted-foreground">'
-  + '<nav class="flex flex-wrap gap-x-4 gap-y-1">'
-  + '<a href="/about/" class="underline underline-offset-2 hover:text-foreground">About &amp; methodology</a>'
-  + '<a href="https://github.com/thomas779/geo-arb-map" rel="noreferrer" class="underline underline-offset-2 hover:text-foreground">GitHub</a>'
-  + '<a href="https://t.me/flagpaths" rel="noreferrer" class="underline underline-offset-2 hover:text-foreground">Telegram updates</a>'
-  + '</nav>'
-  + '<p class="mt-2">Informational only — not legal advice. Verify with an immigration lawyer in the specific country before acting.</p>'
+const FOOTER_HTML = '<footer class="mt-16 border-t">'
+  + '<div class="mx-auto max-w-[1060px] px-4 py-6 sm:px-6">'
+  + '<div class="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between">'
+  + '<span class="font-heading text-base font-bold">Flag Paths</span>'
+  + '<nav class="flex flex-wrap gap-x-5 gap-y-1.5 font-mono text-xs text-muted-foreground">'
+  + '<a href="/about/" class="hover:text-foreground">About &amp; methodology</a>'
+  + '<a href="/country/" class="hover:text-foreground">Countries</a>'
+  + '<a href="/rights/" class="hover:text-foreground">Regional systems</a>'
+  + '<a href="/route/" class="hover:text-foreground">Heritage routes</a>'
+  + '<a href="https://github.com/thomas779/geo-arb-map" rel="noreferrer" class="hover:text-foreground">GitHub</a>'
+  + '<a href="https://t.me/flagpaths" rel="noreferrer" class="hover:text-foreground">Telegram</a>'
+  + '</nav></div>'
+  + '<p class="mt-4 max-w-[640px] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">'
+  + 'Informational only — not legal advice. Rules change constantly; verify with an immigration lawyer in the specific country before acting.</p>'
   + '</div></footer>';
 
 function htmlDoc(opts: {
@@ -306,39 +317,83 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   const residenceCount = (citizenship.residence_routes ?? []).length;
   const fullyReviewed = citizenship.jurisdictions.filter(j =>
     Object.values(j.coverage).every(state => state === 'reviewed')).length;
-  const section = (title: string) =>
-    `<h2 class="mb-3 border-t pt-5 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">${title}</h2>`;
+  const link = (href: string, label: string) =>
+    `<a href="${href}" rel="noreferrer" class="underline underline-offset-2 decoration-muted-foreground/50 hover:decoration-foreground">${label}</a>`;
+  const stat = (value: string, label: string) =>
+    `<div class="rounded-lg border bg-card p-4"><div class="font-heading text-3xl font-bold leading-none">${value}</div>`
+    + `<div class="mt-2 font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">${label}</div></div>`;
+  const step = (n: string, title: string, text: string) =>
+    `<div class="rounded-lg border bg-card p-4"><div class="flex items-baseline gap-2">`
+    + `<span class="font-mono text-sm font-semibold text-primary">${n}</span>`
+    + `<h3 class="font-heading text-lg font-semibold leading-tight">${title}</h3></div>`
+    + `<p class="mt-2 text-sm text-muted-foreground">${text}</p></div>`;
+  const sectionHead = (title: string, lede: string) =>
+    `<h2 class="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">${title}</h2>`
+    + `<p class="mt-2 max-w-[640px] text-sm text-muted-foreground">${lede}</p>`;
+  const confidenceChips =
+    `<span class="rounded-full bg-verified/15 px-2 py-0.5 font-mono text-[0.66rem] text-verified">high</span>`
+    + `<span class="rounded-full bg-secondary px-2 py-0.5 font-mono text-[0.66rem]">medium</span>`
+    + `<span class="rounded-full border px-2 py-0.5 font-mono text-[0.66rem] text-muted-foreground">low</span>`;
   const aboutBody = renderToStaticMarkup(createElement(SiteHeader, { active: 'none' }))
-    + `<main class="mx-auto max-w-[760px] px-4 py-8 sm:px-6">
-<h1 class="font-heading text-3xl font-bold leading-tight">About Flag Paths</h1>
-<p class="mt-3 text-muted-foreground">Flag Paths is an open atlas of citizenship, residence, and mobility rules.
-Some passports and residencies quietly unlock whole regions: Mercosur residency opens most of South America,
-and an Irish grandparent is a two-year paper trail away from the entire EU. This site maps those windows —
-${isos.length} countries and territories, ${routeCount} citizenship routes, and ${residenceCount} residence
-programmes, each with visible sources and review state.</p>
-${section('How the data is built')}
-<p class="text-sm text-muted-foreground">Every route cites its sources and carries a <em>last checked</em> date and a
-confidence label (<span class="font-mono text-xs">high / medium / low</span>). Jurisdiction coverage is explicit per
-mode (ancestry, naturalization, birth, investment): <span class="font-mono text-xs">reviewed</span> means a person has
-checked the route set against primary sources; <span class="font-mono text-xs">unchecked</span> never means no route
-exists — a negative conclusion must itself be reviewed and sourced. ${fullyReviewed} jurisdictions are fully reviewed
-across all four modes so far, and the number only moves forward: the test suite pins every fixed mistake so it cannot
-silently return.</p>
-${section('How changes are caught')}
-<p class="text-sm text-muted-foreground">Nationality and immigration law changes constantly. An automated monitor sweeps
-official sources — government gazettes, ministry feeds, and primary legal databases — and cross-checks anything it finds
-against the original source text before it is published. Confirmed changes are posted to the
-<a href="https://t.me/flagpaths" rel="noreferrer" class="underline underline-offset-2">Telegram channel</a>; anything
-touching the dataset becomes a review lead first — automation can propose, only human review can change a legal fact.</p>
-${section('Corrections')}
-<p class="text-sm text-muted-foreground">The data and code are open (AGPL-3.0) at
-<a href="https://github.com/thomas779/geo-arb-map" rel="noreferrer" class="underline underline-offset-2">github.com/thomas779/geo-arb-map</a>.
-If something is wrong or out of date, open an issue — corrections ship with a test so the mistake stays fixed.
-Flag Paths is built in the open by <a href="https://github.com/thomas779" rel="noreferrer" class="underline underline-offset-2">Thomas Humphreys</a>.</p>
-${section('Not legal advice')}
-<p class="text-sm text-muted-foreground">Everything here is informational only. Much of the dataset was researched with
+    + `<main class="mx-auto max-w-[1060px] px-4 py-10 sm:px-6">
+<nav class="mb-8 font-mono text-xs text-muted-foreground"><a href="/" class="underline underline-offset-2">Flag Paths</a> › About</nav>
+
+<div class="max-w-[720px]">
+<p class="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">About &amp; methodology</p>
+<h1 class="mt-3 font-heading text-4xl font-bold leading-[1.1] sm:text-5xl">An open atlas of the rules that move people.</h1>
+<p class="mt-4 text-base leading-relaxed text-muted-foreground">Some passports and residencies quietly unlock whole
+regions: Mercosur residency opens most of South America, and an Irish grandparent is a two-year paper trail away from
+the entire EU. Flag Paths maps those windows — every route with its sources and review state visible.</p>
+</div>
+
+<div class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+${stat(String(isos.length), 'countries &amp; territories')}
+${stat(String(routeCount), 'citizenship routes')}
+${stat(String(residenceCount), 'residence programmes')}
+${stat(String(fullyReviewed), 'fully reviewed')}
+</div>
+
+<section class="mt-12">
+${sectionHead('How the data is built', 'Facts carry their own provenance. Nothing on this site asks to be trusted on authority alone.')}
+<div class="mt-4 grid gap-3 sm:grid-cols-3">
+<div class="rounded-lg border bg-card p-4"><h3 class="font-heading text-lg font-semibold leading-tight">Sourced</h3>
+<p class="mt-2 text-sm text-muted-foreground">Every route cites the law, gazette, or official page it comes from, with a visible <em>last checked</em> date.</p></div>
+<div class="rounded-lg border bg-card p-4"><h3 class="font-heading text-lg font-semibold leading-tight">Graded</h3>
+<p class="mt-2 text-sm text-muted-foreground">Confidence is labeled per route, not implied:</p>
+<div class="mt-2.5 flex flex-wrap gap-1.5">${confidenceChips}</div></div>
+<div class="rounded-lg border bg-card p-4"><h3 class="font-heading text-lg font-semibold leading-tight">Honest about gaps</h3>
+<p class="mt-2 text-sm text-muted-foreground"><span class="font-mono text-xs">reviewed</span> means checked against primary sources.
+<span class="font-mono text-xs">unchecked</span> never means no route exists — a negative conclusion must itself be reviewed and sourced.</p></div>
+</div>
+<p class="mt-3 text-sm text-muted-foreground">${fullyReviewed} jurisdictions are fully reviewed across all four citizenship modes
+(ancestry, naturalization, birth, investment) — and the number only moves forward: the test suite pins every fixed mistake so it cannot silently return.</p>
+</section>
+
+<section class="mt-12">
+${sectionHead('How changes are caught', 'Nationality and immigration law changes constantly. The Atlas is wired to notice.')}
+<div class="mt-4 grid gap-3 sm:grid-cols-3">
+${step('01', 'Detect', 'An automated monitor sweeps official sources daily — government gazettes, ministry feeds, and primary legal databases.')}
+${step('02', 'Verify', 'Every finding is cross-checked against the original source text, in its original language, before anything is published.')}
+${step('03', 'Review', `Confirmed changes post to the ${link('https://t.me/flagpaths', 'Telegram channel')}. Dataset edits become review leads first — automation can propose, only human review can change a legal fact.`)}
+</div>
+</section>
+
+<section class="mt-12 grid gap-3 sm:grid-cols-2">
+<div class="rounded-lg border bg-card p-5">
+<h2 class="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Corrections</h2>
+<p class="mt-3 text-sm text-muted-foreground">The data and code are open (AGPL-3.0). If something is wrong or out of date,
+open an issue — corrections ship with a test so the mistake stays fixed. Flag Paths is built in the open by
+${link('https://github.com/thomas779', 'Thomas Humphreys')}.</p>
+<a href="https://github.com/thomas779/geo-arb-map/issues" rel="noreferrer"
+class="mt-4 inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 font-mono text-xs font-semibold hover:bg-secondary">Open an issue on GitHub →</a>
+</div>
+<div class="rounded-lg border border-dashed p-5">
+<h2 class="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Not legal advice</h2>
+<p class="mt-3 text-sm text-muted-foreground">Everything here is informational only. Much of the dataset was researched with
 AI assistance at varying, clearly-labeled confidence levels, and rules change faster than any dataset. Verify with an
 immigration lawyer in the specific country before acting on anything shown here.</p>
+</div>
+</section>
 </main>`;
   fs.mkdirSync(path.join(distDir, 'about'), { recursive: true });
   fs.writeFileSync(path.join(distDir, 'about', 'index.html'), htmlDoc({
