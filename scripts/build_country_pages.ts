@@ -62,6 +62,19 @@ function appCssHref(distDir: string): string {
   return `/${match[0]}`;
 }
 
+// Shared footer for every prerendered page: gives crawlers a path to /about/
+// (and readers a path to corrections) from all static pages, and keeps the
+// informational-only stance visible site-wide.
+const FOOTER_HTML = '<footer class="mx-auto max-w-[1060px] px-4 pb-8 sm:px-6">'
+  + '<div class="border-t pt-4 font-mono text-xs text-muted-foreground">'
+  + '<nav class="flex flex-wrap gap-x-4 gap-y-1">'
+  + '<a href="/about/" class="underline underline-offset-2 hover:text-foreground">About &amp; methodology</a>'
+  + '<a href="https://github.com/thomas779/geo-arb-map" rel="noreferrer" class="underline underline-offset-2 hover:text-foreground">GitHub</a>'
+  + '<a href="https://t.me/flagpaths" rel="noreferrer" class="underline underline-offset-2 hover:text-foreground">Telegram updates</a>'
+  + '</nav>'
+  + '<p class="mt-2">Informational only — not legal advice. Verify with an immigration lawyer in the specific country before acting.</p>'
+  + '</div></footer>';
+
 function htmlDoc(opts: {
   title: string;
   description: string;
@@ -85,7 +98,7 @@ ${FONT_LINKS}
 <link rel="stylesheet" href="${opts.cssHref}">
 ${opts.headExtra}
 </head>
-<body class="bg-background text-foreground font-sans antialiased">${opts.bodyHtml}</body></html>
+<body class="bg-background text-foreground font-sans antialiased">${opts.bodyHtml}${FOOTER_HTML}</body></html>
 `;
 }
 
@@ -284,8 +297,75 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     bodyHtml: routeHub,
   }));
 
+  // ── About & methodology (/about) ──
+  // The trust page: what the Atlas is, how the data is researched and reviewed,
+  // and how to correct it. Coverage/route counts are computed from the live
+  // dataset at build time so they can never go stale.
+  const aboutUrl = `${SITE}/about/`;
+  const routeCount = citizenship.routes.length;
+  const residenceCount = (citizenship.residence_routes ?? []).length;
+  const fullyReviewed = citizenship.jurisdictions.filter(j =>
+    Object.values(j.coverage).every(state => state === 'reviewed')).length;
+  const section = (title: string) =>
+    `<h2 class="mb-3 border-t pt-5 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">${title}</h2>`;
+  const aboutBody = renderToStaticMarkup(createElement(SiteHeader, { active: 'none' }))
+    + `<main class="mx-auto max-w-[760px] px-4 py-8 sm:px-6">
+<h1 class="font-heading text-3xl font-bold leading-tight">About Flag Paths</h1>
+<p class="mt-3 text-muted-foreground">Flag Paths is an open atlas of citizenship, residence, and mobility rules.
+Some passports and residencies quietly unlock whole regions: Mercosur residency opens most of South America,
+and an Irish grandparent is a two-year paper trail away from the entire EU. This site maps those windows —
+${isos.length} countries and territories, ${routeCount} citizenship routes, and ${residenceCount} residence
+programmes, each with visible sources and review state.</p>
+${section('How the data is built')}
+<p class="text-sm text-muted-foreground">Every route cites its sources and carries a <em>last checked</em> date and a
+confidence label (<span class="font-mono text-xs">high / medium / low</span>). Jurisdiction coverage is explicit per
+mode (ancestry, naturalization, birth, investment): <span class="font-mono text-xs">reviewed</span> means a person has
+checked the route set against primary sources; <span class="font-mono text-xs">unchecked</span> never means no route
+exists — a negative conclusion must itself be reviewed and sourced. ${fullyReviewed} jurisdictions are fully reviewed
+across all four modes so far, and the number only moves forward: the test suite pins every fixed mistake so it cannot
+silently return.</p>
+${section('How changes are caught')}
+<p class="text-sm text-muted-foreground">Nationality and immigration law changes constantly. An automated monitor sweeps
+official sources — government gazettes, ministry feeds, and primary legal databases — and cross-checks anything it finds
+against the original source text before it is published. Confirmed changes are posted to the
+<a href="https://t.me/flagpaths" rel="noreferrer" class="underline underline-offset-2">Telegram channel</a>; anything
+touching the dataset becomes a review lead first — automation can propose, only human review can change a legal fact.</p>
+${section('Corrections')}
+<p class="text-sm text-muted-foreground">The data and code are open (AGPL-3.0) at
+<a href="https://github.com/thomas779/geo-arb-map" rel="noreferrer" class="underline underline-offset-2">github.com/thomas779/geo-arb-map</a>.
+If something is wrong or out of date, open an issue — corrections ship with a test so the mistake stays fixed.
+Flag Paths is built in the open by <a href="https://github.com/thomas779" rel="noreferrer" class="underline underline-offset-2">Thomas Humphreys</a>.</p>
+${section('Not legal advice')}
+<p class="text-sm text-muted-foreground">Everything here is informational only. Much of the dataset was researched with
+AI assistance at varying, clearly-labeled confidence levels, and rules change faster than any dataset. Verify with an
+immigration lawyer in the specific country before acting on anything shown here.</p>
+</main>`;
+  fs.mkdirSync(path.join(distDir, 'about'), { recursive: true });
+  fs.writeFileSync(path.join(distDir, 'about', 'index.html'), htmlDoc({
+    title: 'About & methodology | Flag Paths',
+    description: `How Flag Paths researches, reviews, and monitors citizenship and residence rules: ${routeCount} sourced routes across ${isos.length} jurisdictions, explicit review states, and automated change monitoring.`,
+    canonical: aboutUrl,
+    cssHref,
+    headExtra: [
+      jsonLd({
+        '@context': 'https://schema.org', '@type': 'AboutPage', url: aboutUrl,
+        name: 'About & methodology — Flag Paths',
+        isPartOf: { '@id': `${SITE}/#website` },
+        about: { '@id': `${SITE}/#organization` },
+      }),
+      jsonLd({
+        '@context': 'https://schema.org', '@type': 'Organization',
+        '@id': `${SITE}/#organization`, name: 'Flag Paths', url: `${SITE}/`,
+        logo: `${SITE}/og-image.png`,
+        sameAs: ['https://github.com/thomas779/geo-arb-map', 'https://t.me/flagpaths'],
+      }),
+    ].join('\n'),
+    bodyHtml: aboutBody,
+  }));
+
   const urls = [
     `${SITE}/`,
+    `${SITE}/about/`,
     `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`),
     `${SITE}/rights/`, ...rightsUrls,
     `${SITE}/route/`, ...routeUrls,
@@ -293,7 +373,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 
-  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + sitemap -> ${distDir}`);
+  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap -> ${distDir}`);
 }
 
 if (import.meta.main) {
