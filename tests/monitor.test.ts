@@ -51,7 +51,7 @@ import {
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
-import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, verifyPrimarySource, NewsPostStore, runNews } from '../monitor/publish/news';
+import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, verifyPrimarySource, quoteOnPage, normalizeText, corroboratedByCitations, NewsPostStore, runNews } from '../monitor/publish/news';
 import {
   CitationStore,
   discoverFeed,
@@ -557,22 +557,52 @@ describe('AI sweep + grounded verify', () => {
     store.close();
   });
 
-  test('verifyPrimarySource gates auto-publish on authoritative host + reachable + quote-on-page', async () => {
+  test('verifyPrimarySource returns a tri-state verdict (verified / refuted / inconclusive)', async () => {
     const allowed = new Set(['dre.pt']);
-    const page = '<html><body><p>Lei Orgânica n.º 1/2026 fixa um prazo de dez anos de residência legal para a naturalização.</p></body></html>';
-    const ok = (async () => new Response(page, { status: 200 })) as unknown as typeof fetch;
-    const notFound = (async () => new Response('not found', { status: 404 })) as unknown as typeof fetch;
     const quote = 'prazo de dez anos de residência legal';
-    // authoritative (allowlisted) host + quote present → passes
-    expect((await verifyPrimarySource('https://dre.pt/lei/1-2026', quote, allowed, ok)).ok).toBe(true);
-    // gov-ish host passes even without an allowlist entry
-    expect((await verifyPrimarySource('https://presidencia.gob.py/x', quote, new Set(), ok)).ok).toBe(true);
-    // non-authoritative host → blocked
-    expect((await verifyPrimarySource('https://randomblog.com/x', quote, allowed, ok)).ok).toBe(false);
-    // quote absent (hallucination / degraded-to-root URL) → blocked
-    expect((await verifyPrimarySource('https://dre.pt/x', 'a fabricated passage that is nowhere on the page', allowed, ok)).ok).toBe(false);
-    // unreachable/404 → blocked
-    expect((await verifyPrimarySource('https://dre.pt/x', quote, allowed, notFound)).ok).toBe(false);
+    // A realistic, text-rich gov page (>1500 readable chars) so a MISSING quote is
+    // genuine negative evidence (refuted) rather than an unscannable shell.
+    const filler = 'A presente lei orgânica procede à alteração do regime jurídico da nacionalidade portuguesa e estabelece novas regras aplicáveis aos processos de naturalização. '.repeat(12);
+    const page = `<html><body><h1>Lei Orgânica 1/2026</h1><p>${filler}</p><p>fixa um prazo de dez anos de residência legal para a naturalização.</p></body></html>`;
+    const respond = (body: string, init?: ResponseInit) => (async () => new Response(body, init)) as unknown as typeof fetch;
+    const ok = respond(page, { status: 200 });
+
+    // authoritative (allowlisted) host + quote present → verified
+    expect((await verifyPrimarySource('https://dre.pt/lei/1-2026', quote, allowed, ok)).verdict).toBe('verified');
+    // gov-ish host verifies without an explicit allowlist entry
+    expect((await verifyPrimarySource('https://presidencia.gob.py/x', quote, new Set(), ok)).verdict).toBe('verified');
+    // entity-encoded accent on the page still matches a plain-text quote (the
+    // #90/#96 silence bug: punctuation/entity/accent differences must not block)
+    const entityPage = `<html><body><p>${filler}</p><p>fixa um prazo de dez anos de resid&#234;ncia legal para todos.</p></body></html>`;
+    expect((await verifyPrimarySource('https://dre.pt/x', quote, allowed, respond(entityPage, { status: 200 }))).verdict).toBe('verified');
+    // non-authoritative host → refuted
+    expect((await verifyPrimarySource('https://randomblog.com/x', quote, allowed, ok)).verdict).toBe('refuted');
+    // readable page that lacks the quote → refuted (real negative evidence)
+    expect((await verifyPrimarySource('https://dre.pt/x', 'uma passagem fabricada que nao existe em lado nenhum desta pagina legivel', allowed, ok)).verdict).toBe('refuted');
+    // unreachable / 404 → INCONCLUSIVE (absence of access is not refutation)
+    expect((await verifyPrimarySource('https://dre.pt/x', quote, allowed, respond('nope', { status: 404 }))).verdict).toBe('inconclusive');
+    // PDF source → inconclusive (text not machine-checkable here)
+    expect((await verifyPrimarySource('https://dre.pt/x.pdf', quote, allowed, respond('%PDF-1.7 …', { status: 200, headers: { 'content-type': 'application/pdf' } }))).verdict).toBe('inconclusive');
+    // JS-only shell (quote absent, little readable text) → inconclusive
+    expect((await verifyPrimarySource('https://dre.pt/x', quote, allowed, respond('<html><body><div id="root"></div></body></html>', { status: 200 }))).verdict).toBe('inconclusive');
+  });
+
+  test('quoteOnPage matches robustly and handles CJK (unsegmented script)', () => {
+    const page = normalizeText('<p>Lei Orgânica n.º 1/2026 fixa um prazo de dez anos de residência legal.</p>');
+    expect(quoteOnPage(page, normalizeText('prazo de dez anos de residência legal'))).toBe(true);
+    expect(quoteOnPage(page, normalizeText('prazo de cinco anos de residência temporária concedido'))).toBe(false);
+    // CJK: no word spaces → character-substring fallback
+    const cjkPage = normalizeText('<p>国务院决定将投资移民最低金额提高到二百万美元自二零二六年七月起施行。</p>');
+    expect(quoteOnPage(cjkPage, normalizeText('投资移民最低金额提高到二百万美元'))).toBe(true);
+    expect(quoteOnPage(cjkPage, normalizeText('投资移民最低金额降低到十万美元人民币'))).toBe(false);
+  });
+
+  test('corroboratedByCitations confirms host present among resolved grounding citations', async () => {
+    const fetcher = (async () => new Response('', { status: 200 })) as unknown as typeof fetch;
+    const citations = [{ uri: 'https://www.dre.pt/artigo/123' }, { uri: 'https://noticias.example/x' }];
+    expect(await corroboratedByCitations('dre.pt', citations, fetcher)).toBe(true);   // suffix match www.dre.pt
+    expect(await corroboratedByCitations('boe.es', citations, fetcher)).toBe(false);
+    expect(await corroboratedByCitations('', citations, fetcher)).toBe(false);
   });
 
   test('runNews refuses --apply without a dedup ledger (would otherwise repost every run)', async () => {

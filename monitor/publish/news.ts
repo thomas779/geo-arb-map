@@ -20,7 +20,7 @@ import {
   type TelegramPost,
 } from './telegram';
 import countries from 'i18n-iso-countries';
-import { llmConfigFromEnv } from '../llm/client';
+import { llmConfigFromEnv, resolveRedirect } from '../llm/client';
 import { changeKey, officialSourcesByJurisdiction, type Finding } from '../sweep/run';
 import { hostFromUrl, isGovish } from '../discovery/citations';
 
@@ -109,29 +109,65 @@ export async function verifySourceUrl(
 // the LLM evidence-audit can't catch: a hallucinated-but-internally-consistent
 // finding, or a fabricated/404'd deep link (which verifySourceUrl would otherwise
 // launder to a domain root). Only used on the live --apply path.
+export type SourceVerdict = { verdict: 'verified' | 'refuted' | 'inconclusive'; reason: string };
+
+// Normalise page/quote text to a comparable stream of lowercased letter/number
+// "words": drop tags + script/style, decode numeric & named entities, fold
+// accents (NFD + strip combining marks) so entity-encoded and raw accents match,
+// and reduce punctuation to spaces (curly vs straight quotes stop mattering).
+export function normalizeText(value: string): string {
+  return value
+    .replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex: string) => { try { return String.fromCodePoint(parseInt(hex, 16)); } catch { return ' '; } })
+    .replace(/&#(\d+);/g, (_, dec: string) => { try { return String.fromCodePoint(Number(dec)); } catch { return ' '; } })
+    .replace(/&[a-z]+;/gi, ' ')
+    .normalize('NFD').replace(/\p{M}+/gu, '')
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// True if any contiguous ~8-word run of the quote appears on the page (tolerant
+// of one transcription slip anywhere in the quote). For unsegmented scripts
+// (CJK — few/no spaces) fall back to a character substring. A fabricated quote
+// has no matching run.
+export function quoteOnPage(pageNorm: string, quoteNorm: string): boolean {
+  const words = quoteNorm.split(' ').filter(Boolean);
+  if (words.length < 4) {
+    const chars = quoteNorm.replace(/ /g, '');
+    return chars.length >= 12 && pageNorm.replace(/ /g, '').includes(chars.slice(0, 24));
+  }
+  const run = Math.min(8, words.length);
+  for (let i = 0; i + run <= words.length; i += 1) {
+    if (pageNorm.includes(words.slice(i, i + run).join(' '))) return true;
+  }
+  return false;
+}
+
+const nonAsciiCount = (value: string) => (value.match(/[^\u0000-\u007f]/g) ?? []).length;
+
+// Auto-publish integrity gate. Returns a tri-state verdict:
+//   verified     — authoritative host + the quoted evidence is on the page
+//   refuted      — non-authoritative host, OR a readable same-script page that
+//                  does NOT contain the quote (real negative evidence)
+//   inconclusive — could not check (unreachable/403, PDF, JS-only shell, script
+//                  mismatch, no quote). "Absence of evidence" is NOT refutation;
+//                  runNews falls back to grounding-citation corroboration.
 export async function verifyPrimarySource(
   url: string,
   originalQuote: string,
   allowedHosts: Set<string>,
   fetcher: typeof fetch = fetch,
-): Promise<{ ok: boolean; reason: string }> {
+): Promise<SourceVerdict> {
   const host = hostFromUrl(url);
-  if (!host) return { ok: false, reason: 'unparseable url' };
-  if (!isGovish(host) && !allowedHosts.has(host)) return { ok: false, reason: `non-authoritative host (${host})` };
-  // Normalise to a stream of lowercased letter/number "words", dropping tags,
-  // entities, and ALL punctuation — so a curly vs straight apostrophe, entity
-  // encoding, or spacing can't defeat the match. Keeps accented letters (\p{L})
-  // so non-English quotes still verify.
-  const normalize = (value: string) => value
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&[a-z#0-9]+;/gi, ' ')
-    .toLowerCase()
-    .replace(/[^\p{L}\p{N}]+/gu, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-  const quoteWords = normalize(originalQuote).split(' ').filter(Boolean);
-  if (quoteWords.length < 4) return { ok: false, reason: 'quote too short to verify' };
+  if (!host) return { verdict: 'refuted', reason: 'unparseable url' };
+  if (!isGovish(host) && !allowedHosts.has(host)) return { verdict: 'refuted', reason: `non-authoritative host (${host})` };
+  const quoteNorm = normalizeText(originalQuote);
+  if (quoteNorm.replace(/ /g, '').length < 12) return { verdict: 'inconclusive', reason: 'no verifiable quote' };
   let body: string;
+  let contentType = '';
   try {
     const response = await fetcher(url, {
       redirect: 'follow',
@@ -140,18 +176,57 @@ export async function verifyPrimarySource(
         'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
       },
     });
-    if (!response.ok) return { ok: false, reason: `source returned ${response.status}` };
+    contentType = response.headers.get('content-type') ?? '';
+    if (!response.ok) return { verdict: 'inconclusive', reason: `source returned ${response.status}` };
     body = await response.text();
   } catch {
-    return { ok: false, reason: 'source unreachable' };
+    return { verdict: 'inconclusive', reason: 'source unreachable' };
   }
-  // Require a contiguous run of the quote's first ~10 words to appear on the
-  // page. Robust to punctuation/whitespace/entity differences, but a fabricated
-  // quote (or a degraded-to-root URL) won't contain the passage.
-  const probe = quoteWords.slice(0, Math.min(10, quoteWords.length)).join(' ');
-  return normalize(body).includes(probe)
-    ? { ok: true, reason: 'ok' }
-    : { ok: false, reason: 'quoted evidence not found on the page' };
+  if (/application\/pdf/i.test(contentType) || body.slice(0, 5) === '%PDF-') {
+    return { verdict: 'inconclusive', reason: 'pdf source (text not machine-checkable here)' };
+  }
+  const pageNorm = normalizeText(body);
+  if (quoteOnPage(pageNorm, quoteNorm)) return { verdict: 'verified', reason: 'ok' };
+  // Only a genuinely text-heavy page makes a MISSING quote real negative evidence.
+  // Measured: a real gov.im article server-renders ~200 normalized chars, while
+  // JS-SPA gazettes (legislation.gov.au, u.ae) expose 1200-1400 chars of nav/
+  // footer boilerplate with the actual content loaded by script. A bar this high
+  // keeps those SPAs "inconclusive" (→ corroboration + never-silent) rather than
+  // hard-refuting a real change we simply couldn't scrape.
+  if (pageNorm.replace(/ /g, '').length < 1500) return { verdict: 'inconclusive', reason: 'page has little readable text (JS-rendered?)' };
+  if (nonAsciiCount(quoteNorm) >= 8 && nonAsciiCount(pageNorm) < 8) return { verdict: 'inconclusive', reason: 'page/quote script mismatch' };
+  return { verdict: 'refuted', reason: 'quoted evidence not found on a readable page' };
+}
+
+// Corroboration fallback for an INCONCLUSIVE primary source (PDF / 403 / JS-only
+// shell / script mismatch). The grounding citations are independent search hits
+// the model already used; resolve each short-lived redirect to its real host and
+// check whether the primary source's own host appears among them. If the model
+// found the same authoritative publisher independently, treat the change as
+// corroborated rather than blocking a real update we simply couldn't scrape.
+export async function corroboratedByCitations(
+  primaryHost: string,
+  citations: Array<{ uri: string }>,
+  fetcher: typeof fetch = fetch,
+): Promise<boolean> {
+  if (!primaryHost) return false;
+  const resolved = await Promise.all(
+    citations.slice(0, 10).map(citation =>
+      resolveRedirect(citation.uri, { fetcher }).then(hostFromUrl).catch(() => null)),
+  );
+  const hosts = new Set(resolved.filter((h): h is string => Boolean(h)));
+  // Match the host or a registrable-domain suffix (dre.pt vs www.dre.pt wobble).
+  return [...hosts].some(host =>
+    host === primaryHost || host.endsWith(`.${primaryHost}`) || primaryHost.endsWith(`.${host}`));
+}
+
+interface BlockedNews {
+  iso_n3: string;
+  jurisdiction: string;
+  headline: string;
+  category: string;
+  primary_urls: string[];
+  reason: string;
 }
 
 export function buildNewsPost(finding: Finding): TelegramPost {
@@ -277,7 +352,7 @@ function readArgs(argv: string[]): NewsOptions {
   return options;
 }
 
-export async function runNews(options: NewsOptions): Promise<{ published: number; skipped: number }> {
+export async function runNews(options: NewsOptions): Promise<{ published: number; skipped: number; blocked: number }> {
   const findings = JSON.parse(fs.readFileSync(options.findings, 'utf8')) as Finding[];
   const confirmed = findings.filter(finding => finding.status === 'confirmed').slice(0, options.max);
   const dedupWindowDays = Number(process.env.MONITOR_NEWS_DEDUP_WINDOW_DAYS) || 120;
@@ -292,6 +367,7 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
 
   let published = 0;
   let skipped = 0;
+  const blocked: BlockedNews[] = [];
   try {
     for (const finding of confirmed) {
       const fp = fingerprint(finding);
@@ -301,9 +377,9 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
         console.log(`skip (same ${finding.category} change for ${finding.iso_n3} within ${dedupWindowDays}d): ${finding.claim.slice(0, 60)}`);
         continue;
       }
-      // Keep the un-rewritten primary URL for the integrity gate (verifySourceUrl
+      // Keep the un-rewritten primary URLs for the integrity gate (verifySourceUrl
       // below may degrade a dead deep-link to a domain root for the display link).
-      const primaryBefore = finding.primary_urls[0] ?? '';
+      const originalPrimaries = [...finding.primary_urls];
       // Make sure the "Source" link opens; fall back to the domain root if not.
       finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
       let post: TelegramPost;
@@ -331,14 +407,41 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
         continue;
       }
       // Auto-publish integrity gate — the LLM audit checks the post against the
-      // model's own evidence; this checks it against the real primary source.
+      // model's own evidence; this checks it against the REAL primary source.
+      // Try every candidate URL and keep the strongest verdict. A "refuted"
+      // (non-authoritative host, or a readable page that lacks the quote) is real
+      // negative evidence and hard-blocks. An "inconclusive" (unreachable/403,
+      // PDF, JS-only shell, script mismatch) is NOT refutation — fall back to
+      // grounding-citation corroboration before blocking, so a genuine update on
+      // a page we simply can't scrape still gets out.
       const allowedHosts = new Set((officialHosts.get(finding.iso_n3) ?? [])
         .map(source => hostFromUrl(source.url))
         .filter((h): h is string => Boolean(h)));
-      const verdict = await verifyPrimarySource(primaryBefore, finding.original_quote, allowedHosts);
-      if (!verdict.ok) {
+      let verdict: SourceVerdict = { verdict: 'refuted', reason: 'no authoritative primary source' };
+      for (const candidate of originalPrimaries) {
+        const attempt = await verifyPrimarySource(candidate, finding.original_quote, allowedHosts);
+        if (attempt.verdict === 'verified') { verdict = attempt; break; }
+        if (attempt.verdict === 'inconclusive' && verdict.verdict === 'refuted') verdict = attempt;
+      }
+      if (verdict.verdict === 'inconclusive') {
+        const primaryHost = hostFromUrl(originalPrimaries[0] ?? '') ?? '';
+        verdict = await corroboratedByCitations(primaryHost, finding.citations)
+          ? { verdict: 'verified', reason: `quote unverifiable (${verdict.reason}); host corroborated by grounding citations` }
+          : { verdict: 'refuted', reason: `${verdict.reason}; not corroborated by grounding citations` };
+      }
+      if (verdict.verdict !== 'verified') {
         skipped += 1;
-        console.warn(`skip (source unverified — ${verdict.reason}): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`);
+        blocked.push({
+          iso_n3: finding.iso_n3,
+          jurisdiction: finding.jurisdiction,
+          headline: finding.headline || finding.claim,
+          category: finding.category,
+          primary_urls: originalPrimaries,
+          reason: verdict.reason,
+        });
+        // Never silent: a blocked update is a signal, not a no-op. Surface it as a
+        // CI annotation now and to .out/blocked-news.json below for human review.
+        console.warn(`::warning title=News blocked (${finding.jurisdiction})::${verdict.reason} — ${finding.claim.slice(0, 80)}`);
         continue;
       }
 
@@ -369,9 +472,17 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
       store.writeMutations(options.stateSql);
       store.close();
     }
+    // Never silent: write the blocked-for-review artifact on every apply run
+    // (empty array when nothing was blocked) so a suppressed update is visible.
+    if (options.apply) {
+      const blockedPath = path.join(ROOT, '.out', 'blocked-news.json');
+      fs.mkdirSync(path.dirname(blockedPath), { recursive: true });
+      fs.writeFileSync(blockedPath, `${JSON.stringify(blocked, null, 2)}\n`);
+    }
   }
+  if (blocked.length) console.warn(`${blocked.length} finding(s) blocked for review → .out/blocked-news.json`);
   console.log(`${options.apply ? 'published' : 'previewed'} ${published}, skipped ${skipped}`);
-  return { published, skipped };
+  return { published, skipped, blocked: blocked.length };
 }
 
 if (import.meta.main) {

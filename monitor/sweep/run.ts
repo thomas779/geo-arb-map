@@ -336,7 +336,11 @@ export function normalizeFindings(
       category: normalizeCategory(item.category),
       brief: String(item.brief ?? claim).trim().replace(/\s+/g, ' ').slice(0, 500),
       evidence_quote: String(item.evidence_quote ?? '').trim().replace(/\s+/g, ' ').slice(0, 300),
-      original_quote: String(item.original_quote ?? item.evidence_quote ?? '').trim().replace(/\s+/g, ' ').slice(0, 300),
+      // Original-language passage only. Do NOT fall back to evidence_quote — that
+      // is the English translation, which can't be string-matched against a
+      // non-English source page. Empty is correct: the publish gate treats a
+      // missing quote as inconclusive and corroborates via grounding citations.
+      original_quote: String(item.original_quote ?? '').trim().replace(/\s+/g, ' ').slice(0, 300),
       legal_instrument: String(item.legal_instrument ?? '').trim().replace(/\s+/g, ' ').slice(0, 60),
       citations: grounded.citations,
       search_queries: grounded.searchQueries,
