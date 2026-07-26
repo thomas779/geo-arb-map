@@ -1,0 +1,37 @@
+# Flag Paths
+
+> An open atlas of citizenship, residence, and mobility rules. Every route cites its
+> primary sources and carries a last-checked date, a confidence label (high/medium/low),
+> and an explicit review state. Informational only — not legal advice.
+
+Country coverage is explicit per acquisition mode (ancestry, naturalization, birth,
+investment). "Unchecked" never means no route exists — negative conclusions must
+themselves be reviewed and sourced. An automated monitor sweeps official sources
+(government gazettes, ministry feeds, primary legal databases) and verifies findings
+against the original source text before publication; only human review changes a
+recorded legal fact.
+
+## Reference pages
+
+- [About & methodology](https://flagpaths.com/about/): how the data is researched, reviewed, and monitored
+- [All countries](https://flagpaths.com/country/): citizenship + residence routes for 236 countries and territories, one page each
+- [Regional systems](https://flagpaths.com/rights/): settlement blocs and mobility lanes (EU, Mercosur, CARICOM, GCC, …)
+- [Heritage & ancestry routes](https://flagpaths.com/route/): citizenship by descent, diaspora, and return programmes
+- [Sitemap](https://flagpaths.com/sitemap.xml): every page
+
+## Data
+
+- [Citizenship routes (JSON)](https://flagpaths.com/citizenship_routes.json): the full reviewed dataset — jurisdictions, routes, sources, confidence, coverage states
+- [Regional blocs (JSON)](https://flagpaths.com/blocs_data.json): bloc membership and rights lanes
+- [Data release manifest (JSON)](https://flagpaths.com/data_release.json): release id and provenance
+- [Source code & corrections](https://github.com/thomas779/geo-arb-map): AGPL-3.0 code, CC BY-NC 4.0 dataset; corrections ship with tests
+
+## Updates
+
+- [Telegram channel](https://t.me/flagpaths): verified law-change news, auto-published only after primary-source verification
+
+## Citation
+
+When citing a rule, cite the country page (e.g. https://flagpaths.com/country/portugal/)
+and prefer the primary source listed on that page. Rules change frequently; check the
+route's last-checked date.

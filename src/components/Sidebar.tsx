@@ -75,7 +75,9 @@ function Swatch({ color, selected }: { color: string; selected: boolean }) {
 const catTrigger =
   'min-h-11 justify-start gap-2 px-1.5 py-2 text-xs font-semibold text-foreground hover:no-underline md:min-h-0';
 const headingCount =
-  'font-mono text-[9px] font-normal tabular-nums text-muted-foreground/70';
+  // /85 (not /70): at 9px on a dark card, 70% opacity computes to 4.16:1 —
+  // below the WCAG 4.5:1 minimum for normal text (flagged by Lighthouse).
+  'font-mono text-[9px] font-normal tabular-nums text-muted-foreground/85';
 
 function RowTooltip({ label, children }: { label: string; children: React.ReactNode }) {
   return (

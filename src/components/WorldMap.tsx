@@ -146,7 +146,7 @@ export function WorldMap({ data, state, theme, profile, onSelect, dataUpdatedAt,
               <button
                 type="button"
                 onClick={onOpenInfo}
-                aria-label={`Data updated ${dataUpdatedAt}. Open methodology.`}
+                aria-label={`updated · ${dataUpdatedAt} — open methodology`}
                 className="inline-flex items-center gap-1.5 font-mono text-[10px] text-muted-foreground hover:text-foreground"
               >
                 <span className="relative flex size-1.5" aria-hidden>
