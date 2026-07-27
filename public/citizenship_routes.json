@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 119
+      "residence_routes": 147
     }
   },
   "jurisdictions": [
@@ -268,7 +268,15 @@
         "bahamas-naturalization",
         "bahamas-citizenship-connected-to-birth",
         "bahamas-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "bahamas-permanent-residence-property",
+        "bahamas-homeowner-card",
+        "bahamas-annual-residence-permit"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "048",
@@ -345,7 +353,17 @@
         "barbados-naturalization",
         "barbados-citizenship-by-birth",
         "barbados-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "barbados-serp-hnwi",
+        "barbados-serp-property",
+        "barbados-welcome-stamp",
+        "barbados-entrepreneur-work-permit"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "056",
@@ -383,7 +401,17 @@
         "bermuda-nationality-by-descent",
         "bermuda-naturalization",
         "bermuda-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "bermuda-eirc-investment",
+        "bermuda-wfb-one-year",
+        "bermuda-retiree-residential-certificate"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "digital_nomad": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "064",
@@ -704,7 +732,16 @@
         "cayman-botc-by-descent",
         "cayman-botc-naturalization",
         "cayman-botc-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "cayman-cpr-independent-means",
+        "cayman-rc-independent-means",
+        "cayman-certificate-direct-investment",
+        "cayman-rc-substantial-business-presence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "140",
@@ -1073,7 +1110,18 @@
         "dominican-republic-naturalization",
         "dominican-republic-citizenship-by-birth",
         "dominican-republic-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "dominican-republic-investor-171-07",
+        "dominican-republic-pensionado-171-07",
+        "dominican-republic-rentista-171-07",
+        "dominican-republic-ordinary-residence-285-04"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed",
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "218",
@@ -2543,7 +2591,13 @@
         "montserrat-nationality-by-descent",
         "montserrat-naturalization",
         "montserrat-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "montserrat-economic-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "504",
@@ -2715,7 +2769,16 @@
         "sint-maarten-nationality-by-descent",
         "sint-maarten-naturalization",
         "sint-maarten-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "sint-maarten-investor-director-residence",
+        "sint-maarten-pensioner-rentier-residence",
+        "sint-maarten-no-golden-visa"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "535",
@@ -3335,7 +3398,15 @@
         "anguilla-nationality-by-descent",
         "anguilla-naturalization",
         "anguilla-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "anguilla-rbi-donation",
+        "anguilla-rbi-real-estate",
+        "anguilla-hvr-tax-residency"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "662",
@@ -4041,7 +4112,16 @@
         "turks-and-caicos-nationality-by-descent",
         "turks-and-caicos-naturalization",
         "turks-and-caicos-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "turks-and-caicos-prc-home-investment",
+        "turks-and-caicos-prc-business-investment",
+        "turks-and-caicos-residence-permit-independent-means"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "798",
@@ -36421,6 +36501,126 @@
       ]
     },
     {
+      "id": "bahamas-annual-residence-permit",
+      "country": {
+        "iso_n3": "044",
+        "name": "Bahamas"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Annual Residence Permit (Permit to Reside)",
+      "summary": "Annually renewable permit to reside for any purpose other than working — the route used by financially independent persons and second-home owners wanting actual residence status short of PR. Fee BSD 3,000/year (BSD 300 for dependents/students); no work rights.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bahamas-annual-residence-permit-principal",
+          "label": "Annual Residence Permit (Permit to Reside)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Permit to Reside — Bahamas Department of Immigration",
+          "url": "https://www.immigration.gov.bs/applying-to-stay/permit-to-reside/"
+        }
+      ]
+    },
+    {
+      "id": "bahamas-homeowner-card",
+      "country": {
+        "iso_n3": "044",
+        "name": "Bahamas"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Home Owner Identification Card (annual homeowner's resident card)",
+      "summary": "Renewable identification/residence card for non-Bahamians who own a habitable residence in The Bahamas while maintaining a primary residence abroad. No minimum property value stated; facilitates entry and extended stays; no work rights.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bahamas-homeowner-card-principal",
+          "label": "Home Owner Identification Card (annual homeowner's resident card)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Home Owner Identification — Bahamas Department of Immigration",
+          "url": "https://www.immigration.gov.bs/residence/home-owners/"
+        }
+      ]
+    },
+    {
+      "id": "bahamas-permanent-residence-property",
+      "country": {
+        "iso_n3": "044",
+        "name": "Bahamas"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Economic Permanent Residence (real estate or Central Bank zero-coupon bonds)",
+      "summary": "Lifetime Certificate of Permanent Residence for economic applicants: minimum investment of BSD 1,000,000 via real estate or Central Bank of The Bahamas zero-coupon bonds, held for a minimum of 10 years. Discretionary grant; one-time certificate fee BSD 25,000 (with own-business work rights) or BSD 20,000 (without).",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "BSD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bahamas-permanent-residence-property-principal",
+          "label": "Economic Permanent Residence (real estate or Central Bank zero-coupon bonds)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Permanent Residence — Bahamas Department of Immigration",
+          "url": "https://www.immigration.gov.bs/residence/permanent-residence/"
+        }
+      ]
+    },
+    {
       "id": "bahrain-golden-residency-property",
       "country": {
         "iso_n3": "048",
@@ -36543,6 +36743,165 @@
       ]
     },
     {
+      "id": "barbados-entrepreneur-work-permit",
+      "country": {
+        "iso_n3": "052",
+        "name": "Barbados"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Entrepreneur / investor work permit (long-term)",
+      "summary": "Barbados has no residence-by-investment programme; the investor route is the standard work-permit and immigrant-status channel: entrepreneurs establishing a business apply for a work permit (up to 3 years) with proof of investment-fund transfer per Central Bank regulations and business registration. No minimum investment amount is published.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "barbados-entrepreneur-work-permit-principal",
+          "label": "Entrepreneur / investor work permit (long-term)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Barbados Immigration Department — Work Permits",
+          "url": "https://www.immigration.gov.bb/pages/WorkPermit.aspx"
+        }
+      ]
+    },
+    {
+      "id": "barbados-serp-hnwi",
+      "country": {
+        "iso_n3": "052",
+        "name": "Barbados"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Special Entry and Reside Permit (SERP) — High-Net-Worth Individual",
+      "summary": "Renewable long-stay residence permit for high-net-worth individuals (commonly cited threshold USD 5,000,000+ in assets): Form B with proof of net worth and financial resources, Barbados-valid health insurance, police certificates. Reported as indefinite for applicants 60+ and term-limited for younger applicants.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "barbados-serp-hnwi-principal",
+          "label": "Special Entry and Reside Permit (SERP) — High-Net-Worth Individual",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Barbados Immigration Department — Special Entry Permit",
+          "url": "https://www.immigration.gov.bb/pages/SpecialEntryPermit.aspx"
+        }
+      ]
+    },
+    {
+      "id": "barbados-serp-property",
+      "country": {
+        "iso_n3": "052",
+        "name": "Barbados"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Special Entry and Reside Permit (SERP) — Property Owner",
+      "summary": "SERP route for owners of qualifying Barbados real estate (commonly cited USD 300,000+ unencumbered): title deeds and recent Land Tax bills plus proof of financial resources, health insurance and police certificates. Same age-based structure: indefinite for owners 60+, term-limited under 60.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 300000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "barbados-serp-property-principal",
+          "label": "Special Entry and Reside Permit (SERP) — Property Owner",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Barbados Immigration Department — Special Entry Permit",
+          "url": "https://www.immigration.gov.bb/pages/SpecialEntryPermit.aspx"
+        }
+      ]
+    },
+    {
+      "id": "barbados-welcome-stamp",
+      "country": {
+        "iso_n3": "052",
+        "name": "Barbados"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "12-Month Barbados Welcome Stamp (remote work visa)",
+      "summary": "12-month remote-work residence stamp (Remote Employment Act 2020) for location-independent workers with declared annual income of at least USD 50,000, working for employers/clients outside Barbados. Fees on approval: USD 2,000 individual / USD 3,000 family; renewable; holders not liable to Barbados income tax.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "barbados-welcome-stamp-principal",
+          "label": "12-Month Barbados Welcome Stamp (remote work visa)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "GIS Barbados — Barbados Welcome Stamp Statistics As Of April 30, 2024 (Cabinet renewal to Dec 31, 2026)",
+          "url": "https://gisbarbados.gov.bb/blog/barbados-welcome-stamp-statistics-as-of-april-30-2024/"
+        }
+      ]
+    },
+    {
       "id": "belgium-no-investor-programme-professional-card",
       "country": {
         "iso_n3": "056",
@@ -36578,6 +36937,126 @@
         {
           "title": "Self-employment — coming to work in Belgium — Belgium.be",
           "url": "https://www.belgium.be/en/work/coming_to_work_in_belgium/self_employment"
+        }
+      ]
+    },
+    {
+      "id": "bermuda-eirc-investment",
+      "country": {
+        "iso_n3": "060",
+        "name": "Bermuda"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Economic Investment Residential Certificate (EIRC)",
+      "summary": "BD$2.5M+ qualifying investment (real estate, Sinking Fund, Bermuda Trust Fund, registered-charity donation, equity in or launch of a Bermuda business) grants a Residential Certificate immediately on approval: indefinite right to reside and seek employment, with residence rights for spouse and children.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 2500000,
+        "currency": "BMD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bermuda-eirc-investment-principal",
+          "label": "Economic Investment Residential Certificate (EIRC)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "The Economic Investment Residential Certificate Policy (Revised June 2024), Ministry of Economy and Labour",
+          "url": "https://www.gov.bm/files/media-library/20260413/920ccb7a-the-economic-investment-residential-certificate-policy-june_2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "bermuda-retiree-residential-certificate",
+      "country": {
+        "iso_n3": "060",
+        "name": "Bermuda"
+      },
+      "category": "retirement_pension",
+      "status": "verified_negative",
+      "title": "Retiree / independent-means Residential Certificate (2003 and 2015 policies) — discontinued",
+      "summary": "Bermuda's former retiree/independent-means residence routes (2003 and 2015 Residential Certificate Policies) were expressly replaced by the EIRC Policy: no new retiree-specific route exists, and retirees must now use the BD$2.5M EIRC or successive one-year certificates.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bermuda-retiree-residential-certificate-principal",
+          "label": "Retiree / independent-means Residential Certificate (2003 and 2015 policies) — discontinued",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "The Economic Investment Residential Certificate Policy (Revised June 2024), Ministry of Economy and Labour",
+          "url": "https://www.gov.bm/files/media-library/20260413/920ccb7a-the-economic-investment-residential-certificate-policy-june_2024.pdf"
+        }
+      ]
+    },
+    {
+      "id": "bermuda-wfb-one-year",
+      "country": {
+        "iso_n3": "060",
+        "name": "Bermuda"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Work From Bermuda — One Year Residential Certificate",
+      "summary": "12-month residential certificate for remote workers employed by (or owning) a company registered overseas, and for students studying remotely. Reside in Bermuda and work remotely; no gainful local employment. Requires age 18+, clean record, health insurance, and sufficient means (no fixed threshold published).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bermuda-wfb-one-year-principal",
+          "label": "Work From Bermuda — One Year Residential Certificate",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "One Year Residential Certificate — Government of Bermuda online service",
+          "url": "https://www.gov.bm/services/one-year-residential-certificate"
         }
       ]
     },
@@ -36739,6 +37218,173 @@
         {
           "title": "Start-up Visa Program (IRCC); see also Update on Immigration Measures for Entrepreneurs, Dec 2025",
           "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa.html"
+        }
+      ]
+    },
+    {
+      "id": "cayman-certificate-direct-investment",
+      "country": {
+        "iso_n3": "136",
+        "name": "Cayman Islands"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Certificate of Direct Investment",
+      "summary": "25-year renewable residence with the right to work in the invested business, for a person who invests and maintains at least CI$1,000,000 in a licensed, employment-generating Cayman business. Minimum presence 90 days per calendar year; audited financials at required intervals.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "KYD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cayman-certificate-direct-investment-principal",
+          "label": "Certificate of Direct Investment",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "WORC Annual Declaration for Holder of a Certificate of Direct Investment (2026/05)",
+          "url": "https://my.egov.ky/documents/d/worc/af47-certificate-of-direct-investment-fillable?download=true"
+        }
+      ]
+    },
+    {
+      "id": "cayman-cpr-independent-means",
+      "country": {
+        "iso_n3": "136",
+        "name": "Cayman Islands"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Certificate of Permanent Residence for Persons of Independent Means",
+      "summary": "Permanent residence for applicants who have already invested (fully paid) at least CI$2,000,000 in developed Cayman real estate at the time of application. Under the reform effective 1 May 2026, granted for an initial 10-year period with a year-9 application for an indefinite certificate — only then may the holder pursue BOTC naturalisation and the Right to be Caymanian. May be varied to allow the right to work.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 2000000,
+        "currency": "KYD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cayman-cpr-independent-means-principal",
+          "label": "Certificate of Permanent Residence for Persons of Independent Means",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "WORC Form R42 (2026/05) — Application for Certificate of Permanent Residence, Person of Independent Means",
+          "url": "https://my.egov.ky/documents/d/worc/r42-certificate-of-permanent-residence-for-persons-of-independent-means-2026-05-001f-1-?download=true"
+        }
+      ]
+    },
+    {
+      "id": "cayman-rc-independent-means",
+      "country": {
+        "iso_n3": "136",
+        "name": "Cayman Islands"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residency Certificate for Persons of Independent Means (25-year, renewable)",
+      "summary": "Long-term residence without the right to work (now variable to grant employment rights — 2026 forms re-brand it 'Residency and Employment Rights Certificate'): local investments of CI$1,000,000 including developed real estate, plus continuous annual income of CI$120,000 (Grand Cayman) / CI$75,000 (Sister Islands) OR CI$400,000 on deposit in a local bank. Minimum presence 30 days per calendar year.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "KYD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 30,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cayman-rc-independent-means-principal",
+          "label": "Residency Certificate for Persons of Independent Means (25-year, renewable)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "WORC Form AF41 (2026/07) — Annual Declaration, Residency Certificate for Persons of Independent Means",
+          "url": "https://my.egov.ky/documents/d/worc/af41-annual-declaration-for-holder-of-a-residency-certificate-pims-2026-06-003f?download=true"
+        }
+      ]
+    },
+    {
+      "id": "cayman-rc-substantial-business-presence",
+      "country": {
+        "iso_n3": "136",
+        "name": "Cayman Islands"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residency Certificate (Substantial Business Presence)",
+      "summary": "25-year renewable residence with the right to work in the relevant business, for a person owning at least 10% of an approved-category business or employed there in senior management. Business-ownership applicants must show commercial premises and at least four full-time legally resident employees. Minimum presence 90 days per calendar year.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cayman-rc-substantial-business-presence-principal",
+          "label": "Residency Certificate (Substantial Business Presence)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "WORC Form R50 (2026/05) — Application for Residency Certificate, Substantial Business Presence",
+          "url": "https://my.egov.ky/documents/d/worc/r50-residency-certificate-substantial-business-presence-1?download=true"
         }
       ]
     },
@@ -37168,6 +37814,173 @@
         {
           "title": "Visitors and family members — Migration Department, Republic of Cyprus",
           "url": "https://www.gov.cy/mip-md/en/documents/visitors-and-family-members/"
+        }
+      ]
+    },
+    {
+      "id": "dominican-republic-investor-171-07",
+      "country": {
+        "iso_n3": "214",
+        "name": "Dominican Rep."
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residency by Investment — Law 171-07 fast track (USD 200,000)",
+      "summary": "Foreign investors with a minimum investment of USD 200,000 qualify for the special investor residency: a MIREX Residence Visa (RS 'Inversionistas Ley 171-07'), then direct admission into the permanent-residence track at the DGM (skipping the 5-year ordinary ladder). First card valid 1 year, renewable; investment evidenced by a ProDominicana/CEI-RD registration certificate (or Zonas Francas / border-development / tourism certifications).",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 200000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "dominican-republic-investor-171-07-principal",
+          "label": "Residency by Investment — Law 171-07 fast track (USD 200,000)",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "DGM — Residencia Permanente en calidad de Inversionista",
+          "url": "https://migracion.gob.do/servicio/solicitud-de-residencia-en-calidad-de-inversionista/"
+        }
+      ]
+    },
+    {
+      "id": "dominican-republic-ordinary-residence-285-04",
+      "country": {
+        "iso_n3": "214",
+        "name": "Dominican Rep."
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Ordinary residence track — Ley 285-04 (RT-9 → RP-1 → RD-1)",
+      "summary": "Baseline route for those not using the Law 171-07 fast track: MIREX RS visa, then DGM temporary residence RT-9 (1-year card, proof of economic solvency rather than a fixed amount), annual renewals toward permanent residence (RP-1), and a 10-year 'Residencia Definitiva' (RD-1) after 10+ years of continuous permanent residence.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "dominican-republic-ordinary-residence-285-04-principal",
+          "label": "Ordinary residence track — Ley 285-04 (RT-9 → RP-1 → RD-1)",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "DGM — Residencia Temporal (RT-9)",
+          "url": "https://migracion.gob.do/servicio/residencia-temporal/"
+        }
+      ]
+    },
+    {
+      "id": "dominican-republic-pensionado-171-07",
+      "country": {
+        "iso_n3": "214",
+        "name": "Dominican Rep."
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Pensionado residency — Law 171-07 (USD 1,500/month pension)",
+      "summary": "Foreign pensioners receiving a permanent monthly pension of at least USD 1,500 (plus USD 250/month per dependent; salaries excluded) qualify via a MIREX RS visa then a DGM 1-year renewable residence card, with Law 171-07 tax incentives (imports, property transfer).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "dominican-republic-pensionado-171-07-principal",
+          "label": "Pensionado residency — Law 171-07 (USD 1,500/month pension)",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "MIREX Servicios 360 — Visas (RS: Pensionados/Rentistas Ley 171-07)",
+          "url": "https://servicios360.mirex.gob.do/visas/"
+        }
+      ]
+    },
+    {
+      "id": "dominican-republic-rentista-171-07",
+      "country": {
+        "iso_n3": "214",
+        "name": "Dominican Rep."
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Rentista residency — Law 171-07 (USD 2,000/month passive income)",
+      "summary": "Foreigners with stable passive foreign-source income of at least USD 2,000/month (dividends, foreign rental contracts, or financial investments held 5+ years; plus USD 250/month per dependent; salaries excluded) qualify via a MIREX RS visa then a DGM 1-year renewable residence card, with the same Law 171-07 tax incentives.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "dominican-republic-rentista-171-07-principal",
+          "label": "Rentista residency — Law 171-07 (USD 2,000/month passive income)",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "DGM — Residencia por Inversión en calidad de Rentista",
+          "url": "https://migracion.gob.do/servicio/residencia-por-inversion-en-calidad-de-rentista/"
         }
       ]
     },
@@ -39086,6 +39899,50 @@
       ]
     },
     {
+      "id": "montserrat-economic-residence",
+      "country": {
+        "iso_n3": "500",
+        "name": "Montserrat"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Permit of Economic Residence",
+      "summary": "Economic residence permit under the Immigration (Economic Residence Permit) Regulations, S.R.O. 8/1998: intent to make a commercial investment in Montserrat, net worth over EC$400,000, and a maintained financial contribution of at least EC$400,000 (~USD 148,000) as local property, a Montserrat bank deposit, or government securities.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 400000,
+        "currency": "XCD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "montserrat-economic-residence-principal",
+          "label": "Permit of Economic Residence",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Government of Montserrat — Citizenship & Residence Information (Office of the Deputy Governor): Permit of Economic Residence, S.R.O. 8/1998",
+          "url": "https://www.gov.ms/government/ministries/non-ministerial-departments/office-of-the-deputy-governor/citizenship-residence-information/"
+        }
+      ]
+    },
+    {
       "id": "netherlands-self-employed-daft",
       "country": {
         "iso_n3": "528",
@@ -39126,6 +39983,130 @@
         {
           "title": "Netherlands — IND self-employed residence",
           "url": "https://www.ind.nl/en/residence-permits/work/residence-permit-self-employed-person"
+        }
+      ]
+    },
+    {
+      "id": "sint-maarten-investor-director-residence",
+      "country": {
+        "iso_n3": "534",
+        "name": "Sint Maarten"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residence Permit — Director / Investor (LTU)",
+      "summary": "Temporary residence permit under the LTU for directors and investors: directors need a registered company, business + director's licences and a bank balance of at least USD 20,000; investors need a local bank declaration of intent to invest at least NAf 900,000 (~USD 503,000) in business and/or real estate within 18 months. Permanent residence after 5 years' lawful residence.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 900000,
+        "currency": "ANG"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sint-maarten-investor-director-residence-principal",
+          "label": "Residence Permit — Director / Investor (LTU)",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Immigration & Border Protection Services — online application portal FAQ, Government of Sint Maarten",
+          "url": "https://ibps.sintmaartengov.org/Default/FaqsList"
+        }
+      ]
+    },
+    {
+      "id": "sint-maarten-no-golden-visa",
+      "country": {
+        "iso_n3": "534",
+        "name": "Sint Maarten"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No formal golden visa / residence-by-investment programme",
+      "summary": "Sint Maarten operates no statutory golden-visa or citizenship-by-investment programme. Investment-linked residence exists only as discretionary admission-policy categories (Director, Investor, Penshonado/Rentenier) under the general LTU framework, with thresholds set by ministerial guideline rather than a dedicated investment-migration law.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sint-maarten-no-golden-visa-principal",
+          "label": "No formal golden visa / residence-by-investment programme",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Government of Sint Maarten",
+          "url": "https://www.sintmaartengov.org/"
+        }
+      ]
+    },
+    {
+      "id": "sint-maarten-pensioner-rentier-residence",
+      "country": {
+        "iso_n3": "534",
+        "name": "Sint Maarten"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Residence Permit — Penshonado / Rentenier",
+      "summary": "Temporary residence permit for financially independent retirees (typically 60+, the local retirement age) and rentiers living off assets: income sufficiency proven via local bank statement and an accountant's declaration (rentiers: a foreign financial institution's statement of assets). No fixed statutory income threshold published. Permanent residence after 5 years.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sint-maarten-pensioner-rentier-residence-principal",
+          "label": "Residence Permit — Penshonado / Rentenier",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Immigration & Border Protection Services — online application portal FAQ, Government of Sint Maarten",
+          "url": "https://ibps.sintmaartengov.org/Default/FaqsList"
         }
       ]
     },
@@ -39778,6 +40759,136 @@
         {
           "title": "Aqarat (Real Estate Regulatory Authority) — Own real estate: privileges granted to non-Qatari ownership",
           "url": "https://www.aqarat.gov.qa/en/investors-journey/own-real-estate/"
+        }
+      ]
+    },
+    {
+      "id": "anguilla-hvr-tax-residency",
+      "country": {
+        "iso_n3": "660",
+        "name": "Anguilla"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "High Value Resident (HVR) — lump-sum tax residency",
+      "summary": "Tax-residency programme: annual lump-sum tax payment of USD 75,000 to Anguilla plus property ownership of at least USD 400,000, with a minimum 45 non-consecutive days per year in Anguilla and a declaration of spending under 183 days in any other single country.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 400000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 45,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "anguilla-hvr-tax-residency-principal",
+          "label": "High Value Resident (HVR) — lump-sum tax residency",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Select Anguilla — High Value Resident / Tax Residency (official Government of Anguilla RBI portal)",
+          "url": "https://www.selectanguilla.com/tax-residency/"
+        }
+      ]
+    },
+    {
+      "id": "anguilla-rbi-donation",
+      "country": {
+        "iso_n3": "660",
+        "name": "Anguilla"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residence by Investment — Capital Development Fund donation",
+      "summary": "Non-refundable contribution to Anguilla's Capital Development Fund of USD 150,000 for a single applicant (USD 50,000 per dependant) grants permanent residence, with no physical presence requirement. Dependants: spouse and children up to 26 in full-time education.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 150000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "anguilla-rbi-donation-principal",
+          "label": "Residence by Investment — Capital Development Fund donation",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Select Anguilla — Residence by Investment (official Government of Anguilla RBI portal)",
+          "url": "https://www.selectanguilla.com/permanent-residency/"
+        }
+      ]
+    },
+    {
+      "id": "anguilla-rbi-real-estate",
+      "country": {
+        "iso_n3": "660",
+        "name": "Anguilla"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residence by Investment — real estate (residential or business)",
+      "summary": "Purchase of residential real estate of USD 750,000+ (covers a family of 4; USD 100,000 per additional dependant) grants permanent residence, with no physical presence requirement. Alternatives at the same minimum: business premises, or mixed business & residential (business at least 50% of value).",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 750000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "anguilla-rbi-real-estate-principal",
+          "label": "Residence by Investment — real estate (residential or business)",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Select Anguilla — Residence by Investment (official Government of Anguilla RBI portal)",
+          "url": "https://www.selectanguilla.com/permanent-residency/"
         }
       ]
     },
@@ -40737,6 +41848,131 @@
         {
           "title": "UAE residence visas — u.ae",
           "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas"
+        }
+      ]
+    },
+    {
+      "id": "turks-and-caicos-prc-business-investment",
+      "country": {
+        "iso_n3": "796",
+        "name": "Turks and Caicos Islands"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Permanent Residence Certificate — Investment in a Business",
+      "summary": "PRC via Certificate of Undertaking plus business investment of at least USD 750,000 on the outer islands or USD 1,500,000 on other islands (incl. Providenciales), with at least 60% of employees being local hires. Same fee stack as the home route (PRC fee USD 25,000).",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 750000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "turks-and-caicos-prc-business-investment-principal",
+          "label": "Permanent Residence Certificate — Investment in a Business",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Permanent Residence Certificate — Department of Citizenship & Naturalization, TCI Government",
+          "url": "https://www.gov.tc/citizenship/services/prc"
+        }
+      ]
+    },
+    {
+      "id": "turks-and-caicos-prc-home-investment",
+      "country": {
+        "iso_n3": "796",
+        "name": "Turks and Caicos Islands"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Permanent Residence Certificate — Investment in a Home",
+      "summary": "PRC via Certificate of Undertaking plus investment of at least USD 300,000 in a home on the outer islands (Grand Turk, Salt Cay, South/Middle/North Caicos) or USD 1,000,000 on any other island (incl. Providenciales). No right to work under this route. PRC fee USD 25,000.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 300000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "turks-and-caicos-prc-home-investment-principal",
+          "label": "Permanent Residence Certificate — Investment in a Home",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Permanent Residence Certificate — Department of Citizenship & Naturalization, TCI Government",
+          "url": "https://www.gov.tc/citizenship/services/prc"
+        }
+      ]
+    },
+    {
+      "id": "turks-and-caicos-residence-permit-independent-means",
+      "country": {
+        "iso_n3": "796",
+        "name": "Turks and Caicos Islands"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Residence Permit — Persons of Independent Means / Home Owner",
+      "summary": "Annual Residence Permit (Immigration Regulations 20(1)/29(1), effective 1 April 2016) for persons of independent means, home owners, and spouses of Islanders: financial statement, police record, medical certificate, and an undertaking not to take gainful employment. USD 1,500/year + USD 150 admin.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "turks-and-caicos-residence-permit-independent-means-principal",
+          "label": "Residence Permit — Persons of Independent Means / Home Owner",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Residence Permit Application — Ministry of Immigration and Border Services, TCI Government",
+          "url": "https://gov.tc/bordercontrol/images/docs/forms/Residence%20Permit%20Application.pdf"
         }
       ]
     },

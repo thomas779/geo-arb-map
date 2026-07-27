@@ -902,3 +902,44 @@ describe('IMC map discovery watcher', () => {
     expect(diffSnapshots(after, after)).toEqual([]);
   });
 });
+
+describe('Reddit hand-raiser radar', () => {
+  const { parseRedditAtom, scorePost, buildDigest } = require('../monitor/discovery/reddit_intent') as
+    typeof import('../monitor/discovery/reddit_intent');
+
+  const atom = `<?xml version="1.0"?><feed>
+    <entry><id>t3_abc123</id><title>Is the Portugal golden visa still open in 2026?</title>
+      <link href="https://www.reddit.com/r/IWantOut/comments/abc123/x/"/>
+      <published>2026-07-27T01:00:00+00:00</published>
+      <content type="html">&lt;p&gt;Looking for a residency by investment option, budget 500k&lt;/p&gt;</content>
+    </entry>
+    <entry><id>t3_def456</id><title>Best beaches thread</title>
+      <link href="https://www.reddit.com/r/expats/comments/def456/y/"/>
+      <published>2026-07-27T02:00:00+00:00</published>
+      <content type="html">&lt;p&gt;vacation photos&lt;/p&gt;</content>
+    </entry></feed>`;
+
+  test('parses Atom entries into posts', () => {
+    const posts = parseRedditAtom(atom, 'IWantOut');
+    expect(posts).toHaveLength(2);
+    expect(posts[0].id).toBe('abc123');
+    expect(posts[0].title).toContain('golden visa');
+    expect(posts[0].selftext).toContain('residency by investment');
+    expect(posts[0].permalink).toBe('/r/IWantOut/comments/abc123/x/');
+  });
+
+  test('scores intent+topic posts and rejects off-topic ones', () => {
+    const config = {
+      intent_phrases: ['is it still open', 'looking for a'],
+      topic_keywords: ['golden visa', 'residency by investment'],
+    };
+    const posts = parseRedditAtom(atom, 'IWantOut');
+    // title has "golden visa" + "?"; body has "looking for a" + "residency by investment"
+    const hit = scorePost({ title: posts[0].title, selftext: posts[0].selftext }, config);
+    expect(hit.score).toBeGreaterThan(0);
+    expect(hit.topics).toContain('golden visa');
+    const miss = scorePost({ title: posts[1].title, selftext: posts[1].selftext }, config);
+    expect(miss.score).toBe(0);
+    expect(buildDigest([])).toContain('no hand-raisers');
+  });
+});
