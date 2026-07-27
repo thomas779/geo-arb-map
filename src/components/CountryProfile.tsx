@@ -46,8 +46,10 @@ export function deriveCountryProfile(
   const blocs = mobility.blocs.filter(b => b.members.some(m => m.iso_n3 === iso));
   const lanesIn = mobility.bilateral_lanes.filter(l => l.destination.iso_n3 === iso);
   const reviewedModes = Object.values(jur.coverage).filter(s => s === 'reviewed').length;
+  // Header stat must never advertise a CLOSED programme's price (Bahrain's page
+  // once showed the abolished tier's figure) — active routes only.
   const cheapest = residence
-    .filter(r => r.min_investment)
+    .filter(r => r.status === 'active' && r.min_investment)
     .sort((a, b) => a.min_investment!.amount - b.min_investment!.amount)[0]?.min_investment ?? null;
   const residenceCats = [...new Set(residence.map(r => r.category))].map(c => RESIDENCE_CATEGORY_LABELS[c]);
   const description = `How to get citizenship and residence in ${jur.name}: `
@@ -102,7 +104,19 @@ function RouteCard({ route }: { route: CitizenshipRoute }) {
   );
 }
 
+// Closed/paused programmes stay in the dataset as sourced negative conclusions
+// ("is the UK golden visa still open?" deserves a verified NO with a citation),
+// but they must never read like live offers: sorted after active routes, muted,
+// and labeled.
+const RESIDENCE_STATUS_ORDER = ['active', 'pending_verification', 'inactive', 'verified_negative'];
+const RESIDENCE_STATUS_LABELS: Record<string, string> = {
+  inactive: 'paused',
+  verified_negative: 'closed',
+  pending_verification: 'unverified',
+};
+
 function ResidenceCard({ route }: { route: ResidenceRoute }) {
+  const closed = route.status !== 'active';
   const chips: string[] = [];
   const inv = money(route.min_investment);
   if (inv) chips.push(`from ${inv}`);
@@ -116,12 +130,14 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
   const leadClass = (route.counts_toward_naturalization || route.counts_toward_permanent_residence)
     ? 'bg-verified/15 text-verified' : 'border text-muted-foreground';
   return (
-    <article className="rounded-lg border bg-card p-4">
+    <article className={`rounded-lg border bg-card p-4${closed ? ' opacity-75' : ''}`}>
       <div className="mb-1.5 flex flex-wrap items-center gap-2">
         <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">
           {RESIDENCE_CATEGORY_LABELS[route.category]}
         </span>
-        <span className={`rounded-full px-1.5 font-mono text-[0.66rem] ${leadClass}`}>{leads}</span>
+        {closed
+          ? <span className="rounded-full bg-destructive/15 px-1.5 font-mono text-[0.66rem] text-destructive">{RESIDENCE_STATUS_LABELS[route.status] ?? route.status}</span>
+          : <span className={`rounded-full px-1.5 font-mono text-[0.66rem] ${leadClass}`}>{leads}</span>}
       </div>
       <h3 className="font-heading text-lg font-semibold leading-tight">{route.title}</h3>
       <p className="mt-1 text-sm text-muted-foreground">{route.summary}</p>
@@ -208,7 +224,9 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
           {residence.length > 0 && (
             <section id="residence" className="mt-8 scroll-mt-20">
               <Eyebrow>Residence &amp; settlement</Eyebrow>
-              <div className="space-y-3">{residence.map(r => <ResidenceCard key={r.id} route={r} />)}</div>
+              <div className="space-y-3">{[...residence]
+                .sort((a, b) => RESIDENCE_STATUS_ORDER.indexOf(a.status) - RESIDENCE_STATUS_ORDER.indexOf(b.status))
+                .map(r => <ResidenceCard key={r.id} route={r} />)}</div>
             </section>
           )}
           {blocs.length > 0 && (
