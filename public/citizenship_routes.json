@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 89
+      "residence_routes": 119
     }
   },
   "jurisdictions": [
@@ -284,7 +284,16 @@
         "bahrain-citizenship-by-parent",
         "bahrain-naturalization",
         "bahrain-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "bahrain-golden-residency-property",
+        "bahrain-golden-residency-retiree-nonresident",
+        "bahrain-golden-residency-retiree-resident"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "050",
@@ -777,7 +786,13 @@
         "china-citizenship-by-parent",
         "china-naturalization",
         "china-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "cn-pr-investor-2004"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "158",
@@ -794,7 +809,16 @@
         "taiwan-naturalization",
         "taiwan-citizenship-at-birth-by-parent",
         "taiwan-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "taiwan-investor-arc",
+        "taiwan-entrepreneur-visa",
+        "taiwan-aprc-investment",
+        "taiwan-aprc-government-bonds"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "170",
@@ -1757,7 +1781,17 @@
         "indonesia-naturalization",
         "indonesia-citizenship-at-birth-by-parent",
         "indonesia-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "indonesia-golden-visa-investor",
+        "indonesia-golden-visa-company-establishment",
+        "indonesia-golden-visa-corporate-director",
+        "indonesia-second-home-visa",
+        "indonesia-investor-kitas-pt-pma"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "364",
@@ -1910,7 +1944,14 @@
         "japan-naturalization",
         "japan-citizenship-at-birth-by-parent",
         "japan-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "japan-business-manager",
+        "japan-startup-visa"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "398",
@@ -1996,7 +2037,15 @@
         "korea-general-naturalization",
         "korea-citizenship-at-birth-by-parent",
         "korea-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "korea-f2-public-fund-investor",
+        "korea-f2-tourism-real-estate-investor",
+        "korea-d8-corporate-investor"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "414",
@@ -2210,7 +2259,16 @@
         "macao-nationality-by-descent",
         "macao-naturalization",
         "macao-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "mo-real-estate-investment-residence",
+        "mo-major-investment-residence",
+        "mo-talent-attraction-law-7-2023"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "talent_skilled": "reviewed"
+      }
     },
     {
       "iso_n3": "450",
@@ -3152,7 +3210,14 @@
         "qatar-naturalization",
         "qatar-citizenship-at-birth-by-parent",
         "qatar-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "qatar-property-residence",
+        "qatar-premium-property-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "642",
@@ -3387,7 +3452,18 @@
         "saudi-arabia-citizenship-by-parent",
         "saudi-arabia-naturalization",
         "saudi-arabia-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "saudi-premium-residency-unlimited",
+        "saudi-premium-residency-real-estate",
+        "saudi-premium-residency-investor",
+        "saudi-premium-residency-entrepreneur",
+        "saudi-premium-residency-special-talent"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "talent_skilled": "reviewed"
+      }
     },
     {
       "iso_n3": "686",
@@ -3514,7 +3590,14 @@
         "vietnam-naturalization-special-talent",
         "vietnam-citizenship-at-birth-by-parent",
         "vietnam-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "vietnam-dt-investor-trc",
+        "vietnam-dt4-investor-visa"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "705",
@@ -36338,6 +36421,128 @@
       ]
     },
     {
+      "id": "bahrain-golden-residency-property",
+      "country": {
+        "iso_n3": "048",
+        "name": "Bahrain"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Golden Residency — property owners (BHD 130,000+, lowered from BHD 200,000)",
+      "summary": "Foreigners owning real estate in Bahrain with total purchase value of at least BHD 130,000 qualify for the Golden Residency: an indefinite/permanent residency renewed every 10 years for a BHD 300 administrative fee, with right to work, multiple entry, and sponsorship of spouse, children and parents. The threshold was BHD 200,000 at launch (Feb 2022) and was lowered to BHD 130,000 between April 2025 and March 2026.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 130000,
+        "currency": "BHD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahrain-golden-residency-property-principal",
+          "label": "Golden Residency — property owners (BHD 130,000+, lowered from BHD 200,000)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "NPRA — Golden Residency for Foreigners Owning Real Estate in Bahrain",
+          "url": "https://www.npra.gov.bh/en/services/visas-residence-permit/residence-permits-services/golden-residency/golden-residence-permit-owner-of-properties-in-bahrain/"
+        }
+      ]
+    },
+    {
+      "id": "bahrain-golden-residency-retiree-nonresident",
+      "country": {
+        "iso_n3": "048",
+        "name": "Bahrain"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Golden Residency — retirees abroad (pension BHD 4,000+/month)",
+      "summary": "Retirees not residing in Bahrain, from any country, qualify for the Golden Residency with proof of basic salary/pension of at least BHD 4,000 per month, a Bahrain health-insurance certificate and a 6-month bank statement. Permanent residency renewed every 10 years for BHD 300; includes right to work, multiple entry and family sponsorship.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahrain-golden-residency-retiree-nonresident-principal",
+          "label": "Golden Residency — retirees abroad (pension BHD 4,000+/month)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Bahrain eGovernment portal — Golden Residency Visa Issuance Request (eService)",
+          "url": "https://services.bahrain.bh/wps/portal/en/BSP/GSX-UI-EServiceDetails?esID=397"
+        }
+      ]
+    },
+    {
+      "id": "bahrain-golden-residency-retiree-resident",
+      "country": {
+        "iso_n3": "048",
+        "name": "Bahrain"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Golden Residency — retirees who worked in Bahrain 15+ years (pension BHD 2,000+/month)",
+      "summary": "Retirees who worked in Bahrain's government or private sector for 15 years or more, with an average pension exceeding BHD 2,000 per month during their last five years of residence, qualify for the Golden Residency (permanent residency renewed every 10 years for BHD 300, with work rights, multiple entry and family sponsorship).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          180
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahrain-golden-residency-retiree-resident-principal",
+          "label": "Golden Residency — retirees who worked in Bahrain 15+ years (pension BHD 2,000+/month)",
+          "allocation": "right",
+          "eligibility_months": 180
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "NPRA — Golden Residency (general information, terms and fees)",
+          "url": "https://www.npra.gov.bh/en/services/visas-residence-permit/residence-permits-services/golden-residency/"
+        }
+      ]
+    },
+    {
       "id": "belgium-no-investor-programme-professional-card",
       "country": {
         "iso_n3": "056",
@@ -36534,6 +36739,222 @@
         {
           "title": "Start-up Visa Program (IRCC); see also Update on Immigration Measures for Entrepreneurs, Dec 2025",
           "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa.html"
+        }
+      ]
+    },
+    {
+      "id": "cn-pr-investor-2004",
+      "country": {
+        "iso_n3": "156",
+        "name": "China"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Permanent residence for direct investors (2004 Measures)",
+      "summary": "Foreigners with direct, stable investment in China and good tax records for three consecutive years may apply for permanent residence under the 2004 Measures for the Administration of Examination and Approval of Foreigners' Permanent Residence. Registered-capital tiers range from USD 500,000 (western regions, key poverty-relief counties, or state-encouraged industries) through USD 1M (central China) to USD 2M (anywhere). Grants are rare and entirely discretionary; there is no golden-visa programme.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 500000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cn-pr-investor-2004-principal",
+          "label": "Permanent residence for direct investors (2004 Measures)",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "NIA — Guidelines for Approval of Foreign Nationals' Eligibility for Permanent Residence in China",
+          "url": "https://en.nia.gov.cn/n147423/n147478/n147715/c158291/content.html"
+        }
+      ]
+    },
+    {
+      "id": "taiwan-aprc-government-bonds",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "APRC for Investment Immigrants — central government bonds (Plum Blossom Card)",
+      "summary": "Direct permanent residence (APRC / Plum Blossom Card) for foreign nationals who have invested more than NT$30,000,000 in ROC central government bonds for 3 or more years. Same legal basis and process as the business-investment track (Immigration Act Art. 25); exempt from the standard 5-year/183-days prior-residence requirement. Government-bond investment immigrants are exempt from the NT$10,000 application fee.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 30000000,
+        "currency": "TWD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 183,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "taiwan-aprc-government-bonds-principal",
+          "label": "APRC for Investment Immigrants — central government bonds (Plum Blossom Card)",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "NIA — Guidelines for APRC (Plum Blossom Card): special contributions, senior professionals, investment immigrants",
+          "url": "https://www.immigration.gov.tw/5475/5478/141465/141808/147308/"
+        }
+      ]
+    },
+    {
+      "id": "taiwan-aprc-investment",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "APRC for Investment Immigrants — business investment (Plum Blossom Card)",
+      "summary": "Direct permanent residence (Alien Permanent Resident Certificate, 'Plum Blossom Card') for foreign nationals who have invested more than NT$15,000,000 in a for-profit enterprise in Taiwan and created employment for 5 or more ROC nationals for 3 years. Legal basis: Immigration Act Art. 25. Applicants in this category are expressly exempt from the standard prior-residence requirement (5 consecutive years with 183 days/year). Application fee NT$10,000.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 15000000,
+        "currency": "TWD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 183,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "taiwan-aprc-investment-principal",
+          "label": "APRC for Investment Immigrants — business investment (Plum Blossom Card)",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "NIA — Guidelines for APRC (Plum Blossom Card): special contributions, senior professionals, investment immigrants",
+          "url": "https://www.immigration.gov.tw/5475/5478/141465/141808/147308/"
+        }
+      ]
+    },
+    {
+      "id": "taiwan-entrepreneur-visa",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Entrepreneur Visa (startup residence)",
+      "summary": "Residence route for foreign startup founders (individuals or teams of up to 3 sharing one qualifying startup). Qualifying criteria include: at least NT$2,000,000 in funding from venture capital, the National Development Fund's angel program, or an approved fundraising platform; OR being stationed in and recommended by a government-approved startup park or incubator; OR a recognized innovative startup with at least NT$1,000,000 invested while serving as responsible person; OR winning qualifying startup/design competitions; OR qualifying patents; OR a central-government innovation subsidy of NT$3,000,000+ (NT$1,000,000+ local). Initial residence 2 years, extendable 2 years at a time with NT$3,000,000+ annual revenue, NT$1,000,000+ annual operating expenses, 3+ full-time Taiwanese employees, or other recognized contribution.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 2000000,
+        "currency": "TWD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "taiwan-entrepreneur-visa-principal",
+          "label": "Entrepreneur Visa (startup residence)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Taiwan Entrepreneur Visa — Small and Medium Enterprise and Startup Administration, MOEA",
+          "url": "https://www.sme.gov.tw/article-en-2618-7911"
+        }
+      ]
+    },
+    {
+      "id": "taiwan-investor-arc",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor Resident Visa / ARC (MOEA-approved foreign investment)",
+      "summary": "A foreign national who invests in a new or existing Taiwanese enterprise with approval from the MOEA Department of Investment Review (formerly the Investment Commission; reorganized 2023) — as the investor or as the responsible person/representative of the invested company — may obtain a resident visa from BOCA and then an Alien Resident Certificate (ARC). The official threshold is an investment of at least USD 200,000 (commonly cited as the NT$6 million equivalent; the regulation is denominated in USD). Renewable while the investment and registration are maintained; restricted-industry investments do not qualify.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 200000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "taiwan-investor-arc-principal",
+          "label": "Investor Resident Visa / ARC (MOEA-approved foreign investment)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Bureau of Consular Affairs, MOFA — Resident Visas for Investment",
+          "url": "https://www.boca.gov.tw/cp-166-278-9b20e-2.html"
         }
       ]
     },
@@ -37381,6 +37802,224 @@
       ]
     },
     {
+      "id": "indonesia-golden-visa-company-establishment",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Golden Visa — investor establishing a company (E28B)",
+      "summary": "5- or 10-year ITAS for individual investors committing to establish a company in Indonesia: paid-up capital/investment of at least USD 2,500,000 for 5 years or USD 5,000,000 for 10 years, to be realised within 90 days of entry.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 2500000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "indonesia-golden-visa-company-establishment-principal",
+          "label": "Golden Visa — investor establishing a company (E28B)",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "E28B Visa Investor Pendirian Perusahaan — Direktorat Jenderal Imigrasi",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E28B"
+        }
+      ]
+    },
+    {
+      "id": "indonesia-golden-visa-corporate-director",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Golden Visa — corporate branch/subsidiary directors (E28D)",
+      "summary": "5- or 10-year ITAS for board members/commissioners of foreign companies establishing an Indonesian branch or subsidiary: company investment commitment of USD 25,000,000 (5-yr) or USD 50,000,000 (10-yr), fulfilled within 90 days of entry.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 25000000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "indonesia-golden-visa-corporate-director-principal",
+          "label": "Golden Visa — corporate branch/subsidiary directors (E28D)",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "E28D Visa Investor Pendirian Cabang atau Anak Perusahaan — Direktorat Jenderal Imigrasi",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E28D"
+        }
+      ]
+    },
+    {
+      "id": "indonesia-golden-visa-investor",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Golden Visa — individual capital-market investor (E28C)",
+      "summary": "5- or 10-year limited stay visa (ITAS) for individual foreign investors not establishing a company: USD 350,000 in Indonesian government bonds, public company shares or public mutual funds for 5 years; USD 700,000 (or a USD 1,000,000 apartment/condominium) for 10 years. No sponsor required; renewable and convertible to other stay permits.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 350000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "indonesia-golden-visa-investor-principal",
+          "label": "Golden Visa — individual capital-market investor (E28C)",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "E28C Visa Investor Perorangan (Pasar Modal) — Direktorat Jenderal Imigrasi",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E28C"
+        }
+      ]
+    },
+    {
+      "id": "indonesia-investor-kitas-pt-pma",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor ITAS/KITAS via PT PMA shareholding (E28A)",
+      "summary": "1- or 2-year ITAS for foreign investors holding shares in an Indonesian (BKPM-registered) sponsoring company. Current official requirement: proof of share ownership of at least IDR 10,000,000,000 (~USD 610k) in the guarantor company, plus USD 2,000 living-funds proof. Renewable; classic path to ITAP after 3 consecutive years.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 10000000000,
+        "currency": "IDR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "indonesia-investor-kitas-pt-pma-principal",
+          "label": "Investor ITAS/KITAS via PT PMA shareholding (E28A)",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "E28A Visa Investor — Direktorat Jenderal Imigrasi",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E28A"
+        }
+      ]
+    },
+    {
+      "id": "indonesia-second-home-visa",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Second Home Visa (E33)",
+      "summary": "Sponsor-free limited stay visa for foreigners settling in Indonesia: commitment (within 90 days) to deposit at least USD 130,000 in own name at a state-owned bank, OR purchase an apartment/condominium worth at least USD 1,000,000. Initial stay up to 5 years, extendable to 10 years total.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 130000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "indonesia-second-home-visa-principal",
+          "label": "Second Home Visa (E33)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "E33 Visa Rumah Kedua — Direktorat Jenderal Imigrasi",
+          "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33"
+        }
+      ]
+    },
+    {
       "id": "ireland-iip",
       "country": {
         "iso_n3": "372",
@@ -37505,6 +38144,219 @@
         {
           "title": "Investor Visa for Italy — MISE",
           "url": "https://investorvisa.mise.gov.it/"
+        }
+      ]
+    },
+    {
+      "id": "japan-business-manager",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Business Manager status of residence (経営・管理) — post-Oct 2025 regime",
+      "summary": "Residence status for foreign nationals managing or operating a business in Japan. Significantly tightened effective 16 October 2025: capital/investment of at least JPY 30,000,000; at least one full-time employee who is Japanese, a special permanent resident, or an Appendix Table 2 status holder; a management-related master's/doctorate OR 3+ years' business-management experience; Japanese ability at B2 (JLPT N2+) for the applicant or a full-time employee; business plan confirmed by a qualified professional (SME consultant, CPA, or tax accountant); dedicated business office (home offices in principle not permitted).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 30000000,
+        "currency": "JPY"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "japan-business-manager-principal",
+          "label": "Business Manager status of residence (経営・管理) — post-Oct 2025 regime",
+          "allocation": "discretionary",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "在留資格「経営・管理」に係る上陸基準省令等の改正について (Immigration Services Agency)",
+          "url": "https://www.moj.go.jp/isa/applications/resources/10_00237.html"
+        }
+      ]
+    },
+    {
+      "id": "japan-startup-visa",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Startup Visa — Foreign Entrepreneur Activity Promotion Program (特定活動)",
+      "summary": "Designated Activities status allowing foreign entrepreneurs up to 2 years of residence to prepare a startup without yet meeting Business Manager criteria (office, capital, employees waived during preparation). Requires a startup preparation plan confirmed by a designated municipality or METI-certified support organization, with monthly monitoring. Eligibility: a university degree, Japanese vocational advanced course, 3+ years' field experience, or 1+ year managing a related business abroad. Unified and expanded nationwide from January 2025.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "japan-startup-visa-principal",
+          "label": "Startup Visa — Foreign Entrepreneur Activity Promotion Program (特定活動)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "外国人起業家（外国人起業活動促進事業） (Immigration Services Agency)",
+          "url": "https://www.moj.go.jp/isa/03_00097.html"
+        }
+      ]
+    },
+    {
+      "id": "korea-d8-corporate-investor",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "D-8 Corporate Investment visa (FDI under Foreign Investment Promotion Act)",
+      "summary": "Foreign direct investment of at least KRW 100 million (with at least 10% voting shares, per the Foreign Investment Promotion Act) into a Korean corporation the applicant manages or is essential personnel of; the business must be genuinely active. D-8 is a renewable work-residence status, not itself permanent. Paths onward: F-5 after 5 years; F-2 'high-amount investor' after 3 years on D-8 with USD 500,000+ invested (or USD 300,000+ plus 2 Korean employees); D-8-4 tech founders can reach F-5 after 3 years with KRW 300M investment attracted and 2 Korean hires.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 100000000,
+        "currency": "KRW"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "korea-d8-corporate-investor-principal",
+          "label": "D-8 Corporate Investment visa (FDI under Foreign Investment Promotion Act)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Korea Immigration Service (Ministry of Justice) — Visa Navigator",
+          "url": "https://www.immigration.go.kr/bbs/immigration_eng/230/454086/download.do"
+        }
+      ]
+    },
+    {
+      "id": "korea-f2-public-fund-investor",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Public Business Investment Immigration (fund deposit, F-2 → F-5)",
+      "summary": "Deposit at least KRW 1.5 billion in the Ministry of Justice-designated public business investment vehicle (principal-guaranteed, interest-free fund operated via Korea Development Bank, or a profit/loss-sharing regional development project). Grants F-2 residence with free economic activity for the investor, spouse and unmarried children; converts to F-5 permanent residence after maintaining the investment for 5 years (F-5 retained after principal returns). A high-amount tier (KRW 3 billion) grants F-5 directly, conditional on maintaining the investment for 5 years.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1500000000,
+        "currency": "KRW"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "korea-f2-public-fund-investor-principal",
+          "label": "Public Business Investment Immigration (fund deposit, F-2 → F-5)",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Ministry of Justice — 공익사업 투자이민제 (Public Business Investment Immigration)",
+          "url": "https://www.moj.go.kr/moj/189/subview.do"
+        }
+      ]
+    },
+    {
+      "id": "korea-f2-tourism-real-estate-investor",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Tourism & Leisure Facility (Real Estate) Investment Immigration (F-2 → F-5)",
+      "summary": "Invest at least KRW 1 billion (funds remitted from overseas) in designated tourism/leisure accommodation real estate — resort condominiums, lodging, tourist pensions — in MOJ-designated zones (Jeju, Incheon FEZ Songdo/Yeongjong/Cheongna, Pyeongchang Alpensia, Yeosu Gyeongdo, Busan Haeundae/East Busan). Grants F-2 residence for investor and family (F-1 available from KRW 100M pre-completion); F-5 after maintaining the investment 5 years. Threshold doubled from KRW 500M to 1B in the May 2023 MOJ overhaul.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1000000000,
+        "currency": "KRW"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "korea-f2-tourism-real-estate-investor-principal",
+          "label": "Tourism & Leisure Facility (Real Estate) Investment Immigration (F-2 → F-5)",
+          "allocation": "discretionary",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Incheon Free Economic Zone Authority — Investor Immigration System",
+          "url": "https://www.ifez.go.kr/world/content/view.do?sn=561"
         }
       ]
     },
@@ -37725,6 +38577,126 @@
         {
           "title": "Conditions of residence for investors from third countries — Guichet.lu",
           "url": "https://guichet.public.lu/en/citoyens/immigration/plus-3-mois/ressortissant-tiers/investisseur/investisseur-pays-tiers.html"
+        }
+      ]
+    },
+    {
+      "id": "mo-major-investment-residence",
+      "country": {
+        "iso_n3": "446",
+        "name": "Macao"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Temporary residence by major investment / major investment plan",
+      "summary": "Business (non-real-estate) investment route under Administrative Regulation 3/2005. IPIM's current guidelines (effective March 2026) cover new, renewal and family-dependent applications based on 'major investment / major investment plan'. Published assessment criteria reference an investment of MOP 15,000,000 or above (fixed operational assets plus operating expenditure; loaned capital excluded) in government-prioritized '1+4' diversification industries, with jobs, innovation and sustainability weighed. Fully discretionary case-by-case assessment.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 15000000,
+        "currency": "MOP"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mo-major-investment-residence-principal",
+          "label": "Temporary residence by major investment / major investment plan",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "IPIM — Assessment Criteria for Temporary Residency: Major Investment / Investment Plan",
+          "url": "https://www.ipim.gov.mo/en/about-ipim/temporary-residency/temporary-residence-permit-application/assessment-criteria/assessment-criteria-for-temporary-residency-application-major-investment-investment-plan/"
+        }
+      ]
+    },
+    {
+      "id": "mo-real-estate-investment-residence",
+      "country": {
+        "iso_n3": "446",
+        "name": "Macao"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "Temporary residence by real-estate investment (suspended 2007)",
+      "summary": "The real-estate investment route under Art. 1(4) of Administrative Regulation 3/2005 has not accepted new applications since 4 April 2007, suspended by Administrative Regulation 7/2007. Only renewals and family-dependent extensions for pre-2007 approvals continue. Still closed as of July 2026; no reopening announced.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mo-real-estate-investment-residence-principal",
+          "label": "Temporary residence by real-estate investment (suspended 2007)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "IPIM — Temporary Residency (Administrative Regulation 3/2005 status notes)",
+          "url": "https://www.ipim.gov.mo/en/about-ipim/temporary-residency/"
+        }
+      ]
+    },
+    {
+      "id": "mo-talent-attraction-law-7-2023",
+      "country": {
+        "iso_n3": "446",
+        "name": "Macao"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Talent attraction regime (Law 7/2023)",
+      "summary": "Law 7/2023 (Legal Regime for the Attraction of Qualified Personnel, effective 1 July 2023) grants temporary residence to high-end talents, outstanding talents and advanced professionals via periodic recruitment rounds aligned with the '1+4' diversification strategy. A talent scheme, not an investment scheme — no capital requirement. It replaced the abolished AR 3/2005 management/technical-personnel category (Law 7/2023 abolished new applications there from 1 July 2023). Temporary residence maintained over 7 years of habitual residence can lead to Macau permanent residency.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mo-talent-attraction-law-7-2023-principal",
+          "label": "Talent attraction regime (Law 7/2023)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "IPIM — Temporary Residency (Administrative Regulation 3/2005 status notes)",
+          "url": "https://www.ipim.gov.mo/en/about-ipim/temporary-residency/"
         }
       ]
     },
@@ -38726,6 +39698,299 @@
       ]
     },
     {
+      "id": "qatar-premium-property-residence",
+      "country": {
+        "iso_n3": "634",
+        "name": "Qatar"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Real-estate residence with permanent-residency benefits (QAR 3,650,000 / USD 1,000,000 tier)",
+      "summary": "Property purchases of at least QAR 3,650,000 (official equivalent USD 1,000,000) grant residence plus 'permanent residency benefits' — access to state health care, education and investment privileges akin to the Law 10/2018 permanent-residency card — for the owner and family, tied to continued ownership.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 3650000,
+        "currency": "QAR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "qatar-premium-property-residence-principal",
+          "label": "Real-estate residence with permanent-residency benefits (QAR 3,650,000 / USD 1,000,000 tier)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Aqarat (Real Estate Regulatory Authority) — Own real estate: privileges granted to non-Qatari ownership",
+          "url": "https://www.aqarat.gov.qa/en/investors-journey/own-real-estate/"
+        }
+      ]
+    },
+    {
+      "id": "qatar-property-residence",
+      "country": {
+        "iso_n3": "634",
+        "name": "Qatar"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Real-estate residence permit (QAR 730,000 / USD 200,000 tier)",
+      "summary": "Non-Qataris who buy property worth at least QAR 730,000 (official equivalent USD 200,000) in designated freehold/usufruct zones receive a renewable residence permit for themselves and family, without a sponsor, valid for as long as they own the property. Issued by MOI; QAR 200 service fee.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 730000,
+        "currency": "QAR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "qatar-property-residence-principal",
+          "label": "Real-estate residence permit (QAR 730,000 / USD 200,000 tier)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Aqarat (Real Estate Regulatory Authority) — Own real estate: privileges granted to non-Qatari ownership",
+          "url": "https://www.aqarat.gov.qa/en/investors-journey/own-real-estate/"
+        }
+      ]
+    },
+    {
+      "id": "saudi-premium-residency-entrepreneur",
+      "country": {
+        "iso_n3": "682",
+        "name": "Saudi Arabia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Premium Residency — Entrepreneur",
+      "summary": "For founders holding a Ministry of Investment entrepreneur license, with tiers tied to investment rounds from Center-accredited entities. Category 1: raised >= SAR 400,000 with founder equity >= 20% (fixed-term 5-year renewable residency). Category 2: raised >= SAR 15,000,000 with founder equity >= 10% — direct permanent residency, conditional on creating 10 jobs in year 1 and 10 more in year 2. Application fee SAR 4,000. Special benefits: nominate two staff for Special Talent Residency; entity exempt from Nitaqat (Saudization) for first 3 operational years.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 400000,
+        "currency": "SAR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saudi-premium-residency-entrepreneur-principal",
+          "label": "Premium Residency — Entrepreneur",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Premium Residency Center — Entrepreneur Residency",
+          "url": "https://pr.gov.sa/pr/en?id=pr_product_details_entrepreneur_resident"
+        }
+      ]
+    },
+    {
+      "id": "saudi-premium-residency-investor",
+      "country": {
+        "iso_n3": "682",
+        "name": "Saudi Arabia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Premium Residency — Investor",
+      "summary": "Direct permanent residency for investors holding a Ministry of Investment license with a personal ownership share of at least SAR 7,000,000, proof of capital injection of that amount, valid commercial registration, and proof of employing 10 employees (GOSI-verified) within the applicant's share. Application fee SAR 4,000. Permanent residency conditional on maintaining the SAR 7M investment and 10 employees during the first two years.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 7000000,
+        "currency": "SAR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saudi-premium-residency-investor-principal",
+          "label": "Premium Residency — Investor",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Premium Residency Center — Investor Residency",
+          "url": "https://pr.gov.sa/pr/en?id=pr_product_details_investor_residency"
+        }
+      ]
+    },
+    {
+      "id": "saudi-premium-residency-real-estate",
+      "country": {
+        "iso_n3": "682",
+        "name": "Saudi Arabia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Premium Residency — Real Estate Owner",
+      "summary": "Residency for owners (or usufruct holders) of residential real estate in Saudi Arabia worth at least SAR 4,000,000. Property must be residential, completed (not land), and unmortgaged. Application fee SAR 4,000. Residency validity tied to continued ownership/usufruct. Full Premium Residency benefits: no sponsor, family (spouse, parents, children under 25), work, business under the Investment Law.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 4000000,
+        "currency": "SAR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saudi-premium-residency-real-estate-principal",
+          "label": "Premium Residency — Real Estate Owner",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Premium Residency Center — Real Estate Owner Residency",
+          "url": "https://pr.gov.sa/pr/en?id=pr_product_details_real_estate_owner"
+        }
+      ]
+    },
+    {
+      "id": "saudi-premium-residency-special-talent",
+      "country": {
+        "iso_n3": "682",
+        "name": "Saudi Arabia"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Premium Residency — Special Talent (and Gifted)",
+      "summary": "Salary/qualification-based residency for exceptional professionals. Tracks: researchers (whitelisted entity, salary >= SAR 14,000/month, bachelor's+, 3+ years experience, 3+ published papers, points minimum); healthcare and scientific professionals (salary >= SAR 35,000/month); executives (first/second-level role, total salary >= SAR 80,000/month). 5-year residency renewable once; permanent residency after residing 30 months within 5 years while continuing to meet criteria. Application fee SAR 4,000. Holder exempt from Nitaqat.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          30
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saudi-premium-residency-special-talent-principal",
+          "label": "Premium Residency — Special Talent (and Gifted)",
+          "allocation": "right",
+          "eligibility_months": 30
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Premium Residency Center — Special Talent Residency",
+          "url": "https://pr.gov.sa/pr/en?id=pr_product_details_apply_special_talent"
+        }
+      ]
+    },
+    {
+      "id": "saudi-premium-residency-unlimited",
+      "country": {
+        "iso_n3": "682",
+        "name": "Saudi Arabia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Premium Residency — Limited / Unlimited Duration (fee-based)",
+      "summary": "Fee-based Premium Residency (Iqama Mumayyaza): Unlimited Duration is permanent residency for a one-time SAR 800,000 payment; the Limited Duration variant costs SAR 100,000 per year (1-5 year terms, renewable). Requires proof of financial capability, clean criminal record and health report. No sponsor/employer needed; includes spouse, parents and children under 25; work and business ownership under the Investment Law; real-estate ownership; visa-free exit/re-entry.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 800000,
+        "currency": "SAR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "saudi-premium-residency-unlimited-principal",
+          "label": "Premium Residency — Limited / Unlimited Duration (fee-based)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Premium Residency Center — Limited Duration and Unlimited Duration Premium Residency",
+          "url": "https://pr.gov.sa/pr/en?id=pr_product_details_limited_unlimited"
+        }
+      ]
+    },
+    {
       "id": "singapore-entrepass",
       "country": {
         "iso_n3": "702",
@@ -38842,6 +40107,87 @@
         {
           "title": "MOM — Eligibility for Overseas Networks & Expertise Pass",
           "url": "https://www.mom.gov.sg/passes-and-permits/overseas-networks-expertise-pass/eligibility"
+        }
+      ]
+    },
+    {
+      "id": "vietnam-dt-investor-trc",
+      "country": {
+        "iso_n3": "704",
+        "name": "Vietnam"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor visa DT1-DT3 with Temporary Residence Card (VND 3bn+)",
+      "summary": "Foreign investors (or representatives of foreign investing organizations) with contributed capital of VND 3bn or more receive a DT-class visa and a Temporary Residence Card (TRC): DT1 (VND 100bn+ or Government-designated incentive sector/locality) TRC up to 10 years; DT2 (VND 50bn to under 100bn, or sectors encouraged for development investment) TRC up to 5 years; DT3 (VND 3bn to under 50bn) visa and TRC up to 3 years. TRCs renewable while the investment subsists; no minimum stay requirement to maintain status.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 3000000000,
+        "currency": "VND"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "vietnam-dt-investor-trc-principal",
+          "label": "Investor visa DT1-DT3 with Temporary Residence Card (VND 3bn+)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Luật số 51/2019/QH14 — Cổng Thông tin điện tử Chính phủ (official gazette page with signed PDF)",
+          "url": "https://vanban.chinhphu.vn/default.aspx?pageid=27160&docid=198545"
+        }
+      ]
+    },
+    {
+      "id": "vietnam-dt4-investor-visa",
+      "country": {
+        "iso_n3": "704",
+        "name": "Vietnam"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor visa DT4 (under VND 3bn) — 12-month renewable visa, no TRC",
+      "summary": "Foreign investors with contributed capital under VND 3bn receive a DT4 visa valid up to 12 months, renewable while the investment continues. DT4 holders are not eligible for a Temporary Residence Card, so this tier provides rolling short-term residence only.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "vietnam-dt4-investor-visa-principal",
+          "label": "Investor visa DT4 (under VND 3bn) — 12-month renewable visa, no TRC",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Luật số 51/2019/QH14 — Cổng Thông tin điện tử Chính phủ (official gazette page with signed PDF)",
+          "url": "https://vanban.chinhphu.vn/default.aspx?pageid=27160&docid=198545"
         }
       ]
     },
