@@ -943,3 +943,60 @@ describe('Reddit hand-raiser radar', () => {
     expect(buildDigest([])).toContain('no hand-raisers');
   });
 });
+
+describe('reddit oauth', () => {
+  const {
+    parseTokenResponse, redditCredentialsFromEnv, RedditClient,
+  } = require('../monitor/discovery/reddit_auth') as
+    typeof import('../monitor/discovery/reddit_auth');
+  const { postFromListing } = require('../monitor/discovery/reddit_intent') as
+    typeof import('../monitor/discovery/reddit_intent');
+
+  test('credentials require all four env vars', () => {
+    expect(redditCredentialsFromEnv({})).toBeNull();
+    expect(redditCredentialsFromEnv({
+      MONITOR_REDDIT_CLIENT_ID: 'a',
+      MONITOR_REDDIT_CLIENT_SECRET: 'b',
+      MONITOR_REDDIT_USERNAME: 'c',
+    })).toBeNull();
+    expect(redditCredentialsFromEnv({
+      MONITOR_REDDIT_CLIENT_ID: 'a',
+      MONITOR_REDDIT_CLIENT_SECRET: 'b',
+      MONITOR_REDDIT_USERNAME: 'c',
+      MONITOR_REDDIT_PASSWORD: 'd',
+    })).toEqual({ clientId: 'a', clientSecret: 'b', username: 'c', password: 'd' });
+  });
+
+  test('token parse refreshes early and rejects Reddit error bodies', () => {
+    const parsed = parseTokenResponse({ access_token: 'tok', expires_in: 3600, token_type: 'bearer', scope: '*' });
+    expect(parsed.token).toBe('tok');
+    // 3600s minus the 60s safety margin
+    expect(parsed.expiresAt).toBeLessThanOrEqual(Date.now() + 3540_000);
+    expect(parsed.expiresAt).toBeGreaterThan(Date.now() + 3500_000);
+    // Reddit answers bad credentials with HTTP 200 and an error body, so status is not enough
+    expect(() => parseTokenResponse({ error: 'invalid_grant' })).toThrow(/invalid_grant/);
+    expect(() => parseTokenResponse({ token_type: 'bearer' })).toThrow(/no access_token/);
+    expect(() => parseTokenResponse(null)).toThrow(/not an object/);
+  });
+
+  test('listing records map onto the scorer shape and drop incomplete ones', () => {
+    expect(postFromListing({
+      id: 'abc', title: 'How do I get residency in Georgia?', selftext: 'budget is 30k',
+      permalink: '/r/IWantOut/comments/abc/x/', created_utc: 1_770_000_000, subreddit: 'IWantOut',
+    }, 'IWantOut')).toEqual({
+      id: 'abc', subreddit: 'IWantOut', title: 'How do I get residency in Georgia?',
+      selftext: 'budget is 30k', permalink: '/r/IWantOut/comments/abc/x/', created_utc: 1_770_000_000,
+    });
+    expect(postFromListing({ id: 'abc', title: 'x', permalink: '/r/a/b/' }, 'a')).toBeNull();
+    expect(postFromListing({}, 'a')).toBeNull();
+  });
+
+  test('comment refuses anything that is not a t1_/t3_ fullname or is empty', async () => {
+    const client = new RedditClient(
+      { clientId: 'a', clientSecret: 'b', username: 'c', password: 'd' },
+      (async () => { throw new Error('must not reach the network'); }) as unknown as typeof fetch,
+    );
+    await expect(client.comment('abc123', 'hi')).rejects.toThrow(/t3_/);
+    await expect(client.comment('t3_abc123', '   ')).rejects.toThrow(/empty body/);
+  });
+});

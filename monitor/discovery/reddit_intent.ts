@@ -26,6 +26,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { redditClientFromEnv } from './reddit_auth';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_CONFIG = path.join(ROOT, 'sources', 'reddit-intent.json');
@@ -140,6 +141,26 @@ async function fetchNewPosts(
   return [];
 }
 
+/** Map an authenticated listing record onto the shape the scorer already uses. */
+export function postFromListing(
+  data: Record<string, unknown>,
+  subreddit: string,
+): RedditPost | null {
+  const id = typeof data.id === 'string' ? data.id : '';
+  const title = typeof data.title === 'string' ? data.title : '';
+  const permalink = typeof data.permalink === 'string' ? data.permalink : '';
+  const createdUtc = typeof data.created_utc === 'number' ? data.created_utc : 0;
+  if (!id || !title || !permalink || !createdUtc) return null;
+  return {
+    id,
+    subreddit: typeof data.subreddit === 'string' ? data.subreddit : subreddit,
+    title,
+    selftext: typeof data.selftext === 'string' ? data.selftext : '',
+    permalink,
+    created_utc: createdUtc,
+  };
+}
+
 export function buildDigest(leads: RedditLead[]): string {
   if (leads.length === 0) return 'no hand-raisers in the window';
   return leads.map(lead =>
@@ -157,11 +178,31 @@ async function main(): Promise<void> {
   const configPath = configIndex >= 0 ? path.resolve(process.argv[configIndex + 1]) : DEFAULT_CONFIG;
   const config = JSON.parse(fs.readFileSync(configPath, 'utf8')) as RedditIntentConfig;
 
+  // Authenticated when credentials are present (~100 req/min), anonymous RSS
+  // otherwise — which will not get through a full watchlist. See file header.
+  const client = redditClientFromEnv();
+  console.log(client
+    ? 'reddit: authenticated (OAuth script grant)'
+    : 'reddit: anonymous RSS — expect 429s and partial coverage; set MONITOR_REDDIT_* to authenticate');
+  const pacingMs = client ? 1000 : 8000;
+
   const now = Date.now() / 1000;
   const leads: RedditLead[] = [];
   let reached = 0;
   for (const subreddit of config.subreddits) {
-    const posts = await fetchNewPosts(subreddit);
+    let posts: RedditPost[];
+    if (client) {
+      try {
+        posts = (await client.newPosts(subreddit))
+          .map(data => postFromListing(data, subreddit))
+          .filter((post): post is RedditPost => post !== null);
+      } catch (error) {
+        console.warn(`r/${subreddit}: ${error instanceof Error ? error.message : error}`);
+        posts = [];
+      }
+    } else {
+      posts = await fetchNewPosts(subreddit);
+    }
     if (posts.length > 0) reached += 1;
     for (const post of posts) {
       const ageHours = (now - post.created_utc) / 3600;
@@ -181,9 +222,7 @@ async function main(): Promise<void> {
         excerpt: (post.selftext ?? '').replace(/\s+/g, ' ').slice(0, 280),
       });
     }
-    // polite pacing between subreddit requests; 3s was not enough to stay under
-    // the anonymous RSS limit across a full watchlist
-    await sleep(8000);
+    await sleep(pacingMs);
   }
 
   leads.sort((a, b) => b.score - a.score || a.age_hours - b.age_hours);
