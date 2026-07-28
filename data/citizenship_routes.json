@@ -317,18 +317,26 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Registration routes cover defined descent and family connections",
-      "summary": "Malta provides registration routes for specified family situations, including descendants in the direct line where the relevant line includes two consecutive ascendants born in Malta, and for certain second or subsequent generations born abroad. A foreign spouse of a Maltese citizen may also qualify for registration after five years of marriage, subject to the applicable conditions.",
+      "summary": "Registration in the direct line requires two consecutive ascendants born in Malta. Act XXI of 2025 moved the governing date in articles 3 and 5 from 2007/2010 to 1 August 2028: an ascendant who dies before that date is deemed to have acquired citizenship, while a parent alive on it must themselves have acquired Maltese citizenship under the article for the claim to pass. A foreign spouse may register after five years of marriage. Every grant requires the Minister to be satisfied it is not contrary to the public interest.",
       "facts": {
         "route_type": "registration",
         "spouse_marriage_years": 5,
         "automatic": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-28",
       "sources": [
         {
           "title": "Community Malta Agency — Acquisition of Citizenship",
           "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/"
+        },
+        {
+          "title": "Maltese Citizenship Act, Chapter 188",
+          "url": "https://legislation.mt/eli/cap/188/eng/pdf"
+        },
+        {
+          "title": "Maltese Citizenship (Amendment) Act, Act XXI of 2025",
+          "url": "https://legislation.mt/eli/act/2025/21/eng"
         }
       ]
     },
@@ -338,14 +346,14 @@
       "mode": "investment",
       "status": "inactive",
       "title": "The former transactional investor-citizenship programme has ended",
-      "summary": "Malta discontinued the Granting of Citizenship for Exceptional Services programme following the Court of Justice of the European Union judgment. Current exceptional-merit naturalization is a discretionary route based on genuine exceptional service or contribution and residence; it should not be represented as a direct citizenship-by-investment product.",
+      "summary": "Malta discontinued the Granting of Citizenship for Exceptional Services programme following the Court of Justice of the European Union judgment, and Act XXI of 2025 then deleted the \"individual investor programme\" definition from the Act entirely. The substituted article 10(9) grants merit naturalisation for exceptional service or contribution, including through job creation, naming scientists, athletes, artists, entrepreneurs, philanthropists and technologists among the qualifying categories. It sets no financial threshold and must not be represented as a citizenship-by-investment product.",
       "facts": {
         "programme_type": "former_direct_investor_citizenship",
         "ended_year": 2025,
         "replacement_is_cbi": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-28",
       "sources": [
         {
           "title": "Government of Malta — citizenship programme discontinued",
@@ -358,6 +366,10 @@
         {
           "title": "Community Malta Agency — naturalisation on the basis of merit",
           "url": "https://komunita.gov.mt/wp-content/uploads/2026/02/Citizenship-by-Naturalisation-on-the-Basis-of-Merit.pdf"
+        },
+        {
+          "title": "Maltese Citizenship (Amendment) Act, Act XXI of 2025",
+          "url": "https://legislation.mt/eli/act/2025/21/eng"
         }
       ]
     },

@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Country citizenship routes compiled from a canonical D1 release plus the read-only legacy remainder.",
-    "last_updated": "2026-07-27",
+    "last_updated": "2026-07-28",
     "acquisition_modes": {
       "ancestry": "Citizenship through a parent, grandparent, wider descent rule, restoration, or documented heritage connection.",
       "naturalization": "Citizenship after residence or another qualifying domestic status.",
@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 147
+      "residence_routes": 148
     }
   },
   "jurisdictions": [
@@ -3100,10 +3100,12 @@
         "paraguay-citizenship-by-birth"
       ],
       "residence_route_ids": [
-        "paraguay-permanent-residence-solvency"
+        "paraguay-permanent-residence-solvency",
+        "paraguay-investor-pass"
       ],
       "residence_coverage": {
-        "general_permanent_residence": "reviewed"
+        "general_permanent_residence": "reviewed",
+        "investment": "reviewed"
       }
     },
     {
@@ -21250,7 +21252,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Maltese citizenship by descent",
-      "summary": "Malta provides registration routes for specified family situations, including descendants in the direct line where the relevant line includes two consecutive ascendants born in Malta, and for certain second or subsequent generations born abroad. A foreign spouse of a Maltese citizen may also qualify for registration after five years of marriage, subject to the applicable conditions.",
+      "summary": "Registration in the direct line requires two consecutive ascendants born in Malta. Act XXI of 2025 moved the governing date in articles 3 and 5 from 2007/2010 to 1 August 2028: an ascendant who dies before that date is deemed to have acquired citizenship, while a parent alive on it must themselves have acquired Maltese citizenship under the article for the claim to pass. A foreign spouse may register after five years of marriage. Every grant requires the Minister to be satisfied it is not contrary to the public interest.",
       "facts": {
         "route_type": "registration",
         "spouse_marriage_years": 5,
@@ -21271,11 +21273,19 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-28",
       "sources": [
         {
           "title": "Community Malta Agency — Acquisition of Citizenship",
           "url": "https://komunita.gov.mt/services/acquisition-of-citizenship/"
+        },
+        {
+          "title": "Maltese Citizenship Act, Chapter 188",
+          "url": "https://legislation.mt/eli/cap/188/eng/pdf"
+        },
+        {
+          "title": "Maltese Citizenship (Amendment) Act, Act XXI of 2025",
+          "url": "https://legislation.mt/eli/act/2025/21/eng"
         }
       ]
     },
@@ -21328,7 +21338,7 @@
       "mode": "investment",
       "status": "inactive",
       "title": "Former investor-citizenship programme",
-      "summary": "Malta discontinued the Granting of Citizenship for Exceptional Services programme following the Court of Justice of the European Union judgment. Current exceptional-merit naturalization is a discretionary route based on genuine exceptional service or contribution and residence; it should not be represented as a direct citizenship-by-investment product.",
+      "summary": "Malta discontinued the Granting of Citizenship for Exceptional Services programme following the Court of Justice of the European Union judgment, and Act XXI of 2025 then deleted the \"individual investor programme\" definition from the Act entirely. The substituted article 10(9) grants merit naturalisation for exceptional service or contribution, including through job creation, naming scientists, athletes, artists, entrepreneurs, philanthropists and technologists among the qualifying categories. It sets no financial threshold and must not be represented as a citizenship-by-investment product.",
       "facts": {
         "programme_type": "former_direct_investor_citizenship",
         "ended_year": 2025,
@@ -21344,11 +21354,11 @@
           "label": "Former investor-citizenship programme",
           "allocation": "discretionary",
           "eligibility_months": null,
-          "note": "Historical route retained to state explicitly that transactional investor citizenship ended in 2025."
+          "note": "Historical route retained to state explicitly that transactional investor citizenship ended in 2025. Article 10(9) applications filed before Act XXI of 2025 came into force stay under the previous rules by virtue of the new article 27(4)."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-28",
       "sources": [
         {
           "title": "Government of Malta — citizenship programme discontinued",
@@ -21361,6 +21371,10 @@
         {
           "title": "Community Malta Agency — naturalisation on the basis of merit",
           "url": "https://komunita.gov.mt/wp-content/uploads/2026/02/Citizenship-by-Naturalisation-on-the-Basis-of-Merit.pdf"
+        },
+        {
+          "title": "Maltese Citizenship (Amendment) Act, Act XXI of 2025",
+          "url": "https://legislation.mt/eli/act/2025/21/eng"
         }
       ]
     },
@@ -25618,7 +25632,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Pakistani citizenship through a Pakistani parent",
-      "summary": "A child born abroad is a Pakistani citizen by descent where a parent is a citizen otherwise than by descent; maternal descent has counted since 2000.",
+      "summary": "A child born abroad is a Pakistani citizen by descent where a parent is a citizen otherwise than by descent. The 2000 ordinance substituted \"parent\" for \"father\" in the Citizenship Act 1951, and the Pakistan Citizenship (Amendment) Bill 2026 — assented 19 March 2026 — makes that substitution retrospective, so children of Pakistani mothers born before 2000 are covered rather than cut off at that date.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -25632,15 +25646,20 @@
           "id": "pakistan-citizenship-by-parent-principal",
           "label": "Pakistani citizenship through a Pakistani parent",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "The retrospective effect is confirmed by the Press Information Department assent notice and by the Global Campaign for Equal Nationality Rights, but the gazetted text has not been matched word for word — senate.gov.pk no longer serves the document. Treat the pre-2000 maternal claim as sound in principle and unconfirmed in wording."
         }
       ],
-      "confidence": "high",
-      "last_checked": "2026-07-23",
+      "confidence": "medium",
+      "last_checked": "2026-07-28",
       "sources": [
         {
           "title": "Pakistan Constitution (Constitute Project)",
           "url": "https://www.constituteproject.org/constitution/Pakistan_2018"
+        },
+        {
+          "title": "Pakistan PID — Citizenship (Amendment) Bill 2026 assented",
+          "url": "https://pid.gov.pk/site/press_detail/32172"
         }
       ]
     },
@@ -40457,6 +40476,48 @@
         {
           "title": "Panama — Servicio Nacional de Migración",
           "url": "https://www.migracion.gob.pa/permisos-migratorios/"
+        }
+      ]
+    },
+    {
+      "id": "paraguay-investor-pass",
+      "country": {
+        "iso_n3": "600",
+        "name": "Paraguay"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Paraguay Investor Pass — direct permanent residence",
+      "summary": "Permanent residence without a prior temporary permit for investors who obtain the Constancia de Inversionista Extranjero, verified through the SUACE business one-stop window.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 150000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "paraguay-investor-pass-principal",
+          "label": "Paraguay Investor Pass — direct permanent residence",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-27",
+      "sources": [
+        {
+          "title": "Paraguay DNM — Paraguay Investor Pass",
+          "url": "https://migraciones.gov.py/paraguay-investor-pass-nueva-herramienta-para-facilitar-la-inversion-extranjera-en-el-pais/"
         }
       ]
     },

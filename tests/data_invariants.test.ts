@@ -344,3 +344,50 @@ describe('citizenship route database', () => {
     expect(turkiye?.facts.holding_period_years).toBe(3);
   });
 });
+
+describe('monitor-lead verifications, July 2026', () => {
+  test('Malta descent records the Act XXI of 2025 window and cites the act', () => {
+    const descent = citizenshipRoutes.routes.find(route =>
+      route.id === 'malta-registration-family-descent');
+    // Act XXI of 2025 moved every 2007/2010 reference date in articles 3 and 5
+    // to 1 August 2028. That date is the whole decision for a descent claim, so
+    // it must never silently drop out of the summary again.
+    expect(descent?.summary).toContain('1 August 2028');
+    expect(descent?.summary).toContain('two consecutive ascendants born in Malta');
+    expect(descent?.sources.map(source => source.url)).toContain(
+      'https://legislation.mt/eli/act/2025/21/eng');
+    expect(descent?.last_checked).toBe('2026-07-28');
+  });
+
+  test('Malta ended-investor route records the statutory deletion, not just the judgment', () => {
+    const ended = citizenshipRoutes.routes.find(route =>
+      route.id === 'malta-transactional-investor-citizenship-ended');
+    expect(ended?.status).toBe('inactive');
+    expect(ended?.summary).toContain('individual investor programme');
+    expect(ended?.summary).toContain('no financial threshold');
+    expect(ended?.sources.map(source => source.url)).toContain(
+      'https://legislation.mt/eli/act/2025/21/eng');
+  });
+
+  test('Pakistan descent drops the 2000 cut-off and stays at medium confidence', () => {
+    const descent = citizenshipRoutes.routes.find(route =>
+      route.id === 'pakistan-citizenship-by-parent');
+    // The 2026 amendment makes the 2000 "parent for father" substitution
+    // retrospective. The old summary implied a hard 2000 cut-off, which would
+    // wrongly tell a pre-2000 child of a Pakistani mother that they have no claim.
+    expect(descent?.summary).toContain('retrospective');
+    expect(descent?.summary).not.toContain('has counted since 2000');
+    // Gazetted wording is still unmatched, so this must not claim high confidence.
+    expect(descent?.confidence).toBe('medium');
+  });
+
+  test('Paraguay Investor Pass is priced at its lowest published tier', () => {
+    const residence = citizenshipRoutes.residence_routes ?? [];
+    const pass = residence.find(route => route.id === 'paraguay-investor-pass');
+    expect(pass).toBeDefined();
+    // USD 150k tourism is the floor; the 200k real-estate/BVA tiers live in the note.
+    expect(pass?.min_investment).toEqual({ amount: 150000, currency: 'USD' });
+    expect(pass?.outcome).toBe('permanent_residence');
+    expect(pass?.confidence).toBe('medium');
+  });
+});
