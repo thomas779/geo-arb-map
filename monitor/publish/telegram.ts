@@ -135,8 +135,6 @@ export function buildTelegramPost(issue: ReviewIssue): TelegramPost {
     ...sources.map(url => `• ${url}`),
     '',
     `Review trail: ${issue.url}`,
-    '',
-    'Information only — verify the rule for your circumstances.',
   ].join('\n');
 
   if (text.length > TELEGRAM_MESSAGE_LIMIT) {

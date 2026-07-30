@@ -393,16 +393,20 @@ describe('monitor-lead verifications, July 2026', () => {
 });
 
 describe('monitor-lead verifications, 30 July 2026', () => {
-  test('Slovakia descent records the 15 July 2026 residence-permit removal at medium confidence', () => {
+  test('Slovakia descent records the new section 7(8) ancestor route', () => {
     const descent = citizenshipRoutes.routes.find(route =>
       route.id === 'slovakia-citizenship-by-parent');
-    // The single decision-relevant fact for a diaspora applicant: no Slovak
-    // residence permit is needed before applying.
+    // Act 128/2026 inserted §7(8) on 15 July 2026. Verified verbatim against the
+    // slov-lex consolidated text and diffed against the 12 June 2026 version,
+    // which had no parent/grandparent/great-grandparent provision at all.
     expect(descent?.summary).toContain('15 July 2026');
-    expect(descent?.summary).toContain('residence-permit prerequisite');
     expect(descent?.summary).toContain('great-grandparent');
-    // The amending act number is unconfirmed, so this must not claim high confidence.
-    expect(descent?.confidence).toBe('medium');
+    // The two facts that make the route usable from abroad.
+    expect(descent?.summary).toContain('no Slovak residence permit');
+    expect(descent?.summary).toContain('no language test');
+    expect(descent?.confidence).toBe('high');
+    expect(descent?.sources.map(s => s.url)).toContain(
+      'https://static.slov-lex.sk/static/SK/ZZ/1993/40/20260715.html');
   });
 
   test('Jordan investor route records both directions of the 15 July 2026 decision', () => {

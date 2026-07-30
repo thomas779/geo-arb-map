@@ -30239,7 +30239,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Slovak citizenship through a Slovak parent",
-      "summary": "A child of a Slovak citizen parent is Slovak. Descent and restoration routes also cover certain Czechoslovak-line ancestors and former citizens. From 15 July 2026 an amendment removes the Slovak residence-permit prerequisite for the descent route open to descendants of former Czechoslovak citizens, reaching a parent, grandparent or great-grandparent born in present-day Slovakia, while the applicant now carries the burden of evidencing the ancestor's Czechoslovak citizenship from official or archival records.",
+      "summary": "A child of a Slovak citizen parent is Slovak, and restoration routes cover former Czechoslovak and Slovak citizens. From 15 July 2026 a new §7(8) lets anyone with a parent, grandparent or great-grandparent who was a Czechoslovak citizen born in present-day Slovakia apply without the eight-year permanent-residence condition, needing no Slovak residence permit and no language test. The grant remains discretionary.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -30254,10 +30254,10 @@
           "label": "Slovak citizenship through a Slovak parent",
           "allocation": "right",
           "eligibility_months": 0,
-          "note": "The residence-permit removal is reported as enacted (passed by parliament, signed by the President) effective 15 July 2026, and practitioners place it at Act 40/1993 §7(2)(j) with a new §8(2)(k) on evidence. Held at medium confidence because the amending act number is unconfirmed: the ministry press release serves its homepage to automated retrieval and slov-lex renders client-side, so the consolidated text has not been matched."
+          "note": "Act 128/2026 Z. z. (in force 15 July 2026) inserted §7(8) and renumbered the previous §7(8) to §7(9). The version in force to 14 July 2026 contained no parent/grandparent/great-grandparent provision at all, so this created a route rather than relaxing one — the widely repeated \"§7(2)(j)\" citation is wrong. §7(8) waives only §7(1)(a), and unlike §7(2) and §7(3) it carries no \"povolený pobyt\" (authorised residence) qualifier, so no Slovak residence is required; §7(1)(h) exempts paragraph 4 to 8 applicants from the Slovak language and civics test. \"Možno udeliť\" makes the grant discretionary rather than an entitlement. Verified verbatim against the consolidated text and diffed against the 12 June 2026 version on slov-lex."
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "last_checked": "2026-07-30",
       "sources": [
         {
@@ -30267,6 +30267,10 @@
         {
           "title": "Slovakia IOM MIC - naturalization conditions",
           "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html"
+        },
+        {
+          "title": "Act 40/1993 on state citizenship, consolidated text in force 15 July 2026 (Slov-Lex)",
+          "url": "https://static.slov-lex.sk/static/SK/ZZ/1993/40/20260715.html"
         }
       ]
     },
