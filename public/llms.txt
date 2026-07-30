@@ -15,8 +15,7 @@ recorded legal fact.
 
 - [About & methodology](https://flagpaths.com/about/): how the data is researched, reviewed, and monitored
 - [All countries](https://flagpaths.com/country/): citizenship + residence routes for 236 countries and territories, one page each
-- [Regional systems](https://flagpaths.com/rights/): settlement blocs and mobility lanes (EU, Mercosur, CARICOM, GCC, …)
-- [Heritage & ancestry routes](https://flagpaths.com/route/): citizenship by descent, diaspora, and return programmes
+- [Regional systems & routes](https://flagpaths.com/rights/): settlement blocs and mobility lanes (EU, Mercosur, CARICOM, GCC, …) plus heritage citizenship routes (descent, diaspora, return)
 - [Sitemap](https://flagpaths.com/sitemap.xml): every page
 
 ## Data

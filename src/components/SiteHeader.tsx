@@ -29,9 +29,10 @@ const PLANNER = { key: 'planner' as const, label: 'Planner', href: '/planner', v
 // (mobile-friendly) and the model reads as: Atlas = explore, Browse = read.
 const BROWSE_ITEMS: { key: NavKey; label: string; href: string; view: View }[] = [
   { key: 'countries', label: 'Countries', href: '/country', view: 'countries' },
-  { key: 'rights', label: 'Regional systems', href: '/rights', view: 'rights' },
-  { key: 'route', label: 'Heritage routes', href: '/route', view: 'route' },
+  { key: 'rights', label: 'Regional systems & routes', href: '/rights', view: 'rights' },
 ];
+// 'route' stays a NavKey so /route/<slug> detail pages can mark the Browse menu
+// active — the heritage hub itself now lives inside /rights (see RightsList).
 const BROWSE_KEYS: NavKey[] = ['countries', 'rights', 'route'];
 
 interface Props {

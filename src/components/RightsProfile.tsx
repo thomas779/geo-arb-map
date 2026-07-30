@@ -362,12 +362,15 @@ const HUB_GROUPS: Array<{ label: string; categories: Bloc['category'][] }> = [
 export function RightsList({ mobility }: { mobility: BlocsData }) {
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
-      <h1 className="font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">Regional systems</h1>
+      <h1 className="font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">Regional systems &amp; routes</h1>
       <p className="mb-8 mt-3 max-w-[68ch] text-muted-foreground">
         Blocs and unions that grant residence or citizenship rights across their members — the strongest
         cross-border routes. Open any system, or explore them on the{' '}
         <a href="/" className="underline underline-offset-2">interactive atlas</a>.
       </p>
+      {/* Heritage lanes were previously their own thin hub at /route/. Same user
+          question — "systems whose rights I can unlock" — so they live here as a
+          fourth group; /route/<slug> detail pages are unchanged. */}
       {HUB_GROUPS.map(group => {
         const blocs = mobility.blocs
           .filter(b => group.categories.includes(b.category))
@@ -390,31 +393,24 @@ export function RightsList({ mobility }: { mobility: BlocsData }) {
           </section>
         );
       })}
-    </main>
-  );
-}
-
-export function RouteList({ mobility }: { mobility: BlocsData }) {
-  const lanes = routeLanesForPages(mobility);
-  return (
-    <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
-      <h1 className="font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">Heritage &amp; ancestry routes</h1>
-      <p className="mb-8 mt-3 max-w-[68ch] text-muted-foreground">
-        Citizenship and residence you can claim through ancestry, ethnicity, or diaspora ties — not a
-        passport you already hold. Open any route, or explore them on the{' '}
-        <a href="/" className="underline underline-offset-2">interactive atlas</a>.
-      </p>
-      <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        {lanes.map(l => (
-          <a key={l.id} href={`/route/${entitySlug(l.id)}`} className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2.5 hover:border-primary">
-            <span className="shrink-0 text-lg" aria-hidden>{countryFlag(l.destination.iso_n3)}</span>
-            <span className="min-w-0 flex-1">
-              <span className="block truncate text-sm font-medium">{displayRouteTitle(l.name)}</span>
-              <span className="font-mono text-[0.66rem] text-muted-foreground">→ {l.destination.name}</span>
-            </span>
-          </a>
-        ))}
-      </div>
+      <section id="heritage" className="mb-8 scroll-mt-20">
+        <h2 className="mb-1 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Heritage &amp; ancestry routes</h2>
+        <p className="mb-3 max-w-[68ch] text-sm text-muted-foreground">
+          Citizenship and residence claimed through ancestry, ethnicity, or diaspora ties — not a passport
+          you already hold.
+        </p>
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {routeLanesForPages(mobility).map(l => (
+            <a key={l.id} href={`/route/${entitySlug(l.id)}`} className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2.5 hover:border-primary">
+              <span className="shrink-0 text-lg" aria-hidden>{countryFlag(l.destination.iso_n3)}</span>
+              <span className="min-w-0 flex-1">
+                <span className="block truncate text-sm font-medium">{displayRouteTitle(l.name)}</span>
+                <span className="font-mono text-[0.66rem] text-muted-foreground">→ {l.destination.name}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }

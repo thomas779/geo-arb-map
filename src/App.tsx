@@ -26,7 +26,6 @@ import { CountryProfile, deriveCountryProfile } from '@/components/CountryProfil
 import {
   RightsProfile,
   RightsList,
-  RouteList,
   deriveBlocProfile,
   deriveRouteProfile,
 } from '@/components/RightsProfile';
@@ -412,7 +411,7 @@ export default function App() {
             const profile = id && citizenshipRoutes ? deriveRouteProfile(id, data, citizenshipRoutes) : null;
             return (
               <div className="absolute inset-0 z-30 overflow-y-auto bg-background">
-                {profile ? <RightsProfile data={profile} /> : <RouteList mobility={data} />}
+                {profile ? <RightsProfile data={profile} /> : <RightsList mobility={data} />}
               </div>
             );
           })()}

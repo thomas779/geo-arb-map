@@ -30,6 +30,7 @@ export interface CountryProfileData {
   residence: ResidenceRoute[];
   blocs: BlocsData['blocs'];
   lanesIn: BlocsData['bilateral_lanes'];
+  lanesOut: BlocsData['bilateral_lanes'];
   reviewedModes: number;
   cheapest: ResidenceRoute['min_investment'];
   description: string;
@@ -47,6 +48,10 @@ export function deriveCountryProfile(
   const residence = (citizenshipRoutes.residence_routes ?? []).filter(r => r.country.iso_n3 === iso);
   const blocs = mobility.blocs.filter(b => b.members.some(m => m.iso_n3 === iso));
   const lanesIn = mobility.bilateral_lanes.filter(l => l.destination.iso_n3 === iso);
+  // Lanes this country's PASSPORT benefits from (it is a named beneficiary).
+  // The Atlas panel always showed these; the static page only showed lanesIn,
+  // so Singapore's page hid H-1B1/E-2 while its panel displayed them.
+  const lanesOut = mobility.bilateral_lanes.filter(l => l.beneficiaries.some(m => m.iso_n3 === iso));
   const reviewedModes = Object.values(jur.coverage).filter(s => s === 'reviewed').length;
   // Header stat must never advertise a CLOSED programme's price (Bahrain's page
   // once showed the abolished tier's figure) — active routes only.
@@ -61,7 +66,7 @@ export function deriveCountryProfile(
   return {
     iso, name: jur.name, slug: buildCountrySlugMap(citizenshipRoutes.jurisdictions).get(iso)!,
     coverage: jur.coverage as Record<string, string>,
-    routes, residence, blocs, lanesIn, reviewedModes, cheapest, description,
+    routes, residence, blocs, lanesIn, lanesOut, reviewedModes, cheapest, description,
   };
 }
 
@@ -273,7 +278,7 @@ function Eyebrow({ children, divider = true }: { children: ReactNode; divider?: 
 }
 
 export function CountryProfile({ data }: { data: CountryProfileData }) {
-  const { iso, name, routes, residence, blocs, lanesIn, reviewedModes, cheapest } = data;
+  const { iso, name, routes, residence, blocs, lanesIn, lanesOut, reviewedModes, cheapest } = data;
   const facts: Array<[string, string]> = [
     ['Citizenship', `${reviewedModes} of 4 modes reviewed`],
     ...(routes.length ? [['Citizenship routes', String(routes.length)] as [string, string]] : []),
@@ -343,9 +348,14 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
               </div>
             </section>
           )}
-          {lanesIn.length > 0 && (
+          {(lanesIn.length > 0 || lanesOut.length > 0) && (
             <section id="treaties" className="mt-8 scroll-mt-20">
               <Eyebrow>Treaty &amp; country paths</Eyebrow>
+              {lanesOut.length > 0 && (
+                <p className="mb-2 text-xs text-muted-foreground">
+                  This passport benefits from: {lanesOut.map(l => l.name).join(' · ')}
+                </p>
+              )}
               <div className="flex flex-wrap gap-2">
                 {lanesIn.map(l => (
                   <a
