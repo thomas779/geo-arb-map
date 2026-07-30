@@ -51,7 +51,7 @@ import {
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
-import { buildNewsPost, fingerprint, synthesizeIssue, verifySourceUrl, verifyPrimarySource, quoteOnPage, normalizeText, corroboratedByCitations, NewsPostStore, runNews } from '../monitor/publish/news';
+import { buildNewsPost, fingerprint, synthesizeIssue, proseDateFromIso, verifySourceUrl, verifyPrimarySource, quoteOnPage, normalizeText, corroboratedByCitations, NewsPostStore, runNews } from '../monitor/publish/news';
 import {
   CitationStore,
   discoverFeed,
@@ -495,6 +495,25 @@ describe('AI sweep + grounded verify', () => {
     expect((map.get('858') ?? []).length).toBeGreaterThan(0); // Uruguay has an active verification source
     expect((map.get('858') ?? [])[0].url).toMatch(/^https?:\/\//);
     expect(map.has('multi')).toBe(false);
+  });
+
+  test('proseDateFromIso and synthesizeIssue surface equivalent date forms', () => {
+    expect(proseDateFromIso('2026-06-06')).toBe('6 June 2026');
+    expect(proseDateFromIso('2026-01-01')).toBe('1 January 2026');
+    expect(proseDateFromIso('not-a-date')).toBe('');
+    const finding: Finding = {
+      iso_n3: '752', jurisdiction: 'Sweden', claim: 'Sweden raised habitual residence to eight years',
+      headline: 'Sweden eight year residence', status: 'confirmed',
+      primary_urls: ['https://www.migrationsverket.se/'], effective_date: '2026-06-06',
+      affects_dataset: true, category: 'naturalization', brief: 'Adults need eight years.',
+      evidence_quote: 'eight years (previously five years)', original_quote: 'åtta år (tidigare fem år)',
+      legal_instrument: '', citations: [], search_queries: [],
+    };
+    const body = synthesizeIssue(finding).body;
+    // Both ISO and prose so the auditor cannot invent a year-missing mismatch.
+    expect(body).toContain('Effective date: 2026-06-06 (6 June 2026).');
+    expect(body).toContain('Source passage (English)');
+    expect(body).toContain('Source passage (original language)');
   });
 
   test('buildNewsPost + fingerprint + synthesizeIssue', () => {

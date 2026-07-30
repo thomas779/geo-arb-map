@@ -253,14 +253,24 @@ export function buildNewsPost(finding: Finding): TelegramPost {
 // Synthesize the minimal ReviewIssue that auditTelegramPost reads: it only needs
 // a "## Verified evidence" section. This lets the auto-news path reuse the exact
 // same LLM evidence-audit as the human-reviewed issue path, unchanged.
+// Include ISO date, prose date, and original-language quote so the auditor is not
+// forced to invent mismatches from thin English-only fragments.
 export function synthesizeIssue(finding: Finding): ReviewIssue {
+  const effective = finding.effective_date?.trim() || '';
+  const proseDate = effective ? proseDateFromIso(effective) : '';
   const body = [
     '## Verified evidence',
     '',
-    finding.evidence_quote ? `Source passage: "${finding.evidence_quote}"` : '',
+    finding.evidence_quote ? `Source passage (English): "${finding.evidence_quote}"` : '',
+    finding.original_quote && finding.original_quote !== finding.evidence_quote
+      ? `Source passage (original language): "${finding.original_quote}"`
+      : '',
     finding.claim,
     finding.brief,
-    finding.effective_date ? `Effective date: ${finding.effective_date}.` : '',
+    effective
+      ? `Effective date: ${effective}${proseDate ? ` (${proseDate})` : ''}.`
+      : '',
+    finding.legal_instrument ? `Legal instrument: ${finding.legal_instrument}.` : '',
     ...finding.primary_urls.map(url => `- ${url}`),
   ].filter(Boolean).join('\n');
   return {
@@ -270,6 +280,21 @@ export function synthesizeIssue(finding: Finding): ReviewIssue {
     url: finding.primary_urls[0] ?? '',
     comments: [],
   };
+}
+
+/** "2026-06-06" → "6 June 2026" so the evidence pack and post share a prose form. */
+export function proseDateFromIso(value: string): string {
+  const match = value.trim().match(/^(\d{4})-(\d{2})-(\d{2})/);
+  if (!match) return '';
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
+  const year = match[1];
+  const month = months[Number(match[2]) - 1];
+  const day = String(Number(match[3]));
+  if (!month || !day || day === 'NaN') return '';
+  return `${day} ${month} ${year}`;
 }
 
 // Dedup ledger. Mirrors the collector's state pattern: read from an exported D1
@@ -380,6 +405,43 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
       // Keep the un-rewritten primary URLs for the integrity gate (verifySourceUrl
       // below may degrade a dead deep-link to a domain root for the display link).
       const originalPrimaries = [...finding.primary_urls];
+      // Prefer the original-language quote for page matching; fall back to English.
+      const quoteForPage = (finding.original_quote || finding.evidence_quote || '').trim();
+
+      // Official-source gate FIRST on apply: host + live page + quote. This is the
+      // real verification for auto-publish (no human in the loop). LLM audit is a
+      // secondary wording/consistency check only and must not be the sole gate.
+      if (options.apply) {
+        const allowedHosts = new Set((officialHosts.get(finding.iso_n3) ?? [])
+          .map(source => hostFromUrl(source.url))
+          .filter((h): h is string => Boolean(h)));
+        let verdict: SourceVerdict = { verdict: 'refuted', reason: 'no authoritative primary source' };
+        for (const candidate of originalPrimaries) {
+          const attempt = await verifyPrimarySource(candidate, quoteForPage, allowedHosts);
+          if (attempt.verdict === 'verified') { verdict = attempt; break; }
+          if (attempt.verdict === 'inconclusive' && verdict.verdict === 'refuted') verdict = attempt;
+        }
+        if (verdict.verdict === 'inconclusive') {
+          const primaryHost = hostFromUrl(originalPrimaries[0] ?? '') ?? '';
+          verdict = await corroboratedByCitations(primaryHost, finding.citations)
+            ? { verdict: 'verified', reason: `quote unverifiable (${verdict.reason}); host corroborated by grounding citations` }
+            : { verdict: 'refuted', reason: `${verdict.reason}; not corroborated by grounding citations` };
+        }
+        if (verdict.verdict !== 'verified') {
+          skipped += 1;
+          blocked.push({
+            iso_n3: finding.iso_n3,
+            jurisdiction: finding.jurisdiction,
+            headline: finding.headline || finding.claim,
+            category: finding.category,
+            primary_urls: originalPrimaries,
+            reason: verdict.reason,
+          });
+          console.warn(`::warning title=News blocked (${finding.jurisdiction})::${verdict.reason} — ${finding.claim.slice(0, 80)}`);
+          continue;
+        }
+      }
+
       // Make sure the "Source" link opens; fall back to the domain root if not.
       finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
       let post: TelegramPost;
@@ -390,6 +452,8 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
         console.warn(`skip (unpublishable): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
         continue;
       }
+      // Secondary: LLM consistency check. Prompt is material-facts-only — do not
+      // treat date format / paraphrase / HTML as unsupported (wording risk).
       if (llm) {
         try {
           await auditTelegramPost(synthesizeIssue(finding), post, { llm });
@@ -398,50 +462,14 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
           console.warn(`skip (audit blocked): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
           continue;
         }
-      } else {
+      } else if (!options.apply) {
         console.warn('::warning title=News audit skipped::No LLM configured; dry-run cannot verify evidence');
+      } else {
+        // Apply already refused earlier when llm is missing.
       }
       if (!options.apply) {
         console.log(`\n--- would publish (${finding.iso_n3}) ---\n${post.text}\n`);
         published += 1;
-        continue;
-      }
-      // Auto-publish integrity gate — the LLM audit checks the post against the
-      // model's own evidence; this checks it against the REAL primary source.
-      // Try every candidate URL and keep the strongest verdict. A "refuted"
-      // (non-authoritative host, or a readable page that lacks the quote) is real
-      // negative evidence and hard-blocks. An "inconclusive" (unreachable/403,
-      // PDF, JS-only shell, script mismatch) is NOT refutation — fall back to
-      // grounding-citation corroboration before blocking, so a genuine update on
-      // a page we simply can't scrape still gets out.
-      const allowedHosts = new Set((officialHosts.get(finding.iso_n3) ?? [])
-        .map(source => hostFromUrl(source.url))
-        .filter((h): h is string => Boolean(h)));
-      let verdict: SourceVerdict = { verdict: 'refuted', reason: 'no authoritative primary source' };
-      for (const candidate of originalPrimaries) {
-        const attempt = await verifyPrimarySource(candidate, finding.original_quote, allowedHosts);
-        if (attempt.verdict === 'verified') { verdict = attempt; break; }
-        if (attempt.verdict === 'inconclusive' && verdict.verdict === 'refuted') verdict = attempt;
-      }
-      if (verdict.verdict === 'inconclusive') {
-        const primaryHost = hostFromUrl(originalPrimaries[0] ?? '') ?? '';
-        verdict = await corroboratedByCitations(primaryHost, finding.citations)
-          ? { verdict: 'verified', reason: `quote unverifiable (${verdict.reason}); host corroborated by grounding citations` }
-          : { verdict: 'refuted', reason: `${verdict.reason}; not corroborated by grounding citations` };
-      }
-      if (verdict.verdict !== 'verified') {
-        skipped += 1;
-        blocked.push({
-          iso_n3: finding.iso_n3,
-          jurisdiction: finding.jurisdiction,
-          headline: finding.headline || finding.claim,
-          category: finding.category,
-          primary_urls: originalPrimaries,
-          reason: verdict.reason,
-        });
-        // Never silent: a blocked update is a signal, not a no-op. Surface it as a
-        // CI annotation now and to .out/blocked-news.json below for human review.
-        console.warn(`::warning title=News blocked (${finding.jurisdiction})::${verdict.reason} — ${finding.claim.slice(0, 80)}`);
         continue;
       }
 

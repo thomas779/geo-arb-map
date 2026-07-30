@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import {
   auditTelegramPost,
+  buildEvidenceAuditPrompt,
   buildTelegramPost,
   checkTelegramConnection,
   parseEvidenceAudit,
@@ -105,6 +106,20 @@ describe('Telegram publication gate', () => {
         headers: { 'content-type': 'application/json' },
       })) as unknown as typeof fetch,
     })).rejects.toThrow('AI evidence audit blocked publication');
+  });
+
+  // Sweden-class false negative: auditor treated ISO vs prose date as unsupported.
+  // Prompt must instruct material-only failures and date-format equivalence.
+  test('evidence audit prompt forbids date-format and paraphrase pedantry', () => {
+    const prompt = buildEvidenceAuditPrompt(
+      'Effective date: 2026-06-06 (6 June 2026).\nSource passage: "eight years (previously five years)".',
+      '🇸🇪 <b>Sweden eight year residence</b>\n\nFrom 6 June 2026 adults need eight years.\n\n<a href="https://example.com">Source</a>',
+    );
+    expect(prompt).toContain('Do NOT fail for wording, format, or equivalent presentation');
+    expect(prompt).toMatch(/ISO.*2026-06-06.*6 June 2026/s);
+    expect(prompt).toContain('Paraphrase, compression, or reordering');
+    expect(prompt).toContain('HTML markup, flag emoji');
+    expect(prompt).toContain('Fail only on MATERIAL unsupported substance');
   });
 
   test('checks that the configured destination is a channel where the bot can post', async () => {

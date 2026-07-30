@@ -295,6 +295,50 @@ export function parseEvidenceAudit(value: string): EvidenceAudit {
   };
 }
 
+// Shared audit instructions. Keep this strict on *material* facts and loose on
+// presentation — pedantic date/HTML/paraphrase failures (Sweden 2026-06-06 vs
+// "6 June 2026") blocked true posts without improving accuracy.
+export function buildEvidenceAuditPrompt(evidence: string, postText: string): string {
+  return `Audit a proposed public legal, tax, citizenship, or mobility news brief.
+Use only the supplied verified-evidence text. Do not rely on your memory and do not
+assume that a linked page says anything not quoted here.
+
+Verified evidence:
+${evidence}
+
+Proposed Telegram post:
+${postText}
+
+Return one JSON object only:
+{"publishable":boolean,"unsupported_claims":["claim"],"missing_context":["item"]}
+
+## Fail only on MATERIAL unsupported substance
+Set publishable=false only if the post asserts a material fact that the evidence does
+not support, for example:
+- a different jurisdiction, programme, or legal instrument
+- a different threshold, duration, fee, or count (wrong number)
+- a different effective date or transition rule (wrong day/month/year, or inventing
+  transitional relief the evidence never mentions)
+- inventing scope, eligibility, or exceptions the evidence does not support
+- evidence has no relevant quoted passage about the change at all
+
+unsupported_claims / missing_context must list only those material problems.
+
+## Do NOT fail for wording, format, or equivalent presentation
+These are NOT unsupported claims — set publishable=true:
+- Date formats that name the same calendar day (ISO "2026-06-06", "6 June 2026",
+  "June 6, 2026", "2026-06-06T00:00:00Z" are the same fact)
+- Year present only in an ISO date in the evidence when the post says the same day
+  in prose (and vice versa)
+- Paraphrase, compression, or reordering that keeps the same meaning
+- HTML markup, flag emoji, bold tags, or "Source" link chrome in the post
+- Minor grammar, capitalisation, or punctuation differences
+- Omitting background colour that is not needed to state the change accurately
+- Standard information-only disclaimers and review-trail URLs
+
+Ignore the standard information-only disclaimer and review-trail URL.`;
+}
+
 export async function auditTelegramPost(
   issue: ReviewIssue,
   post: TelegramPost,
@@ -307,23 +351,7 @@ export async function auditTelegramPost(
   },
 ): Promise<EvidenceAudit> {
   const evidence = section(issue.body, 'Verified evidence');
-  const prompt = `Audit a proposed public legal, tax, citizenship, or mobility news brief.
-Use only the supplied verified-evidence text. Do not rely on your memory and do not
-assume that a linked page says anything not quoted here.
-
-Verified evidence:
-${evidence}
-
-Proposed Telegram post:
-${post.text}
-
-Return one JSON object only:
-{"publishable":boolean,"unsupported_claims":["claim"],"missing_context":["item"]}
-
-Set publishable=false if any factual statement, date, scope, transition rule, or
-qualification in the post is not supported by the supplied evidence, or if the
-evidence lacks a relevant quoted passage. Ignore the standard information-only
-disclaimer and review-trail URL.`;
+  const prompt = buildEvidenceAuditPrompt(evidence, post.text);
   const result = parseEvidenceAudit(await generateLlmText(prompt, llm, {
     maxTokens: 1200,
     fetcher,
