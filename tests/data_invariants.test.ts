@@ -409,6 +409,17 @@ describe('monitor-lead verifications, 30 July 2026', () => {
       'https://static.slov-lex.sk/static/SK/ZZ/1993/40/20260715.html');
   });
 
+  test('Sweden naturalization records the 6 June 2026 eight-year and self-support rules', () => {
+    const sweden = citizenshipRoutes.routes.find(route =>
+      route.id === 'sweden-naturalization');
+    expect(sweden?.facts.eligibility_months).toEqual([96]);
+    expect(sweden?.summary).toContain('eight years');
+    expect(sweden?.summary).toContain('6 June 2026');
+    expect(sweden?.summary).toContain('SEK 20,000');
+    expect(sweden?.summary).toContain('no transitional relief');
+    expect(sweden?.last_checked).toBe('2026-07-30');
+  });
+
   test('Jordan investor route records both directions of the 15 July 2026 decision', () => {
     const jordan = citizenshipRoutes.routes.find(route =>
       route.id === 'jordan-investor-citizenship');

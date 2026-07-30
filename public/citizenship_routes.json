@@ -31951,7 +31951,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Citizenship after eight years residence",
-      "summary": "Adults generally need continuous residence of at least eight years, permanent residence status, identity proof, and good conduct. Shorter periods apply for Nordic citizens, spouses, and other statutory categories. Language and knowledge requirements apply under the current rules.",
+      "summary": "From 6 June 2026 adults generally need eight years habitual residence (was five), permanent residence, identity proof, orderly life, and self-support of about SEK 20,000/month (three income base amounts). Language and society knowledge requirements apply. Shorter periods for Nordic citizens, former Swedes, spouses, refugees, under-21s and stateless applicants; no transitional relief for pending applications.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -31969,7 +31969,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Swedish Migration Agency - citizenship for adults",
