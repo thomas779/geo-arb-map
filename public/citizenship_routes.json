@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 158
+      "residence_routes": 167
     }
   },
   "jurisdictions": [
@@ -495,7 +495,13 @@
         "brazil-naturalization-by-residence",
         "brazil-citizenship-by-birth",
         "brazil-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "brazil-viper-investor-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "084",
@@ -807,7 +813,15 @@
         "chile-naturalization",
         "chile-citizenship-by-birth",
         "chile-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "chile-investor-temporary-residence",
+        "chile-rentista-jubilado-temporary-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "156",
@@ -873,7 +887,14 @@
         "colombia-citizenship-by-conditional-birth",
         "colombia-study-permanent-residence-credit",
         "colombia-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "colombia-m-visa-real-estate-investor",
+        "colombia-m-visa-business-investor"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "174",
@@ -1145,7 +1166,13 @@
         "ecuador-naturalization",
         "ecuador-citizenship-at-birth",
         "ecuador-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "ecuador-investor-temporary-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "222",
@@ -3042,7 +3069,13 @@
         "palau-citizenship-by-parent",
         "palau-naturalization",
         "palau-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "palau-rns-digital-residency-id"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "586",
@@ -3147,7 +3180,15 @@
         "peru-naturalization",
         "peru-citizenship-at-birth",
         "peru-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "peru-rentista-residence",
+        "peru-investor-residence"
+      ],
+      "residence_coverage": {
+        "retirement_pension": "reviewed",
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "608",
@@ -37133,6 +37174,50 @@
       ]
     },
     {
+      "id": "brazil-viper-investor-residence",
+      "country": {
+        "iso_n3": "076",
+        "name": "Brazil"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Permanent residence for investors (VIPER / RN 36 framework)",
+      "summary": "Residence for foreigners who make a qualifying productive or real-estate investment under CNIG/MJSP regulations implementing Lei 13.445/2017.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "BRL"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          48
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "brazil-viper-investor-residence-principal",
+          "label": "Permanent residence for investors (VIPER / RN 36 framework)",
+          "allocation": "discretionary",
+          "eligibility_months": 48
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Brazil MJSP / immigration regulations (Lei 13.445 framework)",
+          "url": "https://www.gov.br/mj/pt-br/assuntos/seus-direitos/migracoes"
+        }
+      ]
+    },
+    {
       "id": "canada-federal-immigrant-investor",
       "country": {
         "iso_n3": "124",
@@ -37461,6 +37546,94 @@
       ]
     },
     {
+      "id": "chile-investor-temporary-residence",
+      "country": {
+        "iso_n3": "152",
+        "name": "Chile"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Temporary residence for investors (USD 500,000 productive investment)",
+      "summary": "Residencia Temporal for persons investing at least USD 500,000 (or equivalent) in the production of goods or services in Chile, per SERMIG investor subcategory.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 500000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "chile-investor-temporary-residence-principal",
+          "label": "Temporary residence for investors (USD 500,000 productive investment)",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "SERMIG — Investors and related personnel",
+          "url": "https://serviciomigraciones.cl/en/residencia-temporal-permit/subcategories/investors/"
+        }
+      ]
+    },
+    {
+      "id": "chile-rentista-jubilado-temporary-residence",
+      "country": {
+        "iso_n3": "152",
+        "name": "Chile"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Temporary residence for rentistas and retirees",
+      "summary": "Residencia Temporal for foreigners living on stable passive income (rentista) or a pension (jubilado), without local employment as the basis.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "chile-rentista-jubilado-temporary-residence-principal",
+          "label": "Temporary residence for rentistas and retirees",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "SERMIG — Jubilados y rentistas",
+          "url": "https://serviciomigraciones.cl/residencia-temporal/subcategorias/jubilados-y-rentistas/"
+        }
+      ]
+    },
+    {
       "id": "cn-pr-investor-2004",
       "country": {
         "iso_n3": "156",
@@ -37673,6 +37846,88 @@
         {
           "title": "Bureau of Consular Affairs, MOFA — Resident Visas for Investment",
           "url": "https://www.boca.gov.tw/cp-166-278-9b20e-2.html"
+        }
+      ]
+    },
+    {
+      "id": "colombia-m-visa-business-investor",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Migrant (M) visa — company / partner investment",
+      "summary": "M-category migrant visa for partners or owners investing at least 100 SMMLV in a Colombian company.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "colombia-m-visa-business-investor-principal",
+          "label": "Migrant (M) visa — company / partner investment",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Cancillería — visa types / Resolución 5477 framework",
+          "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/tipos-de-visa"
+        }
+      ]
+    },
+    {
+      "id": "colombia-m-visa-real-estate-investor",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Migrant (M) visa — real estate investment",
+      "summary": "M-category migrant visa for foreigners who acquire Colombian real estate at a minimum of 350 SMMLV and maintain the investment.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "colombia-m-visa-real-estate-investor-principal",
+          "label": "Migrant (M) visa — real estate investment",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Cancillería — visa types / Resolución 5477 framework",
+          "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/tipos-de-visa"
         }
       ]
     },
@@ -38133,6 +38388,50 @@
         {
           "title": "DGM — Residencia por Inversión en calidad de Rentista",
           "url": "https://migracion.gob.do/servicio/residencia-por-inversion-en-calidad-de-rentista/"
+        }
+      ]
+    },
+    {
+      "id": "ecuador-investor-temporary-residence",
+      "country": {
+        "iso_n3": "218",
+        "name": "Ecuador"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Temporary residence — investor (inversionista)",
+      "summary": "Temporary residence for foreigners who invest at least 100 unified basic salaries (SBU) in real estate, a bank deposit, or an Ecuadorian company.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 48200,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ecuador-investor-temporary-residence-principal",
+          "label": "Temporary residence — investor (inversionista)",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Ecuador immigration — residence categories (Servicio de Gestión Migratoria framework)",
+          "url": "https://www.gob.ec/sgm"
         }
       ]
     },
@@ -40732,6 +41031,48 @@
       ]
     },
     {
+      "id": "palau-rns-digital-residency-id",
+      "country": {
+        "iso_n3": "585",
+        "name": "Palau"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Digital Residency ID (RNS.ID)",
+      "summary": "Government-linked digital identity / “digital residency” credential sold via RNS.ID — not a physical residence permit and not a path to Palauan citizenship.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 248,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "palau-rns-digital-residency-id-principal",
+          "label": "Digital Residency ID (RNS.ID)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "RNS.ID — Palau Digital Residency ID",
+          "url": "https://rns.id/"
+        }
+      ]
+    },
+    {
       "id": "panama-friendly-nations-visa",
       "country": {
         "iso_n3": "591",
@@ -40941,6 +41282,91 @@
         {
           "title": "Paraguay — Dirección Nacional de Migraciones (Res. DNM 407/2026)",
           "url": "https://migraciones.gov.py/migraciones-actualiza-el-regimen-de-acreditacion-de-solvencia-economica-para-extranjeros/"
+        }
+      ]
+    },
+    {
+      "id": "peru-investor-residence",
+      "country": {
+        "iso_n3": "604",
+        "name": "Peru"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor migratory status (business capital)",
+      "summary": "Residence for foreigners who invest a statutory minimum capital in a Peruvian company and meet job-creation / business-plan conditions.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "peru-investor-residence-principal",
+          "label": "Investor migratory status (business capital)",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Superintendencia Nacional de Migraciones (Peru)",
+          "url": "https://www.gob.pe/migraciones"
+        }
+      ]
+    },
+    {
+      "id": "peru-rentista-residence",
+      "country": {
+        "iso_n3": "604",
+        "name": "Peru"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Rentista (independent means) residence",
+      "summary": "Residence for foreigners with stable passive income from abroad (pension, rents, investments) meeting Migraciones practice thresholds.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "peru-rentista-residence-principal",
+          "label": "Rentista (independent means) residence",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Superintendencia Nacional de Migraciones (Peru)",
+          "url": "https://www.gob.pe/migraciones"
         }
       ]
     },

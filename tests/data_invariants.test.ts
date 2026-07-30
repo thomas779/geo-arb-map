@@ -417,6 +417,32 @@ describe('monitor-lead verifications, 30 July 2026', () => {
       'https://static.slov-lex.sk/static/SK/ZZ/1993/40/20260715.html');
   });
 
+  test('residence batch 6 records LatAm RBI tracks and Palau RNS.ID digital credential', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    for (const id of [
+      'brazil-viper-investor-residence',
+      'chile-investor-temporary-residence',
+      'chile-rentista-jubilado-temporary-residence',
+      'colombia-m-visa-real-estate-investor',
+      'colombia-m-visa-business-investor',
+      'ecuador-investor-temporary-residence',
+      'peru-rentista-residence',
+      'peru-investor-residence',
+      'palau-rns-digital-residency-id',
+    ]) {
+      expect(byId.has(id), id).toBe(true);
+    }
+    const palau = byId.get('palau-rns-digital-residency-id');
+    expect(palau?.category).toBe('digital_nomad');
+    expect(palau?.counts_toward_permanent_residence).toBe(false);
+    expect(palau?.counts_toward_naturalization).toBe(false);
+    expect(palau?.summary.toLowerCase()).toContain('not a physical residence');
+    expect(palau?.summary.toLowerCase()).toMatch(/digital identity|digital residency/);
+    expect(palau?.min_investment?.amount).toBe(248);
+    const chile = byId.get('chile-investor-temporary-residence');
+    expect(chile?.min_investment?.amount).toBe(500000);
+  });
+
   test('residence batch 5 records Nordics/Baltics startup tracks and golden-visa negatives', () => {
     const ids = new Set(citizenshipRoutes.residence_routes?.map(r => r.id) ?? []);
     for (const id of [
