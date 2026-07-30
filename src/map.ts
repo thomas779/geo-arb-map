@@ -464,10 +464,10 @@ function idleBucket(lookupIso: string): IdleBucket {
   return 'none';
 }
 
-let _classIsos: Set<string> | null = null;
+let _classIsos: { all: Set<string>; accruing: Set<string> } | null = null;
 
-/** Route-class browse paint set (#129); owned by render(), read by colorForIso. */
-export function setRouteClassIsos(isos: Set<string> | null): void {
+/** Route-class browse paint sets (#129); owned by render(), read by colorForIso. */
+export function setRouteClassIsos(isos: { all: Set<string>; accruing: Set<string> } | null): void {
   _classIsos = isos;
 }
 
@@ -475,9 +475,13 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   const lookupIso = mobilityIso(iso);
   const dark = isDarkTheme();
   if (state.routeClass && _classIsos) {
-    // Binary paint: the question is "does an active route of this class exist
-    // here", so intensity ramps would imply precision the data doesn't claim.
-    return _classIsos.has(lookupIso) ? 'var(--map-strong)' : 'var(--map-land)';
+    // Two tones, one honest split (owner decision): solid where at least one
+    // active route of the class ACCRUES toward PR or citizenship, muted where
+    // routes exist but dead-end — most digital-nomad visas are the muted case.
+    // The flags are the same ones the cards' ladder badges render.
+    if (_classIsos.accruing.has(lookupIso)) return 'var(--map-strong)';
+    if (_classIsos.all.has(lookupIso)) return 'var(--map-limited)';
+    return 'var(--map-land)';
   }
   if (state.lane) {
     const lane = data.bilateral_lanes.find(l => l.id === state.lane);

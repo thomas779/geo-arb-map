@@ -257,7 +257,7 @@ export default function App() {
   }, [state.routeClass, citizenshipRoutes]);
   const routeClassCounts = useMemo(() => {
     if (!citizenshipRoutes) return new Map<string, number>();
-    return new Map(ROUTE_CLASSES.map(cls => [cls.id, isosForRouteClass(cls, citizenshipRoutes).size]));
+    return new Map(ROUTE_CLASSES.map(cls => [cls.id, isosForRouteClass(cls, citizenshipRoutes).all.size]));
   }, [citizenshipRoutes]);
 
   const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane);

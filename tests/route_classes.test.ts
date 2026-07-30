@@ -11,12 +11,13 @@ const data = (await Bun.file(
   new URL('../public/citizenship_routes.json', import.meta.url),
 ).json()) as CitizenshipRoutesData;
 
-const isos = (id: string) => isosForRouteClass(routeClassById(id)!, data);
+const isos = (id: string) => isosForRouteClass(routeClassById(id)!, data).all;
+const accruing = (id: string) => isosForRouteClass(routeClassById(id)!, data).accruing;
 
 describe('route-class painted sets', () => {
   test('every class resolves and paints at least one jurisdiction', () => {
     for (const cls of ROUTE_CLASSES) {
-      expect(isosForRouteClass(cls, data).size, cls.id).toBeGreaterThan(0);
+      expect(isosForRouteClass(cls, data).all.size, cls.id).toBeGreaterThan(0);
     }
   });
 
@@ -48,6 +49,20 @@ describe('route-class painted sets', () => {
     const set = isos('ancestry');
     expect(set.has('380')).toBe(true); // Italy jure sanguinis
     expect(set.has('376')).toBe(true); // Israel — Law of Return folded into the ancestry route
+  });
+
+  test('two-tone paint: accruing is a subset and catches the dead-end nomad visas', () => {
+    const nomad = isosForRouteClass(routeClassById('digital-nomad')!, data);
+    for (const iso of nomad.accruing) expect(nomad.all.has(iso)).toBe(true);
+    // Portugal's D8 counts toward naturalisation — solid tier.
+    expect(nomad.accruing.has('620')).toBe(true);
+    // South Africa's Remote Work visa is a visitor visa: time accrues toward
+    // nothing. Paints, but muted — the owner's "money grab" tier, made visible.
+    expect(nomad.all.has('710')).toBe(true);
+    expect(nomad.accruing.has('710')).toBe(false);
+    // Citizenship classes are all-accruing by definition.
+    const cbi = isosForRouteClass(routeClassById('cbi')!, data);
+    expect(cbi.accruing.size).toBe(cbi.all.size);
   });
 
   test('citizenship and residence investment stay distinct classes', () => {

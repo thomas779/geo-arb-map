@@ -40,24 +40,44 @@ export function routeClassById(id: string | null | undefined): RouteClass | null
   return ROUTE_CLASSES.find(c => c.id === id) ?? null;
 }
 
-/** ISO-n3 set of jurisdictions with ≥1 ACTIVE route of the class. */
+/**
+ * Painted sets for a class. Two tiers, because "has a route" hides the
+ * distinction the owner called out: most digital-nomad visas are temporary
+ * stays that accrue toward nothing, while a few genuinely ladder into PR or
+ * citizenship. `accruing` ⊆ `all`.
+ *
+ * - citizenship classes: every active route is `accruing` by definition — the
+ *   outcome IS citizenship.
+ * - residence classes: `accruing` when the route counts toward permanent
+ *   residence or naturalization (the same flags the cards' ladder badges show).
+ */
+export interface RouteClassIsos {
+  all: Set<string>;
+  accruing: Set<string>;
+}
+
 export function isosForRouteClass(
   routeClass: RouteClass,
   data: CitizenshipRoutesData,
-): Set<string> {
-  const isos = new Set<string>();
+): RouteClassIsos {
+  const all = new Set<string>();
+  const accruing = new Set<string>();
   if (routeClass.kind === 'citizenship') {
     for (const route of data.routes) {
       if (route.mode === routeClass.match && route.status === 'active') {
-        isos.add(route.country.iso_n3);
+        all.add(route.country.iso_n3);
+        accruing.add(route.country.iso_n3);
       }
     }
   } else {
     for (const route of data.residence_routes ?? []) {
       if (route.category === routeClass.match && route.status === 'active') {
-        isos.add(route.country.iso_n3);
+        all.add(route.country.iso_n3);
+        if (route.counts_toward_permanent_residence || route.counts_toward_naturalization) {
+          accruing.add(route.country.iso_n3);
+        }
       }
     }
   }
-  return isos;
+  return { all, accruing };
 }

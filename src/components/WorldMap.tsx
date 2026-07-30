@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import type { AppState, BlocsData } from '../types';
+import type { RouteClassIsos } from '../lib/route-classes';
 import type { Profile } from '../lib/planner';
 import { init as initMap, render as renderMap, setRouteClassIsos } from '../map';
 import { cn } from '../lib/utils';
@@ -13,8 +14,8 @@ interface Props {
   theme: string;
   profile: Profile;
   onSelect: (iso: string, name: string) => void;
-  /** Route-class browse (#129): ISO set to paint; null when no class selected. */
-  routeClassIsos?: Set<string> | null;
+  /** Route-class browse (#129): painted sets; null when no class selected. */
+  routeClassIsos?: RouteClassIsos | null;
   /** Last-verified date, shown in the map key footer (consolidates the old pill). */
   dataUpdatedAt?: string;
   /** Opens the methodology / trust panel from the map key footer. */
@@ -79,7 +80,7 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
   // once a selection is active (the panels already explain it), hidden off-map.
   const legendMode = state.view !== 'map'
     ? 'hidden'
-    : state.lane || state.blocs.length > 0 || state.country
+    : state.lane || state.blocs.length > 0 || state.country || state.routeClass
       ? 'select'
       : 'idle';
 
@@ -113,6 +114,17 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
                       <span>{row.label}</span>
                     </li>
                   ))}
+                </ul>
+              ) : state.routeClass ? (
+                <ul className="flex flex-col gap-1.5">
+                  <li className="flex items-center gap-2 text-[11.5px] leading-tight text-foreground">
+                    <span className="legend-sw sw-strong" aria-hidden />
+                    <span>Route leads toward PR or citizenship</span>
+                  </li>
+                  <li className="flex items-center gap-2 text-[11.5px] leading-tight text-foreground">
+                    <span className="legend-sw sw-limited" aria-hidden />
+                    <span>Route exists, residence only</span>
+                  </li>
                 </ul>
               ) : (
                 <p className="text-[11.5px] leading-snug text-muted-foreground">Selection highlighted on the map.</p>
