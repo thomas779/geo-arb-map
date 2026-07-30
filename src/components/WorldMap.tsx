@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import type { AppState, BlocsData } from '../types';
 import type { Profile } from '../lib/planner';
-import { init as initMap, render as renderMap } from '../map';
+import { init as initMap, render as renderMap, setRouteClassIsos } from '../map';
 import { cn } from '../lib/utils';
 import { Card, CardFooter } from '@/components/ui/card';
 
@@ -13,6 +13,8 @@ interface Props {
   theme: string;
   profile: Profile;
   onSelect: (iso: string, name: string) => void;
+  /** Route-class browse (#129): ISO set to paint; null when no class selected. */
+  routeClassIsos?: Set<string> | null;
   /** Last-verified date, shown in the map key footer (consolidates the old pill). */
   dataUpdatedAt?: string;
   /** Opens the methodology / trust panel from the map key footer. */
@@ -46,7 +48,7 @@ const ACCESS_LEVELS = [
  * (by the ids map.ts expects), forwards state changes to its render(),
  * and renders the map legend (driven by AppState, not by the D3 layer).
  */
-export function WorldMap({ data, state, theme, profile, onSelect, dataUpdatedAt, onOpenInfo }: Props) {
+export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos = null, dataUpdatedAt, onOpenInfo }: Props) {
   const inited = useRef(false);
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
@@ -58,6 +60,7 @@ export function WorldMap({ data, state, theme, profile, onSelect, dataUpdatedAt,
     if (!data || inited.current) return;
     inited.current = true;
     const cleanup = initMap(data, (iso, name) => onSelectRef.current(iso, name));
+    setRouteClassIsos(routeClassIsos);
     renderMap(state, data, profile);
     return () => {
       cleanup();
@@ -68,8 +71,9 @@ export function WorldMap({ data, state, theme, profile, onSelect, dataUpdatedAt,
 
   useEffect(() => {
     if (!data || !inited.current) return;
+    setRouteClassIsos(routeClassIsos);
     renderMap(state, data, profile);
-  }, [state, data, theme, profile]);
+  }, [state, data, theme, profile, routeClassIsos]);
 
   // Legend is idle-first: full key when nothing is selected, a one-line caption
   // once a selection is active (the panels already explain it), hidden off-map.

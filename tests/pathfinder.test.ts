@@ -288,6 +288,7 @@ describe('profile and URL regressions', () => {
         view: 'map',
         blocs: ['eu_eea'],
         lane: null,
+        routeClass: null,
         country: null,
         countryName: null,
       },

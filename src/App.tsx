@@ -16,6 +16,7 @@ import * as url from './url';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Sidebar } from '@/components/Sidebar';
+import { ROUTE_CLASSES, isosForRouteClass, routeClassById } from '@/lib/route-classes';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { RouteDetailPanel } from '@/components/RouteDetailPanel';
@@ -63,6 +64,7 @@ const initialState: AppState = {
   view: 'map',
   blocs: [],
   lane: null,
+  routeClass: null,
   country: null,
   countryName: null,
   ...url.read(),
@@ -195,6 +197,7 @@ export default function App() {
         ? []
         : s.blocs.includes(id) ? s.blocs.filter(b => b !== id) : [...s.blocs, id],
       lane: null,
+      routeClass: null,
       country: null,
       countryName: null,
     }));
@@ -202,11 +205,24 @@ export default function App() {
   const selectLane = useCallback((id: string | null) => {
     setMobileList(false);
     if (id !== null) setRoutePanelOpen(true);
-    patch({ view: 'map', lane: id, blocs: [], country: null, countryName: null });
+    patch({ view: 'map', lane: id, blocs: [], routeClass: null, country: null, countryName: null });
   }, [patch]);
+  /** Route-class browse (#129). Single-select; re-picking the active class clears it. */
+  const selectRouteClass = useCallback((id: string | null) => {
+    setMobileList(false);
+    setState(s => ({
+      ...s,
+      view: 'map',
+      routeClass: id === null || s.routeClass === id ? null : id,
+      blocs: [],
+      lane: null,
+      country: null,
+      countryName: null,
+    }));
+  }, []);
   const clearMapSelection = useCallback(() => {
     setRoutePanelOpen(false);
-    patch({ blocs: [], lane: null, country: null, countryName: null });
+    patch({ blocs: [], lane: null, routeClass: null, country: null, countryName: null });
   }, [patch]);
   const selectView = useCallback((v: AppState['view']) =>
     patch({ view: v }), [patch]);
@@ -232,6 +248,17 @@ export default function App() {
     setRoutePanelOpen(true);
     patch({ country: null, countryName: null });
   }, [patch]);
+
+  // Route-class browse (#129): the painted ISO set and per-class country counts,
+  // derived from the same public data the country pages render.
+  const routeClassIsos = useMemo(() => {
+    const cls = routeClassById(state.routeClass);
+    return cls && citizenshipRoutes ? isosForRouteClass(cls, citizenshipRoutes) : null;
+  }, [state.routeClass, citizenshipRoutes]);
+  const routeClassCounts = useMemo(() => {
+    if (!citizenshipRoutes) return new Map<string, number>();
+    return new Map(ROUTE_CLASSES.map(cls => [cls.id, isosForRouteClass(cls, citizenshipRoutes).size]));
+  }, [citizenshipRoutes]);
 
   const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane);
   const rightPanelOpen = state.country ? detailPanelOpen : hasRouteSelection && routePanelOpen;
@@ -315,6 +342,8 @@ export default function App() {
               state={state}
               onBloc={toggleBloc}
               onLane={selectLane}
+              onRouteClass={selectRouteClass}
+              routeClassCounts={routeClassCounts}
             />
           </div>
         )}
@@ -325,6 +354,7 @@ export default function App() {
             theme={theme}
             profile={profile}
             onSelect={selectCountry}
+            routeClassIsos={routeClassIsos}
             dataUpdatedAt={dataStatus.updatedAt}
             onOpenInfo={() => changeInfo('methodology')}
           />
@@ -357,6 +387,8 @@ export default function App() {
                 state={state}
                 onBloc={toggleBloc}
                 onLane={selectLane}
+                onRouteClass={selectRouteClass}
+                routeClassCounts={routeClassCounts}
               />
             </div>
           )}

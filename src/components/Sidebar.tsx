@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Check, ChevronDown, Search } from 'lucide-react';
+import { ROUTE_CLASSES } from '@/lib/route-classes';
 import type { AppState, BilateralLane, Bloc, BlocsData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -57,6 +58,10 @@ interface Props {
   state: AppState;
   onBloc: (id: string | null) => void;
   onLane: (id: string | null) => void;
+  /** Route-class browse (#129); single-select, null clears. */
+  onRouteClass: (id: string | null) => void;
+  /** Countries with >=1 active route, per class id — the row count badges. */
+  routeClassCounts: Map<string, number>;
 }
 
 function Swatch({ color, selected }: { color: string; selected: boolean }) {
@@ -134,7 +139,7 @@ function LaneDirection({ lane }: { lane: BilateralLane }) {
   );
 }
 
-export function Sidebar({ data, state, onBloc, onLane }: Props) {
+export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassCounts }: Props) {
   const { theme } = useTheme();
   const dark = theme === 'dark';
   const [query, setQuery] = useState('');
@@ -217,7 +222,7 @@ export function Sidebar({ data, state, onBloc, onLane }: Props) {
     : null;
   const selectedBlocs = data.blocs.filter(bloc => state.blocs.includes(bloc.id));
 
-  const allSections = ['regional', 'country'];
+  const allSections = ['regional', 'classes', 'country'];
   const [openSections, setOpenSections] = useState<string[]>(() => {
     if (selectedLane) return ['country'];
     return ['regional'];
@@ -361,6 +366,36 @@ export function Sidebar({ data, state, onBloc, onLane }: Props) {
             </AccordionContent>
           </AccordionItem>
         )}
+        {/* Route-class browse (#129): a third axis over the country inventory —
+          * "where does an active golden visa / nomad / ancestry route exist" —
+          * distinct from regional systems and nationality lanes. Single-select;
+          * painting is binary (has an active route or not). */}
+        <AccordionItem value="classes" className="border-b">
+          <AccordionTrigger className={catTrigger}>
+            <span>Route types</span>
+            <span className={headingCount}>{ROUTE_CLASSES.length}</span>
+          </AccordionTrigger>
+          <AccordionContent className="h-auto pb-1">
+            {ROUTE_CLASSES.filter(cls =>
+              !query.trim() || cls.label.toLowerCase().includes(query.trim().toLowerCase()),
+            ).map(cls => (
+              <Button
+                key={cls.id}
+                variant="ghost"
+                size="sm"
+                className={cn(rowBase, 'gap-1.5 px-1.5', state.routeClass === cls.id && rowSelected)}
+                aria-pressed={state.routeClass === cls.id}
+                title={cls.description}
+                onClick={() => onRouteClass(cls.id)}
+              >
+                <span className="min-w-0 flex-1 truncate text-left">{cls.label}</span>
+                <Badge variant="outline" className="shrink-0 px-1.5 text-[10px] text-muted-foreground">
+                  {routeClassCounts.get(cls.id) ?? 0}
+                </Badge>
+              </Button>
+            ))}
+          </AccordionContent>
+        </AccordionItem>
 
         {countryLaneCount > 0 && (
           <AccordionItem value="country" className="border-b">

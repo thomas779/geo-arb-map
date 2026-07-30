@@ -1,7 +1,7 @@
 import type { AppState } from './types';
 import type { FlagStatus, PlantedFlag, Profile } from './lib/planner';
 
-const MAP_PARAMS = ['view', 'blocs', 'bloc', 'lane', 'country'];
+const MAP_PARAMS = ['view', 'blocs', 'bloc', 'lane', 'country', 'class'];
 const PROFILE_PARAMS = ['flags', 'born', 'ancestors', 'heritage', 'partner', 'goals'];
 const TRUST_SECTIONS = ['methodology', 'privacy', 'limitations'] as const;
 export type TrustSection = typeof TRUST_SECTIONS[number];
@@ -91,6 +91,9 @@ export function read(): Partial<AppState> {
   const lane = params.get('lane');
   if (lane) state.lane = lane;
 
+  const routeClass = params.get('class');
+  if (routeClass) state.routeClass = routeClass;
+
   const country = params.get('country');
   if (country) state.country = country;
 
@@ -120,6 +123,7 @@ export function paramsForState(current: URLSearchParams, state: AppState): URLSe
   if (state.view === 'map') {
     if (state.blocs.length) params.set('blocs', state.blocs.join(','));
     if (state.lane) params.set('lane', state.lane);
+    if (state.routeClass) params.set('class', state.routeClass);
     if (state.country) params.set('country', state.country);
   }
   return params;

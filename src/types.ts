@@ -220,6 +220,8 @@ export interface AppState {
   /** Multi-select compare: countries in 2+ selected blocs render blended. */
   blocs: string[];
   lane: string | null;
+  /** Route-class browse (#129): paints jurisdictions with an active route of the class. */
+  routeClass: string | null;
   country: string | null;
   countryName: string | null;
 }
