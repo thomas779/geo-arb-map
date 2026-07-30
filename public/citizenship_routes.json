@@ -28588,7 +28588,7 @@
       "mode": "investment",
       "status": "active",
       "title": "Citizenship by Investment Programme",
-      "summary": "Direct citizenship by registration following a qualifying investment under the Citizenship by Investment Act.",
+      "summary": "Direct citizenship by registration following a qualifying investment under the Citizenship by Investment Act. Act No. 22 of 2025 inserts s.30A requiring applicants and dependants to comply with prescribed residency and genuine-link requirements from 1 January 2026; those requirements have not yet been published as regulations, so no fixed day-count is recorded.",
       "facts": {
         "programme_type": "direct_citizenship_by_investment",
         "residence_required": false,
@@ -28605,15 +28605,19 @@
           "label": "Citizenship by Investment Programme",
           "allocation": "discretionary",
           "eligibility_months": 0,
-          "note": "The National Economic Fund option currently starts at US$240,000 for a principal applicant with up to three qualifying dependants; other options and fees differ."
+          "note": "The National Economic Fund option currently starts at US$240,000 for a principal applicant with up to three qualifying dependants; other options and fees differ. s.30A is primary law in force from 1 January 2026, but the Unit FAQs still describe no residency requirement and the Cap. 1.20 PDF on pmd.govt.lc does not yet consolidate the amendment."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-17",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Saint Lucia Citizenship by Investment Act",
           "url": "https://pmd.govt.lc/wp-content/uploads/2025/10/Citizenship-by-Investment-Act-Cap.1.20.pdf"
+        },
+        {
+          "title": "Saint Lucia Citizenship by Investment (Amendment) Act 2025 (No. 22 of 2025)",
+          "url": "https://npc.govt.lc/laws/download/UjVlcXRvZTd3RG93ODVaQ0tsbWNwZEJ4WUdIWE9DR3N3WlNGUC9GVjBjYmM0bEZNaGJicXVNVFh4RGJGSkdRam94VnZBYWxwcndtelBObGJ1Si82OFkrcmd3a2tlcWRDSW4zYzBjN2hmM1ViaVFhRXAxUitnOTNpRzNkSlNqRW0="
         }
       ]
     },

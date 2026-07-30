@@ -409,6 +409,17 @@ describe('monitor-lead verifications, 30 July 2026', () => {
       'https://static.slov-lex.sk/static/SK/ZZ/1993/40/20260715.html');
   });
 
+  test('Saint Lucia CIP records Act 22 of 2025 s.30A without inventing a day-count', () => {
+    const cip = citizenshipRoutes.routes.find(route => route.id === 'saint-lucia-cip');
+    expect(cip?.status).toBe('active');
+    expect(cip?.facts.residence_required).toBe(false);
+    expect(cip?.summary).toContain('s.30A');
+    expect(cip?.summary).toContain('1 January 2026');
+    expect(cip?.summary).toContain('not yet been published');
+    expect(cip?.sources.map(s => s.title).join(' ')).toMatch(/\(Amendment\) Act 2025/);
+    expect(cip?.last_checked).toBe('2026-07-30');
+  });
+
   test('Sweden naturalization records the 6 June 2026 eight-year and self-support rules', () => {
     const sweden = citizenshipRoutes.routes.find(route =>
       route.id === 'sweden-naturalization');
