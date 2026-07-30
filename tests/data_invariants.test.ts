@@ -570,14 +570,26 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(byId.get('pakistan-citizenship-at-birth-by-parent')?.facts.jus_soli).toBe('none');
     expect(byId.get('uruguay-nationality-by-birth')?.facts.jus_soli).toBe('unconditional');
     expect(byId.get('uruguay-nationality-by-birth')?.facts.unconditional_jus_soli).toBe(true);
-    // Unconditional set: Americas core + US territories following US jus soli + Venezuela.
+    // Unconditional set: Americas core, the Commonwealth Caribbean, US territories
+    // following US jus soli, plus Lesotho, Tuvalu and Peru. Corrected 2026-07-30
+    // after nine jurisdictions were found misclassified as `none` at high
+    // confidence — see #119. Every entry is sourced to official government text.
     const unconditional = citizenshipRoutes.routes.filter(r =>
       r.mode === 'birth' && r.facts?.jus_soli === 'unconditional');
     expect(unconditional.map(r => r.country.iso_n3).sort()).toEqual([
-      '028', '032', '052', '068', '076', '124', '212', '218', '222', '308',
-      '316', '320', '340', '484', '558', '580', '591', '600', '630', '659',
-      '662', '840', '850', '858', '862',
+      '028', '032', '052', '068', '076', '084', '124', '192', '212', '218',
+      '222', '308', '316', '320', '328', '340', '388', '426', '484', '558',
+      '580', '591', '600', '604', '630', '659', '662', '670', '780', '798',
+      '840', '850', '858', '862',
     ]);
+    // Guard against silent UNDER-counting, which is how the errors above arose:
+    // an exact-list assertion happily locks in a wrong answer. GLOBALCIT puts
+    // unconditional ius soli near 19% of 191 states, so the sovereign count
+    // (excluding the four US territories) belongs in a defensible band.
+    const TERRITORIES = new Set(['316', '580', '630', '850']);
+    const sovereigns = unconditional.filter(r => !TERRITORIES.has(r.country.iso_n3));
+    expect(sovereigns.length).toBeGreaterThanOrEqual(28);
+    expect(sovereigns.length).toBeLessThanOrEqual(42);
     // Full atlas birth coverage: every birth route carries structured jus_soli.
     const birth = citizenshipRoutes.routes.filter(r => r.mode === 'birth');
     const withJs = birth.filter(r => r.facts?.jus_soli);
@@ -689,5 +701,43 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(note).toContain('JOD 150,000');
     expect(note).toContain('five-year hold');
     expect(jordan?.last_checked).toBe('2026-07-30');
+  });
+});
+
+describe('source quality: constituteproject is a lead, not a source of record', () => {
+  // Owner policy (2026-07-30): constituteproject.org may be used to FIND a
+  // provision but must not stand as the cited authority in the published data.
+  // 357 routes currently violate this. Rather than assert zero and fail the
+  // suite, ratchet: the count may only go down. Lower these numbers as
+  // jurisdictions are re-sourced; never raise them.
+  const CONSTITUTEPROJECT_ONLY_CEILING = 357;
+  const CONSTITUTEPROJECT_ANY_CEILING = 381;
+
+  const cites = (route: { sources: Array<{ url: string }> }) =>
+    route.sources.some(source => source.url.includes('constituteproject'));
+  const onlyCites = (route: { sources: Array<{ url: string }> }) =>
+    route.sources.length > 0 && route.sources.every(source => source.url.includes('constituteproject'));
+
+  test('no new route may take constituteproject as its only source', () => {
+    const offenders = citizenshipRoutes.routes.filter(onlyCites);
+    expect(offenders.length).toBeLessThanOrEqual(CONSTITUTEPROJECT_ONLY_CEILING);
+  });
+
+  test('overall constituteproject reliance does not grow', () => {
+    expect(citizenshipRoutes.routes.filter(cites).length)
+      .toBeLessThanOrEqual(CONSTITUTEPROJECT_ANY_CEILING);
+  });
+
+  test('every route classified unconditional jus soli has an official source', () => {
+    // The birth-tourism answer is the most consequential thing in the dataset,
+    // so this subset gets the strict rule now rather than via the ratchet.
+    const unconditional = citizenshipRoutes.routes.filter(route =>
+      route.facts?.jus_soli === 'unconditional');
+    expect(unconditional.length).toBeGreaterThan(0);
+    // Ratcheted to 7 while the Latin American batch (Bolivia, Ecuador, El
+    // Salvador, Guatemala, Honduras, Nicaragua, Venezuela) is re-sourced to
+    // official gazettes. Drive this to 0 and then assert toEqual([]).
+    const unsourced = unconditional.filter(onlyCites).map(route => route.id);
+    expect(unsourced.length).toBeLessThanOrEqual(7);
   });
 });

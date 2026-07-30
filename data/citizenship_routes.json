@@ -1320,18 +1320,16 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Peruvian parent or birth in Peru",
-      "summary": "Birth to a Peruvian parent, or birth in Peru under the Nationality Law, creates Peruvian nationality. Ordinary foreign-parent temporary presence is not a general unrestricted jus soli path.",
+      "title": "Citizenship at birth in Peru",
+      "summary": "Constitution art. 52 makes those born in the territory of the Republic Peruvian by birth, with no parental nationality, residence, status or registration condition, and unusually no diplomatic carve-out. Ley 26574 art. 2.1 restates it.",
       "facts": {
-        "jus_soli": "conditional",
-        "parent_condition": "residence",
-        "jus_soli_exceptions": [
-          "diplomats"
-        ],
-        "unconditional_jus_soli": false
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Peru Migraciones — naturalization procedure",
@@ -1347,20 +1345,23 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Belizean parent",
-      "summary": "Birth to a Belizean parent creates nationality under the constitutional and nationality-act framework.",
+      "title": "Citizenship at birth in Belize",
+      "summary": "Constitution s.24 makes every person born in Belize on or after Independence Day a citizen at the date of birth, whatever the parents' nationality or status, excepting only children of accredited envoys and of enemy aliens born in enemy-occupied territory. Belizean Nationality Act s.5 agrees.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [],
-        "unconditional_jus_soli": false
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Belize Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Belize_2011"
+          "title": "Constitution of Belize, Cap. 4 (Substantive Laws of Belize, Revised Edition 2000)",
+          "url": "https://web.archive.org/web/20071011005723/http://www.belizelaw.org/lawadmin/PDF%20files/cap004.pdf"
         },
         {
           "title": "Belize Immigration — Citizenship eligibility",
@@ -1376,20 +1377,23 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Cuba parent",
-      "summary": "Birth to a Cuba parent creates nationality. Birth in Cuba alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "title": "Citizenship at birth in Cuba",
+      "summary": "Constitution art. 34(a) makes those born in the national territory Cuban by birth, excepting only children of foreigners serving their government or an international organisation. Ley 172/2024 will add a parental-presence condition once it commences, expected around 1 November 2026.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [],
-        "unconditional_jus_soli": false
+        "jus_soli_exceptions": [
+          "diplomats",
+          "international_organisation_staff"
+        ],
+        "unconditional_jus_soli": true
       },
-      "confidence": "high",
-      "last_checked": "2026-07-22",
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Cuba Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Cuba_2019"
+          "title": "Ley 172/2024 Ley de Ciudadania, Gaceta Oficial No. 39 Ordinaria de 5 de mayo de 2026",
+          "url": "https://www.gacetaoficial.gob.cu/sites/default/files/goc-2026-o39.pdf"
         }
       ]
     },
@@ -1401,20 +1405,23 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Guyana parent",
-      "summary": "Birth to a Guyana parent creates nationality. Birth in Guyana alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "title": "Citizenship at birth in Guyana",
+      "summary": "Constitution art. 43 makes every person born in Guyana a citizen at the date of birth, whatever the parents' nationality or status; the provisos exclude only children of accredited envoys and of enemy aliens born in enemy-occupied territory. Art. 48(1)(b) entrenches art. 43 against statutory deprivation.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [],
-        "unconditional_jus_soli": false
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Guyana Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Guyana_2016"
+          "title": "Constitution of the Co-operative Republic of Guyana (Parliament of Guyana)",
+          "url": "https://parliament.gov.gy/Constitution%20of%20the%20Cooperatiive%20Republic%20of%20Guyana.pdf"
         }
       ]
     },
@@ -1426,20 +1433,23 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Jamaica parent",
-      "summary": "Birth to a Jamaica parent creates nationality. Birth in Jamaica alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "title": "Citizenship at birth in Jamaica",
+      "summary": "Constitution s.3B(1) makes every person born in Jamaica a citizen at birth, whatever the parents' nationality or status. s.3B(3) excludes only children of accredited envoys and of enemy aliens born in enemy-occupied territory.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [],
-        "unconditional_jus_soli": false
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Jamaica Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Jamaica_2015"
+          "title": "Constitution of Jamaica (Laws of Jamaica, Ministry of Justice)",
+          "url": "https://laws.moj.gov.jm/library/statute/the-jamaica-constitution-order-in-council-1962/download"
         }
       ]
     },
@@ -1451,20 +1461,23 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Saint Vincent and the Grenadines parent",
-      "summary": "Birth to a Saint Vincent and the Grenadines parent creates nationality. Birth in Saint Vincent and the Grenadines alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "title": "Citizenship at birth in Saint Vincent and the Grenadines",
+      "summary": "Constitution s.91 makes every person born in Saint Vincent and the Grenadines a citizen at the date of birth, whatever the parents' nationality or status, excepting only children of accredited envoys and of enemy aliens born in enemy-occupied territory. This is the standard OECS clause, near-identical to its six sibling constitutions.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [],
-        "unconditional_jus_soli": false
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Saint Vincent and the Grenadines Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Saint_Vincent_and_the_Grenadines_2009"
+          "title": "Constitution of Saint Vincent and the Grenadines 1979 (Government of Saint Vincent and the Grenadines)",
+          "url": "https://www.gov.vc/images/visitors/1979_constitution.pdf"
         }
       ]
     },
@@ -1476,20 +1489,23 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Trinidad and Tobago parent",
-      "summary": "Birth to a Trinidad and Tobago parent creates nationality. Birth in Trinidad and Tobago alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "title": "Citizenship at birth in Trinidad and Tobago",
+      "summary": "Constitution s.17(1) makes every person born in Trinidad and Tobago a citizen at the date of birth, whatever the parents' nationality or status. s.17(2) excludes only children of accredited envoys where neither parent is a citizen, and of enemy aliens born in enemy-occupied territory.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [],
-        "unconditional_jus_soli": false
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Trinidad and Tobago Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Trinidad_and_Tobago_2007"
+          "title": "Constitution of Trinidad and Tobago (Ministry of the Attorney General and Legal Affairs)",
+          "url": "https://rgd.legalaffairs.gov.tt/laws2/Constitution.pdf"
         }
       ]
     },
@@ -3119,20 +3135,24 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Lesotho parent",
-      "summary": "Birth to a Lesotho parent creates nationality. Birth in Lesotho alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "title": "Citizenship at birth in Lesotho",
+      "summary": "Constitution s.38(1) makes every person born in Lesotho a citizen, whatever the parents' nationality or status. s.38(2) excepts children of accredited envoys and of enemy aliens in occupied territory only where neither parent is a citizen, and s.38(3) overrides both where the child would otherwise be stateless.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [],
-        "unconditional_jus_soli": false
+        "jus_soli_exceptions": [
+          "diplomats",
+          "enemy_aliens_in_occupied_territory",
+          "statelessness_saver_overrides_both_exceptions"
+        ],
+        "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Lesotho Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Lesotho_2018"
+          "title": "Constitution of Lesotho, Chapter IV (Government of Lesotho)",
+          "url": "https://www.gov.ls/download/lesotho-constitution/?wpdmdl=1329"
         }
       ]
     },
@@ -4406,20 +4426,23 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Tuvaluan parent",
-      "summary": "Birth to a Tuvaluan parent creates citizenship. Birth in Tuvalu alone to two foreign parents is not unrestricted jus soli.",
+      "title": "Citizenship at birth in Tuvalu",
+      "summary": "Constitution s.46(1) makes a person born in Tuvalu a citizen by birth automatically, whatever the parents' nationality or status, excepting only children of accredited envoys and of enemy aliens in occupied territory. The Citizenship Act 1979 contains no birth provision at all.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [],
-        "unconditional_jus_soli": false
+        "jus_soli_exceptions": [
+          "diplomats",
+          "enemy_aliens_in_occupied_territory"
+        ],
+        "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Tuvalu Citizenship Act 1979 (official legislation PDF)",
-          "url": "https://tuvalu-legislation.tv/cms/images/LEGISLATION/PRINCIPAL/1979/1979-0005/1979-0005_1.pdf"
+          "title": "Constitution of Tuvalu, Part III, s.46 (CAP. 1.02, 2023 Revised Edition)",
+          "url": "https://tuvalu-legislation.tv/cms/images/LEGISLATION/PRINCIPAL/1986/1986-0001/1986-0001.pdf"
         }
       ]
     },
@@ -5799,7 +5822,7 @@
       "sources": [
         {
           "title": "8 USC 1407 — Persons born in Guam",
-          "url": "https://www.law.cornell.edu/uscode/text/8/1407"
+          "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title8/html/USCODE-2023-title8-chap12-subchapIII-partI-sec1407.htm"
         }
       ],
       "facts": {
@@ -6143,8 +6166,8 @@
       "last_checked": "2026-07-23",
       "sources": [
         {
-          "title": "48 USC 1801 — Covenant establishing the CNMI",
-          "url": "https://www.law.cornell.edu/uscode/text/48/1801"
+          "title": "Covenant with the CNMI, Pub. L. 94-241, 90 Stat. 263 (§301 citizenship)",
+          "url": "https://www.govinfo.gov/content/pkg/STATUTE-90/pdf/STATUTE-90-Pg263.pdf"
         }
       ],
       "facts": {
@@ -6221,7 +6244,7 @@
       "sources": [
         {
           "title": "8 USC 1402 — Persons born in Puerto Rico",
-          "url": "https://www.law.cornell.edu/uscode/text/8/1402"
+          "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title8/html/USCODE-2023-title8-chap12-subchapIII-partI-sec1402.htm"
         }
       ],
       "facts": {
@@ -6622,7 +6645,7 @@
       "sources": [
         {
           "title": "8 USC 1406 — Persons born in the Virgin Islands",
-          "url": "https://www.law.cornell.edu/uscode/text/8/1406"
+          "url": "https://www.govinfo.gov/content/pkg/USCODE-2023-title8/html/USCODE-2023-title8-chap12-subchapIII-partI-sec1406.htm"
         }
       ],
       "facts": {
