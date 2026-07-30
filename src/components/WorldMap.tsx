@@ -116,14 +116,18 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
                   ))}
                 </ul>
               ) : state.routeClass ? (
+                /* Speaks the TR/PR/CIT vocabulary the Access levels glossary
+                   below already defines, instead of re-explaining the tiers in
+                   new words. The glossary stays the single place terms are
+                   defined; this key only maps swatch -> tier. */
                 <ul className="flex flex-col gap-1.5">
                   <li className="flex items-center gap-2 text-[11.5px] leading-tight text-foreground">
                     <span className="legend-sw sw-strong" aria-hidden />
-                    <span>Route leads toward PR or citizenship</span>
+                    <span>Leads to <span className="font-mono text-[10px] font-semibold">PR</span> or <span className="font-mono text-[10px] font-semibold">CIT</span></span>
                   </li>
                   <li className="flex items-center gap-2 text-[11.5px] leading-tight text-foreground">
                     <span className="legend-sw sw-limited" aria-hidden />
-                    <span>Route exists, residence only</span>
+                    <span><span className="font-mono text-[10px] font-semibold">TR</span> only</span>
                   </li>
                 </ul>
               ) : (
