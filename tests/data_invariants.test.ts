@@ -728,6 +728,44 @@ describe('source quality: constituteproject is a lead, not a source of record', 
       .toBeLessThanOrEqual(CONSTITUTEPROJECT_ANY_CEILING);
   });
 
+  // The two ceilings above are necessary but gameable: `onlyCites` means "EVERY
+  // source is constituteproject", so bolting on one junk non-official source
+  // lowers the count with zero quality gain. Demonstrated in the 5-year
+  // naturalisation cluster — 16 routes share the identical modelled sentence but
+  // only 13 are CP-only, so 3 already score "clean" while the year figure was
+  // still never read from any statute. These two metrics ratchet UP instead, and
+  // cannot be satisfied by adding noise.
+  const OFFICIAL_SOURCED_FLOOR = 353;
+  const PROVENANCE_DECLARED_FLOOR = 53;
+
+  const OFFICIAL_HOST = /(^|\.)(gov|gob|gouv|govt|go)(\.[a-z]{2,3})?$/;
+  const OFFICIAL_EXTRA = [
+    'e-tar.lt', 'ejustice.just.fgov.be', 'elperuano.pe', 'indiacode.nic.in',
+    'kenyalaw.org', 'legis.md', 'legislation.gov.uk', 'legislation.mt',
+    'legislatie.just.ro', 'pisrs.si', 'portaljuridicandorra.ad',
+    'riigiteataja.ee', 'slov-lex.sk', 'tuvalu-legislation.tv', 'zakon.rada.gov.ua',
+  ];
+  const isOfficialHost = (url: string): boolean => {
+    const host = (/^https?:\/\/([^/]+)/.exec(url)?.[1] ?? '').toLowerCase();
+    return OFFICIAL_HOST.test(host)
+      || host.endsWith('.gc.ca') || host.endsWith('.admin.ch') || host.includes('europa.eu')
+      || OFFICIAL_EXTRA.some(extra => host === extra || host.endsWith(`.${extra}`));
+  };
+
+  test('official-host sourcing only grows', () => {
+    const sourced = citizenshipRoutes.routes.filter(route => route.sources.some(s => isOfficialHost(s.url)));
+    expect(sourced.length).toBeGreaterThanOrEqual(OFFICIAL_SOURCED_FLOOR);
+  });
+
+  test('declared estimated/unverified provenance only grows', () => {
+    // Honest downgrades must register as progress. Without this, re-sourcing a
+    // jurisdiction that turns out to have NO official copy shows up as zero
+    // movement on the descending ceilings and reads as failure.
+    const declared = citizenshipRoutes.routes.filter(route =>
+      /\bmodel(?:ed|led)\b/i.test(route.pathways?.[0]?.note ?? '') || route.confidence === 'low');
+    expect(declared.length).toBeGreaterThanOrEqual(PROVENANCE_DECLARED_FLOOR);
+  });
+
   test('every route classified unconditional jus soli has an official source', () => {
     // The birth-tourism answer is the most consequential thing in the dataset,
     // so this subset gets the strict rule now rather than via the ratchet.
