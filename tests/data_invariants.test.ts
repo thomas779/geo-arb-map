@@ -391,3 +391,29 @@ describe('monitor-lead verifications, July 2026', () => {
     expect(pass?.confidence).toBe('medium');
   });
 });
+
+describe('monitor-lead verifications, 30 July 2026', () => {
+  test('Slovakia descent records the 15 July 2026 residence-permit removal at medium confidence', () => {
+    const descent = citizenshipRoutes.routes.find(route =>
+      route.id === 'slovakia-citizenship-by-parent');
+    // The single decision-relevant fact for a diaspora applicant: no Slovak
+    // residence permit is needed before applying.
+    expect(descent?.summary).toContain('15 July 2026');
+    expect(descent?.summary).toContain('residence-permit prerequisite');
+    expect(descent?.summary).toContain('great-grandparent');
+    // The amending act number is unconfirmed, so this must not claim high confidence.
+    expect(descent?.confidence).toBe('medium');
+  });
+
+  test('Jordan investor route records both directions of the 15 July 2026 decision', () => {
+    const jordan = citizenshipRoutes.routes.find(route =>
+      route.id === 'jordan-investor-citizenship');
+    expect(jordan?.status).toBe('active');
+    // Shares up, property down — the same Cabinet decision moved the window both
+    // ways, and the loosening is the half a reader is least likely to be told.
+    const note = jordan?.pathways?.[0]?.note ?? '';
+    expect(note).toContain('JOD 150,000');
+    expect(note).toContain('five-year hold');
+    expect(jordan?.last_checked).toBe('2026-07-30');
+  });
+});

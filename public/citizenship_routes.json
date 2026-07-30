@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Country citizenship routes compiled from a canonical D1 release plus the read-only legacy remainder.",
-    "last_updated": "2026-07-28",
+    "last_updated": "2026-07-30",
     "acquisition_modes": {
       "ancestry": "Citizenship through a parent, grandparent, wider descent rule, restoration, or documented heritage connection.",
       "naturalization": "Citizenship after residence or another qualifying domestic status.",
@@ -18563,11 +18563,11 @@
           "label": "Investor citizenship criteria",
           "allocation": "discretionary",
           "eligibility_months": 36,
-          "note": "Property purchase alone is a residence route, not direct citizenship. Passive deposit and treasury-bond routes have been phased out. Thresholds and employment numbers change by Cabinet decision; always verify the current Invest Jordan publication before relying on a quote. Origin-country dual-nationality policy should still be checked case by case."
+          "note": "Property purchase alone is a residence route, not direct citizenship, and the Cabinet decision of 15 July 2026 cut that residence threshold to JOD 150,000 for property outside Amman governorate from JOD 200,000. On the listed-shares track the same decision requires purchase through a licensed broker within four months of written Ministry of Investment approval, then a five-year hold during which the shares cannot be leveraged, mortgaged or liquidated and trading profits cannot be withdrawn. Passive deposit and treasury-bond routes have been phased out. Thresholds and employment numbers change by Cabinet decision; always verify the current Invest Jordan publication before relying on a quote. Origin-country dual-nationality policy should still be checked case by case."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Invest Jordan — Cabinet investor residency and citizenship criteria",
@@ -30239,7 +30239,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Slovak citizenship through a Slovak parent",
-      "summary": "A child of a Slovak citizen parent is Slovak. Descent and restoration routes also cover certain Czechoslovak-line ancestors and former citizens.",
+      "summary": "A child of a Slovak citizen parent is Slovak. Descent and restoration routes also cover certain Czechoslovak-line ancestors and former citizens. From 15 July 2026 an amendment removes the Slovak residence-permit prerequisite for the descent route open to descendants of former Czechoslovak citizens, reaching a parent, grandparent or great-grandparent born in present-day Slovakia, while the applicant now carries the burden of evidencing the ancestor's Czechoslovak citizenship from official or archival records.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -30253,11 +30253,12 @@
           "id": "slovakia-citizenship-by-parent-principal",
           "label": "Slovak citizenship through a Slovak parent",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "The residence-permit removal is reported as enacted (passed by parliament, signed by the President) effective 15 July 2026, and practitioners place it at Act 40/1993 §7(2)(j) with a new §8(2)(k) on evidence. Held at medium confidence because the amending act number is unconfirmed: the ministry press release serves its homepage to automated retrieval and slov-lex renders client-side, so the consolidated text has not been matched."
         }
       ],
-      "confidence": "high",
-      "last_checked": "2026-07-22",
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Slovakia Constitution (Constitute Project)",
