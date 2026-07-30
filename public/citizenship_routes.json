@@ -15,19 +15,19 @@
       "unchecked": "No route-level review has been completed for this mode."
     },
     "counts": {
-      "jurisdictions": 233,
-      "routes": 875,
+      "jurisdictions": 240,
+      "routes": 877,
       "by_mode": {
-        "birth": 231,
         "ancestry": 238,
         "naturalization": 381,
-        "investment": 25
+        "birth": 231,
+        "investment": 27
       },
       "by_status": {
-        "active": 859,
-        "pending_verification": 6,
+        "active": 862,
+        "pending_verification": 4,
         "verified_negative": 2,
-        "inactive": 8
+        "inactive": 9
       },
       "residence_routes": 252
     }
@@ -314,6 +314,7 @@
       "route_ids": [
         "bahrain-citizenship-by-parent",
         "bahrain-naturalization",
+        "bahrain-citizenship-by-marriage",
         "bahrain-citizenship-at-birth-by-parent"
       ],
       "residence_route_ids": [
@@ -449,8 +450,8 @@
       "route_ids": [
         "bhutan-citizenship-by-parents",
         "bhutan-naturalization",
-        "bhutan-citizenship-at-birth-by-parents",
-        "bhutan-citizenship-by-marriage"
+        "bhutan-citizenship-by-marriage",
+        "bhutan-citizenship-at-birth-by-parents"
       ]
     },
     {
@@ -659,8 +660,8 @@
       "route_ids": [
         "burundi-citizenship-by-parent",
         "burundi-naturalization",
-        "burundi-citizenship-at-birth-by-parent",
-        "burundi-citizenship-by-marriage"
+        "burundi-citizenship-by-marriage",
+        "burundi-citizenship-at-birth-by-parent"
       ]
     },
     {
@@ -1610,10 +1611,10 @@
       },
       "route_ids": [
         "germany-restoration-nazi-persecution",
+        "germany-spaetaussiedler",
         "germany-citizenship-by-parent",
         "germany-naturalization-by-residence",
-        "germany-citizenship-by-birth",
-        "germany-spaetaussiedler"
+        "germany-citizenship-by-birth"
       ],
       "residence_route_ids": [
         "germany-self-employment-21-aufenthg",
@@ -1964,7 +1965,10 @@
       ],
       "residence_route_ids": [
         "india-oci"
-      ]
+      ],
+      "residence_coverage": {
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "360",
@@ -2156,12 +2160,13 @@
         "japan-citizenship-by-marriage"
       ],
       "residence_route_ids": [
+        "japan-nikkei-long-term-resident",
         "japan-business-manager",
         "japan-startup-visa",
-        "japan-digital-nomad-visa",
-        "japan-nikkei-long-term-resident"
+        "japan-digital-nomad-visa"
       ],
       "residence_coverage": {
+        "general_permanent_residence": "reviewed",
         "investment": "reviewed",
         "digital_nomad": "reviewed"
       }
@@ -2180,8 +2185,8 @@
         "kazakhstan-citizenship-by-parent",
         "kazakhstan-citizenship-by-kandas-status",
         "kazakhstan-naturalization",
-        "kazakhstan-citizenship-at-birth-by-parent",
-        "kazakhstan-citizenship-by-marriage"
+        "kazakhstan-citizenship-by-marriage",
+        "kazakhstan-citizenship-at-birth-by-parent"
       ],
       "residence_route_ids": [
         "kazakhstan-e-residency"
@@ -2272,13 +2277,14 @@
         "korea-citizenship-by-marriage"
       ],
       "residence_route_ids": [
+        "korea-f4-overseas-korean",
         "korea-f2-public-fund-investor",
         "korea-f2-tourism-real-estate-investor",
         "korea-d8-corporate-investor",
-        "korea-digital-nomad-workcation",
-        "korea-f4-overseas-korean"
+        "korea-digital-nomad-workcation"
       ],
       "residence_coverage": {
+        "general_permanent_residence": "reviewed",
         "investment": "reviewed",
         "digital_nomad": "reviewed"
       }
@@ -2575,8 +2581,8 @@
       "route_ids": [
         "malaysia-citizenship-by-parent",
         "malaysia-naturalization",
-        "malaysia-citizenship-at-birth-by-parent",
-        "malaysia-citizenship-by-marriage"
+        "malaysia-citizenship-by-marriage",
+        "malaysia-citizenship-at-birth-by-parent"
       ],
       "residence_route_ids": [
         "malaysia-mm2h-silver",
@@ -2775,6 +2781,7 @@
       "route_ids": [
         "moldova-citizenship-by-parent",
         "moldova-naturalization",
+        "moldova-investor-citizenship-repealed",
         "moldova-citizenship-at-birth-by-parent",
         "moldova-citizenship-by-marriage"
       ]
@@ -2866,8 +2873,8 @@
       "route_ids": [
         "oman-citizenship-by-parent",
         "oman-naturalization",
-        "oman-citizenship-at-birth-by-parent",
-        "oman-citizenship-by-marriage"
+        "oman-citizenship-by-marriage",
+        "oman-citizenship-at-birth-by-parent"
       ]
     },
     {
@@ -2922,8 +2929,8 @@
       "route_ids": [
         "nepal-citizenship-by-descent",
         "nepal-naturalization",
-        "nepal-citizenship-at-birth-by-parent",
-        "nepal-citizenship-by-marriage"
+        "nepal-citizenship-by-marriage",
+        "nepal-citizenship-at-birth-by-parent"
       ]
     },
     {
@@ -3273,9 +3280,9 @@
       "route_ids": [
         "pakistan-citizenship-by-parent",
         "pakistan-naturalization",
+        "pakistan-citizenship-by-marriage",
         "pakistan-citizenship-at-birth-by-parent",
-        "pakistan-commonwealth-investment-citizenship",
-        "pakistan-citizenship-by-marriage"
+        "pakistan-commonwealth-investment-citizenship"
       ]
     },
     {
@@ -3432,7 +3439,10 @@
       ],
       "residence_route_ids": [
         "poland-karta-polaka"
-      ]
+      ],
+      "residence_coverage": {
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "620",
@@ -3576,12 +3586,12 @@
         "investment": "reviewed"
       },
       "route_ids": [
+        "russia-compatriot-resettlement",
         "russia-citizenship-by-parent",
         "russia-naturalization",
         "russia-simplified-naturalization-heritage",
-        "russia-citizenship-at-birth-by-parent",
         "russia-citizenship-by-marriage",
-        "russia-compatriot-resettlement"
+        "russia-citizenship-at-birth-by-parent"
       ]
     },
     {
@@ -4513,6 +4523,7 @@
       "route_ids": [
         "north-macedonia-citizenship-by-parent",
         "north-macedonia-naturalization",
+        "north-macedonia-economic-interest-citizenship",
         "north-macedonia-citizenship-at-birth-by-parent",
         "north-macedonia-citizenship-by-marriage"
       ]
@@ -4557,12 +4568,13 @@
         "uk-citizenship-by-birth"
       ],
       "residence_route_ids": [
+        "uk-ancestry-visa",
         "uk-tier-1-investor",
         "uk-innovator-founder",
-        "uk-digital-nomad-verified-negative",
-        "uk-ancestry-visa"
+        "uk-digital-nomad-verified-negative"
       ],
       "residence_coverage": {
+        "general_permanent_residence": "reviewed",
         "investment": "reviewed",
         "digital_nomad": "reviewed"
       }
@@ -6480,6 +6492,42 @@
       ]
     },
     {
+      "id": "bahrain-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "048",
+        "name": "Bahrain"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship for the foreign wife of a Bahraini",
+      "summary": "Article 7(1): a foreign woman who marries a Bahraini after the Act's commencement becomes Bahraini. A Bahraini woman who marries a foreigner loses Bahraini nationality only if and when she acquires her husband's nationality. There is no corresponding automatic route for foreign husbands of Bahraini women.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahrain-citizenship-by-marriage-principal",
+          "label": "Citizenship for the foreign wife of a Bahraini",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Art. 7(1) of the consolidated Citizenship Act 1963 (K0863). Previously unrecorded in the dataset."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Bahraini Citizenship Act 1963, consolidated (Legislation & Legal Opinion Commission)",
+          "url": "https://www.legalaffairs.gov.bh/Legislation/HTM/K0863"
+        }
+      ]
+    },
+    {
       "id": "bahrain-citizenship-by-parent",
       "country": {
         "iso_n3": "048",
@@ -6539,42 +6587,6 @@
           "allocation": "discretionary",
           "eligibility_months": 300,
           "note": "Figures read from consolidated Citizenship Act art. 6(1)(a)-(d) on legalaffairs.gov.bh (K0863). Grants remain rare and discretionary."
-        }
-      ],
-      "confidence": "high",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "Bahraini Citizenship Act 1963, consolidated (Legislation & Legal Opinion Commission)",
-          "url": "https://www.legalaffairs.gov.bh/Legislation/HTM/K0863"
-        }
-      ]
-    },
-    {
-      "id": "bahrain-citizenship-by-marriage",
-      "country": {
-        "iso_n3": "048",
-        "name": "Bahrain"
-      },
-      "mode": "naturalization",
-      "status": "active",
-      "title": "Citizenship for the foreign wife of a Bahraini",
-      "summary": "Article 7(1): a foreign woman who marries a Bahraini after the Act's commencement becomes Bahraini. A Bahraini woman who marries a foreigner loses Bahraini nationality only if and when she acquires her husband's nationality. There is no corresponding automatic route for foreign husbands of Bahraini women.",
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [
-          0
-        ],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "bahrain-citizenship-by-marriage-principal",
-          "label": "Citizenship for the foreign wife of a Bahraini",
-          "allocation": "right",
-          "eligibility_months": 0,
-          "note": "Art. 7(1) of the consolidated Citizenship Act 1963 (K0863). Previously unrecorded in the dataset."
         }
       ],
       "confidence": "high",
@@ -9241,9 +9253,9 @@
         "name": "Cambodia"
       },
       "mode": "investment",
-      "status": "pending_verification",
-      "title": "Investor and donor naturalization exists in law; current operation needs verification",
-      "summary": "Cambodia's nationality law contains investment and donation provisions, but a current government-administered programme and operational requirements have not been verified for live recommendations.",
+      "status": "active",
+      "title": "Naturalization by investment or donation",
+      "summary": "The 2018 Law on Nationality (arts. 21-22, as amended in 2025) grants discretionary naturalization by Royal Decree to investors and donors. Sub-Decree No. 225 of 1 December 2025 sets the amounts: at least KHR 4 billion (about USD 1 million) of personal capital actually deployed in a qualifying investment project plus twelve months of legal residence, or a KHR 12 billion (about USD 3 million) donation to the national budget plus six months of legal residence. There is no marketing agency, application window, or published quota.",
       "facts": {
         "programme_type": "statutory_investor_naturalization",
         "canonical": true,
@@ -9254,17 +9266,21 @@
       "pathways": [
         {
           "id": "cambodia-investor-naturalization-status-principal",
-          "label": "Investor and donor naturalization exists in law; current operation needs verification",
+          "label": "Naturalization by investment or donation",
           "allocation": "discretionary",
           "eligibility_months": null
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-17",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Cambodia Law on Nationality 1996 (CIB English text)",
-          "url": "https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf"
+          "title": "Law on Nationality 2018, consolidated with 2025 amendment (Ministry of Justice)",
+          "url": "https://www.moj.gov.kh/files/user-folder/document/Law/2025/ច្បាប់ស្តីពីសញ្ជាតិនិងវិសោធនកម្មត្រឹមឆ្នាំ២០២៥.pdf"
+        },
+        {
+          "title": "Sub-Decree No. 225 of 1 December 2025 on the Implementation of the Law on Nationality (NCDD library)",
+          "url": "https://lib.ncdd.gov.kh/storage/app/public/library_backend/1773128374________________________________________________________________________________________________________________________________________.pdf"
         }
       ]
     },
@@ -15396,6 +15412,42 @@
         {
           "title": "German Nationality Act (Staatsangehörigkeitsgesetz)",
           "url": "https://www.gesetze-im-internet.de/stag/"
+        }
+      ]
+    },
+    {
+      "id": "germany-spaetaussiedler",
+      "country": {
+        "iso_n3": "276",
+        "name": "Germany"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Spätaussiedler ethnic German resettlement",
+      "summary": "Recognition as a late ethnic German resettler (Spätaussiedler) under the Federal Expellees Act confers German nationality automatically upon admission — ethnic eligibility, managed admission, automatic citizenship. Mainly for post-Soviet ethnic German cohorts; documentation requirements are substantial.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "germany-spaetaussiedler-principal",
+          "label": "Spätaussiedler ethnic German resettlement",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Folded from the former heritage-lane layer onto Germany country routes."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "BAMF — Ethnic German resettlers",
+          "url": "https://www.bamf.de/EN/Themen/MigrationAufenthalt/Spaetaussiedler/spaetaussiedler-node.html"
         }
       ]
     },
@@ -23260,6 +23312,44 @@
       ]
     },
     {
+      "id": "moldova-investor-citizenship-repealed",
+      "country": {
+        "iso_n3": "498",
+        "name": "Moldova"
+      },
+      "mode": "investment",
+      "status": "inactive",
+      "title": "Former investor-citizenship provisions",
+      "summary": "Moldova ran a citizenship-by-investment programme introduced by Law 283/2016 and Government Decision 786/2017 (EUR 100,000 non-refundable contribution to the sustainable development fund, or EUR 250,000 invested in a strategic area and held five years). After a 2019-2020 moratorium, Law 111/2020 abrogated the investment provisions of the citizenship law effective 1 September 2020, with pending files wound down by the Government. Investment must not be presented as a current route to Moldovan citizenship.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "moldova-investor-citizenship-repealed-principal",
+          "label": "Former investor-citizenship provisions",
+          "allocation": "discretionary",
+          "eligibility_months": null,
+          "note": "Historical route retained to state explicitly that investor citizenship closed on 1 September 2020 (Law 111/2020, Official Monitor 161-164/2020 art. 315). The citizenship law was wholly recodified by Law 253/2025 without any investment route."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Official Monitor No. 161-164 of 3 July 2020 (Law 111/2020, art. 315)",
+          "url": "https://monitorul.gov.md/ro/monitor/2221"
+        },
+        {
+          "title": "Law No. 111 of 18 June 2020 abrogating investment citizenship (legis.md)",
+          "url": "https://www.legis.md/cautare/showdetails/122019"
+        }
+      ]
+    },
+    {
       "id": "moldova-naturalization",
       "country": {
         "iso_n3": "498",
@@ -29136,6 +29226,42 @@
         {
           "title": "Federal Law No. 138-FZ of 28 April 2023 on Citizenship of the Russian Federation (consolidated, pravo.gov.ru IPS)",
           "url": "https://pravo.gov.ru/proxy/ips/?doc_itself=&nd=605444183&page=all&rdk=8"
+        }
+      ]
+    },
+    {
+      "id": "russia-compatriot-resettlement",
+      "country": {
+        "iso_n3": "643",
+        "name": "Russia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Compatriot Resettlement Programme (accelerated citizenship)",
+      "summary": "Federal State Programme for the voluntary resettlement of compatriots: qualify as a compatriot (broad cultural/historical definition), join via a participating region, relocate, and use an accelerated settlement and citizenship track. Dual citizenship is generally tolerated. Region-linked obligations apply; the wider migration environment remains volatile.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          18
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "russia-compatriot-resettlement-principal",
+          "label": "Compatriot Resettlement Programme (accelerated citizenship)",
+          "allocation": "discretionary",
+          "eligibility_months": 18,
+          "note": "Folded from the former heritage-lane layer. Timeline is an eligibility/process estimate, not a fixed statutory clock."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Kremlin — State Programme for voluntary resettlement of compatriots",
+          "url": "https://en.kremlin.ru/acts/news/50216"
         }
       ]
     },
@@ -35594,8 +35720,8 @@
       "last_checked": "2026-07-23",
       "sources": [
         {
-          "title": "North Macedonia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Macedonia_2011"
+          "title": "Law on Citizenship of the Republic of North Macedonia, consolidated text July 2025 (Government portal / MOI)",
+          "url": "https://portal.mdt.gov.mk/post-body-files/zakoni-mvr-file-Bh91.pdf"
         }
       ]
     },
@@ -35635,6 +35761,47 @@
       ]
     },
     {
+      "id": "north-macedonia-economic-interest-citizenship",
+      "country": {
+        "iso_n3": "807",
+        "name": "Macedonia"
+      },
+      "mode": "investment",
+      "status": "active",
+      "title": "Naturalization for special economic interest",
+      "summary": "Discretionary naturalization under article 11 of the Law on Citizenship where admission serves a special economic (or scientific, cultural, sporting) national interest. The implementing decree, as amended in Official Gazette 255/2019, recognises an economic interest at EUR 400,000 invested directly in new capacities employing at least ten people on indefinite contracts for a year, or EUR 200,000 held at least two years in a qualifying private investment fund vetted by the Fund for Innovation and Technological Development. Every grant requires a Government opinion; approvals are case-by-case and low-volume.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "north-macedonia-economic-interest-citizenship-principal",
+          "label": "Naturalization for special economic interest",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Law on Citizenship of the Republic of North Macedonia, consolidated text July 2025 (Government portal / MOI)",
+          "url": "https://portal.mdt.gov.mk/post-body-files/zakoni-mvr-file-Bh91.pdf"
+        },
+        {
+          "title": "Decree on criteria for special national interest, amendment in Official Gazette 255/2019 (Government portal / MOI)",
+          "url": "https://portal.mdt.gov.mk/post-body-files/podzakonski-akti-mvr-file-mtv8.pdf"
+        },
+        {
+          "title": "Ministry of Interior - secondary legislation in force",
+          "url": "https://mvr.gov.mk/mk-MK/legislativa/podzakonski-akti"
+        }
+      ]
+    },
+    {
       "id": "north-macedonia-naturalization",
       "country": {
         "iso_n3": "807",
@@ -35642,31 +35809,30 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Naturalization after about 8 years residence",
-      "summary": "Adults generally need about 8 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "title": "Naturalization after seven years residence",
+      "summary": "Adults need at least seven years of lawful continuous residence before ordinary naturalization (Law on Citizenship, art. 7), plus secured housing and income, a clean criminal record, command of Macedonian, no security bar, and a loyalty oath. Grant is discretionary.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
-          96
+          84
         ],
         "discretionary_decision": true
       },
       "pathways": [
         {
           "id": "north-macedonia-naturalization-principal",
-          "label": "Naturalization after about 8 years residence",
+          "label": "Naturalization after seven years residence",
           "allocation": "discretionary",
-          "eligibility_months": 96,
-          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+          "eligibility_months": 84
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-22",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "North Macedonia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Macedonia_2011"
+          "title": "Law on Citizenship of the Republic of North Macedonia, consolidated text July 2025 (Government portal / MOI)",
+          "url": "https://portal.mdt.gov.mk/post-body-files/zakoni-mvr-file-Bh91.pdf"
         }
       ]
     },
@@ -37417,11 +37583,11 @@
         "name": "Samoa"
       },
       "mode": "investment",
-      "status": "pending_verification",
-      "title": "Citizenship Investment Act exists; current programme operation needs verification",
-      "summary": "Samoa has a Citizenship Investment Act and was reviewing the programme framework in 2025, but current application operations and qualifying guidelines are not yet verified for live recommendations.",
+      "status": "active",
+      "title": "Citizenship by investment (Citizenship Investment Act 2015)",
+      "summary": "The Citizenship Investment Act 2015 grants citizenship to approved investors: a minimum qualifying investment of WST 4 million within three years of grant and a minimum net worth of WST 2.5 million (statutory defaults, ss. 5-6), administered by the Citizenship Investment Committee under the Ministry of Commerce, Industry and Labour. The route is in force but essentially dormant in volume - MCIL reported a single application received in June 2025 - and Cabinet-approved amendments to the framework are in progress.",
       "facts": {
-        "programme_type": "statutory_basis_only",
+        "programme_type": "statutory_investor_citizenship",
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [],
@@ -37430,17 +37596,21 @@
       "pathways": [
         {
           "id": "samoa-citizenship-investment-status-principal",
-          "label": "Citizenship Investment Act exists; current programme operation needs verification",
+          "label": "Citizenship by investment (Citizenship Investment Act 2015)",
           "allocation": "discretionary",
           "eligibility_months": null
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-17",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Samoa Citizenship Investment Act 2015",
           "url": "https://www.ag.gov.ws/wp-content/uploads/2024/02/Citizenship-Investment-Act-2015.pdf"
+        },
+        {
+          "title": "Samoa MCIL Annual Report 2024-25",
+          "url": "https://www.mcil.gov.ws/sites/default/files/documents/annual-reports/mcil-annual-report-2024-25.pdf"
         },
         {
           "title": "Samoa MCIL - 2025 policy framework workshop",
@@ -37733,78 +37903,6 @@
         {
           "title": "Zambia Citizenship of Zambia Act 2016",
           "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07"
-        }
-      ]
-    },
-    {
-      "id": "germany-spaetaussiedler",
-      "country": {
-        "iso_n3": "276",
-        "name": "Germany"
-      },
-      "mode": "ancestry",
-      "status": "active",
-      "title": "Spätaussiedler ethnic German resettlement",
-      "summary": "Recognition as a late ethnic German resettler (Spätaussiedler) under the Federal Expellees Act confers German nationality automatically upon admission — ethnic eligibility, managed admission, automatic citizenship. Mainly for post-Soviet ethnic German cohorts; documentation requirements are substantial.",
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [
-          0
-        ],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "germany-spaetaussiedler-principal",
-          "label": "Spätaussiedler ethnic German resettlement",
-          "allocation": "right",
-          "eligibility_months": 0,
-          "note": "Folded from the former heritage-lane layer onto Germany country routes."
-        }
-      ],
-      "confidence": "high",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "BAMF — Ethnic German resettlers",
-          "url": "https://www.bamf.de/EN/Themen/MigrationAufenthalt/Spaetaussiedler/spaetaussiedler-node.html"
-        }
-      ]
-    },
-    {
-      "id": "russia-compatriot-resettlement",
-      "country": {
-        "iso_n3": "643",
-        "name": "Russia"
-      },
-      "mode": "naturalization",
-      "status": "active",
-      "title": "Compatriot Resettlement Programme (accelerated citizenship)",
-      "summary": "Federal State Programme for the voluntary resettlement of compatriots: qualify as a compatriot (broad cultural/historical definition), join via a participating region, relocate, and use an accelerated settlement and citizenship track. Dual citizenship is generally tolerated. Region-linked obligations apply; the wider migration environment remains volatile.",
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [
-          18
-        ],
-        "discretionary_decision": true
-      },
-      "pathways": [
-        {
-          "id": "russia-compatriot-resettlement-principal",
-          "label": "Compatriot Resettlement Programme (accelerated citizenship)",
-          "allocation": "discretionary",
-          "eligibility_months": 18,
-          "note": "Folded from the former heritage-lane layer. Timeline is an eligibility/process estimate, not a fixed statutory clock."
-        }
-      ],
-      "confidence": "medium",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "Kremlin — State Programme for voluntary resettlement of compatriots",
-          "url": "https://en.kremlin.ru/acts/news/50216"
         }
       ]
     }
@@ -41988,6 +42086,52 @@
       ]
     },
     {
+      "id": "india-oci",
+      "country": {
+        "iso_n3": "356",
+        "name": "India"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Overseas Citizen of India (OCI)",
+      "summary": "Lifelong multiple-entry status for persons of Indian origin and eligible spouses: indefinite stay, stronger than a visa, weaker than nationality. Statutory path to citizenship after five years as OCI plus ordinary residence (Citizenship Act s.5(1)(g)). India bans dual citizenship — taking Indian citizenship means renouncing the other. OCI benefits and compliance rules are adjusted periodically.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "india-oci-principal",
+          "label": "Overseas Citizen of India (OCI)",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Folded from the former heritage-lane layer into India residence routes (same pattern as the Gold Card move)."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "MHA India — OCI Cardholder",
+          "url": "https://ociservices.gov.in/"
+        },
+        {
+          "title": "India MEA — Overseas Citizenship of India Scheme",
+          "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme.htm"
+        }
+      ]
+    },
+    {
       "id": "indonesia-golden-visa-company-establishment",
       "country": {
         "iso_n3": "360",
@@ -42544,6 +42688,48 @@
       ]
     },
     {
+      "id": "japan-nikkei-long-term-resident",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Nikkei Long-Term Resident status",
+      "summary": "Long-Term Resident status for qualifying Japanese descendants (Nikkei), mainly through the fourth generation in places such as Brazil and Peru. Permanent residence and naturalisation are available after ordinary residence. Japan adjusts descendant subcategories periodically and bans dual citizenship at naturalisation.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "japan-nikkei-long-term-resident-principal",
+          "label": "Nikkei Long-Term Resident status",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Folded from the former heritage-lane layer into Japan residence routes."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Japan MOJ — statuses of residence",
+          "url": "https://www.moj.go.jp/isa/applications/status/longtermresident.html"
+        }
+      ]
+    },
+    {
       "id": "japan-startup-visa",
       "country": {
         "iso_n3": "392",
@@ -42997,6 +43183,48 @@
         {
           "title": "Incheon Free Economic Zone Authority — Investor Immigration System",
           "url": "https://www.ifez.go.kr/world/content/view.do?sn=561"
+        }
+      ]
+    },
+    {
+      "id": "korea-f4-overseas-korean",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "F-4 Overseas Korean visa",
+      "summary": "F-4 visa for overseas Koreans (ethnic Koreans with foreign nationality): broad labour-market access and a credible path to F-5 permanent residence. Functions as quasi-membership for the Korean diaspora. PR and citizenship require ordinary residence; Korea restricts dual citizenship for naturalisers.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "korea-f4-overseas-korean-principal",
+          "label": "F-4 Overseas Korean visa",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Folded from the former heritage-lane layer into Korea residence routes."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Korea Visa Portal — F-4 Overseas Korean",
+          "url": "https://www.visa.go.kr/"
         }
       ]
     },
@@ -45070,6 +45298,48 @@
         {
           "title": "Philippine Retirement Authority — SRRV",
           "url": "https://pra.gov.ph/SRRVisa"
+        }
+      ]
+    },
+    {
+      "id": "poland-karta-polaka",
+      "country": {
+        "iso_n3": "616",
+        "name": "Poland"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Pole's Card (Karta Polaka)",
+      "summary": "Pole's Card for people of Polish descent or nation affiliation: national visa, permanent residence, then recognition as a Polish citizen after about one year of residence with PR. Dual citizenship OK. Proof of Polish affiliation/descent required; legislation is periodically adjusted.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "poland-karta-polaka-principal",
+          "label": "Pole's Card (Karta Polaka)",
+          "allocation": "right",
+          "eligibility_months": 12,
+          "note": "Folded from the former heritage-lane layer into Poland residence routes."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "gov.pl — Pole's Card",
+          "url": "https://www.gov.pl/web/diplomacy/the-pole-card"
         }
       ]
     },
@@ -47400,6 +47670,48 @@
       ]
     },
     {
+      "id": "uk-ancestry-visa",
+      "country": {
+        "iso_n3": "826",
+        "name": "United Kingdom"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "UK Ancestry visa",
+      "summary": "5-year work visa for Commonwealth citizens with a UK-born grandparent: renewable, leads to Indefinite Leave to Remain then naturalisation. Commonwealth citizenship alone is not enough — the UK-born grandparent is required.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uk-ancestry-visa-principal",
+          "label": "UK Ancestry visa",
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Folded from the former heritage-lane layer into UK residence routes (same pattern as the Gold Card move)."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "GOV.UK — UK Ancestry visa",
+          "url": "https://www.gov.uk/ancestry-visa"
+        }
+      ]
+    },
+    {
       "id": "uk-digital-nomad-verified-negative",
       "country": {
         "iso_n3": "826",
@@ -48080,220 +48392,6 @@
         {
           "title": "Uzbekistan — Presidential Decree PF-67 (lex.uz)",
           "url": "https://lex.uz/ru/docs/7483820"
-        }
-      ]
-    },
-    {
-      "id": "uk-ancestry-visa",
-      "country": {
-        "iso_n3": "826",
-        "name": "United Kingdom"
-      },
-      "category": "general_permanent_residence",
-      "status": "active",
-      "title": "UK Ancestry visa",
-      "summary": "5-year work visa for Commonwealth citizens with a UK-born grandparent: renewable, leads to Indefinite Leave to Remain then naturalisation. Commonwealth citizenship alone is not enough — the UK-born grandparent is required.",
-      "outcome": "permanent_residence",
-      "counts_toward_permanent_residence": true,
-      "counts_toward_naturalization": true,
-      "min_investment": null,
-      "min_income_monthly": null,
-      "physical_presence_days_per_year": null,
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [
-          60
-        ],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "uk-ancestry-visa-principal",
-          "label": "UK Ancestry visa",
-          "allocation": "right",
-          "eligibility_months": 60,
-          "note": "Folded from the former heritage-lane layer into UK residence routes (same pattern as the Gold Card move)."
-        }
-      ],
-      "confidence": "high",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "GOV.UK — UK Ancestry visa",
-          "url": "https://www.gov.uk/ancestry-visa"
-        }
-      ]
-    },
-    {
-      "id": "poland-karta-polaka",
-      "country": {
-        "iso_n3": "616",
-        "name": "Poland"
-      },
-      "category": "general_permanent_residence",
-      "status": "active",
-      "title": "Pole's Card (Karta Polaka)",
-      "summary": "Pole's Card for people of Polish descent or nation affiliation: national visa, permanent residence, then recognition as a Polish citizen after about one year of residence with PR. Dual citizenship OK. Proof of Polish affiliation/descent required; legislation is periodically adjusted.",
-      "outcome": "permanent_residence",
-      "counts_toward_permanent_residence": true,
-      "counts_toward_naturalization": true,
-      "min_investment": null,
-      "min_income_monthly": null,
-      "physical_presence_days_per_year": null,
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [
-          12
-        ],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "poland-karta-polaka-principal",
-          "label": "Pole's Card (Karta Polaka)",
-          "allocation": "right",
-          "eligibility_months": 12,
-          "note": "Folded from the former heritage-lane layer into Poland residence routes."
-        }
-      ],
-      "confidence": "high",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "gov.pl — Pole's Card",
-          "url": "https://www.gov.pl/web/diplomacy/the-pole-card"
-        }
-      ]
-    },
-    {
-      "id": "korea-f4-overseas-korean",
-      "country": {
-        "iso_n3": "410",
-        "name": "South Korea"
-      },
-      "category": "general_permanent_residence",
-      "status": "active",
-      "title": "F-4 Overseas Korean visa",
-      "summary": "F-4 visa for overseas Koreans (ethnic Koreans with foreign nationality): broad labour-market access and a credible path to F-5 permanent residence. Functions as quasi-membership for the Korean diaspora. PR and citizenship require ordinary residence; Korea restricts dual citizenship for naturalisers.",
-      "outcome": "residence",
-      "counts_toward_permanent_residence": true,
-      "counts_toward_naturalization": true,
-      "min_investment": null,
-      "min_income_monthly": null,
-      "physical_presence_days_per_year": null,
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [
-          0
-        ],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "korea-f4-overseas-korean-principal",
-          "label": "F-4 Overseas Korean visa",
-          "allocation": "right",
-          "eligibility_months": 0,
-          "note": "Folded from the former heritage-lane layer into Korea residence routes."
-        }
-      ],
-      "confidence": "medium",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "Korea Visa Portal — F-4 Overseas Korean",
-          "url": "https://www.visa.go.kr/"
-        }
-      ]
-    },
-    {
-      "id": "japan-nikkei-long-term-resident",
-      "country": {
-        "iso_n3": "392",
-        "name": "Japan"
-      },
-      "category": "general_permanent_residence",
-      "status": "active",
-      "title": "Nikkei Long-Term Resident status",
-      "summary": "Long-Term Resident status for qualifying Japanese descendants (Nikkei), mainly through the fourth generation in places such as Brazil and Peru. Permanent residence and naturalisation are available after ordinary residence. Japan adjusts descendant subcategories periodically and bans dual citizenship at naturalisation.",
-      "outcome": "residence",
-      "counts_toward_permanent_residence": true,
-      "counts_toward_naturalization": true,
-      "min_investment": null,
-      "min_income_monthly": null,
-      "physical_presence_days_per_year": null,
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [
-          0
-        ],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "japan-nikkei-long-term-resident-principal",
-          "label": "Nikkei Long-Term Resident status",
-          "allocation": "right",
-          "eligibility_months": 0,
-          "note": "Folded from the former heritage-lane layer into Japan residence routes."
-        }
-      ],
-      "confidence": "high",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "Japan MOJ — statuses of residence",
-          "url": "https://www.moj.go.jp/isa/applications/status/longtermresident.html"
-        }
-      ]
-    },
-    {
-      "id": "india-oci",
-      "country": {
-        "iso_n3": "356",
-        "name": "India"
-      },
-      "category": "general_permanent_residence",
-      "status": "active",
-      "title": "Overseas Citizen of India (OCI)",
-      "summary": "Lifelong multiple-entry status for persons of Indian origin and eligible spouses: indefinite stay, stronger than a visa, weaker than nationality. Statutory path to citizenship after five years as OCI plus ordinary residence (Citizenship Act s.5(1)(g)). India bans dual citizenship — taking Indian citizenship means renouncing the other. OCI benefits and compliance rules are adjusted periodically.",
-      "outcome": "residence",
-      "counts_toward_permanent_residence": false,
-      "counts_toward_naturalization": true,
-      "min_investment": null,
-      "min_income_monthly": null,
-      "physical_presence_days_per_year": null,
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [
-          0
-        ],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "india-oci-principal",
-          "label": "Overseas Citizen of India (OCI)",
-          "allocation": "right",
-          "eligibility_months": 0,
-          "note": "Folded from the former heritage-lane layer into India residence routes (same pattern as the Gold Card move)."
-        }
-      ],
-      "confidence": "high",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "MHA India — OCI Cardholder",
-          "url": "https://ociservices.gov.in/"
-        },
-        {
-          "title": "India MEA — Overseas Citizenship of India Scheme",
-          "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme.htm"
         }
       ]
     }

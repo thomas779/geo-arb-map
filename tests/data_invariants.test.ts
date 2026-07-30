@@ -331,9 +331,12 @@ describe('citizenship route database', () => {
       route.mode === 'investment' && route.status === 'active');
     const pending = citizenshipRoutes.routes.filter(route =>
       route.mode === 'investment' && route.status === 'pending_verification');
-    expect(active.length).toBe(13);
+    expect(active.length).toBe(16);
     expect(active.map(route => route.id)).toContain('mauritius-investor-naturalization');
-    expect(pending.map(route => route.country.iso_n3).sort()).toEqual(['032', '050', '116', '586', '598', '882']);
+    // July 2026 gap-check batch: North Macedonia art. 11 confirmed active (was a
+    // genuine gap); Samoa and Cambodia verified active from pending.
+    expect(active.map(route => route.id)).toContain('north-macedonia-economic-interest-citizenship');
+    expect(pending.map(route => route.country.iso_n3).sort()).toEqual(['032', '050', '586', '598']);
   });
 
   test('Portugal records preserve the 2026 transition and nationality-dependent periods', () => {

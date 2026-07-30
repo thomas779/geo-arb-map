@@ -658,18 +658,22 @@
         "name": "Samoa"
       },
       "mode": "investment",
-      "status": "pending_verification",
-      "title": "Citizenship Investment Act exists; current programme operation needs verification",
-      "summary": "Samoa has a Citizenship Investment Act and was reviewing the programme framework in 2025, but current application operations and qualifying guidelines are not yet verified for live recommendations.",
+      "status": "active",
+      "title": "Citizenship by investment (Citizenship Investment Act 2015)",
+      "summary": "The Citizenship Investment Act 2015 grants citizenship to approved investors: a minimum qualifying investment of WST 4 million within three years of grant and a minimum net worth of WST 2.5 million (statutory defaults, ss. 5-6), administered by the Citizenship Investment Committee under the Ministry of Commerce, Industry and Labour. The route is in force but essentially dormant in volume - MCIL reported a single application received in June 2025 - and Cabinet-approved amendments to the framework are in progress.",
       "facts": {
-        "programme_type": "statutory_basis_only"
+        "programme_type": "statutory_investor_citizenship"
       },
-      "confidence": "medium",
-      "last_checked": "2026-07-17",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Government of Samoa — Citizenship Investment Act 2015",
           "url": "https://www.ag.gov.ws/wp-content/uploads/2024/02/Citizenship-Investment-Act-2015.pdf"
+        },
+        {
+          "title": "Samoa MCIL — Annual Report 2024-25",
+          "url": "https://www.mcil.gov.ws/sites/default/files/documents/annual-reports/mcil-annual-report-2024-25.pdf"
         },
         {
           "title": "Samoa Ministry of Commerce — 2025 policy framework workshop",
@@ -684,18 +688,22 @@
         "name": "Cambodia"
       },
       "mode": "investment",
-      "status": "pending_verification",
-      "title": "Investor and donor naturalization exists in law; current operation needs verification",
-      "summary": "Cambodia's nationality law contains investment and donation provisions, but a current government-administered programme and operational requirements have not been verified for live recommendations.",
+      "status": "active",
+      "title": "Naturalization by investment or donation",
+      "summary": "The 2018 Law on Nationality (arts. 21-22, as amended in 2025) grants discretionary naturalization by Royal Decree to investors and donors. Sub-Decree No. 225 of 1 December 2025 sets the amounts: at least KHR 4 billion (about USD 1 million) of personal capital actually deployed in a qualifying investment project plus twelve months of legal residence, or a KHR 12 billion (about USD 3 million) donation to the national budget plus six months of legal residence. There is no marketing agency, application window, or published quota.",
       "facts": {
         "programme_type": "statutory_investor_naturalization"
       },
-      "confidence": "medium",
-      "last_checked": "2026-07-17",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Cambodia Committee for Investment and Development — Law on Nationality",
-          "url": "https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf"
+          "title": "Cambodia Ministry of Justice — Law on Nationality 2018, consolidated with 2025 amendment",
+          "url": "https://www.moj.gov.kh/files/user-folder/document/Law/2025/ច្បាប់ស្តីពីសញ្ជាតិនិងវិសោធនកម្មត្រឹមឆ្នាំ២០២៥.pdf"
+        },
+        {
+          "title": "Sub-Decree No. 225 of 1 December 2025 on the Implementation of the Law on Nationality (NCDD library)",
+          "url": "https://lib.ncdd.gov.kh/storage/app/public/library_backend/1773128374________________________________________________________________________________________________________________________________________.pdf"
         }
       ]
     },
@@ -1810,6 +1818,10 @@
         {
           "title": "Bhutan Citizenship Act 1985, National Assembly PDF (Wayback of nab.gov.bt)",
           "url": "https://web.archive.org/web/20150806205032if_/http://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
+        },
+        {
+          "title": "Bhutan Citizenship Act 1985, National Assembly (original URL; site often unreachable)",
+          "url": "https://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
         }
       ]
     },
@@ -3377,6 +3389,10 @@
         {
           "title": "Federal Constitution of Malaysia, Part III and Second Schedule (Laws of Malaysia / AGC lom.agc.gov.my)",
           "url": "https://lom.agc.gov.my/federal-constitution.php"
+        },
+        {
+          "title": "Federal Constitution reprint PDF (JAC portal copy via Wayback, used for quote verification 2026-07-30)",
+          "url": "https://web.archive.org/web/20240101000000id_/https://www.jac.gov.my/spk/images/stories/10_akta/perlembagaan_persekutuan/federal_constitution.pdf"
         }
       ]
     },
@@ -5691,6 +5707,10 @@
         {
           "title": "Nepal Citizenship Act 2063 (2006), Law Commission English text (Wayback of official PDF)",
           "url": "https://web.archive.org/web/20220121174852if_/https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
+        },
+        {
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission (original URL; CMS often unavailable)",
+          "url": "https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
         }
       ],
       "facts": {
