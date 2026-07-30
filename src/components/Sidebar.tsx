@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, ChevronDown, Search } from 'lucide-react';
+import { Armchair, Award, Banknote, Check, ChevronDown, Fingerprint, Home, Hourglass, Laptop, Search, Users } from 'lucide-react';
 import { ROUTE_CLASSES } from '@/lib/route-classes';
 import type { AppState, BilateralLane, Bloc, BlocsData } from '../types';
 import { Button } from '@/components/ui/button';
@@ -52,6 +52,19 @@ const REGIONAL_GROUPS: Array<{
 const rowBase =
   'h-11 w-full justify-start gap-2 rounded-md px-2 text-left text-sm font-medium md:h-8';
 const rowSelected = 'bg-accent';
+
+// Route-class rows have no color identity (selection paints the map one hue),
+// so a muted glyph stands where bloc rows put their color swatch.
+const ROUTE_CLASS_ICONS: Record<string, typeof Users> = {
+  ancestry: Users,
+  cbi: Banknote,
+  naturalization: Hourglass,
+  'golden-visa': Home,
+  'digital-nomad': Laptop,
+  retirement: Armchair,
+  talent: Award,
+  'digital-identity': Fingerprint,
+};
 
 interface Props {
   data: BlocsData;
@@ -228,14 +241,16 @@ export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassC
     return ['regional'];
   });
   const [openGroups, setOpenGroups] = useState<string[]>(() => {
+    // Route-type subgroups default open: eight rows total, nothing to economise.
+    const classDefaults = ['class-citizenship', 'class-residence'];
     if (selectedLane && selectedLane.beneficiaries.length > 0) {
-      return [laneGroupId(selectedLane)];
+      return [laneGroupId(selectedLane), ...classDefaults];
     }
     const selectedCategories = new Set(selectedBlocs.map(bloc => bloc.category));
     const selectedGroupIds = REGIONAL_GROUPS
       .filter(group => group.categories.some(category => selectedCategories.has(category)))
       .map(group => group.id);
-    return selectedGroupIds.length > 0 ? selectedGroupIds : ['established'];
+    return [...(selectedGroupIds.length > 0 ? selectedGroupIds : ['established']), ...classDefaults];
   });
 
   const blocRows = (blocs: Bloc[]) => blocs.map(bloc => (
@@ -367,33 +382,56 @@ export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassC
           </AccordionItem>
         )}
         {/* Route-class browse (#129): a third axis over the country inventory —
-          * "where does an active golden visa / nomad / ancestry route exist" —
-          * distinct from regional systems and nationality lanes. Single-select;
-          * painting is binary (has an active route or not). */}
+          * "where does an active golden visa / nomad / ancestry route exist".
+          * Anatomy mirrors the bloc/lane rows exactly: leading glyph (the class
+          * has no color identity, so a muted icon stands where blocs put their
+          * swatch), RowTooltip carrying the one-line description, and the same
+          * count badge. Two subgroups match the depth of every other section. */}
         <AccordionItem value="classes" className="border-b">
           <AccordionTrigger className={catTrigger}>
             <span>Route types</span>
             <span className={headingCount}>{ROUTE_CLASSES.length}</span>
           </AccordionTrigger>
           <AccordionContent className="h-auto pb-1">
-            {ROUTE_CLASSES.filter(cls =>
-              !query.trim() || cls.label.toLowerCase().includes(query.trim().toLowerCase()),
-            ).map(cls => (
-              <Button
-                key={cls.id}
-                variant="ghost"
-                size="sm"
-                className={cn(rowBase, 'gap-1.5 px-1.5', state.routeClass === cls.id && rowSelected)}
-                aria-pressed={state.routeClass === cls.id}
-                title={cls.description}
-                onClick={() => onRouteClass(cls.id)}
-              >
-                <span className="min-w-0 flex-1 truncate text-left">{cls.label}</span>
-                <Badge variant="outline" className="shrink-0 px-1.5 text-[10px] text-muted-foreground">
-                  {routeClassCounts.get(cls.id) ?? 0}
-                </Badge>
-              </Button>
-            ))}
+            {[
+              { id: 'class-citizenship', label: 'Citizenship', description: 'Paths that end in a passport.', kind: 'citizenship' as const },
+              { id: 'class-residence', label: 'Residence', description: 'Paths that end in the right to live there.', kind: 'residence' as const },
+            ].map(group => {
+              const classes = ROUTE_CLASSES.filter(cls =>
+                cls.kind === group.kind
+                && (!query.trim() || cls.label.toLowerCase().includes(query.trim().toLowerCase())));
+              if (!classes.length) return null;
+              return subgroup(
+                group.id,
+                group.label,
+                group.description,
+                classes.length,
+                classes.map(cls => {
+                  const Icon = ROUTE_CLASS_ICONS[cls.id] ?? Users;
+                  const selected = state.routeClass === cls.id;
+                  return (
+                    <RowTooltip key={cls.id} label={cls.description}>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className={cn(rowBase, selected && rowSelected)}
+                        aria-pressed={selected}
+                        onClick={() => onRouteClass(cls.id)}
+                      >
+                        <Icon
+                          className={cn('size-3.5 shrink-0', selected ? 'text-foreground' : 'text-muted-foreground')}
+                          aria-hidden
+                        />
+                        <span className="min-w-0 flex-1 truncate">{cls.label}</span>
+                        <Badge variant="outline" className="text-xs tabular-nums text-muted-foreground">
+                          {routeClassCounts.get(cls.id) ?? 0}
+                        </Badge>
+                      </Button>
+                    </RowTooltip>
+                  );
+                }),
+              );
+            })}
           </AccordionContent>
         </AccordionItem>
 
