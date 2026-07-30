@@ -81,6 +81,14 @@ function memberOk(m: { name: string; iso_n3: string }, ctx: string) {
 }
 
 describe('regression: Russia dual-citizenship correction', () => {
+  test('dual_citizenship.countries["586"] is conditional on the DGIP 22-country list', () => {
+    const pk = data.dual_citizenship?.countries['586'];
+    expect(pk?.status).toBe('conditional');
+    expect(pk?.note).toContain('s.14(3)');
+    expect(pk?.note).toContain('22');
+    expect(pk?.sources?.join(' ')).toContain('dgip.gov.pk/immigration/dual_nationality.php');
+  });
+
   test('dual_citizenship.countries["643"].status is "allowed"', () => {
     expect(data.dual_citizenship?.countries['643']?.status).toBe('allowed');
   });
