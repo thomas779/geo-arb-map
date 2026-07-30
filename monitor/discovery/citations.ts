@@ -49,6 +49,7 @@ export function isSocialHost(host: string): boolean {
 // scored as an independent outlet — which matters because the same predicate
 // feeds source-candidate ranking. Keep sorted by host for scanning.
 const OFFICIAL_LEGISLATION_HOSTS = [
+  'arlis.am', // Armenia, Legal Information System of the Republic of Armenia
   'e-tar.lt', // Lithuania, Teisės aktų registras
   'ejustice.just.fgov.be', // Belgium, Moniteur belge / Belgisch Staatsblad
   'elperuano.pe', // Peru, Diario Oficial El Peruano
@@ -63,6 +64,7 @@ const OFFICIAL_LEGISLATION_HOSTS = [
   'riigiteataja.ee', // Estonia, State Gazette
   'slov-lex.sk', // Slovakia, Slov-Lex (incl. static.slov-lex.sk)
   'tuvalu-legislation.tv', // Tuvalu, PacLII-hosted national legislation
+  'uradni-list.si', // Slovenia, Uradni list RS (Official Gazette publisher)
   'zakon.rada.gov.ua', // Ukraine, Verkhovna Rada
 ];
 

@@ -6713,11 +6713,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Armenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Armenia_2015"
+          "title": "Law on Citizenship of the Republic of Armenia HO-16, consolidated (ARLIS)",
+          "url": "https://www.arlis.am/hy/acts/218433/latest"
         }
       ]
     },
@@ -6730,7 +6730,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Simplified citizenship for persons of Armenian ethnic origin",
-      "summary": "A person of Armenian ethnic origin may acquire citizenship through a simplified procedure with no residence requirement and no language or history examination; Armenian church baptismal records are accepted as proof of origin.",
+      "summary": "Ethnic Armenians acquire citizenship by a simplified procedure without the residence or language conditions (articles 1 and 13(3)); familiarity with the Constitution still applies.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -6745,15 +6745,15 @@
           "label": "Simplified citizenship for persons of Armenian ethnic origin",
           "allocation": "right",
           "eligibility_months": 0,
-          "note": "Ethnic-origin route grounded in the constitution and citizenship law; verify current documentary standards (Decree 97-N) at application."
+          "note": "The commonly repeated claim that church baptismal records prove Armenian origin sits in sub-statutory acts not located on an official portal in this sweep — treat documentary standards as unverified."
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Armenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Armenia_2015"
+          "title": "Law on Citizenship of the Republic of Armenia HO-16, consolidated (ARLIS)",
+          "url": "https://www.arlis.am/hy/acts/218433/latest"
         }
       ]
     },
@@ -6766,12 +6766,12 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization as the spouse of a citizen",
-      "summary": "A spouse of an Armenian is exempt from the language test and residency, on about two years of marriage or a common child.",
+      "summary": "A spouse married to an Armenian citizen for the last two years who has spent at least 365 days in Armenia within that period is exempt from the residence and language conditions.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
-          24
+          12
         ],
         "discretionary_decision": true
       },
@@ -6780,16 +6780,16 @@
           "id": "armenia-citizenship-by-marriage-principal",
           "label": "Naturalization as the spouse of a citizen",
           "allocation": "discretionary",
-          "eligibility_months": 24,
-          "note": "Citizenship Law art. 13; ordinary period is three years."
+          "eligibility_months": 12,
+          "note": "Citizenship Law art. 13(2)(1) read on ARLIS. The exemption does not cover the Constitution-familiarity requirement (art. 13(1)(3)). Corrects the looser two-years-or-common-child wording."
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "last_checked": "2026-07-23",
       "sources": [
         {
-          "title": "Armenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Armenia_2015"
+          "title": "Law on Citizenship of the Republic of Armenia HO-16, consolidated (ARLIS)",
+          "url": "https://www.arlis.am/hy/acts/218433/latest"
         }
       ]
     },
@@ -6802,7 +6802,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Armenian citizenship through an Armenian parent",
-      "summary": "A child of an Armenian citizen parent is an Armenian citizen (jus sanguinis), regardless of birthplace.",
+      "summary": "Automatic only when both parents are Armenian citizens at birth, wherever born, or where the second parent is unknown or stateless. With one citizen and one foreign parent, the child acquires citizenship only with the parents' written agreement, or if born in Armenia, or where the child would otherwise be stateless (article 11).",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -6816,15 +6816,16 @@
           "id": "armenia-citizenship-by-parent-principal",
           "label": "Armenian citizenship through an Armenian parent",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "Corrects the previous unconditional jus sanguinis wording: mixed-parentage children need parental consent, which planners of a one-citizen-parent birth abroad should know."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Armenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Armenia_2015"
+          "title": "Law on Citizenship of the Republic of Armenia HO-16, consolidated (ARLIS)",
+          "url": "https://www.arlis.am/hy/acts/218433/latest"
         }
       ]
     },
@@ -6837,7 +6838,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after about three years residence",
-      "summary": "Ordinary applicants generally need about three years of residence plus language and constitutional knowledge; grant is discretionary. Spouses, parents of Armenian minors, and persons of Armenian descent are exempted from the residence requirement.",
+      "summary": "Three years of permanent residence, the ability to communicate in Armenian, and familiarity with the Constitution (article 13). Armenia recognises dual citizenship (article 13.1, since 2007): a dual citizen is treated solely as Armenian by Armenia, and no renunciation is demanded.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -6856,11 +6857,11 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Armenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Armenia_2015"
+          "title": "Law on Citizenship of the Republic of Armenia HO-16, consolidated (ARLIS)",
+          "url": "https://www.arlis.am/hy/acts/218433/latest"
         }
       ]
     },
@@ -7024,10 +7025,10 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Belgian parent",
-      "summary": "Birth to a Belgian parent creates Belgian nationality. Birth in Belgium alone to two foreign parents is not unrestricted jus soli.",
+      "summary": "No unconditional jus soli, but two statutory birth-in-Belgium routes exist: a child born in Belgium who would otherwise be stateless before eighteen is Belgian (article 10), and the second-generation double jus soli of article 11 makes a child Belgian where a parent was also born in Belgium and resided five of the ten years before the birth.",
       "facts": {
-        "jus_soli": "none",
-        "parent_condition": "none",
+        "jus_soli": "conditional",
+        "parent_condition": "born_in_country",
         "jus_soli_exceptions": [],
         "unconditional_jus_soli": false,
         "canonical": true,
@@ -7046,11 +7047,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Belgium Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
+          "title": "Code de la nationalite belge, consolidated (Justel, Moniteur belge)",
+          "url": "https://www.ejustice.just.fgov.be/eli/loi/1984/06/28/1984900065/justel"
         }
       ]
     },
@@ -7063,7 +7064,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Belgian nationality through a Belgian parent",
-      "summary": "A child of a Belgian parent is Belgian under the nationality code, subject to registration rules for birth abroad.",
+      "summary": "A child born in Belgium to a Belgian parent is Belgian automatically (article 8 s.1 1). Born abroad, the child is Belgian only if the Belgian parent was themselves born in Belgium, or the parent declares within five years of the birth.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -7081,11 +7082,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Belgium Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
+          "title": "Code de la nationalite belge, consolidated (Justel, Moniteur belge)",
+          "url": "https://www.ejustice.just.fgov.be/eli/loi/1984/06/28/1984900065/justel"
         }
       ]
     },
@@ -7098,29 +7099,30 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Nationality declaration after five years residence",
-      "summary": "Adults with five years legal residence may apply for Belgian nationality by declaration if they meet integration, language, and economic participation conditions. Naturalization by parliament remains a separate exceptional track. Not automatic after five years.",
+      "summary": "The main route is the declaration de nationalite under article 12bis: an entitlement, not a discretionary grant, after five years of legal main residence with language (A2) and social and economic participation. A ten-year track needs only language and participation in the host community, and the spouse of a Belgian may declare after five years residence and three years of marriage. Parliamentary naturalisation (article 19) survives only as an exceptional-merit track.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
           60
         ],
-        "discretionary_decision": true
+        "discretionary_decision": false
       },
       "pathways": [
         {
           "id": "belgium-naturalization-principal",
           "label": "Nationality declaration after five years residence",
-          "allocation": "discretionary",
-          "eligibility_months": 60
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Read against the consolidated Code de la nationalite belge on Justel (updated to 18-02-2026). The previous record modelled this as discretionary naturalisation; article 12bis is a declaration of right when conditions are met, which materially changes how the route should be planned around."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Belgium Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
+          "title": "Code de la nationalite belge, consolidated (Justel, Moniteur belge)",
+          "url": "https://www.ejustice.just.fgov.be/eli/loi/1984/06/28/1984900065/justel"
         }
       ]
     },
@@ -17451,11 +17453,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "India Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/India_2016"
+          "title": "The Citizenship Act, 1955 (Act 57 of 1955), consolidated (India Code)",
+          "url": "https://www.indiacode.nic.in/bitstream/123456789/1522/1/A1955-57Eng.pdf"
         }
       ]
     },
@@ -17490,8 +17492,8 @@
       "last_checked": "2026-07-23",
       "sources": [
         {
-          "title": "India Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/India_2016"
+          "title": "The Citizenship Act, 1955 (Act 57 of 1955), consolidated (India Code)",
+          "url": "https://www.indiacode.nic.in/bitstream/123456789/1522/1/A1955-57Eng.pdf"
         }
       ]
     },
@@ -17504,7 +17506,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Indian citizenship through an Indian parent",
-      "summary": "A child of an Indian citizen parent may be Indian under the Citizenship Act date rules. Overseas Citizen of India (OCI) is a separate status for persons of Indian origin abroad — not dual nationality.",
+      "summary": "A child born abroad on or after 10 December 1992 with an Indian citizen parent is Indian by descent, but births from 3 December 2004 must be registered at an Indian consulate within one year, with an undertaking that the child holds no foreign passport (section 4).",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -17523,11 +17525,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "India Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/India_2016"
+          "title": "The Citizenship Act, 1955 (Act 57 of 1955), consolidated (India Code)",
+          "url": "https://www.indiacode.nic.in/bitstream/123456789/1522/1/A1955-57Eng.pdf"
         },
         {
           "title": "India MEA — Overseas Citizenship of India Scheme",
@@ -17565,8 +17567,8 @@
       "last_checked": "2026-07-22",
       "sources": [
         {
-          "title": "India Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/India_2016"
+          "title": "The Citizenship Act, 1955 (Act 57 of 1955), consolidated (India Code)",
+          "url": "https://www.indiacode.nic.in/bitstream/123456789/1522/1/A1955-57Eng.pdf"
         }
       ]
     },
@@ -31763,7 +31765,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Slovenia parent",
-      "summary": "Birth to a Slovenia parent creates nationality. Birth in Slovenia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "summary": "No general jus soli. Article 9 covers only a child born or found in Slovenia whose parents are unknown, of unknown citizenship or stateless, revocable if a foreign citizenship emerges before age 18.",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -31785,11 +31787,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Slovenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Slovenia_2016"
+          "title": "Zakon o drzavljanstvu Republike Slovenije ZDRS-UPB2, Ur. l. RS 24/07 (Uradni list)",
+          "url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2007-01-1211"
         }
       ]
     },
@@ -31820,12 +31822,12 @@
           "note": "Citizenship Act art. 12; language test applies."
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "last_checked": "2026-07-23",
       "sources": [
         {
-          "title": "Slovenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Slovenia_2016"
+          "title": "Zakon o drzavljanstvu Republike Slovenije ZDRS-UPB2, Ur. l. RS 24/07 (Uradni list)",
+          "url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2007-01-1211"
         }
       ]
     },
@@ -31838,7 +31840,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Slovenia nationality through a Slovenia parent",
-      "summary": "A child of a Slovenia parent is a national under the constitutional nationality framework and nationality statute.",
+      "summary": "Automatic at birth when both parents are Slovenian citizens; with one citizen parent, automatic only when the child is born in Slovenia — born abroad, the citizen parent must register the child or the child may opt by age 36 (articles 4 and 5).",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -31856,11 +31858,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Slovenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Slovenia_2016"
+          "title": "Zakon o drzavljanstvu Republike Slovenije ZDRS-UPB2, Ur. l. RS 24/07 (Uradni list)",
+          "url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2007-01-1211"
         }
       ]
     },
@@ -31873,7 +31875,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after about 10 years residence",
-      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "summary": "Ten years of actual residence with the last five continuous (article 10), a regulated foreigner status, and release from the previous citizenship or proof it will follow on admission, with statutory exceptions. The grant is discretionary.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -31888,15 +31890,15 @@
           "label": "Naturalization after about 10 years residence",
           "allocation": "discretionary",
           "eligibility_months": 120,
-          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+          "note": "Read against ZDRS-UPB2 (Ur. l. RS 24/07, as amended by ZDRS-E 40/17) in the Uradni list. The renunciation condition (article 10(1) point 2) was previously unrecorded."
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Slovenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Slovenia_2016"
+          "title": "Zakon o drzavljanstvu Republike Slovenije ZDRS-UPB2, Ur. l. RS 24/07 (Uradni list)",
+          "url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2007-01-1211"
         }
       ]
     },
@@ -35279,10 +35281,10 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Ukraine parent",
-      "summary": "Birth to a Ukraine parent creates nationality. Birth in Ukraine alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "summary": "No unconditional jus soli, but article 7 makes a child born to permanently resident foreigners a Ukrainian citizen where the child acquires no other citizenship at birth.",
       "facts": {
-        "jus_soli": "none",
-        "parent_condition": "none",
+        "jus_soli": "conditional",
+        "parent_condition": "lawful_residence",
         "jus_soli_exceptions": [],
         "unconditional_jus_soli": false,
         "canonical": true,
@@ -35301,11 +35303,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Ukraine Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+          "title": "Law of Ukraine on Citizenship No. 2235-III, consolidated (Verkhovna Rada)",
+          "url": "https://zakon.rada.gov.ua/laws/show/2235-14/print"
         }
       ]
     },
@@ -35318,12 +35320,12 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization as the spouse of a citizen",
-      "summary": "A spouse married for more than two years may naturalize after two years of residence, instead of five.",
+      "summary": "A spouse married to a Ukrainian citizen for more than three years is exempt from the continuous-residence condition entirely; the other naturalisation conditions still apply.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
-          24
+          0
         ],
         "discretionary_decision": true
       },
@@ -35332,16 +35334,16 @@
           "id": "ukraine-citizenship-by-marriage-principal",
           "label": "Naturalization as the spouse of a citizen",
           "allocation": "discretionary",
-          "eligibility_months": 24,
-          "note": "Law on Citizenship art. 9."
+          "eligibility_months": 0,
+          "note": "Law on Citizenship art. 9 part 2 point 3, second paragraph, read on zakon.rada.gov.ua (revision of 10.05.2026). Also covers a 3+ year marriage ended by the citizen spouse's death. Corrects the previously modeled 2-years-marriage/2-years-residence figures."
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "last_checked": "2026-07-23",
       "sources": [
         {
-          "title": "Ukraine Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+          "title": "Law of Ukraine on Citizenship No. 2235-III, consolidated (Verkhovna Rada)",
+          "url": "https://zakon.rada.gov.ua/laws/show/2235-14/print"
         }
       ]
     },
@@ -35354,7 +35356,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Ukraine nationality through a Ukraine parent",
-      "summary": "A child of a Ukraine parent is a national under the constitutional nationality framework and nationality statute.",
+      "summary": "A person with at least one parent who was a Ukrainian citizen at the moment of birth is a citizen automatically, wherever born (article 7). Article 8 separately grants a right to citizenship by territorial origin reaching a parent, grandparent, great-grandparent or sibling born or permanently resident in Ukraine or its historical territories.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -35372,11 +35374,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Ukraine Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+          "title": "Law of Ukraine on Citizenship No. 2235-III, consolidated (Verkhovna Rada)",
+          "url": "https://zakon.rada.gov.ua/laws/show/2235-14/print"
         }
       ]
     },
@@ -35389,7 +35391,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after about 5 years residence",
-      "summary": "Adults generally need about 5 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "summary": "Five years of continuous residence (article 9), plus recognition of the Constitution, exams in its basics and in the state language, and lawful means of subsistence. Since Law 4502-IX of 18 June 2025, multiple citizenship is recognised in listed cases and acquisition can proceed by declaration instead of renunciation for citizens of listed states.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -35404,15 +35406,15 @@
           "label": "Naturalization after about 5 years residence",
           "allocation": "discretionary",
           "eligibility_months": 60,
-          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+          "note": "Read against the consolidated law on zakon.rada.gov.ua (revision of 10.05.2026). The 2025 multiple-citizenship reform (articles 1, 5-1, 10-1) is in force and was previously unrecorded."
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Ukraine Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+          "title": "Law of Ukraine on Citizenship No. 2235-III, consolidated (Verkhovna Rada)",
+          "url": "https://zakon.rada.gov.ua/laws/show/2235-14/print"
         }
       ]
     },

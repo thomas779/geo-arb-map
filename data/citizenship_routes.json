@@ -1755,11 +1755,11 @@
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Armenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Armenia_2015"
+          "title": "Law on Citizenship of the Republic of Armenia HO-16, consolidated (ARLIS)",
+          "url": "https://www.arlis.am/hy/acts/218433/latest"
         }
       ]
     },
@@ -1772,19 +1772,19 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Belgian parent",
-      "summary": "Birth to a Belgian parent creates Belgian nationality. Birth in Belgium alone to two foreign parents is not unrestricted jus soli.",
+      "summary": "No unconditional jus soli, but two statutory birth-in-Belgium routes exist: a child born in Belgium who would otherwise be stateless before eighteen is Belgian (article 10), and the second-generation double jus soli of article 11 makes a child Belgian where a parent was also born in Belgium and resided five of the ten years before the birth.",
       "facts": {
-        "jus_soli": "none",
-        "parent_condition": "none",
+        "jus_soli": "conditional",
+        "parent_condition": "born_in_country",
         "jus_soli_exceptions": [],
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Belgium Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
+          "title": "Code de la nationalite belge, consolidated (Justel, Moniteur belge)",
+          "url": "https://www.ejustice.just.fgov.be/eli/loi/1984/06/28/1984900065/justel"
         }
       ]
     },
@@ -2839,11 +2839,11 @@
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "India Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/India_2016"
+          "title": "The Citizenship Act, 1955 (Act 57 of 1955), consolidated (India Code)",
+          "url": "https://www.indiacode.nic.in/bitstream/123456789/1522/1/A1955-57Eng.pdf"
         }
       ]
     },
@@ -4072,7 +4072,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Slovenia parent",
-      "summary": "Birth to a Slovenia parent creates nationality. Birth in Slovenia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "summary": "No general jus soli. Article 9 covers only a child born or found in Slovenia whose parents are unknown, of unknown citizenship or stateless, revocable if a foreign citizenship emerges before age 18.",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -4080,11 +4080,11 @@
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Slovenia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Slovenia_2016"
+          "title": "Zakon o drzavljanstvu Republike Slovenije ZDRS-UPB2, Ur. l. RS 24/07 (Uradni list)",
+          "url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2007-01-1211"
         }
       ]
     },
@@ -4479,19 +4479,19 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Ukraine parent",
-      "summary": "Birth to a Ukraine parent creates nationality. Birth in Ukraine alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "summary": "No unconditional jus soli, but article 7 makes a child born to permanently resident foreigners a Ukrainian citizen where the child acquires no other citizenship at birth.",
       "facts": {
-        "jus_soli": "none",
-        "parent_condition": "none",
+        "jus_soli": "conditional",
+        "parent_condition": "lawful_residence",
         "jus_soli_exceptions": [],
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Ukraine Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+          "title": "Law of Ukraine on Citizenship No. 2235-III, consolidated (Verkhovna Rada)",
+          "url": "https://zakon.rada.gov.ua/laws/show/2235-14/print"
         }
       ]
     },

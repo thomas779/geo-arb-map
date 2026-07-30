@@ -717,8 +717,8 @@ describe('source quality: constituteproject is a lead, not a source of record', 
   // 357 routes currently violate this. Rather than assert zero and fail the
   // suite, ratchet: the count may only go down. Lower these numbers as
   // jurisdictions are re-sourced; never raise them.
-  const CONSTITUTEPROJECT_ONLY_CEILING = 313;
-  const CONSTITUTEPROJECT_ANY_CEILING = 333;
+  const CONSTITUTEPROJECT_ONLY_CEILING = 294;
+  const CONSTITUTEPROJECT_ANY_CEILING = 313;
 
   const cites = (route: { sources: Array<{ url: string }> }) =>
     route.sources.some(source => source.url.includes('constituteproject'));
@@ -747,10 +747,10 @@ describe('source quality: constituteproject is a lead, not a source of record', 
 
   const OFFICIAL_HOST = /(^|\.)(gov|gob|gouv|govt|go)(\.[a-z]{2,3})?$/;
   const OFFICIAL_EXTRA = [
-    'e-tar.lt', 'ejustice.just.fgov.be', 'elperuano.pe', 'indiacode.nic.in',
+    'arlis.am', 'e-tar.lt', 'ejustice.just.fgov.be', 'elperuano.pe', 'indiacode.nic.in',
     'kenyalaw.org', 'legis.md', 'legislation.gov.uk', 'legislation.mt',
     'legislatie.just.ro', 'pisrs.si', 'portaljuridicandorra.ad',
-    'riigiteataja.ee', 'slov-lex.sk', 'tuvalu-legislation.tv', 'zakon.rada.gov.ua',
+    'riigiteataja.ee', 'slov-lex.sk', 'tuvalu-legislation.tv', 'uradni-list.si', 'zakon.rada.gov.ua',
   ];
   const isOfficialHost = (url: string): boolean => {
     const host = (/^https?:\/\/([^/]+)/.exec(url)?.[1] ?? '').toLowerCase();

@@ -2914,22 +2914,23 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Belgium_2014",
+      "url": "https://www.ejustice.just.fgov.be/eli/loi/1984/06/28/1984900065/justel",
       "jurisdictions": [
         "056"
       ],
       "pages": [
         {
-          "id": "constitution",
-          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
+          "id": "consolidated-law",
+          "url": "https://www.ejustice.just.fgov.be/eli/loi/1984/06/28/1984900065/justel"
         }
       ],
       "keywords": [
-        "nationality",
-        "citizenship",
-        "Belgium"
+        "nationalit\u00e9",
+        "d\u00e9claration",
+        "naturalisation",
+        "Code de la nationalit\u00e9"
       ],
-      "notes": "Constitution framework. Prefer a future stable IBZ nationality page when available."
+      "notes": "Official consolidated citizenship law; replaced the constituteproject aggregator row 2026-07-30 after primary-source verification."
     },
     {
       "id": "sweden-citizenship-law",
@@ -4337,19 +4338,22 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Slovenia_2016",
+      "url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2007-01-1211",
       "jurisdictions": [
         "705"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
+        "dr\u017eavljanstvo",
         "citizenship",
-        "Slovenia",
-        "residence",
-        "birth"
+        "naturalizacija"
       ],
-      "notes": "Slovenia constitutional nationality framework via Constitute Project text."
+      "notes": "Official consolidated citizenship law; replaced the constituteproject aggregator row 2026-07-30 after primary-source verification.",
+      "pages": [
+        {
+          "id": "consolidated-law",
+          "url": "https://www.uradni-list.si/glasilo-uradni-list-rs/vsebina/2007-01-1211"
+        }
+      ]
     },
     {
       "id": "burundi-citizenship-law",
@@ -4672,19 +4676,22 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Ukraine_2019",
+      "url": "https://zakon.rada.gov.ua/laws/show/2235-14/print",
       "jurisdictions": [
         "804"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
+        "\u0433\u0440\u043e\u043c\u0430\u0434\u044f\u043d\u0441\u0442\u0432\u043e",
         "citizenship",
-        "Ukraine",
-        "residence",
-        "birth"
+        "naturalisation"
       ],
-      "notes": "Ukraine constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+      "notes": "Official consolidated citizenship law; replaced the constituteproject aggregator row 2026-07-30 after primary-source verification.",
+      "pages": [
+        {
+          "id": "consolidated-law",
+          "url": "https://zakon.rada.gov.ua/laws/show/2235-14/print"
+        }
+      ]
     },
     {
       "id": "belize-citizenship-law",
@@ -4853,20 +4860,22 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Armenia_2015",
+      "url": "https://www.arlis.am/hy/acts/218433/latest",
       "jurisdictions": [
         "051"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
+        "\u0584\u0561\u0572\u0561\u0584\u0561\u0581\u056b\u0578\u0582\u0569\u0575\u0578\u0582\u0576",
         "citizenship",
-        "Armenia",
-        "descent",
-        "residence",
-        "birth"
+        "naturalisation"
       ],
-      "notes": "Armenian constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+      "notes": "Official consolidated citizenship law; replaced the constituteproject aggregator row 2026-07-30 after primary-source verification.",
+      "pages": [
+        {
+          "id": "consolidated-law",
+          "url": "https://www.arlis.am/hy/acts/218433/latest"
+        }
+      ]
     },
     {
       "id": "azerbaijan-citizenship-law",
