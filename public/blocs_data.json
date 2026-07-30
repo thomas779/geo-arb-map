@@ -1662,25 +1662,6 @@
       "leads_to_settlement": true
     },
     {
-      "id": "taiwan_employment_gold_card",
-      "name": "Taiwan Employment Gold Card",
-      "color": "#C45C5C",
-      "destination": {
-        "name": "Taiwan",
-        "iso_n3": "158"
-      },
-      "beneficiaries_note": "Foreign specialists in designated fields - skill-based, not nationality-mapped",
-      "beneficiaries": [],
-      "grants": "Open work + residence for up to 3 years (renewable), no sponsor. Path to permanent residence after about 3 years of qualifying stay.",
-      "limits": "Field eligibility is reviewed. Permanent residence only, not citizenship, and not Cross-Strait / HK / Macau rights.",
-      "leads_to_settlement": true,
-      "allocation": "discretionary",
-      "sources": [
-        "https://goldcard.nat.gov.tw/en/",
-        "https://www.immigration.gov.tw/5475/5478/141465/141808/411648/cp_news"
-      ]
-    },
-    {
       "id": "falklands_argentina",
       "name": "Argentina citizenship claim (Falklands-born)",
       "color": "#AE711D",

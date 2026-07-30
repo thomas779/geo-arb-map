@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import type { BilateralLane, Bloc, BlocRights, BlocsData, CitizenshipRoutesData } from '@/types';
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
+import { ExternalSourceLink } from '@/components/ExternalSourceLink';
 import { displayRouteTitle } from '@/lib/display-title';
 import { dataCorrectionUrl, sourceUrl } from '@/lib/trust';
 
@@ -335,7 +336,7 @@ function RoutePage({ data }: { data: RouteProfileData }) {
               return (
                 <li key={source} className="text-sm leading-relaxed text-muted-foreground">
                   {href
-                    ? <a href={href} rel="nofollow noreferrer" className="underline underline-offset-2 hover:text-foreground">{source}</a>
+                    ? <ExternalSourceLink href={href}>{source}</ExternalSourceLink>
                     : source}
                 </li>
               );

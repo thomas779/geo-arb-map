@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { THEME_BOOT_JS } from '../scripts/build_country_pages';
+import { RESIDENCE_FILTER_JS, THEME_BOOT_JS } from '../scripts/build_country_pages';
 
 const canonicalUrl = 'https://flagpaths.com/';
 const index = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
@@ -52,6 +52,11 @@ describe('public SEO contract', () => {
     const hash = createHash('sha256').update(THEME_BOOT_JS).digest('base64');
     expect(headers).toContain(`'sha256-${hash}'`);
     expect(index).toContain(`<script>${THEME_BOOT_JS}</script>`);
+    // Same contract for the residence filter chips: prerendered country pages
+    // have no hydration, so the chips are driven by an inline script that CSP
+    // must hash-allow, or every filter button silently does nothing.
+    const filterHash = createHash('sha256').update(RESIDENCE_FILTER_JS).digest('base64');
+    expect(headers).toContain(`'sha256-${filterHash}'`);
   });
 
   test('keeps the workers.dev duplicate out of search indexes', () => {

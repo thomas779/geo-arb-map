@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 246
+      "residence_routes": 247
     }
   },
   "jurisdictions": [
@@ -913,12 +913,14 @@
         "taiwan-citizenship-by-marriage"
       ],
       "residence_route_ids": [
+        "taiwan-employment-gold-card",
         "taiwan-investor-arc",
         "taiwan-entrepreneur-visa",
         "taiwan-aprc-investment",
         "taiwan-aprc-government-bonds"
       ],
       "residence_coverage": {
+        "talent_skilled": "reviewed",
         "investment": "reviewed"
       }
     },
@@ -39637,6 +39639,47 @@
         {
           "title": "NIA — Guidelines for APRC (Plum Blossom Card): special contributions, senior professionals, investment immigrants",
           "url": "https://www.immigration.gov.tw/5475/5478/141465/141808/147308/"
+        }
+      ]
+    },
+    {
+      "id": "taiwan-employment-gold-card",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Employment Gold Card",
+      "summary": "Combined open work permit, resident visa and ARC for foreign specialists in designated fields, valid one to three years with no sponsor required.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "taiwan-employment-gold-card-principal",
+          "label": "Employment Gold Card",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Taiwan Employment Gold Card — official portal",
+          "url": "https://goldcard.nat.gov.tw/en/"
         }
       ]
     },

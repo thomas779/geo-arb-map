@@ -57,6 +57,14 @@ export const THEME_BOOT_JS = "try{if(localStorage.getItem('geo-arb-theme')!=='li
   + "try{localStorage.setItem('geo-arb-theme',d?'dark':'light')}catch(e){}})});";
 const THEME_SCRIPT = `<script>${THEME_BOOT_JS}</script>`;
 
+// Static country pages are prerendered without hydration, so the React
+// onClick on the residence filter chips is dead HTML there. This script
+// drives the same chips via the data attributes CountryProfile renders.
+// The A/I class strings MUST mirror ResidenceSection's chip classes.
+// Its sha256 is pinned in public/_headers (CSP) — tests/seo.test.ts checks.
+export const RESIDENCE_FILTER_JS = "document.addEventListener('DOMContentLoaded',function(){var A='bg-primary text-primary-foreground',I='border bg-card text-muted-foreground hover:border-primary hover:text-foreground',btns=[].slice.call(document.querySelectorAll('[data-residence-filter]')),cards=[].slice.call(document.querySelectorAll('[data-residence-category]'));if(!btns.length)return;btns.forEach(function(b){b.addEventListener('click',function(){var f=b.getAttribute('data-residence-filter');btns.forEach(function(x){var on=x===b;A.split(' ').forEach(function(c){x.classList.toggle(c,on)});I.split(' ').forEach(function(c){x.classList.toggle(c,!on)});});cards.forEach(function(c){c.style.display=(f==='all'||c.getAttribute('data-residence-category')===f)?'':'none'});})});});";
+const RESIDENCE_FILTER_SCRIPT = `<script>${RESIDENCE_FILTER_JS}</script>`;
+
 // Static-page theme toggle, wired by THEME_BOOT_JS above. Mirrors the app's
 // header toggle (ghost icon button, Sun in dark / Moon in light via CSS).
 function staticHeader(active: NavKey) {
@@ -161,7 +169,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
       Fragment, null,
       staticHeader('countries'),
       createElement(CountryProfile, { data }),
-    ));
+    )) + RESIDENCE_FILTER_SCRIPT;
     const presentModes = Object.entries(data.coverage)
       .filter(([, s]) => s === 'reviewed' || s === 'partial')
       .map(([m]) => CITIZENSHIP_MODE_LABELS[m] ?? m);

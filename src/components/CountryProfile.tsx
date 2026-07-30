@@ -3,6 +3,7 @@ import type { BlocsData, CitizenshipRoute, CitizenshipRoutesData, ResidenceCateg
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
 import { provenanceLabel, routeProvenance } from '@/lib/trust';
 import { countryFlag } from '@/lib/country';
+import { ExternalSourceLink } from '@/components/ExternalSourceLink';
 import {
   RESIDENCE_CATEGORY_LABELS,
   RESIDENCE_STATUS_LABELS,
@@ -82,7 +83,7 @@ function Sources({ sources }: { sources: { title: string; url: string }[] }) {
       {sources.map((s, i) => (
         <span key={s.url}>
           {i > 0 && ' · '}
-          <a href={s.url} rel="nofollow noreferrer" className="underline underline-offset-2 hover:text-foreground">{s.title}</a>
+          <ExternalSourceLink href={s.url}>{s.title}</ExternalSourceLink>
         </span>
       ))}
     </p>
@@ -141,7 +142,10 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
   }
   const ladder = residenceLadderBadges(route);
   return (
-    <article className={`rounded-lg border bg-card p-4${closed ? ' opacity-75' : ''}`}>
+    <article
+      data-residence-category={route.category}
+      className={`rounded-lg border bg-card p-4${closed ? ' opacity-75' : ''}`}
+    >
       <div className="mb-1.5 flex flex-wrap items-center gap-2">
         <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">
           {RESIDENCE_CATEGORY_LABELS[route.category]}
@@ -209,6 +213,7 @@ function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
         <div className="mb-3 flex flex-wrap gap-1.5" role="group" aria-label="Filter residence programmes by type">
           <button
             type="button"
+            data-residence-filter="all"
             onClick={() => setFilter('all')}
             className={`rounded-full px-2.5 py-1 font-mono text-[0.7rem] transition-colors ${
               filter === 'all'
@@ -224,6 +229,7 @@ function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
               <button
                 key={cat}
                 type="button"
+                data-residence-filter={cat}
                 onClick={() => setFilter(cat)}
                 className={`rounded-full px-2.5 py-1 font-mono text-[0.7rem] transition-colors ${
                   filter === cat
