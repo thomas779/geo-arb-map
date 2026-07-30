@@ -2685,29 +2685,27 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Malaysia_2007",
+      "url": "https://lom.agc.gov.my/federal-constitution.php",
       "jurisdictions": [
         "458"
       ],
       "pages": [
         {
-          "id": "constitution",
-          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+          "id": "federal-constitution-portal",
+          "url": "https://lom.agc.gov.my/federal-constitution.php"
         },
         {
-          "id": "residence-pass",
-          "url": "https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/"
+          "id": "federal-constitution-pdf-wayback",
+          "url": "https://web.archive.org/web/20240101000000id_/https://www.jac.gov.my/spk/images/stories/10_akta/perlembagaan_persekutuan/federal_constitution.pdf"
         }
       ],
       "keywords": [
         "citizenship",
-        "naturalisation",
-        "naturalization",
         "Federal Constitution",
-        "residence",
-        "Malay"
+        "naturalisation",
+        "Part III"
       ],
-      "notes": "Federal Constitution plus Immigration Residence Pass page. JPN citizenship portal failed TLS in the collector."
+      "notes": "Official AGC Laws of Malaysia Federal Constitution portal; text quote-verified against JAC reprint PDF (Wayback). Replaced constituteproject aggregator 2026-07-30."
     },
     {
       "id": "vietnam-citizenship-law",
@@ -4844,19 +4842,22 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Russia_2014",
+      "url": "https://pravo.gov.ru/proxy/ips/?doc_itself=&nd=605444183&page=all&rdk=8",
       "jurisdictions": [
         "643"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
-        "citizenship",
-        "Russia",
-        "residence",
-        "birth"
+        "\u0433\u0440\u0430\u0436\u0434\u0430\u043d\u0441\u0442\u0432\u043e",
+        "naturalisation",
+        "138-\u0424\u0417"
       ],
-      "notes": "Russian constitutional nationality framework via Constitute Project text; cross-check the 2023 citizenship law (Federal Law 138-FZ). Active verification monitor for canonical coverage audit."
+      "notes": "Official 138-FZ consolidated text via pravo.gov.ru IPS; replaced constituteproject aggregator 2026-07-30 after primary-source verification.",
+      "pages": [
+        {
+          "id": "138fz-consolidated",
+          "url": "https://pravo.gov.ru/proxy/ips/?doc_itself=&nd=605444183&page=all&rdk=8"
+        }
+      ]
     },
     {
       "id": "armenia-citizenship-law",
@@ -4904,40 +4905,48 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017",
+      "url": "https://adilet.zan.kz/rus/docs/Z910004800_",
       "jurisdictions": [
         "398"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
-        "citizenship",
-        "Kazakhstan",
-        "kandas",
-        "residence",
-        "birth"
+        "\u0433\u0440\u0430\u0436\u0434\u0430\u043d\u0441\u0442\u0432\u043e",
+        "naturalisation",
+        "\u043a\u0430\u043d\u0434\u0430\u0441"
       ],
-      "notes": "Kazakhstani constitutional nationality framework via Constitute Project text. Active verification monitor for canonical coverage audit."
+      "notes": "Official Adilet consolidation of Law 1017-XII; replaced constituteproject aggregator 2026-07-30 after primary-source verification.",
+      "pages": [
+        {
+          "id": "adilet-law",
+          "url": "https://adilet.zan.kz/rus/docs/Z910004800_"
+        }
+      ]
     },
     {
       "id": "pakistan-citizenship-law",
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Pakistan_2018",
+      "url": "https://pakistancode.gov.pk/pdffiles/administratora2b6f3407a109a491d47d649f6ff0c01.pdf",
       "jurisdictions": [
         "586"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
         "citizenship",
-        "Pakistan",
-        "dual nationality",
-        "residence",
-        "birth"
+        "naturalisation",
+        "Pakistan Citizenship Act"
       ],
-      "notes": "Pakistani constitutional nationality framework via Constitute Project text; cross-check the Pakistan Citizenship Act 1951. Active verification monitor for canonical coverage audit."
+      "notes": "Official Pakistan Code PDF of Citizenship Act 1951 (consolidated through Act XXVII of 2026); replaced constituteproject aggregator 2026-07-30.",
+      "pages": [
+        {
+          "id": "citizenship-act-1951",
+          "url": "https://pakistancode.gov.pk/pdffiles/administratora2b6f3407a109a491d47d649f6ff0c01.pdf"
+        },
+        {
+          "id": "naturalization-act-1926",
+          "url": "https://pakistancode.gov.pk/pdffiles/administrator82667a82a20c35d5ee1e97ad66e230f4.pdf"
+        }
+      ]
     },
     {
       "id": "bangladesh-citizenship-law",

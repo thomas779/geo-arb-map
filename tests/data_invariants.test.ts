@@ -385,16 +385,15 @@ describe('monitor-lead verifications, July 2026', () => {
       'https://legislation.mt/eli/act/2025/21/eng');
   });
 
-  test('Pakistan descent drops the 2000 cut-off and stays at medium confidence', () => {
+  test('Pakistan descent records retrospective parent-for-father substitution at high confidence', () => {
     const descent = citizenshipRoutes.routes.find(route =>
       route.id === 'pakistan-citizenship-by-parent');
-    // The 2026 amendment makes the 2000 "parent for father" substitution
-    // retrospective. The old summary implied a hard 2000 cut-off, which would
-    // wrongly tell a pre-2000 child of a Pakistani mother that they have no claim.
-    expect(descent?.summary).toContain('retrospective');
+    // s. 5(2) in the Pakistan Code consolidation (Act XXVII of 2026) makes the
+    // 2000 "parent for father" substitution retrospective to the Act's commencement.
+    expect(descent?.summary.toLowerCase()).toMatch(/retrospect|commencement/);
     expect(descent?.summary).not.toContain('has counted since 2000');
-    // Gazetted wording is still unmatched, so this must not claim high confidence.
-    expect(descent?.confidence).toBe('medium');
+    expect(descent?.confidence).toBe('high');
+    expect(descent?.sources[0]?.url).toContain('pakistancode.gov.pk');
   });
 
   test('Paraguay Investor Pass is priced at its lowest published tier', () => {
@@ -570,24 +569,27 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(fi?.min_income_monthly?.amount).toBe(3937);
   });
 
-  test('priority jus soli batch: DR Chile Pakistan conditional/none; Uruguay unconditional', () => {
+  test('priority jus soli batch: DR Chile conditional; Pakistan + Uruguay unconditional', () => {
     const byId = new Map(citizenshipRoutes.routes.map(r => [r.id, r]));
     expect(byId.get('dominican-republic-citizenship-by-birth')?.facts.jus_soli).toBe('conditional');
     expect(byId.get('chile-citizenship-by-birth')?.facts.jus_soli).toBe('conditional');
-    expect(byId.get('pakistan-citizenship-at-birth-by-parent')?.facts.jus_soli).toBe('none');
+    // s. 4 Citizenship Act 1951 is general jus soli (diplomat/enemy-alien exceptions only).
+    // Tier 1c 2026-07-30: corrected prior practice-as-statute jus_soli=none modeling.
+    expect(byId.get('pakistan-citizenship-at-birth-by-parent')?.facts.jus_soli).toBe('unconditional');
+    expect(byId.get('pakistan-citizenship-at-birth-by-parent')?.facts.unconditional_jus_soli).toBe(true);
     expect(byId.get('uruguay-nationality-by-birth')?.facts.jus_soli).toBe('unconditional');
     expect(byId.get('uruguay-nationality-by-birth')?.facts.unconditional_jus_soli).toBe(true);
     // Unconditional set: Americas core, the Commonwealth Caribbean, US territories
-    // following US jus soli, plus Lesotho, Tuvalu and Peru. Corrected 2026-07-30
-    // after nine jurisdictions were found misclassified as `none` at high
-    // confidence — see #119. Every entry is sourced to official government text.
+    // following US jus soli, plus Lesotho, Tuvalu, Peru, and Pakistan (s. 4 Act).
+    // Corrected 2026-07-30 after nine jurisdictions were found misclassified as
+    // `none` at high confidence — see #119. Every entry is sourced to official text.
     const unconditional = citizenshipRoutes.routes.filter(r =>
       r.mode === 'birth' && r.facts?.jus_soli === 'unconditional');
     expect(unconditional.map(r => r.country.iso_n3).sort()).toEqual([
       '028', '032', '052', '068', '076', '084', '124', '192', '212', '218',
       '222', '308', '316', '320', '328', '340', '388', '426', '484', '558',
-      '580', '591', '600', '604', '630', '659', '662', '670', '780', '798',
-      '840', '850', '858', '862',
+      '580', '586', '591', '600', '604', '630', '659', '662', '670', '780',
+      '798', '840', '850', '858', '862',
     ]);
     // Guard against silent UNDER-counting, which is how the errors above arose:
     // an exact-list assertion happily locks in a wrong answer. GLOBALCIT puts
@@ -725,8 +727,8 @@ describe('source quality: constituteproject is a lead, not a source of record', 
   // 357 routes currently violate this. Rather than assert zero and fail the
   // suite, ratchet: the count may only go down. Lower these numbers as
   // jurisdictions are re-sourced; never raise them.
-  const CONSTITUTEPROJECT_ONLY_CEILING = 275;
-  const CONSTITUTEPROJECT_ANY_CEILING = 294;
+  const CONSTITUTEPROJECT_ONLY_CEILING = 258;
+  const CONSTITUTEPROJECT_ANY_CEILING = 275;
 
   const cites = (route: { sources: Array<{ url: string }> }) =>
     route.sources.some(source => source.url.includes('constituteproject'));
@@ -750,12 +752,12 @@ describe('source quality: constituteproject is a lead, not a source of record', 
   // only 13 are CP-only, so 3 already score "clean" while the year figure was
   // still never read from any statute. These two metrics ratchet UP instead, and
   // cannot be satisfied by adding noise.
-  const OFFICIAL_SOURCED_FLOOR = 392;
+  const OFFICIAL_SOURCED_FLOOR = 404;
   const PROVENANCE_DECLARED_FLOOR = 53;
 
   const OFFICIAL_HOST = /(^|\.)(gov|gob|gouv|govt|go)(\.[a-z]{2,3})?$/;
   const OFFICIAL_EXTRA = [
-    'arlis.am', 'e-tar.lt', 'ejustice.just.fgov.be', 'elperuano.pe', 'indiacode.nic.in',
+    'adilet.zan.kz', 'arlis.am', 'e-tar.lt', 'ejustice.just.fgov.be', 'elperuano.pe', 'indiacode.nic.in',
     'kenyalaw.org', 'legis.md', 'legislation.gov.uk', 'legislation.mt',
     'legislatie.just.ro', 'pisrs.si', 'portaljuridicandorra.ad',
     'riigiteataja.ee', 'slov-lex.sk', 'tuvalu-legislation.tv', 'uradni-list.si', 'zakon.rada.gov.ua',

@@ -796,23 +796,23 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth in Pakistan",
-      "summary": "Birth to a Pakistani parent creates nationality. The 1951 Act grants citizenship to persons born in Pakistan (excluding children of diplomats or enemy aliens), a territorial rule narrowed in practice since a 1999 ruling toward requiring a Pakistani parent.",
+      "title": "Citizenship by birth in Pakistan (s. 4)",
+      "summary": "Section 4 of the Citizenship Act 1951 grants citizenship by birth to every person born in Pakistan after commencement, except where the father has diplomatic immunity and is not a citizen, or is an enemy alien in occupied territory. The statute text has not been amended to require a Pakistani parent; any narrowing toward a parentage rule sits in case-law and administrative practice, not in s. 4 as published.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
         "jus_soli_exceptions": [
           "diplomats",
           "enemy_aliens"
         ],
-        "unconditional_jus_soli": false
+        "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Pakistan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Pakistan_2018"
+          "title": "Pakistan Citizenship Act, 1951 (II of 1951), consolidated (Pakistan Code)",
+          "url": "https://pakistancode.gov.pk/pdffiles/administratora2b6f3407a109a491d47d649f6ff0c01.pdf"
         }
       ]
     },
@@ -2960,7 +2960,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Kazakhstani parent",
-      "summary": "Birth to a Kazakhstani parent creates nationality. Birth in Kazakhstan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and children who would otherwise be stateless.",
+      "summary": "No general jus soli. Art. 13: a child found in Kazakhstan whose parents are both unknown is a citizen. Art. 14: a child born in Kazakhstan to permanently resident stateless persons is a citizen. Birth in Kazakhstan to two foreign-citizen parents does not confer citizenship (art. 11-1). Parentage rules are in arts. 11–12.",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -2968,11 +2968,11 @@
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Kazakhstan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017"
+          "title": "Law of the Republic of Kazakhstan on Citizenship No. 1017-XII of 20 December 1991 (consolidated, Adilet)",
+          "url": "https://adilet.zan.kz/rus/docs/Z910004800_"
         }
       ]
     },
@@ -3364,19 +3364,19 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Malaysian parent",
-      "summary": "A person born to a Malaysian citizen parent is Malaysian under the Constitution’s operation-of-law and registration rules. Birth in Malaysia to two foreign parents is not general jus soli.",
+      "summary": "Art. 14 and Second Schedule Part II: persons born on or after Malaysia Day are citizens by operation of law if born in the Federation with at least one parent a citizen or permanently resident; or born abroad to a citizen father under the registration/service rules of Second Schedule Part II ss. 1(b)–(c); or born in the Federation not a citizen of any other country (ss. 1(e)). Not unrestricted jus soli for two foreign parents.",
       "facts": {
-        "jus_soli": "none",
-        "parent_condition": "none",
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
         "jus_soli_exceptions": [],
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Malaysia Federal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+          "title": "Federal Constitution of Malaysia, Part III and Second Schedule (Laws of Malaysia / AGC lom.agc.gov.my)",
+          "url": "https://lom.agc.gov.my/federal-constitution.php"
         }
       ]
     },
@@ -3870,7 +3870,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Russian parent",
-      "summary": "Birth to a Russian parent creates nationality regardless of birthplace. Birth in Russia to foreign parents is not unrestricted jus soli; territorial birth confers citizenship only to prevent statelessness.",
+      "summary": "No general jus soli. Birth in Russia to two foreign or stateless parents permanently resident in Russia confers citizenship only where the child acquires no foreign citizenship by birth (art. 13(1)(5)); foundlings acquire citizenship if parentage is not established within six months (art. 13(3)). Ordinary nationality at birth follows the art. 13 parentage rules.",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -3878,11 +3878,11 @@
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Russia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Russia_2014"
+          "title": "Federal Law No. 138-FZ of 28 April 2023 on Citizenship of the Russian Federation (consolidated, pravo.gov.ru IPS)",
+          "url": "https://pravo.gov.ru/proxy/ips/?doc_itself=&nd=605444183&page=all&rdk=8"
         }
       ]
     },

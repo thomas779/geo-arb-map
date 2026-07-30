@@ -19161,7 +19161,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Kazakhstani parent",
-      "summary": "Birth to a Kazakhstani parent creates nationality. Birth in Kazakhstan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and children who would otherwise be stateless.",
+      "summary": "No general jus soli. Art. 13: a child found in Kazakhstan whose parents are both unknown is a citizen. Art. 14: a child born in Kazakhstan to permanently resident stateless persons is a citizen. Birth in Kazakhstan to two foreign-citizen parents does not confer citizenship (art. 11-1). Parentage rules are in arts. 11–12.",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -19183,11 +19183,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Kazakhstan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017"
+          "title": "Law of the Republic of Kazakhstan on Citizenship No. 1017-XII of 20 December 1991 (consolidated, Adilet)",
+          "url": "https://adilet.zan.kz/rus/docs/Z910004800_"
         }
       ]
     },
@@ -19200,7 +19200,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Simplified citizenship for ethnic Kazakh (kandas) repatriates",
-      "summary": "An ethnic Kazakh who was not previously a citizen and returns to the historical homeland may obtain \"kandas\" status and acquire citizenship through a simplified registration procedure regardless of the period of residence.",
+      "summary": "Art. 16-1(1): kandas permanently residing in Kazakhstan on lawful grounds may be admitted in the simplified (registration) procedure regardless of length of residence; processing must not exceed three months from application. Dual citizenship is not recognized.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -19215,15 +19215,15 @@
           "label": "Simplified citizenship for ethnic Kazakh (kandas) repatriates",
           "allocation": "right",
           "eligibility_months": 0,
-          "note": "The \"oralman\" status was renamed \"kandas\" in 2021; verify current qualifying and quota conditions at application."
+          "note": "Art. 16-1 Adilet; raises confidence after primary-source verification."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Kazakhstan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017"
+          "title": "Law of the Republic of Kazakhstan on Citizenship No. 1017-XII of 20 December 1991 (consolidated, Adilet)",
+          "url": "https://adilet.zan.kz/rus/docs/Z910004800_"
         }
       ]
     },
@@ -19236,7 +19236,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization as the spouse of a citizen",
-      "summary": "A spouse of a Kazakh may naturalize after three years of residence, instead of five.",
+      "summary": "Art. 16(1) reduces the permanent-residence condition for applicants married to a Kazakhstan citizen for at least three years (состоящие в браке … не менее трех лет) — the three years attach to the marriage duration, not to “three years of residence instead of five.” Still a presidential discretionary admission track.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -19248,18 +19248,18 @@
       "pathways": [
         {
           "id": "kazakhstan-citizenship-by-marriage-principal",
-          "label": "Naturalization as the spouse of a citizen",
+          "label": "Naturalization while married to a Kazakhstan citizen (3+ years of marriage)",
           "allocation": "discretionary",
           "eligibility_months": 36,
-          "note": "Discretionary (application)."
+          "note": "Corrects the prior “three years residence instead of five” framing. Art. 16(1) Adilet."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Kazakhstan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017"
+          "title": "Law of the Republic of Kazakhstan on Citizenship No. 1017-XII of 20 December 1991 (consolidated, Adilet)",
+          "url": "https://adilet.zan.kz/rus/docs/Z910004800_"
         }
       ]
     },
@@ -19272,7 +19272,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Kazakhstani citizenship through a Kazakhstani parent",
-      "summary": "A child at least one of whose parents is a Kazakhstani citizen is a citizen (jus sanguinis), regardless of birthplace.",
+      "summary": "Not unconditional single-parent jus sanguinis. Art. 11: a child both of whose parents are citizens is a citizen regardless of birthplace. Art. 12 covers mixed-parentage cases with additional conditions (birth in Kazakhstan, consent, or other statutory cases). The prior “any one Kazakhstani parent, any birthplace” wording overstates art. 11.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -19286,15 +19286,16 @@
           "id": "kazakhstan-citizenship-by-parent-principal",
           "label": "Kazakhstani citizenship through a Kazakhstani parent",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "Corrects unconditional single-parent descent wording against arts. 11–12 Adilet."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Kazakhstan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017"
+          "title": "Law of the Republic of Kazakhstan on Citizenship No. 1017-XII of 20 December 1991 (consolidated, Adilet)",
+          "url": "https://adilet.zan.kz/rus/docs/Z910004800_"
         }
       ]
     },
@@ -19307,7 +19308,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after about five years residence",
-      "summary": "Adults generally need about five years of continuous permanent residence (about three years for spouses of citizens); applicants must generally renounce prior citizenship. Grant is discretionary.",
+      "summary": "Admission to citizenship under art. 16(1) for persons permanently residing in Kazakhstan on lawful grounds for not less than five years, or married to a Kazakhstan citizen for not less than three years (the three-year figure is the duration of the marriage, not a separate three-year residence track). Dual citizenship is not recognized (art. 3). Grant is by the President (art. 15) and discretionary.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -19322,15 +19323,15 @@
           "label": "Naturalization after about five years residence",
           "allocation": "discretionary",
           "eligibility_months": 60,
-          "note": "Five-year residence floor from comparative readings of the citizenship law; case-check the current statute."
+          "note": "Art. 16(1) Adilet consolidation (amendments through Law No. 82-VIII of 16.05.2024). Five-year floor is statutory, not modeled. Renunciation is framed via non-recognition of dual citizenship (art. 3)."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Kazakhstan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017"
+          "title": "Law of the Republic of Kazakhstan on Citizenship No. 1017-XII of 20 December 1991 (consolidated, Adilet)",
+          "url": "https://adilet.zan.kz/rus/docs/Z910004800_"
         }
       ]
     },
@@ -21805,10 +21806,10 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Malaysian parent",
-      "summary": "A person born to a Malaysian citizen parent is Malaysian under the Constitution’s operation-of-law and registration rules. Birth in Malaysia to two foreign parents is not general jus soli.",
+      "summary": "Art. 14 and Second Schedule Part II: persons born on or after Malaysia Day are citizens by operation of law if born in the Federation with at least one parent a citizen or permanently resident; or born abroad to a citizen father under the registration/service rules of Second Schedule Part II ss. 1(b)–(c); or born in the Federation not a citizen of any other country (ss. 1(e)). Not unrestricted jus soli for two foreign parents.",
       "facts": {
-        "jus_soli": "none",
-        "parent_condition": "none",
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
         "jus_soli_exceptions": [],
         "unconditional_jus_soli": false,
         "canonical": true,
@@ -21827,11 +21828,15 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Malaysia Federal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+          "title": "Federal Constitution of Malaysia, Part III and Second Schedule (Laws of Malaysia / AGC lom.agc.gov.my)",
+          "url": "https://lom.agc.gov.my/federal-constitution.php"
+        },
+        {
+          "title": "Federal Constitution reprint PDF (JAC portal copy via Wayback, used for quote verification 2026-07-30)",
+          "url": "https://web.archive.org/web/20240101000000id_/https://www.jac.gov.my/spk/images/stories/10_akta/perlembagaan_persekutuan/federal_constitution.pdf"
         }
       ]
     },
@@ -21843,31 +21848,35 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Naturalization as the spouse of a citizen",
-      "summary": "The foreign wife of a Malaysian man may register after two years of residence, instead of about ten.",
+      "title": "Citizenship by registration for the foreign wife of a Malaysian citizen",
+      "summary": "Art. 15(1): a married woman whose husband is a citizen is entitled, on application, to be registered as a citizen if she has resided in the Federation throughout the two years preceding the application, intends to do so permanently, and is of good character (subject to art. 18). Foreign husbands of Malaysian women have no parallel art. 15 registration track.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
           24
         ],
-        "discretionary_decision": true
+        "discretionary_decision": false
       },
       "pathways": [
         {
           "id": "malaysia-citizenship-by-marriage-principal",
-          "label": "Naturalization as the spouse of a citizen",
-          "allocation": "discretionary",
+          "label": "Citizenship by registration for the foreign wife of a Malaysian citizen",
+          "allocation": "right",
           "eligibility_months": 24,
-          "note": "Federal Constitution art. 15(2). Foreign husbands of Malaysian women have no facilitation."
+          "note": "Art. 15(1) Federal Constitution (not art. 15(2), which is child registration). Wife-only."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Malaysia Federal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+          "title": "Federal Constitution of Malaysia, Part III and Second Schedule (Laws of Malaysia / AGC lom.agc.gov.my)",
+          "url": "https://lom.agc.gov.my/federal-constitution.php"
+        },
+        {
+          "title": "Federal Constitution reprint PDF (JAC portal copy via Wayback, used for quote verification 2026-07-30)",
+          "url": "https://web.archive.org/web/20240101000000id_/https://www.jac.gov.my/spk/images/stories/10_akta/perlembagaan_persekutuan/federal_constitution.pdf"
         }
       ]
     },
@@ -21880,7 +21889,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Malaysian citizenship through a Malaysian parent",
-      "summary": "A child of a Malaysian citizen parent may hold or register Malaysian citizenship under the Federal Constitution, subject to the birthplace and registration rules in force.",
+      "summary": "Descent is primarily father-line for births abroad (Second Schedule Part II s. 1(b)–(c), with consular registration within a year unless the father was born in the Federation or is in federal/state service). Births in the Federation need at least one citizen or permanently resident parent (s. 1(a)). Maternal transmission alone for foreign births is not the general automatic rule.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -21894,15 +21903,20 @@
           "id": "malaysia-citizenship-by-parent-principal",
           "label": "Malaysian citizenship through a Malaysian parent",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "Second Schedule Part II Federal Constitution; corrects over-broad “any Malaysian parent” wording."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Malaysia Federal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+          "title": "Federal Constitution of Malaysia, Part III and Second Schedule (Laws of Malaysia / AGC lom.agc.gov.my)",
+          "url": "https://lom.agc.gov.my/federal-constitution.php"
+        },
+        {
+          "title": "Federal Constitution reprint PDF (JAC portal copy via Wayback, used for quote verification 2026-07-30)",
+          "url": "https://web.archive.org/web/20240101000000id_/https://www.jac.gov.my/spk/images/stories/10_akta/perlembagaan_persekutuan/federal_constitution.pdf"
         }
       ]
     },
@@ -21915,7 +21929,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after long residence",
-      "summary": "Federal Constitution naturalization generally requires ten years residence within the twelve years before application, including twelve months immediately before applying, Malay language ability, good character, and renunciation of prior nationality. Approval is highly discretionary.",
+      "summary": "Art. 19 naturalization: the Federal Government may grant a certificate if satisfied of good character, adequate knowledge of the Malay language, and residence for periods amounting in the aggregate to not less than ten years in the twelve years immediately preceding the application, including the twelve months immediately preceding that date (art. 19(3)). Highly discretionary; dual citizenship is not generally permitted.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -21929,19 +21943,20 @@
           "id": "malaysia-naturalization-principal",
           "label": "Naturalization after long residence",
           "allocation": "discretionary",
-          "eligibility_months": 120
+          "eligibility_months": 120,
+          "note": "Art. 19(3) Federal Constitution — ten of twelve years + last twelve months continuous."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Malaysia Federal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+          "title": "Federal Constitution of Malaysia, Part III and Second Schedule (Laws of Malaysia / AGC lom.agc.gov.my)",
+          "url": "https://lom.agc.gov.my/federal-constitution.php"
         },
         {
-          "title": "Malaysia Immigration — Residence Pass",
-          "url": "https://www.imi.gov.my/index.php/en/main-services/pass/residence-pass/"
+          "title": "Federal Constitution reprint PDF (JAC portal copy via Wayback, used for quote verification 2026-07-30)",
+          "url": "https://web.archive.org/web/20240101000000id_/https://www.jac.gov.my/spk/images/stories/10_akta/perlembagaan_persekutuan/federal_constitution.pdf"
         }
       ]
     },
@@ -26745,16 +26760,16 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth in Pakistan",
-      "summary": "Birth to a Pakistani parent creates nationality. The 1951 Act grants citizenship to persons born in Pakistan (excluding children of diplomats or enemy aliens), a territorial rule narrowed in practice since a 1999 ruling toward requiring a Pakistani parent.",
+      "title": "Citizenship by birth in Pakistan (s. 4)",
+      "summary": "Section 4 of the Citizenship Act 1951 grants citizenship by birth to every person born in Pakistan after commencement, except where the father has diplomatic immunity and is not a citizen, or is an enemy alien in occupied territory. The statute text has not been amended to require a Pakistani parent; any narrowing toward a parentage rule sits in case-law and administrative practice, not in s. 4 as published.",
       "facts": {
-        "jus_soli": "none",
+        "jus_soli": "unconditional",
         "parent_condition": "none",
         "jus_soli_exceptions": [
           "diplomats",
           "enemy_aliens"
         ],
-        "unconditional_jus_soli": false,
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -26767,15 +26782,16 @@
           "id": "pakistan-citizenship-at-birth-by-parent-principal",
           "label": "Citizenship at birth in Pakistan",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "s. 4 Pakistan Code consolidation. Corrects the prior jus_soli=none modeling that treated practice as statute. Practice/case-law may still demand a Pakistani parent — flag for counsel, but the Act remains general jus soli."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Pakistan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Pakistan_2018"
+          "title": "Pakistan Citizenship Act, 1951 (II of 1951), consolidated (Pakistan Code)",
+          "url": "https://pakistancode.gov.pk/pdffiles/administratora2b6f3407a109a491d47d649f6ff0c01.pdf"
         }
       ]
     },
@@ -26788,7 +26804,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization as the spouse of a citizen",
-      "summary": "The foreign wife of a Pakistani man is entitled to citizenship with no residence requirement.",
+      "summary": "s. 10(2): a woman married to a citizen of Pakistan (or who would have been a citizen but for death) is entitled, on application, to be registered as a citizen — if an alien, on obtaining a certificate of domicile and taking the oath of allegiance. No residence period in the Act. Wife-only; no equivalent for foreign husbands.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -26803,15 +26819,15 @@
           "label": "Naturalization as the spouse of a citizen",
           "allocation": "right",
           "eligibility_months": 0,
-          "note": "Citizenship Act s.10. Wife only — a foreign husband of a Pakistani woman has no facilitated route."
+          "note": "s. 10(2) Pakistan Code; allocation remains a right on application (domicile/oath conditions if alien)."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Pakistan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Pakistan_2018"
+          "title": "Pakistan Citizenship Act, 1951 (II of 1951), consolidated (Pakistan Code)",
+          "url": "https://pakistancode.gov.pk/pdffiles/administratora2b6f3407a109a491d47d649f6ff0c01.pdf"
         }
       ]
     },
@@ -26824,7 +26840,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Pakistani citizenship through a Pakistani parent",
-      "summary": "A child born abroad is a Pakistani citizen by descent where a parent is a citizen otherwise than by descent. The 2000 ordinance substituted \"parent\" for \"father\" in the Citizenship Act 1951, and the Pakistan Citizenship (Amendment) Bill 2026 — assented 19 March 2026 — makes that substitution retrospective, so children of Pakistani mothers born before 2000 are covered rather than cut off at that date.",
+      "summary": "Child born abroad is a citizen by descent where a parent is a citizen otherwise than by descent. The official consolidation includes s. 5(2) (Act No. XXVII of 2026 s. 2), making the 2000 substitution of “parent” for “father” retrospective to the Act’s commencement.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -26839,19 +26855,15 @@
           "label": "Pakistani citizenship through a Pakistani parent",
           "allocation": "right",
           "eligibility_months": 0,
-          "note": "The retrospective effect is confirmed by the Press Information Department assent notice and by the Global Campaign for Equal Nationality Rights, but the gazetted text has not been matched word for word — senate.gov.pk no longer serves the document. Treat the pre-2000 maternal claim as sound in principle and unconfirmed in wording."
+          "note": "s. 5 and s. 5(2) Pakistan Code consolidation (2026 amendment footnote)."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-28",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Pakistan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Pakistan_2018"
-        },
-        {
-          "title": "Pakistan PID — Citizenship (Amendment) Bill 2026 assented",
-          "url": "https://pid.gov.pk/site/press_detail/32172"
+          "title": "Pakistan Citizenship Act, 1951 (II of 1951), consolidated (Pakistan Code)",
+          "url": "https://pakistancode.gov.pk/pdffiles/administratora2b6f3407a109a491d47d649f6ff0c01.pdf"
         }
       ]
     },
@@ -26864,7 +26876,7 @@
       "mode": "investment",
       "status": "pending_verification",
       "title": "Commonwealth-citizen citizenship by investment registration",
-      "summary": "A Commonwealth citizen may be registered as a Pakistani citizen after remitting a set amount (commonly cited around PKR 5,000,000) to the State Bank of Pakistan. The route is limited to Commonwealth nationals and approval is discretionary.",
+      "summary": "s. 20 empowers the Federal Government to register a Commonwealth citizen or British protected person “upon such terms and conditions as it may by general or special order specify.” No remittance amount appears in the Act; commonly cited PKR 5,000,000 figures would live in subordinate orders/rules not located on pakistancode.gov.pk.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -26877,15 +26889,15 @@
           "label": "Commonwealth investment registration",
           "allocation": "discretionary",
           "eligibility_months": null,
-          "note": "No verified operating timeline; limited to Commonwealth citizens."
+          "note": "Statutory hook is s. 20 only. Investment amount remains unverified against official subordinate legislation."
         }
       ],
       "confidence": "low",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Pakistan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Pakistan_2018"
+          "title": "Pakistan Citizenship Act, 1951 (II of 1951), consolidated (Pakistan Code)",
+          "url": "https://pakistancode.gov.pk/pdffiles/administratora2b6f3407a109a491d47d649f6ff0c01.pdf"
         }
       ]
     },
@@ -26898,7 +26910,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after about five years residence",
-      "summary": "Adults generally need about five years of residence plus proficiency in a vernacular language and good character; grant is discretionary.",
+      "summary": "s. 9 Citizenship Act 1951: the Federal Government may register as a citizen a person granted a certificate of naturalisation under the Naturalization Act 1926. Residence under 1926 s. 3(1)(c): twelve months immediately preceding the application plus an aggregate of at least four years in the seven years before that twelve-month period (~five years minimum), good character, and adequate knowledge of a declared vernacular. Discretionary.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -26913,15 +26925,19 @@
           "label": "Naturalization after about five years residence",
           "allocation": "discretionary",
           "eligibility_months": 60,
-          "note": "Five-year residence floor from readings of the Citizenship Act 1951 schedule; case-check the exact residence computation."
+          "note": "Residence computation lives in Naturalization Act 1926 s. 3(1)(c), not the 1951 Act schedule."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Pakistan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Pakistan_2018"
+          "title": "Pakistan Citizenship Act, 1951 (II of 1951), consolidated (Pakistan Code)",
+          "url": "https://pakistancode.gov.pk/pdffiles/administratora2b6f3407a109a491d47d649f6ff0c01.pdf"
+        },
+        {
+          "title": "Naturalization Act, 1926 (VII of 1926) (Pakistan Code)",
+          "url": "https://pakistancode.gov.pk/pdffiles/administrator82667a82a20c35d5ee1e97ad66e230f4.pdf"
         }
       ]
     },
@@ -29021,7 +29037,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Russian parent",
-      "summary": "Birth to a Russian parent creates nationality regardless of birthplace. Birth in Russia to foreign parents is not unrestricted jus soli; territorial birth confers citizenship only to prevent statelessness.",
+      "summary": "No general jus soli. Birth in Russia to two foreign or stateless parents permanently resident in Russia confers citizenship only where the child acquires no foreign citizenship by birth (art. 13(1)(5)); foundlings acquire citizenship if parentage is not established within six months (art. 13(3)). Ordinary nationality at birth follows the art. 13 parentage rules.",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -29043,11 +29059,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Russia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Russia_2014"
+          "title": "Federal Law No. 138-FZ of 28 April 2023 on Citizenship of the Russian Federation (consolidated, pravo.gov.ru IPS)",
+          "url": "https://pravo.gov.ru/proxy/ips/?doc_itself=&nd=605444183&page=all&rdk=8"
         }
       ]
     },
@@ -29059,8 +29075,8 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Naturalization as the spouse of a citizen",
-      "summary": "A spouse married to a Russian for at least three years may use the simplified order, without the minimum residence requirement.",
+      "title": "Simplified naturalization as the spouse of a Russian citizen (with common child)",
+      "summary": "Under art. 16(2)(5) of 138-FZ, the simplified spousal track requires permanent residence in Russia (residence permit, irrespective of duration), marriage to a Russian citizen residing in Russia, AND a common child of the marriage (including adopted). The old 62-FZ “three years of marriage” waiver without a child no longer exists — marriage alone of any duration does not qualify.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -29072,18 +29088,18 @@
       "pathways": [
         {
           "id": "russia-citizenship-by-marriage-principal",
-          "label": "Naturalization as the spouse of a citizen",
+          "label": "Simplified naturalization as the spouse of a Russian citizen (with common child)",
           "allocation": "discretionary",
           "eligibility_months": 0,
-          "note": "Federal Law 138-FZ; a residence permit is still needed."
+          "note": "Art. 16(2)(5) 138-FZ. Corrects the prior three-year marriage / no-child model. Residence permit still required."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Russia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Russia_2014"
+          "title": "Federal Law No. 138-FZ of 28 April 2023 on Citizenship of the Russian Federation (consolidated, pravo.gov.ru IPS)",
+          "url": "https://pravo.gov.ru/proxy/ips/?doc_itself=&nd=605444183&page=all&rdk=8"
         }
       ]
     },
@@ -29096,7 +29112,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Russian citizenship through a Russian parent",
-      "summary": "A child of a Russian citizen parent is a Russian citizen (jus sanguinis), regardless of birthplace.",
+      "summary": "Automatic citizenship by birth when both parents (or the sole parent) are Russian citizens, wherever born (art. 13(1)(1)). With one Russian and one foreign parent: the child is a citizen by birth if born in Russia (art. 13(1)(3)), or if born abroad only where the child acquired no foreign citizenship by birth (art. 13(1)(4)). Not unconditional single-parent jus sanguinis for mixed parentage births abroad.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -29110,15 +29126,16 @@
           "id": "russia-citizenship-by-parent-principal",
           "label": "Russian citizenship through a Russian parent",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "Corrects the prior unconditional “any Russian parent, any birthplace” wording against 138-FZ art. 13."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Russia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Russia_2014"
+          "title": "Federal Law No. 138-FZ of 28 April 2023 on Citizenship of the Russian Federation (consolidated, pravo.gov.ru IPS)",
+          "url": "https://pravo.gov.ru/proxy/ips/?doc_itself=&nd=605444183&page=all&rdk=8"
         }
       ]
     },
@@ -29131,7 +29148,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after about five years residence",
-      "summary": "The general procedure requires roughly five years of permanent residence plus Russian-language proficiency, knowledge of history and law, and a lawful source of income. Grant is discretionary.",
+      "summary": "The general procedure under Federal Law 138-FZ (2023) requires five years of permanent residence counted from the day of the decision granting a residence permit (вид на жительство) until the application day, Russian-language proficiency, and knowledge of Russian history and the fundamentals of legislation, plus absence of statutory refusal grounds (art. 15). The prior “lawful source of income” condition from 62-FZ was not carried into 138-FZ. Grant is by the MVD (or territorial organ), discretionary.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -29146,15 +29163,15 @@
           "label": "Naturalization after about five years residence",
           "allocation": "discretionary",
           "eligibility_months": 60,
-          "note": "Five-year residence floor from the 2023 Federal Law 138-FZ general procedure; case-check the many simplified categories that reduce or waive it."
+          "note": "Art. 15(1) 138-FZ read on pravo.gov.ru IPS (consolidated with amendments through May 2026). Corrects the income condition that applied under the repealed 62-FZ framework."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Russia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Russia_2014"
+          "title": "Federal Law No. 138-FZ of 28 April 2023 on Citizenship of the Russian Federation (consolidated, pravo.gov.ru IPS)",
+          "url": "https://pravo.gov.ru/proxy/ips/?doc_itself=&nd=605444183&page=all&rdk=8"
         }
       ]
     },
@@ -29167,7 +29184,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Simplified naturalization for native Russian speakers and USSR/Empire descendants",
-      "summary": "The 2023 law keeps simplified routes that cut or waive the ordinary residence requirement, including recognized native Russian speakers and descendants of persons who permanently resided in the USSR or the Russian Empire.",
+      "summary": "Art. 16(2)(1)–(2) 138-FZ: persons permanently residing in Russia (irrespective of duration) who were born or permanently resided in the RSFSR as USSR citizens, or who have a direct ascending-line relative born or permanently resident in the RSFSR or on Russian Empire/USSR territory within Russia’s present borders, may apply without the five-year, language, and history/law requirements of art. 15. The separate “recognized native Russian speaker” (носитель русского языка) track of the prior law is not restated in the same form in 138-FZ — plan against the current art. 16 list, not legacy 62-FZ summaries.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -29180,15 +29197,15 @@
           "label": "Simplified naturalization for native Russian speakers and USSR/Empire descendants",
           "allocation": "discretionary",
           "eligibility_months": null,
-          "note": "Statutory basis in the 2023 law; qualifying criteria (language-commission recognition, documentary proof of USSR/Empire residence) require case-level verification."
+          "note": "Read against 138-FZ art. 16 simplified grounds on pravo.gov.ru IPS (2023 law)."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Russia Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Russia_2014"
+          "title": "Federal Law No. 138-FZ of 28 April 2023 on Citizenship of the Russian Federation (consolidated, pravo.gov.ru IPS)",
+          "url": "https://pravo.gov.ru/proxy/ips/?doc_itself=&nd=605444183&page=all&rdk=8"
         }
       ]
     },

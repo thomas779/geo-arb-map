@@ -49,6 +49,7 @@ export function isSocialHost(host: string): boolean {
 // scored as an independent outlet — which matters because the same predicate
 // feeds source-candidate ranking. Keep sorted by host for scanning.
 const OFFICIAL_LEGISLATION_HOSTS = [
+  'adilet.zan.kz', // Kazakhstan, Ministry of Justice legal information system (Әділет)
   'arlis.am', // Armenia, Legal Information System of the Republic of Armenia
   'e-tar.lt', // Lithuania, Teisės aktų registras
   'ejustice.just.fgov.be', // Belgium, Moniteur belge / Belgisch Staatsblad
