@@ -475,10 +475,9 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   const lookupIso = mobilityIso(iso);
   const dark = isDarkTheme();
   if (state.routeClass && _classIsos) {
-    // Two tones, one honest split (owner decision): solid where at least one
-    // active route of the class ACCRUES toward PR or citizenship, muted where
-    // routes exist but dead-end — most digital-nomad visas are the muted case.
-    // The flags are the same ones the cards' ladder badges render.
+    // Two tones, validated against the palette (see route-classes.ts): a third
+    // step cannot clear both the land grey and its ramp neighbour, so PR and
+    // CIT share the solid tone and the legend says so.
     if (_classIsos.accruing.has(lookupIso)) return 'var(--map-strong)';
     if (_classIsos.all.has(lookupIso)) return 'var(--map-limited)';
     return 'var(--map-land)';

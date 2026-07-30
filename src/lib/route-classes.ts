@@ -41,15 +41,17 @@ export function routeClassById(id: string | null | undefined): RouteClass | null
 }
 
 /**
- * Painted sets for a class. Two tiers, because "has a route" hides the
- * distinction the owner called out: most digital-nomad visas are temporary
- * stays that accrue toward nothing, while a few genuinely ladder into PR or
- * citizenship. `accruing` ⊆ `all`.
+ * Painted sets for a class. TWO tiers, not three — validated, not felt: the
+ * palette validator puts every 3-tone candidate below ΔE 9 against either the
+ * land grey or its ramp neighbour (the PR↔land corridor is only ~ΔE 15 wide),
+ * so a third tone would be indistinguishable for a meaningful share of
+ * readers. The legend keeps all three Access-level rows; PR and CIT share the
+ * solid swatch, which is the truthful statement that the map cannot split
+ * them further.
  *
- * - citizenship classes: every active route is `accruing` by definition — the
- *   outcome IS citizenship.
- * - residence classes: `accruing` when the route counts toward permanent
- *   residence or naturalization (the same flags the cards' ladder badges show).
+ * `accruing`: at least one active route of the class counts toward PR or
+ * naturalization (the flags the cards' ladder badges render). Citizenship
+ * classes are all-accruing by definition. `accruing` ⊆ `all`.
  */
 export interface RouteClassIsos {
   all: Set<string>;
