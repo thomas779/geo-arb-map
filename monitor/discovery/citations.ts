@@ -49,6 +49,15 @@ export function isSocialHost(host: string): boolean {
 // scored as an independent outlet — which matters because the same predicate
 // feeds source-candidate ranking. Keep sorted by host for scanning.
 const OFFICIAL_LEGISLATION_HOSTS = [
+  'belgium.be', // Belgium, federal portal
+  'canada.ca', // Canada, Government of Canada portal
+  'gesetze-im-internet.de', // Germany, federal law portal (BMJ)
+  'mae.ro', // Romania, Ministry of Foreign Affairs
+  'migracija.lt', // Lithuania, Migration Department
+  'migri.fi', // Finland, Immigration Service
+  'nyidanmark.dk', // Denmark, Immigration Service portal
+  'service-public.fr', // France, official administration portal
+  'sintmaartengov.org', // Sint Maarten, government portal
   'adilet.zan.kz', // Kazakhstan, Ministry of Justice legal information system (Әділет)
   'arlis.am', // Armenia, Legal Information System of the Republic of Armenia
   'e-tar.lt', // Lithuania, Teisės aktų registras

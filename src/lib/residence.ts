@@ -45,12 +45,32 @@ export const HEADLINE_CATEGORIES: ReadonlyArray<{ category: ResidenceCategory; a
  * Headline categories with no row of ANY status for this jurisdiction.
  * Fires only when the jurisdiction has residence coverage at all — deriving
  * "no golden visa recorded" for a country whose residence layer was never
- * reviewed would claim more than we know.
+ * reviewed would claim more than we know. Categories whose absence was
+ * VERIFIED (a verified_negative row exists) are excluded here: they get the
+ * stronger sourced statement from verifiedResidenceNegatives instead.
  */
 export function derivedResidenceAbsences(residence: ResidenceRoute[]): string[] {
   if (!residence.length) return [];
   const present = new Set(residence.map(route => route.category));
   return HEADLINE_CATEGORIES.filter(h => !present.has(h.category)).map(h => h.absenceLabel);
+}
+
+/**
+ * Verified non-existence, presented as a quiet sourced line rather than a card.
+ *
+ * Owner rule: never give a card to something that never existed. A card titled
+ * "No dedicated digital nomad visa" reads with the same visual weight as a real
+ * programme; the checked fact belongs in a footnote with its official source.
+ * Cards are reserved for things with a story — active routes and lapsed
+ * programmes (`inactive`, which carry their run dates).
+ */
+export function verifiedResidenceNegatives(residence: ResidenceRoute[]): ResidenceRoute[] {
+  return residence.filter(route => route.status === 'verified_negative');
+}
+
+/** Everything that should render as a card: active, lapsed, pending. */
+export function residenceCardRoutes(residence: ResidenceRoute[]): ResidenceRoute[] {
+  return residence.filter(route => route.status !== 'verified_negative');
 }
 
 export const RESIDENCE_STATUS_ORDER = [

@@ -10,6 +10,8 @@ import {
   RESIDENCE_STATUS_ORDER,
   residenceLadderBadges,
   derivedResidenceAbsences,
+  residenceCardRoutes,
+  verifiedResidenceNegatives,
 } from '@/lib/residence';
 
 // Shared per-country page derivation + labels, used by the interactive app
@@ -184,8 +186,12 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
 }
 
 function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
+  // Verified negatives render as sourced footnotes, never cards — a card titled
+  // "No dedicated X" carries the same weight as a programme. See residence.ts.
+  const cards = useMemo(() => residenceCardRoutes(residence), [residence]);
+  const negatives = useMemo(() => verifiedResidenceNegatives(residence), [residence]);
   const categories = useMemo(() => {
-    const present = [...new Set(residence.map(r => r.category))];
+    const present = [...new Set(cards.map(r => r.category))];
     // Prefer nomad / identity early so the filter showcases long-stay & digital ID.
     const preferred: ResidenceCategory[] = [
       'digital_nomad',
@@ -196,15 +202,15 @@ function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
       'general_permanent_residence',
     ];
     return preferred.filter(c => present.includes(c));
-  }, [residence]);
+  }, [cards]);
   const [filter, setFilter] = useState<ResidenceCategory | 'all'>('all');
   const visible = useMemo(() => {
-    const list = filter === 'all' ? residence : residence.filter(r => r.category === filter);
+    const list = filter === 'all' ? cards : cards.filter(r => r.category === filter);
     return [...list].sort(
       (a, b) => RESIDENCE_STATUS_ORDER.indexOf(a.status as typeof RESIDENCE_STATUS_ORDER[number])
         - RESIDENCE_STATUS_ORDER.indexOf(b.status as typeof RESIDENCE_STATUS_ORDER[number]),
     );
-  }, [residence, filter]);
+  }, [cards, filter]);
   const showFilter = categories.length > 1;
   return (
     <section id="residence" className="mt-8 scroll-mt-20">
@@ -221,10 +227,10 @@ function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
                 : 'border bg-card text-muted-foreground hover:border-primary hover:text-foreground'
             }`}
           >
-            All ({residence.length})
+            All ({cards.length})
           </button>
           {categories.map(cat => {
-            const n = residence.filter(r => r.category === cat).length;
+            const n = cards.filter(r => r.category === cat).length;
             return (
               <button
                 key={cat}
@@ -266,8 +272,18 @@ function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
             </p>
           )}
       </div>
+      {filter === 'all' && negatives.length > 0 && (
+        <div className="mt-3 space-y-1">
+          {negatives.map(r => (
+            <p key={r.id} className="text-xs text-muted-foreground">
+              Verified — {RESIDENCE_CATEGORY_LABELS[r.category].toLowerCase()}: {r.summary}{' '}
+              {r.sources[0] && <ExternalSourceLink href={r.sources[0].url}>{r.sources[0].title}</ExternalSourceLink>}
+            </p>
+          ))}
+        </div>
+      )}
       {filter === 'all' && derivedResidenceAbsences(residence).length > 0 && (
-        <p className="mt-3 text-xs text-muted-foreground">
+        <p className="mt-2 text-xs text-muted-foreground">
           Not recorded here: {derivedResidenceAbsences(residence).join('; ')}.
         </p>
       )}
