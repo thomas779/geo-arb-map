@@ -515,14 +515,13 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(byId.get('cyprus-digital-nomad-visa')?.category).toBe('digital_nomad');
     expect(byId.get('cyprus-digital-nomad-visa')?.counts_toward_permanent_residence).toBe(false);
     expect(byId.get('romania-digital-nomad-visa')?.counts_toward_naturalization).toBe(false);
-    for (const id of [
-      'georgia-digital-nomad-verified-negative',
-      'germany-digital-nomad-verified-negative',
-      'turkey-digital-nomad-verified-negative',
-    ]) {
-      expect(byId.get(id)?.status).toBe('verified_negative');
-      expect(byId.get(id)?.category).toBe('digital_nomad');
-    }
+    // 2026-07-30 audit of every stored nomad negative against official sources:
+    // Germany's negative held; Türkiye's was WRONG (TGA runs the Dijital Göçebe
+    // scheme since April 2024); Georgia's hid the lapsed pandemic programme.
+    expect(byId.get('germany-digital-nomad-verified-negative')?.status).toBe('verified_negative');
+    expect(byId.get('turkey-digital-nomad-visa')?.status).toBe('active');
+    expect(byId.get('turkey-digital-nomad-visa')?.min_income_monthly).toEqual({ amount: 3000, currency: 'USD' });
+    expect(byId.get('georgia-remotely-from-georgia-ended')?.status).toBe('inactive');
   });
 
   test('digital nomad coverage batch adds Croatia Italy Hungary Colombia with no PR/citizenship path', () => {
@@ -599,12 +598,20 @@ describe('monitor-lead verifications, 30 July 2026', () => {
 
   test('digital nomad residual negatives + Korea workcation (PR/cit no)', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    // Post-audit split (2026-07-30): Mexico, Jamaica and the UK negatives were
+    // CONFIRMED against official taxonomies. Namibia's was wrong (NIPDB visa is
+    // live); Antigua's and the Bahamas' hid lapsed programmes and are now
+    // inactive rows carrying their run dates.
+    expect(byId.get('namibia-digital-nomad-visa')?.status).toBe('active');
+    expect(byId.get('south-africa-remote-work-visa')?.status).toBe('active');
+    expect(byId.get('indonesia-remote-worker-visa')?.status).toBe('active');
+    for (const id of ['antigua-nomad-digital-residence-ended', 'bahamas-beats-ended']) {
+      expect(byId.get(id)?.status, id).toBe('inactive');
+      expect(byId.get(id)?.counts_toward_permanent_residence, id).toBe(false);
+    }
     for (const id of [
       'mexico-digital-nomad-verified-negative',
       'jamaica-digital-nomad-verified-negative',
-      'bahamas-digital-nomad-verified-negative',
-      'namibia-digital-nomad-verified-negative',
-      'antigua-digital-nomad-verified-negative',
       'uk-digital-nomad-verified-negative',
     ]) {
       expect(byId.get(id)?.status, id).toBe('verified_negative');

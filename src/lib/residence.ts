@@ -61,7 +61,7 @@ export const RESIDENCE_STATUS_ORDER = [
 ] as const;
 
 export const RESIDENCE_STATUS_LABELS: Record<string, string> = {
-  inactive: 'paused',
+  inactive: 'ended',
   // Not "closed": a verified negative means the programme was checked and does
   // not exist (every stored one is a contested claim, usually the IMC map).
   // "closed" implied a programme once ran and ended — the wrong story on

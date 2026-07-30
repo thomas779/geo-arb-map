@@ -170,7 +170,7 @@
         "antigua-barbuda-citizenship-by-marriage"
       ],
       "residence_route_ids": [
-        "antigua-digital-nomad-verified-negative"
+        "antigua-nomad-digital-residence-ended"
       ],
       "residence_coverage": {
         "digital_nomad": "reviewed"
@@ -294,7 +294,7 @@
         "bahamas-permanent-residence-property",
         "bahamas-homeowner-card",
         "bahamas-annual-residence-permit",
-        "bahamas-digital-nomad-verified-negative"
+        "bahamas-beats-ended"
       ],
       "residence_coverage": {
         "investment": "reviewed",
@@ -1557,7 +1557,7 @@
         "georgia-investment-residence",
         "georgia-real-estate-short-term-residence",
         "georgia-permanent-residence-investment",
-        "georgia-digital-nomad-verified-negative",
+        "georgia-remotely-from-georgia-ended",
         "georgia-e-residency-verified-negative"
       ],
       "residence_coverage": {
@@ -1984,7 +1984,7 @@
         "indonesia-golden-visa-corporate-director",
         "indonesia-second-home-visa",
         "indonesia-investor-kitas-pt-pma",
-        "indonesia-second-home-vs-nomad"
+        "indonesia-remote-worker-visa"
       ],
       "residence_coverage": {
         "investment": "reviewed",
@@ -2880,7 +2880,7 @@
         "namibia-citizenship-at-birth-by-parent"
       ],
       "residence_route_ids": [
-        "namibia-digital-nomad-verified-negative"
+        "namibia-digital-nomad-visa"
       ],
       "residence_coverage": {
         "digital_nomad": "reviewed"
@@ -4011,7 +4011,7 @@
       "residence_route_ids": [
         "south-africa-retired-person",
         "south-africa-financially-independent",
-        "south-africa-digital-nomad-verified-negative"
+        "south-africa-remote-work-visa"
       ],
       "residence_coverage": {
         "retirement_pension": "reviewed",
@@ -4372,7 +4372,7 @@
         "turkiye-exceptional-investor-citizenship"
       ],
       "residence_route_ids": [
-        "turkey-digital-nomad-verified-negative"
+        "turkey-digital-nomad-visa"
       ],
       "residence_coverage": {
         "digital_nomad": "reviewed"
@@ -37751,15 +37751,15 @@
       ]
     },
     {
-      "id": "antigua-digital-nomad-verified-negative",
+      "id": "antigua-nomad-digital-residence-ended",
       "country": {
         "iso_n3": "028",
         "name": "Antigua and Barbuda"
       },
       "category": "digital_nomad",
-      "status": "verified_negative",
-      "title": "No dedicated digital nomad visa",
-      "summary": "Antigua and Barbuda has no branded digital-nomad residence permit; long stays use work, CIP-linked, or visitor categories.",
+      "status": "inactive",
+      "title": "Nomad Digital Residence (NDR) — ended",
+      "summary": "Antigua and Barbuda ran a two-year remote-work residence visa from November 2020 for applicants earning USD 50,000 per year; the official programme site now carries a \"This program has ended\" banner.",
       "outcome": "residence",
       "counts_toward_permanent_residence": false,
       "counts_toward_naturalization": false,
@@ -37774,8 +37774,8 @@
       },
       "pathways": [
         {
-          "id": "antigua-digital-nomad-verified-negative-principal",
-          "label": "No dedicated digital nomad visa",
+          "id": "antigua-nomad-digital-residence-ended-principal",
+          "label": "Nomad Digital Residence (NDR) — ended",
           "allocation": "right",
           "eligibility_months": null
         }
@@ -37784,8 +37784,8 @@
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Antigua and Barbuda Immigration",
-          "url": "https://immigration.gov.ag/"
+          "title": "Antigua and Barbuda — Nomad Digital Residence (official site, ended banner)",
+          "url": "https://nomad.gov.ag/ui/"
         }
       ]
     },
@@ -38238,15 +38238,15 @@
       ]
     },
     {
-      "id": "bahamas-digital-nomad-verified-negative",
+      "id": "bahamas-beats-ended",
       "country": {
         "iso_n3": "044",
         "name": "Bahamas"
       },
       "category": "digital_nomad",
-      "status": "verified_negative",
-      "title": "No dedicated digital nomad visa",
-      "summary": "The Bahamas has no branded digital-nomad residence permit.",
+      "status": "inactive",
+      "title": "BEATS (Extended Access Travel Stay) — ended",
+      "summary": "The Bahamas ran the BEATS remote-work and study permit from October 2020 (USD 25 application, USD 1,000 worker permit, renewable up to three years); the dedicated application portal no longer resolves.",
       "outcome": "residence",
       "counts_toward_permanent_residence": false,
       "counts_toward_naturalization": false,
@@ -38261,18 +38261,18 @@
       },
       "pathways": [
         {
-          "id": "bahamas-digital-nomad-verified-negative-principal",
-          "label": "No dedicated digital nomad visa",
+          "id": "bahamas-beats-ended-principal",
+          "label": "BEATS (Extended Access Travel Stay) — ended",
           "allocation": "right",
           "eligibility_months": null
         }
       ],
-      "confidence": "high",
+      "confidence": "medium",
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bahamas Immigration",
-          "url": "https://www.immigration.gov.bs/"
+          "title": "Bahamas Department of Immigration — BEATS portal (Wayback of official application)",
+          "url": "https://web.archive.org/web/2023/https://portal.immigration.gov.bs/"
         }
       ]
     },
@@ -40984,45 +40984,6 @@
       ]
     },
     {
-      "id": "georgia-digital-nomad-verified-negative",
-      "country": {
-        "iso_n3": "268",
-        "name": "Georgia"
-      },
-      "category": "digital_nomad",
-      "status": "verified_negative",
-      "title": "No dedicated digital nomad residence permit",
-      "summary": "Georgia has no standalone digital-nomad residence stamp comparable to Croatia or Spain; remote workers from many countries rely on long visa-free stays rather than a remote-work permit.",
-      "outcome": "residence",
-      "counts_toward_permanent_residence": false,
-      "counts_toward_naturalization": false,
-      "min_investment": null,
-      "min_income_monthly": null,
-      "physical_presence_days_per_year": null,
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "georgia-digital-nomad-verified-negative-principal",
-          "label": "No dedicated digital nomad residence permit",
-          "allocation": "right",
-          "eligibility_months": null
-        }
-      ],
-      "confidence": "high",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
-          "url": "https://matsne.gov.ge/en/document/view/2278806"
-        }
-      ]
-    },
-    {
       "id": "georgia-e-residency-verified-negative",
       "country": {
         "iso_n3": "268",
@@ -41186,6 +41147,45 @@
         {
           "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
           "url": "https://matsne.gov.ge/en/document/view/2278806"
+        }
+      ]
+    },
+    {
+      "id": "georgia-remotely-from-georgia-ended",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "category": "digital_nomad",
+      "status": "inactive",
+      "title": "Remotely from Georgia — ended",
+      "summary": "Georgia ran the pandemic-era \"Remotely from Georgia\" remote-worker entry programme from 27 August 2020; the national tourism administration now describes it in the past tense.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "georgia-remotely-from-georgia-ended-principal",
+          "label": "Remotely from Georgia — ended",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Georgian National Tourism Administration — Remotely from Georgia",
+          "url": "https://gnta.ge/"
         }
       ]
     },
@@ -41984,6 +41984,45 @@
       ]
     },
     {
+      "id": "indonesia-remote-worker-visa",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Remote Worker visa (E33G)",
+      "summary": "Indonesia offers a dedicated Remote Worker visa, selectable in the official e-visa wizard alongside a family-dependant variant, distinct from the Second Home visa.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "indonesia-remote-worker-visa-principal",
+          "label": "Remote Worker visa (E33G)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Indonesia e-Visa — official visa selection wizard",
+          "url": "https://evisa.imigrasi.go.id/web/visa-selection"
+        }
+      ]
+    },
+    {
       "id": "indonesia-second-home-visa",
       "country": {
         "iso_n3": "360",
@@ -42022,45 +42061,6 @@
         {
           "title": "E33 Visa Rumah Kedua — Direktorat Jenderal Imigrasi",
           "url": "https://www.imigrasi.go.id/wna/daftar-visa-indonesia/E33"
-        }
-      ]
-    },
-    {
-      "id": "indonesia-second-home-vs-nomad",
-      "country": {
-        "iso_n3": "360",
-        "name": "Indonesia"
-      },
-      "category": "digital_nomad",
-      "status": "verified_negative",
-      "title": "Second Home / long-stay visit — not a digital nomad work permit",
-      "summary": "Indonesia’s Second Home and related long-stay visit products are not a general remote-work digital nomad visa authorizing local employment for foreign clients as a settlement track.",
-      "outcome": "residence",
-      "counts_toward_permanent_residence": false,
-      "counts_toward_naturalization": false,
-      "min_investment": null,
-      "min_income_monthly": null,
-      "physical_presence_days_per_year": null,
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "indonesia-second-home-vs-nomad-principal",
-          "label": "Second Home / long-stay visit — not a digital nomad work permit",
-          "allocation": "right",
-          "eligibility_months": null
-        }
-      ],
-      "confidence": "medium",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "Direktorat Jenderal Imigrasi — official portal",
-          "url": "https://www.imigrasi.go.id/"
         }
       ]
     },
@@ -43952,20 +43952,23 @@
       ]
     },
     {
-      "id": "namibia-digital-nomad-verified-negative",
+      "id": "namibia-digital-nomad-visa",
       "country": {
         "iso_n3": "516",
         "name": "Namibia"
       },
       "category": "digital_nomad",
-      "status": "verified_negative",
-      "title": "No dedicated digital nomad visa",
-      "summary": "Namibia has no branded digital-nomad residence permit as of this review; remote workers use visitor, work, or other Immigration Act categories.",
+      "status": "active",
+      "title": "Digital Nomad Visa",
+      "summary": "Six-month, non-renewable stay for remote workers earning at least USD 2,000 per month, administered with an NIPDB motivation letter.",
       "outcome": "residence",
       "counts_toward_permanent_residence": false,
       "counts_toward_naturalization": false,
       "min_investment": null,
-      "min_income_monthly": null,
+      "min_income_monthly": {
+        "amount": 2000,
+        "currency": "USD"
+      },
       "physical_presence_days_per_year": null,
       "facts": {
         "canonical": true,
@@ -43975,18 +43978,18 @@
       },
       "pathways": [
         {
-          "id": "namibia-digital-nomad-verified-negative-principal",
-          "label": "No dedicated digital nomad visa",
+          "id": "namibia-digital-nomad-visa-principal",
+          "label": "Digital Nomad Visa",
           "allocation": "right",
           "eligibility_months": null
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Ministry of Home Affairs — Namibia",
-          "url": "https://mha.gov.na/"
+          "title": "NIPDB — Namibia Digital Nomad Visa",
+          "url": "https://www.nipdb.com/digital-nomad-visa"
         }
       ]
     },
@@ -46135,45 +46138,6 @@
       ]
     },
     {
-      "id": "south-africa-digital-nomad-verified-negative",
-      "country": {
-        "iso_n3": "710",
-        "name": "South Africa"
-      },
-      "category": "digital_nomad",
-      "status": "verified_negative",
-      "title": "No dedicated digital nomad visa (as of review)",
-      "summary": "South Africa does not operate a dedicated digital-nomad visa; remote workers use visitor, critical skills, business, or other Immigration Act categories.",
-      "outcome": "residence",
-      "counts_toward_permanent_residence": false,
-      "counts_toward_naturalization": false,
-      "min_investment": null,
-      "min_income_monthly": null,
-      "physical_presence_days_per_year": null,
-      "facts": {
-        "canonical": true,
-        "variant_count": 1,
-        "eligibility_months": [],
-        "discretionary_decision": false
-      },
-      "pathways": [
-        {
-          "id": "south-africa-digital-nomad-verified-negative-principal",
-          "label": "No dedicated digital nomad visa (as of review)",
-          "allocation": "right",
-          "eligibility_months": null
-        }
-      ],
-      "confidence": "medium",
-      "last_checked": "2026-07-30",
-      "sources": [
-        {
-          "title": "South Africa — Department of Home Affairs",
-          "url": "https://www.dha.gov.za/"
-        }
-      ]
-    },
-    {
       "id": "south-africa-financially-independent",
       "country": {
         "iso_n3": "710",
@@ -46214,6 +46178,48 @@
         {
           "title": "South Africa — Department of Home Affairs",
           "url": "https://www.dha.gov.za/"
+        }
+      ]
+    },
+    {
+      "id": "south-africa-remote-work-visa",
+      "country": {
+        "iso_n3": "710",
+        "name": "South Africa"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Remote Work visitor's visa (s11(1)(b)(iv))",
+      "summary": "Visitor's visa for the prescribed activity of remote work for a foreign employer, for stays over three months up to three years, with a gross income floor of ZAR 650,796 per year.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 54233,
+        "currency": "ZAR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "south-africa-remote-work-visa-principal",
+          "label": "Remote Work visitor's visa (s11(1)(b)(iv))",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "DHA — Remote Work Visa requirements (s11(1)(b)(iv))",
+          "url": "https://www.dha.gov.za/images/notices/8october24/Remote_Work_Visa_-_requirements_-_9_October_2024.pdf"
         }
       ]
     },
@@ -46723,20 +46729,23 @@
       ]
     },
     {
-      "id": "turkey-digital-nomad-verified-negative",
+      "id": "turkey-digital-nomad-visa",
       "country": {
         "iso_n3": "792",
         "name": "Türkiye"
       },
       "category": "digital_nomad",
-      "status": "verified_negative",
-      "title": "No dedicated digital nomad residence permit (as of review)",
-      "summary": "Turkey has not enacted a clear standalone digital-nomad residence category comparable to Croatia or Spain; remote workers use ordinary short-stay, work, or other residence titles when they qualify.",
+      "status": "active",
+      "title": "Dijital Göçebe (Digital Nomad) scheme",
+      "summary": "Türkiye issues a Digital Nomad Identification Certificate through the national tourism agency for remote workers aged 21–55 earning USD 3,000 per month, as the first step to a consular visa and short-term residence.",
       "outcome": "residence",
       "counts_toward_permanent_residence": false,
       "counts_toward_naturalization": false,
       "min_investment": null,
-      "min_income_monthly": null,
+      "min_income_monthly": {
+        "amount": 3000,
+        "currency": "USD"
+      },
       "physical_presence_days_per_year": null,
       "facts": {
         "canonical": true,
@@ -46746,8 +46755,8 @@
       },
       "pathways": [
         {
-          "id": "turkey-digital-nomad-verified-negative-principal",
-          "label": "No dedicated digital nomad residence permit (as of review)",
+          "id": "turkey-digital-nomad-visa-principal",
+          "label": "Dijital Göçebe (Digital Nomad) scheme",
           "allocation": "right",
           "eligibility_months": null
         }
@@ -46756,8 +46765,8 @@
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Presidency of Migration Management (Göç İdaresi) — e-Residence",
-          "url": "https://e-ikamet.goc.gov.tr/"
+          "title": "GoTürkiye (TGA) — Dijital Göçebe visa pre-application",
+          "url": "https://goturkiye.com/tr/digitalnomads/dijital-gocebe-vize-ve-kisa-donem-ikamet-icin-basvuru-sureci"
         }
       ]
     },
