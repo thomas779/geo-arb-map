@@ -117,27 +117,38 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
                 </ul>
               ) : state.routeClass ? (
                 /* The Access levels glossary IS the key here (owner call): one
-                   list defines the tiers and carries the paint swatches, so
-                   there is no separate "on the map" block to semi-duplicate it.
-                   Citizenship classes paint everything solid, so only the CIT
-                   row renders for them; residence classes show all three tiers
-                   with the tone each paints. */
+                   list defines the tiers and keys the map. Every row keeps its
+                   full detail — pips, title, description — and gains a swatch
+                   showing which paint tone that tier gets under the selected
+                   route type. Tiers the selection cannot paint (TR/PR under a
+                   citizenship class) wear the land swatch rather than being
+                   hidden: keep the detail, mark the relevance. */
                 <div className="flex flex-col gap-2.5">
-                  {ACCESS_LEVELS
-                    .filter(level => routeClassById(state.routeClass)?.kind !== 'citizenship' || level.tier === 'CIT')
-                    .map(level => (
+                  {ACCESS_LEVELS.map((level, index) => {
+                    const kind = routeClassById(state.routeClass)?.kind;
+                    const swatch = kind === 'citizenship'
+                      ? (level.tier === 'CIT' ? 'sw-strong' : 'sw-none')
+                      : (level.tier === 'TR' ? 'sw-limited' : 'sw-strong');
+                    return (
                       <div key={level.tier} className="grid grid-cols-[18px_30px_1fr] items-start gap-2">
-                        <span
-                          className={cn('legend-sw mt-0.5', level.tier === 'TR' ? 'sw-limited' : 'sw-strong')}
-                          aria-hidden
-                        />
+                        <span className={cn('legend-sw mt-0.5', swatch)} aria-hidden />
                         <span className="pt-0.5 font-mono text-[10px] font-semibold text-foreground">{level.tier}</span>
                         <span className="min-w-0">
+                          <span className="mb-1 flex gap-0.5" aria-label={`Level ${index + 1} of 3`}>
+                            {[0, 1, 2].map(step => (
+                              <span
+                                key={step}
+                                aria-hidden
+                                className={cn('h-1 w-2.5 rounded-full', step <= index ? 'bg-primary' : 'bg-muted')}
+                              />
+                            ))}
+                          </span>
                           <span className="block text-[11px] font-medium text-foreground">{level.title}</span>
                           <span className="block text-[10px] leading-snug text-muted-foreground">{level.detail}</span>
                         </span>
                       </div>
-                    ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <p className="text-[11.5px] leading-snug text-muted-foreground">Selection highlighted on the map.</p>
