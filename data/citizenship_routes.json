@@ -945,11 +945,11 @@
         "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bolivia 2009 Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bolivia_2009"
+          "title": "Constitucion Politica del Estado, art. 141 (Tribunal Constitucional Plurinacional)",
+          "url": "https://tcpbolivia.bo/wp-content/uploads/2025/04/CPE_2009.pdf"
         }
       ]
     },
@@ -1048,17 +1048,15 @@
       "facts": {
         "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [
-          "diplomats"
-        ],
+        "jus_soli_exceptions": [],
         "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "El Salvador Constitution — nationality (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/El_Salvador_2014"
+          "title": "Constitucion de la Republica de El Salvador, art. 90 (Asamblea Legislativa)",
+          "url": "https://www.asamblea.gob.sv/sites/default/files/2026-05/1.%20CONSTITUCI%C3%93N%20DE%20LA%20REP%C3%9ABLICA.pdf"
         }
       ]
     },
@@ -1109,11 +1107,11 @@
         "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Honduras Constitution — nationality (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Honduras_2013"
+          "title": "Constitucion de la Republica de Honduras, art. 23 (Tribunal Superior de Cuentas)",
+          "url": "https://www.tsc.gob.hn/web/leyes/Constitucion_de_la_republica.pdf"
         }
       ]
     },
@@ -1158,15 +1156,17 @@
         "jus_soli": "unconditional",
         "parent_condition": "none",
         "jus_soli_exceptions": [
-          "diplomats"
+          "diplomats",
+          "officials of international organisations",
+          "persons sent by their government to work in Nicaragua"
         ],
         "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Nicaragua Constitution — nationality (Constitute Project)",
+          "title": "Nicaragua Constitution (Constitute Project) — STALE, see route note",
           "url": "https://www.constituteproject.org/constitution/Nicaragua_2014"
         }
       ]
@@ -2407,17 +2407,15 @@
       "facts": {
         "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [
-          "diplomats"
-        ],
+        "jus_soli_exceptions": [],
         "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Ecuador 2021 Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Ecuador_2021"
+          "title": "Constitucion de la Republica del Ecuador, art. 7 (Asamblea Nacional)",
+          "url": "https://www.asambleanacional.gob.ec/documentos/Constitucion-2008.pdf"
         }
       ]
     },
@@ -2710,16 +2708,17 @@
         "jus_soli": "unconditional",
         "parent_condition": "none",
         "jus_soli_exceptions": [
-          "diplomats"
+          "diplomats",
+          "persons in legally equivalent posts"
         ],
         "unconditional_jus_soli": true
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Guatemala Constitution — nationality (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Guatemala_1993"
+          "title": "Constitucion Politica de la Republica de Guatemala, art. 144 (Congreso de la Republica)",
+          "url": "https://www.congreso.gob.gt/assets/uploads/congreso/marco_legal/68724-1511972586_constitucion_politica_de_la_republica.pdf"
         }
       ]
     },
@@ -6668,19 +6667,17 @@
       "title": "Venezuelan nationality by birth in Venezuela",
       "summary": "Any person born within the territory of the Republic is Venezuelan by birth under Article 32.",
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Venezuela Constitution — nationality (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Venezuela_2009"
+          "title": "Constitucion de la Republica Bolivariana de Venezuela, art. 32 (Asamblea Nacional)",
+          "url": "https://www.asambleanacional.gob.ve/storage/documentos/botones/constitucion-nacional-20191205135853.PDF"
         }
       ],
       "facts": {
         "jus_soli": "unconditional",
         "parent_condition": "none",
-        "jus_soli_exceptions": [
-          "diplomats"
-        ],
+        "jus_soli_exceptions": [],
         "unconditional_jus_soli": true
       }
     },

@@ -710,8 +710,8 @@ describe('source quality: constituteproject is a lead, not a source of record', 
   // 357 routes currently violate this. Rather than assert zero and fail the
   // suite, ratchet: the count may only go down. Lower these numbers as
   // jurisdictions are re-sourced; never raise them.
-  const CONSTITUTEPROJECT_ONLY_CEILING = 357;
-  const CONSTITUTEPROJECT_ANY_CEILING = 381;
+  const CONSTITUTEPROJECT_ONLY_CEILING = 313;
+  const CONSTITUTEPROJECT_ANY_CEILING = 333;
 
   const cites = (route: { sources: Array<{ url: string }> }) =>
     route.sources.some(source => source.url.includes('constituteproject'));
@@ -734,10 +734,11 @@ describe('source quality: constituteproject is a lead, not a source of record', 
     const unconditional = citizenshipRoutes.routes.filter(route =>
       route.facts?.jus_soli === 'unconditional');
     expect(unconditional.length).toBeGreaterThan(0);
-    // Ratcheted to 7 while the Latin American batch (Bolivia, Ecuador, El
-    // Salvador, Guatemala, Honduras, Nicaragua, Venezuela) is re-sourced to
-    // official gazettes. Drive this to 0 and then assert toEqual([]).
+    // Ratcheted to 1: Nicaragua alone remains, because its official
+    // publisher (digesto.asamblea.gob.ni) is http-only and the URL invariant
+    // requires https. Drive to 0 and assert toEqual([]) once an https official
+    // copy of Ley 761 art. 45(1) is found.
     const unsourced = unconditional.filter(onlyCites).map(route => route.id);
-    expect(unsourced.length).toBeLessThanOrEqual(7);
+    expect(unsourced.length).toBeLessThanOrEqual(1);
   });
 });
