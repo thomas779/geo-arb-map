@@ -44,3 +44,31 @@ export function productFeedbackUrl(): string {
 
 export const METHODOLOGY_URL = `${REPOSITORY_URL}#data-pipeline`;
 
+/**
+ * Provenance of a single route's key figures.
+ *
+ * `modeled` means the figure was inferred from comparative sources rather than
+ * read out of the instrument. 378 routes ship a reviewer note saying so and no
+ * surface displayed it, so the site presented an estimate as a flat assertion
+ * with a citation attached. Anything not read from primary law has to say so.
+ */
+export type RouteProvenance = { kind: 'modeled' | 'unverified'; detail: string } | null;
+
+export function routeProvenance(route: {
+  confidence?: string;
+  pathways?: Array<{ note?: string | null }>;
+}): RouteProvenance {
+  const note = route.pathways?.[0]?.note?.trim() || '';
+  // "modeled" is the marker the bulk import left behind; it is load-bearing.
+  if (/\bmodel(?:ed|led)\b/i.test(note)) return { kind: 'modeled', detail: note };
+  if (route.confidence === 'low') {
+    return { kind: 'unverified', detail: note || 'Not verified against primary law.' };
+  }
+  return null;
+}
+
+/** Short chip text for the provenance state. */
+export function provenanceLabel(provenance: NonNullable<RouteProvenance>): string {
+  return provenance.kind === 'modeled' ? 'estimated, not read from law' : 'not verified against primary law';
+}
+

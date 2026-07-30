@@ -44,11 +44,34 @@ export function isSocialHost(host: string): boolean {
 // A rough .gov/.gob/.gouv/.govt/.go detector plus a few known official hosts.
 // Used only to LABEL a candidate (agencies are wanted, but should be
 // distinguishable from independent outlets in the report), never to exclude.
+// Official legislation portals that carry no .gov-family suffix. Every one of
+// these was hit while sourcing real jurisdictions, and each would otherwise be
+// scored as an independent outlet — which matters because the same predicate
+// feeds source-candidate ranking. Keep sorted by host for scanning.
+const OFFICIAL_LEGISLATION_HOSTS = [
+  'e-tar.lt', // Lithuania, Teisės aktų registras
+  'ejustice.just.fgov.be', // Belgium, Moniteur belge / Belgisch Staatsblad
+  'elperuano.pe', // Peru, Diario Oficial El Peruano
+  'indiacode.nic.in', // India, official code repository
+  'kenyalaw.org', // Kenya, National Council for Law Reporting (statutory body)
+  'legis.md', // Moldova, Registrul de stat al actelor juridice
+  'legislation.gov.uk', // UK, The National Archives
+  'legislation.mt', // Malta, Laws of Malta
+  'legislatie.just.ro', // Romania, Ministry of Justice
+  'pisrs.si', // Slovenia, Pravno-informacijski sistem
+  'portaljuridicandorra.ad', // Andorra, Portal Jurídic
+  'riigiteataja.ee', // Estonia, State Gazette
+  'slov-lex.sk', // Slovakia, Slov-Lex (incl. static.slov-lex.sk)
+  'tuvalu-legislation.tv', // Tuvalu, PacLII-hosted national legislation
+  'zakon.rada.gov.ua', // Ukraine, Verkhovna Rada
+];
+
 export function isGovish(host: string): boolean {
   return /(^|\.)(gov|gob|gouv|govt|go)(\.[a-z]{2,3})?$/.test(host)
     || host.endsWith('.gc.ca')
     || /(^|\.)europa\.eu$/.test(host)
-    || host.endsWith('.admin.ch');
+    || host.endsWith('.admin.ch')
+    || OFFICIAL_LEGISLATION_HOSTS.some(official => host === official || host.endsWith(`.${official}`));
 }
 
 // The aggregation key: a domain, or domain/@account for social hosts.

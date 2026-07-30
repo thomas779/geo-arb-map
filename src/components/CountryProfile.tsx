@@ -1,6 +1,7 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import type { BlocsData, CitizenshipRoute, CitizenshipRoutesData, ResidenceCategory, ResidenceRoute } from '@/types';
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
+import { provenanceLabel, routeProvenance } from '@/lib/trust';
 import { countryFlag } from '@/lib/country';
 import {
   RESIDENCE_CATEGORY_LABELS,
@@ -99,8 +100,26 @@ function RouteCard({ route }: { route: CitizenshipRoute }) {
       </div>
       <h3 className="font-heading text-lg font-semibold leading-tight">{route.title}</h3>
       <p className="mt-1 text-sm text-muted-foreground">{route.summary}</p>
+      <RouteProvenanceNote route={route} />
       <Sources sources={route.sources} />
     </article>
+  );
+}
+
+/**
+ * Says out loud when a figure was estimated rather than read from the
+ * instrument. The reviewer note already existed in the data and was never
+ * rendered, so an estimate looked identical to a sourced fact.
+ */
+function RouteProvenanceNote({ route }: { route: CitizenshipRoute }) {
+  const provenance = routeProvenance(route);
+  if (!provenance) return null;
+  return (
+    <p className="mt-2 rounded border border-dashed px-2 py-1.5 text-[0.72rem] leading-snug text-muted-foreground">
+      <span className="font-mono uppercase tracking-wider">{provenanceLabel(provenance)}</span>
+      {' — '}
+      {provenance.detail}
+    </p>
   );
 }
 
