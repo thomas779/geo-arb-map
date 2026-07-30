@@ -391,12 +391,6 @@ export function RightsList({ mobility }: { mobility: BlocsData }) {
           </section>
         );
       })}
-      <p className="max-w-[68ch] text-sm text-muted-foreground">
-        Ancestry and diaspora programmes (descent citizenship, Law of Return, OCI, F-4, UK Ancestry, and similar)
-        are listed on each destination{' '}
-        <a href="/country/" className="underline underline-offset-2">country page</a>
-        {' '}— not as a separate badge category.
-      </p>
     </main>
   );
 }
