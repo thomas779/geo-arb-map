@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import type { AppState, BlocsData } from '../types';
-import type { RouteClassIsos } from '../lib/route-classes';
+import { routeClassById, type RouteClassIsos } from '../lib/route-classes';
 import type { Profile } from '../lib/planner';
 import { init as initMap, render as renderMap, setRouteClassIsos } from '../map';
 import { cn } from '../lib/utils';
@@ -101,7 +101,7 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
             onClick={() => setLegendOpen(open => !open)}
             className="flex w-full items-center justify-between px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground"
           >
-            {legendMode === 'idle' ? 'Map key' : 'On the map'}
+            {legendMode === 'idle' ? 'Map key' : state.routeClass ? 'Access levels' : 'On the map'}
             <ChevronDown className={cn('size-3.5 transition-transform', legendOpen && 'rotate-180')} aria-hidden />
           </button>
           {legendOpen && (
@@ -116,23 +116,33 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
                   ))}
                 </ul>
               ) : state.routeClass ? (
-                /* Speaks the TR/PR/CIT vocabulary the Access levels glossary
-                   below already defines, instead of re-explaining the tiers in
-                   new words. The glossary stays the single place terms are
-                   defined; this key only maps swatch -> tier. */
-                <ul className="flex flex-col gap-1.5">
-                  <li className="flex items-center gap-2 text-[11.5px] leading-tight text-foreground">
-                    <span className="legend-sw sw-strong" aria-hidden />
-                    <span>Leads to <span className="font-mono text-[10px] font-semibold">PR</span> or <span className="font-mono text-[10px] font-semibold">CIT</span></span>
-                  </li>
-                  <li className="flex items-center gap-2 text-[11.5px] leading-tight text-foreground">
-                    <span className="legend-sw sw-limited" aria-hidden />
-                    <span><span className="font-mono text-[10px] font-semibold">TR</span> only</span>
-                  </li>
-                </ul>
+                /* The Access levels glossary IS the key here (owner call): one
+                   list defines the tiers and carries the paint swatches, so
+                   there is no separate "on the map" block to semi-duplicate it.
+                   Citizenship classes paint everything solid, so only the CIT
+                   row renders for them; residence classes show all three tiers
+                   with the tone each paints. */
+                <div className="flex flex-col gap-2.5">
+                  {ACCESS_LEVELS
+                    .filter(level => routeClassById(state.routeClass)?.kind !== 'citizenship' || level.tier === 'CIT')
+                    .map(level => (
+                      <div key={level.tier} className="grid grid-cols-[18px_30px_1fr] items-start gap-2">
+                        <span
+                          className={cn('legend-sw mt-0.5', level.tier === 'TR' ? 'sw-limited' : 'sw-strong')}
+                          aria-hidden
+                        />
+                        <span className="pt-0.5 font-mono text-[10px] font-semibold text-foreground">{level.tier}</span>
+                        <span className="min-w-0">
+                          <span className="block text-[11px] font-medium text-foreground">{level.title}</span>
+                          <span className="block text-[10px] leading-snug text-muted-foreground">{level.detail}</span>
+                        </span>
+                      </div>
+                    ))}
+                </div>
               ) : (
                 <p className="text-[11.5px] leading-snug text-muted-foreground">Selection highlighted on the map.</p>
               )}
+              {!state.routeClass && (
               <details className="group mt-2.5 border-t pt-2.5">
                 <summary className="flex cursor-pointer list-none items-center justify-between font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground hover:text-foreground [&::-webkit-details-marker]:hidden">
                   <span>Access levels</span>
@@ -159,6 +169,7 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
                   ))}
                 </div>
               </details>
+              )}
             </div>
           )}
           {dataUpdatedAt && (
