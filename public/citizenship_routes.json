@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 212
+      "residence_routes": 219
     }
   },
   "jurisdictions": [
@@ -168,7 +168,13 @@
         "antigua-barbuda-citizenship-by-birth",
         "antigua-barbuda-cip",
         "antigua-barbuda-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "antigua-digital-nomad-verified-negative"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "031",
@@ -285,10 +291,12 @@
       "residence_route_ids": [
         "bahamas-permanent-residence-property",
         "bahamas-homeowner-card",
-        "bahamas-annual-residence-permit"
+        "bahamas-annual-residence-permit",
+        "bahamas-digital-nomad-verified-negative"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -2102,7 +2110,13 @@
         "jamaica-naturalization",
         "jamaica-citizenship-at-birth-by-parent",
         "jamaica-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "jamaica-digital-nomad-verified-negative"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "392",
@@ -2218,10 +2232,12 @@
       "residence_route_ids": [
         "korea-f2-public-fund-investor",
         "korea-f2-tourism-real-estate-investor",
-        "korea-d8-corporate-investor"
+        "korea-d8-corporate-investor",
+        "korea-digital-nomad-workcation"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -2653,11 +2669,13 @@
       ],
       "residence_route_ids": [
         "mexico-temporary-residency-solvency",
-        "mexico-residency-by-investment"
+        "mexico-residency-by-investment",
+        "mexico-digital-nomad-verified-negative"
       ],
       "residence_coverage": {
         "general_permanent_residence": "reviewed",
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -2821,7 +2839,13 @@
         "namibia-citizenship-by-parent",
         "namibia-naturalization",
         "namibia-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "namibia-digital-nomad-verified-negative"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "520",
@@ -4453,10 +4477,12 @@
       ],
       "residence_route_ids": [
         "uk-tier-1-investor",
-        "uk-innovator-founder"
+        "uk-innovator-founder",
+        "uk-digital-nomad-verified-negative"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -24518,6 +24544,12 @@
       "title": "Dutch nationality at birth",
       "summary": "Citizenship at birth in Aruba follows Dutch nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24624,6 +24656,12 @@
       "title": "Dutch nationality at birth",
       "summary": "Citizenship at birth in Sint Maarten follows Dutch nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24730,6 +24768,12 @@
       "title": "Dutch nationality at birth",
       "summary": "Citizenship at birth in Caribbean Netherlands follows Dutch nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24836,6 +24880,12 @@
       "title": "French nationality at birth",
       "summary": "Citizenship at birth in New Caledonia follows French nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24942,6 +24992,12 @@
       "title": "Citizenship at birth through a Vanuatu parent",
       "summary": "A child born after independence acquires citizenship at birth, whether born in Vanuatu or abroad, if at least one parent is a citizen.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_citizen",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -25809,6 +25865,12 @@
       "title": "Australian citizenship at birth",
       "summary": "Citizenship at birth in Norfolk Island follows Australian citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -26059,6 +26121,12 @@
       "title": "United States citizenship at birth",
       "summary": "Citizenship at birth in Northern Mariana Islands follows United States citizenship rules.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -27401,6 +27469,10 @@
       "title": "Citizenship at birth through a Filipino parent",
       "summary": "A person born to a Filipino father or mother is a Filipino citizen under the 1987 Constitution. Birth in the Philippines alone to two foreign parents does not generally create citizenship by soil.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -27665,6 +27737,10 @@
       "title": "Citizenship at birth through a Polish parent",
       "summary": "A person born to a Polish citizen parent is a Polish citizen at birth. Birth in Poland to two foreign parents does not generally create citizenship by soil alone.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -28348,6 +28424,12 @@
       "title": "United States citizenship at birth",
       "summary": "Citizenship at birth in Puerto Rico follows United States citizenship rules.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -29076,6 +29158,12 @@
       "title": "French nationality at birth",
       "summary": "Citizenship at birth in Saint-Barthélemy follows French nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -29795,6 +29883,12 @@
       "title": "French nationality at birth",
       "summary": "Citizenship at birth in Saint-Martin follows French nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -29901,6 +29995,12 @@
       "title": "French nationality at birth",
       "summary": "Citizenship at birth in Saint-Pierre-et-Miquelon follows French nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -30263,6 +30363,12 @@
       "title": "Citizenship connected to birth in São Tomé and Príncipe",
       "summary": "A person born in São Tomé and Príncipe is of origin nationality when a parent is São-tomense, when the parents are stateless or of unknown nationality, or when foreign parents reside in the territory and are not in the service of another state. Foundling and parental-status conditions remain statutory.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_stateless",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -30449,6 +30555,10 @@
       "title": "Citizenship at birth through a Saudi father",
       "summary": "Nationality flows from a Saudi father; mere birth on Saudi soil confers no automatic citizenship.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -30734,6 +30844,12 @@
       "title": "Citizenship at birth to prevent statelessness",
       "summary": "A child born or found in Serbia acquires citizenship where both parents are unknown, of unknown citizenship or stateless, or where the child would otherwise be stateless.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "stateless_or_unknown",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -32180,6 +32296,12 @@
       "title": "Citizenship through birth in Spain",
       "summary": "Birth in Spain alone does not generally confer citizenship. Nationality by origin applies in limited parentage, statelessness, or undetermined-parentage cases.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parentage_or_stateless",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 3,
         "eligibility_months": [
@@ -33183,6 +33305,10 @@
       "title": "Facilitated naturalization for a third generation born in Switzerland",
       "summary": "Birth in Switzerland does not itself grant citizenship, but a qualifying third-generation applicant born there may use facilitated naturalization before age 25.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [],
@@ -33221,6 +33347,10 @@
       "title": "Citizenship at birth through a Syrian father",
       "summary": "Citizenship at birth flows from a Syrian father regardless of birthplace; birth on Syrian soil alone confers nothing, a paternal-line model linked to protracted Kurdish statelessness.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34095,6 +34225,10 @@
       "title": "Citizenship at birth through a qualifying parent",
       "summary": "Citizenship at birth follows the federal parentage rules rather than territorial birth; the law also protects certain children of unknown or stateless parentage.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34414,6 +34548,12 @@
       "title": "Citizenship at birth to prevent statelessness",
       "summary": "A child born in Türkiye who cannot acquire any nationality from the parents becomes Turkish from birth; a foundling is presumed born in Türkiye.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "stateless_or_unknown",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -35642,6 +35782,12 @@
       "title": "British citizenship at birth",
       "summary": "Citizenship at birth in Guernsey follows British citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -35748,6 +35894,12 @@
       "title": "British citizenship at birth",
       "summary": "Citizenship at birth in Jersey follows British citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -35854,6 +36006,12 @@
       "title": "British citizenship at birth",
       "summary": "Citizenship at birth in Isle of Man follows British citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -36259,6 +36417,12 @@
       "title": "United States citizenship at birth",
       "summary": "Citizenship at birth in United States Virgin Islands follows United States citizenship rules.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -36733,6 +36897,12 @@
       "title": "Venezuelan nationality by birth in Venezuela",
       "summary": "Any person born within the territory of the Republic is Venezuelan by birth under Article 32.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -36853,6 +37023,12 @@
       "title": "French nationality at birth",
       "summary": "Citizenship at birth in Wallis and Futuna follows French nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -37471,6 +37647,45 @@
       ]
     },
     {
+      "id": "antigua-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "028",
+        "name": "Antigua and Barbuda"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad visa",
+      "summary": "Antigua and Barbuda has no branded digital-nomad residence permit; long stays use work, CIP-linked, or visitor categories.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "antigua-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Antigua and Barbuda Immigration",
+          "url": "https://immigration.gov.ag/"
+        }
+      ]
+    },
+    {
       "id": "azerbaijan-golden-visa-verified-negative",
       "country": {
         "iso_n3": "031",
@@ -37876,6 +38091,45 @@
         {
           "title": "Permit to Reside — Bahamas Department of Immigration",
           "url": "https://www.immigration.gov.bs/applying-to-stay/permit-to-reside/"
+        }
+      ]
+    },
+    {
+      "id": "bahamas-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "044",
+        "name": "Bahamas"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad visa",
+      "summary": "The Bahamas has no branded digital-nomad residence permit.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahamas-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Bahamas Immigration",
+          "url": "https://www.immigration.gov.bs/"
         }
       ]
     },
@@ -41594,6 +41848,45 @@
       ]
     },
     {
+      "id": "jamaica-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "388",
+        "name": "Jamaica"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad visa",
+      "summary": "Jamaica has no branded digital-nomad residence permit; remote workers use visitor or other Immigration Act categories.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "jamaica-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Passport, Immigration and Citizenship Agency — Jamaica",
+          "url": "https://www.pica.gov.jm/"
+        }
+      ]
+    },
+    {
       "id": "japan-business-manager",
       "country": {
         "iso_n3": "392",
@@ -41759,6 +42052,47 @@
         {
           "title": "Korea Immigration Service (Ministry of Justice) — Visa Navigator",
           "url": "https://www.immigration.go.kr/bbs/immigration_eng/230/454086/download.do"
+        }
+      ]
+    },
+    {
+      "id": "korea-digital-nomad-workcation",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Workcation / digital nomad stay products",
+      "summary": "Korea has experimented with workcation-style long-stay products for remote workers; treat as limited stay permissions, not a PR or citizenship ladder.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "korea-digital-nomad-workcation-principal",
+          "label": "Workcation / digital nomad stay products",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Hi Korea / Korea Immigration Service",
+          "url": "https://www.hikorea.go.kr/"
         }
       ]
     },
@@ -42733,6 +43067,45 @@
       ]
     },
     {
+      "id": "mexico-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "484",
+        "name": "Mexico"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad visa",
+      "summary": "Mexico has no branded digital-nomad visa; long stays use temporary resident solvency, work, family, or other INM categories.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "mexico-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Mexico — Instituto Nacional de Migración",
+          "url": "https://www.gob.mx/inm"
+        }
+      ]
+    },
+    {
       "id": "mexico-residency-by-investment",
       "country": {
         "iso_n3": "484",
@@ -42900,6 +43273,45 @@
         {
           "title": "Government of Montserrat — Citizenship & Residence Information (Office of the Deputy Governor): Permit of Economic Residence, S.R.O. 8/1998",
           "url": "https://www.gov.ms/government/ministries/non-ministerial-departments/office-of-the-deputy-governor/citizenship-residence-information/"
+        }
+      ]
+    },
+    {
+      "id": "namibia-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "516",
+        "name": "Namibia"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad visa",
+      "summary": "Namibia has no branded digital-nomad residence permit as of this review; remote workers use visitor, work, or other Immigration Act categories.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "namibia-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Ministry of Home Affairs — Namibia",
+          "url": "https://mha.gov.na/"
         }
       ]
     },
@@ -45716,6 +46128,45 @@
         {
           "title": "Arab Republic of Egypt — government services portal",
           "url": "https://www.egypt.gov.eg/"
+        }
+      ]
+    },
+    {
+      "id": "uk-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "826",
+        "name": "United Kingdom"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad visa",
+      "summary": "The UK has no branded digital-nomad visa; remote workers use visitor, skilled worker, or other Immigration Rules routes when they qualify.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uk-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "GOV.UK — Visas and immigration",
+          "url": "https://www.gov.uk/browse/visas-immigration"
         }
       ]
     },

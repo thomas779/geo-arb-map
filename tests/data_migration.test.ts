@@ -259,7 +259,7 @@ describe('data migration shadow', () => {
     expect(shadow.manifest.counts).toEqual({
       jurisdictions: 233,
       arrangements: 3,
-      citizenship_routes: 25,
+      citizenship_routes: 255,
     });
   });
 

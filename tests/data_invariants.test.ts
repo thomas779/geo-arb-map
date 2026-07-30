@@ -544,17 +544,42 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(byId.get('pakistan-citizenship-at-birth-by-parent')?.facts.jus_soli).toBe('none');
     expect(byId.get('uruguay-nationality-by-birth')?.facts.jus_soli).toBe('unconditional');
     expect(byId.get('uruguay-nationality-by-birth')?.facts.unconditional_jus_soli).toBe(true);
-    // Americas + US structured unconditional set (diplomat exceptions only).
+    // Unconditional set: Americas core + US territories following US jus soli + Venezuela.
     const unconditional = citizenshipRoutes.routes.filter(r =>
       r.mode === 'birth' && r.facts?.jus_soli === 'unconditional');
     expect(unconditional.map(r => r.country.iso_n3).sort()).toEqual([
       '028', '032', '052', '068', '076', '124', '212', '218', '222', '308',
-      '316', '320', '340', '484', '558', '591', '600', '659', '662', '840', '858',
+      '316', '320', '340', '484', '558', '580', '591', '600', '630', '659',
+      '662', '840', '850', '858', '862',
     ]);
-    // Coverage gate: majority of birth routes now carry structured jus_soli.
-    const withJs = citizenshipRoutes.routes.filter(r =>
-      r.mode === 'birth' && r.facts?.jus_soli);
-    expect(withJs.length).toBeGreaterThanOrEqual(175);
+    // Full atlas birth coverage: every birth route carries structured jus_soli.
+    const birth = citizenshipRoutes.routes.filter(r => r.mode === 'birth');
+    const withJs = birth.filter(r => r.facts?.jus_soli);
+    expect(withJs.length).toBe(birth.length);
+    expect(withJs.length).toBe(231);
+  });
+
+  test('digital nomad residual negatives + Korea workcation (PR/cit no)', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    for (const id of [
+      'mexico-digital-nomad-verified-negative',
+      'jamaica-digital-nomad-verified-negative',
+      'bahamas-digital-nomad-verified-negative',
+      'namibia-digital-nomad-verified-negative',
+      'antigua-digital-nomad-verified-negative',
+      'uk-digital-nomad-verified-negative',
+    ]) {
+      expect(byId.get(id)?.status, id).toBe('verified_negative');
+      expect(byId.get(id)?.category, id).toBe('digital_nomad');
+      expect(byId.get(id)?.counts_toward_permanent_residence, id).toBe(false);
+      expect(byId.get(id)?.counts_toward_naturalization, id).toBe(false);
+    }
+    const kr = byId.get('korea-digital-nomad-workcation');
+    expect(kr?.category).toBe('digital_nomad');
+    expect(kr?.counts_toward_permanent_residence).toBe(false);
+    expect(kr?.counts_toward_naturalization).toBe(false);
+    const nomads = (citizenshipRoutes.residence_routes ?? []).filter(r => r.category === 'digital_nomad');
+    expect(nomads.length).toBeGreaterThanOrEqual(35);
   });
 
   test('residence IMC remainder batches 8–10 cover former gap ISOs', () => {

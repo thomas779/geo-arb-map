@@ -5966,6 +5966,727 @@
         "jus_soli_exceptions": [],
         "unconditional_jus_soli": false
       }
+    },
+    {
+      "id": "aruba-citizenship-at-birth",
+      "country": {
+        "iso_n3": "533",
+        "name": "Aruba"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Dutch nationality at birth",
+      "summary": "Citizenship at birth in Aruba follows Dutch nationality rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Aruba — Work & residence",
+          "url": "https://www.gobierno.aw/en/work-and-residence-permit"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "sint-maarten-citizenship-at-birth",
+      "country": {
+        "iso_n3": "534",
+        "name": "Sint Maarten"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Dutch nationality at birth",
+      "summary": "Citizenship at birth in Sint Maarten follows Dutch nationality rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Sint Maarten",
+          "url": "https://www.sintmaartengov.org/"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "caribbean-netherlands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "535",
+        "name": "Caribbean Netherlands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Dutch nationality at birth",
+      "summary": "Citizenship at birth in Caribbean Netherlands follows Dutch nationality rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Rijksdienst Caribisch Nederland",
+          "url": "https://www.rijksdienstcn.com/"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "new-caledonia-citizenship-at-birth",
+      "country": {
+        "iso_n3": "540",
+        "name": "New Caledonia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in New Caledonia follows French nationality rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Gouvernement de la Nouvelle-Calédonie",
+          "url": "https://www.gouv.nc/"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "vanuatu-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "548",
+        "name": "Vanuatu"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Vanuatu parent",
+      "summary": "A child born after independence acquires citizenship at birth, whether born in Vanuatu or abroad, if at least one parent is a citizen.",
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Vanuatu — citizenship",
+          "url": "https://parliament.gov.vu/images/constitution.pdf"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_citizen",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "norfolk-island-citizenship-at-birth",
+      "country": {
+        "iso_n3": "574",
+        "name": "Norfolk Island"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Australian citizenship at birth",
+      "summary": "Citizenship at birth in Norfolk Island follows Australian citizenship rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Norfolk Island Legislation Amendment Act 2015",
+          "url": "https://www.legislation.gov.au/C2015A00059/latest/text"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "northern-mariana-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "580",
+        "name": "Northern Mariana Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "United States citizenship at birth",
+      "summary": "Citizenship at birth in Northern Mariana Islands follows United States citizenship rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "48 USC 1801 — Covenant establishing the CNMI",
+          "url": "https://www.law.cornell.edu/uscode/text/48/1801"
+        }
+      ],
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      }
+    },
+    {
+      "id": "philippines-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "608",
+        "name": "Philippines"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Filipino parent",
+      "summary": "A person born to a Filipino father or mother is a Filipino citizen under the 1987 Constitution. Birth in the Philippines alone to two foreign parents does not generally create citizenship by soil.",
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Philippines Commonwealth Act No. 473 — Revised Naturalization Law",
+          "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/29/34227"
+        }
+      ],
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "poland-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "616",
+        "name": "Poland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Polish parent",
+      "summary": "A person born to a Polish citizen parent is a Polish citizen at birth. Birth in Poland to two foreign parents does not generally create citizenship by soil alone.",
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Poland MSWiA — citizenship (English hub)",
+          "url": "https://www.gov.pl/web/mswia-en/citizenship"
+        }
+      ],
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "puerto-rico-citizenship-at-birth",
+      "country": {
+        "iso_n3": "630",
+        "name": "Puerto Rico"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "United States citizenship at birth",
+      "summary": "Citizenship at birth in Puerto Rico follows United States citizenship rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1402 — Persons born in Puerto Rico",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1402"
+        }
+      ],
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      }
+    },
+    {
+      "id": "saint-barthelemy-citizenship-at-birth",
+      "country": {
+        "iso_n3": "652",
+        "name": "Saint-Barthélemy"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in Saint-Barthélemy follows French nationality rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Collectivité de Saint-Barthélemy",
+          "url": "https://www.comstbarth.fr/"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "saint-martin-citizenship-at-birth",
+      "country": {
+        "iso_n3": "663",
+        "name": "Saint-Martin"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in Saint-Martin follows French nationality rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Collectivité de Saint-Martin",
+          "url": "https://www.com-saint-martin.fr/"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "saint-pierre-and-miquelon-citizenship-at-birth",
+      "country": {
+        "iso_n3": "666",
+        "name": "Saint-Pierre-et-Miquelon"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in Saint-Pierre-et-Miquelon follows French nationality rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Service-Public — Saint-Pierre-et-Miquelon",
+          "url": "https://lannuaire.service-public.gouv.fr/collectivites-d-outre-mer/saint-pierre-et-miquelon/ed2ce256-ce24-4a37-9df1-13ce1eef8812"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "sao-tome-citizenship-by-birth",
+      "country": {
+        "iso_n3": "678",
+        "name": "São Tomé and Príncipe"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship connected to birth in São Tomé and Príncipe",
+      "summary": "A person born in São Tomé and Príncipe is of origin nationality when a parent is São-tomense, when the parents are stateless or of unknown nationality, or when foreign parents reside in the territory and are not in the service of another state. Foundling and parental-status conditions remain statutory.",
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_stateless",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "saudi-arabia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "682",
+        "name": "Saudi Arabia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Saudi father",
+      "summary": "Nationality flows from a Saudi father; mere birth on Saudi soil confers no automatic citizenship.",
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Saudi Arabian Nationality Regulations (1374 H)",
+          "url": "https://www.ecoi.net/en/file/local/1098597/1504_1217587365_saudi-arabian-nationality-regulations.pdf"
+        }
+      ],
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "serbia-citizenship-by-birth-statelessness",
+      "country": {
+        "iso_n3": "688",
+        "name": "Serbia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth to prevent statelessness",
+      "summary": "A child born or found in Serbia acquires citizenship where both parents are unknown, of unknown citizenship or stateless, or where the child would otherwise be stateless.",
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Serbian Ministry of Interior — Citizenship",
+          "url": "https://mup.gov.rs/wps/portal/sr/gradjani/dokumenta/Drzavljanstvo/"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "stateless_or_unknown",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "spain-citizenship-by-birth",
+      "country": {
+        "iso_n3": "724",
+        "name": "Spain"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship through birth in Spain",
+      "summary": "Birth in Spain alone does not generally confer citizenship. Nationality by origin applies in limited parentage, statelessness, or undetermined-parentage cases.",
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Spanish Civil Code — Articles 17, 20 and 22",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1889-4763"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parentage_or_stateless",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "switzerland-third-generation-naturalization",
+      "country": {
+        "iso_n3": "756",
+        "name": "Switzerland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Facilitated naturalization for a third generation born in Switzerland",
+      "summary": "Birth in Switzerland does not itself grant citizenship, but a qualifying third-generation applicant born there may use facilitated naturalization before age 25.",
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Swiss SEM — Third-generation naturalisation",
+          "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden/3-generation.html"
+        },
+        {
+          "title": "Swiss SEM — Acquiring Swiss citizenship",
+          "url": "https://www.sem.admin.ch/sem/en/home/integration-einbuergerung/schweizer-werden.html"
+        }
+      ],
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "syria-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "760",
+        "name": "Syria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Syrian father",
+      "summary": "Citizenship at birth flows from a Syrian father regardless of birthplace; birth on Syrian soil alone confers nothing, a paternal-line model linked to protracted Kurdish statelessness.",
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Syria Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Syria_2012"
+        }
+      ],
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "uae-citizenship-at-birth-qualifying-parent",
+      "country": {
+        "iso_n3": "784",
+        "name": "United Arab Emirates"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a qualifying parent",
+      "summary": "Citizenship at birth follows the federal parentage rules rather than territorial birth; the law also protects certain children of unknown or stateless parentage.",
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "UAE Ministry of Justice — Nationality and Passports Law",
+          "url": "https://elaws.moj.gov.ae/UAE-MOJ_LC-En/00_NATIONALITY/UAE-LC-En_1972-11-18_00017_Kait.html?val=EL1"
+        }
+      ],
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "turkiye-citizenship-by-birth-statelessness",
+      "country": {
+        "iso_n3": "792",
+        "name": "Türkiye"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth to prevent statelessness",
+      "summary": "A child born in Türkiye who cannot acquire any nationality from the parents becomes Turkish from birth; a foundling is presumed born in Türkiye.",
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Türkiye NVI — Acquisition of Turkish citizenship",
+          "url": "https://nvi.gov.tr/turk-vatandasliginin-kazanilmasi"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "stateless_or_unknown",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "guernsey-citizenship-at-birth",
+      "country": {
+        "iso_n3": "831",
+        "name": "Guernsey"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British citizenship at birth",
+      "summary": "Citizenship at birth in Guernsey follows British citizenship rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "States of Guernsey — Immigration",
+          "url": "https://www.gov.gg/immigration"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "jersey-citizenship-at-birth",
+      "country": {
+        "iso_n3": "832",
+        "name": "Jersey"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British citizenship at birth",
+      "summary": "Citizenship at birth in Jersey follows British citizenship rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Government of Jersey — Citizenship & settling in Jersey",
+          "url": "https://www.gov.je/LifeEvents/CitizenshipSettlingInJersey/pages/default.aspx"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "isle-of-man-citizenship-at-birth",
+      "country": {
+        "iso_n3": "833",
+        "name": "Isle of Man"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "British citizenship at birth",
+      "summary": "Citizenship at birth in Isle of Man follows British citizenship rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Isle of Man Government — Immigration",
+          "url": "https://www.gov.im/categories/travel-traffic-and-motoring/immigration/"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
+    },
+    {
+      "id": "us-virgin-islands-citizenship-at-birth",
+      "country": {
+        "iso_n3": "850",
+        "name": "United States Virgin Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "United States citizenship at birth",
+      "summary": "Citizenship at birth in United States Virgin Islands follows United States citizenship rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "8 USC 1406 — Persons born in the Virgin Islands",
+          "url": "https://www.law.cornell.edu/uscode/text/8/1406"
+        }
+      ],
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      }
+    },
+    {
+      "id": "venezuela-citizenship-by-birth",
+      "country": {
+        "iso_n3": "862",
+        "name": "Venezuela"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Venezuelan nationality by birth in Venezuela",
+      "summary": "Any person born within the territory of the Republic is Venezuelan by birth under Article 32.",
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Venezuela Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Venezuela_2009"
+        }
+      ],
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      }
+    },
+    {
+      "id": "wallis-and-futuna-citizenship-at-birth",
+      "country": {
+        "iso_n3": "876",
+        "name": "Wallis and Futuna"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "French nationality at birth",
+      "summary": "Citizenship at birth in Wallis and Futuna follows French nationality rules.",
+      "confidence": "medium",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Assemblée territoriale des îles Wallis et Futuna",
+          "url": "https://www.assembleeterritoriale.wf/"
+        }
+      ],
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      }
     }
   ]
 }
