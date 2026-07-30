@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 185
+      "residence_routes": 206
     }
   },
   "jurisdictions": [
@@ -184,7 +184,14 @@
         "azerbaijan-citizenship-by-parent",
         "azerbaijan-naturalization",
         "azerbaijan-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "azerbaijan-temporary-residence-investment",
+        "azerbaijan-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "032",
@@ -603,7 +610,13 @@
         "bulgaria-citizenship-by-birth-statelessness",
         "bulgaria-investor-citizenship-repealed",
         "bulgaria-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "bulgaria-fund-permanent-residence-investment"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "104",
@@ -670,7 +683,15 @@
         "cambodia-citizenship-at-birth-by-parent",
         "cambodia-investor-naturalization-status",
         "cambodia-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "cambodia-retirement-eb-9-residence",
+        "cambodia-passive-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "retirement_pension": "reviewed",
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "120",
@@ -786,7 +807,13 @@
         "sri-lanka-citizenship-by-descent",
         "sri-lanka-naturalization",
         "sri-lanka-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "sri-lanka-residence-visa-investment"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "148",
@@ -1341,7 +1368,13 @@
         "fiji-naturalization",
         "fiji-citizenship-at-birth-by-parent",
         "fiji-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "fiji-investor-permit-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "246",
@@ -1804,7 +1837,15 @@
         "honduras-citizenship-by-parent",
         "honduras-naturalization-by-residence",
         "honduras-citizenship-by-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "honduras-rentista-pensionado-residence",
+        "honduras-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "retirement_pension": "reviewed",
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "344",
@@ -2202,7 +2243,13 @@
         "kyrgyzstan-citizenship-by-kyrgyz-origin",
         "kyrgyzstan-naturalization",
         "kyrgyzstan-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "kyrgyzstan-investor-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "418",
@@ -2434,7 +2481,13 @@
         "malawi-naturalization",
         "malawi-citizenship-at-birth-by-parent",
         "malawi-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "malawi-temporary-residence-investment-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "458",
@@ -2475,7 +2528,13 @@
         "maldives-citizenship-by-parent",
         "maldives-naturalization",
         "maldives-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "maldives-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "466",
@@ -2956,7 +3015,15 @@
         "nicaragua-naturalization",
         "nicaragua-citizenship-by-birth",
         "nicaragua-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "nicaragua-rentista-pensionado-residence",
+        "nicaragua-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "retirement_pension": "reviewed",
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "562",
@@ -3600,7 +3667,15 @@
         "san-marino-citizenship-by-parent",
         "san-marino-naturalization",
         "san-marino-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "san-marino-elective-residence",
+        "san-marino-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "retirement_pension": "reviewed",
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "678",
@@ -3695,7 +3770,14 @@
         "seychelles-citizenship-by-parent",
         "seychelles-naturalization",
         "seychelles-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "seychelles-gopid-investor-residence",
+        "seychelles-passive-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "694",
@@ -4288,7 +4370,14 @@
         "ukraine-naturalization",
         "ukraine-citizenship-at-birth-by-parent",
         "ukraine-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "ukraine-temporary-residence-investment",
+        "ukraine-passive-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "807",
@@ -4323,7 +4412,13 @@
         "egypt-citizenship-by-birth",
         "egypt-investor-citizenship",
         "egypt-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "egypt-deposit-residence-investment"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "826",
@@ -9710,6 +9805,13 @@
       "title": "Nationality by birth in Chile",
       "summary": "Persons born in Chilean territory are Chilean by birth, except children of transient foreigners or of foreigners who are in Chile in the service of their government. Statelessness safeguards and later option routes may apply to some excluded children.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "transient_foreigners"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -11995,6 +12097,14 @@
       "title": "Dominican nationality by birth in the Dominican Republic",
       "summary": "Persons born in the national territory are Dominican under Article 18, except children of foreign diplomats and of foreigners in transit or illegally present as defined by Dominican law.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "lawful_residence",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "foreigners_in_transit",
+          "illegally_present"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -25692,6 +25802,13 @@
       "title": "Citizenship at birth in Pakistan",
       "summary": "Birth to a Pakistani parent creates nationality. The 1951 Act grants citizenship to persons born in Pakistan (excluding children of diplomats or enemy aliens), a territorial rule narrowed in practice since a 1999 ruling toward requiring a Pakistani parent.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "enemy_aliens"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -35520,6 +35637,12 @@
       "title": "Uruguayan nationality by territorial birth",
       "summary": "Every person born anywhere in the territory of Uruguay is a natural citizen and Uruguayan national.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -36422,6 +36545,86 @@
       ]
     },
     {
+      "id": "azerbaijan-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "031",
+        "name": "Azerbaijan"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No passive golden visa / CIP",
+      "summary": "Azerbaijan does not run a citizenship-by-investment or simple passive property golden-visa programme.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "azerbaijan-golden-visa-verified-negative-principal",
+          "label": "No passive golden visa / CIP",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "State Migration Service of Azerbaijan",
+          "url": "https://migration.gov.az/"
+        }
+      ]
+    },
+    {
+      "id": "azerbaijan-temporary-residence-investment",
+      "country": {
+        "iso_n3": "031",
+        "name": "Azerbaijan"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Temporary residence linked to investment / entrepreneurship",
+      "summary": "Temporary residence permits for foreigners engaging in entrepreneurial activity or investment under Azerbaijan migration rules.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "azerbaijan-temporary-residence-investment-principal",
+          "label": "Temporary residence linked to investment / entrepreneurship",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "State Migration Service of Azerbaijan",
+          "url": "https://migration.gov.az/"
+        }
+      ]
+    },
+    {
       "id": "argentina-digital-nomad-transitory",
       "country": {
         "iso_n3": "032",
@@ -37316,6 +37519,130 @@
       ]
     },
     {
+      "id": "bulgaria-fund-permanent-residence-investment",
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Permanent residence via regulated fund investment",
+      "summary": "Permanent residence for non-EU investors who make a qualifying investment in a Bulgarian AIF/ETF-style regulated fund under the post-CBI investment residence framework.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 512000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 0,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "bulgaria-fund-permanent-residence-investment-principal",
+          "label": "Permanent residence via regulated fund investment",
+          "allocation": "discretionary",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Invest Bulgaria Agency",
+          "url": "https://www.investbg.government.bg/en"
+        }
+      ]
+    },
+    {
+      "id": "cambodia-passive-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "116",
+        "name": "Cambodia"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No EU-style passive golden visa product",
+      "summary": "Cambodia does not market a standardized Mediterranean-style passive golden visa; long stays use EB and related categories.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "cambodia-passive-golden-visa-verified-negative-principal",
+          "label": "No EU-style passive golden visa product",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "General Department of Immigration (Cambodia)",
+          "url": "https://immigration.gov.kh/"
+        }
+      ]
+    },
+    {
+      "id": "cambodia-retirement-eb-9-residence",
+      "country": {
+        "iso_n3": "116",
+        "name": "Cambodia"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "EB retirement / long-stay visa pathways",
+      "summary": "Cambodia long-stay EB categories used by retirees and long-term visitors, distinct from any citizenship-by-investment marketing.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cambodia-retirement-eb-9-residence-principal",
+          "label": "EB retirement / long-stay visa pathways",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "General Department of Immigration (Cambodia)",
+          "url": "https://immigration.gov.kh/"
+        }
+      ]
+    },
+    {
       "id": "canada-federal-immigrant-investor",
       "country": {
         "iso_n3": "124",
@@ -37640,6 +37967,47 @@
         {
           "title": "WORC Form R50 (2026/05) — Application for Residency Certificate, Substantial Business Presence",
           "url": "https://my.egov.ky/documents/d/worc/r50-residency-certificate-substantial-business-presence-1?download=true"
+        }
+      ]
+    },
+    {
+      "id": "sri-lanka-residence-visa-investment",
+      "country": {
+        "iso_n3": "144",
+        "name": "Sri Lanka"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residence Visa — investment / business categories",
+      "summary": "Sri Lanka Residence Visa categories for investors and businesspersons under Immigration & Emigration Department rules, often linked to BOI or prescribed capital.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "sri-lanka-residence-visa-investment-principal",
+          "label": "Residence Visa — investment / business categories",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Department of Immigration and Emigration — Sri Lanka",
+          "url": "https://www.immigration.gov.lk/"
         }
       ]
     },
@@ -38747,6 +39115,47 @@
       ]
     },
     {
+      "id": "fiji-investor-permit-residence",
+      "country": {
+        "iso_n3": "242",
+        "name": "Fiji"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor permit / residence pathways",
+      "summary": "Fiji investor and work-permit linked residence under Immigration Act practice for persons establishing businesses meeting prescribed capital thresholds.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "fiji-investor-permit-residence-principal",
+          "label": "Investor permit / residence pathways",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Fiji Immigration Department",
+          "url": "https://www.immigration.gov.fj/"
+        }
+      ]
+    },
+    {
       "id": "finland-golden-visa-verified-negative",
       "country": {
         "iso_n3": "246",
@@ -39491,6 +39900,89 @@
         {
           "title": "Guatemala — IGM, Reglamento de Residencias (Acuerdo IGM-016-2025)",
           "url": "https://igm.gob.gt/informacion-residencias-permanentes/"
+        }
+      ]
+    },
+    {
+      "id": "honduras-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "340",
+        "name": "Honduras"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No CIP / passive golden visa product",
+      "summary": "Honduras does not operate a Caribbean-style citizenship-by-investment or simple property golden visa for open marketing.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "honduras-golden-visa-verified-negative-principal",
+          "label": "No CIP / passive golden visa product",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Instituto Nacional de Migración (Honduras)",
+          "url": "https://inm.gob.hn/"
+        }
+      ]
+    },
+    {
+      "id": "honduras-rentista-pensionado-residence",
+      "country": {
+        "iso_n3": "340",
+        "name": "Honduras"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Rentista / pensionado residence",
+      "summary": "Temporary residence for foreigners proving stable pension or rentista income under Honduran immigration categories.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1500,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "honduras-rentista-pensionado-residence-principal",
+          "label": "Rentista / pensionado residence",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Instituto Nacional de Migración (Honduras)",
+          "url": "https://inm.gob.hn/"
         }
       ]
     },
@@ -40267,6 +40759,47 @@
       ]
     },
     {
+      "id": "kyrgyzstan-investor-residence",
+      "country": {
+        "iso_n3": "417",
+        "name": "Kyrgyzstan"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor residence permit",
+      "summary": "Temporary residence for foreign investors meeting capital and business registration requirements under Kyrgyz migration rules.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "kyrgyzstan-investor-residence-principal",
+          "label": "Investor residence permit",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Ministry of Digital Development / migration services — Kyrgyz Republic",
+          "url": "https://www.gov.kg/"
+        }
+      ]
+    },
+    {
       "id": "latvia-investor-residence",
       "country": {
         "iso_n3": "428",
@@ -40731,6 +41264,45 @@
       ]
     },
     {
+      "id": "malawi-temporary-residence-investment-verified-negative",
+      "country": {
+        "iso_n3": "454",
+        "name": "Malawi"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No open passive RBI / golden visa programme",
+      "summary": "Malawi does not operate a public passive residence-by-investment or golden visa product for general foreign applicants.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malawi-temporary-residence-investment-verified-negative-principal",
+          "label": "No open passive RBI / golden visa programme",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Government of Malawi",
+          "url": "https://www.malawi.gov.mw/"
+        }
+      ]
+    },
+    {
       "id": "malaysia-de-rantau-nomad",
       "country": {
         "iso_n3": "458",
@@ -40811,6 +41383,45 @@
         {
           "title": "Malaysia MM2H — official programme",
           "url": "https://mm2h.gov.my/"
+        }
+      ]
+    },
+    {
+      "id": "maldives-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "462",
+        "name": "Maldives"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No passive golden visa / open RBI for general applicants",
+      "summary": "Maldives does not operate a public passive residence-by-investment programme comparable to Caribbean or Mediterranean golden visas for unrestricted foreign applicants.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "maldives-golden-visa-verified-negative-principal",
+          "label": "No passive golden visa / open RBI for general applicants",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Maldives Immigration",
+          "url": "https://immigration.gov.mv/"
         }
       ]
     },
@@ -41542,6 +42153,89 @@
         {
           "title": "Investor 1 Resident Visa — Immigration New Zealand",
           "url": "https://www.immigration.govt.nz/visas/investor-1-resident-visa/"
+        }
+      ]
+    },
+    {
+      "id": "nicaragua-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "558",
+        "name": "Nicaragua"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No open passive golden visa / CIP",
+      "summary": "Nicaragua does not offer a standardized passive investment golden visa or citizenship-by-investment programme for general applicants.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "nicaragua-golden-visa-verified-negative-principal",
+          "label": "No open passive golden visa / CIP",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migración y Extranjería — Nicaragua",
+          "url": "https://www.migob.gob.ni/"
+        }
+      ]
+    },
+    {
+      "id": "nicaragua-rentista-pensionado-residence",
+      "country": {
+        "iso_n3": "558",
+        "name": "Nicaragua"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Rentista / pensionado residence",
+      "summary": "Residence categories for pensioners and rentistas with stable foreign income under Nicaraguan migration practice.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "nicaragua-rentista-pensionado-residence-principal",
+          "label": "Rentista / pensionado residence",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migración y Extranjería — Nicaragua",
+          "url": "https://www.migob.gob.ni/"
         }
       ]
     },
@@ -42447,6 +43141,86 @@
       ]
     },
     {
+      "id": "san-marino-elective-residence",
+      "country": {
+        "iso_n3": "674",
+        "name": "San Marino"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Elective / economic residence (residenza elettiva)",
+      "summary": "Residence permissions for foreigners who meet San Marino economic self-sufficiency and housing rules — small-state elective residence, not an EU golden visa.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "san-marino-elective-residence-principal",
+          "label": "Elective / economic residence (residenza elettiva)",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Republic of San Marino — government portal",
+          "url": "https://www.gov.sm/"
+        }
+      ]
+    },
+    {
+      "id": "san-marino-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "674",
+        "name": "San Marino"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No Caribbean-style golden visa / CIP",
+      "summary": "San Marino does not offer a standardized passive investment golden visa or citizenship-by-investment product.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "san-marino-golden-visa-verified-negative-principal",
+          "label": "No Caribbean-style golden visa / CIP",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Republic of San Marino — government portal",
+          "url": "https://www.gov.sm/"
+        }
+      ]
+    },
+    {
       "id": "saudi-premium-residency-entrepreneur",
       "country": {
         "iso_n3": "682",
@@ -42652,6 +43426,86 @@
         {
           "title": "Premium Residency Center — Limited Duration and Unlimited Duration Premium Residency",
           "url": "https://pr.gov.sa/pr/en?id=pr_product_details_limited_unlimited"
+        }
+      ]
+    },
+    {
+      "id": "seychelles-gopid-investor-residence",
+      "country": {
+        "iso_n3": "690",
+        "name": "Seychelles"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "GOP / investor-linked residence pathways",
+      "summary": "Seychelles Gainful Occupation Permit and related investor/self-employment permissions — economic presence required, not a pure passive golden visa.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "seychelles-gopid-investor-residence-principal",
+          "label": "GOP / investor-linked residence pathways",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Seychelles Department of Immigration",
+          "url": "https://www.ics.gov.sc/"
+        }
+      ]
+    },
+    {
+      "id": "seychelles-passive-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "690",
+        "name": "Seychelles"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No simple passive property golden visa",
+      "summary": "Seychelles does not offer an open passive real-estate golden visa for general foreign buyers without economic substance rules.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "seychelles-passive-golden-visa-verified-negative-principal",
+          "label": "No simple passive property golden visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Seychelles Department of Immigration",
+          "url": "https://www.ics.gov.sc/"
         }
       ]
     },
@@ -43566,6 +44420,130 @@
         {
           "title": "Residence Permit Application — Ministry of Immigration and Border Services, TCI Government",
           "url": "https://gov.tc/bordercontrol/images/docs/forms/Residence%20Permit%20Application.pdf"
+        }
+      ]
+    },
+    {
+      "id": "ukraine-passive-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "804",
+        "name": "Ukraine"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No passive real-estate golden visa",
+      "summary": "Ukraine does not operate a simple property-purchase residence-by-investment product comparable to Mediterranean golden visas.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ukraine-passive-golden-visa-verified-negative-principal",
+          "label": "No passive real-estate golden visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "State Migration Service of Ukraine",
+          "url": "https://dmsu.gov.ua/en-home.html"
+        }
+      ]
+    },
+    {
+      "id": "ukraine-temporary-residence-investment",
+      "country": {
+        "iso_n3": "804",
+        "name": "Ukraine"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Temporary residence for foreign investors / significant economic activity",
+      "summary": "Temporary residence pathways for foreigners investing in or conducting significant business activity in Ukraine under migration legislation — active economic presence, not a passive golden visa.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ukraine-temporary-residence-investment-principal",
+          "label": "Temporary residence for foreign investors / significant economic activity",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "State Migration Service of Ukraine",
+          "url": "https://dmsu.gov.ua/en-home.html"
+        }
+      ]
+    },
+    {
+      "id": "egypt-deposit-residence-investment",
+      "country": {
+        "iso_n3": "818",
+        "name": "Egypt"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residence via bank deposit / investment programmes",
+      "summary": "Egypt offers temporary and permanent residence categories tied to bank deposits or property investment under immigration regulations administered with Interior / GAFI practice.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 100000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "egypt-deposit-residence-investment-principal",
+          "label": "Residence via bank deposit / investment programmes",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Arab Republic of Egypt — government services portal",
+          "url": "https://www.egypt.gov.eg/"
         }
       ]
     },

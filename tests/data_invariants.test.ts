@@ -537,6 +537,30 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(fi?.min_income_monthly?.amount).toBe(3937);
   });
 
+  test('priority jus soli batch: DR Chile Pakistan conditional/none; Uruguay unconditional', () => {
+    const byId = new Map(citizenshipRoutes.routes.map(r => [r.id, r]));
+    expect(byId.get('dominican-republic-citizenship-by-birth')?.facts.jus_soli).toBe('conditional');
+    expect(byId.get('chile-citizenship-by-birth')?.facts.jus_soli).toBe('conditional');
+    expect(byId.get('pakistan-citizenship-at-birth-by-parent')?.facts.jus_soli).toBe('none');
+    expect(byId.get('uruguay-nationality-by-birth')?.facts.jus_soli).toBe('unconditional');
+    expect(byId.get('uruguay-nationality-by-birth')?.facts.unconditional_jus_soli).toBe(true);
+    // Unconditional set so far: US + Uruguay (Portugal remains conditional).
+    const unconditional = citizenshipRoutes.routes.filter(r =>
+      r.mode === 'birth' && r.facts?.jus_soli === 'unconditional');
+    expect(unconditional.map(r => r.country.iso_n3).sort()).toEqual(['840', '858']);
+  });
+
+  test('residence IMC remainder batches 8–10 cover former gap ISOs', () => {
+    const isos = new Set((citizenshipRoutes.residence_routes ?? []).map(r => r.country.iso_n3));
+    for (const iso of [
+      '100', '804', '031', '674', // R8
+      '818', '462', '690', '144', // R9
+      '340', '558', '242', '116', '417', '454', // R10
+    ]) {
+      expect(isos.has(iso), iso).toBe(true);
+    }
+  });
+
   test('US birthright records unconditional jus soli after Trump v. Barbara', () => {
     const birth = citizenshipRoutes.routes.find(route => route.id === 'us-citizenship-by-birth');
     expect(birth?.facts.jus_soli).toBe('unconditional');

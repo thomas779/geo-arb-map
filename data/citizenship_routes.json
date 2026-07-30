@@ -7,7 +7,10 @@
   "routes": [
     {
       "id": "france-study-naturalization-residence",
-      "country": { "iso_n3": "250", "name": "France" },
+      "country": {
+        "iso_n3": "250",
+        "name": "France"
+      },
       "mode": "naturalization",
       "status": "active",
       "title": "French higher education can reduce the naturalization residence period to two years",
@@ -44,7 +47,10 @@
     },
     {
       "id": "colombia-study-permanent-residence-credit",
-      "country": { "iso_n3": "170", "name": "Colombia" },
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
       "mode": "naturalization",
       "status": "verified_negative",
       "title": "Visitor student visa time does not accumulate toward permanent residence",
@@ -74,78 +80,129 @@
     },
     {
       "id": "antigua-barbuda-cip",
-      "country": { "iso_n3": "028", "name": "Antigua and Barbuda" },
+      "country": {
+        "iso_n3": "028",
+        "name": "Antigua and Barbuda"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Citizenship by Investment Programme",
       "summary": "Government-administered direct citizenship programme with contribution, real-estate and other approved investment options.",
-      "facts": { "programme_type": "direct_citizenship_by_investment", "residence_required": true },
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": true
+      },
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
-        { "title": "Antigua and Barbuda Citizenship by Investment Unit", "url": "https://cip.gov.ag/home" }
+        {
+          "title": "Antigua and Barbuda Citizenship by Investment Unit",
+          "url": "https://cip.gov.ag/home"
+        }
       ]
     },
     {
       "id": "dominica-cbi",
-      "country": { "iso_n3": "212", "name": "Dominica" },
+      "country": {
+        "iso_n3": "212",
+        "name": "Dominica"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Citizenship by Investment Programme",
       "summary": "Government-administered direct citizenship programme offering a public-fund contribution and approved real-estate route.",
-      "facts": { "programme_type": "direct_citizenship_by_investment", "residence_required": false },
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
-        { "title": "Dominica Citizenship by Investment Unit", "url": "https://www.cbiu.gov.dm/" }
+        {
+          "title": "Dominica Citizenship by Investment Unit",
+          "url": "https://www.cbiu.gov.dm/"
+        }
       ]
     },
     {
       "id": "grenada-cbi",
-      "country": { "iso_n3": "308", "name": "Grenada" },
+      "country": {
+        "iso_n3": "308",
+        "name": "Grenada"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Citizenship by Investment Programme",
       "summary": "Government-administered direct citizenship programme with National Transformation Fund and approved-project routes.",
-      "facts": { "programme_type": "direct_citizenship_by_investment", "residence_required": false },
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
-        { "title": "Grenada Citizenship by Investment", "url": "https://www.cbi.gov.gd/index_php/" }
+        {
+          "title": "Grenada Citizenship by Investment",
+          "url": "https://www.cbi.gov.gd/index_php/"
+        }
       ]
     },
     {
       "id": "st-kitts-nevis-citizenship-programme",
-      "country": { "iso_n3": "659", "name": "St. Kitts and Nevis" },
+      "country": {
+        "iso_n3": "659",
+        "name": "St. Kitts and Nevis"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Citizenship Programme",
       "summary": "Government-administered direct citizenship programme requiring a prescribed investment or contribution, including the Sustainable Island State Contribution (SISC), and due diligence.",
-      "facts": { "programme_type": "direct_citizenship_by_investment", "residence_required": false },
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
       "confidence": "high",
       "last_checked": "2026-07-22",
       "sources": [
-        { "title": "St. Kitts and Nevis Citizenship Unit", "url": "https://ciu.gov.kn/application-process/" }
+        {
+          "title": "St. Kitts and Nevis Citizenship Unit",
+          "url": "https://ciu.gov.kn/application-process/"
+        }
       ]
     },
     {
       "id": "saint-lucia-cip",
-      "country": { "iso_n3": "662", "name": "Saint Lucia" },
+      "country": {
+        "iso_n3": "662",
+        "name": "Saint Lucia"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Citizenship by Investment Programme",
       "summary": "Direct citizenship by registration following a qualifying investment under the Citizenship by Investment Act. Act No. 22 of 2025 inserts s.30A requiring applicants and dependants to comply with prescribed residency and genuine-link requirements from 1 January 2026; those requirements have not yet been published as regulations, so no fixed day-count is recorded.",
-      "facts": { "programme_type": "direct_citizenship_by_investment", "residence_required": false },
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
       "confidence": "high",
       "last_checked": "2026-07-30",
       "sources": [
-        { "title": "Saint Lucia Citizenship by Investment Act", "url": "https://pmd.govt.lc/wp-content/uploads/2025/10/Citizenship-by-Investment-Act-Cap.1.20.pdf" },
-        { "title": "Saint Lucia Citizenship by Investment (Amendment) Act 2025 (No. 22 of 2025)", "url": "https://npc.govt.lc/laws/download/UjVlcXRvZTd3RG93ODVaQ0tsbWNwZEJ4WUdIWE9DR3N3WlNGUC9GVjBjYmM0bEZNaGJicXVNVFh4RGJGSkdRam94VnZBYWxwcndtelBObGJ1Si82OFkrcmd3a2tlcWRDSW4zYzBjN2hmM1ViaVFhRXAxUitnOTNpRzNkSlNqRW0=" }
+        {
+          "title": "Saint Lucia Citizenship by Investment Act",
+          "url": "https://pmd.govt.lc/wp-content/uploads/2025/10/Citizenship-by-Investment-Act-Cap.1.20.pdf"
+        },
+        {
+          "title": "Saint Lucia Citizenship by Investment (Amendment) Act 2025 (No. 22 of 2025)",
+          "url": "https://npc.govt.lc/laws/download/UjVlcXRvZTd3RG93ODVaQ0tsbWNwZEJ4WUdIWE9DR3N3WlNGUC9GVjBjYmM0bEZNaGJicXVNVFh4RGJGSkdRam94VnZBYWxwcndtelBObGJ1Si82OFkrcmd3a2tlcWRDSW4zYzBjN2hmM1ViaVFhRXAxUitnOTNpRzNkSlNqRW0="
+        }
       ]
     },
     {
       "id": "turkiye-exceptional-investor-citizenship",
-      "country": { "iso_n3": "792", "name": "Türkiye" },
+      "country": {
+        "iso_n3": "792",
+        "name": "Türkiye"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Exceptional citizenship for qualifying investors",
@@ -162,89 +219,163 @@
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
-        { "title": "Invest in Türkiye — Acquiring Property and Citizenship", "url": "https://f.invest.gov.tr/en/investmentguide/pages/acquiring-property-and-citizenship.aspx" }
+        {
+          "title": "Invest in Türkiye — Acquiring Property and Citizenship",
+          "url": "https://f.invest.gov.tr/en/investmentguide/pages/acquiring-property-and-citizenship.aspx"
+        }
       ]
     },
     {
       "id": "egypt-investor-citizenship",
-      "country": { "iso_n3": "818", "name": "Egypt" },
+      "country": {
+        "iso_n3": "818",
+        "name": "Egypt"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Egyptian citizenship through investment programmes",
       "summary": "The Prime Minister's citizenship unit administers direct routes through a non-refundable contribution, property, an investment project or a central-bank deposit. No multi-year residence period is required before the investment programme grant.",
-      "facts": { "programme_type": "direct_citizenship_by_investment", "residence_required": false, "discretionary_decision": true },
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false,
+        "discretionary_decision": true
+      },
       "confidence": "high",
       "last_checked": "2026-07-22",
       "sources": [
-        { "title": "Egyptian Cabinet — Citizenship through Investment Programmes", "url": "https://egyptcitizenship.gov.eg/" },
-        { "title": "GAFI — Unit for Granting Egyptian Citizenship in Exchange for Investment", "url": "https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx" }
+        {
+          "title": "Egyptian Cabinet — Citizenship through Investment Programmes",
+          "url": "https://egyptcitizenship.gov.eg/"
+        },
+        {
+          "title": "GAFI — Unit for Granting Egyptian Citizenship in Exchange for Investment",
+          "url": "https://www.gafi.gov.eg/English/Howcanwehelp/Pages/Egyptian-Citizenship.aspx"
+        }
       ]
     },
     {
       "id": "jordan-investor-citizenship",
-      "country": { "iso_n3": "400", "name": "Jordan" },
+      "country": {
+        "iso_n3": "400",
+        "name": "Jordan"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Investor citizenship criteria",
       "summary": "Jordan's Cabinet-approved criteria, administered by the Ministry of Investment / Invest Jordan, provide citizenship routes through qualifying securities, productive projects, business expansion or sustained job creation. Several project routes require a multi-year compliance period, often with a temporary three-year passport before a recommendation for full citizenship. Dual nationality is routinely permitted on this economic pathway.",
-      "facts": { "programme_type": "investor_citizenship", "residence_required": false, "discretionary_decision": true },
+      "facts": {
+        "programme_type": "investor_citizenship",
+        "residence_required": false,
+        "discretionary_decision": true
+      },
       "confidence": "high",
       "last_checked": "2026-07-30",
       "sources": [
-        { "title": "Invest Jordan — Cabinet investor residency and citizenship criteria", "url": "https://invest.jo/en/node/123" },
-        { "title": "Jordan News Agency (Petra) — Cabinet investor citizenship amendments", "url": "https://petra.gov.jo/en/news/government-revamps-investor-citizenship-rules-to-funnel-capital-into-provinces" }
+        {
+          "title": "Invest Jordan — Cabinet investor residency and citizenship criteria",
+          "url": "https://invest.jo/en/node/123"
+        },
+        {
+          "title": "Jordan News Agency (Petra) — Cabinet investor citizenship amendments",
+          "url": "https://petra.gov.jo/en/news/government-revamps-investor-citizenship-rules-to-funnel-capital-into-provinces"
+        }
       ]
     },
     {
       "id": "vanuatu-investor-citizenship",
-      "country": { "iso_n3": "548", "name": "Vanuatu" },
+      "country": {
+        "iso_n3": "548",
+        "name": "Vanuatu"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Investor and contribution citizenship programmes",
       "summary": "The Citizenship Commission lists investor citizenship, the Development Support Program, the Vanuatu Contribution Program and a real-estate option under the Citizenship Act framework.",
-      "facts": { "programme_type": "direct_citizenship_by_investment", "residence_required": false },
+      "facts": {
+        "programme_type": "direct_citizenship_by_investment",
+        "residence_required": false
+      },
       "confidence": "high",
       "last_checked": "2026-07-17",
       "sources": [
-        { "title": "Vanuatu Citizenship Commission — Types of Citizenship", "url": "https://vancitizenship.gov.vu/index.php/citizenship/types-of-citizenship" },
-        { "title": "Vanuatu Citizenship Commission — Legislative Framework", "url": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework" }
+        {
+          "title": "Vanuatu Citizenship Commission — Types of Citizenship",
+          "url": "https://vancitizenship.gov.vu/index.php/citizenship/types-of-citizenship"
+        },
+        {
+          "title": "Vanuatu Citizenship Commission — Legislative Framework",
+          "url": "https://vancitizenship.gov.vu/index.php/about-us/legislative-framework"
+        }
       ]
     },
     {
       "id": "nauru-climate-resilience-citizenship",
-      "country": { "iso_n3": "520", "name": "Nauru" },
+      "country": {
+        "iso_n3": "520",
+        "name": "Nauru"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Economic and Climate Resilience Citizenship Program",
       "summary": "A statutory contribution programme administered by the Nauru Program Office under the Nauru Economic and Climate Resilience Citizenship Act 2024, under which a foreign adult may acquire economic and climate resilience citizenship after a prescribed contribution and due diligence, without a residence requirement.",
-      "facts": { "programme_type": "direct_citizenship_by_contribution", "residence_required": false },
+      "facts": {
+        "programme_type": "direct_citizenship_by_contribution",
+        "residence_required": false
+      },
       "confidence": "high",
       "last_checked": "2026-07-22",
       "sources": [
-        { "title": "Nauru Economic and Climate Resilience Citizenship Act 2024", "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf" },
-        { "title": "Nauru Program Office — Economic and Climate Resilience Citizenship Program", "url": "https://www.ecrcp.gov.nr/" },
-        { "title": "Government of Nauru — programme launch", "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx" }
+        {
+          "title": "Nauru Economic and Climate Resilience Citizenship Act 2024",
+          "url": "https://ronlaw.gov.nr/assets/docs%2Facts%2F2024%2FNauru%20Economic%20and%20Climate%20Resilience%20Citizenship%20Act%202024.pdf"
+        },
+        {
+          "title": "Nauru Program Office — Economic and Climate Resilience Citizenship Program",
+          "url": "https://www.ecrcp.gov.nr/"
+        },
+        {
+          "title": "Government of Nauru — programme launch",
+          "url": "https://www.nauru.gov.nr/government-information-office/media-release/climate-resilience-citizenship-program-introducted-in-singapore_1dec24.aspx"
+        }
       ]
     },
     {
       "id": "sao-tome-principe-cbi",
-      "country": { "iso_n3": "678", "name": "São Tomé and Príncipe" },
+      "country": {
+        "iso_n3": "678",
+        "name": "São Tomé and Príncipe"
+      },
       "mode": "investment",
       "status": "active",
       "title": "Citizenship by Investment Programme",
       "summary": "A direct contribution route created under Decreto-Lei n.º 07/2025 as a special naturalization mechanism under Lei n.º 07/2022 for investment or donation to the National Transformation Fund, administered through the Citizenship by Investment and Donation Unit.",
-      "facts": { "programme_type": "direct_citizenship_by_contribution", "residence_required": false },
+      "facts": {
+        "programme_type": "direct_citizenship_by_contribution",
+        "residence_required": false
+      },
       "confidence": "high",
       "last_checked": "2026-07-22",
       "sources": [
-        { "title": "São Tomé and Príncipe — Decreto-Lei n.º 07/2025 RNID", "url": "https://www.imidaily.com/wp-content/uploads/2025/08/STP-CBI-Act-01082025-1.pdf" },
-        { "title": "São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade", "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf" },
-        { "title": "Honorary Consulate of São Tomé and Príncipe — Citizenship by Investment", "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/" }
+        {
+          "title": "São Tomé and Príncipe — Decreto-Lei n.º 07/2025 RNID",
+          "url": "https://www.imidaily.com/wp-content/uploads/2025/08/STP-CBI-Act-01082025-1.pdf"
+        },
+        {
+          "title": "São Tomé and Príncipe — Lei n.º 07/2022 Lei da Nacionalidade",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/STP-Lei.07.2022.pdf"
+        },
+        {
+          "title": "Honorary Consulate of São Tomé and Príncipe — Citizenship by Investment",
+          "url": "https://saotomeprincipe.de/pt/cidadania-por-investimento/"
+        }
       ]
     },
     {
       "id": "portugal-ordinary-naturalization-2026",
-      "country": { "iso_n3": "620", "name": "Portugal" },
+      "country": {
+        "iso_n3": "620",
+        "name": "Portugal"
+      },
       "mode": "naturalization",
       "status": "active",
       "title": "Ordinary naturalization uses seven- or ten-year residence periods under the 2026 law",
@@ -271,7 +402,10 @@
     },
     {
       "id": "portugal-birth-parent-residence-2026",
-      "country": { "iso_n3": "620", "name": "Portugal" },
+      "country": {
+        "iso_n3": "620",
+        "name": "Portugal"
+      },
       "mode": "birth",
       "status": "active",
       "title": "Birth in Portugal can qualify when a parent has five years of legal residence",
@@ -294,7 +428,10 @@
     },
     {
       "id": "malta-residence-naturalization",
-      "country": { "iso_n3": "470", "name": "Malta" },
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
       "mode": "naturalization",
       "status": "active",
       "title": "Residence-based naturalization requires the final twelve months plus four of the preceding six years",
@@ -316,7 +453,10 @@
     },
     {
       "id": "malta-registration-family-descent",
-      "country": { "iso_n3": "470", "name": "Malta" },
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
       "mode": "ancestry",
       "status": "active",
       "title": "Registration routes cover defined descent and family connections",
@@ -345,7 +485,10 @@
     },
     {
       "id": "malta-transactional-investor-citizenship-ended",
-      "country": { "iso_n3": "470", "name": "Malta" },
+      "country": {
+        "iso_n3": "470",
+        "name": "Malta"
+      },
       "mode": "investment",
       "status": "inactive",
       "title": "The former transactional investor-citizenship programme has ended",
@@ -378,7 +521,10 @@
     },
     {
       "id": "bulgaria-ordinary-naturalization",
-      "country": { "iso_n3": "100", "name": "Bulgaria" },
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
       "mode": "naturalization",
       "status": "active",
       "title": "Ordinary naturalization generally requires five years holding permanent or long-term residence",
@@ -404,7 +550,10 @@
     },
     {
       "id": "bulgaria-bulgarian-origin-naturalization",
-      "country": { "iso_n3": "100", "name": "Bulgaria" },
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
       "mode": "ancestry",
       "status": "active",
       "title": "Bulgarian-origin route can waive residence, income, language and renunciation conditions",
@@ -427,7 +576,10 @@
     },
     {
       "id": "bulgaria-investor-citizenship-repealed",
-      "country": { "iso_n3": "100", "name": "Bulgaria" },
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
       "mode": "investment",
       "status": "inactive",
       "title": "Investor-citizenship provisions were repealed in 2022",
@@ -451,7 +603,10 @@
     },
     {
       "id": "greece-ordinary-naturalization",
-      "country": { "iso_n3": "300", "name": "Greece" },
+      "country": {
+        "iso_n3": "300",
+        "name": "Greece"
+      },
       "mode": "naturalization",
       "status": "active",
       "title": "Ordinary naturalization generally requires seven years of legal residence",
@@ -475,7 +630,10 @@
     },
     {
       "id": "greece-citizenship-by-greek-parent",
-      "country": { "iso_n3": "300", "name": "Greece" },
+      "country": {
+        "iso_n3": "300",
+        "name": "Greece"
+      },
       "mode": "ancestry",
       "status": "active",
       "title": "Citizenship routes exist through a Greek parent and defined descent declarations",
@@ -495,51 +653,194 @@
     },
     {
       "id": "samoa-citizenship-investment-status",
-      "country": { "iso_n3": "882", "name": "Samoa" },
+      "country": {
+        "iso_n3": "882",
+        "name": "Samoa"
+      },
       "mode": "investment",
       "status": "pending_verification",
       "title": "Citizenship Investment Act exists; current programme operation needs verification",
       "summary": "Samoa has a Citizenship Investment Act and was reviewing the programme framework in 2025, but current application operations and qualifying guidelines are not yet verified for live recommendations.",
-      "facts": { "programme_type": "statutory_basis_only" },
+      "facts": {
+        "programme_type": "statutory_basis_only"
+      },
       "confidence": "medium",
       "last_checked": "2026-07-17",
       "sources": [
-        { "title": "Government of Samoa — Citizenship Investment Act 2015", "url": "https://www.ag.gov.ws/wp-content/uploads/2024/02/Citizenship-Investment-Act-2015.pdf" },
-        { "title": "Samoa Ministry of Commerce — 2025 policy framework workshop", "url": "https://mcil.gov.ws/node/89" }
+        {
+          "title": "Government of Samoa — Citizenship Investment Act 2015",
+          "url": "https://www.ag.gov.ws/wp-content/uploads/2024/02/Citizenship-Investment-Act-2015.pdf"
+        },
+        {
+          "title": "Samoa Ministry of Commerce — 2025 policy framework workshop",
+          "url": "https://mcil.gov.ws/node/89"
+        }
       ]
     },
     {
       "id": "cambodia-investor-naturalization-status",
-      "country": { "iso_n3": "116", "name": "Cambodia" },
+      "country": {
+        "iso_n3": "116",
+        "name": "Cambodia"
+      },
       "mode": "investment",
       "status": "pending_verification",
       "title": "Investor and donor naturalization exists in law; current operation needs verification",
       "summary": "Cambodia's nationality law contains investment and donation provisions, but a current government-administered programme and operational requirements have not been verified for live recommendations.",
-      "facts": { "programme_type": "statutory_investor_naturalization" },
+      "facts": {
+        "programme_type": "statutory_investor_naturalization"
+      },
       "confidence": "medium",
       "last_checked": "2026-07-17",
       "sources": [
-        { "title": "Cambodia Committee for Investment and Development — Law on Nationality", "url": "https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf" }
+        {
+          "title": "Cambodia Committee for Investment and Development — Law on Nationality",
+          "url": "https://cib-cdc.gov.kh/media/2025/04/1.-Law-on-Nationality-1996-EN.pdf"
+        }
       ]
     },
     {
       "id": "us-citizenship-by-birth",
-      "country": { "iso_n3": "840", "name": "United States of America" },
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
       "mode": "birth",
       "status": "active",
       "title": "Citizenship by birth in the United States",
       "summary": "The Fourteenth Amendment Citizenship Clause and 8 U.S.C. § 1401 grant citizenship at birth to a person born in the United States and subject to its jurisdiction. Traditional exceptions include children of foreign diplomats (and related extraterritorial fictions), not a parental-status test. Executive Order 14160 (20 January 2025) sought to deny citizenship to children of parents unlawfully or temporarily present; the Supreme Court held in Trump v. Barbara (25-365, 30 June 2026) that such children remain subject to U.S. jurisdiction and are citizens at birth. Unconditional jus soli for birth-tourism purposes remains the law.",
       "facts": {
         "jus_soli": "unconditional",
-        "jus_soli_exceptions": ["diplomats", "enemy_aliens_historic"],
+        "jus_soli_exceptions": [
+          "diplomats",
+          "enemy_aliens_historic"
+        ],
         "parent_condition": "none",
         "unconditional_jus_soli": true
       },
       "confidence": "high",
       "last_checked": "2026-07-30",
       "sources": [
-        { "title": "U.S. Code — 8 USC 1401", "url": "https://uscode.house.gov/view.xhtml?edition=prelim&hl=false&req=granuleid%3AUSC-prelim-title8-section1401" },
-        { "title": "Supreme Court — Trump v. Barbara (25-365), 30 June 2026", "url": "https://www.supremecourt.gov/opinions/25pdf/25-365_4hdj.pdf" }
+        {
+          "title": "U.S. Code — 8 USC 1401",
+          "url": "https://uscode.house.gov/view.xhtml?edition=prelim&hl=false&req=granuleid%3AUSC-prelim-title8-section1401"
+        },
+        {
+          "title": "Supreme Court — Trump v. Barbara (25-365), 30 June 2026",
+          "url": "https://www.supremecourt.gov/opinions/25pdf/25-365_4hdj.pdf"
+        }
+      ]
+    },
+    {
+      "id": "dominican-republic-citizenship-by-birth",
+      "country": {
+        "iso_n3": "214",
+        "name": "Dominican Rep."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Dominican nationality by birth in the Dominican Republic",
+      "summary": "Persons born in the national territory are Dominican under Article 18, except children of foreign diplomats and of foreigners in transit or illegally present as defined by Dominican law.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "lawful_residence",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "foreigners_in_transit",
+          "illegally_present"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Dominican Republic Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Dominican_Republic_2015"
+        }
+      ]
+    },
+    {
+      "id": "chile-citizenship-by-birth",
+      "country": {
+        "iso_n3": "152",
+        "name": "Chile"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Nationality by birth in Chile",
+      "summary": "Persons born in Chilean territory are Chilean by birth, except children of transient foreigners or of foreigners who are in Chile in the service of their government. Statelessness safeguards and later option routes may apply to some excluded children.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "transient_foreigners"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Chile Constitution Article 10 — nationality (BCN)",
+          "url": "https://bcn.cl/2lzfp"
+        }
+      ]
+    },
+    {
+      "id": "pakistan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "586",
+        "name": "Pakistan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth in Pakistan",
+      "summary": "Birth to a Pakistani parent creates nationality. The 1951 Act grants citizenship to persons born in Pakistan (excluding children of diplomats or enemy aliens), a territorial rule narrowed in practice since a 1999 ruling toward requiring a Pakistani parent.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "enemy_aliens"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Pakistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Pakistan_2018"
+        }
+      ]
+    },
+    {
+      "id": "uruguay-nationality-by-birth",
+      "country": {
+        "iso_n3": "858",
+        "name": "Uruguay"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Uruguayan nationality by territorial birth",
+      "summary": "Every person born anywhere in the territory of Uruguay is a natural citizen and Uruguayan national.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Uruguay Constitution — Article 74",
+          "url": "https://www.impo.com.uy/bases/constitucion/1967-1967/74"
+        }
       ]
     }
   ]
