@@ -455,6 +455,32 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(byId.get('palau-rns-digital-residency-id')?.category).toBe('digital_identity');
   });
 
+  test('digital_identity batch: active peers + paused Ukraine + announced Portugal + Georgia negative', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    for (const id of [
+      'estonia-e-residency',
+      'azerbaijan-e-residency',
+      'lithuania-e-residency',
+      'palau-rns-digital-residency-id',
+      'kazakhstan-e-residency',
+    ]) {
+      const r = byId.get(id);
+      expect(r, id).toBeTruthy();
+      expect(r?.category, id).toBe('digital_identity');
+      expect(r?.status, id).toBe('active');
+      expect(r?.counts_toward_permanent_residence, id).toBe(false);
+      expect(r?.counts_toward_naturalization, id).toBe(false);
+    }
+    expect(byId.get('ukraine-uresidency')?.category).toBe('digital_identity');
+    expect(byId.get('ukraine-uresidency')?.status).toBe('inactive');
+    expect(byId.get('portugal-e-residency-announced')?.category).toBe('digital_identity');
+    expect(byId.get('portugal-e-residency-announced')?.status).toBe('pending_verification');
+    expect(byId.get('georgia-e-residency-verified-negative')?.status).toBe('verified_negative');
+    expect(byId.get('georgia-e-residency-verified-negative')?.category).toBe('digital_identity');
+    expect(byId.get('kazakhstan-e-residency')?.min_investment?.amount).toBe(120);
+    expect(byId.get('kazakhstan-e-residency')?.summary).toMatch(/not.*eGov|not.*visa|not a visa/i);
+  });
+
   test('digital nomad N2 Americas: Argentina transitory + Panama remote worker', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
     const ar = byId.get('argentina-digital-nomad-transitory');

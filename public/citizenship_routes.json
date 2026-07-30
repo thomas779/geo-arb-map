@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 219
+      "residence_routes": 225
     }
   },
   "jurisdictions": [
@@ -193,10 +193,12 @@
       ],
       "residence_route_ids": [
         "azerbaijan-temporary-residence-investment",
-        "azerbaijan-golden-visa-verified-negative"
+        "azerbaijan-golden-visa-verified-negative",
+        "azerbaijan-e-residency"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_identity": "reviewed"
       }
     },
     {
@@ -1542,11 +1544,13 @@
         "georgia-investment-residence",
         "georgia-real-estate-short-term-residence",
         "georgia-permanent-residence-investment",
-        "georgia-digital-nomad-verified-negative"
+        "georgia-digital-nomad-verified-negative",
+        "georgia-e-residency-verified-negative"
       ],
       "residence_coverage": {
         "investment": "reviewed",
-        "digital_nomad": "reviewed"
+        "digital_nomad": "reviewed",
+        "digital_identity": "reviewed"
       }
     },
     {
@@ -2160,7 +2164,13 @@
         "kazakhstan-naturalization",
         "kazakhstan-citizenship-at-birth-by-parent",
         "kazakhstan-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "kazakhstan-e-residency"
+      ],
+      "residence_coverage": {
+        "digital_identity": "reviewed"
+      }
     },
     {
       "iso_n3": "400",
@@ -2420,10 +2430,12 @@
       "residence_route_ids": [
         "lithuania-startup-visa",
         "lithuania-business-activity-residence",
-        "lithuania-golden-visa-verified-negative"
+        "lithuania-golden-visa-verified-negative",
+        "lithuania-e-residency"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_identity": "reviewed"
       }
     },
     {
@@ -3407,12 +3419,14 @@
       "residence_route_ids": [
         "portugal-golden-visa",
         "portugal-d8-digital-nomad",
-        "portugal-d7-passive-income"
+        "portugal-d7-passive-income",
+        "portugal-e-residency-announced"
       ],
       "residence_coverage": {
         "investment": "reviewed",
         "digital_nomad": "reviewed",
-        "retirement_pension": "reviewed"
+        "retirement_pension": "reviewed",
+        "digital_identity": "reviewed"
       }
     },
     {
@@ -4413,10 +4427,12 @@
       ],
       "residence_route_ids": [
         "ukraine-temporary-residence-investment",
-        "ukraine-passive-golden-visa-verified-negative"
+        "ukraine-passive-golden-visa-verified-negative",
+        "ukraine-uresidency"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_identity": "reviewed"
       }
     },
     {
@@ -37686,6 +37702,45 @@
       ]
     },
     {
+      "id": "azerbaijan-e-residency",
+      "country": {
+        "iso_n3": "031",
+        "name": "Azerbaijan"
+      },
+      "category": "digital_identity",
+      "status": "active",
+      "title": "e-Residency / m-Residency digital identity",
+      "summary": "Government e-Residency card or m-Residency mobile ID for non-residents: electronic signatures, government/business e-services and online company registration — not a right to live in Azerbaijan.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "azerbaijan-e-residency-principal",
+          "label": "e-Residency / m-Residency digital identity",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Digital Trade Hub of Azerbaijan — Become e/m-Resident",
+          "url": "https://dth.az/become-resident"
+        }
+      ]
+    },
+    {
       "id": "azerbaijan-golden-visa-verified-negative",
       "country": {
         "iso_n3": "031",
@@ -40673,6 +40728,45 @@
       ]
     },
     {
+      "id": "georgia-e-residency-verified-negative",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "category": "digital_identity",
+      "status": "verified_negative",
+      "title": "No sovereign e-residency / non-resident digital ID programme",
+      "summary": "Georgia has no operating national e-residency product for non-residents; remote company formation via power of attorney is not a government digital identity.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "georgia-e-residency-verified-negative-principal",
+          "label": "No sovereign e-residency / non-resident digital ID programme",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Public Service Development Agency / Georgia government services",
+          "url": "https://sda.gov.ge/"
+        }
+      ]
+    },
+    {
       "id": "georgia-investment-residence",
       "country": {
         "iso_n3": "268",
@@ -42014,6 +42108,48 @@
       ]
     },
     {
+      "id": "kazakhstan-e-residency",
+      "country": {
+        "iso_n3": "398",
+        "name": "Kazakhstan"
+      },
+      "category": "digital_identity",
+      "status": "active",
+      "title": "eResidency digital identity (Digital ID Card + IIN)",
+      "summary": "State eResidency programme: Digital Identity Card and special IIN for non-residents to access partner banks, brokers and other programme services online — not a visa, residence permit, tax residency or ordinary eGov access.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 120,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "kazakhstan-e-residency-principal",
+          "label": "eResidency digital identity (Digital ID Card + IIN)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "eResidency of Kazakhstan (state programme)",
+          "url": "https://www.eresidency.gov.kz/en"
+        }
+      ]
+    },
+    {
       "id": "korea-d8-corporate-investor",
       "country": {
         "iso_n3": "410",
@@ -42310,6 +42446,45 @@
         {
           "title": "Migration Department (migracija.lt) — residence permits for third-country nationals",
           "url": "https://www.migracija.lt/en/home"
+        }
+      ]
+    },
+    {
+      "id": "lithuania-e-residency",
+      "country": {
+        "iso_n3": "440",
+        "name": "Lithuania"
+      },
+      "category": "digital_identity",
+      "status": "active",
+      "title": "E-resident digital identity card",
+      "summary": "Government e-resident card for persons abroad with electronic identification and signature certificates — not a right to live in Lithuania.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "lithuania-e-residency-principal",
+          "label": "E-resident digital identity card",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migration Department of Lithuania — E. Resident services",
+          "url": "https://migracija.lrv.lt/en/structure-and-contacts/information-for-visitors/services-for-persons-abroad/e-resident-services/"
         }
       ]
     },
@@ -44304,6 +44479,45 @@
       ]
     },
     {
+      "id": "portugal-e-residency-announced",
+      "country": {
+        "iso_n3": "620",
+        "name": "Portugal"
+      },
+      "category": "digital_identity",
+      "status": "pending_verification",
+      "title": "e-Residency programme (announced, not verifiably open)",
+      "summary": "Official Digital Transition plan describes a non-resident digital identity with NIF/NISS, company registration and banking access — but the government page was last updated 21 June 2022 and no live application portal is verified.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "portugal-e-residency-announced-principal",
+          "label": "e-Residency programme (announced, not verifiably open)",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Portugal Digital — e-Residency Program",
+          "url": "https://digital.gov.pt/en/estrategia-digital/plano-de-acao-para-a-transicao-digital/02-transformacao-digital-do-tecido-empresarial/programa-e-residency"
+        }
+      ]
+    },
+    {
       "id": "portugal-golden-visa",
       "country": {
         "iso_n3": "620",
@@ -46084,6 +46298,45 @@
         {
           "title": "State Migration Service of Ukraine",
           "url": "https://dmsu.gov.ua/en-home.html"
+        }
+      ]
+    },
+    {
+      "id": "ukraine-uresidency",
+      "country": {
+        "iso_n3": "804",
+        "name": "Ukraine"
+      },
+      "category": "digital_identity",
+      "status": "inactive",
+      "title": "uResidency (e-resident) — applications temporarily suspended",
+      "summary": "Government uResidency digital status for foreign freelancers (e-signature, sole-proprietor setup, banking and automated taxation) — new applications are currently suspended while the programme is reformatted.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "ukraine-uresidency-principal",
+          "label": "uResidency (e-resident) — applications temporarily suspended",
+          "allocation": "discretionary",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "uResidency Ukraine (Diia)",
+          "url": "https://e-resident.diia.gov.ua/"
         }
       ]
     },
