@@ -605,7 +605,25 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(kr?.counts_toward_permanent_residence).toBe(false);
     expect(kr?.counts_toward_naturalization).toBe(false);
     const nomads = (citizenshipRoutes.residence_routes ?? []).filter(r => r.category === 'digital_nomad');
-    expect(nomads.length).toBeGreaterThanOrEqual(35);
+    expect(nomads.length).toBeGreaterThanOrEqual(38);
+  });
+
+  test('digital nomad gap fill: Costa Rica Ley 10008, Slovenia 2025 permit, Brazil VITEM XIV', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    for (const id of [
+      'costa-rica-remote-worker-ley-10008',
+      'slovenia-digital-nomad-temporary-residence',
+      'brazil-vitem-xiv-digital-nomad',
+    ]) {
+      const r = byId.get(id);
+      expect(r, id).toBeTruthy();
+      expect(r?.category, id).toBe('digital_nomad');
+      expect(r?.status, id).toBe('active');
+      expect(r?.counts_toward_permanent_residence, id).toBe(false);
+      expect(r?.counts_toward_naturalization, id).toBe(false);
+    }
+    expect(byId.get('costa-rica-remote-worker-ley-10008')?.min_income_monthly?.amount).toBe(3000);
+    expect(byId.get('brazil-vitem-xiv-digital-nomad')?.min_income_monthly?.amount).toBe(1500);
   });
 
   test('residence IMC remainder batches 8–10 cover former gap ISOs', () => {

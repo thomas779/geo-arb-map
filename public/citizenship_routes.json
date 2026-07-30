@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 225
+      "residence_routes": 228
     }
   },
   "jurisdictions": [
@@ -520,10 +520,12 @@
         "brazil-citizenship-by-marriage"
       ],
       "residence_route_ids": [
-        "brazil-viper-investor-residence"
+        "brazil-viper-investor-residence",
+        "brazil-vitem-xiv-digital-nomad"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -1032,11 +1034,13 @@
       "residence_route_ids": [
         "costa-rica-rentista",
         "costa-rica-pensionado",
-        "costa-rica-inversionista"
+        "costa-rica-inversionista",
+        "costa-rica-remote-worker-ley-10008"
       ],
       "residence_coverage": {
         "investment": "reviewed",
-        "retirement_pension": "reviewed"
+        "retirement_pension": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -3930,7 +3934,13 @@
         "slovenia-naturalization",
         "slovenia-citizenship-at-birth-by-parent",
         "slovenia-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "slovenia-digital-nomad-temporary-residence"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "706",
@@ -38754,6 +38764,50 @@
       ]
     },
     {
+      "id": "brazil-vitem-xiv-digital-nomad",
+      "country": {
+        "iso_n3": "076",
+        "name": "Brazil"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "VITEM XIV digital nomad temporary visa",
+      "summary": "Temporary visa for foreigners who work remotely for a foreign employer or as remote self-employed using information technology while in Brazil — not Brazilian local employment.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1500,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "brazil-vitem-xiv-digital-nomad-principal",
+          "label": "VITEM XIV digital nomad temporary visa",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Brazil MRE — Digital Nomad Visa (VITEM XIV)",
+          "url": "https://www.gov.br/mre/pt-br/embaixada-helsinque/consular-services/digital-nomad-visa-vitem-xiv"
+        }
+      ]
+    },
+    {
       "id": "bulgaria-fund-permanent-residence-investment",
       "country": {
         "iso_n3": "100",
@@ -39805,6 +39859,50 @@
         {
           "title": "Costa Rica — Dirección General de Migración",
           "url": "https://migracion.go.cr/"
+        }
+      ]
+    },
+    {
+      "id": "costa-rica-remote-worker-ley-10008",
+      "country": {
+        "iso_n3": "188",
+        "name": "Costa Rica"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Remote worker / digital nomad stay (Ley 10008)",
+      "summary": "Stay category for remote workers and remote service providers under Ley 10008 — foreign-source remote work, not Costa Rican local employment.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "costa-rica-remote-worker-ley-10008-principal",
+          "label": "Remote worker / digital nomad stay (Ley 10008)",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "DGME Costa Rica — Nómadas Digitales",
+          "url": "https://migracion.go.cr/nomadas-digitales/"
         }
       ]
     },
@@ -45466,6 +45564,50 @@
         {
           "title": "Luật số 51/2019/QH14 — Cổng Thông tin điện tử Chính phủ (official gazette page with signed PDF)",
           "url": "https://vanban.chinhphu.vn/default.aspx?pageid=27160&docid=198545"
+        }
+      ]
+    },
+    {
+      "id": "slovenia-digital-nomad-temporary-residence",
+      "country": {
+        "iso_n3": "705",
+        "name": "Slovenia"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Temporary residence permit for digital nomads",
+      "summary": "Temporary residence for non-EU/EEA remote workers or self-employed persons working for entities outside Slovenia via ICT — not admission to the Slovenian labour market.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3050,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "slovenia-digital-nomad-temporary-residence-principal",
+          "label": "Temporary residence permit for digital nomads",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "GOV.SI — Temporary residence permit for digital nomads",
+          "url": "https://www.gov.si/en/news/2025-11-21-temporary-residence-permit-for-digital-nomads/"
         }
       ]
     },
