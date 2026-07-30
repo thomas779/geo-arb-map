@@ -842,6 +842,656 @@
           "url": "https://www.impo.com.uy/bases/constitucion/1967-1967/74"
         }
       ]
+    },
+    {
+      "id": "antigua-barbuda-citizenship-by-birth",
+      "country": {
+        "iso_n3": "028",
+        "name": "Antigua and Barbuda"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Antigua and Barbuda",
+      "summary": "A person born in Antigua and Barbuda acquires citizenship at birth, subject to the Constitution’s diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Antigua and Barbuda",
+          "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made"
+        }
+      ]
+    },
+    {
+      "id": "argentina-citizenship-by-birth",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Argentine citizenship by territorial birth",
+      "summary": "A person born in Argentine territory is generally an Argentine citizen at birth, subject to the statutory exception for children of foreign ministers and diplomatic-legation members residing in Argentina.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Argentina — current text of Citizenship Law No. 346",
+          "url": "https://www.argentina.gob.ar/normativa/nacional/ley-346-48854/actualizacion"
+        }
+      ]
+    },
+    {
+      "id": "barbados-citizenship-by-birth",
+      "country": {
+        "iso_n3": "052",
+        "name": "Barbados"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Barbados",
+      "summary": "A person born in Barbados after 29 November 1966 is generally a citizen from birth, subject to narrow diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Barbados — citizenship",
+          "url": "https://www.electoral.barbados.gov.bb/wp-content/uploads/2021/10/The_Constitution_of_Barbados.pdf"
+        }
+      ]
+    },
+    {
+      "id": "bolivia-citizenship-by-birth",
+      "country": {
+        "iso_n3": "068",
+        "name": "Bolivia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Bolivia or through a Bolivian parent",
+      "summary": "Persons born in Bolivian territory are Bolivian by birth (with the constitutional foreign-service exceptions). Parentage rules also transmit Bolivian nationality.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Bolivia 2009 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bolivia_2009"
+        }
+      ]
+    },
+    {
+      "id": "brazil-citizenship-by-birth",
+      "country": {
+        "iso_n3": "076",
+        "name": "Brazil"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Brazilian citizenship by territorial birth",
+      "summary": "A person born in Brazil is generally Brazilian at birth, including a child of foreign parents, unless the parents are serving their country.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Brazil — Article 12",
+          "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicaocompilado.htm"
+        }
+      ]
+    },
+    {
+      "id": "canada-citizenship-by-birth",
+      "country": {
+        "iso_n3": "124",
+        "name": "Canada"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Canada",
+      "summary": "A person born in Canada is generally a citizen at birth, with a narrow exception for children of certain foreign diplomatic personnel.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "IRCC — Check if you may be a Canadian citizen",
+          "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-citizenship/become-canadian-citizen/eligibility/already-citizen.html"
+        }
+      ]
+    },
+    {
+      "id": "dominica-citizenship-by-birth",
+      "country": {
+        "iso_n3": "212",
+        "name": "Dominica"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Dominica",
+      "summary": "A person born in Dominica acquires citizenship at birth, subject to the constitutional exceptions for certain diplomatic and hostile-occupation circumstances.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of the Commonwealth of Dominica",
+          "url": "https://www.dominica.gov.dm/laws/chapters/chap1-01.pdf"
+        }
+      ]
+    },
+    {
+      "id": "el-salvador-citizenship-by-birth",
+      "country": {
+        "iso_n3": "222",
+        "name": "El Salvador"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Salvadoran nationality by birth in El Salvador",
+      "summary": "Persons born in the territory of El Salvador are Salvadoran by birth under Article 90.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "El Salvador Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/El_Salvador_2014"
+        }
+      ]
+    },
+    {
+      "id": "grenada-citizenship-by-birth",
+      "country": {
+        "iso_n3": "308",
+        "name": "Grenada"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Grenada",
+      "summary": "A person born in Grenada acquires citizenship at birth, subject to the constitutional diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Grenada",
+          "url": "https://www.gov.gd/government/the-constitution"
+        }
+      ]
+    },
+    {
+      "id": "honduras-citizenship-by-birth",
+      "country": {
+        "iso_n3": "340",
+        "name": "Honduras"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Honduran nationality by birth in Honduras",
+      "summary": "Persons born within the national territory are Honduran by birth under Article 23, with the diplomatic-agent children exception.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Honduras Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Honduras_2013"
+        }
+      ]
+    },
+    {
+      "id": "mexico-citizenship-by-birth",
+      "country": {
+        "iso_n3": "484",
+        "name": "Mexico"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Mexican nationality by territorial birth",
+      "summary": "A person born in Mexican territory is Mexican by birth regardless of the parents’ nationality; the Constitution also covers births aboard qualifying Mexican vessels and aircraft.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Political Constitution of Mexico — Article 30",
+          "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf"
+        }
+      ]
+    },
+    {
+      "id": "nicaragua-citizenship-by-birth",
+      "country": {
+        "iso_n3": "558",
+        "name": "Nicaragua"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Nicaraguan nationality by birth in Nicaragua",
+      "summary": "Persons born in the national territory are nationals under Article 16, with exceptions for children of certain foreign diplomatic or international-organization personnel unless they opt for Nicaraguan nationality.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nicaragua Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Nicaragua_2014"
+        }
+      ]
+    },
+    {
+      "id": "panama-nationality-by-birth",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Nationality by birth in Panama",
+      "summary": "A person born in Panama is Panamanian by birth under Article 9 of the Constitution.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Panama — nationality and naturalization",
+          "url": "https://constitucion.te.gob.pa/constitucion-vigente/"
+        }
+      ]
+    },
+    {
+      "id": "paraguay-citizenship-by-birth",
+      "country": {
+        "iso_n3": "600",
+        "name": "Paraguay"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Natural nationality by birth in Paraguay",
+      "summary": "Persons born in the territory of the Republic are natural Paraguayans, subject to the constitutional exception for children of persons in the service of a foreign government.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Paraguay Constitution — nationality provisions (signed text)",
+          "url": "https://www.bacn.gov.py/archivos/9580/CONSTITUCION_ORIGINAL_FIRMADA.pdf"
+        }
+      ]
+    },
+    {
+      "id": "st-kitts-nevis-citizenship-by-birth",
+      "country": {
+        "iso_n3": "659",
+        "name": "St. Kitts and Nevis"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in St Kitts and Nevis",
+      "summary": "A person born in the federation acquires citizenship at birth, except for the Constitution’s diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of St Christopher and Nevis",
+          "url": "https://lawcommission.gov.kn/wp-content/documents/Annual-Laws/The-Constitution-of-St-Christopher-and-Nevis.pdf"
+        }
+      ]
+    },
+    {
+      "id": "saint-lucia-citizenship-by-birth",
+      "country": {
+        "iso_n3": "662",
+        "name": "Saint Lucia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Saint Lucia",
+      "summary": "A person born in Saint Lucia acquires citizenship at birth, subject to the statutory diplomatic-immunity and hostile-occupation exceptions.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of Saint Lucia — citizenship",
+          "url": "https://www.govt.lc/constitution7"
+        },
+        {
+          "title": "Citizenship of Saint Lucia (Amendment) Act 2024",
+          "url": "https://npc.govt.lc/files/laws/acts/2024/Act%20No%207%20of%202024%20Citizenship%20of%20Saint%20Lucia.pdf"
+        }
+      ]
+    },
+    {
+      "id": "costa-rica-citizenship-by-birth",
+      "country": {
+        "iso_n3": "188",
+        "name": "Costa Rica"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Costa Rican nationality by birth in Costa Rica or through a Costa Rican parent",
+      "summary": "Article 13 nationality by birth rules: Costa Rican parentage, birth in Costa Rica with registration for foreign parents, birth abroad to a Costa Rican by birth with registration, and foundlings.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "registration",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Costa Rica Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Costa_Rica_2020"
+        }
+      ]
+    },
+    {
+      "id": "peru-citizenship-at-birth",
+      "country": {
+        "iso_n3": "604",
+        "name": "Peru"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Peruvian parent or birth in Peru",
+      "summary": "Birth to a Peruvian parent, or birth in Peru under the Nationality Law, creates Peruvian nationality. Ordinary foreign-parent temporary presence is not a general unrestricted jus soli path.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "residence",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Peru Migraciones — naturalization procedure",
+          "url": "https://www.gob.pe/12580"
+        }
+      ]
+    },
+    {
+      "id": "belize-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "084",
+        "name": "Belize"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Belizean parent",
+      "summary": "Birth to a Belizean parent creates nationality under the constitutional and nationality-act framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Belize Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belize_2011"
+        },
+        {
+          "title": "Belize Immigration — Citizenship eligibility",
+          "url": "https://immigration.gov.bz/citizenship/citizenship-do-i-qualify/"
+        }
+      ]
+    },
+    {
+      "id": "cuba-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "192",
+        "name": "Cuba"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Cuba parent",
+      "summary": "Birth to a Cuba parent creates nationality. Birth in Cuba alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cuba Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cuba_2019"
+        }
+      ]
+    },
+    {
+      "id": "guyana-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "328",
+        "name": "Guyana"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Guyana parent",
+      "summary": "Birth to a Guyana parent creates nationality. Birth in Guyana alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guyana Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guyana_2016"
+        }
+      ]
+    },
+    {
+      "id": "jamaica-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "388",
+        "name": "Jamaica"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Jamaica parent",
+      "summary": "Birth to a Jamaica parent creates nationality. Birth in Jamaica alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Jamaica Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Jamaica_2015"
+        }
+      ]
+    },
+    {
+      "id": "saint-vincent-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "670",
+        "name": "St. Vin. and Gren."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Saint Vincent and the Grenadines parent",
+      "summary": "Birth to a Saint Vincent and the Grenadines parent creates nationality. Birth in Saint Vincent and the Grenadines alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Saint Vincent and the Grenadines Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Saint_Vincent_and_the_Grenadines_2009"
+        }
+      ]
+    },
+    {
+      "id": "trinidad-and-tobago-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "780",
+        "name": "Trinidad and Tobago"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Trinidad and Tobago parent",
+      "summary": "Birth to a Trinidad and Tobago parent creates nationality. Birth in Trinidad and Tobago alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Trinidad and Tobago Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Trinidad_and_Tobago_2007"
+        }
+      ]
     }
   ]
 }

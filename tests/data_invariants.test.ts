@@ -544,10 +544,13 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(byId.get('pakistan-citizenship-at-birth-by-parent')?.facts.jus_soli).toBe('none');
     expect(byId.get('uruguay-nationality-by-birth')?.facts.jus_soli).toBe('unconditional');
     expect(byId.get('uruguay-nationality-by-birth')?.facts.unconditional_jus_soli).toBe(true);
-    // Unconditional set so far: US + Uruguay (Portugal remains conditional).
+    // Americas + US structured unconditional set (diplomat exceptions only).
     const unconditional = citizenshipRoutes.routes.filter(r =>
       r.mode === 'birth' && r.facts?.jus_soli === 'unconditional');
-    expect(unconditional.map(r => r.country.iso_n3).sort()).toEqual(['840', '858']);
+    expect(unconditional.map(r => r.country.iso_n3).sort()).toEqual([
+      '028', '032', '052', '068', '076', '124', '212', '222', '308', '340',
+      '484', '558', '591', '600', '659', '662', '840', '858',
+    ]);
   });
 
   test('residence IMC remainder batches 8–10 cover former gap ISOs', () => {

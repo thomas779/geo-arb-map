@@ -5445,6 +5445,13 @@
       "title": "Citizenship by birth in Antigua and Barbuda",
       "summary": "A person born in Antigua and Barbuda acquires citizenship at birth, subject to the Constitution’s diplomatic-immunity and hostile-occupation exceptions.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -5701,6 +5708,12 @@
       "title": "Argentine citizenship by territorial birth",
       "summary": "A person born in Argentine territory is generally an Argentine citizen at birth, subject to the statutory exception for children of foreign ministers and diplomatic-legation members residing in Argentina.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -6686,6 +6699,13 @@
       "title": "Citizenship by birth in Barbados",
       "summary": "A person born in Barbados after 29 November 1966 is generally a citizen from birth, subject to narrow diplomatic-immunity and hostile-occupation exceptions.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -7183,6 +7203,12 @@
       "title": "Citizenship by birth in Bolivia or through a Bolivian parent",
       "summary": "Persons born in Bolivian territory are Bolivian by birth (with the constitutional foreign-service exceptions). Parentage rules also transmit Bolivian nationality.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -7571,6 +7597,12 @@
       "title": "Brazilian citizenship by territorial birth",
       "summary": "A person born in Brazil is generally Brazilian at birth, including a child of foreign parents, unless the parents are serving their country.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -7740,6 +7772,10 @@
       "title": "Citizenship at birth through a Belizean parent",
       "summary": "Birth to a Belizean parent creates nationality under the constitutional and nationality-act framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -9120,6 +9156,12 @@
       "title": "Citizenship by birth in Canada",
       "summary": "A person born in Canada is generally a citizen at birth, with a narrow exception for children of certain foreign diplomatic personnel.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -10948,6 +10990,12 @@
       "title": "Costa Rican nationality by birth in Costa Rica or through a Costa Rican parent",
       "summary": "Article 13 nationality by birth rules: Costa Rican parentage, birth in Costa Rica with registration for foreign parents, birth abroad to a Costa Rican by birth with registration, and foundlings.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "registration",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -11209,6 +11257,10 @@
       "title": "Citizenship at birth through a Cuba parent",
       "summary": "Birth to a Cuba parent creates nationality. Birth in Cuba alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -11948,6 +12000,13 @@
       "title": "Citizenship by birth in Dominica",
       "summary": "A person born in Dominica acquires citizenship at birth, subject to the constitutional exceptions for certain diplomatic and hostile-occupation circumstances.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -12422,6 +12481,12 @@
       "title": "Salvadoran nationality by birth in El Salvador",
       "summary": "Persons born in the territory of El Salvador are Salvadoran by birth under Article 90.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -15522,6 +15587,13 @@
       "title": "Citizenship by birth in Grenada",
       "summary": "A person born in Grenada acquires citizenship at birth, subject to the constitutional diplomatic-immunity and hostile-occupation exceptions.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -16038,6 +16110,10 @@
       "title": "Citizenship at birth through a Guyana parent",
       "summary": "Birth to a Guyana parent creates nationality. Birth in Guyana alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -16354,6 +16430,12 @@
       "title": "Honduran nationality by birth in Honduras",
       "summary": "Persons born within the national territory are Honduran by birth under Article 23, with the diplomatic-agent children exception.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -18206,6 +18288,10 @@
       "title": "Citizenship at birth through a Jamaica parent",
       "summary": "Birth to a Jamaica parent creates nationality. Birth in Jamaica alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -21951,6 +22037,12 @@
       "title": "Mexican nationality by territorial birth",
       "summary": "A person born in Mexican territory is Mexican by birth regardless of the parents’ nationality; the Constitution also covers births aboard qualifying Mexican vessels and aircraft.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24627,6 +24719,12 @@
       "title": "Nicaraguan nationality by birth in Nicaragua",
       "summary": "Persons born in the national territory are nationals under Article 16, with exceptions for children of certain foreign diplomatic or international-organization personnel unless they opt for Nicaraguan nationality.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -26065,6 +26163,12 @@
       "title": "Nationality by birth in Panama",
       "summary": "A person born in Panama is Panamanian by birth under Article 9 of the Constitution.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -26428,6 +26532,12 @@
       "title": "Natural nationality by birth in Paraguay",
       "summary": "Persons born in the territory of the Republic are natural Paraguayans, subject to the constitutional exception for children of persons in the service of a foreign government.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -26542,6 +26652,12 @@
       "title": "Citizenship at birth through a Peruvian parent or birth in Peru",
       "summary": "Birth to a Peruvian parent, or birth in Peru under the Nationality Law, creates Peruvian nationality. Ordinary foreign-parent temporary presence is not a general unrestricted jus soli path.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "residence",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -28548,6 +28664,13 @@
       "title": "Citizenship by birth in St Kitts and Nevis",
       "summary": "A person born in the federation acquires citizenship at birth, except for the Constitution’s diplomatic-immunity and hostile-occupation exceptions.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -28880,6 +29003,13 @@
       "title": "Citizenship by birth in Saint Lucia",
       "summary": "A person born in Saint Lucia acquires citizenship at birth, subject to the statutory diplomatic-immunity and hostile-occupation exceptions.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "hostile_occupation"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -29241,6 +29371,10 @@
       "title": "Citizenship at birth through a Saint Vincent and the Grenadines parent",
       "summary": "Birth to a Saint Vincent and the Grenadines parent creates nationality. Birth in Saint Vincent and the Grenadines alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -33091,6 +33225,10 @@
       "title": "Citizenship at birth through a Trinidad and Tobago parent",
       "summary": "Birth to a Trinidad and Tobago parent creates nationality. Birth in Trinidad and Tobago alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
