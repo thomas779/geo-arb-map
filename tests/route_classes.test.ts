@@ -51,18 +51,19 @@ describe('route-class painted sets', () => {
     expect(set.has('376')).toBe(true); // Israel — Law of Return folded into the ancestry route
   });
 
-  test('two-tone paint (validated): accruing subset, dead-end nomads muted', () => {
+  test('three tiers, two colours + hatch: best outcome per country', () => {
     const nomad = tiers('digital-nomad');
-    for (const iso of nomad.accruing) expect(nomad.all.has(iso)).toBe(true);
-    // Portugal's D8 counts toward naturalisation — solid tone.
-    expect(nomad.accruing.has('620')).toBe(true);
-    // South Africa's Remote Work visa accrues toward nothing — muted tone,
-    // the owner's "money grab" tier made visible.
-    expect(nomad.all.has('710')).toBe(true);
-    expect(nomad.accruing.has('710')).toBe(false);
-    // Citizenship classes are all-accruing by definition.
+    // Tiers are mutually exclusive and cover the painted set.
+    expect(nomad.cit.size + nomad.pr.size + nomad.tr.size).toBe(nomad.all.size);
+    for (const iso of nomad.cit) { expect(nomad.pr.has(iso)).toBe(false); expect(nomad.tr.has(iso)).toBe(false); }
+    // Portugal's D8 counts toward naturalisation — CIT, solid strong.
+    expect(nomad.cit.has('620')).toBe(true);
+    // South Africa's Remote Work visa accrues toward nothing — TR, light tone:
+    // the owner's "money grab" tier, unambiguous now.
+    expect(nomad.tr.has('710')).toBe(true);
+    // Citizenship classes paint everything CIT by definition.
     const cbi = tiers('cbi');
-    expect(cbi.accruing.size).toBe(cbi.all.size);
+    expect(cbi.cit.size).toBe(cbi.all.size);
   });
 
   test('citizenship and residence investment stay distinct classes', () => {

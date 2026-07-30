@@ -129,6 +129,9 @@
 .sw-limited { background: var(--map-limited); }
 .sw-lane { background: var(--map-lane); }
 .sw-none { background: var(--map-land); }
+/* PR tier under route-class paint: strong hue with the same 45° hatch the map
+   pattern (#pr-hatch in src/map.ts) uses — keep the two in sync. */
+.sw-pr-hatch { background: repeating-linear-gradient(45deg, var(--map-strong) 0 3px, var(--map-lane) 3px 5px); }
 
 /* ── Shared chips (bloc/lane color swatches) ── */
 .chip {

@@ -128,7 +128,7 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
                     const kind = routeClassById(state.routeClass)?.kind;
                     const swatch = kind === 'citizenship'
                       ? (level.tier === 'CIT' ? 'sw-strong' : 'sw-none')
-                      : level.tier === 'TR' ? 'sw-limited' : 'sw-strong';
+                      : level.tier === 'TR' ? 'sw-limited' : level.tier === 'PR' ? 'sw-pr-hatch' : 'sw-strong';
                     return (
                       <div key={level.tier} className="grid grid-cols-[18px_30px_1fr] items-start gap-2">
                         <span className={cn('legend-sw mt-0.5', swatch)} aria-hidden />

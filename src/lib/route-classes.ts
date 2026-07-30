@@ -41,45 +41,44 @@ export function routeClassById(id: string | null | undefined): RouteClass | null
 }
 
 /**
- * Painted sets for a class. TWO tiers, not three — validated, not felt: the
- * palette validator puts every 3-tone candidate below ΔE 9 against either the
- * land grey or its ramp neighbour (the PR↔land corridor is only ~ΔE 15 wide),
- * so a third tone would be indistinguishable for a meaningful share of
- * readers. The legend keeps all three Access-level rows; PR and CIT share the
- * solid swatch, which is the truthful statement that the map cannot split
- * them further.
- *
- * `accruing`: at least one active route of the class counts toward PR or
- * naturalization (the flags the cards' ladder badges render). Citizenship
- * classes are all-accruing by definition. `accruing` ⊆ `all`.
+ * Painted sets for a class: the country's BEST outcome across its active
+ * routes, as three mutually exclusive tiers matching the Access levels
+ * glossary. The palette cannot carry three lightness steps (validated: every
+ * candidate third blue lands within dE 9 of the land grey or its ramp
+ * neighbour), so the third distinction uses TEXTURE, the dataviz-sanctioned
+ * secondary channel: TR = light solid, PR = strong 45-degree hatch, CIT =
+ * strong solid. The hatch reads as "almost the strongest", which is what PR is.
  */
 export interface RouteClassIsos {
   all: Set<string>;
-  accruing: Set<string>;
+  cit: Set<string>;
+  pr: Set<string>;
+  tr: Set<string>;
 }
 
 export function isosForRouteClass(
   routeClass: RouteClass,
   data: CitizenshipRoutesData,
 ): RouteClassIsos {
-  const all = new Set<string>();
-  const accruing = new Set<string>();
+  const best = new Map<string, 'tr' | 'pr' | 'cit'>();
+  const rank = { tr: 0, pr: 1, cit: 2 } as const;
+  const raise = (iso: string, tier: 'tr' | 'pr' | 'cit') => {
+    const current = best.get(iso);
+    if (!current || rank[tier] > rank[current]) best.set(iso, tier);
+  };
   if (routeClass.kind === 'citizenship') {
     for (const route of data.routes) {
-      if (route.mode === routeClass.match && route.status === 'active') {
-        all.add(route.country.iso_n3);
-        accruing.add(route.country.iso_n3);
-      }
+      if (route.mode === routeClass.match && route.status === 'active') raise(route.country.iso_n3, 'cit');
     }
   } else {
     for (const route of data.residence_routes ?? []) {
-      if (route.category === routeClass.match && route.status === 'active') {
-        all.add(route.country.iso_n3);
-        if (route.counts_toward_permanent_residence || route.counts_toward_naturalization) {
-          accruing.add(route.country.iso_n3);
-        }
-      }
+      if (route.category !== routeClass.match || route.status !== 'active') continue;
+      if (route.counts_toward_naturalization) raise(route.country.iso_n3, 'cit');
+      else if (route.counts_toward_permanent_residence) raise(route.country.iso_n3, 'pr');
+      else raise(route.country.iso_n3, 'tr');
     }
   }
-  return { all, accruing };
+  const sets: RouteClassIsos = { all: new Set(best.keys()), cit: new Set(), pr: new Set(), tr: new Set() };
+  for (const [iso, tier] of best) sets[tier].add(iso);
+  return sets;
 }

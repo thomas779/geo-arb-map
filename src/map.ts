@@ -116,6 +116,17 @@ export function init(
 
   const svg = d3.select<SVGSVGElement, unknown>('#map');
   _svg = svg;
+  // PR-tier hatch for route-class paint: the palette cannot carry a third
+  // lightness step (see route-classes.ts), so the middle tier is the strong
+  // hue with a 45-degree light hatch — texture as the secondary channel.
+  // CSS vars inside the pattern track the theme automatically.
+  const defs = svg.append('defs');
+  const hatch = defs.append('pattern')
+    .attr('id', 'pr-hatch').attr('patternUnits', 'userSpaceOnUse')
+    .attr('width', 5).attr('height', 5).attr('patternTransform', 'rotate(45)');
+  hatch.append('rect').attr('width', 5).attr('height', 5).attr('fill', 'var(--map-strong)');
+  hatch.append('line').attr('x1', 0).attr('y1', 0).attr('x2', 0).attr('y2', 5)
+    .attr('stroke', 'var(--map-lane)').attr('stroke-width', 2);
   _gMap = svg.append('g');
   _gDots = svg.append('g').attr('class', 'dot-layer');
   _gFlags = svg.append('g').attr('class', 'flag-layer');
@@ -464,10 +475,12 @@ function idleBucket(lookupIso: string): IdleBucket {
   return 'none';
 }
 
-let _classIsos: { all: Set<string>; accruing: Set<string> } | null = null;
+let _classIsos: { cit: Set<string>; pr: Set<string>; tr: Set<string> } | null = null;
 
 /** Route-class browse paint sets (#129); owned by render(), read by colorForIso. */
-export function setRouteClassIsos(isos: { all: Set<string>; accruing: Set<string> } | null): void {
+export function setRouteClassIsos(
+  isos: { cit: Set<string>; pr: Set<string>; tr: Set<string> } | null,
+): void {
   _classIsos = isos;
 }
 
@@ -475,11 +488,12 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   const lookupIso = mobilityIso(iso);
   const dark = isDarkTheme();
   if (state.routeClass && _classIsos) {
-    // Two tones, validated against the palette (see route-classes.ts): a third
-    // step cannot clear both the land grey and its ramp neighbour, so PR and
-    // CIT share the solid tone and the legend says so.
-    if (_classIsos.accruing.has(lookupIso)) return 'var(--map-strong)';
-    if (_classIsos.all.has(lookupIso)) return 'var(--map-limited)';
+    // Three tiers, two colours: CIT solid strong, PR strong with a 45-degree
+    // hatch (texture as the secondary channel — the palette cannot carry a
+    // third lightness step), TR light solid.
+    if (_classIsos.cit.has(lookupIso)) return 'var(--map-strong)';
+    if (_classIsos.pr.has(lookupIso)) return 'url(#pr-hatch)';
+    if (_classIsos.tr.has(lookupIso)) return 'var(--map-limited)';
     return 'var(--map-land)';
   }
   if (state.lane) {
