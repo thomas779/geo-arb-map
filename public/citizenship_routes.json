@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 228
+      "residence_routes": 246
     }
   },
   "jurisdictions": [
@@ -1286,7 +1286,14 @@
         "ethiopia-naturalization",
         "ethiopia-citizenship-at-birth-by-parent",
         "ethiopia-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "ethiopia-origin-id-yellow-card",
+        "ethiopia-permanent-residence-id"
+      ],
+      "residence_coverage": {
+        "general_permanent_residence": "reviewed"
+      }
     },
     {
       "iso_n3": "232",
@@ -2209,7 +2216,21 @@
         "kenya-registration-by-residence",
         "kenya-citizenship-at-birth-by-parent",
         "kenya-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "kenya-investor-permit-class-g",
+        "kenya-class-k-ordinary-resident",
+        "kenya-class-d-employment",
+        "kenya-permanent-residence-lawful-resident",
+        "kenya-digital-nomad-permit"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "retirement_pension": "reviewed",
+        "talent_skilled": "reviewed",
+        "general_permanent_residence": "reviewed",
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "408",
@@ -3566,7 +3587,17 @@
         "rwanda-naturalization",
         "rwanda-citizenship-at-birth-by-parent",
         "rwanda-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "rwanda-investor-residence-permit",
+        "rwanda-permanent-residence-l1",
+        "rwanda-permanent-residence-l2-l3-merit"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "general_permanent_residence": "reviewed",
+        "talent_skilled": "reviewed"
+      }
     },
     {
       "iso_n3": "652",
@@ -4417,7 +4448,19 @@
         "uganda-naturalization",
         "uganda-citizenship-at-birth-by-parent",
         "uganda-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "uganda-entry-permit-class-h-ordinary-resident",
+        "uganda-entry-permit-class-d-trade",
+        "uganda-certificate-of-residence-long-stay",
+        "uganda-entry-permit-class-g3-rare-skills"
+      ],
+      "residence_coverage": {
+        "retirement_pension": "reviewed",
+        "investment": "reviewed",
+        "general_permanent_residence": "reviewed",
+        "talent_skilled": "reviewed"
+      }
     },
     {
       "iso_n3": "804",
@@ -4588,7 +4631,18 @@
         "tanzania-naturalization",
         "tanzania-citizenship-at-birth-by-parent",
         "tanzania-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "tanzania-residence-permit-class-a-investor",
+        "tanzania-residence-permit-class-b-employment",
+        "tanzania-residence-permit-class-c2-retired",
+        "tanzania-residence-permit-class-c11-property-buyer"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "talent_skilled": "reviewed",
+        "retirement_pension": "reviewed"
+      }
     },
     {
       "iso_n3": "840",
@@ -40433,6 +40487,84 @@
       ]
     },
     {
+      "id": "ethiopia-origin-id-yellow-card",
+      "country": {
+        "iso_n3": "231",
+        "name": "Ethiopia"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Ethiopian Origin ID (yellow card)",
+      "summary": "A foreign national of Ethiopian origin gets visa-free entry plus residence, employment and property rights without acquiring citizenship.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ethiopia-origin-id-yellow-card-principal",
+          "label": "Ethiopian Origin ID (yellow card)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Ethiopian Immigration and Citizenship Service — Ethiopian Origin ID",
+          "url": "https://ics.gov.et/services/ethiopian-origin-id/"
+        }
+      ]
+    },
+    {
+      "id": "ethiopia-permanent-residence-id",
+      "country": {
+        "iso_n3": "231",
+        "name": "Ethiopia"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Permanent Residence ID (five-year renewable)",
+      "summary": "A five-year renewable permanent-residence identity card.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ethiopia-permanent-residence-id-principal",
+          "label": "Permanent Residence ID (five-year renewable)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "low",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Ethiopian Immigration and Citizenship Service — Permanent Residence ID",
+          "url": "https://ics.gov.et/services/permanent-residence-id-five-year-renewable/"
+        }
+      ]
+    },
+    {
       "id": "estonia-digital-nomad",
       "country": {
         "iso_n3": "233",
@@ -42266,6 +42398,211 @@
         {
           "title": "eResidency of Kazakhstan (state programme)",
           "url": "https://www.eresidency.gov.kz/en"
+        }
+      ]
+    },
+    {
+      "id": "kenya-class-d-employment",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Class D employment permit",
+      "summary": "Employer-sponsored residence where the role cannot be filled locally.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kenya-class-d-employment-principal",
+          "label": "Class D employment permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Kenya Directorate of Immigration Services — Class D",
+          "url": "https://immigration.go.ke/class-d-employment/"
+        }
+      ]
+    },
+    {
+      "id": "kenya-class-k-ordinary-resident",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Class K ordinary resident permit",
+      "summary": "Residence for applicants aged 35 or over with an assured private income from outside Kenya who will not take employment.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 2000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kenya-class-k-ordinary-resident-principal",
+          "label": "Class K ordinary resident permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Kenya Directorate of Immigration Services — Class K",
+          "url": "https://immigration.go.ke/class-k-ordinary-residents/"
+        }
+      ]
+    },
+    {
+      "id": "kenya-digital-nomad-permit",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "category": "digital_nomad",
+      "status": "pending_verification",
+      "title": "Digital nomad permit (not evidenced)",
+      "summary": "No Kenyan digital-nomad or remote-work permit could be found in any official source.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kenya-digital-nomad-permit-principal",
+          "label": "Digital nomad permit (not evidenced)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "low",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Kenya Directorate of Immigration Services — work permits and passes",
+          "url": "https://immigration.go.ke/work-permits-and-passes/"
+        }
+      ]
+    },
+    {
+      "id": "kenya-investor-permit-class-g",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Class G investor permit",
+      "summary": "Residence for a foreign national investing in a specific trade, business or consultancy in Kenya.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 100000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kenya-investor-permit-class-g-principal",
+          "label": "Class G investor permit",
+          "allocation": "right",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Kenya Directorate of Immigration Services — Class G",
+          "url": "https://immigration.go.ke/class-g-specific-trade-business-or-consultancy/"
+        }
+      ]
+    },
+    {
+      "id": "kenya-permanent-residence-lawful-resident",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Permanent residence (Lawful Resident, Category B)",
+      "summary": "Permanent residence after seven years of valid permits and three years of continuous residence.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          84
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "kenya-permanent-residence-lawful-resident-principal",
+          "label": "Permanent residence (Lawful Resident, Category B)",
+          "allocation": "right",
+          "eligibility_months": 84
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Kenya Directorate of Immigration Services — Lawful Residents Category B",
+          "url": "https://immigration.go.ke/lawful-residents-category-b/"
         }
       ]
     },
@@ -44890,6 +45227,127 @@
       ]
     },
     {
+      "id": "rwanda-investor-residence-permit",
+      "country": {
+        "iso_n3": "646",
+        "name": "Rwanda"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Investor residence permit",
+      "summary": "Sector-coded investor permits granted for up to two years, or up to five where the investment recurs.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "rwanda-investor-residence-permit-principal",
+          "label": "Investor residence permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Rwanda Directorate General of Immigration and Emigration — business and investor",
+          "url": "https://www.migration.gov.rw/our-services/business-investor"
+        }
+      ]
+    },
+    {
+      "id": "rwanda-permanent-residence-l1",
+      "country": {
+        "iso_n3": "646",
+        "name": "Rwanda"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Permanent residence class L-1",
+      "summary": "Permanent residence after ten aggregate years of lawful residence in Rwanda.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "rwanda-permanent-residence-l1-principal",
+          "label": "Permanent residence class L-1",
+          "allocation": "right",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Rwanda Ministerial Order relating to immigration and emigration (Official Gazette, 30/05/2019)",
+          "url": "https://www.migration.gov.rw/fileadmin/user_upload/pdf_files/ministerial_order_relating_to_immigration_and_emigration.pdf"
+        }
+      ]
+    },
+    {
+      "id": "rwanda-permanent-residence-l2-l3-merit",
+      "country": {
+        "iso_n3": "646",
+        "name": "Rwanda"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Permanent residence classes L-2 and L-3 (merit)",
+      "summary": "Permanent residence with no qualifying period for exceptional contribution, or for senior staff of a multinational.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "rwanda-permanent-residence-l2-l3-merit-principal",
+          "label": "Permanent residence classes L-2 and L-3 (merit)",
+          "allocation": "right",
+          "eligibility_months": 0
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Rwanda Ministerial Order relating to immigration and emigration (Official Gazette, 30/05/2019)",
+          "url": "https://www.migration.gov.rw/fileadmin/user_upload/pdf_files/ministerial_order_relating_to_immigration_and_emigration.pdf"
+        }
+      ]
+    },
+    {
       "id": "anguilla-hvr-tax-residency",
       "country": {
         "iso_n3": "660",
@@ -46386,6 +46844,167 @@
       ]
     },
     {
+      "id": "uganda-certificate-of-residence-long-stay",
+      "country": {
+        "iso_n3": "800",
+        "name": "Uganda"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Certificate of residence (long stay)",
+      "summary": "Long-stay residence status after ten years of continuous residence in Uganda.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          120
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uganda-certificate-of-residence-long-stay-principal",
+          "label": "Certificate of residence (long stay)",
+          "allocation": "right",
+          "eligibility_months": 120
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Uganda Directorate of Citizenship and Immigration Control — certificate of residence",
+          "url": "https://www.immigration.go.ug/services/certificate-residence"
+        }
+      ]
+    },
+    {
+      "id": "uganda-entry-permit-class-d-trade",
+      "country": {
+        "iso_n3": "800",
+        "name": "Uganda"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Class D entry permit (general trade and business)",
+      "summary": "Residence for a foreign national conducting trade or business in Uganda.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uganda-entry-permit-class-d-trade-principal",
+          "label": "Class D entry permit (general trade and business)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Uganda Directorate of Citizenship and Immigration Control — Class D",
+          "url": "https://www.immigration.go.ug/entry-permit/class-d"
+        }
+      ]
+    },
+    {
+      "id": "uganda-entry-permit-class-g3-rare-skills",
+      "country": {
+        "iso_n3": "800",
+        "name": "Uganda"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Class G3 entry permit (rare skills)",
+      "summary": "Residence for a foreign national with skills unavailable in Uganda.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uganda-entry-permit-class-g3-rare-skills-principal",
+          "label": "Class G3 entry permit (rare skills)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "low",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Uganda Directorate of Citizenship and Immigration Control — entry permits",
+          "url": "https://www.immigration.go.ug/permit/entry-permit"
+        }
+      ]
+    },
+    {
+      "id": "uganda-entry-permit-class-h-ordinary-resident",
+      "country": {
+        "iso_n3": "800",
+        "name": "Uganda"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Class H entry permit (ordinary resident)",
+      "summary": "Residence for a person of independent means who undertakes not to take employment in Uganda.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uganda-entry-permit-class-h-ordinary-resident-principal",
+          "label": "Class H entry permit (ordinary resident)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Uganda Directorate of Citizenship and Immigration Control — Class H",
+          "url": "https://www.immigration.go.ug/entry-permit/class-h"
+        }
+      ]
+    },
+    {
       "id": "ukraine-passive-golden-visa-verified-negative",
       "country": {
         "iso_n3": "804",
@@ -46824,6 +47443,165 @@
         {
           "title": "Isle of Man Government — Immigration",
           "url": "https://www.gov.im/categories/travel-traffic-and-motoring/immigration/"
+        }
+      ]
+    },
+    {
+      "id": "tanzania-residence-permit-class-a-investor",
+      "country": {
+        "iso_n3": "834",
+        "name": "Tanzania"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Class A residence permit (investor)",
+      "summary": "Residence for investors and self-employed persons, at half the capital threshold for East African Community citizens.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 100000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tanzania-residence-permit-class-a-investor-principal",
+          "label": "Class A residence permit (investor)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Tanzania Immigration Services — residence permit guidelines",
+          "url": "https://eservices.immigration.go.tz/online/web/permit/guidelines"
+        }
+      ]
+    },
+    {
+      "id": "tanzania-residence-permit-class-b-employment",
+      "country": {
+        "iso_n3": "834",
+        "name": "Tanzania"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Class B residence permit (employment)",
+      "summary": "Employer-sponsored residence for a foreign national in specified employment.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tanzania-residence-permit-class-b-employment-principal",
+          "label": "Class B residence permit (employment)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Tanzania Immigration Services — residence permit guidelines",
+          "url": "https://eservices.immigration.go.tz/online/web/permit/guidelines"
+        }
+      ]
+    },
+    {
+      "id": "tanzania-residence-permit-class-c11-property-buyer",
+      "country": {
+        "iso_n3": "834",
+        "name": "Tanzania"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Class C-11 residence permit (property buyer)",
+      "summary": "Residence for a buyer of real estate, at a USD 500 permit fee with no published purchase threshold.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tanzania-residence-permit-class-c11-property-buyer-principal",
+          "label": "Class C-11 residence permit (property buyer)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Tanzania Immigration Services — residence permit guidelines",
+          "url": "https://eservices.immigration.go.tz/online/web/permit/guidelines"
+        }
+      ]
+    },
+    {
+      "id": "tanzania-residence-permit-class-c2-retired",
+      "country": {
+        "iso_n3": "834",
+        "name": "Tanzania"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Class C-2 residence permit (retired)",
+      "summary": "Residence for retired persons aged 55 or over with an assured income.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "tanzania-residence-permit-class-c2-retired-principal",
+          "label": "Class C-2 residence permit (retired)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Tanzania Immigration Services — residence permit guidelines",
+          "url": "https://eservices.immigration.go.tz/online/web/permit/guidelines"
         }
       ]
     },
