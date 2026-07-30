@@ -226,6 +226,23 @@ function compactContext(context: DatasetContext): unknown {
 // verification-tier entries (excludes the shared 'multi' aggregators). Anchors
 // the grounded sweep on the RIGHT primary source instead of rediscovering it
 // every run — the main failure mode for opaque, low-web-presence jurisdictions.
+/**
+ * Third-party legal aggregators. Useful for FINDING a provision, never
+ * authoritative for one — so they must not be fed to the sweep as sources "we
+ * already trust". 92 jurisdictions currently list constituteproject as their
+ * only verification source, which meant every sweep was being told to trust an
+ * academic English translation as if it were the gazette, re-seeding the exact
+ * defect we are cleaning out of the dataset. Excluded here rather than by
+ * demoting the manifest rows, so the coverage audit does not spike 92 gaps
+ * before those jurisdictions have a real source to replace it with.
+ */
+const AGGREGATOR_HOSTS = ['constituteproject.org', 'refworld.org', 'ilo.org', 'wipolex.wipo.int'];
+
+export function isAggregatorUrl(url: string): boolean {
+  const host = (/^https?:\/\/([^/]+)/.exec(url)?.[1] ?? '').toLowerCase();
+  return AGGREGATOR_HOSTS.some(aggregator => host === aggregator || host.endsWith(`.${aggregator}`));
+}
+
 export function officialSourcesByJurisdiction(root: string): Map<string, Array<{ title: string; url: string }>> {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'sources', 'manifest.json'), 'utf8')) as {
     sources?: Array<{ tier?: string; status?: string; url?: string; notes?: string; jurisdictions?: string[] }>;
@@ -233,6 +250,7 @@ export function officialSourcesByJurisdiction(root: string): Map<string, Array<{
   const map = new Map<string, Array<{ title: string; url: string }>>();
   for (const source of manifest.sources ?? []) {
     if (source.tier !== 'verification' || source.status !== 'active' || !source.url) continue;
+    if (isAggregatorUrl(source.url)) continue;
     const isos = (source.jurisdictions ?? []).filter(iso => iso && iso !== 'multi');
     if (!isos.length) continue;
     const title = (source.notes ?? source.url).split('.')[0].trim().slice(0, 80);

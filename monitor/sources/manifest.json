@@ -50,8 +50,21 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://mexiconewsdaily.com/feed/",
-      "jurisdictions": ["484"],
-      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "temporary resident", "permanent resident", "expat"],
+      "jurisdictions": [
+        "484"
+      ],
+      "keywords": [
+        "visa",
+        "immigration",
+        "residence",
+        "residency",
+        "permit",
+        "citizenship",
+        "nationality",
+        "temporary resident",
+        "permanent resident",
+        "expat"
+      ],
       "keyword_match": "any",
       "notes": "Mexico News Daily (English). Local outlet, keyword-filtered to mobility items. Discovery only; verify against SRE/INM primary sources."
     },
@@ -61,8 +74,23 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://www.theportugalnews.com/rss",
-      "jurisdictions": ["620"],
-      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "golden visa", "D7", "D8", "AIMA", "expat"],
+      "jurisdictions": [
+        "620"
+      ],
+      "keywords": [
+        "visa",
+        "immigration",
+        "residence",
+        "residency",
+        "permit",
+        "citizenship",
+        "nationality",
+        "golden visa",
+        "D7",
+        "D8",
+        "AIMA",
+        "expat"
+      ],
       "keyword_match": "any",
       "notes": "The Portugal News (English). Local outlet, keyword-filtered. Discovery only; verify against AIMA/official sources."
     },
@@ -72,8 +100,21 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://thebalisun.com/feed/",
-      "jurisdictions": ["360"],
-      "keywords": ["visa", "immigration", "residence", "residency", "permit", "KITAS", "second home visa", "citizenship", "expat", "golden visa"],
+      "jurisdictions": [
+        "360"
+      ],
+      "keywords": [
+        "visa",
+        "immigration",
+        "residence",
+        "residency",
+        "permit",
+        "KITAS",
+        "second home visa",
+        "citizenship",
+        "expat",
+        "golden visa"
+      ],
       "keyword_match": "any",
       "notes": "The Bali Sun (English). Indonesia expat/visa coverage, keyword-filtered. Discovery only; verify against Indonesian immigration primary sources."
     },
@@ -83,8 +124,21 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://ticotimes.net/feed/",
-      "jurisdictions": ["188"],
-      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "rentista", "pensionado", "expat"],
+      "jurisdictions": [
+        "188"
+      ],
+      "keywords": [
+        "visa",
+        "immigration",
+        "residence",
+        "residency",
+        "permit",
+        "citizenship",
+        "nationality",
+        "rentista",
+        "pensionado",
+        "expat"
+      ],
       "keyword_match": "any",
       "notes": "The Tico Times (English). Costa Rica local outlet, keyword-filtered. Discovery only; verify against Migracion CR primary sources."
     },
@@ -94,8 +148,23 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://www.thaiexaminer.com/feed/",
-      "jurisdictions": ["764"],
-      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "DTV", "LTR", "retirement visa", "Elite visa", "expat"],
+      "jurisdictions": [
+        "764"
+      ],
+      "keywords": [
+        "visa",
+        "immigration",
+        "residence",
+        "residency",
+        "permit",
+        "citizenship",
+        "nationality",
+        "DTV",
+        "LTR",
+        "retirement visa",
+        "Elite visa",
+        "expat"
+      ],
       "keyword_match": "any",
       "notes": "Thai Examiner (English). Thailand foreigner/visa coverage, keyword-filtered. Discovery only; verify against Thai Immigration Bureau primary sources."
     },
@@ -105,8 +174,21 @@
       "adapter": "rss",
       "status": "active",
       "url": "https://e.vnexpress.net/rss/news.rss",
-      "jurisdictions": ["704"],
-      "keywords": ["visa", "immigration", "residence", "residency", "permit", "citizenship", "nationality", "temporary residence", "e-visa", "expat"],
+      "jurisdictions": [
+        "704"
+      ],
+      "keywords": [
+        "visa",
+        "immigration",
+        "residence",
+        "residency",
+        "permit",
+        "citizenship",
+        "nationality",
+        "temporary residence",
+        "e-visa",
+        "expat"
+      ],
       "keyword_match": "any",
       "notes": "VnExpress International (English). Vietnam local outlet, keyword-filtered. Discovery only; verify against Vietnamese immigration primary sources."
     },
@@ -952,7 +1034,7 @@
         "nationalit\u00e9",
         "Staatsangeh\u00f6rigkeit"
       ],
-      "notes": "Official Journal of the EU (OJ L) RSS — all EU legislation, keyword-filtered to nationality/residence/migration/free-movement items; article text infers the specific jurisdiction. Verified live 2026-07-26."
+      "notes": "Official Journal of the EU (OJ L) RSS \u2014 all EU legislation, keyword-filtered to nationality/residence/migration/free-movement items; article text infers the specific jurisdiction. Verified live 2026-07-26."
     },
     {
       "id": "greece-citizenship",
@@ -2365,10 +2447,6 @@
         {
           "id": "constitution-chapter-iii",
           "url": "https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/"
-        },
-        {
-          "id": "constitute-nigeria",
-          "url": "https://www.constituteproject.org/constitution/Nigeria_2011"
         }
       ],
       "keywords": [
@@ -2691,10 +2769,6 @@
         {
           "id": "immigration-citizenship",
           "url": "https://immigration.go.ke/citizenship-section/"
-        },
-        {
-          "id": "constitution",
-          "url": "https://www.constituteproject.org/constitution/Kenya_2010"
         }
       ],
       "keywords": [
@@ -2771,10 +2845,6 @@
         {
           "id": "oci-scheme",
           "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme"
-        },
-        {
-          "id": "constitution",
-          "url": "https://www.constituteproject.org/constitution/India_2016"
         }
       ],
       "keywords": [
@@ -2967,10 +3037,6 @@
         {
           "id": "igi",
           "url": "https://igi.mai.gov.ro/en/"
-        },
-        {
-          "id": "constitution",
-          "url": "https://www.constituteproject.org/constitution/Romania_2003"
         }
       ],
       "keywords": [
@@ -2994,10 +3060,6 @@
         {
           "id": "government",
           "url": "https://www.govern.ad/en"
-        },
-        {
-          "id": "constitution",
-          "url": "https://www.constituteproject.org/constitution/Andorra_1993"
         }
       ],
       "keywords": [
@@ -3096,10 +3158,6 @@
         {
           "id": "migracija",
           "url": "https://www.migracija.lt/home?lang=en"
-        },
-        {
-          "id": "constitution",
-          "url": "https://www.constituteproject.org/constitution/Lithuania_2019"
         }
       ],
       "keywords": [
@@ -3146,10 +3204,6 @@
         {
           "id": "naturalization",
           "url": "https://mic.iom.sk/en/citizenship/conditions-for-granting-slovak-citizenship-naturalization.html"
-        },
-        {
-          "id": "constitution",
-          "url": "https://www.constituteproject.org/constitution/Slovakia_2017"
         }
       ],
       "keywords": [
@@ -3371,10 +3425,6 @@
         {
           "id": "citizenship-law",
           "url": "https://www.migracao.gov.tl/pdf/[0503-07]citizenship%20Law.pdf"
-        },
-        {
-          "id": "constitution",
-          "url": "https://www.constituteproject.org/constitution/East_Timor_2002"
         }
       ],
       "keywords": [
@@ -5427,7 +5477,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of Bermuda — Department of Immigration — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of Bermuda \u2014 Department of Immigration \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "british-virgin-islands-citizenship-law",
@@ -5445,7 +5495,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of the Virgin Islands — Belonger status — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of the Virgin Islands \u2014 Belonger status \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "gibraltar-citizenship-law",
@@ -5463,7 +5513,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Gibraltar Constitution Order 2006 — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Gibraltar Constitution Order 2006 \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "falkland-islands-citizenship-law",
@@ -5481,7 +5531,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Falkland Islands Government — Falkland Islands status — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Falkland Islands Government \u2014 Falkland Islands status \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "montserrat-citizenship-law",
@@ -5499,7 +5549,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of Montserrat — Citizenship & residence — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of Montserrat \u2014 Citizenship & residence \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "pitcairn-islands-citizenship-law",
@@ -5517,7 +5567,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of the Pitcairn Islands — Immigration — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of the Pitcairn Islands \u2014 Immigration \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "saint-helena-citizenship-law",
@@ -5535,7 +5585,7 @@
         "residence",
         "birth"
       ],
-      "notes": "St Helena Government — St Helenian status — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "St Helena Government \u2014 St Helenian status \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "anguilla-citizenship-law",
@@ -5553,7 +5603,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of Anguilla — Anguillian status — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of Anguilla \u2014 Anguillian status \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "turks-and-caicos-citizenship-law",
@@ -5571,7 +5621,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Turks and Caicos Islands Constitution Order 2011 — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Turks and Caicos Islands Constitution Order 2011 \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "guernsey-citizenship-law",
@@ -5589,7 +5639,7 @@
         "residence",
         "birth"
       ],
-      "notes": "States of Guernsey — Immigration — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "States of Guernsey \u2014 Immigration \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "jersey-citizenship-law",
@@ -5607,7 +5657,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of Jersey — Citizenship & settling in Jersey — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of Jersey \u2014 Citizenship & settling in Jersey \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "isle-of-man-citizenship-law",
@@ -5625,7 +5675,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Isle of Man Government — Immigration — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Isle of Man Government \u2014 Immigration \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "puerto-rico-citizenship-law",
@@ -5643,7 +5693,7 @@
         "residence",
         "birth"
       ],
-      "notes": "8 USC 1402 — Persons born in Puerto Rico — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "8 USC 1402 \u2014 Persons born in Puerto Rico \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "guam-citizenship-law",
@@ -5661,7 +5711,7 @@
         "residence",
         "birth"
       ],
-      "notes": "8 USC 1407 — Persons born in Guam — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "8 USC 1407 \u2014 Persons born in Guam \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "us-virgin-islands-citizenship-law",
@@ -5679,7 +5729,7 @@
         "residence",
         "birth"
       ],
-      "notes": "8 USC 1406 — Persons born in the Virgin Islands — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "8 USC 1406 \u2014 Persons born in the Virgin Islands \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "northern-mariana-islands-citizenship-law",
@@ -5697,7 +5747,7 @@
         "residence",
         "birth"
       ],
-      "notes": "48 USC 1801 — Covenant establishing the CNMI — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "48 USC 1801 \u2014 Covenant establishing the CNMI \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "american-samoa-citizenship-law",
@@ -5715,7 +5765,7 @@
         "residence",
         "birth"
       ],
-      "notes": "8 USC 1408 — Nationals but not citizens at birth — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "8 USC 1408 \u2014 Nationals but not citizens at birth \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "norfolk-island-citizenship-law",
@@ -5733,7 +5783,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Norfolk Island Legislation Amendment Act 2015 — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Norfolk Island Legislation Amendment Act 2015 \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "french-polynesia-citizenship-law",
@@ -5751,7 +5801,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Présidence de la Polynésie française — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Pr\u00e9sidence de la Polyn\u00e9sie fran\u00e7aise \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "new-caledonia-citizenship-law",
@@ -5769,7 +5819,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Gouvernement de la Nouvelle-Calédonie — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Gouvernement de la Nouvelle-Cal\u00e9donie \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "saint-barthelemy-citizenship-law",
@@ -5783,11 +5833,11 @@
       "keywords": [
         "nationality",
         "citizenship",
-        "Saint-Barthélemy",
+        "Saint-Barth\u00e9lemy",
         "residence",
         "birth"
       ],
-      "notes": "Collectivité de Saint-Barthélemy — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Collectivit\u00e9 de Saint-Barth\u00e9lemy \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "saint-martin-citizenship-law",
@@ -5805,7 +5855,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Collectivité de Saint-Martin — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Collectivit\u00e9 de Saint-Martin \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "saint-pierre-and-miquelon-citizenship-law",
@@ -5823,7 +5873,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Service-Public — Saint-Pierre-et-Miquelon — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Service-Public \u2014 Saint-Pierre-et-Miquelon \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "wallis-and-futuna-citizenship-law",
@@ -5841,7 +5891,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Assemblée territoriale des îles Wallis et Futuna — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Assembl\u00e9e territoriale des \u00eeles Wallis et Futuna \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "aruba-citizenship-law",
@@ -5859,7 +5909,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of Aruba — Work & residence — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of Aruba \u2014 Work & residence \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "curacao-citizenship-law",
@@ -5873,11 +5923,11 @@
       "keywords": [
         "nationality",
         "citizenship",
-        "Curaçao",
+        "Cura\u00e7ao",
         "residence",
         "birth"
       ],
-      "notes": "Government of Curaçao — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of Cura\u00e7ao \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "sint-maarten-citizenship-law",
@@ -5895,7 +5945,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of Sint Maarten — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of Sint Maarten \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "caribbean-netherlands-citizenship-law",
@@ -5913,7 +5963,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Rijksdienst Caribisch Nederland — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Rijksdienst Caribisch Nederland \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "greenland-citizenship-law",
@@ -5931,7 +5981,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Naalakkersuisut — Government of Greenland — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Naalakkersuisut \u2014 Government of Greenland \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "faroe-islands-citizenship-law",
@@ -5949,7 +5999,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of the Faroe Islands — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of the Faroe Islands \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "cook-islands-citizenship-law",
@@ -5967,7 +6017,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Cook Islands Government — permanent residency — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Cook Islands Government \u2014 permanent residency \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "niue-citizenship-law",
@@ -5985,7 +6035,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Government of Niue — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of Niue \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "tokelau-citizenship-law",
@@ -6003,7 +6053,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Tokelau (Government) — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Tokelau (Government) \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "hong-kong-citizenship-law",
@@ -6021,7 +6071,7 @@
         "residence",
         "birth"
       ],
-      "notes": "HK Immigration Department — Chinese nationality — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "HK Immigration Department \u2014 Chinese nationality \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "macao-citizenship-law",
@@ -6039,7 +6089,7 @@
         "residence",
         "birth"
       ],
-      "notes": "Macao SAR Government — right of abode — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Macao SAR Government \u2014 right of abode \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     },
     {
       "id": "aland-islands-citizenship-law",
@@ -6053,11 +6103,11 @@
       "keywords": [
         "nationality",
         "citizenship",
-        "Åland Islands",
+        "\u00c5land Islands",
         "residence",
         "birth"
       ],
-      "notes": "Government of Åland (Ålands landskapsregering) — territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
+      "notes": "Government of \u00c5land (\u00c5lands landskapsregering) \u2014 territory record; confers parent-sovereign nationality. Active verification monitor for canonical coverage audit."
     }
   ]
 }
