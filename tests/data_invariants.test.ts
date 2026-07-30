@@ -417,6 +417,27 @@ describe('monitor-lead verifications, 30 July 2026', () => {
       'https://static.slov-lex.sk/static/SK/ZZ/1993/40/20260715.html');
   });
 
+  test('residence batch 5 records Nordics/Baltics startup tracks and golden-visa negatives', () => {
+    const ids = new Set(citizenshipRoutes.residence_routes?.map(r => r.id) ?? []);
+    for (const id of [
+      'denmark-startup-denmark',
+      'denmark-golden-visa-verified-negative',
+      'finland-startup-entrepreneur',
+      'finland-specialist',
+      'finland-golden-visa-verified-negative',
+      'lithuania-startup-visa',
+      'lithuania-golden-visa-verified-negative',
+      'romania-commercial-activity-long-stay',
+      'romania-golden-visa-verified-negative',
+    ]) {
+      expect(ids.has(id), id).toBe(true);
+    }
+    const neg = citizenshipRoutes.residence_routes?.find(r => r.id === 'denmark-golden-visa-verified-negative');
+    expect(neg?.status).toBe('verified_negative');
+    const fi = citizenshipRoutes.residence_routes?.find(r => r.id === 'finland-specialist');
+    expect(fi?.min_income_monthly?.amount).toBe(3937);
+  });
+
   test('US birthright records unconditional jus soli after Trump v. Barbara', () => {
     const birth = citizenshipRoutes.routes.find(route => route.id === 'us-citizenship-by-birth');
     expect(birth?.facts.jus_soli).toBe('unconditional');

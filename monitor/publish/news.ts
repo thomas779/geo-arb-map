@@ -160,6 +160,7 @@ export async function verifyPrimarySource(
   originalQuote: string,
   allowedHosts: Set<string>,
   fetcher: typeof fetch = fetch,
+  claimContext?: { category?: string; claim?: string; headline?: string },
 ): Promise<SourceVerdict> {
   const host = hostFromUrl(url);
   if (!host) return { verdict: 'refuted', reason: 'unparseable url' };
@@ -186,7 +187,19 @@ export async function verifyPrimarySource(
     return { verdict: 'inconclusive', reason: 'pdf source (text not machine-checkable here)' };
   }
   const pageNorm = normalizeText(body);
-  if (quoteOnPage(pageNorm, quoteNorm)) return { verdict: 'verified', reason: 'ok' };
+  if (quoteOnPage(pageNorm, quoteNorm)) {
+    // Quote is real — still block Saint Lucia-style grafts: CBI claim attached to a
+    // constitution / ordinary-registration provision that never mentions investment.
+    const graft = detectTopicGraft({
+      category: claimContext?.category ?? '',
+      claim: claimContext?.claim ?? '',
+      headline: claimContext?.headline ?? '',
+      pageNorm,
+      quoteNorm,
+    });
+    if (graft) return { verdict: 'refuted', reason: graft };
+    return { verdict: 'verified', reason: 'ok' };
+  }
   // Only a genuinely text-heavy page makes a MISSING quote real negative evidence.
   // Measured: a real gov.im article server-renders ~200 normalized chars, while
   // JS-SPA gazettes (legislation.gov.au, u.ae) expose 1200-1400 chars of nav/
@@ -196,6 +209,46 @@ export async function verifyPrimarySource(
   if (pageNorm.replace(/ /g, '').length < 1500) return { verdict: 'inconclusive', reason: 'page has little readable text (JS-rendered?)' };
   if (nonAsciiCount(quoteNorm) >= 8 && nonAsciiCount(pageNorm) < 8) return { verdict: 'inconclusive', reason: 'page/quote script mismatch' };
   return { verdict: 'refuted', reason: 'quoted evidence not found on a readable page' };
+}
+
+// Topic tokens: claim says CBI/investment but the cited page is a different route
+// (constitution, ordinary naturalization, commonwealth registration, etc.).
+const INVESTMENT_ROUTE_RE = /\b(invest(?:ment|or)?|cbi|cip|economic citizenship|national economic fund|qualifying investment|citizenship by investment|golden visa|residence by investment|real estate project|enterprise project)\b/i;
+const ORDINARY_REGISTRATION_RE = /\b(commonwealth citizen|ordinarily resident|ordinary residence|chapter (vii|7|vi|6)|registration after|naturalis(?:ation|ation) after|years? of ordinary residence|constitution)\b/i;
+const CBI_CLAIM_RE = /\b(cbi|cip|citizenship by investment|investment programme|investment program|genuine link|economic citizenship|passport for investment|qualifying dependant)\b/i;
+
+/**
+ * Detect claim→source topic grafts (e.g. Saint Lucia #122: CBI "genuine link"
+ * claim backed by a constitution chapter on Commonwealth 7-year registration).
+ * Returns a human-readable reason when the graft is clear; null when OK/unknown.
+ */
+export function detectTopicGraft(input: {
+  category: string;
+  claim: string;
+  headline: string;
+  pageNorm: string;
+  quoteNorm: string;
+}): string | null {
+  const category = (input.category || '').toLowerCase();
+  const claimBlob = `${input.claim} ${input.headline}`;
+  const sourceBlob = `${input.quoteNorm} ${input.pageNorm.slice(0, 8000)}`;
+
+  const claimIsCbi = category === 'cbi' || category === 'investment' || CBI_CLAIM_RE.test(claimBlob);
+  if (!claimIsCbi) return null;
+
+  const sourceHasInvestment = INVESTMENT_ROUTE_RE.test(sourceBlob);
+  const sourceLooksOrdinary = ORDINARY_REGISTRATION_RE.test(sourceBlob);
+
+  // Hard graft: CBI/investment claim + ordinary/constitutional registration language
+  // and no investment programme language on the cited page.
+  if (!sourceHasInvestment && sourceLooksOrdinary) {
+    return 'topic mismatch: claim is investment/CBI but cited provision is ordinary registration or constitutional citizenship (not an investment route)';
+  }
+  // Softer graft: claim screams CBI but the source never mentions investment at all.
+  if (!sourceHasInvestment && CBI_CLAIM_RE.test(claimBlob) && category === 'cbi') {
+    return 'topic mismatch: CBI claim but cited source never mentions investment, CBI, or a programme contribution';
+  }
+  return null;
 }
 
 // Corroboration fallback for an INCONCLUSIVE primary source (PDF / 403 / JS-only
@@ -416,8 +469,13 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
           .map(source => hostFromUrl(source.url))
           .filter((h): h is string => Boolean(h)));
         let verdict: SourceVerdict = { verdict: 'refuted', reason: 'no authoritative primary source' };
+        const claimContext = {
+          category: finding.category,
+          claim: finding.claim,
+          headline: finding.headline,
+        };
         for (const candidate of originalPrimaries) {
-          const attempt = await verifyPrimarySource(candidate, quoteForPage, allowedHosts);
+          const attempt = await verifyPrimarySource(candidate, quoteForPage, allowedHosts, undefined, claimContext);
           if (attempt.verdict === 'verified') { verdict = attempt; break; }
           if (attempt.verdict === 'inconclusive' && verdict.verdict === 'refuted') verdict = attempt;
         }

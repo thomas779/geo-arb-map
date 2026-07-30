@@ -51,7 +51,7 @@ import {
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
-import { buildNewsPost, fingerprint, synthesizeIssue, proseDateFromIso, verifySourceUrl, verifyPrimarySource, quoteOnPage, normalizeText, corroboratedByCitations, NewsPostStore, runNews } from '../monitor/publish/news';
+import { buildNewsPost, fingerprint, synthesizeIssue, proseDateFromIso, verifySourceUrl, verifyPrimarySource, detectTopicGraft, quoteOnPage, normalizeText, corroboratedByCitations, NewsPostStore, runNews } from '../monitor/publish/news';
 import {
   CitationStore,
   discoverFeed,
@@ -596,6 +596,37 @@ describe('AI sweep + grounded verify', () => {
     expect(store.mutations[0]).toContain("'752'");
     expect(store.mutations[0]).toContain('25');
     store.close();
+  });
+
+  test('detectTopicGraft catches Saint Lucia-style CBI→constitution grafts', () => {
+    // Real constitution language about Commonwealth ordinary residence — not CBI.
+    const constitutionPage = normalizeText(`
+      Chapter VII Citizenship. Section 102 registration. Any person who being a
+      Commonwealth citizen is and for 7 years previous to his or her application
+      has been ordinarily resident in Saint Lucia may apply for registration.
+    `);
+    const graft = detectTopicGraft({
+      category: 'cbi',
+      claim: 'Saint Lucia introduced mandatory residency and genuine link requirements for citizenship by investment',
+      headline: 'Saint Lucia CBI genuine link from January 2026',
+      pageNorm: constitutionPage,
+      quoteNorm: normalizeText('Commonwealth citizen is and for 7 years previous to his or her application has been ordinarily resident'),
+    });
+    expect(graft).toMatch(/topic mismatch/i);
+    expect(graft).toMatch(/investment|CBI|ordinary/i);
+
+    // Real CBI page with investment language — no graft.
+    const cbiPage = normalizeText(`
+      Citizenship by Investment Act. Qualifying investment in the National Economic Fund.
+      Applicants and dependants shall comply with prescribed residency and genuine link.
+    `);
+    expect(detectTopicGraft({
+      category: 'cbi',
+      claim: 'Saint Lucia CBI genuine link requirements effective 2026',
+      headline: 'Saint Lucia CBI genuine link',
+      pageNorm: cbiPage,
+      quoteNorm: normalizeText('prescribed residency and genuine link'),
+    })).toBeNull();
   });
 
   test('verifyPrimarySource returns a tri-state verdict (verified / refuted / inconclusive)', async () => {

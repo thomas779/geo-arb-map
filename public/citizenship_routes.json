@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 148
+      "residence_routes": 158
     }
   },
   "jurisdictions": [
@@ -1075,7 +1075,14 @@
         "denmark-naturalization",
         "denmark-citizenship-at-birth-by-parent",
         "denmark-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "denmark-startup-denmark",
+        "denmark-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "212",
@@ -1306,7 +1313,16 @@
         "finland-naturalization",
         "finland-citizenship-at-birth-by-parent",
         "finland-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "finland-startup-entrepreneur",
+        "finland-specialist",
+        "finland-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed",
+        "talent_skilled": "reviewed"
+      }
     },
     {
       "iso_n3": "248",
@@ -2265,7 +2281,15 @@
         "lithuania-naturalization",
         "lithuania-citizenship-at-birth-by-parent",
         "lithuania-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "lithuania-startup-visa",
+        "lithuania-business-activity-residence",
+        "lithuania-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "442",
@@ -3299,7 +3323,14 @@
         "romania-naturalization",
         "romania-citizenship-at-birth-by-parent",
         "romania-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "romania-commercial-activity-long-stay",
+        "romania-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "643",
@@ -36203,7 +36234,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "D.3. Residència per a nòmada digital — Seu Electrònica del Govern d'Andorra",
@@ -36242,7 +36273,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Llei 9/2012 qualificada d'immigració, arts. 98-99 (text consolidat, Portal Jurídic d'Andorra)",
@@ -36284,7 +36315,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Llei 2/2026, del 22 de gener (BOPA núm. 15, 12-2-2026) — Portal Jurídic d'Andorra",
@@ -36323,7 +36354,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "BIIP closure and refunds — Department of Home Affairs",
@@ -36365,7 +36396,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "BIIP closure and refunds — Department of Home Affairs",
@@ -36409,7 +36440,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Subclass 888 Business Innovation and Investment (Permanent) visa — Department of Home Affairs",
@@ -36448,7 +36479,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Subclass 858 National Innovation visa — Department of Home Affairs",
@@ -36492,7 +36523,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Red-White-Red Card for self-employed key workers (migration.gv.at)",
@@ -36533,7 +36564,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Niederlassungsbewilligung – ausgenommen Erwerbstätigkeit – Antrag (oesterreich.gv.at)",
@@ -36572,7 +36603,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Permit to Reside — Bahamas Department of Immigration",
@@ -36611,7 +36642,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Home Owner Identification — Bahamas Department of Immigration",
@@ -36653,7 +36684,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Permanent Residence — Bahamas Department of Immigration",
@@ -36695,7 +36726,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "NPRA — Golden Residency for Foreigners Owning Real Estate in Bahrain",
@@ -36734,7 +36765,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Bahrain eGovernment portal — Golden Residency Visa Issuance Request (eService)",
@@ -36775,7 +36806,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "NPRA — Golden Residency (general information, terms and fees)",
@@ -36814,7 +36845,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Barbados Immigration Department — Work Permits",
@@ -36853,7 +36884,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Barbados Immigration Department — Special Entry Permit",
@@ -36895,7 +36926,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Barbados Immigration Department — Special Entry Permit",
@@ -36934,7 +36965,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "GIS Barbados — Barbados Welcome Stamp Statistics As Of April 30, 2024 (Cabinet renewal to Dec 31, 2026)",
@@ -36973,7 +37004,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Self-employment — coming to work in Belgium — Belgium.be",
@@ -37015,7 +37046,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "The Economic Investment Residential Certificate Policy (Revised June 2024), Ministry of Economy and Labour",
@@ -37054,7 +37085,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "The Economic Investment Residential Certificate Policy (Revised June 2024), Ministry of Economy and Labour",
@@ -37093,7 +37124,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "One Year Residential Certificate — Government of Bermuda online service",
@@ -37132,7 +37163,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Notice - Termination of the backlog of applications in the federal Immigrant Investor Program and federal Entrepreneur Program (IRCC)",
@@ -37171,7 +37202,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Provincial Nominee Program (IRCC)",
@@ -37215,7 +37246,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Conditions for immigrating to Quebec as an investor (MIFI)",
@@ -37254,7 +37285,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Start-up Visa Program (IRCC); see also Update on Immigration Measures for Entrepreneurs, Dec 2025",
@@ -37296,7 +37327,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "WORC Annual Declaration for Holder of a Certificate of Direct Investment (2026/05)",
@@ -37340,7 +37371,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "WORC Form R42 (2026/05) — Application for Certificate of Permanent Residence, Person of Independent Means",
@@ -37382,7 +37413,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "WORC Form AF41 (2026/07) — Annual Declaration, Residency Certificate for Persons of Independent Means",
@@ -37421,7 +37452,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "WORC Form R50 (2026/05) — Application for Residency Certificate, Substantial Business Presence",
@@ -37465,7 +37496,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "NIA — Guidelines for Approval of Foreign Nationals' Eligibility for Permanent Residence in China",
@@ -37509,7 +37540,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "NIA — Guidelines for APRC (Plum Blossom Card): special contributions, senior professionals, investment immigrants",
@@ -37553,7 +37584,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "NIA — Guidelines for APRC (Plum Blossom Card): special contributions, senior professionals, investment immigrants",
@@ -37595,7 +37626,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Taiwan Entrepreneur Visa — Small and Medium Enterprise and Startup Administration, MOEA",
@@ -37637,7 +37668,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Bureau of Consular Affairs, MOFA — Resident Visas for Investment",
@@ -37681,7 +37712,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Costa Rica — Dirección General de Migración",
@@ -37725,7 +37756,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Costa Rica — Dirección General de Migración",
@@ -37769,7 +37800,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Costa Rica — Dirección General de Migración",
@@ -37811,7 +37842,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Immigration Permits for Investors — Migration Department, Republic of Cyprus",
@@ -37850,11 +37881,91 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Visitors and family members — Migration Department, Republic of Cyprus",
           "url": "https://www.gov.cy/mip-md/en/documents/visitors-and-family-members/"
+        }
+      ]
+    },
+    {
+      "id": "denmark-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "208",
+        "name": "Denmark"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No passive residence-by-investment (golden visa)",
+      "summary": "Denmark has no passive capital-contribution or real-estate golden-visa residence route.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "denmark-golden-visa-verified-negative-principal",
+          "label": "No passive residence-by-investment (golden visa)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "New to Denmark — Work schemes overview",
+          "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work"
+        }
+      ]
+    },
+    {
+      "id": "denmark-startup-denmark",
+      "country": {
+        "iso_n3": "208",
+        "name": "Denmark"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Start-up Denmark residence and work permit",
+      "summary": "Residence for non-EU founders whose innovative growth idea is approved by a Danish Business Authority expert panel, then granted by SIRI.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "denmark-startup-denmark-principal",
+          "label": "Start-up Denmark residence and work permit",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "New to Denmark — Start-up Denmark",
+          "url": "https://www.nyidanmark.dk/en-GB/You-want-to-apply/Work/Start-up-Denmark"
         }
       ]
     },
@@ -37894,7 +38005,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "DGM — Residencia Permanente en calidad de Inversionista",
@@ -37935,7 +38046,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "DGM — Residencia Temporal (RT-9)",
@@ -37976,7 +38087,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "MIREX Servicios 360 — Visas (RS: Pensionados/Rentistas Ley 171-07)",
@@ -38017,7 +38128,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "DGM — Residencia por Inversión en calidad de Rentista",
@@ -38059,11 +38170,138 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Estonia Digital Nomad Visa — e-Residency",
           "url": "https://www.e-resident.gov.ee/nomadvisa/"
+        }
+      ]
+    },
+    {
+      "id": "finland-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "246",
+        "name": "Finland"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No passive residence-by-investment (golden visa)",
+      "summary": "Finland has no passive capital or property golden-visa residence route.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "finland-golden-visa-verified-negative-principal",
+          "label": "No passive residence-by-investment (golden visa)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migri — Residence permits overview",
+          "url": "https://migri.fi/en/residence-permit"
+        }
+      ]
+    },
+    {
+      "id": "finland-specialist",
+      "country": {
+        "iso_n3": "246",
+        "name": "Finland"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Residence permit for a specialist",
+      "summary": "Residence for highly skilled employment requiring special expertise, with a 2026 gross salary floor of EUR 3,937 per month.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3937,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "finland-specialist-principal",
+          "label": "Residence permit for a specialist",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migri — Specialist residence permit",
+          "url": "https://migri.fi/en/specialist"
+        }
+      ]
+    },
+    {
+      "id": "finland-startup-entrepreneur",
+      "country": {
+        "iso_n3": "246",
+        "name": "Finland"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Residence permit for a start-up entrepreneur",
+      "summary": "Residence for founders of a growth-oriented start-up after a favourable Business Finland eligibility statement; Migri issues the permit.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1210,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "finland-startup-entrepreneur-principal",
+          "label": "Residence permit for a start-up entrepreneur",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migri — Start-up entrepreneur residence permit",
+          "url": "https://migri.fi/en/start-up-entrepreneur"
         }
       ]
     },
@@ -38103,7 +38341,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Service-Public.fr — Carte talent : carte de séjour pluriannuelle d'un étranger en France (F16922)",
@@ -38147,7 +38385,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Légifrance — CESEDA art. R421-35 (talent-porteur de projet, investissement économique direct)",
@@ -38189,7 +38427,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
@@ -38233,7 +38471,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
@@ -38275,7 +38513,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
@@ -38314,7 +38552,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Aufenthaltsgesetz (AufenthG) — consolidated text (Gesetze im Internet, BMJ)",
@@ -38355,7 +38593,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "§ 21 AufenthG — Selbständige Tätigkeit (Gesetze im Internet, BMJ)",
@@ -38397,7 +38635,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Greece Ministry of Migration",
@@ -38439,7 +38677,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Greece Ministry of Migration",
@@ -38483,7 +38721,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Greek Ministry of Migration — Golden Visa",
@@ -38522,7 +38760,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Guatemala — IGM, Reglamento de Residencias (Acuerdo IGM-016-2025)",
@@ -38561,7 +38799,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Capital Investment Entrant Scheme (suspended) — Immigration Department",
@@ -38605,7 +38843,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "New CIES — Investment Requirement (InvestHK official portal)",
@@ -38647,7 +38885,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Hungary Guest Investor Programme — OIF",
@@ -38691,7 +38929,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "E28B Visa Investor Pendirian Perusahaan — Direktorat Jenderal Imigrasi",
@@ -38735,7 +38973,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "E28D Visa Investor Pendirian Cabang atau Anak Perusahaan — Direktorat Jenderal Imigrasi",
@@ -38779,7 +39017,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "E28C Visa Investor Perorangan (Pasar Modal) — Direktorat Jenderal Imigrasi",
@@ -38823,7 +39061,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "E28A Visa Investor — Direktorat Jenderal Imigrasi",
@@ -38865,7 +39103,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "E33 Visa Rumah Kedua — Direktorat Jenderal Imigrasi",
@@ -38907,7 +39145,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Minister Harris announces closure of the Immigrant Investor Programme (Department of Justice, Home Affairs and Migration)",
@@ -38949,7 +39187,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Start-up Entrepreneur Programme (STEP) — Immigration Service Delivery",
@@ -38993,7 +39231,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Investor Visa for Italy — MISE",
@@ -39037,7 +39275,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "在留資格「経営・管理」に係る上陸基準省令等の改正について (Immigration Services Agency)",
@@ -39076,7 +39314,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "外国人起業家（外国人起業活動促進事業） (Immigration Services Agency)",
@@ -39118,7 +39356,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Korea Immigration Service (Ministry of Justice) — Visa Navigator",
@@ -39162,7 +39400,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Ministry of Justice — 공익사업 투자이민제 (Public Business Investment Immigration)",
@@ -39206,7 +39444,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Incheon Free Economic Zone Authority — Investor Immigration System",
@@ -39250,11 +39488,135 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Latvia — Office of Citizenship and Migration Affairs",
           "url": "https://www.pmlp.gov.lv/en/residence-permit"
+        }
+      ]
+    },
+    {
+      "id": "lithuania-business-activity-residence",
+      "country": {
+        "iso_n3": "440",
+        "name": "Lithuania"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Temporary residence for lawful business activity",
+      "summary": "Temporary residence tied to operating a Lithuanian company with minimum equity and own-capital participation — active business, not passive portfolio investment.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 14000,
+        "currency": "EUR"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "lithuania-business-activity-residence-principal",
+          "label": "Temporary residence for lawful business activity",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migration Department (migracija.lt) — residence permits for third-country nationals",
+          "url": "https://www.migracija.lt/en/home"
+        }
+      ]
+    },
+    {
+      "id": "lithuania-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "440",
+        "name": "Lithuania"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No passive residence-by-investment (golden visa)",
+      "summary": "Lithuania has no passive property or donation golden-visa residence route.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "lithuania-golden-visa-verified-negative-principal",
+          "label": "No passive residence-by-investment (golden visa)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migration Department (migracija.lt) — residence permits for third-country nationals",
+          "url": "https://www.migracija.lt/en/home"
+        }
+      ]
+    },
+    {
+      "id": "lithuania-startup-visa",
+      "country": {
+        "iso_n3": "440",
+        "name": "Lithuania"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Start-up Visa temporary residence",
+      "summary": "Temporary residence for non-EU founders of an innovative start-up after Startup Lithuania / Enterprise Lithuania endorsement, then Migration Department decision.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "lithuania-startup-visa-principal",
+          "label": "Start-up Visa temporary residence",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migration Department (migracija.lt) — residence permits for third-country nationals",
+          "url": "https://www.migracija.lt/en/home"
         }
       ]
     },
@@ -39294,7 +39656,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Loi du 8 mars 2017 portant modification de la loi modifiée du 29 août 2008 sur la libre circulation des personnes et l'immigration — Legilux",
@@ -39338,7 +39700,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Conditions of residence for investors from third countries — Guichet.lu",
@@ -39382,7 +39744,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Demande de titre de séjour pour investisseur — Ministère des Finances",
@@ -39426,7 +39788,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Conditions of residence for investors from third countries — Guichet.lu",
@@ -39468,7 +39830,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "IPIM — Assessment Criteria for Temporary Residency: Major Investment / Investment Plan",
@@ -39507,7 +39869,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "IPIM — Temporary Residency (Administrative Regulation 3/2005 status notes)",
@@ -39546,7 +39908,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "IPIM — Temporary Residency (Administrative Regulation 3/2005 status notes)",
@@ -39588,7 +39950,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Malaysia DE Rantau — MDEC",
@@ -39630,7 +39992,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Malaysia MM2H — official programme",
@@ -39674,7 +40036,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Malta Permanent Residence Programme — Residency Malta",
@@ -39716,7 +40078,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Malta Nomad Residence Permit — Residency Malta",
@@ -39760,7 +40122,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Mauritius EDB — Residency",
@@ -39804,7 +40166,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Mauritius EDB — Retired Non-Citizen",
@@ -39848,7 +40210,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Mexico — Instituto Nacional de Migración",
@@ -39892,7 +40254,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Mexico — Instituto Nacional de Migración",
@@ -39931,7 +40293,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Demander une carte de séjour — Service Public Particuliers, Principauté de Monaco",
@@ -39975,7 +40337,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Government of Montserrat — Citizenship & Residence Information (Office of the Deputy Governor): Permit of Economic Residence, S.R.O. 8/1998",
@@ -40019,7 +40381,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Netherlands — IND self-employed residence",
@@ -40063,7 +40425,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Immigration & Border Protection Services — online application portal FAQ, Government of Sint Maarten",
@@ -40102,7 +40464,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Government of Sint Maarten",
@@ -40143,7 +40505,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Immigration & Border Protection Services — online application portal FAQ, Government of Sint Maarten",
@@ -40187,7 +40549,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Immigration New Zealand — Active Investor Plus Visa",
@@ -40231,7 +40593,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Immigration New Zealand — Active Investor Plus Visa",
@@ -40275,7 +40637,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Business Investor Visa offers new immigration options for investors — Immigration New Zealand",
@@ -40319,7 +40681,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Entrepreneur Work Visa — Immigration New Zealand",
@@ -40361,7 +40723,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Investor 1 Resident Visa — Immigration New Zealand",
@@ -40405,7 +40767,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Panama — Servicio Nacional de Migración",
@@ -40449,7 +40811,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Panama — Servicio Nacional de Migración",
@@ -40493,7 +40855,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Panama — Servicio Nacional de Migración",
@@ -40535,7 +40897,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Paraguay DNM — Paraguay Investor Pass",
@@ -40574,7 +40936,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Paraguay — Dirección Nacional de Migraciones (Res. DNM 407/2026)",
@@ -40621,7 +40983,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Philippine Retirement Authority — SRRV",
@@ -40665,7 +41027,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Portugal visas portal (MNE) — D8",
@@ -40709,7 +41071,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Portugal visas portal (MNE) — D8",
@@ -40753,7 +41115,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "AIMA — Autorização de Residência para Atividade de Investimento",
@@ -40795,7 +41157,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Aqarat (Real Estate Regulatory Authority) — Own real estate: privileges granted to non-Qatari ownership",
@@ -40837,11 +41199,91 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Aqarat (Real Estate Regulatory Authority) — Own real estate: privileges granted to non-Qatari ownership",
           "url": "https://www.aqarat.gov.qa/en/investors-journey/own-real-estate/"
+        }
+      ]
+    },
+    {
+      "id": "romania-commercial-activity-long-stay",
+      "country": {
+        "iso_n3": "642",
+        "name": "Romania"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Long-stay for commercial / economic activity",
+      "summary": "Long-stay visa and temporary residence for third-country nationals carrying out economic activities in Romania under the aliens legislation — active business, not a passive golden visa.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "romania-commercial-activity-long-stay-principal",
+          "label": "Long-stay for commercial / economic activity",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Romanian MFA — long-stay visa information",
+          "url": "https://www.mae.ro/en/node/2035"
+        }
+      ]
+    },
+    {
+      "id": "romania-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "642",
+        "name": "Romania"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No enacted passive golden-visa residence programme",
+      "summary": "Romania has no enacted passive capital or listed-share golden-visa residence statute as of July 2026 review.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "romania-golden-visa-verified-negative-principal",
+          "label": "No enacted passive golden-visa residence programme",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Romanian MFA — long-stay visa information",
+          "url": "https://www.mae.ro/en/node/2035"
         }
       ]
     },
@@ -40879,7 +41321,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Select Anguilla — High Value Resident / Tax Residency (official Government of Anguilla RBI portal)",
@@ -40923,7 +41365,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Select Anguilla — Residence by Investment (official Government of Anguilla RBI portal)",
@@ -40967,7 +41409,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Select Anguilla — Residence by Investment (official Government of Anguilla RBI portal)",
@@ -41009,7 +41451,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Premium Residency Center — Entrepreneur Residency",
@@ -41051,7 +41493,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Premium Residency Center — Investor Residency",
@@ -41093,7 +41535,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Premium Residency Center — Real Estate Owner Residency",
@@ -41134,7 +41576,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Premium Residency Center — Special Talent Residency",
@@ -41176,7 +41618,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Premium Residency Center — Limited Duration and Unlimited Duration Premium Residency",
@@ -41215,7 +41657,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "MOM — Eligibility for EntrePass",
@@ -41257,7 +41699,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "EDB Global Investor Programme Factsheet (updated 5 May 2025)",
@@ -41296,7 +41738,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "MOM — Eligibility for Overseas Networks & Expertise Pass",
@@ -41338,7 +41780,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Luật số 51/2019/QH14 — Cổng Thông tin điện tử Chính phủ (official gazette page with signed PDF)",
@@ -41377,7 +41819,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Luật số 51/2019/QH14 — Cổng Thông tin điện tử Chính phủ (official gazette page with signed PDF)",
@@ -41421,7 +41863,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "South Africa — Department of Home Affairs",
@@ -41465,7 +41907,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "South Africa — Department of Home Affairs",
@@ -41509,7 +41951,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Spain — Ministerio de Inclusión (extranjería)",
@@ -41553,7 +41995,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Spain — Ministerio de Inclusión (extranjería)",
@@ -41594,7 +42036,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "FNIA (SR 142.20) Art. 30(1)(b); VZAE (SR 142.201) Art. 32; DBG (SR 642.11) Art. 14 — Fedlex",
@@ -41635,7 +42077,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "VZAE (SR 142.201), Art. 25 — Rentnerinnen und Rentner (implementing Art. 28 FNIA) — Fedlex",
@@ -41677,7 +42119,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Thailand LTR Visa — BOI",
@@ -41719,7 +42161,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Thailand LTR Visa — BOI",
@@ -41761,7 +42203,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Thailand LTR Visa — BOI",
@@ -41803,7 +42245,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "UAE Government — Golden Visa",
@@ -41842,7 +42284,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "UAE Government — Golden Visa",
@@ -41884,7 +42326,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "UAE residence visas — u.ae",
@@ -41926,7 +42368,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "UAE residence visas — u.ae",
@@ -41968,7 +42410,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Permanent Residence Certificate — Department of Citizenship & Naturalization, TCI Government",
@@ -42010,7 +42452,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Permanent Residence Certificate — Department of Citizenship & Naturalization, TCI Government",
@@ -42051,7 +42493,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Residence Permit Application — Ministry of Immigration and Border Services, TCI Government",
@@ -42092,7 +42534,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Innovator Founder visa - GOV.UK",
@@ -42131,7 +42573,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Statement of changes to the Immigration Rules: CP 632, 17 February 2022",
@@ -42170,7 +42612,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "USCIS - E-2 Treaty Investors",
@@ -42212,7 +42654,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "USCIS - About the EB-5 Visa Classification",
@@ -42254,7 +42696,7 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "USCIS - About the EB-5 Visa Classification",
@@ -42296,7 +42738,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "USCIS - Form I-140G, Immigrant Petition for the Gold Card Program",
@@ -42335,7 +42777,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Uruguay — Dirección Nacional de Migración",
@@ -42377,7 +42819,7 @@
         }
       ],
       "confidence": "medium",
-      "last_checked": "2026-07-27",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "Uzbekistan — Presidential Decree PF-67 (lex.uz)",
