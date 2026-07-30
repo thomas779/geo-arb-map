@@ -455,6 +455,50 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(byId.get('palau-rns-digital-residency-id')?.category).toBe('digital_identity');
   });
 
+  test('digital nomad N2 Americas: Argentina transitory + Panama remote worker', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    const ar = byId.get('argentina-digital-nomad-transitory');
+    expect(ar?.category).toBe('digital_nomad');
+    expect(ar?.counts_toward_permanent_residence).toBe(false);
+    expect(ar?.counts_toward_naturalization).toBe(false);
+    expect(ar?.summary).toMatch(/180 days|transitory/i);
+    const pa = byId.get('panama-remote-worker-short-stay');
+    expect(pa?.category).toBe('digital_nomad');
+    expect(pa?.counts_toward_permanent_residence).toBe(false);
+    expect(pa?.min_income_monthly?.amount).toBe(3000);
+  });
+
+  test('residence batch 7 British islands HNW/business routes + golden-visa negatives', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    for (const id of [
+      'gibraltar-hnw-residence',
+      'gibraltar-passive-golden-visa-verified-negative',
+      'isle-of-man-entrepreneur-investor-residence',
+      'isle-of-man-golden-visa-verified-negative',
+      'jersey-business-high-value-residence',
+      'jersey-golden-visa-verified-negative',
+    ]) {
+      expect(byId.has(id), id).toBe(true);
+    }
+    expect(byId.get('gibraltar-passive-golden-visa-verified-negative')?.status).toBe('verified_negative');
+    expect(byId.get('isle-of-man-golden-visa-verified-negative')?.status).toBe('verified_negative');
+  });
+
+  test('digital nomad N1 Europe/Black Sea batch (CY RO + GE/DE/TR negatives)', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    expect(byId.get('cyprus-digital-nomad-visa')?.category).toBe('digital_nomad');
+    expect(byId.get('cyprus-digital-nomad-visa')?.counts_toward_permanent_residence).toBe(false);
+    expect(byId.get('romania-digital-nomad-visa')?.counts_toward_naturalization).toBe(false);
+    for (const id of [
+      'georgia-digital-nomad-verified-negative',
+      'germany-digital-nomad-verified-negative',
+      'turkey-digital-nomad-verified-negative',
+    ]) {
+      expect(byId.get(id)?.status).toBe('verified_negative');
+      expect(byId.get(id)?.category).toBe('digital_nomad');
+    }
+  });
+
   test('digital nomad coverage batch adds Croatia Italy Hungary Colombia with no PR/citizenship path', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
     for (const id of [

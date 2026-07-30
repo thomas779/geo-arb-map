@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 172
+      "residence_routes": 185
     }
   },
   "jurisdictions": [
@@ -201,7 +201,13 @@
         "argentina-naturalization-after-residence",
         "argentina-citizenship-by-birth",
         "argentina-relevant-investment-citizenship"
-      ]
+      ],
+      "residence_route_ids": [
+        "argentina-digital-nomad-transitory"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "036",
@@ -1049,11 +1055,13 @@
       ],
       "residence_route_ids": [
         "cyprus-immigration-permit-investor",
-        "cyprus-visitor-pink-slip"
+        "cyprus-visitor-pink-slip",
+        "cyprus-digital-nomad-visa"
       ],
       "residence_coverage": {
         "investment": "reviewed",
-        "retirement_pension": "reviewed"
+        "retirement_pension": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -1484,10 +1492,12 @@
       "residence_route_ids": [
         "georgia-investment-residence",
         "georgia-real-estate-short-term-residence",
-        "georgia-permanent-residence-investment"
+        "georgia-permanent-residence-investment",
+        "georgia-digital-nomad-verified-negative"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -1540,10 +1550,12 @@
       ],
       "residence_route_ids": [
         "germany-self-employment-21-aufenthg",
-        "germany-golden-visa"
+        "germany-golden-visa",
+        "germany-digital-nomad-verified-negative"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -1577,7 +1589,14 @@
         "gibraltar-nationality-by-descent",
         "gibraltar-naturalization",
         "gibraltar-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "gibraltar-hnw-residence",
+        "gibraltar-passive-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "296",
@@ -3130,11 +3149,13 @@
       "residence_route_ids": [
         "panama-friendly-nations-visa",
         "panama-qualified-investor-visa",
-        "panama-pensionado"
+        "panama-pensionado",
+        "panama-remote-worker-short-stay"
       ],
       "residence_coverage": {
         "investment": "reviewed",
-        "retirement_pension": "reviewed"
+        "retirement_pension": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -3381,10 +3402,12 @@
       ],
       "residence_route_ids": [
         "romania-commercial-activity-long-stay",
-        "romania-golden-visa-verified-negative"
+        "romania-golden-visa-verified-negative",
+        "romania-digital-nomad-visa"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -4168,7 +4191,13 @@
         "turkiye-naturalization-by-residence",
         "turkiye-citizenship-by-birth-statelessness",
         "turkiye-exceptional-investor-citizenship"
-      ]
+      ],
+      "residence_route_ids": [
+        "turkey-digital-nomad-verified-negative"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "795",
@@ -4349,7 +4378,14 @@
         "jersey-nationality-by-descent",
         "jersey-naturalization",
         "jersey-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "jersey-business-high-value-residence",
+        "jersey-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "833",
@@ -4365,7 +4401,14 @@
         "isle-of-man-nationality-by-descent",
         "isle-of-man-naturalization",
         "isle-of-man-citizenship-at-birth"
-      ]
+      ],
+      "residence_route_ids": [
+        "isle-of-man-entrepreneur-investor-residence",
+        "isle-of-man-golden-visa-verified-negative"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
+      }
     },
     {
       "iso_n3": "834",
@@ -36379,6 +36422,47 @@
       ]
     },
     {
+      "id": "argentina-digital-nomad-transitory",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Transitory residence for digital nomads (remote work)",
+      "summary": "Transitory residence under Ley 25.871 art. 24(h) / DNM Disposición 758/2022 for foreigners working remotely for activity and income outside Argentina — up to 180 days, typically extendable once.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          6
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "argentina-digital-nomad-transitory-principal",
+          "label": "Transitory residence for digital nomads (remote work)",
+          "allocation": "discretionary",
+          "eligibility_months": 6
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Infoleg — Ley 25.871 (migración) texto actualizado",
+          "url": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/90000-94999/92016/texact.htm"
+        }
+      ]
+    },
+    {
       "id": "australia-biip-188",
       "country": {
         "iso_n3": "036",
@@ -38166,6 +38250,50 @@
       ]
     },
     {
+      "id": "cyprus-digital-nomad-visa",
+      "country": {
+        "iso_n3": "196",
+        "name": "Cyprus"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Cyprus Digital Nomad Visa residence permit",
+      "summary": "Residence permit for non-EU/EEA nationals providing remote services via ICT to companies or clients outside Cyprus under the official Digital Nomad Visa scheme.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3500,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cyprus-digital-nomad-visa-principal",
+          "label": "Cyprus Digital Nomad Visa residence permit",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Gov.cy — Cyprus Digital Nomad Visa scheme announcement",
+          "url": "https://www.gov.cy/en/migration/announcement-by-the-deputy-ministry-of-migration-and-international-protection-on-cyprus-digital-nomad-visa-scheme/"
+        }
+      ]
+    },
+    {
       "id": "cyprus-immigration-permit-investor",
       "country": {
         "iso_n3": "196",
@@ -38834,6 +38962,45 @@
       ]
     },
     {
+      "id": "georgia-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "268",
+        "name": "Georgia"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad residence permit",
+      "summary": "Georgia has no standalone digital-nomad residence stamp comparable to Croatia or Spain; remote workers from many countries rely on long visa-free stays rather than a remote-work permit.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "georgia-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad residence permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Law of Georgia on the Legal Status of Aliens and Stateless Persons (consolidated, Art. 15-16)",
+          "url": "https://matsne.gov.ge/en/document/view/2278806"
+        }
+      ]
+    },
+    {
       "id": "georgia-investment-residence",
       "country": {
         "iso_n3": "268",
@@ -38962,6 +39129,45 @@
       ]
     },
     {
+      "id": "germany-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "276",
+        "name": "Germany"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad residence permit",
+      "summary": "Germany has no branded digital-nomad visa; remote workers use ordinary employment, freelance (§ 21(5) freelancers), or other AufenthG titles when they qualify.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "germany-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad residence permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Aufenthaltsgesetz (AufenthG) — consolidated text (Gesetze im Internet, BMJ)",
+          "url": "https://www.gesetze-im-internet.de/aufenthg_2004/"
+        }
+      ]
+    },
+    {
       "id": "germany-golden-visa",
       "country": {
         "iso_n3": "276",
@@ -39038,6 +39244,86 @@
         {
           "title": "§ 21 AufenthG — Selbständige Tätigkeit (Gesetze im Internet, BMJ)",
           "url": "https://www.gesetze-im-internet.de/aufenthg_2004/__21.html"
+        }
+      ]
+    },
+    {
+      "id": "gibraltar-hnw-residence",
+      "country": {
+        "iso_n3": "292",
+        "name": "Gibraltar"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "High Net Worth Individual residence (Category 2 / HNW)",
+      "summary": "Gibraltar residence schemes for high-net-worth individuals under local income-tax category rules — not an EU free-movement status.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "gibraltar-hnw-residence-principal",
+          "label": "High Net Worth Individual residence (Category 2 / HNW)",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "HM Government of Gibraltar — Civil Status and Registration Office",
+          "url": "https://www.gibraltar.gov.gi/uploads/CivilStatus/"
+        }
+      ]
+    },
+    {
+      "id": "gibraltar-passive-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "292",
+        "name": "Gibraltar"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No passive real-estate golden visa",
+      "summary": "Gibraltar does not offer a simple property-purchase golden visa comparable to Caribbean CIP-style residence.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "gibraltar-passive-golden-visa-verified-negative-principal",
+          "label": "No passive real-estate golden visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "HM Government of Gibraltar",
+          "url": "https://www.gibraltar.gov.gi/"
         }
       ]
     },
@@ -41434,6 +41720,50 @@
       ]
     },
     {
+      "id": "panama-remote-worker-short-stay",
+      "country": {
+        "iso_n3": "591",
+        "name": "Panama"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Short-stay visa for remote workers (trabajador remoto)",
+      "summary": "Short-stay visa created by Executive Decree 198 of 2021 for remote workers serving foreign employers or clients from Panama — typically 9 months, often extendable once.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3000,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          9
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "panama-remote-worker-short-stay-principal",
+          "label": "Short-stay visa for remote workers (trabajador remoto)",
+          "allocation": "discretionary",
+          "eligibility_months": 9
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migración Panamá — short-stay remote worker requirements (PDF)",
+          "url": "https://www.migracion.gob.pa/wp-content/uploads/18.REQUISITOS-PARA-SOLICITAR-VISA-DE-CORTA-ESTANCIA-COMO-TRABAJADOR-REMOTO.pdf"
+        }
+      ]
+    },
+    {
       "id": "paraguay-investor-pass",
       "country": {
         "iso_n3": "600",
@@ -41890,6 +42220,50 @@
         {
           "id": "romania-commercial-activity-long-stay-principal",
           "label": "Long-stay for commercial / economic activity",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Romanian MFA — long-stay visa information",
+          "url": "https://www.mae.ro/en/node/2035"
+        }
+      ]
+    },
+    {
+      "id": "romania-digital-nomad-visa",
+      "country": {
+        "iso_n3": "642",
+        "name": "Romania"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Digital nomad long-stay visa / temporary residence",
+      "summary": "Long-stay D-category route for non-EU nationals working remotely via ICT for a foreign employer or own foreign company, followed by temporary residence with IGI.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3700,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "romania-digital-nomad-visa-principal",
+          "label": "Digital nomad long-stay visa / temporary residence",
           "allocation": "discretionary",
           "eligibility_months": 12
         }
@@ -43032,6 +43406,45 @@
       ]
     },
     {
+      "id": "turkey-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "792",
+        "name": "Türkiye"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad residence permit (as of review)",
+      "summary": "Turkey has not enacted a clear standalone digital-nomad residence category comparable to Croatia or Spain; remote workers use ordinary short-stay, work, or other residence titles when they qualify.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "turkey-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad residence permit (as of review)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Presidency of Migration Management (Göç İdaresi) — e-Residence",
+          "url": "https://e-ikamet.goc.gov.tr/"
+        }
+      ]
+    },
+    {
       "id": "turks-and-caicos-prc-business-investment",
       "country": {
         "iso_n3": "796",
@@ -43233,6 +43646,166 @@
         {
           "title": "Statement of changes to the Immigration Rules: CP 632, 17 February 2022",
           "url": "https://www.gov.uk/government/publications/statement-of-changes-to-the-immigration-rules-cp-632-17-february-2022"
+        }
+      ]
+    },
+    {
+      "id": "jersey-business-high-value-residence",
+      "country": {
+        "iso_n3": "832",
+        "name": "Jersey"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "High Value Resident / business residence pathways",
+      "summary": "Jersey controls its own immigration and offers high-value resident and business-related residential permissions — not an EU golden visa.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "jersey-business-high-value-residence-principal",
+          "label": "High Value Resident / business residence pathways",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Government of Jersey — Immigration",
+          "url": "https://www.gov.je/Travel/Immigration/Pages/default.aspx"
+        }
+      ]
+    },
+    {
+      "id": "jersey-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "832",
+        "name": "Jersey"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No passive property golden visa",
+      "summary": "Jersey does not offer a simple real-estate purchase route to residence comparable to Mediterranean golden visas.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "jersey-golden-visa-verified-negative-principal",
+          "label": "No passive property golden visa",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Government of Jersey — Immigration",
+          "url": "https://www.gov.je/Travel/Immigration/Pages/default.aspx"
+        }
+      ]
+    },
+    {
+      "id": "isle-of-man-entrepreneur-investor-residence",
+      "country": {
+        "iso_n3": "833",
+        "name": "Isle of Man"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Business Migrant / entrepreneur residence routes",
+      "summary": "Isle of Man residence for non-settled persons via business migrant and related economic routes under Immigration Rules — Crown Dependency controls its own immigration.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "isle-of-man-entrepreneur-investor-residence-principal",
+          "label": "Business Migrant / entrepreneur residence routes",
+          "allocation": "discretionary",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Isle of Man Government — Immigration",
+          "url": "https://www.gov.im/categories/travel-traffic-and-motoring/immigration/"
+        }
+      ]
+    },
+    {
+      "id": "isle-of-man-golden-visa-verified-negative",
+      "country": {
+        "iso_n3": "833",
+        "name": "Isle of Man"
+      },
+      "category": "investment",
+      "status": "verified_negative",
+      "title": "No passive golden visa / CIP residence",
+      "summary": "Isle of Man does not run a citizenship-by-investment or passive property golden-visa programme.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "isle-of-man-golden-visa-verified-negative-principal",
+          "label": "No passive golden visa / CIP residence",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Isle of Man Government — Immigration",
+          "url": "https://www.gov.im/categories/travel-traffic-and-motoring/immigration/"
         }
       ]
     },
