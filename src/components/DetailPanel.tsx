@@ -15,7 +15,7 @@ import { countryFlag } from '@/lib/country';
 import { displayRouteTitle } from '@/lib/display-title';
 import { dataCorrectionUrl } from '@/lib/trust';
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
-import { RESIDENCE_CATEGORY_SHORT, residenceLadderBadges } from '@/lib/residence';
+import { RESIDENCE_CATEGORY_SHORT, derivedResidenceAbsences, residenceLadderBadges } from '@/lib/residence';
 
 /*
  * The country panel is a SUMMARY companion to the map — a quick look that funnels
@@ -241,11 +241,16 @@ export function DetailPanel({
         <>
           <SectionHeading
             title="Residence & settlement"
-            description="Live-here routes (golden visas, digital nomad, digital ID, retirement, talent). Badges show whether time counts toward PR or citizenship."
+            description="Live-here routes. Badges show whether time counts toward PR or citizenship."
           />
           <div className="space-y-1.5">
             {residenceRoutes.map(route => <ResidenceRow key={route.id} route={route} />)}
           </div>
+          {derivedResidenceAbsences(residenceRoutes).length > 0 && (
+            <p className="mt-1.5 text-[0.7rem] leading-snug text-muted-foreground">
+              Not recorded here: {derivedResidenceAbsences(residenceRoutes).join('; ')}.
+            </p>
+          )}
         </>
       )}
 

@@ -24,6 +24,35 @@ export const RESIDENCE_CATEGORY_SHORT: Record<ResidenceCategory, string> = {
   general_permanent_residence: 'Permanent residence',
 };
 
+/**
+ * Categories a reader will actively look for on any country. When a reviewed
+ * jurisdiction simply has no row in one of these, the page derives a one-line
+ * "not recorded" statement instead of storing a negative route.
+ *
+ * Why derived: stored negatives had become an arbitrary signal — Germany had a
+ * "no golden visa" row while Sweden (same fact) had silence, and silence reads
+ * as "unchecked". Stored `verified_negative` rows are reserved for CONTESTED
+ * absences — every one of the 27 investment negatives is a country the IMC
+ * industry map claims has an RBI programme — while the default case is computed
+ * here, so it is consistent by construction.
+ */
+export const HEADLINE_CATEGORIES: ReadonlyArray<{ category: ResidenceCategory; absenceLabel: string }> = [
+  { category: 'investment', absenceLabel: 'golden visa / residence-by-investment' },
+  { category: 'digital_nomad', absenceLabel: 'digital-nomad programme' },
+];
+
+/**
+ * Headline categories with no row of ANY status for this jurisdiction.
+ * Fires only when the jurisdiction has residence coverage at all — deriving
+ * "no golden visa recorded" for a country whose residence layer was never
+ * reviewed would claim more than we know.
+ */
+export function derivedResidenceAbsences(residence: ResidenceRoute[]): string[] {
+  if (!residence.length) return [];
+  const present = new Set(residence.map(route => route.category));
+  return HEADLINE_CATEGORIES.filter(h => !present.has(h.category)).map(h => h.absenceLabel);
+}
+
 export const RESIDENCE_STATUS_ORDER = [
   'active',
   'pending_verification',
@@ -33,7 +62,11 @@ export const RESIDENCE_STATUS_ORDER = [
 
 export const RESIDENCE_STATUS_LABELS: Record<string, string> = {
   inactive: 'paused',
-  verified_negative: 'closed',
+  // Not "closed": a verified negative means the programme was checked and does
+  // not exist (every stored one is a contested claim, usually the IMC map).
+  // "closed" implied a programme once ran and ended — the wrong story on
+  // Germany, which never had a golden visa. Lapsed programmes use `inactive`.
+  verified_negative: 'does not exist',
   pending_verification: 'unverified',
 };
 

@@ -8,6 +8,7 @@ import {
   RESIDENCE_STATUS_LABELS,
   RESIDENCE_STATUS_ORDER,
   residenceLadderBadges,
+  derivedResidenceAbsences,
 } from '@/lib/residence';
 
 // Shared per-country page derivation + labels, used by the interactive app
@@ -254,6 +255,11 @@ function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
             </p>
           )}
       </div>
+      {filter === 'all' && derivedResidenceAbsences(residence).length > 0 && (
+        <p className="mt-3 text-xs text-muted-foreground">
+          Not recorded here: {derivedResidenceAbsences(residence).join('; ')}.
+        </p>
+      )}
     </section>
   );
 }
