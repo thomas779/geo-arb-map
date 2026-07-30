@@ -56,7 +56,8 @@
   vector-effect: non-scaling-stroke;
 }
 
-.micro-dot {
+.micro-dot,
+.selection-dot {
   cursor: pointer;
   transition: fill 0.15s;
   stroke: none;

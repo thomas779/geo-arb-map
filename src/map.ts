@@ -74,9 +74,27 @@ let _svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, unknown>;
 let _zoom: d3.ZoomBehavior<SVGSVGElement, unknown>;
 let _featureBounds: Map<string, [[number, number], [number, number]]>;
 let _featureCentroids: Map<string, [number, number]>;
+// Projected feature areas (px² at k=1), for the "too small to see its colour"
+// test. Derived from the geometry each resize — no hand-maintained list.
+let _featureAreas: Map<string, number> = new Map();
+let _featureNames: Map<string, string> = new Map();
+let _onSelect: ((iso: string, name: string) => void) | null = null;
+let _canHover = false;
+
+// Below this projected area a country's fill is effectively invisible, so
+// members of an ACTIVE selection under the threshold get a ringed dot.
+// Calibrated at a 1188×772 map: Singapore 0.5, Cyprus 6.7, Qatar 12.2,
+// Fiji 19.4, Rwanda 25.9 (in) vs Albania 35.1, Belgium 41.4, Switzerland
+// 53.7 (out — their paint reads fine). Scales with viewport: a smaller
+// window legitimately needs more dots.
+const SMALL_AREA_PX = 30;
 let _tooltip: HTMLElement;
 let _isReady = false;
 let _pendingRender: (() => void) | null = null;
+// Last painted (state, data), so resize can re-derive the selection dots:
+// which jurisdictions count as "small" depends on the projected size, and a
+// map that resized while hidden (0×0 container) computes every area as ~0.
+let _lastPaint: { state: AppState; data: BlocsData } | null = null;
 let _lastFocus: string | null = null;
 let _resizeObserver: ResizeObserver | null = null;
 let _abortController: AbortController | null = null;
@@ -88,6 +106,7 @@ export function init(
 ): () => void {
   if (_initialized) destroy();
   _initialized = true;
+  _onSelect = onSelect;
 
   // Build iso → blocs index (current members only; former_members excluded from count)
   _byCountry = new Map();
@@ -150,6 +169,9 @@ export function init(
       // Keep dots and their leader labels at constant screen size
       _gDots.selectAll<SVGCircleElement, MicroState>('circle.micro-dot')
         .attr('r', 5 / _currentK);
+      _gDots.selectAll<SVGCircleElement, { iso: string }>('circle.selection-dot')
+        .attr('r', 5 / _currentK)
+        .attr('stroke-width', 1.5 / _currentK);
       _gDots.selectAll('.dot-leader').remove();
     });
   svg.call(_zoom);
@@ -160,19 +182,32 @@ export function init(
     const h = wrap.clientHeight;
     svg.attr('viewBox', `0 0 ${w} ${h}`);
     _projection.fitSize([w, h], { type: 'Sphere' });
+    // Natural Earth ships some outlying territories as separate features that
+    // carry the parent's ISO code (Ashmore & Cartier Is. is a second "036").
+    // Keep the LARGEST feature's bounds/centroid per iso and sum the areas —
+    // last-write-wins let the reef overwrite Australia, which then "qualified"
+    // as a small jurisdiction and drew a phantom dot in the Timor Sea.
+    const largestArea = new Map<string, number>();
+    _featureAreas = new Map();
     _gMap.selectAll<SVGPathElement, d3.GeoPermissibleObjects>('path')
       .attr('d', d => _path(d))
       .each(function (d) {
         // Bounds must be captured AFTER fitSize — they're used for zoom framing
         const id = (d as unknown as { id: number | string }).id;
         const iso = String(id).padStart(3, '0');
-        _featureBounds.set(iso, _path.bounds(d));
-        // Area-weighted centroid — bbox centers break on antimeridian-crossing
-        // features (US/Russia/Fiji), whose boxes span the whole projection.
-        _featureCentroids.set(iso, _path.centroid(d));
+        const area = _path.area(d);
+        if (area > (largestArea.get(iso) ?? -1)) {
+          largestArea.set(iso, area);
+          _featureBounds.set(iso, _path.bounds(d));
+          // Area-weighted centroid — bbox centers break on antimeridian-crossing
+          // features (US/Russia/Fiji), whose boxes span the whole projection.
+          _featureCentroids.set(iso, _path.centroid(d));
+        }
+        _featureAreas.set(iso, (_featureAreas.get(iso) ?? 0) + area);
       });
     updateDotPositions();
     updateFlagPositions();
+    if (_isReady && _lastPaint) paintAll(_lastPaint.state, _lastPaint.data);
   }
   _resizeObserver = new ResizeObserver(resize);
   _resizeObserver.observe(document.getElementById('map-wrap')!);
@@ -194,7 +229,9 @@ export function init(
         geometry: unknown;
       }>;
 
+      features.forEach(f => _featureNames.set(String(f.id).padStart(3, '0'), f.properties.name));
       const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      _canHover = canHover;
       const countryPaths = _gMap.selectAll('path')
         .data(features)
         .join('path')
@@ -264,15 +301,19 @@ export function destroy(): void {
   if (_tooltip) _tooltip.style.display = 'none';
   _isReady = false;
   _pendingRender = null;
+  _lastPaint = null;
   _lastFocus = null;
   _currentK = 1;
   _initialized = false;
 }
 
 function updateDotPositions(): void {
-  _gDots.selectAll<SVGCircleElement, MicroState>('circle')
+  _gDots.selectAll<SVGCircleElement, MicroState>('circle.micro-dot')
     .attr('cx', d => (_projection([d.lon, d.lat]) ?? [0, 0])[0])
     .attr('cy', d => (_projection([d.lon, d.lat]) ?? [0, 0])[1]);
+  _gDots.selectAll<SVGCircleElement, string>('circle.selection-dot')
+    .attr('cx', iso => (_featureCentroids.get(iso) ?? [0, 0])[0])
+    .attr('cy', iso => (_featureCentroids.get(iso) ?? [0, 0])[1]);
 }
 
 function updateFlagPositions(): void {
@@ -328,8 +369,12 @@ function drawFlags(profile: Profile): void {
 }
 
 function showDotLeader(d: MicroState): void {
-  _gDots.selectAll('.dot-leader').remove();
   const [x, y] = _projection([d.lon, d.lat]) ?? [0, 0];
+  showDotLeaderAt(x, y, d.name);
+}
+
+function showDotLeaderAt(x: number, y: number, name: string): void {
+  _gDots.selectAll('.dot-leader').remove();
   const k = _currentK;
   const dx = 16 / k;
   const dy = -16 / k;
@@ -348,7 +393,7 @@ function showDotLeader(d: MicroState): void {
     .attr('stroke-width', 3 / k)
     .attr('paint-order', 'stroke')
     .style('font', `500 ${12 / k}px Inter, sans-serif`)
-    .text(d.name);
+    .text(name);
 }
 
 /** Animate the camera to frame a set of jurisdictions (with padding). */
@@ -539,22 +584,91 @@ function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   return IDLE_FILL[idleBucket(lookupIso)];
 }
 
+/** ISOs the current selection highlights (mobility-mapped), or null when idle. */
+function selectionIsos(state: AppState, data: BlocsData): Set<string> | null {
+  if (state.routeClass && _classIsos) {
+    return new Set([..._classIsos.cit, ..._classIsos.pr, ..._classIsos.tr]);
+  }
+  if (state.lane) {
+    const lane = data.bilateral_lanes.find(l => l.id === state.lane);
+    if (!lane) return new Set();
+    return new Set([lane.destination.iso_n3, ...lane.beneficiaries.map(m => m.iso_n3)]);
+  }
+  if (state.blocs.length) {
+    const isos = new Set<string>();
+    for (const bloc of data.blocs) {
+      if (state.blocs.includes(bloc.id)) bloc.members.forEach(m => isos.add(m.iso_n3));
+    }
+    return isos;
+  }
+  return null;
+}
+
 function paintAll(state: AppState, data: BlocsData): void {
+  _lastPaint = { state, data };
+  // A hidden container (display:none view, background window) projects every
+  // feature to ~0 px² — deriving smallness there would dot the whole selection.
+  // Skip the paint; the ResizeObserver re-runs it when real dimensions return.
+  if (!document.getElementById('map-wrap')?.clientWidth) return;
+  // Members of the active selection show a pointer cursor — they read as
+  // results, and the pointer says "this one is part of the answer". Idle land
+  // keeps the grab cursor so panning stays advertised.
+  const selected = selectionIsos(state, data);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   _gMap.selectAll<SVGPathElement, any>('.country')
-    .attr('fill', d => colorForIso(String(d.id).padStart(3, '0'), state, data));
+    .attr('fill', d => colorForIso(String(d.id).padStart(3, '0'), state, data))
+    .style('cursor', d =>
+      selected?.has(mobilityIso(String(d.id).padStart(3, '0'))) ? 'pointer' : null);
 
-  // Dots get an accent ring only when they belong to a selected bloc — a
+  // Dots get an accent ring only when they belong to the active selection — a
   // legitimate highlight, unlike using an outline to encode an idle category.
   _gDots.selectAll<SVGCircleElement, MicroState>('.micro-dot')
     .attr('fill', d => colorForIso(d.iso, state, data))
-    .attr('stroke', d => {
-      if (!state.blocs.length) return 'none';
-      const lookupIso = mobilityIso(d.iso);
-      const inSelected = data.blocs.some(b =>
-        state.blocs.includes(b.id) && b.members.some(m => m.iso_n3 === lookupIso));
-      return inSelected ? 'var(--map-accent)' : 'none';
-    });
+    .attr('stroke', d => (selected?.has(mobilityIso(d.iso)) ? 'var(--map-accent)' : 'none'));
+
+  // Small-area members of the active selection get a ringed dot: their polygon
+  // is too small to show its paint (Singapore, Vanuatu, São Tomé…). Smallness
+  // is derived from projected area — no hand list — and micro-states are
+  // excluded because they already carry a permanent dot.
+  const microIsos = new Set(MICRO_STATES.map(m => m.iso));
+  const smallSelected = selected
+    ? [...selected].filter(iso =>
+        !microIsos.has(iso)
+        && (_featureAreas.get(iso) ?? Infinity) < SMALL_AREA_PX
+        && _featureCentroids.has(iso))
+    : [];
+  _gDots.selectAll<SVGCircleElement, string>('circle.selection-dot')
+    .data(smallSelected, iso => String(iso))
+    .join(
+      enter => {
+        const dots = enter.append('circle')
+          .attr('class', 'selection-dot')
+          .attr('r', 5 / _currentK)
+          .attr('stroke-width', 1.5 / _currentK)
+          .on('click', (_e, iso) => _onSelect?.(iso, _featureNames.get(iso) ?? iso));
+        if (_canHover) {
+          dots
+            .on('mouseenter', (_e, iso) => {
+              const [x, y] = _featureCentroids.get(iso) ?? [0, 0];
+              showDotLeaderAt(x, y, _featureNames.get(iso) ?? iso);
+            })
+            .on('mousemove', (e, iso) => {
+              showTooltip(e as MouseEvent, _featureNames.get(iso) ?? iso, iso);
+            })
+            .on('mouseleave', () => {
+              hideTooltip();
+              _gDots.selectAll('.dot-leader').remove();
+            });
+        }
+        return dots;
+      },
+      update => update,
+      exit => exit.remove(),
+    )
+    .attr('cx', iso => _featureCentroids.get(iso)![0])
+    .attr('cy', iso => _featureCentroids.get(iso)![1])
+    .attr('fill', iso => colorForIso(iso, state, data))
+    .attr('stroke', 'var(--map-accent)');
 }
 
 export function render(state: AppState, data: BlocsData, profile: Profile = EMPTY_PROFILE): void {
