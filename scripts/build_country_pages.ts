@@ -31,12 +31,11 @@ import {
   routeLanesForPages,
 } from '../src/components/RightsProfile';
 import { buildCountrySlugMap } from '../src/lib/slug';
+import { isNonApplicableJurisdiction } from '../src/lib/country';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://flagpaths.com';
-// Uninhabited entries excluded from coverage (see src/App.tsx) — no pages.
-const NON_APPLICABLE = new Set(['086', '239', '260', '334']);
 
 const FONT_LINKS = '<link rel="preconnect" href="https://fonts.googleapis.com">'
   + '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
@@ -153,7 +152,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   const slugByIso = buildCountrySlugMap(citizenship.jurisdictions);
   const isos = citizenship.jurisdictions
     .map(j => j.iso_n3)
-    .filter(iso => !NON_APPLICABLE.has(iso));
+    .filter(iso => !isNonApplicableJurisdiction(iso));
 
   for (const iso of isos) {
     const data = deriveCountryProfile(iso, citizenship, mobility);

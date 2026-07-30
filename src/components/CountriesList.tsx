@@ -1,9 +1,6 @@
 import type { CitizenshipRoutesData } from '@/types';
 import { buildCountrySlugMap } from '@/lib/slug';
-import { countryFlag } from '@/lib/country';
-
-// Uninhabited entries excluded from coverage (see App.tsx) — no dedicated page.
-const NON_APPLICABLE = new Set(['086', '239', '260', '334']);
+import { countryFlag, isNonApplicableJurisdiction } from '@/lib/country';
 
 export function CountriesList({
   citizenshipRoutes,
@@ -13,7 +10,7 @@ export function CountriesList({
   const jurisdictions = citizenshipRoutes?.jurisdictions ?? [];
   const slugByIso = buildCountrySlugMap(jurisdictions);
   const items = jurisdictions
-    .filter(j => !NON_APPLICABLE.has(j.iso_n3))
+    .filter(j => !isNonApplicableJurisdiction(j.iso_n3))
     .map(j => ({ iso: j.iso_n3, name: j.name, slug: slugByIso.get(j.iso_n3)! }))
     .sort((a, b) => a.name.localeCompare(b.name));
 

@@ -31,6 +31,7 @@ import {
   deriveRouteProfile,
 } from '@/components/RightsProfile';
 import { buildSlugToIso, buildEntitySlugToId } from '@/lib/slug';
+import { isNonApplicableJurisdiction } from '@/lib/country';
 import { TrustCenter } from '@/components/TrustCenter';
 import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
@@ -103,9 +104,8 @@ export default function App() {
     const jurisdictions = citizenshipRoutes?.meta.counts.jurisdictions ?? 0;
     // Uninhabited entries with no permanent population confer no nationality, so
     // they are excluded from the coverage denominator (not from the tracked map).
-    const NON_APPLICABLE_JURISDICTIONS = new Set(['086', '239', '260', '334']);
     const applicableJurisdictions = citizenshipRoutes?.jurisdictions.filter(jurisdiction =>
-      !NON_APPLICABLE_JURISDICTIONS.has(jurisdiction.iso_n3),
+      !isNonApplicableJurisdiction(jurisdiction.iso_n3),
     ).length ?? 0;
     const reviewedJurisdictions = citizenshipRoutes?.jurisdictions.filter(jurisdiction =>
       Object.values(jurisdiction.coverage).every(state => state === 'reviewed'),

@@ -15,7 +15,7 @@ import { countryFlag } from '@/lib/country';
 import { displayRouteTitle } from '@/lib/display-title';
 import { dataCorrectionUrl } from '@/lib/trust';
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
-import { RESIDENCE_CATEGORY_SHORT } from '@/lib/residence';
+import { RESIDENCE_CATEGORY_SHORT, residenceLadderBadges } from '@/lib/residence';
 
 /*
  * The country panel is a SUMMARY companion to the map — a quick look that funnels
@@ -79,11 +79,17 @@ function CoverageStrip({
   );
 }
 
-function statusLabel(route: CitizenshipRoute): string {
+/**
+ * The badge earns attention only when it carries a caveat. 592 of 872 routes are
+ * high-confidence and active, and stamping "verified" on that majority trained
+ * readers to skip the badge — so the 278 medium and 2 low ones, the rows that
+ * actually need a second look, stopped landing. Returning null renders nothing.
+ */
+function statusLabel(route: CitizenshipRoute): string | null {
   if (route.status === 'inactive') return 'ended';
   if (route.status === 'verified_negative') return 'does not qualify';
   if (route.status === 'pending_verification') return 'verification pending';
-  return route.confidence === 'high' ? 'verified' : `${route.confidence} confidence`;
+  return route.confidence === 'high' ? null : `${route.confidence} confidence`;
 }
 
 /** Compact, non-expandable route row — title + mode + status; detail lives on the page. */
@@ -96,12 +102,11 @@ function RouteRow({ route }: { route: CitizenshipRoute }) {
         </span>
         <span className="block truncate text-sm font-medium leading-snug">{displayRouteTitle(route.title)}</span>
       </span>
-      <Badge
-        variant={route.status === 'active' && route.confidence === 'high' ? 'verified' : 'outline'}
-        className="h-4 shrink-0 px-1.5 text-[9px]"
-      >
-        {statusLabel(route)}
-      </Badge>
+      {statusLabel(route) && (
+        <Badge variant="outline" className="h-4 shrink-0 px-1.5 text-[9px]">
+          {statusLabel(route)}
+        </Badge>
+      )}
     </div>
   );
 }
@@ -116,18 +121,15 @@ function ResidenceRow({ route }: { route: ResidenceRoute }) {
         <span className="block truncate text-sm font-medium leading-snug">{route.title}</span>
       </span>
       <span className="flex shrink-0 flex-col items-end gap-0.5">
-        <Badge
-          variant={route.counts_toward_permanent_residence ? 'verified' : 'outline'}
-          className="h-4 px-1.5 text-[9px]"
-        >
-          {route.counts_toward_permanent_residence ? 'PR yes' : 'PR no'}
-        </Badge>
-        <Badge
-          variant={route.counts_toward_naturalization ? 'verified' : 'outline'}
-          className="h-4 px-1.5 text-[9px]"
-        >
-          {route.counts_toward_naturalization ? 'cit. yes' : 'cit. no'}
-        </Badge>
+        {residenceLadderBadges(route, { variant: 'short' }).map(badge => (
+          <Badge
+            key={badge.key}
+            variant={badge.tone === 'positive' ? 'verified' : 'outline'}
+            className="h-4 px-1.5 text-[9px]"
+          >
+            {badge.label}
+          </Badge>
+        ))}
       </span>
     </div>
   );
