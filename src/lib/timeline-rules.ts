@@ -18,13 +18,19 @@ export interface NaturalizationTimeline {
   conditional?: TimelineCondition[];
 }
 
+/** Personal descent / diaspora claim → destination path (was "heritage lanes"). */
+export interface DescentTimeline {
+  iso_n3: string;
+  route_id: string;
+  duration_months: number;
+  /** `ancestor` = profile.ancestors includes iso; `claim:<id>` = profile.heritages includes id */
+  gate: string;
+  confidence: TimelineConfidence;
+}
+
 interface TimelineRules {
   naturalization: NaturalizationTimeline[];
-  heritage: Array<{
-    lane_id: string;
-    duration_months: number;
-    confidence: TimelineConfidence;
-  }>;
+  heritage: DescentTimeline[];
   investment: Array<{
     iso_n3: string;
     duration_months: number;
@@ -36,9 +42,13 @@ export const monthsToYears = (months: number): number => months / 12;
 
 export const TIMELINE_RULES = timelineRulesJson as TimelineRules;
 
+/** Years to citizenship (or settlement-then-cit) for descent paths, keyed by destination ISO. */
 export const DESCENT_YEARS: Record<string, number> = Object.fromEntries(
-  TIMELINE_RULES.heritage.map(rule => [rule.lane_id, monthsToYears(rule.duration_months)]),
+  TIMELINE_RULES.heritage.map(rule => [rule.iso_n3, monthsToYears(rule.duration_months)]),
 );
+
+/** All descent path rules (planner, edges, UI). */
+export const DESCENT_PATHS: DescentTimeline[] = TIMELINE_RULES.heritage;
 
 export const CBI_YEARS: Record<string, number> = Object.fromEntries(
   TIMELINE_RULES.investment.map(rule => [rule.iso_n3, monthsToYears(rule.duration_months)]),
@@ -74,4 +84,15 @@ export function timelineBeneficiaryIsos(
 
 export function naturalizationRule(iso: string): NaturalizationTimeline | undefined {
   return TIMELINE_RULES.naturalization.find(rule => rule.iso_n3 === iso);
+}
+
+/** Whether a profile satisfies a descent-path gate. */
+export function descentGateSatisfied(
+  gate: string,
+  profile: { ancestors: string[]; heritages: string[] },
+  iso_n3: string,
+): boolean {
+  if (gate === 'ancestor') return profile.ancestors.includes(iso_n3);
+  if (gate.startsWith('claim:')) return profile.heritages.includes(gate.slice(6));
+  return false;
 }

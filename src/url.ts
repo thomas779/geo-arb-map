@@ -56,7 +56,7 @@ export function viewFromPath(pathname = window.location.pathname): AppState['vie
   if (pathname === '/planner' || pathname.startsWith('/planner/')) return 'stacking';
   if (pathname === '/country' || pathname.startsWith('/country/')) return 'countries';
   if (pathname === '/rights' || pathname.startsWith('/rights/')) return 'rights';
-  if (pathname === '/route' || pathname.startsWith('/route/')) return 'route';
+  // /route/* 301s to country pages in production (_redirects); SPA falls through to map.
   return 'map';
 }
 
@@ -68,7 +68,6 @@ function pathForView(view: AppState['view'], currentPath = window.location.pathn
   }
   // Rights/route detail paths are preserved; the bare path is the hub.
   if (view === 'rights') return /^\/rights\/[^/]+/.test(currentPath) ? currentPath : '/rights';
-  if (view === 'route') return /^\/route\/[^/]+/.test(currentPath) ? currentPath : '/route';
   return '/';
 }
 

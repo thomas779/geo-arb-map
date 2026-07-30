@@ -282,17 +282,11 @@ export function DetailPanel({
             description="Nationality-specific access that can be useful without general free movement."
           />
           <div className="flex flex-wrap gap-2">
-            {lanes.map(lane =>
-              lane.beneficiaries.length === 0 ? (
-                <a key={lane.id} href={`/route/${entitySlug(lane.id)}`} className={chipClass}>
-                  {displayRouteTitle(lane.name)}
-                </a>
-              ) : (
-                <span key={lane.id} className="rounded-full border bg-card px-3 py-1.5 text-xs text-muted-foreground">
-                  {displayRouteTitle(lane.name)}
-                </span>
-              ),
-            )}
+            {lanes.map(lane => (
+              <span key={lane.id} className="rounded-full border bg-card px-3 py-1.5 text-xs text-muted-foreground">
+                {displayRouteTitle(lane.name)}
+              </span>
+            ))}
           </div>
         </>
       )}

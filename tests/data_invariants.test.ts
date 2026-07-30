@@ -51,7 +51,12 @@ const timelineRules = await Bun.file(
       excluded_iso_n3?: string[];
     }>;
   }>;
-  heritage: Array<{ lane_id: string; duration_months: number }>;
+  heritage: Array<{
+    iso_n3: string;
+    route_id: string;
+    duration_months: number;
+    gate: string;
+  }>;
   investment: Array<{ iso_n3: string; duration_months: number }>;
 };
 
@@ -181,12 +186,9 @@ describe('referential integrity', () => {
     }
   });
 
-  test('identity lanes (empty beneficiaries) always have beneficiaries_note', () => {
+  test('bilateral lanes are nationality-based (no empty-beneficiary heritage layer)', () => {
     for (const l of data.bilateral_lanes) {
-      if (l.beneficiaries.length === 0) {
-        expect(typeof l.beneficiaries_note, `lane ${l.id}`).toBe('string');
-        expect(l.beneficiaries_note!.length, `lane ${l.id}`).toBeGreaterThan(0);
-      }
+      expect(l.beneficiaries.length, `lane ${l.id} should list beneficiary countries`).toBeGreaterThan(0);
     }
   });
 
@@ -211,7 +213,7 @@ describe('canonical timeline rules', () => {
 
   test('durations are unique, positive month values', () => {
     const naturalizationIds = timelineRules.naturalization.map(rule => rule.iso_n3);
-    const heritageIds = timelineRules.heritage.map(rule => rule.lane_id);
+    const heritageIds = timelineRules.heritage.map(rule => rule.iso_n3);
     const investmentIds = timelineRules.investment.map(rule => rule.iso_n3);
     expect(new Set(naturalizationIds).size).toBe(naturalizationIds.length);
     expect(new Set(heritageIds).size).toBe(heritageIds.length);
@@ -266,8 +268,14 @@ describe('canonical timeline rules', () => {
         }
       }
     }
+    const residenceById = new Map(
+      (citizenshipRoutes.residence_routes ?? []).map(route => [route.id, route]),
+    );
     for (const rule of timelineRules.heritage) {
-      expect(laneIds.has(rule.lane_id), rule.lane_id).toBe(true);
+      expect(rule.iso_n3).toMatch(ISO_RE);
+      expect(rule.gate === 'ancestor' || rule.gate.startsWith('claim:'), rule.route_id).toBe(true);
+      const exists = routeById.has(rule.route_id) || residenceById.has(rule.route_id);
+      expect(exists, `descent path route ${rule.route_id}`).toBe(true);
     }
   });
 });

@@ -2,7 +2,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export type NavKey = 'atlas' | 'planner' | 'countries' | 'rights' | 'route' | 'none';
+export type NavKey = 'atlas' | 'planner' | 'countries' | 'rights' | 'none';
 
 /** The Flag Paths route-mark. Shared by the app header and prerendered pages. */
 export function BrandMark() {
@@ -20,20 +20,17 @@ export function BrandMark() {
   );
 }
 
-type View = 'map' | 'stacking' | 'countries' | 'rights' | 'route';
+type View = 'map' | 'stacking' | 'countries' | 'rights';
 
 const ATLAS = { key: 'atlas' as const, label: 'Atlas', href: '/', view: 'map' as View };
 const PLANNER = { key: 'planner' as const, label: 'Planner', href: '/planner', view: 'stacking' as View };
-// Countries / Regional systems / Heritage routes are the same data as reference
-// pages — grouped under one "Browse" menu so the top nav stays at three items
-// (mobile-friendly) and the model reads as: Atlas = explore, Browse = read.
+// Countries / Regional systems — grouped under one "Browse" menu so the top nav
+// stays mobile-friendly: Atlas = explore, Browse = read.
 const BROWSE_ITEMS: { key: NavKey; label: string; href: string; view: View }[] = [
   { key: 'countries', label: 'Countries', href: '/country', view: 'countries' },
-  { key: 'rights', label: 'Regional systems & routes', href: '/rights', view: 'rights' },
+  { key: 'rights', label: 'Regional systems', href: '/rights', view: 'rights' },
 ];
-// 'route' stays a NavKey so /route/<slug> detail pages can mark the Browse menu
-// active — the heritage hub itself now lives inside /rights (see RightsList).
-const BROWSE_KEYS: NavKey[] = ['countries', 'rights', 'route'];
+const BROWSE_KEYS: NavKey[] = ['countries', 'rights'];
 
 interface Props {
   /** Which nav item is current. 'none' highlights nothing. */

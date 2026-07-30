@@ -13,7 +13,7 @@ export function sourceUrl(source: string): string | null {
 const ENTRY_TYPE_BY_KIND: Record<string, string> = {
   country: 'Country profile (citizenship / residence routes)',
   bloc: 'Regional system / bloc (/rights page)',
-  lane: 'Heritage or treaty route (/route or lane)',
+  lane: 'Treaty or nationality-based bilateral route',
 };
 
 /**

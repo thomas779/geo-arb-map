@@ -26,8 +26,6 @@ import {
   RightsProfile,
   RightsList,
   deriveBlocProfile,
-  deriveRouteProfile,
-  routeLanesForPages,
 } from '../src/components/RightsProfile';
 import { buildCountrySlugMap } from '../src/lib/slug';
 import { isNonApplicableJurisdiction } from '../src/lib/country';
@@ -110,7 +108,6 @@ const FOOTER_HTML = '<footer class="mt-16 border-t">'
   + '<a href="/about/" class="hover:text-foreground">About &amp; methodology</a>'
   + '<a href="/country/" class="hover:text-foreground">Countries</a>'
   + '<a href="/rights/" class="hover:text-foreground">Regional systems</a>'
-  + '<a href="/route/" class="hover:text-foreground">Heritage routes</a>'
   + '<a href="https://github.com/thomas779/geo-arb-map" rel="noreferrer" class="hover:text-foreground">GitHub</a>'
   + '<a href="https://t.me/flagpaths" rel="noreferrer" class="hover:text-foreground">Telegram</a>'
   + '</nav></div>'
@@ -288,60 +285,9 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     bodyHtml: rightsHub,
   }));
 
-  // ── Heritage/ancestry route pages (/route/<slug>) + hub ──
-  const routeUrls: string[] = [];
-  for (const lane of routeLanesForPages(mobility)) {
-    const data = deriveRouteProfile(lane.id, mobility, citizenship);
-    if (!data) continue;
-    const url = `${SITE}/route/${data.slug}/`;
-    const bodyHtml = renderToStaticMarkup(createElement(
-      Fragment, null,
-      staticHeader('rights'),
-      createElement(RightsProfile, { data }),
-    ));
-    const headExtra = [
-      `<meta property="og:type" content="article"><meta property="og:site_name" content="Flag Paths">`,
-      `<meta property="og:url" content="${url}"><meta property="og:title" content="${esc(`${data.name} — Citizenship by Heritage`)}">`,
-      `<meta property="og:description" content="${esc(data.description)}"><meta property="og:image" content="${SITE}/og-image.png">`,
-      `<meta name="twitter:card" content="summary_large_image">`,
-      jsonLd({
-        '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Flag Paths', item: `${SITE}/` },
-          { '@type': 'ListItem', position: 2, name: 'Routes', item: `${SITE}/route/` },
-          { '@type': 'ListItem', position: 3, name: data.name, item: url },
-        ],
-      }),
-    ].join('\n');
-    const dir = path.join(distDir, 'route', data.slug);
-    fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.html'), htmlDoc({
-      title: `${data.name} — Citizenship by Heritage | Flag Paths`,
-      description: data.description, canonical: url, cssHref, headExtra, bodyHtml,
-    }));
-    routeUrls.push(url);
-  }
-  // The heritage hub merged into /rights (RightsList #heritage section). The old
-  // /route/ URL stays live for inbound links but canonicalises to /rights/ and
-  // renders the merged hub, so nothing 404s and no duplicate hub is indexed.
-  const routeHub = renderToStaticMarkup(createElement(
-    Fragment, null,
-    staticHeader('rights'),
-    createElement(RightsList, { mobility }),
-  ));
-  fs.writeFileSync(path.join(distDir, 'route', 'index.html'), htmlDoc({
-    title: 'Regional systems & routes | Flag Paths',
-    description: `Regional rights systems and ${routeUrls.length} heritage citizenship routes, with official sources.`,
-    canonical: `${SITE}/rights/`, cssHref,
-    headExtra: jsonLd({
-      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Flag Paths', item: `${SITE}/` },
-        { '@type': 'ListItem', position: 2, name: 'Regional systems & routes', item: `${SITE}/rights/` },
-      ],
-    }),
-    bodyHtml: routeHub,
-  }));
+  // Heritage /route pages dissolved: ancestry and diaspora programmes live on
+  // country pages. Permanent redirects for old URLs are in public/_redirects
+  // (copied into dist by the static build).
 
   // ── About & methodology (/about) ──
   // The trust page: what the Atlas is, how the data is researched and reviewed,
@@ -458,13 +404,11 @@ immigration lawyer in the specific country before acting on anything shown here.
     `${SITE}/about/`,
     `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`),
     `${SITE}/rights/`, ...rightsUrls,
-    // /route/ hub canonicalises to /rights/ — only lane detail pages are indexed
-    ...routeUrls,
   ];
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 
-  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap -> ${distDir}`);
+  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights pages + hubs + about + sitemap -> ${distDir}`);
 }
 
 if (import.meta.main) {

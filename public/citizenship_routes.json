@@ -16,20 +16,20 @@
     },
     "counts": {
       "jurisdictions": 233,
-      "routes": 873,
+      "routes": 875,
       "by_mode": {
         "birth": 231,
-        "ancestry": 237,
-        "naturalization": 380,
+        "ancestry": 238,
+        "naturalization": 381,
         "investment": 25
       },
       "by_status": {
-        "active": 857,
+        "active": 859,
         "pending_verification": 6,
         "verified_negative": 2,
         "inactive": 8
       },
-      "residence_routes": 247
+      "residence_routes": 252
     }
   },
   "jurisdictions": [
@@ -1612,7 +1612,8 @@
         "germany-restoration-nazi-persecution",
         "germany-citizenship-by-parent",
         "germany-naturalization-by-residence",
-        "germany-citizenship-by-birth"
+        "germany-citizenship-by-birth",
+        "germany-spaetaussiedler"
       ],
       "residence_route_ids": [
         "germany-self-employment-21-aufenthg",
@@ -1960,6 +1961,9 @@
         "india-naturalization",
         "india-citizenship-at-birth-by-parent",
         "india-citizenship-by-marriage"
+      ],
+      "residence_route_ids": [
+        "india-oci"
       ]
     },
     {
@@ -2154,7 +2158,8 @@
       "residence_route_ids": [
         "japan-business-manager",
         "japan-startup-visa",
-        "japan-digital-nomad-visa"
+        "japan-digital-nomad-visa",
+        "japan-nikkei-long-term-resident"
       ],
       "residence_coverage": {
         "investment": "reviewed",
@@ -2270,7 +2275,8 @@
         "korea-f2-public-fund-investor",
         "korea-f2-tourism-real-estate-investor",
         "korea-d8-corporate-investor",
-        "korea-digital-nomad-workcation"
+        "korea-digital-nomad-workcation",
+        "korea-f4-overseas-korean"
       ],
       "residence_coverage": {
         "investment": "reviewed",
@@ -3423,6 +3429,9 @@
         "poland-recognition-by-residence",
         "poland-citizenship-at-birth-by-parent",
         "poland-citizenship-by-marriage"
+      ],
+      "residence_route_ids": [
+        "poland-karta-polaka"
       ]
     },
     {
@@ -3571,7 +3580,8 @@
         "russia-naturalization",
         "russia-simplified-naturalization-heritage",
         "russia-citizenship-at-birth-by-parent",
-        "russia-citizenship-by-marriage"
+        "russia-citizenship-by-marriage",
+        "russia-compatriot-resettlement"
       ]
     },
     {
@@ -4549,7 +4559,8 @@
       "residence_route_ids": [
         "uk-tier-1-investor",
         "uk-innovator-founder",
-        "uk-digital-nomad-verified-negative"
+        "uk-digital-nomad-verified-negative",
+        "uk-ancestry-visa"
       ],
       "residence_coverage": {
         "investment": "reviewed",
@@ -37707,6 +37718,78 @@
           "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07"
         }
       ]
+    },
+    {
+      "id": "germany-spaetaussiedler",
+      "country": {
+        "iso_n3": "276",
+        "name": "Germany"
+      },
+      "mode": "ancestry",
+      "status": "active",
+      "title": "Spätaussiedler ethnic German resettlement",
+      "summary": "Recognition as a late ethnic German resettler (Spätaussiedler) under the Federal Expellees Act confers German nationality automatically upon admission — ethnic eligibility, managed admission, automatic citizenship. Mainly for post-Soviet ethnic German cohorts; documentation requirements are substantial.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "germany-spaetaussiedler-principal",
+          "label": "Spätaussiedler ethnic German resettlement",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Folded from the former heritage-lane layer onto Germany country routes."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "BAMF — Ethnic German resettlers",
+          "url": "https://www.bamf.de/EN/Themen/MigrationAufenthalt/Spaetaussiedler/spaetaussiedler-node.html"
+        }
+      ]
+    },
+    {
+      "id": "russia-compatriot-resettlement",
+      "country": {
+        "iso_n3": "643",
+        "name": "Russia"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Compatriot Resettlement Programme (accelerated citizenship)",
+      "summary": "Federal State Programme for the voluntary resettlement of compatriots: qualify as a compatriot (broad cultural/historical definition), join via a participating region, relocate, and use an accelerated settlement and citizenship track. Dual citizenship is generally tolerated. Region-linked obligations apply; the wider migration environment remains volatile.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          18
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "russia-compatriot-resettlement-principal",
+          "label": "Compatriot Resettlement Programme (accelerated citizenship)",
+          "allocation": "discretionary",
+          "eligibility_months": 18,
+          "note": "Folded from the former heritage-lane layer. Timeline is an eligibility/process estimate, not a fixed statutory clock."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Kremlin — State Programme for voluntary resettlement of compatriots",
+          "url": "https://en.kremlin.ru/acts/news/50216"
+        }
+      ]
     }
   ],
   "residence_routes": [
@@ -47980,6 +48063,220 @@
         {
           "title": "Uzbekistan — Presidential Decree PF-67 (lex.uz)",
           "url": "https://lex.uz/ru/docs/7483820"
+        }
+      ]
+    },
+    {
+      "id": "uk-ancestry-visa",
+      "country": {
+        "iso_n3": "826",
+        "name": "United Kingdom"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "UK Ancestry visa",
+      "summary": "5-year work visa for Commonwealth citizens with a UK-born grandparent: renewable, leads to Indefinite Leave to Remain then naturalisation. Commonwealth citizenship alone is not enough — the UK-born grandparent is required.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uk-ancestry-visa-principal",
+          "label": "UK Ancestry visa",
+          "allocation": "right",
+          "eligibility_months": 60,
+          "note": "Folded from the former heritage-lane layer into UK residence routes (same pattern as the Gold Card move)."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "GOV.UK — UK Ancestry visa",
+          "url": "https://www.gov.uk/ancestry-visa"
+        }
+      ]
+    },
+    {
+      "id": "poland-karta-polaka",
+      "country": {
+        "iso_n3": "616",
+        "name": "Poland"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Pole's Card (Karta Polaka)",
+      "summary": "Pole's Card for people of Polish descent or nation affiliation: national visa, permanent residence, then recognition as a Polish citizen after about one year of residence with PR. Dual citizenship OK. Proof of Polish affiliation/descent required; legislation is periodically adjusted.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "poland-karta-polaka-principal",
+          "label": "Pole's Card (Karta Polaka)",
+          "allocation": "right",
+          "eligibility_months": 12,
+          "note": "Folded from the former heritage-lane layer into Poland residence routes."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "gov.pl — Pole's Card",
+          "url": "https://www.gov.pl/web/diplomacy/the-pole-card"
+        }
+      ]
+    },
+    {
+      "id": "korea-f4-overseas-korean",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "F-4 Overseas Korean visa",
+      "summary": "F-4 visa for overseas Koreans (ethnic Koreans with foreign nationality): broad labour-market access and a credible path to F-5 permanent residence. Functions as quasi-membership for the Korean diaspora. PR and citizenship require ordinary residence; Korea restricts dual citizenship for naturalisers.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "korea-f4-overseas-korean-principal",
+          "label": "F-4 Overseas Korean visa",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Folded from the former heritage-lane layer into Korea residence routes."
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Korea Visa Portal — F-4 Overseas Korean",
+          "url": "https://www.visa.go.kr/"
+        }
+      ]
+    },
+    {
+      "id": "japan-nikkei-long-term-resident",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Nikkei Long-Term Resident status",
+      "summary": "Long-Term Resident status for qualifying Japanese descendants (Nikkei), mainly through the fourth generation in places such as Brazil and Peru. Permanent residence and naturalisation are available after ordinary residence. Japan adjusts descendant subcategories periodically and bans dual citizenship at naturalisation.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "japan-nikkei-long-term-resident-principal",
+          "label": "Nikkei Long-Term Resident status",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Folded from the former heritage-lane layer into Japan residence routes."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Japan MOJ — statuses of residence",
+          "url": "https://www.moj.go.jp/isa/applications/status/longtermresident.html"
+        }
+      ]
+    },
+    {
+      "id": "india-oci",
+      "country": {
+        "iso_n3": "356",
+        "name": "India"
+      },
+      "category": "general_permanent_residence",
+      "status": "active",
+      "title": "Overseas Citizen of India (OCI)",
+      "summary": "Lifelong multiple-entry status for persons of Indian origin and eligible spouses: indefinite stay, stronger than a visa, weaker than nationality. Statutory path to citizenship after five years as OCI plus ordinary residence (Citizenship Act s.5(1)(g)). India bans dual citizenship — taking Indian citizenship means renouncing the other. OCI benefits and compliance rules are adjusted periodically.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "india-oci-principal",
+          "label": "Overseas Citizen of India (OCI)",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Folded from the former heritage-lane layer into India residence routes (same pattern as the Gold Card move)."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "MHA India — OCI Cardholder",
+          "url": "https://ociservices.gov.in/"
+        },
+        {
+          "title": "India MEA — Overseas Citizenship of India Scheme",
+          "url": "https://www.mea.gov.in/overseas-citizenship-of-india-scheme.htm"
         }
       ]
     }

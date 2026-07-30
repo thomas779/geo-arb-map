@@ -193,63 +193,87 @@
   ],
   "heritage": [
     {
-      "lane_id": "ireland_fbr",
+      "iso_n3": "372",
+      "route_id": "ireland-citizenship-by-descent",
       "duration_months": 18,
+      "gate": "ancestor",
       "confidence": "legacy"
     },
     {
-      "lane_id": "italy_jure_sanguinis",
+      "iso_n3": "380",
+      "route_id": "italy-citizenship-by-descent",
       "duration_months": 18,
+      "gate": "ancestor",
       "confidence": "legacy"
     },
     {
-      "lane_id": "uk_ancestry",
-      "duration_months": 72,
-      "confidence": "legacy"
-    },
-    {
-      "lane_id": "poland_karta_polaka",
-      "duration_months": 24,
-      "confidence": "legacy"
-    },
-    {
-      "lane_id": "hungary_simplified",
+      "iso_n3": "348",
+      "route_id": "hungary-citizenship-by-parent-or-simplified-origin",
       "duration_months": 12,
+      "gate": "ancestor",
       "confidence": "legacy"
     },
     {
-      "lane_id": "armenia_ethnic",
+      "iso_n3": "051",
+      "route_id": "armenia-citizenship-by-armenian-descent",
       "duration_months": 12,
+      "gate": "ancestor",
       "confidence": "legacy"
     },
     {
-      "lane_id": "korea_f4",
-      "duration_months": 48,
-      "confidence": "legacy"
-    },
-    {
-      "lane_id": "japan_nikkei",
-      "duration_months": 60,
-      "confidence": "legacy"
-    },
-    {
-      "lane_id": "israel_law_of_return",
+      "iso_n3": "376",
+      "route_id": "israel-citizenship-by-return-or-parent",
       "duration_months": 6,
+      "gate": "claim:israel_law_of_return",
       "confidence": "legacy"
     },
     {
-      "lane_id": "germany_spaetaussiedler",
+      "iso_n3": "276",
+      "route_id": "germany-spaetaussiedler",
       "duration_months": 12,
+      "gate": "claim:germany_spaetaussiedler",
       "confidence": "legacy"
     },
     {
-      "lane_id": "kazakhstan_qandas",
+      "iso_n3": "398",
+      "route_id": "kazakhstan-citizenship-by-kandas-status",
       "duration_months": 12,
+      "gate": "claim:kazakhstan_qandas",
       "confidence": "legacy"
     },
     {
-      "lane_id": "russia_compatriot",
+      "iso_n3": "643",
+      "route_id": "russia-compatriot-resettlement",
       "duration_months": 18,
+      "gate": "claim:russia_compatriot",
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "826",
+      "route_id": "uk-ancestry-visa",
+      "duration_months": 72,
+      "gate": "ancestor",
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "616",
+      "route_id": "poland-karta-polaka",
+      "duration_months": 24,
+      "gate": "ancestor",
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "410",
+      "route_id": "korea-f4-overseas-korean",
+      "duration_months": 48,
+      "gate": "ancestor",
+      "confidence": "legacy"
+    },
+    {
+      "iso_n3": "392",
+      "route_id": "japan-nikkei-long-term-resident",
+      "duration_months": 60,
+      "gate": "ancestor",
       "confidence": "legacy"
     }
   ],

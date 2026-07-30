@@ -28,7 +28,7 @@ interface Props {
 const LEGEND_ROWS = [
   { key: 'strong', label: 'Strong settlement bloc', hint: 'Full free movement or citizenship union (EU/EEA, Mercosur, EAEU…).' },
   { key: 'limited', label: 'Limited framework only', hint: 'Partial, one-way, or still-emerging arrangements.' },
-  { key: 'lane', label: 'Reachable via a lane', hint: 'A bilateral, ancestry, or heritage route leads here.' },
+  { key: 'lane', label: 'Reachable via a lane', hint: 'A bilateral or nationality-based route leads here.' },
   { key: 'none', label: 'No cross-border framework', hint: 'Ordinary nationality routes may still exist — click to check.' },
 ] as const;
 

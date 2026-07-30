@@ -279,20 +279,16 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
     path.isInvestment
       ? 'via investment'
       : path.via === 'ancestry'
-      ? 'via ancestry'
-      : path.via === 'heritage'
-        ? 'via heritage claim'
+        ? 'via ancestry / diaspora claim'
         : null;
 
   const routeLabel = (path: PlannerPath) =>
     path.plan
       ?? (path.via === 'ancestry'
-        ? 'Citizenship by descent'
-        : path.via === 'heritage'
-          ? 'Citizenship through a documented heritage claim'
-          : path.isInvestment
-            ? 'Citizenship by investment'
-            : 'Residence followed by ordinary naturalization');
+        ? 'Citizenship by descent or documented personal claim'
+        : path.isInvestment
+          ? 'Citizenship by investment'
+          : 'Residence followed by ordinary naturalization');
 
   return (
     <div className="grid max-w-[1200px] items-start gap-4 sm:gap-6 lg:grid-cols-[minmax(340px,400px)_1fr]">
@@ -482,19 +478,19 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                 </div>
 
                 <div>
-                  <FieldLabel>Heritage claims (self-attested)</FieldLabel>
+                  <FieldLabel>Personal claims (self-attested)</FieldLabel>
                   <div className="flex flex-col gap-1.5">
                     {HERITAGE_OPTIONS.map(h => (
-                      <label key={h.laneId} className="flex min-h-10 cursor-pointer items-center gap-2 text-sm sm:min-h-0 sm:text-xs">
+                      <label key={h.claimId} className="flex min-h-10 cursor-pointer items-center gap-2 text-sm sm:min-h-0 sm:text-xs">
                         <input
                           type="checkbox"
                           className="accent-[var(--primary)]"
-                          checked={profile.heritages.includes(h.laneId)}
+                          checked={profile.heritages.includes(h.claimId)}
                           onChange={e => onChange({
                             ...profile,
                             heritages: e.target.checked
-                              ? [...profile.heritages, h.laneId]
-                              : profile.heritages.filter(x => x !== h.laneId),
+                              ? [...profile.heritages, h.claimId]
+                              : profile.heritages.filter(x => x !== h.claimId),
                           })}
                         />
                         {h.label}
@@ -771,20 +767,20 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-2 px-4 sm:px-5">
-                {unlocked.ancestryLanes.length > 0 && (
+                {unlocked.ancestryPaths.length > 0 && (
                   <details className="group rounded-md border border-dashed">
                     <summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 px-3 py-2">
                       <Heart className="size-4 text-muted-foreground" aria-hidden />
                       <span className="text-sm font-medium">Family-based claims</span>
-                      <Badge variant="outline" className="text-xs">{unlocked.ancestryLanes.length}</Badge>
+                      <Badge variant="outline" className="text-xs">{unlocked.ancestryPaths.length}</Badge>
                       <span className="ml-auto hidden text-xs text-muted-foreground sm:inline">From your family facts</span>
                       <ChevronDown className="size-3.5 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
                     </summary>
                     <div className="border-t border-dashed px-3 py-3">
                       <div className="flex flex-wrap gap-1.5">
-                        {unlocked.ancestryLanes.map(lane => (
-                          <span key={lane.id} className="rounded-full border bg-background px-2.5 py-1 text-xs">
-                            {displayRouteTitle(lane.name)}
+                        {unlocked.ancestryPaths.map(path => (
+                          <span key={path.id} className="rounded-full border bg-background px-2.5 py-1 text-xs">
+                            {displayRouteTitle(path.name)}
                           </span>
                         ))}
                       </div>

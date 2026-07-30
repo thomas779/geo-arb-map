@@ -3,14 +3,13 @@ import { readFileSync } from 'node:fs';
 import { entitySlug, buildEntitySlugToId } from '../src/lib/slug';
 import type { BlocsData } from '../src/types';
 
-// Every bloc gets a /rights/<slug> page and every heritage lane a /route/<slug>
-// page. Slugs are a pure function of id, so a collision would silently make two
-// entities share a URL (one page overwrites the other) — pin uniqueness here.
+// Every bloc gets a /rights/<slug> page. Heritage /route pages were dissolved —
+// ancestry and diaspora programmes live on country pages instead.
 const data = JSON.parse(
   readFileSync(new URL('../public/blocs_data.json', import.meta.url), 'utf8'),
 ) as BlocsData;
 
-describe('rights/route page slugs', () => {
+describe('rights page slugs', () => {
   test('bloc slugs are unique', () => {
     const slugs = data.blocs.map(b => entitySlug(b.id));
     expect(new Set(slugs).size).toBe(slugs.length);
@@ -28,8 +27,8 @@ describe('rights/route page slugs', () => {
     for (const l of data.bilateral_lanes) expect(laneRev.get(entitySlug(l.id))).toBe(l.id);
   });
 
-  test('heritage lanes (the ones that get /route pages) exist', () => {
+  test('no empty-beneficiary heritage lanes remain', () => {
     const heritage = data.bilateral_lanes.filter(l => l.beneficiaries.length === 0);
-    expect(heritage.length).toBeGreaterThan(0);
+    expect(heritage).toEqual([]);
   });
 });

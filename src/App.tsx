@@ -27,7 +27,6 @@ import {
   RightsProfile,
   RightsList,
   deriveBlocProfile,
-  deriveRouteProfile,
 } from '@/components/RightsProfile';
 import { buildSlugToIso, buildEntitySlugToId } from '@/lib/slug';
 import { isNonApplicableJurisdiction } from '@/lib/country';
@@ -250,8 +249,7 @@ export default function App() {
           state.view === 'stacking' ? 'planner'
             : state.view === 'countries' ? 'countries'
               : state.view === 'rights' ? 'rights'
-                : state.view === 'route' ? 'route'
-                  : 'atlas'
+                : 'atlas'
         }
         onSelectView={selectView}
         right={(
@@ -399,16 +397,6 @@ export default function App() {
             const slug = /^\/rights\/([^/]+)\/?$/.exec(window.location.pathname)?.[1] ?? null;
             const id = slug ? buildEntitySlugToId(data.blocs).get(slug) : null;
             const profile = id && citizenshipRoutes ? deriveBlocProfile(id, data, citizenshipRoutes) : null;
-            return (
-              <div className="absolute inset-0 z-30 overflow-y-auto bg-background">
-                {profile ? <RightsProfile data={profile} /> : <RightsList mobility={data} />}
-              </div>
-            );
-          })()}
-          {state.view === 'route' && data && (() => {
-            const slug = /^\/route\/([^/]+)\/?$/.exec(window.location.pathname)?.[1] ?? null;
-            const id = slug ? buildEntitySlugToId(data.bilateral_lanes).get(slug) : null;
-            const profile = id && citizenshipRoutes ? deriveRouteProfile(id, data, citizenshipRoutes) : null;
             return (
               <div className="absolute inset-0 z-30 overflow-y-auto bg-background">
                 {profile ? <RightsProfile data={profile} /> : <RightsList mobility={data} />}

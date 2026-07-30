@@ -1,13 +1,15 @@
 import type { BilateralLane, Bloc, BlocsData } from '../types';
 import {
   CBI_YEARS,
+  DESCENT_PATHS,
   DESCENT_YEARS,
+  descentGateSatisfied,
   naturalizationRule,
   naturalizationYears,
   timelineBeneficiaryIsos,
 } from './timeline-rules';
 
-export { CBI_YEARS, DESCENT_YEARS } from './timeline-rules';
+export { CBI_YEARS, DESCENT_YEARS, DESCENT_PATHS } from './timeline-rules';
 
 /**
  * "My Flags" planner engine.
@@ -55,7 +57,7 @@ export interface Profile {
   birthplace: string | null;
   /** iso_n3 of parents'/grandparents' birthplaces — unlocks descent lanes */
   ancestors: string[];
-  /** self-attested heritage claims, keyed by lane id (Law of Return, Spätaussiedler...) */
+  /** self-attested personal claims (Law of Return, Spätaussiedler, Qandas, compatriot) — not a separate badge layer */
   heritages: string[];
   /** partner's citizenships — household footprint derives from either spouse */
   partnerCitizenships: string[];
@@ -114,13 +116,19 @@ export function profileHasInput(profile: Profile): boolean {
     || profile.goals.length > 0;
 }
 
-/** Heritage claims that aren't captured by an ancestor's birthplace. */
-export const HERITAGE_OPTIONS: Array<{ laneId: string; label: string }> = [
-  { laneId: 'israel_law_of_return', label: 'Jewish heritage (Law of Return)' },
-  { laneId: 'germany_spaetaussiedler', label: 'Ethnic German (Spätaussiedler)' },
-  { laneId: 'kazakhstan_qandas', label: 'Ethnic Kazakh (Qandas)' },
-  { laneId: 'russia_compatriot', label: "Russian 'compatriot' (cultural/historical tie)" },
+/**
+ * Personal claims that aren't captured by an ancestor ISO alone.
+ * claimId is stable for URL/profile storage; destination is the country page.
+ */
+export const HERITAGE_OPTIONS: Array<{ claimId: string; label: string; iso_n3: string }> = [
+  { claimId: 'israel_law_of_return', label: 'Jewish heritage (Law of Return)', iso_n3: '376' },
+  { claimId: 'germany_spaetaussiedler', label: 'Ethnic German (Spätaussiedler)', iso_n3: '276' },
+  { claimId: 'kazakhstan_qandas', label: 'Ethnic Kazakh (Qandas / kandas)', iso_n3: '398' },
+  { claimId: 'russia_compatriot', label: "Russian 'compatriot' (cultural/historical tie)", iso_n3: '643' },
 ];
+
+/** @deprecated use claimId — kept so older profile JSON still type-checks at call sites */
+export type HeritageOption = (typeof HERITAGE_OPTIONS)[number];
 
 /** Lanes whose qualifying class is birthplace, not nationality. */
 const BIRTHPLACE_LANES: Record<string, string> = {
@@ -151,8 +159,8 @@ export interface UnlockResult {
   workLanes: BilateralLane[];
   /** chance-based lanes: ballot / quota_queue / discretionary */
   chanceLanes: BilateralLane[];
-  /** descent/heritage lanes this profile plausibly qualifies for (paths, not current rights) */
-  ancestryLanes: BilateralLane[];
+  /** descent/diaspora paths this profile plausibly qualifies for (paths, not current rights) */
+  ancestryPaths: Array<{ id: string; name: string; iso_n3: string; route_id: string }>;
   /** birthplace-derived notes (jus soli hints, BN(O) conditionality) */
   birthHints: string[];
   /** deduped jurisdictions reachable beyond the held citizenships */
@@ -170,7 +178,7 @@ export interface Recommendation {
   lostBlocs: string[];
   lostCitizenships: string[];
   renouncesPrevious: boolean;
-  via: 'naturalization' | 'cbi' | 'ancestry' | 'heritage';
+  via: 'naturalization' | 'cbi' | 'ancestry';
 }
 
 const DEFAULT_YEARS = 6; // conservative assumption when no duration is parseable
@@ -201,7 +209,6 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
   const lanes: BilateralLane[] = [];
   const workLanes: BilateralLane[] = [];
   const chanceLanes: BilateralLane[] = [];
-  const ancestryLanes: BilateralLane[] = [];
   const birthHints: string[] = [];
   const countries = new Set<string>();
 
@@ -233,21 +240,38 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
     countries.add(l.destination.iso_n3);
   }
 
-  // Descent + heritage lanes: qualifying is personal, not nationality-based.
-  // A lane already consumed doesn't count as a path: holding citizenship at
-  // the destination, or holding the diaspora status itself (e.g. India OCI),
-  // removes it from "paths you may qualify for".
+  // Descent / diaspora claim paths: personal eligibility, not nationality-based.
+  // Holding citizenship (or diaspora status) at the destination consumes the path.
   const consumed = new Set(
     profile.flags.filter(f => f.status === 'cit' || f.status === 'diaspora').map(f => f.iso_n3),
   );
-  const identityLanes = data.bilateral_lanes.filter(l => l.beneficiaries.length === 0);
-  const heritageIds = new Set(profile.heritages);
-  const ancestorIsos = new Set(profile.ancestors);
-  for (const l of identityLanes) {
-    if (consumed.has(l.destination.iso_n3)) continue;
-    if (heritageIds.has(l.id) || ancestorIsos.has(l.destination.iso_n3)) {
-      ancestryLanes.push(l);
+  const ancestryPaths: Array<{ id: string; name: string; iso_n3: string; route_id: string }> = [];
+  const nameOf = (iso: string): string => {
+    for (const b of data.blocs) {
+      const m = b.members.find(x => x.iso_n3 === iso);
+      if (m) return m.name;
     }
+    for (const l of data.bilateral_lanes) {
+      if (l.destination.iso_n3 === iso) return l.destination.name;
+      const m = l.beneficiaries.find(x => x.iso_n3 === iso);
+      if (m) return m.name;
+    }
+    return iso;
+  };
+  for (const path of DESCENT_PATHS) {
+    if (consumed.has(path.iso_n3)) continue;
+    if (!descentGateSatisfied(path.gate, profile, path.iso_n3)) continue;
+    ancestryPaths.push({
+      id: path.route_id,
+      name: path.route_id.replace(/-/g, ' '),
+      iso_n3: path.iso_n3,
+      route_id: path.route_id,
+    });
+    // Prefer human labels for claim-gated paths
+    const claim = HERITAGE_OPTIONS.find(h => path.gate === `claim:${h.claimId}`);
+    if (claim) ancestryPaths[ancestryPaths.length - 1].name = claim.label;
+    else ancestryPaths[ancestryPaths.length - 1].name = `${nameOf(path.iso_n3)} descent / diaspora path`;
+    countries.add(path.iso_n3);
   }
 
   if (profile.birthplace && BIRTHPLACE_HINTS[profile.birthplace]) {
@@ -261,7 +285,7 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
   }
 
   for (const iso of held) countries.delete(iso);
-  return { blocs, asymmetric, lanes, workLanes, chanceLanes, ancestryLanes, birthHints, countries };
+  return { blocs, asymmetric, lanes, workLanes, chanceLanes, ancestryPaths, birthHints, countries };
 }
 
 /** Additional jurisdictions available through a partner, without double-counting either spouse's flags. */
@@ -364,13 +388,15 @@ export function recommend(
 
   const recs: Recommendation[] = [];
 
-  // Descent/heritage paths the profile qualifies for — usually the best moves.
-  for (const lane of current.ancestryLanes) {
-    if (!lane.leads_to_settlement) continue;
-    const via = profile.heritages.includes(lane.id) ? 'heritage' : 'ancestry';
+  // Descent / diaspora claim paths — usually the best moves (all fold into "ancestry").
+  for (const path of current.ancestryPaths) {
+    const name = countryOptions(data).find(c => c.iso_n3 === path.iso_n3)?.name
+      ?? path.name;
     const r = evaluate(
-      lane.destination.iso_n3, lane.destination.name,
-      DESCENT_YEARS[lane.id] ?? 2, via,
+      path.iso_n3,
+      name,
+      DESCENT_YEARS[path.iso_n3] ?? 2,
+      'ancestry',
     );
     if (r) recs.push(r);
   }

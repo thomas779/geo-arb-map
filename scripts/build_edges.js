@@ -11,8 +11,8 @@
  *                             edges exist but planners must suppress them)
  *   - work-only lanes:        cit:beneficiary → work:dest — TERMINAL, no
  *                             outgoing edges ever leave a work node
- *   - identity lanes:         conditional cit:dest edges gated by `needs`
- *                             (ancestor:ISO or heritage:<laneId>)
+ *   - descent paths:          conditional cit:dest edges from timeline
+ *                             heritage rules (ancestor:ISO or heritage:<claimId>)
  *   - naturalization:         pr/settle_full/settle_partial:X → cit:X using
  *                             dataset-parsed years, with audited ordinary +
  *                             nationality-gated edges where the fastest track
@@ -28,6 +28,7 @@ import {
 } from '../src/lib/planner.ts';
 import {
   CBI_YEARS,
+  DESCENT_PATHS,
   DESCENT_YEARS,
   naturalizationRule,
   timelineBeneficiaryIsos,
@@ -55,21 +56,10 @@ export function buildEdges(data, manualEdges) {
     }
   }
 
-  // ── Lane edges ──
+  // ── Lane edges (nationality-based bilateral only; descent is separate) ──
   for (const l of data.bilateral_lanes) {
     const allocation = l.allocation ?? 'right';
-    if (l.beneficiaries.length === 0) {
-      // Identity lane → conditional citizenship-by-descent/heritage edge
-      if (!l.leads_to_settlement) continue;
-      const heritage = ['israel_law_of_return', 'germany_spaetaussiedler', 'kazakhstan_qandas', 'russia_compatriot'].includes(l.id);
-      push({
-        from: '*', to: `cit:${l.destination.iso_n3}`, mechanism: l.id,
-        years: DESCENT_YEARS[l.id] ?? 2, allocation,
-        needs: [heritage ? `heritage:${l.id}` : `ancestor:${l.destination.iso_n3}`],
-        renounces_previous: renounces(l.destination.iso_n3) || undefined,
-      });
-      continue;
-    }
+    if (l.beneficiaries.length === 0) continue; // legacy guard; heritage lanes dissolved
     for (const ben of l.beneficiaries) {
       if (!l.leads_to_settlement) {
         push({ from: `cit:${ben.iso_n3}`, to: `work:${l.destination.iso_n3}`, mechanism: l.id, allocation });
@@ -77,6 +67,25 @@ export function buildEdges(data, manualEdges) {
         push({ from: `cit:${ben.iso_n3}`, to: `settle_partial:${l.destination.iso_n3}`, mechanism: l.id, allocation });
       }
     }
+  }
+
+  // ── Descent / diaspora claim paths (country routes, not a separate badge layer) ──
+  for (const path of DESCENT_PATHS) {
+    const iso = path.iso_n3;
+    const need = path.gate === 'ancestor'
+      ? `ancestor:${iso}`
+      : path.gate.startsWith('claim:')
+        ? `heritage:${path.gate.slice(6)}`
+        : null;
+    if (!need) continue;
+    push({
+      from: '*',
+      to: `cit:${iso}`,
+      mechanism: path.route_id,
+      years: DESCENT_YEARS[iso] ?? path.duration_months / 12,
+      needs: [need],
+      renounces_previous: renounces(iso) || undefined,
+    });
   }
 
   // ── Citizenship-by-investment: open to anyone (money-gated, a right) ──

@@ -366,7 +366,7 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
                 {lanesIn.map(l => (
                   <a
                     key={l.id}
-                    href={l.beneficiaries.length === 0 ? `/route/${entitySlug(l.id)}` : `/?lane=${l.id}`}
+                    href={`/?lane=${l.id}`}
                     className="rounded-full border bg-card px-3 py-1.5 text-sm hover:border-primary"
                   >
                     {l.name}

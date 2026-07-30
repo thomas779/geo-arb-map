@@ -207,11 +207,6 @@ function LaneDetail({
 
   return (
     <div className="space-y-3">
-      {lane.beneficiaries.length === 0 && (
-        <Button asChild variant="secondary" size="sm" className="w-full">
-          <a href={`/route/${entitySlug(lane.id)}`}>View full page →</a>
-        </Button>
-      )}
       <button
         type="button"
         className="flex w-full items-center gap-2 rounded-lg border bg-card px-3 py-2.5 text-left hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
@@ -244,11 +239,8 @@ function LaneDetail({
         </div>
       </div>
 
-      {(lane.beneficiaries.length === 0 || allocation !== 'right' || lane.renounces_previous) && (
+      {(allocation !== 'right' || lane.renounces_previous) && (
         <div className="flex flex-wrap gap-1.5">
-          {lane.beneficiaries.length === 0 && (
-            <Badge variant="secondary" className="text-[10px]">Eligibility-based heritage route</Badge>
-          )}
           {allocation !== 'right' && (
             <Badge variant="outline" className="text-[10px]">
               {allocation.replace('_', ' ')}

@@ -7,7 +7,7 @@ import { displayRouteTitle } from '@/lib/display-title';
 import { dataCorrectionUrl, sourceUrl } from '@/lib/trust';
 
 // Shared full-page profiles for regional systems (blocs → /rights/<slug>) and
-// heritage/ancestry routes (lanes → /route/<slug>). Used by the interactive app
+// regional systems (/rights/<slug>). Used by the interactive app
 // (in-app nav) and the static SSR prerender (scripts/build_country_pages.ts),
 // so a page and its atlas panel can't drift. Mirrors CountryProfile.
 
@@ -74,9 +74,9 @@ export function blocsForPages(mobility: BlocsData): Bloc[] {
   return mobility.blocs;
 }
 
-/** Lanes that get a /route page: heritage/ancestry routes (no beneficiary country set). */
-export function routeLanesForPages(mobility: BlocsData): BilateralLane[] {
-  return mobility.bilateral_lanes.filter(l => l.beneficiaries.length === 0);
+/** @deprecated Heritage /route pages dissolved; kept as empty for build script imports until removed. */
+export function routeLanesForPages(_mobility: BlocsData): BilateralLane[] {
+  return [];
 }
 
 export function deriveBlocProfile(
@@ -287,7 +287,7 @@ function RoutePage({ data }: { data: RouteProfileData }) {
   const destHref = data.destination.slug ? `/country/${data.destination.slug}` : `/?country=${data.destination.iso}`;
   return (
     <Shell
-      breadcrumb={{ label: 'Routes', href: '/route' }}
+      breadcrumb={{ label: 'Countries', href: '/country' }}
       title={data.name}
       emoji={<span aria-hidden>{countryFlag(data.destination.iso)}</span>}
       facts={[
@@ -298,7 +298,7 @@ function RoutePage({ data }: { data: RouteProfileData }) {
       atlasHref={`/?lane=${data.id}`}
       sectionNav={[['What you get', '#grants'], ...(data.sources.length ? [['Sources', '#sources'] as [string, string]] : [])]}
       reportHref={dataCorrectionUrl(data.name, `lane:${data.id}`)}
-      footerExtra={<a href="/route" className="underline underline-offset-2">All heritage routes</a>}
+      footerExtra={<a href="/country" className="underline underline-offset-2">All countries</a>}
     >
       <section id="grants" className="scroll-mt-20">
         <Eyebrow divider={false}>What this path provides</Eyebrow>
@@ -369,9 +369,6 @@ export function RightsList({ mobility }: { mobility: BlocsData }) {
         cross-border routes. Open any system, or explore them on the{' '}
         <a href="/" className="underline underline-offset-2">interactive atlas</a>.
       </p>
-      {/* Heritage lanes were previously their own thin hub at /route/. Same user
-          question — "systems whose rights I can unlock" — so they live here as a
-          fourth group; /route/<slug> detail pages are unchanged. */}
       {HUB_GROUPS.map(group => {
         const blocs = mobility.blocs
           .filter(b => group.categories.includes(b.category))
@@ -394,24 +391,12 @@ export function RightsList({ mobility }: { mobility: BlocsData }) {
           </section>
         );
       })}
-      <section id="heritage" className="mb-8 scroll-mt-20">
-        <h2 className="mb-1 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">Heritage &amp; ancestry routes</h2>
-        <p className="mb-3 max-w-[68ch] text-sm text-muted-foreground">
-          Citizenship and residence claimed through ancestry, ethnicity, or diaspora ties — not a passport
-          you already hold.
-        </p>
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {routeLanesForPages(mobility).map(l => (
-            <a key={l.id} href={`/route/${entitySlug(l.id)}`} className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2.5 hover:border-primary">
-              <span className="shrink-0 text-lg" aria-hidden>{countryFlag(l.destination.iso_n3)}</span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate text-sm font-medium">{displayRouteTitle(l.name)}</span>
-                <span className="font-mono text-[0.66rem] text-muted-foreground">→ {l.destination.name}</span>
-              </span>
-            </a>
-          ))}
-        </div>
-      </section>
+      <p className="max-w-[68ch] text-sm text-muted-foreground">
+        Ancestry and diaspora programmes (descent citizenship, Law of Return, OCI, F-4, UK Ancestry, and similar)
+        are listed on each destination{' '}
+        <a href="/country/" className="underline underline-offset-2">country page</a>
+        {' '}— not as a separate badge category.
+      </p>
     </main>
   );
 }

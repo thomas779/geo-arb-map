@@ -210,8 +210,6 @@ export function Sidebar({ data, state, onBloc, onLane }: Props) {
     },
   ];
   const visibleCountryLaneGroups = countryLaneGroups.filter(group => group.lanes.length > 0);
-  const heritageLanes = data.bilateral_lanes.filter(lane =>
-    lane.beneficiaries.length === 0 && laneMatches(lane));
   const regionalCount = regionalGroups.reduce((count, group) => count + group.blocs.length, 0);
   const countryLaneCount = visibleCountryLaneGroups.reduce((count, group) => count + group.lanes.length, 0);
   const selectedLane = state.lane
@@ -219,11 +217,9 @@ export function Sidebar({ data, state, onBloc, onLane }: Props) {
     : null;
   const selectedBlocs = data.blocs.filter(bloc => state.blocs.includes(bloc.id));
 
-  const allSections = ['regional', 'country', 'heritage'];
+  const allSections = ['regional', 'country'];
   const [openSections, setOpenSections] = useState<string[]>(() => {
-    if (selectedLane) {
-      return [selectedLane.beneficiaries.length === 0 ? 'heritage' : 'country'];
-    }
+    if (selectedLane) return ['country'];
     return ['regional'];
   });
   const [openGroups, setOpenGroups] = useState<string[]>(() => {
@@ -342,8 +338,8 @@ export function Sidebar({ data, state, onBloc, onLane }: Props) {
         {/*
           * Lead with regional systems: blocs like EU/EEA and Mercosur paint
           * settlement rights across whole regions — the strongest, most
-          * visible cross-border routes on the map — before the country- and
-          * heritage-specific lanes.
+          * visible cross-border routes on the map — before nationality-based
+          * country paths. Ancestry/diaspora programmes live on country pages.
           */}
         {regionalCount > 0 && (
           <AccordionItem value="regional" className="border-b">
@@ -387,25 +383,9 @@ export function Sidebar({ data, state, onBloc, onLane }: Props) {
           </AccordionItem>
         )}
 
-        {heritageLanes.length > 0 && (
-          <AccordionItem value="heritage" className="border-b">
-            <AccordionTrigger className={catTrigger}>
-              <span>Heritage paths</span>
-              <span className={headingCount}>
-                {heritageLanes.length}
-              </span>
-            </AccordionTrigger>
-            <AccordionContent className="h-auto pb-1">
-              <div className="px-1.5 pb-1 text-[11px] leading-snug text-muted-foreground">
-                Ancestry, ethnicity, and diaspora routes.
-              </div>
-              {laneRows(heritageLanes)}
-            </AccordionContent>
-          </AccordionItem>
-        )}
         </Accordion>
 
-        {isFiltering && regionalCount === 0 && countryLaneCount === 0 && heritageLanes.length === 0 && (
+        {isFiltering && regionalCount === 0 && countryLaneCount === 0 && (
           <p className="mx-2 mt-4 text-xs text-muted-foreground">
             No routes match your search.
           </p>
