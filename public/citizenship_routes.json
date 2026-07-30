@@ -5638,6 +5638,10 @@
       "title": "Citizenship at birth through an Azerbaijani parent",
       "summary": "Birth to an Azerbaijani parent creates nationality. A child born in Azerbaijan to two foreign parents is not a citizen, but a child born there to stateless or unknown parents is a citizen to prevent statelessness.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -6327,6 +6331,10 @@
       "title": "Citizenship at birth through a Bahraini father",
       "summary": "Bahraini nationality descends from a Bahraini father; birth on Bahraini territory alone confers no citizenship.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -7019,6 +7027,12 @@
       "title": "British Overseas Territories Citizenship at birth",
       "summary": "Citizenship at birth in Bermuda follows British Overseas Territories Citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -8153,6 +8167,12 @@
       "title": "British Overseas Territories Citizenship at birth",
       "summary": "Citizenship at birth in British Virgin Islands follows British Overseas Territories Citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -9385,6 +9405,10 @@
       "title": "Citizenship at birth through a Cape Verdean parent",
       "summary": "Birth to a Cape Verdean parent creates nationality. Additional birth-in-territory choice rules exist for some long-resident foreign-parent cases.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -10128,6 +10152,10 @@
       "title": "Citizenship at birth through a Chinese parent",
       "summary": "Birth to a Chinese parent generally creates Chinese nationality. The PRC does not recognize dual nationality for Chinese nationals.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -11035,6 +11063,12 @@
       "title": "New Zealand citizenship at birth",
       "summary": "Citizenship at birth in Cook Islands follows New Zealand citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -11557,6 +11591,10 @@
       "title": "Citizenship at birth through a Cypriot parent",
       "summary": "A person born abroad after 16 August 1960 can use the consular-birth route where a mother or father was a Cypriot citizen at the time of birth, subject to statutory exceptions and registration.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -13326,6 +13364,12 @@
       "title": "Danish nationality at birth",
       "summary": "Citizenship at birth in Faroe Islands follows Danish nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -13430,6 +13474,12 @@
       "title": "British Overseas Territories Citizenship at birth",
       "summary": "Citizenship at birth in Falkland Islands follows British Overseas Territories Citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -13834,6 +13884,12 @@
       "title": "Finnish nationality at birth",
       "summary": "Citizenship at birth in Åland Islands follows Finnish nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -13940,6 +13996,12 @@
       "title": "Citizenship through birth and residence in France",
       "summary": "Birth in France alone is not generally enough. Limited parentage or statelessness cases confer citizenship at birth; otherwise a child of foreign parents can acquire it from age 13, 16, or automatically at 18 when the residence conditions are met.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "residence",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 5,
         "eligibility_months": [
@@ -14231,6 +14293,12 @@
       "title": "French nationality at birth",
       "summary": "Citizenship at birth in French Polynesia follows French nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -14700,6 +14768,12 @@
       "title": "Citizenship at birth under anti-statelessness safeguards",
       "summary": "A child born in Georgia can acquire citizenship under narrow statutory safeguards, including where qualifying parents are stateless or the other parent is unknown.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "stateless_safeguard",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -14925,6 +14999,10 @@
       "title": "Status at birth through a registered parent",
       "summary": "A child’s status derives from registration in the Palestinian population registry through a registered parent; there is no documented unrestricted birthright (jus soli).",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -14997,6 +15075,12 @@
       "title": "Citizenship by birth in Germany",
       "summary": "A child of foreign parents born in Germany acquires citizenship when one parent meets the residence and permanent-status conditions.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -15296,6 +15380,12 @@
       "title": "British Overseas Territories Citizenship at birth",
       "summary": "Citizenship at birth in Gibraltar follows British Overseas Territories Citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -15547,6 +15637,12 @@
       "title": "Citizenship following birth and schooling in Greece",
       "summary": "A child born in Greece to foreign parents can acquire citizenship by declaration where the statutory parent-residence, lawful-status and Greek-school conditions are met.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "residence_and_school",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -15661,6 +15757,12 @@
       "title": "Danish nationality at birth",
       "summary": "Citizenship at birth in Greenland follows Danish nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -15960,6 +16062,12 @@
       "title": "United States citizenship at birth",
       "summary": "Citizenship at birth in Guam follows United States citizenship rules.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -16795,6 +16903,10 @@
       "title": "Chinese nationality at birth",
       "summary": "Citizenship at birth in Hong Kong follows Chinese nationality rules.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -17504,6 +17616,10 @@
       "title": "Citizenship at birth through an Iranian parent",
       "summary": "Birth to an Iranian father creates nationality. There is no unrestricted jus soli, but conditional territorial routes exist (a person born in Iran of foreign parents where one parent was also born in Iran, or a person born in Iran to a foreign father who continues to reside there after age 18).",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -17647,6 +17763,10 @@
       "title": "Citizenship at birth through an Iraqi parent",
       "summary": "Nationality follows parentage under art. 18; there is no general birthright citizenship, only limited anti-statelessness and foundling provisions.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -17789,6 +17909,12 @@
       "title": "Citizenship by birth on the island of Ireland",
       "summary": "For births from 2005, citizenship depends on a parent’s citizenship, entitlement, or qualifying residence before the birth.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 2,
         "eligibility_months": [
@@ -18240,6 +18366,12 @@
       "title": "Limited citizenship routes connected to birth in Italy",
       "summary": "Birth in Italy is not generally enough. Citizenship exists at birth in limited statelessness or non-transmission cases, while a foreign child born and continuously resident in Italy may declare citizenship after reaching adulthood.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "residence",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 2,
         "eligibility_months": [
@@ -19368,6 +19500,10 @@
       "title": "Citizenship at birth through a DPRK parent",
       "summary": "Citizenship at birth is chiefly by descent from a DPRK parent. A limited territorial provision covers a child of one citizen and one foreign or stateless parent residing in the DPRK; there is no unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -19623,6 +19759,10 @@
       "title": "Citizenship at birth through a Kuwaiti father",
       "summary": "Kuwaiti nationality descends from a Kuwaiti father; birth on Kuwaiti soil alone confers no citizenship.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -21082,6 +21222,10 @@
       "title": "Chinese nationality at birth",
       "summary": "Citizenship at birth in Macao follows Chinese nationality rules.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -21624,6 +21768,10 @@
       "title": "Citizenship at birth through a Maldivian parent",
       "summary": "Citizenship passes from a Maldivian citizen parent; there is no unrestricted birthright-by-territory rule, and citizens must be Muslim.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -21840,6 +21988,12 @@
       "title": "Citizenship at birth through a qualifying parent",
       "summary": "For births on or after 1 August 1989, birth in Malta confers citizenship only where a parent has the qualifying citizenship or status required by the Act.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -22259,6 +22413,12 @@
       "title": "Citizenship connected to birth in Mauritius",
       "summary": "Birth in Mauritius before 1 October 1995 generally conferred citizenship regardless of parentage; after that date, at least one parent must be a Mauritian citizen.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "date_and_parent",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -23127,6 +23287,12 @@
       "title": "British Overseas Territories Citizenship at birth",
       "summary": "Citizenship at birth in Montserrat follows British Overseas Territories Citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -23521,6 +23687,10 @@
       "title": "Citizenship at birth through an Omani father",
       "summary": "Omani nationality descends from an Omani father; birth in Oman alone confers no automatic citizenship.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -23807,6 +23977,12 @@
       "title": "Citizenship connected to birth in Nauru",
       "summary": "A person born in Nauru is a citizen at birth if either parent is a citizen. A person born in Nauru to non-citizen parents may later apply after twenty continuous years of residence. Foundling and otherwise-stateless birth situations are also protected under the constitutional and statutory framework.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_citizen",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -23925,6 +24101,10 @@
       "title": "Citizenship at birth through a Nepali parent",
       "summary": "Birth to Nepali parent(s) creates nationality. There is no general jus soli granting citizenship to children of foreign parents born in Nepal.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24181,6 +24361,12 @@
       "title": "Automatic citizenship for a qualifying third generation",
       "summary": "A child can acquire Dutch citizenship at birth under the statutory third-generation principal-residence rule even without a Dutch parent.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24220,6 +24406,12 @@
       "title": "Dutch nationality at birth",
       "summary": "Citizenship at birth in Curaçao follows Dutch nationality rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "double_jus_soli",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -25506,6 +25698,12 @@
       "title": "New Zealand citizenship at birth",
       "summary": "Citizenship at birth in Niue follows New Zealand citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -27354,6 +27552,12 @@
       "title": "British Overseas Territories Citizenship at birth",
       "summary": "Citizenship at birth in Pitcairn Islands follows British Overseas Territories Citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -27995,6 +28199,10 @@
       "title": "Original citizenship at birth through a Timorese parent",
       "summary": "Birth to a Timorese parent creates original citizenship under the Constitution. Additional birth-in-territory rules apply for certain parentage and declaration cases.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -28246,6 +28454,10 @@
       "title": "Citizenship at birth through a Qatari father",
       "summary": "Qatari nationality descends from a Qatari father; birth on Qatari territory alone confers no citizenship.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -28970,6 +29182,12 @@
       "title": "British Overseas Territories Citizenship at birth",
       "summary": "Citizenship at birth in Saint Helena, Ascension and Tristan da Cunha follows British Overseas Territories Citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -29267,6 +29485,12 @@
       "title": "British Overseas Territories Citizenship at birth",
       "summary": "Citizenship at birth in Anguilla follows British Overseas Territories Citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -29929,6 +30153,10 @@
       "title": "Citizenship at birth through a Sammarinese parent",
       "summary": "Citizenship at birth is by descent from a San Marino parent; the only territorial rule is a foundling provision for children born on the territory to unknown or stateless parents.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -31773,6 +32001,10 @@
       "title": "Citizenship at birth through a Zimbabwean parent",
       "summary": "Birth to a Zimbabwean parent creates citizenship under the Constitution. Additional birth categories exist for some SADC-parent historical cases.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -33497,6 +33729,12 @@
       "title": "New Zealand citizenship at birth",
       "summary": "Citizenship at birth in Tokelau follows New Zealand citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34433,6 +34671,12 @@
       "title": "British Overseas Territories Citizenship at birth",
       "summary": "Citizenship at birth in Turks and Caicos Islands follows British Overseas Territories Citizenship rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_or_settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [

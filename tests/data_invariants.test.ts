@@ -549,12 +549,12 @@ describe('monitor-lead verifications, 30 July 2026', () => {
       r.mode === 'birth' && r.facts?.jus_soli === 'unconditional');
     expect(unconditional.map(r => r.country.iso_n3).sort()).toEqual([
       '028', '032', '052', '068', '076', '124', '212', '218', '222', '308',
-      '320', '340', '484', '558', '591', '600', '659', '662', '840', '858',
+      '316', '320', '340', '484', '558', '591', '600', '659', '662', '840', '858',
     ]);
     // Coverage gate: majority of birth routes now carry structured jus_soli.
     const withJs = citizenshipRoutes.routes.filter(r =>
       r.mode === 'birth' && r.facts?.jus_soli);
-    expect(withJs.length).toBeGreaterThanOrEqual(150);
+    expect(withJs.length).toBeGreaterThanOrEqual(175);
   });
 
   test('residence IMC remainder batches 8–10 cover former gap ISOs', () => {
