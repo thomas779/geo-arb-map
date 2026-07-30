@@ -557,6 +557,28 @@ describe('AI sweep + grounded verify', () => {
     store.close();
   });
 
+  // publish_manual.ts uses this same store after a successful Telegram send so
+  // auto-news cannot re-post a hand-reviewed item. Lock the mutation shape.
+  test('NewsPostStore mutations are portable INSERT OR IGNORE rows for D1', () => {
+    const store = new NewsPostStore(path.resolve(import.meta.dir, '..'), null);
+    const f: Finding = {
+      iso_n3: '752', jurisdiction: 'Sweden', claim: 'Sweden raised habitual residence to eight years',
+      headline: 'Sweden eight year residence', status: 'confirmed',
+      primary_urls: ['https://www.migrationsverket.se/'], effective_date: '2026-06-06',
+      affects_dataset: true, category: 'naturalization', brief: 'b', evidence_quote: 'e',
+      original_quote: 'e', legal_instrument: '', citations: [], search_queries: [],
+    };
+    const fp = fingerprint(f);
+    store.record(fp, f, 25, '2026-07-30T09:00:00Z');
+    expect(store.has(fp)).toBe(true);
+    expect(store.mutations).toHaveLength(1);
+    expect(store.mutations[0]).toContain('INSERT OR IGNORE INTO monitor_posts');
+    expect(store.mutations[0]).toContain(fp);
+    expect(store.mutations[0]).toContain("'752'");
+    expect(store.mutations[0]).toContain('25');
+    store.close();
+  });
+
   test('verifyPrimarySource returns a tri-state verdict (verified / refuted / inconclusive)', async () => {
     const allowed = new Set(['dre.pt']);
     const quote = 'prazo de dez anos de residência legal';
