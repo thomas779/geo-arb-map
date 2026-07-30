@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 206
+      "residence_routes": 212
     }
   },
   "jurisdictions": [
@@ -749,7 +749,13 @@
         "cabo-verde-citizenship-by-parent",
         "cabo-verde-naturalization",
         "cabo-verde-citizenship-at-birth-by-parent"
-      ]
+      ],
+      "residence_route_ids": [
+        "cabo-verde-remote-work-visa"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "136",
@@ -1438,10 +1444,12 @@
       ],
       "residence_route_ids": [
         "france-talent-investor",
-        "france-talent-business-creator"
+        "france-talent-business-creator",
+        "france-digital-nomad-verified-negative"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -1950,10 +1958,12 @@
         "indonesia-golden-visa-company-establishment",
         "indonesia-golden-visa-corporate-director",
         "indonesia-second-home-visa",
-        "indonesia-investor-kitas-pt-pma"
+        "indonesia-investor-kitas-pt-pma",
+        "indonesia-second-home-vs-nomad"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -2112,10 +2122,12 @@
       ],
       "residence_route_ids": [
         "japan-business-manager",
-        "japan-startup-visa"
+        "japan-startup-visa",
+        "japan-digital-nomad-visa"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -2614,11 +2626,13 @@
       ],
       "residence_route_ids": [
         "mauritius-retired-residence",
-        "mauritius-occupation-permit-investor"
+        "mauritius-occupation-permit-investor",
+        "mauritius-premium-visa-nomad"
       ],
       "residence_coverage": {
         "retirement_pension": "reviewed",
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -3915,11 +3929,13 @@
       ],
       "residence_route_ids": [
         "south-africa-retired-person",
-        "south-africa-financially-independent"
+        "south-africa-financially-independent",
+        "south-africa-digital-nomad-verified-negative"
       ],
       "residence_coverage": {
         "retirement_pension": "reviewed",
-        "general_permanent_residence": "reviewed"
+        "general_permanent_residence": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -4732,6 +4748,10 @@
       "title": "Citizenship at birth through an Afghan parent",
       "summary": "Birth to an Afghan parent creates nationality. Birth in Afghanistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -4838,6 +4858,10 @@
       "title": "Citizenship at birth through a Albania parent",
       "summary": "Birth to a Albania parent creates nationality. Birth in Albania alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -4980,6 +5004,10 @@
       "title": "Citizenship at birth through an Algerian parent",
       "summary": "Birth to an Algerian parent creates Algerian nationality. Birth in Algeria alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -5155,6 +5183,10 @@
       "title": "Citizenship at birth through an Andorran parent",
       "summary": "Birth to an Andorran parent creates Andorran nationality. Birth in Andorra alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -5268,6 +5300,10 @@
       "title": "Citizenship at birth through an Angolan parent",
       "summary": "Birth to an Angolan parent creates Angolan nationality. Birth in Angola alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -5857,6 +5893,12 @@
       "title": "Citizenship by birth in Australia",
       "summary": "A child born in Australia is a citizen when a parent is a citizen or permanent resident, or when the child is ordinarily resident in Australia for the first ten years of life.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 2,
         "eligibility_months": [
@@ -5979,6 +6021,10 @@
       "title": "Citizenship at birth through an Austrian parent",
       "summary": "Birth to an Austrian parent creates Austrian citizenship. Birth in Austria alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -6203,6 +6249,12 @@
       "title": "Citizenship connected to birth in The Bahamas",
       "summary": "Birth in The Bahamas confers citizenship at birth when a parent is Bahamian. A person born there to non-citizen parents may instead apply for registration at age 18 and before turning 19, subject to the constitutional conditions.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_citizen",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -6381,6 +6433,10 @@
       "title": "Citizenship at birth through a Bangladeshi parent",
       "summary": "Birth to a Bangladeshi parent creates nationality. Birth in Bangladesh alone to foreign parents is not unrestricted jus soli; a limited rule covers foundlings of unknown parentage.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -6521,6 +6577,10 @@
       "title": "Citizenship at birth through an Armenian parent",
       "summary": "Birth to an Armenian parent creates nationality regardless of birthplace. Birth in Armenia alone to foreign parents is not unrestricted jus soli; territorial birth confers citizenship only to prevent statelessness.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -6850,6 +6910,10 @@
       "title": "Citizenship at birth through a Belgian parent",
       "summary": "Birth to a Belgian parent creates Belgian nationality. Birth in Belgium alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -7061,6 +7125,10 @@
       "title": "Citizenship at birth where both parents are Bhutanese",
       "summary": "Citizenship transmits at birth only where both parents are Bhutanese citizens; Bhutan has no unrestricted jus soli and limited anti-statelessness safeguards.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -7350,6 +7418,10 @@
       "title": "Citizenship at birth through a Bosnia and Herzegovina parent",
       "summary": "Birth to a Bosnia and Herzegovina parent creates nationality. Birth in Bosnia and Herzegovina alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -7492,6 +7564,10 @@
       "title": "Citizenship at birth through a Motswana parent",
       "summary": "Birth to a Botswana citizen parent creates citizenship. Birth in Botswana alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -7968,6 +8044,10 @@
       "title": "Citizenship at birth through a citizen parent",
       "summary": "Birth to a Solomon Islands citizen parent creates citizenship. Birth in the Solomon Islands alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -8179,6 +8259,10 @@
       "title": "Citizenship at birth through a Bruneian parent",
       "summary": "Birth to a Bruneian parent creates Bruneian nationality. Birth in Brunei alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -8324,6 +8408,12 @@
       "title": "Citizenship by birth where no other citizenship is acquired",
       "summary": "A person born in Bulgaria is a citizen by place of birth if they do not acquire another citizenship by origin; a foundling with unknown parents is presumed born in Bulgaria.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "stateless_or_unknown",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -8479,6 +8569,10 @@
       "title": "Citizenship at birth through citizen/national-race parentage",
       "summary": "Citizenship at birth is by descent and national-race lineage, not by birth on territory; there is minimal anti-statelessness protection, which excludes the Rohingya.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -8584,6 +8678,10 @@
       "title": "Citizenship at birth through a Burundi parent",
       "summary": "Birth to a Burundi parent creates nationality. Birth in Burundi alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -8726,6 +8824,10 @@
       "title": "Citizenship at birth through a Belarusian parent",
       "summary": "Birth to a Belarusian parent creates nationality. Birth in Belarus alone to foreign parents is not unrestricted jus soli; territorial rules cover children who would otherwise be stateless.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -8832,6 +8934,10 @@
       "title": "Citizenship at birth through a Cambodian parent",
       "summary": "Birth to a Cambodian parent creates Cambodian nationality. Birth in Cambodia alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -9015,6 +9121,10 @@
       "title": "Citizenship at birth through a Cameroonian parent",
       "summary": "Birth to a Cameroonian parent creates nationality. Birth in Cameroon alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -9380,6 +9490,12 @@
       "title": "BOTC citizenship at birth through a qualifying parent",
       "summary": "A child born in Cayman acquires BOTC at birth when a parent is a BOTC or is settled in the territory, subject to the British Nationality Act and date-specific rules.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -9494,6 +9610,10 @@
       "title": "Citizenship at birth through a Central African Republic parent",
       "summary": "Birth to a Central African Republic parent creates nationality. Birth in Central African Republic alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -9636,6 +9756,10 @@
       "title": "Citizenship at birth through a Sri Lankan parent",
       "summary": "Citizenship follows descent from a Sri Lankan parent; there is no automatic birthright citizenship for children of foreign parents born on Sri Lankan soil.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -9741,6 +9865,10 @@
       "title": "Citizenship at birth through a Chad parent",
       "summary": "Birth to a Chad parent creates nationality. Birth in Chad alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -10103,6 +10231,10 @@
       "title": "Citizenship at birth through a R.O.C. parent or foundling rule",
       "summary": "A person born to a R.O.C. national parent is a R.O.C. national at birth. A person born in the territory whose parents cannot be ascertained or were both stateless is also a national. Birth in Taiwan alone to identified foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -10245,6 +10377,12 @@
       "title": "Colombian nationality by conditional territorial birth",
       "summary": "A child born in Colombia to foreign parents is Colombian by birth when at least one parent was domiciled in Colombia at the time of birth; a separate exception protects a child whom no state recognizes as a national.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "domicile",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -10459,6 +10597,10 @@
       "title": "Citizenship at birth through a Comorian parent",
       "summary": "Birth to a Comorian parent creates nationality. Birth in Comoros alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -10603,6 +10745,10 @@
       "title": "Citizenship at birth through a Republic of the Congo parent",
       "summary": "Birth to a Republic of the Congo parent creates nationality. Birth in Republic of the Congo alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -10745,6 +10891,10 @@
       "title": "Citizenship at birth through a Democratic Republic of the Congo parent",
       "summary": "Birth to a Democratic Republic of the Congo parent creates nationality. Birth in Democratic Republic of the Congo alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -11118,6 +11268,10 @@
       "title": "Citizenship at birth through a Croatian parent",
       "summary": "Birth to a Croatian parent creates Croatian citizenship. Birth in Croatia alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -11576,6 +11730,10 @@
       "title": "Citizenship at birth through a Czech parent",
       "summary": "Birth to a Czech parent creates Czech citizenship. Birth in Czechia alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -11681,6 +11839,10 @@
       "title": "Citizenship at birth through a Benin parent",
       "summary": "Birth to a Benin parent creates nationality. Birth in Benin alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -11821,6 +11983,10 @@
       "title": "Citizenship at birth through a Danish parent",
       "summary": "Birth to a Danish parent creates Danish citizenship. Birth in Denmark alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -12304,6 +12470,12 @@
       "title": "Citizenship at birth through an Ecuadorian parent or birth in Ecuador",
       "summary": "Birth to an Ecuadorian parent, or birth in Ecuador under the Constitution, creates Ecuadorian nationality.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -12608,6 +12780,10 @@
       "title": "Citizenship at birth through a Equatorial Guinea parent",
       "summary": "Birth to a Equatorial Guinea parent creates nationality. Birth in Equatorial Guinea alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -12750,6 +12926,10 @@
       "title": "Citizenship at birth through an Ethiopian parent",
       "summary": "Birth to an Ethiopian parent creates Ethiopian nationality. Birth in Ethiopia alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -12891,6 +13071,10 @@
       "title": "Citizenship at birth through a Eritrea parent",
       "summary": "Birth to a Eritrea parent creates nationality. Birth in Eritrea alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -13033,6 +13217,10 @@
       "title": "Citizenship at birth through an Estonian parent",
       "summary": "Birth to an Estonian parent creates Estonian citizenship. Birth in Estonia alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -13348,6 +13536,10 @@
       "title": "Citizenship at birth through a Fijian parent",
       "summary": "Birth to a Fijian parent creates Fijian citizenship under nationality law. Birth in Fiji alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -13493,6 +13685,10 @@
       "title": "Citizenship at birth through a Finnish parent",
       "summary": "Birth to a Finnish parent creates Finnish citizenship. Birth in Finland alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -14141,6 +14337,10 @@
       "title": "Citizenship at birth through a Djibouti parent",
       "summary": "Birth to a Djibouti parent creates nationality. Birth in Djibouti alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -14281,6 +14481,10 @@
       "title": "Citizenship at birth through a Gabon parent",
       "summary": "Birth to a Gabon parent creates nationality. Birth in Gabon alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -14575,6 +14779,10 @@
       "title": "Citizenship at birth through a The Gambia parent",
       "summary": "Birth to a The Gambia parent creates nationality. Birth in The Gambia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -14941,6 +15149,10 @@
       "title": "Citizenship at birth through a Ghanaian parent",
       "summary": "Birth to a Ghanaian parent creates Ghanaian citizenship under the applicable constitutional date rules. Birth in Ghana alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -15190,6 +15402,10 @@
       "title": "Citizenship at birth through a Kiribati parent",
       "summary": "Birth to a Kiribati parent creates citizenship under nationality law. Birth in Kiribati alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -15850,6 +16066,12 @@
       "title": "Guatemalan nationality by birth in Guatemala or through a Guatemalan parent",
       "summary": "Birth in Guatemala or through a Guatemalan parent creates Guatemalan nationality under the constitutional framework.",
       "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -15968,6 +16190,10 @@
       "title": "Citizenship at birth through a Guinea parent",
       "summary": "Birth to a Guinea parent creates nationality. Birth in Guinea alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -16256,6 +16482,10 @@
       "title": "Citizenship at birth through a Haiti parent",
       "summary": "Birth to a Haiti parent creates nationality. Birth in Haiti alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -16670,6 +16900,10 @@
       "title": "Citizenship at birth through a Hungarian parent",
       "summary": "A child acquires Hungarian citizenship at birth when at least one parent is a Hungarian citizen, regardless of the place of birth. Birth in Hungary alone to foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -16817,6 +17051,10 @@
       "title": "Citizenship at birth through an Icelandic parent",
       "summary": "Birth to an Icelandic parent creates Icelandic citizenship. Birth in Iceland alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -16966,6 +17204,10 @@
       "title": "Citizenship at birth through an Indian parent",
       "summary": "After 1987, birth in India creates citizenship only with a qualifying Indian parent (or later rules for both parents). Birth in India alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -17112,6 +17354,10 @@
       "title": "Citizenship at birth through an Indonesian parent",
       "summary": "A person born to an Indonesian citizen parent acquires Indonesian citizenship under Law No. 12 of 2006. Birth in Indonesia alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -17772,6 +18018,10 @@
       "title": "Citizenship at birth through an Israeli parent",
       "summary": "A person born in Israel after the establishment of the State acquires Israeli nationality by birth when a parent was an Israeli national; birth in Israel alone to two foreign parents is not general jus soli under the Nationality Law.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -18149,6 +18399,10 @@
       "title": "Citizenship at birth through an Ivorian parent",
       "summary": "Birth to an Ivorian parent creates Ivorian nationality. Birth in Cote dIvoire alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -18434,6 +18688,10 @@
       "title": "Citizenship at birth through a Japanese parent or foundling rule",
       "summary": "A person born to a Japanese father or mother is Japanese at birth. A person born in Japan whose parents are both unknown or without nationality is also Japanese. Birth in Japan alone to identified foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -18589,6 +18847,10 @@
       "title": "Citizenship at birth through a Kazakhstani parent",
       "summary": "Birth to a Kazakhstani parent creates nationality. Birth in Kazakhstan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and children who would otherwise be stateless.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -18767,6 +19029,10 @@
       "title": "Limited citizenship connected to birth in Jordan",
       "summary": "A person born in Jordan to a Jordanian mother and a father who is unknown, stateless or whose filiation is not established is Jordanian. A foundling in Jordan is presumed born there and is Jordanian unless the contrary is proved. Birth in Jordan to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -18951,6 +19217,10 @@
       "title": "Citizenship at birth through a Kenyan parent",
       "summary": "Birth to a Kenyan citizen parent creates Kenyan citizenship by birth. Birth in Kenya alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -19202,6 +19472,10 @@
       "title": "Citizenship at birth through a Korean parent",
       "summary": "A person born to a Korean national parent acquires Korean nationality at birth. Birth in Korea alone to two foreign parents is not general jus soli under the Nationality Act.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -19455,6 +19729,10 @@
       "title": "Citizenship at birth through a Kyrgyz parent",
       "summary": "Birth to a Kyrgyz parent creates nationality. Birth in Kyrgyzstan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -19597,6 +19875,10 @@
       "title": "Citizenship at birth through a Lao parent",
       "summary": "Birth to a Lao parent creates nationality. Birth in Laos alone to foreign parents is not unrestricted jus soli, though foundlings are presumed Lao and conditional anti-statelessness protections exist.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -19703,6 +19985,10 @@
       "title": "Citizenship at birth through a Lebanese father",
       "summary": "Birth to a Lebanese father creates nationality. Birth in Lebanon alone to foreign parents is not unrestricted jus soli; a narrow safety net covers those born to unknown or stateless parents.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -19846,6 +20132,10 @@
       "title": "Citizenship at birth through a Lesotho parent",
       "summary": "Birth to a Lesotho parent creates nationality. Birth in Lesotho alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -19988,6 +20278,10 @@
       "title": "Citizenship at birth through a Latvian parent",
       "summary": "Birth to a Latvian parent creates Latvian citizenship. Birth in Latvia alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -20093,6 +20387,10 @@
       "title": "Citizenship at birth through a Liberia parent",
       "summary": "Birth to a Liberia parent creates nationality. Birth in Liberia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -20199,6 +20497,10 @@
       "title": "Citizenship at birth through a Libya parent",
       "summary": "Birth to a Libya parent creates nationality. Birth in Libya alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -20339,6 +20641,10 @@
       "title": "Citizenship at birth through a Liechtenstein parent",
       "summary": "Birth to a Liechtenstein parent creates Liechtenstein citizenship. Birth in Liechtenstein alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -20480,6 +20786,10 @@
       "title": "Citizenship at birth through a Lithuanian parent",
       "summary": "Birth to a Lithuanian parent creates Lithuanian citizenship. Birth in Lithuania alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -20629,6 +20939,10 @@
       "title": "Citizenship at birth through a Luxembourgish parent",
       "summary": "Birth to a Luxembourgish parent creates Luxembourgish nationality. Birth in Luxembourg alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -20873,6 +21187,10 @@
       "title": "Citizenship at birth through a Madagascar parent",
       "summary": "Birth to a Madagascar parent creates nationality. Birth in Madagascar alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -21013,6 +21331,10 @@
       "title": "Citizenship at birth through a Malawi parent",
       "summary": "Birth to a Malawi parent creates nationality. Birth in Malawi alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -21153,6 +21475,10 @@
       "title": "Citizenship at birth through a Malaysian parent",
       "summary": "A person born to a Malaysian citizen parent is Malaysian under the Constitution’s operation-of-law and registration rules. Birth in Malaysia to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -21404,6 +21730,10 @@
       "title": "Citizenship at birth through a Mali parent",
       "summary": "Birth to a Mali parent creates nationality. Birth in Mali alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -21714,6 +22044,10 @@
       "title": "Citizenship at birth through a Mauritania parent",
       "summary": "Birth to a Mauritania parent creates nationality. Birth in Mauritania alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -22210,6 +22544,10 @@
       "title": "Citizenship at birth through a Monegasque parent",
       "summary": "Birth to a Monegasque parent creates Monegasque nationality. Birth in Monaco alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -22349,6 +22687,10 @@
       "title": "Citizenship at birth through a Mongolian parent",
       "summary": "Mongolia confers citizenship by descent from a citizen parent, not by birth on territory alone (no unrestricted jus soli).",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -22455,6 +22797,10 @@
       "title": "Citizenship at birth through a Moldova parent",
       "summary": "Birth to a Moldova parent creates nationality. Birth in Moldova alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -22597,6 +22943,10 @@
       "title": "Citizenship at birth through a Montenegrin parent",
       "summary": "Birth to a Montenegrin parent creates nationality. Birth in Montenegro alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -22883,6 +23233,10 @@
       "title": "Citizenship at birth through a Moroccan parent",
       "summary": "Birth to a Moroccan parent creates Moroccan nationality. Birth in Morocco alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -23024,6 +23378,10 @@
       "title": "Citizenship at birth through a Mozambican parent",
       "summary": "Birth to a Mozambican parent creates nationality. Birth in Mozambique alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -23305,6 +23663,10 @@
       "title": "Citizenship at birth through a Namibian parent",
       "summary": "Birth to a Namibian parent creates citizenship. Birth in Namibia alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24573,6 +24935,12 @@
       "title": "Citizenship by birth in New Zealand",
       "summary": "For births from 1 January 2006, a child born in New Zealand is a citizen when at least one parent is a citizen or has the right to live in New Zealand indefinitely.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24865,6 +25233,10 @@
       "title": "Citizenship at birth through a Niger parent",
       "summary": "Birth to a Niger parent creates nationality. Birth in Niger alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -24971,6 +25343,10 @@
       "title": "Citizenship at birth through a Nigerian parent or grandparent rules",
       "summary": "A person born outside Nigeria either of whose parents is a citizen of Nigeria is a citizen by birth. Birth in Nigeria after independence with a citizen parent or grandparent also creates citizenship by birth under section 25. Birth in Nigeria alone to two foreign parents without qualifying lineage is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -25340,6 +25716,10 @@
       "title": "Citizenship at birth through a Norwegian parent",
       "summary": "Birth to a Norwegian parent creates Norwegian citizenship. Birth in Norway alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -25587,6 +25967,10 @@
       "title": "Citizenship at birth through an FSM parent",
       "summary": "Birth to an FSM parent creates citizenship under the code. Birth in the FSM alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -25692,6 +26076,10 @@
       "title": "Citizenship at birth through a Marshallese parent",
       "summary": "Birth to a Marshallese parent creates citizenship. Birth in the Marshall Islands alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -25797,6 +26185,10 @@
       "title": "Citizenship at birth through a Palauan parent",
       "summary": "Birth to a Palauan parent creates citizenship. Birth in Palau alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -26354,6 +26746,10 @@
       "title": "Citizenship at birth through a PNG parent",
       "summary": "Birth to a PNG citizen parent creates PNG citizenship. Birth in PNG alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -27453,6 +27849,10 @@
       "title": "Citizenship at birth through a Guinea-Bissau parent",
       "summary": "Birth to a Guinea-Bissau parent creates nationality. Birth in Guinea-Bissau alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -27988,6 +28388,10 @@
       "title": "Citizenship at birth through a Romanian parent",
       "summary": "Birth to a Romanian parent creates Romanian citizenship. Birth in Romania alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -28137,6 +28541,10 @@
       "title": "Citizenship at birth through a Russian parent",
       "summary": "Birth to a Russian parent creates nationality regardless of birthplace. Birth in Russia to foreign parents is not unrestricted jus soli; territorial birth confers citizenship only to prevent statelessness.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -28313,6 +28721,10 @@
       "title": "Citizenship at birth through a Rwandan parent",
       "summary": "Birth to a Rwandan parent creates Rwandan nationality. Birth in Rwanda alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -29915,6 +30327,10 @@
       "title": "Citizenship at birth through a Senegalese parent",
       "summary": "Birth to a Senegalese parent creates Senegalese nationality. Birth in Senegal alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -30194,6 +30610,10 @@
       "title": "Citizenship at birth through a Seychellois parent",
       "summary": "Birth to a Seychellois parent creates citizenship. Birth in Seychelles alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -30299,6 +30719,10 @@
       "title": "Citizenship at birth through a Sierra Leone parent",
       "summary": "Birth to a Sierra Leone parent creates nationality. Birth in Sierra Leone alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -30445,6 +30869,12 @@
       "title": "Citizenship by birth in Singapore",
       "summary": "A person born in Singapore is a citizen by birth when at least one parent is a Singapore citizen, subject to the constitutional exceptions.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -30556,6 +30986,10 @@
       "title": "Citizenship at birth through a Slovak parent",
       "summary": "Birth to a Slovak parent creates Slovak citizenship. Birth in Slovakia alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -30706,6 +31140,10 @@
       "title": "Citizenship at birth through a Vietnamese parent",
       "summary": "Birth to a Vietnamese parent creates Vietnamese nationality. Birth in Vietnam alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -30883,6 +31321,10 @@
       "title": "Citizenship at birth through a Slovenia parent",
       "summary": "Birth to a Slovenia parent creates nationality. Birth in Slovenia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -31025,6 +31467,10 @@
       "title": "Citizenship at birth through a Somalia parent",
       "summary": "Birth to a Somalia parent creates nationality. Birth in Somalia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -31165,6 +31611,10 @@
       "title": "Citizenship at birth through a South African parent",
       "summary": "A person born to a South African citizen parent is a South African citizen by birth under the Citizenship Act. Birth in the Republic to two foreign parents is not unconditional jus soli; specified later naturalisation or registration routes may apply in limited statutory cases.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -31703,6 +32153,10 @@
       "title": "Citizenship at birth through a South Sudan parent",
       "summary": "Birth to a South Sudan parent creates nationality. Birth in South Sudan alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -31845,6 +32299,10 @@
       "title": "Citizenship at birth through a Sudan parent",
       "summary": "Birth to a Sudan parent creates nationality. Birth in Sudan alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -31987,6 +32445,10 @@
       "title": "Citizenship at birth through a Suriname parent",
       "summary": "Birth to a Suriname parent creates nationality. Birth in Suriname alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -32129,6 +32591,10 @@
       "title": "Citizenship at birth through a Eswatini parent",
       "summary": "Birth to a Eswatini parent creates nationality. Birth in Eswatini alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -32269,6 +32735,10 @@
       "title": "Citizenship at birth through a Swedish parent",
       "summary": "Birth to a Swedish parent creates Swedish citizenship. Birth in Sweden alone to two foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -32625,6 +33095,10 @@
       "title": "Citizenship at birth through a Tajik parent",
       "summary": "Birth to a Tajik parent creates nationality. Birth in Tajikistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -32731,6 +33205,10 @@
       "title": "Citizenship at birth through a Thai parent",
       "summary": "A person born to a Thai national parent is a Thai national at birth under the Nationality Act. Birth in Thailand alone to two foreign parents is not unconditional jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -32873,6 +33351,10 @@
       "title": "Citizenship at birth through a Togo parent",
       "summary": "Birth to a Togo parent creates nationality. Birth in Togo alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -33120,6 +33602,10 @@
       "title": "Citizenship at birth through a Tongan parent",
       "summary": "Birth to a Tongan parent creates Tongan nationality. Birth in Tonga alone to two foreign parents is not a general open jus soli path for ordinary foreign residents.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -33545,6 +34031,10 @@
       "title": "Citizenship at birth through a Tunisian parent",
       "summary": "Birth to a Tunisian parent creates Tunisian nationality. Birth in Tunisia alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -33833,6 +34323,10 @@
       "title": "Citizenship at birth through a Turkmen parent",
       "summary": "Birth to a Turkmen parent creates nationality. Birth in Turkmenistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34045,6 +34539,10 @@
       "title": "Citizenship at birth through a Tuvaluan parent",
       "summary": "Birth to a Tuvaluan parent creates citizenship. Birth in Tuvalu alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34150,6 +34648,10 @@
       "title": "Citizenship at birth through a Ugandan parent",
       "summary": "Birth to a Ugandan parent creates citizenship under constitutional categories. Birth in Uganda alone to two foreign parents is not unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34289,6 +34791,10 @@
       "title": "Citizenship at birth through a Ukraine parent",
       "summary": "Birth to a Ukraine parent creates nationality. Birth in Ukraine alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34431,6 +34937,10 @@
       "title": "Citizenship at birth through a North Macedonia parent",
       "summary": "Birth to a North Macedonia parent creates nationality. Birth in North Macedonia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34573,6 +35083,10 @@
       "title": "Citizenship at birth through parentage or foundling status",
       "summary": "A person is Egyptian at birth when born to an Egyptian father or mother. A person born in Egypt of unknown parents, including a foundling presumed born in Egypt, is also Egyptian. Birth in Egypt alone to identified foreign parents is not general jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34763,6 +35277,12 @@
       "title": "Citizenship by birth in the UK",
       "summary": "For births from 1983, a child is normally automatically British when a parent is British or settled at the time of birth.",
       "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -35196,6 +35716,10 @@
       "title": "Citizenship at birth through a Tanzanian parent",
       "summary": "Birth to a Tanzanian parent creates citizenship. Birth in Tanzania alone to two foreign parents is not treated as open jus soli in practice.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -35597,6 +36121,10 @@
       "title": "Citizenship at birth through a Burkina Faso parent",
       "summary": "Birth to a Burkina Faso parent creates nationality. Birth in Burkina Faso alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -35851,6 +36379,10 @@
       "title": "Citizenship at birth through an Uzbek parent",
       "summary": "Birth to an Uzbek parent creates nationality. Birth in Uzbekistan alone to two foreign parents is not unrestricted jus soli; anti-statelessness safeguards cover foundlings and otherwise-stateless children.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -36183,6 +36715,10 @@
       "title": "Citizenship at birth through a Samoan parent",
       "summary": "Birth to a Samoan parent creates Samoan citizenship. Birth in Samoa alone to two foreign parents is not general unrestricted jus soli.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -36326,6 +36862,10 @@
       "title": "Citizenship at birth through a Yemeni father",
       "summary": "Nationality at birth derives from a Yemeni father regardless of place of birth; birth in Yemen alone does not confer citizenship, with a limited safeguard for children of unknown or stateless fathers.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -36432,6 +36972,10 @@
       "title": "Citizenship at birth through a Zambian parent",
       "summary": "Birth to a Zambian parent creates citizenship under constitutional categories. Birth in Zambia alone to two foreign parents is not unrestricted open jus soli for all cases.",
       "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -37942,6 +38486,50 @@
       ]
     },
     {
+      "id": "cabo-verde-remote-work-visa",
+      "country": {
+        "iso_n3": "132",
+        "name": "Cabo Verde"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Remote working / digital nomad visa",
+      "summary": "Residence permission for foreigners working remotely for foreign employers or clients from Cabo Verde under the remote-work visa framework.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1500,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "cabo-verde-remote-work-visa-principal",
+          "label": "Remote working / digital nomad visa",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Governo de Cabo Verde — services portal",
+          "url": "https://www.governo.cv/"
+        }
+      ]
+    },
+    {
       "id": "cayman-certificate-direct-investment",
       "country": {
         "iso_n3": "136",
@@ -39421,6 +40009,45 @@
       ]
     },
     {
+      "id": "france-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "250",
+        "name": "France"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad residence permit",
+      "summary": "France has no branded digital-nomad visa; remote workers use visitor, talent, employee, or other CESEDA titles when they qualify.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "france-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad residence permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Service-Public — foreign nationals in France",
+          "url": "https://www.service-public.fr/particuliers/vosdroits/N19804"
+        }
+      ]
+    },
+    {
       "id": "france-talent-business-creator",
       "country": {
         "iso_n3": "250",
@@ -40512,6 +41139,45 @@
       ]
     },
     {
+      "id": "indonesia-second-home-vs-nomad",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "Second Home / long-stay visit — not a digital nomad work permit",
+      "summary": "Indonesia’s Second Home and related long-stay visit products are not a general remote-work digital nomad visa authorizing local employment for foreign clients as a settlement track.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "indonesia-second-home-vs-nomad-principal",
+          "label": "Second Home / long-stay visit — not a digital nomad work permit",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Direktorat Jenderal Imigrasi — official portal",
+          "url": "https://www.imigrasi.go.id/"
+        }
+      ]
+    },
+    {
       "id": "ireland-iip",
       "country": {
         "iso_n3": "372",
@@ -40724,6 +41390,50 @@
         {
           "title": "在留資格「経営・管理」に係る上陸基準省令等の改正について (Immigration Services Agency)",
           "url": "https://www.moj.go.jp/isa/applications/resources/10_00237.html"
+        }
+      ]
+    },
+    {
+      "id": "japan-digital-nomad-visa",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Digital Nomad visa (designated activities)",
+      "summary": "Japan’s Designated Activities digital nomad route for high-income remote workers from designated countries — short-term stay, not a path to permanent residence.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 8333,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          6
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "japan-digital-nomad-visa-principal",
+          "label": "Digital Nomad visa (designated activities)",
+          "allocation": "discretionary",
+          "eligibility_months": 6
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Immigration Services Agency of Japan",
+          "url": "https://www.moj.go.jp/isa/index.html"
         }
       ]
     },
@@ -41690,6 +42400,47 @@
         {
           "title": "Mauritius EDB — Residency",
           "url": "https://residency.mu/"
+        }
+      ]
+    },
+    {
+      "id": "mauritius-premium-visa-nomad",
+      "country": {
+        "iso_n3": "480",
+        "name": "Mauritius"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Premium Visa (long-stay remote / multi-entry)",
+      "summary": "Long-stay Premium Visa used by remote workers and long-stay visitors who meet means and insurance requirements under Mauritius immigration practice.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "mauritius-premium-visa-nomad-principal",
+          "label": "Premium Visa (long-stay remote / multi-entry)",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Passport and Immigration Office — Mauritius",
+          "url": "https://passport.govmu.org/"
         }
       ]
     },
@@ -43845,6 +44596,45 @@
         {
           "title": "Luật số 51/2019/QH14 — Cổng Thông tin điện tử Chính phủ (official gazette page with signed PDF)",
           "url": "https://vanban.chinhphu.vn/default.aspx?pageid=27160&docid=198545"
+        }
+      ]
+    },
+    {
+      "id": "south-africa-digital-nomad-verified-negative",
+      "country": {
+        "iso_n3": "710",
+        "name": "South Africa"
+      },
+      "category": "digital_nomad",
+      "status": "verified_negative",
+      "title": "No dedicated digital nomad visa (as of review)",
+      "summary": "South Africa does not operate a dedicated digital-nomad visa; remote workers use visitor, critical skills, business, or other Immigration Act categories.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "south-africa-digital-nomad-verified-negative-principal",
+          "label": "No dedicated digital nomad visa (as of review)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "South Africa — Department of Home Affairs",
+          "url": "https://www.dha.gov.za/"
         }
       ]
     },

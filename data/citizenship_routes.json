@@ -1492,6 +1492,3217 @@
           "url": "https://www.constituteproject.org/constitution/Trinidad_and_Tobago_2007"
         }
       ]
+    },
+    {
+      "id": "afghanistan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "004",
+        "name": "Afghanistan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Afghan parent",
+      "summary": "Birth to an Afghan parent creates nationality. Birth in Afghanistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Afghanistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Afghanistan_2004"
+        }
+      ]
+    },
+    {
+      "id": "albania-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "008",
+        "name": "Albania"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Albania parent",
+      "summary": "Birth to a Albania parent creates nationality. Birth in Albania alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Albania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Albania_2016"
+        }
+      ]
+    },
+    {
+      "id": "algeria-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "012",
+        "name": "Algeria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Algerian parent",
+      "summary": "Birth to an Algerian parent creates Algerian nationality. Birth in Algeria alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Algeria Nationality Code (English text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf"
+        }
+      ]
+    },
+    {
+      "id": "andorra-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "020",
+        "name": "Andorra"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Andorran parent",
+      "summary": "Birth to an Andorran parent creates Andorran nationality. Birth in Andorra alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Andorra Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Andorra_1993"
+        }
+      ]
+    },
+    {
+      "id": "angola-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "024",
+        "name": "Angola"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Angolan parent",
+      "summary": "Birth to an Angolan parent creates Angolan nationality. Birth in Angola alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Angola Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Angola_2010"
+        }
+      ]
+    },
+    {
+      "id": "australia-citizenship-by-birth",
+      "country": {
+        "iso_n3": "036",
+        "name": "Australia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Australia",
+      "summary": "A child born in Australia is a citizen when a parent is a citizen or permanent resident, or when the child is ordinarily resident in Australia for the first ten years of life.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Australian Citizenship Act 2007",
+          "url": "https://www.legislation.gov.au/C2007A00020/latest/text"
+        }
+      ]
+    },
+    {
+      "id": "austria-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "040",
+        "name": "Austria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Austrian parent",
+      "summary": "Birth to an Austrian parent creates Austrian citizenship. Birth in Austria alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Austria migration.gv.at - citizenship",
+          "url": "https://www.migration.gv.at/en/living-and-working-in-austria/integration-and-citizenship/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "bahamas-citizenship-connected-to-birth",
+      "country": {
+        "iso_n3": "044",
+        "name": "Bahamas"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship connected to birth in The Bahamas",
+      "summary": "Birth in The Bahamas confers citizenship at birth when a parent is Bahamian. A person born there to non-citizen parents may instead apply for registration at age 18 and before turning 19, subject to the constitutional conditions.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "parent_citizen",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of The Bahamas — citizenship",
+          "url": "https://laws.bahamas.gov.bs/cms/images/LEGISLATION/PRINCIPAL/1973/1973-1080/1973-1080_1.pdf"
+        }
+      ]
+    },
+    {
+      "id": "bangladesh-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "050",
+        "name": "Bangladesh"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Bangladeshi parent",
+      "summary": "Birth to a Bangladeshi parent creates nationality. Birth in Bangladesh alone to foreign parents is not unrestricted jus soli; a limited rule covers foundlings of unknown parentage.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bangladesh Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bangladesh_2014"
+        }
+      ]
+    },
+    {
+      "id": "armenia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "051",
+        "name": "Armenia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Armenian parent",
+      "summary": "Birth to an Armenian parent creates nationality regardless of birthplace. Birth in Armenia alone to foreign parents is not unrestricted jus soli; territorial birth confers citizenship only to prevent statelessness.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Armenia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Armenia_2015"
+        }
+      ]
+    },
+    {
+      "id": "belgium-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "056",
+        "name": "Belgium"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Belgian parent",
+      "summary": "Birth to a Belgian parent creates Belgian nationality. Birth in Belgium alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Belgium Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belgium_2014"
+        }
+      ]
+    },
+    {
+      "id": "bhutan-citizenship-at-birth-by-parents",
+      "country": {
+        "iso_n3": "064",
+        "name": "Bhutan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth where both parents are Bhutanese",
+      "summary": "Citizenship transmits at birth only where both parents are Bhutanese citizens; Bhutan has no unrestricted jus soli and limited anti-statelessness safeguards.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Bhutan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+        }
+      ]
+    },
+    {
+      "id": "bosnia-herzegovina-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "070",
+        "name": "Bosnia and Herz."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Bosnia and Herzegovina parent",
+      "summary": "Birth to a Bosnia and Herzegovina parent creates nationality. Birth in Bosnia and Herzegovina alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Bosnia and Herzegovina Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Bosnia_Herzegovina_2009"
+        }
+      ]
+    },
+    {
+      "id": "botswana-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "072",
+        "name": "Botswana"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Motswana parent",
+      "summary": "Birth to a Botswana citizen parent creates citizenship. Birth in Botswana alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Botswana Citizenship Act Cap 01:01",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/01/Botswana_Citizenship_Act_Cap0101_2004.pdf"
+        }
+      ]
+    },
+    {
+      "id": "solomon-islands-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "090",
+        "name": "Solomon Is."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a citizen parent",
+      "summary": "Birth to a Solomon Islands citizen parent creates citizenship. Birth in the Solomon Islands alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Solomon Islands government - obtain citizenship",
+          "url": "https://solomons.gov.sb/ministry-of-home-affairs/essential-services/obtain-solomon-islands-citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "brunei-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "096",
+        "name": "Brunei"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Bruneian parent",
+      "summary": "Birth to a Bruneian parent creates Bruneian nationality. Birth in Brunei alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Brunei Nationality Act (AGC)",
+          "url": "https://www.agc.gov.bn/AGC%20Images/LAWS/ACT_PDF/cap015.pdf"
+        }
+      ]
+    },
+    {
+      "id": "bulgaria-citizenship-by-birth-statelessness",
+      "country": {
+        "iso_n3": "100",
+        "name": "Bulgaria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth where no other citizenship is acquired",
+      "summary": "A person born in Bulgaria is a citizen by place of birth if they do not acquire another citizenship by origin; a foundling with unknown parents is presumed born in Bulgaria.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "stateless_or_unknown",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Bulgarian Ministry of Justice — Citizenship Act",
+          "url": "https://justice.government.bg/home/normdoc/2134446592"
+        }
+      ]
+    },
+    {
+      "id": "myanmar-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "104",
+        "name": "Myanmar"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through citizen/national-race parentage",
+      "summary": "Citizenship at birth is by descent and national-race lineage, not by birth on territory; there is minimal anti-statelessness protection, which excludes the Rohingya.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Myanmar Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Myanmar_2015"
+        }
+      ]
+    },
+    {
+      "id": "burundi-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "108",
+        "name": "Burundi"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Burundi parent",
+      "summary": "Birth to a Burundi parent creates nationality. Birth in Burundi alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Burundi Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Burundi_2018"
+        }
+      ]
+    },
+    {
+      "id": "belarus-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "112",
+        "name": "Belarus"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Belarusian parent",
+      "summary": "Birth to a Belarusian parent creates nationality. Birth in Belarus alone to foreign parents is not unrestricted jus soli; territorial rules cover children who would otherwise be stateless.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Belarus Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Belarus_2004"
+        }
+      ]
+    },
+    {
+      "id": "cambodia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "116",
+        "name": "Cambodia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Cambodian parent",
+      "summary": "Birth to a Cambodian parent creates Cambodian nationality. Birth in Cambodia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cambodia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cambodia_2008"
+        }
+      ]
+    },
+    {
+      "id": "cameroon-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "120",
+        "name": "Cameroon"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Cameroonian parent",
+      "summary": "Birth to a Cameroonian parent creates nationality. Birth in Cameroon alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cameroon Ministry of Justice - who is a Cameroonian",
+          "url": "https://minjustice.cm/ova_sev/who-is-a-cameroonian/"
+        }
+      ]
+    },
+    {
+      "id": "cayman-botc-by-birth",
+      "country": {
+        "iso_n3": "136",
+        "name": "Cayman Islands"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "BOTC citizenship at birth through a qualifying parent",
+      "summary": "A child born in Cayman acquires BOTC at birth when a parent is a BOTC or is settled in the territory, subject to the British Nationality Act and date-specific rules.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "British Nationality Act 1981",
+          "url": "https://www.legislation.gov.uk/ukpga/1981/61/contents"
+        }
+      ]
+    },
+    {
+      "id": "central-african-republic-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "140",
+        "name": "Central African Rep."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Central African Republic parent",
+      "summary": "Birth to a Central African Republic parent creates nationality. Birth in Central African Republic alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Central African Republic Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Central_African_Republic_2016"
+        }
+      ]
+    },
+    {
+      "id": "sri-lanka-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "144",
+        "name": "Sri Lanka"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Sri Lankan parent",
+      "summary": "Citizenship follows descent from a Sri Lankan parent; there is no automatic birthright citizenship for children of foreign parents born on Sri Lankan soil.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Sri Lanka Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sri_Lanka_2015"
+        }
+      ]
+    },
+    {
+      "id": "chad-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "148",
+        "name": "Chad"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Chad parent",
+      "summary": "Birth to a Chad parent creates nationality. Birth in Chad alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Chad Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Chad_2018"
+        }
+      ]
+    },
+    {
+      "id": "taiwan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "158",
+        "name": "Taiwan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a R.O.C. parent or foundling rule",
+      "summary": "A person born to a R.O.C. national parent is a R.O.C. national at birth. A person born in the territory whose parents cannot be ascertained or were both stateless is also a national. Birth in Taiwan alone to identified foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Taiwan (R.O.C.) Nationality Act — Laws & Regulations Database",
+          "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=D0030001"
+        }
+      ]
+    },
+    {
+      "id": "colombia-citizenship-by-conditional-birth",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Colombian nationality by conditional territorial birth",
+      "summary": "A child born in Colombia to foreign parents is Colombian by birth when at least one parent was domiciled in Colombia at the time of birth; a separate exception protects a child whom no state recognizes as a national.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "domicile",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Colombia Law 2332 of 2023 — nationality",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/ley_2332_2023.htm"
+        }
+      ]
+    },
+    {
+      "id": "comoros-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "174",
+        "name": "Comoros"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Comorian parent",
+      "summary": "Birth to a Comorian parent creates nationality. Birth in Comoros alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Comoros Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Comoros_2018"
+        }
+      ]
+    },
+    {
+      "id": "congo-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "178",
+        "name": "Congo"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Republic of the Congo parent",
+      "summary": "Birth to a Republic of the Congo parent creates nationality. Birth in Republic of the Congo alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Congo_2015"
+        }
+      ]
+    },
+    {
+      "id": "drc-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "180",
+        "name": "Dem. Rep. Congo"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Democratic Republic of the Congo parent",
+      "summary": "Birth to a Democratic Republic of the Congo parent creates nationality. Birth in Democratic Republic of the Congo alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Democratic Republic of the Congo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Democratic_Republic_of_the_Congo_2011"
+        }
+      ]
+    },
+    {
+      "id": "croatia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "191",
+        "name": "Croatia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Croatian parent",
+      "summary": "Birth to a Croatian parent creates Croatian citizenship. Birth in Croatia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Croatia gov.hr - acquiring Croatian citizenship",
+          "url": "https://gov.hr/en/acquiring-croatian-citizenship/460"
+        }
+      ]
+    },
+    {
+      "id": "czechia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "203",
+        "name": "Czechia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Czech parent",
+      "summary": "Birth to a Czech parent creates Czech citizenship. Birth in Czechia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Czech Ministry of Interior - citizenship",
+          "url": "https://www.mvcr.cz/clanek/statni-obcanstvi.aspx"
+        }
+      ]
+    },
+    {
+      "id": "benin-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "204",
+        "name": "Benin"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Benin parent",
+      "summary": "Birth to a Benin parent creates nationality. Birth in Benin alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Benin Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Benin_1990"
+        }
+      ]
+    },
+    {
+      "id": "denmark-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "208",
+        "name": "Denmark"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Danish parent",
+      "summary": "Birth to a Danish parent creates Danish citizenship. Birth in Denmark alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Denmark UIM - citizenship",
+          "url": "https://uim.dk/arbejdsomraader/statsborgerskab/"
+        }
+      ]
+    },
+    {
+      "id": "ecuador-citizenship-at-birth",
+      "country": {
+        "iso_n3": "218",
+        "name": "Ecuador"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Ecuadorian parent or birth in Ecuador",
+      "summary": "Birth to an Ecuadorian parent, or birth in Ecuador under the Constitution, creates Ecuadorian nationality.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ecuador 2021 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ecuador_2021"
+        }
+      ]
+    },
+    {
+      "id": "equatorial-guinea-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "226",
+        "name": "Eq. Guinea"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Equatorial Guinea parent",
+      "summary": "Birth to a Equatorial Guinea parent creates nationality. Birth in Equatorial Guinea alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Equatorial Guinea Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Equatorial_Guinea_2012"
+        }
+      ]
+    },
+    {
+      "id": "ethiopia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "231",
+        "name": "Ethiopia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Ethiopian parent",
+      "summary": "Birth to an Ethiopian parent creates Ethiopian nationality. Birth in Ethiopia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ethiopia Proclamation on Ethiopian Nationality 378/2003",
+          "url": "https://www.refworld.org/docid/409100414.html"
+        }
+      ]
+    },
+    {
+      "id": "eritrea-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "232",
+        "name": "Eritrea"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Eritrea parent",
+      "summary": "Birth to a Eritrea parent creates nationality. Birth in Eritrea alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Eritrea Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Eritrea_1997"
+        }
+      ]
+    },
+    {
+      "id": "estonia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "233",
+        "name": "Estonia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Estonian parent",
+      "summary": "Birth to an Estonian parent creates Estonian citizenship. Birth in Estonia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Estonia Citizenship Act (Riigi Teataja)",
+          "url": "https://www.riigiteataja.ee/en/eli/523012024006/consolide"
+        }
+      ]
+    },
+    {
+      "id": "fiji-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "242",
+        "name": "Fiji"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Fijian parent",
+      "summary": "Birth to a Fijian parent creates Fijian citizenship under nationality law. Birth in Fiji alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Fiji Ministry of Immigration - citizenship by registration and naturalization",
+          "url": "https://www.immigration.gov.fj/by-registration/"
+        }
+      ]
+    },
+    {
+      "id": "finland-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "246",
+        "name": "Finland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Finnish parent",
+      "summary": "Birth to a Finnish parent creates Finnish citizenship. Birth in Finland alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Finnish Immigration Service - Finnish citizenship",
+          "url": "https://migri.fi/en/finnish-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "djibouti-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "262",
+        "name": "Djibouti"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Djibouti parent",
+      "summary": "Birth to a Djibouti parent creates nationality. Birth in Djibouti alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Djibouti Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Djibouti_2010"
+        }
+      ]
+    },
+    {
+      "id": "gabon-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "266",
+        "name": "Gabon"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Gabon parent",
+      "summary": "Birth to a Gabon parent creates nationality. Birth in Gabon alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Gabon Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gabon_2011"
+        }
+      ]
+    },
+    {
+      "id": "gambia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "270",
+        "name": "Gambia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a The Gambia parent",
+      "summary": "Birth to a The Gambia parent creates nationality. Birth in The Gambia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "The Gambia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Gambia_2019"
+        }
+      ]
+    },
+    {
+      "id": "ghana-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "288",
+        "name": "Ghana"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Ghanaian parent",
+      "summary": "Birth to a Ghanaian parent creates Ghanaian citizenship under the applicable constitutional date rules. Birth in Ghana alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ghana Citizenship Act 2000 (Act 591)",
+          "url": "https://citizenshiprightsafrica.org/wp-content/uploads/2016/02/Ghana_Citizenship_Act_with_forms_591_2000.pdf"
+        }
+      ]
+    },
+    {
+      "id": "kiribati-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "296",
+        "name": "Kiribati"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Kiribati parent",
+      "summary": "Birth to a Kiribati parent creates citizenship under nationality law. Birth in Kiribati alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Kiribati Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kiribati_2013"
+        }
+      ]
+    },
+    {
+      "id": "guatemala-citizenship-by-birth",
+      "country": {
+        "iso_n3": "320",
+        "name": "Guatemala"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Guatemalan nationality by birth in Guatemala or through a Guatemalan parent",
+      "summary": "Birth in Guatemala or through a Guatemalan parent creates Guatemalan nationality under the constitutional framework.",
+      "facts": {
+        "jus_soli": "unconditional",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": true
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guatemala Constitution — nationality (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guatemala_1993"
+        }
+      ]
+    },
+    {
+      "id": "guinea-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "324",
+        "name": "Guinea"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Guinea parent",
+      "summary": "Birth to a Guinea parent creates nationality. Birth in Guinea alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guinea Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guinea_2020"
+        }
+      ]
+    },
+    {
+      "id": "haiti-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "332",
+        "name": "Haiti"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Haiti parent",
+      "summary": "Birth to a Haiti parent creates nationality. Birth in Haiti alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Haiti Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Haiti_2012"
+        }
+      ]
+    },
+    {
+      "id": "hungary-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "348",
+        "name": "Hungary"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Hungarian parent",
+      "summary": "A child acquires Hungarian citizenship at birth when at least one parent is a Hungarian citizen, regardless of the place of birth. Birth in Hungary alone to foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Hungary Government — acquisition of Hungarian nationality",
+          "url": "https://emberijogok.kormany.hu/the-acquisition-of-hungarian-nationality"
+        }
+      ]
+    },
+    {
+      "id": "iceland-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "352",
+        "name": "Iceland"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Icelandic parent",
+      "summary": "Birth to an Icelandic parent creates Icelandic citizenship. Birth in Iceland alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Government of Iceland - citizenship",
+          "url": "https://www.government.is/topics/foreign-nationals/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "india-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "356",
+        "name": "India"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Indian parent",
+      "summary": "After 1987, birth in India creates citizenship only with a qualifying Indian parent (or later rules for both parents). Birth in India alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "India Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/India_2016"
+        }
+      ]
+    },
+    {
+      "id": "indonesia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "360",
+        "name": "Indonesia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Indonesian parent",
+      "summary": "A person born to an Indonesian citizen parent acquires Indonesian citizenship under Law No. 12 of 2006. Birth in Indonesia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Indonesia Law No. 12 of 2006 on Citizenship (English text)",
+          "url": "https://www.ecoi.net/en/file/local/1170232/1504_1217488313_law-of-the-republic-of-indonesia-no-12-on-citizenship-of-the-republic-of-indonesia.pdf"
+        }
+      ]
+    },
+    {
+      "id": "israel-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "376",
+        "name": "Israel"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Israeli parent",
+      "summary": "A person born in Israel after the establishment of the State acquires Israeli nationality by birth when a parent was an Israeli national; birth in Israel alone to two foreign parents is not general jus soli under the Nationality Law.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Israel Nationality Law 5712-1952 (amended text)",
+          "url": "https://data.globalcit.eu/NationalDB/docs/Isreal%20Nationality%20Law%20(amended).pdf"
+        }
+      ]
+    },
+    {
+      "id": "cote-divoire-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "384",
+        "name": "Côte d'Ivoire"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Ivorian parent",
+      "summary": "Birth to an Ivorian parent creates Ivorian nationality. Birth in Cote dIvoire alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Cote d'Ivoire Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Cote_dIvoire_2016"
+        }
+      ]
+    },
+    {
+      "id": "japan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "392",
+        "name": "Japan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Japanese parent or foundling rule",
+      "summary": "A person born to a Japanese father or mother is Japanese at birth. A person born in Japan whose parents are both unknown or without nationality is also Japanese. Birth in Japan alone to identified foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Japan Nationality Act (Japanese Law Translation)",
+          "url": "https://www.japaneselawtranslation.go.jp/en/laws/view/3784/en"
+        },
+        {
+          "title": "Japan Ministry of Justice — Nationality Q&A",
+          "url": "https://www.moj.go.jp/EN/MINJI/minji78.html"
+        }
+      ]
+    },
+    {
+      "id": "kazakhstan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "398",
+        "name": "Kazakhstan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Kazakhstani parent",
+      "summary": "Birth to a Kazakhstani parent creates nationality. Birth in Kazakhstan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and children who would otherwise be stateless.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kazakhstan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kazakhstan_2017"
+        }
+      ]
+    },
+    {
+      "id": "jordan-citizenship-by-birth-limited",
+      "country": {
+        "iso_n3": "400",
+        "name": "Jordan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Limited citizenship connected to birth in Jordan",
+      "summary": "A person born in Jordan to a Jordanian mother and a father who is unknown, stateless or whose filiation is not established is Jordanian. A foundling in Jordan is presumed born there and is Jordanian unless the contrary is proved. Birth in Jordan to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Jordanian Nationality Law No. 6 of 1954 (as amended)",
+          "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Jordan%20Law%20No.%206%20of%201954%20on%20Nationality%20%28last%20amended%201987%29%20English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "kenya-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "404",
+        "name": "Kenya"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Kenyan parent",
+      "summary": "Birth to a Kenyan citizen parent creates Kenyan citizenship by birth. Birth in Kenya alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Kenya 2010 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kenya_2010"
+        }
+      ]
+    },
+    {
+      "id": "korea-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "410",
+        "name": "South Korea"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Korean parent",
+      "summary": "A person born to a Korean national parent acquires Korean nationality at birth. Birth in Korea alone to two foreign parents is not general jus soli under the Nationality Act.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "HiKorea — General naturalization (5 years)",
+          "url": "https://www.hikorea.go.kr/info/InfoDatail.pt?CAT_SEQ=200&PARENT_ID=148&locale=EN"
+        }
+      ]
+    },
+    {
+      "id": "kyrgyzstan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "417",
+        "name": "Kyrgyzstan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Kyrgyz parent",
+      "summary": "Birth to a Kyrgyz parent creates nationality. Birth in Kyrgyzstan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Kyrgyz Republic Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Kyrgyz_Republic_2021"
+        }
+      ]
+    },
+    {
+      "id": "laos-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "418",
+        "name": "Laos"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Lao parent",
+      "summary": "Birth to a Lao parent creates nationality. Birth in Laos alone to foreign parents is not unrestricted jus soli, though foundlings are presumed Lao and conditional anti-statelessness protections exist.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Laos Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Laos_2015"
+        }
+      ]
+    },
+    {
+      "id": "lebanon-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "422",
+        "name": "Lebanon"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Lebanese father",
+      "summary": "Birth to a Lebanese father creates nationality. Birth in Lebanon alone to foreign parents is not unrestricted jus soli; a narrow safety net covers those born to unknown or stateless parents.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Lebanon Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lebanon_2004"
+        }
+      ]
+    },
+    {
+      "id": "lesotho-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "426",
+        "name": "Lesotho"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Lesotho parent",
+      "summary": "Birth to a Lesotho parent creates nationality. Birth in Lesotho alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Lesotho Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lesotho_2018"
+        }
+      ]
+    },
+    {
+      "id": "latvia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "428",
+        "name": "Latvia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Latvian parent",
+      "summary": "Birth to a Latvian parent creates Latvian citizenship. Birth in Latvia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Latvia OCMA/PMLP - naturalisation",
+          "url": "https://www.pmlp.gov.lv/en/naturalisation"
+        }
+      ]
+    },
+    {
+      "id": "liberia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "430",
+        "name": "Liberia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Liberia parent",
+      "summary": "Birth to a Liberia parent creates nationality. Birth in Liberia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Liberia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Liberia_1986"
+        }
+      ]
+    },
+    {
+      "id": "libya-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "434",
+        "name": "Libya"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Libya parent",
+      "summary": "Birth to a Libya parent creates nationality. Birth in Libya alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Libya Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Libya_2011"
+        }
+      ]
+    },
+    {
+      "id": "liechtenstein-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "438",
+        "name": "Liechtenstein"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Liechtenstein parent",
+      "summary": "Birth to a Liechtenstein parent creates Liechtenstein citizenship. Birth in Liechtenstein alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Liechtenstein National Administration - naturalization",
+          "url": "https://www.llv.li/en/individuals/migration-and-integration/naturalization"
+        }
+      ]
+    },
+    {
+      "id": "lithuania-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "440",
+        "name": "Lithuania"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Lithuanian parent",
+      "summary": "Birth to a Lithuanian parent creates Lithuanian citizenship. Birth in Lithuania alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Lithuania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Lithuania_2019"
+        }
+      ]
+    },
+    {
+      "id": "luxembourg-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "442",
+        "name": "Luxembourg"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Luxembourgish parent",
+      "summary": "Birth to a Luxembourgish parent creates Luxembourgish nationality. Birth in Luxembourg alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Luxembourg Guichet - naturalisation",
+          "url": "https://guichet.public.lu/en/citoyens/citoyennete/nationalite-luxembourgeoise/acquisition-recouvrement/naturalisation.html"
+        }
+      ]
+    },
+    {
+      "id": "madagascar-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "450",
+        "name": "Madagascar"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Madagascar parent",
+      "summary": "Birth to a Madagascar parent creates nationality. Birth in Madagascar alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Madagascar Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Madagascar_2010"
+        }
+      ]
+    },
+    {
+      "id": "malawi-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "454",
+        "name": "Malawi"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Malawi parent",
+      "summary": "Birth to a Malawi parent creates nationality. Birth in Malawi alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malawi Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malawi_2017"
+        }
+      ]
+    },
+    {
+      "id": "malaysia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Malaysian parent",
+      "summary": "A person born to a Malaysian citizen parent is Malaysian under the Constitution’s operation-of-law and registration rules. Birth in Malaysia to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Malaysia Federal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Malaysia_2007"
+        }
+      ]
+    },
+    {
+      "id": "mali-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "466",
+        "name": "Mali"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Mali parent",
+      "summary": "Birth to a Mali parent creates nationality. Birth in Mali alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mali Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mali_1992"
+        }
+      ]
+    },
+    {
+      "id": "mauritania-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "478",
+        "name": "Mauritania"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Mauritania parent",
+      "summary": "Birth to a Mauritania parent creates nationality. Birth in Mauritania alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mauritania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mauritania_2012"
+        }
+      ]
+    },
+    {
+      "id": "monaco-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "492",
+        "name": "Monaco"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Monegasque parent",
+      "summary": "Birth to a Monegasque parent creates Monegasque nationality. Birth in Monaco alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Monaco mon service public - acquiring nationality",
+          "url": "https://monservicepublic.gouv.mc/en/themes/nationality-and-residency/monegasque-nationality/acquisition-and-loss-of-nationality/acquiring-monegasque-nationality"
+        }
+      ]
+    },
+    {
+      "id": "mongolia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "496",
+        "name": "Mongolia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Mongolian parent",
+      "summary": "Mongolia confers citizenship by descent from a citizen parent, not by birth on territory alone (no unrestricted jus soli).",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Mongolia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mongolia_2001"
+        }
+      ]
+    },
+    {
+      "id": "moldova-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "498",
+        "name": "Moldova"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Moldova parent",
+      "summary": "Birth to a Moldova parent creates nationality. Birth in Moldova alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Moldova Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Moldova_2016"
+        }
+      ]
+    },
+    {
+      "id": "montenegro-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "499",
+        "name": "Montenegro"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Montenegrin parent",
+      "summary": "Birth to a Montenegrin parent creates nationality. Birth in Montenegro alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Montenegro Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Montenegro_2013"
+        }
+      ]
+    },
+    {
+      "id": "morocco-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "504",
+        "name": "Morocco"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Moroccan parent",
+      "summary": "Birth to a Moroccan parent creates Moroccan nationality. Birth in Morocco alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Morocco 2011 Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Morocco_2011"
+        }
+      ]
+    },
+    {
+      "id": "mozambique-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "508",
+        "name": "Mozambique"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Mozambican parent",
+      "summary": "Birth to a Mozambican parent creates nationality. Birth in Mozambique alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Mozambique Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Mozambique_2007"
+        }
+      ]
+    },
+    {
+      "id": "namibia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "516",
+        "name": "Namibia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Namibian parent",
+      "summary": "Birth to a Namibian parent creates citizenship. Birth in Namibia alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Namibia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Namibia_2014"
+        }
+      ]
+    },
+    {
+      "id": "nz-citizenship-by-birth",
+      "country": {
+        "iso_n3": "554",
+        "name": "New Zealand"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in New Zealand",
+      "summary": "For births from 1 January 2006, a child born in New Zealand is a citizen when at least one parent is a citizen or has the right to live in New Zealand indefinitely.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "New Zealand Government — Citizenship by birth, descent and grant",
+          "url": "https://www.govt.nz/browse/passports-citizenship-and-identity/nz-citizenship/types-of-citizenship-grant-birth-and-descent/"
+        }
+      ]
+    },
+    {
+      "id": "niger-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "562",
+        "name": "Niger"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Niger parent",
+      "summary": "Birth to a Niger parent creates nationality. Birth in Niger alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Niger Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Niger_2010"
+        }
+      ]
+    },
+    {
+      "id": "nigeria-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "566",
+        "name": "Nigeria"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Nigerian parent or grandparent rules",
+      "summary": "A person born outside Nigeria either of whose parents is a citizen of Nigeria is a citizen by birth. Birth in Nigeria after independence with a citizen parent or grandparent also creates citizenship by birth under section 25. Birth in Nigeria alone to two foreign parents without qualifying lineage is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Nigeria Constitution 1999 — Chapter III Citizenship (published text)",
+          "url": "https://citizenshiprightsafrica.org/en/nigeria-constitution-1999-chapter-iii-on-citizenship/"
+        },
+        {
+          "title": "Constitute Project — Constitution of Nigeria 1999 (as amended)",
+          "url": "https://www.constituteproject.org/constitution/Nigeria_2011"
+        }
+      ]
+    },
+    {
+      "id": "norway-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "578",
+        "name": "Norway"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Norwegian parent",
+      "summary": "Birth to a Norwegian parent creates Norwegian citizenship. Birth in Norway alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Norway UDI - citizenship",
+          "url": "https://www.udi.no/en/want-to-apply/citizenship/"
+        }
+      ]
+    },
+    {
+      "id": "micronesia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "583",
+        "name": "Micronesia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an FSM parent",
+      "summary": "Birth to an FSM parent creates citizenship under the code. Birth in the FSM alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "FSM Code Title 7 Chapter 2 Citizenship",
+          "url": "https://fsmlaw.org/fsm/code/title07/T07_Ch02.htm"
+        }
+      ]
+    },
+    {
+      "id": "marshall-islands-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "584",
+        "name": "Marshall Is."
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Marshallese parent",
+      "summary": "Birth to a Marshallese parent creates citizenship. Birth in the Marshall Islands alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Marshall Islands Citizenship Act 1984 (Refworld)",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/1984/123580"
+        }
+      ]
+    },
+    {
+      "id": "palau-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "585",
+        "name": "Palau"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Palauan parent",
+      "summary": "Birth to a Palauan parent creates citizenship. Birth in Palau alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Palau Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Palau_2008"
+        }
+      ]
+    },
+    {
+      "id": "papua-new-guinea-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "598",
+        "name": "Papua New Guinea"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a PNG parent",
+      "summary": "Birth to a PNG citizen parent creates PNG citizenship. Birth in PNG alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "PNG ICA - eligibility for citizenship",
+          "url": "https://ica.gov.pg/citizenship/eligibility-for-png-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "guinea-bissau-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "624",
+        "name": "Guinea-Bissau"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Guinea-Bissau parent",
+      "summary": "Birth to a Guinea-Bissau parent creates nationality. Birth in Guinea-Bissau alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Guinea-Bissau Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Guinea_Bissau_1996"
+        }
+      ]
+    },
+    {
+      "id": "romania-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "642",
+        "name": "Romania"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Romanian parent",
+      "summary": "Birth to a Romanian parent creates Romanian citizenship. Birth in Romania alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Romania Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Romania_2003"
+        }
+      ]
+    },
+    {
+      "id": "russia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "643",
+        "name": "Russia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Russian parent",
+      "summary": "Birth to a Russian parent creates nationality regardless of birthplace. Birth in Russia to foreign parents is not unrestricted jus soli; territorial birth confers citizenship only to prevent statelessness.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Russia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Russia_2014"
+        }
+      ]
+    },
+    {
+      "id": "rwanda-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "646",
+        "name": "Rwanda"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Rwandan parent",
+      "summary": "Birth to a Rwandan parent creates Rwandan nationality. Birth in Rwanda alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Rwanda DGIE - citizenship services",
+          "url": "https://www.migration.gov.rw/our-services/citizenshipss"
+        }
+      ]
+    },
+    {
+      "id": "senegal-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "686",
+        "name": "Senegal"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Senegalese parent",
+      "summary": "Birth to a Senegalese parent creates Senegalese nationality. Birth in Senegal alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Senegal Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Senegal_2016"
+        }
+      ]
+    },
+    {
+      "id": "seychelles-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "690",
+        "name": "Seychelles"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Seychellois parent",
+      "summary": "Birth to a Seychellois parent creates citizenship. Birth in Seychelles alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Seychelles ICS - permanent resident and citizenship FAQ",
+          "url": "https://www.ics.gov.sc/faq/immigration-services/permanent-resident-citizenship"
+        }
+      ]
+    },
+    {
+      "id": "sierra-leone-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "694",
+        "name": "Sierra Leone"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Sierra Leone parent",
+      "summary": "Birth to a Sierra Leone parent creates nationality. Birth in Sierra Leone alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Sierra Leone Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sierra_Leone_2013"
+        }
+      ]
+    },
+    {
+      "id": "singapore-citizenship-by-birth",
+      "country": {
+        "iso_n3": "702",
+        "name": "Singapore"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in Singapore",
+      "summary": "A person born in Singapore is a citizen by birth when at least one parent is a Singapore citizen, subject to the constitutional exceptions.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Constitution of the Republic of Singapore — Citizenship",
+          "url": "https://sso.agc.gov.sg/Act/CONS1963?ProvIds=P110-&ViewType=Advance"
+        }
+      ]
+    },
+    {
+      "id": "slovakia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "703",
+        "name": "Slovakia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Slovak parent",
+      "summary": "Birth to a Slovak parent creates Slovak citizenship. Birth in Slovakia alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Slovakia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Slovakia_2017"
+        }
+      ]
+    },
+    {
+      "id": "vietnam-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "704",
+        "name": "Vietnam"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Vietnamese parent",
+      "summary": "Birth to a Vietnamese parent creates Vietnamese nationality. Birth in Vietnam alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Vietnam Law on Vietnamese Nationality 2008 (English)",
+          "url": "https://vietnamlawmagazine.vn/law-on-vietnamese-nationality-2008-4847.html"
+        }
+      ]
+    },
+    {
+      "id": "slovenia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "705",
+        "name": "Slovenia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Slovenia parent",
+      "summary": "Birth to a Slovenia parent creates nationality. Birth in Slovenia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Slovenia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Slovenia_2016"
+        }
+      ]
+    },
+    {
+      "id": "somalia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "706",
+        "name": "Somalia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Somalia parent",
+      "summary": "Birth to a Somalia parent creates nationality. Birth in Somalia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Somalia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Somalia_2012"
+        }
+      ]
+    },
+    {
+      "id": "south-africa-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "710",
+        "name": "South Africa"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a South African parent",
+      "summary": "A person born to a South African citizen parent is a South African citizen by birth under the Citizenship Act. Birth in the Republic to two foreign parents is not unconditional jus soli; specified later naturalisation or registration routes may apply in limited statutory cases.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "South African Citizenship Act 88 of 1995 (gov.za PDF)",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/act88of1995.pdf"
+        },
+        {
+          "title": "South African Citizenship Amendment Act 17 of 2010",
+          "url": "https://www.gov.za/sites/default/files/gcis_document/201409/a1720100.pdf"
+        }
+      ]
+    },
+    {
+      "id": "south-sudan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "728",
+        "name": "S. Sudan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a South Sudan parent",
+      "summary": "Birth to a South Sudan parent creates nationality. Birth in South Sudan alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "South Sudan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/South_Sudan_2011"
+        }
+      ]
+    },
+    {
+      "id": "sudan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "729",
+        "name": "Sudan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Sudan parent",
+      "summary": "Birth to a Sudan parent creates nationality. Birth in Sudan alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Sudan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Sudan_2019"
+        }
+      ]
+    },
+    {
+      "id": "suriname-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "740",
+        "name": "Suriname"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Suriname parent",
+      "summary": "Birth to a Suriname parent creates nationality. Birth in Suriname alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Suriname Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Suriname_1992"
+        }
+      ]
+    },
+    {
+      "id": "eswatini-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "748",
+        "name": "eSwatini"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Eswatini parent",
+      "summary": "Birth to a Eswatini parent creates nationality. Birth in Eswatini alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Eswatini Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Swaziland_2005"
+        }
+      ]
+    },
+    {
+      "id": "sweden-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "752",
+        "name": "Sweden"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Swedish parent",
+      "summary": "Birth to a Swedish parent creates Swedish citizenship. Birth in Sweden alone to two foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Swedish Migration Agency - citizenship for adults",
+          "url": "https://www.migrationsverket.se/en/you-want-to-apply/swedish-citizenship/citizenship-for-adults/citizenship-for-adults.html"
+        }
+      ]
+    },
+    {
+      "id": "tajikistan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "762",
+        "name": "Tajikistan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tajik parent",
+      "summary": "Birth to a Tajik parent creates nationality. Birth in Tajikistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Tajikistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tajikistan_2016"
+        }
+      ]
+    },
+    {
+      "id": "thailand-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "764",
+        "name": "Thailand"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Thai parent",
+      "summary": "A person born to a Thai national parent is a Thai national at birth under the Nationality Act. Birth in Thailand alone to two foreign parents is not unconditional jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Thailand Nationality Act B.E. 2508 (amended; UNHCR English text)",
+          "url": "https://www.refworld.org/legal/legislation/natlegbod/2012/101733"
+        }
+      ]
+    },
+    {
+      "id": "togo-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "768",
+        "name": "Togo"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Togo parent",
+      "summary": "Birth to a Togo parent creates nationality. Birth in Togo alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Togo Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Togo_2007"
+        }
+      ]
+    },
+    {
+      "id": "tonga-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "776",
+        "name": "Tonga"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tongan parent",
+      "summary": "Birth to a Tongan parent creates Tongan nationality. Birth in Tonga alone to two foreign parents is not a general open jus soli path for ordinary foreign residents.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tonga Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tonga_2013"
+        }
+      ]
+    },
+    {
+      "id": "tunisia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "788",
+        "name": "Tunisia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tunisian parent",
+      "summary": "Birth to a Tunisian parent creates Tunisian nationality. Birth in Tunisia alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tunisia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Tunisia_2022"
+        }
+      ]
+    },
+    {
+      "id": "turkmenistan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "795",
+        "name": "Turkmenistan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Turkmen parent",
+      "summary": "Birth to a Turkmen parent creates nationality. Birth in Turkmenistan alone to foreign parents is not unrestricted jus soli; territorial rules cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Turkmenistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Turkmenistan_2016"
+        }
+      ]
+    },
+    {
+      "id": "tuvalu-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "798",
+        "name": "Tuvalu"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tuvaluan parent",
+      "summary": "Birth to a Tuvaluan parent creates citizenship. Birth in Tuvalu alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tuvalu Citizenship Act 1979 (official legislation PDF)",
+          "url": "https://tuvalu-legislation.tv/cms/images/LEGISLATION/PRINCIPAL/1979/1979-0005/1979-0005_1.pdf"
+        }
+      ]
+    },
+    {
+      "id": "uganda-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "800",
+        "name": "Uganda"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Ugandan parent",
+      "summary": "Birth to a Ugandan parent creates citizenship under constitutional categories. Birth in Uganda alone to two foreign parents is not unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Uganda Immigration - naturalization",
+          "url": "https://www.immigration.go.ug/node/235"
+        }
+      ]
+    },
+    {
+      "id": "ukraine-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "804",
+        "name": "Ukraine"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Ukraine parent",
+      "summary": "Birth to a Ukraine parent creates nationality. Birth in Ukraine alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Ukraine Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Ukraine_2019"
+        }
+      ]
+    },
+    {
+      "id": "north-macedonia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "807",
+        "name": "Macedonia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a North Macedonia parent",
+      "summary": "Birth to a North Macedonia parent creates nationality. Birth in North Macedonia alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "North Macedonia Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Macedonia_2011"
+        }
+      ]
+    },
+    {
+      "id": "egypt-citizenship-by-birth",
+      "country": {
+        "iso_n3": "818",
+        "name": "Egypt"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through parentage or foundling status",
+      "summary": "A person is Egyptian at birth when born to an Egyptian father or mother. A person born in Egypt of unknown parents, including a foundling presumed born in Egypt, is also Egyptian. Birth in Egypt alone to identified foreign parents is not general jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "Egyptian Nationality Law No. 26 of 1975",
+          "url": "https://manshurat.org/node/7358"
+        },
+        {
+          "title": "Egypt Law No. 154 of 2004 amending the Nationality Law",
+          "url": "https://learningpartnership.org/sites/default/files/resources/pdfs/Egypt%20-%20Nationality%20Law%20-%202004%20-%20English.pdf"
+        }
+      ]
+    },
+    {
+      "id": "uk-citizenship-by-birth",
+      "country": {
+        "iso_n3": "826",
+        "name": "United Kingdom"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship by birth in the UK",
+      "summary": "For births from 1983, a child is normally automatically British when a parent is British or settled at the time of birth.",
+      "facts": {
+        "jus_soli": "conditional",
+        "parent_condition": "settled",
+        "jus_soli_exceptions": [
+          "diplomats"
+        ],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-21",
+      "sources": [
+        {
+          "title": "GOV.UK — British citizenship for people born in the UK",
+          "url": "https://www.gov.uk/apply-citizenship-born-uk/eligibility"
+        }
+      ]
+    },
+    {
+      "id": "tanzania-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "834",
+        "name": "Tanzania"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Tanzanian parent",
+      "summary": "Birth to a Tanzanian parent creates citizenship. Birth in Tanzania alone to two foreign parents is not treated as open jus soli in practice.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Tanzania Immigration - citizenship by naturalization",
+          "url": "https://www.immigration.go.tz/index.php/3-0-citizenship-by-naturalization"
+        }
+      ]
+    },
+    {
+      "id": "burkina-faso-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "854",
+        "name": "Burkina Faso"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Burkina Faso parent",
+      "summary": "Birth to a Burkina Faso parent creates nationality. Birth in Burkina Faso alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Burkina Faso Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Burkina_Faso_2012"
+        }
+      ]
+    },
+    {
+      "id": "uzbekistan-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "860",
+        "name": "Uzbekistan"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through an Uzbek parent",
+      "summary": "Birth to an Uzbek parent creates nationality. Birth in Uzbekistan alone to two foreign parents is not unrestricted jus soli; anti-statelessness safeguards cover foundlings and otherwise-stateless children.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Uzbekistan Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Uzbekistan_2023"
+        }
+      ]
+    },
+    {
+      "id": "samoa-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "882",
+        "name": "Samoa"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Samoan parent",
+      "summary": "Birth to a Samoan parent creates Samoan citizenship. Birth in Samoa alone to two foreign parents is not general unrestricted jus soli.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Samoa Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Samoa_2017"
+        }
+      ]
+    },
+    {
+      "id": "yemen-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "887",
+        "name": "Yemen"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Yemeni father",
+      "summary": "Nationality at birth derives from a Yemeni father regardless of place of birth; birth in Yemen alone does not confer citizenship, with a limited safeguard for children of unknown or stateless fathers.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-23",
+      "sources": [
+        {
+          "title": "Yemen Constitution (Constitute Project)",
+          "url": "https://www.constituteproject.org/constitution/Yemen_2015"
+        }
+      ]
+    },
+    {
+      "id": "zambia-citizenship-at-birth-by-parent",
+      "country": {
+        "iso_n3": "894",
+        "name": "Zambia"
+      },
+      "mode": "birth",
+      "status": "active",
+      "title": "Citizenship at birth through a Zambian parent",
+      "summary": "Birth to a Zambian parent creates citizenship under constitutional categories. Birth in Zambia alone to two foreign parents is not unrestricted open jus soli for all cases.",
+      "facts": {
+        "jus_soli": "none",
+        "parent_condition": "none",
+        "jus_soli_exceptions": [],
+        "unconditional_jus_soli": false
+      },
+      "confidence": "high",
+      "last_checked": "2026-07-22",
+      "sources": [
+        {
+          "title": "Zambia Citizenship of Zambia Act 2016",
+          "url": "https://zambialii.org/akn/zm/act/2016/33/eng@2016-06-07"
+        }
+      ]
     }
   ]
 }
