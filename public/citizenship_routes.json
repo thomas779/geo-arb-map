@@ -26852,6 +26852,8 @@
         "parent_legal_residence_years": 5,
         "effective_from": "2026-05-19",
         "unconditional_jus_soli": false,
+        "jus_soli": "conditional",
+        "parent_condition": "lawful_residence",
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -34985,8 +34987,15 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship by birth in the United States",
-      "summary": "Federal statute grants citizenship at birth to a person born in the United States and subject to its jurisdiction.",
+      "summary": "The Fourteenth Amendment Citizenship Clause and 8 U.S.C. § 1401 grant citizenship at birth to a person born in the United States and subject to its jurisdiction. Traditional exceptions include children of foreign diplomats (and related extraterritorial fictions), not a parental-status test. Executive Order 14160 (20 January 2025) sought to deny citizenship to children of parents unlawfully or temporarily present; the Supreme Court held in Trump v. Barbara (25-365, 30 June 2026) that such children remain subject to U.S. jurisdiction and are citizens at birth. Unconditional jus soli for birth-tourism purposes remains the law.",
       "facts": {
+        "jus_soli": "unconditional",
+        "jus_soli_exceptions": [
+          "diplomats",
+          "enemy_aliens_historic"
+        ],
+        "parent_condition": "none",
+        "unconditional_jus_soli": true,
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
@@ -35003,11 +35012,15 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-30",
       "sources": [
         {
           "title": "U.S. Code — 8 USC 1401",
           "url": "https://uscode.house.gov/view.xhtml?edition=prelim&hl=false&req=granuleid%3AUSC-prelim-title8-section1401"
+        },
+        {
+          "title": "Supreme Court — Trump v. Barbara (25-365), 30 June 2026",
+          "url": "https://www.supremecourt.gov/opinions/25pdf/25-365_4hdj.pdf"
         }
       ]
     },

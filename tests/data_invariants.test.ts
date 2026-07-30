@@ -417,6 +417,26 @@ describe('monitor-lead verifications, 30 July 2026', () => {
       'https://static.slov-lex.sk/static/SK/ZZ/1993/40/20260715.html');
   });
 
+  test('US birthright records unconditional jus soli after Trump v. Barbara', () => {
+    const birth = citizenshipRoutes.routes.find(route => route.id === 'us-citizenship-by-birth');
+    expect(birth?.facts.jus_soli).toBe('unconditional');
+    expect(birth?.facts.unconditional_jus_soli).toBe(true);
+    expect(birth?.facts.parent_condition).toBe('none');
+    expect(birth?.summary).toContain('Trump v. Barbara');
+    expect(birth?.summary).toContain('30 June 2026');
+    expect(birth?.sources.map(s => s.url).join(' ')).toContain('supremecourt.gov/opinions/25pdf/25-365');
+    expect(birth?.last_checked).toBe('2026-07-30');
+  });
+
+  test('Portugal birth route is structured as conditional jus soli', () => {
+    const birth = citizenshipRoutes.routes.find(route =>
+      route.id === 'portugal-birth-parent-residence-2026');
+    expect(birth?.facts.jus_soli).toBe('conditional');
+    expect(birth?.facts.unconditional_jus_soli).toBe(false);
+    expect(birth?.facts.parent_condition).toBe('lawful_residence');
+    expect(birth?.facts.parent_legal_residence_years).toBe(5);
+  });
+
   test('Saint Lucia CIP records Act 22 of 2025 s.30A without inventing a day-count', () => {
     const cip = citizenshipRoutes.routes.find(route => route.id === 'saint-lucia-cip');
     expect(cip?.status).toBe('active');
