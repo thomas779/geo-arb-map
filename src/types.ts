@@ -150,6 +150,7 @@ export interface CitizenshipRoute {
 export type ResidenceCategory =
   | 'investment'
   | 'digital_nomad'
+  | 'digital_identity'
   | 'retirement_pension'
   | 'talent_skilled'
   | 'general_permanent_residence';

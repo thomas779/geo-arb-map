@@ -7,7 +7,6 @@ import type {
   CitizenshipCoverageState,
   CitizenshipRoute,
   CitizenshipRoutesData,
-  ResidenceCategory,
   ResidenceRoute,
 } from '../types';
 import { Button } from '@/components/ui/button';
@@ -16,6 +15,7 @@ import { countryFlag } from '@/lib/country';
 import { displayRouteTitle } from '@/lib/display-title';
 import { dataCorrectionUrl } from '@/lib/trust';
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
+import { RESIDENCE_CATEGORY_SHORT } from '@/lib/residence';
 
 /*
  * The country panel is a SUMMARY companion to the map — a quick look that funnels
@@ -46,14 +46,6 @@ const COVERAGE_LABELS: Record<CitizenshipCoverageState, string> = {
   partial: 'partial',
   pending: 'pending',
   unchecked: 'not reviewed',
-};
-
-const RESIDENCE_CATEGORY_LABELS: Record<ResidenceCategory, string> = {
-  investment: 'Investment',
-  digital_nomad: 'Digital nomad',
-  retirement_pension: 'Retirement',
-  talent_skilled: 'Talent',
-  general_permanent_residence: 'Permanent residence',
 };
 
 function SectionHeading({ title, description }: { title: string; description: string }) {
@@ -115,20 +107,28 @@ function RouteRow({ route }: { route: CitizenshipRoute }) {
 }
 
 function ResidenceRow({ route }: { route: ResidenceRoute }) {
-  const [variant, label] = route.counts_toward_naturalization
-    ? (['verified', '→ citizenship'] as const)
-    : route.counts_toward_permanent_residence
-      ? (['outline', '→ permanent residence'] as const)
-      : (['outline', 'renewable'] as const);
   return (
     <div className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2">
       <span className="min-w-0 flex-1">
         <span className="block text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-          {RESIDENCE_CATEGORY_LABELS[route.category]}
+          {RESIDENCE_CATEGORY_SHORT[route.category]}
         </span>
         <span className="block truncate text-sm font-medium leading-snug">{route.title}</span>
       </span>
-      <Badge variant={variant} className="h-4 shrink-0 px-1.5 text-[9px]">{label}</Badge>
+      <span className="flex shrink-0 flex-col items-end gap-0.5">
+        <Badge
+          variant={route.counts_toward_permanent_residence ? 'verified' : 'outline'}
+          className="h-4 px-1.5 text-[9px]"
+        >
+          {route.counts_toward_permanent_residence ? 'PR yes' : 'PR no'}
+        </Badge>
+        <Badge
+          variant={route.counts_toward_naturalization ? 'verified' : 'outline'}
+          className="h-4 px-1.5 text-[9px]"
+        >
+          {route.counts_toward_naturalization ? 'cit. yes' : 'cit. no'}
+        </Badge>
+      </span>
     </div>
   );
 }
@@ -239,7 +239,7 @@ export function DetailPanel({
         <>
           <SectionHeading
             title="Residence & settlement"
-            description="Live-here routes (golden visas, digital-nomad, retirement, talent)."
+            description="Live-here routes (golden visas, digital nomad, digital ID, retirement, talent). Badges show whether time counts toward PR or citizenship."
           />
           <div className="space-y-1.5">
             {residenceRoutes.map(route => <ResidenceRow key={route.id} route={route} />)}

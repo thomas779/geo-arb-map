@@ -147,7 +147,8 @@ const MoneySchema = z.strictObject({
 
 export const ResidenceCategorySchema = z.enum([
   'investment', // golden visa / residence-by-investment
-  'digital_nomad',
+  'digital_nomad', // physical long-stay remote-work visa/permit
+  'digital_identity', // e-residency / digital ID — not immigration residence
   'retirement_pension',
   'talent_skilled',
   'general_permanent_residence',

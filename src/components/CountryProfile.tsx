@@ -1,21 +1,21 @@
-import type { ReactNode } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import type { BlocsData, CitizenshipRoute, CitizenshipRoutesData, ResidenceCategory, ResidenceRoute } from '@/types';
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
+import {
+  RESIDENCE_CATEGORY_LABELS,
+  RESIDENCE_STATUS_LABELS,
+  RESIDENCE_STATUS_ORDER,
+  residenceLadderBadges,
+} from '@/lib/residence';
 
 // Shared per-country page derivation + labels, used by the interactive app
 // (dev + in-app nav) and by the static SSR prerender (scripts/build_country_pages.ts),
 // so the country pages are a single source of truth with the app.
 
+export { RESIDENCE_CATEGORY_LABELS };
 export const CITIZENSHIP_MODE_LABELS: Record<string, string> = {
   ancestry: 'Ancestry', naturalization: 'Naturalization', birth: 'Birth', investment: 'Investment',
-};
-export const RESIDENCE_CATEGORY_LABELS: Record<ResidenceCategory, string> = {
-  investment: 'Investment (golden visa)',
-  digital_nomad: 'Digital nomad',
-  retirement_pension: 'Retirement',
-  talent_skilled: 'Talent',
-  general_permanent_residence: 'Permanent residence',
 };
 const COVERAGE_ORDER = ['ancestry', 'naturalization', 'birth', 'investment'] as const;
 
@@ -104,17 +104,6 @@ function RouteCard({ route }: { route: CitizenshipRoute }) {
   );
 }
 
-// Closed/paused programmes stay in the dataset as sourced negative conclusions
-// ("is the UK golden visa still open?" deserves a verified NO with a citation),
-// but they must never read like live offers: sorted after active routes, muted,
-// and labeled.
-const RESIDENCE_STATUS_ORDER = ['active', 'pending_verification', 'inactive', 'verified_negative'];
-const RESIDENCE_STATUS_LABELS: Record<string, string> = {
-  inactive: 'paused',
-  verified_negative: 'closed',
-  pending_verification: 'unverified',
-};
-
 function ResidenceCard({ route }: { route: ResidenceRoute }) {
   const closed = route.status !== 'active';
   const chips: string[] = [];
@@ -125,19 +114,31 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
   if (route.physical_presence_days_per_year !== null) {
     chips.push(route.physical_presence_days_per_year === 0 ? 'no stay required' : `${route.physical_presence_days_per_year} days/yr`);
   }
-  const leads = route.counts_toward_naturalization ? '→ citizenship'
-    : route.counts_toward_permanent_residence ? '→ permanent residence' : 'renewable — no PR';
-  const leadClass = (route.counts_toward_naturalization || route.counts_toward_permanent_residence)
-    ? 'bg-verified/15 text-verified' : 'border text-muted-foreground';
+  const ladder = residenceLadderBadges(route);
   return (
     <article className={`rounded-lg border bg-card p-4${closed ? ' opacity-75' : ''}`}>
       <div className="mb-1.5 flex flex-wrap items-center gap-2">
         <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">
           {RESIDENCE_CATEGORY_LABELS[route.category]}
         </span>
-        {closed
-          ? <span className="rounded-full bg-destructive/15 px-1.5 font-mono text-[0.66rem] text-destructive">{RESIDENCE_STATUS_LABELS[route.status] ?? route.status}</span>
-          : <span className={`rounded-full px-1.5 font-mono text-[0.66rem] ${leadClass}`}>{leads}</span>}
+        {closed ? (
+          <span className="rounded-full bg-destructive/15 px-1.5 font-mono text-[0.66rem] text-destructive">
+            {RESIDENCE_STATUS_LABELS[route.status] ?? route.status}
+          </span>
+        ) : (
+          ladder.map(badge => (
+            <span
+              key={badge.key}
+              className={`rounded-full px-1.5 font-mono text-[0.66rem] ${
+                badge.tone === 'positive'
+                  ? 'bg-verified/15 text-verified'
+                  : 'border text-muted-foreground'
+              }`}
+            >
+              {badge.label}
+            </span>
+          ))
+        )}
       </div>
       <h3 className="font-heading text-lg font-semibold leading-tight">{route.title}</h3>
       <p className="mt-1 text-sm text-muted-foreground">{route.summary}</p>
@@ -150,6 +151,91 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
       )}
       <Sources sources={route.sources} />
     </article>
+  );
+}
+
+function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
+  const categories = useMemo(() => {
+    const present = [...new Set(residence.map(r => r.category))];
+    // Prefer nomad / identity early so the filter showcases long-stay & digital ID.
+    const preferred: ResidenceCategory[] = [
+      'digital_nomad',
+      'digital_identity',
+      'investment',
+      'retirement_pension',
+      'talent_skilled',
+      'general_permanent_residence',
+    ];
+    return preferred.filter(c => present.includes(c));
+  }, [residence]);
+  const [filter, setFilter] = useState<ResidenceCategory | 'all'>('all');
+  const visible = useMemo(() => {
+    const list = filter === 'all' ? residence : residence.filter(r => r.category === filter);
+    return [...list].sort(
+      (a, b) => RESIDENCE_STATUS_ORDER.indexOf(a.status as typeof RESIDENCE_STATUS_ORDER[number])
+        - RESIDENCE_STATUS_ORDER.indexOf(b.status as typeof RESIDENCE_STATUS_ORDER[number]),
+    );
+  }, [residence, filter]);
+  const showFilter = categories.length > 1;
+  return (
+    <section id="residence" className="mt-8 scroll-mt-20">
+      <Eyebrow>Residence &amp; settlement</Eyebrow>
+      {showFilter && (
+        <div className="mb-3 flex flex-wrap gap-1.5" role="group" aria-label="Filter residence programmes by type">
+          <button
+            type="button"
+            onClick={() => setFilter('all')}
+            className={`rounded-full px-2.5 py-1 font-mono text-[0.7rem] transition-colors ${
+              filter === 'all'
+                ? 'bg-primary text-primary-foreground'
+                : 'border bg-card text-muted-foreground hover:border-primary hover:text-foreground'
+            }`}
+          >
+            All ({residence.length})
+          </button>
+          {categories.map(cat => {
+            const n = residence.filter(r => r.category === cat).length;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setFilter(cat)}
+                className={`rounded-full px-2.5 py-1 font-mono text-[0.7rem] transition-colors ${
+                  filter === cat
+                    ? 'bg-primary text-primary-foreground'
+                    : 'border bg-card text-muted-foreground hover:border-primary hover:text-foreground'
+                }`}
+              >
+                {RESIDENCE_CATEGORY_LABELS[cat]} ({n})
+              </button>
+            );
+          })}
+        </div>
+      )}
+      {filter === 'digital_nomad' && (
+        <p className="mb-3 text-xs leading-relaxed text-muted-foreground">
+          Digital nomad permits authorize a limited long stay on remote income. Most do
+          <strong className="font-medium text-foreground"> not</strong> count toward permanent
+          residence or naturalization — check the PR / citizenship badges on each card.
+        </p>
+      )}
+      {filter === 'digital_identity' && (
+        <p className="mb-3 text-xs leading-relaxed text-muted-foreground">
+          Digital identity (e-residency) is a government digital credential for remote services
+          or KYC — <strong className="font-medium text-foreground">not</strong> a right to live
+          in the country and not a citizenship ladder.
+        </p>
+      )}
+      <div className="space-y-3">
+        {visible.length
+          ? visible.map(r => <ResidenceCard key={r.id} route={r} />)
+          : (
+            <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
+              No programmes in this filter.
+            </p>
+          )}
+      </div>
+    </section>
   );
 }
 
@@ -221,14 +307,7 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
                 : <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">Not yet reviewed at route level — a coverage gap, not a claim that no path exists.</p>}
             </div>
           </section>
-          {residence.length > 0 && (
-            <section id="residence" className="mt-8 scroll-mt-20">
-              <Eyebrow>Residence &amp; settlement</Eyebrow>
-              <div className="space-y-3">{[...residence]
-                .sort((a, b) => RESIDENCE_STATUS_ORDER.indexOf(a.status) - RESIDENCE_STATUS_ORDER.indexOf(b.status))
-                .map(r => <ResidenceCard key={r.id} route={r} />)}</div>
-            </section>
-          )}
+          {residence.length > 0 && <ResidenceSection residence={residence} />}
           {blocs.length > 0 && (
             <section id="regional" className="mt-8 scroll-mt-20">
               <Eyebrow>Regional rights</Eyebrow>

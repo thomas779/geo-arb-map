@@ -29,7 +29,7 @@
         "inactive": 8,
         "verified_negative": 1
       },
-      "residence_routes": 167
+      "residence_routes": 172
     }
   },
   "jurisdictions": [
@@ -890,10 +890,12 @@
       ],
       "residence_route_ids": [
         "colombia-m-visa-real-estate-investor",
-        "colombia-m-visa-business-investor"
+        "colombia-m-visa-business-investor",
+        "colombia-digital-nomad-visa"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -1003,7 +1005,13 @@
         "croatia-naturalization",
         "croatia-citizenship-at-birth-by-parent",
         "croatia-citizenship-by-marriage"
-      ]
+      ],
+      "residence_route_ids": [
+        "croatia-digital-nomad-temporary-stay"
+      ],
+      "residence_coverage": {
+        "digital_nomad": "reviewed"
+      }
     },
     {
       "iso_n3": "192",
@@ -1258,9 +1266,11 @@
         "estonia-citizenship-at-birth-by-parent"
       ],
       "residence_route_ids": [
+        "estonia-e-residency",
         "estonia-digital-nomad"
       ],
       "residence_coverage": {
+        "digital_identity": "reviewed",
         "digital_nomad": "reviewed"
       }
     },
@@ -1817,10 +1827,12 @@
         "hungary-citizenship-by-marriage"
       ],
       "residence_route_ids": [
-        "hungary-guest-investor"
+        "hungary-guest-investor",
+        "hungary-white-card-digital-nomad"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -1980,10 +1992,12 @@
         "italy-citizenship-connected-to-birth"
       ],
       "residence_route_ids": [
-        "italy-investor-visa"
+        "italy-investor-visa",
+        "italy-digital-nomad-visa"
       ],
       "residence_coverage": {
-        "investment": "reviewed"
+        "investment": "reviewed",
+        "digital_nomad": "reviewed"
       }
     },
     {
@@ -3074,7 +3088,7 @@
         "palau-rns-digital-residency-id"
       ],
       "residence_coverage": {
-        "digital_nomad": "reviewed"
+        "digital_identity": "reviewed"
       }
     },
     {
@@ -37850,6 +37864,50 @@
       ]
     },
     {
+      "id": "colombia-digital-nomad-visa",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Visitor / remote worker digital nomad visa",
+      "summary": "Colombian visa categories used for remote workers providing services to foreign clients or employers from Colombia under the Cancillería visa framework.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 900,
+        "currency": "USD"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          24
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "colombia-digital-nomad-visa-principal",
+          "label": "Visitor / remote worker digital nomad visa",
+          "allocation": "discretionary",
+          "eligibility_months": 24
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Cancillería — visa types / Resolución 5477 framework",
+          "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/tipos-de-visa"
+        }
+      ]
+    },
+    {
       "id": "colombia-m-visa-business-investor",
       "country": {
         "iso_n3": "170",
@@ -38060,6 +38118,50 @@
         {
           "title": "Costa Rica — Dirección General de Migración",
           "url": "https://migracion.go.cr/"
+        }
+      ]
+    },
+    {
+      "id": "croatia-digital-nomad-temporary-stay",
+      "country": {
+        "iso_n3": "191",
+        "name": "Croatia"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Temporary stay for digital nomads",
+      "summary": "Temporary stay for third-country nationals working remotely via communication technology for a foreign employer or own foreign company, without serving Croatian employers.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3622.5,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "croatia-digital-nomad-temporary-stay-principal",
+          "label": "Temporary stay for digital nomads",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "MUP — Temporary stay of digital nomads",
+          "url": "https://mup.gov.hr/aliens-281621/temporary-stay-of-digital-nomads-286853/286853"
         }
       ]
     },
@@ -38472,8 +38574,47 @@
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Estonia Digital Nomad Visa — e-Residency",
+          "title": "Estonia Digital Nomad Visa",
           "url": "https://www.e-resident.gov.ee/nomadvisa/"
+        }
+      ]
+    },
+    {
+      "id": "estonia-e-residency",
+      "country": {
+        "iso_n3": "233",
+        "name": "Estonia"
+      },
+      "category": "digital_identity",
+      "status": "active",
+      "title": "e-Residency digital identity",
+      "summary": "Government-issued digital ID for non-residents to authenticate online, e-sign, and form/run an Estonian company remotely — not a visa and not a right to live in Estonia.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "estonia-e-residency-principal",
+          "label": "e-Residency digital identity",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "e-Residency of Estonia",
+          "url": "https://www.e-resident.gov.ee/"
         }
       ]
     },
@@ -39193,6 +39334,50 @@
       ]
     },
     {
+      "id": "hungary-white-card-digital-nomad",
+      "country": {
+        "iso_n3": "348",
+        "name": "Hungary"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "White Card (digital nomad residence permit)",
+      "summary": "Residence permit for third-country nationals performing remote work for a foreign employer or as freelancers for foreign clients under the White Card scheme.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 3000,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "hungary-white-card-digital-nomad-principal",
+          "label": "White Card (digital nomad residence permit)",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Hungary Guest Investor Programme — OIF",
+          "url": "https://oif.gov.hu/"
+        }
+      ]
+    },
+    {
       "id": "indonesia-golden-visa-company-establishment",
       "country": {
         "iso_n3": "360",
@@ -39491,6 +39676,50 @@
         {
           "title": "Start-up Entrepreneur Programme (STEP) — Immigration Service Delivery",
           "url": "https://www.irishimmigration.ie/coming-to-work-in-ireland/what-are-my-options-for-working-in-ireland/coming-to-work-for-more-than-90-days/start-up-entrepreneur-programme-step/"
+        }
+      ]
+    },
+    {
+      "id": "italy-digital-nomad-visa",
+      "country": {
+        "iso_n3": "380",
+        "name": "Italy"
+      },
+      "category": "digital_nomad",
+      "status": "active",
+      "title": "Digital nomad / remote worker visa",
+      "summary": "National visa and residence permit for highly skilled remote workers employed by or contracting with entities outside Italy.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 2333,
+        "currency": "EUR"
+      },
+      "physical_presence_days_per_year": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          12
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "italy-digital-nomad-visa-principal",
+          "label": "Digital nomad / remote worker visa",
+          "allocation": "discretionary",
+          "eligibility_months": 12
+        }
+      ],
+      "confidence": "medium",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Italian consular — Digital Nomad / Remote Worker Visa",
+          "url": "https://consnewyork.esteri.it/en/servizi-consolari-e-visti/servizi-per-il-cittadino-straniero/visti/visas-to-enter-italy/digital-nomad-remote-worker-visa/"
         }
       ]
     },
@@ -41036,7 +41265,7 @@
         "iso_n3": "585",
         "name": "Palau"
       },
-      "category": "digital_nomad",
+      "category": "digital_identity",
       "status": "active",
       "title": "Digital Residency ID (RNS.ID)",
       "summary": "Government-linked digital identity / “digital residency” credential sold via RNS.ID — not a physical residence permit and not a path to Palauan citizenship.",

@@ -433,7 +433,7 @@ describe('monitor-lead verifications, 30 July 2026', () => {
       expect(byId.has(id), id).toBe(true);
     }
     const palau = byId.get('palau-rns-digital-residency-id');
-    expect(palau?.category).toBe('digital_nomad');
+    expect(palau?.category).toBe('digital_identity');
     expect(palau?.counts_toward_permanent_residence).toBe(false);
     expect(palau?.counts_toward_naturalization).toBe(false);
     expect(palau?.summary.toLowerCase()).toContain('not a physical residence');
@@ -441,6 +441,35 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(palau?.min_investment?.amount).toBe(248);
     const chile = byId.get('chile-investor-temporary-residence');
     expect(chile?.min_investment?.amount).toBe(500000);
+  });
+
+  test('digital_identity holds Estonia e-Residency and Palau RNS.ID separately from nomad visas', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    const ee = byId.get('estonia-e-residency');
+    const nomad = byId.get('estonia-digital-nomad');
+    expect(ee?.category).toBe('digital_identity');
+    expect(ee?.counts_toward_permanent_residence).toBe(false);
+    expect(ee?.counts_toward_naturalization).toBe(false);
+    expect(ee?.summary.toLowerCase()).toMatch(/not a visa|not a right to live/);
+    expect(nomad?.category).toBe('digital_nomad');
+    expect(byId.get('palau-rns-digital-residency-id')?.category).toBe('digital_identity');
+  });
+
+  test('digital nomad coverage batch adds Croatia Italy Hungary Colombia with no PR/citizenship path', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    for (const id of [
+      'croatia-digital-nomad-temporary-stay',
+      'italy-digital-nomad-visa',
+      'hungary-white-card-digital-nomad',
+      'colombia-digital-nomad-visa',
+    ]) {
+      const r = byId.get(id);
+      expect(r, id).toBeTruthy();
+      expect(r?.category).toBe('digital_nomad');
+      expect(r?.counts_toward_permanent_residence).toBe(false);
+      expect(r?.counts_toward_naturalization).toBe(false);
+    }
+    expect(byId.get('croatia-digital-nomad-temporary-stay')?.min_income_monthly?.amount).toBe(3622.5);
   });
 
   test('residence batch 5 records Nordics/Baltics startup tracks and golden-visa negatives', () => {
