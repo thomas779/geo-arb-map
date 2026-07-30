@@ -431,6 +431,7 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build parity gates', () => {
       'bahamas-citizenship-by-marriage',
       'bahamas-citizenship-by-parent',
       'bahamas-naturalization',
+      'bahrain-citizenship-by-marriage',
       'bahrain-citizenship-by-parent',
       'bahrain-naturalization',
       'bangladesh-citizenship-by-parent',

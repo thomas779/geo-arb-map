@@ -1797,7 +1797,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth where both parents are Bhutanese",
-      "summary": "Citizenship transmits at birth only where both parents are Bhutanese citizens; Bhutan has no unrestricted jus soli and limited anti-statelessness safeguards.",
+      "summary": "No jus soli. Birth citizenship requires both parents to be Bhutanese citizens (1985 Act art. 2; Constitution art. 6.1). The only territorial category is registration for persons domiciled in Bhutan on or before 31 December 1958 (Act art. 3 / Constitution art. 6.2).",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -1805,11 +1805,11 @@
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bhutan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+          "title": "Bhutan Citizenship Act 1985, National Assembly PDF (Wayback of nab.gov.bt)",
+          "url": "https://web.archive.org/web/20150806205032if_/http://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
         }
       ]
     },
@@ -1973,8 +1973,8 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Burundi parent",
-      "summary": "Birth to a Burundi parent creates nationality. Birth in Burundi alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "title": "Citizenship at birth (patrilineal descent; foundling presumption)",
+      "summary": "No general jus soli. By legal presumption, a child born in Burundi of legally unknown parents, and a child found in Burundi unless proven not born on Burundian soil, are Burundian (art. 3(a)-(b)). Ordinary nationality at birth is patrilineal under the 2000 statute (art. 2).",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -1982,11 +1982,11 @@
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Burundi Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Burundi_2018"
+          "title": "Loi n° 1/013 du 18 juillet 2000 portant réforme du Code de la Nationalité, B.O.B. n° 8 bis/2000 (amategeko.gov.bi)",
+          "url": "https://amategeko.gov.bi/wp-content/uploads/2019/12/BOB_No8-bis-2000.pdf"
         }
       ]
     },
@@ -4759,8 +4759,8 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Bahraini father",
-      "summary": "Bahraini nationality descends from a Bahraini father; birth on Bahraini territory alone confers no citizenship.",
+      "title": "Citizenship at birth through a Bahraini father (foundling exception)",
+      "summary": "No general jus soli. Article 5 (as amended) retains only a foundling rule: a person born in Bahrain to unknown parents is Bahraini, and an abandoned infant is presumed born there unless the contrary is proved. Ordinary nationality at birth follows a Bahraini father (article 4).",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -4768,11 +4768,11 @@
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bahrain Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bahrain_2017"
+          "title": "Bahraini Citizenship Act 1963, consolidated (Legislation & Legal Opinion Commission)",
+          "url": "https://www.legalaffairs.gov.bh/Legislation/HTM/K0863"
         }
       ]
     },
@@ -5024,7 +5024,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through an Omani father",
-      "summary": "Omani nationality descends from an Omani father; birth in Oman alone confers no automatic citizenship.",
+      "summary": "No general jus soli. Birth in Oman alone confers nothing. Exception under article 15(3): a person born in Oman to unknown parents is deemed Omani. Ordinary nationality at birth follows an Omani-by-origin father (articles 11-12).",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -5032,11 +5032,11 @@
         "unconditional_jus_soli": false
       },
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Oman Basic Statute (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Oman_2011"
+          "title": "Omani Citizenship Law, Royal Decree 17/2025, Official Gazette 1583 (MJLA)",
+          "url": "https://www.mjla.gov.om/images/legislation/file/Book917850.pdf"
         }
       ]
     },
@@ -5684,13 +5684,13 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Nepali parent",
-      "summary": "Birth to Nepali parent(s) creates nationality. There is no general jus soli granting citizenship to children of foreign parents born in Nepal.",
+      "summary": "No general jus soli for children of foreign parents. Citizenship by descent arises under section 3 when a parent is a Nepali citizen. Section 4 birth-based citizenship was a closed transitional category for persons born in Nepal before 13 April 1990 and permanently domiciled, with a time-limited application window.",
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Nepal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Nepal_2015"
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission English text (Wayback of official PDF)",
+          "url": "https://web.archive.org/web/20220121174852if_/https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
         }
       ],
       "facts": {

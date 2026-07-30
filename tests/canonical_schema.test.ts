@@ -71,6 +71,7 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('canonical data schemas', () => {
       'bahamas-citizenship-by-marriage',
       'bahrain-citizenship-by-parent',
       'bahrain-naturalization',
+      'bahrain-citizenship-by-marriage',
       'bahrain-citizenship-at-birth-by-parent',
       'bangladesh-citizenship-by-parent',
       'bangladesh-naturalization',

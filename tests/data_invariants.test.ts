@@ -717,8 +717,8 @@ describe('source quality: constituteproject is a lead, not a source of record', 
   // 357 routes currently violate this. Rather than assert zero and fail the
   // suite, ratchet: the count may only go down. Lower these numbers as
   // jurisdictions are re-sourced; never raise them.
-  const CONSTITUTEPROJECT_ONLY_CEILING = 294;
-  const CONSTITUTEPROJECT_ANY_CEILING = 313;
+  const CONSTITUTEPROJECT_ONLY_CEILING = 275;
+  const CONSTITUTEPROJECT_ANY_CEILING = 294;
 
   const cites = (route: { sources: Array<{ url: string }> }) =>
     route.sources.some(source => source.url.includes('constituteproject'));
@@ -742,7 +742,7 @@ describe('source quality: constituteproject is a lead, not a source of record', 
   // only 13 are CP-only, so 3 already score "clean" while the year figure was
   // still never read from any statute. These two metrics ratchet UP instead, and
   // cannot be satisfied by adding noise.
-  const OFFICIAL_SOURCED_FLOOR = 353;
+  const OFFICIAL_SOURCED_FLOOR = 392;
   const PROVENANCE_DECLARED_FLOOR = 53;
 
   const OFFICIAL_HOST = /(^|\.)(gov|gob|gouv|govt|go)(\.[a-z]{2,3})?$/;

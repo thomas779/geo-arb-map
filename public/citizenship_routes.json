@@ -15,19 +15,19 @@
       "unchecked": "No route-level review has been completed for this mode."
     },
     "counts": {
-      "jurisdictions": 240,
-      "routes": 872,
+      "jurisdictions": 233,
+      "routes": 873,
       "by_mode": {
-        "ancestry": 237,
-        "naturalization": 379,
         "birth": 231,
+        "ancestry": 237,
+        "naturalization": 380,
         "investment": 25
       },
       "by_status": {
         "active": 857,
         "pending_verification": 6,
-        "inactive": 8,
-        "verified_negative": 1
+        "verified_negative": 2,
+        "inactive": 8
       },
       "residence_routes": 247
     }
@@ -6436,8 +6436,8 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Bahraini father",
-      "summary": "Bahraini nationality descends from a Bahraini father; birth on Bahraini territory alone confers no citizenship.",
+      "title": "Citizenship at birth through a Bahraini father (foundling exception)",
+      "summary": "No general jus soli. Article 5 (as amended) retains only a foundling rule: a person born in Bahrain to unknown parents is Bahraini, and an abandoned infant is presumed born there unless the contrary is proved. Ordinary nationality at birth follows a Bahraini father (article 4).",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -6455,15 +6455,16 @@
           "id": "bahrain-citizenship-at-birth-by-parent-principal",
           "label": "Citizenship at birth through a Bahraini father",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "Foundling rule from consolidated Citizenship Act art. 5 (official DOCX FullAr/K0863); original 1963 double-jus-soli for a person born in Bahrain to a father also born there was removed by amendment."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bahrain Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bahrain_2017"
+          "title": "Bahraini Citizenship Act 1963, consolidated (Legislation & Legal Opinion Commission)",
+          "url": "https://www.legalaffairs.gov.bh/Legislation/HTM/K0863"
         }
       ]
     },
@@ -6476,7 +6477,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Bahraini citizenship through a Bahraini father",
-      "summary": "A child of a Bahraini father is Bahraini by descent regardless of birthplace; a child of a Bahraini mother and foreign father is generally not entitled except where the father is unknown.",
+      "summary": "A child born in or outside Bahrain to a Bahraini father at the time of birth is Bahraini (article 4 as amended). A child of a Bahraini mother acquires only where the father is unknown or paternity is not legally established.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -6494,11 +6495,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bahrain Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bahrain_2017"
+          "title": "Bahraini Citizenship Act 1963, consolidated (Legislation & Legal Opinion Commission)",
+          "url": "https://www.legalaffairs.gov.bh/Legislation/HTM/K0863"
         }
       ]
     },
@@ -6511,7 +6512,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after long residence (about 25 years, 15 for Arabs)",
-      "summary": "Ordinary naturalization requires about twenty-five years of residence (about fifteen for nationals of Arab states) plus good conduct, Arabic fluency, and registered real estate; it is highly discretionary and rare.",
+      "summary": "Ordinary naturalisation under article 6 requires twenty-five consecutive years of lawful ordinary residence (fifteen for an Arab), good character, adequate Arabic, and immovable property registered in the applicant's name. Grant is by order of the King and fully discretionary; naturalised persons are barred from electoral and representative rights for ten years (art. 6(3)).",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -6526,15 +6527,51 @@
           "label": "Naturalization after long residence (about 25 years, 15 for Arabs)",
           "allocation": "discretionary",
           "eligibility_months": 300,
-          "note": "Residence figures from the Citizenship Act 1963 (25 years; 15 for Arab nationals); grants are rare and discretionary."
+          "note": "Figures read from consolidated Citizenship Act art. 6(1)(a)-(d) on legalaffairs.gov.bh (K0863). Grants remain rare and discretionary."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bahrain Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bahrain_2017"
+          "title": "Bahraini Citizenship Act 1963, consolidated (Legislation & Legal Opinion Commission)",
+          "url": "https://www.legalaffairs.gov.bh/Legislation/HTM/K0863"
+        }
+      ]
+    },
+    {
+      "id": "bahrain-citizenship-by-marriage",
+      "country": {
+        "iso_n3": "048",
+        "name": "Bahrain"
+      },
+      "mode": "naturalization",
+      "status": "active",
+      "title": "Citizenship for the foreign wife of a Bahraini",
+      "summary": "Article 7(1): a foreign woman who marries a Bahraini after the Act's commencement becomes Bahraini. A Bahraini woman who marries a foreigner loses Bahraini nationality only if and when she acquires her husband's nationality. There is no corresponding automatic route for foreign husbands of Bahraini women.",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "bahrain-citizenship-by-marriage-principal",
+          "label": "Citizenship for the foreign wife of a Bahraini",
+          "allocation": "right",
+          "eligibility_months": 0,
+          "note": "Art. 7(1) of the consolidated Citizenship Act 1963 (K0863). Previously unrecorded in the dataset."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Bahraini Citizenship Act 1963, consolidated (Legislation & Legal Opinion Commission)",
+          "url": "https://www.legalaffairs.gov.bh/Legislation/HTM/K0863"
         }
       ]
     },
@@ -7247,7 +7284,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth where both parents are Bhutanese",
-      "summary": "Citizenship transmits at birth only where both parents are Bhutanese citizens; Bhutan has no unrestricted jus soli and limited anti-statelessness safeguards.",
+      "summary": "No jus soli. Birth citizenship requires both parents to be Bhutanese citizens (1985 Act art. 2; Constitution art. 6.1). The only territorial category is registration for persons domiciled in Bhutan on or before 31 December 1958 (Act art. 3 / Constitution art. 6.2).",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -7269,11 +7306,15 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bhutan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+          "title": "Bhutan Citizenship Act 1985, National Assembly PDF (Wayback of nab.gov.bt)",
+          "url": "https://web.archive.org/web/20150806205032if_/http://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
+        },
+        {
+          "title": "Bhutan Citizenship Act 1985, National Assembly (original URL; site often unreachable)",
+          "url": "https://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
         }
       ]
     },
@@ -7284,32 +7325,34 @@
         "name": "Bhutan"
       },
       "mode": "naturalization",
-      "status": "active",
-      "title": "Naturalization as the spouse of a citizen",
-      "summary": "A spouse of a Bhutanese may naturalize after fifteen years of residence, instead of twenty.",
+      "status": "verified_negative",
+      "title": "No marriage-preferential naturalization route",
+      "summary": "Neither the 1985 Citizenship Act nor the 2008 Constitution creates a reduced naturalisation track for foreign spouses. The Act's 15-year tier applies only to government employees and applicants with a Bhutanese parent (art. 4(a),(c)); Constitution art. 6.3(a) sets a flat minimum of fifteen years lawful residence for all naturalisation applicants. Foreign spouses naturalise on the same terms as any other foreigner under ordinary naturalization.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
-        "eligibility_months": [
-          180
-        ],
+        "eligibility_months": [],
         "discretionary_decision": true
       },
       "pathways": [
         {
           "id": "bhutan-citizenship-by-marriage-principal",
-          "label": "Naturalization as the spouse of a citizen",
+          "label": "No marriage-preferential naturalization route",
           "allocation": "discretionary",
-          "eligibility_months": 180,
-          "note": "Very restrictive; female foreign spouses obtain residence rights, male foreign spouses only immigration cards."
+          "eligibility_months": null,
+          "note": "Corrects the prior \"15 years instead of 20 for spouses\" model — that rationale is not in the Act or Constitution. Administrative practice claims about residence cards for spouses were not located in either instrument."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bhutan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+          "title": "Bhutan Citizenship Act 1985, National Assembly PDF (Wayback of nab.gov.bt)",
+          "url": "https://web.archive.org/web/20150806205032if_/http://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
+        },
+        {
+          "title": "Bhutan Citizenship Act 1985, National Assembly (original URL; site often unreachable)",
+          "url": "https://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
         }
       ]
     },
@@ -7322,7 +7365,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Bhutanese citizenship where both parents are citizens",
-      "summary": "A person is a natural-born Bhutanese citizen only if both parents are citizens of Bhutan (Constitution art. 6); a single Bhutanese parent does not by itself transmit citizenship.",
+      "summary": "A person both of whose parents are citizens of Bhutan is a natural-born citizen (Constitution art. 6.1; Act art. 2). A single Bhutanese parent does not transmit citizenship by itself — it only qualifies the child for the reduced naturalisation tier under Act art. 4.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -7340,11 +7383,15 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bhutan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+          "title": "Bhutan Citizenship Act 1985, National Assembly PDF (Wayback of nab.gov.bt)",
+          "url": "https://web.archive.org/web/20150806205032if_/http://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
+        },
+        {
+          "title": "Bhutan Citizenship Act 1985, National Assembly (original URL; site often unreachable)",
+          "url": "https://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
         }
       ]
     },
@@ -7357,7 +7404,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after 15 to 20 years residence",
-      "summary": "Naturalization requires at least fifteen years of residence (twenty years for applicants without a Bhutanese parent) plus Dzongkha proficiency, knowledge of culture and history, a clean record, and an oath; grant is discretionary (Cabinet/Royal approval).",
+      "summary": "1985 Act art. 4: fifteen years residence for government employees and for applicants either of whose parents is a Bhutanese citizen; twenty years otherwise, with Dzongkha proficiency, knowledge of culture and history, clean record, and oath. Constitution art. 6.3(a) (supreme law) states at least fifteen years lawful residence for naturalisation applicants. Grant is discretionary; the Government may reject without assigning reasons, and grant takes effect by Royal Kasho.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -7372,15 +7419,19 @@
           "label": "Naturalization after 15 to 20 years residence",
           "allocation": "discretionary",
           "eligibility_months": 180,
-          "note": "Fifteen-year tier applies with a Bhutanese parent or government service; twenty years otherwise. Among the most restrictive regimes."
+          "note": "Act art. 4 and Constitution art. 6.3 verified against archived National Assembly PDF. Among the most restrictive regimes."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Bhutan Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Bhutan_2008"
+          "title": "Bhutan Citizenship Act 1985, National Assembly PDF (Wayback of nab.gov.bt)",
+          "url": "https://web.archive.org/web/20150806205032if_/http://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
+        },
+        {
+          "title": "Bhutan Citizenship Act 1985, National Assembly (original URL; site often unreachable)",
+          "url": "https://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
         }
       ]
     },
@@ -8808,8 +8859,8 @@
       },
       "mode": "birth",
       "status": "active",
-      "title": "Citizenship at birth through a Burundi parent",
-      "summary": "Birth to a Burundi parent creates nationality. Birth in Burundi alone to two foreign parents is not unrestricted jus soli under the modeled framework.",
+      "title": "Citizenship at birth (patrilineal descent; foundling presumption)",
+      "summary": "No general jus soli. By legal presumption, a child born in Burundi of legally unknown parents, and a child found in Burundi unless proven not born on Burundian soil, are Burundian (art. 3(a)-(b)). Ordinary nationality at birth is patrilineal under the 2000 statute (art. 2).",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -8827,15 +8878,16 @@
           "id": "burundi-citizenship-at-birth-by-parent-principal",
           "label": "Citizenship at birth through a Burundi parent",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "Arts. 2-3, Loi 1/013 of 18 July 2000, B.O.B. n° 8 bis/2000. Force status very likely current (no later nationality statute found); CEDJ status page was HTTP 500 at research time."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Burundi Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Burundi_2018"
+          "title": "Loi n° 1/013 du 18 juillet 2000 portant réforme du Code de la Nationalité, B.O.B. n° 8 bis/2000 (amategeko.gov.bi)",
+          "url": "https://amategeko.gov.bi/wp-content/uploads/2019/12/BOB_No8-bis-2000.pdf"
         }
       ]
     },
@@ -8848,7 +8900,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization as the spouse of a citizen",
-      "summary": "The foreign wife of a Burundian acquires nationality by declaration on marriage.",
+      "summary": "A foreign woman who marries a Burundian acquires nationality by simple declaration, made at any time during or after the celebration of a valid marriage (arts. 4, 10, 11). A foreign husband of a Burundian woman has no declaration route; he naturalises with the residence period reduced to five years (art. 7(d)).",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -8863,15 +8915,15 @@
           "label": "Naturalization as the spouse of a citizen",
           "allocation": "right",
           "eligibility_months": 0,
-          "note": "Code de la nationalité 2000. A foreign husband must naturalize after five years of residence."
+          "note": "Arts. 4, 10-11 and 7(d), Loi 1/013. Wife declaration (right); husband uses reduced naturalisation."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Burundi Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Burundi_2018"
+          "title": "Loi n° 1/013 du 18 juillet 2000 portant réforme du Code de la Nationalité, B.O.B. n° 8 bis/2000 (amategeko.gov.bi)",
+          "url": "https://amategeko.gov.bi/wp-content/uploads/2019/12/BOB_No8-bis-2000.pdf"
         }
       ]
     },
@@ -8883,8 +8935,8 @@
       },
       "mode": "ancestry",
       "status": "active",
-      "title": "Burundi nationality through a Burundi parent",
-      "summary": "A child of a Burundi parent is a national under the constitutional nationality framework and nationality statute.",
+      "title": "Burundian nationality through a Burundian father",
+      "summary": "Patrilineal at statute level (Loi 1/013 art. 2): Burundian by birth is the legitimate child of a Burundian father (even if born abroad), or the natural child whose filiation with a Burundian father is established. The mother transmits only where paternal filiation is not established or the child is disavowed by the father (art. 2(c)-(d)). A child of a Burundian mother and foreign father otherwise acquires by option (art. 5) or certain legal presumptions (art. 3(c)). Note: parent-equality language in the 2018 Constitution is not implemented in this statute.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -8896,17 +8948,18 @@
       "pathways": [
         {
           "id": "burundi-citizenship-by-parent-principal",
-          "label": "Burundi nationality through a Burundi parent",
+          "label": "Burundian nationality through a Burundian father",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "Corrects prior parent-neutral wording. Art. 2 Loi 1/013 B.O.B. n° 8 bis/2000."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-22",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Burundi Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Burundi_2018"
+          "title": "Loi n° 1/013 du 18 juillet 2000 portant réforme du Code de la Nationalité, B.O.B. n° 8 bis/2000 (amategeko.gov.bi)",
+          "url": "https://amategeko.gov.bi/wp-content/uploads/2019/12/BOB_No8-bis-2000.pdf"
         }
       ]
     },
@@ -8919,7 +8972,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after about 10 years residence",
-      "summary": "Adults generally need about 10 years lawful residence before ordinary naturalization, plus character, language or integration, and other statutory conditions. Grant is discretionary under the nationality law.",
+      "summary": "At least ten years permanent residence in Burundi, reduced to five years for foreigners married to Burundian women and for foreigners who have rendered exceptional services (art. 7(d)). Other conditions: age 21+, good conduct and no crime/délit conviction, proven attachment to the Burundian nation and assimilation (art. 7(a)-(c)). Naturalisation is granted by presidential decree (art. 6) — discretionary. Naturalised persons gain electoral eligibility only ten years after publication (art. 9).",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -8934,15 +8987,15 @@
           "label": "Naturalization after about 10 years residence",
           "allocation": "discretionary",
           "eligibility_months": 120,
-          "note": "Residence floor modeled from the ordinary naturalization track in comparative nationality sources against the constitutional framework; case-check the current nationality statute for reductions and renunciation rules."
+          "note": "Art. 7(d) confirms the ten-year floor previously labeled as modeled from comparative sources. Loi 1/013, B.O.B. n° 8 bis/2000."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-22",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Burundi Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Burundi_2018"
+          "title": "Loi n° 1/013 du 18 juillet 2000 portant réforme du Code de la Nationalité, B.O.B. n° 8 bis/2000 (amategeko.gov.bi)",
+          "url": "https://amategeko.gov.bi/wp-content/uploads/2019/12/BOB_No8-bis-2000.pdf"
         }
       ]
     },
@@ -23809,7 +23862,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through an Omani father",
-      "summary": "Omani nationality descends from an Omani father; birth in Oman alone confers no automatic citizenship.",
+      "summary": "No general jus soli. Birth in Oman alone confers nothing. Exception under article 15(3): a person born in Oman to unknown parents is deemed Omani. Ordinary nationality at birth follows an Omani-by-origin father (articles 11-12).",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -23827,15 +23880,16 @@
           "id": "oman-citizenship-at-birth-by-parent-principal",
           "label": "Citizenship at birth through an Omani father",
           "allocation": "right",
-          "eligibility_months": 0
+          "eligibility_months": 0,
+          "note": "Foundling rule art. 15(3), Royal Decree 17/2025 (Gazette 1583). Prior RD 38/2014 repealed by art. 3."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Oman Basic Statute (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Oman_2011"
+          "title": "Omani Citizenship Law, Royal Decree 17/2025, Official Gazette 1583 (MJLA)",
+          "url": "https://www.mjla.gov.om/images/legislation/file/Book917850.pdf"
         }
       ]
     },
@@ -23847,31 +23901,39 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Naturalization as the spouse of a citizen",
-      "summary": "The foreign wife of an Omani may naturalize after ten years of cohabitation in Oman.",
+      "title": "Naturalization as the spouse of an Omani under RD 17/2025",
+      "summary": "Restructured by Royal Decree 17/2025: the foreign wife of an Omani man may apply after eight years of marriage and continuous lawful cohabitation in Oman (reduced from ten under RD 38/2014), with a child of the marriage and other statutory conditions (art. 19). The foreign husband of an Omani woman may apply after ten years of marriage and continuous lawful cohabitation in Oman, with a child of the marriage (art. 18). Both tracks are discretionary.",
       "facts": {
         "canonical": true,
-        "variant_count": 1,
+        "variant_count": 2,
         "eligibility_months": [
+          96,
           120
         ],
         "discretionary_decision": true
       },
       "pathways": [
         {
-          "id": "oman-citizenship-by-marriage-principal",
-          "label": "Naturalization as the spouse of a citizen",
+          "id": "oman-citizenship-by-marriage-wife",
+          "label": "Foreign wife of an Omani man (8 years)",
+          "allocation": "discretionary",
+          "eligibility_months": 96,
+          "note": "Art. 19 RD 17/2025: eight years marriage + continuous lawful cohabitation in Oman; requires a child of the marriage. Corrects the prior ten-year figure from RD 38/2014."
+        },
+        {
+          "id": "oman-citizenship-by-marriage-husband",
+          "label": "Foreign husband of an Omani woman (10 years)",
           "allocation": "discretionary",
           "eligibility_months": 120,
-          "note": "Royal Decree 38/2014; also requires a child, Arabic, and ministerial marriage approval. Not for husbands of Omani women."
+          "note": "Art. 18 RD 17/2025 — previously unrecorded; husbands of Omani women do have a naturalisation track."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Oman Basic Statute (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Oman_2011"
+          "title": "Omani Citizenship Law, Royal Decree 17/2025, Official Gazette 1583 (MJLA)",
+          "url": "https://www.mjla.gov.om/images/legislation/file/Book917850.pdf"
         }
       ]
     },
@@ -23884,7 +23946,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Omani citizenship through an Omani father",
-      "summary": "A child born to an Omani father by origin is Omani; children of an Omani mother generally do not acquire nationality automatically except in limited cases.",
+      "summary": "Omani by origin if born in or outside Oman to an Omani-by-origin father (arts. 11-12). Children of an Omani mother and foreign father do not acquire automatically except under limited statutory cases (including certain grant/naturalisation descendants and statelessness safeguards).",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -23902,11 +23964,11 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Oman Basic Statute (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Oman_2011"
+          "title": "Omani Citizenship Law, Royal Decree 17/2025, Official Gazette 1583 (MJLA)",
+          "url": "https://www.mjla.gov.om/images/legislation/file/Book917850.pdf"
         }
       ]
     },
@@ -23919,7 +23981,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization after about fifteen years residence",
-      "summary": "Ordinary naturalization under Royal Decree 17/2025 requires about fifteen years of residence (with shorter tiers for family ties) plus Arabic proficiency, good conduct, lawful income, and a pledge to renounce prior nationality; decisions are largely non-justiciable.",
+      "summary": "Ordinary naturalisation under article 17 requires fifteen years continuous lawful residence preceding the application (absences up to 90 days per year do not break continuity), Arabic reading and writing, good conduct, medical fitness, lawful sufficient income, and a written pledge to renounce other nationality. The Ministry may refuse any application without giving reasons (art. 3); courts have no jurisdiction over nationality matters.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -23934,15 +23996,15 @@
           "label": "Naturalization after about fifteen years residence",
           "allocation": "discretionary",
           "eligibility_months": 180,
-          "note": "Fifteen-year headline from the 2025 nationality law (reduced from twenty under the prior decree); family-tie tiers are shorter."
+          "note": "Art. 17 RD 17/2025, Gazette 1583. The prior twenty-year requirement of RD 38/2014 is repealed."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Oman Basic Statute (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Oman_2011"
+          "title": "Omani Citizenship Law, Royal Decree 17/2025, Official Gazette 1583 (MJLA)",
+          "url": "https://www.mjla.gov.om/images/legislation/file/Book917850.pdf"
         }
       ]
     },
@@ -24223,7 +24285,7 @@
       "mode": "birth",
       "status": "active",
       "title": "Citizenship at birth through a Nepali parent",
-      "summary": "Birth to Nepali parent(s) creates nationality. There is no general jus soli granting citizenship to children of foreign parents born in Nepal.",
+      "summary": "No general jus soli for children of foreign parents. Citizenship by descent arises under section 3 when a parent is a Nepali citizen. Section 4 birth-based citizenship was a closed transitional category for persons born in Nepal before 13 April 1990 and permanently domiciled, with a time-limited application window.",
       "facts": {
         "jus_soli": "none",
         "parent_condition": "none",
@@ -24245,11 +24307,15 @@
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Nepal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Nepal_2015"
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission English text (Wayback of official PDF)",
+          "url": "https://web.archive.org/web/20220121174852if_/https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
+        },
+        {
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission (original URL; CMS often unavailable)",
+          "url": "https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
         }
       ]
     },
@@ -24262,7 +24328,7 @@
       "mode": "ancestry",
       "status": "active",
       "title": "Nepali citizenship by descent through a Nepali parent",
-      "summary": "A person acquires citizenship by descent where a parent is a Nepali citizen; the cleanest route is where both mother and father are Nepali citizens.",
+      "summary": "A person born when their father or mother is a citizen of Nepal is a citizen by descent (s. 3(1)). Exception: the child of a Nepali woman married to a foreign citizen falls under the naturalized route of s. 5(2) rather than automatic descent.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -24277,15 +24343,19 @@
           "label": "Nepali citizenship by descent through a Nepali parent",
           "allocation": "right",
           "eligibility_months": 0,
-          "note": "Transmission by a Nepali mother alone has been legally contested and administratively restricted."
+          "note": "Nepal Citizenship Act 2063 s. 3; maternal transmission via a foreign marriage is the s. 5(2) naturalized track, not automatic descent."
         }
       ],
       "confidence": "high",
-      "last_checked": "2026-07-23",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Nepal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Nepal_2015"
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission English text (Wayback of official PDF)",
+          "url": "https://web.archive.org/web/20220121174852if_/https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
+        },
+        {
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission (original URL; CMS often unavailable)",
+          "url": "https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
         }
       ]
     },
@@ -24298,7 +24368,7 @@
       "mode": "naturalization",
       "status": "active",
       "title": "Naturalization as the spouse of a citizen",
-      "summary": "The foreign wife of a Nepali man may acquire nationality on marriage (on initiating renunciation of her foreign citizenship).",
+      "summary": "A foreign woman married to a citizen of Nepal may apply for citizenship on production of the marriage document and evidence of having initiated renunciation of foreign citizenship (s. 5(1)); no residence period is stated. There is no equivalent automatic route for foreign husbands.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -24313,15 +24383,19 @@
           "label": "Naturalization as the spouse of a citizen",
           "allocation": "discretionary",
           "eligibility_months": 0,
-          "note": "Wife only — a foreign husband of a Nepali woman has no route (ordinary 15 years)."
+          "note": "s. 5(1) Citizenship Act 2063; wife-only declaration route confirmed on the Law Commission English text."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Nepal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Nepal_2015"
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission English text (Wayback of official PDF)",
+          "url": "https://web.archive.org/web/20220121174852if_/https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
+        },
+        {
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission (original URL; CMS often unavailable)",
+          "url": "https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
         }
       ]
     },
@@ -24333,8 +24407,8 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Naturalization after about fifteen years residence",
-      "summary": "Ordinary naturalization requires roughly fifteen years of residence plus Nepali-language ability, renunciation of other citizenship, and good character; grant is discretionary and naturalized citizens face constitutional limits on high office.",
+      "title": "Naturalized citizenship for special contribution (not ordinary residence)",
+      "summary": "Section 5(4) is not an open residence naturalisation track: the Government of Nepal may grant naturalized citizenship only to foreign citizens who have \"contributed specially\" to science, philosophy, art, literature, world peace, human welfare or Nepali industry/commerce, and who meet the listed conditions including fifteen years residence, Nepali language ability, renunciation of other citizenship, good character, and home-country reciprocity (s. 5(4)(a)-(g)). Grant is discretionary.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -24346,18 +24420,22 @@
       "pathways": [
         {
           "id": "nepal-naturalization-principal",
-          "label": "Naturalization after about fifteen years residence",
+          "label": "Naturalized citizenship for special contribution (not ordinary residence)",
           "allocation": "discretionary",
           "eligibility_months": 180,
-          "note": "Fifteen-year residence floor is widely reported against the Constitution and Act; foreign spouses of Nepali citizens have a reduced path."
+          "note": "Corrects the prior ordinary-residence framing. s. 5(4) is textually gated on special contribution plus reciprocity. Post-2079 (2022) amendment consolidation not located on the live Law Commission CMS — 15-year figure believed unchanged but unconfirmed against that amendment text."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Nepal Constitution (Constitute Project)",
-          "url": "https://www.constituteproject.org/constitution/Nepal_2015"
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission English text (Wayback of official PDF)",
+          "url": "https://web.archive.org/web/20220121174852if_/https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
+        },
+        {
+          "title": "Nepal Citizenship Act 2063 (2006), Law Commission (original URL; CMS often unavailable)",
+          "url": "https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
         }
       ]
     },

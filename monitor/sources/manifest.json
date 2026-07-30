@@ -4360,19 +4360,22 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Burundi_2018",
+      "url": "https://amategeko.gov.bi/wp-content/uploads/2019/12/BOB_No8-bis-2000.pdf",
       "jurisdictions": [
         "108"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
-        "citizenship",
-        "Burundi",
-        "residence",
-        "birth"
+        "nationalit\u00e9",
+        "naturalisation",
+        "Code de la Nationalit\u00e9"
       ],
-      "notes": "Burundi constitutional nationality framework via Constitute Project text."
+      "notes": "Loi 1/013 of 18 July 2000 in B.O.B. n\u00b0 8 bis/2000 on amategeko.gov.bi (CEDJ portal linked from justice.gov.bi); replaced constituteproject aggregator row 2026-07-30 after primary-source verification.",
+      "pages": [
+        {
+          "id": "bob-8-bis-2000",
+          "url": "https://amategeko.gov.bi/wp-content/uploads/2019/12/BOB_No8-bis-2000.pdf"
+        }
+      ]
     },
     {
       "id": "central-african-republic-citizenship-law",
@@ -4981,19 +4984,22 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Nepal_2015",
+      "url": "https://web.archive.org/web/20220121174852if_/https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf",
       "jurisdictions": [
         "524"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
-        "citizenship",
-        "Nepal",
-        "residence",
-        "birth"
+        "\u0928\u093e\u0917\u0930\u093f\u0915\u0924\u093e",
+        "naturalized citizenship",
+        "citizenship by descent"
       ],
-      "notes": "Nepali constitutional nationality framework via Constitute Project text; cross-check the Nepal Citizenship Act. Active verification monitor for canonical coverage audit."
+      "notes": "Law Commission English PDF of Citizenship Act 2063 via Wayback (live CMS JS-broken); replaced constituteproject aggregator row 2026-07-30. Post-2079 amendment not located on official site.",
+      "pages": [
+        {
+          "id": "act-pdf-wayback",
+          "url": "https://web.archive.org/web/20220121174852if_/https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Nepal-Citizenship-Act-2063-2006.pdf"
+        }
+      ]
     },
     {
       "id": "iran-citizenship-law",
@@ -5172,38 +5178,54 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Bahrain_2017",
+      "url": "https://www.legalaffairs.gov.bh/Legislation/HTM/K0863",
       "jurisdictions": [
         "048"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
-        "citizenship",
-        "Bahrain",
-        "residence",
-        "birth"
+        "\u0627\u0644\u062c\u0646\u0633\u064a\u0629",
+        "\u0627\u0644\u062a\u062c\u0646\u0633",
+        "naturalisation",
+        "citizenship"
       ],
-      "notes": "Bahraini constitutional framework via Constitute Project text; cross-check the Citizenship Act 1963. Active verification monitor for canonical coverage audit."
+      "notes": "Official consolidated Citizenship Act 1963 (K0863); replaced the constituteproject aggregator row 2026-07-30 after primary-source verification.",
+      "pages": [
+        {
+          "id": "consolidated-law",
+          "url": "https://www.legalaffairs.gov.bh/Legislation/HTM/K0863"
+        },
+        {
+          "id": "consolidated-docx",
+          "url": "https://www.legalaffairs.gov.bh/FullAr/K0863.docx"
+        }
+      ]
     },
     {
       "id": "oman-citizenship-law",
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Oman_2011",
+      "url": "https://www.mjla.gov.om/images/legislation/file/Book917850.pdf",
       "jurisdictions": [
         "512"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
-        "citizenship",
-        "Oman",
-        "residence",
-        "birth"
+        "\u0627\u0644\u062c\u0646\u0633\u064a\u0629 \u0627\u0644\u0639\u0645\u0627\u0646\u064a\u0629",
+        "\u0645\u0631\u0633\u0648\u0645 \u0633\u0644\u0637\u0627\u0646\u064a",
+        "naturalisation",
+        "citizenship"
       ],
-      "notes": "Omani Basic Statute via Constitute Project text; cross-check the 2025 nationality law (RD 17/2025). Active verification monitor for canonical coverage audit."
+      "notes": "Official Gazette 1583 PDF of RD 17/2025; replaced the constituteproject aggregator row 2026-07-30 after primary-source verification. Landing page: https://mjla.gov.om/legislation/ar/1/show/1102/",
+      "pages": [
+        {
+          "id": "gazette-pdf",
+          "url": "https://www.mjla.gov.om/images/legislation/file/Book917850.pdf"
+        },
+        {
+          "id": "gazette-issue",
+          "url": "https://mjla.gov.om/legislation/ar/1/show/1102/"
+        }
+      ]
     },
     {
       "id": "belarus-citizenship-law",
@@ -5305,19 +5327,23 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.constituteproject.org/constitution/Bhutan_2008",
+      "url": "https://web.archive.org/web/20150806205032if_/http://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf",
       "jurisdictions": [
         "064"
       ],
       "keywords": [
-        "nationality",
-        "naturalization",
         "citizenship",
-        "Bhutan",
-        "residence",
-        "birth"
+        "naturalization",
+        "Dzongkha",
+        "Kasho"
       ],
-      "notes": "Bhutanese constitutional framework (art. 6) via Constitute Project text; cross-check the Citizenship Act 1985. Active verification monitor for canonical coverage audit."
+      "notes": "1985 Citizenship Act PDF via Wayback of nab.gov.bt (site often unreachable); replaced constituteproject aggregator row 2026-07-30. Constitution art. 6 also read.",
+      "pages": [
+        {
+          "id": "act-1985-wayback",
+          "url": "https://web.archive.org/web/20150806205032if_/http://www.nab.gov.bt/assets/uploads/docs/acts/2014/Bhutan_Citizen_Act_1985Eng.pdf"
+        }
+      ]
     },
     {
       "id": "myanmar-citizenship-law",
