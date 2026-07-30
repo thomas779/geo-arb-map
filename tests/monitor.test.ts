@@ -1072,3 +1072,36 @@ describe('reddit oauth', () => {
     await expect(client.comment('t3_abc123', '   ')).rejects.toThrow(/empty body/);
   });
 });
+
+describe('news dedup window scope', () => {
+  const { NewsPostStore, runNews } = require('../monitor/publish/news') as
+    typeof import('../monitor/publish/news');
+  const base = {
+    jurisdiction: 'Portugal', status: 'confirmed' as const, affects_dataset: false,
+    primary_urls: ['https://diariodarepublica.pt/x'], evidence_quote: 'q', original_quote: 'q',
+    citations: [], search_queries: [], claim: 'c', headline: 'h', brief: 'b',
+  };
+
+  test('a NEW legal instrument is not suppressed by an earlier same-category post', async () => {
+    const fs = require('node:fs') as typeof import('node:fs');
+    const os = require('node:os') as typeof import('node:os');
+    const path = require('node:path') as typeof import('node:path');
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'newswin-'));
+    const findingsPath = path.join(dir, 'findings.json');
+    const statePath = path.join(dir, 'state.sqlite');
+    // Seed the ledger with a naturalization post for 620 from 10 days ago…
+    const seed = new NewsPostStore(path.resolve(__dirname, '..'), statePath);
+    seed.record('aaaaaaaaaaaaaaaa',
+      { ...base, iso_n3: '620', category: 'naturalization', effective_date: '2026-05-01', legal_instrument: '23/2020' } as never,
+      1, new Date(Date.now() - 10 * 86_400_000).toISOString());
+    seed.close();
+    // …the window check must not block a finding citing a DIFFERENT instrument,
+    // and must still block an instrument-less one.
+    const withInstrument = { ...base, iso_n3: '620', category: 'naturalization', effective_date: '2026-05-18', legal_instrument: '1/2026' };
+    const withoutInstrument = { ...base, iso_n3: '620', category: 'naturalization', effective_date: '2026-06-30', legal_instrument: '' };
+    fs.writeFileSync(findingsPath, JSON.stringify([withInstrument, withoutInstrument]));
+    // Dry-run (apply:false) walks the dedup gates without posting.
+    const result = await runNews({ findings: findingsPath, apply: false, stateDb: statePath, stateSql: path.join(dir, 'out.sql'), max: 20 });
+    expect(result.skipped).toBe(1); // only the instrument-less finding hits the window
+  });
+});

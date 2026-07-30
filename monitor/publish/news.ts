@@ -21,7 +21,7 @@ import {
 } from './telegram';
 import countries from 'i18n-iso-countries';
 import { llmConfigFromEnv, resolveRedirect } from '../llm/client';
-import { changeKey, officialSourcesByJurisdiction, type Finding } from '../sweep/run';
+import { changeKey, normalizeInstrument, officialSourcesByJurisdiction, type Finding } from '../sweep/run';
 import { hostFromUrl, isGovish } from '../discovery/citations';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -450,9 +450,18 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
     for (const finding of confirmed) {
       const fp = fingerprint(finding);
       if (store?.has(fp)) { skipped += 1; console.log(`skip (already posted): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`); continue; }
-      if (store?.hasRecentChange(finding.iso_n3, finding.category, dedupWindowDays, new Date())) {
+      // The category window exists for instrument-LESS findings, whose extracted
+      // effective_date wobbles across outlets and defeats the exact fingerprint.
+      // A finding that cites a legal instrument already deduped exactly via
+      // has(fp) above — blocking it here suppressed genuinely NEW law for 120
+      // days whenever ANY same-category post existed (a real Portuguese
+      // nationality reform, Lei Orgânica 1/2026, was skipped this way because
+      // earlier naturalization posts for 620 sat inside the window).
+      const citesInstrument = normalizeInstrument(finding.legal_instrument) !== '';
+      if (!citesInstrument
+        && store?.hasRecentChange(finding.iso_n3, finding.category, dedupWindowDays, new Date())) {
         skipped += 1;
-        console.log(`skip (same ${finding.category} change for ${finding.iso_n3} within ${dedupWindowDays}d): ${finding.claim.slice(0, 60)}`);
+        console.log(`skip (no instrument cited; same ${finding.category} change for ${finding.iso_n3} within ${dedupWindowDays}d): ${finding.claim.slice(0, 60)}`);
         continue;
       }
       // Keep the un-rewritten primary URLs for the integrity gate (verifySourceUrl
