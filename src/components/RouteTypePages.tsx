@@ -20,7 +20,17 @@ import { WORK_RIGHTS_LABELS } from '@/lib/residence';
  * light = residence only). It is computed from the data, never decorative.
  */
 
-const TIER_LABEL: Record<number, string> = { 0: 'Residence only', 1: 'Permanent residence', 2: 'Citizenship' };
+const TIER_LABEL: Record<number, string> = { 0: 'Nothing · TR only', 1: 'Permanent residence', 2: 'Citizenship' };
+
+/**
+ * First sentence only for table rows; the country page owns the full prose.
+ * Splits only before a capital letter so legal citations survive intact
+ * ("Ley 25.871 art. 51" must not end the sentence at "art.").
+ */
+function firstSentence(text: string): string {
+  const match = text.match(/^.*?[.!?](?=\s+[A-ZÀ-Ý"'“(]|$)/);
+  return match ? match[0] : text;
+}
 
 function ladderTier(route: ResidenceRoute): number {
   if (route.counts_toward_naturalization) return 2;
@@ -72,9 +82,9 @@ function TierBar({ split, height = 'h-1.5' }: { split: TierSplit; height?: strin
 
 function tierCaption(split: TierSplit): string {
   const parts: string[] = [];
-  if (split.cit) parts.push(`${split.cit} climb to citizenship`);
-  if (split.pr) parts.push(`${split.pr} reach PR`);
-  if (split.tr) parts.push(`${split.tr} stop at residence`);
+  if (split.cit) parts.push(`${split.cit} count toward citizenship`);
+  if (split.pr) parts.push(`${split.pr} toward PR`);
+  if (split.tr) parts.push(`${split.tr} pure TR, no credit`);
   return parts.join(' · ');
 }
 
@@ -378,10 +388,12 @@ function residenceRow(r: ResidenceRoute, slug: string | undefined, money: (r: Re
       <td className={CELL}>
         <span className="font-medium">{r.title}</span>
         <ConfidenceChip confidence={r.confidence} />
-        <span className="mt-1 block max-w-[46ch] text-xs leading-relaxed text-muted-foreground">{r.summary}</span>
+        <span className="mt-1 block max-w-[46ch] text-xs leading-relaxed text-muted-foreground">{firstSentence(r.summary)}</span>
       </td>
       <td className={`${CELL} whitespace-nowrap font-mono text-xs`}>
-        {amount ?? <span className="text-muted-foreground/50" title="No amount recorded from the instrument">—</span>}
+        {amount
+          ? <><span className="text-muted-foreground/60">from </span>{amount}</>
+          : <span className="text-muted-foreground/50" title="No amount recorded from the instrument">—</span>}
       </td>
       <td className={CELL}><LadderCell tier={ladderTier(r)} /></td>
       <td className={`${CELL} whitespace-nowrap text-xs`} data-v={r.work_rights ?? 'zz'}>
@@ -432,7 +444,7 @@ function ResidenceTablePage({ data, category, moneyHeader, money, moneyRecordedL
               <Th label="Country" sortable />
               <Th label="Programme" />
               <Th label={moneyHeader} />
-              <Th label="Leads to" sortable numeric />
+              <Th label="Counts toward" sortable numeric />
               <Th label="Local work" sortable />
               <Th label="Checked" sortable />
             </tr>
@@ -442,12 +454,14 @@ function ResidenceTablePage({ data, category, moneyHeader, money, moneyRecordedL
           </tbody>
         </TableWrap>
         <p className="mt-2 max-w-[80ch] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">
-          Amounts are statutory minimums in each programme's own currency and are not comparable
-          across rows without conversion. "Leads to" is the best outcome the route itself reaches,
-          on the same ladder the atlas paints. "Local work" is read from the instrument, never
-          inferred; a dash means not yet recorded, not "no". Eligibility can also hinge on the
-          passport you already hold: some programmes are treaty-gated and some exclude specific
-          nationalities. The country profile carries those conditions where recorded.
+          "From" amounts are the statutory floor; many programmes band by age, family size, or
+          investment option, and the country profile carries the variants. Amounts are in each
+          programme's own currency and are not comparable across rows without conversion.
+          "Counts toward" states whose clock this permit runs: citizenship means time here counts
+          toward naturalization, not that the visa grants a passport. "Local work" is read from
+          the instrument, never inferred; a dash means not yet recorded, not "no". Eligibility can
+          also hinge on the passport you already hold. The country profile carries those
+          conditions where recorded.
         </p>
       </Section>
       {ended.length > 0 && (
@@ -487,10 +501,11 @@ export function GoldenVisaPage({ data }: { data: CitizenshipRoutesData }) {
       lede={(active, split) => (
         <p>
           {active.length} active programmes grant residence for a qualifying investment. The entry
-          price is the least interesting column here: what separates these programmes is where they
-          stop. {split.cit} climb all the way to citizenship, {split.pr} reach permanent residence,
-          and {split.tr} end where they start. Direct citizenship for investment is a much shorter
-          list with <a href="/citizenship-by-investment/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
+          price is the least interesting column here: what separates these programmes is whose
+          clock they run. Time on {split.cit} of them counts toward citizenship, {split.pr} count
+          toward permanent residence, and {split.tr} are pure temporary residence with no credit at
+          all. Direct citizenship for investment is a much shorter list with{' '}
+          <a href="/citizenship-by-investment/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
         </p>
       )}
       endedLede="Golden visas churn. Programmes close under EU pressure, housing politics, or security review; a closed programme still being marketed is a red flag."
@@ -508,15 +523,20 @@ export function NomadVisaPage({ data }: { data: CitizenshipRoutesData }) {
       moneyRecordedLabel="income floor recorded for {n}"
       eyebrow="Digital nomad visas"
       title="Remote-work visas, sorted by what they actually lead to."
-      lede={(active, split) => (
-        <p>
-          {active.length} active programmes admit remote workers on foreign income. Most are
-          time-boxed permits that lead nowhere: paid stays, not immigration routes.
-          {' '}{split.cit + split.pr > 0
-            ? `The ${split.cit + split.pr} that genuinely count toward settlement are the table's reason to exist.`
-            : 'None currently counts toward settlement.'}
-        </p>
-      )}
+      lede={(active, split) => {
+        const exceptions = [...new Set(active
+          .filter(r => r.counts_toward_permanent_residence || r.counts_toward_naturalization)
+          .map(r => r.country.name))].sort();
+        return (
+          <p>
+            {active.length} active programmes admit remote workers on foreign income. Most are pure
+            temporary residence: time-boxed stays whose years count toward nothing.
+            {' '}{exceptions.length > 0
+              ? `The exceptions, where the clock genuinely runs: ${exceptions.join(', ')}. If a nomad visa is meant to become a settlement strategy, that short list is the strategy.`
+              : 'None currently counts toward settlement.'}
+          </p>
+        );
+      }}
       endedLede="Several pandemic-era nomad programmes have quietly lapsed. Each ended row's run dates live on the country profile."
     />
   );
