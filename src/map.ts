@@ -49,9 +49,19 @@ const MICRO_STATES: MicroState[] = [
   { iso: '663', name: 'Saint-Martin (France)',      lon: -62.99, lat: 18.11 },
 ];
 
-// Caribbean Netherlands is its own ISO entry for selection and country data,
-// while mobility rights inherit from the Netherlands (the country it belongs to).
-const MOBILITY_PARENT_ISO: Record<string, string> = { '535': '528' };
+// Territories that are separate Natural Earth features (own ISO code) but whose
+// immigration/citizenship regime IS the parent country's, so they inherit its
+// paint. Caribbean Netherlands → NL; Puerto Rico, Guam, USVI and the Northern
+// Marianas → US (the INA applies directly). American Samoa is deliberately NOT
+// mapped: it controls its own immigration and confers US nationality, not
+// citizenship, at birth — painting it as the US would overclaim.
+const MOBILITY_PARENT_ISO: Record<string, string> = {
+  '535': '528', // Bonaire (Caribbean Netherlands) → Netherlands
+  '630': '840', // Puerto Rico → United States
+  '316': '840', // Guam → United States
+  '850': '840', // U.S. Virgin Islands → United States
+  '580': '840', // Northern Mariana Islands → United States
+};
 
 function mobilityIso(iso: string): string {
   return MOBILITY_PARENT_ISO[iso] ?? iso;
@@ -631,9 +641,13 @@ function paintAll(state: AppState, data: BlocsData): void {
   // is derived from projected area — no hand list — and micro-states are
   // excluded because they already carry a permanent dot.
   const microIsos = new Set(MICRO_STATES.map(m => m.iso));
+  // Iterate the FEATURES (not the selection set) so territories that inherit a
+  // parent's paint via MOBILITY_PARENT_ISO also earn a dot (Guam under a US
+  // selection has no own entry in `selected`).
   const smallSelected = selected
-    ? [...selected].filter(iso =>
-        !microIsos.has(iso)
+    ? [..._featureAreas.keys()].filter(iso =>
+        selected.has(mobilityIso(iso))
+        && !microIsos.has(iso)
         && (_featureAreas.get(iso) ?? Infinity) < SMALL_AREA_PX
         && _featureCentroids.has(iso))
     : [];
