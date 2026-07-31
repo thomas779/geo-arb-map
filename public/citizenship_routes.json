@@ -37945,6 +37945,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -37985,6 +37987,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38028,6 +38032,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38068,6 +38074,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38108,6 +38116,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38148,6 +38158,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38188,6 +38200,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38230,6 +38244,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "full",
+      "permit_duration_months": 12,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38272,6 +38288,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "remote_only",
+      "permit_duration_months": 6,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38317,6 +38335,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "full",
+      "permit_duration_months": 36,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38360,6 +38380,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": "full",
+      "permit_duration_months": 12,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38405,6 +38427,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": "full",
+      "permit_duration_months": 12,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38447,6 +38471,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38490,6 +38516,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 40,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38533,6 +38561,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 40,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38575,6 +38605,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38618,6 +38650,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38660,6 +38694,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38702,6 +38738,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38742,6 +38780,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38782,6 +38822,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38825,6 +38867,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38868,6 +38912,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38908,6 +38954,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38948,6 +38996,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38990,6 +39040,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39030,6 +39082,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39073,6 +39127,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39116,6 +39172,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": "remote_only",
+      "permit_duration_months": 12,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39156,6 +39214,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39199,6 +39259,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39239,6 +39301,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39279,6 +39343,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 12,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39322,6 +39388,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39367,6 +39435,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39412,6 +39482,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39454,6 +39526,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39494,6 +39568,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39536,6 +39612,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39576,6 +39654,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39619,6 +39699,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 183,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39661,6 +39743,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39704,6 +39788,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39749,6 +39835,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39792,6 +39880,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39837,6 +39927,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 30,
       "work_rights": null,
+      "permit_duration_months": 300,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39877,6 +39969,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39917,6 +40011,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -39962,6 +40058,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40007,6 +40105,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40052,6 +40152,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40097,6 +40199,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 183,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40142,6 +40246,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 183,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40184,6 +40290,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40229,6 +40337,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40272,6 +40382,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40315,6 +40427,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40357,6 +40471,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "none",
+      "permit_duration_months": 36,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40399,6 +40515,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "none",
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40439,6 +40557,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40481,6 +40601,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40523,6 +40645,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "none",
+      "permit_duration_months": 24,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40566,6 +40690,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40611,6 +40737,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40656,6 +40784,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40701,6 +40831,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40746,6 +40878,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40791,6 +40925,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40836,6 +40972,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 1,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40876,6 +41014,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40916,6 +41056,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -40956,6 +41098,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41001,6 +41145,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41043,6 +41189,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 12,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41088,6 +41236,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41133,6 +41283,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41178,6 +41330,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41220,6 +41374,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "full",
+      "permit_duration_months": 24,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41262,6 +41418,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41302,6 +41460,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 60,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41345,6 +41505,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41385,6 +41547,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41425,6 +41589,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41467,6 +41633,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41510,6 +41678,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41555,6 +41725,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41597,6 +41769,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41640,6 +41814,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41685,6 +41861,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41727,6 +41905,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41770,6 +41950,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41813,6 +41995,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41858,6 +42042,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 12,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41898,6 +42084,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41938,6 +42126,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41978,6 +42168,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42018,6 +42210,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42060,6 +42254,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42102,6 +42298,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42145,6 +42343,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42188,6 +42388,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42231,6 +42433,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42273,6 +42477,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42313,6 +42519,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42356,6 +42564,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42398,6 +42608,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42441,6 +42653,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42486,6 +42700,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42529,6 +42745,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42571,6 +42789,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42621,6 +42841,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 120,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42666,6 +42888,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 60,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42711,6 +42935,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42756,6 +42982,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42798,6 +43026,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42841,6 +43071,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42884,6 +43116,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 1,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42927,6 +43161,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -42970,6 +43206,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43015,6 +43253,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43057,6 +43297,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43100,6 +43342,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43145,6 +43389,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43187,6 +43433,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43230,6 +43478,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43273,6 +43523,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43313,6 +43565,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "employer_sponsored",
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43356,6 +43610,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": "none",
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43399,6 +43655,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": "remote_only",
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43442,6 +43700,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43484,6 +43744,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43529,6 +43791,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43569,6 +43833,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43614,6 +43880,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43659,6 +43927,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43701,6 +43971,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43744,6 +44016,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43789,6 +44063,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43834,6 +44110,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43876,6 +44154,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43916,6 +44196,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -43956,6 +44238,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44001,6 +44285,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 36,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44046,6 +44332,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 36,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44091,6 +44379,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44136,6 +44426,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44181,6 +44473,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44221,6 +44515,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44261,6 +44557,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44301,6 +44599,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44344,6 +44644,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44387,6 +44689,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": "none",
+      "permit_duration_months": 180,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44430,6 +44734,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": "full",
+      "permit_duration_months": 240,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44473,6 +44779,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": "none",
+      "permit_duration_months": 120,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44516,6 +44824,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": "none",
+      "permit_duration_months": 60,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44556,6 +44866,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44599,6 +44911,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44644,6 +44958,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 12,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44687,6 +45003,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44729,6 +45047,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44774,6 +45094,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 120,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44816,6 +45138,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44859,6 +45183,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44904,6 +45230,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44946,6 +45274,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44989,6 +45319,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45034,6 +45366,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45077,6 +45411,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45122,6 +45458,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45164,6 +45502,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45204,6 +45544,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45249,6 +45591,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 105,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45294,6 +45638,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 21,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45339,6 +45685,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45384,6 +45732,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45429,6 +45779,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45469,6 +45821,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45512,6 +45866,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45557,6 +45913,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45600,6 +45958,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45645,6 +46005,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45690,6 +46052,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45735,6 +46099,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45780,6 +46146,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45820,6 +46188,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45860,6 +46230,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45905,6 +46277,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45953,6 +46327,8 @@
       },
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -45995,6 +46371,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46041,6 +46419,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46086,6 +46466,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46128,6 +46510,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46171,6 +46555,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 7,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46216,6 +46602,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46259,6 +46647,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46299,6 +46689,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46344,6 +46736,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46386,6 +46780,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46426,6 +46822,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 24,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46466,6 +46864,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46508,6 +46908,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46553,6 +46955,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 45,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46596,6 +47000,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46641,6 +47047,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46683,6 +47091,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46725,6 +47135,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46768,6 +47180,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46811,6 +47225,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46854,6 +47270,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46894,6 +47312,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46939,6 +47359,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46979,6 +47401,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47021,6 +47445,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47061,6 +47487,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47104,6 +47532,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47144,6 +47574,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47187,6 +47619,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47227,6 +47661,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 12,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47270,6 +47706,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47315,6 +47753,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47360,6 +47800,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47403,6 +47845,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47448,6 +47892,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47493,6 +47939,8 @@
       },
       "physical_presence_days_per_year": 183,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47535,6 +47983,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 183,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47577,6 +48027,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 183,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47622,6 +48074,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47665,6 +48119,8 @@
       },
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47708,6 +48164,8 @@
       },
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47751,6 +48209,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47791,6 +48251,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47834,6 +48296,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47877,6 +48341,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": 0,
       "work_rights": null,
+      "permit_duration_months": 60,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47920,6 +48386,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47963,6 +48431,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48006,6 +48476,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48046,6 +48518,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48088,6 +48562,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48130,6 +48606,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48170,6 +48648,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48213,6 +48693,8 @@
       },
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48253,6 +48735,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48293,6 +48777,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48335,6 +48821,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48378,6 +48866,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48420,6 +48910,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48463,6 +48955,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48503,6 +48997,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48545,6 +49041,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48585,6 +49083,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48627,6 +49127,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48667,6 +49169,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48709,6 +49213,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48752,6 +49258,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48792,6 +49300,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48832,6 +49342,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48872,6 +49384,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48912,6 +49426,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48955,6 +49471,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -48998,6 +49516,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -49041,6 +49561,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -49081,6 +49603,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "employer_sponsored",
+      "permit_duration_months": 36,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -49121,6 +49645,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -49161,6 +49687,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": "full",
+      "permit_duration_months": null,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -49204,6 +49732,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
+      "permit_duration_months": 60,
+      "permit_renewable": null,
       "facts": {
         "canonical": true,
         "variant_count": 1,

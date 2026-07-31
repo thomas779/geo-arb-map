@@ -22,6 +22,14 @@ import { WORK_RIGHTS_LABELS } from '@/lib/residence';
 
 const TIER_LABEL: Record<number, string> = { 0: 'TR', 1: 'Permanent residence', 2: 'Citizenship' };
 
+/** Permit term: "5 yr · renews", "6 mo", or null when unrecorded. */
+function fmtTerm(r: ResidenceRoute): string | null {
+  const months = r.permit_duration_months;
+  if (!months) return null;
+  const base = months % 12 === 0 ? `${months / 12} yr` : `${months} mo`;
+  return r.permit_renewable ? `${base} · renews` : base;
+}
+
 /**
  * First sentence only for table rows; the country page owns the full prose.
  * Splits only before a capital letter so legal citations survive intact
@@ -395,6 +403,9 @@ function residenceRow(r: ResidenceRoute, slug: string | undefined, money: (r: Re
           ? <><span className="text-muted-foreground/60">from </span>{amount}</>
           : <span className="text-muted-foreground/50" title="No amount recorded from the instrument">—</span>}
       </td>
+      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.permit_duration_months ?? 0}>
+        {fmtTerm(r) ?? <span className="text-muted-foreground/50" title="Not yet read from the instrument">—</span>}
+      </td>
       <td className={CELL}><LadderCell tier={ladderTier(r)} /></td>
       <td className={`${CELL} whitespace-nowrap text-xs`} data-v={r.work_rights ?? 'zz'}>
         {r.work_rights
@@ -444,6 +455,7 @@ function ResidenceTablePage({ data, category, moneyHeader, money, moneyRecordedL
               <Th label="Country" sortable />
               <Th label="Programme" />
               <Th label={moneyHeader} />
+              <Th label="Term" sortable numeric />
               <Th label="Counts toward" sortable numeric />
               <Th label="Local work" sortable />
               <Th label="Checked" sortable />
@@ -457,6 +469,7 @@ function ResidenceTablePage({ data, category, moneyHeader, money, moneyRecordedL
           "From" amounts are the statutory floor; many programmes band by age, family size, or
           investment option, and the country profile carries the variants. Amounts are in each
           programme's own currency and are not comparable across rows without conversion.
+          "Term" is one grant's validity; "renews" appears only where the instrument says so.
           "Counts toward" states whose clock this permit runs: citizenship means time here counts
           toward naturalization, not that the visa grants a passport. "Local work" is read from
           the instrument, never inferred; a dash means not yet recorded, not "no". Eligibility can

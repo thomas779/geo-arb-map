@@ -180,6 +180,12 @@ export const ResidenceRouteSchema = z.strictObject({
   // (tied to the petitioning employer), 'self_employment' (own business only),
   // 'full' (open labour-market access).
   work_rights: z.enum(['full', 'employer_sponsored', 'self_employment', 'remote_only', 'none']).nullable().default(null),
+  // The permit's own term: how long one grant lasts, and whether it renews.
+  // Distinct from eligibility timelines (time-to-PR) and never inferred:
+  // null = not read from the instrument. Renewability is recorded only when
+  // stated — silence stays null, never false.
+  permit_duration_months: z.number().int().positive().nullable().default(null),
+  permit_renewable: z.boolean().nullable().default(null),
   variants: z.array(RouteVariantSchema).min(1),
 }).superRefine((route, context) => {
   route.variants.forEach((variant, index) => {

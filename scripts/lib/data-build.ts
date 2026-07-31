@@ -821,6 +821,8 @@ function projectResidenceRoute(
     min_income_monthly: route.min_income_monthly,
     physical_presence_days_per_year: route.physical_presence_days_per_year,
     work_rights: route.work_rights ?? null,
+    permit_duration_months: route.permit_duration_months ?? null,
+    permit_renewable: route.permit_renewable ?? null,
     facts: {
       canonical: true,
       variant_count: route.variants.length,

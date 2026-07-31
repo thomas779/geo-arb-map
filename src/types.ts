@@ -176,6 +176,10 @@ export interface ResidenceRoute {
   physical_presence_days_per_year: number | null;
   /** Local work access read from the instrument; null = not recorded (never inferred). */
   work_rights?: 'full' | 'employer_sponsored' | 'self_employment' | 'remote_only' | 'none' | null;
+  /** One grant's validity in months; null = not recorded. */
+  permit_duration_months?: number | null;
+  /** Renewability as stated in the instrument; null = not stated (never false from silence). */
+  permit_renewable?: boolean | null;
   facts: Record<string, unknown>;
   pathways?: CitizenshipRoutePathway[];
   confidence: 'high' | 'medium' | 'low';
