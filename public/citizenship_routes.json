@@ -29,7 +29,7 @@
         "verified_negative": 2,
         "inactive": 9
       },
-      "residence_routes": 252
+      "residence_routes": 265
     }
   },
   "jurisdictions": [
@@ -218,10 +218,17 @@
         "argentina-relevant-investment-citizenship"
       ],
       "residence_route_ids": [
-        "argentina-digital-nomad-transitory"
+        "argentina-digital-nomad-transitory",
+        "argentina-rentista-residence",
+        "argentina-pensionado-residence",
+        "argentina-inversionista-residence",
+        "argentina-cientificos-residence"
       ],
       "residence_coverage": {
-        "digital_nomad": "reviewed"
+        "digital_nomad": "reviewed",
+        "retirement_pension": "reviewed",
+        "investment": "reviewed",
+        "talent_skilled": "reviewed"
       }
     },
     {
@@ -943,11 +950,15 @@
         "colombia-citizenship-by-marriage"
       ],
       "residence_route_ids": [
+        "colombia-v-rentista",
+        "colombia-m-pensionado",
+        "colombia-m-rentista",
         "colombia-m-visa-real-estate-investor",
         "colombia-m-visa-business-investor",
         "colombia-digital-nomad-visa"
       ],
       "residence_coverage": {
+        "retirement_pension": "reviewed",
         "investment": "reviewed",
         "digital_nomad": "reviewed"
       }
@@ -1234,9 +1245,11 @@
         "ecuador-citizenship-by-marriage"
       ],
       "residence_route_ids": [
+        "ecuador-rentista-temporary-residence",
         "ecuador-investor-temporary-residence"
       ],
       "residence_coverage": {
+        "retirement_pension": "reviewed",
         "investment": "reviewed"
       }
     },
@@ -2586,6 +2599,9 @@
       ],
       "residence_route_ids": [
         "malaysia-mm2h-silver",
+        "malaysia-mm2h-gold",
+        "malaysia-mm2h-platinum",
+        "malaysia-mm2h-sez-sfz",
         "malaysia-de-rantau-nomad"
       ],
       "residence_coverage": {
@@ -4686,12 +4702,14 @@
         "us-citizenship-by-marriage"
       ],
       "residence_route_ids": [
+        "us-o1-extraordinary-ability",
         "us-eb5-direct-investor",
         "us-eb5-regional-center",
         "us-gold-card",
         "us-e2-treaty-investor"
       ],
       "residence_coverage": {
+        "talent_skilled": "reviewed",
         "investment": "reviewed"
       }
     },
@@ -4744,9 +4762,11 @@
         "uruguay-citizenship-by-marriage"
       ],
       "residence_route_ids": [
+        "uruguay-rentista-permanent-residence",
         "uruguay-legal-residence"
       ],
       "residence_coverage": {
+        "retirement_pension": "reviewed",
         "general_permanent_residence": "reviewed"
       }
     },
@@ -38194,6 +38214,48 @@
       ]
     },
     {
+      "id": "argentina-cientificos-residence",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "Científicos y personal especializado temporary residence",
+      "summary": "Temporary residence under Ley 25.871 art. 23(e) for scientists, researchers, technicians and specialized personnel under contract with a RENURE-registered institution or company. One year, renewable. Admission is contract-bound, but once admitted art. 51 grants the general temporary-resident right to any remunerated activity.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "work_rights": "full",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "argentina-cientificos-residence-principal",
+          "label": "Científicos y personal especializado temporary residence",
+          "allocation": "right",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migraciones — residencia temporaria como científico y/o personal especializado (trámite oficial)",
+          "url": "https://www.argentina.gob.ar/servicio/obtener-una-residencia-temporaria-como-cientifico-yo-personal-especializado-yo-personal-de"
+        }
+      ]
+    },
+    {
       "id": "argentina-digital-nomad-transitory",
       "country": {
         "iso_n3": "032",
@@ -38209,7 +38271,7 @@
       "min_investment": null,
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
-      "work_rights": null,
+      "work_rights": "remote_only",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -38232,6 +38294,139 @@
         {
           "title": "Infoleg — Ley 25.871 (migración) texto actualizado",
           "url": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/90000-94999/92016/texact.htm"
+        }
+      ]
+    },
+    {
+      "id": "argentina-inversionista-residence",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "category": "investment",
+      "status": "pending_verification",
+      "title": "Inversionista temporary residence (statutory; operation unverified)",
+      "summary": "Ley 25.871 art. 23(d) grants temporary residence to investors in productive, commercial or service activities; Decreto 616/2010 set the threshold at ARS 1,500,000 — never updated since 2010 and now nominally trivial. The category survives in the statute, but Migraciones’ current temporary-residence service list omits it and the trámite page is unreachable, so present operation is unverified.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 1500000,
+        "currency": "ARS"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "work_rights": "full",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "argentina-inversionista-residence-principal",
+          "label": "Inversionista temporary residence (statutory; operation unverified)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "low",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Infoleg — Decreto 616/2010 (reglamentación Ley 25.871)",
+          "url": "https://servicios.infoleg.gob.ar/infolegInternet/anexos/165000-169999/167004/norma.htm"
+        }
+      ]
+    },
+    {
+      "id": "argentina-pensionado-residence",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Pensionado temporary residence (pensioners)",
+      "summary": "Temporary residence under Ley 25.871 art. 23(c) for recipients of a government or private pension of at least five Salarios Mínimo Vital y Móvil per month (about ARS 1,762,000 at the March 2026 SMVM). Granted for a year, renewable, with the same full local work access as other temporary residents (art. 51).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1762000,
+        "currency": "ARS"
+      },
+      "physical_presence_days_per_year": null,
+      "work_rights": "full",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "argentina-pensionado-residence-principal",
+          "label": "Pensionado temporary residence (pensioners)",
+          "allocation": "right",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migraciones — residencia temporaria como pensionado (trámite oficial)",
+          "url": "https://www.argentina.gob.ar/servicio/obtener-una-residencia-temporaria-como-pensionado"
+        }
+      ]
+    },
+    {
+      "id": "argentina-rentista-residence",
+      "country": {
+        "iso_n3": "032",
+        "name": "Argentina"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Rentista temporary residence (passive income)",
+      "summary": "Temporary residence under Ley 25.871 art. 23(b) for a person living off lawful passive income from abroad — at least five Salarios Mínimo Vital y Móvil per month (about ARS 1,762,000 at the March 2026 SMVM), remitted through BCRA-authorised banks. Granted for a year, renewable. Unusually, the holder MAY work locally: art. 51 authorizes temporary residents to take any remunerated activity — only the qualifying income must be non-work income.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": {
+        "amount": 1762000,
+        "currency": "ARS"
+      },
+      "physical_presence_days_per_year": null,
+      "work_rights": "full",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          36
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "argentina-rentista-residence-principal",
+          "label": "Rentista temporary residence (passive income)",
+          "allocation": "right",
+          "eligibility_months": 36
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Migraciones — residencia temporaria como rentista (trámite oficial)",
+          "url": "https://www.argentina.gob.ar/servicio/obtener-una-residencia-temporaria-como-rentista"
         }
       ]
     },
@@ -40143,6 +40338,88 @@
       ]
     },
     {
+      "id": "colombia-m-pensionado",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Migrant (M) visa — pensionado",
+      "summary": "Migrant-category visa under Resolución 5477/2022 art. 77 for recipients of a life pension from a state or private fund of at least three SMMLV per month, granted up to three years. No work permitted, but as an M visa it leads to the resident (R) visa after five years of continuous status (art. 90 as amended by Resolución 10434/2023).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "work_rights": "none",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          60
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "colombia-m-pensionado-principal",
+          "label": "Migrant (M) visa — pensionado",
+          "allocation": "right",
+          "eligibility_months": 60
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Colombia Resolution 5477 of 2022",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm"
+        }
+      ]
+    },
+    {
+      "id": "colombia-m-rentista",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "category": "retirement_pension",
+      "status": "verified_negative",
+      "title": "No Migrant (M) rentista category",
+      "summary": "Resolución 5477/2022 contains no rentista category in the Migrant class: rentista appears only as a Visitor visa (art. 56). Guides describing an “M-rentista” with a path to the R visa describe a category that does not exist in the current instrument.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "work_rights": "none",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "colombia-m-rentista-principal",
+          "label": "No Migrant (M) rentista category",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Colombia Resolution 5477 of 2022",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm"
+        }
+      ]
+    },
+    {
       "id": "colombia-m-visa-business-investor",
       "country": {
         "iso_n3": "170",
@@ -40223,6 +40500,46 @@
         {
           "title": "Cancillería — visa types / Resolución 5477 framework",
           "url": "https://www.cancilleria.gov.co/atencion-y-servicio-al-ciudadano/tramites-y-servicios/visa/tipos-de-visa"
+        }
+      ]
+    },
+    {
+      "id": "colombia-v-rentista",
+      "country": {
+        "iso_n3": "170",
+        "name": "Colombia"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Visitor (V) visa — rentista",
+      "summary": "Rentista is a VISITOR category under Resolución 5477/2022 art. 56: income from rents of at least ten SMMLV per month, granted for up to two years. It permits no work (“No permite trabajar”) and, like all V visas, accumulates nothing toward the resident (R) visa (art. 23).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "work_rights": "none",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "colombia-v-rentista-principal",
+          "label": "Visitor (V) visa — rentista",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Colombia Resolution 5477 of 2022",
+          "url": "https://www.cancilleria.gov.co/sites/default/files/Normograma/docs/resolucion_minrelaciones_5477_2022.htm"
         }
       ]
     },
@@ -40874,6 +41191,48 @@
         {
           "title": "Ecuador immigration — residence categories (Servicio de Gestión Migratoria framework)",
           "url": "https://www.gob.ec/sgm"
+        }
+      ]
+    },
+    {
+      "id": "ecuador-rentista-temporary-residence",
+      "country": {
+        "iso_n3": "218",
+        "name": "Ecuador"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Rentista temporary residence",
+      "summary": "Two-year renewable temporary residence (LOMH art. 60(2)) for holders of monthly income from lawful rents — lease contracts, investment instruments and similar — of at least three Salarios Básicos Unificados, plus USD 250 per accompanying dependent (Acuerdo Ministerial 70/2024). Residents may work (LOMH art. 51); permanent residence opens at 21 months (art. 63) and naturalization three years after that (art. 71).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "work_rights": "full",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          21
+        ],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "ecuador-rentista-temporary-residence-principal",
+          "label": "Rentista temporary residence",
+          "allocation": "right",
+          "eligibility_months": 21
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Gobierno del Ecuador — concesión visa residencia temporal rentista (trámite oficial)",
+          "url": "https://www.gob.ec/mremh/tramites/concesion-visa-residencia-temporal-rentista"
         }
       ]
     },
@@ -44000,6 +44359,135 @@
       ]
     },
     {
+      "id": "malaysia-mm2h-gold",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "MM2H — Gold tier",
+      "summary": "Fifteen-year renewable pass: USD 500,000 fixed deposit plus a compulsory property purchase from MYR 1,000,000. Same 90-day cumulative annual stay rule (waived at 50+), no work or business, no path to permanent residence or citizenship.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 500000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "work_rights": "none",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malaysia-mm2h-gold-principal",
+          "label": "MM2H — Gold tier",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "MM2H official portal — Gold tier",
+          "url": "https://www.mm2h.gov.my/category/gold"
+        }
+      ]
+    },
+    {
+      "id": "malaysia-mm2h-platinum",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "MM2H — Platinum tier",
+      "summary": "Twenty-year renewable pass: USD 1,000,000 fixed deposit plus a compulsory property purchase from MYR 2,000,000. The only MM2H tier that permits work and business. Still no path to permanent residence or citizenship.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 1000000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "work_rights": "full",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malaysia-mm2h-platinum-principal",
+          "label": "MM2H — Platinum tier",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "MM2H official portal — Platinum tier",
+          "url": "https://www.mm2h.gov.my/category/platinum"
+        }
+      ]
+    },
+    {
+      "id": "malaysia-mm2h-sez-sfz",
+      "country": {
+        "iso_n3": "458",
+        "name": "Malaysia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "MM2H — Special Economic / Financial Zone tier",
+      "summary": "Ten-year renewable pass tied to the special economic and financial zones (Forest City): USD 65,000 fixed deposit for applicants aged 21 to 49, USD 32,000 at 50 and over, with property purchase in the designated zone. No work or business, no path to permanent residence or citizenship.",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": {
+        "amount": 32000,
+        "currency": "USD"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": 90,
+      "work_rights": "none",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "malaysia-mm2h-sez-sfz-principal",
+          "label": "MM2H — Special Economic / Financial Zone tier",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "MM2H official portal — SEZ/SFZ tier",
+          "url": "https://www.mm2h.gov.my/category/sez"
+        }
+      ]
+    },
+    {
       "id": "malaysia-mm2h-silver",
       "country": {
         "iso_n3": "458",
@@ -44008,7 +44496,7 @@
       "category": "investment",
       "status": "active",
       "title": "MM2H — Silver tier",
-      "summary": "Malaysia My Second Home long-stay pass requiring a fixed deposit and property purchase.",
+      "summary": "Malaysia My Second Home five-year renewable pass: USD 150,000 fixed deposit plus a compulsory property purchase from MYR 600,000. Minimum stay of 90 cumulative days per year (waived for participants aged 50 and over). No work or business, and no path to permanent residence or citizenship.",
       "outcome": "residence",
       "counts_toward_permanent_residence": false,
       "counts_toward_naturalization": false,
@@ -44017,8 +44505,8 @@
         "currency": "USD"
       },
       "min_income_monthly": null,
-      "physical_presence_days_per_year": 60,
-      "work_rights": null,
+      "physical_presence_days_per_year": 90,
+      "work_rights": "none",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -44033,12 +44521,12 @@
           "eligibility_months": null
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Malaysia MM2H — official programme",
-          "url": "https://mm2h.gov.my/"
+          "title": "MM2H official portal — Silver tier",
+          "url": "https://www.mm2h.gov.my/category/silver"
         }
       ]
     },
@@ -48568,6 +49056,46 @@
       ]
     },
     {
+      "id": "us-o1-extraordinary-ability",
+      "country": {
+        "iso_n3": "840",
+        "name": "United States of America"
+      },
+      "category": "talent_skilled",
+      "status": "active",
+      "title": "O-1 extraordinary ability (O-1A / O-1B)",
+      "summary": "Employer- or agent-petitioned status for extraordinary ability in the sciences, education, business, or athletics (O-1A), or distinction in the arts and extraordinary achievement in film and television (O-1B). Approved for up to three years per event or activity and extendable in one-year increments with no statutory cap. Quasi-dual-intent by regulation: pursuing a green card is not a ground for denial. USCIS approved 93.9% of O-classification completions in FY2025 (94.5% in FY2024).",
+      "outcome": "residence",
+      "counts_toward_permanent_residence": false,
+      "counts_toward_naturalization": false,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "work_rights": "employer_sponsored",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "us-o1-extraordinary-ability-principal",
+          "label": "O-1 extraordinary ability (O-1A / O-1B)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "8 CFR 214.2(o) — O-1 classification (eCFR, current)",
+          "url": "https://www.ecfr.gov/current/title-8/chapter-I/subchapter-B/part-214/section-214.2"
+        }
+      ]
+    },
+    {
       "id": "uruguay-legal-residence",
       "country": {
         "iso_n3": "858",
@@ -48604,6 +49132,46 @@
         {
           "title": "Uruguay — Dirección Nacional de Migración",
           "url": "https://migracion.gub.uy/"
+        }
+      ]
+    },
+    {
+      "id": "uruguay-rentista-permanent-residence",
+      "country": {
+        "iso_n3": "858",
+        "name": "Uruguay"
+      },
+      "category": "retirement_pension",
+      "status": "active",
+      "title": "Rentista permanent residence (independent means)",
+      "summary": "Rentistas apply directly onto Uruguay’s permanent residence track (Decreto 394/009 art. 4(B)(c)). There is no fixed statutory income amount: the standard is income sufficient to cover the applicant’s expenses, evidenced by a notarial certificate stating the nature, monthly amount, and how the income is received in Uruguay. Full work rights (Ley 18.250 art. 8); citizenship after three years (with family) or five (single) under Constitution art. 75.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": null,
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "work_rights": "full",
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [],
+        "discretionary_decision": false
+      },
+      "pathways": [
+        {
+          "id": "uruguay-rentista-permanent-residence-principal",
+          "label": "Rentista permanent residence (independent means)",
+          "allocation": "right",
+          "eligibility_months": null
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Decreto 394/009 — reglamentación de la Ley de Migración (IMPO)",
+          "url": "https://www.impo.com.uy/bases/decretos/394-2009"
         }
       ]
     },
