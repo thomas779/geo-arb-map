@@ -174,6 +174,12 @@ export const ResidenceRouteSchema = z.strictObject({
   min_investment: MoneySchema.nullable(),
   min_income_monthly: MoneySchema.nullable(),
   physical_presence_days_per_year: z.number().int().nonnegative().nullable(),
+  // What the permit lets you DO locally. null = not yet read from the
+  // instrument — never inferred. 'remote_only' (nomad visas), 'none'
+  // (rentista/retirement permits that bar local work), 'employer_sponsored'
+  // (tied to the petitioning employer), 'self_employment' (own business only),
+  // 'full' (open labour-market access).
+  work_rights: z.enum(['full', 'employer_sponsored', 'self_employment', 'remote_only', 'none']).nullable().default(null),
   variants: z.array(RouteVariantSchema).min(1),
 }).superRefine((route, context) => {
   route.variants.forEach((variant, index) => {

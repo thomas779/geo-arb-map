@@ -174,6 +174,8 @@ export interface ResidenceRoute {
   min_investment: ResidenceMoney | null;
   min_income_monthly: ResidenceMoney | null;
   physical_presence_days_per_year: number | null;
+  /** Local work access read from the instrument; null = not recorded (never inferred). */
+  work_rights?: 'full' | 'employer_sponsored' | 'self_employment' | 'remote_only' | 'none' | null;
   facts: Record<string, unknown>;
   pathways?: CitizenshipRoutePathway[];
   confidence: 'high' | 'medium' | 'low';

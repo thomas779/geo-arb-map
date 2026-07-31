@@ -99,6 +99,18 @@ export const RESIDENCE_STATUS_LABELS: Record<string, string> = {
  * rendered as "PR path: no" on one surface and "PR no" on the other.
  * `variant: 'short'` is for the dense panel rows.
  */
+// What the permit lets you DO locally, read from the instrument — never
+// inferred (null = not recorded, and no chip renders). Rentista/retirement
+// permits typically bar local work entirely; nomad visas allow only foreign
+// remote work; that difference was previously invisible on every surface.
+export const WORK_RIGHTS_LABELS: Record<string, { long: string; short: string }> = {
+  full: { long: 'Local work: yes', short: 'work yes' },
+  employer_sponsored: { long: 'Work: sponsor-tied', short: 'sponsor-tied' },
+  self_employment: { long: 'Work: own business only', short: 'own business' },
+  remote_only: { long: 'Remote work only', short: 'remote only' },
+  none: { long: 'Local work: no', short: 'work no' },
+};
+
 export function residenceLadderBadges(
   route: ResidenceRoute,
   { variant = 'long' }: { variant?: 'long' | 'short' } = {},
@@ -110,7 +122,7 @@ export function residenceLadderBadges(
   const pr = route.counts_toward_permanent_residence;
   const nat = route.counts_toward_naturalization;
   const short = variant === 'short';
-  return [
+  const badges: Array<{ key: string; label: string; tone: 'positive' | 'neutral' | 'muted' }> = [
     {
       key: 'pr',
       label: short ? (pr ? 'PR yes' : 'PR no') : (pr ? 'PR path: yes' : 'PR path: no'),
@@ -124,4 +136,13 @@ export function residenceLadderBadges(
       tone: nat ? 'positive' : 'muted',
     },
   ];
+  const work = route.work_rights ? WORK_RIGHTS_LABELS[route.work_rights] : null;
+  if (work) {
+    badges.push({
+      key: 'work',
+      label: short ? work.short : work.long,
+      tone: route.work_rights === 'full' ? 'positive' : 'neutral',
+    });
+  }
+  return badges;
 }

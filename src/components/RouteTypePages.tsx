@@ -2,6 +2,7 @@ import type { CitizenshipRoute, CitizenshipRoutesData, ResidenceRoute } from '@/
 import { buildCountrySlugMap } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
 import { ROUTE_CLASSES } from '@/lib/route-classes';
+import { WORK_RIGHTS_LABELS } from '@/lib/residence';
 
 /**
  * Prerendered comparison pages for route types (/route-types/ hub +
@@ -290,6 +291,11 @@ function residenceRow(r: ResidenceRoute, slug: string | undefined, money: (r: Re
         {amount ?? <span className="text-muted-foreground/60">—</span>}
       </td>
       <td className={CELL}><LadderCell tier={ladderTier(r)} /></td>
+      <td className={`${CELL} whitespace-nowrap text-xs`} data-v={r.work_rights ?? 'zz'}>
+        {r.work_rights
+          ? <span className="text-muted-foreground">{WORK_RIGHTS_LABELS[r.work_rights].long}</span>
+          : <span className="text-muted-foreground/50" title="Not yet read from the instrument">—</span>}
+      </td>
       <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.last_checked}>
         {r.last_checked}
       </td>
@@ -323,6 +329,7 @@ function ResidenceTablePage({ data, category, moneyHeader, money, eyebrow, title
               <Th label="Programme" />
               <Th label={moneyHeader} />
               <Th label="Leads to" sortable numeric />
+              <Th label="Local work" sortable />
               <Th label="Checked" sortable />
             </tr>
           </thead>
@@ -333,6 +340,7 @@ function ResidenceTablePage({ data, category, moneyHeader, money, eyebrow, title
         <p className="mt-2 font-mono text-[0.68rem] text-muted-foreground/80">
           Amounts are statutory minimums in the programme's own currency and are not comparable across rows without conversion.
           "Leads to" is the best outcome the route itself can reach — the same TR → PR → CIT ladder the atlas paints.
+          "Local work" is read from the instrument, never inferred — a dash means not yet recorded, not "no".
         </p>
       </Section>
       {ended.length > 0 && (
