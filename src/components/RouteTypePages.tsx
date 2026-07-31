@@ -1,18 +1,23 @@
 import type { CitizenshipRoute, CitizenshipRoutesData, ResidenceRoute } from '@/types';
 import { buildCountrySlugMap } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
-import { ROUTE_CLASSES } from '@/lib/route-classes';
+import { ROUTE_CLASSES, type RouteClass } from '@/lib/route-classes';
 import { WORK_RIGHTS_LABELS } from '@/lib/residence';
 
 /**
  * Prerendered comparison pages for route types (/route-types/ hub +
  * /citizenship-by-investment, /golden-visas, /digital-nomad-visas).
  *
- * Tables, never card lists — the country page owns the prose; these pages own
- * the structured fields and the cross-country aggregates (counts, thresholds,
+ * Tables, never card lists: the country page owns the prose, these pages own
+ * the structured fields and the cross-country aggregates (tier splits, counts,
  * the closed-programme churn) that cannot live on any single country page.
- * Rendered via renderToStaticMarkup only: interactivity is limited to the
+ * Rendered via renderToStaticMarkup only; interactivity is limited to the
  * TABLE_SORT_JS script in build_country_pages, driven by data attributes.
+ *
+ * The signature element across hub and tables is the TIER BAR: each residence
+ * family's routes split by how far they carry the holder, painted in the same
+ * three tones the atlas legend uses (strong solid = citizenship, hatch = PR,
+ * light = residence only). It is computed from the data, never decorative.
  */
 
 const TIER_LABEL: Record<number, string> = { 0: 'Residence only', 1: 'Permanent residence', 2: 'Citizenship' };
@@ -21,6 +26,17 @@ function ladderTier(route: ResidenceRoute): number {
   if (route.counts_toward_naturalization) return 2;
   if (route.counts_toward_permanent_residence) return 1;
   return 0;
+}
+
+interface TierSplit { cit: number; pr: number; tr: number; total: number }
+
+function tierSplit(routes: ResidenceRoute[]): TierSplit {
+  const split = { cit: 0, pr: 0, tr: 0, total: routes.length };
+  for (const r of routes) {
+    const t = ladderTier(r);
+    if (t === 2) split.cit += 1; else if (t === 1) split.pr += 1; else split.tr += 1;
+  }
+  return split;
 }
 
 /** Compact money: EUR 250k, USD 1M, KHR 4bn. Reads at a glance in a dense column. */
@@ -38,7 +54,31 @@ function trimZero(n: number): string {
   return (Math.round(n * 10) / 10).toFixed(1).replace(/\.0$/, '');
 }
 
-/** Ladder pips — the same three-step vocabulary as the atlas Access levels. */
+/**
+ * The tier bar: route counts by terminal tier, in the map legend's own tones.
+ * sw-pr-hatch is the compiled hatch pattern the atlas uses for the PR tier.
+ */
+function TierBar({ split, height = 'h-1.5' }: { split: TierSplit; height?: string }) {
+  if (!split.total) return null;
+  const pct = (n: number) => `${(n / split.total) * 100}%`;
+  return (
+    <span className={`flex w-full overflow-hidden rounded-full ${height}`} aria-hidden>
+      {split.cit > 0 && <span style={{ width: pct(split.cit), background: 'var(--map-strong)' }} />}
+      {split.pr > 0 && <span className="sw-pr-hatch" style={{ width: pct(split.pr) }} />}
+      {split.tr > 0 && <span style={{ width: pct(split.tr), background: 'var(--map-limited)' }} />}
+    </span>
+  );
+}
+
+function tierCaption(split: TierSplit): string {
+  const parts: string[] = [];
+  if (split.cit) parts.push(`${split.cit} climb to citizenship`);
+  if (split.pr) parts.push(`${split.pr} reach PR`);
+  if (split.tr) parts.push(`${split.tr} stop at residence`);
+  return parts.join(' · ');
+}
+
+/** Ladder pips on table rows: the same three-step vocabulary as the atlas Access levels. */
 function LadderCell({ tier }: { tier: number }) {
   return (
     <span className="flex items-center gap-1.5" data-v={tier}>
@@ -53,7 +93,7 @@ function LadderCell({ tier }: { tier: number }) {
 }
 
 function ConfidenceChip({ confidence }: { confidence: string }) {
-  // House rule: the badge appears only below `high` — labelling the majority
+  // House rule: the badge appears only below `high`. Labelling the majority
   // "verified" trains readers to ignore it exactly when it matters.
   if (confidence === 'high') return null;
   return (
@@ -102,7 +142,7 @@ function TableWrap({ children }: { children: React.ReactNode }) {
   // Wide content scrolls inside its own container; the page never scrolls sideways.
   return (
     <div className="mt-4 overflow-x-auto rounded-lg border bg-card">
-      <table className="w-full min-w-[640px] border-collapse text-sm" data-sortable>
+      <table className="w-full min-w-[720px] border-collapse text-sm" data-sortable>
         {children}
       </table>
     </div>
@@ -126,7 +166,7 @@ function PageShell({ eyebrow, title, lede, children }: {
       {children}
       <p className="mt-10 max-w-[68ch] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">
         Every row links to the country profile with its full conditions and primary sources.
-        Confidence below high is flagged inline. Informational only — not legal advice.
+        Confidence below high is flagged inline. Informational only, not legal advice.
       </p>
     </main>
   );
@@ -134,16 +174,23 @@ function PageShell({ eyebrow, title, lede, children }: {
 
 // ── /route-types/ hub ──
 
-// ROUTE_CLASSES descriptions are written for the atlas sidebar; a couple
-// reference UI that doesn't exist on this page, so the hub overrides them.
-const HUB_DESCRIPTION: Record<string, string> = {
-  'golden-visa': 'Residence for a qualifying investment. Not citizenship — the table shows how far each programme leads.',
-};
-
 const TABLE_PAGE_BY_CLASS: Record<string, string> = {
   cbi: '/citizenship-by-investment/',
   'golden-visa': '/golden-visas/',
   'digital-nomad': '/digital-nomad-visas/',
+};
+
+// ROUTE_CLASSES descriptions are written for the atlas sidebar; the hub can
+// afford a sentence more of voice.
+const HUB_DESCRIPTION: Record<string, string> = {
+  ancestry: 'Citizenship through parents, grandparents, or diaspora ties. Usually the cheapest route anyone qualifies for, if they qualify at all.',
+  naturalization: 'Citizenship after qualifying years of residence. The default route everywhere, and the clock every residence permit below either feeds or wastes.',
+  cbi: 'Direct citizenship for a qualifying investment or contribution. A short list that marketing sites stretch with closed and imaginary programmes.',
+  'golden-visa': 'Residence for a qualifying investment. What matters is where each programme stops, not what it costs to enter.',
+  'digital-nomad': 'Permits for remote workers on foreign income. Most are paid stays that lead nowhere; a handful genuinely climb.',
+  retirement: 'Residence on passive income or a pension. The rentista family: prove the income, keep the permit.',
+  talent: 'Residence for designated skills, achievement, or sponsored work.',
+  'digital-identity': 'Government digital ID only. Useful for running a company remotely; not a right to live anywhere.',
 };
 
 export function routeClassCounts(data: CitizenshipRoutesData): Map<string, number> {
@@ -157,8 +204,66 @@ export function routeClassCounts(data: CitizenshipRoutesData): Map<string, numbe
   return counts;
 }
 
+function activeResidenceRoutes(data: CitizenshipRoutesData, cls: RouteClass): ResidenceRoute[] {
+  return (data.residence_routes ?? []).filter(r => r.category === cls.match && r.status === 'active');
+}
+
+function HubRow({ cls, data, count }: { cls: RouteClass; data: CitizenshipRoutesData; count: number }) {
+  const table = TABLE_PAGE_BY_CLASS[cls.id];
+  const primaryHref = table ?? `/?class=${cls.id}`;
+  // Digital identity grants no residence, so a "stops at residence" bar would
+  // claim more than the routes do.
+  const split = cls.kind === 'residence' && cls.id !== 'digital-identity'
+    ? tierSplit(activeResidenceRoutes(data, cls))
+    : null;
+  return (
+    <li className="border-b py-5 last:border-b-0">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+        <div className="min-w-0 flex-1">
+          <h3 className="font-heading text-xl font-semibold leading-tight">
+            <a href={primaryHref} className="hover:underline hover:underline-offset-4 hover:decoration-primary">
+              {cls.label}
+            </a>
+          </h3>
+          <p className="mt-1 max-w-[56ch] text-sm text-muted-foreground">{HUB_DESCRIPTION[cls.id] ?? cls.description}</p>
+          <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs">
+            {table && (
+              <a href={table} className="text-primary hover:underline hover:underline-offset-2">Compare programmes →</a>
+            )}
+            <a href={`/?class=${cls.id}`} className="text-muted-foreground hover:text-foreground hover:underline hover:underline-offset-2">
+              Paint it on the atlas →
+            </a>
+          </p>
+        </div>
+        {split && split.total > 0 && (
+          <div className="w-full shrink-0 sm:w-60">
+            <TierBar split={split} />
+            <p className="mt-1.5 font-mono text-[0.64rem] leading-snug text-muted-foreground">{tierCaption(split)}</p>
+          </div>
+        )}
+        <div className="flex shrink-0 items-baseline gap-1.5 sm:w-24 sm:flex-col sm:items-end sm:gap-0 sm:text-right">
+          <span className="font-heading text-3xl font-bold leading-none tabular-nums">{count}</span>
+          <span className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">active</span>
+        </div>
+      </div>
+    </li>
+  );
+}
+
 export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
   const counts = routeClassCounts(data);
+  const shelves: Array<{ kind: RouteClass['kind']; label: string; intro: string }> = [
+    {
+      kind: 'citizenship',
+      label: 'Ends in citizenship',
+      intro: 'The route itself produces a passport. Nothing left to climb afterwards.',
+    },
+    {
+      kind: 'residence',
+      label: 'Starts with residence',
+      intro: 'A permit first. The bar on each row shows what those permits become: strong for citizenship, hatched for permanent residence, light for permits that stop where they start.',
+    },
+  ];
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-10 sm:px-6">
       <nav className="mb-8 font-mono text-xs text-muted-foreground">
@@ -169,35 +274,20 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
         Every way in, by the shape of the route.
       </h1>
       <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-muted-foreground">
-        The same eight route families the atlas paints, as browsable lists: what you put in
-        (money, ancestry, residence, skills) and how far each programme can carry you —
-        temporary residence, permanent residence, or a passport.
+        Money, ancestry, residence, or skills going in. A permit, a settlement right, or a passport
+        coming out. Pick a family to compare programmes line by line, or paint it on the atlas.
       </p>
-      <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-        {ROUTE_CLASSES.map(cls => {
-          const table = TABLE_PAGE_BY_CLASS[cls.id];
-          const n = counts.get(cls.id) ?? 0;
-          return (
-            <li key={cls.id} className="rounded-lg border bg-card p-4">
-              <div className="flex items-baseline justify-between gap-3">
-                <h2 className="font-heading text-lg font-semibold leading-tight">
-                  {table ? <a href={table} className="hover:underline hover:underline-offset-2">{cls.label}</a> : cls.label}
-                </h2>
-                <span className="shrink-0 font-mono text-xs tabular-nums text-muted-foreground">
-                  {n} active
-                </span>
-              </div>
-              <p className="mt-1.5 text-sm text-muted-foreground">{HUB_DESCRIPTION[cls.id] ?? cls.description}</p>
-              <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs">
-                {table && <a href={table} className="text-primary hover:underline hover:underline-offset-2">Compare programmes →</a>}
-                <a href={`/?class=${cls.id}`} className="text-muted-foreground hover:text-foreground hover:underline hover:underline-offset-2">
-                  See it on the atlas →
-                </a>
-              </p>
-            </li>
-          );
-        })}
-      </ul>
+      {shelves.map(shelf => (
+        <section key={shelf.kind} className="mt-12">
+          <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">{shelf.label}</h2>
+          <p className="mt-2 max-w-[68ch] text-sm text-muted-foreground">{shelf.intro}</p>
+          <ul className="mt-2">
+            {ROUTE_CLASSES.filter(cls => cls.kind === shelf.kind).map(cls => (
+              <HubRow key={cls.id} cls={cls} data={data} count={counts.get(cls.id) ?? 0} />
+            ))}
+          </ul>
+        </section>
+      ))}
     </main>
   );
 }
@@ -231,17 +321,15 @@ export function CbiPage({ data }: { data: CitizenshipRoutesData }) {
   return (
     <PageShell
       eyebrow="Citizenship by investment"
-      title="Passports you can buy — every programme with a legal basis."
+      title="Passports you can buy. Every programme with a legal basis."
       lede={(
-        <>
-          <p>
-            {active.length} jurisdictions currently grant citizenship directly for a qualifying
-            investment or contribution. Marketing lists run much longer than this one because they
-            count programmes that have closed, bills that were never enacted, and golden visas —
-            residence permits — dressed up as passports.{' '}
-            <a href="/golden-visas/" className="underline underline-offset-2 hover:text-foreground">Residence-by-investment lives on its own page.</a>
-          </p>
-        </>
+        <p>
+          {active.length} jurisdictions currently grant citizenship directly for a qualifying
+          investment or contribution. Marketing lists run much longer than this one because they
+          count closed programmes, bills that never passed, and golden visas dressed up as
+          passports. Residence by investment is a different product with{' '}
+          <a href="/golden-visas/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
+        </p>
       )}
     >
       <Section title={`Active programmes (${active.length})`}>
@@ -249,10 +337,14 @@ export function CbiPage({ data }: { data: CitizenshipRoutesData }) {
           <thead><tr><Th label="Country" sortable /><Th label="Programme" /><Th label="Checked" sortable /></tr></thead>
           <tbody className={LAST_ROW_FIX}>{active.map(routeRow)}</tbody>
         </TableWrap>
+        <p className="mt-2 max-w-[80ch] font-mono text-[0.68rem] text-muted-foreground/80">
+          Eligibility can hinge on the passport you already hold: several programmes exclude
+          specific nationalities. The country profile carries those conditions where recorded.
+        </p>
       </Section>
       <Section
         title={`Closed programmes (${closed.length})`}
-        lede="Programmes that ran and ended — kept visible because closure is the story: CBI is volatile, and a passport pitch built on a closed programme is the most common scam in this market."
+        lede="Programmes that ran and ended, kept visible because closure is the story: CBI is volatile, and a passport pitch built on a closed programme is the most common scam in this market."
       >
         <TableWrap>
           <thead><tr><Th label="Country" sortable /><Th label="What happened" /><Th label="Checked" sortable /></tr></thead>
@@ -286,9 +378,10 @@ function residenceRow(r: ResidenceRoute, slug: string | undefined, money: (r: Re
       <td className={CELL}>
         <span className="font-medium">{r.title}</span>
         <ConfidenceChip confidence={r.confidence} />
+        <span className="mt-1 block max-w-[46ch] text-xs leading-relaxed text-muted-foreground">{r.summary}</span>
       </td>
       <td className={`${CELL} whitespace-nowrap font-mono text-xs`}>
-        {amount ?? <span className="text-muted-foreground/60">—</span>}
+        {amount ?? <span className="text-muted-foreground/50" title="No amount recorded from the instrument">—</span>}
       </td>
       <td className={CELL}><LadderCell tier={ladderTier(r)} /></td>
       <td className={`${CELL} whitespace-nowrap text-xs`} data-v={r.work_rights ?? 'zz'}>
@@ -303,14 +396,15 @@ function residenceRow(r: ResidenceRoute, slug: string | undefined, money: (r: Re
   );
 }
 
-function ResidenceTablePage({ data, category, moneyHeader, money, eyebrow, title, lede, endedLede }: {
+function ResidenceTablePage({ data, category, moneyHeader, money, moneyRecordedLabel, eyebrow, title, lede, endedLede }: {
   data: CitizenshipRoutesData;
   category: string;
   moneyHeader: string;
   money: (r: ResidenceRoute) => string | null;
+  moneyRecordedLabel: string;
   eyebrow: string;
   title: string;
-  lede: React.ReactNode;
+  lede: (active: ResidenceRoute[], split: TierSplit) => React.ReactNode;
   endedLede: string;
 }) {
   const slugByIso = buildCountrySlugMap(data.jurisdictions);
@@ -318,10 +412,20 @@ function ResidenceTablePage({ data, category, moneyHeader, money, eyebrow, title
   const byName = (a: ResidenceRoute, b: ResidenceRoute) => a.country.name.localeCompare(b.country.name);
   const active = rows.filter(r => r.status === 'active').sort(byName);
   const ended = rows.filter(r => r.status === 'inactive').sort(byName);
+  const split = tierSplit(active);
+  const withMoney = active.filter(r => money(r) !== null).length;
 
   return (
-    <PageShell eyebrow={eyebrow} title={title} lede={lede}>
+    <PageShell eyebrow={eyebrow} title={title} lede={lede(active, split)}>
       <Section title={`Active programmes (${active.length})`}>
+        {/* The page's aggregate view: the same tier bar as the hub, so 100+
+            rows arrive pre-summarised instead of as an undifferentiated dump. */}
+        <div className="mt-4 max-w-[560px]">
+          <TierBar split={split} height="h-2" />
+          <p className="mt-1.5 font-mono text-[0.68rem] text-muted-foreground">
+            {tierCaption(split)} · {moneyRecordedLabel.replace('{n}', String(withMoney))}
+          </p>
+        </div>
         <TableWrap>
           <thead>
             <tr>
@@ -337,10 +441,13 @@ function ResidenceTablePage({ data, category, moneyHeader, money, eyebrow, title
             {active.map(r => residenceRow(r, slugByIso.get(r.country.iso_n3), money))}
           </tbody>
         </TableWrap>
-        <p className="mt-2 font-mono text-[0.68rem] text-muted-foreground/80">
-          Amounts are statutory minimums in the programme's own currency and are not comparable across rows without conversion.
-          "Leads to" is the best outcome the route itself can reach — the same TR → PR → CIT ladder the atlas paints.
-          "Local work" is read from the instrument, never inferred — a dash means not yet recorded, not "no".
+        <p className="mt-2 max-w-[80ch] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">
+          Amounts are statutory minimums in each programme's own currency and are not comparable
+          across rows without conversion. "Leads to" is the best outcome the route itself reaches,
+          on the same ladder the atlas paints. "Local work" is read from the instrument, never
+          inferred; a dash means not yet recorded, not "no". Eligibility can also hinge on the
+          passport you already hold: some programmes are treaty-gated and some exclude specific
+          nationalities. The country profile carries those conditions where recorded.
         </p>
       </Section>
       {ended.length > 0 && (
@@ -368,47 +475,49 @@ function ResidenceTablePage({ data, category, moneyHeader, money, eyebrow, title
 }
 
 export function GoldenVisaPage({ data }: { data: CitizenshipRoutesData }) {
-  const n = (data.residence_routes ?? []).filter(r => r.category === 'investment' && r.status === 'active').length;
   return (
     <ResidenceTablePage
       data={data}
       category="investment"
       moneyHeader="Min. investment"
       money={r => fmtMoney(r.min_investment)}
+      moneyRecordedLabel="minimum recorded for {n}"
       eyebrow="Golden visas"
       title="Residence by investment, with the ladder made explicit."
-      lede={(
+      lede={(active, split) => (
         <p>
-          {n} active programmes grant residence for a qualifying investment. The number that matters
-          is not the entry price but the ladder: many golden visas stop at residence, some reach
-          permanent residence, and a minority genuinely count toward citizenship. Direct
-          citizenship-for-investment is a different, much shorter list —{' '}
-          <a href="/citizenship-by-investment/" className="underline underline-offset-2 hover:text-foreground">see the CBI page</a>.
+          {active.length} active programmes grant residence for a qualifying investment. The entry
+          price is the least interesting column here: what separates these programmes is where they
+          stop. {split.cit} climb all the way to citizenship, {split.pr} reach permanent residence,
+          and {split.tr} end where they start. Direct citizenship for investment is a much shorter
+          list with <a href="/citizenship-by-investment/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
         </p>
       )}
-      endedLede="Golden visas churn: programmes close under EU pressure, housing politics, or security review. A closed programme still being marketed is a red flag."
+      endedLede="Golden visas churn. Programmes close under EU pressure, housing politics, or security review; a closed programme still being marketed is a red flag."
     />
   );
 }
 
 export function NomadVisaPage({ data }: { data: CitizenshipRoutesData }) {
-  const n = (data.residence_routes ?? []).filter(r => r.category === 'digital_nomad' && r.status === 'active').length;
   return (
     <ResidenceTablePage
       data={data}
       category="digital_nomad"
       moneyHeader="Min. monthly income"
       money={r => fmtMoney(r.min_income_monthly)}
+      moneyRecordedLabel="income floor recorded for {n}"
       eyebrow="Digital nomad visas"
       title="Remote-work visas, sorted by what they actually lead to."
-      lede={(
+      lede={(active, split) => (
         <p>
-          {n} active programmes admit remote workers on foreign income. Most are time-boxed permits
-          that lead nowhere — paid stays, not immigration routes. The exceptions that count toward
-          permanent residence or citizenship are what make this table worth reading.
+          {active.length} active programmes admit remote workers on foreign income. Most are
+          time-boxed permits that lead nowhere: paid stays, not immigration routes.
+          {' '}{split.cit + split.pr > 0
+            ? `The ${split.cit + split.pr} that genuinely count toward settlement are the table's reason to exist.`
+            : 'None currently counts toward settlement.'}
         </p>
       )}
-      endedLede="Several pandemic-era nomad programmes have quietly lapsed. Each ended row carries its run dates in the country profile."
+      endedLede="Several pandemic-era nomad programmes have quietly lapsed. Each ended row's run dates live on the country profile."
     />
   );
 }
