@@ -1,7 +1,8 @@
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { RESIDENCE_FILTER_JS, THEME_BOOT_JS } from '../scripts/build_country_pages';
+import { buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_TYPE_DIRS, TABLE_SORT_JS, THEME_BOOT_JS } from '../scripts/build_country_pages';
+import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 
 const canonicalUrl = 'https://flagpaths.com/';
 const index = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
@@ -57,6 +58,27 @@ describe('public SEO contract', () => {
     // must hash-allow, or every filter button silently does nothing.
     const filterHash = createHash('sha256').update(RESIDENCE_FILTER_JS).digest('base64');
     expect(headers).toContain(`'sha256-${filterHash}'`);
+    // And for the route-type comparison tables' sort script.
+    const sortHash = createHash('sha256').update(TABLE_SORT_JS).digest('base64');
+    expect(headers).toContain(`'sha256-${sortHash}'`);
+  });
+
+  test('route-type hubs ship in the sitemap, not just as pages', () => {
+    // The historical footgun: a hub added to the page loop but not the urls
+    // array ships unindexed, defeating the point of an SEO page. The build
+    // writes buildSitemapUrls() verbatim, so asserting against it IS asserting
+    // the shipped sitemap — with no dependency on a stale dist/ artifact.
+    const citizenship = JSON.parse(readFileSync(
+      new URL('../public/citizenship_routes.json', import.meta.url), 'utf8')) as CitizenshipRoutesData;
+    const mobility = JSON.parse(readFileSync(
+      new URL('../public/blocs_data.json', import.meta.url), 'utf8')) as BlocsData;
+    const urls = buildSitemapUrls(citizenship, mobility);
+    for (const dir of ROUTE_TYPE_DIRS) {
+      expect(urls).toContain(`https://flagpaths.com/${dir}/`);
+    }
+    expect(urls).toContain('https://flagpaths.com/country/');
+    expect(urls).toContain('https://flagpaths.com/rights/');
+    expect(urls.length).toBeGreaterThan(240);
   });
 
   test('keeps the workers.dev duplicate out of search indexes', () => {

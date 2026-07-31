@@ -27,6 +27,12 @@ import {
   RightsList,
   deriveBlocProfile,
 } from '../src/components/RightsProfile';
+import {
+  RouteTypesHub,
+  CbiPage,
+  GoldenVisaPage,
+  NomadVisaPage,
+} from '../src/components/RouteTypePages';
 import { buildCountrySlugMap } from '../src/lib/slug';
 import { isNonApplicableJurisdiction } from '../src/lib/country';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
@@ -62,6 +68,66 @@ const THEME_SCRIPT = `<script>${THEME_BOOT_JS}</script>`;
 // Its sha256 is pinned in public/_headers (CSP) — tests/seo.test.ts checks.
 export const RESIDENCE_FILTER_JS = "document.addEventListener('DOMContentLoaded',function(){var A='bg-primary text-primary-foreground',I='border bg-card text-muted-foreground hover:border-primary hover:text-foreground',btns=[].slice.call(document.querySelectorAll('[data-residence-filter]')),cards=[].slice.call(document.querySelectorAll('[data-residence-category]'));if(!btns.length)return;btns.forEach(function(b){b.addEventListener('click',function(){var f=b.getAttribute('data-residence-filter');btns.forEach(function(x){var on=x===b;A.split(' ').forEach(function(c){x.classList.toggle(c,on)});I.split(' ').forEach(function(c){x.classList.toggle(c,!on)});});cards.forEach(function(c){c.style.display=(f==='all'||c.getAttribute('data-residence-category')===f)?'':'none'});})});});";
 const RESIDENCE_FILTER_SCRIPT = `<script>${RESIDENCE_FILTER_JS}</script>`;
+
+// Sortable comparison tables on the prerendered route-type pages. Click (or
+// Enter on) a th[data-sort] to sort tbody rows: 'num' compares the numeric
+// data-v attribute, 'text' compares data-v (or cell text) with localeCompare.
+// Pure static HTML otherwise — same CSP story as the scripts above: the
+// sha256 is pinned in public/_headers and tests/seo.test.ts recomputes it.
+export const TABLE_SORT_JS = "document.addEventListener('DOMContentLoaded',function(){"
+  + "[].slice.call(document.querySelectorAll('table[data-sortable]')).forEach(function(t){"
+  + "var body=t.tBodies[0];if(!body)return;"
+  + "[].slice.call(t.querySelectorAll('th[data-sort]')).forEach(function(h){"
+  + "function go(){var kind=h.getAttribute('data-sort'),i=[].indexOf.call(h.parentNode.children,h),"
+  + "asc=h.getAttribute('aria-sort')!=='ascending',"
+  + "rows=[].slice.call(body.rows);"
+  + "rows.sort(function(a,b){var x=val(a),y=val(b);"
+  + "var c=kind==='num'?(parseFloat(x)||0)-(parseFloat(y)||0):String(x).localeCompare(String(y));"
+  + "return asc?c:-c});"
+  + "function val(r){var c=r.cells[i];if(!c)return '';var d=c.querySelector('[data-v]');"
+  + "return (d?d.getAttribute('data-v'):c.getAttribute('data-v'))||c.textContent.trim()}"
+  + "rows.forEach(function(r){body.appendChild(r)});"
+  + "[].slice.call(h.parentNode.children).forEach(function(x){x.removeAttribute('aria-sort')});"
+  + "h.setAttribute('aria-sort',asc?'ascending':'descending')}"
+  + "h.addEventListener('click',go);"
+  + "h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});"
+  + "})})});";
+const TABLE_SORT_SCRIPT = `<script>${TABLE_SORT_JS}</script>`;
+
+// One list drives BOTH the page loop and the sitemap so a new hub can never
+// ship unindexed (the exact footgun tests/seo.test.ts guards).
+export const ROUTE_TYPE_DIRS = [
+  'route-types',
+  'citizenship-by-investment',
+  'golden-visas',
+  'digital-nomad-visas',
+] as const;
+
+/**
+ * The full sitemap URL list, exported so tests assert hub coverage against the
+ * SAME construction the build writes — no dependency on a (possibly stale)
+ * dist/ artifact, and no second hand-maintained list to drift.
+ */
+export function buildSitemapUrls(
+  citizenship: CitizenshipRoutesData,
+  mobility: BlocsData,
+): string[] {
+  const slugByIso = buildCountrySlugMap(citizenship.jurisdictions);
+  const isos = citizenship.jurisdictions
+    .map(j => j.iso_n3)
+    .filter(iso => !isNonApplicableJurisdiction(iso))
+    .filter(iso => deriveCountryProfile(iso, citizenship, mobility) !== null);
+  const rightsSlugs = mobility.blocs
+    .map(bloc => deriveBlocProfile(bloc.id, mobility, citizenship)?.slug)
+    .filter((slug): slug is string => Boolean(slug));
+  return [
+    `${SITE}/`,
+    `${SITE}/about/`,
+    `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`),
+    `${SITE}/rights/`, ...rightsSlugs.map(slug => `${SITE}/rights/${slug}/`),
+    ...ROUTE_TYPE_DIRS.map(dir => `${SITE}/${dir}/`),
+  ];
+}
 
 // Static-page theme toggle, wired by THEME_BOOT_JS above. Mirrors the app's
 // header toggle (ghost icon button, Sun in dark / Moon in light via CSS).
@@ -285,6 +351,67 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     bodyHtml: rightsHub,
   }));
 
+  // ── Route-type pages (/route-types/ hub + three comparison tables) ──
+  // Tables, never card lists: the country page owns the prose, these pages own
+  // the structured fields plus cross-country aggregates (counts, thresholds,
+  // closed-programme churn) that no single country page can carry.
+  const routeTypePages: Array<{ dir: string; title: string; description: string; el: ReturnType<typeof createElement> }> = [
+    {
+      dir: 'route-types',
+      title: 'Route types — Compare Citizenship & Residence Programmes | Flag Paths',
+      description: 'Browse every route family — citizenship by investment, golden visas, digital nomad visas, retirement, ancestry, naturalization — with live counts and comparison tables.',
+      el: createElement(RouteTypesHub, { data: citizenship }),
+    },
+    {
+      dir: 'citizenship-by-investment',
+      title: 'Citizenship by Investment — Every Active Programme | Flag Paths',
+      description: 'All active citizenship-by-investment programmes with a legal basis, plus closed programmes and unverified statutory leads — each row sourced and dated.',
+      el: createElement(CbiPage, { data: citizenship }),
+    },
+    {
+      dir: 'golden-visas',
+      title: 'Golden Visas — Residence by Investment Compared | Flag Paths',
+      description: 'Every active residence-by-investment programme with minimum investment and whether it leads to permanent residence or citizenship.',
+      el: createElement(GoldenVisaPage, { data: citizenship }),
+    },
+    {
+      dir: 'digital-nomad-visas',
+      title: 'Digital Nomad Visas — Income Floors & What They Lead To | Flag Paths',
+      description: 'Active digital nomad visas with minimum income requirements and whether they count toward permanent residence or citizenship, plus lapsed programmes.',
+      el: createElement(NomadVisaPage, { data: citizenship }),
+    },
+  ];
+  const routeTypeUrls: string[] = [];
+  for (const page of routeTypePages) {
+    const url = `${SITE}/${page.dir}/`;
+    const bodyHtml = renderToStaticMarkup(createElement(
+      Fragment, null,
+      staticHeader('route-types'),
+      page.el,
+    ));
+    const headExtra = [
+      `<meta property="og:type" content="website"><meta property="og:site_name" content="Flag Paths">`,
+      `<meta property="og:url" content="${url}"><meta property="og:title" content="${esc(page.title)}">`,
+      `<meta property="og:description" content="${esc(page.description)}"><meta property="og:image" content="${SITE}/og-image.png">`,
+      `<meta name="twitter:card" content="summary_large_image">`,
+      TABLE_SORT_SCRIPT,
+      jsonLd({
+        '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Flag Paths', item: `${SITE}/` },
+          { '@type': 'ListItem', position: 2, name: 'Route types', item: `${SITE}/route-types/` },
+          ...(page.dir === 'route-types' ? [] : [{ '@type': 'ListItem', position: 3, name: page.title.split(' — ')[0], item: url }]),
+        ],
+      }),
+    ].join('\n');
+    const dir = path.join(distDir, page.dir);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'index.html'), htmlDoc({
+      title: page.title, description: page.description, canonical: url, cssHref, headExtra, bodyHtml,
+    }));
+    routeTypeUrls.push(url);
+  }
+
   // Heritage /route pages dissolved: ancestry and diaspora programmes live on
   // country pages. Permanent redirects for old URLs are in public/_redirects
   // (copied into dist by the static build).
@@ -399,16 +526,11 @@ immigration lawyer in the specific country before acting on anything shown here.
     bodyHtml: aboutBody,
   }));
 
-  const urls = [
-    `${SITE}/`,
-    `${SITE}/about/`,
-    `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`),
-    `${SITE}/rights/`, ...rightsUrls,
-  ];
+  const urls = buildSitemapUrls(citizenship, mobility);
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 
-  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights pages + hubs + about + sitemap -> ${distDir}`);
+  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeTypeUrls.length} route-type pages + hubs + about + sitemap -> ${distDir}`);
 }
 
 if (import.meta.main) {

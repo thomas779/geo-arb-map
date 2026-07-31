@@ -2,7 +2,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export type NavKey = 'atlas' | 'planner' | 'countries' | 'rights' | 'none';
+export type NavKey = 'atlas' | 'planner' | 'countries' | 'rights' | 'route-types' | 'none';
 
 /** The Flag Paths route-mark. Shared by the app header and prerendered pages. */
 export function BrandMark() {
@@ -26,11 +26,13 @@ const ATLAS = { key: 'atlas' as const, label: 'Atlas', href: '/', view: 'map' as
 const PLANNER = { key: 'planner' as const, label: 'Planner', href: '/planner', view: 'stacking' as View };
 // Countries / Regional systems — grouped under one "Browse" menu so the top nav
 // stays mobile-friendly: Atlas = explore, Browse = read.
-const BROWSE_ITEMS: { key: NavKey; label: string; href: string; view: View }[] = [
+const BROWSE_ITEMS: { key: NavKey; label: string; href: string; view?: View }[] = [
   { key: 'countries', label: 'Countries', href: '/country', view: 'countries' },
   { key: 'rights', label: 'Regional systems', href: '/rights', view: 'rights' },
+  // Prerendered comparison pages, not an SPA view — always a plain link.
+  { key: 'route-types', label: 'Route types', href: '/route-types/' },
 ];
-const BROWSE_KEYS: NavKey[] = ['countries', 'rights'];
+const BROWSE_KEYS: NavKey[] = ['countries', 'rights', 'route-types'];
 
 interface Props {
   /** Which nav item is current. 'none' highlights nothing. */
@@ -106,19 +108,20 @@ export function SiteHeader({ active, onSelectView, right }: Props) {
   };
 
   const browseActive = BROWSE_KEYS.includes(active);
-  const browseItem = (def: { label: string; href: string; view: View }) => {
+  const browseItem = (def: { label: string; href: string; view?: View }) => {
     const cls = 'flex w-full items-center rounded-md px-2.5 py-2 text-left text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground';
     // Close the <details> after selecting so the menu doesn't linger.
     const close = (e: { currentTarget: HTMLElement }) =>
       (e.currentTarget.closest('details') as HTMLDetailsElement | null)?.removeAttribute('open');
-    if (onSelectView) {
+    if (onSelectView && def.view) {
+      const view = def.view;
       return (
-        <button key={def.view} type="button" className={cls} onClick={e => { close(e); onSelectView(def.view); }}>
+        <button key={def.href} type="button" className={cls} onClick={e => { close(e); onSelectView(view); }}>
           {def.label}
         </button>
       );
     }
-    return <a key={def.view} href={def.href} className={cls}>{def.label}</a>;
+    return <a key={def.href} href={def.href} className={cls}>{def.label}</a>;
   };
 
   return (
