@@ -39110,9 +39110,12 @@
       "counts_toward_permanent_residence": false,
       "counts_toward_naturalization": false,
       "min_investment": null,
-      "min_income_monthly": null,
+      "min_income_monthly": {
+        "amount": 4167,
+        "currency": "USD"
+      },
       "physical_presence_days_per_year": null,
-      "work_rights": null,
+      "work_rights": "remote_only",
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -41079,7 +41082,10 @@
       "counts_toward_permanent_residence": true,
       "counts_toward_naturalization": true,
       "min_investment": null,
-      "min_income_monthly": null,
+      "min_income_monthly": {
+        "amount": 1500,
+        "currency": "USD"
+      },
       "physical_presence_days_per_year": null,
       "work_rights": null,
       "facts": {
@@ -41121,7 +41127,10 @@
       "counts_toward_permanent_residence": true,
       "counts_toward_naturalization": true,
       "min_investment": null,
-      "min_income_monthly": null,
+      "min_income_monthly": {
+        "amount": 2000,
+        "currency": "USD"
+      },
       "physical_presence_days_per_year": null,
       "work_rights": null,
       "facts": {

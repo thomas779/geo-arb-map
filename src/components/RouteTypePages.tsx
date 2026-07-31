@@ -20,7 +20,7 @@ import { WORK_RIGHTS_LABELS } from '@/lib/residence';
  * light = residence only). It is computed from the data, never decorative.
  */
 
-const TIER_LABEL: Record<number, string> = { 0: 'Nothing · TR only', 1: 'Permanent residence', 2: 'Citizenship' };
+const TIER_LABEL: Record<number, string> = { 0: 'TR', 1: 'Permanent residence', 2: 'Citizenship' };
 
 /**
  * First sentence only for table rows; the country page owns the full prose.
@@ -84,7 +84,7 @@ function tierCaption(split: TierSplit): string {
   const parts: string[] = [];
   if (split.cit) parts.push(`${split.cit} count toward citizenship`);
   if (split.pr) parts.push(`${split.pr} toward PR`);
-  if (split.tr) parts.push(`${split.tr} pure TR, no credit`);
+  if (split.tr) parts.push(`${split.tr} TR`);
   return parts.join(' · ');
 }
 
