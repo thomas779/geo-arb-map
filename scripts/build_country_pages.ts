@@ -94,6 +94,12 @@ export const TABLE_SORT_JS = "document.addEventListener('DOMContentLoaded',funct
   + "})})});";
 const TABLE_SORT_SCRIPT = `<script>${TABLE_SORT_JS}</script>`;
 
+// Owner gate (2026-07-31): the route-type pages are not up to publication
+// standard yet — keep building and reviewing them locally, but production
+// (Workers Builds sets CI) must not emit, link, or index them until they are.
+// Flip by setting SHOW_ROUTE_TYPES=1 in the Workers Build environment.
+export const ROUTE_TYPES_ENABLED = process.env.SHOW_ROUTE_TYPES === '1' || !process.env.CI;
+
 // One list drives BOTH the page loop and the sitemap so a new hub can never
 // ship unindexed (the exact footgun tests/seo.test.ts guards).
 export const ROUTE_TYPE_DIRS = [
@@ -125,7 +131,7 @@ export function buildSitemapUrls(
     `${SITE}/about/`,
     `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`),
     `${SITE}/rights/`, ...rightsSlugs.map(slug => `${SITE}/rights/${slug}/`),
-    ...ROUTE_TYPE_DIRS.map(dir => `${SITE}/${dir}/`),
+    ...(ROUTE_TYPES_ENABLED ? ROUTE_TYPE_DIRS.map(dir => `${SITE}/${dir}/`) : []),
   ];
 }
 
@@ -382,7 +388,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     },
   ];
   const routeTypeUrls: string[] = [];
-  for (const page of routeTypePages) {
+  for (const page of ROUTE_TYPES_ENABLED ? routeTypePages : []) {
     const url = `${SITE}/${page.dir}/`;
     const bodyHtml = renderToStaticMarkup(createElement(
       Fragment, null,

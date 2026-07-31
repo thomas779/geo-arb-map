@@ -26,11 +26,23 @@ const ATLAS = { key: 'atlas' as const, label: 'Atlas', href: '/', view: 'map' as
 const PLANNER = { key: 'planner' as const, label: 'Planner', href: '/planner', view: 'stacking' as View };
 // Countries / Regional systems — grouped under one "Browse" menu so the top nav
 // stays mobile-friendly: Atlas = explore, Browse = read.
+declare const __SHOW_ROUTE_TYPES__: boolean;
+
+// Vite injects the define for the SPA bundle; under bun (tests and the static
+// prerender script) fall back to the same env logic as ROUTE_TYPES_ENABLED in
+// scripts/build_country_pages.ts, so the prerendered nav respects the gate too.
+const SHOW_ROUTE_TYPES: boolean = typeof __SHOW_ROUTE_TYPES__ !== 'undefined'
+  ? __SHOW_ROUTE_TYPES__
+  : typeof process !== 'undefined' && (process.env.SHOW_ROUTE_TYPES === '1' || !process.env.CI);
+
 const BROWSE_ITEMS: { key: NavKey; label: string; href: string; view?: View }[] = [
   { key: 'countries', label: 'Countries', href: '/country', view: 'countries' },
   { key: 'rights', label: 'Regional systems', href: '/rights', view: 'rights' },
   // Prerendered comparison pages, not an SPA view — always a plain link.
-  { key: 'route-types', label: 'Route types', href: '/route-types/' },
+  // Gated off production until they meet the publication bar.
+  ...(SHOW_ROUTE_TYPES
+    ? [{ key: 'route-types' as NavKey, label: 'Route types', href: '/route-types/' }]
+    : []),
 ];
 const BROWSE_KEYS: NavKey[] = ['countries', 'rights', 'route-types'];
 

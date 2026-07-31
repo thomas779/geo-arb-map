@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_TYPE_DIRS, TABLE_SORT_JS, THEME_BOOT_JS } from '../scripts/build_country_pages';
+import { buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_TYPE_DIRS, ROUTE_TYPES_ENABLED, TABLE_SORT_JS, THEME_BOOT_JS } from '../scripts/build_country_pages';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 
 const canonicalUrl = 'https://flagpaths.com/';
@@ -73,8 +73,11 @@ describe('public SEO contract', () => {
     const mobility = JSON.parse(readFileSync(
       new URL('../public/blocs_data.json', import.meta.url), 'utf8')) as BlocsData;
     const urls = buildSitemapUrls(citizenship, mobility);
+    // The route-type pages are gated off production (CI) until they meet the
+    // publication bar; when the flag is on they must all be in the sitemap.
     for (const dir of ROUTE_TYPE_DIRS) {
-      expect(urls).toContain(`https://flagpaths.com/${dir}/`);
+      if (ROUTE_TYPES_ENABLED) expect(urls).toContain(`https://flagpaths.com/${dir}/`);
+      else expect(urls).not.toContain(`https://flagpaths.com/${dir}/`);
     }
     expect(urls).toContain('https://flagpaths.com/country/');
     expect(urls).toContain('https://flagpaths.com/rights/');

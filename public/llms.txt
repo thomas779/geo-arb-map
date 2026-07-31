@@ -16,10 +16,6 @@ recorded legal fact.
 - [About & methodology](https://flagpaths.com/about/): how the data is researched, reviewed, and monitored
 - [All countries](https://flagpaths.com/country/): citizenship + residence routes for 236 countries and territories, one page each
 - [Regional systems & routes](https://flagpaths.com/rights/): settlement blocs and mobility lanes (EU, Mercosur, CARICOM, GCC, …) plus heritage citizenship routes (descent, diaspora, return)
-- [Route types](https://flagpaths.com/route-types/): every route family with live counts — compare programmes by what you put in and what they lead to
-- [Citizenship by investment](https://flagpaths.com/citizenship-by-investment/): every active CBI programme with a legal basis, plus closed programmes and unverified leads
-- [Golden visas](https://flagpaths.com/golden-visas/): residence-by-investment programmes with minimum investment and whether they lead to PR or citizenship
-- [Digital nomad visas](https://flagpaths.com/digital-nomad-visas/): income floors and whether the visa counts toward permanent residence or citizenship
 - [Sitemap](https://flagpaths.com/sitemap.xml): every page
 
 ## Data

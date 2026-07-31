@@ -20,7 +20,7 @@ import { WORK_RIGHTS_LABELS } from '@/lib/residence';
  * light = residence only). It is computed from the data, never decorative.
  */
 
-const TIER_LABEL: Record<number, string> = { 0: 'TR', 1: 'Permanent residence', 2: 'Citizenship' };
+const TIER_LABEL: Record<number, string> = { 0: 'TR', 1: 'PR', 2: 'Citizenship' };
 
 /** Permit term: "5 yr · renews", "6 mo", or null when unrecorded. */
 function fmtTerm(r: ResidenceRoute): string | null {
@@ -160,7 +160,7 @@ function TableWrap({ children }: { children: React.ReactNode }) {
   // Wide content scrolls inside its own container; the page never scrolls sideways.
   return (
     <div className="mt-4 overflow-x-auto rounded-lg border bg-card">
-      <table className="w-full min-w-[720px] border-collapse text-sm" data-sortable>
+      <table className="rt-table w-full border-collapse text-sm sm:min-w-[720px]" data-sortable>
         {children}
       </table>
     </div>
@@ -322,15 +322,15 @@ export function CbiPage({ data }: { data: CitizenshipRoutesData }) {
 
   const routeRow = (r: CitizenshipRoute) => (
     <tr key={r.id}>
-      <td className={CELL}>
+      <td className={CELL} data-th="Country">
         <CountryCell iso={r.country.iso_n3} name={r.country.name} slug={slugByIso.get(r.country.iso_n3)} />
       </td>
-      <td className={CELL}>
+      <td className={CELL} data-th="Programme">
         <span className="font-medium">{r.title}</span>
         <ConfidenceChip confidence={r.confidence} />
         <span className="mt-1 block max-w-[52ch] text-xs leading-relaxed text-muted-foreground">{r.summary}</span>
       </td>
-      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.last_checked}>
+      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.last_checked} data-th="Checked">
         {r.last_checked}
       </td>
     </tr>
@@ -386,33 +386,33 @@ export function CbiPage({ data }: { data: CitizenshipRoutesData }) {
 
 // ── residence-route table pages (golden visa / digital nomad) ──
 
-function residenceRow(r: ResidenceRoute, slug: string | undefined, money: (r: ResidenceRoute) => string | null) {
+function residenceRow(r: ResidenceRoute, slug: string | undefined, money: (r: ResidenceRoute) => string | null, moneyHeader: string) {
   const amount = money(r);
   return (
     <tr key={r.id}>
-      <td className={CELL}>
+      <td className={CELL} data-th="Country">
         <CountryCell iso={r.country.iso_n3} name={r.country.name} slug={slug} />
       </td>
-      <td className={CELL}>
+      <td className={CELL} data-th="Programme">
         <span className="font-medium">{r.title}</span>
         <ConfidenceChip confidence={r.confidence} />
         <span className="mt-1 block max-w-[46ch] text-xs leading-relaxed text-muted-foreground">{firstSentence(r.summary)}</span>
       </td>
-      <td className={`${CELL} whitespace-nowrap font-mono text-xs`}>
+      <td className={`${CELL} whitespace-nowrap font-mono text-xs`} data-th={moneyHeader}>
         {amount
           ? <><span className="text-muted-foreground/60">from </span>{amount}</>
           : <span className="text-muted-foreground/50" title="No amount recorded from the instrument">—</span>}
       </td>
-      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.permit_duration_months ?? 0}>
+      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.permit_duration_months ?? 0} data-th="Term">
         {fmtTerm(r) ?? <span className="text-muted-foreground/50" title="Not yet read from the instrument">—</span>}
       </td>
-      <td className={CELL}><LadderCell tier={ladderTier(r)} /></td>
-      <td className={`${CELL} whitespace-nowrap text-xs`} data-v={r.work_rights ?? 'zz'}>
+      <td className={CELL} data-th="Counts toward"><LadderCell tier={ladderTier(r)} /></td>
+      <td className={`${CELL} whitespace-nowrap text-xs`} data-v={r.work_rights ?? 'zz'} data-th="Local work">
         {r.work_rights
           ? <span className="text-muted-foreground">{WORK_RIGHTS_LABELS[r.work_rights].long}</span>
           : <span className="text-muted-foreground/50" title="Not yet read from the instrument">—</span>}
       </td>
-      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.last_checked}>
+      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.last_checked} data-th="Checked">
         {r.last_checked}
       </td>
     </tr>
@@ -462,7 +462,7 @@ function ResidenceTablePage({ data, category, moneyHeader, money, moneyRecordedL
             </tr>
           </thead>
           <tbody className={LAST_ROW_FIX}>
-            {active.map(r => residenceRow(r, slugByIso.get(r.country.iso_n3), money))}
+            {active.map(r => residenceRow(r, slugByIso.get(r.country.iso_n3), money, moneyHeader))}
           </tbody>
         </TableWrap>
         <p className="mt-2 max-w-[80ch] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">
@@ -486,11 +486,11 @@ function ResidenceTablePage({ data, category, moneyHeader, money, moneyRecordedL
             <tbody className={LAST_ROW_FIX}>
               {ended.map(r => (
                 <tr key={r.id}>
-                  <td className={CELL}>
+                  <td className={CELL} data-th="Country">
                     <CountryCell iso={r.country.iso_n3} name={r.country.name} slug={slugByIso.get(r.country.iso_n3)} />
                   </td>
-                  <td className={`${CELL} font-medium`}>{r.title}</td>
-                  <td className={`${CELL} max-w-[52ch] text-xs leading-relaxed text-muted-foreground`}>{r.summary}</td>
+                  <td className={`${CELL} font-medium`} data-th="Programme">{r.title}</td>
+                  <td className={`${CELL} max-w-[52ch] text-xs leading-relaxed text-muted-foreground`} data-th="What happened">{r.summary}</td>
                 </tr>
               ))}
             </tbody>

@@ -169,3 +169,38 @@
   line-height: 1.45;
   color: var(--map-ink);
 }
+
+/* Route-type comparison tables: under 640px each row collapses to a labeled
+   block (CSS only — the sort script and DOM are untouched). The Country and
+   Programme cells lead unlabeled; data cells become "label — value" lines. */
+@media (max-width: 639px) {
+  .rt-table thead { display: none; }
+  .rt-table tbody tr {
+    display: block;
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .rt-table tbody tr:last-child { border-bottom: 0; }
+  .rt-table tbody td {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    justify-content: space-between;
+    border: 0;
+    padding: 0.15rem 0;
+    white-space: normal;
+  }
+  .rt-table tbody td[data-th]:not([data-th='Country']):not([data-th='Programme'])::before {
+    content: attr(data-th);
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+  .rt-table tbody td[data-th='Country'] { font-size: 0.95rem; }
+  .rt-table tbody td[data-th='Country'],
+  .rt-table tbody td[data-th='Programme'] { display: block; }
+}
