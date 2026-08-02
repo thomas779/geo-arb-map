@@ -99,6 +99,13 @@ Do **not** transcribe these lists by hand. Regenerate them from the built pilot
 - Keep the constitution/nationality-law as a stable, monitorable primary source
   (Constitute Project constitutions are the common baseline); push exact
   statutory specifics into route `summary`/`note` with honest confidence.
+- During every new review, populate the typed fields when the official evidence
+  supports them: `parent_residence_right` for birth routes,
+  `transmission_abroad` for birth/ancestry routes,
+  `nationality_eligibility` for direct CBI or residence routes, and the
+  jurisdiction-level `dual_nationality` finding. Each object carries its own
+  `source_refs`; omission means not recorded and must never be treated as a
+  negative finding.
 
 ## Command sequence
 

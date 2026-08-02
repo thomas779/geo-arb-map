@@ -31,6 +31,70 @@ export const SourceReferenceSchema = z.strictObject({
   note: z.string().min(1).optional(),
 });
 
+export const NationalityEligibilitySchema = z.strictObject({
+  kind: z.enum(['open', 'treaty_list', 'exclusions']),
+  included_iso_n3: z.array(IsoN3),
+  excluded_iso_n3: z.array(IsoN3),
+  detail: z.string().min(1),
+  source_refs: z.array(SourceReferenceSchema).min(1),
+}).superRefine((eligibility, context) => {
+  if (eligibility.kind === 'open'
+    && (eligibility.included_iso_n3.length > 0 || eligibility.excluded_iso_n3.length > 0)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['kind'],
+      message: 'Open nationality eligibility cannot carry included or excluded country lists',
+    });
+  }
+  if (eligibility.kind === 'treaty_list' && eligibility.included_iso_n3.length === 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['included_iso_n3'],
+      message: 'Treaty-list eligibility requires at least one included nationality',
+    });
+  }
+  if (eligibility.kind === 'exclusions' && eligibility.excluded_iso_n3.length === 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['excluded_iso_n3'],
+      message: 'Exclusion eligibility requires at least one excluded nationality',
+    });
+  }
+});
+
+export const ParentResidenceRightSchema = z.strictObject({
+  exists: z.boolean(),
+  wait_months: z.number().int().nonnegative().nullable(),
+  leads_to_citizenship: z.boolean(),
+  instrument: z.string().min(1),
+  source_refs: z.array(SourceReferenceSchema).min(1),
+}).superRefine((right, context) => {
+  if (!right.exists && (right.wait_months !== null || right.leads_to_citizenship)) {
+    context.addIssue({
+      code: 'custom',
+      path: ['exists'],
+      message: 'A verified absence cannot carry a wait period or lead to citizenship',
+    });
+  }
+});
+
+export const TransmissionAbroadSchema = z.strictObject({
+  kind: z.enum([
+    'unlimited',
+    'registration_required',
+    'first_generation_only',
+    'unknown',
+  ]),
+  detail: z.string().min(1),
+  source_refs: z.array(SourceReferenceSchema).min(1),
+});
+
+export const DualNationalitySchema = z.strictObject({
+  status: z.enum(['allowed', 'conditional', 'prohibited', 'unknown']),
+  detail: z.string().min(1),
+  source_refs: z.array(SourceReferenceSchema).min(1),
+});
+
 export const SourceRecordSchema = z.strictObject({
   schema_version: z.literal(1),
   entity_type: z.literal('source'),
@@ -114,6 +178,33 @@ export const RouteSchema = z.strictObject({
   }),
   review: ReviewSchema,
   variants: z.array(RouteVariantSchema).min(1),
+  // These fields are optional during migration. Absence means “not recorded”,
+  // never an inferred open/negative result.
+  nationality_eligibility: NationalityEligibilitySchema.optional(),
+  parent_residence_right: ParentResidenceRightSchema.optional(),
+  transmission_abroad: TransmissionAbroadSchema.optional(),
+}).superRefine((route, context) => {
+  if (route.nationality_eligibility && route.mode !== 'investment') {
+    context.addIssue({
+      code: 'custom',
+      path: ['nationality_eligibility'],
+      message: 'Citizenship nationality eligibility belongs only on investment routes',
+    });
+  }
+  if (route.parent_residence_right && route.mode !== 'birth') {
+    context.addIssue({
+      code: 'custom',
+      path: ['parent_residence_right'],
+      message: 'Parent residence rights belong only on birth routes',
+    });
+  }
+  if (route.transmission_abroad && route.mode !== 'ancestry' && route.mode !== 'birth') {
+    context.addIssue({
+      code: 'custom',
+      path: ['transmission_abroad'],
+      message: 'Transmission abroad belongs only on ancestry or birth routes',
+    });
+  }
 });
 
 const JurisdictionIdentitySchema = z.strictObject({
@@ -186,6 +277,7 @@ export const ResidenceRouteSchema = z.strictObject({
   // stated — silence stays null, never false.
   permit_duration_months: z.number().int().positive().nullable().default(null),
   permit_renewable: z.boolean().nullable().default(null),
+  nationality_eligibility: NationalityEligibilitySchema.optional(),
   variants: z.array(RouteVariantSchema).min(1),
 }).superRefine((route, context) => {
   route.variants.forEach((variant, index) => {
@@ -219,6 +311,7 @@ export const JurisdictionRecordSchema = z.strictObject({
   // Residence layer — optional and separate from the 4-mode citizenship coverage.
   residence_routes: z.array(ResidenceRouteSchema).optional(),
   residence_coverage: z.array(ResidenceCoverageSchema).optional(),
+  dual_nationality: DualNationalitySchema.optional(),
 }).superRefine((record, context) => {
   const modes = record.coverage.map(item => item.mode);
   for (const mode of REQUIRED_MODES) {
@@ -373,6 +466,10 @@ export type ModeCoverage = z.infer<typeof ModeCoverageSchema>;
 export type ResidenceCategory = z.infer<typeof ResidenceCategorySchema>;
 export type ResidenceRoute = z.infer<typeof ResidenceRouteSchema>;
 export type ResidenceCoverage = z.infer<typeof ResidenceCoverageSchema>;
+export type NationalityEligibility = z.infer<typeof NationalityEligibilitySchema>;
+export type ParentResidenceRight = z.infer<typeof ParentResidenceRightSchema>;
+export type TransmissionAbroad = z.infer<typeof TransmissionAbroadSchema>;
+export type DualNationality = z.infer<typeof DualNationalitySchema>;
 export type JurisdictionRecordV1 = z.infer<typeof JurisdictionRecordV1Schema>;
 export type JurisdictionRecord = z.infer<typeof JurisdictionRecordSchema>;
 export type JurisdictionPayload = z.infer<typeof JurisdictionPayloadSchema>;

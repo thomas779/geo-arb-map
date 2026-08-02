@@ -365,9 +365,15 @@ function evidenceReferences(record: JurisdictionRecord | ArrangementRecord): Arr
       ...record.coverage.flatMap(item => item.source_refs),
       ...record.routes.flatMap(route =>
         route.variants.flatMap(variant => variant.source_refs)),
+      ...record.routes.flatMap(route => route.nationality_eligibility?.source_refs ?? []),
+      ...record.routes.flatMap(route => route.parent_residence_right?.source_refs ?? []),
+      ...record.routes.flatMap(route => route.transmission_abroad?.source_refs ?? []),
       ...(record.residence_coverage ?? []).flatMap(item => item.source_refs),
       ...(record.residence_routes ?? []).flatMap(route =>
         route.variants.flatMap(variant => variant.source_refs)),
+      ...(record.residence_routes ?? []).flatMap(route =>
+        route.nationality_eligibility?.source_refs ?? []),
+      ...(record.dual_nationality?.source_refs ?? []),
     ];
   }
   return [
