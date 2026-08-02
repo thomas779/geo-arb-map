@@ -328,6 +328,19 @@ describe('monitor triage', () => {
     expect(leads[0].needs_primary_source).toBe(true);
   });
 
+  test('resolves numeric jurisdictions to names before creating issue titles', () => {
+    const leads = normalizeRulings([{
+      signal_id: signal.id,
+      jurisdiction: '840',
+      impact_type: 'eligibility',
+      summary: 'The United States may have changed eligibility.',
+      needs_primary_source: true,
+      confidence: 'medium',
+    }], [signal], { [signal.id]: ['840'] }, { '840': 'United States of America' });
+    expect(leads[0].jurisdiction).toBe('United States of America');
+    expect(buildIssueDraft(leads[0]).title).toContain('United States of America');
+  });
+
   test('parses fenced model output and deduplicates issue markers', () => {
     expect(parseJsonArray('```json\n[]\n```')).toEqual([]);
     expect(parseJsonArray('Here is the result: [{"summary":"contains ] safely"}]\nDone.'))
