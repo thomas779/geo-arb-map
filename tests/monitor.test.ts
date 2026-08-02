@@ -508,6 +508,15 @@ describe('AI sweep + grounded verify', () => {
     expect((map.get('858') ?? []).length).toBeGreaterThan(0); // Uruguay has an active verification source
     expect((map.get('858') ?? [])[0].url).toMatch(/^https?:\/\//);
     expect(map.has('multi')).toBe(false);
+    expect((map.get('674') ?? []).map(source => source.url)).toContain(
+      'https://www.consigliograndeegenerale.sm/on-line/home/archivio-leggi-decreti-e-regolamenti/documento17157139.html',
+    );
+    expect((map.get('222') ?? []).map(source => source.url)).toContain(
+      'https://www.asamblea.gob.sv/sites/default/files/documents/decretos/1A94F7E5-FC00-4CB9-9DDA-AC13CF555359.pdf',
+    );
+    expect((map.get('012') ?? []).map(source => source.url)).toContain(
+      'https://www.joradp.dz/FTP/jo-francais/2026/F2026014.pdf',
+    );
   });
 
   test('proseDateFromIso and synthesizeIssue surface equivalent date forms', () => {

@@ -245,19 +245,44 @@ export function isAggregatorUrl(url: string): boolean {
 
 export function officialSourcesByJurisdiction(root: string): Map<string, Array<{ title: string; url: string }>> {
   const manifest = JSON.parse(fs.readFileSync(path.join(root, 'sources', 'manifest.json'), 'utf8')) as {
-    sources?: Array<{ tier?: string; status?: string; url?: string; notes?: string; jurisdictions?: string[] }>;
+    sources?: Array<{
+      tier?: string;
+      status?: string;
+      url?: string;
+      notes?: string;
+      jurisdictions?: string[];
+      pages?: Array<{ id?: string; url?: string; jurisdiction?: string }>;
+    }>;
   };
   const map = new Map<string, Array<{ title: string; url: string }>>();
   for (const source of manifest.sources ?? []) {
-    if (source.tier !== 'verification' || source.status !== 'active' || !source.url) continue;
-    if (isAggregatorUrl(source.url)) continue;
+    if (source.tier !== 'verification' || source.status !== 'active') continue;
     const isos = (source.jurisdictions ?? []).filter(iso => iso && iso !== 'multi');
     if (!isos.length) continue;
-    const title = (source.notes ?? source.url).split('.')[0].trim().slice(0, 80);
-    for (const iso of isos) {
-      const list = map.get(iso) ?? [];
-      if (list.length < 4) list.push({ title, url: source.url });
-      map.set(iso, list);
+
+    const candidates = [
+      ...(source.url ? [{
+        title: (source.notes ?? source.url).split('.')[0].trim().slice(0, 80),
+        url: source.url,
+        jurisdiction: undefined,
+      }] : []),
+      ...(source.pages ?? []).flatMap(page => page.url ? [{
+        title: (page.id ?? page.url).replace(/[-_]+/g, ' ').trim().slice(0, 80),
+        url: page.url,
+        jurisdiction: page.jurisdiction,
+      }] : []),
+    ].filter(candidate => !isAggregatorUrl(candidate.url));
+
+    for (const candidate of candidates) {
+      const candidateIsos = candidate.jurisdiction ? [candidate.jurisdiction] : isos;
+      for (const iso of candidateIsos) {
+        if (!isos.includes(iso)) continue;
+        const list = map.get(iso) ?? [];
+        if (list.length < 6 && !list.some(item => item.url === candidate.url)) {
+          list.push({ title: candidate.title, url: candidate.url });
+        }
+        map.set(iso, list);
+      }
     }
   }
   return map;
