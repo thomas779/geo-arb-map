@@ -8,6 +8,10 @@ import {
   writeDataRelease,
   type CompileSelectionMode,
 } from './lib/data-build';
+import {
+  assertPromotionPreservesHead,
+  readHeadPromotionArtifact,
+} from './lib/promotion-guard';
 
 function arg(name: string): string | undefined {
   const index = process.argv.indexOf(name);
@@ -29,6 +33,15 @@ const release = compileDataRelease({
   releaseId: arg('--release'),
 });
 if (!release.parity.passed) throw new Error('Cannot promote a release with failed parity gates');
+
+// A parity-clean candidate can still be stale relative to work another session
+// already committed. Compare with Git HEAD before writing so a promotion cannot
+// silently erase reviewed routes or coverage merely because the private
+// canonical authoring file was not reconciled first.
+assertPromotionPreservesHead(
+  readHeadPromotionArtifact(REPO_ROOT),
+  release.frontend.citizenship,
+);
 
 writeDataRelease(release);
 fs.writeFileSync(

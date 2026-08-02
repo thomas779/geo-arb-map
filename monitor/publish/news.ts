@@ -53,6 +53,8 @@ interface NewsOptions {
   stateDb: string | null;
   stateSql: string;
   max: number;
+  /** Injectable so previews and tests never need to depend on the public network. */
+  fetcher?: typeof fetch;
 }
 
 // Dedup key. Hashes the change's canonical identity (changeKey): the legal
@@ -442,6 +444,7 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
   if (options.apply && !llm) throw new Error('A monitoring LLM must be configured to auto-publish news');
   // Authoritative-host allowlist per jurisdiction, for the auto-publish gate.
   const officialHosts = officialSourcesByJurisdiction(ROOT);
+  const fetcher = options.fetcher ?? fetch;
 
   let published = 0;
   let skipped = 0;
@@ -484,13 +487,13 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
           headline: finding.headline,
         };
         for (const candidate of originalPrimaries) {
-          const attempt = await verifyPrimarySource(candidate, quoteForPage, allowedHosts, undefined, claimContext);
+          const attempt = await verifyPrimarySource(candidate, quoteForPage, allowedHosts, fetcher, claimContext);
           if (attempt.verdict === 'verified') { verdict = attempt; break; }
           if (attempt.verdict === 'inconclusive' && verdict.verdict === 'refuted') verdict = attempt;
         }
         if (verdict.verdict === 'inconclusive') {
           const primaryHost = hostFromUrl(originalPrimaries[0] ?? '') ?? '';
-          verdict = await corroboratedByCitations(primaryHost, finding.citations)
+          verdict = await corroboratedByCitations(primaryHost, finding.citations, fetcher)
             ? { verdict: 'verified', reason: `quote unverifiable (${verdict.reason}); host corroborated by grounding citations` }
             : { verdict: 'refuted', reason: `${verdict.reason}; not corroborated by grounding citations` };
         }
@@ -510,7 +513,7 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
       }
 
       // Make sure the "Source" link opens; fall back to the domain root if not.
-      finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
+      finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url, fetcher)));
       let post: TelegramPost;
       try {
         post = buildNewsPost(finding);

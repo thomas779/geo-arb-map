@@ -1101,7 +1101,17 @@ describe('news dedup window scope', () => {
     const withoutInstrument = { ...base, iso_n3: '620', category: 'naturalization', effective_date: '2026-06-30', legal_instrument: '' };
     fs.writeFileSync(findingsPath, JSON.stringify([withInstrument, withoutInstrument]));
     // Dry-run (apply:false) walks the dedup gates without posting.
-    const result = await runNews({ findings: findingsPath, apply: false, stateDb: statePath, stateSql: path.join(dir, 'out.sql'), max: 20 });
+    const noNetwork = (async () => {
+      throw new Error('network access is forbidden in this test');
+    }) as unknown as typeof fetch;
+    const result = await runNews({
+      findings: findingsPath,
+      apply: false,
+      stateDb: statePath,
+      stateSql: path.join(dir, 'out.sql'),
+      max: 20,
+      fetcher: noNetwork,
+    });
     expect(result.skipped).toBe(1); // only the instrument-less finding hits the window
   });
 });
