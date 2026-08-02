@@ -227,6 +227,7 @@ export default function App() {
   const selectView = useCallback((v: AppState['view']) =>
     patch({ view: v }), [patch]);
   const selectCountry = useCallback((iso: string, name: string) => {
+    setMobileList(false);
     setRoutePanelOpen(false);
     if (state.country === iso) {
       setDetailPanelOpen(open => !open);
@@ -344,6 +345,8 @@ export default function App() {
               onLane={selectLane}
               onRouteClass={selectRouteClass}
               routeClassCounts={routeClassCounts}
+              citizenshipRoutes={citizenshipRoutes}
+              onCountry={selectCountry}
             />
           </div>
         )}
@@ -389,6 +392,8 @@ export default function App() {
                 onLane={selectLane}
                 onRouteClass={selectRouteClass}
                 routeClassCounts={routeClassCounts}
+                citizenshipRoutes={citizenshipRoutes}
+                onCountry={selectCountry}
               />
             </div>
           )}
