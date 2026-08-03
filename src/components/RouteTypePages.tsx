@@ -160,11 +160,6 @@ function PageShell({ eyebrow, title, lede, children }: {
       <h1 className="mt-2 max-w-[760px] font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">{title}</h1>
       <div className="mb-8 mt-3 max-w-[68ch] leading-relaxed text-muted-foreground">{lede}</div>
       {children}
-      <p className="mt-10 max-w-[68ch] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">
-        These lists narrow the field; they do not rank programmes. Open a country guide for
-        conditions, confidence, and primary sources. Personalized recommendations belong in Planner.
-        Informational only, not legal advice.
-      </p>
     </main>
   );
 }
