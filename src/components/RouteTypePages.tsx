@@ -1,16 +1,16 @@
 import type { CitizenshipRoute, CitizenshipRoutesData, ResidenceRoute } from '@/types';
 import { buildCountrySlugMap } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
-import { ROUTE_CLASSES, type RouteClass } from '@/lib/route-classes';
+import { isosForRouteClass, ROUTE_CLASSES, type RouteClass } from '@/lib/route-classes';
 import { WORK_RIGHTS_LABELS } from '@/lib/residence';
 
 /**
  * Prerendered comparison pages for route types (/route-types/ hub +
  * /citizenship-by-investment, /golden-visas, /digital-nomad-visas).
  *
- * Tables, never card lists: the country page owns the prose, these pages own
- * the structured fields and the cross-country aggregates (tier splits, counts,
- * the closed-programme churn) that cannot live on any single country page.
+ * The hub uses route-family cards for discovery; comparison pages use tables
+ * because the country page owns prose while these pages own structured fields
+ * and cross-country aggregates (tier splits, counts, closed-programme churn).
  * Rendered via renderToStaticMarkup only; interactivity is limited to the
  * TABLE_SORT_JS script in build_country_pages, driven by data attributes.
  *
@@ -159,7 +159,7 @@ function Section({ title, lede, children }: { title: string; lede?: string; chil
 function TableWrap({ children }: { children: React.ReactNode }) {
   // Wide content scrolls inside its own container; the page never scrolls sideways.
   return (
-    <div className="mt-4 overflow-x-auto rounded-lg border bg-card">
+    <div className="mt-4 overflow-x-auto rounded-xl border bg-card shadow-sm">
       <table className="rt-table w-full border-collapse text-sm sm:min-w-[720px]" data-sortable>
         {children}
       </table>
@@ -174,13 +174,29 @@ function PageShell({ eyebrow, title, lede, children }: {
   eyebrow: string; title: string; lede: React.ReactNode; children: React.ReactNode;
 }) {
   return (
-    <main className="mx-auto max-w-[1060px] px-4 py-10 sm:px-6">
+    <main className="mx-auto max-w-[1120px] px-4 py-10 sm:px-6 sm:py-14">
       <nav className="mb-8 font-mono text-xs text-muted-foreground">
         <a href="/" className="underline underline-offset-2">Flag Paths</a> › <a href="/route-types/" className="underline underline-offset-2">Route types</a>
       </nav>
-      <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">{eyebrow}</p>
-      <h1 className="mt-3 max-w-[720px] font-heading text-4xl font-bold leading-[1.1] sm:text-5xl">{title}</h1>
-      <div className="mt-4 max-w-[68ch] text-base leading-relaxed text-muted-foreground">{lede}</div>
+      <div className="grid gap-8 border-b pb-8 md:grid-cols-[1fr_260px] md:items-end">
+        <div>
+          <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">{eyebrow}</p>
+          <h1 className="mt-3 max-w-[760px] font-heading text-4xl font-bold leading-[1.06] sm:text-5xl">{title}</h1>
+          <div className="mt-4 max-w-[68ch] text-base leading-relaxed text-muted-foreground">{lede}</div>
+        </div>
+        <div className="hidden gap-px overflow-hidden rounded-lg border bg-border md:grid">
+          {[
+            ['1', 'Compare the typed fields'],
+            ['2', 'Open the country guide'],
+            ['3', 'Verify the primary source'],
+          ].map(([step, label]) => (
+            <div key={step} className="grid grid-cols-[24px_1fr] items-center gap-2 bg-card px-3 py-2.5">
+              <span className="font-mono text-[0.62rem] font-semibold text-primary">{step}</span>
+              <span className="text-xs text-muted-foreground">{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
       {children}
       <p className="mt-10 max-w-[68ch] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">
         Every row links to the country profile with its full conditions and primary sources.
@@ -214,57 +230,54 @@ const HUB_DESCRIPTION: Record<string, string> = {
 export function routeClassCounts(data: CitizenshipRoutesData): Map<string, number> {
   const counts = new Map<string, number>();
   for (const cls of ROUTE_CLASSES) {
-    const n = cls.kind === 'citizenship'
-      ? data.routes.filter(r => r.mode === cls.match && r.status === 'active').length
-      : (data.residence_routes ?? []).filter(r => r.category === cls.match && r.status === 'active').length;
-    counts.set(cls.id, n);
+    counts.set(cls.id, isosForRouteClass(cls, data).all.size);
   }
   return counts;
 }
 
-function activeResidenceRoutes(data: CitizenshipRoutesData, cls: RouteClass): ResidenceRoute[] {
-  return (data.residence_routes ?? []).filter(r => r.category === cls.match && r.status === 'active');
-}
-
-function HubRow({ cls, data, count }: { cls: RouteClass; data: CitizenshipRoutesData; count: number }) {
+function HubCard({ cls, data, count }: { cls: RouteClass; data: CitizenshipRoutesData; count: number }) {
   const table = TABLE_PAGE_BY_CLASS[cls.id];
   const primaryHref = table ?? `/?class=${cls.id}`;
+  const outcomes = isosForRouteClass(cls, data);
   // Digital identity grants no residence, so a "stops at residence" bar would
   // claim more than the routes do.
   const split = cls.kind === 'residence' && cls.id !== 'digital-identity'
-    ? tierSplit(activeResidenceRoutes(data, cls))
+    ? { cit: outcomes.cit.size, pr: outcomes.pr.size, tr: outcomes.tr.size, total: outcomes.all.size }
     : null;
   return (
-    <li className="border-b py-5 last:border-b-0">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <div className="min-w-0 flex-1">
-          <h3 className="font-heading text-xl font-semibold leading-tight">
-            <a href={primaryHref} className="hover:underline hover:underline-offset-4 hover:decoration-primary">
-              {cls.label}
-            </a>
-          </h3>
-          <p className="mt-1 max-w-[56ch] text-sm text-muted-foreground">{HUB_DESCRIPTION[cls.id] ?? cls.description}</p>
-          <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs">
-            {table && (
-              <a href={table} className="text-primary hover:underline hover:underline-offset-2">Compare programmes →</a>
-            )}
-            <a href={`/?class=${cls.id}`} className="text-muted-foreground hover:text-foreground hover:underline hover:underline-offset-2">
-              Paint it on the atlas →
-            </a>
-          </p>
-        </div>
-        {split && split.total > 0 && (
-          <div className="w-full shrink-0 sm:w-60">
-            <TierBar split={split} />
-            <p className="mt-1.5 font-mono text-[0.64rem] leading-snug text-muted-foreground">{tierCaption(split)}</p>
+    <article className="group flex min-h-[258px] flex-col rounded-xl border bg-card p-5 transition-colors hover:border-primary/45">
+      <div className="flex items-start justify-between gap-4">
+        <span className="rounded-full border px-2 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+          {cls.kind === 'citizenship' ? 'Passport route' : 'Residence route'}
+        </span>
+        <span className="text-right">
+          <span className="block font-heading text-3xl font-bold leading-none tabular-nums">{count}</span>
+          <span className="font-mono text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">countries</span>
+        </span>
+      </div>
+      <h3 className="mt-5 font-heading text-2xl font-semibold leading-tight">
+        <a href={primaryHref} className="decoration-primary underline-offset-4 group-hover:underline">
+          {cls.label}
+        </a>
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{HUB_DESCRIPTION[cls.id] ?? cls.description}</p>
+      <div className="mt-auto pt-5">
+        {split && split.total > 0 ? (
+          <>
+            <TierBar split={split} height="h-2" />
+            <p className="mt-1.5 font-mono text-[0.6rem] leading-snug text-muted-foreground">{tierCaption(split)}</p>
+          </>
+        ) : (
+          <div className="flex items-center gap-2 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+            <span className="h-2 w-12 rounded-full bg-primary" aria-hidden /> Citizenship outcome
           </div>
         )}
-        <div className="flex shrink-0 items-baseline gap-1.5 sm:w-24 sm:flex-col sm:items-end sm:gap-0 sm:text-right">
-          <span className="font-heading text-3xl font-bold leading-none tabular-nums">{count}</span>
-          <span className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">active</span>
+        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[0.68rem] font-medium">
+          {table && <a href={table} className="text-primary hover:underline hover:underline-offset-2">Compare programmes →</a>}
+          <a href={`/?class=${cls.id}`} className="text-muted-foreground hover:text-foreground hover:underline hover:underline-offset-2">Show on atlas →</a>
         </div>
       </div>
-    </li>
+    </article>
   );
 }
 
@@ -283,27 +296,39 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
     },
   ];
   return (
-    <main className="mx-auto max-w-[1060px] px-4 py-10 sm:px-6">
+    <main className="mx-auto max-w-[1120px] px-4 py-10 sm:px-6 sm:py-14">
       <nav className="mb-8 font-mono text-xs text-muted-foreground">
         <a href="/" className="underline underline-offset-2">Flag Paths</a> › Route types
       </nav>
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">Route types</p>
-      <h1 className="mt-3 max-w-[720px] font-heading text-4xl font-bold leading-[1.1] sm:text-5xl">
-        Every way in, by the shape of the route.
+      <h1 className="mt-3 max-w-[800px] font-heading text-4xl font-bold leading-[1.06] sm:text-6xl">
+        Choose the outcome first. Then compare the route.
       </h1>
-      <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-muted-foreground">
-        Money, ancestry, residence, or skills going in. A permit, a settlement right, or a passport
-        coming out. Pick a family to compare programmes line by line, or paint it on the atlas.
-      </p>
+      <div className="mt-5 grid gap-6 border-b pb-8 md:grid-cols-[1fr_380px] md:items-end">
+        <p className="max-w-[66ch] text-base leading-relaxed text-muted-foreground">
+          Money, ancestry, residence, or skills going in. A permit, a settlement right, or a passport
+          coming out. Pick a family to compare programmes, or paint every matching country on the atlas.
+        </p>
+        <div className="grid grid-cols-3 gap-px overflow-hidden rounded-lg border bg-border text-center">
+          {['Temporary residence', 'Permanent residence', 'Citizenship'].map((label, index) => (
+            <div key={label} className="bg-card px-2 py-3">
+              <span className="mx-auto mb-2 block h-1.5 w-10 rounded-full bg-primary" style={{ opacity: 0.35 + index * 0.3 }} aria-hidden />
+              <span className="font-mono text-[0.56rem] font-semibold uppercase leading-tight tracking-[0.1em] text-muted-foreground">{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
       {shelves.map(shelf => (
         <section key={shelf.kind} className="mt-12">
-          <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">{shelf.label}</h2>
-          <p className="mt-2 max-w-[68ch] text-sm text-muted-foreground">{shelf.intro}</p>
-          <ul className="mt-2">
+          <div className="grid gap-2 sm:grid-cols-[220px_1fr] sm:items-start">
+            <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-foreground">{shelf.label}</h2>
+            <p className="max-w-[68ch] text-sm leading-relaxed text-muted-foreground">{shelf.intro}</p>
+          </div>
+          <div className="mt-5 grid gap-3 md:grid-cols-2">
             {ROUTE_CLASSES.filter(cls => cls.kind === shelf.kind).map(cls => (
-              <HubRow key={cls.id} cls={cls} data={data} count={counts.get(cls.id) ?? 0} />
+              <HubCard key={cls.id} cls={cls} data={data} count={counts.get(cls.id) ?? 0} />
             ))}
-          </ul>
+          </div>
         </section>
       ))}
     </main>

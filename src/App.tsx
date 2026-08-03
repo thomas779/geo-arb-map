@@ -83,12 +83,12 @@ export default function App() {
   // Open on load when a shared/deep-linked selection is present (there's no
   // separate "open panel" affordance now — selection and panel are one).
   const [routePanelOpen, setRoutePanelOpen] = useState(
-    Boolean(initialState.lane) || initialState.blocs.length > 0,
+    Boolean(initialState.lane) || Boolean(initialState.routeClass) || initialState.blocs.length > 0,
   );
   // Portrait phones browse a LIST first; the map is on demand. Shared links
   // with a selection land straight on the framed map.
   const [mobileList, setMobileList] = useState<boolean>(
-    initialState.blocs.length === 0 && !initialState.lane && !initialState.country,
+    initialState.blocs.length === 0 && !initialState.lane && !initialState.routeClass && !initialState.country,
   );
   const { theme, setTheme } = useTheme();
 
@@ -176,8 +176,8 @@ export default function App() {
   }, [state]);
 
   useEffect(() => {
-    if (state.blocs.length === 0 && !state.lane) setRoutePanelOpen(false);
-  }, [state.blocs.length, state.lane]);
+    if (state.blocs.length === 0 && !state.lane && !state.routeClass) setRoutePanelOpen(false);
+  }, [state.blocs.length, state.lane, state.routeClass]);
 
   const patch = useCallback((p: Partial<AppState>) => {
     setState(s => ({ ...s, ...p }));
@@ -210,6 +210,7 @@ export default function App() {
   /** Route-class browse (#129). Single-select; re-picking the active class clears it. */
   const selectRouteClass = useCallback((id: string | null) => {
     setMobileList(false);
+    if (id !== null) setRoutePanelOpen(true);
     setState(s => ({
       ...s,
       view: 'map',
@@ -261,7 +262,7 @@ export default function App() {
     return new Map(ROUTE_CLASSES.map(cls => [cls.id, isosForRouteClass(cls, citizenshipRoutes).all.size]));
   }, [citizenshipRoutes]);
 
-  const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane);
+  const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane) || Boolean(state.routeClass);
   const rightPanelOpen = state.country ? detailPanelOpen : hasRouteSelection && routePanelOpen;
 
   return (
@@ -482,6 +483,8 @@ export default function App() {
                     data={data}
                     blocIds={state.blocs}
                     laneId={state.lane}
+                    routeClassId={state.routeClass}
+                    citizenshipRoutes={citizenshipRoutes}
                     onClose={clearMapSelection}
                     onSelectCountry={selectCountry}
                   />
@@ -490,7 +493,7 @@ export default function App() {
             )}
             <div
               className={cn(
-                'absolute inset-y-0 right-0 z-30 hidden w-[370px] overflow-hidden border-l bg-background shadow-xl transition-transform duration-300 ease-out will-change-transform motion-reduce:transition-none md:block xl:w-[390px]',
+                'absolute inset-y-0 right-0 z-30 hidden w-[400px] overflow-hidden border-l bg-background shadow-xl transition-transform duration-200 ease-out will-change-transform motion-reduce:transition-none md:block xl:w-[420px]',
                 !rightPanelOpen && 'translate-x-full',
               )}
               aria-hidden={!rightPanelOpen}
@@ -510,6 +513,8 @@ export default function App() {
                   data={data}
                   blocIds={state.blocs}
                   laneId={state.lane}
+                  routeClassId={state.routeClass}
+                  citizenshipRoutes={citizenshipRoutes}
                   onClose={clearMapSelection}
                   onSelectCountry={selectCountry}
                 />

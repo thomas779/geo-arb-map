@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ReactNode } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, FlagTriangleRight, Globe2, Network, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export type NavKey = 'atlas' | 'planner' | 'countries' | 'rights' | 'route-types' | 'none';
@@ -24,25 +24,12 @@ type View = 'map' | 'stacking' | 'countries' | 'rights';
 
 const ATLAS = { key: 'atlas' as const, label: 'Atlas', href: '/', view: 'map' as View };
 const PLANNER = { key: 'planner' as const, label: 'Planner', href: '/planner', view: 'stacking' as View };
-// Countries / Regional systems — grouped under one "Browse" menu so the top nav
-// stays mobile-friendly: Atlas = explore, Browse = read.
-declare const __SHOW_ROUTE_TYPES__: boolean;
-
-// Vite injects the define for the SPA bundle; under bun (tests and the static
-// prerender script) fall back to the same env logic as ROUTE_TYPES_ENABLED in
-// scripts/build_country_pages.ts, so the prerendered nav respects the gate too.
-const SHOW_ROUTE_TYPES: boolean = typeof __SHOW_ROUTE_TYPES__ !== 'undefined'
-  ? __SHOW_ROUTE_TYPES__
-  : typeof process !== 'undefined' && (process.env.SHOW_ROUTE_TYPES === '1' || !process.env.CI);
-
-const BROWSE_ITEMS: { key: NavKey; label: string; href: string; view?: View }[] = [
-  { key: 'countries', label: 'Countries', href: '/country', view: 'countries' },
-  { key: 'rights', label: 'Regional systems', href: '/rights', view: 'rights' },
-  // Prerendered comparison pages, not an SPA view — always a plain link.
-  // Gated off production until they meet the publication bar.
-  ...(SHOW_ROUTE_TYPES
-    ? [{ key: 'route-types' as NavKey, label: 'Route types', href: '/route-types/' }]
-    : []),
+// Read-first pages live together here; each description answers why the page
+// differs from the interactive atlas before the user leaves the map.
+const BROWSE_ITEMS: { key: NavKey; label: string; description: string; icon: LucideIcon; href: string; view?: View }[] = [
+  { key: 'countries', label: 'Country guides', description: 'Domestic citizenship and residence rules', icon: Globe2, href: '/country', view: 'countries' },
+  { key: 'rights', label: 'Regional systems', description: 'Shared rights across member countries', icon: Network, href: '/rights', view: 'rights' },
+  { key: 'route-types', label: 'Route types', description: 'Compare ancestry, investment, and permits', icon: FlagTriangleRight, href: '/route-types/' },
 ];
 const BROWSE_KEYS: NavKey[] = ['countries', 'rights', 'route-types'];
 
@@ -120,8 +107,20 @@ export function SiteHeader({ active, onSelectView, right }: Props) {
   };
 
   const browseActive = BROWSE_KEYS.includes(active);
-  const browseItem = (def: { label: string; href: string; view?: View }) => {
-    const cls = 'flex w-full items-center rounded-md px-2.5 py-2 text-left text-xs font-medium text-muted-foreground hover:bg-accent hover:text-foreground';
+  const browseItem = (def: { label: string; description: string; icon: LucideIcon; href: string; view?: View }) => {
+    const Icon = def.icon;
+    const cls = 'group/item grid w-full grid-cols-[28px_1fr] gap-2.5 rounded-md px-2.5 py-2.5 text-left hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40';
+    const content = (
+      <>
+        <span className="flex size-7 items-center justify-center rounded-md border bg-background text-muted-foreground group-hover/item:border-primary/40 group-hover/item:text-primary">
+          <Icon className="size-3.5" aria-hidden />
+        </span>
+        <span className="min-w-0">
+          <span className="block text-xs font-semibold text-foreground">{def.label}</span>
+          <span className="mt-0.5 block text-[10px] leading-snug text-muted-foreground">{def.description}</span>
+        </span>
+      </>
+    );
     // Close the <details> after selecting so the menu doesn't linger.
     const close = (e: { currentTarget: HTMLElement }) =>
       (e.currentTarget.closest('details') as HTMLDetailsElement | null)?.removeAttribute('open');
@@ -129,11 +128,11 @@ export function SiteHeader({ active, onSelectView, right }: Props) {
       const view = def.view;
       return (
         <button key={def.href} type="button" className={cls} onClick={e => { close(e); onSelectView(view); }}>
-          {def.label}
+          {content}
         </button>
       );
     }
-    return <a key={def.href} href={def.href} className={cls}>{def.label}</a>;
+    return <a key={def.href} href={def.href} className={cls}>{content}</a>;
   };
 
   return (
@@ -162,7 +161,8 @@ export function SiteHeader({ active, onSelectView, right }: Props) {
             <ChevronDown className="size-3 transition-transform group-open:rotate-180" aria-hidden />
             <Underline show={browseActive} />
           </summary>
-          <div className="absolute left-0 top-full z-50 mt-1.5 min-w-48 rounded-lg border bg-card p-1 shadow-lg">
+          <div className="absolute left-0 top-full z-50 mt-1.5 w-72 max-w-[calc(100vw-1rem)] rounded-lg border bg-card p-1.5 shadow-xl">
+            <p className="px-2.5 pb-1.5 pt-1 font-mono text-[9px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">Browse the research</p>
             {BROWSE_ITEMS.map(browseItem)}
           </div>
         </details>

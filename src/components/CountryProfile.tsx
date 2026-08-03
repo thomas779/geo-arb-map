@@ -94,7 +94,7 @@ function Sources({ sources }: { sources: { title: string; url: string }[] }) {
 
 function RouteCard({ route }: { route: CitizenshipRoute }) {
   return (
-    <article className="rounded-lg border bg-card p-4">
+    <article id={`route-${route.id}`} className="scroll-mt-20 rounded-lg border bg-card p-4">
       <div className="mb-1.5 flex flex-wrap items-center gap-2">
         <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">
           {CITIZENSHIP_MODE_LABELS[route.mode] ?? route.mode}
@@ -145,8 +145,9 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
   const ladder = residenceLadderBadges(route);
   return (
     <article
+      id={`residence-${route.id}`}
       data-residence-category={route.category}
-      className={`rounded-lg border bg-card p-4${closed ? ' opacity-75' : ''}`}
+      className={`scroll-mt-20 rounded-lg border bg-card p-4${closed ? ' opacity-75' : ''}`}
     >
       <div className="mb-1.5 flex flex-wrap items-center gap-2">
         <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">

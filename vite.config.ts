@@ -28,11 +28,6 @@ function countryPagesPlugin(): Plugin {
 }
 
 export default defineConfig({
-  // Mirrors ROUTE_TYPES_ENABLED in scripts/build_country_pages.ts: the
-  // route-type pages are local-only until they meet the publication bar.
-  define: {
-    __SHOW_ROUTE_TYPES__: JSON.stringify(process.env.SHOW_ROUTE_TYPES === '1' || !process.env.CI),
-  },
   base: '/',
   plugins: [react(), tailwindcss(), countryPagesPlugin()],
   resolve: {
