@@ -20,7 +20,12 @@ recorded legal fact.
 
 ## Data
 
-- [Citizenship routes (JSON)](https://flagpaths.com/citizenship_routes.json): the full reviewed dataset — jurisdictions, routes, sources, confidence, coverage states
+Read the index first, then fetch only the countries you need. The index is ~16KB
+compressed and names every jurisdiction; each country slice is ~3KB and carries that
+country's full routes, summaries, sources, confidence and last-checked dates.
+
+- [Atlas index (JSON)](https://flagpaths.com/atlas-index.json): every jurisdiction and route in compact form — iso_n3, name, coverage state, route mode/category, status, confidence, last_checked. No prose bodies.
+- Country slice (JSON): `https://flagpaths.com/country/<slug>/data.json` — one jurisdiction's full detail, beside its human page at `/country/<slug>/`. Slugs come from the index or the sitemap (e.g. `/country/portugal/data.json`).
 - [Regional blocs (JSON)](https://flagpaths.com/blocs_data.json): bloc membership and rights lanes
 - [Data release manifest (JSON)](https://flagpaths.com/data_release.json): release id and provenance
 - [Source code & corrections](https://github.com/thomas779/geo-arb-map): AGPL-3.0 code, CC BY-NC 4.0 dataset; corrections ship with tests

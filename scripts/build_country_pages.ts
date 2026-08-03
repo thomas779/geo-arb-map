@@ -193,6 +193,75 @@ ${opts.headExtra}
 `;
 }
 
+/**
+ * The atlas index: everything the map, sidebar, search and route-class painting
+ * need, with the prose bodies left out. About 11% of the full corpus (160KB vs
+ * 1.4MB), so opening one country no longer ships 240 jurisdictions of detail.
+ * Per-country detail lives in the slices written beside each prerendered page,
+ * which is also what makes the dataset agent-ingestible: read one small index,
+ * then fetch only the jurisdictions you actually need.
+ *
+ * Field names stay identical to the full corpus so a consumer can move between
+ * index and slice without a second mental model.
+ */
+export function buildAtlasIndex(citizenship: CitizenshipRoutesData, releaseId?: string) {
+  return {
+    meta: {
+      ...citizenship.meta,
+      ...(releaseId ? { release_id: releaseId } : {}),
+      shape: 'atlas-index',
+      detail: 'Per-country detail: /country/<slug>/data.json',
+    },
+    jurisdictions: citizenship.jurisdictions.map(jurisdiction => ({
+      iso_n3: jurisdiction.iso_n3,
+      name: jurisdiction.name,
+      coverage: jurisdiction.coverage,
+    })),
+    routes: citizenship.routes.map(route => ({
+      id: route.id,
+      iso_n3: route.country.iso_n3,
+      mode: route.mode,
+      status: route.status,
+      confidence: route.confidence,
+      last_checked: route.last_checked,
+    })),
+    residence_routes: (citizenship.residence_routes ?? []).map(route => ({
+      id: route.id,
+      iso_n3: route.country.iso_n3,
+      category: route.category,
+      status: route.status,
+      counts_toward_permanent_residence: route.counts_toward_permanent_residence,
+      counts_toward_naturalization: route.counts_toward_naturalization,
+      confidence: route.confidence,
+      last_checked: route.last_checked,
+    })),
+  };
+}
+
+/** One jurisdiction's full detail: the unit an agent or the panel actually reads. */
+export function buildCountrySlice(
+  iso: string,
+  slug: string,
+  citizenship: CitizenshipRoutesData,
+  releaseId?: string,
+) {
+  const jurisdiction = citizenship.jurisdictions.find(item => item.iso_n3 === iso);
+  return {
+    meta: {
+      shape: 'country-slice',
+      ...(releaseId ? { release_id: releaseId } : {}),
+      last_updated: citizenship.meta.last_updated,
+      canonical: `${SITE}/country/${slug}/`,
+      index: `${SITE}/atlas-index.json`,
+      license: 'CC BY-NC 4.0, attribution: geo-arb-map contributors',
+    },
+    jurisdiction: jurisdiction ?? null,
+    routes: citizenship.routes.filter(route => route.country.iso_n3 === iso),
+    residence_routes: (citizenship.residence_routes ?? []).filter(
+      route => route.country.iso_n3 === iso),
+  };
+}
+
 export function generateCountryPages(distDir: string = path.join(root, 'dist')): void {
   if (!fs.existsSync(distDir)) {
     throw new Error(`dist/ not found at ${distDir} — run "vite build" first.`);
@@ -204,6 +273,14 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     fs.readFileSync(path.join(root, 'public/blocs_data.json'), 'utf8'),
   ) as BlocsData;
   const cssHref = appCssHref(distDir);
+  const releaseId = (() => {
+    try {
+      return (JSON.parse(fs.readFileSync(
+        path.join(root, 'public/data_release.json'), 'utf8')) as { release_id?: string }).release_id;
+    } catch {
+      return undefined;
+    }
+  })();
   const slugByIso = buildCountrySlugMap(citizenship.jurisdictions);
   const isos = citizenship.jurisdictions
     .map(j => j.iso_n3)
@@ -261,6 +338,12 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
       headExtra,
       bodyHtml,
     }));
+    // Machine sibling of the page: the panel fetches this on selection, and an
+    // agent that lands on the HTML finds the data one path away.
+    fs.writeFileSync(
+      path.join(dir, 'data.json'),
+      `${JSON.stringify(buildCountrySlice(iso, data.slug, citizenship, releaseId), null, 2)}\n`,
+    );
   }
 
   // Hub: same SiteHeader + the shared CountriesList.
@@ -527,11 +610,16 @@ immigration lawyer in the specific country before acting on anything shown here.
     bodyHtml: aboutBody,
   }));
 
+  fs.writeFileSync(
+    path.join(distDir, 'atlas-index.json'),
+    `${JSON.stringify(buildAtlasIndex(citizenship, releaseId), null, 2)}\n`,
+  );
+
   const urls = buildSitemapUrls(citizenship, mobility);
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 
-  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap -> ${distDir}`);
+  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap + atlas-index and ${isos.length} slices -> ${distDir}`);
 }
 
 if (import.meta.main) {
