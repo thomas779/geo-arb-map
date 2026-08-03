@@ -1,6 +1,12 @@
 import { describe, expect, test } from 'bun:test';
 import type { CitizenshipRoutesData } from '../src/types';
-import { ROUTE_CLASSES, isosForRouteClass, routeClassById } from '../src/lib/route-classes';
+import {
+  ROUTE_CLASSES,
+  isosForRouteClass,
+  residenceCategoryPageHref,
+  routeClassById,
+  routeClassPageHref,
+} from '../src/lib/route-classes';
 
 // Route-class browse (#129): the map paints jurisdictions with >=1 ACTIVE route
 // of a class. These fixtures pin the painted-set semantics against the real
@@ -71,5 +77,16 @@ describe('route-class painted sets', () => {
     // (buy residence). New Zealand has an active golden visa and no CBI.
     expect(isos('golden-visa').has('554')).toBe(true);
     expect(isos('cbi').has('554')).toBe(false);
+  });
+
+  test('country and category browse paths point to the same nested route indexes', () => {
+    expect(routeClassPageHref('cbi')).toBe('/routes/citizenship-by-investment/');
+    expect(routeClassPageHref('retirement')).toBe('/routes/retirement-visas/');
+    expect(routeClassPageHref('talent')).toBe('/routes/talent-skilled-visas/');
+    expect(routeClassPageHref('digital-identity')).toBe('/routes/digital-identities/');
+    expect(residenceCategoryPageHref('retirement_pension')).toBe(routeClassPageHref('retirement'));
+    expect(residenceCategoryPageHref('talent_skilled')).toBe(routeClassPageHref('talent'));
+    expect(residenceCategoryPageHref('digital_identity')).toBe(routeClassPageHref('digital-identity'));
+    expect(residenceCategoryPageHref('general_permanent_residence')).toBeNull();
   });
 });

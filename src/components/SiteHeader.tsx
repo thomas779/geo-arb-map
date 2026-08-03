@@ -2,7 +2,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import { ChevronDown, FlagTriangleRight, Globe2, Network, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export type NavKey = 'atlas' | 'planner' | 'countries' | 'rights' | 'route-types' | 'none';
+export type NavKey = 'atlas' | 'planner' | 'countries' | 'rights' | 'routes' | 'none';
 
 /** The Flag Paths route-mark. Shared by the app header and prerendered pages. */
 export function BrandMark() {
@@ -29,9 +29,9 @@ const PLANNER = { key: 'planner' as const, label: 'Planner', href: '/planner', v
 const BROWSE_ITEMS: { key: NavKey; label: string; description: string; icon: LucideIcon; href: string; view?: View }[] = [
   { key: 'countries', label: 'Country guides', description: 'Domestic citizenship and residence rules', icon: Globe2, href: '/country', view: 'countries' },
   { key: 'rights', label: 'Regional systems', description: 'Shared rights across member countries', icon: Network, href: '/rights', view: 'rights' },
-  { key: 'route-types', label: 'Route types', description: 'Compare ancestry, investment, and permits', icon: FlagTriangleRight, href: '/route-types/' },
+  { key: 'routes', label: 'Routes', description: 'Browse countries by citizenship or residence path', icon: FlagTriangleRight, href: '/routes/' },
 ];
-const BROWSE_KEYS: NavKey[] = ['countries', 'rights', 'route-types'];
+const BROWSE_KEYS: NavKey[] = ['countries', 'rights', 'routes'];
 
 interface Props {
   /** Which nav item is current. 'none' highlights nothing. */

@@ -1,4 +1,4 @@
-import type { CitizenshipRoutesData } from '@/types';
+import type { CitizenshipRoutesData, ResidenceCategory } from '@/types';
 
 /**
  * Route-class browse (issue #129): paint jurisdictions that have at least one
@@ -41,14 +41,30 @@ export function routeClassById(id: string | null | undefined): RouteClass | null
 }
 
 const ROUTE_CLASS_PAGE: Record<string, string> = {
-  cbi: '/citizenship-by-investment/',
-  'golden-visa': '/golden-visas/',
-  'digital-nomad': '/digital-nomad-visas/',
+  cbi: '/routes/citizenship-by-investment/',
+  'golden-visa': '/routes/golden-visas/',
+  'digital-nomad': '/routes/digital-nomad-visas/',
+  retirement: '/routes/retirement-visas/',
+  talent: '/routes/talent-skilled-visas/',
+  'digital-identity': '/routes/digital-identities/',
 };
 
-/** A comparison page exists for the three route families with comparable typed fields. */
+/** Country-first discovery pages for route families with structured coverage. */
 export function routeClassPageHref(id: string): string | null {
   return ROUTE_CLASS_PAGE[id] ?? null;
+}
+
+const RESIDENCE_CATEGORY_PAGE: Partial<Record<ResidenceCategory, string>> = {
+  investment: ROUTE_CLASS_PAGE['golden-visa'],
+  digital_nomad: ROUTE_CLASS_PAGE['digital-nomad'],
+  retirement_pension: ROUTE_CLASS_PAGE.retirement,
+  talent_skilled: ROUTE_CLASS_PAGE.talent,
+  digital_identity: ROUTE_CLASS_PAGE['digital-identity'],
+};
+
+/** Reciprocal link from a country programme back to its all-country index. */
+export function residenceCategoryPageHref(category: ResidenceCategory): string | null {
+  return RESIDENCE_CATEGORY_PAGE[category] ?? null;
 }
 
 /**

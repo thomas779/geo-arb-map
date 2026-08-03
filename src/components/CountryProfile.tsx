@@ -3,6 +3,7 @@ import type { BlocsData, CitizenshipRoute, CitizenshipRoutesData, ResidenceCateg
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
 import { provenanceLabel, routeProvenance } from '@/lib/trust';
 import { countryFlag } from '@/lib/country';
+import { residenceCategoryPageHref, routeClassPageHref } from '@/lib/route-classes';
 import { ExternalSourceLink } from '@/components/ExternalSourceLink';
 import {
   RESIDENCE_CATEGORY_LABELS,
@@ -93,12 +94,23 @@ function Sources({ sources }: { sources: { title: string; url: string }[] }) {
 }
 
 function RouteCard({ route }: { route: CitizenshipRoute }) {
+  const categoryHref = route.mode === 'investment' ? routeClassPageHref('cbi') : null;
   return (
     <article id={`route-${route.id}`} className="scroll-mt-20 rounded-lg border bg-card p-4">
       <div className="mb-1.5 flex flex-wrap items-center gap-2">
-        <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">
-          {CITIZENSHIP_MODE_LABELS[route.mode] ?? route.mode}
-        </span>
+        {categoryHref ? (
+          <a
+            href={categoryHref}
+            title="Browse citizenship-by-investment programmes in all countries"
+            className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground underline decoration-transparent underline-offset-2 hover:text-primary hover:decoration-current"
+          >
+            {CITIZENSHIP_MODE_LABELS[route.mode] ?? route.mode} →
+          </a>
+        ) : (
+          <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">
+            {CITIZENSHIP_MODE_LABELS[route.mode] ?? route.mode}
+          </span>
+        )}
         <span
           className={`rounded-full px-1.5 font-mono text-[0.66rem] ${
             route.status === 'active' ? 'bg-verified/15 text-verified' : 'border text-muted-foreground'
@@ -142,7 +154,10 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
   if (route.physical_presence_days_per_year !== null) {
     chips.push(route.physical_presence_days_per_year === 0 ? 'no stay required' : `${route.physical_presence_days_per_year} days/yr`);
   }
-  const ladder = residenceLadderBadges(route);
+  const ladder = route.category === 'digital_identity'
+    ? [{ key: 'identity', label: 'No residence rights', tone: 'muted' as const }]
+    : residenceLadderBadges(route);
+  const categoryHref = residenceCategoryPageHref(route.category);
   return (
     <article
       id={`residence-${route.id}`}
@@ -150,9 +165,19 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
       className={`scroll-mt-20 rounded-lg border bg-card p-4${closed ? ' opacity-75' : ''}`}
     >
       <div className="mb-1.5 flex flex-wrap items-center gap-2">
-        <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">
-          {RESIDENCE_CATEGORY_LABELS[route.category]}
-        </span>
+        {categoryHref ? (
+          <a
+            href={categoryHref}
+            title={`Browse ${RESIDENCE_CATEGORY_LABELS[route.category].toLowerCase()} routes in all countries`}
+            className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground underline decoration-transparent underline-offset-2 hover:text-primary hover:decoration-current"
+          >
+            {RESIDENCE_CATEGORY_LABELS[route.category]} →
+          </a>
+        ) : (
+          <span className="font-mono text-[0.68rem] font-semibold uppercase tracking-wider text-muted-foreground">
+            {RESIDENCE_CATEGORY_LABELS[route.category]}
+          </span>
+        )}
         {closed ? (
           <span className="rounded-full bg-destructive/15 px-1.5 font-mono text-[0.66rem] text-destructive">
             {RESIDENCE_STATUS_LABELS[route.status] ?? route.status}

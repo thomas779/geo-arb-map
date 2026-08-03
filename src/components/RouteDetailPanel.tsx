@@ -42,11 +42,13 @@ function RouteClassDetail({
   const countries = citizenshipRoutes.jurisdictions
     .filter(jurisdiction => sets.all.has(jurisdiction.iso_n3))
     .sort((a, b) => a.name.localeCompare(b.name));
-  const outcomes = [
-    { key: 'cit', label: 'Citizenship', count: sets.cit.size, className: 'bg-primary' },
-    { key: 'pr', label: 'Permanent residence', count: sets.pr.size, className: 'sw-pr-hatch' },
-    { key: 'tr', label: 'Temporary residence', count: sets.tr.size, className: 'bg-[var(--map-limited)]' },
-  ].filter(outcome => outcome.count > 0);
+  const outcomes = routeClass.id === 'digital-identity'
+    ? [{ key: 'identity', label: 'Digital identity only', count: sets.all.size, className: 'bg-[var(--map-limited)]' }]
+    : [
+      { key: 'cit', label: 'Citizenship', count: sets.cit.size, className: 'bg-primary' },
+      { key: 'pr', label: 'Permanent residence', count: sets.pr.size, className: 'sw-pr-hatch' },
+      { key: 'tr', label: 'Temporary residence', count: sets.tr.size, className: 'bg-[var(--map-limited)]' },
+    ].filter(outcome => outcome.count > 0);
 
   return (
     <div className="space-y-4">
@@ -61,11 +63,13 @@ function RouteClassDetail({
         ))}
       </div>
       <p className="text-xs leading-relaxed text-muted-foreground">
-        The map shows the best recorded outcome for each country. A citizenship result means the route itself or its residence clock can lead there; open the country guide for conditions.
+        {routeClass.id === 'digital-identity'
+          ? 'The map shows countries with an active government digital credential. These programmes do not grant residence rights.'
+          : 'The map shows the best recorded outcome for each country. A citizenship result means the route itself or its residence clock can lead there; open the country guide for conditions.'}
       </p>
       {pageHref && (
         <Button asChild className="w-full" size="sm">
-          <a href={pageHref}>Compare programmes →</a>
+          <a href={pageHref}>Browse countries →</a>
         </Button>
       )}
       <details open className="group overflow-hidden rounded-lg border bg-card">

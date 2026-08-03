@@ -30,8 +30,11 @@ import {
 import {
   RouteTypesHub,
   CbiPage,
+  DigitalIdentityPage,
   GoldenVisaPage,
   NomadVisaPage,
+  RetirementVisaPage,
+  TalentSkilledVisaPage,
 } from '../src/components/RouteTypePages';
 import { buildCountrySlugMap } from '../src/lib/slug';
 import { isNonApplicableJurisdiction } from '../src/lib/country';
@@ -71,15 +74,18 @@ const RESIDENCE_FILTER_SCRIPT = `<script>${RESIDENCE_FILTER_JS}</script>`;
 
 // Route-type pages are part of the public discovery layer. Keep this exported
 // so the sitemap and tests share one release decision.
-export const ROUTE_TYPES_ENABLED = true;
+export const ROUTES_ENABLED = true;
 
 // One list drives BOTH the page loop and the sitemap so a new hub can never
 // ship unindexed (the exact footgun tests/seo.test.ts guards).
-export const ROUTE_TYPE_DIRS = [
-  'route-types',
-  'citizenship-by-investment',
-  'golden-visas',
-  'digital-nomad-visas',
+export const ROUTE_PATHS = [
+  'routes',
+  'routes/citizenship-by-investment',
+  'routes/golden-visas',
+  'routes/digital-nomad-visas',
+  'routes/retirement-visas',
+  'routes/talent-skilled-visas',
+  'routes/digital-identities',
 ] as const;
 
 /**
@@ -104,7 +110,7 @@ export function buildSitemapUrls(
     `${SITE}/about/`,
     `${SITE}/country/`, ...isos.map(iso => `${SITE}/country/${slugByIso.get(iso)}/`),
     `${SITE}/rights/`, ...rightsSlugs.map(slug => `${SITE}/rights/${slug}/`),
-    ...(ROUTE_TYPES_ENABLED ? ROUTE_TYPE_DIRS.map(dir => `${SITE}/${dir}/`) : []),
+    ...(ROUTES_ENABLED ? ROUTE_PATHS.map(routePath => `${SITE}/${routePath}/`) : []),
   ];
 }
 
@@ -330,41 +336,59 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     bodyHtml: rightsHub,
   }));
 
-  // ── Route-type pages (/route-types/ hub + three country shortlists) ──
+  // ── Route pages (/routes/ hub + country shortlists) ──
   // Browse pages narrow the field by country and outcome. Country guides own
   // programme conditions and evidence; Planner will eventually own ranking.
-  const routeTypePages: Array<{ dir: string; title: string; description: string; el: ReturnType<typeof createElement> }> = [
+  const routePages: Array<{ path: string; title: string; description: string; el: ReturnType<typeof createElement> }> = [
     {
-      dir: 'route-types',
-      title: 'Route types — Citizenship & Residence Paths | Flag Paths',
+      path: 'routes',
+      title: 'Routes — Citizenship & Residence Paths | Flag Paths',
       description: 'Browse citizenship and residence route families, including investment, ancestry, naturalization, digital nomad, retirement, and talent paths.',
       el: createElement(RouteTypesHub, { data: citizenship }),
     },
     {
-      dir: 'citizenship-by-investment',
+      path: 'routes/citizenship-by-investment',
       title: 'Citizenship by Investment Countries | Flag Paths',
       description: 'Browse countries with active citizenship-by-investment programmes, plus closed and pending programmes, linked to sourced country guides.',
       el: createElement(CbiPage, { data: citizenship }),
     },
     {
-      dir: 'golden-visas',
+      path: 'routes/golden-visas',
       title: 'Golden Visa Countries by Outcome | Flag Paths',
       description: 'Browse residence-by-investment countries grouped by whether routes can lead to citizenship, permanent residence, or temporary stay.',
       el: createElement(GoldenVisaPage, { data: citizenship }),
     },
     {
-      dir: 'digital-nomad-visas',
+      path: 'routes/digital-nomad-visas',
       title: 'Digital Nomad Visa Countries by Outcome | Flag Paths',
       description: 'Browse digital nomad visa countries grouped by whether routes can lead to citizenship, permanent residence, or temporary stay.',
       el: createElement(NomadVisaPage, { data: citizenship }),
     },
+    {
+      path: 'routes/retirement-visas',
+      title: 'Retirement Visa Countries by Outcome | Flag Paths',
+      description: 'Browse retirement, pension, and passive-income residence countries grouped by whether routes can lead to citizenship, permanent residence, or temporary stay.',
+      el: createElement(RetirementVisaPage, { data: citizenship }),
+    },
+    {
+      path: 'routes/talent-skilled-visas',
+      title: 'Talent and Skilled Visa Countries by Outcome | Flag Paths',
+      description: 'Browse countries with mapped talent and skilled routes, grouped by whether routes can lead to citizenship, permanent residence, or temporary stay.',
+      el: createElement(TalentSkilledVisaPage, { data: citizenship }),
+    },
+    {
+      path: 'routes/digital-identities',
+      title: 'Digital Identity and E-Residency Countries | Flag Paths',
+      description: 'Browse government digital identity and e-residency programmes for non-residents, without confusing them with residence or citizenship rights.',
+      el: createElement(DigitalIdentityPage, { data: citizenship }),
+    },
   ];
-  const routeTypeUrls: string[] = [];
-  for (const page of ROUTE_TYPES_ENABLED ? routeTypePages : []) {
-    const url = `${SITE}/${page.dir}/`;
+  const routeUrls: string[] = [];
+  for (const page of ROUTES_ENABLED ? routePages : []) {
+    const url = `${SITE}/${page.path}/`;
     const bodyHtml = renderToStaticMarkup(createElement(
       Fragment, null,
-      staticHeader('route-types'),
+      staticHeader('routes'),
       page.el,
     ));
     const headExtra = [
@@ -376,17 +400,17 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
         '@context': 'https://schema.org', '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Flag Paths', item: `${SITE}/` },
-          { '@type': 'ListItem', position: 2, name: 'Route types', item: `${SITE}/route-types/` },
-          ...(page.dir === 'route-types' ? [] : [{ '@type': 'ListItem', position: 3, name: page.title.split(' — ')[0], item: url }]),
+          { '@type': 'ListItem', position: 2, name: 'Routes', item: `${SITE}/routes/` },
+          ...(page.path === 'routes' ? [] : [{ '@type': 'ListItem', position: 3, name: page.title.split(' | ')[0], item: url }]),
         ],
       }),
     ].join('\n');
-    const dir = path.join(distDir, page.dir);
+    const dir = path.join(distDir, page.path);
     fs.mkdirSync(dir, { recursive: true });
     fs.writeFileSync(path.join(dir, 'index.html'), htmlDoc({
       title: page.title, description: page.description, canonical: url, cssHref, headExtra, bodyHtml,
     }));
-    routeTypeUrls.push(url);
+    routeUrls.push(url);
   }
 
   // Heritage /route pages dissolved: ancestry and diaspora programmes live on
@@ -507,7 +531,7 @@ immigration lawyer in the specific country before acting on anything shown here.
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
 
-  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeTypeUrls.length} route-type pages + hubs + about + sitemap -> ${distDir}`);
+  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap -> ${distDir}`);
 }
 
 if (import.meta.main) {

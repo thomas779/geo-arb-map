@@ -1,13 +1,13 @@
-import type { CitizenshipRoute, CitizenshipRoutesData, ResidenceRoute } from '@/types';
+import type { CitizenshipRoute, CitizenshipRoutesData, ResidenceCategory, ResidenceRoute } from '@/types';
 import { buildCountrySlugMap } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
 import { isosForRouteClass, ROUTE_CLASSES, type RouteClass } from '@/lib/route-classes';
 
 /**
- * Prerendered comparison pages for route types (/route-types/ hub +
- * /citizenship-by-investment, /golden-visas, /digital-nomad-visas).
+ * Prerendered route discovery pages under /routes/. Country guides answer
+ * “what is available here?”; these pages answer “where is this available?”.
  *
- * The hub uses route-family cards for discovery. Comparison pages deliberately
+ * The hub uses route-family cards for discovery. Directory pages deliberately
  * stop at country shortlists: the country page owns conditions and evidence,
  * while the future planner owns personalized ranking.
  *
@@ -154,7 +154,7 @@ function PageShell({ eyebrow, title, lede, children }: {
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
       <nav className="mb-6 font-mono text-xs text-muted-foreground">
-        <a href="/" className="underline underline-offset-2">Flag Paths</a> › <a href="/route-types/" className="underline underline-offset-2">Route types</a>
+        <a href="/" className="underline underline-offset-2">Flag Paths</a> › <a href="/routes/" className="underline underline-offset-2">Routes</a>
       </nav>
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">{eyebrow}</p>
       <h1 className="mt-2 max-w-[760px] font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">{title}</h1>
@@ -164,12 +164,15 @@ function PageShell({ eyebrow, title, lede, children }: {
   );
 }
 
-// ── /route-types/ hub ──
+// ── /routes/ hub ──
 
-const TABLE_PAGE_BY_CLASS: Record<string, string> = {
-  cbi: '/citizenship-by-investment/',
-  'golden-visa': '/golden-visas/',
-  'digital-nomad': '/digital-nomad-visas/',
+const DIRECTORY_PAGE_BY_CLASS: Record<string, string> = {
+  cbi: '/routes/citizenship-by-investment/',
+  'golden-visa': '/routes/golden-visas/',
+  'digital-nomad': '/routes/digital-nomad-visas/',
+  retirement: '/routes/retirement-visas/',
+  talent: '/routes/talent-skilled-visas/',
+  'digital-identity': '/routes/digital-identities/',
 };
 
 // ROUTE_CLASSES descriptions are written for the atlas sidebar; the hub can
@@ -194,8 +197,8 @@ export function routeClassCounts(data: CitizenshipRoutesData): Map<string, numbe
 }
 
 function HubCard({ cls, data, count }: { cls: RouteClass; data: CitizenshipRoutesData; count: number }) {
-  const table = TABLE_PAGE_BY_CLASS[cls.id];
-  const primaryHref = table ?? `/?class=${cls.id}`;
+  const directory = DIRECTORY_PAGE_BY_CLASS[cls.id];
+  const primaryHref = directory ?? `/?class=${cls.id}`;
   const outcomes = isosForRouteClass(cls, data);
   // Digital identity grants no residence, so a "stops at residence" bar would
   // claim more than the routes do.
@@ -219,14 +222,18 @@ function HubCard({ cls, data, count }: { cls: RouteClass; data: CitizenshipRoute
             <TierBar split={split} />
             <p className="mt-1.5 font-mono text-[0.6rem] leading-snug text-muted-foreground">{tierCaption(split)}</p>
           </>
+        ) : cls.id === 'digital-identity' ? (
+          <p className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+            Identity only · no residence rights
+          </p>
         ) : (
           <p className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
             Citizenship outcome
           </p>
         )}
-        {table && (
-          <a href={table} className="mt-3 inline-block font-mono text-[0.68rem] font-medium text-primary hover:underline hover:underline-offset-2">
-            Compare programmes →
+        {directory && (
+          <a href={directory} className="mt-3 inline-block font-mono text-[0.68rem] font-medium text-primary hover:underline hover:underline-offset-2">
+            Browse countries →
           </a>
         )}
       </div>
@@ -251,7 +258,7 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
       <h1 className="font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">
-        Citizenship &amp; residence route types
+        Citizenship &amp; residence routes
       </h1>
       <p className="mb-8 mt-3 max-w-[68ch] text-muted-foreground">
         Explore the main ways countries grant citizenship or residence. Each route family narrows the
@@ -272,7 +279,7 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
   );
 }
 
-// ── /citizenship-by-investment/ ──
+// ── /routes/citizenship-by-investment/ ──
 
 export function CbiPage({ data }: { data: CitizenshipRoutesData }) {
   const slugByIso = buildCountrySlugMap(data.jurisdictions);
@@ -293,7 +300,7 @@ export function CbiPage({ data }: { data: CitizenshipRoutesData }) {
           {active.length} countries currently grant citizenship directly for a qualifying investment
           or contribution. Start with the country; its guide carries the programme conditions,
           exclusions, confidence, and primary sources. Residence by investment is different and has{' '}
-          <a href="/golden-visas/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
+          <a href="/routes/golden-visas/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
         </p>
       )}
     >
@@ -341,7 +348,7 @@ function residenceDetail(
 
 function ResidenceShortlistPage({ data, category, money, eyebrow, title, lede, endedLede }: {
   data: CitizenshipRoutesData;
-  category: string;
+  category: ResidenceCategory;
   money: (r: ResidenceRoute) => string | null;
   eyebrow: string;
   title: string;
@@ -411,7 +418,7 @@ export function GoldenVisaPage({ data }: { data: CitizenshipRoutesData }) {
           {active.length} countries currently offer a mapped residence-by-investment route. Start
           with what the permit can become, then open a country guide for its investment options,
           presence rules, and sources. Direct citizenship for investment has{' '}
-          <a href="/citizenship-by-investment/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
+          <a href="/routes/citizenship-by-investment/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
         </p>
       )}
       endedLede="Golden visas churn. Programmes close under EU pressure, housing politics, or security review; a closed programme still being marketed is a red flag."
@@ -424,7 +431,10 @@ export function NomadVisaPage({ data }: { data: CitizenshipRoutesData }) {
     <ResidenceShortlistPage
       data={data}
       category="digital_nomad"
-      money={r => fmtMoney(r.min_income_monthly)}
+      money={r => {
+        const amount = fmtMoney(r.min_income_monthly);
+        return amount ? `${amount}/mo` : null;
+      }}
       eyebrow="Digital nomad visas"
       title="Digital nomad visas, grouped by outcome."
       lede={(active, split) => (
@@ -436,5 +446,93 @@ export function NomadVisaPage({ data }: { data: CitizenshipRoutesData }) {
       )}
       endedLede="Several pandemic-era nomad programmes have quietly lapsed. Each ended row's run dates live on the country profile."
     />
+  );
+}
+
+export function RetirementVisaPage({ data }: { data: CitizenshipRoutesData }) {
+  return (
+    <ResidenceShortlistPage
+      data={data}
+      category="retirement_pension"
+      money={r => {
+        const amount = fmtMoney(r.min_income_monthly);
+        return amount ? `${amount}/mo` : null;
+      }}
+      eyebrow="Retirement residence"
+      title="Retirement and passive-income routes, grouped by outcome."
+      lede={(active, split) => (
+        <p>
+          {active.length} countries currently offer a mapped retirement, pension, or passive-income
+          residence route. {split.cit + split.pr} have a recorded path beyond temporary residence.
+          Open a country guide for income rules, work restrictions, and official sources.
+        </p>
+      )}
+      endedLede="Ended retirement and passive-income programmes remain listed as historical context, not current options."
+    />
+  );
+}
+
+export function TalentSkilledVisaPage({ data }: { data: CitizenshipRoutesData }) {
+  return (
+    <ResidenceShortlistPage
+      data={data}
+      category="talent_skilled"
+      money={() => null}
+      eyebrow="Talent and skilled routes"
+      title="Talent and skilled routes, grouped by outcome."
+      lede={(active, split) => (
+        <p>
+          {active.length} countries currently have a mapped route for designated talent, skills,
+          achievement, or entrepreneurship. {split.cit + split.pr} have a recorded path beyond
+          temporary residence. Country guides carry the actual eligibility tests and evidence.
+        </p>
+      )}
+      endedLede="Ended talent and skilled programmes remain listed as historical context, not current options."
+    />
+  );
+}
+
+export function DigitalIdentityPage({ data }: { data: CitizenshipRoutesData }) {
+  const slugByIso = buildCountrySlugMap(data.jurisdictions);
+  const rows = (data.residence_routes ?? []).filter(route => route.category === 'digital_identity');
+  const active = groupByCountry(rows.filter(route => route.status === 'active'), slugByIso);
+  const pending = groupByCountry(rows.filter(route => route.status === 'pending_verification'), slugByIso);
+  const inactive = groupByCountry(rows.filter(route => route.status === 'inactive'), slugByIso);
+
+  return (
+    <PageShell
+      eyebrow="Digital identities"
+      title="Government digital identities, by country."
+      lede={(
+        <p>
+          {active.length} countries currently offer a mapped digital identity or e-residency
+          programme for non-residents. These credentials can unlock remote government or business
+          services; they do not grant residence, work rights, or citizenship.
+        </p>
+      )}
+    >
+      <ShortlistSection
+        title="Available programmes"
+        description="Open a country guide for eligibility, credential scope, and primary sources."
+        groups={active}
+        detail={group => `${group.routes.length} credential${group.routes.length === 1 ? '' : 's'} · no residence rights`}
+      />
+      {pending.length > 0 && (
+        <details className="group mt-8 rounded-lg border bg-card px-4 py-3">
+          <summary className="cursor-pointer list-none font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            Announced or pending <span className="text-muted-foreground/60">{pending.length}</span>
+          </summary>
+          <CountryShortlist groups={pending} detail={() => 'not yet verified as open'} />
+        </details>
+      )}
+      {inactive.length > 0 && (
+        <details className="group mt-3 rounded-lg border bg-card px-4 py-3">
+          <summary className="cursor-pointer list-none font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            Paused or ended <span className="text-muted-foreground/60">{inactive.length}</span>
+          </summary>
+          <CountryShortlist groups={inactive} detail={() => 'not currently available'} />
+        </details>
+      )}
+    </PageShell>
   );
 }

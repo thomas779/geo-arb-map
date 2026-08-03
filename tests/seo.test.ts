@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_TYPE_DIRS, ROUTE_TYPES_ENABLED, THEME_BOOT_JS } from '../scripts/build_country_pages';
+import { buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_PATHS, ROUTES_ENABLED, THEME_BOOT_JS } from '../scripts/build_country_pages';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 
 const canonicalUrl = 'https://flagpaths.com/';
@@ -60,7 +60,7 @@ describe('public SEO contract', () => {
     expect(headers).toContain(`'sha256-${filterHash}'`);
   });
 
-  test('route-type hubs ship in the sitemap, not just as pages', () => {
+  test('route pages ship in the sitemap, not just as HTML', () => {
     // The historical footgun: a hub added to the page loop but not the urls
     // array ships unindexed, defeating the point of an SEO page. The build
     // writes buildSitemapUrls() verbatim, so asserting against it IS asserting
@@ -70,13 +70,21 @@ describe('public SEO contract', () => {
     const mobility = JSON.parse(readFileSync(
       new URL('../public/blocs_data.json', import.meta.url), 'utf8')) as BlocsData;
     const urls = buildSitemapUrls(citizenship, mobility);
-    for (const dir of ROUTE_TYPE_DIRS) {
-      expect(ROUTE_TYPES_ENABLED).toBe(true);
-      expect(urls).toContain(`https://flagpaths.com/${dir}/`);
+    for (const routePath of ROUTE_PATHS) {
+      expect(ROUTES_ENABLED).toBe(true);
+      expect(urls).toContain(`https://flagpaths.com/${routePath}/`);
     }
     expect(urls).toContain('https://flagpaths.com/country/');
     expect(urls).toContain('https://flagpaths.com/rights/');
     expect(urls.length).toBeGreaterThan(240);
+  });
+
+  test('old route discovery URLs permanently redirect to the nested hierarchy', () => {
+    const redirects = readFileSync(new URL('../public/_redirects', import.meta.url), 'utf8');
+    expect(redirects).toContain('/route-types/ /routes/ 301');
+    expect(redirects).toContain('/citizenship-by-investment/ /routes/citizenship-by-investment/ 301');
+    expect(redirects).toContain('/golden-visas/ /routes/golden-visas/ 301');
+    expect(redirects).toContain('/digital-nomad-visas/ /routes/digital-nomad-visas/ 301');
   });
 
   test('keeps the workers.dev duplicate out of search indexes', () => {
