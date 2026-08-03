@@ -40,6 +40,17 @@ export function routeClassById(id: string | null | undefined): RouteClass | null
   return ROUTE_CLASSES.find(c => c.id === id) ?? null;
 }
 
+const ROUTE_CLASS_PAGE: Record<string, string> = {
+  cbi: '/citizenship-by-investment/',
+  'golden-visa': '/golden-visas/',
+  'digital-nomad': '/digital-nomad-visas/',
+};
+
+/** A comparison page exists for the three route families with comparable typed fields. */
+export function routeClassPageHref(id: string): string | null {
+  return ROUTE_CLASS_PAGE[id] ?? null;
+}
+
 /**
  * Painted sets for a class: the country's BEST outcome across its active
  * routes, as three mutually exclusive tiers matching the Access levels

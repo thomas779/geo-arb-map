@@ -1,4 +1,4 @@
-import { ArrowLeft, PanelRightClose, X } from 'lucide-react';
+import { ArrowLeft, ChevronRight, ExternalLink, PanelRightClose, X } from 'lucide-react';
 import type {
   AppState,
   BilateralLane,
@@ -48,9 +48,9 @@ const COVERAGE_LABELS: Record<CitizenshipCoverageState, string> = {
   unchecked: 'not reviewed',
 };
 
-function SectionHeading({ title, description }: { title: string; description: string }) {
+function SectionHeading({ id, title, description }: { id: string; title: string; description: string }) {
   return (
-    <div className="mb-2 mt-5">
+    <div id={id} className="mb-2 mt-6 scroll-mt-36">
       <h3 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground">{title}</h3>
       <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{description}</p>
     </div>
@@ -93,9 +93,9 @@ function statusLabel(route: CitizenshipRoute): string | null {
 }
 
 /** Compact, non-expandable route row — title + mode + status; detail lives on the page. */
-function RouteRow({ route }: { route: CitizenshipRoute }) {
-  return (
-    <div className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2">
+function RouteRow({ route, countrySlug }: { route: CitizenshipRoute; countrySlug?: string }) {
+  const body = (
+    <>
       <span className="min-w-0 flex-1">
         <span className="block text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
           {MODE_LABELS[route.mode]}
@@ -107,13 +107,25 @@ function RouteRow({ route }: { route: CitizenshipRoute }) {
           {statusLabel(route)}
         </Badge>
       )}
-    </div>
+      {countrySlug && <ChevronRight className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />}
+    </>
+  );
+  return countrySlug ? (
+    <a
+      href={`/country/${countrySlug}/#route-${encodeURIComponent(route.id)}`}
+      className="flex min-h-12 items-center gap-2 rounded-lg border bg-card px-3 py-2 transition-colors hover:border-primary/55 hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+      aria-label={`Read requirements and sources for ${displayRouteTitle(route.title)}`}
+    >
+      {body}
+    </a>
+  ) : (
+    <div className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2">{body}</div>
   );
 }
 
-function ResidenceRow({ route }: { route: ResidenceRoute }) {
-  return (
-    <div className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2">
+function ResidenceRow({ route, countrySlug }: { route: ResidenceRoute; countrySlug?: string }) {
+  const body = (
+    <>
       <span className="min-w-0 flex-1">
         <span className="block text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
           {RESIDENCE_CATEGORY_SHORT[route.category]}
@@ -131,7 +143,19 @@ function ResidenceRow({ route }: { route: ResidenceRoute }) {
           </Badge>
         ))}
       </span>
-    </div>
+      {countrySlug && <ChevronRight className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />}
+    </>
+  );
+  return countrySlug ? (
+    <a
+      href={`/country/${countrySlug}/#residence-${encodeURIComponent(route.id)}`}
+      className="flex min-h-12 items-center gap-2 rounded-lg border bg-card px-3 py-2 transition-colors hover:border-primary/55 hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+      aria-label={`Read requirements and sources for ${route.title}`}
+    >
+      {body}
+    </a>
+  ) : (
+    <div className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2">{body}</div>
   );
 }
 
@@ -171,34 +195,57 @@ export function DetailPanel({
 
   return (
     <section className="h-full w-full overflow-y-auto bg-background px-3 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-4 md:pb-8">
-      <div className="sticky top-0 z-10 -mx-3 flex items-center justify-between gap-2 border-b bg-background px-3 py-2.5 sm:-mx-4 sm:px-4">
-        <h2 className="flex min-w-0 items-center gap-2 text-base font-semibold">
-          {flag && <span aria-hidden>{flag}</span>}
-          <span className="truncate">{countryName}</span>
-        </h2>
-        <div className="-mr-1 flex shrink-0 items-center gap-0.5">
-          {onCollapse && (
+      <header className="sticky top-0 z-10 -mx-3 border-b bg-background/95 px-3 pb-2.5 pt-2.5 backdrop-blur-md sm:-mx-4 sm:px-4">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="flex min-w-0 items-center gap-2 font-heading text-xl font-semibold tracking-tight">
+            {flag && <span aria-hidden>{flag}</span>}
+            <span className="truncate">{countryName}</span>
+          </h2>
+          <div className="-mr-1 flex shrink-0 items-center gap-0.5">
+            {countrySlug && (
+              <Button asChild variant="ghost" size="sm" className="h-8 gap-1 px-2 text-xs text-muted-foreground">
+                <a href={`/country/${countrySlug}/`}>
+                  Full guide <ExternalLink className="size-3" aria-hidden />
+                </a>
+              </Button>
+            )}
+            {onCollapse && (
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="hidden text-muted-foreground md:inline-flex"
+                aria-label="Hide country details"
+                onClick={onCollapse}
+              >
+                <PanelRightClose aria-hidden />
+              </Button>
+            )}
             <Button
               variant="ghost"
-              size="icon-sm"
-              className="hidden text-muted-foreground md:inline-flex"
-              aria-label="Hide country details"
-              onClick={onCollapse}
+              size="icon-lg"
+              className="size-11 text-muted-foreground md:size-8"
+              aria-label="Clear country selection"
+              onClick={onClose}
             >
-              <PanelRightClose aria-hidden />
+              <X className="size-5" />
             </Button>
-          )}
-          <Button
-            variant="ghost"
-            size="icon-lg"
-            className="size-11 text-muted-foreground md:size-8"
-            aria-label="Clear country selection"
-            onClick={onClose}
-          >
-            <X className="size-5" />
-          </Button>
+          </div>
         </div>
-      </div>
+        <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
+          {routes.length} citizenship rule{routes.length === 1 ? '' : 's'} · {residenceRoutes.length} residence route{residenceRoutes.length === 1 ? '' : 's'} · {regionalCount + laneCount} connected right{regionalCount + laneCount === 1 ? '' : 's'}
+        </p>
+        <nav aria-label={`${countryName} guide sections`} className="mt-2 grid grid-cols-3 gap-px overflow-hidden rounded-md border bg-border">
+          <a href="#panel-citizenship" className="bg-card px-2 py-1.5 text-center text-[10px] font-semibold text-muted-foreground hover:text-foreground">
+            Citizenship <span className="font-mono">{routes.length}</span>
+          </a>
+          <a href="#panel-residence" className="bg-card px-2 py-1.5 text-center text-[10px] font-semibold text-muted-foreground hover:text-foreground">
+            Residence <span className="font-mono">{residenceRoutes.length}</span>
+          </a>
+          <a href="#panel-rights" className="bg-card px-2 py-1.5 text-center text-[10px] font-semibold text-muted-foreground hover:text-foreground">
+            Rights <span className="font-mono">{regionalCount + laneCount}</span>
+          </a>
+        </nav>
+      </header>
 
       <div className="mb-3 mt-3">
         {onBackToRoutes && (
@@ -212,24 +259,17 @@ export function DetailPanel({
             {state.blocs.length > 1 ? 'Back to comparison' : 'Back to route guide'}
           </Button>
         )}
-        <p className="text-xs text-muted-foreground">
-          {routes.length} country rule{routes.length === 1 ? '' : 's'}{residenceRoutes.length > 0 ? ` · ${residenceRoutes.length} residence route${residenceRoutes.length === 1 ? '' : 's'}` : ''} · {regionalCount} regional system{regionalCount === 1 ? '' : 's'} · {laneCount} treaty path{laneCount === 1 ? '' : 's'}
-        </p>
-        {countrySlug && (
-          <Button asChild variant="secondary" size="sm" className="mt-2.5 w-full">
-            <a href={`/country/${countrySlug}/`}>View full page →</a>
-          </Button>
-        )}
       </div>
 
       <SectionHeading
+        id="panel-citizenship"
         title="Citizenship paths"
-        description="How this country grants citizenship. Open the full profile for requirements and sources."
+        description="The main legal routes we have reviewed. Open a row for its requirements and sources."
       />
       {jurisdiction && <CoverageStrip coverage={jurisdiction.coverage} />}
       {routes.length > 0 ? (
         <div className="mt-2 space-y-1.5">
-          {routes.map(route => <RouteRow key={route.id} route={route} />)}
+          {routes.map(route => <RouteRow key={route.id} route={route} countrySlug={countrySlug} />)}
         </div>
       ) : (
         <div className="mt-2 rounded-lg border border-dashed px-3 py-3 text-xs leading-relaxed text-muted-foreground">
@@ -240,11 +280,12 @@ export function DetailPanel({
       {residenceRoutes.length > 0 && (
         <>
           <SectionHeading
+            id="panel-residence"
             title="Residence & settlement"
-            description="Live-here routes. Badges show whether time counts toward PR or citizenship."
+            description="Permits to live here. The badges show whether their time advances toward PR or citizenship."
           />
           <div className="space-y-1.5">
-            {residenceCardRoutes(residenceRoutes).map(route => <ResidenceRow key={route.id} route={route} />)}
+            {residenceCardRoutes(residenceRoutes).map(route => <ResidenceRow key={route.id} route={route} countrySlug={countrySlug} />)}
           </div>
           {verifiedResidenceNegatives(residenceRoutes).length > 0 && (
             <p className="mt-1.5 text-[0.7rem] leading-snug text-muted-foreground">
@@ -263,6 +304,7 @@ export function DetailPanel({
       {regionalCount > 0 && (
         <>
           <SectionHeading
+            id="panel-rights"
             title="Regional rights"
             description="Systems whose rights citizenship or qualifying status here can unlock. Open one for the full ladder."
           />
@@ -284,6 +326,7 @@ export function DetailPanel({
       {laneCount > 0 && (
         <>
           <SectionHeading
+            id={regionalCount > 0 ? 'panel-treaties' : 'panel-rights'}
             title="Treaty & country paths"
             description="Nationality-specific access that can be useful without general free movement."
           />
@@ -298,9 +341,17 @@ export function DetailPanel({
       )}
 
       {regionalCount === 0 && laneCount === 0 && (
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+        <p id="panel-rights" className="mt-5 scroll-mt-36 text-xs leading-relaxed text-muted-foreground">
           No regional settlement system or nationality-specific treaty path is mapped for this country yet.
         </p>
+      )}
+
+      {countrySlug && (
+        <Button asChild className="mt-6 w-full">
+          <a href={`/country/${countrySlug}/`}>
+            Read the full {countryName} guide <ExternalLink className="size-3.5" aria-hidden />
+          </a>
+        </Button>
       )}
 
       <a

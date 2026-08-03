@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils';
 
 // Delay the slide-up so the map's zoom-to-selection reads first (the
 // "purposeful latency"). Drag the handle down past the threshold to dismiss.
-const REVEAL_DELAY_MS = 150;
+const REVEAL_DELAY_MS = 40;
 const DISMISS_THRESHOLD_PX = 110;
 
 /**
@@ -47,10 +47,12 @@ export function MobileDetailSheet({
         )}
       />
       <div
-        className="absolute inset-x-0 bottom-0 top-[36%] flex flex-col overflow-hidden rounded-t-2xl border-t bg-background shadow-2xl will-change-transform"
+        role="dialog"
+        aria-label="Selected map details"
+        className="absolute inset-x-0 bottom-0 top-[22%] flex flex-col overflow-hidden rounded-t-2xl border-t bg-background shadow-2xl transition-transform duration-200 ease-out will-change-transform motion-reduce:transition-none sm:top-[28%]"
         style={{
           transform: open ? `translateY(${drag}px)` : 'translateY(100%)',
-          transition: dragging ? 'none' : 'transform 0.3s ease-out',
+          transition: dragging ? 'none' : undefined,
         }}
       >
         <div

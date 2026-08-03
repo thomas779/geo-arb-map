@@ -94,11 +94,9 @@ export const TABLE_SORT_JS = "document.addEventListener('DOMContentLoaded',funct
   + "})})});";
 const TABLE_SORT_SCRIPT = `<script>${TABLE_SORT_JS}</script>`;
 
-// Owner gate (2026-07-31): the route-type pages are not up to publication
-// standard yet — keep building and reviewing them locally, but production
-// (Workers Builds sets CI) must not emit, link, or index them until they are.
-// Flip by setting SHOW_ROUTE_TYPES=1 in the Workers Build environment.
-export const ROUTE_TYPES_ENABLED = process.env.SHOW_ROUTE_TYPES === '1' || !process.env.CI;
+// Route-type pages are part of the public discovery layer. Keep this exported
+// so the sitemap and tests share one release decision.
+export const ROUTE_TYPES_ENABLED = true;
 
 // One list drives BOTH the page loop and the sitemap so a new hub can never
 // ship unindexed (the exact footgun tests/seo.test.ts guards).

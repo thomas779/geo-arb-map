@@ -73,11 +73,9 @@ describe('public SEO contract', () => {
     const mobility = JSON.parse(readFileSync(
       new URL('../public/blocs_data.json', import.meta.url), 'utf8')) as BlocsData;
     const urls = buildSitemapUrls(citizenship, mobility);
-    // The route-type pages are gated off production (CI) until they meet the
-    // publication bar; when the flag is on they must all be in the sitemap.
     for (const dir of ROUTE_TYPE_DIRS) {
-      if (ROUTE_TYPES_ENABLED) expect(urls).toContain(`https://flagpaths.com/${dir}/`);
-      else expect(urls).not.toContain(`https://flagpaths.com/${dir}/`);
+      expect(ROUTE_TYPES_ENABLED).toBe(true);
+      expect(urls).toContain(`https://flagpaths.com/${dir}/`);
     }
     expect(urls).toContain('https://flagpaths.com/country/');
     expect(urls).toContain('https://flagpaths.com/rights/');

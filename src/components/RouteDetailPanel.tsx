@@ -6,7 +6,7 @@ import {
   Route,
   X,
 } from 'lucide-react';
-import type { BilateralLane, Bloc, BlocsData } from '../types';
+import type { BilateralLane, Bloc, BlocsData, CitizenshipRoutesData } from '../types';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/components/theme-provider';
@@ -15,13 +15,83 @@ import { displayColor } from '@/lib/color';
 import { displayRouteTitle } from '@/lib/display-title';
 import { entitySlug } from '@/lib/slug';
 import { dataCorrectionUrl, sourceUrl } from '@/lib/trust';
+import { isosForRouteClass, routeClassById, routeClassPageHref } from '@/lib/route-classes';
 
 interface Props {
   data: BlocsData;
   blocIds: string[];
   laneId: string | null;
+  routeClassId?: string | null;
+  citizenshipRoutes?: CitizenshipRoutesData | null;
   onClose: () => void;
   onSelectCountry: (iso: string, name: string) => void;
+}
+
+function RouteClassDetail({
+  routeClassId,
+  citizenshipRoutes,
+  onSelectCountry,
+}: {
+  routeClassId: string;
+  citizenshipRoutes: CitizenshipRoutesData;
+  onSelectCountry: (iso: string, name: string) => void;
+}) {
+  const routeClass = routeClassById(routeClassId)!;
+  const sets = isosForRouteClass(routeClass, citizenshipRoutes);
+  const pageHref = routeClassPageHref(routeClass.id);
+  const countries = citizenshipRoutes.jurisdictions
+    .filter(jurisdiction => sets.all.has(jurisdiction.iso_n3))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const outcomes = [
+    { key: 'cit', label: 'Citizenship', count: sets.cit.size, className: 'bg-primary' },
+    { key: 'pr', label: 'Permanent residence', count: sets.pr.size, className: 'sw-pr-hatch' },
+    { key: 'tr', label: 'Temporary residence', count: sets.tr.size, className: 'bg-[var(--map-limited)]' },
+  ].filter(outcome => outcome.count > 0);
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm leading-relaxed text-muted-foreground">{routeClass.description}</p>
+      <div className="grid gap-px overflow-hidden rounded-lg border bg-border">
+        {outcomes.map(outcome => (
+          <div key={outcome.key} className="grid grid-cols-[12px_1fr_auto] items-center gap-2 bg-card px-3 py-2.5">
+            <span className={`size-3 rounded-[3px] ${outcome.className}`} aria-hidden />
+            <span className="text-xs">{outcome.label}</span>
+            <span className="font-mono text-xs font-semibold tabular-nums">{outcome.count}</span>
+          </div>
+        ))}
+      </div>
+      <p className="text-xs leading-relaxed text-muted-foreground">
+        The map shows the best recorded outcome for each country. A citizenship result means the route itself or its residence clock can lead there; open the country guide for conditions.
+      </p>
+      {pageHref && (
+        <Button asChild className="w-full" size="sm">
+          <a href={pageHref}>Compare programmes →</a>
+        </Button>
+      )}
+      <details open className="group overflow-hidden rounded-lg border bg-card">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 px-3 text-xs font-medium">
+          <span>Country guides</span>
+          <span className="font-mono text-[10px] text-muted-foreground">{countries.length}</span>
+          <ChevronDown className="ml-auto size-3.5 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
+        </summary>
+        <div className="grid grid-cols-2 gap-x-2 gap-y-1 border-t px-2 py-2">
+          {countries.map(country => (
+            <button
+              key={country.iso_n3}
+              type="button"
+              className="flex min-h-9 min-w-0 items-center gap-1.5 rounded px-1.5 text-left text-xs hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+              onClick={() => onSelectCountry(country.iso_n3, country.name)}
+              aria-label={`Open ${country.name} country guide`}
+            >
+              <span aria-hidden>{countryFlag(country.iso_n3)}</span>
+              <span className="truncate">{country.name}</span>
+              <ChevronRight className="ml-auto size-3 shrink-0 text-muted-foreground" aria-hidden />
+            </button>
+          ))}
+        </div>
+      </details>
+    </div>
+  );
 }
 
 const CATEGORY_LABEL: Record<Bloc['category'], string> = {
@@ -315,6 +385,8 @@ export function RouteDetailPanel({
   data,
   blocIds,
   laneId,
+  routeClassId,
+  citizenshipRoutes,
   onClose,
   onSelectCountry,
 }: Props) {
@@ -323,6 +395,10 @@ export function RouteDetailPanel({
     ? data.bilateral_lanes.find(candidate => candidate.id === laneId) ?? null
     : null;
   const selectedCount = blocs.length + Number(Boolean(lane));
+  const routeClass = routeClassById(routeClassId);
+  const routeClassIsos = routeClass && citizenshipRoutes
+    ? isosForRouteClass(routeClass, citizenshipRoutes)
+    : null;
 
   const overlapCounts = new Map<string, number>();
   blocs.forEach(bloc => {
@@ -339,12 +415,16 @@ export function RouteDetailPanel({
   const overlapMembers = uniqueMembers.filter(member => (overlapCounts.get(member.iso_n3) ?? 0) > 1);
 
   const singleBloc = blocs.length === 1 && !lane ? blocs[0] : null;
-  const title = lane
+  const title = routeClass
+    ? routeClass.label
+    : lane
     ? displayRouteTitle(lane.name)
     : singleBloc
       ? displayRouteTitle(singleBloc.name)
       : 'Selected routes';
-  const subtitle = lane
+  const subtitle = routeClass && routeClassIsos
+    ? `${routeClassIsos.all.size} countries · grouped by best outcome`
+    : lane
     ? (lane.beneficiaries.length > 0
       ? `${lane.beneficiaries.length} origins · 1 destination`
       : 'Heritage eligibility · 1 destination')
@@ -394,7 +474,15 @@ export function RouteDetailPanel({
 
       {lane && <LaneDetail lane={lane} onSelectCountry={onSelectCountry} />}
 
-      {!singleBloc && !lane && (
+      {routeClass && citizenshipRoutes && (
+        <RouteClassDetail
+          routeClassId={routeClass.id}
+          citizenshipRoutes={citizenshipRoutes}
+          onSelectCountry={onSelectCountry}
+        />
+      )}
+
+      {!singleBloc && !lane && !routeClass && (
         <div className="space-y-4">
           <p className="text-xs leading-relaxed text-muted-foreground">
             Compare each system on its own terms. Rights do not combine automatically, even where the highlighted countries overlap.
