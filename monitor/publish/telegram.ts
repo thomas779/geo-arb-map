@@ -128,7 +128,11 @@ export function issueFlag(issueBody: string): string {
     const artifact = JSON.parse(fs.readFileSync(
       fileURLToPath(new URL('../../public/citizenship_routes.json', import.meta.url)), 'utf8',
     )) as { jurisdictions: Array<{ iso_n3: string; name: string }> };
-    const match = artifact.jurisdictions.find(j => j.name === name);
+    // Triage tables abbreviate registry names ("Cayman Is.", "Antigua and
+    // Barb."), so fall back to prefix matching with the trailing dot dropped.
+    const needle = name.toLowerCase().replace(/\.$/, '');
+    const match = artifact.jurisdictions.find(j => j.name === name)
+      ?? artifact.jurisdictions.find(j => j.name.toLowerCase().startsWith(needle));
     return match ? flagEmoji(match.iso_n3) : '🌍';
   } catch {
     return '🌍';
