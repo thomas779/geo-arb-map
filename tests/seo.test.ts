@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_TYPE_DIRS, ROUTE_TYPES_ENABLED, TABLE_SORT_JS, THEME_BOOT_JS } from '../scripts/build_country_pages';
+import { buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_TYPE_DIRS, ROUTE_TYPES_ENABLED, THEME_BOOT_JS } from '../scripts/build_country_pages';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 
 const canonicalUrl = 'https://flagpaths.com/';
@@ -58,9 +58,6 @@ describe('public SEO contract', () => {
     // must hash-allow, or every filter button silently does nothing.
     const filterHash = createHash('sha256').update(RESIDENCE_FILTER_JS).digest('base64');
     expect(headers).toContain(`'sha256-${filterHash}'`);
-    // And for the route-type comparison tables' sort script.
-    const sortHash = createHash('sha256').update(TABLE_SORT_JS).digest('base64');
-    expect(headers).toContain(`'sha256-${sortHash}'`);
   });
 
   test('route-type hubs ship in the sitemap, not just as pages', () => {

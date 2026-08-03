@@ -2,43 +2,20 @@ import type { CitizenshipRoute, CitizenshipRoutesData, ResidenceRoute } from '@/
 import { buildCountrySlugMap } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
 import { isosForRouteClass, ROUTE_CLASSES, type RouteClass } from '@/lib/route-classes';
-import { WORK_RIGHTS_LABELS } from '@/lib/residence';
 
 /**
  * Prerendered comparison pages for route types (/route-types/ hub +
  * /citizenship-by-investment, /golden-visas, /digital-nomad-visas).
  *
- * The hub uses route-family cards for discovery; comparison pages use tables
- * because the country page owns prose while these pages own structured fields
- * and cross-country aggregates (tier splits, counts, closed-programme churn).
- * Rendered via renderToStaticMarkup only; interactivity is limited to the
- * TABLE_SORT_JS script in build_country_pages, driven by data attributes.
+ * The hub uses route-family cards for discovery. Comparison pages deliberately
+ * stop at country shortlists: the country page owns conditions and evidence,
+ * while the future planner owns personalized ranking.
  *
- * The signature element across hub and tables is the TIER BAR: each residence
+ * The signature element across hub and shortlists is the TIER BAR: each residence
  * family's routes split by how far they carry the holder, painted in the same
  * three tones the atlas legend uses (strong solid = citizenship, hatch = PR,
  * light = residence only). It is computed from the data, never decorative.
  */
-
-const TIER_LABEL: Record<number, string> = { 0: 'TR', 1: 'PR', 2: 'Citizenship' };
-
-/** Permit term: "5 yr · renews", "6 mo", or null when unrecorded. */
-function fmtTerm(r: ResidenceRoute): string | null {
-  const months = r.permit_duration_months;
-  if (!months) return null;
-  const base = months % 12 === 0 ? `${months / 12} yr` : `${months} mo`;
-  return r.permit_renewable ? `${base} · renews` : base;
-}
-
-/**
- * First sentence only for table rows; the country page owns the full prose.
- * Splits only before a capital letter so legal citations survive intact
- * ("Ley 25.871 art. 51" must not end the sentence at "art.").
- */
-function firstSentence(text: string): string {
-  const match = text.match(/^.*?[.!?](?=\s+[A-ZÀ-Ý"'“(]|$)/);
-  return match ? match[0] : text;
-}
 
 function ladderTier(route: ResidenceRoute): number {
   if (route.counts_toward_naturalization) return 2;
@@ -47,15 +24,6 @@ function ladderTier(route: ResidenceRoute): number {
 }
 
 interface TierSplit { cit: number; pr: number; tr: number; total: number }
-
-function tierSplit(routes: ResidenceRoute[]): TierSplit {
-  const split = { cit: 0, pr: 0, tr: 0, total: routes.length };
-  for (const r of routes) {
-    const t = ladderTier(r);
-    if (t === 2) split.cit += 1; else if (t === 1) split.pr += 1; else split.tr += 1;
-  }
-  return split;
-}
 
 /** Compact money: EUR 250k, USD 1M, KHR 4bn. Reads at a glance in a dense column. */
 export function fmtMoney(money: { amount: number; currency: string } | null): string | null {
@@ -96,79 +64,89 @@ function tierCaption(split: TierSplit): string {
   return parts.join(' · ');
 }
 
-/** Ladder pips on table rows: the same three-step vocabulary as the atlas Access levels. */
-function LadderCell({ tier }: { tier: number }) {
+interface CountryRouteGroup<T> {
+  iso: string;
+  name: string;
+  slug: string | undefined;
+  routes: T[];
+}
+
+function groupByCountry<T extends { country: { iso_n3: string; name: string } }>(
+  routes: T[],
+  slugByIso: Map<string, string>,
+): CountryRouteGroup<T>[] {
+  const grouped = new Map<string, CountryRouteGroup<T>>();
+  for (const route of routes) {
+    const existing = grouped.get(route.country.iso_n3);
+    if (existing) existing.routes.push(route);
+    else grouped.set(route.country.iso_n3, {
+      iso: route.country.iso_n3,
+      name: route.country.name,
+      slug: slugByIso.get(route.country.iso_n3),
+      routes: [route],
+    });
+  }
+  return [...grouped.values()].sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function CountryShortlist<T>({
+  groups,
+  detail,
+}: {
+  groups: CountryRouteGroup<T>[];
+  detail: (group: CountryRouteGroup<T>) => string;
+}) {
   return (
-    <span className="flex items-center gap-1.5" data-v={tier}>
-      <span className="flex gap-0.5" aria-hidden>
-        {[0, 1, 2].map(step => (
-          <span key={step} className={`h-1 w-2.5 rounded-full ${step <= tier ? 'bg-primary' : 'bg-muted'}`} />
-        ))}
-      </span>
-      <span className="whitespace-nowrap text-xs text-muted-foreground">{TIER_LABEL[tier]}</span>
-    </span>
+    <ul className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      {groups.map(group => {
+        const content = (
+          <>
+            <span className="shrink-0 text-lg" aria-hidden>{countryFlag(group.iso)}</span>
+            <span className="min-w-0 flex-1">
+              <span className="block truncate text-sm font-medium">{group.name}</span>
+              <span className="block truncate font-mono text-[0.62rem] text-muted-foreground">{detail(group)}</span>
+            </span>
+            <span className="shrink-0 text-muted-foreground" aria-hidden>→</span>
+          </>
+        );
+        return (
+          <li key={group.iso}>
+            {group.slug ? (
+              <a href={`/country/${group.slug}/`} className="flex min-h-14 items-center gap-3 rounded-lg border bg-card px-3 py-2.5 hover:border-primary">
+                {content}
+              </a>
+            ) : (
+              <div className="flex min-h-14 items-center gap-3 rounded-lg border bg-card px-3 py-2.5">{content}</div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
-function ConfidenceChip({ confidence }: { confidence: string }) {
-  // House rule: the badge appears only below `high`. Labelling the majority
-  // "verified" trains readers to ignore it exactly when it matters.
-  if (confidence === 'high') return null;
+function ShortlistSection<T>({
+  title,
+  description,
+  groups,
+  detail,
+}: {
+  title: string;
+  description?: string;
+  groups: CountryRouteGroup<T>[];
+  detail: (group: CountryRouteGroup<T>) => string;
+}) {
+  if (groups.length === 0) return null;
   return (
-    <span className="ml-1.5 rounded-full border px-1.5 py-px font-mono text-[0.6rem] text-muted-foreground">
-      {confidence === 'low' ? 'unverified' : 'medium confidence'}
-    </span>
-  );
-}
-
-function CountryCell({ iso, name, slug }: { iso: string; name: string; slug?: string }) {
-  const inner = (
-    <>
-      <span aria-hidden className="mr-1.5">{countryFlag(iso)}</span>
-      {name}
-    </>
-  );
-  return slug
-    ? <a href={`/country/${slug}/`} className="font-medium hover:underline hover:underline-offset-2" data-v={name}>{inner}</a>
-    : <span className="font-medium" data-v={name}>{inner}</span>;
-}
-
-function Th({ label, sortable = false, numeric = false }: { label: string; sortable?: boolean; numeric?: boolean }) {
-  return (
-    <th
-      scope="col"
-      {...(sortable ? { 'data-sort': numeric ? 'num' : 'text', tabIndex: 0, role: 'button' } : {})}
-      className={`whitespace-nowrap border-b px-3 py-2 text-left font-mono text-[0.66rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground ${sortable ? 'cursor-pointer select-none hover:text-foreground' : ''}`}
-    >
-      {label}
-      {sortable && <span aria-hidden className="ml-1 opacity-60">↕</span>}
-    </th>
-  );
-}
-
-function Section({ title, lede, children }: { title: string; lede?: string; children: React.ReactNode }) {
-  return (
-    <section className="mt-10">
-      <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">{title}</h2>
-      {lede && <p className="mt-2 max-w-[68ch] text-sm text-muted-foreground">{lede}</p>}
-      {children}
+    <section className="mt-8">
+      <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+        {title} <span className="text-muted-foreground/60">{groups.length}</span>
+      </h2>
+      {description && <p className="mt-1.5 max-w-[68ch] text-sm leading-relaxed text-muted-foreground">{description}</p>}
+      <CountryShortlist groups={groups} detail={detail} />
     </section>
   );
 }
-
-function TableWrap({ children }: { children: React.ReactNode }) {
-  // Wide content scrolls inside its own container; the page never scrolls sideways.
-  return (
-    <div className="mt-4 overflow-x-auto rounded-xl border bg-card shadow-sm">
-      <table className="rt-table w-full border-collapse text-sm sm:min-w-[720px]" data-sortable>
-        {children}
-      </table>
-    </div>
-  );
-}
-
-const CELL = 'border-b px-3 py-2.5 align-top';
-const LAST_ROW_FIX = '[&>tr:last-child>td]:border-b-0';
 
 function PageShell({ eyebrow, title, lede, children }: {
   eyebrow: string; title: string; lede: React.ReactNode; children: React.ReactNode;
@@ -183,8 +161,9 @@ function PageShell({ eyebrow, title, lede, children }: {
       <div className="mb-8 mt-3 max-w-[68ch] leading-relaxed text-muted-foreground">{lede}</div>
       {children}
       <p className="mt-10 max-w-[68ch] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">
-        Every row links to the country profile with its full conditions and primary sources.
-        Confidence below high is flagged inline. Informational only, not legal advice.
+        These lists narrow the field; they do not rank programmes. Open a country guide for
+        conditions, confidence, and primary sources. Personalized recommendations belong in Planner.
+        Informational only, not legal advice.
       </p>
     </main>
   );
@@ -280,8 +259,8 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
         Citizenship &amp; residence route types
       </h1>
       <p className="mb-8 mt-3 max-w-[68ch] text-muted-foreground">
-        Compare the main ways countries grant citizenship or residence. Open a route family to see it
-        across the atlas; where structured programme data is available, compare the programmes directly.
+        Explore the main ways countries grant citizenship or residence. Each route family narrows the
+        countries worth investigating; country guides carry the rules and evidence.
       </p>
       {shelves.map(shelf => (
         <section key={shelf.kind} className="mb-8">
@@ -303,187 +282,122 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
 export function CbiPage({ data }: { data: CitizenshipRoutesData }) {
   const slugByIso = buildCountrySlugMap(data.jurisdictions);
   const rows = data.routes.filter(r => r.mode === 'investment');
-  const byName = (a: CitizenshipRoute, b: CitizenshipRoute) => a.country.name.localeCompare(b.country.name);
-  const active = rows.filter(r => r.status === 'active').sort(byName);
-  const closed = rows.filter(r => r.status === 'inactive').sort(byName);
-  const pending = rows.filter(r => r.status === 'pending_verification').sort(byName);
-
-  const routeRow = (r: CitizenshipRoute) => (
-    <tr key={r.id}>
-      <td className={CELL} data-th="Country">
-        <CountryCell iso={r.country.iso_n3} name={r.country.name} slug={slugByIso.get(r.country.iso_n3)} />
-      </td>
-      <td className={CELL} data-th="Programme">
-        <span className="font-medium">{r.title}</span>
-        <ConfidenceChip confidence={r.confidence} />
-        <span className="mt-1 block max-w-[52ch] text-xs leading-relaxed text-muted-foreground">{r.summary}</span>
-      </td>
-      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.last_checked} data-th="Checked">
-        {r.last_checked}
-      </td>
-    </tr>
+  const active = groupByCountry(rows.filter(r => r.status === 'active'), slugByIso);
+  const closed = groupByCountry(rows.filter(r => r.status === 'inactive'), slugByIso);
+  const pending = groupByCountry(rows.filter(r => r.status === 'pending_verification'), slugByIso);
+  const detail = (group: CountryRouteGroup<CitizenshipRoute>) => (
+    `${group.routes.length} programme${group.routes.length === 1 ? '' : 's'} · direct citizenship`
   );
 
   return (
     <PageShell
       eyebrow="Citizenship by investment"
-      title="Passports you can buy. Every programme with a legal basis."
+      title="Citizenship by investment, by country."
       lede={(
         <p>
-          {active.length} jurisdictions currently grant citizenship directly for a qualifying
-          investment or contribution. Marketing lists run much longer than this one because they
-          count closed programmes, bills that never passed, and golden visas dressed up as
-          passports. Residence by investment is a different product with{' '}
+          {active.length} countries currently grant citizenship directly for a qualifying investment
+          or contribution. Start with the country; its guide carries the programme conditions,
+          exclusions, confidence, and primary sources. Residence by investment is different and has{' '}
           <a href="/golden-visas/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
         </p>
       )}
     >
-      <Section title={`Active programmes (${active.length})`}>
-        <TableWrap>
-          <thead><tr><Th label="Country" sortable /><Th label="Programme" /><Th label="Checked" sortable /></tr></thead>
-          <tbody className={LAST_ROW_FIX}>{active.map(routeRow)}</tbody>
-        </TableWrap>
-        <p className="mt-2 max-w-[80ch] font-mono text-[0.68rem] text-muted-foreground/80">
-          Eligibility can hinge on the passport you already hold: several programmes exclude
-          specific nationalities. The country profile carries those conditions where recorded.
-        </p>
-      </Section>
-      <Section
-        title={`Closed programmes (${closed.length})`}
-        lede="Programmes that ran and ended, kept visible because closure is the story: CBI is volatile, and a passport pitch built on a closed programme is the most common scam in this market."
-      >
-        <TableWrap>
-          <thead><tr><Th label="Country" sortable /><Th label="What happened" /><Th label="Checked" sortable /></tr></thead>
-          <tbody className={LAST_ROW_FIX}>{closed.map(routeRow)}</tbody>
-        </TableWrap>
-      </Section>
+      <ShortlistSection title="Active programmes" groups={active} detail={detail} />
+      {closed.length > 0 && (
+        <details className="group mt-8 rounded-lg border bg-card px-4 py-3">
+          <summary className="cursor-pointer list-none font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            Closed programmes <span className="text-muted-foreground/60">{closed.length}</span>
+          </summary>
+          <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-muted-foreground">
+            Kept as historical context because closed programmes are still frequently marketed.
+          </p>
+          <CountryShortlist groups={closed} detail={group => `${group.routes.length} closed programme${group.routes.length === 1 ? '' : 's'}`} />
+        </details>
+      )}
       {pending.length > 0 && (
-        <Section
-          title={`Statutory leads pending verification (${pending.length})`}
-          lede="Law on the books, but current operation unverified against official sources. Not recommendations."
-        >
-          <TableWrap>
-            <thead><tr><Th label="Country" sortable /><Th label="Status" /><Th label="Checked" sortable /></tr></thead>
-            <tbody className={LAST_ROW_FIX}>{pending.map(routeRow)}</tbody>
-          </TableWrap>
-        </Section>
+        <details className="group mt-3 rounded-lg border bg-card px-4 py-3">
+          <summary className="cursor-pointer list-none font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            Pending verification <span className="text-muted-foreground/60">{pending.length}</span>
+          </summary>
+          <p className="mt-2 text-sm text-muted-foreground">Statutory leads only—not recommendations.</p>
+          <CountryShortlist groups={pending} detail={group => `${group.routes.length} lead${group.routes.length === 1 ? '' : 's'}`} />
+        </details>
       )}
     </PageShell>
   );
 }
 
-// ── residence-route table pages (golden visa / digital nomad) ──
+// ── residence-route shortlists (golden visa / digital nomad) ──
 
-function residenceRow(r: ResidenceRoute, slug: string | undefined, money: (r: ResidenceRoute) => string | null, moneyHeader: string) {
-  const amount = money(r);
-  return (
-    <tr key={r.id}>
-      <td className={CELL} data-th="Country">
-        <CountryCell iso={r.country.iso_n3} name={r.country.name} slug={slug} />
-      </td>
-      <td className={CELL} data-th="Programme">
-        <span className="font-medium">{r.title}</span>
-        <ConfidenceChip confidence={r.confidence} />
-        <span className="mt-1 block max-w-[46ch] text-xs leading-relaxed text-muted-foreground">{firstSentence(r.summary)}</span>
-      </td>
-      <td className={`${CELL} whitespace-nowrap font-mono text-xs`} data-th={moneyHeader}>
-        {amount
-          ? <><span className="text-muted-foreground/60">from </span>{amount}</>
-          : <span className="text-muted-foreground/50" title="No amount recorded from the instrument">—</span>}
-      </td>
-      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.permit_duration_months ?? 0} data-th="Term">
-        {fmtTerm(r) ?? <span className="text-muted-foreground/50" title="Not yet read from the instrument">—</span>}
-      </td>
-      <td className={CELL} data-th="Counts toward"><LadderCell tier={ladderTier(r)} /></td>
-      <td className={`${CELL} whitespace-nowrap text-xs`} data-v={r.work_rights ?? 'zz'} data-th="Local work">
-        {r.work_rights
-          ? <span className="text-muted-foreground">{WORK_RIGHTS_LABELS[r.work_rights].long}</span>
-          : <span className="text-muted-foreground/50" title="Not yet read from the instrument">—</span>}
-      </td>
-      <td className={`${CELL} whitespace-nowrap font-mono text-xs text-muted-foreground`} data-v={r.last_checked} data-th="Checked">
-        {r.last_checked}
-      </td>
-    </tr>
-  );
+function groupTier(group: CountryRouteGroup<ResidenceRoute>): number {
+  return Math.max(...group.routes.map(ladderTier));
 }
 
-function ResidenceTablePage({ data, category, moneyHeader, money, moneyRecordedLabel, eyebrow, title, lede, endedLede }: {
+function residenceDetail(
+  group: CountryRouteGroup<ResidenceRoute>,
+  money: (route: ResidenceRoute) => string | null,
+): string {
+  const amounts = [...new Set(group.routes.map(money).filter((value): value is string => value !== null))];
+  const programmes = `${group.routes.length} programme${group.routes.length === 1 ? '' : 's'}`;
+  if (amounts.length === 1) return `${programmes} · from ${amounts[0]}`;
+  if (amounts.length > 1) return `${programmes} · entry thresholds vary`;
+  return programmes;
+}
+
+function ResidenceShortlistPage({ data, category, money, eyebrow, title, lede, endedLede }: {
   data: CitizenshipRoutesData;
   category: string;
-  moneyHeader: string;
   money: (r: ResidenceRoute) => string | null;
-  moneyRecordedLabel: string;
   eyebrow: string;
   title: string;
-  lede: (active: ResidenceRoute[], split: TierSplit) => React.ReactNode;
+  lede: (active: CountryRouteGroup<ResidenceRoute>[], split: TierSplit) => React.ReactNode;
   endedLede: string;
 }) {
   const slugByIso = buildCountrySlugMap(data.jurisdictions);
   const rows = (data.residence_routes ?? []).filter(r => r.category === category);
-  const byName = (a: ResidenceRoute, b: ResidenceRoute) => a.country.name.localeCompare(b.country.name);
-  const active = rows.filter(r => r.status === 'active').sort(byName);
-  const ended = rows.filter(r => r.status === 'inactive').sort(byName);
-  const split = tierSplit(active);
-  const withMoney = active.filter(r => money(r) !== null).length;
+  const active = groupByCountry(rows.filter(r => r.status === 'active'), slugByIso);
+  const ended = groupByCountry(rows.filter(r => r.status === 'inactive'), slugByIso);
+  const byTier = (tier: number) => active.filter(group => groupTier(group) === tier);
+  const split = {
+    cit: byTier(2).length,
+    pr: byTier(1).length,
+    tr: byTier(0).length,
+    total: active.length,
+  };
+  const detail = (group: CountryRouteGroup<ResidenceRoute>) => residenceDetail(group, money);
 
   return (
     <PageShell eyebrow={eyebrow} title={title} lede={lede(active, split)}>
-      <Section title={`Active programmes (${active.length})`}>
-        {/* The page's aggregate view: the same tier bar as the hub, so 100+
-            rows arrive pre-summarised instead of as an undifferentiated dump. */}
-        <div className="mt-4 max-w-[560px]">
-          <TierBar split={split} height="h-2" />
-          <p className="mt-1.5 font-mono text-[0.68rem] text-muted-foreground">
-            {tierCaption(split)} · {moneyRecordedLabel.replace('{n}', String(withMoney))}
-          </p>
-        </div>
-        <TableWrap>
-          <thead>
-            <tr>
-              <Th label="Country" sortable />
-              <Th label="Programme" />
-              <Th label={moneyHeader} />
-              <Th label="Term" sortable numeric />
-              <Th label="Counts toward" sortable numeric />
-              <Th label="Local work" sortable />
-              <Th label="Checked" sortable />
-            </tr>
-          </thead>
-          <tbody className={LAST_ROW_FIX}>
-            {active.map(r => residenceRow(r, slugByIso.get(r.country.iso_n3), money, moneyHeader))}
-          </tbody>
-        </TableWrap>
-        <p className="mt-2 max-w-[80ch] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">
-          "From" amounts are the statutory floor; many programmes band by age, family size, or
-          investment option, and the country profile carries the variants. Amounts are in each
-          programme's own currency and are not comparable across rows without conversion.
-          "Term" is one grant's validity; "renews" appears only where the instrument says so.
-          "Counts toward" states whose clock this permit runs: citizenship means time here counts
-          toward naturalization, not that the visa grants a passport. "Local work" is read from
-          the instrument, never inferred; a dash means not yet recorded, not "no". Eligibility can
-          also hinge on the passport you already hold. The country profile carries those
-          conditions where recorded.
-        </p>
-      </Section>
+      <div className="max-w-[560px] rounded-lg border bg-card p-4">
+        <TierBar split={split} height="h-2" />
+        <p className="mt-2 font-mono text-[0.68rem] text-muted-foreground">{tierCaption(split)}</p>
+      </div>
+      <ShortlistSection
+        title="Can feed citizenship"
+        description="The permit itself is not citizenship; qualifying time can count toward ordinary naturalization."
+        groups={byTier(2)}
+        detail={detail}
+      />
+      <ShortlistSection
+        title="Can lead to permanent residence"
+        description="A recorded path reaches permanent residence, but its time is not currently recorded as counting toward citizenship."
+        groups={byTier(1)}
+        detail={detail}
+      />
+      <ShortlistSection
+        title="Temporary stay only"
+        description="No PR or citizenship credit is currently recorded for these programmes."
+        groups={byTier(0)}
+        detail={detail}
+      />
       {ended.length > 0 && (
-        <Section title={`Ended programmes (${ended.length})`} lede={endedLede}>
-          <TableWrap>
-            <thead>
-              <tr><Th label="Country" sortable /><Th label="Programme" /><Th label="What happened" /></tr>
-            </thead>
-            <tbody className={LAST_ROW_FIX}>
-              {ended.map(r => (
-                <tr key={r.id}>
-                  <td className={CELL} data-th="Country">
-                    <CountryCell iso={r.country.iso_n3} name={r.country.name} slug={slugByIso.get(r.country.iso_n3)} />
-                  </td>
-                  <td className={`${CELL} font-medium`} data-th="Programme">{r.title}</td>
-                  <td className={`${CELL} max-w-[52ch] text-xs leading-relaxed text-muted-foreground`} data-th="What happened">{r.summary}</td>
-                </tr>
-              ))}
-            </tbody>
-          </TableWrap>
-        </Section>
+        <details className="group mt-8 rounded-lg border bg-card px-4 py-3">
+          <summary className="cursor-pointer list-none font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            Ended programmes <span className="text-muted-foreground/60">{ended.length}</span>
+          </summary>
+          <p className="mt-2 max-w-[68ch] text-sm leading-relaxed text-muted-foreground">{endedLede}</p>
+          <CountryShortlist groups={ended} detail={detail} />
+        </details>
       )}
     </PageShell>
   );
@@ -491,21 +405,17 @@ function ResidenceTablePage({ data, category, moneyHeader, money, moneyRecordedL
 
 export function GoldenVisaPage({ data }: { data: CitizenshipRoutesData }) {
   return (
-    <ResidenceTablePage
+    <ResidenceShortlistPage
       data={data}
       category="investment"
-      moneyHeader="Min. investment"
       money={r => fmtMoney(r.min_investment)}
-      moneyRecordedLabel="minimum recorded for {n}"
       eyebrow="Golden visas"
-      title="Residence by investment, with the ladder made explicit."
+      title="Residence by investment, grouped by outcome."
       lede={(active, split) => (
         <p>
-          {active.length} active programmes grant residence for a qualifying investment. The entry
-          price is the least interesting column here: what separates these programmes is whose
-          clock they run. Time on {split.cit} of them counts toward citizenship, {split.pr} count
-          toward permanent residence, and {split.tr} are pure temporary residence with no credit at
-          all. Direct citizenship for investment is a much shorter list with{' '}
+          {active.length} countries currently offer a mapped residence-by-investment route. Start
+          with what the permit can become, then open a country guide for its investment options,
+          presence rules, and sources. Direct citizenship for investment has{' '}
           <a href="/citizenship-by-investment/" className="underline underline-offset-2 hover:text-foreground">its own page</a>.
         </p>
       )}
@@ -516,28 +426,19 @@ export function GoldenVisaPage({ data }: { data: CitizenshipRoutesData }) {
 
 export function NomadVisaPage({ data }: { data: CitizenshipRoutesData }) {
   return (
-    <ResidenceTablePage
+    <ResidenceShortlistPage
       data={data}
       category="digital_nomad"
-      moneyHeader="Min. monthly income"
       money={r => fmtMoney(r.min_income_monthly)}
-      moneyRecordedLabel="income floor recorded for {n}"
       eyebrow="Digital nomad visas"
-      title="Remote-work visas, sorted by what they actually lead to."
-      lede={(active, split) => {
-        const exceptions = [...new Set(active
-          .filter(r => r.counts_toward_permanent_residence || r.counts_toward_naturalization)
-          .map(r => r.country.name))].sort();
-        return (
-          <p>
-            {active.length} active programmes admit remote workers on foreign income. Most are pure
-            temporary residence: time-boxed stays whose years count toward nothing.
-            {' '}{exceptions.length > 0
-              ? `The exceptions, where the clock genuinely runs: ${exceptions.join(', ')}. If a nomad visa is meant to become a settlement strategy, that short list is the strategy.`
-              : 'None currently counts toward settlement.'}
-          </p>
-        );
-      }}
+      title="Digital nomad visas, grouped by outcome."
+      lede={(active, split) => (
+        <p>
+          {active.length} countries currently offer a mapped remote-work permit. Most are temporary
+          stays; {split.cit + split.pr} have a recorded path beyond that. Use the shortlist to choose
+          countries worth investigating, then read the country guide for the actual rules.
+        </p>
+      )}
       endedLede="Several pandemic-era nomad programmes have quietly lapsed. Each ended row's run dates live on the country profile."
     />
   );
