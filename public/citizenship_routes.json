@@ -46441,7 +46441,7 @@
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Portugal visas portal (MNE) — D8",
+          "title": "Portugal visas portal (MNE) — D7",
           "url": "https://vistos.mne.gov.pt/"
         }
       ]
@@ -46455,19 +46455,19 @@
       "category": "digital_nomad",
       "status": "active",
       "title": "D8 digital nomad residence visa",
-      "summary": "Residence for remote workers and self-employed with foreign-source income.",
+      "summary": "Residence visa and permit under Lei 23/2007 art. 61.º-B for work performed remotely for employers or clients outside Portugal, with average monthly income of at least four times the minimum wage (EUR 3,680 at the 2026 RMMG). Two-year permit, renewable for three-year periods. Permit time is ordinary legal residence: PR at five years, and the naturalization clock now runs seven years for CPLP and EU nationals or ten for everyone else.",
       "outcome": "residence",
       "counts_toward_permanent_residence": true,
       "counts_toward_naturalization": true,
       "min_investment": null,
       "min_income_monthly": {
-        "amount": 3480,
+        "amount": 3680,
         "currency": "EUR"
       },
       "physical_presence_days_per_year": null,
-      "work_rights": null,
-      "permit_duration_months": null,
-      "permit_renewable": null,
+      "work_rights": "remote_only",
+      "permit_duration_months": 24,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -46484,12 +46484,12 @@
           "eligibility_months": 60
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Portugal visas portal (MNE) — D8",
-          "url": "https://vistos.mne.gov.pt/"
+          "title": "Lei 23/2007, art. 61.º-B — atividade profissional prestada de forma remota (texto consolidado, PGDL)",
+          "url": "https://www.pgdlisboa.pt/leis/lei_mostra_articulado.php?nid=920&tabela=leis"
         }
       ]
     },
@@ -47881,19 +47881,19 @@
       "category": "digital_nomad",
       "status": "active",
       "title": "Digital nomad (international teleworking) residence",
-      "summary": "Residence for non-EU remote workers under the 2022 Startups Law; unaffected by the golden-visa repeal.",
+      "summary": "International-teleworking authorization under Ley 14/2013 arts. 74 bis-74 quinquies (added by the 2022 Startups Law): gross income of at least 200% of the SMI (EUR 2,442 at the 2026 minimum wage), residence authorization up to three years renewable in two-year periods. Employees may work only for companies outside Spain; the self-employed may take Spanish clients up to 20% of their activity. Time counts toward long-term residence at five years and toward naturalization (ten years standard, two for Ibero-American nationals).",
       "outcome": "residence",
       "counts_toward_permanent_residence": true,
       "counts_toward_naturalization": true,
       "min_investment": null,
       "min_income_monthly": {
-        "amount": 2760,
+        "amount": 2442,
         "currency": "EUR"
       },
       "physical_presence_days_per_year": null,
-      "work_rights": null,
-      "permit_duration_months": null,
-      "permit_renewable": null,
+      "work_rights": "remote_only",
+      "permit_duration_months": 36,
+      "permit_renewable": true,
       "facts": {
         "canonical": true,
         "variant_count": 1,
@@ -47910,12 +47910,12 @@
           "eligibility_months": 60
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Spain — Ministerio de Inclusión (extranjería)",
-          "url": "https://extranjeros.inclusion.gob.es/"
+          "title": "Ley 14/2013, arts. 74 bis-74 quinquies — teletrabajo internacional (BOE consolidado)",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-10074"
         }
       ]
     },
