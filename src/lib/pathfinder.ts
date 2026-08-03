@@ -66,23 +66,27 @@ export interface PathRec {
 /**
  * Edge budget (bloc expansions are single 0-yr edges).
  *
- * Six, chosen by measurement rather than taste. At 4 the flagship chain the
- * planner exists to find was unreachable: a US passport could not get to Brazil
- * or Argentina at all, because golden visa -> PR -> naturalisation -> Mercosur
- * settlement is six edges. Measured cost per profile across all 163 citizenship
- * seeds (p50 / worst, worst case being EU passports with the largest frontier):
+ * Eight, chosen by measurement. At four the chain this planner exists to find
+ * was unreachable: a US passport could not get to Brazil or Argentina at all,
+ * because golden visa -> PR -> naturalisation -> Mercosur settlement runs six to
+ * eight edges. Raising the budget only became affordable after the frontier
+ * became a real priority queue (see StateQueue): the previous array was
+ * re-sorted on every pop, so depth looked exponentially expensive when the cost
+ * was actually the queue.
  *
- *   4 hops: 0.2ms /   2ms  — US reaches 76 nodes, no Mercosur chain
- *   5 hops: 0.2ms /  82ms  — 93 nodes, chain still unreachable
- *   6 hops: 0.2ms / 209ms  — 94 nodes, chain reachable  <- here
- *   7 hops: seconds        — +1% reachability for ~10x cost
+ * Measured after that fix, per profile (worst case = EU passports, largest
+ * frontier), against the 101-rule edge set:
  *
- * The Pareto state space grows super-exponentially past six, so this is a cliff
- * edge, not a dial to turn up later. Raising it needs a cheaper dominance check
- * first, not just a bigger number. tests/pathfinder.test.ts pins both the chain
- * and a wall-clock ceiling.
+ *    6 hops:  51ms worst — 114 reachable, Brazil yes, Argentina no
+ *    8 hops: 566ms worst — 142 reachable, Brazil yes, Argentina yes  <- here
+ *   10 hops: 4.9s  worst — 144 reachable (+2 for ~9x the cost)
+ *
+ * So eight buys the full Mercosur chain and 87% more reachable outcomes than the
+ * original four, while staying under a second for the worst realistic profile.
+ * tests/pathfinder.test.ts pins the chain, a reachability floor and a wall-clock
+ * ceiling, so a regression in any of the three fails rather than degrades.
  */
-const MAX_HOPS = 6;
+const MAX_HOPS = 8;
 
 function needsSatisfied(
   needs: string[],
@@ -162,6 +166,55 @@ function withoutNode(state: State): PathInfo {
  * Cheapest (by years, then hops) path from the profile's held statuses to
  * every reachable cit:* node. Returns a map target-node → path info.
  */
+/**
+ * Binary min-heap over the search frontier.
+ *
+ * The frontier used to be a plain array re-sorted on every pop, so a search cost
+ * O(n log n) per step and the whole traversal degraded to roughly O(n^2 log n).
+ * That is what made a six-hop budget look unaffordable (3.2s for an EU profile);
+ * it was the queue, not the graph. Popping is O(log n) here.
+ */
+class StateQueue {
+  private readonly items: State[] = [];
+
+  get size(): number {
+    return this.items.length;
+  }
+
+  push(state: State): void {
+    const items = this.items;
+    items.push(state);
+    let index = items.length - 1;
+    while (index > 0) {
+      const parent = (index - 1) >> 1;
+      if (compareStates(items[index], items[parent]) >= 0) break;
+      [items[index], items[parent]] = [items[parent], items[index]];
+      index = parent;
+    }
+  }
+
+  pop(): State | undefined {
+    const items = this.items;
+    if (items.length === 0) return undefined;
+    const top = items[0];
+    const last = items.pop()!;
+    if (items.length === 0) return top;
+    items[0] = last;
+    let index = 0;
+    for (;;) {
+      const left = index * 2 + 1;
+      const right = left + 1;
+      let smallest = index;
+      if (left < items.length && compareStates(items[left], items[smallest]) < 0) smallest = left;
+      if (right < items.length && compareStates(items[right], items[smallest]) < 0) smallest = right;
+      if (smallest === index) break;
+      [items[index], items[smallest]] = [items[smallest], items[index]];
+      index = smallest;
+    }
+    return top;
+  }
+}
+
 export function shortestPaths(
   profile: Profile,
   edges: GraphEdge[],
@@ -189,7 +242,7 @@ export function shortestPaths(
   };
   const bestByState = new Map<string, State[]>();
   const best = new Map<string, State>();
-  const queue: State[] = [];
+  const queue = new StateQueue();
 
   const seed = (node: string) => queue.push({ ...base, node });
   for (const f of profile.flags) {
@@ -203,10 +256,9 @@ export function shortestPaths(
     }
   }
 
-  while (queue.length) {
-    // Dijkstra: lowest years first, then fewest hops
-    queue.sort(compareStates);
-    const cur = queue.shift()!;
+  while (queue.size) {
+    // Dijkstra: lowest years first, then fewest hops (the heap keeps that order)
+    const cur = queue.pop()!;
     const stateKey = `${cur.node}|${cur.citizenships.join(',')}`;
     const seenStates = bestByState.get(stateKey) ?? [];
     if (seenStates.some(seen => dominates(seen, cur))) continue;
@@ -219,8 +271,9 @@ export function shortestPaths(
     if (!seenNode || compareStates(cur, seenNode) < 0) best.set(cur.node, cur);
 
     if (cur.hops >= MAX_HOPS) continue;
+    const held = new Set(cur.citizenships);
     for (const e of byFrom.get(cur.node) ?? []) {
-      if (needsSatisfied(e.needs ?? [], profile, new Set(cur.citizenships))) {
+      if (needsSatisfied(e.needs ?? [], profile, held)) {
         queue.push(transition(cur, e));
       }
     }
