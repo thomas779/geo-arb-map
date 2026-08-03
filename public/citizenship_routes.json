@@ -10454,7 +10454,7 @@
           "label": "BOTC naturalization after qualifying residence",
           "allocation": "discretionary",
           "eligibility_months": 60,
-          "note": "The general BOTC naturalization schedule uses five years. From 1 May 2026, Caymanian status based on naturalization generally requires 20 years lawful ordinary residence or 10 years after BOTC naturalization or registration."
+          "note": "The general BOTC naturalization schedule uses five years. Caymanian-status figures read from Act 14 of 2025 s.10 (commenced 1 May 2026 by SL 18 of 2026): right to be Caymanian requires 20 years lawful ordinary residence (was 15) or 10 years after BOTC naturalisation or registration (was 5); spouses of Caymanians need 15 years, but only for marriages or civil partnerships entered on or after 1 May 2026 — earlier ones keep 7 years (5 pre-2004). The same Act renames the principal Act the Caymanian Protection Act."
         }
       ],
       "confidence": "high",
@@ -10471,6 +10471,10 @@
         {
           "title": "Cayman Islands Government — Immigration reform",
           "url": "https://gov.ky/web/mcei/immigrationreform"
+        },
+        {
+          "title": "Immigration (Transition) (Amendment and Validation) Act, 2025 (Act 14 of 2025) — legislation.gov.ky",
+          "url": "https://legislation.gov.ky/cms/images/LEGISLATION/AMENDING/2025/2025-0014A/2025-0014A.pdf"
         }
       ]
     },
