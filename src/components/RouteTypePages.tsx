@@ -174,29 +174,13 @@ function PageShell({ eyebrow, title, lede, children }: {
   eyebrow: string; title: string; lede: React.ReactNode; children: React.ReactNode;
 }) {
   return (
-    <main className="mx-auto max-w-[1120px] px-4 py-10 sm:px-6 sm:py-14">
-      <nav className="mb-8 font-mono text-xs text-muted-foreground">
+    <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
+      <nav className="mb-6 font-mono text-xs text-muted-foreground">
         <a href="/" className="underline underline-offset-2">Flag Paths</a> › <a href="/route-types/" className="underline underline-offset-2">Route types</a>
       </nav>
-      <div className="grid gap-8 border-b pb-8 md:grid-cols-[1fr_260px] md:items-end">
-        <div>
-          <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">{eyebrow}</p>
-          <h1 className="mt-3 max-w-[760px] font-heading text-4xl font-bold leading-[1.06] sm:text-5xl">{title}</h1>
-          <div className="mt-4 max-w-[68ch] text-base leading-relaxed text-muted-foreground">{lede}</div>
-        </div>
-        <div className="hidden gap-px overflow-hidden rounded-lg border bg-border md:grid">
-          {[
-            ['1', 'Compare the typed fields'],
-            ['2', 'Open the country guide'],
-            ['3', 'Verify the primary source'],
-          ].map(([step, label]) => (
-            <div key={step} className="grid grid-cols-[24px_1fr] items-center gap-2 bg-card px-3 py-2.5">
-              <span className="font-mono text-[0.62rem] font-semibold text-primary">{step}</span>
-              <span className="text-xs text-muted-foreground">{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">{eyebrow}</p>
+      <h1 className="mt-2 max-w-[760px] font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">{title}</h1>
+      <div className="mb-8 mt-3 max-w-[68ch] leading-relaxed text-muted-foreground">{lede}</div>
       {children}
       <p className="mt-10 max-w-[68ch] font-mono text-[0.68rem] leading-relaxed text-muted-foreground/80">
         Every row links to the country profile with its full conditions and primary sources.
@@ -245,37 +229,32 @@ function HubCard({ cls, data, count }: { cls: RouteClass; data: CitizenshipRoute
     ? { cit: outcomes.cit.size, pr: outcomes.pr.size, tr: outcomes.tr.size, total: outcomes.all.size }
     : null;
   return (
-    <article className="group flex min-h-[258px] flex-col rounded-xl border bg-card p-5 transition-colors hover:border-primary/45">
-      <div className="flex items-start justify-between gap-4">
-        <span className="rounded-full border px-2 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-          {cls.kind === 'citizenship' ? 'Passport route' : 'Residence route'}
-        </span>
-        <span className="text-right">
-          <span className="block font-heading text-3xl font-bold leading-none tabular-nums">{count}</span>
-          <span className="font-mono text-[0.56rem] font-semibold uppercase tracking-[0.14em] text-muted-foreground">countries</span>
-        </span>
+    <article className="group flex h-full flex-col rounded-lg border bg-card px-4 py-3.5 transition-colors hover:border-primary">
+      <div className="flex items-start justify-between gap-3">
+        <h3 className="font-heading text-xl font-semibold leading-tight">
+          <a href={primaryHref} className="decoration-primary underline-offset-4 group-hover:underline">
+            {cls.label}
+          </a>
+        </h3>
+        <span className="shrink-0 font-mono text-[0.66rem] text-muted-foreground">{count} countries</span>
       </div>
-      <h3 className="mt-5 font-heading text-2xl font-semibold leading-tight">
-        <a href={primaryHref} className="decoration-primary underline-offset-4 group-hover:underline">
-          {cls.label}
-        </a>
-      </h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{HUB_DESCRIPTION[cls.id] ?? cls.description}</p>
-      <div className="mt-auto pt-5">
+      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{HUB_DESCRIPTION[cls.id] ?? cls.description}</p>
+      <div className="mt-auto pt-3.5">
         {split && split.total > 0 ? (
           <>
-            <TierBar split={split} height="h-2" />
+            <TierBar split={split} />
             <p className="mt-1.5 font-mono text-[0.6rem] leading-snug text-muted-foreground">{tierCaption(split)}</p>
           </>
         ) : (
-          <div className="flex items-center gap-2 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-            <span className="h-2 w-12 rounded-full bg-primary" aria-hidden /> Citizenship outcome
-          </div>
+          <p className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+            Citizenship outcome
+          </p>
         )}
-        <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-[0.68rem] font-medium">
-          {table && <a href={table} className="text-primary hover:underline hover:underline-offset-2">Compare programmes →</a>}
-          <a href={`/?class=${cls.id}`} className="text-muted-foreground hover:text-foreground hover:underline hover:underline-offset-2">Show on atlas →</a>
-        </div>
+        {table && (
+          <a href={table} className="mt-3 inline-block font-mono text-[0.68rem] font-medium text-primary hover:underline hover:underline-offset-2">
+            Compare programmes →
+          </a>
+        )}
       </div>
     </article>
   );
@@ -296,35 +275,19 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
     },
   ];
   return (
-    <main className="mx-auto max-w-[1120px] px-4 py-10 sm:px-6 sm:py-14">
-      <nav className="mb-8 font-mono text-xs text-muted-foreground">
-        <a href="/" className="underline underline-offset-2">Flag Paths</a> › Route types
-      </nav>
-      <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">Route types</p>
-      <h1 className="mt-3 max-w-[800px] font-heading text-4xl font-bold leading-[1.06] sm:text-6xl">
-        Choose the outcome first. Then compare the route.
+    <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
+      <h1 className="font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">
+        Citizenship &amp; residence route types
       </h1>
-      <div className="mt-5 grid gap-6 border-b pb-8 md:grid-cols-[1fr_380px] md:items-end">
-        <p className="max-w-[66ch] text-base leading-relaxed text-muted-foreground">
-          Money, ancestry, residence, or skills going in. A permit, a settlement right, or a passport
-          coming out. Pick a family to compare programmes, or paint every matching country on the atlas.
-        </p>
-        <div className="grid grid-cols-3 gap-px overflow-hidden rounded-lg border bg-border text-center">
-          {['Temporary residence', 'Permanent residence', 'Citizenship'].map((label, index) => (
-            <div key={label} className="bg-card px-2 py-3">
-              <span className="mx-auto mb-2 block h-1.5 w-10 rounded-full bg-primary" style={{ opacity: 0.35 + index * 0.3 }} aria-hidden />
-              <span className="font-mono text-[0.56rem] font-semibold uppercase leading-tight tracking-[0.1em] text-muted-foreground">{label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      <p className="mb-8 mt-3 max-w-[68ch] text-muted-foreground">
+        Compare the main ways countries grant citizenship or residence. Open a route family to see it
+        across the atlas; where structured programme data is available, compare the programmes directly.
+      </p>
       {shelves.map(shelf => (
-        <section key={shelf.kind} className="mt-12">
-          <div className="grid gap-2 sm:grid-cols-[220px_1fr] sm:items-start">
-            <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-foreground">{shelf.label}</h2>
-            <p className="max-w-[68ch] text-sm leading-relaxed text-muted-foreground">{shelf.intro}</p>
-          </div>
-          <div className="mt-5 grid gap-3 md:grid-cols-2">
+        <section key={shelf.kind} className="mb-8">
+          <h2 className="mb-1 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">{shelf.label}</h2>
+          <p className="mb-3 max-w-[68ch] text-sm leading-relaxed text-muted-foreground">{shelf.intro}</p>
+          <div className="grid auto-rows-fr gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {ROUTE_CLASSES.filter(cls => cls.kind === shelf.kind).map(cls => (
               <HubCard key={cls.id} cls={cls} data={data} count={counts.get(cls.id) ?? 0} />
             ))}
