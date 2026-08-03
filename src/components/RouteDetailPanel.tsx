@@ -6,7 +6,7 @@ import {
   Route,
   X,
 } from 'lucide-react';
-import type { BilateralLane, Bloc, BlocsData, CitizenshipRoutesData } from '../types';
+import type { BilateralLane, Bloc, BlocsData, AtlasIndexData } from '../types';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/components/theme-provider';
@@ -22,7 +22,7 @@ interface Props {
   blocIds: string[];
   laneId: string | null;
   routeClassId?: string | null;
-  citizenshipRoutes?: CitizenshipRoutesData | null;
+  citizenshipRoutes?: AtlasIndexData | null;
   onClose: () => void;
   onSelectCountry: (iso: string, name: string) => void;
 }
@@ -33,7 +33,7 @@ function RouteClassDetail({
   onSelectCountry,
 }: {
   routeClassId: string;
-  citizenshipRoutes: CitizenshipRoutesData;
+  citizenshipRoutes: AtlasIndexData;
   onSelectCountry: (iso: string, name: string) => void;
 }) {
   const routeClass = routeClassById(routeClassId)!;

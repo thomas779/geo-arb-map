@@ -42,11 +42,11 @@ export function countryLabel(name: string, isoN3: string): string {
  * Country-name lookup for the Atlas browser. Prefix matches rank before loose
  * matches so short queries behave like navigation rather than document search.
  */
-export function findJurisdictions(
-  jurisdictions: CitizenshipRoutesData['jurisdictions'],
+export function findJurisdictions<T extends { iso_n3: string; name: string }>(
+  jurisdictions: T[],
   query: string,
   limit = 8,
-): CitizenshipRoutesData['jurisdictions'] {
+): T[] {
   const normalized = query.trim().toLocaleLowerCase();
   if (!normalized) return [];
 

@@ -1,4 +1,4 @@
-import type { ResidenceCategory, ResidenceRoute } from '@/types';
+import type { ResidenceCategory, ResidenceRouteSummary } from '@/types';
 
 /** Shared labels for residence categories (country pages + panels). */
 export const RESIDENCE_CATEGORY_LABELS: Record<ResidenceCategory, string> = {
@@ -49,7 +49,7 @@ export const HEADLINE_CATEGORIES: ReadonlyArray<{ category: ResidenceCategory; a
  * VERIFIED (a verified_negative row exists) are excluded here: they get the
  * stronger sourced statement from verifiedResidenceNegatives instead.
  */
-export function derivedResidenceAbsences(residence: ResidenceRoute[]): string[] {
+export function derivedResidenceAbsences(residence: ResidenceRouteSummary[]): string[] {
   if (!residence.length) return [];
   const present = new Set(residence.map(route => route.category));
   return HEADLINE_CATEGORIES.filter(h => !present.has(h.category)).map(h => h.absenceLabel);
@@ -64,12 +64,12 @@ export function derivedResidenceAbsences(residence: ResidenceRoute[]): string[] 
  * Cards are reserved for things with a story — active routes and lapsed
  * programmes (`inactive`, which carry their run dates).
  */
-export function verifiedResidenceNegatives(residence: ResidenceRoute[]): ResidenceRoute[] {
+export function verifiedResidenceNegatives<T extends ResidenceRouteSummary>(residence: T[]): T[] {
   return residence.filter(route => route.status === 'verified_negative');
 }
 
 /** Everything that should render as a card: active, lapsed, pending. */
-export function residenceCardRoutes(residence: ResidenceRoute[]): ResidenceRoute[] {
+export function residenceCardRoutes<T extends ResidenceRouteSummary>(residence: T[]): T[] {
   return residence.filter(route => route.status !== 'verified_negative');
 }
 
@@ -112,7 +112,7 @@ export const WORK_RIGHTS_LABELS: Record<string, { long: string; short: string }>
 };
 
 export function residenceLadderBadges(
-  route: ResidenceRoute,
+  route: ResidenceRouteSummary,
   { variant = 'long' }: { variant?: 'long' | 'short' } = {},
 ): Array<{
   key: string;

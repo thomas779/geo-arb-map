@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Armchair, Award, Banknote, Check, ChevronDown, Fingerprint, Home, Hourglass, Laptop, Search, Users } from 'lucide-react';
 import { ROUTE_CLASSES } from '@/lib/route-classes';
-import type { AppState, BilateralLane, Bloc, BlocsData, CitizenshipRoutesData } from '../types';
+import type { AppState, BilateralLane, Bloc, BlocsData, AtlasIndexData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -82,7 +82,7 @@ interface Props {
   onRouteClass: (id: string | null) => void;
   /** Countries with >=1 active route, per class id — the row count badges. */
   routeClassCounts: Map<string, number>;
-  citizenshipRoutes: CitizenshipRoutesData | null;
+  citizenshipRoutes: AtlasIndexData | null;
   onCountry: (iso: string, name: string) => void;
 }
 

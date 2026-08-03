@@ -11,7 +11,7 @@ import {
   ShieldCheck,
   Sun,
 } from 'lucide-react';
-import type { AppState, BlocsData, CitizenshipRoutesData, DataReleaseMeta } from './types';
+import type { AppState, BlocsData, AtlasIndexData, CountrySliceData, DataReleaseMeta } from './types';
 import * as url from './url';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -74,7 +74,8 @@ export default function App() {
   const [state, setState] = useState<AppState>(initialState);
   const [data, setData] = useState<BlocsData | null>(null);
   const [profile, setProfile] = useState<Profile>(initialProfile);
-  const [citizenshipRoutes, setCitizenshipRoutes] = useState<CitizenshipRoutesData | null>(null);
+  const [citizenshipRoutes, setCitizenshipRoutes] = useState<AtlasIndexData | null>(null);
+  const [countrySlice, setCountrySlice] = useState<CountrySliceData | null>(null);
   const [dataRelease, setDataRelease] = useState<DataReleaseMeta | null>(null);
   const [infoSection, setInfoSection] = useState<TrustSection | null>(() => url.readInfo());
   const [leftPanelOpen, setLeftPanelOpen] = useState(true);
@@ -163,13 +164,36 @@ export default function App() {
         }));
       })
       .catch(err => { console.error('Failed to load blocs_data.json:', err); setLoadError(true); });
-    fetchJson<CitizenshipRoutesData>('citizenship_routes.json')
+    fetchJson<AtlasIndexData>('atlas-index.json')
       .then((routes) => setCitizenshipRoutes(routes))
-      .catch(err => { console.error('Failed to load citizenship_routes.json:', err); setLoadError(true); });
+      .catch(err => { console.error('Failed to load atlas-index.json:', err); setLoadError(true); });
     fetchJson<DataReleaseMeta>('data_release.json')
       .then((release) => setDataRelease(release))
       .catch(err => { console.error('Failed to load data_release.json:', err); setLoadError(true); });
   }, []);
+
+  // The country profile is the only view that needs prose bodies, so it pulls
+  // that one country's slice (~3KB gzipped) instead of the browser preloading
+  // all 240 jurisdictions of detail up front.
+  const countrySlug = state.view === 'countries'
+    ? /^\/country\/([^/]+)\/?$/.exec(window.location.pathname)?.[1] ?? null
+    : null;
+  useEffect(() => {
+    if (!countrySlug) {
+      setCountrySlice(null);
+      return;
+    }
+    let cancelled = false;
+    fetch(`${import.meta.env.BASE_URL}country/${countrySlug}/data.json`)
+      .then(res => {
+        const type = res.headers.get('content-type') ?? '';
+        if (!res.ok || !type.includes('json')) throw new Error(`slice ${countrySlug}: ${res.status}`);
+        return res.json() as Promise<CountrySliceData>;
+      })
+      .then(slice => { if (!cancelled) setCountrySlice(slice); })
+      .catch(err => { if (!cancelled) { console.error('Failed to load country slice:', err); setCountrySlice(null); } });
+    return () => { cancelled = true; };
+  }, [countrySlug]);
 
   useEffect(() => {
     url.sync(state);
@@ -416,12 +440,16 @@ export default function App() {
             <PlannerPreview data={data} />
           )}
           {state.view === 'countries' && (() => {
-            const slug = /^\/country\/([^/]+)\/?$/.exec(window.location.pathname)?.[1] ?? null;
-            const iso = slug && citizenshipRoutes
-              ? buildSlugToIso(citizenshipRoutes.jurisdictions).get(slug)
-              : null;
-            const profile = iso && citizenshipRoutes && data
-              ? deriveCountryProfile(iso, citizenshipRoutes, data)
+            // Rebuild the corpus shape deriveCountryProfile expects from the
+            // index meta plus this one country's slice.
+            const jurisdiction = countrySlice?.jurisdiction ?? null;
+            const profile = jurisdiction && citizenshipRoutes && data
+              ? deriveCountryProfile(jurisdiction.iso_n3, {
+                  meta: citizenshipRoutes.meta,
+                  jurisdictions: [jurisdiction],
+                  routes: countrySlice!.routes,
+                  residence_routes: countrySlice!.residence_routes,
+                }, data)
               : null;
             return (
               <div className="absolute inset-0 z-30 overflow-y-auto bg-background">

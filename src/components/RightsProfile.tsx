@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import type { BilateralLane, Bloc, BlocRights, BlocsData, CitizenshipRoutesData } from '@/types';
+import type { AtlasIndexData, BilateralLane, Bloc, BlocRights, BlocsData } from '@/types';
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
 import { ExternalSourceLink } from '@/components/ExternalSourceLink';
@@ -82,7 +82,7 @@ export function routeLanesForPages(_mobility: BlocsData): BilateralLane[] {
 export function deriveBlocProfile(
   id: string,
   mobility: BlocsData,
-  citizenship: CitizenshipRoutesData,
+  citizenship: AtlasIndexData,
 ): BlocProfileData | null {
   const bloc = mobility.blocs.find(b => b.id === id);
   if (!bloc) return null;
@@ -113,7 +113,7 @@ export function deriveBlocProfile(
 export function deriveRouteProfile(
   id: string,
   mobility: BlocsData,
-  citizenship: CitizenshipRoutesData,
+  citizenship: AtlasIndexData,
 ): RouteProfileData | null {
   const lane = mobility.bilateral_lanes.find(l => l.id === id);
   if (!lane) return null;

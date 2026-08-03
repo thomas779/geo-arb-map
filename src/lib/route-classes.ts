@@ -1,4 +1,4 @@
-import type { CitizenshipRoutesData, ResidenceCategory } from '@/types';
+import type { AtlasIndexData, ResidenceCategory } from '@/types';
 
 /**
  * Route-class browse (issue #129): paint jurisdictions that have at least one
@@ -85,7 +85,7 @@ export interface RouteClassIsos {
 
 export function isosForRouteClass(
   routeClass: RouteClass,
-  data: CitizenshipRoutesData,
+  data: AtlasIndexData,
 ): RouteClassIsos {
   const best = new Map<string, 'tr' | 'pr' | 'cit'>();
   const rank = { tr: 0, pr: 1, cit: 2 } as const;

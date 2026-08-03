@@ -157,12 +157,7 @@ export interface JurisdictionDualNationality {
   detail: string;
 }
 
-export interface CitizenshipRoute {
-  id: string;
-  country: Member;
-  mode: CitizenshipAcquisitionMode;
-  status: CitizenshipRouteStatus;
-  title: string;
+export interface CitizenshipRoute extends CitizenshipRouteSummary {
   summary: string;
   facts: Record<string, unknown>;
   /** Explicit nationality limits for direct CBI; absent = not recorded. */
@@ -190,17 +185,8 @@ export interface ResidenceMoney {
   currency: string;
 }
 
-export interface ResidenceRoute {
-  id: string;
-  country: Member;
-  category: ResidenceCategory;
-  status: CitizenshipRouteStatus;
-  title: string;
+export interface ResidenceRoute extends ResidenceRouteSummary {
   summary: string;
-  /** Best outcome across variants: permanent_residence if any variant reaches PR, else residence. */
-  outcome: 'residence' | 'permanent_residence';
-  counts_toward_permanent_residence: boolean;
-  counts_toward_naturalization: boolean;
   min_investment: ResidenceMoney | null;
   min_income_monthly: ResidenceMoney | null;
   physical_presence_days_per_year: number | null;
@@ -217,6 +203,62 @@ export interface ResidenceRoute {
   confidence: 'high' | 'medium' | 'low';
   last_checked: string;
   sources: CitizenshipRouteSource[];
+}
+
+/**
+ * What the atlas itself needs from a route: enough to paint the map, filter by
+ * class, list a country and label a panel row. The prose bodies (summary,
+ * sources, facts, pathways) are NOT here, because the browser loads
+ * atlas-index.json (27KB gzipped) rather than the full corpus (178KB), and
+ * those bodies are served per country from /country/<slug>/data.json.
+ *
+ * `CitizenshipRoute` extends this, so anything typed on the summary accepts the
+ * full corpus too: build-time code (country pages, comparison tables) keeps
+ * using the richer type without a second code path.
+ */
+export interface CitizenshipRouteSummary {
+  id: string;
+  country: Member;
+  mode: CitizenshipAcquisitionMode;
+  status: CitizenshipRouteStatus;
+  title: string;
+  confidence: 'high' | 'medium' | 'low';
+  last_checked: string;
+}
+
+export interface ResidenceRouteSummary {
+  id: string;
+  country: Member;
+  category: ResidenceCategory;
+  status: CitizenshipRouteStatus;
+  title: string;
+  outcome: 'residence' | 'permanent_residence';
+  counts_toward_permanent_residence: boolean;
+  counts_toward_naturalization: boolean;
+  /** Local work access; the panel's ladder chips read it, so it rides in the index. */
+  work_rights?: 'full' | 'employer_sponsored' | 'self_employment' | 'remote_only' | 'none' | null;
+  confidence: 'high' | 'medium' | 'low';
+  last_checked: string;
+}
+
+/** The shape served at /country/<slug>/data.json: one jurisdiction, full detail. */
+export interface CountrySliceData {
+  meta: { shape: string; release_id?: string; last_updated: string; canonical: string; index: string };
+  jurisdiction: CitizenshipRoutesData['jurisdictions'][number] | null;
+  routes: CitizenshipRoute[];
+  residence_routes: ResidenceRoute[];
+}
+
+/** The shape served at /atlas-index.json: a strict projection of the corpus. */
+export interface AtlasIndexData {
+  meta: CitizenshipRoutesData['meta'];
+  jurisdictions: Array<{
+    iso_n3: string;
+    name: string;
+    coverage: Record<CitizenshipAcquisitionMode, CitizenshipCoverageState>;
+  }>;
+  routes: CitizenshipRouteSummary[];
+  residence_routes?: ResidenceRouteSummary[];
 }
 
 export interface CitizenshipRoutesData {

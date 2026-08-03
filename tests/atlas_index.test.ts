@@ -20,20 +20,25 @@ describe('atlas index and country slices', () => {
     // The protection boundary: prose and provenance live only in the slices.
     // If a body field creeps into the index, the bulk corpus is public again by
     // accident and first paint balloons back toward 1.4MB.
-    const bodyFields = ['summary', 'title', 'sources', 'pathways', 'facts'];
+    // Titles ride along so the panel needs no extra fetch; the prose and
+    // provenance that make the corpus valuable do not.
+    const bodyFields = ['summary', 'sources', 'pathways', 'facts'];
     for (const field of bodyFields) {
       expect(Object.keys(index.routes[0])).not.toContain(field);
       expect(Object.keys(index.residence_routes[0])).not.toContain(field);
     }
     // Serialised, the index must stay an order of magnitude under the corpus.
     const ratio = JSON.stringify(index).length / JSON.stringify(citizenship).length;
-    expect(ratio).toBeLessThan(0.25);
+    expect(ratio).toBeLessThan(0.3);
   });
 
   test('the index keeps the fields the atlas paints and filters by', () => {
     const index = buildAtlasIndex(citizenship);
     const route = index.routes[0];
-    expect(route).toHaveProperty('iso_n3');
+    // Strict projection: same nesting as the corpus, so map/panel code that
+    // reads route.country.iso_n3 works against either shape unchanged.
+    expect(route.country).toHaveProperty('iso_n3');
+    expect(route).toHaveProperty('title');
     expect(route).toHaveProperty('mode');
     expect(route).toHaveProperty('status');
     const residence = index.residence_routes[0];

@@ -217,21 +217,29 @@ export function buildAtlasIndex(citizenship: CitizenshipRoutesData, releaseId?: 
       name: jurisdiction.name,
       coverage: jurisdiction.coverage,
     })),
+    // A strict PROJECTION of the corpus: identical field names and nesting,
+    // fewer fields. Titles are included so the atlas panel needs no extra
+    // fetch; summary, sources, facts and pathways stay slice-only, which is
+    // both the payload win and the boundary that keeps bulk prose private.
     routes: citizenship.routes.map(route => ({
       id: route.id,
-      iso_n3: route.country.iso_n3,
+      country: route.country,
       mode: route.mode,
+      title: route.title,
       status: route.status,
       confidence: route.confidence,
       last_checked: route.last_checked,
     })),
     residence_routes: (citizenship.residence_routes ?? []).map(route => ({
       id: route.id,
-      iso_n3: route.country.iso_n3,
+      country: route.country,
       category: route.category,
+      title: route.title,
       status: route.status,
+      outcome: route.outcome,
       counts_toward_permanent_residence: route.counts_toward_permanent_residence,
       counts_toward_naturalization: route.counts_toward_naturalization,
+      work_rights: route.work_rights ?? null,
       confidence: route.confidence,
       last_checked: route.last_checked,
     })),

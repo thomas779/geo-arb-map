@@ -6,7 +6,9 @@ import type {
   CitizenshipAcquisitionMode,
   CitizenshipCoverageState,
   CitizenshipRoute,
-  CitizenshipRoutesData,
+  CitizenshipRouteSummary,
+  ResidenceRouteSummary,
+  AtlasIndexData,
   ResidenceRoute,
 } from '../types';
 import { Button } from '@/components/ui/button';
@@ -27,7 +29,7 @@ import { RESIDENCE_CATEGORY_SHORT, derivedResidenceAbsences, residenceCardRoutes
 
 interface Props {
   data: BlocsData;
-  citizenshipRoutes: CitizenshipRoutesData | null;
+  citizenshipRoutes: AtlasIndexData | null;
   state: AppState;
   onClose: () => void;
   onCollapse?: () => void;
@@ -85,7 +87,7 @@ function CoverageStrip({
  * readers to skip the badge — so the 278 medium and 2 low ones, the rows that
  * actually need a second look, stopped landing. Returning null renders nothing.
  */
-function statusLabel(route: CitizenshipRoute): string | null {
+function statusLabel(route: CitizenshipRouteSummary): string | null {
   if (route.status === 'inactive') return 'ended';
   if (route.status === 'verified_negative') return 'does not qualify';
   if (route.status === 'pending_verification') return 'verification pending';
@@ -93,7 +95,7 @@ function statusLabel(route: CitizenshipRoute): string | null {
 }
 
 /** Compact, non-expandable route row — title + mode + status; detail lives on the page. */
-function RouteRow({ route, countrySlug }: { route: CitizenshipRoute; countrySlug?: string }) {
+function RouteRow({ route, countrySlug }: { route: CitizenshipRouteSummary; countrySlug?: string }) {
   const body = (
     <>
       <span className="min-w-0 flex-1">
@@ -123,7 +125,7 @@ function RouteRow({ route, countrySlug }: { route: CitizenshipRoute; countrySlug
   );
 }
 
-function ResidenceRow({ route, countrySlug }: { route: ResidenceRoute; countrySlug?: string }) {
+function ResidenceRow({ route, countrySlug }: { route: ResidenceRouteSummary; countrySlug?: string }) {
   const body = (
     <>
       <span className="min-w-0 flex-1">

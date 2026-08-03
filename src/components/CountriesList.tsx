@@ -1,11 +1,11 @@
-import type { CitizenshipRoutesData } from '@/types';
+import type { AtlasIndexData } from '@/types';
 import { buildCountrySlugMap } from '@/lib/slug';
 import { countryFlag, isNonApplicableJurisdiction } from '@/lib/country';
 
 export function CountriesList({
   citizenshipRoutes,
 }: {
-  citizenshipRoutes: CitizenshipRoutesData | null;
+  citizenshipRoutes: AtlasIndexData | null;
 }) {
   const jurisdictions = citizenshipRoutes?.jurisdictions ?? [];
   const slugByIso = buildCountrySlugMap(jurisdictions);
