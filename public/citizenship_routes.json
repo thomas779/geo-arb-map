@@ -40831,6 +40831,8 @@
       "work_rights": "remote_only",
       "permit_duration_months": 24,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -40874,6 +40876,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -40920,6 +40924,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -40963,6 +40969,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41006,6 +41014,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41049,6 +41059,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41092,6 +41104,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41137,6 +41151,8 @@
       "work_rights": "full",
       "permit_duration_months": 12,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41182,6 +41198,8 @@
       "work_rights": "remote_only",
       "permit_duration_months": 6,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41230,6 +41248,8 @@
       "work_rights": "full",
       "permit_duration_months": 36,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41276,6 +41296,8 @@
       "work_rights": "full",
       "permit_duration_months": 12,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41324,6 +41346,8 @@
       "work_rights": "full",
       "permit_duration_months": 12,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41369,6 +41393,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41415,6 +41441,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41461,6 +41489,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41506,6 +41536,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41552,6 +41584,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41597,6 +41631,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41642,6 +41678,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41685,6 +41723,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41728,6 +41768,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41774,6 +41816,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41820,6 +41864,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41863,6 +41909,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41906,6 +41954,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41951,6 +42001,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -41994,6 +42046,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42040,6 +42094,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42086,6 +42142,8 @@
       "work_rights": "remote_only",
       "permit_duration_months": 12,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42129,6 +42187,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42175,6 +42235,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42218,6 +42280,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42261,6 +42325,8 @@
       "work_rights": null,
       "permit_duration_months": 12,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42307,6 +42373,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42355,6 +42423,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42403,6 +42473,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42448,6 +42520,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42491,6 +42565,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42536,6 +42612,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42579,6 +42657,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42625,6 +42705,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42670,6 +42752,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42716,6 +42800,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42764,6 +42850,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42810,6 +42898,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42858,6 +42948,8 @@
       "work_rights": null,
       "permit_duration_months": 300,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42901,6 +42993,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42944,6 +43038,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -42992,6 +43088,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43040,6 +43138,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43088,6 +43188,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43136,6 +43238,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43184,6 +43288,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43229,6 +43335,8 @@
       "work_rights": null,
       "permit_duration_months": 36,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43277,6 +43385,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43323,6 +43433,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43369,6 +43481,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43414,6 +43528,8 @@
       "work_rights": "none",
       "permit_duration_months": 36,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43459,6 +43575,8 @@
       "work_rights": "none",
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43502,6 +43620,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43547,6 +43667,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43592,6 +43714,8 @@
       "work_rights": "none",
       "permit_duration_months": 24,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43638,6 +43762,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43686,6 +43812,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43734,6 +43862,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43782,6 +43912,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43830,6 +43962,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43878,6 +44012,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43926,6 +44062,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43969,6 +44107,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44012,6 +44152,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44055,6 +44197,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44103,6 +44247,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44148,6 +44294,8 @@
       "work_rights": null,
       "permit_duration_months": 12,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44196,6 +44344,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44244,6 +44394,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44292,6 +44444,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44337,6 +44491,8 @@
       "work_rights": "full",
       "permit_duration_months": 24,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44382,6 +44538,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44425,6 +44583,8 @@
       "work_rights": null,
       "permit_duration_months": 60,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44471,6 +44631,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44514,6 +44676,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44557,6 +44721,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44602,6 +44768,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44648,6 +44816,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44696,6 +44866,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44741,6 +44913,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44787,6 +44961,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44835,6 +45011,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44880,6 +45058,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44926,6 +45106,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -44972,6 +45154,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45020,6 +45204,8 @@
       "work_rights": null,
       "permit_duration_months": 12,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45063,6 +45249,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45106,6 +45294,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45149,6 +45339,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45192,6 +45384,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45237,6 +45431,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45282,6 +45478,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45328,6 +45526,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45374,6 +45574,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45420,6 +45622,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45465,6 +45669,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45508,6 +45714,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45554,6 +45762,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45599,6 +45809,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45645,6 +45857,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45693,6 +45907,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45739,6 +45955,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45784,6 +46002,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45837,6 +46057,8 @@
       "work_rights": null,
       "permit_duration_months": 120,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45885,6 +46107,8 @@
       "work_rights": null,
       "permit_duration_months": 60,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45933,6 +46157,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -45981,6 +46207,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46026,6 +46254,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46072,6 +46302,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46118,6 +46350,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46164,6 +46398,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46210,6 +46446,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46258,6 +46496,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46303,6 +46543,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46349,6 +46591,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46397,6 +46641,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46442,6 +46688,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46488,6 +46736,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46534,6 +46784,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46577,6 +46829,8 @@
       "work_rights": "employer_sponsored",
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46623,6 +46877,8 @@
       "work_rights": "none",
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": 35,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46669,6 +46925,8 @@
       "work_rights": "remote_only",
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46715,6 +46973,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46760,6 +47020,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46808,6 +47070,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46851,6 +47115,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46899,6 +47165,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46947,6 +47215,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -46992,6 +47262,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47038,6 +47310,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47086,6 +47360,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47134,6 +47410,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47179,6 +47457,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47222,6 +47502,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47265,6 +47547,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47313,6 +47597,8 @@
       "work_rights": null,
       "permit_duration_months": 36,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47361,6 +47647,8 @@
       "work_rights": null,
       "permit_duration_months": 36,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47409,6 +47697,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47457,6 +47747,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47505,6 +47797,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47548,6 +47842,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47591,6 +47887,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47634,6 +47932,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47680,6 +47980,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47726,6 +48028,8 @@
       "work_rights": "none",
       "permit_duration_months": 180,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47772,6 +48076,8 @@
       "work_rights": "full",
       "permit_duration_months": 240,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47818,6 +48124,8 @@
       "work_rights": "none",
       "permit_duration_months": 120,
       "permit_renewable": true,
+      "min_age": 21,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47864,6 +48172,8 @@
       "work_rights": "none",
       "permit_duration_months": 60,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47907,6 +48217,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -47953,6 +48265,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48001,6 +48315,8 @@
       "work_rights": null,
       "permit_duration_months": 12,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48047,6 +48363,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48092,6 +48410,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48140,6 +48460,8 @@
       "work_rights": null,
       "permit_duration_months": 120,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48185,6 +48507,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48231,6 +48555,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48279,6 +48605,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48324,6 +48652,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48370,6 +48700,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48418,6 +48750,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48464,6 +48798,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48512,6 +48848,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48557,6 +48895,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48600,6 +48940,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48648,6 +48990,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48696,6 +49040,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48744,6 +49090,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48792,6 +49140,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48840,6 +49190,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48883,6 +49235,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48929,6 +49283,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -48977,6 +49333,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49023,6 +49381,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49071,6 +49431,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49119,6 +49481,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49167,6 +49531,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49215,6 +49581,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49258,6 +49626,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49301,6 +49671,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49349,6 +49721,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49400,6 +49774,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49445,6 +49821,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49494,6 +49872,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49542,6 +49922,8 @@
       "work_rights": "remote_only",
       "permit_duration_months": 24,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49587,6 +49969,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49633,6 +50017,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49681,6 +50067,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49727,6 +50115,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49770,6 +50160,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49818,6 +50210,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49863,6 +50257,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49906,6 +50302,8 @@
       "work_rights": null,
       "permit_duration_months": 24,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49949,6 +50347,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -49994,6 +50394,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50042,6 +50444,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50088,6 +50492,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50136,6 +50542,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50181,6 +50589,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50226,6 +50636,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50272,6 +50684,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50318,6 +50732,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50364,6 +50780,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50407,6 +50825,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50455,6 +50875,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50498,6 +50920,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50543,6 +50967,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50586,6 +51012,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50632,6 +51060,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50675,6 +51105,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50721,6 +51153,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50764,6 +51198,8 @@
       "work_rights": null,
       "permit_duration_months": 12,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50810,6 +51246,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50858,6 +51296,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50906,6 +51346,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -50952,6 +51394,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51000,6 +51444,8 @@
       "work_rights": "remote_only",
       "permit_duration_months": 36,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51048,6 +51494,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51093,6 +51541,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51138,6 +51588,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51186,6 +51638,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51232,6 +51686,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51278,6 +51734,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51324,6 +51782,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51367,6 +51827,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51413,6 +51875,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51459,6 +51923,8 @@
       "work_rights": null,
       "permit_duration_months": 60,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51505,6 +51971,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51551,6 +52019,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51597,6 +52067,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51640,6 +52112,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51685,6 +52159,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51730,6 +52206,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51773,6 +52251,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51819,6 +52299,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51862,6 +52344,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51905,6 +52389,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51950,6 +52436,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -51996,6 +52484,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52041,6 +52531,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52087,6 +52579,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52130,6 +52624,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52175,6 +52671,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52218,6 +52716,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52263,6 +52763,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52306,6 +52808,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52351,6 +52855,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52397,6 +52903,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52440,6 +52948,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52483,6 +52993,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52526,6 +53038,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52569,6 +53083,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52615,6 +53131,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52661,6 +53179,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52707,6 +53227,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52750,6 +53272,8 @@
       "work_rights": "employer_sponsored",
       "permit_duration_months": 36,
       "permit_renewable": true,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52793,6 +53317,8 @@
       "work_rights": null,
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52836,6 +53362,8 @@
       "work_rights": "full",
       "permit_duration_months": null,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -52882,6 +53410,8 @@
       "work_rights": null,
       "permit_duration_months": 60,
       "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,

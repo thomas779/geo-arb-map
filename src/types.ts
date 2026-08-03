@@ -196,6 +196,14 @@ export interface ResidenceRoute extends ResidenceRouteSummary {
   permit_duration_months?: number | null;
   /** Renewability as stated in the instrument; null = not stated (never false from silence). */
   permit_renewable?: boolean | null;
+  /**
+   * Applicant age gates read from the instrument. null = NOT RECORDED, which is
+   * NOT the same as unrestricted: eligibility logic must refuse to confirm rather
+   * than assume. Coverage is deliberately sparse until the verification sweep
+   * fills it (see issue #136).
+   */
+  min_age?: number | null;
+  max_age?: number | null;
   /** Permit eligibility by nationality; absent = not recorded. */
   nationality_eligibility?: NationalityEligibility | null;
   facts: Record<string, unknown>;

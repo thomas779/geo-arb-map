@@ -823,3 +823,29 @@ describe('source quality: constituteproject is a lead, not a source of record', 
     expect(unsourced.length).toBeLessThanOrEqual(1);
   });
 });
+
+describe('residence eligibility gates', () => {
+  const residence = citizenshipRoutes.residence_routes ?? [];
+
+  test('age gates are only ever asserted, never inferred from silence', () => {
+    // The semantics that make this field safe for a recommender: null means NOT
+    // RECORDED, so eligibility logic must refuse to confirm rather than assume no
+    // limit. Coverage is deliberately sparse (see #136) — only 6 of 33
+    // retirement routes carry a verified gate — so treating absence as
+    // "unrestricted" would recommend pensioner visas to thirty-year-olds.
+    for (const route of residence) {
+      if (route.min_age == null) continue;
+      expect(route.min_age).toBeGreaterThan(0);
+      expect(route.min_age).toBeLessThan(100);
+      if (route.max_age != null) expect(route.max_age).toBeGreaterThan(route.min_age);
+    }
+    // Kenya Class K is the worked example: 35+ read from the Immigration
+    // Regulations schedule, not from a summary or a comparative table.
+    const kenya = residence.find(route => route.id === 'kenya-class-k-ordinary-resident');
+    expect(kenya?.min_age).toBe(35);
+    // And the guard against regex-harvesting prose: MM2H Silver mentions "50" as
+    // a PRESENCE-waiver threshold, not an age floor, so it must stay unset.
+    const silver = residence.find(route => route.id === 'malaysia-mm2h-silver');
+    expect(silver?.min_age ?? null).toBeNull();
+  });
+});

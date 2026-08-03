@@ -843,6 +843,8 @@ function projectResidenceRoute(
     work_rights: route.work_rights ?? null,
     permit_duration_months: route.permit_duration_months ?? null,
     permit_renewable: route.permit_renewable ?? null,
+    min_age: route.min_age ?? null,
+    max_age: route.max_age ?? null,
     nationality_eligibility: publicNationalityEligibility(route.nationality_eligibility),
     facts: {
       canonical: true,

@@ -277,6 +277,13 @@ export const ResidenceRouteSchema = z.strictObject({
   // stated — silence stays null, never false.
   permit_duration_months: z.number().int().positive().nullable().default(null),
   permit_renewable: z.boolean().nullable().default(null),
+  // Applicant age gates, read from the instrument. CRITICAL SEMANTICS: null means
+  // NOT RECORDED, never "no age limit". A recommender must therefore treat null
+  // as "cannot confirm eligibility" rather than "eligible": only 6 of 33
+  // retirement routes currently carry a verified gate, so assuming absence means
+  // unrestricted would recommend pensioner visas to thirty-year-olds.
+  min_age: z.number().int().positive().max(120).nullable().default(null),
+  max_age: z.number().int().positive().max(120).nullable().default(null),
   nationality_eligibility: NationalityEligibilitySchema.optional(),
   variants: z.array(RouteVariantSchema).min(1),
 }).superRefine((route, context) => {
