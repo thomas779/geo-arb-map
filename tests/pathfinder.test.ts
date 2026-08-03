@@ -121,10 +121,24 @@ describe('explorer-spec acceptance tests', () => {
     const us = citizen('840', 'United States');
     const spain = shortestPaths(us, edges).get('cit:724');
     expect(spain).toBeDefined();
-    expect(spain!.years).toBe(15); // DAFT 5 + ordinary Spanish naturalization 10
+    // 14 years, and the route matters more than the number: DAFT into the
+    // Netherlands (0) -> Dutch citizenship (5) -> Portugal via EU free movement
+    // (0) -> Portuguese citizenship (7, the CPLP/EU tier under Lei Orgânica
+    // 1/2026) -> Spain via EU (0) -> Spanish citizenship (2). That last step is
+    // Spain's Código Civil art. 22.1 two-year track, which lists Portugal
+    // explicitly, so it is earned rather than leaked: the traveller genuinely
+    // holds a qualifying nationality by then.
+    expect(spain!.years).toBe(14);
+    // The guard this test exists for: a US passport cannot take the short track
+    // directly. Reaching Spain quickly requires acquiring a qualifying
+    // citizenship first, so the path is multi-hop and never 2 years outright.
+    expect(spain!.years).toBeGreaterThan(2);
+    expect(spain!.hops).toBeGreaterThan(1);
+    expect(spain!.acquiredCitizenships).toContain('620');
 
     const uruguay = shortestPaths(citizen('858', 'Uruguay'), edges).get('cit:724');
-    expect(uruguay?.years).toBe(2); // Ibero-American fast track remains available
+    expect(uruguay?.years).toBe(2); // Ibero-American fast track, held from the start
+    expect(uruguay?.hops).toBe(2);
 
     expect(recommend(us, data, 200).find(r => r.iso_n3 === '724')?.years).toBe(10);
     expect(recommend(citizen('858'), data, 200).find(r => r.iso_n3 === '724')?.years).toBe(2);
@@ -171,12 +185,43 @@ describe('explorer-spec acceptance tests', () => {
     expect(rec?.newBlocs).toContain('Mercosur Residence Agreement');
   });
 
-  test('hop-bounded search keeps a slower path when it has enough hops left', () => {
+  test('the six-hop budget reaches the multi-step chains the planner exists for', () => {
+    // At the old budget of four a US passport could not reach Brazil or
+    // Argentina AT ALL: golden visa -> PR -> naturalisation -> Mercosur
+    // settlement is six edges, so the flagship use case was silently truncated.
+    const us = citizen('840', 'United States');
+    const reachable = shortestPaths(us, edges);
+    const brazil = reachable.get('cit:076');
+    expect(brazil).toBeDefined();
+    expect(brazil!.hops).toBeGreaterThan(4);
+    // Reachability floor: regressing the budget or the edge set should fail here
+    // rather than quietly shrinking what the planner can find.
+    expect(reachable.size).toBeGreaterThanOrEqual(90);
+  });
+
+  test('worst-case profile search stays inside a wall-clock ceiling', () => {
+    // The Pareto state space grows super-exponentially with the hop budget: at
+    // seven hops the worst profiles take seconds, which is why MAX_HOPS is a
+    // measured cliff edge and not a dial. EU passports have the largest
+    // frontier, so they are the worst case worth pinning.
+    const worst = ['cit:233', 'cit:428', 'cit:756', 'cit:276'];
+    for (const seed of worst) {
+      const started = performance.now();
+      shortestPaths(citizen(seed.slice(4)), edges);
+      // Generous versus the ~209ms measured locally, so CI variance cannot make
+      // this flaky, while still catching an order-of-magnitude regression.
+      expect(performance.now() - started).toBeLessThan(2000);
+    }
+  });
+
+  test('hop-bounded search prefers the cheaper path when the budget allows, and falls back when it does not', () => {
     const edge = (from: string, to: string, years: number): GraphEdge => ({
       from, to, years, mechanism: `${from}>${to}`,
       allocation: 'right', confidence: 'high', needs: [],
     });
-    const synthetic = [
+    // Two ways to reach x: a free 3-hop detour, or a 1-year direct edge. Then
+    // two more hops to the goal. Within the budget the free detour wins on years.
+    const withinBudget = [
       edge('cit:001', 'a', 0),
       edge('a', 'b', 0),
       edge('b', 'x', 0),
@@ -184,7 +229,21 @@ describe('explorer-spec acceptance tests', () => {
       edge('x', 'y', 0),
       edge('y', 'cit:999', 0),
     ];
-    expect(shortestPaths(citizen('001'), synthetic).get('cit:999')?.years).toBe(1);
+    expect(shortestPaths(citizen('001'), withinBudget).get('cit:999')?.years).toBe(0);
+
+    // Push the free detour past MAX_HOPS and the paid shortcut must win instead,
+    // which is what keeps the budget honest rather than merely generous.
+    const overBudget = [
+      edge('cit:001', 'a', 0),
+      edge('a', 'b', 0),
+      edge('b', 'c', 0),
+      edge('c', 'd', 0),
+      edge('d', 'x', 0),
+      edge('cit:001', 'x', 1),
+      edge('x', 'y', 0),
+      edge('y', 'cit:999', 0),
+    ];
+    expect(shortestPaths(citizen('001'), overBudget).get('cit:999')?.years).toBe(1);
   });
 });
 

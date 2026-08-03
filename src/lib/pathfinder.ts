@@ -63,7 +63,26 @@ export interface PathRec {
   via: 'path';
 }
 
-const MAX_HOPS = 4; // edge budget (bloc expansions are single 0-yr edges)
+/**
+ * Edge budget (bloc expansions are single 0-yr edges).
+ *
+ * Six, chosen by measurement rather than taste. At 4 the flagship chain the
+ * planner exists to find was unreachable: a US passport could not get to Brazil
+ * or Argentina at all, because golden visa -> PR -> naturalisation -> Mercosur
+ * settlement is six edges. Measured cost per profile across all 163 citizenship
+ * seeds (p50 / worst, worst case being EU passports with the largest frontier):
+ *
+ *   4 hops: 0.2ms /   2ms  — US reaches 76 nodes, no Mercosur chain
+ *   5 hops: 0.2ms /  82ms  — 93 nodes, chain still unreachable
+ *   6 hops: 0.2ms / 209ms  — 94 nodes, chain reachable  <- here
+ *   7 hops: seconds        — +1% reachability for ~10x cost
+ *
+ * The Pareto state space grows super-exponentially past six, so this is a cliff
+ * edge, not a dial to turn up later. Raising it needs a cheaper dominance check
+ * first, not just a bigger number. tests/pathfinder.test.ts pins both the chain
+ * and a wall-clock ceiling.
+ */
+const MAX_HOPS = 6;
 
 function needsSatisfied(
   needs: string[],
