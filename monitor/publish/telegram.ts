@@ -1,5 +1,8 @@
 #!/usr/bin/env bun
 
+import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import countries from 'i18n-iso-countries';
 import {
   generateLlmText,
   llmConfigFromEnv,
@@ -98,6 +101,40 @@ function escapeHtml(value: string): string {
 // after the Public brief with no heading of its own — it must never publish.
 const LEAD_BOILERPLATE = 'This issue is an unverified monitoring lead';
 
+function flagEmoji(isoN3: string): string {
+  try {
+    const alpha2 = countries.numericToAlpha2(isoN3);
+    if (!alpha2 || alpha2.length !== 2) return '🌍';
+    return String.fromCodePoint(...[...alpha2.toUpperCase()].map(c => 0x1f1e6 + c.charCodeAt(0) - 65));
+  } catch {
+    return '🌍';
+  }
+}
+
+/**
+ * Flag for the headline, resolved from the triage table's Jurisdiction cell
+ * against the registry names in the public artifact. The globe fallback is
+ * house style too (the auto path uses it for unmapped jurisdictions).
+ */
+export function issueJurisdiction(issueBody: string): string | null {
+  const cell = issueBody.match(/\|\s*Jurisdiction\s*\|\s*([^|\n]+)\|/);
+  return cell?.[1]?.trim() || null;
+}
+
+export function issueFlag(issueBody: string): string {
+  const name = issueJurisdiction(issueBody);
+  if (!name) return '🌍';
+  try {
+    const artifact = JSON.parse(fs.readFileSync(
+      fileURLToPath(new URL('../../public/citizenship_routes.json', import.meta.url)), 'utf8',
+    )) as { jurisdictions: Array<{ iso_n3: string; name: string }> };
+    const match = artifact.jurisdictions.find(j => j.name === name);
+    return match ? flagEmoji(match.iso_n3) : '🌍';
+  } catch {
+    return '🌍';
+  }
+}
+
 function markdownUrls(value: string): string[] {
   const urls = [
     ...String(value).matchAll(/\]\((https?:\/\/[^)\s]+)\)/gi),
@@ -140,9 +177,16 @@ export function buildTelegramPost(issue: ReviewIssue): TelegramPost {
 
   // House pattern, identical to the auto-news path in news.ts: bold headline,
   // short body, a clean Source anchor. No internal links or review notes —
-  // the review trail lives on the GitHub issue, not in the channel.
+  // the review trail lives on the GitHub issue, not in the channel. Issue
+  // titles carry a "Jurisdiction:" routing prefix that the flag already
+  // communicates, so it drops from the headline.
+  const jurisdiction = issueJurisdiction(issue.body);
+  let headline = normalizedTitle(issue.title);
+  if (jurisdiction && headline.toLowerCase().startsWith(`${jurisdiction.toLowerCase()}:`)) {
+    headline = headline.slice(jurisdiction.length + 1).trim();
+  }
   const text = [
-    `<b>${escapeHtml(normalizedTitle(issue.title))}</b>`,
+    `${issueFlag(issue.body)} <b>${escapeHtml(headline)}</b>`,
     '',
     escapeHtml(brief),
     '',
@@ -422,6 +466,7 @@ if (import.meta.main) {
         token: process.env.TELEGRAM_BOT_TOKEN ?? '',
         channelId: process.env.TELEGRAM_CHANNEL_ID ?? '',
         parseMode: 'HTML',
+        disablePreview: true,
       });
       runGh([
         'issue',
