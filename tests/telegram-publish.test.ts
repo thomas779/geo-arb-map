@@ -41,9 +41,13 @@ describe('Telegram publication gate', () => {
     const post = buildTelegramPost(reviewedIssue);
     expect(post.issue_number).toBe(42);
     expect(post.sources).toEqual(['https://example.gouv.fr/notice']);
-    expect(post.text).toContain('France: Student residence treatment changed');
-    expect(post.text).toContain('Review trail: https://github.com/thomas779/geo-arb-map/issues/42');
+    expect(post.text).toContain('<b>France: Student residence treatment changed</b>');
+    expect(post.text).toContain('<a href="https://example.gouv.fr/notice">Source</a>');
+    // The review trail lives on the GitHub issue, never in the channel; the
+    // lead-template epilogue must never leak into the brief.
+    expect(post.text).not.toContain('Review trail');
     expect(post.text).not.toContain('Internal notes');
+    expect(post.text).not.toContain('unverified monitoring lead');
   });
 
   test('rejects incomplete review and placeholder publication copy', () => {
@@ -78,7 +82,7 @@ describe('Telegram publication gate', () => {
     });
     expect(messageId).toBe(77);
     expect(captured.body?.chat_id).toBe('@flagpathsbriefing');
-    expect(captured.body?.text).toContain('Primary source:');
+    expect(captured.body?.text).toContain('<a href="https://example.gouv.fr/notice">Source</a>');
   });
 
   test('requires the AI evidence audit to return a clean publishable result', async () => {

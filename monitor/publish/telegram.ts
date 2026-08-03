@@ -87,6 +87,17 @@ function section(body: string, heading: string): string {
   return content.slice(start, end).trim();
 }
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// The lead-template epilogue is part of every monitoring issue body and sits
+// after the Public brief with no heading of its own — it must never publish.
+const LEAD_BOILERPLATE = 'This issue is an unverified monitoring lead';
+
 function markdownUrls(value: string): string[] {
   const urls = [
     ...String(value).matchAll(/\]\((https?:\/\/[^)\s]+)\)/gi),
@@ -120,21 +131,24 @@ export function buildTelegramPost(issue: ReviewIssue): TelegramPost {
   }
 
   const brief = section(issue.body, 'Public brief')
+    .split(LEAD_BOILERPLATE)[0]
     .replace(/<!--[\s\S]*?-->/g, '')
     .trim();
   if (!brief || PLACEHOLDER_PATTERN.test(brief)) {
     throw new Error('Replace the Public brief placeholder with final publication copy');
   }
 
+  // House pattern, identical to the auto-news path in news.ts: bold headline,
+  // short body, a clean Source anchor. No internal links or review notes —
+  // the review trail lives on the GitHub issue, not in the channel.
   const text = [
-    normalizedTitle(issue.title),
+    `<b>${escapeHtml(normalizedTitle(issue.title))}</b>`,
     '',
-    brief,
+    escapeHtml(brief),
     '',
-    sources.length === 1 ? 'Primary source:' : 'Sources:',
-    ...sources.map(url => `• ${url}`),
-    '',
-    `Review trail: ${issue.url}`,
+    sources.length === 1
+      ? `<a href="${sources[0]}">Source</a>`
+      : sources.map((url, index) => `<a href="${url}">Source ${index + 1}</a>`).join(' · '),
   ].join('\n');
 
   if (text.length > TELEGRAM_MESSAGE_LIMIT) {
@@ -407,6 +421,7 @@ if (import.meta.main) {
       const messageId = await sendTelegramPost(post, {
         token: process.env.TELEGRAM_BOT_TOKEN ?? '',
         channelId: process.env.TELEGRAM_CHANNEL_ID ?? '',
+        parseMode: 'HTML',
       });
       runGh([
         'issue',
