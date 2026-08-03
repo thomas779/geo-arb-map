@@ -176,6 +176,9 @@ function legacyJurisdictionRevision(record: JurisdictionRecord): JurisdictionRec
     coverage: _coverage,
     residence_routes: _residenceRoutes,
     residence_coverage: _residenceCoverage,
+    // v2-only jurisdiction dimension; the full v2 payload keeps it, the v1
+    // compat revision must not (V1Schema is strict).
+    dual_nationality: _dualNationality,
     ...legacy
   } = record;
   return JurisdictionRecordV1Schema.parse({

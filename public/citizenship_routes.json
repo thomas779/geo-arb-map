@@ -3973,7 +3973,10 @@
         "san-marino-naturalization",
         "san-marino-citizenship-at-birth-by-parent"
       ],
-      "dual_nationality": null,
+      "dual_nationality": {
+        "status": "allowed",
+        "detail": "Legge 27/2026 art. 1 states its purpose as eliminating the obligation to renounce every other citizenship held; art. 2(2) abrogates the renunciation letter of Law 114/2000 art. 2(1)."
+      },
       "residence_route_ids": [
         "san-marino-elective-residence",
         "san-marino-golden-visa-verified-negative"
@@ -32960,13 +32963,13 @@
       },
       "mode": "naturalization",
       "status": "active",
-      "title": "Naturalization after about thirty years residence (fifteen by marriage)",
-      "summary": "Ordinary naturalization requires about thirty continuous years of registered residence (halved to fifteen for spouses of citizens), a clean record, and an oath; it is granted only by the Great and General Council through a special law passed by a two-thirds majority.",
+      "title": "Naturalization after twenty years residence (ten by marriage)",
+      "summary": "Legge 27/2026 rewrote the requirements: twenty continuous years of registered and effective residence, reduced to ten for spouses or civil partners of citizens and for semiplena adoptees, or eighteen years for persons resident since birth. Applicants must show Italian at CEFR B1 and pass a test on Sammarinese history and institutions (art. 2-quater), and no longer renounce other citizenships. Grant follows the parliamentary naturalization procedure of art. 2-ter as amended.",
       "facts": {
         "canonical": true,
         "variant_count": 1,
         "eligibility_months": [
-          360
+          240
         ],
         "discretionary_decision": true
       },
@@ -32976,18 +32979,22 @@
       "pathways": [
         {
           "id": "san-marino-naturalization-principal",
-          "label": "Naturalization after about thirty years residence (fifteen by marriage)",
+          "label": "Naturalization after twenty years residence (ten by marriage)",
           "allocation": "discretionary",
-          "eligibility_months": 360,
-          "note": "Thirty-year ordinary / fifteen-year marriage figures from Law 114/2000 as amended; a widely cited 20/10 reduction could not be corroborated against the statute."
+          "eligibility_months": 240,
+          "note": "Read from Legge 25 febbraio 2026 n.27 (CGG archive PDF): art. 2(1) sets the twenty-year floor and the ten-year reductions, art. 2(4) the eighteen-years-from-birth track, art. 2(2) abrogates the renunciation requirement. Resolves the prior note that the 20/10 figures could not be corroborated — they are now statutory."
         }
       ],
-      "confidence": "medium",
-      "last_checked": "2026-07-23",
+      "confidence": "high",
+      "last_checked": "2026-08-03",
       "sources": [
         {
           "title": "San Marino Citizenship Law No. 114/2000 (Consiglio Grande e Generale)",
           "url": "https://www.consigliograndeegenerale.sm/on-line/documento17134125.html"
+        },
+        {
+          "title": "Legge 25 febbraio 2026 n.27 — cittadinanza per naturalizzazione (Consiglio Grande e Generale)",
+          "url": "https://www.consigliograndeegenerale.sm/on-line/home/archivio-leggi-decreti-e-regolamenti/documento17157139.html"
         }
       ]
     },
@@ -40801,16 +40808,16 @@
       "category": "digital_nomad",
       "status": "active",
       "title": "Residència per a nòmada digital",
-      "summary": "Residence for foreigners whose work needs no fixed location and is performed via technology (Llei 42/2022 de l'economia digital; arts. 33 bis and 101 quater-quinquies of the immigration law).",
+      "summary": "Distinct nomad category under Llei 42/2022 (arts. 33 bis and 101 quater-quinquies of the immigration law) for work performed remotely via technology for entities outside Andorra: NO deposit and NO investment — the EUR 47,500 AFA deposit and EUR 600,000 investment belong to the separate passive-residence route. Means test is regulatory: annual resources above 300% of the annual minimum salary plus 100% per dependant. Two-year authorization renewing 2+3 then 10-year periods; Andorra has no separate PR, so the successive ten-year authorization is the settlement endpoint, and years count toward the 20-year naturalization as amended by Llei 8/2026.",
       "outcome": "residence",
       "counts_toward_permanent_residence": true,
       "counts_toward_naturalization": true,
       "min_investment": null,
       "min_income_monthly": null,
       "physical_presence_days_per_year": 90,
-      "work_rights": null,
-      "permit_duration_months": null,
-      "permit_renewable": null,
+      "work_rights": "remote_only",
+      "permit_duration_months": 24,
+      "permit_renewable": true,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -40826,12 +40833,12 @@
           "eligibility_months": null
         }
       ],
-      "confidence": "medium",
+      "confidence": "high",
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "D.3. Residència per a nòmada digital — Seu Electrònica del Govern d'Andorra",
-          "url": "https://www.e-tramits.ad/tramits/ca/d3-residencia-per-a-nomada-digital/p/GV001311"
+          "title": "Govern d'Andorra — Residència per a nòmada digital (D.3)",
+          "url": "https://www.govern.ad/ca/tematiques/immigracio/residencia/residencia-per-a-nomada-digital"
         }
       ]
     },
