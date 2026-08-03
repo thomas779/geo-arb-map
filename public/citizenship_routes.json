@@ -43215,7 +43215,7 @@
       "category": "talent_skilled",
       "status": "active",
       "title": "Employment Gold Card",
-      "summary": "Combined open work permit, resident visa and ARC for foreign specialists in designated fields, valid one to three years with no sponsor required.",
+      "summary": "Combined open work permit, resident visa and ARC for foreign specialists in designated fields, valid one to three years with no sponsor required. Under art. 18 of the Foreign Professionals Act as comprehensively amended effective 1 January 2026, specialist professionals reach permanent residency (APRC) after three continuous years with 183+ days per year, or after just ONE year in cases meeting conditions announced by the Ministry of the Interior; doctoral and master’s degrees credit two and one years respectively toward the specialist clock.",
       "outcome": "residence",
       "counts_toward_permanent_residence": true,
       "counts_toward_naturalization": true,
@@ -43223,8 +43223,8 @@
       "min_income_monthly": null,
       "physical_presence_days_per_year": null,
       "work_rights": null,
-      "permit_duration_months": null,
-      "permit_renewable": null,
+      "permit_duration_months": 36,
+      "permit_renewable": true,
       "nationality_eligibility": null,
       "facts": {
         "canonical": true,
@@ -43246,8 +43246,8 @@
       "last_checked": "2026-07-30",
       "sources": [
         {
-          "title": "Taiwan Employment Gold Card — official portal",
-          "url": "https://goldcard.nat.gov.tw/en/"
+          "title": "Act for the Recruitment and Employment of Foreign Professionals, arts. 18-19 (consolidated, Laws & Regulations Database)",
+          "url": "https://law.moj.gov.tw/ENG/LawClass/LawAll.aspx?pcode=A0030295"
         }
       ]
     },
