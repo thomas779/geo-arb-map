@@ -2302,7 +2302,10 @@
         "kazakhstan-citizenship-by-marriage",
         "kazakhstan-citizenship-at-birth-by-parent"
       ],
-      "dual_nationality": null,
+      "dual_nationality": {
+        "status": "prohibited",
+        "detail": "Dual citizenship is not recognized (Law on Citizenship art. 3, Adilet consolidation); admission to citizenship is framed through non-recognition rather than a renunciation ceremony."
+      },
       "residence_route_ids": [
         "kazakhstan-e-residency"
       ],
@@ -3456,7 +3459,10 @@
         "pakistan-citizenship-at-birth-by-parent",
         "pakistan-commonwealth-investment-citizenship"
       ],
-      "dual_nationality": null
+      "dual_nationality": {
+        "status": "conditional",
+        "detail": "Conditional under Citizenship Act s.14(3): dual nationality is permitted only with countries designated by Federal Gazette notification; DGIP publishes the operational 22-country list (last modified 9 January 2026). Germany is limited to birth-in-Germany children of Pakistani parents."
+      }
     },
     {
       "iso_n3": "591",
@@ -3779,7 +3785,10 @@
         "russia-citizenship-by-marriage",
         "russia-citizenship-at-birth-by-parent"
       ],
-      "dual_nationality": null
+      "dual_nationality": {
+        "status": "allowed",
+        "detail": "Permitted subject to a notification duty under Federal Law 138-FZ (2023); holding another citizenship is not a bar to Russian citizenship and does not require renunciation for the general procedure."
+      }
     },
     {
       "iso_n3": "646",
