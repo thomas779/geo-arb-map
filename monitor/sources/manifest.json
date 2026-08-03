@@ -939,6 +939,10 @@
         {
           "id": "eb5-investor",
           "url": "https://www.uscis.gov/eb-5"
+        },
+        {
+          "id": "state-department-visa-bonds",
+          "url": "https://travel.state.gov/content/travel/en/News/visas-news/countries-subject-to-visa-bonds.html"
         }
       ],
       "notes": "Monitor USCIS and Department of State citizenship-at-birth, naturalization, and investor-residence guidance, resolving legal changes to the U.S. Code."
@@ -1223,12 +1227,28 @@
       "id": "greece-migration-legislation",
       "tier": "verification",
       "adapter": "html_index",
-      "status": "planned",
+      "status": "active",
       "url": "https://migration.gov.gr/nomothesia-1-2/nomothesia-archi-prosfygon/",
       "jurisdictions": [
         "300"
       ],
-      "notes": "Official Greek Ministry of Migration and Asylum legislation index. Monitor new laws and gazette references, then resolve nationality-specific changes through the competent ministry and Government Gazette."
+      "pages": [
+        {
+          "id": "migration-legislation-index",
+          "url": "https://migration.gov.gr/nomothesia-1-2/nomothesia-archi-prosfygon/"
+        },
+        {
+          "id": "law-5275-2026-gazette",
+          "url": "https://migration.gov.gr/wp-content/uploads/2026/02/%CE%A6%CE%95%CE%9A%CE%9117_6.2.2025.pdf"
+        }
+      ],
+      "keywords": [
+        "\u03bc\u03b5\u03c4\u03b1\u03bd\u03ac\u03c3\u03c4\u03b5\u03c5\u03c3\u03b7",
+        "\u03ac\u03b4\u03b5\u03b9\u03b1 \u03b4\u03b9\u03b1\u03bc\u03bf\u03bd\u03ae\u03c2",
+        "\u03b5\u03c0\u03ad\u03bd\u03b4\u03c5\u03c3\u03b7",
+        "\u03b9\u03b8\u03b1\u03b3\u03ad\u03bd\u03b5\u03b9\u03b1"
+      ],
+      "notes": "Official Greek Ministry of Migration and Asylum legislation index plus the official Gazette copy of Law 5275/2026. Use the latter to distinguish recodification from newly created routes."
     },
     {
       "id": "colombia-nationality-norms",
@@ -2571,6 +2591,16 @@
       "jurisdictions": [
         "222"
       ],
+      "pages": [
+        {
+          "id": "temporary-residence-decree-531",
+          "url": "https://www.asamblea.gob.sv/sites/default/files/documents/decretos/1A94F7E5-FC00-4CB9-9DDA-AC13CF555359.pdf"
+        },
+        {
+          "id": "assembly-decree-531-announcement",
+          "url": "https://www.asamblea.gob.sv/node/13888"
+        }
+      ],
       "keywords": [
         "nacionalidad",
         "naturalizaci\u00f3n",
@@ -2578,7 +2608,7 @@
         "El Salvador",
         "hispanoamericanos"
       ],
-      "notes": "Constitution Articles 90 to 92: one-year Spanish/Hispano-American naturalization floor; Central American option by declaration."
+      "notes": "Constitution Articles 90 to 92 provide the nationality baseline; official Assembly Decree 531 and its announcement record the 2026 temporary-residence physical-presence amendment."
     },
     {
       "id": "guatemala-citizenship-law",
@@ -3761,6 +3791,10 @@
         {
           "id": "code",
           "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf"
+        },
+        {
+          "id": "official-gazette-law-26-01-2026",
+          "url": "https://www.joradp.dz/FTP/jo-francais/2026/F2026014.pdf"
         }
       ],
       "keywords": [
@@ -3768,7 +3802,7 @@
         "naturalization",
         "Algeria"
       ],
-      "notes": "Algerian Nationality Code English text."
+      "notes": "Algerian Nationality Code translation for orientation plus the official Gazette text of Law 26-01/2026. Only the JORADP Gazette is primary evidence for the 2026 deprivation amendment."
     },
     {
       "id": "tunisia-citizenship-law",
@@ -5435,9 +5469,27 @@
       "tier": "verification",
       "adapter": "html_index",
       "status": "active",
-      "url": "https://www.consigliograndeegenerale.sm/on-line/documento17134125.html",
+      "url": "https://www.gov.sm/pub1/GovSM/Situazioni-di-vita/Cittadinanza-per-naturalizzazione.html",
       "jurisdictions": [
         "674"
+      ],
+      "pages": [
+        {
+          "id": "naturalization-guidance",
+          "url": "https://www.gov.sm/pub1/GovSM/Situazioni-di-vita/Cittadinanza-per-naturalizzazione.html"
+        },
+        {
+          "id": "law-27-2026",
+          "url": "https://www.consigliograndeegenerale.sm/on-line/home/archivio-leggi-decreti-e-regolamenti/documento17157139.html"
+        },
+        {
+          "id": "law-27-2026-metadata",
+          "url": "https://www.consigliograndeegenerale.sm/on-line/home/archivio-leggi-decreti-e-regolamenti/scheda17193413.html"
+        },
+        {
+          "id": "law-114-2000",
+          "url": "https://www.consigliograndeegenerale.sm/on-line/documento17134125.html"
+        }
       ],
       "keywords": [
         "cittadinanza",
@@ -5447,7 +5499,7 @@
         "San Marino",
         "residenza"
       ],
-      "notes": "San Marino Citizenship Law No. 114/2000 via the Great and General Council site. Active verification monitor for canonical coverage audit."
+      "notes": "Current San Marino naturalization guidance plus Law 27/2026 and the amended Law 114/2000. Monitor residence floors, language and civics tests, and dual-nationality treatment."
     },
     {
       "id": "vatican-citizenship-law",

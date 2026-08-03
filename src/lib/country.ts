@@ -1,4 +1,5 @@
 import { numericToAlpha2 } from 'i18n-iso-countries';
+import type { CitizenshipRoutesData } from '@/types';
 
 const REGIONAL_INDICATOR_OFFSET = 0x1f1e6 - 65;
 
@@ -35,4 +36,31 @@ export function countryFlag(isoN3: string): string {
 export function countryLabel(name: string, isoN3: string): string {
   const flag = countryFlag(isoN3);
   return flag ? `${flag} ${name}` : name;
+}
+
+/**
+ * Country-name lookup for the Atlas browser. Prefix matches rank before loose
+ * matches so short queries behave like navigation rather than document search.
+ */
+export function findJurisdictions(
+  jurisdictions: CitizenshipRoutesData['jurisdictions'],
+  query: string,
+  limit = 8,
+): CitizenshipRoutesData['jurisdictions'] {
+  const normalized = query.trim().toLocaleLowerCase();
+  if (!normalized) return [];
+
+  return jurisdictions
+    .filter(jurisdiction => !isNonApplicableJurisdiction(jurisdiction.iso_n3))
+    .filter(jurisdiction => (
+      jurisdiction.name.toLocaleLowerCase().includes(normalized)
+      || jurisdiction.iso_n3 === normalized
+    ))
+    .sort((a, b) => {
+      const aStarts = a.name.toLocaleLowerCase().startsWith(normalized);
+      const bStarts = b.name.toLocaleLowerCase().startsWith(normalized);
+      if (aStarts !== bStarts) return aStarts ? -1 : 1;
+      return a.name.localeCompare(b.name);
+    })
+    .slice(0, limit);
 }

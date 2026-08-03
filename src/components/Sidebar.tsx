@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Armchair, Award, Banknote, Check, ChevronDown, Fingerprint, Home, Hourglass, Laptop, Search, Users } from 'lucide-react';
 import { ROUTE_CLASSES } from '@/lib/route-classes';
-import type { AppState, BilateralLane, Bloc, BlocsData } from '../types';
+import type { AppState, BilateralLane, Bloc, BlocsData, CitizenshipRoutesData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -15,7 +15,7 @@ import {
 import { cn } from '@/lib/utils';
 import { displayColor } from '@/lib/color';
 import { useTheme } from '@/components/theme-provider';
-import { countryFlag } from '@/lib/country';
+import { countryFlag, findJurisdictions } from '@/lib/country';
 import { displayRouteTitle } from '@/lib/display-title';
 
 const REGIONAL_GROUPS: Array<{
@@ -66,6 +66,13 @@ const ROUTE_CLASS_ICONS: Record<string, typeof Users> = {
   'digital-identity': Fingerprint,
 };
 
+const QUICK_ROUTES = [
+  { id: 'ancestry', label: 'Ancestry' },
+  { id: 'cbi', label: 'Invest for citizenship' },
+  { id: 'golden-visa', label: 'Golden visas' },
+  { id: 'digital-nomad', label: 'Digital nomad' },
+] as const;
+
 interface Props {
   data: BlocsData;
   state: AppState;
@@ -75,6 +82,8 @@ interface Props {
   onRouteClass: (id: string | null) => void;
   /** Countries with >=1 active route, per class id — the row count badges. */
   routeClassCounts: Map<string, number>;
+  citizenshipRoutes: CitizenshipRoutesData | null;
+  onCountry: (iso: string, name: string) => void;
 }
 
 function Swatch({ color, selected }: { color: string; selected: boolean }) {
@@ -152,12 +161,33 @@ function LaneDirection({ lane }: { lane: BilateralLane }) {
   );
 }
 
-export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassCounts }: Props) {
+export function Sidebar({
+  data,
+  state,
+  onBloc,
+  onLane,
+  onRouteClass,
+  routeClassCounts,
+  citizenshipRoutes,
+  onCountry,
+}: Props) {
   const { theme } = useTheme();
   const dark = theme === 'dark';
   const [query, setQuery] = useState('');
   const q = query.trim().toLowerCase();
   const isFiltering = Boolean(q);
+  const countryMatches = citizenshipRoutes
+    ? findJurisdictions(citizenshipRoutes.jurisdictions, q)
+    : [];
+  const quickRouteClasses = QUICK_ROUTES.flatMap(quick => {
+    const routeClass = ROUTE_CLASSES.find(candidate => candidate.id === quick.id);
+    return routeClass ? [{ ...quick, routeClass }] : [];
+  });
+  const visibleRouteClasses = ROUTE_CLASSES.filter(routeClass => (
+    !q
+    || routeClass.label.toLowerCase().includes(q)
+    || routeClass.description.toLowerCase().includes(q)
+  ));
 
   const blocMatches = (bloc: Bloc) => {
     if (!q) return true;
@@ -238,7 +268,8 @@ export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassC
   const allSections = ['regional', 'classes', 'country'];
   const [openSections, setOpenSections] = useState<string[]>(() => {
     if (selectedLane) return ['country'];
-    return ['regional'];
+    if (state.routeClass) return ['classes'];
+    return [];
   });
   const [openGroups, setOpenGroups] = useState<string[]>(() => {
     // Route-type subgroups default open: eight rows total, nothing to economise.
@@ -340,7 +371,7 @@ export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassC
           />
           <Input
             type="search"
-            placeholder="Search countries, routes, or rights…"
+            placeholder="Country, route, or right…"
             value={query}
             onChange={e => setQuery(e.target.value)}
             className="h-11 w-full pl-8 text-base placeholder:text-[13px] md:h-8 md:text-sm md:placeholder:text-sm"
@@ -349,6 +380,80 @@ export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassC
       </div>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-6">
+        {!isFiltering && (
+          <section className="border-b py-3" aria-labelledby="quick-routes-heading">
+            <div className="mb-2 flex items-baseline justify-between gap-2 px-1">
+              <h2 id="quick-routes-heading" className="text-xs font-semibold text-foreground">
+                Explore popular routes
+              </h2>
+              <span className="text-[10px] text-muted-foreground">paint the map</span>
+            </div>
+            <div className="grid grid-cols-2 overflow-hidden rounded-md border border-sidebar-border bg-sidebar-border">
+              {quickRouteClasses.map(({ label, routeClass }, index) => {
+                const Icon = ROUTE_CLASS_ICONS[routeClass.id] ?? Users;
+                const selected = state.routeClass === routeClass.id;
+                return (
+                  <button
+                    key={routeClass.id}
+                    type="button"
+                    className={cn(
+                      'flex min-h-11 items-center gap-2 bg-sidebar px-2.5 text-left text-xs font-medium transition-colors hover:bg-accent focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                      index % 2 === 0 && 'border-r border-sidebar-border',
+                      index < 2 && 'border-b border-sidebar-border',
+                      selected && 'bg-accent text-foreground',
+                    )}
+                    aria-pressed={selected}
+                    title={routeClass.description}
+                    onClick={() => onRouteClass(routeClass.id)}
+                  >
+                    <Icon className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+                    <span className="min-w-0 flex-1 leading-tight">{label}</span>
+                    <span className={headingCount}>{routeClassCounts.get(routeClass.id) ?? 0}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        )}
+
+        {isFiltering && countryMatches.length > 0 && (
+          <section className="border-b py-2" aria-labelledby="country-results-heading">
+            <div className="flex items-baseline gap-2 px-1.5 py-1.5">
+              <h2 id="country-results-heading" className="text-xs font-semibold text-foreground">
+                Countries
+              </h2>
+              <span className={headingCount}>{countryMatches.length}</span>
+            </div>
+            {countryMatches.map(jurisdiction => {
+              const reviewed = Object.values(jurisdiction.coverage)
+                .filter(coverage => coverage === 'reviewed').length;
+              return (
+                <Button
+                  key={jurisdiction.iso_n3}
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  className="h-11 w-full justify-start gap-2 px-1.5 text-left md:h-9"
+                  onClick={() => {
+                    onCountry(jurisdiction.iso_n3, jurisdiction.name);
+                    setQuery('');
+                  }}
+                >
+                  <span className="w-5 shrink-0 text-base leading-none" aria-hidden>
+                    {countryFlag(jurisdiction.iso_n3)}
+                  </span>
+                  <span className="min-w-0 flex-1 truncate text-sm font-medium">
+                    {jurisdiction.name}
+                  </span>
+                  <span className="text-[10px] tabular-nums text-muted-foreground">
+                    {reviewed}/4 reviewed
+                  </span>
+                </Button>
+              );
+            })}
+          </section>
+        )}
+
         <Accordion
         type="multiple"
         value={isFiltering ? allSections : openSections}
@@ -387,19 +492,18 @@ export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassC
           * has no color identity, so a muted icon stands where blocs put their
           * swatch), RowTooltip carrying the one-line description, and the same
           * count badge. Two subgroups match the depth of every other section. */}
+        {visibleRouteClasses.length > 0 && (
         <AccordionItem value="classes" className="border-b">
           <AccordionTrigger className={catTrigger}>
             <span>Route types</span>
-            <span className={headingCount}>{ROUTE_CLASSES.length}</span>
+            <span className={headingCount}>{visibleRouteClasses.length}</span>
           </AccordionTrigger>
           <AccordionContent className="h-auto pb-1">
             {[
               { id: 'class-citizenship', label: 'Citizenship', description: 'Paths that end in a passport.', kind: 'citizenship' as const },
               { id: 'class-residence', label: 'Residence', description: 'Paths that end in the right to live there.', kind: 'residence' as const },
             ].map(group => {
-              const classes = ROUTE_CLASSES.filter(cls =>
-                cls.kind === group.kind
-                && (!query.trim() || cls.label.toLowerCase().includes(query.trim().toLowerCase())));
+              const classes = visibleRouteClasses.filter(cls => cls.kind === group.kind);
               if (!classes.length) return null;
               return subgroup(
                 group.id,
@@ -434,6 +538,7 @@ export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassC
             })}
           </AccordionContent>
         </AccordionItem>
+        )}
 
         {countryLaneCount > 0 && (
           <AccordionItem value="country" className="border-b">
@@ -458,7 +563,7 @@ export function Sidebar({ data, state, onBloc, onLane, onRouteClass, routeClassC
 
         </Accordion>
 
-        {isFiltering && regionalCount === 0 && countryLaneCount === 0 && (
+        {isFiltering && countryMatches.length === 0 && regionalCount === 0 && countryLaneCount === 0 && visibleRouteClasses.length === 0 && (
           <p className="mx-2 mt-4 text-xs text-muted-foreground">
             No routes match your search.
           </p>

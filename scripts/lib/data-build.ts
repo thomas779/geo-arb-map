@@ -689,8 +689,13 @@ function canonicalRouteSources(
   sourceIndex: Map<string, SourceRecord>,
   legacySources: Array<{ title: string; url: string }>,
 ): Array<{ title: string; url: string }> {
-  const sourceIds = route.variants.flatMap(variant =>
-    variant.source_refs.map(reference => reference.source_id));
+  const sourceIds = [
+    ...route.variants.flatMap(variant =>
+      variant.source_refs.map(reference => reference.source_id)),
+    ...(route.nationality_eligibility?.source_refs ?? []).map(reference => reference.source_id),
+    ...(route.parent_residence_right?.source_refs ?? []).map(reference => reference.source_id),
+    ...(route.transmission_abroad?.source_refs ?? []).map(reference => reference.source_id),
+  ];
   const seen = new Set<string>();
   const canonical = sourceIds.flatMap(sourceId => {
     if (seen.has(sourceId)) return [];
@@ -782,18 +787,33 @@ function residenceRouteSources(
 ): Array<{ title: string; url: string }> {
   const seen = new Set<string>();
   const out: Array<{ title: string; url: string }> = [];
-  for (const variant of route.variants) {
-    for (const reference of variant.source_refs) {
-      if (seen.has(reference.source_id)) continue;
-      seen.add(reference.source_id);
-      const source = sourceIndex.get(reference.source_id);
-      if (!source) {
-        throw new Error(`Residence route ${route.id} references missing source ${reference.source_id}`);
-      }
-      out.push({ title: source.title, url: source.url });
+  const references = [
+    ...route.variants.flatMap(variant => variant.source_refs),
+    ...(route.nationality_eligibility?.source_refs ?? []),
+  ];
+  for (const reference of references) {
+    if (seen.has(reference.source_id)) continue;
+    seen.add(reference.source_id);
+    const source = sourceIndex.get(reference.source_id);
+    if (!source) {
+      throw new Error(`Residence route ${route.id} references missing source ${reference.source_id}`);
     }
+    out.push({ title: source.title, url: source.url });
   }
   return out;
+}
+
+function publicNationalityEligibility(
+  eligibility: CanonicalResidenceRoute['nationality_eligibility']
+    | JurisdictionRecord['routes'][number]['nationality_eligibility'],
+) {
+  if (!eligibility) return null;
+  return {
+    kind: eligibility.kind,
+    included_iso_n3: eligibility.included_iso_n3,
+    excluded_iso_n3: eligibility.excluded_iso_n3,
+    detail: eligibility.detail,
+  };
 }
 
 function projectResidenceRoute(
@@ -823,6 +843,7 @@ function projectResidenceRoute(
     work_rights: route.work_rights ?? null,
     permit_duration_months: route.permit_duration_months ?? null,
     permit_renewable: route.permit_renewable ?? null,
+    nationality_eligibility: publicNationalityEligibility(route.nationality_eligibility),
     facts: {
       canonical: true,
       variant_count: route.variants.length,
@@ -947,6 +968,12 @@ function projectFrontendCitizenship(
       item.mode,
       coverageState(item.review.state),
     ])) as Record<CitizenshipAcquisitionMode, CitizenshipCoverageState>;
+    row.dual_nationality = jurisdiction.dual_nationality
+      ? {
+          status: jurisdiction.dual_nationality.status,
+          detail: jurisdiction.dual_nationality.detail,
+        }
+      : null;
 
     for (const route of jurisdiction.routes) {
       const legacyRoute = legacyRouteIndex.get(route.id);
@@ -965,6 +992,21 @@ function projectFrontendCitizenship(
           ...(legacyRoute?.facts ?? {}),
           ...canonicalRouteFacts(route),
         },
+        nationality_eligibility: publicNationalityEligibility(route.nationality_eligibility),
+        parent_residence_right: route.parent_residence_right
+          ? {
+              exists: route.parent_residence_right.exists,
+              wait_months: route.parent_residence_right.wait_months,
+              leads_to_citizenship: route.parent_residence_right.leads_to_citizenship,
+              instrument: route.parent_residence_right.instrument,
+            }
+          : null,
+        transmission_abroad: route.transmission_abroad
+          ? {
+              kind: route.transmission_abroad.kind,
+              detail: route.transmission_abroad.detail,
+            }
+          : null,
         pathways: route.variants.map(variant => ({
           id: variant.id,
           label: variant.label,

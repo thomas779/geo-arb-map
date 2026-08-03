@@ -328,6 +328,19 @@ describe('monitor triage', () => {
     expect(leads[0].needs_primary_source).toBe(true);
   });
 
+  test('resolves numeric jurisdictions to names before creating issue titles', () => {
+    const leads = normalizeRulings([{
+      signal_id: signal.id,
+      jurisdiction: '840',
+      impact_type: 'eligibility',
+      summary: 'The United States may have changed eligibility.',
+      needs_primary_source: true,
+      confidence: 'medium',
+    }], [signal], { [signal.id]: ['840'] }, { '840': 'United States of America' });
+    expect(leads[0].jurisdiction).toBe('United States of America');
+    expect(buildIssueDraft(leads[0]).title).toContain('United States of America');
+  });
+
   test('parses fenced model output and deduplicates issue markers', () => {
     expect(parseJsonArray('```json\n[]\n```')).toEqual([]);
     expect(parseJsonArray('Here is the result: [{"summary":"contains ] safely"}]\nDone.'))
@@ -495,6 +508,15 @@ describe('AI sweep + grounded verify', () => {
     expect((map.get('858') ?? []).length).toBeGreaterThan(0); // Uruguay has an active verification source
     expect((map.get('858') ?? [])[0].url).toMatch(/^https?:\/\//);
     expect(map.has('multi')).toBe(false);
+    expect((map.get('674') ?? []).map(source => source.url)).toContain(
+      'https://www.consigliograndeegenerale.sm/on-line/home/archivio-leggi-decreti-e-regolamenti/documento17157139.html',
+    );
+    expect((map.get('222') ?? []).map(source => source.url)).toContain(
+      'https://www.asamblea.gob.sv/sites/default/files/documents/decretos/1A94F7E5-FC00-4CB9-9DDA-AC13CF555359.pdf',
+    );
+    expect((map.get('012') ?? []).map(source => source.url)).toContain(
+      'https://www.joradp.dz/FTP/jo-francais/2026/F2026014.pdf',
+    );
   });
 
   test('proseDateFromIso and synthesizeIssue surface equivalent date forms', () => {
@@ -1101,7 +1123,17 @@ describe('news dedup window scope', () => {
     const withoutInstrument = { ...base, iso_n3: '620', category: 'naturalization', effective_date: '2026-06-30', legal_instrument: '' };
     fs.writeFileSync(findingsPath, JSON.stringify([withInstrument, withoutInstrument]));
     // Dry-run (apply:false) walks the dedup gates without posting.
-    const result = await runNews({ findings: findingsPath, apply: false, stateDb: statePath, stateSql: path.join(dir, 'out.sql'), max: 20 });
+    const noNetwork = (async () => {
+      throw new Error('network access is forbidden in this test');
+    }) as unknown as typeof fetch;
+    const result = await runNews({
+      findings: findingsPath,
+      apply: false,
+      stateDb: statePath,
+      stateSql: path.join(dir, 'out.sql'),
+      max: 20,
+      fetcher: noNetwork,
+    });
     expect(result.skipped).toBe(1); // only the instrument-less finding hits the window
   });
 });

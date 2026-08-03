@@ -30,11 +30,16 @@ branches get preview builds. Configure it in the Cloudflare dashboard under the
 
 | Setting | Value |
 | --- | --- |
-| Build command | `bunx vite build` |
+| Build command | `bun run build` |
 | Deploy command (production) | `bunx wrangler deploy -c wrangler.web.jsonc` |
 | Version command (preview branches) | `bunx wrangler versions upload -c wrangler.web.jsonc` |
 | Root directory | `/` |
 | Production branch | `main` |
+
+`bun run build` is deliberate: it runs TypeScript, the monitor Worker type-check,
+the artifact-level invariant suite, and then Vite. The private canonical source
+is absent from Cloudflare and public CI, so canonical database parity remains a
+separate local/D1-export gate; committed public artifacts are still fully checked.
 
 The `-c wrangler.web.jsonc` is **required** on both the deploy *and* version
 commands — the config is not the default filename, and the repo has a second

@@ -139,6 +139,7 @@ export function normalizeRulings(
   rulings: unknown[],
   signals: Signal[],
   signalJurisdictions: Record<string, string[]>,
+  jurisdictionNames: Record<string, string> = {},
 ): Lead[] {
   const bySignalId = new Map(signals.map(signal => [signal.id, signal]));
   const seen = new Set<string>();
@@ -159,9 +160,10 @@ export function normalizeRulings(
       .replace(/[^\p{L}\p{N} .,'()/-]/gu, '')
       .replace(/\s+/g, ' ')
       .slice(0, 80);
+    const jurisdictionLabel = jurisdictionNames[jurisdiction] ?? jurisdiction;
     return [{
       signal_id: signal.id,
-      jurisdiction: jurisdiction || signal.jurisdiction,
+      jurisdiction: jurisdictionLabel || signal.jurisdiction,
       impact_type: ruling.impact_type as Lead['impact_type'],
       summary,
       needs_primary_source: signal.tier === 'discovery'
@@ -235,6 +237,9 @@ export async function runTriage(
   const citizenshipData = JSON.parse(
     fs.readFileSync(path.resolve(ROOT, '..', 'public', 'citizenship_routes.json'), 'utf8'),
   ) as CitizenshipData;
+  const jurisdictionNames = Object.fromEntries(
+    citizenshipData.jurisdictions.map(item => [item.iso_n3, item.name]),
+  );
   const blocsData = JSON.parse(
     fs.readFileSync(path.resolve(ROOT, '..', 'public', 'blocs_data.json'), 'utf8'),
   ) as BlocsData;
@@ -250,7 +255,12 @@ export async function runTriage(
   } else if (fixtureRulings) {
     mode = 'fixture';
     const context = buildDatasetContext(unseen, citizenshipData, blocsData);
-    leads = normalizeRulings(fixtureRulings, unseen, context.signal_jurisdictions);
+    leads = normalizeRulings(
+      fixtureRulings,
+      unseen,
+      context.signal_jurisdictions,
+      jurisdictionNames,
+    );
   } else if (!llm) {
     mode = 'skipped-no-llm';
     console.warn('::warning title=Monitor triage skipped::No monitoring LLM is configured');
@@ -258,7 +268,12 @@ export async function runTriage(
     for (const batch of chunks(unseen, options.batchSize)) {
       const context = buildDatasetContext(batch, citizenshipData, blocsData);
       const responseText = await generateLlmText(buildPrompt(batch, context), llm);
-      leads.push(...normalizeRulings(parseJsonArray(responseText), batch, context.signal_jurisdictions));
+      leads.push(...normalizeRulings(
+        parseJsonArray(responseText),
+        batch,
+        context.signal_jurisdictions,
+        jurisdictionNames,
+      ));
     }
   }
 

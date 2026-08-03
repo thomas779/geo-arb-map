@@ -53,6 +53,28 @@ interface NewsOptions {
   stateDb: string | null;
   stateSql: string;
   max: number;
+  /** Injectable so previews and tests never need to depend on the public network. */
+  fetcher?: typeof fetch;
+}
+
+interface NewsDisposition {
+  iso_n3: string;
+  jurisdiction: string;
+  headline: string;
+  outcome: 'published' | 'previewed' | 'skipped' | 'blocked';
+  reason: string;
+}
+
+interface NewsReport {
+  ran_at: string;
+  apply: boolean;
+  findings: number;
+  confirmed: number;
+  attempted: number;
+  published: number;
+  skipped: number;
+  blocked: number;
+  dispositions: NewsDisposition[];
 }
 
 // Dedup key. Hashes the change's canonical identity (changeKey): the legal
@@ -442,14 +464,32 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
   if (options.apply && !llm) throw new Error('A monitoring LLM must be configured to auto-publish news');
   // Authoritative-host allowlist per jurisdiction, for the auto-publish gate.
   const officialHosts = officialSourcesByJurisdiction(ROOT);
+  const fetcher = options.fetcher ?? fetch;
 
   let published = 0;
   let skipped = 0;
   const blocked: BlockedNews[] = [];
+  const dispositions: NewsDisposition[] = [];
+  const disposition = (
+    finding: Finding,
+    outcome: NewsDisposition['outcome'],
+    reason: string,
+  ) => dispositions.push({
+    iso_n3: finding.iso_n3,
+    jurisdiction: finding.jurisdiction,
+    headline: finding.headline || finding.claim,
+    outcome,
+    reason,
+  });
   try {
     for (const finding of confirmed) {
       const fp = fingerprint(finding);
-      if (store?.has(fp)) { skipped += 1; console.log(`skip (already posted): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`); continue; }
+      if (store?.has(fp)) {
+        skipped += 1;
+        disposition(finding, 'skipped', 'already_posted');
+        console.log(`skip (already posted): ${finding.iso_n3} ${finding.claim.slice(0, 60)}`);
+        continue;
+      }
       // The category window exists for instrument-LESS findings, whose extracted
       // effective_date wobbles across outlets and defeats the exact fingerprint.
       // A finding that cites a legal instrument already deduped exactly via
@@ -461,6 +501,7 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
       if (!citesInstrument
         && store?.hasRecentChange(finding.iso_n3, finding.category, dedupWindowDays, new Date())) {
         skipped += 1;
+        disposition(finding, 'skipped', 'recent_same_category_without_instrument');
         console.log(`skip (no instrument cited; same ${finding.category} change for ${finding.iso_n3} within ${dedupWindowDays}d): ${finding.claim.slice(0, 60)}`);
         continue;
       }
@@ -484,13 +525,13 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
           headline: finding.headline,
         };
         for (const candidate of originalPrimaries) {
-          const attempt = await verifyPrimarySource(candidate, quoteForPage, allowedHosts, undefined, claimContext);
+          const attempt = await verifyPrimarySource(candidate, quoteForPage, allowedHosts, fetcher, claimContext);
           if (attempt.verdict === 'verified') { verdict = attempt; break; }
           if (attempt.verdict === 'inconclusive' && verdict.verdict === 'refuted') verdict = attempt;
         }
         if (verdict.verdict === 'inconclusive') {
           const primaryHost = hostFromUrl(originalPrimaries[0] ?? '') ?? '';
-          verdict = await corroboratedByCitations(primaryHost, finding.citations)
+          verdict = await corroboratedByCitations(primaryHost, finding.citations, fetcher)
             ? { verdict: 'verified', reason: `quote unverifiable (${verdict.reason}); host corroborated by grounding citations` }
             : { verdict: 'refuted', reason: `${verdict.reason}; not corroborated by grounding citations` };
         }
@@ -504,18 +545,24 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
             primary_urls: originalPrimaries,
             reason: verdict.reason,
           });
+          disposition(finding, 'blocked', `primary_source: ${verdict.reason}`);
           console.warn(`::warning title=News blocked (${finding.jurisdiction})::${verdict.reason} — ${finding.claim.slice(0, 80)}`);
           continue;
         }
       }
 
       // Make sure the "Source" link opens; fall back to the domain root if not.
-      finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url)));
+      finding.primary_urls = await Promise.all(finding.primary_urls.map(url => verifySourceUrl(url, fetcher)));
       let post: TelegramPost;
       try {
         post = buildNewsPost(finding);
       } catch (error) {
         skipped += 1;
+        disposition(
+          finding,
+          'skipped',
+          `unpublishable: ${error instanceof Error ? error.message : String(error)}`,
+        );
         console.warn(`skip (unpublishable): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
         continue;
       }
@@ -526,6 +573,19 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
           await auditTelegramPost(synthesizeIssue(finding), post, { llm });
         } catch (error) {
           skipped += 1;
+          blocked.push({
+            iso_n3: finding.iso_n3,
+            jurisdiction: finding.jurisdiction,
+            headline: finding.headline || finding.claim,
+            category: finding.category,
+            primary_urls: originalPrimaries,
+            reason: `evidence audit: ${error instanceof Error ? error.message : String(error)}`,
+          });
+          disposition(
+            finding,
+            'blocked',
+            `evidence_audit: ${error instanceof Error ? error.message : String(error)}`,
+          );
           console.warn(`skip (audit blocked): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
           continue;
         }
@@ -537,6 +597,7 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
       if (!options.apply) {
         console.log(`\n--- would publish (${finding.iso_n3}) ---\n${post.text}\n`);
         published += 1;
+        disposition(finding, 'previewed', 'passed_preview_gates');
         continue;
       }
 
@@ -554,11 +615,17 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
         // Don't record (it may not have posted); keep going so one 429/502
         // doesn't abort the run and drop the earlier sends from the ledger.
         skipped += 1;
+        disposition(
+          finding,
+          'skipped',
+          `telegram_send: ${error instanceof Error ? error.message : String(error)}`,
+        );
         console.warn(`skip (send failed): ${finding.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
         continue;
       }
       store?.record(fp, finding, messageId, new Date().toISOString());
       published += 1;
+      disposition(finding, 'published', 'sent_to_telegram');
       console.log(`published ${finding.iso_n3} as Telegram message ${messageId}`);
     }
   } finally {
@@ -571,8 +638,21 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
     // (empty array when nothing was blocked) so a suppressed update is visible.
     if (options.apply) {
       const blockedPath = path.join(ROOT, '.out', 'blocked-news.json');
+      const reportPath = path.join(ROOT, '.out', 'news-report.json');
       fs.mkdirSync(path.dirname(blockedPath), { recursive: true });
       fs.writeFileSync(blockedPath, `${JSON.stringify(blocked, null, 2)}\n`);
+      const report: NewsReport = {
+        ran_at: new Date().toISOString(),
+        apply: true,
+        findings: findings.length,
+        confirmed: findings.filter(finding => finding.status === 'confirmed').length,
+        attempted: confirmed.length,
+        published,
+        skipped,
+        blocked: blocked.length,
+        dispositions,
+      };
+      fs.writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
     }
   }
   if (blocked.length) console.warn(`${blocked.length} finding(s) blocked for review → .out/blocked-news.json`);

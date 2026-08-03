@@ -133,6 +133,30 @@ export interface CitizenshipRoutePathway {
   note?: string;
 }
 
+export interface NationalityEligibility {
+  kind: 'open' | 'treaty_list' | 'exclusions';
+  included_iso_n3: string[];
+  excluded_iso_n3: string[];
+  detail: string;
+}
+
+export interface ParentResidenceRight {
+  exists: boolean;
+  wait_months: number | null;
+  leads_to_citizenship: boolean;
+  instrument: string;
+}
+
+export interface TransmissionAbroad {
+  kind: 'unlimited' | 'registration_required' | 'first_generation_only' | 'unknown';
+  detail: string;
+}
+
+export interface JurisdictionDualNationality {
+  status: 'allowed' | 'conditional' | 'prohibited' | 'unknown';
+  detail: string;
+}
+
 export interface CitizenshipRoute {
   id: string;
   country: Member;
@@ -141,6 +165,12 @@ export interface CitizenshipRoute {
   title: string;
   summary: string;
   facts: Record<string, unknown>;
+  /** Explicit nationality limits for direct CBI; absent = not recorded. */
+  nationality_eligibility?: NationalityEligibility | null;
+  /** Residence consequences for a parent of a child born in-country. */
+  parent_residence_right?: ParentResidenceRight | null;
+  /** How citizenship is transmitted to children born abroad. */
+  transmission_abroad?: TransmissionAbroad | null;
   pathways?: CitizenshipRoutePathway[];
   confidence: 'high' | 'medium' | 'low';
   last_checked: string;
@@ -180,6 +210,8 @@ export interface ResidenceRoute {
   permit_duration_months?: number | null;
   /** Renewability as stated in the instrument; null = not stated (never false from silence). */
   permit_renewable?: boolean | null;
+  /** Permit eligibility by nationality; absent = not recorded. */
+  nationality_eligibility?: NationalityEligibility | null;
   facts: Record<string, unknown>;
   pathways?: CitizenshipRoutePathway[];
   confidence: 'high' | 'medium' | 'low';
@@ -209,6 +241,7 @@ export interface CitizenshipRoutesData {
     route_ids: string[];
     residence_coverage?: Partial<Record<ResidenceCategory, CitizenshipCoverageState>>;
     residence_route_ids?: string[];
+    dual_nationality?: JurisdictionDualNationality | null;
     registry_note?: string;
   }>;
   routes: CitizenshipRoute[];

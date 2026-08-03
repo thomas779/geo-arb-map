@@ -42,11 +42,18 @@ For every jurisdiction in `data/migration-pilot.json`:
    the child's citizenship, each relative's residence eligibility, any reduced
    naturalization period, and whether the result is automatic or discretionary.
    Never collapse family-unity residence into citizenship for parents or
-   grandparents.
+   grandparents. Record the evidence in `parent_residence_right`; absence means
+   it has not been reviewed, while `exists: false` is an evidence-backed negative.
 7. For visas, record separately whether time counts toward permanent residence
    and toward naturalization; a renewable long-stay permit is not necessarily a
    settlement route.
-8. Report disagreements using the canonical record ID, JSON pointer, source
+8. For ancestry and birth routes, record `transmission_abroad` explicitly. For
+   direct CBI and residence routes, record `nationality_eligibility` as open,
+   treaty-list, or exclusions. Never infer openness from a silent page.
+9. Record the jurisdiction's `dual_nationality` position independently of its
+   acquisition routes. Conditional retention or renunciation rules are not the
+   same as a blanket prohibition.
+10. Report disagreements using the canonical record ID, JSON pointer, source
    URL, proposed correction, and the date the source was checked.
 
 Do not approve a generated packet merely because it validates. Schema and
