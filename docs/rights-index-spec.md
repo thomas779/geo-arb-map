@@ -109,6 +109,20 @@ dimension, one of:
 - `EMPTY` schema exists and validates, zero rows
 - `ABSENT` no schema; the field must be designed before sourcing
 
+### The A1 provenance problem
+
+Dimension A1 is the centre of the index, and it currently rests on data that cannot
+satisfy rule 6. Only **3 of 46 published arrangements are canonical** (`eu_eea`,
+`mercosur`, `spain_iberoamerican`). The other 43 are legacy passthrough: no
+`directionality`, no `destinations`/`beneficiaries` split, no evidence links. **Not one
+of the 24 blocs carries a `sources` field.**
+
+So the settle-by-right peer counts that make the thesis look good, Ireland at 35 peers
+and the Nordic group at 33, are computed from unsourced membership lists. That is fine
+for a prototype and unacceptable for a published index. Migrating arrangements into
+canonical is therefore a prerequisite for A1, not an improvement to it, and it is
+sequenced ahead of structuring the rights text.
+
 It also reports three **structural blockers** that are code fixes rather than sourcing,
 and which would silently corrupt the index if left in place: arrangement directionality
 is dropped in projection, `eligibility[]` is dropped in projection (taking descent

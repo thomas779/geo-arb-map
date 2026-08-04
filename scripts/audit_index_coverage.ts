@@ -219,6 +219,46 @@ const residenceFields: Dimension[] = [
   { id: 'R5', axis: 'B', label: 'counts_toward_* flags', status: 'ready', have: residence.filter(r => typeof r.counts_toward_naturalization === 'boolean').length, total: residence.length, note: 'the only settlement-permanence signal populated for every row' },
 ];
 
+/**
+ * Arrangement provenance. This is the sharpest finding in the report and it was
+ * missed on the first pass: only 3 of the 46 published arrangements have a
+ * canonical record (eu_eea, mercosur, spain_iberoamerican). The other 43 are
+ * legacy passthrough, so they have no directionality, no destinations/beneficiaries
+ * split, and no evidence links. Not one of the 24 blocs carries a `sources` field.
+ *
+ * Dimension A1 is the whole point of the index, and it currently rests almost
+ * entirely on unsourced membership lists. Spec rule 6 says every dimension traces
+ * to an instrument, so A1 cannot be published from this input regardless of how
+ * the scorer is written.
+ */
+function arrangementProvenance() {
+  let canonicalIds = new Set<string>();
+  let sample = true;
+  try {
+    // Synchronous on purpose: the resolver falls back to the committed sample, so
+    // a fork without the private pilot still gets a truthful (if smaller) report.
+    const mod = require(`${root}scripts/lib/canonical-source.ts`);
+    sample = mod.CANONICAL_SOURCE_IS_SAMPLE;
+    canonicalIds = new Set(
+      (mod.buildCanonicalPilot().arrangements as Array<{ id: string }>).map(a => a.id),
+    );
+  } catch {
+    return null;
+  }
+  const blocIds = blocs.blocs.map(b => b.id);
+  const laneIds = blocs.bilateral_lanes.map(l => l.id);
+  return {
+    sample,
+    canonical_blocs: blocIds.filter(id => canonicalIds.has(id)),
+    legacy_blocs: blocIds.filter(id => !canonicalIds.has(id)),
+    canonical_lanes: laneIds.filter(id => canonicalIds.has(id)),
+    legacy_lanes: laneIds.filter(id => !canonicalIds.has(id)),
+    blocs_with_sources: blocs.blocs.filter(b => 'sources' in b).length,
+    lanes_with_sources: blocs.bilateral_lanes.filter(l => 'sources' in l).length,
+  };
+}
+const provenance = arrangementProvenance();
+
 /** Structural blockers that are code fixes rather than sourcing. */
 const blockers = [
   {
@@ -258,6 +298,7 @@ const summary = {
   },
   dimensions,
   residence_fields: residenceFields,
+  arrangement_provenance: provenance,
   blockers,
 };
 
@@ -287,6 +328,23 @@ function table(title: string, rows: Dimension[]) {
 table('AXIS A — worth once held', dimensions.filter(d => d.axis === 'A'));
 table('AXIS B — openness to outsiders', dimensions.filter(d => d.axis === 'B'));
 table('Residence-side fields', residenceFields);
+
+if (provenance) {
+  const cb = provenance.canonical_blocs.length;
+  const cl = provenance.canonical_lanes.length;
+  const total = blocs.blocs.length + blocs.bilateral_lanes.length;
+  console.log('\nArrangement provenance (dimension A1 rests on this)');
+  console.log(`  canonical   ${cb + cl}/${total}   blocs: ${provenance.canonical_blocs.join(', ') || 'none'}` +
+    ` · lanes: ${provenance.canonical_lanes.join(', ') || 'none'}`);
+  console.log(`  legacy      ${provenance.legacy_blocs.length + provenance.legacy_lanes.length}/${total}` +
+    `   no directionality, no destinations/beneficiaries split, no evidence links`);
+  console.log(`  sourced     blocs ${provenance.blocs_with_sources}/${blocs.blocs.length}` +
+    ` · lanes ${provenance.lanes_with_sources}/${blocs.bilateral_lanes.length}`);
+  if (provenance.blocs_with_sources === 0) {
+    console.log('  WARNING  not one bloc carries a source. A1 cannot satisfy spec rule 6 from this input.');
+  }
+  if (provenance.sample) console.log('  (canonical source is the committed SAMPLE, so counts are a floor)');
+}
 
 console.log('\nStructural blockers (code, not sourcing)');
 for (const b of blockers) {
