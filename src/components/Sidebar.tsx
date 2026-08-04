@@ -365,7 +365,7 @@ export function Sidebar({
     <aside className="flex h-full w-full flex-col overflow-hidden bg-sidebar">
       <div className="shrink-0 border-b border-sidebar-border px-3 pb-3 pt-3">
         <div className="mb-2 px-0.5">
-          <h1 className="text-sm font-semibold text-foreground">Explore global mobility</h1>
+          <h1 className="text-sm font-semibold text-foreground">Explore citizenship &amp; residence</h1>
           <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
             Search a country or choose how you want to move.
           </p>
