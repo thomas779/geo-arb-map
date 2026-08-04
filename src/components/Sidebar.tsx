@@ -370,7 +370,7 @@ export function Sidebar({
             Search a country or choose how you want to move.
           </p>
         </div>
-        <div className="relative">
+        <div className="relative" data-tour="country-search">
           <Search
             className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
             aria-hidden
@@ -388,7 +388,7 @@ export function Sidebar({
 
       <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-6">
         {!isFiltering && (
-          <section className="border-b py-3" aria-labelledby="quick-routes-heading">
+          <section className="border-b py-3" aria-labelledby="quick-routes-heading" data-tour="route-start">
             <div className="mb-2 flex items-baseline justify-between gap-2 px-1">
               <h2 id="quick-routes-heading" className="text-xs font-semibold text-foreground">
                 Start with a route

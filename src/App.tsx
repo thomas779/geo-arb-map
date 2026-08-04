@@ -38,6 +38,7 @@ import { clearStoredProfile, LEGACY_FLAGS_KEY, PROFILE_KEY } from '@/lib/profile
 import { cn } from '@/lib/utils';
 import { SiteHeader } from '@/components/SiteHeader';
 import { AtlasGuide } from '@/components/AtlasGuide';
+import { AtlasTour } from '@/components/AtlasTour';
 import type { TrustSection } from './url';
 
 function initialProfile(): Profile {
@@ -87,6 +88,7 @@ export default function App() {
   const [routePanelOpen, setRoutePanelOpen] = useState(
     Boolean(initialState.lane) || Boolean(initialState.routeClass) || initialState.blocs.length > 0,
   );
+  const [tourOpen, setTourOpen] = useState(false);
   // Portrait phones browse a LIST first; the map is on demand. Shared links
   // with a selection land straight on the framed map.
   const [mobileList, setMobileList] = useState<boolean>(
@@ -300,6 +302,32 @@ export default function App() {
       });
     });
   }, []);
+  const prepareTourStep = useCallback((step: number) => {
+    if (step < 2) {
+      setLeftPanelOpen(true);
+      setMobileList(true);
+    } else {
+      setMobileList(false);
+    }
+  }, []);
+
+  const selectionPrompt = useMemo(() => {
+    if (state.routeClass) {
+      const routeClass = routeClassById(state.routeClass);
+      const count = routeClassIsos?.all.size ?? 0;
+      return routeClass ? `${routeClass.label} · ${count} highlighted` : null;
+    }
+    if (state.blocs.length) {
+      const selected = data?.blocs.filter(bloc => state.blocs.includes(bloc.id)) ?? [];
+      const members = new Set(selected.flatMap(bloc => bloc.members.map(member => member.iso_n3))).size;
+      return `${selected.length === 1 ? selected[0].name : `${selected.length} regional systems`} · ${members} highlighted`;
+    }
+    if (state.lane) {
+      const lane = data?.bilateral_lanes.find(item => item.id === state.lane);
+      return lane ? `${lane.name} · destination highlighted` : null;
+    }
+    return null;
+  }, [data, routeClassIsos, state.blocs, state.lane, state.routeClass]);
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
@@ -356,6 +384,7 @@ export default function App() {
             <AtlasGuide
               autoOpen={!state.country && !hasRouteSelection}
               onSearchCountry={startCountrySearch}
+              onStartTour={() => setTourOpen(true)}
             />
           )}
           <span className="mx-1 h-5 w-px bg-border" aria-hidden />
@@ -393,7 +422,7 @@ export default function App() {
             />
           </div>
         )}
-        <div id="map-wrap" className="cartographic-surface relative min-w-0 flex-1 overflow-hidden">
+        <div id="map-wrap" data-tour="map" className="cartographic-surface relative min-w-0 flex-1 overflow-hidden">
           <WorldMap
             data={data}
             state={state}
@@ -425,6 +454,15 @@ export default function App() {
                 {leftPanelOpen ? 'Hide route browser' : 'Show route browser'}
               </TooltipContent>
             </Tooltip>
+          )}
+          {data && state.view === 'map' && selectionPrompt && !state.country && (
+            <div className="pointer-events-none absolute left-1/2 top-3 z-[19] hidden -translate-x-1/2 md:block">
+              <div className="rounded-lg border bg-background/92 px-3 py-2 text-center shadow-md backdrop-blur-md">
+                <p className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-primary">Next</p>
+                <p className="mt-0.5 text-xs font-semibold text-foreground">Choose a highlighted country</p>
+                <p className="mt-0.5 max-w-64 truncate text-[10px] text-muted-foreground">{selectionPrompt}</p>
+              </div>
+            </div>
           )}
           {data && state.view === 'map' && mobileList && (
             <div className="absolute inset-0 z-10 bg-background md:hidden">
@@ -569,6 +607,7 @@ export default function App() {
           </>
         )}
       </main>
+      <AtlasTour open={tourOpen && state.view === 'map'} onOpenChange={setTourOpen} onStepChange={prepareTourStep} />
       {data && (
         <TrustCenter
           open={infoSection !== null}

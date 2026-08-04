@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {
   ChevronRight,
   CircleHelp,
+  Compass,
   ExternalLink,
   Network,
   Route,
@@ -25,9 +26,10 @@ function firstVisit(autoOpen: boolean): boolean {
 interface Props {
   autoOpen: boolean;
   onSearchCountry: () => void;
+  onStartTour: () => void;
 }
 
-export function AtlasGuide({ autoOpen, onSearchCountry }: Props) {
+export function AtlasGuide({ autoOpen, onSearchCountry, onStartTour }: Props) {
   const [open, setOpen] = useState(() => firstVisit(autoOpen));
 
   const markSeen = () => {
@@ -50,6 +52,12 @@ export function AtlasGuide({ autoOpen, onSearchCountry }: Props) {
   };
 
   const followLink = () => markSeen();
+
+  const startTour = () => {
+    markSeen();
+    setOpen(false);
+    onStartTour();
+  };
 
   return (
     <Popover open={open} onOpenChange={changeOpen}>
@@ -81,6 +89,16 @@ export function AtlasGuide({ autoOpen, onSearchCountry }: Props) {
           <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
             Choose a starting point. You can change direction at any time.
           </p>
+        </div>
+
+        <div className="px-3 pb-3">
+          <Button type="button" className="w-full justify-between" onClick={startTour}>
+            <span className="inline-flex items-center gap-2">
+              <Compass className="size-4" aria-hidden />
+              Show me around
+            </span>
+            <span className="font-mono text-[9px] font-medium uppercase tracking-wider opacity-75">3 steps</span>
+          </Button>
         </div>
 
         <div className="border-y bg-border">
