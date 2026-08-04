@@ -431,6 +431,46 @@ describe('monitor-lead verifications, July 2026', () => {
     expect(pass?.outcome).toBe('permanent_residence');
     expect(pass?.confidence).toBe('medium');
   });
+
+  // Russia investor ВНЖ (Gov. Decree 2573) — high confidence only; quote-checked
+  // 2026-08-04 against full decree text + Minek implementation note. Not CBI.
+  test('Russia investor permanent residence is Decree 2573 at high confidence, not CBI', () => {
+    const residence = citizenshipRoutes.residence_routes ?? [];
+    const route = residence.find(r => r.id === 'russia-investor-permanent-residence');
+    expect(route).toBeDefined();
+    expect(route?.country.iso_n3).toBe('643');
+    expect(route?.category).toBe('investment');
+    expect(route?.status).toBe('active');
+    expect(route?.outcome).toBe('permanent_residence');
+    expect(route?.confidence).toBe('high');
+    // Lowest published capital corridor is RUB 15m (regional social projects);
+    // higher corridors (company tax floors, real-estate cadastral bands) stay in the summary.
+    expect(route?.min_investment).toEqual({ amount: 15_000_000, currency: 'RUB' });
+    expect(route?.counts_toward_permanent_residence).toBe(true);
+    expect(route?.counts_toward_naturalization).toBe(true);
+    // Direct PR without prior temporary residence (РВП).
+    expect(route?.summary).toMatch(/без получения разрешения на временное проживание|without first obtaining a temporary residence permit|without.*РВП/i);
+    expect(route?.summary).toContain('15 million');
+    expect(route?.summary).toContain('30 million');
+    expect(route?.summary).toContain('50 million');
+    expect(route?.summary).toContain('20 million');
+    expect(route?.summary).toContain('25 million');
+    expect(route?.summary).toMatch(/sanctions/i);
+    // No invented stay-day rule; physical presence is deliberately unset.
+    expect(route?.physical_presence_days_per_year).toBeNull();
+    const urls = (route?.sources ?? []).map(s => s.url);
+    expect(urls.some(u => u.includes('government.ru') || u.includes('pravo.gov.ru'))).toBe(true);
+    expect(urls.some(u => u.includes('economy.gov.ru'))).toBe(true);
+
+    // Citizenship layer still records no CBI for Russia.
+    const ru = citizenshipRoutes.jurisdictions.find(j => j.iso_n3 === '643');
+    expect(ru?.residence_route_ids).toContain('russia-investor-permanent-residence');
+    expect(ru?.coverage.investment).toBe('reviewed');
+    const cbi = (citizenshipRoutes.routes ?? []).filter(
+      r => r.country.iso_n3 === '643' && r.mode === 'investment' && r.status === 'active',
+    );
+    expect(cbi).toHaveLength(0);
+  });
 });
 
 describe('monitor-lead verifications, 30 July 2026', () => {

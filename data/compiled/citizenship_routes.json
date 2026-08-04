@@ -29,7 +29,7 @@
         "verified_negative": 2,
         "inactive": 9
       },
-      "residence_routes": 265
+      "residence_routes": 266
     }
   },
   "jurisdictions": [
@@ -3788,6 +3788,12 @@
       "dual_nationality": {
         "status": "allowed",
         "detail": "Permitted subject to a notification duty under Federal Law 138-FZ (2023); holding another citizenship is not a bar to Russian citizenship and does not require renunciation for the general procedure."
+      },
+      "residence_route_ids": [
+        "russia-investor-permanent-residence"
+      ],
+      "residence_coverage": {
+        "investment": "reviewed"
       }
     },
     {
@@ -50280,6 +50286,65 @@
         {
           "title": "Romanian MFA — long-stay visa information",
           "url": "https://www.mae.ro/en/node/2035"
+        }
+      ]
+    },
+    {
+      "id": "russia-investor-permanent-residence",
+      "country": {
+        "iso_n3": "643",
+        "name": "Russia"
+      },
+      "category": "investment",
+      "status": "active",
+      "title": "Permanent residence for foreign investors (ВНЖ without РВП)",
+      "summary": "Permanent residence permit (вид на жительство) for a foreign citizen or stateless person who has invested in the Russian Federation and meets one of the Government Decree No. 2573 criteria, issued without first obtaining a temporary residence permit (РВП). Four corridors, each alternative: (a) at least RUB 15 million invested in socially significant projects of subjects of the Russian Federation during the three years preceding the ВНЖ application; (b) registration of a Russian legal entity in listed forms (partnership, ООО, sole-founder АО, peasant farm, or economic partnership) that has conducted business for the two calendar years immediately before the application year and during the application year, with the applicant the sole participant of an АО/ООО at grant, and taxes plus social contributions of at least RUB 4 million annually; (c) at least RUB 30 million invested in a Russian legal entity that has conducted business in Russia for at least three years, with that entity paying at least RUB 6 million in taxes and social contributions in the calendar year immediately before the application year; (d) continuous ownership for one year before applying of Russian real estate of any purpose acquired at the construction stage or within two years of commissioning, with aggregate cadastral value of at least RUB 50 million in Moscow, RUB 20 million in subjects of the Far Eastern Federal District, or RUB 25 million in other subjects, free of rights restrictions and encumbrances during that holding year. Decree in force from 11 January 2023. Third-country sanctions, banking, and travel practice can block use of this path even where Russian law allows it.",
+      "outcome": "permanent_residence",
+      "counts_toward_permanent_residence": true,
+      "counts_toward_naturalization": true,
+      "min_investment": {
+        "amount": 15000000,
+        "currency": "RUB"
+      },
+      "min_income_monthly": null,
+      "physical_presence_days_per_year": null,
+      "work_rights": null,
+      "permit_duration_months": null,
+      "permit_renewable": null,
+      "min_age": null,
+      "max_age": null,
+      "nationality_eligibility": null,
+      "facts": {
+        "canonical": true,
+        "variant_count": 1,
+        "eligibility_months": [
+          0
+        ],
+        "discretionary_decision": true
+      },
+      "pathways": [
+        {
+          "id": "russia-investor-permanent-residence-principal",
+          "label": "Permanent residence for foreign investors (ВНЖ without РВП)",
+          "allocation": "discretionary",
+          "eligibility_months": 0,
+          "note": "Decree 2573 corridors (a)–(d) as published. Decree 2573 itself does not restate family-member rules; ordinary 115-FZ family provisions for ВНЖ holders may apply — confirm current MVD practice."
+        }
+      ],
+      "confidence": "high",
+      "last_checked": "2026-07-30",
+      "sources": [
+        {
+          "title": "Government of Russia — Decree No. 2573 of 31 December 2022 (investor ВНЖ criteria)",
+          "url": "http://government.ru/docs/all/145534/"
+        },
+        {
+          "title": "Official publication of Decree 2573 (pravo.gov.ru 0001202301040004)",
+          "url": "http://publication.pravo.gov.ru/Document/View/0001202301040004"
+        },
+        {
+          "title": "Ministry of Economic Development — documents confirming investor ВНЖ criteria (updated 29 Sep 2023)",
+          "url": "https://www.economy.gov.ru/material/news/minekonomrazvitiya_informiruet_o_dokumentah_kotorymi_mozhet_byt_podtverzhdeno_sootvetstvie_inostrannyh_investorov_kriteriyam_dlya_polucheniya_vnzh_v_rf.html"
         }
       ]
     },
