@@ -33,7 +33,8 @@
     "monitor:sources:x-seed": "bun monitor/discovery/x_seed.ts",
     "monitor:test": "bun test tests/monitor.test.ts",
     "preview": "vite preview",
-    "test": "bun test"
+    "test": "bun test",
+    "data:publish": "bun scripts/publish_data_repo.ts"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.9",

@@ -23,8 +23,34 @@ and for licensing see the repo `README.md`.
 
 ## Deploy pipeline (web)
 
-The web app deploys via **Cloudflare Workers Builds git integration** — *not*
-GitHub Actions. On every push to `main`, Cloudflare builds and deploys; other
+> **Cutover in progress (2026-08-04).** Deployment is moving to GitHub Actions
+> (`.github/workflows/deploy.yml`) because the compiled dataset now lives in the
+> private `flag-paths-data` repo, which a Cloudflare-side build cannot authenticate
+> to without a dashboard-managed secret. The new workflow is live and proven: it
+> fetches the dataset, runs `bun run build` (tsc plus the full suite, so the deploy
+> is gated on tests), asserts the corpus is not served, and then **skips the deploy
+> until `CLOUDFLARE_DEPLOY_TOKEN` exists**. Two remaining steps, both dashboard:
+>
+> 1. Create a Cloudflare API token with **Workers Scripts: Edit** and add it as the
+>    `CLOUDFLARE_DEPLOY_TOKEN` GitHub secret. (The existing `CLOUDFLARE_API_TOKEN`
+>    is D1 + R2 only; verified 403 against the Workers API.)
+> 2. Disable the Workers Builds git integration for `flag-paths-web`, then remove
+>    `data/compiled/citizenship_routes.json` and `data/citizenship_routes.json`
+>    from this repo (they stay committed until then, so the current deploy keeps
+>    working).
+>
+> ### Dataset flow after the cutover
+>
+> | Step | Command | Effect |
+> |---|---|---|
+> | Compile | `bun run data:db && data:build && data:promote -- --allow-draft` | writes `data/compiled/` locally, guarded against dropping routes |
+> | Publish | `bun run data:publish` | pushes the release to `flag-paths-data` (the source CI and the deploy read) |
+> | Sync D1 | `bun run data:sync sync` | canonical store |
+>
+> `data:publish` refuses a corpus under 500 routes, so a sample-built or truncated
+> release cannot reach the source the deploy trusts.
+
+The web app currently deploys via **Cloudflare Workers Builds git integration**. On every push to `main`, Cloudflare builds and deploys; other
 branches get preview builds. Configure it in the Cloudflare dashboard under the
 `flag-paths-web` Worker → Settings → Build:
 
