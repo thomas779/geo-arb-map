@@ -6,13 +6,12 @@ name: Deploy web
 # is gated on the test suite by construction, because `bun run build` is
 # `bun run verify && vite build` — tsc plus the full suite, then the bundle.
 #
-# Requires a Cloudflare API token with Workers Scripts: Edit as
-# CLOUDFLARE_DEPLOY_TOKEN (mirror the existing "flag-paths-web build" token,
-# which is proven to deploy this Worker; do not reuse or roll that one while
-# Workers Builds is still the live path). The existing CLOUDFLARE_API_TOKEN is scoped to D1 and
-# R2 only (verified: 403 against the Workers API), so it cannot deploy. Until that
-# secret exists the job builds and verifies but skips the deploy, so adding this
-# workflow cannot break a push.
+# Deploys with CLOUDFLARE_API_TOKEN, whose Cloudflare token (flag-paths-gh-actions)
+# gained Workers Scripts: Edit on 2026-08-04. Deliberate tradeoff, recorded so it is
+# not mistaken for an oversight: that same token is used by the monitor workflows,
+# which run LLM-driven code against untrusted pages, so deploy rights now sit inside
+# that blast radius. Accepted for simplicity over a second token; revisit by giving
+# the deploy its own token if the monitor's surface grows.
 
 on:
   push:
@@ -31,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      HAS_DEPLOY_TOKEN: ${{ secrets.CLOUDFLARE_DEPLOY_TOKEN != '' }}
+      HAS_DEPLOY_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN != '' }}
       # Non-secret account identifier, set explicitly for the same reason
       # backup-d1.yml does: without it wrangler falls back to listing accounts,
       # which needs a permission the deploy token does not otherwise require and
@@ -73,12 +72,11 @@ jobs:
       - name: Deploy
         if: env.HAS_DEPLOY_TOKEN == 'true'
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_DEPLOY_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: bunx wrangler deploy -c wrangler.web.jsonc
 
       - name: Explain a skipped deploy
         if: env.HAS_DEPLOY_TOKEN != 'true'
         run: |
-          echo "::warning::CLOUDFLARE_DEPLOY_TOKEN is not set, so the build was verified but not deployed."
-          echo "To finish the cutover: create a Cloudflare API token with Workers Scripts: Edit,"
-          echo "add it as CLOUDFLARE_DEPLOY_TOKEN, then disable Workers Builds for flag-paths-web."
+          echo "::warning::CLOUDFLARE_API_TOKEN is not set, so the build was verified but not deployed."
+          echo "The token needs Workers Scripts: Edit to deploy this Worker."
