@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import {
+  ChevronRight,
   CircleHelp,
   ExternalLink,
-  MapPin,
+  Network,
   Route,
   Search,
 } from 'lucide-react';
@@ -11,24 +12,6 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { dataCorrectionUrl, productFeedbackUrl } from '@/lib/trust';
 
 const GUIDE_STORAGE_KEY = 'flag-paths:atlas-guide-seen';
-
-const STARTING_POINTS = [
-  {
-    icon: Search,
-    title: 'Know the country?',
-    detail: 'Search it or click it on the map.',
-  },
-  {
-    icon: Route,
-    title: 'Know the route?',
-    detail: 'Choose family, investment, work, or another path.',
-  },
-  {
-    icon: MapPin,
-    title: 'Just exploring?',
-    detail: 'Use the colors to spot shared and country-specific access.',
-  },
-] as const;
 
 function firstVisit(autoOpen: boolean): boolean {
   if (!autoOpen || typeof window === 'undefined') return false;
@@ -41,10 +24,10 @@ function firstVisit(autoOpen: boolean): boolean {
 
 interface Props {
   autoOpen: boolean;
-  onExplore: () => void;
+  onSearchCountry: () => void;
 }
 
-export function AtlasGuide({ autoOpen, onExplore }: Props) {
+export function AtlasGuide({ autoOpen, onSearchCountry }: Props) {
   const [open, setOpen] = useState(() => firstVisit(autoOpen));
 
   const markSeen = () => {
@@ -60,11 +43,13 @@ export function AtlasGuide({ autoOpen, onExplore }: Props) {
     if (!next) markSeen();
   };
 
-  const explore = () => {
+  const chooseCountry = () => {
     markSeen();
     setOpen(false);
-    onExplore();
+    onSearchCountry();
   };
+
+  const followLink = () => markSeen();
 
   return (
     <Popover open={open} onOpenChange={changeOpen}>
@@ -91,33 +76,56 @@ export function AtlasGuide({ autoOpen, onExplore }: Props) {
             Quick guide
           </p>
           <h2 className="mt-1 font-heading text-xl font-semibold tracking-[-0.02em] text-foreground">
-            Start with what you know.
+            What would you like to find?
           </h2>
           <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-            A country, a route, or neither—each is a valid starting point.
+            Choose a starting point. You can change direction at any time.
           </p>
         </div>
 
-        <div className="border-y px-2 py-1">
-          {STARTING_POINTS.map(point => {
-            const Icon = point.icon;
-            return (
-              <div key={point.title} className="flex items-center gap-3 rounded-md px-2 py-2.5">
-                <span className="grid size-8 shrink-0 place-items-center rounded-md border bg-background text-muted-foreground">
-                  <Icon className="size-3.5" aria-hidden />
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-xs font-semibold text-foreground">{point.title}</span>
-                  <span className="mt-0.5 block text-[11px] leading-snug text-muted-foreground">{point.detail}</span>
-                </span>
-              </div>
-            );
-          })}
+        <div className="border-y bg-border">
+          <button
+            type="button"
+            onClick={chooseCountry}
+            className="group flex w-full items-center gap-3 bg-popover px-4 py-3 text-left hover:bg-accent focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+          >
+            <Search className="size-4 shrink-0 text-primary" aria-hidden />
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-semibold text-foreground">Search a country</span>
+              <span className="mt-0.5 block text-[11px] leading-snug text-muted-foreground">See citizenship rules and available paths.</span>
+            </span>
+            <ChevronRight className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5" aria-hidden />
+          </button>
+          <a
+            href="/routes/"
+            onClick={followLink}
+            className="group mt-px flex items-center gap-3 bg-popover px-4 py-3 hover:bg-accent focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+          >
+            <Route className="size-4 shrink-0 text-primary" aria-hidden />
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-semibold text-foreground">Browse ways to move</span>
+              <span className="mt-0.5 block text-[11px] leading-snug text-muted-foreground">Compare ancestry, investment, work, and other routes.</span>
+            </span>
+            <ChevronRight className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5" aria-hidden />
+          </a>
+          <a
+            href="/rights/"
+            onClick={followLink}
+            className="group mt-px flex items-center gap-3 bg-popover px-4 py-3 hover:bg-accent focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
+          >
+            <Network className="size-4 shrink-0 text-primary" aria-hidden />
+            <span className="min-w-0 flex-1">
+              <span className="block text-xs font-semibold text-foreground">Compare regional rights</span>
+              <span className="mt-0.5 block text-[11px] leading-snug text-muted-foreground">See where one status can open several countries.</span>
+            </span>
+            <ChevronRight className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5" aria-hidden />
+          </a>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-3">
-          <Button type="button" onClick={explore}>Explore routes</Button>
-          <Button type="button" variant="ghost" onClick={() => changeOpen(false)}>Got it</Button>
+        <div className="px-3 py-2">
+          <Button type="button" variant="ghost" size="sm" onClick={() => changeOpen(false)}>
+            I’ll explore the map
+          </Button>
         </div>
 
         <div className="grid grid-cols-2 gap-px border-t bg-border">

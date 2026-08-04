@@ -289,9 +289,16 @@ export default function App() {
 
   const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane) || Boolean(state.routeClass);
   const rightPanelOpen = state.country ? detailPanelOpen : hasRouteSelection && routePanelOpen;
-  const openRouteBrowser = useCallback(() => {
+  const startCountrySearch = useCallback(() => {
     setLeftPanelOpen(true);
     setMobileList(true);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const search = Array.from(document.querySelectorAll<HTMLInputElement>('[data-atlas-search]'))
+          .find(input => input.getClientRects().length > 0);
+        search?.focus();
+      });
+    });
   }, []);
 
   return (
@@ -348,7 +355,7 @@ export default function App() {
           {state.view === 'map' && (
             <AtlasGuide
               autoOpen={!state.country && !hasRouteSelection}
-              onExplore={openRouteBrowser}
+              onSearchCountry={startCountrySearch}
             />
           )}
           <span className="mx-1 h-5 w-px bg-border" aria-hidden />

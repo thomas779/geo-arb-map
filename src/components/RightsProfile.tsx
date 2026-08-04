@@ -354,21 +354,45 @@ export function RightsProfile({ data }: { data: RightsProfileData }) {
 
 // ── Hub lists ──────────────────────────────────────────────────────────────
 
-const HUB_GROUPS: Array<{ label: string; categories: Bloc['category'][] }> = [
-  { label: 'Established rights', categories: ['full', 'closed'] },
-  { label: 'Limited or one-way', categories: ['partial', 'hub_spoke', 'one_way'] },
-  { label: 'Emerging frameworks', categories: ['proto'] },
+const HUB_GROUPS: Array<{ label: string; description: string; categories: Bloc['category'][] }> = [
+  {
+    label: 'Broad cross-border rights',
+    description: 'Established systems with practical residence or work rights.',
+    categories: ['full', 'closed'],
+  },
+  {
+    label: 'Conditional access',
+    description: 'Access depends on nationality, direction, or local rules.',
+    categories: ['partial', 'hub_spoke', 'one_way'],
+  },
+  {
+    label: 'Developing systems',
+    description: 'Cooperation exists, but dependable movement rights remain limited.',
+    categories: ['proto'],
+  },
 ];
+
+function blocOutcome(bloc: Bloc): string {
+  if (bloc.category === 'full' || bloc.category === 'closed') {
+    return `Shared residence or work rights · ${bloc.members.length} countries`;
+  }
+  if (bloc.category === 'proto') {
+    return `Developing cooperation · ${bloc.members.length} countries`;
+  }
+  return `Conditional cross-border access · ${bloc.members.length} countries`;
+}
 
 export function RightsList({ mobility }: { mobility: BlocsData }) {
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
-      <h1 className="font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">Regional systems &amp; routes</h1>
-      <p className="mb-8 mt-3 max-w-[68ch] text-muted-foreground">
-        Blocs and unions that grant residence or citizenship rights across their members — the strongest
-        cross-border routes. Open any system, or explore them on the{' '}
-        <a href="/" className="underline underline-offset-2">interactive atlas</a>.
+      <h1 className="font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">Rights that reach beyond one country</h1>
+      <p className="mt-3 max-w-[68ch] text-muted-foreground">
+        Some passports and residence statuses let you live or work in other countries. Choose a system to see
+        the status you need, what it unlocks, and its member countries.
       </p>
+      <a href="/" className="mb-8 mt-3 inline-flex text-sm font-medium text-primary hover:underline">
+        See these systems on the atlas →
+      </a>
       {HUB_GROUPS.map(group => {
         const blocs = mobility.blocs
           .filter(b => group.categories.includes(b.category))
@@ -376,15 +400,19 @@ export function RightsList({ mobility }: { mobility: BlocsData }) {
         if (!blocs.length) return null;
         return (
           <section key={group.label} className="mb-8">
-            <h2 className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">{group.label}</h2>
+            <div className="mb-3">
+              <h2 className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-foreground">{group.label}</h2>
+              <p className="mt-1 text-sm text-muted-foreground">{group.description}</p>
+            </div>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {blocs.map(b => (
-                <a key={b.id} href={`/rights/${entitySlug(b.id)}`} className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2.5 hover:border-primary">
-                  <span className="size-3.5 shrink-0 rounded-[3px]" style={{ background: b.color }} aria-hidden />
+                <a key={b.id} href={`/rights/${entitySlug(b.id)}`} className="group flex min-h-[76px] items-center gap-3 rounded-lg border bg-card px-4 py-3 hover:border-primary">
+                  <span className="size-3 shrink-0 rounded-[3px]" style={{ background: b.color }} aria-hidden />
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-medium">{displayRouteTitle(b.name)}</span>
-                    <span className="font-mono text-[0.66rem] text-muted-foreground">{b.members.length} countries</span>
+                    <span className="block text-sm font-semibold leading-snug">{displayRouteTitle(b.name)}</span>
+                    <span className="mt-1 block text-xs leading-snug text-muted-foreground">{blocOutcome(b)}</span>
                   </span>
+                  <span className="shrink-0 text-sm text-muted-foreground transition-transform group-hover:translate-x-0.5" aria-hidden>→</span>
                 </a>
               ))}
             </div>

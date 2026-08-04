@@ -377,6 +377,7 @@ export function Sidebar({
           />
           <Input
             type="search"
+            data-atlas-search
             placeholder="Search countries or routes…"
             value={query}
             onChange={e => setQuery(e.target.value)}
