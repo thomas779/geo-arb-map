@@ -125,3 +125,65 @@ describe('public surface is index-plus-slices, not a bulk download', () => {
     expect(llms).not.toContain('/citizenship_routes.json');
   });
 });
+
+describe('every workflow that reads the private corpus fetches it', () => {
+  // The failure this guards against actually happened: privatising the corpus on
+  // 2026-08-04 left monitor/sweep/run.ts pointing at the retired
+  // public/citizenship_routes.json, and nothing caught it until the 14:38 cron
+  // died with ENOENT (run 30920031089). The daily monitor is the one pipeline
+  // whose breakage is invisible for hours, so both halves of this are asserted
+  // statically rather than trusted to a scheduled run.
+  const workflowDir = new URL('../.github/workflows/', import.meta.url);
+
+  test('no source file reads the retired public corpus path', () => {
+    // A single grep-equivalent over the directories that ship code. If the corpus
+    // ever moves again, this points at every caller that has to move with it.
+    const roots = ['monitor', 'scripts', 'src'];
+    const offenders: string[] = [];
+    const walk = (dir: URL) => {
+      for (const entry of readdirSync(dir, { withFileTypes: true })) {
+        const child = new URL(`${entry.name}${entry.isDirectory() ? '/' : ''}`, dir);
+        if (entry.isDirectory()) walk(child);
+        else if (/\.(ts|tsx|js)$/.test(entry.name)) {
+          const text = readFileSync(child, 'utf8');
+          // Match the path as assembled either literally or via path.resolve parts.
+          if (/public['"/\s,]+citizenship_routes\.json/.test(text)
+            || /'public',\s*'citizenship_routes\.json'/.test(text)) {
+            offenders.push(`${entry.name}`);
+          }
+        }
+      }
+    };
+    for (const root of roots) walk(new URL(`../${root}/`, import.meta.url));
+    expect(offenders).toEqual([]);
+  });
+
+  test('workflows running corpus-dependent commands include the fetch step', () => {
+    // Commands whose code path reads data/compiled or the legacy twin. Keep this
+    // list honest: adding a corpus reader without adding it here defeats the test.
+    // Deliberately NOT here: monitor:news. It imports changeKey,
+    // normalizeInstrument and officialSourcesByJurisdiction from sweep/run, but
+    // the corpus read lives inside runSweep, which news never calls. Listing it
+    // would force a deploy key onto publish-manual.yml for a dependency it does
+    // not have. If news ever calls runSweep, add it here.
+    const needsCorpus = [
+      'monitor:sweep',
+      'monitor:triage',
+      'monitor:telegram',
+      'data:build',
+      'bun run build',
+      'bun run verify',
+    ];
+    const failures: string[] = [];
+    for (const entry of readdirSync(workflowDir, { withFileTypes: true })) {
+      if (!entry.isFile() || !entry.name.endsWith('.yml')) continue;
+      const text = readFileSync(new URL(entry.name, workflowDir), 'utf8');
+      const uses = needsCorpus.filter(command => text.includes(command));
+      if (!uses.length) continue;
+      if (!text.includes('./.github/actions/fetch-data')) {
+        failures.push(`${entry.name} runs ${uses.join(', ')} without fetch-data`);
+      }
+    }
+    expect(failures).toEqual([]);
+  });
+});

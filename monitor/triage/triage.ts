@@ -234,8 +234,10 @@ export async function runTriage(
     .sort((a, b) => String(b.published_at ?? '').localeCompare(String(a.published_at ?? '')))
     .slice(0, options.maxSignals);
 
+  // data/compiled, not public/: see the note in monitor/sweep/run.ts. Gitignored
+  // here and fetched from the private flag-paths-data repo in CI.
   const citizenshipData = JSON.parse(
-    fs.readFileSync(path.resolve(ROOT, '..', 'public', 'citizenship_routes.json'), 'utf8'),
+    fs.readFileSync(path.resolve(ROOT, '..', 'data', 'compiled', 'citizenship_routes.json'), 'utf8'),
   ) as CitizenshipData;
   const jurisdictionNames = Object.fromEntries(
     citizenshipData.jurisdictions.map(item => [item.iso_n3, item.name]),

@@ -506,8 +506,13 @@ export async function runSweep(
   const registry = loadRegistry(JSON.parse(
     fs.readFileSync(path.resolve(ROOT, '..', 'data', 'registry.json'), 'utf8'),
   ));
+  // data/compiled, not public/: the corpus stopped being a served endpoint on
+  // 2026-08-04 and is gitignored here, so CI fetches it from the private
+  // flag-paths-data repo. The sweep cannot degrade gracefully without it, since
+  // the delta-aware prompt is what stops already-recorded law being reported as
+  // new, so fail loudly rather than sweep blind.
   const citizenshipData = JSON.parse(
-    fs.readFileSync(path.resolve(ROOT, '..', 'public', 'citizenship_routes.json'), 'utf8'),
+    fs.readFileSync(path.resolve(ROOT, '..', 'data', 'compiled', 'citizenship_routes.json'), 'utf8'),
   ) as CitizenshipData;
   const blocsData = JSON.parse(
     fs.readFileSync(path.resolve(ROOT, '..', 'public', 'blocs_data.json'), 'utf8'),

@@ -60,6 +60,15 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      # The compiled corpus left this repo on 2026-08-04 and is gitignored, so it
+      # has to be fetched. The sweep's delta-aware prompt needs it to tell new law
+      # from law we already record; without it the run reports known rules as
+      # changes. It broke exactly that way in run 30920031089.
+      - name: Fetch compiled dataset
+        uses: ./.github/actions/fetch-data
+        with:
+          deploy-key: ${{ secrets.FLAG_PATHS_DATA_DEPLOY_KEY }}
+
       - name: Read existing issue markers
         env:
           GH_TOKEN: ${{ github.token }}
@@ -176,6 +185,15 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
+
+      # The compiled corpus left this repo on 2026-08-04 and is gitignored, so it
+      # has to be fetched. The sweep's delta-aware prompt needs it to tell new law
+      # from law we already record; without it the run reports known rules as
+      # changes. It broke exactly that way in run 30920031089.
+      - name: Fetch compiled dataset
+        uses: ./.github/actions/fetch-data
+        with:
+          deploy-key: ${{ secrets.FLAG_PATHS_DATA_DEPLOY_KEY }}
 
       - name: Download sweep findings
         uses: actions/download-artifact@v4
