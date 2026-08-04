@@ -777,15 +777,25 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                       <ChevronDown className="size-3.5 text-muted-foreground transition-transform group-open:rotate-180" aria-hidden />
                     </summary>
                     <div className="border-t border-dashed px-3 py-3">
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-col gap-1.5">
                         {unlocked.ancestryPaths.map(path => (
-                          <span key={path.id} className="rounded-full border bg-background px-2.5 py-1 text-xs">
-                            {displayRouteTitle(path.name)}
-                          </span>
+                          <div key={path.id} className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                            <span className="rounded-full border bg-background px-2.5 py-1 text-xs">
+                              {displayRouteTitle(path.name)}
+                            </span>
+                            {path.qualifyingRelation && (
+                              <span className="text-xs text-muted-foreground">
+                                qualifies through a {path.qualifyingRelation}
+                                {!path.limitRecorded && ', how far back is not recorded'}
+                              </span>
+                            )}
+                          </div>
                         ))}
                       </div>
                       <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
                         These are document-dependent claims, so they remain visible even when they add little mapped access.
+                        We record which relation qualifies, not how many generations back a claim still runs, so check the
+                        cutoff before relying on a distant ancestor.
                       </p>
                     </div>
                   </details>

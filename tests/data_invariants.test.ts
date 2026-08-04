@@ -221,8 +221,44 @@ describe('canonical timeline rules', () => {
     expect(compiledCurated).toEqual(
       [...regenerated.naturalization].sort((a: NatRule, b: NatRule) => a.iso_n3.localeCompare(b.iso_n3)),
     );
-    expect(compiledTimelineRules.heritage).toEqual(regenerated.heritage);
+    // Heritage rules get descent relations attached from the private canonical
+    // source, so the same curated/derived split applies: compare the curated base
+    // and validate the attached half separately, since a sample checkout cannot
+    // reproduce it.
+    type HeritageRule = Record<string, unknown> & {
+      route_id: string;
+      relations?: string[];
+      deepest_recorded_degree?: number | null;
+      limit_recorded?: boolean;
+      maximum_degree?: number;
+    };
+    const ATTACHED = ['relations', 'deepest_recorded_degree', 'limit_recorded', 'maximum_degree'];
+    const compiledHeritage = compiledTimelineRules.heritage as unknown as HeritageRule[];
+    const withoutAttached = compiledHeritage.map(rule => {
+      const base: Record<string, unknown> = { ...rule };
+      for (const field of ATTACHED) delete base[field];
+      return base;
+    });
+    expect(withoutAttached).toEqual(regenerated.heritage as Record<string, unknown>[]);
     expect(compiledTimelineRules.investment).toEqual(regenerated.investment);
+
+    for (const rule of compiledHeritage) {
+      if (!rule.relations) continue;
+      // Every attached relation must be in the closed vocabulary, and the deepest
+      // recorded degree must agree with it: a great-grandparent claim reporting
+      // degree 2 would understate depth by a generation.
+      expect(rule.relations.length).toBeGreaterThan(0);
+      for (const relation of rule.relations) {
+        expect(['parent', 'grandparent', 'great_grandparent', 'ancestor_unspecified'])
+          .toContain(relation);
+      }
+      const degrees = { parent: 1, grandparent: 2, great_grandparent: 3 } as Record<string, number>;
+      const named = rule.relations.map(relation => degrees[relation]).filter(Boolean) as number[];
+      expect(rule.deepest_recorded_degree ?? null)
+        .toBe(named.length ? Math.max(...named) : null);
+      // A ceiling is only ever present alongside an authored maximum.
+      expect(rule.limit_recorded).toBe(rule.maximum_degree !== undefined);
+    }
 
     for (const rule of compiledNat) {
       if (curatedIsos.has(rule.iso_n3)) continue;
@@ -901,6 +937,73 @@ describe('source quality: constituteproject is a lead, not a source of record', 
     // copy of Ley 761 art. 45(1) is found.
     const unsourced = unconditional.filter(onlyCites).map(route => route.id);
     expect(unsourced.length).toBeLessThanOrEqual(1);
+  });
+});
+
+describe('descent depth is recorded positively, never as a cutoff', () => {
+  const ancestry = citizenshipRoutes.routes.filter(route => route.mode === 'ancestry');
+
+  test('the derived field reaches the corpus and stays on ancestry routes', () => {
+    // Was 1 of 238 before this landed: degree used to live only in eligibility
+    // FIELD NAMES, which data-build drops with the rest of `eligibility`.
+    const populated = ancestry.filter(route => route.descent);
+    expect(ancestry.length).toBe(238);
+    expect(populated.length).toBeGreaterThanOrEqual(230);
+    // A `parent.*` condition on a birth route is jus sanguinis at birth, a
+    // different question from descent depth, so the field must not appear there.
+    for (const route of citizenshipRoutes.routes) {
+      if (route.mode !== 'ancestry') expect(route.descent ?? null).toBeNull();
+    }
+  });
+
+  test('Ireland records the grandparent it actually allows', () => {
+    // Two variants: an Irish-born parent, and the foreign birth register for a
+    // grandparent. The planner used to collapse both into one flat 18-month path.
+    const ireland = ancestry.find(route => route.id === 'ireland-citizenship-by-descent');
+    expect(ireland?.descent?.relations).toEqual(['parent', 'grandparent']);
+    expect(ireland?.descent?.deepest_recorded_degree).toBe(2);
+  });
+
+  test('a missing deeper relation is not a ceiling', () => {
+    // The rule this whole field exists to protect. Italy records only a parent
+    // condition, yet Italian law transmits without a generational limit subject
+    // to the 1948 and 2025 rules. Asserting maximum_degree here would tell
+    // someone with an Italian great-grandparent that they do not qualify.
+    const italy = ancestry.find(route => route.id === 'italy-citizenship-by-descent');
+    expect(italy?.descent?.deepest_recorded_degree).toBe(1);
+    expect(italy?.descent?.maximum_degree ?? null).toBeNull();
+    expect(italy?.descent?.limit_recorded).toBe(false);
+
+    // Corpus-wide, almost nothing records a ceiling. That is the honest state of
+    // the data and the measure of what #155-adjacent sourcing still owes.
+    const withLimit = ancestry.filter(route => route.descent?.limit_recorded);
+    expect(withLimit.length).toBe(1);
+    expect(withLimit[0]!.id).toBe('bulgaria-bulgarian-origin-naturalization');
+    expect(withLimit[0]!.descent?.maximum_degree).toBe(3);
+  });
+
+  test('ethnic-origin claims carry lineage but no generation', () => {
+    // Spätaussiedler, Kandas, Kairylman, Armenian origin and the Spanish
+    // democratic-memory option are lineage claims with no ancestral degree, so
+    // null is the correct answer rather than a coverage gap to be filled.
+    for (const id of [
+      'germany-spaetaussiedler',
+      'kazakhstan-citizenship-by-kandas-status',
+      'spain-democratic-memory-option',
+    ]) {
+      const route = ancestry.find(candidate => candidate.id === id);
+      expect(route).toBeDefined();
+      expect(route?.descent ?? null).toBeNull();
+    }
+  });
+
+  test('great-grandparent depth survives, and is never read as grandparent', () => {
+    const portugal = ancestry.find(
+      route => route.id === 'portugal-great-grandchild-naturalization',
+    );
+    expect(portugal?.descent?.relations).toEqual(['great_grandparent']);
+    expect(portugal?.descent?.relations).not.toContain('grandparent');
+    expect(portugal?.descent?.deepest_recorded_degree).toBe(3);
   });
 });
 

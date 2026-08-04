@@ -25,6 +25,7 @@ import {
   readCanonicalProjections,
   type CanonicalProjections,
 } from './canonical-store';
+import { deriveDescentRelations } from './descent-relations';
 
 export const REPO_ROOT = fileURLToPath(new URL('../..', import.meta.url));
 
@@ -1008,6 +1009,15 @@ function projectFrontendCitizenship(
               kind: route.transmission_abroad.kind,
               detail: route.transmission_abroad.detail,
             }
+          : null,
+        // Re-encodes the ancestral degree that authored eligibility field names
+        // already carry, because `pathways` below drops `eligibility` entirely.
+        // Ancestry routes only: a `parent.*` condition on a birth route is jus
+        // sanguinis at birth, which is a different question from descent depth.
+        descent: route.mode === 'ancestry'
+          ? deriveDescentRelations(
+            route.variants.flatMap(variant => variant.eligibility ?? []),
+          )
           : null,
         pathways: route.variants.map(variant => ({
           id: variant.id,

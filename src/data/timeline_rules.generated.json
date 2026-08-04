@@ -613,21 +613,38 @@
       "route_id": "ireland-citizenship-by-descent",
       "duration_months": 18,
       "gate": "ancestor",
-      "confidence": "legacy"
+      "confidence": "legacy",
+      "relations": [
+        "parent",
+        "grandparent"
+      ],
+      "deepest_recorded_degree": 2,
+      "limit_recorded": false
     },
     {
       "iso_n3": "380",
       "route_id": "italy-citizenship-by-descent",
       "duration_months": 18,
       "gate": "ancestor",
-      "confidence": "legacy"
+      "confidence": "legacy",
+      "relations": [
+        "parent"
+      ],
+      "deepest_recorded_degree": 1,
+      "limit_recorded": false
     },
     {
       "iso_n3": "348",
       "route_id": "hungary-citizenship-by-parent-or-simplified-origin",
       "duration_months": 12,
       "gate": "ancestor",
-      "confidence": "legacy"
+      "confidence": "legacy",
+      "relations": [
+        "parent",
+        "ancestor_unspecified"
+      ],
+      "deepest_recorded_degree": 1,
+      "limit_recorded": false
     },
     {
       "iso_n3": "051",
@@ -641,7 +658,12 @@
       "route_id": "israel-citizenship-by-return-or-parent",
       "duration_months": 6,
       "gate": "claim:israel_law_of_return",
-      "confidence": "legacy"
+      "confidence": "legacy",
+      "relations": [
+        "parent"
+      ],
+      "deepest_recorded_degree": 1,
+      "limit_recorded": false
     },
     {
       "iso_n3": "276",

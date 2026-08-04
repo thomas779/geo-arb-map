@@ -152,6 +152,19 @@ export interface TransmissionAbroad {
   detail: string;
 }
 
+/**
+ * Which ancestral relations a descent route records as qualifying, re-encoded from
+ * the eligibility field names that `pathways` drops. Positive-only: `relations`
+ * lists what qualifies and never what fails, so `limit_recorded: false` means the
+ * cutoff is unknown rather than absent. See `scripts/lib/descent-relations.ts`.
+ */
+export interface DescentRelations {
+  relations: Array<'parent' | 'grandparent' | 'great_grandparent' | 'ancestor_unspecified'>;
+  deepest_recorded_degree: number | null;
+  maximum_degree: number | null;
+  limit_recorded: boolean;
+}
+
 export interface JurisdictionDualNationality {
   status: 'allowed' | 'conditional' | 'prohibited' | 'unknown';
   detail: string;
@@ -166,6 +179,8 @@ export interface CitizenshipRoute extends CitizenshipRouteSummary {
   parent_residence_right?: ParentResidenceRight | null;
   /** How citizenship is transmitted to children born abroad. */
   transmission_abroad?: TransmissionAbroad | null;
+  /** Ancestral relations recorded as qualifying. Ancestry routes only. */
+  descent?: DescentRelations | null;
   pathways?: CitizenshipRoutePathway[];
   confidence: 'high' | 'medium' | 'low';
   last_checked: string;

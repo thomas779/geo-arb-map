@@ -26,6 +26,47 @@ export interface DescentTimeline {
   /** `ancestor` = profile.ancestors includes iso; `claim:<id>` = profile.heritages includes id */
   gate: string;
   confidence: TimelineConfidence;
+  /**
+   * Ancestral relations the corpus records as qualifying, attached at build time
+   * from the route's eligibility conditions. Absent on ethnic-origin claims, which
+   * have lineage but no generation.
+   */
+  relations?: Array<'parent' | 'grandparent' | 'great_grandparent' | 'ancestor_unspecified'>;
+  deepest_recorded_degree?: number | null;
+  /**
+   * Whether the route records how DEEP descent runs. Almost always false, and
+   * false means unknown rather than unlimited, so the UI must not imply either.
+   */
+  limit_recorded?: boolean;
+  maximum_degree?: number;
+}
+
+/**
+ * Human label for the ancestral relations a descent route records.
+ *
+ * The planner cannot verify degree: `Profile.ancestors` is a flat ISO list with no
+ * generation, so ticking "Italy" says nothing about whether the Italian relative is
+ * a parent or a great-great-grandparent. Rather than assert an unconditional path,
+ * name the relation the corpus actually records and let the reader place themselves.
+ */
+export function descentRelationLabel(rule: DescentTimeline): string | null {
+  if (!rule.relations?.length) return null;
+  const named = rule.relations.filter(relation => relation !== 'ancestor_unspecified');
+  const openEnded = rule.relations.includes('ancestor_unspecified');
+  const words: Record<string, string> = {
+    parent: 'parent',
+    grandparent: 'grandparent',
+    great_grandparent: 'great-grandparent',
+  };
+  const list = named.map(relation => words[relation] ?? relation);
+  if (rule.maximum_degree !== undefined) {
+    return `ancestor up to ${rule.maximum_degree} generations back`;
+  }
+  if (!list.length) return 'a qualifying ancestor';
+  const joined = list.length === 1
+    ? list[0]!
+    : `${list.slice(0, -1).join(', ')} or ${list[list.length - 1]}`;
+  return openEnded ? `${joined}, or a wider ancestor` : joined;
 }
 
 interface TimelineRules {

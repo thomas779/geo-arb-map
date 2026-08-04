@@ -4,6 +4,7 @@ import {
   DESCENT_PATHS,
   DESCENT_YEARS,
   descentGateSatisfied,
+  descentRelationLabel,
   naturalizationRule,
   naturalizationYears,
   timelineBeneficiaryIsos,
@@ -160,7 +161,16 @@ export interface UnlockResult {
   /** chance-based lanes: ballot / quota_queue / discretionary */
   chanceLanes: BilateralLane[];
   /** descent/diaspora paths this profile plausibly qualifies for (paths, not current rights) */
-  ancestryPaths: Array<{ id: string; name: string; iso_n3: string; route_id: string }>;
+  ancestryPaths: Array<{
+    id: string;
+    name: string;
+    iso_n3: string;
+    route_id: string;
+    /** Relation the corpus records as qualifying, e.g. "parent or grandparent". */
+    qualifyingRelation?: string | null;
+    /** False/absent means the generational cutoff is UNKNOWN, not unlimited. */
+    limitRecorded?: boolean;
+  }>;
   /** birthplace-derived notes (jus soli hints, BN(O) conditionality) */
   birthHints: string[];
   /** deduped jurisdictions reachable beyond the held citizenships */
@@ -245,7 +255,7 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
   const consumed = new Set(
     profile.flags.filter(f => f.status === 'cit' || f.status === 'diaspora').map(f => f.iso_n3),
   );
-  const ancestryPaths: Array<{ id: string; name: string; iso_n3: string; route_id: string }> = [];
+  const ancestryPaths: UnlockResult['ancestryPaths'] = [];
   const nameOf = (iso: string): string => {
     for (const b of data.blocs) {
       const m = b.members.find(x => x.iso_n3 === iso);
@@ -266,6 +276,8 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
       name: path.route_id.replace(/-/g, ' '),
       iso_n3: path.iso_n3,
       route_id: path.route_id,
+      qualifyingRelation: descentRelationLabel(path),
+      limitRecorded: path.limit_recorded ?? false,
     });
     // Prefer human labels for claim-gated paths
     const claim = HERITAGE_OPTIONS.find(h => path.gate === `claim:${h.claimId}`);

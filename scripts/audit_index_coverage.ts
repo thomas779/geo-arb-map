@@ -44,6 +44,7 @@ type Route = {
   parent_residence_right?: unknown;
   nationality_eligibility?: unknown;
   pathways?: Pathway[];
+  descent?: { limit_recorded: boolean } | null;
 };
 type ResidenceRoute = {
   category: string;
@@ -174,11 +175,20 @@ const dimensions: Dimension[] = [
   {
     id: 'B2',
     axis: 'B',
-    label: 'Descent depth',
-    status: 'thin',
-    have: factKey(ancestry, 'maximum_ancestor_degree'),
+    label: 'Descent depth (recorded)',
+    status: nonNull(ancestry, r => r.descent) >= ancestry.length * 0.9 ? 'ready' : 'thin',
+    have: nonNull(ancestry, r => r.descent),
     total: ancestry.length,
-    note: 'degree otherwise encoded in eligibility field NAMES, which the projection drops',
+    note: 'derived from authored eligibility field names; the 6 nulls are ethnic-origin claims with no degree',
+  },
+  {
+    id: 'B2b',
+    axis: 'B',
+    label: 'Descent CEILING',
+    status: 'thin',
+    have: ancestry.filter(r => r.descent?.limit_recorded).length,
+    total: ancestry.length,
+    note: 'how DEEP descent runs. Absence is unknown, never a cutoff, so this cannot be derived and must be sourced',
   },
   {
     id: 'B3',

@@ -11,6 +11,7 @@
 
 import fs from 'node:fs';
 import { buildCanonicalPilot, CANONICAL_SOURCE_IS_SAMPLE } from './lib/canonical-source';
+import { deriveDescentRelations } from './lib/descent-relations';
 
 // Eligibility fields that mark a variant as a SPECIAL track rather than the
 // ordinary residence one: spouses, descent, investors, merit. The planner's
@@ -117,6 +118,41 @@ export function buildTimelineRules(source, citizenshipRoutes, derivedNaturalizat
 }
 
 /**
+ * Attach the recorded ancestral relations to each curated descent rule.
+ *
+ * The 12 curated heritage rules carry a duration and a binary `gate: 'ancestor'`,
+ * so the planner has been telling anyone who ticks Italy that citizenship is 18
+ * months away regardless of whether their Italian relative is a parent or a
+ * great-great-grandparent. It cannot check the degree, because the profile has no
+ * degree and the corpus never projected one.
+ *
+ * This does not invent the missing check. It surfaces what the corpus actually
+ * records so the claim stops being unconditional, and `limit_recorded` carries the
+ * honest caveat: false means the cutoff is unknown, NOT that there is none.
+ */
+export function attachDescentRelations(heritage, pilot) {
+  const byRouteId = new Map();
+  for (const jurisdiction of pilot.jurisdictions) {
+    for (const route of jurisdiction.routes ?? []) {
+      if (route.mode !== 'ancestry') continue;
+      byRouteId.set(route.id, (route.variants ?? []).flatMap(v => v.eligibility ?? []));
+    }
+  }
+  return heritage.map(rule => {
+    const conditions = byRouteId.get(rule.route_id);
+    const finding = conditions ? deriveDescentRelations(conditions) : null;
+    if (!finding) return rule;
+    return {
+      ...rule,
+      relations: finding.relations,
+      deepest_recorded_degree: finding.deepest_recorded_degree,
+      limit_recorded: finding.limit_recorded,
+      ...(finding.maximum_degree !== null ? { maximum_degree: finding.maximum_degree } : {}),
+    };
+  });
+}
+
+/**
  * Curated rules WIN where they exist: they carry conditional tiers (Portugal's
  * CPLP/EU split, Spain's Ibero-American track) that canonical facts cannot yet
  * express, and overriding them would change shipped planner output. Derived
@@ -142,9 +178,11 @@ export function mergeDerivedNaturalization(output, derived) {
 if (import.meta.main) {
   const source = JSON.parse(fs.readFileSync('data/timeline_rules.json', 'utf8'));
   const citizenshipRoutes = JSON.parse(fs.readFileSync('data/citizenship_routes.json', 'utf8'));
-  const derived = deriveOrdinaryNaturalization(buildCanonicalPilot());
-  const output = mergeDerivedNaturalization(
+  const pilot = buildCanonicalPilot();
+  const derived = deriveOrdinaryNaturalization(pilot);
+  const merged = mergeDerivedNaturalization(
     buildTimelineRules(source, citizenshipRoutes), derived);
+  const output = { ...merged, heritage: attachDescentRelations(merged.heritage, pilot) };
   const curatedIsos = new Set(source.naturalization.map(rule => rule.iso_n3));
   const added = output.naturalization.length - curatedIsos.size;
 
