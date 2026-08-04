@@ -214,20 +214,27 @@ describe('explorer-spec acceptance tests', () => {
     expect(reachable.size).toBeGreaterThanOrEqual(90);
   });
 
+  // The per-seed budget below is what decides this test, so the timeout has to
+  // clear the sum of those budgets with slack. It did not on 2026-08-04: four
+  // seeds at ~500ms locally is ~2s, which fit the default 5000ms here but not on
+  // a shared runner at ~2.5x, so the test timed out at 5099ms while every
+  // assertion inside it would have passed. Never let the enclosing timeout be
+  // tighter than what the assertions allow.
   test('worst-case profile search stays inside a wall-clock ceiling', () => {
-    // The Pareto state space grows super-exponentially with the hop budget: at
-    // seven hops the worst profiles take seconds, which is why MAX_HOPS is a
-    // measured cliff edge and not a dial. EU passports have the largest
-    // frontier, so they are the worst case worth pinning.
+    // The Pareto state space grows steeply with the hop budget, which is why
+    // MAX_HOPS is a measured cliff edge and not a dial. EU passports have the
+    // largest frontier, so they are the worst case worth pinning.
     const worst = ['cit:233', 'cit:428', 'cit:756', 'cit:276'];
     for (const seed of worst) {
       const started = performance.now();
       shortestPaths(citizen(seed.slice(4)), edges);
-      // Generous versus the ~209ms measured locally, so CI variance cannot make
-      // this flaky, while still catching an order-of-magnitude regression.
-      expect(performance.now() - started).toBeLessThan(2000);
+      // ~500ms per seed locally at MAX_HOPS=8, ~1.3s on a GitHub runner. 3000ms
+      // is 6x the local figure: loose enough to survive a noisy runner, tight
+      // enough to catch an order-of-magnitude regression such as the
+      // queue.sort()-per-pop that cost 3.2s before the heap replaced it.
+      expect(performance.now() - started).toBeLessThan(3000);
     }
-  });
+  }, 20_000);
 
   test('hop-bounded search prefers the cheaper path when the budget allows, and falls back when it does not', () => {
     const edge = (from: string, to: string, years: number): GraphEdge => ({
