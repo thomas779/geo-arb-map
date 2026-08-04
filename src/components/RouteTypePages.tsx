@@ -1,20 +1,28 @@
 import type { CitizenshipRoute, CitizenshipRoutesData, ResidenceCategory, ResidenceRoute } from '@/types';
+import {
+  Armchair,
+  ArrowRight,
+  Award,
+  Banknote,
+  Fingerprint,
+  Home,
+  Hourglass,
+  Laptop,
+  Users,
+  type LucideIcon,
+} from 'lucide-react';
 import { buildCountrySlugMap } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
-import { isosForRouteClass, ROUTE_CLASSES, type RouteClass } from '@/lib/route-classes';
+import { isosForRouteClass, ROUTE_CLASSES } from '@/lib/route-classes';
 
 /**
  * Prerendered route discovery pages under /routes/. Country guides answer
  * “what is available here?”; these pages answer “where is this available?”.
  *
- * The hub uses route-family cards for discovery. Directory pages deliberately
- * stop at country shortlists: the country page owns conditions and evidence,
- * while the future planner owns personalized ranking.
- *
- * The signature element across hub and shortlists is the TIER BAR: each residence
- * family's routes split by how far they carry the holder, painted in the same
- * three tones the atlas legend uses (strong solid = citizenship, hatch = PR,
- * light = residence only). It is computed from the data, never decorative.
+ * The hub is an intent-led chooser. Directory pages deliberately stop at
+ * country shortlists: the country page owns conditions and evidence, while the
+ * future planner owns personalized ranking. Residence directories retain the
+ * data-derived tier bar where the outcome distinction is useful.
  */
 
 function ladderTier(route: ResidenceRoute): number {
@@ -175,19 +183,6 @@ const DIRECTORY_PAGE_BY_CLASS: Record<string, string> = {
   'digital-identity': '/routes/digital-identities/',
 };
 
-// ROUTE_CLASSES descriptions are written for the atlas sidebar; the hub can
-// afford a sentence more of voice.
-const HUB_DESCRIPTION: Record<string, string> = {
-  ancestry: 'Citizenship through parents, grandparents, or diaspora ties. Usually the cheapest route anyone qualifies for, if they qualify at all.',
-  naturalization: 'Citizenship after qualifying years of residence. The default route everywhere, and the clock every residence permit below either feeds or wastes.',
-  cbi: 'Direct citizenship for a qualifying investment or contribution. A short list that marketing sites stretch with closed and imaginary programmes.',
-  'golden-visa': 'Residence for a qualifying investment. What matters is where each programme stops, not what it costs to enter.',
-  'digital-nomad': 'Permits for remote workers on foreign income. Most are paid stays that lead nowhere; a handful genuinely climb.',
-  retirement: 'Residence on passive income or a pension. The rentista family: prove the income, keep the permit.',
-  talent: 'Residence for designated skills, achievement, or sponsored work.',
-  'digital-identity': 'Government digital ID only. Useful for running a company remotely; not a right to live anywhere.',
-};
-
 export function routeClassCounts(data: CitizenshipRoutesData): Map<string, number> {
   const counts = new Map<string, number>();
   for (const cls of ROUTE_CLASSES) {
@@ -196,85 +191,95 @@ export function routeClassCounts(data: CitizenshipRoutesData): Map<string, numbe
   return counts;
 }
 
-function HubCard({ cls, data, count }: { cls: RouteClass; data: CitizenshipRoutesData; count: number }) {
-  const directory = DIRECTORY_PAGE_BY_CLASS[cls.id];
-  const primaryHref = directory ?? `/?class=${cls.id}`;
-  const outcomes = isosForRouteClass(cls, data);
-  // Digital identity grants no residence, so a "stops at residence" bar would
-  // claim more than the routes do.
-  const split = cls.kind === 'residence' && cls.id !== 'digital-identity'
-    ? { cit: outcomes.cit.size, pr: outcomes.pr.size, tr: outcomes.tr.size, total: outcomes.all.size }
-    : null;
+interface HubRoute {
+  id: string;
+  label: string;
+  detail: string;
+  icon: LucideIcon;
+}
+
+const HUB_SECTIONS: Array<{ title: string; routes: HubRoute[] }> = [
+  {
+    title: 'I want citizenship',
+    routes: [
+      { id: 'ancestry', label: 'Through family', detail: 'Parents, grandparents, or heritage', icon: Users },
+      { id: 'naturalization', label: 'After living there', detail: 'Qualifying years of residence', icon: Hourglass },
+      { id: 'cbi', label: 'Through investment', detail: 'Direct citizenship programmes', icon: Banknote },
+    ],
+  },
+  {
+    title: 'I want residence',
+    routes: [
+      { id: 'golden-visa', label: 'By investing', detail: 'Residence by investment', icon: Home },
+      { id: 'digital-nomad', label: 'To work remotely', detail: 'Remote-work permits', icon: Laptop },
+      { id: 'retirement', label: 'To retire abroad', detail: 'Pension or passive income', icon: Armchair },
+      { id: 'talent', label: 'For my skills', detail: 'Talent and skilled routes', icon: Award },
+    ],
+  },
+];
+
+const DIGITAL_IDENTITY: HubRoute = {
+  id: 'digital-identity',
+  label: 'Access services remotely',
+  detail: 'Digital identity — not a visa',
+  icon: Fingerprint,
+};
+
+function RouteChoice({ route, count }: { route: HubRoute; count: number }) {
+  const href = DIRECTORY_PAGE_BY_CLASS[route.id] ?? `/?class=${route.id}`;
+  const Icon = route.icon;
   return (
-    <article className="group flex h-full flex-col rounded-lg border bg-card px-4 py-3.5 transition-colors hover:border-primary">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-heading text-xl font-semibold leading-tight">
-          <a href={primaryHref} className="decoration-primary underline-offset-4 group-hover:underline">
-            {cls.label}
-          </a>
-        </h3>
-        <span className="shrink-0 font-mono text-[0.66rem] text-muted-foreground">{count} countries</span>
-      </div>
-      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{HUB_DESCRIPTION[cls.id] ?? cls.description}</p>
-      <div className="mt-auto pt-3.5">
-        {split && split.total > 0 ? (
-          <>
-            <TierBar split={split} />
-            <p className="mt-1.5 font-mono text-[0.6rem] leading-snug text-muted-foreground">{tierCaption(split)}</p>
-          </>
-        ) : cls.id === 'digital-identity' ? (
-          <p className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-            Identity only · no residence rights
-          </p>
-        ) : (
-          <p className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
-            Citizenship outcome
-          </p>
-        )}
-        {directory && (
-          <a href={directory} className="mt-3 inline-block font-mono text-[0.68rem] font-medium text-primary hover:underline hover:underline-offset-2">
-            Browse countries →
-          </a>
-        )}
-      </div>
-    </article>
+    <a
+      href={href}
+      className="group flex min-h-[4.75rem] items-center gap-3 rounded-lg border bg-card px-3.5 py-3 transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+    >
+      <span className="grid size-9 shrink-0 place-items-center rounded-md bg-accent text-foreground">
+        <Icon className="size-4" aria-hidden />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm font-semibold text-foreground">{route.label}</span>
+        <span className="mt-0.5 block text-xs leading-snug text-muted-foreground">{route.detail}</span>
+      </span>
+      <span className="flex shrink-0 items-center gap-2">
+        <span className="hidden font-mono text-[0.64rem] text-muted-foreground min-[420px]:inline">{count} countries</span>
+        <ArrowRight className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden />
+      </span>
+    </a>
   );
 }
 
 export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
   const counts = routeClassCounts(data);
-  const shelves: Array<{ kind: RouteClass['kind']; label: string; intro: string }> = [
-    {
-      kind: 'citizenship',
-      label: 'Ends in citizenship',
-      intro: 'The route itself produces a passport. Nothing left to climb afterwards.',
-    },
-    {
-      kind: 'residence',
-      label: 'Starts with residence',
-      intro: 'A permit first. The bar on each row shows what those permits become: strong for citizenship, hatched for permanent residence, light for permits that stop where they start.',
-    },
-  ];
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
       <h1 className="font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">
-        Citizenship &amp; residence routes
+        How do you want to move?
       </h1>
-      <p className="mb-8 mt-3 max-w-[68ch] text-muted-foreground">
-        Explore the main ways countries grant citizenship or residence. Each route family narrows the
-        countries worth investigating; country guides carry the rules and evidence.
+      <p className="mb-7 mt-3 max-w-[58ch] text-muted-foreground">
+        Choose a path to see the countries that offer it.
       </p>
-      {shelves.map(shelf => (
-        <section key={shelf.kind} className="mb-8">
-          <h2 className="mb-1 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">{shelf.label}</h2>
-          <p className="mb-3 max-w-[68ch] text-sm leading-relaxed text-muted-foreground">{shelf.intro}</p>
-          <div className="grid auto-rows-fr gap-2 sm:grid-cols-2 lg:grid-cols-3">
-            {ROUTE_CLASSES.filter(cls => cls.kind === shelf.kind).map(cls => (
-              <HubCard key={cls.id} cls={cls} data={data} count={counts.get(cls.id) ?? 0} />
-            ))}
-          </div>
-        </section>
-      ))}
+      <div className="grid gap-8 md:grid-cols-2 md:gap-6">
+        {HUB_SECTIONS.map(section => (
+          <section key={section.title}>
+            <h2 className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+              {section.title}
+            </h2>
+            <div className="space-y-2">
+              {section.routes.map(route => (
+                <RouteChoice key={route.id} route={route} count={counts.get(route.id) ?? 0} />
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+      <section className="mt-8 border-t pt-6">
+        <h2 className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          I need digital access
+        </h2>
+        <div className="max-w-[calc(50%-0.75rem)] max-md:max-w-none">
+          <RouteChoice route={DIGITAL_IDENTITY} count={counts.get(DIGITAL_IDENTITY.id) ?? 0} />
+        </div>
+      </section>
     </main>
   );
 }

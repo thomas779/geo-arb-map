@@ -29,15 +29,18 @@ and for licensing see the repo `README.md`.
 > to without a dashboard-managed secret. The new workflow is live and proven: it
 > fetches the dataset, runs `bun run build` (tsc plus the full suite, so the deploy
 > is gated on tests), asserts the corpus is not served, and then **skips the deploy
-> until `CLOUDFLARE_DEPLOY_TOKEN` exists**. Two remaining steps, both dashboard:
+> **Actions is now the deploying path** (first successful deploy 2026-08-04:
+> `Uploaded flag-paths-web`). One step remains:
 >
-> 1. Create a Cloudflare API token with **Workers Scripts: Edit** and add it as the
->    `CLOUDFLARE_DEPLOY_TOKEN` GitHub secret. (The existing `CLOUDFLARE_API_TOKEN`
->    is D1 + R2 only; verified 403 against the Workers API.)
-> 2. Disable the Workers Builds git integration for `flag-paths-web`, then remove
->    `data/compiled/citizenship_routes.json` and `data/citizenship_routes.json`
->    from this repo (they stay committed until then, so the current deploy keeps
->    working).
+> 1. ~~Grant the token Workers permission.~~ **Done:** `flag-paths-gh-actions`
+>    gained **Workers Scripts: Edit**, so the deploy uses the existing
+>    `CLOUDFLARE_API_TOKEN`. Tradeoff recorded in `deploy.yml`: that token is
+>    shared with the monitor workflows, so deploy rights sit inside their blast
+>    radius.
+> 2. **Disable the Workers Builds git integration** for `flag-paths-web`
+>    (dashboard → Settings → Build). Once the dataset left this repo, a
+>    Cloudflare-side build can no longer fetch it, so it fails without deploying;
+>    that is noise rather than harm, but it should be switched off.
 >
 > ### Dataset flow after the cutover
 >

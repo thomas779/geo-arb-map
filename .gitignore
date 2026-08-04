@@ -31,3 +31,10 @@ Thumbs.db
 
 # local-only overrides
 *.local
+
+# Compiled dataset: a BUILD INPUT fetched from the private flag-paths-data repo,
+# not a committed artifact. Keeping it here made `git clone` a complete copy of
+# the product (240 jurisdictions / 877 routes). CI and the deploy fetch it via
+# .github/actions/fetch-data; maintainers publish with `bun run data:publish`.
+data/compiled/citizenship_routes.json
+data/citizenship_routes.json

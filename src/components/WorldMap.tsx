@@ -29,10 +29,10 @@ interface Props {
  * Order mirrors the visual ramp: strongest → weakest → unknown.
  */
 const LEGEND_ROWS = [
-  { key: 'strong', label: 'Strong settlement bloc', hint: 'Full free movement or citizenship union (EU/EEA, Mercosur, EAEU…).' },
-  { key: 'limited', label: 'Limited framework only', hint: 'Partial, one-way, or still-emerging arrangements.' },
-  { key: 'lane', label: 'Reachable via a lane', hint: 'A bilateral or nationality-based route leads here.' },
-  { key: 'none', label: 'No cross-border framework', hint: 'Ordinary nationality routes may still exist — click to check.' },
+  { key: 'strong', label: 'Broad regional access', hint: 'Shared rights across several countries.' },
+  { key: 'limited', label: 'Limited regional access', hint: 'Some movement rights, with conditions.' },
+  { key: 'lane', label: 'Country-specific route', hint: 'A nationality-based route connects to this country.' },
+  { key: 'none', label: 'No shared route shown', hint: 'Click the country to inspect its domestic options.' },
 ] as const;
 
 // The status hierarchy (less → more) referenced across bloc rights ladders.
@@ -87,7 +87,7 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
   return (
     <>
       <svg id="map" />
-      <div id="hint">scroll to zoom · drag to pan · click a country</div>
+      <div id="hint">click a country · drag to explore · scroll to zoom</div>
       <div id="tooltip" />
       {legendMode !== 'hidden' && (
         <Card

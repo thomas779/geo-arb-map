@@ -67,10 +67,10 @@ const ROUTE_CLASS_ICONS: Record<string, typeof Users> = {
 };
 
 const QUICK_ROUTES = [
-  { id: 'ancestry', label: 'Ancestry' },
+  { id: 'ancestry', label: 'Through family' },
   { id: 'cbi', label: 'Invest for citizenship' },
-  { id: 'golden-visa', label: 'Golden visas' },
-  { id: 'digital-nomad', label: 'Digital nomad' },
+  { id: 'golden-visa', label: 'Invest for residence' },
+  { id: 'digital-nomad', label: 'Work remotely' },
 ] as const;
 
 interface Props {
@@ -363,7 +363,13 @@ export function Sidebar({
 
   return (
     <aside className="flex h-full w-full flex-col overflow-hidden bg-sidebar">
-      <div className="shrink-0 border-b border-sidebar-border px-3 py-3">
+      <div className="shrink-0 border-b border-sidebar-border px-3 pb-3 pt-3">
+        <div className="mb-2 px-0.5">
+          <h1 className="text-sm font-semibold text-foreground">Explore global mobility</h1>
+          <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
+            Search a country or choose how you want to move.
+          </p>
+        </div>
         <div className="relative">
           <Search
             className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground"
@@ -371,7 +377,7 @@ export function Sidebar({
           />
           <Input
             type="search"
-            placeholder="Country, route, or right…"
+            placeholder="Search countries or routes…"
             value={query}
             onChange={e => setQuery(e.target.value)}
             className="h-11 w-full pl-8 text-base placeholder:text-[13px] md:h-8 md:text-sm md:placeholder:text-sm"
@@ -384,9 +390,9 @@ export function Sidebar({
           <section className="border-b py-3" aria-labelledby="quick-routes-heading">
             <div className="mb-2 flex items-baseline justify-between gap-2 px-1">
               <h2 id="quick-routes-heading" className="text-xs font-semibold text-foreground">
-                Explore popular routes
+                Start with a route
               </h2>
-              <span className="text-[10px] text-muted-foreground">paint the map</span>
+              <span className="text-[10px] text-muted-foreground">show countries</span>
             </div>
             <div className="grid grid-cols-2 overflow-hidden rounded-md border border-sidebar-border bg-sidebar-border">
               {quickRouteClasses.map(({ label, routeClass }, index) => {
