@@ -1,0 +1,37 @@
+name: Fetch compiled dataset
+description: >-
+  Place the compiled corpus where the build and tests expect it. The dataset lives
+  in the private flag-paths-data repo rather than this one, so a fork or a scrape
+  of the public repo gets code and a six-jurisdiction sample, not the corpus.
+
+inputs:
+  deploy-key:
+    description: Read-only SSH deploy key for thomas779/flag-paths-data
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Check out the private dataset
+      uses: actions/checkout@v4
+      with:
+        repository: thomas779/flag-paths-data
+        ssh-key: ${{ inputs.deploy-key }}
+        path: .flag-paths-data
+        persist-credentials: false
+
+    - name: Place the dataset where the build reads it
+      shell: bash
+      run: |
+        set -euo pipefail
+        mkdir -p data/compiled
+        cp .flag-paths-data/compiled/citizenship_routes.json data/compiled/citizenship_routes.json
+        cp .flag-paths-data/compiled/citizenship_routes.legacy.json data/citizenship_routes.json
+        # Fail loudly rather than letting a truncated fetch produce a plausible
+        # but near-empty atlas: a real release carries hundreds of routes.
+        routes=$(bun -e 'const d=await Bun.file("data/compiled/citizenship_routes.json").json(); console.log(d.routes.length)')
+        echo "compiled dataset: $routes routes"
+        if [ "$routes" -lt 500 ]; then
+          echo "::error::compiled dataset has only $routes routes; refusing to build on a truncated corpus"
+          exit 1
+        fi

@@ -27,5 +27,12 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      # The corpus is not in this repo (see .github/actions/fetch-data). Tests and
+      # the prerender read it as a build input, so it must land before either runs.
+      - name: Fetch compiled dataset
+        uses: ./.github/actions/fetch-data
+        with:
+          deploy-key: ${{ secrets.FLAG_PATHS_DATA_DEPLOY_KEY }}
+
       - name: Type-check, test committed artifacts, and build
         run: bun run build
