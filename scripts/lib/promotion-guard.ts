@@ -86,7 +86,7 @@ export function assertPromotionPreservesHead(
 }
 
 export function readHeadPromotionArtifact(repoRoot: string): PromotionArtifact {
-  const relativePath = 'public/citizenship_routes.json';
+  const relativePath = 'data/compiled/citizenship_routes.json';
   const result = Bun.spawnSync(['git', 'show', `HEAD:${relativePath}`], {
     cwd: path.resolve(repoRoot),
     stdout: 'pipe',

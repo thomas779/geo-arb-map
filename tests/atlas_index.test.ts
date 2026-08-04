@@ -6,7 +6,7 @@ import { isNonApplicableJurisdiction } from '../src/lib/country';
 import type { CitizenshipRoutesData } from '../src/types';
 
 const citizenship = JSON.parse(readFileSync(
-  new URL('../public/citizenship_routes.json', import.meta.url), 'utf8')) as CitizenshipRoutesData;
+  new URL('../data/compiled/citizenship_routes.json', import.meta.url), 'utf8')) as CitizenshipRoutesData;
 
 describe('atlas index and country slices', () => {
   test('the index carries every entity but no prose bodies', () => {

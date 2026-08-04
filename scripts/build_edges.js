@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * Generate public/edges.json — the strategy-explorer graph layer.
+ * Generate data/compiled/edges.json — the strategy-explorer graph layer.
  *
  * Implements docs/explorer-spec.md derivation rules (conservative):
  *   - full/closed blocs:      cit:X → settle_full:Y   (0 yrs) for co-members
@@ -152,9 +152,9 @@ if (import.meta.main) {
   const manual = JSON.parse(fs.readFileSync('data/manual_edges.json', 'utf8'));
   const out = buildEdges(data, manual);
   out.meta.counts.edges = out.edges.length;
-  fs.writeFileSync('public/edges.json', JSON.stringify(out) + '\n');
+  fs.writeFileSync('data/compiled/edges.json', JSON.stringify(out) + '\n');
   const byMech = {};
   for (const e of out.edges) byMech[e.mechanism] = (byMech[e.mechanism] ?? 0) + 1;
-  console.log(`public/edges.json: ${out.edges.length} edges`);
+  console.log(`data/compiled/edges.json: ${out.edges.length} edges`);
   console.log('top mechanisms:', Object.entries(byMech).sort((a, b) => b[1] - a[1]).slice(0, 6));
 }

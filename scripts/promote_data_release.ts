@@ -45,7 +45,7 @@ assertPromotionPreservesHead(
 
 writeDataRelease(release);
 fs.writeFileSync(
-  path.join(REPO_ROOT, 'public/citizenship_routes.json'),
+  path.join(REPO_ROOT, 'data/compiled/citizenship_routes.json'),
   `${JSON.stringify(release.frontend.citizenship, null, 2)}\n`,
 );
 fs.writeFileSync(
@@ -58,5 +58,5 @@ fs.writeFileSync(
 );
 
 console.log(
-  `promoted ${release.manifest.release_id} (${selectionMode}) to public/citizenship_routes.json`,
+  `promoted ${release.manifest.release_id} (${selectionMode}) to data/compiled/citizenship_routes.json`,
 );

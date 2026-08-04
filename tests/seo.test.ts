@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test';
-import { readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_PATHS, ROUTES_ENABLED, THEME_BOOT_JS } from '../scripts/build_country_pages';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
@@ -66,7 +66,7 @@ describe('public SEO contract', () => {
     // writes buildSitemapUrls() verbatim, so asserting against it IS asserting
     // the shipped sitemap — with no dependency on a stale dist/ artifact.
     const citizenship = JSON.parse(readFileSync(
-      new URL('../public/citizenship_routes.json', import.meta.url), 'utf8')) as CitizenshipRoutesData;
+      new URL('../data/compiled/citizenship_routes.json', import.meta.url), 'utf8')) as CitizenshipRoutesData;
     const mobility = JSON.parse(readFileSync(
       new URL('../public/blocs_data.json', import.meta.url), 'utf8')) as BlocsData;
     const urls = buildSitemapUrls(citizenship, mobility);
@@ -95,5 +95,33 @@ describe('public SEO contract', () => {
     // SPA fallback so client routes (/planner, /country) resolve on direct hits;
     // the workers.dev origin stays out of the index via _headers above.
     expect(workerConfig).toContain('"not_found_handling": "single-page-application"');
+  });
+});
+
+describe('public surface is index-plus-slices, not a bulk download', () => {
+  test('the compiled corpus is not a served static file', () => {
+    // Anything in public/ is copied to dist/ and served, so the corpus living
+    // there made the whole dataset a one-request download and the atlas load all
+    // 240 jurisdictions to read one. It is now a BUILD INPUT under data/compiled,
+    // consumed by the prerender and the index/slice emitters. Agents and readers
+    // get atlas-index.json plus /country/<slug>/data.json instead.
+    expect(existsSync(new URL('../public/citizenship_routes.json', import.meta.url))).toBe(false);
+    expect(existsSync(new URL('../data/compiled/citizenship_routes.json', import.meta.url))).toBe(true);
+
+    // Nothing else large should creep into the served directory either.
+    const served = readdirSync(new URL('../public/', import.meta.url), { withFileTypes: true })
+      .filter(entry => entry.isFile() && entry.name.endsWith('.json'));
+    for (const entry of served) {
+      const bytes = statSync(new URL(`../public/${entry.name}`, import.meta.url)).size;
+      expect(bytes, `public/${entry.name} is ${Math.round(bytes / 1024)}KB; bulk data belongs in data/compiled`)
+        .toBeLessThan(200_000);
+    }
+  });
+
+  test('llms.txt points agents at the index and the slice pattern', () => {
+    const llms = readFileSync(new URL('../public/llms.txt', import.meta.url), 'utf8');
+    expect(llms).toContain('/atlas-index.json');
+    expect(llms).toContain('/country/<slug>/data.json');
+    expect(llms).not.toContain('/citizenship_routes.json');
   });
 });

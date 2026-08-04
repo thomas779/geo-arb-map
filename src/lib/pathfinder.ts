@@ -2,7 +2,7 @@ import type { BlocsData } from '../types';
 import { computeUnlocks, type Goal, type Profile } from './planner';
 
 /**
- * Multi-hop pathfinder over the status graph (public/edges.json), per
+ * Multi-hop pathfinder over the status graph (data/compiled/edges.json, compiled at build time), per
  * docs/explorer-spec.md:
  *  - legal logic decides which edges EXIST for this profile (needs gating,
  *    allocation === 'right' only — ballot/quota/discretionary never enter

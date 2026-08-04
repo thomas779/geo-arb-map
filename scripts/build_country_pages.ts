@@ -275,7 +275,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     throw new Error(`dist/ not found at ${distDir} — run "vite build" first.`);
   }
   const citizenship = JSON.parse(
-    fs.readFileSync(path.join(root, 'public/citizenship_routes.json'), 'utf8'),
+    fs.readFileSync(path.join(root, 'data/compiled/citizenship_routes.json'), 'utf8'),
   ) as CitizenshipRoutesData;
   const mobility = JSON.parse(
     fs.readFileSync(path.join(root, 'public/blocs_data.json'), 'utf8'),

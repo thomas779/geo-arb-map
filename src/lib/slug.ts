@@ -1,6 +1,6 @@
 // Deterministic country slugs shared by the static per-country page generator
 // (scripts/build_country_pages.ts) and the client "full profile" links. Both
-// derive the map from the same jurisdiction list (public/citizenship_routes.json),
+// derive the map from the same jurisdiction list (the compiled corpus),
 // so they always agree without a separate lookup file.
 
 export function slugify(name: string): string {

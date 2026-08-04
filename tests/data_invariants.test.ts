@@ -24,7 +24,7 @@ const data = (await Bun.file(
 ).json()) as BlocsData;
 
 const citizenshipRoutes = (await Bun.file(
-  new URL('../public/citizenship_routes.json', import.meta.url),
+  new URL('../data/compiled/citizenship_routes.json', import.meta.url),
 ).json()) as CitizenshipRoutesData;
 
 const timelineRules = await Bun.file(

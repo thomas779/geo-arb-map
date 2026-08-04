@@ -14,7 +14,7 @@ import {
 // lapsed programmes never paint.
 
 const data = (await Bun.file(
-  new URL('../public/citizenship_routes.json', import.meta.url),
+  new URL('../data/compiled/citizenship_routes.json', import.meta.url),
 ).json()) as CitizenshipRoutesData;
 
 const isos = (id: string) => isosForRouteClass(routeClassById(id)!, data).all;
