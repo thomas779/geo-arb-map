@@ -45,6 +45,7 @@ type Route = {
   nationality_eligibility?: unknown;
   pathways?: Pathway[];
   descent?: { limit_recorded: boolean } | null;
+  summary?: string;
 };
 type ResidenceRoute = {
   category: string;
@@ -110,6 +111,29 @@ const isoHighConfidence = new Set(
 
 const factKey = (rs: Route[], key: string) => rs.filter(r => r.facts && key in r.facts).length;
 
+/**
+ * The conditional third of jus soli cannot be scored on its recorded label.
+ *
+ * `facts.parent_condition` has 16 values and no schema, and cross-reading each
+ * route's own summary against its label shows three systematic problems:
+ *  - 29 of 59 are dependent territories whose summary only says "follows <metropole>
+ *    rules", so the label restates another jurisdiction's rule, not their instrument;
+ *  - Belgium, France, Italy and Ukraine say birth alone is NOT generally enough, so
+ *    their conditional flag describes a right to acquire LATER (age 13/16/18), not
+ *    citizenship at birth;
+ *  - Chile reads "Chilean by birth except children of transient foreigners", which is
+ *    unconditional with a narrow exception, yet it is bucketed with Germany's
+ *    settled-parent rule.
+ * Detected here rather than asserted, so the count tracks the data as it is fixed.
+ */
+const conditionalBirth = birth.filter(r => (r.facts as Record<string, unknown> | undefined)?.jus_soli === 'conditional');
+const conditionalTension = conditionalBirth.filter(r => {
+  const summary = String((r as unknown as { summary?: string }).summary ?? '');
+  return /follows .* (rules|law)/.test(summary)
+    || /alone is not|not generally enough|No unconditional/.test(summary)
+    || /stateless/i.test(summary);
+});
+
 const dimensions: Dimension[] = [
   // ---- Axis A: what the passport is worth once held -----------------------
   {
@@ -166,11 +190,21 @@ const dimensions: Dimension[] = [
   {
     id: 'B1',
     axis: 'B',
-    label: 'Jus soli',
+    label: 'Jus soli (tri-state)',
     status: 'thin',
     have: factKey(birth, 'jus_soli'),
     total: birth.length,
-    note: 'complete, but inside untyped facts with no zod, no enum, and no consumer',
+    note: 'untyped facts, no zod, no enum, no consumer; and see B1b before scoring the conditional third',
+  },
+  {
+    id: 'B1b',
+    axis: 'B',
+    label: 'Jus soli CONDITION',
+    status: 'thin',
+    have: conditionalBirth.length - conditionalTension.length,
+    total: conditionalBirth.length,
+    note: 'conditional routes whose own summary does NOT contradict their parent_condition label; '
+      + `${conditionalTension.length} do, so the vocabulary cannot be normalised without legal review`,
   },
   {
     id: 'B2',
