@@ -19,6 +19,7 @@
  */
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { scoreAxis } from './lib/rights-score';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const asJson = process.argv.includes('--json');
@@ -388,6 +389,40 @@ if (provenance) {
     console.log('  WARNING  not one bloc carries a source. A1 cannot satisfy spec rule 6 from this input.');
   }
   if (provenance.sample) console.log('  (canonical source is the committed SAMPLE, so counts are a floor)');
+}
+
+/**
+ * Run the composite model (scripts/lib/rights-score.ts) over dimension AVAILABILITY
+ * to answer "could either axis be published today".
+ *
+ * This is programme readiness, NOT a country score: the input is whether each
+ * dimension is scoreable at all, not any country's value. Weights are equal because
+ * the spec deliberately defers them until the inputs exist, so this measures breadth
+ * of coverage rather than importance.
+ */
+function axisReadiness(axis: 'A' | 'B') {
+  return scoreAxis(
+    dimensions
+      .filter(dimension => dimension.axis === axis)
+      .map(dimension => ({
+        id: dimension.id,
+        weight: 1,
+        value: dimension.status === 'ready' ? 100 : null,
+        confidence: dimension.status === 'ready' ? ('high' as const) : null,
+      })),
+  );
+}
+
+console.log('\nCould either axis be published today? (equal weights, availability only)');
+for (const axis of ['A', 'B'] as const) {
+  const readiness = axisReadiness(axis);
+  const pct = Math.round(readiness.completeness * 100);
+  console.log(
+    `  Axis ${axis}  ${readiness.scored}/${readiness.total} dimensions scoreable  `
+      + `completeness ${String(pct).padStart(3)}%  `
+      + `${readiness.rankable ? 'RANKABLE' : 'NOT RANKABLE'}`,
+  );
+  if (readiness.missing.length) console.log(`          missing: ${readiness.missing.join(', ')}`);
 }
 
 console.log('\nStructural blockers (code, not sourcing)');
