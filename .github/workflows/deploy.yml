@@ -1,0 +1,77 @@
+name: Deploy web
+
+# Replaces the Cloudflare Workers Builds git integration, for two reasons: the
+# compiled corpus now lives in a private repo that a Cloudflare-side build cannot
+# authenticate to without a dashboard-managed secret, and a deploy that runs here
+# is gated on the test suite by construction, because `bun run build` is
+# `bun run verify && vite build` — tsc plus the full suite, then the bundle.
+#
+# Requires a Cloudflare API token with Workers Scripts: Edit as
+# CLOUDFLARE_DEPLOY_TOKEN. The existing CLOUDFLARE_API_TOKEN is scoped to D1 and
+# R2 only (verified: 403 against the Workers API), so it cannot deploy. Until that
+# secret exists the job builds and verifies but skips the deploy, so adding this
+# workflow cannot break a push.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-web
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HAS_DEPLOY_TOKEN: ${{ secrets.CLOUDFLARE_DEPLOY_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Fetch compiled dataset
+        uses: ./.github/actions/fetch-data
+        with:
+          deploy-key: ${{ secrets.FLAG_PATHS_DATA_DEPLOY_KEY }}
+
+      - name: Verify and build
+        run: bun run build
+
+      # Guards the point of the slicing work: the corpus must never ship as a
+      # served file again, whatever a future change to public/ does.
+      - name: Assert the bulk corpus is not served
+        run: |
+          set -euo pipefail
+          for path in dist/citizenship_routes.json dist/edges.json; do
+            if [ -f "$path" ]; then
+              echo "::error::$path would be served; the corpus is a build input, not a public endpoint"
+              exit 1
+            fi
+          done
+          test -f dist/atlas-index.json
+          slices=$(ls dist/country/*/data.json | wc -l)
+          echo "served surface: atlas-index.json + $slices country slices"
+
+      - name: Deploy
+        if: env.HAS_DEPLOY_TOKEN == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_DEPLOY_TOKEN }}
+        run: bunx wrangler deploy -c wrangler.web.jsonc
+
+      - name: Explain a skipped deploy
+        if: env.HAS_DEPLOY_TOKEN != 'true'
+        run: |
+          echo "::warning::CLOUDFLARE_DEPLOY_TOKEN is not set, so the build was verified but not deployed."
+          echo "To finish the cutover: create a Cloudflare API token with Workers Scripts: Edit,"
+          echo "add it as CLOUDFLARE_DEPLOY_TOKEN, then disable Workers Builds for flag-paths-web."
