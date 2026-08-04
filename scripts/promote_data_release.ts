@@ -34,10 +34,11 @@ const release = compileDataRelease({
 });
 if (!release.parity.passed) throw new Error('Cannot promote a release with failed parity gates');
 
-// A parity-clean candidate can still be stale relative to work another session
-// already committed. Compare with Git HEAD before writing so a promotion cannot
-// silently erase reviewed routes or coverage merely because the private
-// canonical authoring file was not reconciled first.
+// A parity-clean candidate can still be stale relative to work already
+// published (flag-paths-data / last local promote). Compare against that
+// baseline before writing so a promotion cannot silently erase reviewed
+// routes merely because the private canonical authoring file was not
+// reconciled first. Git HEAD no longer carries the corpus (gitignored).
 assertPromotionPreservesHead(
   readHeadPromotionArtifact(REPO_ROOT),
   release.frontend.citizenship,

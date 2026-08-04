@@ -432,6 +432,46 @@ describe('monitor-lead verifications, July 2026', () => {
     expect(pass?.confidence).toBe('medium');
   });
 
+  // #136 residence medium→high batch (2026-08-04): primary-law upgrades only.
+  test('#136 batch: Japan nomad, Spain non-lucrative, Portugal D7, Latvia deposit are high', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+
+    const jp = byId.get('japan-digital-nomad-visa');
+    expect(jp?.confidence).toBe('high');
+    expect(jp?.min_income_monthly).toEqual({ amount: 833334, currency: 'JPY' });
+    expect(jp?.permit_duration_months).toBe(6);
+    expect(jp?.permit_renewable).toBe(false);
+    expect(jp?.counts_toward_permanent_residence).toBe(false);
+    expect(jp?.counts_toward_naturalization).toBe(false);
+    expect(jp?.summary).toMatch(/10[, ]?000[, ]?000|10 million yen/i);
+    expect(jp?.sources.some(s => s.url.includes('moj.go.jp/isa'))).toBe(true);
+
+    const es = byId.get('spain-non-lucrative-visa');
+    expect(es?.confidence).toBe('high');
+    expect(es?.min_income_monthly).toEqual({ amount: 2400, currency: 'EUR' });
+    expect(es?.physical_presence_days_per_year).toBe(183);
+    expect(es?.permit_duration_months).toBe(12);
+    expect(es?.permit_renewable).toBe(true);
+    expect(es?.work_rights).toBe('none');
+    expect(es?.summary).toMatch(/400\s*%|IPREM/i);
+    expect(es?.sources.some(s => s.url.includes('boe.es') || s.url.includes('BOE-A-2024-24099'))).toBe(true);
+
+    const pt = byId.get('portugal-d7-passive-income');
+    expect(pt?.confidence).toBe('high');
+    // RMMG 2026 = EUR 920 (DL 139/2025); 2025's 870 is superseded.
+    expect(pt?.min_income_monthly).toEqual({ amount: 920, currency: 'EUR' });
+    expect(pt?.counts_toward_permanent_residence).toBe(true);
+    expect(pt?.counts_toward_naturalization).toBe(true);
+    expect(pt?.sources.some(s => s.url.includes('vistos.mne.gov.pt') || s.url.includes('diariodarepublica'))).toBe(true);
+
+    const lv = byId.get('latvia-investor-residence');
+    expect(lv?.confidence).toBe('high');
+    expect(lv?.min_investment).toEqual({ amount: 280000, currency: 'EUR' });
+    expect(lv?.summary).toMatch(/280[, ]?000/);
+    expect(lv?.summary).toMatch(/25[, ]?000/);
+    expect(lv?.sources.some(s => s.url.includes('pmlp.gov.lv'))).toBe(true);
+  });
+
   // Russia investor ВНЖ (Gov. Decree 2573) — high confidence only; quote-checked
   // 2026-08-04 against full decree text + Minek implementation note. Not CBI.
   test('Russia investor permanent residence is Decree 2573 at high confidence, not CBI', () => {

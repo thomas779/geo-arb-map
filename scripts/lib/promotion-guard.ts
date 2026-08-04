@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import path from 'node:path';
 
 type Coverage = Record<string, string>;
@@ -78,23 +79,48 @@ export function assertPromotionPreservesHead(
   );
   const remaining = regressions.length - preview.length;
   throw new Error([
-    `Promotion would regress ${regressions.length} item(s) relative to HEAD.`,
+    `Promotion would regress ${regressions.length} item(s) relative to the published baseline.`,
     ...preview,
     ...(remaining > 0 ? [`...and ${remaining} more`] : []),
-    'Reconcile the private canonical source with committed public data before promoting.',
+    'Reconcile the private canonical source with what is already published (flag-paths-data / local compiled) before promoting. A blind promote drops canonical-only routes.',
   ].join('\n'));
 }
 
+/**
+ * Baseline for forward-only promotion.
+ *
+ * Since 2026-08-04 the compiled corpus is gitignored and lives in the private
+ * `flag-paths-data` repo. Compare against, in order:
+ *   1. on-disk `data/compiled/citizenship_routes.json` (last local promote)
+ *   2. `.generated/flag-paths-data/compiled/citizenship_routes.json` (cloned published)
+ *   3. `git show HEAD:data/compiled/...` (legacy, only if still tracked)
+ * Refusing to promote without a baseline is intentional — silent drops hurt.
+ */
 export function readHeadPromotionArtifact(repoRoot: string): PromotionArtifact {
+  const resolved = path.resolve(repoRoot);
+  const candidates = [
+    path.join(resolved, 'data/compiled/citizenship_routes.json'),
+    path.join(resolved, '.generated/flag-paths-data/compiled/citizenship_routes.json'),
+  ];
+  for (const filePath of candidates) {
+    if (fs.existsSync(filePath)) {
+      return JSON.parse(fs.readFileSync(filePath, 'utf8')) as PromotionArtifact;
+    }
+  }
+
   const relativePath = 'data/compiled/citizenship_routes.json';
   const result = Bun.spawnSync(['git', 'show', `HEAD:${relativePath}`], {
-    cwd: path.resolve(repoRoot),
+    cwd: resolved,
     stdout: 'pipe',
     stderr: 'pipe',
   });
-  if (result.exitCode !== 0) {
-    const detail = result.stderr.toString().trim();
-    throw new Error(`Cannot read HEAD:${relativePath}; refusing an unguarded promotion${detail ? `: ${detail}` : ''}`);
+  if (result.exitCode === 0) {
+    return JSON.parse(result.stdout.toString()) as PromotionArtifact;
   }
-  return JSON.parse(result.stdout.toString()) as PromotionArtifact;
+
+  const detail = result.stderr.toString().trim();
+  throw new Error(
+    `Cannot locate a promotion baseline (looked for local compiled, flag-paths-data clone, and HEAD:${relativePath}); refusing an unguarded promotion${detail ? `: ${detail}` : ''}. `
+    + 'Fetch or promote once so data/compiled/citizenship_routes.json exists, or clone flag-paths-data into .generated/flag-paths-data.',
+  );
 }
