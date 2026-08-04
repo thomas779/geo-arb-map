@@ -77,7 +77,8 @@ bun run build      # tsc → bun test → vite build (what CI runs)
 # data tooling
 bun run data:db                   # import candidates and build SQL projections locally
 bun run data:build                # compile a deterministic draft release from SQLite/D1
-bun run data:promote -- --allow-draft # promote the reviewed draft to the Atlas artifact
+bun run data:promote -- --allow-draft # promote the reviewed draft to data/compiled/
+bun run data:publish              # push the release to the private flag-paths-data repo
 bun run data:review               # render the human review packet
 bun run data:timelines            # compile reviewed fact references for future planner work
 

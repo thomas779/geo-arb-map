@@ -28,9 +28,9 @@ and for licensing see the repo `README.md`.
 > private `flag-paths-data` repo, which a Cloudflare-side build cannot authenticate
 > to without a dashboard-managed secret. The new workflow is live and proven: it
 > fetches the dataset, runs `bun run build` (tsc plus the full suite, so the deploy
-> is gated on tests), asserts the corpus is not served, and then **skips the deploy
-> **Actions is now the deploying path** (first successful deploy 2026-08-04:
-> `Uploaded flag-paths-web`). One step remains:
+> is gated on tests), asserts the corpus is not served, and deploys with
+> `wrangler deploy`. **Actions is now the deploying path** (first successful deploy
+> 2026-08-04: `Uploaded flag-paths-web`). One step remains:
 >
 > 1. ~~Grant the token Workers permission.~~ **Done:** `flag-paths-gh-actions`
 >    gained **Workers Scripts: Edit**, so the deploy uses the existing
@@ -53,9 +53,11 @@ and for licensing see the repo `README.md`.
 > `data:publish` refuses a corpus under 500 routes, so a sample-built or truncated
 > release cannot reach the source the deploy trusts.
 
-The web app currently deploys via **Cloudflare Workers Builds git integration**. On every push to `main`, Cloudflare builds and deploys; other
-branches get preview builds. Configure it in the Cloudflare dashboard under the
-`flag-paths-web` Worker → Settings → Build:
+### Superseded: Workers Builds git integration
+
+Kept for reference until the dashboard integration is switched off. This is how
+the site deployed before 2026-08-04, and the settings still exist in the
+dashboard under the `flag-paths-web` Worker → Settings → Build:
 
 | Setting | Value |
 | --- | --- |
@@ -89,12 +91,24 @@ There are **two** tokens, deliberately minimal and distinct:
 - (Cloudflare's "Edit Cloudflare Workers" template, scoped to this account +
   both zones.)
 
-**2. `CLOUDFLARE_API_TOKEN`** (GitHub Actions secret) — used by
-`monitor.yml`, `backup-d1.yml`, `sync-canonical-d1.yml`.
+**2. `CLOUDFLARE_API_TOKEN`** (GitHub Actions secret, Cloudflare name
+`flag-paths-gh-actions`) — used by `monitor.yml`, `backup-d1.yml`,
+`sync-canonical-d1.yml`, and now `deploy.yml`.
 - Account → **D1: Edit** (migrations + queries)
 - Account → **Workers R2 Storage: Edit** (backup uploads)
-- Scoped to this account only. **No** Workers Scripts — CI never deploys a
-  worker.
+- Account → **Workers Scripts: Edit** (added 2026-08-04, so Actions can deploy)
+- Scoped to this account only.
+
+That last permission is a deliberate tradeoff, recorded so it is not mistaken for
+an oversight: the same token runs the monitor workflows, which execute LLM-driven
+code against untrusted pages, so deploy rights now sit inside that blast radius.
+Accepted for simplicity over a second token; the fix if the monitor's surface
+grows is a deploy-only token.
+
+There is also a third secret, **`FLAG_PATHS_DATA_DEPLOY_KEY`** — a read-only SSH
+deploy key for the private `flag-paths-data` repo, used by
+`.github/actions/fetch-data`. Its private half exists only as that secret; the
+local key material was destroyed after upload.
 
 Cloudflare `account_id` / `database_id` / bucket names in the `wrangler.jsonc`
 files are non-secret identifiers (useless without a token) and are fine to
@@ -112,8 +126,15 @@ canonical-pilot.ts (private, local)
         │  sync-canonical-d1 workflow → remote D1 (flag-paths-data)   [private store]
         │  backup-d1 workflow (daily) → private R2 bucket             [backups]
         ▼
-data:promote / compiled public/*.json  → committed → served by the Atlas   [public subset]
+data:promote → data/compiled/*.json (gitignored)
+        │  data:publish → private flag-paths-data repo
+        ▼
+CI + deploy fetch it → sliced into atlas-index.json + per-country data.json  [public subset]
 ```
+
+The compiled corpus is **no longer committed** to this repo and is no longer a
+served endpoint. The public surface is the index plus per-country slices, so a
+fork gets the code and the 6-jurisdiction sample, not the dataset.
 
 - **Resolver:** `scripts/lib/canonical-source.ts` loads the real file if present,
   else `canonical-pilot.sample.{ts,json}`. All build scripts and tests import
@@ -145,6 +166,7 @@ a raw re-import — see [`../data/d1/README.md`](../data/d1/README.md).
 | `x-watchlist-seed.yml` | manual | propose X watchlist accounts via Grok (evidence-required, review-first) | D1 (reverse mode) |
 | `backup-d1.yml` | daily cron + dispatch | export D1, validate, upload to R2 | D1 + R2 |
 | `sync-canonical-d1.yml` | manual | re-import canonical → D1 (guarded) | D1 |
+| `deploy.yml` | push to `main` + dispatch | fetch private dataset, verify, deploy `flag-paths-web` | Workers Scripts |
 | `publish-telegram.yml` | manual | publish one reviewed brief | — |
 | `check-telegram.yml` | manual | Telegram connection check | — |
 

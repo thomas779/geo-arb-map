@@ -95,7 +95,9 @@ The sweep **compares** each jurisdiction against what we already record (delta-a
 flags `affects_dataset` findings. Those open a `ChangeProposal`-shaped GitHub issue (see
 `scripts/lib/canonical-schema.ts`). A reviewer confirms the primary source, then the change enters
 the canonical store as a **draft revision → approved** (`data:db` / `data:stage`), is compiled by
-`data:build`, and shipped by `data:promote`. The dataset is never hand-edited or auto-written from a
+`data:build`, promoted by `data:promote`, and shipped by `data:publish` (the compiled dataset is
+gitignored here and lives in the private `flag-paths-data` repo, so a commit alone ships nothing).
+The dataset is never hand-edited or auto-written from a
 finding — that gate + the regression invariants are the integrity guarantee.
 
 ## Telegram publication

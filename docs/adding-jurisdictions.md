@@ -59,10 +59,13 @@ Hand-edited inputs:
      which maps to adapter `html_index`) must line up, or the audit reports a
      `structural_error`.
 
-Regenerated committed artifacts — **do not hand-edit**:
+Regenerated artifacts — **do not hand-edit, and do not try to commit**:
 
-4. **`public/citizenship_routes.json`** and **`public/data_release.json`** —
-   produced by `data:db` → `data:promote` (below).
+4. **`data/compiled/citizenship_routes.json`** and **`data/compiled/data_release.json`** —
+   produced by `data:db` → `data:promote` (below). Both are **gitignored** since
+   2026-08-04: the compiled dataset lives in the private `flag-paths-data` repo,
+   which CI and the deploy fetch with a deploy key. A commit does not ship data;
+   `bun run data:publish` does.
 
 Pinned test lists to refresh (they break by design on any jurisdiction change):
 
@@ -113,10 +116,18 @@ Do **not** transcribe these lists by hand. Regenerate them from the built pilot
 bun run data:db                        # import canonical records → SQLite
 bun run data:build                     # parity gates (non-zero exit blocks cutover)
 bun run monitor:audit                  # expect no `no_active_verification_source` gaps
-bun run data:promote -- --allow-draft  # rewrite public/citizenship_routes.json + data_release.json
+bun run data:promote -- --allow-draft  # rewrite data/compiled/{citizenship_routes,data_release}.json
 bun test                               # regenerate the pinned lists (below) until green
 bun run build                          # tsc + monitor tsc + tests + vite (what CI runs)
+bun run data:publish                   # push the release to flag-paths-data (nothing ships without this)
 ```
+
+`data:publish` is not optional and not covered by `git push`. The compiled files
+above are gitignored, and both public CI and the deploy workflow read the dataset
+from the private `flag-paths-data` repo. Skip it and the live Atlas keeps serving
+the previous release while the repo looks up to date. Before promoting, diff the
+built JSON against what is already published: another agent's canonical-only
+routes exist nowhere else and a blind promote drops them.
 
 ### Persisting to the D1 canonical store
 
