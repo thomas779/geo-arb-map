@@ -53,9 +53,9 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
   const inited = useRef(false);
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
-  const [legendOpen, setLegendOpen] = useState(
-    () => typeof window === 'undefined' || window.matchMedia('(min-width: 768px)').matches,
-  );
+  // Keep the first view quiet. The first-visit guide explains how to begin;
+  // the map key remains one click away when the color vocabulary is needed.
+  const [legendOpen, setLegendOpen] = useState(false);
 
   useEffect(() => {
     if (!data || inited.current) return;

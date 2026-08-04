@@ -37,6 +37,7 @@ import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
 import { clearStoredProfile, LEGACY_FLAGS_KEY, PROFILE_KEY } from '@/lib/profile-storage';
 import { cn } from '@/lib/utils';
 import { SiteHeader } from '@/components/SiteHeader';
+import { AtlasGuide } from '@/components/AtlasGuide';
 import type { TrustSection } from './url';
 
 function initialProfile(): Profile {
@@ -288,6 +289,10 @@ export default function App() {
 
   const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane) || Boolean(state.routeClass);
   const rightPanelOpen = state.country ? detailPanelOpen : hasRouteSelection && routePanelOpen;
+  const openRouteBrowser = useCallback(() => {
+    setLeftPanelOpen(true);
+    setMobileList(true);
+  }, []);
 
   return (
     <div className="flex h-dvh flex-col overflow-hidden">
@@ -340,6 +345,12 @@ export default function App() {
               </span>
             </a>
           </Button>
+          {state.view === 'map' && (
+            <AtlasGuide
+              autoOpen={!state.country && !hasRouteSelection}
+              onExplore={openRouteBrowser}
+            />
+          )}
           <span className="mx-1 h-5 w-px bg-border" aria-hidden />
           <Button
             variant="ghost"
