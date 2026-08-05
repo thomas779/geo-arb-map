@@ -91,6 +91,23 @@ Do **not** transcribe these lists by hand. Regenerate them from the built pilot
   the route object (which allows `'low'` per `RouteSchema`).
 - One route per `present` mode minimum; add extra routes for distinctive
   leverage (e.g. ethnic-origin descent, heritage fast-tracks).
+- **A URL in prose is not a citation.** Every new claim needs a registered source:
+  add the URL to `OFFICIAL_URLS`, add a tuple to the official-sources table, and
+  pass the resolved record into the route's `source`. A link pasted into a
+  `summary` or `note` string is invisible to `source_refs`, to the evidence index,
+  to the citation ledger and to the source-verification monitor. If a claim has no
+  citable URL, it does not go in the artifact — record the lead in the note
+  qualitatively and leave the number out (see `indonesia-naturalization`).
+- **`summary` is the machine-readable field**; `note` is the caveat. The Atlas
+  publishes per-country slices for model ingestion, so a hedged figure in a note
+  becomes an unhedged fact the moment something extracts it. Never let the summary
+  assert what the note qualifies: if the gazette has not been read, the summary
+  says "reported" and does not state a gazette date.
+- **`last_checked` means "the whole route was read against its sources on this
+  date"**, not "someone touched this row". Adding a fee note after verifying one
+  page does not re-verify the residence clock. Bump it only when the route's
+  substantive claims were re-read; otherwise leave it and date the new finding
+  inside the `note`.
 - `investment` = a **direct** citizenship-by-investment programme. Investor
   *residence* (Gulf premium residency, golden visas) is **not** CBI → mark
   `verified_none` and note the residence programme. A statutory-but-uncertain
