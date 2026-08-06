@@ -550,6 +550,32 @@ describe('monitor-lead verifications, July 2026', () => {
 });
 
 describe('monitor-lead verifications, 30 July 2026', () => {
+  test('monitor #177 Syria Decree 13 Kurdish route is medium with SANA source entity', () => {
+    const route = citizenshipRoutes.routes.find(r => r.id === 'syria-kurdish-citizenship-decree-13-2026');
+    expect(route).toBeDefined();
+    expect(route?.confidence).toBe('medium');
+    expect(route?.status).toBe('active');
+    expect(route?.summary).toMatch(/Decree No\.\s*13|Decree No\. \(13\)|Decree No\. 13/i);
+    expect(route?.summary).toMatch(/1962|Hasakah|al-Hasakah|Hasakeh/i);
+    const urls = (route?.sources ?? []).map(s => s.url);
+    expect(urls.some(u => u.includes('sana.sy'))).toBe(true);
+  });
+
+  test('monitor #176 Gibraltar Status long-residence is 20 years from Act 2026 primary law', () => {
+    const route = citizenshipRoutes.residence_routes?.find(r => r.id === 'gibraltar-gibraltarian-status-long-residence');
+    expect(route).toBeDefined();
+    expect(route?.confidence).toBe('high');
+    expect(route?.outcome).toBe('permanent_residence');
+    expect(route?.pathways?.[0]?.eligibility_months).toBe(240);
+    const summary = route?.summary ?? '';
+    expect(summary).toMatch(/twenty years|20 years/i);
+    expect(summary).toMatch(/ten-year|ten years|10 years/i); // savings for pre-30 Oct 2025
+    expect(summary).not.toMatch(/permanent residency from five/i);
+    const urls = (route?.sources ?? []).map(s => s.url);
+    expect(urls.some(u => u.includes('gibraltarlaws.gov.gi') && u.includes('gibraltarian-status-amendment'))).toBe(true);
+  });
+
+
   test('Slovakia descent records the new section 7(8) ancestor route', () => {
     const descent = citizenshipRoutes.routes.find(route =>
       route.id === 'slovakia-citizenship-by-parent');

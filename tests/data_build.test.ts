@@ -934,6 +934,7 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build parity gates', () => {
       'switzerland-citizenship-by-marriage',
       'switzerland-ordinary-naturalization',
       'syria-citizenship-by-parent',
+      'syria-kurdish-citizenship-decree-13-2026',
       'syria-naturalization',
       'taiwan-citizenship-by-marriage',
       'taiwan-citizenship-by-parent',

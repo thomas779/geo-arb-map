@@ -696,6 +696,7 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('canonical data schemas', () => {
       'switzerland-citizenship-by-marriage',
       'syria-citizenship-by-parent',
       'syria-naturalization',
+      'syria-kurdish-citizenship-decree-13-2026',
       'syria-citizenship-at-birth-by-parent',
       'taiwan-citizenship-by-parent',
       'taiwan-naturalization',
