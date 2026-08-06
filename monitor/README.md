@@ -102,6 +102,28 @@ finding — that gate + the regression invariants are the integrity guarantee.
 
 ## Telegram publication
 
+**A lead is not finished when the data ships.** Verifying a lead, correcting the
+dataset and closing the issue leaves the channel behind, which happened twice:
+the Gibraltar Status Act and Syria's Decree 13 both reached the atlas with the
+reviewer template still empty. Closing a `monitor-lead` as **completed** now
+requires one of two things, and `monitor-lead-gate.yml` comments on the issue if
+neither is present:
+
+- **Publishing it.** Fill `## Verified evidence` with at least one primary URL as
+  a markdown link, write the exact copy into `## Public brief`, tick the reviewer
+  checklist, then add the **`publish-approved`** label. The label triggers
+  `publish-telegram.yml`; no manual dispatch. The environment's reviewers still
+  approve the run, so the human gate is on the publish, not on remembering to
+  start it.
+- **Deciding not to.** Add the **`not-newsworthy`** label. No further prompting.
+
+Note the headline comes from the **issue title**, not the brief. Lead titles are
+written by the sweep and are sometimes wrong: the Gibraltar lead's title asserted
+that ordinary permanent residency rose from five years to ten, which is not in
+the Act. Retitle the issue to the verified fact before approving, or the channel
+publishes the error as its headline.
+
+
 Public channel `@flagpaths`. Confirmed news auto-publishes when `MONITOR_AUTO_PUBLISH=true`, through
 `publish/telegram.ts`'s LLM evidence-audit (every claim must be backed by cited evidence) and the
 `monitor_posts` D1 dedup ledger. Set `MONITOR_AUTO_PUBLISH=false` to pause instantly. GitHub environment

@@ -1,5 +1,10 @@
 name: Publish reviewed Telegram brief
 
+# Two triggers, same job. The dispatch stays for manual reruns; the label is the
+# one that stops Telegram silently falling behind the dataset. Before this, a
+# reviewer had to remember to come back and dispatch with the right issue number,
+# and twice they did not: the Gibraltar and Syria briefs sat unpublished with the
+# reviewer template still empty while the data was already live.
 on:
   workflow_dispatch:
     inputs:
@@ -7,6 +12,8 @@ on:
         description: Reviewed monitoring issue number
         required: true
         type: number
+  issues:
+    types: [labeled]
 
 permissions:
   contents: read
@@ -18,7 +25,13 @@ concurrency:
 
 jobs:
   publish:
+    # Only the approval label, never any other labelling activity.
+    if: >-
+      github.event_name == 'workflow_dispatch'
+      || github.event.label.name == 'publish-approved'
     runs-on: ubuntu-latest
+    # Keeps the human gate: the environment's reviewers still approve the run.
+    # What is removed is having to remember to start it, not the check on it.
     environment: telegram-publication
     env:
       GH_TOKEN: ${{ github.token }}
@@ -48,12 +61,22 @@ jobs:
         with:
           deploy-key: ${{ secrets.FLAG_PATHS_DATA_DEPLOY_KEY }}
 
-      - name: Preview reviewed brief
+      - name: Resolve the issue number
         env:
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
+          DISPATCH_ISSUE: ${{ inputs.issue_number }}
+          LABELED_ISSUE: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          number="${DISPATCH_ISSUE:-$LABELED_ISSUE}"
+          if [ -z "$number" ]; then
+            echo "::error::Could not resolve an issue number from this trigger"
+            exit 1
+          fi
+          echo "ISSUE_NUMBER=$number" >> "$GITHUB_ENV"
+          echo "publishing brief from issue #$number"
+
+      - name: Preview reviewed brief
         run: bun run monitor:telegram -- --issue "$ISSUE_NUMBER" --dry-run
 
       - name: Publish reviewed brief
-        env:
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
         run: bun run monitor:telegram -- --issue "$ISSUE_NUMBER" --apply

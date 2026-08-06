@@ -1,0 +1,74 @@
+name: Monitor lead close gate
+
+# Stops Telegram silently falling behind the dataset.
+#
+# The failure this exists for happened twice: a reviewer verified a lead against
+# primary law, shipped the data, closed the issue as completed, and never filled
+# the "Public brief" section. Nothing complained, so the change reached the atlas
+# and never reached the channel. Both the Gibraltar Status Act and Syria's Decree
+# 13 sat unpublished with the reviewer template untouched.
+#
+# This is a nudge, not a block. It cannot reopen work or second-guess an
+# editorial call: a lead that genuinely is not worth publishing just needs the
+# `not-newsworthy` label. What it will not let you do is close a lead as done
+# while leaving the question unanswered.
+
+on:
+  issues:
+    types: [closed]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    # Completed means "we acted on this". Closing as not-planned is already an
+    # explicit editorial decision and needs no prompt.
+    if: >-
+      contains(github.event.issue.labels.*.name, 'monitor-lead')
+      && github.event.issue.state_reason == 'completed'
+      && !contains(github.event.issue.labels.*.name, 'not-newsworthy')
+      && !contains(github.event.issue.labels.*.name, 'publish-approved')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check whether a public brief was written
+        env:
+          GH_TOKEN: ${{ github.token }}
+          # Via env, never interpolated into the shell: issue bodies are
+          # attacker-controlled text.
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          # Mirrors monitor/publish/telegram.ts: take the section, cut at the lead
+          # boilerplate sentinel, strip HTML comments, then see if anything real is
+          # left. An awk/sed version of this passed an untouched template, because
+          # the boilerplate runs to three lines and the placeholder is a comment.
+          state=$(python3 - <<'PY'
+          import os, re
+          body = os.environ.get('ISSUE_BODY', '')
+          match = re.search(r'^## Public brief\s*$(.*?)(?=^## |\Z)', body, re.S | re.M)
+          section = (match.group(1) if match else '')
+          section = section.split('This issue is an unverified monitoring lead')[0]
+          section = re.sub(r'<!--.*?-->', '', section, flags=re.S)
+          print('FILLED' if section.strip() else 'EMPTY')
+          PY
+          )
+          if [ "$state" = "FILLED" ]; then
+            echo "public brief present; nothing to prompt"
+            exit 0
+          fi
+          echo "::warning::Lead #$ISSUE_NUMBER closed as completed with an empty Public brief"
+          gh issue comment "$ISSUE_NUMBER" --repo "$REPO" --body \
+          'This lead was closed as completed with an empty **Public brief**, so nothing will be published to the channel.
+
+          That is fine if the change is not worth publishing. It is not fine if it is: the dataset moves and the channel does not, which is how the Gibraltar and Syria changes both went live unannounced.
+
+          Pick one:
+
+          - **Publish it.** Fill in `## Verified evidence` (at least one primary URL as a markdown link) and `## Public brief` (the exact copy to publish), tick the reviewer checklist, then add the `publish-approved` label. Publishing runs from the label; no dispatch needed.
+          - **Skip it.** Add the `not-newsworthy` label. No further prompting.
+
+          This comment is automated and will not reopen the issue.'
