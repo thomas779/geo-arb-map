@@ -283,6 +283,19 @@ export async function generateGroundedText(
       const found = citationFromAnnotation(annotation);
       return found ? [found] : [];
     });
+  // Diagnostic, not a fix: citations_seen has been 0 on every run while grounded
+  // queries run 33-186, and correcting the annotation shape did not change it. Log
+  // the STRUCTURE (keys only, never content) when that happens, so the real shape
+  // is established from a live response instead of guessed at a third time.
+  if (citations.length === 0 && searchQueries.length > 0) {
+    const shape = steps.slice(0, 3).map(step => ({
+      type: step.type,
+      keys: Object.keys(step as object),
+      contentKeys: (step.content ?? []).slice(0, 2).map(item => Object.keys(item as object)),
+      modelOutputKeys: step.model_output ? Object.keys(step.model_output as object) : null,
+    }));
+    console.warn(`::warning title=No grounding citations::steps=${JSON.stringify(shape)}`);
+  }
   if (!text) throw new Error('Gemini grounded response did not contain text');
   return {
     text, citations, searchQueries,
