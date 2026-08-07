@@ -189,6 +189,35 @@ export async function generateLlmText(
 // the native :generateContent endpoint only; the OpenAI-compatible shim cannot
 // ground. Grounding is also incompatible with structured JSON output, so callers
 // must request JSON in the prompt and parse it tolerantly.
+/**
+ * One annotation, two provider shapes.
+ *
+ * Gemini's interactions endpoint returns the URL directly on the annotation,
+ * `{ type: 'url_citation', url, title }`, per ai.google.dev grounding docs. The
+ * OpenAI-compatible shape nests it, `{ url_citation: { url, title } }`. This code
+ * only ever read the nested form, so against Gemini it silently produced an empty
+ * citation list on every run: 33 to 41 grounded queries, zero citations captured.
+ *
+ * That mattered twice over. The proof-of-search gate fell back to counting
+ * queries, so a model that searched and read nothing looked like one that read
+ * sources. And the citation vetting in monitor/sweep/citations.ts had nothing to
+ * intersect against, leaving only its reachability half alive.
+ */
+interface GroundingAnnotation {
+  type?: string;
+  url?: string;
+  title?: string;
+  url_citation?: { url?: string; title?: string };
+}
+
+export function citationFromAnnotation(annotation: GroundingAnnotation): GroundingCitation | null {
+  if (annotation.url) return { uri: annotation.url, title: annotation.title ?? '' };
+  if (annotation.url_citation?.url) {
+    return { uri: annotation.url_citation.url, title: annotation.url_citation.title ?? '' };
+  }
+  return null;
+}
+
 export async function generateGroundedText(
   prompt: string,
   config: LlmConfig,
@@ -225,10 +254,17 @@ export async function generateGroundedText(
     steps?: Array<{
       type?: string;
       arguments?: { queries?: string[] };
+      model_output?: {
+        content?: Array<{
+          type?: string;
+          text?: string;
+          annotations?: GroundingAnnotation[];
+        }>;
+      };
       content?: Array<{
         type?: string;
         text?: string;
-        annotations?: Array<{ url_citation?: { url?: string; title?: string } }>;
+        annotations?: GroundingAnnotation[];
       }>;
     }>;
   };
@@ -236,14 +272,17 @@ export async function generateGroundedText(
   const inputTokens = tokenField(usage, 'input');
   const outputTokens = tokenField(usage, 'output');
   const steps = body.steps ?? [];
-  const contentItems = steps.flatMap(step => step.content ?? []);
+  // Content sits directly on the step for some step types and under model_output
+  // for others; take both rather than assuming one.
+  const contentItems = steps.flatMap(step => [...(step.content ?? []), ...(step.model_output?.content ?? [])]);
   const text = contentItems.map(item => item.text ?? '').join('').trim();
   const searchQueries = steps.flatMap(step => step.arguments?.queries ?? []);
   const citations: GroundingCitation[] = contentItems
     .flatMap(item => item.annotations ?? [])
-    .flatMap(annotation => (annotation.url_citation?.url
-      ? [{ uri: annotation.url_citation.url, title: annotation.url_citation.title ?? '' }]
-      : []));
+    .flatMap(annotation => {
+      const found = citationFromAnnotation(annotation);
+      return found ? [found] : [];
+    });
   if (!text) throw new Error('Gemini grounded response did not contain text');
   return {
     text, citations, searchQueries,

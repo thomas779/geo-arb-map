@@ -30,7 +30,7 @@ import {
   routesFromRows,
   senderAllowed,
 } from '../monitor/cloudflare/intake';
-import { generateGroundedText } from '../monitor/llm/client';
+import { generateGroundedText, citationFromAnnotation } from '../monitor/llm/client';
 import {
   buildSweepPrompt,
   changeKey,
@@ -1177,5 +1177,42 @@ describe('x_search request is scoped by parameters, not prose', () => {
     // The API rejects the combination outright.
     const tool = buildXSearchTool(['imidaily'], 24, new Date('2026-08-07T09:00:00Z'));
     expect('excluded_x_handles' in tool).toBe(false);
+  });
+});
+
+describe('grounding citations are parsed from the real Gemini shape', () => {
+  test('the annotation carries the url directly, as ai.google.dev documents', () => {
+    // Verbatim from the Grounding with Google Search docs. Reading only the
+    // OpenAI-style nested url_citation produced zero citations on every run,
+    // against 33-41 grounded queries.
+    expect(citationFromAnnotation({
+      type: 'url_citation',
+      url: 'https://www.aljazeera.com/sports/euro-2024-final',
+      title: 'aljazeera.com',
+      start_index: 0,
+      end_index: 56,
+    } as never)).toEqual({
+      uri: 'https://www.aljazeera.com/sports/euro-2024-final',
+      title: 'aljazeera.com',
+    });
+  });
+
+  test('the OpenAI-compatible nested shape still works', () => {
+    // Kept so a non-Gemini provider does not regress to zero citations.
+    expect(citationFromAnnotation({
+      url_citation: { url: 'https://example.gov/a', title: 'example.gov' },
+    } as never)).toEqual({ uri: 'https://example.gov/a', title: 'example.gov' });
+  });
+
+  test('an annotation with no url yields nothing rather than a blank citation', () => {
+    // A citation with an empty uri would satisfy the proof-of-search gate while
+    // pointing nowhere, which is worse than having none.
+    expect(citationFromAnnotation({ type: 'text' } as never)).toBeNull();
+    expect(citationFromAnnotation({ url_citation: {} } as never)).toBeNull();
+  });
+
+  test('title is optional and defaults to empty, not undefined', () => {
+    expect(citationFromAnnotation({ url: 'https://example.gov/a' } as never))
+      .toEqual({ uri: 'https://example.gov/a', title: '' });
   });
 });
