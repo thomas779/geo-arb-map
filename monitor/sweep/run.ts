@@ -15,9 +15,11 @@ import { fileURLToPath } from 'node:url';
 import {
   generateGroundedText,
   llmConfigFromEnv,
+  resolveRedirect,
   type GroundedResult,
   type GroundingCitation,
 } from '../llm/client';
+import { applyCitationVerdicts, checkCitations } from './citations';
 import { parseJsonArray, seenSignalIds, type Lead, type ImpactType } from '../triage/triage';
 import {
   datasetContextForJurisdiction,
@@ -334,6 +336,30 @@ no hype, no exclamation marks, and never legal advice. Put ONLY official/primary
 blogs or aggregators. Use status "confirmed" only when a primary source supports it.`;
 }
 
+/**
+ * Resolve the grounding redirects once per call, then vet each finding's claimed
+ * sources against them. Grounding citations are short-lived Google redirect links,
+ * so they have to be followed before they can be compared with what the model
+ * wrote. Failures here never drop a finding: they demote it and force the lead to
+ * ask for a primary source.
+ */
+async function vetFindings(findings: Finding[], citations: GroundingCitation[]): Promise<Finding[]> {
+  if (findings.length === 0) return findings;
+  const groundedUrls = await Promise.all(citations.map(citation => resolveRedirect(citation.uri)));
+  return Promise.all(findings.map(async finding => {
+    const checks = await checkCitations(finding.primary_urls, groundedUrls);
+    const vetted = applyCitationVerdicts(finding, checks);
+    const bad = checks.filter(check => check.verdict === 'unverified');
+    if (bad.length) {
+      console.warn(
+        `::warning title=Unverified citation::${finding.iso_n3} cited ${bad.length} URL(s) that are `
+        + `neither in the grounded search results nor reachable: ${bad.map(b => `${b.url} (${b.status ?? 'no response'})`).join(', ')}`,
+      );
+    }
+    return { ...finding, status: vetted.status as Finding['status'] } as Finding;
+  }));
+}
+
 // Normalize the model's raw JSON for one jurisdiction into validated findings.
 // The grounded result is the proof-of-search gate: if the model did not actually
 // search (no citations and no queries), every finding from that call is dropped
@@ -585,6 +611,12 @@ export async function runSweep(
       } catch (error) {
         console.error(`::warning title=Sweep parse failed::${entry.iso_n3}: ${error instanceof Error ? error.message : String(error)}`);
       }
+      // Vet the URLs the model claimed against the URLs search actually returned,
+      // and against whether they resolve. The grounding set was previously used
+      // only to prove a search happened; a model that searched correctly and then
+      // tidied the URL into a plausible-looking form passed every gate. See
+      // monitor/sweep/citations.ts for the case that motivated this.
+      normalized = await vetFindings(normalized, result.citations);
       const skipped = normalized.length === 0 && result.citations.length === 0 && result.searchQueries.length === 0;
       console.log(`${entry.iso_n3} ${entry.name}: ${normalized.length} findings`);
       return {
