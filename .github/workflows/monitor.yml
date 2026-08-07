@@ -2,12 +2,13 @@ name: Monitor mobility sources
 
 on:
   schedule:
-    # Split so the X pass has a cron of its own to key off. Gating on the wall
-    # clock did not work: GitHub delays scheduled runs by tens of minutes, so the
-    # 06:17 slot started at 07:40 on 2026-08-07 and the `date -u +%H = 06` test
-    # never matched. Across three days no run began in the 06:00 hour, so X had
-    # not run on schedule at all.
-    - cron: "17 0,12,18 * * *"
+    # One run a day, owner's call on 2026-08-07. The grounded sweep is the only
+    # metered part, so runs-per-day is the cost dial: at MONITOR_SWEEP_MAX_CALLS=60
+    # that is 60 calls daily, roughly $0.0075.
+    #
+    # The X pass gates on this exact cron string rather than on the clock. An
+    # earlier `date -u +%H = 06` test never fired, because GitHub delays scheduled
+    # runs by tens of minutes and no run had started in the 06:00 hour for days.
     - cron: "17 6 * * *"
   repository_dispatch:
     types: [newsletter_signal]
