@@ -8,14 +8,7 @@ import { parseNewsletterMessages } from '../monitor/collectors/email';
 import { signalFromNewsletterDispatch } from '../monitor/collectors/github-dispatch';
 import { parseTelegramPreview } from '../monitor/collectors/telegram';
 import { signalMatchesKeywords, runCollectors } from '../monitor/collectors/run';
-import {
-  buildUserPrompt,
-  loadWatchlist,
-  parseXSearchResponse,
-  resolveIso,
-  xSearchConfigFromEnv,
-  type XSearchConfig,
-} from '../monitor/collectors/x_search';
+import { buildUserPrompt, loadWatchlist, parseXSearchResponse, resolveIso, xSearchConfigFromEnv, type XSearchConfig, buildXSearchTool, MAX_ALLOWED_HANDLES } from '../monitor/collectors/x_search';
 import {
   blueskyEndpoint,
   collectBluesky,
@@ -805,12 +798,19 @@ describe('X (Twitter) discovery via xAI', () => {
     expect(loadWatchlist()).toContain('nomadcapitalist'); // the shipped watchlist
   });
 
-  test('buildUserPrompt scopes to the watchlist when present, broad when empty', () => {
+  test('buildUserPrompt no longer carries the handle scoping', () => {
+    // Superseded 2026-08-07. The prompt used to interpolate
+    // "from:a OR from:b ..." and ask for anything else besides; scoping is now
+    // the `allowed_x_handles` request parameter (see buildXSearchTool). Leaving
+    // the handles in the prose would restore the reasoning burden that made the
+    // model answer 15 handles with two broad calls and zero sources used.
     const scoped = buildUserPrompt(24, ['nomadcapitalist', 'imidaily']);
-    expect(scoped).toContain('from:nomadcapitalist OR from:imidaily');
-    expect(scoped).toContain('Also include any other qualifying official change');
+    expect(scoped).not.toContain('from:');
+    expect(scoped).not.toContain('nomadcapitalist');
+    expect(scoped).toContain('already restricted to a curated set of accounts');
     const broad = buildUserPrompt(24, []);
     expect(broad).not.toContain('from:');
+    expect(broad).not.toContain('already restricted');
     expect(broad).toContain('last 24 hours');
   });
 
@@ -1135,5 +1135,47 @@ describe('news dedup window scope', () => {
       fetcher: noNetwork,
     });
     expect(result.skipped).toBe(1); // only the instrument-less finding hits the window
+  });
+});
+
+describe('x_search request is scoped by parameters, not prose', () => {
+  test('the watchlist becomes allowed_x_handles rather than from: text', () => {
+    // The regression this guards: scoping used to live in the user prompt as
+    // "from:a OR from:b ...", which the model had to interpret. It answered a
+    // 15-handle watchlist with two broad calls and zero sources used.
+    const tool = buildXSearchTool(['imidaily', 'nomadcapitalist'], 24, new Date('2026-08-07T09:00:00Z'));
+    expect(tool.type).toBe('x_search');
+    expect(tool.allowed_x_handles).toEqual(['imidaily', 'nomadcapitalist']);
+    const prompt = buildUserPrompt(24, ['imidaily', 'nomadcapitalist']);
+    expect(prompt).not.toContain('from:');
+    expect(prompt).not.toContain('imidaily');
+  });
+
+  test('handles are capped at the documented API maximum of 20', () => {
+    // Over 20 the parameter is rejected, which would silently unscope the search.
+    const many = Array.from({ length: 31 }, (_, i) => `handle${i}`);
+    const tool = buildXSearchTool(many, 24, new Date('2026-08-07T09:00:00Z'));
+    expect((tool.allowed_x_handles as string[]).length).toBe(MAX_ALLOWED_HANDLES);
+  });
+
+  test('from_date rounds outward so the start of the window is not cut off', () => {
+    // from_date is a DATE. A 24h lookback at 09:00 reaches back to 06 Aug, so
+    // from_date must be 06 Aug; using 07 Aug would drop most of the window.
+    const tool = buildXSearchTool([], 24, new Date('2026-08-07T09:00:00Z'));
+    expect(tool.from_date).toBe('2026-08-06');
+    // A short window inside the same day still yields that day.
+    expect(buildXSearchTool([], 2, new Date('2026-08-07T09:00:00Z')).from_date).toBe('2026-08-07');
+  });
+
+  test('no watchlist means no handle filter, not an empty one', () => {
+    // An empty allowed_x_handles would match nothing rather than everything.
+    const tool = buildXSearchTool([], 24, new Date('2026-08-07T09:00:00Z'));
+    expect('allowed_x_handles' in tool).toBe(false);
+  });
+
+  test('allowed and excluded handles are never both set', () => {
+    // The API rejects the combination outright.
+    const tool = buildXSearchTool(['imidaily'], 24, new Date('2026-08-07T09:00:00Z'));
+    expect('excluded_x_handles' in tool).toBe(false);
   });
 });

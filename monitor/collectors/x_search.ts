@@ -68,12 +68,53 @@ const SYSTEM_PROMPT =
   + 'about actual government/policy changes with a concrete source — never opinion, ads, promotions, or generic '
   + 'commentary. Prefer official agencies, immigration lawyers, and specialist reporters.';
 
+/** `allowed_x_handles` is capped at 20 by the API and is silently rejected above it. */
+export const MAX_ALLOWED_HANDLES = 20;
+
+/**
+ * Build the server-side x_search tool entry.
+ *
+ * Scoping used to live in the PROSE of the user prompt as `from:a OR from:b …`,
+ * which left the model to translate an English instruction into search behaviour.
+ * On 2026-08-04 it resolved a 15-handle watchlist plus "anything else you find"
+ * into two broad calls, used zero sources, and spent 1,271 of its 1,276 output
+ * tokens reasoning its way to an empty array.
+ *
+ * `allowed_x_handles` and `from_date` are the documented parameters for this
+ * (docs.x.ai, X Search Parameters), so coverage becomes a property of the request
+ * rather than of prompt compliance, and the reasoning burden that consumed the
+ * spend mostly disappears.
+ *
+ * Note this makes the search EXCLUSIVE to the watchlist: `allowed_x_handles` is a
+ * filter, not a ranking hint. That is the deliberate trade. The open half of the
+ * hybrid returned nothing on the only run it ever had, broad discovery is already
+ * covered by RSS and Bluesky, and an unscoped X firehose is precisely what buries
+ * the niche accounts the watchlist exists to catch.
+ */
+export function buildXSearchTool(
+  watchlist: string[],
+  lookbackHours: number,
+  now: Date,
+): Record<string, unknown> {
+  const tool: Record<string, unknown> = { type: 'x_search' };
+  if (watchlist.length) {
+    tool.allowed_x_handles = watchlist.slice(0, MAX_ALLOWED_HANDLES);
+  }
+  // from_date is a DATE, so an N-hour window has to round outward to whole days
+  // or the first hours of the window fall outside it. Over-fetching is corrected
+  // by the caller's own lookback filter; under-fetching loses posts silently.
+  const from = new Date(now.getTime() - lookbackHours * 3_600_000);
+  tool.from_date = from.toISOString().slice(0, 10);
+  return tool;
+}
+
 export function buildUserPrompt(hours: number, watchlist: string[] = []): string {
-  // Hybrid: give priority to the curated accounts (so small niche accounts are
-  // never buried), but still surface anything else — so coverage never regresses
-  // while the watchlist is small.
+  // Handle scoping and the date range are request parameters now (see
+  // buildXSearchTool), so the prompt only has to describe WHAT qualifies and the
+  // output contract. Restating the handles here would re-introduce the reasoning
+  // burden the parameters exist to remove.
   const priority = watchlist.length
-    ? `Give priority to recent posts from these accounts, searching each explicitly: ${watchlist.map(handle => `from:${handle}`).join(' OR ')}. Also include any other qualifying official change you find. `
+    ? 'The search is already restricted to a curated set of accounts, so report everything qualifying that you find. '
     : '';
   return `${priority}Search X for posts from roughly the last ${hours} hours about such changes. `
     + 'Search in English AND in the local language of the country involved (e.g. Spanish, Portuguese, French, '
@@ -167,7 +208,7 @@ export async function collectXSearch(
     model: config.model,
     instructions: SYSTEM_PROMPT,
     input: [{ role: 'user', content: buildUserPrompt(config.lookbackHours, config.watchlist) }],
-    tools: [{ type: 'x_search' }],
+    tools: [buildXSearchTool(config.watchlist, config.lookbackHours, new Date())],
     stream: false,
   };
   const response = await fetchImpl(`${config.baseUrl}/responses`, {
