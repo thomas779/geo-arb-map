@@ -288,12 +288,22 @@ export async function generateGroundedText(
   // the STRUCTURE (keys only, never content) when that happens, so the real shape
   // is established from a live response instead of guessed at a third time.
   if (citations.length === 0 && searchQueries.length > 0) {
-    const shape = steps.slice(0, 3).map(step => ({
-      type: step.type,
-      keys: Object.keys(step as object),
-      contentKeys: (step.content ?? []).slice(0, 2).map(item => Object.keys(item as object)),
-      modelOutputKeys: step.model_output ? Object.keys(step.model_output as object) : null,
-    }));
+    const shape = steps.map(step => {
+      const raw = step as unknown as Record<string, unknown>;
+      const result = raw.result;
+      return {
+        type: step.type,
+        keys: Object.keys(raw),
+        // The sources are in the google_search_result step's `result`, not in
+        // annotations. Log its shape (keys only) to find the URI field.
+        resultKeys: result && typeof result === 'object'
+          ? (Array.isArray(result)
+            ? [`array[${result.length}]`, ...(result[0] && typeof result[0] === 'object' ? Object.keys(result[0] as object) : [])]
+            : Object.keys(result as object))
+          : typeof result,
+        contentKeys: (step.content ?? []).slice(0, 2).map(item => Object.keys(item as object)),
+      };
+    });
     console.warn(`::warning title=No grounding citations::steps=${JSON.stringify(shape)}`);
   }
   if (!text) throw new Error('Gemini grounded response did not contain text');
