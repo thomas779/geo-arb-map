@@ -130,7 +130,11 @@ interface SweepReport {
   ran_at: string;
   mode: string;
   model: string | null;
+  /** How many the discovery signals flagged, BEFORE max-calls truncation. */
+  jurisdictions_flagged: number;
   jurisdictions_selected: number;
+  /** True when max-calls dropped flagged jurisdictions that would otherwise run. */
+  cap_binding: boolean;
   calls_made: number;
   grounded_queries: number;
   citations_seen: number;
@@ -562,6 +566,13 @@ export async function runSweep(
 
   // Weekly rotation index (stateless): distinct runs cover different slices.
   const rotationIndex = options.rotationIndex ?? Math.floor(Date.now() / (7 * 86_400_000));
+  // Counted before selection so the report can say whether max-calls truncated the
+  // work. Without this the report shows only the post-slice number, so a cap that
+  // is silently dropping flagged jurisdictions looks identical to a quiet day:
+  // four consecutive runs reported exactly 12 of 12 and nobody could tell which.
+  const flaggedCount = options.only
+    ? registry.filter(entry => options.only!.includes(entry.iso_n3)).length
+    : registry.filter(entry => rssByIso.has(entry.iso_n3)).length;
   const capped = selectJurisdictions(registry, {
     only: options.only,
     rssFlagged: new Set(rssByIso.keys()),
@@ -662,11 +673,21 @@ export async function runSweep(
     ((inputTokens / 1_000_000) * inputRate + (outputTokens / 1_000_000) * outputRate).toFixed(4),
   );
 
+  if (flaggedCount > capped.length) {
+    console.warn(
+      `::warning title=Sweep cap is binding::${flaggedCount} jurisdictions were flagged by discovery `
+      + `signals but only ${capped.length} were swept (MONITOR_SWEEP_MAX_CALLS). `
+      + `${flaggedCount - capped.length} flagged jurisdiction(s) went unchecked this run.`,
+    );
+  }
+
   const report: SweepReport = {
     ran_at: new Date().toISOString(),
     mode,
     model: llm?.model ?? null,
+    jurisdictions_flagged: flaggedCount,
     jurisdictions_selected: capped.length,
+    cap_binding: flaggedCount > capped.length,
     calls_made: callsMade,
     grounded_queries: groundedQueries,
     citations_seen: citationsSeen,
