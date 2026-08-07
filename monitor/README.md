@@ -84,7 +84,7 @@ keyword pre-filter drops off-topic items before any AI call, and the grounded sw
 
 **X (Twitter) discovery** runs **once/day** (the 06:00 UTC cycle) via xAI's `x_search`, scoped to a
 curated watchlist (`monitor/sources/x-watchlist.json`) via `from:` operators with a broad, multilingual
-fallback — ≈ **$0.02/run** (grok-4.3). It flags jurisdictions like any other signal; it never verifies.
+fallback. Scoping is the `allowed_x_handles` and `from_date` request parameters, not prompt prose. **Cost:** two observed runs reported `cost_in_usd_ticks` of 211.8M and 271.2M; if ticks are nano-USD that is ≈ **$0.21–0.27/run**, roughly 10x the ≈$0.02 previously documented here. Confirm against the xAI bill before relying on either figure. Both runs returned **zero signals**, so the yield is still unmeasured (#182). It flags jurisdictions like any other signal; it never verifies.
 Bluesky (keyless AppView) and the citation ledger add no API cost. The manual **`x-watchlist-seed`**
 workflow grows the watchlist from real data (Grok, evidence-required) — agentic, so ≈ **$0.50–1/run**;
 run it sparingly.
