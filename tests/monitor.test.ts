@@ -44,7 +44,7 @@ import {
   type Finding,
 } from '../monitor/sweep/run';
 import { datasetContextForJurisdiction } from '../monitor/triage/context';
-import { buildNewsPost, fingerprint, synthesizeIssue, proseDateFromIso, verifySourceUrl, verifyPrimarySource, detectTopicGraft, quoteOnPage, normalizeText, corroboratedByCitations, NewsPostStore, runNews } from '../monitor/publish/news';
+import { buildNewsPost, fingerprint, synthesizeIssue, proseDateFromIso, verifySourceUrl, verifyPrimarySource, detectTopicGraft, quoteOnPage, normalizeText, corroboratedByCitations, NewsPostStore, runNews, commencesInFuture } from '../monitor/publish/news';
 import {
   CitationStore,
   discoverFeed,
@@ -1214,5 +1214,35 @@ describe('grounding citations are parsed from the real Gemini shape', () => {
   test('title is optional and defaults to empty, not undefined', () => {
     expect(citationFromAnnotation({ url: 'https://example.gov/a' } as never))
       .toEqual({ uri: 'https://example.gov/a', title: '' });
+  });
+});
+
+describe('future-dated changes do not auto-publish as current news', () => {
+  const today = new Date('2026-08-07T12:00:00Z');
+
+  test('a commencement date after today is held back', () => {
+    // The UK case: settlement English requirement raised from March 2027, and
+    // gov.uk's headline said "now required". It published as though in force and
+    // had to be deleted by hand.
+    expect(commencesInFuture('2027-03-01', today)).toBe(true);
+  });
+
+  test('a change already in force publishes normally', () => {
+    expect(commencesInFuture('2026-08-01', today)).toBe(false);
+    expect(commencesInFuture('2026-08-07', today)).toBe(false); // commences today
+  });
+
+  test('an unknown or malformed date never blocks publication', () => {
+    // Most findings carry no date. Treating absence as "future" would silence the
+    // channel entirely, which is a worse failure than an occasional early post.
+    expect(commencesInFuture(null, today)).toBe(false);
+    expect(commencesInFuture('', today)).toBe(false);
+    expect(commencesInFuture('soon', today)).toBe(false);
+    expect(commencesInFuture('March 2027', today)).toBe(false);
+  });
+
+  test('a full timestamp is compared by date, not by string length', () => {
+    expect(commencesInFuture('2027-03-01T00:00:00Z', today)).toBe(true);
+    expect(commencesInFuture('2026-01-01T00:00:00Z', today)).toBe(false);
   });
 });

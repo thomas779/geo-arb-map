@@ -327,6 +327,24 @@ export function buildNewsPost(finding: Finding): TelegramPost {
 
 // Synthesize the minimal ReviewIssue that auditTelegramPost reads: it only needs
 // a "## Verified evidence" section. This lets the auto-news path reuse the exact
+/**
+ * A change that has not commenced yet is an announcement, not news of a rule in
+ * force, and the channel has no way to say so: the brief is model-written and the
+ * headline comes from the claim.
+ *
+ * On 2026-08-07 this published the UK raising its settlement English requirement
+ * as though it had happened. It commences in March 2027, and gov.uk's own headline
+ * ("now required") invited the reading. The owner deleted the post. Announcements
+ * still matter, often more than commencements, so these are not dropped: they fall
+ * through to the human issue path where a sentence can carry the date.
+ */
+export function commencesInFuture(effectiveDate: string | null, today: Date): boolean {
+  if (!effectiveDate) return false;
+  const iso = effectiveDate.trim().slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
+  return iso > today.toISOString().slice(0, 10);
+}
+
 // same LLM evidence-audit as the human-reviewed issue path, unchanged.
 // Include ISO date, prose date, and original-language quote so the auditor is not
 // forced to invent mismatches from thin English-only fragments.
@@ -484,6 +502,14 @@ export async function runNews(options: NewsOptions): Promise<{ published: number
   try {
     for (const finding of confirmed) {
       const fp = fingerprint(finding);
+      if (commencesInFuture(finding.effective_date, new Date())) {
+        console.log(
+          `skip (commences ${finding.effective_date}, not yet in force): `
+          + `${finding.iso_n3} ${finding.claim.slice(0, 60)}`,
+        );
+        skipped += 1;
+        continue;
+      }
       if (store?.has(fp)) {
         skipped += 1;
         disposition(finding, 'skipped', 'already_posted');
