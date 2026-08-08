@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_PATHS, ROUTES_ENABLED, THEME_BOOT_JS } from '../scripts/build_country_pages';
+import { buildSitemapLastmod, buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_PATHS, ROUTES_ENABLED, THEME_BOOT_JS } from '../scripts/build_country_pages';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 
 const canonicalUrl = 'https://flagpaths.com/';
@@ -58,6 +58,36 @@ describe('public SEO contract', () => {
     // must hash-allow, or every filter button silently does nothing.
     const filterHash = createHash('sha256').update(RESIDENCE_FILTER_JS).digest('base64');
     expect(headers).toContain(`'sha256-${filterHash}'`);
+  });
+
+  test('sitemap lastmod comes from the data, not the build clock', () => {
+    // Google Search Console reported 131 pages "Discovered - currently not
+    // indexed" on 2026-08-08. There is no code fix for that, but a sitemap with
+    // no lastmod gives the crawler nothing to prioritise on, so we now emit one.
+    //
+    // It MUST come from each route's last_checked, not from Date.now(). Stamping
+    // 271 URLs with today on every deploy claims the whole corpus changed daily,
+    // which is false and which Google learns to discount. This test fails if
+    // someone "simplifies" it to a build timestamp.
+    const citizenship = JSON.parse(readFileSync(
+      new URL('../data/compiled/citizenship_routes.json', import.meta.url), 'utf8')) as CitizenshipRoutesData;
+    const mobility = JSON.parse(readFileSync(
+      new URL('../public/blocs_data.json', import.meta.url), 'utf8')) as BlocsData;
+    const urls = buildSitemapUrls(citizenship, mobility);
+    const lastmod = buildSitemapLastmod(citizenship, mobility);
+
+    // Every value is a plain date, and every key is a URL we actually ship.
+    for (const [url, when] of lastmod) {
+      expect(when).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(urls).toContain(url);
+    }
+    // Most country pages carry one, otherwise the field is decorative.
+    const countryUrls = urls.filter(u => /\/country\/[^/]+\/$/.test(u));
+    const covered = countryUrls.filter(u => lastmod.has(u));
+    expect(covered.length).toBeGreaterThan(countryUrls.length * 0.9);
+    // The corpus was sourced over many days, so a single date across everything
+    // means it was stamped rather than derived.
+    expect(new Set(lastmod.values()).size).toBeGreaterThan(1);
   });
 
   test('route pages ship in the sitemap, not just as HTML', () => {

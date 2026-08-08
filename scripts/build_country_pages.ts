@@ -114,6 +114,58 @@ export function buildSitemapUrls(
   ];
 }
 
+/**
+ * `lastmod` per URL, derived from the data rather than from the build clock.
+ *
+ * Stamping every URL with "now" on each deploy would be a lie that Google learns
+ * to ignore: 271 pages claiming to change daily when a handful actually did. A
+ * country page's real last-modified is the newest `last_checked` among the routes
+ * it renders, which is exactly what our sourcing passes update.
+ *
+ * Omitted rather than guessed where nothing datable exists, since a sitemap with
+ * no lastmod is honest and one with a wrong lastmod is worse than none.
+ */
+export function buildSitemapLastmod(
+  citizenship: CitizenshipRoutesData,
+  mobility: BlocsData,
+): Map<string, string> {
+  const slugByIso = buildCountrySlugMap(citizenship.jurisdictions);
+  const dated = (value: unknown): string | null =>
+    (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value) ? value : null);
+  const newest = (dates: Array<string | null>): string | null => {
+    const valid = dates.filter((d): d is string => d !== null).sort();
+    return valid.length ? valid[valid.length - 1]! : null;
+  };
+
+  const byIso = new Map<string, string[]>();
+  for (const route of citizenship.routes) {
+    const iso = route.country?.iso_n3;
+    const when = dated(route.last_checked);
+    if (!iso || !when) continue;
+    (byIso.get(iso) ?? byIso.set(iso, []).get(iso)!).push(when);
+  }
+
+  const lastmod = new Map<string, string>();
+  for (const [iso, dates] of byIso) {
+    const slug = slugByIso.get(iso);
+    const when = newest(dates);
+    if (slug && when) lastmod.set(`${SITE}/country/${slug}/`, when);
+  }
+  // Hubs move whenever anything beneath them moves, so they take the corpus max.
+  const corpusMax = newest([...lastmod.values()]);
+  if (corpusMax) {
+    for (const hub of [`${SITE}/`, `${SITE}/country/`, `${SITE}/rights/`,
+      ...(ROUTES_ENABLED ? ROUTE_PATHS.map(p => `${SITE}/${p}/`) : [])]) {
+      lastmod.set(hub, corpusMax);
+    }
+    for (const bloc of mobility.blocs) {
+      const slug = deriveBlocProfile(bloc.id, mobility, citizenship)?.slug;
+      if (slug) lastmod.set(`${SITE}/rights/${slug}/`, corpusMax);
+    }
+  }
+  return lastmod;
+}
+
 // Static-page theme toggle, wired by THEME_BOOT_JS above. Mirrors the app's
 // header toggle (ghost icon button, Sun in dark / Moon in light via CSS).
 function staticHeader(active: NavKey) {
@@ -624,8 +676,12 @@ immigration lawyer in the specific country before acting on anything shown here.
   );
 
   const urls = buildSitemapUrls(citizenship, mobility);
+  const lastmod = buildSitemapLastmod(citizenship, mobility);
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'),
-    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n')}\n</urlset>\n`);
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => {
+      const when = lastmod.get(u);
+      return `  <url><loc>${u}</loc>${when ? `<lastmod>${when}</lastmod>` : ''}</url>`;
+    }).join('\n')}\n</urlset>\n`);
 
   console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap + atlas-index and ${isos.length} slices -> ${distDir}`);
 }
