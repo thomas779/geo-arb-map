@@ -1058,3 +1058,37 @@ describe('residence eligibility gates', () => {
     expect(silver?.min_age ?? null).toBeNull();
   });
 });
+
+describe('per-claim confidence', () => {
+  test('Nepal keeps a high badge while showing medium effective confidence', () => {
+    // The live case: s. 3(1) descent is high from the 2006 Act, the Fourth
+    // Amendment procedure is press-reported. Before claims existed the author had
+    // to downgrade the whole route or hedge in prose, and the prose hedge is lost
+    // when a country slice is extracted.
+    const nepal = citizenshipRoutes.routes.find(r => r.id === 'nepal-citizenship-by-descent');
+    expect(nepal?.confidence).toBe('high');
+    expect(nepal?.effective_confidence).toBe('medium');
+    expect(nepal?.claims?.[0]?.confidence).toBe('medium');
+  });
+
+  test('effective confidence is never stronger than the badge', () => {
+    // A claim may only lower what a consumer sees. If this ever inverts, a weak
+    // detail would be able to promote a route.
+    const order = { low: 0, medium: 1, high: 2 } as const;
+    for (const route of citizenshipRoutes.routes) {
+      const effective = route.effective_confidence ?? route.confidence;
+      expect(
+        order[effective] <= order[route.confidence],
+        `${route.id} reports ${effective} effective against a ${route.confidence} badge`,
+      ).toBe(true);
+    }
+  });
+
+  test('routes without claims are untouched', () => {
+    // Nothing may move silently: absent claims must leave the two values equal.
+    for (const route of citizenshipRoutes.routes) {
+      if (route.claims?.length) continue;
+      expect(route.effective_confidence ?? route.confidence).toBe(route.confidence);
+    }
+  });
+});

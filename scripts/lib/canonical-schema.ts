@@ -165,6 +165,38 @@ export const RouteVariantSchema = z.strictObject({
   source_refs: z.array(SourceReferenceSchema),
 });
 
+/**
+ * A separately-evidenced assertion attached to a route.
+ *
+ * `review.confidence` is ONE badge for a whole route, and routes routinely mix
+ * evidence of very different strength. `nepal-citizenship-by-descent` is the live
+ * case: the s. 3(1) descent rule is high confidence from the 2006 Act, while the
+ * Fourth Amendment procedure for an unidentified father is press-reported. The
+ * author's only options were to downgrade the whole route, losing the strength of
+ * the core rule, or keep `high` and hedge in prose — and prose hedges do not
+ * survive extraction into a country slice.
+ *
+ * A claim carries its own confidence and its own sources, so "core rule high, this
+ * added detail medium" becomes machine-readable instead of a sentence.
+ *
+ * This does NOT weaken the route badge. `effectiveConfidence` takes the weakest of
+ * the route and its claims, so adding a weak claim can only ever lower what a
+ * consumer sees, never raise it.
+ */
+export const RouteClaimSchema = z.strictObject({
+  /** Stable slug so a claim can be referenced and superseded. */
+  id: z.string().regex(/^[a-z][a-z0-9_-]*$/),
+  /** What is being asserted, in one sentence. */
+  statement: z.string().min(1),
+  confidence: Confidence,
+  /**
+   * Empty is allowed and meaningful: it says this claim rests on no registered
+   * source, which is exactly the state that should force a low confidence rather
+   * than be hidden.
+   */
+  source_refs: z.array(SourceReferenceSchema),
+});
+
 export const RouteSchema = z.strictObject({
   id: EntityId,
   mode: AcquisitionModeSchema,
@@ -183,6 +215,8 @@ export const RouteSchema = z.strictObject({
   nationality_eligibility: NationalityEligibilitySchema.optional(),
   parent_residence_right: ParentResidenceRightSchema.optional(),
   transmission_abroad: TransmissionAbroadSchema.optional(),
+  /** Separately-evidenced assertions; see RouteClaimSchema. */
+  claims: z.array(RouteClaimSchema).optional(),
 }).superRefine((route, context) => {
   if (route.nationality_eligibility && route.mode !== 'investment') {
     context.addIssue({

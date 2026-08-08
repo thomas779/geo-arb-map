@@ -208,6 +208,14 @@ export interface CitizenshipRoute extends CitizenshipRouteSummary {
   descent?: DescentRelations | null;
   pathways?: CitizenshipRoutePathway[];
   confidence: 'high' | 'medium' | 'low';
+  /**
+   * The weakest of `confidence` and every claim below. Equals `confidence` when a
+   * route carries no claims. Consumers ranking or scoring should read THIS, since
+   * the badge alone can be high while a press-reported detail rides along.
+   */
+  effective_confidence?: 'high' | 'medium' | 'low';
+  /** Separately-evidenced assertions with their own confidence. */
+  claims?: Array<{ id: string; statement: string; confidence: 'high' | 'medium' | 'low' }>;
   last_checked: string;
   sources: CitizenshipRouteSource[];
 }

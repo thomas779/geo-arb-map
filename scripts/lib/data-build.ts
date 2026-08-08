@@ -27,6 +27,7 @@ import {
 } from './canonical-store';
 import { deriveDescentRelations } from './descent-relations';
 import { classifyJusSoli } from './jus-soli';
+import { effectiveConfidence } from './claim-confidence';
 
 export const REPO_ROOT = fileURLToPath(new URL('../..', import.meta.url));
 
@@ -1056,6 +1057,22 @@ function projectFrontendCitizenship(
           ...(variant.timeline.note ? { note: variant.timeline.note } : {}),
         })),
         confidence: route.review.confidence,
+        // What a consumer should actually believe: the weakest of the route badge
+        // and every separately-evidenced claim. Equal to `confidence` on routes
+        // with no claims, so nothing changes until a claim is authored.
+        effective_confidence: effectiveConfidence(
+          route.review.confidence,
+          route.claims ?? [],
+        ).effective,
+        ...(route.claims?.length
+          ? {
+            claims: route.claims.map(claim => ({
+              id: claim.id,
+              statement: claim.statement,
+              confidence: claim.confidence,
+            })),
+          }
+          : {}),
         last_checked: route.review.last_checked ?? '',
         sources: canonicalRouteSources(route, sourceIndex, []),
       });
