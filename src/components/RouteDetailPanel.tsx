@@ -470,7 +470,7 @@ export function RouteDetailPanel({
             This guide explains the shared arrangement. Country-specific citizenship timelines live in each member’s country guide.
           </p>
           <Button asChild variant="secondary" size="sm" className="mb-4 w-full">
-            <a href={`/rights/${entitySlug(singleBloc.id)}`}>View full page →</a>
+            <a href={`/rights/${entitySlug(singleBloc.id)}/`}>View full page →</a>
           </Button>
           <BlocDetail bloc={singleBloc} onSelectCountry={onSelectCountry} />
         </>

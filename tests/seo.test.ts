@@ -60,6 +60,36 @@ describe('public SEO contract', () => {
     expect(headers).toContain(`'sha256-${filterHash}'`);
   });
 
+  test('internal links point at canonical URLs, never at a redirect', () => {
+    // Search Console, 2026-08-08: 14 URLs sat in "Page with redirect", and 11 of
+    // them were non-trailing-slash forms of live pages (/country/honduras,
+    // /rights/eu-eea, ...). We were generating those links ourselves — 163
+    // distinct ones, /country 742 times — and the host answers them with a 307,
+    // a TEMPORARY redirect, which tells Google to keep the original URL rather
+    // than consolidate on the canonical.
+    //
+    // Every such link costs a crawler two requests and splits the signal across
+    // two URLs, on a site whose main indexing problem is crawl budget. Linked
+    // correctly, the redirect never happens.
+    const files = ['url.ts', 'components/SiteHeader.tsx', 'components/CountriesList.tsx',
+      'components/RightsProfile.tsx', 'components/CountryProfile.tsx',
+      'components/DetailPanel.tsx', 'components/RouteDetailPanel.tsx',
+      'components/RouteTypePages.tsx'];
+    const offenders: string[] = [];
+    for (const file of files) {
+      const src = readFileSync(new URL(`../src/${file}`, import.meta.url), 'utf8');
+      // href="/x" and href={`/x`}, ignoring query-only and fragment links.
+      for (const m of src.matchAll(/href[=:]\s*\{?[`'"](\/[^`'"]*)[`'"]/g)) {
+        const path = m[1]!;
+        if (path === '/' || path.startsWith('/?') || path.startsWith('/#')) continue;
+        const last = path.split('/').pop()!;
+        if (path.endsWith('/') || path.includes('#') || last.includes('.')) continue;
+        offenders.push(`${file}: ${path}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
   test('sitemap lastmod comes from the data, not the build clock', () => {
     // Google Search Console reported 131 pages "Discovered - currently not
     // indexed" on 2026-08-08. There is no code fix for that, but a sitemap with

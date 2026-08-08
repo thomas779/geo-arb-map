@@ -312,12 +312,12 @@ export function DetailPanel({
           />
           <div className="flex flex-wrap gap-2">
             {blocs.map(b => (
-              <a key={b.id} href={`/rights/${entitySlug(b.id)}`} className={chipClass}>
+              <a key={b.id} href={`/rights/${entitySlug(b.id)}/`} className={chipClass}>
                 {displayRouteTitle(b.name)}
               </a>
             ))}
             {formerBlocs.map(b => (
-              <a key={b.id} href={`/rights/${entitySlug(b.id)}`} className={`${chipClass} text-muted-foreground`}>
+              <a key={b.id} href={`/rights/${entitySlug(b.id)}/`} className={`${chipClass} text-muted-foreground`}>
                 {displayRouteTitle(b.name)} · former
               </a>
             ))}

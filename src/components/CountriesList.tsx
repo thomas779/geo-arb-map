@@ -22,7 +22,7 @@ export function CountriesList({
         <p className="mb-8 mt-3 max-w-[68ch] text-muted-foreground">
           Citizenship and residence routes for {items.length} jurisdictions — open any country for its
           full profile, or explore them on the <a href="/" className="underline underline-offset-2 hover:text-foreground">interactive atlas</a>.
-          Also browse <a href="/rights" className="underline underline-offset-2 hover:text-foreground">regional systems</a>.
+          Also browse <a href="/rights/" className="underline underline-offset-2 hover:text-foreground">regional systems</a>.
         </p>
         {/* Same card style as the rights hub, but CSS multi-column so the
             A→Z order runs DOWN each column (easier to scan) rather than across. */}

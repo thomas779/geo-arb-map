@@ -338,7 +338,7 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
       <nav className="mb-6 font-mono text-xs text-muted-foreground">
         <a href="/" className="underline underline-offset-2">Flag Paths</a> ›{' '}
-        <a href="/country" className="underline underline-offset-2">Countries</a> › {name}
+        <a href="/country/" className="underline underline-offset-2">Countries</a> › {name}
       </nav>
       <div className="grid gap-8 md:grid-cols-[266px_1fr] md:items-start">
         <aside className="md:sticky md:top-20">
@@ -391,7 +391,7 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
               <Eyebrow>Regional rights</Eyebrow>
               <div className="flex flex-wrap gap-2">
                 {blocs.map(b => (
-                  <a key={b.id} href={`/rights/${entitySlug(b.id)}`} className="rounded-full border bg-card px-3 py-1.5 text-sm hover:border-primary">{b.name}</a>
+                  <a key={b.id} href={`/rights/${entitySlug(b.id)}/`} className="rounded-full border bg-card px-3 py-1.5 text-sm hover:border-primary">{b.name}</a>
                 ))}
               </div>
             </section>
@@ -420,7 +420,7 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
           <footer className="mt-10 border-t pt-5 text-xs text-muted-foreground">
             <p>Data is compiled from official and primary legal sources and reviewed for the Flag Paths atlas. Programmes — especially residence-by-investment — change frequently; verify against the linked official sources before acting.</p>
             <p className="mt-2">
-              <a href="/country" className="underline underline-offset-2">All countries</a> ·{' '}
+              <a href="/country/" className="underline underline-offset-2">All countries</a> ·{' '}
               <a href={`/?country=${iso}`} className="underline underline-offset-2">Open {name} in the atlas</a>
             </p>
           </footer>

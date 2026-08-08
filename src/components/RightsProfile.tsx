@@ -160,7 +160,7 @@ function MemberGrid({ members }: { members: MemberLink[] }) {
         return m.slug ? (
           <a
             key={m.iso}
-            href={`/country/${m.slug}`}
+            href={`/country/${m.slug}/`}
             className="flex items-center gap-2 rounded-lg border bg-card px-3 py-2 text-sm hover:border-primary"
           >
             {inner}
@@ -243,14 +243,14 @@ function BlocPage({ data }: { data: BlocProfileData }) {
   if (data.notes) sectionNav.push(['Notes', '#notes']);
   return (
     <Shell
-      breadcrumb={{ label: 'Rights', href: '/rights' }}
+      breadcrumb={{ label: 'Rights', href: '/rights/' }}
       title={data.name}
       emoji={<span className="inline-block size-7 rounded-md align-middle" style={{ background: data.color }} aria-hidden />}
       facts={[['Type', data.categoryLabel], ['Member countries', String(data.members.length)]]}
       atlasHref={`/?blocs=${data.id}`}
       sectionNav={sectionNav}
       reportHref={dataCorrectionUrl(data.name, `bloc:${data.id}`)}
-      footerExtra={<a href="/rights" className="underline underline-offset-2">All regional systems</a>}
+      footerExtra={<a href="/rights/" className="underline underline-offset-2">All regional systems</a>}
     >
       <section id="rights" className="scroll-mt-20">
         <Eyebrow divider={false}>Rights by status</Eyebrow>
@@ -284,10 +284,10 @@ function BlocPage({ data }: { data: BlocProfileData }) {
 }
 
 function RoutePage({ data }: { data: RouteProfileData }) {
-  const destHref = data.destination.slug ? `/country/${data.destination.slug}` : `/?country=${data.destination.iso}`;
+  const destHref = data.destination.slug ? `/country/${data.destination.slug}/` : `/?country=${data.destination.iso}`;
   return (
     <Shell
-      breadcrumb={{ label: 'Countries', href: '/country' }}
+      breadcrumb={{ label: 'Countries', href: '/country/' }}
       title={data.name}
       emoji={<span aria-hidden>{countryFlag(data.destination.iso)}</span>}
       facts={[
@@ -298,7 +298,7 @@ function RoutePage({ data }: { data: RouteProfileData }) {
       atlasHref={`/?lane=${data.id}`}
       sectionNav={[['What you get', '#grants'], ...(data.sources.length ? [['Sources', '#sources'] as [string, string]] : [])]}
       reportHref={dataCorrectionUrl(data.name, `lane:${data.id}`)}
-      footerExtra={<a href="/country" className="underline underline-offset-2">All countries</a>}
+      footerExtra={<a href="/country/" className="underline underline-offset-2">All countries</a>}
     >
       <section id="grants" className="scroll-mt-20">
         <Eyebrow divider={false}>What this path provides</Eyebrow>
@@ -406,7 +406,7 @@ export function RightsList({ mobility }: { mobility: BlocsData }) {
             </div>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {blocs.map(b => (
-                <a key={b.id} href={`/rights/${entitySlug(b.id)}`} className="group flex min-h-[76px] items-center gap-3 rounded-lg border bg-card px-4 py-3 hover:border-primary">
+                <a key={b.id} href={`/rights/${entitySlug(b.id)}/`} className="group flex min-h-[76px] items-center gap-3 rounded-lg border bg-card px-4 py-3 hover:border-primary">
                   <span className="size-3 shrink-0 rounded-[3px]" style={{ background: b.color }} aria-hidden />
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-semibold leading-snug">{displayRouteTitle(b.name)}</span>

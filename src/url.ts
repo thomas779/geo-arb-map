@@ -61,13 +61,13 @@ export function viewFromPath(pathname = window.location.pathname): AppState['vie
 }
 
 function pathForView(view: AppState['view'], currentPath = window.location.pathname): string {
-  if (view === 'stacking') return '/planner';
+  if (view === 'stacking') return '/planner/';
   if (view === 'countries') {
     // Preserve a specific /country/<slug> detail path; only the list is bare /country.
-    return /^\/country\/[^/]+/.test(currentPath) ? currentPath : '/country';
+    return /^\/country\/[^/]+/.test(currentPath) ? currentPath : '/country/';
   }
   // Rights/route detail paths are preserved; the bare path is the hub.
-  if (view === 'rights') return /^\/rights\/[^/]+/.test(currentPath) ? currentPath : '/rights';
+  if (view === 'rights') return /^\/rights\/[^/]+/.test(currentPath) ? currentPath : '/rights/';
   return '/';
 }
 

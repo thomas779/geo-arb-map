@@ -23,12 +23,12 @@ export function BrandMark() {
 type View = 'map' | 'stacking' | 'countries' | 'rights';
 
 const ATLAS = { key: 'atlas' as const, label: 'Atlas', href: '/', view: 'map' as View };
-const PLANNER = { key: 'planner' as const, label: 'Planner', href: '/planner', view: 'stacking' as View };
+const PLANNER = { key: 'planner' as const, label: 'Planner', href: '/planner/', view: 'stacking' as View };
 // Read-first pages live together here; each description answers why the page
 // differs from the interactive atlas before the user leaves the map.
 const BROWSE_ITEMS: { key: NavKey; label: string; description: string; icon: LucideIcon; href: string; view?: View }[] = [
-  { key: 'countries', label: 'Country guides', description: 'Domestic citizenship and residence rules', icon: Globe2, href: '/country', view: 'countries' },
-  { key: 'rights', label: 'Regional systems', description: 'Shared rights across member countries', icon: Network, href: '/rights', view: 'rights' },
+  { key: 'countries', label: 'Country guides', description: 'Domestic citizenship and residence rules', icon: Globe2, href: '/country/', view: 'countries' },
+  { key: 'rights', label: 'Regional systems', description: 'Shared rights across member countries', icon: Network, href: '/rights/', view: 'rights' },
   { key: 'routes', label: 'Routes', description: 'Browse countries by citizenship or residence path', icon: FlagTriangleRight, href: '/routes/' },
 ];
 const BROWSE_KEYS: NavKey[] = ['countries', 'rights', 'routes'];
