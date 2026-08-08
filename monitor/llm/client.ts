@@ -277,35 +277,33 @@ export async function generateGroundedText(
   const contentItems = steps.flatMap(step => [...(step.content ?? []), ...(step.model_output?.content ?? [])]);
   const text = contentItems.map(item => item.text ?? '').join('').trim();
   const searchQueries = steps.flatMap(step => step.arguments?.queries ?? []);
+  // NO CITATIONS ARE AVAILABLE IN THIS CONFIGURATION, and that is a property of the
+  // request rather than a parsing bug. Probed live on 2026-08-08: the response steps
+  // are google_search_call, google_search_result, thought and model_output. The
+  // search-result step's `result` is a one-element array whose only key is
+  // `search_suggestions` (the HTML widget), and model_output's content carries just
+  // `text` and `type` with no `annotations` key at all.
+  //
+  // Gemini attaches url_citation annotations to spans of generated PROSE. The sweep
+  // prompt demands "Return ONLY a JSON array", so there are no prose spans to
+  // annotate and nothing to cite. Two attempts to fix the parsing (9aa5e7d, and the
+  // OpenAI-shape fallback below) could not have worked.
+  //
+  // Consequences, both accepted deliberately:
+  //  - The proof-of-search gate in normalizeFindings leans on query counts, which is
+  //    the only signal the contract permits.
+  //  - The grounding half of monitor/sweep/citations.ts stays inert, so URL
+  //    reachability does the real work. That is what caught the fabricated Gibraltar
+  //    citation, which was a real host with an invented path.
+  //
+  // Recovering citations would mean asking for prose alongside the JSON and parsing
+  // both. Not worth it while reachability covers the failure we actually saw.
   const citations: GroundingCitation[] = contentItems
     .flatMap(item => item.annotations ?? [])
     .flatMap(annotation => {
       const found = citationFromAnnotation(annotation);
       return found ? [found] : [];
     });
-  // Diagnostic, not a fix: citations_seen has been 0 on every run while grounded
-  // queries run 33-186, and correcting the annotation shape did not change it. Log
-  // the STRUCTURE (keys only, never content) when that happens, so the real shape
-  // is established from a live response instead of guessed at a third time.
-  if (citations.length === 0 && searchQueries.length > 0) {
-    const shape = steps.map(step => {
-      const raw = step as unknown as Record<string, unknown>;
-      const result = raw.result;
-      return {
-        type: step.type,
-        keys: Object.keys(raw),
-        // The sources are in the google_search_result step's `result`, not in
-        // annotations. Log its shape (keys only) to find the URI field.
-        resultKeys: result && typeof result === 'object'
-          ? (Array.isArray(result)
-            ? [`array[${result.length}]`, ...(result[0] && typeof result[0] === 'object' ? Object.keys(result[0] as object) : [])]
-            : Object.keys(result as object))
-          : typeof result,
-        contentKeys: (step.content ?? []).slice(0, 2).map(item => Object.keys(item as object)),
-      };
-    });
-    console.warn(`::warning title=No grounding citations::steps=${JSON.stringify(shape)}`);
-  }
   if (!text) throw new Error('Gemini grounded response did not contain text');
   return {
     text, citations, searchQueries,
