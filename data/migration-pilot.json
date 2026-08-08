@@ -242,7 +242,28 @@
       "mercosur"
     ],
     "bilateral_lanes": [
-      "spain_iberoamerican"
+      "tn_usmca",
+      "e3",
+      "h1b1",
+      "e2",
+      "spain_iberoamerican",
+      "uk_yms_expanded",
+      "falklands_argentina",
+      "daft",
+      "panama_friendly_nations",
+      "russia_cis_patent",
+      "australia_pev",
+      "nz_samoan_quota",
+      "nz_pacific_access",
+      "nz_realm",
+      "france_algeria",
+      "monaco_france",
+      "japan_epa_careworkers",
+      "france_morocco",
+      "france_tunisia",
+      "france_senegal",
+      "france_gabon",
+      "andorra_conventions"
     ]
   },
   "cutover_gate": "Promote only after structural parity, invariant tests, production build, and reviewed source-file diffs all pass."

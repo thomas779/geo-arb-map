@@ -691,7 +691,13 @@ function projectLane(canonical: ArrangementRecord, legacy: BilateralLane, names:
       legacy.beneficiaries,
       names,
     ),
-    beneficiaries_note: canonical.participants.beneficiaries_note,
+    // Only when present. Setting it unconditionally puts an `undefined` key on
+    // every lane, which the mobility diff counts as an added field: migrating the
+    // 21 legacy lanes produced 21 spurious "added beneficiaries_note" entries even
+    // though the serialized output was byte-identical.
+    ...(canonical.participants.beneficiaries_note
+      ? { beneficiaries_note: canonical.participants.beneficiaries_note }
+      : {}),
     grants: canonical.rights_by_status.citizenship,
     limits: canonical.editorial.limits ?? '',
     leads_to_settlement: canonical.pathways.some(pathway => pathway.outcome !== 'work'),

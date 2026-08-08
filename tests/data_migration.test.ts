@@ -251,14 +251,38 @@ describe('data migration shadow', () => {
       '887',
       '894',
     ])
+    // #162 first batch (2026-08-08): the 21 remaining bilateral lanes joined the
+    // migration scope. Blocs stay at two until their founding instruments are
+    // sourced, since their direction cannot be established from a flat member list.
     expect(shadow.arrangements.map(item => item.record.id)).toEqual([
       'eu_eea',
       'mercosur',
+      'tn_usmca',
+      'e3',
+      'h1b1',
+      'e2',
       'spain_iberoamerican',
+      'uk_yms_expanded',
+      'falklands_argentina',
+      'daft',
+      'panama_friendly_nations',
+      'russia_cis_patent',
+      'australia_pev',
+      'nz_samoan_quota',
+      'nz_pacific_access',
+      'nz_realm',
+      'france_algeria',
+      'monaco_france',
+      'japan_epa_careworkers',
+      'france_morocco',
+      'france_tunisia',
+      'france_senegal',
+      'france_gabon',
+      'andorra_conventions',
     ]);
     expect(shadow.manifest.counts).toEqual({
       jurisdictions: 233,
-      arrangements: 3,
+      arrangements: 24,
       citizenship_routes: 255,
     });
   });

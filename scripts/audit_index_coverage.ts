@@ -68,7 +68,7 @@ const corpus = JSON.parse(fs.readFileSync(corpusPath, 'utf8')) as {
 };
 const blocs = JSON.parse(fs.readFileSync(`${root}public/blocs_data.json`, 'utf8')) as {
   blocs: Array<{ id: string; category: string; rights?: Record<string, string> }>;
-  bilateral_lanes: Array<{ id: string }>;
+  bilateral_lanes: Array<{ id: string; sources?: string[] }>;
   dual_citizenship?: { countries?: Record<string, unknown> };
 };
 
@@ -284,15 +284,18 @@ const residenceFields: Dimension[] = [
  */
 function arrangementProvenance() {
   let canonicalIds = new Set<string>();
+  const canonicalById = new Map<string, { id: string; source_refs?: unknown[] }>();
   let sample = true;
   try {
     // Synchronous on purpose: the resolver falls back to the committed sample, so
     // a fork without the private pilot still gets a truthful (if smaller) report.
     const mod = require(`${root}scripts/lib/canonical-source.ts`);
     sample = mod.CANONICAL_SOURCE_IS_SAMPLE;
-    canonicalIds = new Set(
-      (mod.buildCanonicalPilot().arrangements as Array<{ id: string }>).map(a => a.id),
-    );
+    const arrangements = mod.buildCanonicalPilot().arrangements as Array<{
+      id: string; source_refs?: unknown[];
+    }>;
+    canonicalIds = new Set(arrangements.map(a => a.id));
+    for (const a of arrangements) canonicalById.set(a.id, a);
   } catch {
     return null;
   }
@@ -300,12 +303,28 @@ function arrangementProvenance() {
   const laneIds = blocs.bilateral_lanes.map(l => l.id);
   return {
     sample,
+    // Sourced is reported separately from canonical on purpose. Migrating an
+    // arrangement into canonical does NOT source it: the 2026-08-08 lane batch
+    // moved 21 records across with 6 of them carrying no source_refs at all, and
+    // "canonical 24/46" must never be read as "sourced 24/46".
+    canonical_sourced: [...canonicalById.values()].filter(
+      a => (a.source_refs ?? []).length > 0,
+    ).length,
+    canonical_total: canonicalIds.size,
     canonical_blocs: blocIds.filter(id => canonicalIds.has(id)),
     legacy_blocs: blocIds.filter(id => !canonicalIds.has(id)),
     canonical_lanes: laneIds.filter(id => canonicalIds.has(id)),
     legacy_lanes: laneIds.filter(id => !canonicalIds.has(id)),
     blocs_with_sources: blocs.blocs.filter(b => 'sources' in b).length,
     lanes_with_sources: blocs.bilateral_lanes.filter(l => 'sources' in l).length,
+    // A `sources` array is not a citation. Measured 2026-08-08: of 28 entries
+    // across 15 lanes, ZERO are URLs. 27 are prose ("Executive Decree 226 of July
+    // 2021", "Russian GUVM work-patent rules") and one is a bare host. So they
+    // cannot become source entities (SourceRecordSchema.url requires a real URL)
+    // and "15 of 22 sourced" overstates what is actually citable.
+    lanes_with_resolvable_source: blocs.bilateral_lanes.filter(
+      l => ((l as { sources?: string[] }).sources ?? []).some(u => /^https?:\/\//.test(u)),
+    ).length,
   };
 }
 const provenance = arrangementProvenance();
@@ -392,7 +411,10 @@ if (provenance) {
   console.log(`  legacy      ${provenance.legacy_blocs.length + provenance.legacy_lanes.length}/${total}` +
     `   no directionality, no destinations/beneficiaries split, no evidence links`);
   console.log(`  sourced     blocs ${provenance.blocs_with_sources}/${blocs.blocs.length}` +
-    ` · lanes ${provenance.lanes_with_sources}/${blocs.bilateral_lanes.length}`);
+    ` · lanes ${provenance.lanes_with_sources}/${blocs.bilateral_lanes.length}` +
+    ` (only ${provenance.lanes_with_resolvable_source} lane(s) cite a URL; the rest are prose)`);
+  console.log(`  of the ${provenance.canonical_total} canonical, ` +
+    `${provenance.canonical_sourced} carry source_refs — migrating is not sourcing`);
   if (provenance.blocs_with_sources === 0) {
     console.log('  WARNING  not one bloc carries a source. A1 cannot satisfy spec rule 6 from this input.');
   }
