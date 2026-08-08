@@ -20,7 +20,6 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { scoreAxis } from './lib/rights-score';
-import { classifyJusSoli } from './lib/jus-soli';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const asJson = process.argv.includes('--json');
@@ -47,7 +46,7 @@ type Route = {
   nationality_eligibility?: unknown;
   pathways?: Pathway[];
   descent?: { limit_recorded: boolean } | null;
-  jus_soli_condition?: { family: string; openness: number | null } | null;
+  jus_soli_condition?: { family: string; families?: string[]; openness: number | null } | null;
   summary?: string;
 };
 type ResidenceRoute = {
@@ -142,29 +141,16 @@ const factKey = (rs: Route[], key: string) => rs.filter(r => r.facts && key in r
  */
 const conditionalBirth = birth.filter(r => (r.facts as Record<string, unknown> | undefined)?.jus_soli === 'conditional');
 
-/**
- * Classified live rather than read off the route.
- *
- * `jus_soli_condition` is not a recorded field yet; typing it is #152, which is
- * blocked on this review precisely because a schema must not be built over labels
- * the data contradicts. Until then the audit reports what `classifyJusSoli`
- * derives from the recorded tri-state, condition and summary, so B1b tracks the
- * review as it lands instead of reading 0 of 59 and looking like no work is done.
- */
-const conditionOf = (route: (typeof conditionalBirth)[number]) => {
-  const facts = (route.facts ?? {}) as Record<string, unknown>;
-  return classifyJusSoli(
-    facts.jus_soli as string | undefined,
-    facts.parent_condition as string | undefined,
-    String((route as unknown as { summary?: string }).summary ?? ''),
-  );
-};
-const conditions = conditionalBirth.map(conditionOf);
-const classifiedConditional = conditions.filter(c => c.family !== 'needs_review').length;
-const deferring = conditions.filter(c => c.family === 'follows_metropole').length;
-const unreviewed = conditions.filter(c => c.family === 'needs_review').length;
+// Read off the projected field rather than recomputed here. `data-build.ts` already
+// runs `classifyJusSoli` into `jus_soli_condition` for every birth route, so
+// classifying a second time in the audit would let the two drift and report a
+// coverage number the corpus does not actually carry.
+const conditions = conditionalBirth.map(r => r.jus_soli_condition).filter(Boolean);
+const classifiedConditional = conditions.filter(c => c!.family !== 'needs_review').length;
+const deferring = conditions.filter(c => c!.family === 'follows_metropole').length;
+const unreviewed = conditions.filter(c => c!.family === 'needs_review').length;
 /** Routes whose text describes more than one qualifying limb. A single label loses these. */
-const multiLimb = conditions.filter(c => c.families.length > 1).length;
+const multiLimb = conditions.filter(c => (c!.families ?? []).length > 1).length;
 const conditionalTension = conditionalBirth.filter(r => {
   const summary = String((r as unknown as { summary?: string }).summary ?? '');
   return /follows .* (rules|law)/.test(summary)

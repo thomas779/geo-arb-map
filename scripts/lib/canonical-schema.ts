@@ -197,6 +197,58 @@ export const RouteClaimSchema = z.strictObject({
   source_refs: z.array(SourceReferenceSchema),
 });
 
+const MoneySchema = z.strictObject({
+  amount: z.number().positive(),
+  currency: z.string().regex(/^[A-Z]{3}$/, 'Expected an ISO 4217 currency code'),
+});
+
+/**
+ * What a route costs to use, and what you must be able to show to use it.
+ *
+ * Exists because there was nowhere else. `iceland-naturalization` recorded ISK
+ * 259,951/month means and ISK 60,000/30,000 fees inside `variant.timeline.note`,
+ * which is for caveats about the CLOCK, and `gibraltar-employment-residence-permit`
+ * had to put GBP 250 into prose. Both validated, and neither was queryable: a
+ * country page asking "what does this actually cost" could not see either, and a
+ * cost dimension for the rights index could not either.
+ *
+ * Shared by citizenship and residence routes rather than kept as two shapes, per
+ * the #169 decision.
+ *
+ * NULL MEANS NOT RECORDED, never free and never no threshold. A fee that exists
+ * but has not been read must not render as zero, which is the same rule that
+ * governs `max_age` and `work_rights`.
+ */
+export const RouteCostsSchema = z.strictObject({
+  /** Application or processing fees, one row per applicant class. */
+  fees: z.array(z.strictObject({
+    /** Who the fee applies to: `adult`, `child`, `family_filing`, `renewal`. */
+    applies_to: z.string().regex(/^[a-z][a-z0-9_]*$/),
+    amount: MoneySchema,
+    detail: z.string().default(''),
+  })).default([]),
+  /**
+   * Self-support or means threshold. `pegged_to` matters as much as the number:
+   * Iceland's is aligned to City of Reykjavík financial-aid criteria and Gibraltar's
+   * to the Employment Survey average, so both move without the instrument changing.
+   * An amount recorded without saying what it tracks reads as more fixed than it is.
+   */
+  means: z.strictObject({
+    amount: MoneySchema.nullable(),
+    period: z.enum(['monthly', 'annual']),
+    applies_to: z.string().regex(/^[a-z][a-z0-9_]*$/),
+    pegged_to: z.string().default(''),
+    detail: z.string().default(''),
+  }).nullable().default(null),
+  /** Fee schedules are dated instruments and change more often than nationality law. */
+  effective: z.strictObject({
+    from: NullableDate,
+    to: NullableDate,
+  }).default({ from: null, to: null }),
+  /** Required, same as transmission_abroad: an amount with no source is the failure mode. */
+  source_refs: z.array(SourceReferenceSchema).min(1),
+});
+
 export const RouteSchema = z.strictObject({
   id: EntityId,
   mode: AcquisitionModeSchema,
@@ -217,6 +269,8 @@ export const RouteSchema = z.strictObject({
   transmission_abroad: TransmissionAbroadSchema.optional(),
   /** Separately-evidenced assertions; see RouteClaimSchema. */
   claims: z.array(RouteClaimSchema).optional(),
+  /** Fees and means thresholds; see RouteCostsSchema. Absent means not recorded. */
+  costs: RouteCostsSchema.optional(),
 }).superRefine((route, context) => {
   if (route.nationality_eligibility && route.mode !== 'investment') {
     context.addIssue({
@@ -265,10 +319,7 @@ export const ModeCoverageSchema = z.strictObject({
 
 // --- Residence layer (parallel family; keeps the 4-mode citizenship taxonomy untouched) ---
 
-const MoneySchema = z.strictObject({
-  amount: z.number().positive(),
-  currency: z.string().regex(/^[A-Z]{3}$/, 'Expected an ISO 4217 currency code'),
-});
+
 
 export const ResidenceCategorySchema = z.enum([
   'investment', // golden visa / residence-by-investment
@@ -319,6 +370,12 @@ export const ResidenceRouteSchema = z.strictObject({
   min_age: z.number().int().positive().max(120).nullable().default(null),
   max_age: z.number().int().positive().max(120).nullable().default(null),
   nationality_eligibility: NationalityEligibilitySchema.optional(),
+  /**
+   * Same shape as the citizenship route's, deliberately. #169 asked whether to keep
+   * two, and one wins: a fee is a fee, and a country page rendering "what this
+   * costs" should not branch on which family the route belongs to.
+   */
+  costs: RouteCostsSchema.optional(),
   variants: z.array(RouteVariantSchema).min(1),
 }).superRefine((route, context) => {
   route.variants.forEach((variant, index) => {
