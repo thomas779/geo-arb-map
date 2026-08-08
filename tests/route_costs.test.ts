@@ -127,8 +127,12 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('Paraguay: the ladder, and three fig
       }>;
     }>;
   };
-  const py = pilot.jurisdictions.find(j => j.jurisdiction.iso_n3 === '600')!;
-  const routes = py.residence_routes ?? [];
+  // `skipIf` skips the TESTS, not this describe body, which still evaluates in
+  // sample mode. Paraguay is not in the six-jurisdiction sample, so a non-null
+  // deref here throws before any test is skipped and fails CI with an "unhandled
+  // error between tests" rather than a readable assertion.
+  const py = pilot.jurisdictions.find(j => j.jurisdiction.iso_n3 === '600');
+  const routes = py?.residence_routes ?? [];
   const byId = (id: string) => routes.find(r => r.id === id)!;
 
   test('the ordinary entry step exists and is temporary, not permanent', () => {
@@ -191,8 +195,8 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('Paraguay: the ladder, and three fig
   test('the dual-nationality split is recorded, not flattened', () => {
     // Natural-born (art. 147) and naturalised (art. 150) sit under opposite regimes.
     // A single enum cannot express that, so the detail must carry both limbs.
-    expect(py.dual_nationality!.status).toBe('conditional');
-    expect(py.dual_nationality!.detail).toContain('147');
-    expect(py.dual_nationality!.detail).toContain('150');
+    expect(py!.dual_nationality!.status).toBe('conditional');
+    expect(py!.dual_nationality!.detail).toContain('147');
+    expect(py!.dual_nationality!.detail).toContain('150');
   });
 });
