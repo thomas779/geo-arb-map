@@ -11,6 +11,7 @@ import {
   type CitizenshipData,
   type DatasetContext,
 } from './context';
+import { outOfScopeVerdict, type OutOfScopeVerdict } from './out-of-scope';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 export const IMPACT_TYPES = [
@@ -62,6 +63,8 @@ interface TriageReport {
   triaged: number;
   leads: number;
   truncated_signals: number;
+  /** Leads removed by the out-of-scope filter, with the phrase that matched. */
+  dropped_out_of_scope?: DroppedLead[];
 }
 
 const CONFIDENCE = new Set<LeadConfidence>(['low', 'medium', 'high']);
@@ -135,11 +138,20 @@ export function parseJsonArray(text: string): unknown[] {
   return parsed;
 }
 
+/** A lead the scope filter removed, kept so the run report can show it. */
+export interface DroppedLead extends OutOfScopeVerdict {
+  signal_id: string;
+  summary: string;
+}
+
 export function normalizeRulings(
   rulings: unknown[],
   signals: Signal[],
   signalJurisdictions: Record<string, string[]>,
   jurisdictionNames: Record<string, string> = {},
+  // Out-parameter rather than a changed return type, so every existing caller
+  // keeps working and only the reporter has to opt in to seeing drops.
+  dropped: DroppedLead[] = [],
 ): Lead[] {
   const bySignalId = new Map(signals.map(signal => [signal.id, signal]));
   const seen = new Set<string>();
@@ -161,6 +173,14 @@ export function normalizeRulings(
       .replace(/\s+/g, ' ')
       .slice(0, 80);
     const jurisdictionLabel = jurisdictionNames[jurisdiction] ?? jurisdiction;
+    // Drop classes the atlas does not model before they become issues. Reported,
+    // never silent: seven identical closures is a cost worth removing, but a
+    // filter that hides a genuine change would be far worse than the repetition.
+    const outOfScope = outOfScopeVerdict(`${summary} ${signal.title ?? ''} ${signal.excerpt ?? ''}`);
+    if (outOfScope) {
+      dropped.push({ signal_id: signal.id, summary, ...outOfScope });
+      return [];
+    }
     return [{
       signal_id: signal.id,
       jurisdiction: jurisdictionLabel || signal.jurisdiction,
@@ -252,6 +272,8 @@ export async function runTriage(
 
   let mode = llm?.provider ?? 'unconfigured';
   let leads: Lead[] = [];
+  // Collected so the run report shows what scope filtering removed.
+  const dropped: DroppedLead[] = [];
   if (unseen.length === 0) {
     mode = 'no-new-signals';
   } else if (fixtureRulings) {
@@ -262,6 +284,7 @@ export async function runTriage(
       unseen,
       context.signal_jurisdictions,
       jurisdictionNames,
+      dropped,
     );
   } else if (!llm) {
     mode = 'skipped-no-llm';
@@ -275,6 +298,7 @@ export async function runTriage(
         batch,
         context.signal_jurisdictions,
         jurisdictionNames,
+        dropped,
       ));
     }
   }
@@ -287,6 +311,9 @@ export async function runTriage(
     already_seen: signals.length - allUnseen.length,
     triaged: unseen.length,
     leads: leads.length,
+    // Named so a wrongly filtered lead is visible in the run summary rather than
+    // vanishing between the sweep and the issue queue.
+    dropped_out_of_scope: dropped,
     truncated_signals: Math.max(0, allUnseen.length - unseen.length),
   };
   fs.mkdirSync(path.dirname(options.output), { recursive: true });
@@ -294,6 +321,9 @@ export async function runTriage(
   fs.writeFileSync(options.output, `${JSON.stringify(leads, null, 2)}\n`);
   fs.writeFileSync(options.report, `${JSON.stringify(report, null, 2)}\n`);
   console.log(`${leads.length} leads from ${unseen.length} unseen signals (${mode})`);
+  for (const drop of dropped) {
+    console.log(`  out of scope (${drop.reason}, matched "${drop.matched}"): ${drop.summary.slice(0, 90)}`);
+  }
   return { leads, report };
 }
 
