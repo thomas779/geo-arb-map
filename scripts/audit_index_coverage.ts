@@ -307,12 +307,14 @@ const provenance = arrangementProvenance();
 /** Structural blockers that are code fixes rather than sourcing. */
 const blockers = [
   {
-    id: 'directionality',
+    id: 'directionality served',
     ok: blocsRaw.includes('directionality'),
     detail:
-      'canonical carries directionality plus participants.destinations/beneficiaries; ' +
-      'projectBloc drops both, so a one-way right would be credited symmetrically ' +
-      '(wrongly boosting UK BNO/BOT and US COFA)',
+      'projectBloc now carries directionality and the destinations/beneficiaries split ' +
+      '(2026-08-08), so the pipe is correct. Still BLOCKED because ' +
+      'public/blocs_data.json is the legacy SOURCE the browser reads, not a projection ' +
+      'output, and only 2 of 24 blocs are canonical. Clears when the 43 arrangements ' +
+      'reach canonical and the served file is generated from the projection.',
   },
   {
     id: 'eligibility projected',
