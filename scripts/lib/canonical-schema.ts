@@ -453,6 +453,45 @@ const ParticipantSchema = z.strictObject({
   beneficiaries_note: z.string().min(1).optional(),
 });
 
+/**
+ * What an arrangement actually confers, as something a scorer can read.
+ *
+ * `rights_by_status` is three free-text strings, and dimensions A1 (settlement by
+ * right) and A2 (work by right) cannot be computed from prose. The prose is also
+ * editorial rather than legal in places — one entry reads "Strongest bloc in the
+ * world" — and it overstates in others: ECOWAS is recorded as conferring
+ * "residency rights bloc-wide" when its free movement is phased, with the right of
+ * entry realised and residence and establishment uneven.
+ *
+ * Two enums, deliberately separate, because residence and work are different
+ * rights and conflating them is what makes A2 impossible. A permit that lets you
+ * live somewhere without working is a materially weaker thing.
+ *
+ * `unknown` is a first-class value and the default. It means the instrument was not
+ * read or does not say, never "no right", per the index rule that unrecorded is
+ * never zero.
+ */
+export const RightsGrantSchema = z.strictObject({
+  /** Whether the holder may reside, and on what terms. */
+  reside: z.enum(['indefinite', 'conditional', 'none', 'unknown']),
+  /** Whether the holder may work without a separate permit. */
+  work: z.enum(['unrestricted', 'conditional', 'none', 'unknown']),
+  /**
+   * Machine-readable gates on a `conditional` grant, e.g. a CARICOM Skills
+   * Certificate or a registration step. Empty on an unconditional grant.
+   */
+  conditions: z.array(z.string().regex(/^[a-z][a-z0-9_]*$/)),
+  /** Free text kept alongside, so the legal nuance is not lost to the enums. */
+  detail: z.string(),
+});
+
+export const RightsMatrixSchema = z.strictObject({
+  temporary_residence: RightsGrantSchema,
+  permanent_residence: RightsGrantSchema,
+  citizenship: RightsGrantSchema,
+  source_refs: z.array(SourceReferenceSchema),
+});
+
 export const ArrangementRecordSchema = z.strictObject({
   schema_version: z.literal(1),
   entity_type: z.literal('arrangement'),
@@ -492,6 +531,8 @@ export const ArrangementRecordSchema = z.strictObject({
     limits: z.string().optional(),
   }),
   review: ReviewSchema,
+  /** Structured form of rights_by_status; see RightsMatrixSchema. */
+  rights_matrix: RightsMatrixSchema.optional(),
   source_refs: z.array(SourceReferenceSchema),
 });
 

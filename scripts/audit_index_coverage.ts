@@ -111,6 +111,17 @@ const isoHighConfidence = new Set(
   naturalization.filter(r => monthsOf(r).length > 0 && r.confidence === 'high').map(r => r.country.iso_n3),
 );
 
+/** Rights matrices from the canonical pilot, empty when only the sample resolves. */
+function provenanceMatrices(): Array<{ citizenship?: { reside?: string; work?: string } }> {
+  try {
+    const mod = require(`${root}scripts/lib/canonical-source.ts`);
+    return (mod.buildCanonicalPilot().arrangements as Array<{ rights_matrix?: unknown }>)
+      .flatMap(a => (a.rights_matrix ? [a.rights_matrix as { citizenship?: { reside?: string; work?: string } }] : []));
+  } catch {
+    return [];
+  }
+}
+
 const factKey = (rs: Route[], key: string) => rs.filter(r => r.facts && key in r.facts).length;
 
 /**
@@ -141,25 +152,37 @@ const conditionalTension = conditionalBirth.filter(r => {
     || /stateless/i.test(summary);
 });
 
+/**
+ * A1 and A2 read the structured rights matrix (#154), not the free-text prose.
+ * `unknown` does not count: it means the instrument was not read, and counting it
+ * would let an unmeasured bloc inflate the dimension.
+ */
+const matrices = provenanceMatrices();
+const rightsMatrixCount = matrices.length;
+const rightsMatrixScoreable = matrices.filter(m => m.citizenship?.reside && m.citizenship.reside !== 'unknown').length;
+const workScoreable = matrices.filter(m => m.citizenship?.work && m.citizenship.work !== 'unknown').length;
+
 const dimensions: Dimension[] = [
   // ---- Axis A: what the passport is worth once held -----------------------
   {
     id: 'A1',
     axis: 'A',
     label: 'Settlement by right',
-    status: 'prose',
-    have: 0,
+    status: rightsMatrixScoreable > 0 ? 'thin' : 'prose',
+    have: rightsMatrixScoreable,
     total: blocs.blocs.length,
-    note: `rights_by_status is 3 free-text strings; 0/${blocs.blocs.length} structured`,
+    note: 'blocs whose citizenship-level RESIDE right is recorded as something other than '
+      + `unknown (#154); ${rightsMatrixCount} carry a matrix at all`,
   },
   {
     id: 'A2',
     axis: 'A',
     label: 'Work by right',
-    status: 'prose',
-    have: 0,
+    status: workScoreable > 0 ? 'thin' : 'prose',
+    have: workScoreable,
     total: blocs.blocs.length,
-    note: 'no field separates labour-market access from residence',
+    note: 'work is now a separate enum from residence, so a residence-only right no longer '
+      + 'scores as labour-market access',
   },
   {
     id: 'A3',
