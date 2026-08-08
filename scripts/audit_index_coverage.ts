@@ -46,6 +46,7 @@ type Route = {
   nationality_eligibility?: unknown;
   pathways?: Pathway[];
   descent?: { limit_recorded: boolean } | null;
+  jus_soli_condition?: { family: string; openness: number | null } | null;
   summary?: string;
 };
 type ResidenceRoute = {
@@ -128,6 +129,11 @@ const factKey = (rs: Route[], key: string) => rs.filter(r => r.facts && key in r
  * Detected here rather than asserted, so the count tracks the data as it is fixed.
  */
 const conditionalBirth = birth.filter(r => (r.facts as Record<string, unknown> | undefined)?.jus_soli === 'conditional');
+const classifiedConditional = conditionalBirth.filter(
+  r => r.jus_soli_condition && r.jus_soli_condition.family !== 'needs_review',
+).length;
+const deferring = conditionalBirth.filter(r => r.jus_soli_condition?.family === 'follows_metropole').length;
+const unreviewed = conditionalBirth.filter(r => r.jus_soli_condition?.family === 'needs_review').length;
 const conditionalTension = conditionalBirth.filter(r => {
   const summary = String((r as unknown as { summary?: string }).summary ?? '');
   return /follows .* (rules|law)/.test(summary)
@@ -201,11 +207,11 @@ const dimensions: Dimension[] = [
     id: 'B1b',
     axis: 'B',
     label: 'Jus soli CONDITION',
-    status: 'thin',
-    have: conditionalBirth.length - conditionalTension.length,
+    status: classifiedConditional >= conditionalBirth.length * 0.9 ? 'ready' : 'thin',
+    have: classifiedConditional,
     total: conditionalBirth.length,
-    note: 'conditional routes whose own summary does NOT contradict their parent_condition label; '
-      + `${conditionalTension.length} do, so the vocabulary cannot be normalised without legal review`,
+    note: `conditional routes resolved into a typed family; ${deferring} defer to a metropole `
+      + `and ${unreviewed} await primary review (both score null, never zero)`,
   },
   {
     id: 'B2',

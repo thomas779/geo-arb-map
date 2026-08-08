@@ -193,6 +193,17 @@ export interface CitizenshipRoute extends CitizenshipRouteSummary {
   parent_residence_right?: ParentResidenceRight | null;
   /** How citizenship is transmitted to children born abroad. */
   transmission_abroad?: TransmissionAbroad | null;
+  /**
+   * What the conditional jus soli label actually means, re-encoded from the
+   * recorded condition and summary. Birth routes only. `openness: null` means
+   * deliberately unscoreable (defers to a metropole, or unreviewed), never zero.
+   */
+  jus_soli_condition?: {
+    family: string;
+    openness: number | null;
+    basis: string;
+    defers_to?: string;
+  } | null;
   /** Ancestral relations recorded as qualifying. Ancestry routes only. */
   descent?: DescentRelations | null;
   pathways?: CitizenshipRoutePathway[];

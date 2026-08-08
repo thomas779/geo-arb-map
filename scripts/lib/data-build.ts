@@ -26,6 +26,7 @@ import {
   type CanonicalProjections,
 } from './canonical-store';
 import { deriveDescentRelations } from './descent-relations';
+import { classifyJusSoli } from './jus-soli';
 
 export const REPO_ROOT = fileURLToPath(new URL('../..', import.meta.url));
 
@@ -1026,6 +1027,16 @@ function projectFrontendCitizenship(
         // already carry, because `pathways` below drops `eligibility` entirely.
         // Ancestry routes only: a `parent.*` condition on a birth route is jus
         // sanguinis at birth, which is a different question from descent depth.
+        // Re-encodes what the conditional jus soli label actually means. The flat
+        // tri-state scored a statelessness safeguard like a settled-parent rule and
+        // put Chile beside Germany; see scripts/lib/jus-soli.ts.
+        jus_soli_condition: route.mode === 'birth'
+          ? classifyJusSoli(
+            (legacyRoute?.facts as Record<string, string> | undefined)?.jus_soli,
+            (legacyRoute?.facts as Record<string, string> | undefined)?.parent_condition,
+            route.summary ?? '',
+          )
+          : null,
         descent: route.mode === 'ancestry'
           ? deriveDescentRelations(
             route.variants.flatMap(variant => variant.eligibility ?? []),
