@@ -368,7 +368,19 @@ describe('citizenship route database', () => {
       expect(route.last_checked).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(route.sources.length, route.id).toBeGreaterThan(0);
       for (const source of route.sources) {
-        expect(source.url, route.id).toMatch(/^https:\/\//);
+        // HTTP is allowed ONLY for named official publishers that serve no TLS at
+        // all. bdlaws.minlaw.gov.bd is the Legislative and Parliamentary Affairs
+        // Division of Bangladesh's Ministry of Law and is the publisher of record
+        // for the Citizenship Act, 1951; its https endpoint does not connect.
+        // The alternative is citing an aggregator for a statute, which is the
+        // thing #127 exists to stop, so the weaker transport is the lesser harm.
+        // Keep this list tiny and justified: every entry is a host we verified is
+        // http-only, not a host we could not be bothered to check.
+        const HTTP_ONLY_OFFICIAL = ['bdlaws.minlaw.gov.bd'];
+        const host = (/^https?:\/\/([^/]+)/.exec(source.url)?.[1] ?? '').toLowerCase();
+        if (!HTTP_ONLY_OFFICIAL.includes(host)) {
+          expect(source.url, route.id).toMatch(/^https:\/\//);
+        }
       }
     }
   });
@@ -767,11 +779,27 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     const sovereigns = unconditional.filter(r => !TERRITORIES.has(r.country.iso_n3));
     expect(sovereigns.length).toBeGreaterThanOrEqual(28);
     expect(sovereigns.length).toBeLessThanOrEqual(42);
-    // Full atlas birth coverage: every birth route carries structured jus_soli.
+    // Birth coverage: every birth route carries structured jus_soli, with ONE
+    // deliberate hole.
+    //
+    // Bangladesh was recorded `jus_soli: none` at confidence high on a single
+    // constituteproject citation. Reading the statute (2026-08-08) contradicts it:
+    // s.4 of the Citizenship Act, 1951 says "Every person born in Bangladesh after
+    // the commencement of this Act shall be a citizen of Bangladesh by birth",
+    // subject only to a diplomat and an enemy-alien proviso. The value was REMOVED
+    // rather than flipped to unconditional, because P.O. 149/1972 has not been read
+    // and asserting the opposite on this evidence would repeat the same error
+    // backwards. `classifyJusSoli` therefore returns needs_review for it, which is
+    // the honest answer.
+    //
+    // The named exception matters: this asserts the hole is exactly one route and
+    // exactly that route, so coverage cannot quietly erode behind a lowered number.
     const birth = citizenshipRoutes.routes.filter(r => r.mode === 'birth');
     const withJs = birth.filter(r => r.facts?.jus_soli);
-    expect(withJs.length).toBe(birth.length);
-    expect(withJs.length).toBe(231);
+    const missing = birth.filter(r => !r.facts?.jus_soli).map(r => r.id);
+    expect(missing).toEqual(['bangladesh-citizenship-at-birth-by-parent']);
+    expect(withJs.length).toBe(birth.length - 1);
+    expect(withJs.length).toBe(230);
   });
 
   test('digital nomad residual negatives + Korea workcation (PR/cit no)', () => {
@@ -895,8 +923,8 @@ describe('source quality: constituteproject is a lead, not a source of record', 
   // 357 routes currently violate this. Rather than assert zero and fail the
   // suite, ratchet: the count may only go down. Lower these numbers as
   // jurisdictions are re-sourced; never raise them.
-  const CONSTITUTEPROJECT_ONLY_CEILING = 258;
-  const CONSTITUTEPROJECT_ANY_CEILING = 275;
+  const CONSTITUTEPROJECT_ONLY_CEILING = 244;
+  const CONSTITUTEPROJECT_ANY_CEILING = 261;
 
   const cites = (route: { sources: Array<{ url: string }> }) =>
     route.sources.some(source => source.url.includes('constituteproject'));
