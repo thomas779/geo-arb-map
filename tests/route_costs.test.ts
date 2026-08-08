@@ -113,3 +113,86 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('the two routes this was built for',
     }
   });
 });
+
+describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('Paraguay: the ladder, and three figures that were wrong (#161)', () => {
+  const pilot = buildCanonicalPilot() as unknown as {
+    jurisdictions: Array<{
+      jurisdiction: { iso_n3: string };
+      dual_nationality?: { status: string; detail: string };
+      residence_routes?: Array<{
+        id: string; counts_toward_permanent_residence: boolean; permit_duration_months: number | null;
+        costs?: { fees: Array<{ amount: unknown; pegged_to: string }>; means: { amount: unknown; pegged_to: string } | null };
+        variants: Array<{ timeline: { note?: string } }>;
+        review: { note?: string };
+      }>;
+    }>;
+  };
+  const py = pilot.jurisdictions.find(j => j.jurisdiction.iso_n3 === '600')!;
+  const routes = py.residence_routes ?? [];
+  const byId = (id: string) => routes.find(r => r.id === id)!;
+
+  test('the ordinary entry step exists and is temporary, not permanent', () => {
+    // Ley 6984/2022 art. 46 makes temporary residence a statutory prior requirement.
+    // Modelling only the permanent stage described the wrong product to anyone
+    // researching "cheap Paraguay residency", which is what this issue was about.
+    const temp = byId('paraguay-temporary-residence');
+    expect(temp.permit_duration_months).toBe(24);
+    expect(temp.counts_toward_permanent_residence).toBe(true);
+  });
+
+  test('no means test on the entry step', () => {
+    // Art. 50 lists twelve documentary requirements and none is a means test, and
+    // Res. DNM 407/2026 says the solvency regime applies to permanent residence
+    // "sin alterar los requisitos legalmente previstos para la residencia temporal".
+    expect(byId('paraguay-temporary-residence').costs!.means).toBeNull();
+  });
+
+  test('solvency binds at the permanent stage but sets no amount', () => {
+    // Res. 407/2026 contains no monetary threshold anywhere: proof is documentary
+    // per category, and solvency "no podrá presumirse en ningún caso". A null amount
+    // with a populated peg records that the gate is real without inventing a figure.
+    const means = byId('paraguay-permanent-residence-solvency').costs!.means!;
+    expect(means.amount).toBeNull();
+    expect(means.pegged_to).toContain('no monetary threshold');
+  });
+
+  test('fees are jornales, not a frozen guarani figure', () => {
+    // Ley 6984/2022 art. 100 sets fees in jornales, a statutory day-wage unit. The
+    // guarani figure is a published conversion that moves when the jornal is
+    // revalued, so recording 2,926,925 as the fee would freeze a number the law
+    // never set. This is the same error as Gibraltar's invented GBP 37,500.
+    for (const id of ['paraguay-temporary-residence', 'paraguay-permanent-residence-solvency']) {
+      for (const fee of byId(id).costs!.fees) {
+        expect(fee.amount, `${id} fee should carry no fixed amount`).toBeNull();
+        expect(fee.pegged_to).toContain('jornal');
+      }
+    }
+  });
+
+  test('the two unsupported figures are no longer asserted', () => {
+    const permanent = byId('paraguay-permanent-residence-solvency') as unknown as {
+      summary: string; costs: { effective: { from: string | null } }; review: { note?: string };
+    };
+    // Res. 407/2026 is dated 28 May 2026 and carries no vigencia clause, so the
+    // previously recorded "applications from 6 July 2026" was never in the instrument.
+    // Checked on the summary and the effective date rather than the whole record,
+    // because the review note names the date deliberately to document its removal.
+    // Suppressing it there would erase the audit trail, which is the opposite of
+    // what this is for.
+    expect(permanent.summary).not.toContain('6 July 2026');
+    expect(permanent.costs.effective.from).toBe('2026-05-28');
+    expect(permanent.review.note).toContain('not supported by the instrument');
+    // The conversion window is 3 months before expiry, not 90 days before and 30 after.
+    const window = byId('paraguay-temporary-residence').variants[0]!.timeline.note ?? '';
+    expect(window).toContain('three months before');
+    expect(window).not.toContain('30 days');
+  });
+
+  test('the dual-nationality split is recorded, not flattened', () => {
+    // Natural-born (art. 147) and naturalised (art. 150) sit under opposite regimes.
+    // A single enum cannot express that, so the detail must carry both limbs.
+    expect(py.dual_nationality!.status).toBe('conditional');
+    expect(py.dual_nationality!.detail).toContain('147');
+    expect(py.dual_nationality!.detail).toContain('150');
+  });
+});

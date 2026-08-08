@@ -220,11 +220,21 @@ const MoneySchema = z.strictObject({
  * governs `max_age` and `work_rights`.
  */
 export const RouteCostsSchema = z.strictObject({
-  /** Application or processing fees, one row per applicant class. */
+  /**
+   * Application or processing fees, one row per applicant class.
+   *
+   * `amount` is nullable for the same reason `means.amount` is. Paraguay sets every
+   * migration fee in *jornales* (Ley 6984/2022 art. 100), a statutory day-wage unit,
+   * and publishes the guaraní equivalent separately. The instrument fixes the number
+   * of jornales; the cash figure moves whenever the jornal is revalued. Recording
+   * PYG 2,926,925 as the fee would freeze a number the law never set.
+   */
   fees: z.array(z.strictObject({
-    /** Who the fee applies to: `adult`, `child`, `family_filing`, `renewal`. */
+    /** Who or what the fee applies to: `adult`, `child`, `family_filing`, `renewal`. */
     applies_to: z.string().regex(/^[a-z][a-z0-9_]*$/),
-    amount: MoneySchema,
+    amount: MoneySchema.nullable().default(null),
+    /** What the fee tracks when it is not a fixed sum, e.g. a statutory wage unit. */
+    pegged_to: z.string().default(''),
     detail: z.string().default(''),
   })).default([]),
   /**
