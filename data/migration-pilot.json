@@ -239,7 +239,17 @@
   "arrangements": {
     "blocs": [
       "eu_eea",
-      "mercosur"
+      "mercosur",
+      "can",
+      "cta",
+      "eaeu",
+      "npu",
+      "oecs",
+      "ttta",
+      "union_state",
+      "csme",
+      "eac",
+      "ecowas"
     ],
     "bilateral_lanes": [
       "tn_usmca",

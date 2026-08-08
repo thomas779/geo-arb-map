@@ -388,15 +388,71 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build parity gates', () => {
   });
 
   test('projected direction is only ever the canonical value, never a default', () => {
-    // The trap this guards: 43 of 46 arrangements are legacy and have no recorded
+    // The trap this guards: the unmigrated blocs are legacy and have no recorded
     // direction. Emitting a default would assert every unmigrated bloc is mutual,
     // which would inflate one-way arrangements like BN(O) and COFA.
     const blocs = release.compatibility.mobility.blocs;
     const withDirection = blocs.filter(bloc => 'directionality' in bloc);
-    expect(withDirection.length).toBe(2);
-    expect(withDirection.map(bloc => bloc.id).sort()).toEqual(['eu_eea', 'mercosur']);
+    // The two pilot blocs plus the ten settlement-conferring blocs of #162, each
+    // read off its founding instrument rather than off member ordering.
+    expect(withDirection.map(bloc => bloc.id).sort()).toEqual([
+      'can', 'csme', 'cta', 'eac', 'eaeu', 'ecowas',
+      'eu_eea', 'mercosur', 'npu', 'oecs', 'ttta', 'union_state',
+    ]);
     for (const bloc of withDirection) {
       expect(['symmetric', 'asymmetric']).toContain(bloc.directionality!);
+    }
+    // The point of the guard, stated positively: every bloc whose direction has
+    // NOT been established from an instrument must still carry no direction at
+    // all. dutch_kingdom is the worked warning — it is categorised one_way while
+    // all four members share a single Dutch nationality, so defaulting it to
+    // 'symmetric' here would launder a categorisation we believe is wrong.
+    const withoutDirection = blocs
+      .filter(bloc => !('directionality' in bloc))
+      .map(bloc => bloc.id)
+      .sort();
+    expect(withoutDirection).toEqual([
+      'asean', 'ca4', 'cofa', 'cplp', 'dutch_kingdom', 'gcc',
+      'greater_china', 'india_bhutan', 'india_nepal', 'pacific_alliance',
+      'uk_bno', 'uk_bot',
+    ]);
+  });
+
+  test('a migrated settlement bloc always carries a source; migrating is not sourcing', () => {
+    // #162 exists because 24 arrangements were canonical and only 3 cited anything,
+    // and not one of the 24 blocs did. A bloc reaching canonical with empty
+    // source_refs would re-open exactly that gap, so pin every one of the ten.
+    const settlementBlocs = [
+      'can', 'csme', 'cta', 'eac', 'eaeu',
+      'ecowas', 'npu', 'oecs', 'ttta', 'union_state',
+    ];
+    const byId = new Map(release.arrangements.map(item => [item.id, item]));
+    const sourceById = new Map(release.sources.map(item => [item.id, item]));
+    for (const id of settlementBlocs) {
+      const arrangement = byId.get(id);
+      expect(arrangement).toBeDefined();
+      expect(arrangement!.source_refs.length).toBeGreaterThan(0);
+      for (const ref of arrangement!.source_refs) {
+        // Every citation must resolve to a real source entity carrying a URL —
+        // the lanes' prose "sources" are the thing this rules out.
+        const source = sourceById.get(ref.source_id);
+        expect(source).toBeDefined();
+        expect(source!.url).toMatch(/^https?:\/\//);
+        // last_checked is required and never defaulted; see LEGACY_SOURCE_LAST_CHECKED.
+        expect(source!.last_checked).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      }
+    }
+  });
+
+  test('bloc display strength stays an integer tier in 0..3', () => {
+    // The bound was `<= 1` until #162, generalised from two tier-1 pilot blocs and
+    // the lanes' filler 0. It is a display TIER (1 strongest, 3 weakest, 0 = lane
+    // filler), so pin the real domain rather than leaving the field open-ended.
+    for (const arrangement of release.arrangements) {
+      const { strength } = arrangement.display;
+      expect(Number.isInteger(strength)).toBe(true);
+      expect(strength).toBeGreaterThanOrEqual(0);
+      expect(strength).toBeLessThanOrEqual(3);
     }
   });
 

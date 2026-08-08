@@ -19,7 +19,7 @@
  * Usage (needs CLOUDFLARE_API_TOKEN in env, scoped Account · D1:Edit):
  *   bun run data:sync -- verify           # counts + head-ambiguity report only
  *   bun run data:sync -- backup [dir]     # dump canonical tables to JSON
- *   bun run data:sync -- sync             # backup -> wipe -> import -> verify
+ *   bun run data:sync -- sync             # backup -> wipe -> migrate -> import -> verify
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -165,6 +165,44 @@ async function backup(dir: string): Promise<number> {
   return total;
 }
 
+/**
+ * Apply pending schema migrations to the remote database.
+ *
+ * The import path only ever writes ROWS: it wipes the canonical tables and
+ * re-inserts them, and never touches DDL. So a migration that changes a table
+ * definition (as 0006 does, widening `display_strength` from a 0-1 real to a 0-3
+ * integer tier) never reaches D1 on its own, and the next sync fails mid-write
+ * against a CHECK constraint the local build has already moved past.
+ *
+ * Called between the wipe and the import, which is the one moment the canonical
+ * tables are EMPTY. That matters: 0006 rebuilds arrangement_index, and
+ * arrangement_participants / arrangement_pathway_index carry foreign keys into
+ * it. With no rows anywhere there is nothing to cascade and nothing to copy, so
+ * the rebuild needs no PRAGMA foreign_keys juggling — which is just as well,
+ * since the D1 REST endpoint rejects those PRAGMAs.
+ *
+ * Idempotent by inspection: it reads the live DDL and returns early once the
+ * table has been migrated, so a repeated sync is a no-op.
+ */
+async function migrateRemoteSchema(): Promise<void> {
+  const master = await query(
+    "SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'arrangement_index';",
+  );
+  const ddl = String(master[0]?.sql ?? '');
+  if (!ddl) throw new Error('arrangement_index is missing from the remote database');
+  if (/display_strength\s+INTEGER/i.test(ddl)) {
+    console.log('  schema up to date (arrangement_index.display_strength is an integer tier)');
+    return;
+  }
+  const file = path.join(root, 'data/d1/migrations/0006_arrangement_strength_tier.sql');
+  // Strip PRAGMAs: the file carries them for the local bun:sqlite build, where
+  // the table can be populated. Here it is empty, and D1 rejects them anyway.
+  const statements = splitStatements(fs.readFileSync(file, 'utf8'))
+    .filter(statement => !/^\s*PRAGMA\b/i.test(statement));
+  console.log(`  applying 0006_arrangement_strength_tier (${statements.length} statements)`);
+  await runBatched(statements, 'migrate');
+}
+
 async function verify(): Promise<void> {
   const counts = (await query(
     `SELECT (SELECT COUNT(*) FROM canonical_entities) AS entities,
@@ -214,7 +252,12 @@ if (cmd === 'verify') {
   console.log('== 3. wipe canonical tables (monitor_* untouched) ==');
   try {
     await runBatched(CANONICAL_TABLES_WIPE_ORDER.map(t => `DELETE FROM ${t};`), 'wipe');
-    console.log('== 4. import ==');
+    // Between wipe and import on purpose — see migrateRemoteSchema. DDL never
+    // reaches D1 through the row import, so without this a schema change lands
+    // locally and then fails the next sync against the stale remote constraint.
+    console.log('== 4. schema migrations ==');
+    await migrateRemoteSchema();
+    console.log('== 5. import ==');
     await runBatched(statements, 'import');
   } catch (error) {
     console.error('\n!! sync FAILED mid-write — remote canonical tables may be PARTIAL.');
@@ -222,7 +265,7 @@ if (cmd === 'verify') {
     console.error(`   or restore from the pre-wipe backup at ${backupDir}`);
     throw error;
   }
-  console.log('== 5. verify ==');
+  console.log('== 6. verify ==');
   await verify();
   console.log(`sync complete. backup kept at ${backupDir}`);
 } else {

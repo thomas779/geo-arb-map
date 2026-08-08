@@ -464,7 +464,20 @@ export const ArrangementRecordSchema = z.strictObject({
   participants: ParticipantSchema,
   display: z.strictObject({
     category: z.enum(['full', 'partial', 'hub_spoke', 'one_way', 'closed', 'proto']),
-    strength: z.number().nonnegative().max(1),
+    /**
+     * Legacy display TIER, not a normalised score: 1 is the strongest rung and 3
+     * the weakest, with 0 reserved for bilateral lanes, which project no strength
+     * and carry it as structural filler.
+     *
+     * This was `.max(1)` until the #162 bloc batch. That bound was not a modelled
+     * constraint — it was generalised from the only two blocs then canonical
+     * (eu_eea and mercosur, both tier 1) plus the lanes' 0, and it read the field
+     * as a 0-1 fraction. Fourteen of the 24 legacy blocs are tier 2 or 3, so the
+     * schema rejected valid source data the moment a third bloc was migrated.
+     * Widened to the domain the data actually has, and pinned by a test rather
+     * than left open-ended.
+     */
+    strength: z.number().int().nonnegative().max(3),
     color: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
   }),
   rights_by_status: z.strictObject({

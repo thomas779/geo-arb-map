@@ -252,11 +252,27 @@ describe('data migration shadow', () => {
       '894',
     ])
     // #162 first batch (2026-08-08): the 21 remaining bilateral lanes joined the
-    // migration scope. Blocs stay at two until their founding instruments are
+    // migration scope. Blocs stayed at two until their founding instruments were
     // sourced, since their direction cannot be established from a flat member list.
+    // #162 second batch (2026-08-08): the ten settlement-conferring blocs joined,
+    // each with the instrument that establishes its direction. The remaining twelve
+    // blocs stay out on the same rule — gcc, cofa, india_nepal, india_bhutan, cplp,
+    // uk_bno, uk_bot, greater_china, dutch_kingdom, asean, ca4 and pacific_alliance
+    // are unsourced, and dutch_kingdom is the worked example of why guessing is
+    // wrong (categorised one_way while all four members share Dutch nationality).
     expect(shadow.arrangements.map(item => item.record.id)).toEqual([
       'eu_eea',
       'mercosur',
+      'can',
+      'eaeu',
+      'union_state',
+      'ttta',
+      'cta',
+      'oecs',
+      'csme',
+      'eac',
+      'npu',
+      'ecowas',
       'tn_usmca',
       'e3',
       'h1b1',
@@ -282,7 +298,8 @@ describe('data migration shadow', () => {
     ]);
     expect(shadow.manifest.counts).toEqual({
       jurisdictions: 233,
-      arrangements: 24,
+      // 12 blocs + 22 bilateral lanes. Was 24 (2 + 22) before the #162 second batch.
+      arrangements: 34,
       citizenship_routes: 255,
     });
   });

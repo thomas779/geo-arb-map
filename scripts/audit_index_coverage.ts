@@ -317,6 +317,16 @@ function arrangementProvenance() {
     legacy_lanes: laneIds.filter(id => !canonicalIds.has(id)),
     blocs_with_sources: blocs.blocs.filter(b => 'sources' in b).length,
     lanes_with_sources: blocs.bilateral_lanes.filter(l => 'sources' in l).length,
+    // Blocs sourced CANONICALLY, which is the only place a bloc citation can
+    // live. `blocs_with_sources` above counts a `sources` key on the legacy
+    // public/blocs_data.json records; that file has never carried one and is not
+    // where evidence goes, so on its own it under-reports a migrated-and-sourced
+    // bloc to zero forever. Kept as a separate number rather than merged, because
+    // a bloc can be canonical and still unsourced and that has to stay visible:
+    // this counts source_refs, not membership of the pilot.
+    canonical_blocs_sourced: blocIds.filter(
+      id => (canonicalById.get(id)?.source_refs ?? []).length > 0,
+    ).length,
     // A `sources` array is not a citation. Measured 2026-08-08: of 28 entries
     // across 15 lanes, ZERO are URLs. 27 are prose ("Executive Decree 226 of July
     // 2021", "Russian GUVM work-patent rules") and one is a bare host. So they
@@ -410,13 +420,17 @@ if (provenance) {
     ` · lanes: ${provenance.canonical_lanes.join(', ') || 'none'}`);
   console.log(`  legacy      ${provenance.legacy_blocs.length + provenance.legacy_lanes.length}/${total}` +
     `   no directionality, no destinations/beneficiaries split, no evidence links`);
-  console.log(`  sourced     blocs ${provenance.blocs_with_sources}/${blocs.blocs.length}` +
+  console.log(`  sourced     blocs ${provenance.canonical_blocs_sourced}/${blocs.blocs.length}` +
+    ` (canonical source_refs; ${provenance.blocs_with_sources} legacy \`sources\` fields)` +
     ` · lanes ${provenance.lanes_with_sources}/${blocs.bilateral_lanes.length}` +
     ` (only ${provenance.lanes_with_resolvable_source} lane(s) cite a URL; the rest are prose)`);
   console.log(`  of the ${provenance.canonical_total} canonical, ` +
     `${provenance.canonical_sourced} carry source_refs — migrating is not sourcing`);
-  if (provenance.blocs_with_sources === 0) {
+  if (provenance.canonical_blocs_sourced === 0) {
     console.log('  WARNING  not one bloc carries a source. A1 cannot satisfy spec rule 6 from this input.');
+  } else if (provenance.canonical_blocs_sourced < blocs.blocs.length) {
+    console.log(`  WARNING  ${blocs.blocs.length - provenance.canonical_blocs_sourced} bloc(s) still` +
+      ' carry no source. A1 can only be scored over the sourced subset, never the full set.');
   }
   if (provenance.sample) console.log('  (canonical source is the committed SAMPLE, so counts are a floor)');
 }
