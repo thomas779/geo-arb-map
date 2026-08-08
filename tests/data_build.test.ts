@@ -362,18 +362,42 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('data:build parity gates', () => {
     };
     expect(detail.actual).toEqual(detail.expected);
     expect(detail.mismatch).toEqual([]);
-    // Every mobility diff is under the sanctioned Spain beneficiaries path.
+    // Every mobility diff is one of exactly two sanctioned kinds: the Spain
+    // beneficiary correction, and the directionality now projected onto canonical
+    // blocs. Anything else is unsanctioned drift and must fail here.
     for (const entry of release.compatibility_diff.mobility) {
-      expect(entry.path.startsWith('bilateral_lanes[spain_iberoamerican].beneficiaries')).toBe(true);
+      const sanctioned = entry.path.startsWith('bilateral_lanes[spain_iberoamerican].beneficiaries')
+        || /^blocs\[[a-z_]+\]\.(directionality|destinations|beneficiaries)/.test(entry.path);
+      expect(sanctioned, `unsanctioned mobility drift at ${entry.path}`).toBe(true);
     }
     expect(release.compatibility_diff.mobility.every(e => e.kind === 'added')).toBe(true);
   });
 
-  test('canonical regional arrangements reproduce legacy membership exactly', () => {
-    // No mobility diff touches eu_eea or mercosur — they round-trip byte-for-byte.
-    const drifted = release.compatibility_diff.mobility.filter(e =>
-      e.path.startsWith('blocs[') || (e.path.startsWith('bilateral_lanes[') && !e.path.includes('spain_iberoamerican')));
+  test('canonical regional arrangements reproduce legacy MEMBERSHIP exactly', () => {
+    // Membership still round-trips byte-for-byte. Direction and participant roles
+    // are a deliberate addition (they existed canonically and were being dropped),
+    // so they are excluded here rather than the whole bloc namespace being
+    // waved through: a change to members or rights must still fail.
+    const drifted = release.compatibility_diff.mobility.filter(e => {
+      const isAddedRole = /^blocs\[[a-z_]+\]\.(directionality|destinations|beneficiaries)/.test(e.path);
+      if (isAddedRole) return false;
+      return e.path.startsWith('blocs[')
+        || (e.path.startsWith('bilateral_lanes[') && !e.path.includes('spain_iberoamerican'));
+    });
     expect(drifted).toEqual([]);
+  });
+
+  test('projected direction is only ever the canonical value, never a default', () => {
+    // The trap this guards: 43 of 46 arrangements are legacy and have no recorded
+    // direction. Emitting a default would assert every unmigrated bloc is mutual,
+    // which would inflate one-way arrangements like BN(O) and COFA.
+    const blocs = release.compatibility.mobility.blocs;
+    const withDirection = blocs.filter(bloc => 'directionality' in bloc);
+    expect(withDirection.length).toBe(2);
+    expect(withDirection.map(bloc => bloc.id).sort()).toEqual(['eu_eea', 'mercosur']);
+    for (const bloc of withDirection) {
+      expect(['symmetric', 'asymmetric']).toContain(bloc.directionality!);
+    }
   });
 
   test('Spain correction adds the eight missing Ibero-American beneficiaries', () => {

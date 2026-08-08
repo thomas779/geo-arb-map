@@ -1,4 +1,5 @@
 import { describe, test, expect } from 'bun:test';
+import { findingToLead } from '../monitor/sweep/run';
 import {
   applyCitationVerdicts,
   canonicalizeUrl,
@@ -155,5 +156,54 @@ describe('what the vetting refuses to do', () => {
     );
     expect(applyCitationVerdicts({ primary_urls: [], status: 'rumour' }, checks).status)
       .toBe('rumour');
+  });
+});
+
+describe('the vetting verdict reaches the lead', () => {
+  const finding = (over: Record<string, unknown> = {}) => ({
+    iso_n3: '292',
+    jurisdiction: 'Gibraltar',
+    claim: 'Gibraltar introduced the Residency Regulations 2026',
+    headline: 'Gibraltar residency regulations',
+    status: 'confirmed' as const,
+    primary_urls: [GIBRALTAR_FABRICATED],
+    effective_date: '2026-07-14',
+    affects_dataset: true,
+    category: 'residency',
+    brief: 'A new permit framework.',
+    evidence_quote: 'q',
+    original_quote: 'q',
+    legal_instrument: 'LN 2026/166',
+    ...over,
+  });
+
+  test('a fabricated citation forces "Primary source needed: Yes"', () => {
+    // The bug this pins: needs_primary_source was recomputed downstream as
+    // primary_urls.length === 0. A fabricated URL on a real host is a non-empty
+    // array, so the Gibraltar lead shipped as "Primary source needed: No" with a
+    // citation that 404s, next to "Confidence: high".
+    const vetted = applyCitationVerdicts(finding(), [{
+      url: GIBRALTAR_FABRICATED, grounded: false, status: 404, reachable: false, verdict: 'unverified',
+    }]);
+    expect(vetted.needs_primary_source).toBe(true);
+    const lead = findingToLead({ ...finding(), ...vetted } as never);
+    expect(lead?.needs_primary_source).toBe(true);
+  });
+
+  test('a verified citation still reports "Primary source needed: No"', () => {
+    const vetted = applyCitationVerdicts(finding({ primary_urls: [GIBRALTAR_REAL] }), [{
+      url: GIBRALTAR_REAL, grounded: true, status: 200, reachable: true, verdict: 'grounded',
+    }]);
+    expect(vetted.needs_primary_source).toBe(false);
+    expect(findingToLead({ ...finding({ primary_urls: [GIBRALTAR_REAL] }), ...vetted } as never)?.needs_primary_source)
+      .toBe(false);
+  });
+
+  test('an unvetted finding falls back to the URL count', () => {
+    // Fixture and offline paths never run the vetting, so the old behaviour has
+    // to survive when needs_primary_source is absent.
+    expect(findingToLead(finding({ primary_urls: ['https://example.gov/a'] }) as never)?.needs_primary_source)
+      .toBe(false);
+    expect(findingToLead(finding({ primary_urls: [] }) as never)).toBeNull();
   });
 });

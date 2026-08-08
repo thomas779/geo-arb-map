@@ -638,6 +638,18 @@ function projectBloc(canonical: ArrangementRecord, legacy: Bloc, names: Map<stri
     strength: canonical.display.strength,
     color: canonical.display.color,
     members: resolveMembers(canonical.participants.members, legacy.members, names),
+    // Direction and participant roles were computed canonically and then dropped
+    // here, so a consumer saw a flat member list and could not tell a mutual
+    // right from a one-way one. projectLane has always carried them; blocs never
+    // did. Emitted only when populated, so absent keeps meaning "not recorded"
+    // rather than "symmetric".
+    directionality: canonical.directionality,
+    ...(canonical.participants.destinations.length
+      ? { destinations: resolveMembers(canonical.participants.destinations, [], names) }
+      : {}),
+    ...(canonical.participants.beneficiaries.length
+      ? { beneficiaries: resolveMembers(canonical.participants.beneficiaries, [], names) }
+      : {}),
     ...(canonical.participants.former_members.length
       ? {
         former_members: resolveMembers(
@@ -1089,9 +1101,31 @@ function diffMobility(generated: BlocsData, source: BlocsData): CompatibilityDif
 function expectedCompatibilityMobility(
   source: BlocsData,
   names: Map<string, string>,
+  loaded?: LoadedCanonical,
 ): BlocsData {
+  // Direction and participant roles are a SANCTIONED addition to the bloc shape:
+  // they exist canonically and used to be dropped, so a consumer could not tell a
+  // mutual right from a one-way one. Mirrored here so the gate still fails on any
+  // drift we did not intend, rather than being loosened to let this through.
+  const canonicalById = new Map(
+    (loaded?.arrangements ?? []).map(arrangement => [arrangement.id, arrangement]),
+  );
   return {
     ...source,
+    blocs: source.blocs.map(bloc => {
+      const canonical = canonicalById.get(bloc.id);
+      if (!canonical) return bloc;
+      return {
+        ...bloc,
+        directionality: canonical.directionality,
+        ...(canonical.participants.destinations.length
+          ? { destinations: resolveMembers(canonical.participants.destinations, [], names) }
+          : {}),
+        ...(canonical.participants.beneficiaries.length
+          ? { beneficiaries: resolveMembers(canonical.participants.beneficiaries, [], names) }
+          : {}),
+      };
+    }),
     bilateral_lanes: source.bilateral_lanes.map(lane => {
       if (lane.id !== SPAIN_IBEROAMERICAN) return lane;
       const existing = new Set(lane.beneficiaries.map(member => member.iso_n3));
@@ -1247,7 +1281,7 @@ function gateArrangementProjectionParity(
   names: Map<string, string>,
 ): ParityGateResult {
   const projectedMobility = projectCompatibilityMobility(loaded, sourceMobility, names);
-  const expectedMobility = expectedCompatibilityMobility(sourceMobility, names);
+  const expectedMobility = expectedCompatibilityMobility(sourceMobility, names, loaded);
   const actual = diffMobility(projectedMobility, sourceMobility);
   const expected = diffMobility(expectedMobility, sourceMobility);
   const mismatch = deepDiff(expected, actual, 'sanctioned_diff');

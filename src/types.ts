@@ -27,6 +27,20 @@ export interface Bloc {
   color: string;
   members: Member[];
   former_members?: Member[];
+  /**
+   * Whether the arrangement's rights run both ways.
+   *
+   * Absent on the legacy remainder, which is most of them: only 3 of 46
+   * arrangements are canonical. Absent means UNKNOWN, not symmetric. Anything
+   * counting settle-by-right peers must refuse to credit an arrangement whose
+   * direction it cannot establish, or it inflates the UK on BN(O) and the
+   * Overseas Territories, and the US on the Compact of Free Association.
+   */
+  directionality?: 'symmetric' | 'asymmetric';
+  /** Where an asymmetric right runs TO. Empty/absent on symmetric arrangements. */
+  destinations?: Member[];
+  /** Who an asymmetric right runs FROM. Empty/absent on symmetric arrangements. */
+  beneficiaries?: Member[];
   rights: BlocRights;
   fastest_entry: string;
   notes: string;

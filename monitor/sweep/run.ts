@@ -19,7 +19,7 @@ import {
   type GroundedResult,
   type GroundingCitation,
 } from '../llm/client';
-import { applyCitationVerdicts, checkCitations } from './citations';
+import { applyCitationVerdicts, checkCitations, type CitationCheck } from './citations';
 import { parseJsonArray, seenSignalIds, type Lead, type ImpactType } from '../triage/triage';
 import {
   datasetContextForJurisdiction,
@@ -51,6 +51,17 @@ export interface Finding {
   // language — used to verify the finding against the live page before auto-
   // publishing (a translated quote can't be string-matched against the source).
   original_quote: string;
+  /**
+   * Set by citation vetting: true when no cited URL was reachable or grounded.
+   *
+   * Consumed by leadFromFinding instead of recomputing from primary_urls.length.
+   * That recompute was the bug: a fabricated URL on a real host is still a
+   * non-empty primary_urls, so the Gibraltar case emitted "Primary source
+   * needed: No" while its only citation 404'd.
+   */
+  needs_primary_source?: boolean;
+  /** Per-URL verdicts, surfaced on the lead so a reviewer sees what failed. */
+  citation_checks?: CitationCheck[];
   // The official identifier of the law/decree/act (e.g. "1/2026", "PF-67",
   // "20.446"), when the change enacts one. This is the STABLE identity of the
   // event: outlets reword the claim and wobble the effective_date, but the
@@ -360,7 +371,12 @@ async function vetFindings(findings: Finding[], citations: GroundingCitation[]):
         + `neither in the grounded search results nor reachable: ${bad.map(b => `${b.url} (${b.status ?? 'no response'})`).join(', ')}`,
       );
     }
-    return { ...finding, status: vetted.status as Finding['status'] } as Finding;
+    return {
+      ...finding,
+      status: vetted.status as Finding['status'],
+      needs_primary_source: vetted.needs_primary_source,
+      citation_checks: vetted.citation_checks,
+    } as Finding;
   }));
 }
 
@@ -452,7 +468,10 @@ export function findingToLead(finding: Finding): Lead | null {
     jurisdiction: finding.jurisdiction,
     impact_type: impactTypeForCategory(finding.category),
     summary: finding.claim,
-    needs_primary_source: finding.primary_urls.length === 0,
+    // Vetted verdict wins. Falling back to the URL count treats a fabricated
+    // citation as a citation, which is exactly how a 404 reached a lead marked
+    // "Primary source needed: No".
+    needs_primary_source: finding.needs_primary_source ?? finding.primary_urls.length === 0,
     confidence: CONFIDENCE_BY_STATUS[finding.status],
     signal,
   };
