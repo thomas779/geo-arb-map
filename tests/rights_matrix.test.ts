@@ -64,6 +64,38 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('structured rights (#154)', () => {
     }
   });
 
+  test('the three corrections from reading instruments are pinned', () => {
+    // Reading 5 instruments corrected 3 rows. Each is pinned so a later edit cannot
+    // quietly restore the prose reading.
+
+    // ECOWAS Protocol A/P.1/5/79 art. 2: entry is Phase I, residence is Phase II.
+    expect(byId.get('ecowas')!.rights_matrix!.citizenship.conditions)
+      .toContain('phase_ii_not_sourced');
+
+    // EAEU art. 97(5): stay "shall depend on the duration of an employment contract",
+    // so this is a work right, not a settle-by-right bloc.
+    expect(byId.get('eaeu')!.rights_matrix!.citizenship.conditions)
+      .toContain('employment_contract');
+
+    // OECS art. 12.5 lets a Protocol Member State regulate movement, and art. 12.1
+    // binds Protocol members rather than all seven OECS members.
+    const oecs = byId.get('oecs')!.rights_matrix!.citizenship;
+    expect(oecs.reside).toBe('conditional');
+    expect(oecs.conditions).toContain('member_may_regulate_movement');
+  });
+
+  test('prose-derived rows are labelled UNVERIFIED, instrument-read ones are not', () => {
+    // Populated is not verified. Without this marker "A1 12/24" reads as though all
+    // twelve were checked, when five were.
+    const verified = withMatrix.filter(a => !a.rights_matrix!.citizenship.detail.startsWith('UNVERIFIED'));
+    expect(verified.length).toBe(5);
+    expect(verified.map(a => a.id).sort())
+      .toEqual(['can', 'eaeu', 'ecowas', 'oecs', 'ttta']);
+    // CARICOM and the EAC both 403 every automated fetch, so they must stay marked.
+    expect(byId.get('csme')!.rights_matrix!.citizenship.detail).toStartWith('UNVERIFIED');
+    expect(byId.get('eac')!.rights_matrix!.citizenship.detail).toStartWith('UNVERIFIED');
+  });
+
   test('every matrix cites the arrangement it came from', () => {
     for (const arrangement of withMatrix) {
       expect(

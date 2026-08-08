@@ -112,11 +112,11 @@ const isoHighConfidence = new Set(
 );
 
 /** Rights matrices from the canonical pilot, empty when only the sample resolves. */
-function provenanceMatrices(): Array<{ citizenship?: { reside?: string; work?: string } }> {
+function provenanceMatrices(): Array<{ citizenship?: { reside?: string; work?: string; detail?: string } }> {
   try {
     const mod = require(`${root}scripts/lib/canonical-source.ts`);
     return (mod.buildCanonicalPilot().arrangements as Array<{ rights_matrix?: unknown }>)
-      .flatMap(a => (a.rights_matrix ? [a.rights_matrix as { citizenship?: { reside?: string; work?: string } }] : []));
+      .flatMap(a => (a.rights_matrix ? [a.rights_matrix as { citizenship?: { reside?: string; work?: string; detail?: string } }] : []));
   } catch {
     return [];
   }
@@ -161,6 +161,13 @@ const matrices = provenanceMatrices();
 const rightsMatrixCount = matrices.length;
 const rightsMatrixScoreable = matrices.filter(m => m.citizenship?.reside && m.citizenship.reside !== 'unknown').length;
 const workScoreable = matrices.filter(m => m.citizenship?.work && m.citizenship.work !== 'unknown').length;
+// Populated is not verified. A row derived from the recorded prose is marked
+// UNVERIFIED in its detail, because reading instruments has corrected 3 of the 5
+// read so far: ECOWAS confers entry not residence, EAEU residence is tied to an
+// employment contract, and OECS lets a member regulate movement under art. 12.5.
+const rightsVerified = matrices.filter(
+  m => m.citizenship?.detail && !m.citizenship.detail.startsWith('UNVERIFIED'),
+).length;
 
 const dimensions: Dimension[] = [
   // ---- Axis A: what the passport is worth once held -----------------------
@@ -171,8 +178,8 @@ const dimensions: Dimension[] = [
     status: rightsMatrixScoreable > 0 ? 'thin' : 'prose',
     have: rightsMatrixScoreable,
     total: blocs.blocs.length,
-    note: 'blocs whose citizenship-level RESIDE right is recorded as something other than '
-      + `unknown (#154); ${rightsMatrixCount} carry a matrix at all`,
+    note: `${rightsVerified} of ${rightsMatrixCount} rows were read against the instrument; `
+      + 'the rest are prose-derived and marked UNVERIFIED in their detail',
   },
   {
     id: 'A2',
