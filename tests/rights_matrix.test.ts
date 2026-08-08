@@ -64,9 +64,10 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('structured rights (#154)', () => {
     }
   });
 
-  test('the three corrections from reading instruments are pinned', () => {
-    // Reading 5 instruments corrected 3 rows. Each is pinned so a later edit cannot
-    // quietly restore the prose reading.
+  test('the five corrections from reading instruments are pinned', () => {
+    // Reading 9 instruments corrected 5 rows, every one in the same direction: the
+    // prose overstated what the instrument confers. Each is pinned so a later edit
+    // cannot quietly restore the prose reading.
 
     // ECOWAS Protocol A/P.1/5/79 art. 2: entry is Phase I, residence is Phase II.
     expect(byId.get('ecowas')!.rights_matrix!.citizenship.conditions)
@@ -82,18 +83,51 @@ describe.skipIf(CANONICAL_SOURCE_IS_SAMPLE)('structured rights (#154)', () => {
     const oecs = byId.get('oecs')!.rights_matrix!.citizenship;
     expect(oecs.reside).toBe('conditional');
     expect(oecs.conditions).toContain('member_may_regulate_movement');
+
+    // The big one. Directive 2004/38/EC art. 6 gives three months unconditionally;
+    // art. 7(1) makes anything longer conditional on being a worker, self-sufficient
+    // or a student; only art. 16 permanent residence, after five years, is
+    // unconditional. The row previously said `indefinite` with no conditions, which
+    // is the single assumption the settle-by-right counts leaned on hardest.
+    const eu = byId.get('eu_eea')!.rights_matrix!.citizenship;
+    expect(eu.reside).toBe('conditional');
+    expect(eu.conditions).toContain('economic_activity_or_self_sufficiency');
+    expect(eu.conditions).toContain('unconditional_after_five_years');
+
+    // Union State art. 14(5) grants equal rights "unless otherwise provided by the
+    // legislative acts of the participating states", and art. 14(6) leaves the legal
+    // position to national law entirely. An equal-treatment clause subordinated to
+    // national law is not a right to reside.
+    const union = byId.get('union_state')!.rights_matrix!.citizenship;
+    expect(union.reside).toBe('conditional');
+    expect(union.work).toBe('conditional');
+    expect(union.conditions).toContain('subject_to_national_law');
+  });
+
+  test('a cited instrument that governs something else does not count as verified', () => {
+    // The CTA row cited Immigration Act 1971 s.1(3) for mutual settlement. Reading it
+    // showed it removes control from arrivals "on a local journey" and defines the
+    // common travel area: a provision keyed to the JOURNEY, not to nationality, and
+    // conferring no settlement. Reading a citation and finding it misfits is a
+    // verification failure, not a verification, so the row stays prose-derived.
+    const cta = byId.get('cta')!.rights_matrix!.citizenship;
+    expect(cta.detail).toStartWith('UNVERIFIED');
+    expect(cta.detail).toContain('local journey');
   });
 
   test('prose-derived rows are labelled UNVERIFIED, instrument-read ones are not', () => {
     // Populated is not verified. Without this marker "A1 12/24" reads as though all
     // twelve were checked, when five were.
     const verified = withMatrix.filter(a => !a.rights_matrix!.citizenship.detail.startsWith('UNVERIFIED'));
-    expect(verified.length).toBe(5);
+    expect(verified.length).toBe(8);
     expect(verified.map(a => a.id).sort())
-      .toEqual(['can', 'eaeu', 'ecowas', 'oecs', 'ttta']);
-    // CARICOM and the EAC both 403 every automated fetch, so they must stay marked.
-    expect(byId.get('csme')!.rights_matrix!.citizenship.detail).toStartWith('UNVERIFIED');
-    expect(byId.get('eac')!.rights_matrix!.citizenship.detail).toStartWith('UNVERIFIED');
+      .toEqual(['can', 'eaeu', 'ecowas', 'eu_eea', 'mercosur', 'oecs', 'ttta', 'union_state']);
+    // Three cannot be read by automation at all: CARICOM and the EAC 403 every
+    // fetch, and the Nordic 1982 agreement returns an empty body. They must stay
+    // marked rather than inherit the confidence of the eight that were read.
+    for (const id of ['csme', 'eac', 'npu']) {
+      expect(byId.get(id)!.rights_matrix!.citizenship.detail).toStartWith('UNVERIFIED');
+    }
   });
 
   test('every matrix cites the arrangement it came from', () => {
