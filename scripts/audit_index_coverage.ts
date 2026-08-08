@@ -20,6 +20,7 @@
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { scoreAxis } from './lib/rights-score';
+import { classifyJusSoli } from './lib/jus-soli';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const asJson = process.argv.includes('--json');
@@ -140,11 +141,30 @@ const factKey = (rs: Route[], key: string) => rs.filter(r => r.facts && key in r
  * Detected here rather than asserted, so the count tracks the data as it is fixed.
  */
 const conditionalBirth = birth.filter(r => (r.facts as Record<string, unknown> | undefined)?.jus_soli === 'conditional');
-const classifiedConditional = conditionalBirth.filter(
-  r => r.jus_soli_condition && r.jus_soli_condition.family !== 'needs_review',
-).length;
-const deferring = conditionalBirth.filter(r => r.jus_soli_condition?.family === 'follows_metropole').length;
-const unreviewed = conditionalBirth.filter(r => r.jus_soli_condition?.family === 'needs_review').length;
+
+/**
+ * Classified live rather than read off the route.
+ *
+ * `jus_soli_condition` is not a recorded field yet; typing it is #152, which is
+ * blocked on this review precisely because a schema must not be built over labels
+ * the data contradicts. Until then the audit reports what `classifyJusSoli`
+ * derives from the recorded tri-state, condition and summary, so B1b tracks the
+ * review as it lands instead of reading 0 of 59 and looking like no work is done.
+ */
+const conditionOf = (route: (typeof conditionalBirth)[number]) => {
+  const facts = (route.facts ?? {}) as Record<string, unknown>;
+  return classifyJusSoli(
+    facts.jus_soli as string | undefined,
+    facts.parent_condition as string | undefined,
+    String((route as unknown as { summary?: string }).summary ?? ''),
+  );
+};
+const conditions = conditionalBirth.map(conditionOf);
+const classifiedConditional = conditions.filter(c => c.family !== 'needs_review').length;
+const deferring = conditions.filter(c => c.family === 'follows_metropole').length;
+const unreviewed = conditions.filter(c => c.family === 'needs_review').length;
+/** Routes whose text describes more than one qualifying limb. A single label loses these. */
+const multiLimb = conditions.filter(c => c.families.length > 1).length;
 const conditionalTension = conditionalBirth.filter(r => {
   const summary = String((r as unknown as { summary?: string }).summary ?? '');
   return /follows .* (rules|law)/.test(summary)
@@ -241,7 +261,8 @@ const dimensions: Dimension[] = [
     have: classifiedConditional,
     total: conditionalBirth.length,
     note: `conditional routes resolved into a typed family; ${deferring} defer to a metropole `
-      + `and ${unreviewed} await primary review (both score null, never zero)`,
+      + `and ${unreviewed} await primary review (both score null, never zero); `
+      + `${multiLimb} state more than one qualifying limb and score on the widest`,
   },
   {
     id: 'B2',

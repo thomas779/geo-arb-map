@@ -103,6 +103,99 @@ describe('what it refuses to decide', () => {
   });
 });
 
+describe('limbs are alternatives, so the most open one decides', () => {
+  // A first-match-wins classifier scored each route by whichever regex it reached
+  // first. Running it over the live corpus mislabelled six routes in BOTH
+  // directions, which is why this now collects limbs instead of returning one.
+
+  test('a statelessness exception does not demote a real residence rule', () => {
+    // Colombia. The rule is parental domicile; statelessness is "a separate
+    // exception" in its own clause. Matching the word first scored it 5 instead of
+    // 55, understating it by 50 points.
+    const finding = classifyJusSoli('conditional', 'domicile',
+      'A child born in Colombia to foreign parents is Colombian by birth when at least one parent '
+      + 'was domiciled in Colombia at the time of birth; a separate exception protects a child whom '
+      + 'no state recognizes as a national.');
+    expect(finding.family).toBe('parent_lawful_residence');
+    expect(finding.families).toContain('stateless_safeguard');
+    expect(finding.openness).toBe(FAMILY_OPENNESS.parent_lawful_residence);
+  });
+
+  test('three alternative limbs score as the widest, not the narrowest', () => {
+    // São Tomé: citizen parent OR stateless parents OR resident foreign parents.
+    // A child qualifies under any one, so the residence limb is what the score
+    // should reflect.
+    const finding = classifyJusSoli('conditional', 'parent_or_stateless',
+      'A person born in São Tomé and Príncipe is of origin nationality when a parent is '
+      + 'São-tomense, when the parents are stateless or of unknown nationality, or when foreign '
+      + 'parents reside in the territory and are not in the service of another state.');
+    expect(finding.family).toBe('parent_lawful_residence');
+    expect(finding.openness).toBe(55);
+  });
+
+  test('two birth limbs are not a later-acquisition route', () => {
+    // Belgium. Article 10 is a safeguard and article 11 is double jus soli, and BOTH
+    // operate at birth. Firing on "No unconditional jus soli" alone labelled it a
+    // later acquisition, which is a claim about a route it does not have.
+    const finding = classifyJusSoli('conditional', 'born_in_country',
+      'No unconditional jus soli, but two statutory birth-in-Belgium routes exist: a child born in '
+      + 'Belgium who would otherwise be stateless before eighteen is Belgian (article 10), and the '
+      + 'second-generation double jus soli of article 11 makes a child Belgian where a parent was '
+      + 'also born in Belgium and resided five of the ten years before the birth.');
+    expect(finding.family).toBe('double_jus_soli');
+    expect(finding.families).not.toContain('later_acquisition_not_birth');
+  });
+
+  test('residence as a precondition of a stateless grant is not a residence limb', () => {
+    // Ukraine. Article 7 grants to a child of permanently resident foreigners only
+    // "where the child acquires no other citizenship at birth". Both facts describe
+    // ONE grant, so a child of resident foreigners who inherits a nationality gets
+    // nothing. Reading the recorded `lawful_residence` as its own limb scored a
+    // 5-point rule at 55.
+    const finding = classifyJusSoli('conditional', 'lawful_residence',
+      'No unconditional jus soli, but article 7 makes a child born to permanently resident '
+      + 'foreigners a Ukrainian citizen where the child acquires no other citizenship at birth.');
+    expect(finding.family).toBe('stateless_safeguard');
+    expect(finding.families).not.toContain('parent_lawful_residence');
+  });
+
+  test('a child-residence clock is not parental residence', () => {
+    // Australia. "or when the CHILD is ordinarily resident for the first ten years"
+    // is a different rule from a parent's lawful residence, and reading it as one
+    // overstated Australia by 25 points. It is acquisition on the tenth birthday,
+    // so it belongs beside France.
+    const finding = classifyJusSoli('conditional', 'settled',
+      'A child born in Australia is a citizen when a parent is a citizen or permanent resident, or '
+      + 'when the child is ordinarily resident in Australia for the first ten years of life.');
+    expect(finding.family).toBe('parent_settled');
+    expect(finding.families).toContain('later_acquisition_not_birth');
+    expect(finding.families).not.toContain('parent_lawful_residence');
+  });
+
+  test('the widest limb wins even when it is the exception', () => {
+    // Chile carries three limbs once statelessness and the `settled` label are read
+    // alongside its own text. The birthright-with-exceptions limb is the widest and
+    // must not be dragged down by the other two.
+    const finding = classifyJusSoli('conditional', 'settled',
+      'Persons born in Chilean territory are Chilean by birth, except children of transient '
+      + 'foreigners or of foreigners who are in Chile in the service of their government. '
+      + 'Statelessness safeguards and later option routes may apply to some excluded children.');
+    expect(finding.family).toBe('unconditional_with_exceptions');
+    expect(finding.openness).toBe(90);
+    expect(finding.families.length).toBeGreaterThan(1);
+  });
+
+  test('the Crown Dependencies resolve their metropole', () => {
+    // Guernsey, Jersey and the Isle of Man say "British citizenship rules", not
+    // "British Overseas Territories". Matching only the latter left three routes
+    // deferring to nobody.
+    const finding = classifyJusSoli('conditional', 'parent_or_settled',
+      'Citizenship at birth in Jersey follows British citizenship rules.');
+    expect(finding.family).toBe('follows_metropole');
+    expect(finding.defers_to).toBe('United Kingdom');
+  });
+});
+
 describe('the openness scale', () => {
   test('every family has an entry, so a new one cannot score undefined', () => {
     for (const f of JUS_SOLI_FAMILIES) {
