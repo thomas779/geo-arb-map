@@ -931,6 +931,29 @@ describe('source quality: constituteproject is a lead, not a source of record', 
   const onlyCites = (route: { sources: Array<{ url: string }> }) =>
     route.sources.length > 0 && route.sources.every(source => source.url.includes('constituteproject'));
 
+  test('a birth route sourced only to an aggregator cannot claim high confidence', () => {
+    // The error signature behind every jus soli correction so far. `confidence`
+    // defaults to 'high' in principalCitizenshipRoute, so these badges were never
+    // an assertion that anyone verified the route — they are an unset field.
+    //
+    // That would be tolerable if the values were sound. Measured over the corpus,
+    // birth routes citing only constituteproject record `jus_soli: none` 97% of the
+    // time (72 of 74), against 41% (64 of 156) for birth routes with any other
+    // source. Jurisdictions were not assigned to sources by their birthright
+    // regime, so the gap is an ingestion artefact, most likely the aggregator's
+    // "no UNCONDITIONAL jus soli" flattened to "none" on import.
+    //
+    // Four of four tested came back wrong: Jamaica, Trinidad (#119), Bangladesh
+    // and Slovakia (2026-08). This asserts the class stays capped, and it is
+    // self-healing: citing any non-aggregator source lifts the cap automatically.
+    const offenders = citizenshipRoutes.routes.filter(route =>
+      route.mode === 'birth'
+      && route.sources.length > 0
+      && route.sources.every(source => source.url.includes('constituteproject'))
+      && route.confidence === 'high');
+    expect(offenders.map(route => route.id)).toEqual([]);
+  });
+
   test('no new route may take constituteproject as its only source', () => {
     const offenders = citizenshipRoutes.routes.filter(onlyCites);
     expect(offenders.length).toBeLessThanOrEqual(CONSTITUTEPROJECT_ONLY_CEILING);
