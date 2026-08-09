@@ -559,6 +559,72 @@ describe('monitor-lead verifications, July 2026', () => {
     );
     expect(cbi).toHaveLength(0);
   });
+
+  // #190 talent / extraordinary ability expansion — P0+P1 high-conf products plus
+  // Ireland Critical Skills at medium. Quote-checked 2026-08-09 against official portals.
+  test('#190 talent_skilled expansion pins flagship products and taxonomy guards', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    const high = [
+      'uk-global-talent',
+      'us-eb1a-extraordinary-ability',
+      'france-talent-salarie-qualifie',
+      'france-talent-chercheur',
+      'france-talent-carte-bleue-europeenne',
+      'japan-highly-skilled-professional',
+      'hong-kong-ttps',
+      'hong-kong-qmas',
+      'germany-eu-blue-card',
+      'netherlands-highly-skilled-migrant',
+      'canada-global-talent-stream',
+    ] as const;
+    for (const id of high) {
+      const r = byId.get(id);
+      expect(r, id).toBeTruthy();
+      expect(r?.category).toBe('talent_skilled');
+      expect(r?.status).toBe('active');
+      expect(r?.confidence).toBe('high');
+    }
+    const ie = byId.get('ireland-critical-skills-employment-permit');
+    expect(ie).toBeTruthy();
+    expect(ie?.category).toBe('talent_skilled');
+    expect(ie?.confidence).toBe('medium');
+
+    // US: immigrant EB-1A is permanent; O-1 remains temporary nonimmigrant.
+    expect(byId.get('us-eb1a-extraordinary-ability')?.outcome).toBe('permanent_residence');
+    expect(byId.get('us-eb1a-extraordinary-ability')?.counts_toward_permanent_residence).toBe(true);
+    expect(byId.get('us-o1-extraordinary-ability')?.outcome).toBe('residence');
+    expect(byId.get('us-o1-extraordinary-ability')?.counts_toward_permanent_residence).toBe(false);
+
+    // Canada GTS is TFWP temporary — not a PR product.
+    expect(byId.get('canada-global-talent-stream')?.counts_toward_permanent_residence).toBe(false);
+    expect(byId.get('canada-global-talent-stream')?.counts_toward_naturalization).toBe(false);
+
+    // HK TTPS is not permanent at grant; 7-year ordinary residence for right of abode.
+    expect(byId.get('hong-kong-ttps')?.outcome).toBe('residence');
+    expect(byId.get('hong-kong-ttps')?.min_income_monthly).toEqual({ amount: 208333, currency: 'HKD' });
+
+    // France non-investment talent limbs; investment porteur-de-projet stay in investment.
+    expect(byId.get('france-talent-investor')?.category).toBe('investment');
+    expect(byId.get('france-talent-business-creator')?.category).toBe('investment');
+    expect(byId.get('france-talent-salarie-qualifie')?.min_income_monthly?.currency).toBe('EUR');
+    expect(byId.get('france-talent-carte-bleue-europeenne')?.min_income_monthly?.amount).toBe(4947.75);
+
+    // NL HSM 2026 ≥30 floor.
+    expect(byId.get('netherlands-highly-skilled-migrant')?.min_income_monthly).toEqual({
+      amount: 5942,
+      currency: 'EUR',
+    });
+
+    // UK Global Talent: renewable multi-year, full work rights, settlement clock present.
+    const uk = byId.get('uk-global-talent');
+    expect(uk?.permit_duration_months).toBe(60);
+    expect(uk?.permit_renewable).toBe(true);
+    expect(uk?.work_rights).toBe('full');
+    expect(uk?.min_age).toBe(18);
+
+    const talent = (citizenshipRoutes.residence_routes ?? []).filter(r => r.category === 'talent_skilled');
+    expect(talent.length).toBeGreaterThanOrEqual(28);
+  });
 });
 
 describe('monitor-lead verifications, 30 July 2026', () => {
