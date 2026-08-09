@@ -54,6 +54,71 @@ export interface DescentRelationsFinding {
    * is never zero.
    */
   limit_recorded: boolean;
+  /**
+   * The route qualifies on ETHNIC OR NATIONAL ORIGIN rather than on descent from a
+   * citizen. Deliberately not a degree, because it is not a generation: the Law of
+   * Return, Spätaussiedler recognition and the Armenian/Bulgarian/Kyrgyz origin
+   * routes ask what you ARE, not how many generations back a citizen sits. Forcing
+   * them onto the degree scale is why Israel derived as `parent` and Germany's
+   * Spätaussiedler route derived as nothing at all.
+   */
+  origin_based: boolean;
+  /** Set when any part of this finding was authored rather than derived. */
+  authored_basis?: string;
+}
+
+/**
+ * A limb the instrument states but the eligibility conditions do not encode.
+ *
+ * The derivation reads field NAMES, so a limb described only in prose is invisible.
+ * Israel is the worked case: its summary says the Law of Return extends "to a child
+ * and grandchild of a Jew", while its only authored condition names a parent.
+ *
+ * Same discipline as the derivation: positive-only. `unlimited` may be set only
+ * where the instrument states no generational cutoff, never inferred from the
+ * absence of one — the difference between "the law says it keeps going" and
+ * "nobody wrote down where it stops".
+ */
+export interface AuthoredDescent {
+  relations?: DescentRelation[];
+  origin_based?: boolean;
+  /** The instrument states no generational limit. Never inferred from silence. */
+  unlimited?: boolean;
+  /** Why, citing the provision. Required, so an authored value is always traceable. */
+  basis: string;
+}
+
+/** What a consumer shows. `not_recorded` is first-class, never collapsed to "parent only". */
+export const DESCENT_REACH = [
+  'origin_based',
+  'unlimited',
+  'grandparent_or_deeper',
+  'parent_only',
+  'not_recorded',
+] as const;
+
+export type DescentReach = (typeof DESCENT_REACH)[number];
+
+/**
+ * Bucket a finding for presentation.
+ *
+ * Ordering matters. `origin_based` wins over any degree because an origin test is a
+ * different question, and a route can carry both — Israel transmits by descent AND
+ * by origin, and origin is the limb users are looking for. A null finding returns
+ * `not_recorded` rather than `parent_only`, because 223 routes sit at degree 1
+ * mostly because no deeper limb was ever authored, not because one was checked for
+ * and ruled out.
+ */
+export function descentReach(finding: DescentRelationsFinding | null): DescentReach {
+  if (!finding) return 'not_recorded';
+  if (finding.origin_based) return 'origin_based';
+  if (finding.relations.includes('ancestor_unspecified') && finding.maximum_degree === null) {
+    return 'unlimited';
+  }
+  const deepest = finding.deepest_recorded_degree;
+  if (deepest !== null && deepest >= 2) return 'grandparent_or_deeper';
+  if (deepest === 1) return 'parent_only';
+  return 'not_recorded';
 }
 
 /**
@@ -106,9 +171,17 @@ function relationsFromField(field: string): DescentRelation[] {
  * @returns null when the route records no ancestral relation at all, so callers
  *   can distinguish "no descent signal" from "descent at parent level".
  */
-export function deriveDescentRelations(conditions: Condition[]): DescentRelationsFinding | null {
+export function deriveDescentRelations(
+  conditions: Condition[],
+  authored?: AuthoredDescent,
+): DescentRelationsFinding | null {
   const relations = new Set<DescentRelation>();
   let maximumDegree: number | null = null;
+  for (const relation of authored?.relations ?? []) relations.add(relation);
+  // An instrument stating no cutoff is an open-ended ancestor claim, which is what
+  // `ancestor_unspecified` with no ceiling already means. Reuse it rather than add a
+  // second way to say the same thing.
+  if (authored?.unlimited) relations.add('ancestor_unspecified');
 
   for (const condition of conditions) {
     for (const relation of relationsFromField(condition.field)) relations.add(relation);
@@ -127,7 +200,10 @@ export function deriveDescentRelations(conditions: Condition[]): DescentRelation
     }
   }
 
-  if (relations.size === 0) return null;
+  // An origin-based route legitimately records no ancestral relation — Spätaussiedler
+  // asks about ethnicity, not about a citizen ancestor — so it must still produce a
+  // finding rather than falling through to null.
+  if (relations.size === 0 && !authored?.origin_based) return null;
 
   const degrees = [...relations]
     .map(relation => DEGREE[relation])
@@ -138,5 +214,7 @@ export function deriveDescentRelations(conditions: Condition[]): DescentRelation
     deepest_recorded_degree: degrees.length ? Math.max(...degrees) : null,
     maximum_degree: maximumDegree,
     limit_recorded: maximumDegree !== null,
+    origin_based: authored?.origin_based ?? false,
+    ...(authored ? { authored_basis: authored.basis } : {}),
   };
 }

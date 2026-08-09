@@ -281,7 +281,33 @@ export const RouteSchema = z.strictObject({
   claims: z.array(RouteClaimSchema).optional(),
   /** Fees and means thresholds; see RouteCostsSchema. Absent means not recorded. */
   costs: RouteCostsSchema.optional(),
+  /**
+   * Descent facts the instrument states but the eligibility conditions do not encode.
+   *
+   * `descent-relations.ts` derives reach from eligibility FIELD NAMES, which is sound
+   * but blind to prose. Israel forced this: its summary says the Law of Return extends
+   * "to a child and grandchild of a Jew", while its only authored condition names a
+   * parent, so it derived as parent-only — and Germany's Spätaussiedler route derived
+   * as nothing at all, because ethnic origin is not a generation.
+   *
+   * Same discipline as the derivation: positive-only. `unlimited` records that the
+   * instrument states no cutoff; never that nobody wrote one down.
+   */
+  authored_descent: z.strictObject({
+    relations: z.array(z.enum(['parent', 'grandparent', 'great_grandparent', 'ancestor_unspecified'])).default([]),
+    origin_based: z.boolean().default(false),
+    unlimited: z.boolean().default(false),
+    /** Cite the provision, so an authored value is always traceable. */
+    basis: z.string().min(1),
+  }).optional(),
 }).superRefine((route, context) => {
+  if (route.authored_descent && route.mode !== 'ancestry') {
+    context.addIssue({
+      code: 'custom',
+      path: ['authored_descent'],
+      message: 'Authored descent belongs only on ancestry routes',
+    });
+  }
   if (route.nationality_eligibility && route.mode !== 'investment') {
     context.addIssue({
       code: 'custom',

@@ -1047,6 +1047,7 @@ function projectFrontendCitizenship(
         descent: route.mode === 'ancestry'
           ? deriveDescentRelations(
             route.variants.flatMap(variant => variant.eligibility ?? []),
+            (route as { authored_descent?: Parameters<typeof deriveDescentRelations>[1] }).authored_descent,
           )
           : null,
         pathways: route.variants.map(variant => ({

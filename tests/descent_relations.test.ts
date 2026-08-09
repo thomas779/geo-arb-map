@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'bun:test';
-import { deriveDescentRelations } from '../scripts/lib/descent-relations';
+import { descentReach, deriveDescentRelations } from '../scripts/lib/descent-relations';
 import { descentRelationLabel, DESCENT_PATHS } from '../src/lib/timeline-rules';
 
 const cond = (field: string, operator = 'eq', value: unknown = true) => ({ field, operator, value });
@@ -11,6 +11,7 @@ describe('descent relation derivation', () => {
       deepest_recorded_degree: 1,
       maximum_degree: null,
       limit_recorded: false,
+      origin_based: false,
     });
     expect(
       deriveDescentRelations([cond('grandparent.birth.island_of_ireland')])?.deepest_recorded_degree,
@@ -162,5 +163,77 @@ describe('descent relation labels reach the planner', () => {
     expect(descentRelationLabel(ireland!)).toBe('parent or grandparent');
     // And the honest caveat survives: nothing in the table records a cutoff.
     expect(DESCENT_PATHS.some(path => path.limit_recorded)).toBe(false);
+  });
+});
+
+describe('reach: what the ancestry facet should actually show (#191)', () => {
+  // The facet highlighted 232 of 240 jurisdictions, because every country
+  // transmits to the child of a citizen. The useful question is narrower:
+  // grandparent-or-deeper, or ethnic/diaspora ties.
+
+  test('an origin test is not a generation', () => {
+    // Germany's Spätaussiedler route asks about ethnic German affiliation, not
+    // about descent from a German citizen, so it records no ancestral relation at
+    // all and previously derived to null — invisible in every ancestry facet.
+    const germany = deriveDescentRelations(
+      [{ field: 'heritage.ethnic_german_resettler', operator: 'eq', value: true }],
+      { origin_based: true, basis: 'Federal Expellees Act' },
+    );
+    expect(germany).not.toBeNull();
+    expect(germany!.relations).toEqual([]);
+    expect(descentReach(germany)).toBe('origin_based');
+  });
+
+  test('origin wins over degree when a route carries both', () => {
+    // Israel transmits by descent under the Nationality Law AND by Jewish status
+    // under the Law of Return. Origin is the limb people are searching for, so a
+    // route carrying both files under origin rather than under its degree.
+    const israel = deriveDescentRelations(
+      [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '376' }],
+      { relations: ['parent', 'grandparent'], origin_based: true, basis: 'Law of Return s.4A' },
+    );
+    expect(descentReach(israel)).toBe('origin_based');
+    // The authored grandchild limb is still recorded, not swallowed by the bucket.
+    expect(israel!.relations).toContain('grandparent');
+  });
+
+  test('an authored limb is traceable', () => {
+    // A value that cannot be traced to a provision is indistinguishable from a
+    // guess, which is the failure this whole corpus is organised against.
+    const finding = deriveDescentRelations(
+      [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '376' }],
+      { relations: ['grandparent'], basis: 'Law of Return s.4A' },
+    );
+    expect(finding!.authored_basis).toContain('s.4A');
+  });
+
+  test('nothing recorded reads as not_recorded, never as parent_only', () => {
+    // 223 routes sit at degree 1 mostly because nobody authored a deeper limb, not
+    // because one was checked for and ruled out. Collapsing those two states is how
+    // a facet publishes a confident wrong answer for the jurisdictions users most
+    // care about.
+    expect(descentReach(null)).toBe('not_recorded');
+    expect(descentReach(deriveDescentRelations([{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '008' }])))
+      .toBe('parent_only');
+  });
+
+  test('a grandparent limb buckets separately from a parent one', () => {
+    const ireland = deriveDescentRelations([
+      { field: 'grandparent.birth.island_of_ireland', operator: 'eq', value: true },
+    ]);
+    expect(descentReach(ireland)).toBe('grandparent_or_deeper');
+  });
+
+  test('unlimited is authored, never inferred from silence', () => {
+    // The module's founding rule: a `parent.*` condition proves a parent qualifies,
+    // it does not prove a grandparent fails. So an unlimited reading must come from
+    // the instrument saying so, and a bare parent condition must NOT produce it.
+    const silent = deriveDescentRelations([{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '380' }]);
+    expect(descentReach(silent)).toBe('parent_only');
+    const stated = deriveDescentRelations(
+      [{ field: 'parent.citizenship.iso_n3', operator: 'eq', value: '380' }],
+      { unlimited: true, basis: 'the instrument states no generational cutoff' },
+    );
+    expect(descentReach(stated)).toBe('unlimited');
   });
 });
