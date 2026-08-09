@@ -33,7 +33,7 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
         See which destinations will exchange a foreign driving licence — and whether a theory
         or practical test is still required. Currently seeded with{' '}
         <strong className="font-semibold text-foreground">{destCount} destination annexes</strong>
-        {' '}(Germany Anlage 11 FeV; Great Britain Exchangeable Licences Orders).
+        {' '}(DE, GB, NL, IE, FR, ES, AT, NZ, AU, DK, PT).
       </p>
 
       <aside

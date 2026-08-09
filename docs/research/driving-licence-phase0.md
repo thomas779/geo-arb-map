@@ -112,11 +112,28 @@ Research dumps: `nl-rdw-exchange.json`, `ie-recognised-states.json`, `fr-recipro
 | Rights index | Out of scope |
 | Country pages | Licence section when iso appears in seed (as dest and/or origin) |
 
+## Destination annex inventory (current seed)
+
+| ISO | Destination | Primary source family |
+|---|---|---|
+| 276 | Germany | Anlage 11 FeV |
+| 826 | Great Britain | SI 1999/1641 + 2021/537 |
+| 528 | Netherlands | RDW agreement list |
+| 372 | Ireland | NDLS / RSA recognised states |
+| 250 | France | Sécurité routière reciprocity PDF (1 May 2026) |
+| 724 | Spain | DGT convenios de canje |
+| 040 | Austria | oesterreich.gv.at FSG conversion |
+| 554 | New Zealand | NZTA exempt countries |
+| 036 | Australia | Austroads recognised jurisdictions |
+| 208 | Denmark | Danish Road Traffic Authority Group 1/2 |
+| 620 | Portugal | IMT / gov.pt OECD–CPLP & bilateral track |
+
 ## Next after this branch
 
-1. More destination annexes (AU, BE, ES, …)  
+1. Belgium SPF Mobilité interactive tables; Switzerland ASTRA full third-country list; Sweden Trafikverket; Singapore / Japan / Korea as destinations  
 2. Optional formal `licence_routes` in canonical pilot  
 3. Origin acquisition ranked by annex frequency  
 4. Tighten France class columns where PDF left null  
+
 
 

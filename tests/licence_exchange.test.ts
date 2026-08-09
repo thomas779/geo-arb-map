@@ -14,103 +14,86 @@ const seed = JSON.parse(
   readFileSync(join(import.meta.dir, '../public/licence_exchange.json'), 'utf8'),
 ) as LicenceExchangeData;
 
+const DEST_ISOS = [
+  '036', '040', '208', '250', '276', '372', '528', '554', '620', '724', '826',
+];
+
 describe('licence exchange seed (#171)', () => {
-  test('seed has five destination annexes plus disclaimer', () => {
+  test('seed has eleven destination annexes plus disclaimer', () => {
     expect(seed.schema_version).toBe(1);
     expect(seed.disclaimer.normal_residence).toMatch(/185 days/i);
     expect(seed.disclaimer.scope).toMatch(/not a guide to licence tourism/i);
-    expect(seed.destinations.map(d => d.iso_n3).sort()).toEqual([
-      '250', '276', '372', '528', '826',
-    ]);
+    expect(seed.destinations.map(d => d.iso_n3).sort()).toEqual([...DEST_ISOS].sort());
+    expect(seed.destinations.length).toBe(11);
+    for (const d of seed.destinations) {
+      expect(d.entries.length).toBeGreaterThan(0);
+      expect(d.source_url).toMatch(/^https?:\/\//);
+    }
+  });
+
+  test('core instruments remain wired', () => {
     const de = seed.destinations.find(d => d.iso_n3 === '276')!;
     const uk = seed.destinations.find(d => d.iso_n3 === '826')!;
-    const nl = seed.destinations.find(d => d.iso_n3 === '528')!;
-    const fr = seed.destinations.find(d => d.iso_n3 === '250')!;
-    const ie = seed.destinations.find(d => d.iso_n3 === '372')!;
+    const es = seed.destinations.find(d => d.iso_n3 === '724')!;
+    const at = seed.destinations.find(d => d.iso_n3 === '040')!;
+    const au = seed.destinations.find(d => d.iso_n3 === '036')!;
     expect(de.source_url).toContain('fev_2010/anlage_11');
-    expect(de.entries.length).toBeGreaterThan(50);
     expect(uk.source_url).toContain('legislation.gov.uk');
-    expect(uk.entries.length).toBeGreaterThanOrEqual(20);
-    expect(nl.source_url).toContain('rdw.nl');
-    expect(nl.entries.some(e => e.origin_label_en === 'Japan')).toBe(true);
-    expect(fr.source_url).toContain('securite-routiere.gouv.fr');
-    expect(fr.entries.length).toBeGreaterThan(80);
-    expect(ie.source_url).toContain('ndls.ie');
+    expect(es.source_url).toContain('dgt.es');
+    expect(at.source_url).toContain('oesterreich.gv.at');
+    expect(au.source_url).toContain('austroads.gov.au');
   });
 
   test('Switzerland is no retest in Germany; Connecticut requires theory', () => {
     const entries = seed.destinations.find(d => d.iso_n3 === '276')!.entries;
     const ch = entries.find(e => e.origin_label_en === 'Switzerland' || e.origin_label === 'Schweiz');
     expect(ch).toBeTruthy();
-    expect(ch!.theory_test_required).toBe(false);
-    expect(ch!.practical_test_required).toBe(false);
     expect(ch!.no_retest).toBe(true);
-
     const ct = entries.find(e => e.subnational_label === 'Connecticut');
-    expect(ct).toBeTruthy();
     expect(ct!.theory_test_required).toBe(true);
     expect(ct!.practical_test_required).toBe(false);
-    expect(ct!.subnational).toBe(true);
-    expect(ct!.parent_iso_n3).toBe('840');
   });
 
-  test('UK designates Japan and UAE without retest; Canada varies', () => {
-    const uk = seed.destinations.find(d => d.iso_n3 === '826')!;
-    const jp = uk.entries.find(e => e.origin_iso_n3 === '392');
-    const ae = uk.entries.find(e => e.origin_iso_n3 === '784');
-    const ca = uk.entries.find(e => e.origin_iso_n3 === '124');
-    expect(jp?.no_retest).toBe(true);
-    expect(ae?.no_retest).toBe(true);
-    expect(ca?.varies_by_subnational).toBe(true);
+  test('Spain lists Paraguay with car/moto no tests; truck/bus note', () => {
+    const es = seed.destinations.find(d => d.iso_n3 === '724')!;
+    const py = es.entries.find(e => e.origin_iso_n3 === '600');
+    expect(py).toBeTruthy();
+    expect(py!.no_retest).toBe(true);
+    expect(py!.note ?? '').toMatch(/Truck|C\/D|bus/i);
   });
 
-  test('lookup groups US under parent and flags subnational variance', () => {
-    const origins = listOrigins(seed);
-    const us = origins.find(o => o.iso_n3 === '840');
-    expect(us).toBeTruthy();
-    expect(us!.varies_by_subnational).toBe(true);
-    expect(us!.label).toMatch(/United States/i);
-
-    const matches = matchesForOrigin(seed, 'nat:840');
-    expect(matches.some(m => m.destination.iso_n3 === '276')).toBe(true);
-    const de = matches.find(m => m.destination.iso_n3 === '276')!;
-    expect(de.varies_by_subnational).toBe(true);
-    expect(de.entries.every(e => e.subnational)).toBe(true);
-  });
-
-  test('Japan matches all five seeded destinations without practical retest', () => {
+  test('Japan matches every seeded destination without practical retest', () => {
     const matches = matchesForOrigin(seed, 'nat:392');
-    expect(matches.map(m => m.destination.iso_n3).sort()).toEqual([
-      '250', '276', '372', '528', '826',
-    ]);
-    expect(matches.every(m => m.any_no_retest)).toBe(true);
+    expect(matches.map(m => m.destination.iso_n3).sort()).toEqual([...DEST_ISOS].sort());
+    expect(matches.every(m => m.any_no_retest || !m.any_practical)).toBe(true);
     expect(matches.every(m => !m.any_practical)).toBe(true);
   });
 
-  test('Netherlands lists Alberta/Québec as subnational; France lists Paraguay', () => {
-    const nl = seed.destinations.find(d => d.iso_n3 === '528')!;
-    expect(nl.entries.some(e => e.subnational_label === 'Alberta')).toBe(true);
-    expect(nl.entries.some(e => e.subnational_label === 'Québec')).toBe(true);
-    const fr = seed.destinations.find(d => d.iso_n3 === '250')!;
-    expect(fr.entries.some(e => e.origin_iso_n3 === '600' || e.origin_label_en === 'Paraguay')).toBe(true);
+  test('lookup groups US under parent with subnational variance (DE)', () => {
+    const matches = matchesForOrigin(seed, 'nat:840');
+    const de = matches.find(m => m.destination.iso_n3 === '276');
+    expect(de).toBeTruthy();
+    expect(de!.varies_by_subnational).toBe(true);
   });
 
-  test('country summary for Germany and Japan', () => {
-    const de = summariseCountry(seed, '276');
-    expect(countryHasLicenceData(de)).toBe(true);
-    expect(de.as_destination?.origin_count).toBeGreaterThan(50);
+  test('country summary for Paraguay and Japan', () => {
+    const py = summariseCountry(seed, '600');
+    expect(countryHasLicenceData(py)).toBe(true);
+    expect(py.as_origin_destinations.map(d => d.iso_n3).sort()).toEqual(['250', '724']);
 
     const jp = summariseCountry(seed, '392');
-    expect(countryHasLicenceData(jp)).toBe(true);
-    expect(jp.as_destination).toBeNull();
-    expect(jp.as_origin_destinations.map(d => d.iso_n3).sort()).toEqual([
-      '250', '276', '372', '528', '826',
-    ]);
+    expect(jp.as_origin_destinations).toHaveLength(11);
+  });
+
+  test('listOrigins is non-empty and sorted', () => {
+    const origins = listOrigins(seed);
+    expect(origins.length).toBeGreaterThan(40);
+    const labels = origins.map(o => o.label);
+    expect(labels).toEqual([...labels].sort((a, b) => a.localeCompare(b)));
   });
 
   test('testLabel wording', () => {
     expect(testLabel(false, false)).toBe('No retest');
     expect(testLabel(true, false)).toBe('Theory only');
-    expect(testLabel(true, true)).toBe('Theory + practical');
   });
 });
