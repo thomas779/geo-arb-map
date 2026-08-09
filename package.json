@@ -35,7 +35,8 @@
     "preview": "vite preview",
     "test": "bun test",
     "data:publish": "bun scripts/publish_data_repo.ts",
-    "index:audit": "bun scripts/audit_index_coverage.ts"
+    "index:audit": "bun scripts/audit_index_coverage.ts",
+    "research:verify": "bun scripts/verify_research_quotes.ts"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.2.9",
