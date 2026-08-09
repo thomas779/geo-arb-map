@@ -88,8 +88,18 @@ export const ROUTE_PATHS = [
   'routes/retirement-visas',
   'routes/talent-skilled-visas',
   'routes/digital-identities',
-  'routes/driving-licences',
+  // NOT 'routes/driving-licences'. The page still renders — it is emitted from
+  // `routePages` below, not from this list — but it is deliberately kept OUT of the
+  // sitemap while the agreement layer is being built. Its modal answer today is one
+  // or two destinations, and Google is already declining to index 131 of our pages;
+  // feeding it another thin one costs crawl budget the country pages need. It also
+  // carries robots:noindex (see NOINDEX_PATHS), because a page absent from the
+  // sitemap but still linked is not reliably de-indexed. Re-add when the agreement
+  // research lands.
 ] as const;
+
+/** Emitted and reachable, but deliberately not indexed. See ROUTE_PATHS above. */
+export const NOINDEX_PATHS: readonly string[] = ['routes/driving-licences'];
 
 /**
  * The full sitemap URL list, exported so tests assert hub coverage against the
@@ -562,6 +572,9 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
       bodyHtml += '<script src="/licence-exchange.js" defer></script>';
     }
     const headExtra = [
+      ...(NOINDEX_PATHS.includes(page.path)
+        ? ['<meta name="robots" content="noindex, follow">']
+        : []),
       `<meta property="og:type" content="website"><meta property="og:site_name" content="Flag Paths">`,
       `<meta property="og:url" content="${url}"><meta property="og:title" content="${esc(page.title)}">`,
       `<meta property="og:description" content="${esc(page.description)}"><meta property="og:image" content="${SITE}/og-image.png">`,

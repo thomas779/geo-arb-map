@@ -2,6 +2,10 @@ import { describe, expect, test } from 'bun:test';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
+  agreementById,
+  agreementKindLabel,
+  isosForAgreement,
+  listAgreements,
   countryHasLicenceData,
   listOrigins,
   matchesForOrigin,
@@ -95,5 +99,62 @@ describe('licence exchange seed (#171)', () => {
   test('testLabel wording', () => {
     expect(testLabel(false, false)).toBe('No retest');
     expect(testLabel(true, false)).toBe('Theory only');
+  });
+});
+
+describe('agreement layer: three legally different things, no longer one list', () => {
+  // The defect this fixes. Spain's source is titled "Paises con convenio de canjes"
+  // — countries with a negotiated exchange agreement — while Germany's Anlage 11 FeV
+  // is a domestic annex Germany maintains alone. Both rendered as an identical list
+  // of country names, hiding the difference that actually matters to a reader: a
+  // treaty binds a counterparty, an annex can be amended by one ministry.
+
+  test('Spain is a negotiated agreement and carries its Latin American members', () => {
+    const spain = agreementById(seed, 'licence-spain')!;
+    expect(spain.kind).toBe('bilateral_agreement');
+    expect(spain.kind_verified).toBe(true);
+    // The bloc the owner described: most of Latin America swaps into Spain.
+    for (const iso of ['600', '032', '170', '604', '858']) { // Paraguay, Argentina, Colombia, Peru, Uruguay
+      expect(spain.beneficiaries, `Spain should cover ${iso}`).toContain(iso);
+    }
+  });
+
+  test('Germany is a unilateral annex, not an agreement', () => {
+    const germany = agreementById(seed, 'licence-germany')!;
+    expect(germany.kind).toBe('unilateral_recognition');
+    expect(germany.directionality).toBe('asymmetric');
+  });
+
+  test('an unproven basis says so instead of guessing', () => {
+    // Typing an arrangement from the title of the page that publishes it is a
+    // hypothesis. Anything not yet read against its instrument stays `unknown` and
+    // renders as "Basis not established" rather than borrowing a friendlier word.
+    for (const agreement of listAgreements(seed)) {
+      if (agreement.kind === 'unknown') expect(agreement.kind_verified).toBeFalsy();
+      else expect(agreement.kind_verified).toBe(true);
+    }
+    expect(agreementKindLabel('unknown')).toBe('Basis not established');
+  });
+
+  test('map ISOs keep direction separate', () => {
+    // Under a unilateral annex the destination grants and the beneficiaries receive.
+    // Merging them into one painted blob would imply a reciprocity that does not
+    // exist, which is the whole reason `kind` was added.
+    const germany = agreementById(seed, 'licence-germany')!;
+    const isos = isosForAgreement(germany);
+    expect([...isos.destinations]).toEqual(['276']);
+    expect(isos.beneficiaries.has('276')).toBe(false);
+    expect(isos.all.size).toBe(isos.destinations.size + isos.beneficiaries.size);
+  });
+
+  test('every entry resolves to an agreement, and every agreement to a destination', () => {
+    const ids = new Set(listAgreements(seed).map(a => a.id));
+    const destIsos = new Set(seed.destinations.map(d => d.iso_n3));
+    for (const dest of seed.destinations) {
+      expect(ids, `${dest.name} has no agreement`).toContain(dest.agreement_id!);
+    }
+    for (const agreement of listAgreements(seed)) {
+      for (const iso of agreement.destinations) expect(destIsos).toContain(iso);
+    }
   });
 });

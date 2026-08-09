@@ -28,7 +28,52 @@ export interface LicenceExchangeDestination {
   source_url: string;
   source_urls?: string[];
   notes?: string[];
+  /**
+   * The arrangement this list rests on. Held on the destination rather than on each
+   * entry: there is one agreement per list, and stamping it onto all 419 rows was
+   * denormalisation that pushed the served file past the 200KB public-surface cap.
+   */
+  agreement_id?: string;
   entries: LicenceExchangeEntry[];
+}
+
+/**
+ * How a destination's exchange list is legally constituted.
+ *
+ * This distinction is the point of the agreement layer, and the data flattened it
+ * before: Spain's list is titled "Paises con convenio de canjes" — countries with a
+ * negotiated exchange agreement — while Germany's Anlage 11 FeV is a domestic annex
+ * Germany maintains alone. Both rendered as an identical list of countries, which
+ * hides the thing that matters. A treaty binds a counterparty; an annex can be
+ * amended by one ministry on a Tuesday.
+ *
+ * `unknown` is a first-class value and must stay visible. Typing an arrangement from
+ * the title of the page that publishes it is a hypothesis, not a reading.
+ */
+export type LicenceAgreementKind =
+  | 'multilateral_instrument'
+  | 'bilateral_agreement'
+  | 'unilateral_recognition'
+  | 'unknown';
+
+export interface LicenceAgreement {
+  id: string;
+  name: string;
+  kind: LicenceAgreementKind;
+  directionality: 'symmetric' | 'asymmetric' | 'unknown';
+  instrument: string;
+  source_url: string;
+  /** States that grant the exchange. */
+  destinations: string[];
+  /** States whose licences the arrangement covers. */
+  beneficiaries: string[];
+  /** Why the kind was assigned, quoting the authority where possible. */
+  basis?: string;
+  /**
+   * False means the KIND is unconfirmed against the instrument, NOT that the
+   * arrangement is doubtful. Mirrors BLOC_RIGHTS.verified in the canonical corpus.
+   */
+  kind_verified?: boolean;
 }
 
 export interface LicenceExchangeDisclaimer {
@@ -42,6 +87,7 @@ export interface LicenceExchangeData {
   generated_at: string;
   disclaimer: LicenceExchangeDisclaimer;
   destinations: LicenceExchangeDestination[];
+  agreements?: LicenceAgreement[];
 }
 
 export interface OriginOption {
@@ -218,4 +264,55 @@ export function testLabel(theory: boolean | null, practical: boolean | null): st
   if (theory === false && practical === true) return 'Practical only';
   if (theory === true && practical === true) return 'Theory + practical';
   return 'Tests unknown';
+}
+
+
+/**
+ * ISO codes an agreement covers, for painting the world map.
+ *
+ * Deliberately mirrors `isosForRouteClass` in src/lib/route-classes.ts so the atlas
+ * needs no new map machinery: a declarative list, a derivation to an ISO set, and the
+ * existing paint path.
+ *
+ * `destinations` and `beneficiaries` are returned separately because the direction is
+ * the interesting part. Under a symmetric instrument they are two ends of one right;
+ * under a unilateral annex the destination grants and the beneficiaries receive, and
+ * showing them in one undifferentiated blob would imply a reciprocity that does not
+ * exist.
+ */
+export interface LicenceAgreementIsos {
+  all: Set<string>;
+  destinations: Set<string>;
+  beneficiaries: Set<string>;
+}
+
+export function isosForAgreement(agreement: LicenceAgreement): LicenceAgreementIsos {
+  const destinations = new Set(agreement.destinations);
+  const beneficiaries = new Set(agreement.beneficiaries);
+  return { all: new Set([...destinations, ...beneficiaries]), destinations, beneficiaries };
+}
+
+/** Agreements, widest first, so the map facet leads with the ones that matter. */
+export function listAgreements(data: LicenceExchangeData): LicenceAgreement[] {
+  return [...(data.agreements ?? [])].sort(
+    (a, b) => b.beneficiaries.length - a.beneficiaries.length || a.name.localeCompare(b.name),
+  );
+}
+
+export function agreementById(
+  data: LicenceExchangeData,
+  id: string | null | undefined,
+): LicenceAgreement | null {
+  if (!id) return null;
+  return (data.agreements ?? []).find(agreement => agreement.id === id) ?? null;
+}
+
+/** Human label for a kind. `unknown` says so rather than guessing a friendlier word. */
+export function agreementKindLabel(kind: LicenceAgreementKind): string {
+  switch (kind) {
+    case 'multilateral_instrument': return 'Multilateral instrument';
+    case 'bilateral_agreement': return 'Bilateral agreement';
+    case 'unilateral_recognition': return 'Unilateral recognition';
+    default: return 'Basis not established';
+  }
 }
