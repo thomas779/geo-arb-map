@@ -4,6 +4,13 @@ import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
 import { provenanceLabel, routeProvenance } from '@/lib/trust';
 import { countryFlag } from '@/lib/country';
 import { residenceCategoryPageHref, routeClassPageHref } from '@/lib/route-classes';
+import {
+  countryHasLicenceData,
+  testLabel,
+  type CountryLicenceSummary,
+  type LicenceExchangeData,
+  summariseCountry,
+} from '@/lib/licence-exchange';
 import { ExternalSourceLink } from '@/components/ExternalSourceLink';
 import {
   RESIDENCE_CATEGORY_LABELS,
@@ -38,6 +45,8 @@ export interface CountryProfileData {
   reviewedModes: number;
   cheapest: ResidenceRoute['min_investment'];
   description: string;
+  /** Driving-licence exchange seed (#171); null when this iso is not in the seed. */
+  licence: CountryLicenceSummary | null;
 }
 
 /** Resolve everything a country page needs from the public data. Returns null if the iso is unknown. */
@@ -45,6 +54,7 @@ export function deriveCountryProfile(
   iso: string,
   citizenshipRoutes: CitizenshipRoutesData,
   mobility: BlocsData,
+  licenceData?: LicenceExchangeData | null,
 ): CountryProfileData | null {
   const jur = citizenshipRoutes.jurisdictions.find(j => j.iso_n3 === iso);
   if (!jur) return null;
@@ -67,10 +77,12 @@ export function deriveCountryProfile(
     + `${routes.length} citizenship route${routes.length === 1 ? '' : 's'}`
     + (residence.length ? ` and ${residence.length} residence programme${residence.length === 1 ? '' : 's'} (${residenceCats.join(', ')})` : '')
     + `, with official sources. Part of the Flag Paths atlas.`;
+  const licenceSummary = licenceData ? summariseCountry(licenceData, iso) : null;
+  const licence = licenceSummary && countryHasLicenceData(licenceSummary) ? licenceSummary : null;
   return {
     iso, name: jur.name, slug: buildCountrySlugMap(citizenshipRoutes.jurisdictions).get(iso)!,
     coverage: jur.coverage as Record<string, string>,
-    routes, residence, blocs, lanesIn, lanesOut, reviewedModes, cheapest, description,
+    routes, residence, blocs, lanesIn, lanesOut, reviewedModes, cheapest, description, licence,
   };
 }
 
@@ -325,14 +337,73 @@ function Eyebrow({ children, divider = true }: { children: ReactNode; divider?: 
   );
 }
 
+function LicenceSection({ licence, iso }: { licence: CountryLicenceSummary; iso: string }) {
+  return (
+    <section id="licences" className="mt-8 scroll-mt-20">
+      <Eyebrow>Driving licence exchange</Eyebrow>
+      <p className="mb-3 max-w-[60ch] text-sm text-muted-foreground">
+        Lawful exchange conditions from seeded destination annexes. Exchange almost always
+        requires normal residence — not a fly-in product.{' '}
+        <a href="/routes/driving-licences/" className="text-primary underline-offset-2 hover:underline">
+          Full lookup
+        </a>
+        .
+      </p>
+      {licence.as_destination && (
+        <div className="mb-3 rounded-lg border bg-card p-3.5">
+          <p className="text-sm font-semibold">As a destination</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Official annex lists {licence.as_destination.origin_count} origin rows
+            ({licence.as_destination.no_retest_count} with no theory and no practical in the seed).
+          </p>
+          <p className="mt-1 font-mono text-[0.7rem] text-muted-foreground">
+            {licence.as_destination.instrument}
+          </p>
+          <a
+            href={licence.as_destination.source_url}
+            className="mt-2 inline-block font-mono text-xs text-primary underline-offset-2 hover:underline"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Primary source
+          </a>
+        </div>
+      )}
+      {licence.as_origin_destinations.length > 0 && (
+        <div className="rounded-lg border bg-card p-3.5">
+          <p className="text-sm font-semibold">As an issuing origin</p>
+          <ul className="mt-2 space-y-2">
+            {licence.as_origin_destinations.map(d => (
+              <li key={d.iso_n3} className="text-sm">
+                <span className="font-medium">{d.name}</span>
+                <span className="ml-2 font-mono text-[0.7rem] text-muted-foreground">
+                  {testLabel(d.theory_test_required, d.practical_test_required)}
+                  {d.varies_by_subnational ? ' · varies by subnational unit' : ''}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={'/routes/driving-licences/' + `?from=${iso}`}
+            className="mt-3 inline-block font-mono text-xs text-primary underline-offset-2 hover:underline"
+          >
+            Look up this origin →
+          </a>
+        </div>
+      )}
+    </section>
+  );
+}
+
 export function CountryProfile({ data }: { data: CountryProfileData }) {
-  const { iso, name, routes, residence, blocs, lanesIn, lanesOut, reviewedModes, cheapest } = data;
+  const { iso, name, routes, residence, blocs, lanesIn, lanesOut, reviewedModes, cheapest, licence } = data;
   const facts: Array<[string, string]> = [
     ['Citizenship', `${reviewedModes} of 4 modes reviewed`],
     ...(routes.length ? [['Citizenship routes', String(routes.length)] as [string, string]] : []),
     ...(residence.length ? [['Residence programmes', String(residence.length)] as [string, string]] : []),
     ...(cheapest ? [['Residence by investment from', money(cheapest)!] as [string, string]] : []),
     ...(blocs.length ? [['Regional systems', String(blocs.length)] as [string, string]] : []),
+    ...(licence ? [['Licence exchange seed', 'mapped'] as [string, string]] : []),
   ];
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
@@ -358,6 +429,7 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
           <nav className="mt-4 flex flex-wrap gap-x-4 gap-y-2 font-mono text-xs text-muted-foreground">
             <a href="#citizenship" className="hover:text-foreground">Citizenship</a>
             {residence.length > 0 && <a href="#residence" className="hover:text-foreground">Residence</a>}
+            {licence && <a href="#licences" className="hover:text-foreground">Licences</a>}
             {blocs.length > 0 && <a href="#regional" className="hover:text-foreground">Regional</a>}
             {lanesIn.length > 0 && <a href="#treaties" className="hover:text-foreground">Treaties</a>}
           </nav>
@@ -386,6 +458,7 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
             </div>
           </section>
           {residence.length > 0 && <ResidenceSection residence={residence} />}
+          {licence && <LicenceSection licence={licence} iso={iso} />}
           {blocs.length > 0 && (
             <section id="regional" className="mt-8 scroll-mt-20">
               <Eyebrow>Regional rights</Eyebrow>

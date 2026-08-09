@@ -295,7 +295,7 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
         </h2>
         <div className="max-w-[calc(50%-0.75rem)] max-md:max-w-none">
           {/* Count is destination annexes seeded, not citizenship isos */}
-          <RouteChoice route={DRIVING_LICENCES} count={1} />
+          <RouteChoice route={DRIVING_LICENCES} count={2} />
         </div>
       </section>
     </main>

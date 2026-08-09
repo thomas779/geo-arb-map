@@ -10,13 +10,7 @@ import { AlertTriangle, Car, ExternalLink } from 'lucide-react';
  */
 export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
   const origins = listOrigins(data);
-  const de = data.destinations.find(d => d.iso_n3 === '276');
-  const noRetestNational = (de?.entries ?? []).filter(
-    e => !e.subnational && e.no_retest,
-  );
-  // unique by label
-  const noRetestLabels = [...new Map(noRetestNational.map(e => [e.origin_label_en, e])).values()]
-    .sort((a, b) => a.origin_label_en.localeCompare(b.origin_label_en));
+  const destCount = data.destinations.length;
 
   return (
     <main className="mx-auto max-w-[960px] px-4 py-8 sm:px-6">
@@ -37,11 +31,11 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
       </h1>
       <p className="mb-6 mt-3 max-w-[68ch] leading-relaxed text-muted-foreground">
         See which destinations will exchange a foreign driving licence — and whether a theory
-        or practical test is still required. Seeded with Germany&apos;s official origin list
-        (Anlage 11 FeV). More destination annexes will expand the map.
+        or practical test is still required. Currently seeded with{' '}
+        <strong className="font-semibold text-foreground">{destCount} destination annexes</strong>
+        {' '}(Germany Anlage 11 FeV; Great Britain Exchangeable Licences Orders).
       </p>
 
-      {/* Always-visible legal framing */}
       <aside
         className="mb-8 rounded-lg border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm leading-relaxed"
         role="note"
@@ -55,7 +49,6 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
         <p className="mt-2 text-xs text-muted-foreground">{data.disclaimer.coverage}</p>
       </aside>
 
-      {/* Live lookup (enhanced by licence-exchange.js) */}
       <section
         id="licence-exchange-live"
         className="mb-10 rounded-xl border bg-card p-4 sm:p-5"
@@ -77,61 +70,73 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
         <div id="licence-exchange-results" className="mt-5 space-y-4" />
       </section>
 
-      {/* Static fallback / SEO content */}
       <section id="licence-exchange-fallback">
-        <h2 className="font-heading text-lg font-semibold">
-          Germany — origins with no theory and no practical test
-        </h2>
+        <h2 className="font-heading text-lg font-semibold">Seeded destinations</h2>
         <p className="mt-1 max-w-[60ch] text-sm text-muted-foreground">
-          From Anlage 11 FeV (national-level rows only). Sub-national US / Canada / Australia
-          units are listed under their parent country in the live lookup — never as a single
-          fake country-wide rule.
+          Each annex is destination-led: what that country accepts from foreign issuers.
+          Enable JavaScript for the interactive origin → destination lookup above.
         </p>
-        {de && (
-          <p className="mt-2">
-            <a
-              href={de.source_url}
-              className="inline-flex items-center gap-1 font-mono text-xs text-primary underline-offset-2 hover:underline"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {de.instrument}
-              <ExternalLink className="size-3" aria-hidden />
-            </a>
-          </p>
-        )}
-        <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-          {noRetestLabels.map(e => (
-            <li
-              key={e.origin_label_en}
-              className="rounded-md border bg-card px-3 py-2 text-sm"
-            >
-              <span className="font-medium">{e.origin_label_en}</span>
-              <span className="mt-0.5 block font-mono text-[0.7rem] text-muted-foreground">
-                {e.classes ?? 'classes n/a'} · {testLabel(e.theory_test_required, e.practical_test_required)}
-              </span>
-              {e.origin_iso_n3 && (
-                <a
-                  className="mt-1 inline-block font-mono text-[0.65rem] text-primary underline-offset-2 hover:underline"
-                  href={`/routes/driving-licences/?from=${e.origin_iso_n3}`}
-                >
-                  Look up
-                </a>
-              )}
-            </li>
-          ))}
-        </ul>
+        <div className="mt-4 space-y-6">
+          {data.destinations.map(dest => {
+            const noRetest = dest.entries.filter(e => !e.subnational && e.no_retest);
+            const unique = [...new Map(noRetest.map(e => [e.origin_label_en, e])).values()]
+              .sort((a, b) => a.origin_label_en.localeCompare(b.origin_label_en));
+            return (
+              <article key={dest.iso_n3} className="rounded-lg border bg-card p-4">
+                <header className="flex flex-wrap items-baseline justify-between gap-2">
+                  <h3 className="font-heading text-base font-semibold">{dest.name}</h3>
+                  <a
+                    href={dest.source_url}
+                    className="inline-flex items-center gap-1 font-mono text-xs text-primary underline-offset-2 hover:underline"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Primary source
+                    <ExternalLink className="size-3" aria-hidden />
+                  </a>
+                </header>
+                <p className="mt-1 font-mono text-[0.7rem] text-muted-foreground">{dest.instrument}</p>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  {dest.entries.length} origin rows · {unique.length} national-level no-retest listings shown below
+                </p>
+                <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
+                  {unique.slice(0, 24).map(e => (
+                    <li key={`${dest.iso_n3}-${e.origin_label_en}`} className="text-sm">
+                      <span className="font-medium">{e.origin_label_en}</span>
+                      <span className="ml-1 font-mono text-[0.65rem] text-muted-foreground">
+                        {testLabel(e.theory_test_required, e.practical_test_required)}
+                      </span>
+                      {e.origin_iso_n3 && (
+                        <a
+                          className="ml-1 font-mono text-[0.65rem] text-primary underline-offset-2 hover:underline"
+                          href={'/routes/driving-licences/' + `?from=${e.origin_iso_n3}`}
+                        >
+                          look up
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+                {unique.length > 24 && (
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    +{unique.length - 24} more — use the live lookup.
+                  </p>
+                )}
+              </article>
+            );
+          })}
+        </div>
 
         <details className="mt-8 rounded-lg border bg-card px-4 py-3">
           <summary className="cursor-pointer list-none font-mono text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            All origins in the Germany seed ({origins.length} groups)
+            All origins in the seed ({origins.length} groups)
           </summary>
           <ul className="mt-3 columns-2 gap-x-6 text-sm sm:columns-3">
             {origins.map(o => (
               <li key={o.key} className="break-inside-avoid py-0.5">
                 {o.iso_n3 ? (
                   <a
-                    href={`/routes/driving-licences/?from=${o.iso_n3}`}
+                    href={'/routes/driving-licences/' + `?from=${o.iso_n3}`}
                     className="text-foreground underline-offset-2 hover:underline"
                   >
                     {o.label}
@@ -153,12 +158,12 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
         <ul className="mt-2 list-disc space-y-1 pl-5">
           <li>Not a guide to obtaining a licence without meeting residence conditions.</li>
           <li>Not a rights-index score and not a citizenship or residence route.</li>
-          <li>Not multi-hop planning — one destination annex at a time until more are seeded.</li>
+          <li>Not multi-hop planning — one destination annex at a time.</li>
         </ul>
         <p className="mt-4">
-          Research notes: see issue{' '}
+          Research notes:{' '}
           <a href="https://github.com/thomas779/geo-arb-map/issues/171" className="underline underline-offset-2">
-            #171
+            issue #171
           </a>
           .
         </p>

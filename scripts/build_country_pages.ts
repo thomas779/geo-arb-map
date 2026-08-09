@@ -88,6 +88,7 @@ export const ROUTE_PATHS = [
   'routes/retirement-visas',
   'routes/talent-skilled-visas',
   'routes/digital-identities',
+  'routes/driving-licences',
 ] as const;
 
 /**
@@ -347,9 +348,18 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   const isos = citizenship.jurisdictions
     .map(j => j.iso_n3)
     .filter(iso => !isNonApplicableJurisdiction(iso));
+  const licenceExchange = (() => {
+    try {
+      return JSON.parse(
+        fs.readFileSync(path.join(root, 'public/licence_exchange.json'), 'utf8'),
+      ) as LicenceExchangeData;
+    } catch {
+      return null;
+    }
+  })();
 
   for (const iso of isos) {
-    const data = deriveCountryProfile(iso, citizenship, mobility);
+    const data = deriveCountryProfile(iso, citizenship, mobility, licenceExchange);
     if (!data) continue;
     const url = `${SITE}/country/${data.slug}/`;
     const bodyHtml = renderToStaticMarkup(createElement(
@@ -484,6 +494,9 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   // ── Route pages (/routes/ hub + country shortlists) ──
   // Browse pages narrow the field by country and outcome. Country guides own
   // programme conditions and evidence; Planner will eventually own ranking.
+  if (!licenceExchange) {
+    throw new Error('public/licence_exchange.json is required to prerender driving-licence routes');
+  }
   const routePages: Array<{ path: string; title: string; description: string; el: ReturnType<typeof createElement> }> = [
     {
       path: 'routes',
@@ -532,11 +545,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
       title: 'Driving Licence Exchange Lookup | Flag Paths',
       description:
         'Look up which destinations exchange a foreign driving licence and whether theory or practical tests are required. Seeded with Germany Anlage 11 FeV; normal-residence rules apply.',
-      el: createElement(DrivingLicencesPage, {
-        data: JSON.parse(
-          fs.readFileSync(path.join(root, 'public/licence_exchange.json'), 'utf8'),
-        ) as LicenceExchangeData,
-      }),
+      el: createElement(DrivingLicencesPage, { data: licenceExchange }),
     },
   ];
   const routeUrls: string[] = [];

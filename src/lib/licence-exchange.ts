@@ -16,6 +16,9 @@ export interface LicenceExchangeEntry {
   theory_test_required: boolean | null;
   practical_test_required: boolean | null;
   no_retest: boolean;
+  /** Country-level row that still varies by sub-unit (e.g. Canada under UK SI). */
+  varies_by_subnational?: boolean;
+  note?: string | null;
 }
 
 export interface LicenceExchangeDestination {
@@ -23,6 +26,8 @@ export interface LicenceExchangeDestination {
   name: string;
   instrument: string;
   source_url: string;
+  source_urls?: string[];
+  notes?: string[];
   entries: LicenceExchangeEntry[];
 }
 
@@ -77,13 +82,13 @@ export function listOrigins(data: LicenceExchangeData): OriginOption[] {
       const existing = map.get(pickerKey);
       if (existing) {
         existing.entry_count += 1;
-        if (e.subnational) existing.varies_by_subnational = true;
+        if (e.subnational || e.varies_by_subnational) existing.varies_by_subnational = true;
       } else {
         map.set(pickerKey, {
           key: pickerKey,
           label,
           iso_n3: e.subnational ? e.parent_iso_n3 : e.origin_iso_n3,
-          varies_by_subnational: e.subnational,
+          varies_by_subnational: Boolean(e.subnational || e.varies_by_subnational),
           entry_count: 1,
         });
       }
@@ -118,10 +123,77 @@ export function matchesForOrigin(data: LicenceExchangeData, originKey: string): 
       any_no_retest: entries.some(e => e.no_retest),
       any_theory: entries.some(e => e.theory_test_required === true),
       any_practical: entries.some(e => e.practical_test_required === true),
-      varies_by_subnational: entries.some(e => e.subnational),
+      varies_by_subnational: entries.some(e => e.subnational || e.varies_by_subnational),
     });
   }
   return matches;
+}
+
+/** Country-page summary: destination annex and/or origin listings. */
+export interface CountryLicenceSummary {
+  iso_n3: string;
+  as_destination: {
+    name: string;
+    instrument: string;
+    source_url: string;
+    origin_count: number;
+    no_retest_count: number;
+  } | null;
+  as_origin_destinations: Array<{
+    iso_n3: string;
+    name: string;
+    no_retest: boolean;
+    theory_test_required: boolean | null;
+    practical_test_required: boolean | null;
+    varies_by_subnational: boolean;
+    source_url: string;
+  }>;
+}
+
+export function summariseCountry(data: LicenceExchangeData, iso: string): CountryLicenceSummary {
+  const asDest = data.destinations.find(d => d.iso_n3 === iso) ?? null;
+  const as_origin_destinations: CountryLicenceSummary['as_origin_destinations'] = [];
+  for (const dest of data.destinations) {
+    const entries = dest.entries.filter(
+      e => e.origin_iso_n3 === iso || e.parent_iso_n3 === iso,
+    );
+    if (!entries.length) continue;
+    as_origin_destinations.push({
+      iso_n3: dest.iso_n3,
+      name: dest.name,
+      no_retest: entries.some(e => e.no_retest),
+      theory_test_required: entries.some(e => e.theory_test_required === true)
+        ? true
+        : entries.every(e => e.theory_test_required === false)
+          ? false
+          : null,
+      practical_test_required: entries.some(e => e.practical_test_required === true)
+        ? true
+        : entries.every(e => e.practical_test_required === false)
+          ? false
+          : null,
+      varies_by_subnational: entries.some(e => e.subnational || e.varies_by_subnational),
+      source_url: dest.source_url,
+    });
+  }
+  as_origin_destinations.sort((a, b) => a.name.localeCompare(b.name));
+  return {
+    iso_n3: iso,
+    as_destination: asDest
+      ? {
+          name: asDest.name,
+          instrument: asDest.instrument,
+          source_url: asDest.source_url,
+          origin_count: asDest.entries.length,
+          no_retest_count: asDest.entries.filter(e => e.no_retest).length,
+        }
+      : null,
+    as_origin_destinations,
+  };
+}
+
+export function countryHasLicenceData(summary: CountryLicenceSummary): boolean {
+  return Boolean(summary.as_destination || summary.as_origin_destinations.length);
 }
 
 function entryMatchesKey(e: LicenceExchangeEntry, originKey: string): boolean {

@@ -63,7 +63,9 @@
 
     var html = '';
     matches.forEach(function (m) {
-      var varies = m.entries.some(function (e) { return e.subnational; });
+      var varies = m.entries.some(function (e) {
+        return e.subnational || e.varies_by_subnational;
+      });
       html += '<article class="licence-result rounded-lg border bg-card p-4">';
       html += '<header class="mb-3 flex flex-wrap items-baseline justify-between gap-2">';
       html += '<h3 class="font-heading text-lg font-semibold">' + escapeHtml(m.dest.name) + '</h3>';
@@ -79,7 +81,7 @@
       if (varies) {
         html +=
           '<p class="mb-3 rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs">' +
-          'Conditions <strong>vary by state / province / territory</strong>. Germany does not publish a single country-wide rule for this origin.' +
+          'Conditions <strong>vary by state / province / territory</strong>. Do not treat this as a single country-wide rule.' +
           '</p>';
       }
       html += '<div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b text-xs text-muted-foreground">';

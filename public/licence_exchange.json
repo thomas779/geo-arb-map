@@ -2,9 +2,9 @@
   "schema_version": 1,
   "generated_at": "2026-08-09",
   "disclaimer": {
-    "normal_residence": "Exchange usually requires that you were normally resident in the issuing country when (and often while) you held the licence. EU law defines normal residence as living in a place for at least 185 days in each calendar year (Directive 2006/126/EC Art. 12). A licence obtained without meeting that condition is often void in the destination.",
+    "normal_residence": "Exchange usually requires that you were normally resident in the issuing country when (and often while) you held the licence, and that you are resident in the destination when you exchange. EU law defines normal residence as living in a place for at least 185 days in each calendar year (Directive 2006/126/EC Art. 12). A licence obtained without meeting that condition is often void in the destination.",
     "scope": "Lawful exchange conditions only. This is not a guide to licence tourism.",
-    "coverage": "v1 seeds Germany (Anlage 11 FeV) only. More destination annexes will expand the lookup."
+    "coverage": "v1 seeds 2 destination annexes: Germany (Anlage 11 FeV) and Great Britain (Exchangeable Licences Orders). More destinations will expand the lookup."
   },
   "destinations": [
     {
@@ -12,6 +12,14 @@
       "name": "Germany",
       "instrument": "Anlage 11 FeV (zu § 31)",
       "source_url": "https://www.gesetze-im-internet.de/fev_2010/anlage_11.html",
+      "source_urls": [
+        "https://www.gesetze-im-internet.de/fev_2010/anlage_11.html"
+      ],
+      "notes": [
+        "Exchange also requires taking up residence in Germany and meeting FeV §31 conditions; the annex is not a fly-in product.",
+        "Directive 2006/126/EC Art. 12: normal residence means usually living in a place for at least 185 days in each calendar year.",
+        "US, Canada, and Australia rows are sub-national; never synthesise a single country-wide answer."
+      ],
       "entries": [
         {
           "origin_label": "Albanien",
@@ -23,7 +31,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Albania"
+          "origin_label_en": "Albania",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Albanien",
@@ -35,7 +44,8 @@
           "theory_test_required": false,
           "practical_test_required": true,
           "no_retest": false,
-          "origin_label_en": "Albania"
+          "origin_label_en": "Albania",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Andorra",
@@ -47,7 +57,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Andorra"
+          "origin_label_en": "Andorra",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Bosnien und Herzegowina",
@@ -59,7 +70,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Bosnia and Herzegovina"
+          "origin_label_en": "Bosnia and Herzegovina",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Französisch-Polynesien",
@@ -71,7 +83,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "French Polynesia"
+          "origin_label_en": "French Polynesia",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Gibraltar",
@@ -83,7 +96,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Gibraltar"
+          "origin_label_en": "Gibraltar",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Guernsey",
@@ -95,7 +109,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Guernsey"
+          "origin_label_en": "Guernsey",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Insel Man",
@@ -107,7 +122,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Isle of Man"
+          "origin_label_en": "Isle of Man",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Israel",
@@ -119,7 +135,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Israel"
+          "origin_label_en": "Israel",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Japan",
@@ -131,7 +148,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Japan"
+          "origin_label_en": "Japan",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Jersey",
@@ -143,7 +161,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Jersey"
+          "origin_label_en": "Jersey",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Kosovo",
@@ -155,7 +174,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Kosovo"
+          "origin_label_en": "Kosovo",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Moldau",
@@ -167,7 +187,8 @@
           "theory_test_required": false,
           "practical_test_required": true,
           "no_retest": false,
-          "origin_label_en": "Moldova"
+          "origin_label_en": "Moldova",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Republik Nordmazedonien",
@@ -179,7 +200,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "North Macedonia"
+          "origin_label_en": "North Macedonia",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Monaco",
@@ -191,7 +213,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Monaco"
+          "origin_label_en": "Monaco",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Namibia",
@@ -203,7 +226,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Namibia"
+          "origin_label_en": "Namibia",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Neukaledonien",
@@ -215,7 +239,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "New Caledonia"
+          "origin_label_en": "New Caledonia",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Neuseeland",
@@ -227,7 +252,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "New Zealand"
+          "origin_label_en": "New Zealand",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Republik Korea",
@@ -239,7 +265,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "South Korea"
+          "origin_label_en": "South Korea",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "San Marino",
@@ -251,7 +278,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "San Marino"
+          "origin_label_en": "San Marino",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Schweiz",
@@ -263,7 +291,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Switzerland"
+          "origin_label_en": "Switzerland",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Serbien",
@@ -275,7 +304,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Serbia"
+          "origin_label_en": "Serbia",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Singapur",
@@ -287,7 +317,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Singapore"
+          "origin_label_en": "Singapore",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Südafrika",
@@ -299,7 +330,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "South Africa"
+          "origin_label_en": "South Africa",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Vereinigtes Königreich",
@@ -311,7 +343,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "United Kingdom"
+          "origin_label_en": "United Kingdom",
+          "varies_by_subnational": false
         },
         {
           "origin_label": "Australian Capital Territory",
@@ -323,7 +356,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Australian Capital Territory"
+          "origin_label_en": "Australian Capital Territory",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "New South Wales",
@@ -335,7 +369,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "New South Wales"
+          "origin_label_en": "New South Wales",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Northern Territory",
@@ -347,7 +382,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Northern Territory"
+          "origin_label_en": "Northern Territory",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Queensland",
@@ -359,7 +395,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Queensland"
+          "origin_label_en": "Queensland",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "South Australia",
@@ -371,7 +408,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "South Australia"
+          "origin_label_en": "South Australia",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Tasmania",
@@ -383,7 +421,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Tasmania"
+          "origin_label_en": "Tasmania",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Victoria",
@@ -395,7 +434,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Victoria"
+          "origin_label_en": "Victoria",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Western Australia",
@@ -407,7 +447,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Western Australia"
+          "origin_label_en": "Western Australia",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Alabama",
@@ -419,7 +460,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Alabama"
+          "origin_label_en": "Alabama",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Arizona",
@@ -431,7 +473,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Arizona"
+          "origin_label_en": "Arizona",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Arkansas",
@@ -443,7 +486,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Arkansas"
+          "origin_label_en": "Arkansas",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Colorado",
@@ -455,7 +499,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Colorado"
+          "origin_label_en": "Colorado",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Connecticut",
@@ -467,7 +512,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "Connecticut"
+          "origin_label_en": "Connecticut",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Delaware",
@@ -479,7 +525,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Delaware"
+          "origin_label_en": "Delaware",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "District of Columbia",
@@ -491,7 +538,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "District of Columbia"
+          "origin_label_en": "District of Columbia",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Florida",
@@ -503,7 +551,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "Florida"
+          "origin_label_en": "Florida",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Idaho",
@@ -515,7 +564,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Idaho"
+          "origin_label_en": "Idaho",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Illinois",
@@ -527,7 +577,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Illinois"
+          "origin_label_en": "Illinois",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Indiana",
@@ -539,7 +590,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "Indiana"
+          "origin_label_en": "Indiana",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Iowa",
@@ -551,7 +603,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Iowa"
+          "origin_label_en": "Iowa",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Kansas",
@@ -563,7 +616,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Kansas"
+          "origin_label_en": "Kansas",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Kentucky",
@@ -575,7 +629,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Kentucky"
+          "origin_label_en": "Kentucky",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Louisiana",
@@ -587,7 +642,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Louisiana"
+          "origin_label_en": "Louisiana",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Maryland",
@@ -599,7 +655,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Maryland"
+          "origin_label_en": "Maryland",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Massachusetts",
@@ -611,7 +668,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Massachusetts"
+          "origin_label_en": "Massachusetts",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Michigan",
@@ -623,7 +681,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Michigan"
+          "origin_label_en": "Michigan",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Minnesota",
@@ -635,7 +694,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "Minnesota"
+          "origin_label_en": "Minnesota",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Mississippi",
@@ -647,7 +707,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "Mississippi"
+          "origin_label_en": "Mississippi",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Missouri",
@@ -659,7 +720,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "Missouri"
+          "origin_label_en": "Missouri",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Nebraska",
@@ -671,7 +733,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "Nebraska"
+          "origin_label_en": "Nebraska",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "New Mexico",
@@ -683,7 +746,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "New Mexico"
+          "origin_label_en": "New Mexico",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "North Carolina",
@@ -695,7 +759,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "North Carolina"
+          "origin_label_en": "North Carolina",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Ohio",
@@ -707,7 +772,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Ohio"
+          "origin_label_en": "Ohio",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Oklahoma",
@@ -719,7 +785,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Oklahoma"
+          "origin_label_en": "Oklahoma",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Oregon",
@@ -731,7 +798,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "Oregon"
+          "origin_label_en": "Oregon",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Pennsylvania",
@@ -743,7 +811,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Pennsylvania"
+          "origin_label_en": "Pennsylvania",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Puerto Rico",
@@ -755,7 +824,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Puerto Rico"
+          "origin_label_en": "Puerto Rico",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "South Carolina",
@@ -767,7 +837,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "South Carolina"
+          "origin_label_en": "South Carolina",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "South Dakota",
@@ -779,7 +850,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "South Dakota"
+          "origin_label_en": "South Dakota",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Tennessee",
@@ -791,7 +863,8 @@
           "theory_test_required": true,
           "practical_test_required": false,
           "no_retest": false,
-          "origin_label_en": "Tennessee"
+          "origin_label_en": "Tennessee",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Texas",
@@ -803,7 +876,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Texas"
+          "origin_label_en": "Texas",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Utah",
@@ -815,7 +889,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Utah"
+          "origin_label_en": "Utah",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Virginia",
@@ -827,7 +902,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Virginia"
+          "origin_label_en": "Virginia",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Washington State",
@@ -839,7 +915,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Washington State"
+          "origin_label_en": "Washington State",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "West Virginia",
@@ -851,7 +928,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "West Virginia"
+          "origin_label_en": "West Virginia",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Wisconsin",
@@ -863,7 +941,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Wisconsin"
+          "origin_label_en": "Wisconsin",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Wyoming",
@@ -875,7 +954,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Wyoming"
+          "origin_label_en": "Wyoming",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Alberta",
@@ -887,7 +967,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Alberta"
+          "origin_label_en": "Alberta",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "British Columbia",
@@ -899,7 +980,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "British Columbia"
+          "origin_label_en": "British Columbia",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Manitoba",
@@ -911,7 +993,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Manitoba"
+          "origin_label_en": "Manitoba",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "New Brunswick",
@@ -923,7 +1006,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "New Brunswick"
+          "origin_label_en": "New Brunswick",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Newfoundland",
@@ -935,7 +1019,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Newfoundland"
+          "origin_label_en": "Newfoundland",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Northwest Territories",
@@ -947,7 +1032,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Northwest Territories"
+          "origin_label_en": "Northwest Territories",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Nova Scotia",
@@ -959,7 +1045,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Nova Scotia"
+          "origin_label_en": "Nova Scotia",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Ontario",
@@ -971,7 +1058,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Ontario"
+          "origin_label_en": "Ontario",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Prince Edward Island",
@@ -983,7 +1071,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Prince Edward Island"
+          "origin_label_en": "Prince Edward Island",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Québec",
@@ -995,7 +1084,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Québec"
+          "origin_label_en": "Québec",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Saskatchewan",
@@ -1007,7 +1097,8 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Saskatchewan"
+          "origin_label_en": "Saskatchewan",
+          "varies_by_subnational": true
         },
         {
           "origin_label": "Yukon",
@@ -1019,7 +1110,368 @@
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "origin_label_en": "Yukon"
+          "origin_label_en": "Yukon",
+          "varies_by_subnational": true
+        }
+      ]
+    },
+    {
+      "iso_n3": "826",
+      "name": "United Kingdom (Great Britain)",
+      "instrument": "Driving Licences (Exchangeable Licences) Orders — SI 1999/1641 (as amended) and SI 2021/537",
+      "source_url": "https://www.legislation.gov.uk/uksi/1999/1641/schedule",
+      "source_urls": [
+        "https://www.legislation.gov.uk/uksi/1999/1641/schedule",
+        "https://www.legislation.gov.uk/uksi/1999/1641/article/3",
+        "https://www.legislation.gov.uk/uksi/1999/1641/article/4",
+        "https://www.legislation.gov.uk/uksi/2021/537/contents/made"
+      ],
+      "notes": [
+        "Applies to Great Britain (England, Wales, Scotland). Northern Ireland has a separate designation regime.",
+        "Exchange requires the applicant to be resident in GB and to meet DVLA exchange conditions; designation is not a fly-in product.",
+        "EU/EEA licences follow separate recognition/exchange rules and are not listed as \"designated country\" origins here.",
+        "Canada: SI 1999/1641 art. 4 designates Canadian provinces and territories — treat as subnational variance at country level.",
+        "Class correspondence is order-specific; this seed records designation (exchange without driving test) without inventing class maps."
+      ],
+      "entries": [
+        {
+          "origin_label": "Andorra",
+          "origin_label_en": "Andorra",
+          "origin_iso_n3": "020",
+          "parent_iso_n3": "020",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Australia",
+          "origin_label_en": "Australia",
+          "origin_iso_n3": "036",
+          "parent_iso_n3": "036",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Barbados",
+          "origin_label_en": "Barbados",
+          "origin_iso_n3": "052",
+          "parent_iso_n3": "052",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "British Virgin Islands",
+          "origin_label_en": "British Virgin Islands",
+          "origin_iso_n3": "092",
+          "parent_iso_n3": "092",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Canada",
+          "origin_label_en": "Canada",
+          "origin_iso_n3": "124",
+          "parent_iso_n3": "124",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": true,
+          "note": "Canadian provincial licences designated under SI 1999/1641 art. 4"
+        },
+        {
+          "origin_label": "Cayman Islands",
+          "origin_label_en": "Cayman Islands",
+          "origin_iso_n3": "136",
+          "parent_iso_n3": "136",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Republic of Cyprus",
+          "origin_label_en": "Republic of Cyprus",
+          "origin_iso_n3": "196",
+          "parent_iso_n3": "196",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Falkland Islands",
+          "origin_label_en": "Falkland Islands",
+          "origin_iso_n3": "238",
+          "parent_iso_n3": "238",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Faroe Islands",
+          "origin_label_en": "Faroe Islands",
+          "origin_iso_n3": "234",
+          "parent_iso_n3": "234",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Guernsey",
+          "origin_label_en": "Guernsey",
+          "origin_iso_n3": "831",
+          "parent_iso_n3": "831",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Hong Kong",
+          "origin_label_en": "Hong Kong",
+          "origin_iso_n3": "344",
+          "parent_iso_n3": "344",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Isle of Man",
+          "origin_label_en": "Isle of Man",
+          "origin_iso_n3": "833",
+          "parent_iso_n3": "833",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Japan",
+          "origin_label_en": "Japan",
+          "origin_iso_n3": "392",
+          "parent_iso_n3": "392",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Jersey",
+          "origin_label_en": "Jersey",
+          "origin_iso_n3": "832",
+          "parent_iso_n3": "832",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Malta",
+          "origin_label_en": "Malta",
+          "origin_iso_n3": "470",
+          "parent_iso_n3": "470",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Monaco",
+          "origin_label_en": "Monaco",
+          "origin_iso_n3": "492",
+          "parent_iso_n3": "492",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "New Zealand",
+          "origin_label_en": "New Zealand",
+          "origin_iso_n3": "554",
+          "parent_iso_n3": "554",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Republic of Korea",
+          "origin_label_en": "Republic of Korea",
+          "origin_iso_n3": "410",
+          "parent_iso_n3": "410",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "North Macedonia",
+          "origin_label_en": "North Macedonia",
+          "origin_iso_n3": "807",
+          "parent_iso_n3": "807",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Singapore",
+          "origin_label_en": "Singapore",
+          "origin_iso_n3": "702",
+          "parent_iso_n3": "702",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "South Africa",
+          "origin_label_en": "South Africa",
+          "origin_iso_n3": "710",
+          "parent_iso_n3": "710",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Switzerland",
+          "origin_label_en": "Switzerland",
+          "origin_iso_n3": "756",
+          "parent_iso_n3": "756",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Taiwan",
+          "origin_label_en": "Taiwan",
+          "origin_iso_n3": "158",
+          "parent_iso_n3": "158",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Ukraine",
+          "origin_label_en": "Ukraine",
+          "origin_iso_n3": "804",
+          "parent_iso_n3": "804",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "United Arab Emirates",
+          "origin_label_en": "United Arab Emirates",
+          "origin_iso_n3": "784",
+          "parent_iso_n3": "784",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
+        },
+        {
+          "origin_label": "Zimbabwe",
+          "origin_label_en": "Zimbabwe",
+          "origin_iso_n3": "716",
+          "parent_iso_n3": "716",
+          "subnational": false,
+          "subnational_label": null,
+          "classes": null,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "varies_by_subnational": false
         }
       ]
     }

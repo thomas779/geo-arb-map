@@ -79,19 +79,32 @@ gov.uk interactive questionnaire is **not** usable as a static annex (#171).
 
 ---
 
+## Instrument 4 (completed) — UK Exchangeable Licences Orders
+
+Primary:
+
+- [SI 1999/1641 Schedule (revised)](https://www.legislation.gov.uk/uksi/1999/1641/schedule) — other countries/territories list  
+- [SI 1999/1641 art. 3](https://www.legislation.gov.uk/uksi/1999/1641/article/3) — South Africa  
+- [SI 1999/1641 art. 4](https://www.legislation.gov.uk/uksi/1999/1641/article/4) — Canadian provinces and territories  
+- [SI 2021/537](https://www.legislation.gov.uk/uksi/2021/537/contents/made) — Cayman Islands, North Macedonia, Taiwan, Ukraine, UAE  
+
+Harvest: `docs/research/uk-exchangeable-licences.json` (26 designated origins).  
+**Note:** Great Britain only; Northern Ireland is a separate regime. Designation = exchange without driving test when resident in GB; class maps not invented.
+
 ## Product decision for UI v1
 
 | Choice | Decision |
 |---|---|
 | Primary UX | Origin → destinations that list it (exchange lookup) |
-| Seed destination | **Germany only** |
+| Seed destinations | **Germany** + **Great Britain** |
 | Framing | Reference / convertibility tool + residence disclaimer |
 | Pathfinder | No multi-hop |
 | Rights index | Out of scope |
+| Country pages | Licence section when iso appears in seed (as dest and/or origin) |
 
-## Next after this branch is stable
+## Next after this branch
 
-1. UK exchangeable-licences orders → second destination  
-2. Schema formalisation into `licence_routes` on jurisdiction records (optional if seed JSON remains the UI feed)  
-3. More EU annexes  
-4. Origin acquisition ranked by annex frequency  
+1. More destination annexes (IE, FR, NL, AU, …)  
+2. Optional formal `licence_routes` in canonical pilot  
+3. Origin acquisition ranked by annex frequency  
+
