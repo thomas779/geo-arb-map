@@ -203,12 +203,81 @@ async function migrateRemoteSchema(): Promise<void> {
   await runBatched(statements, 'migrate');
 }
 
+/**
+ * Create the licence-exchange tables if they are absent.
+ *
+ * Separate from migrateRemoteSchema because it is pure CREATE IF NOT EXISTS with no
+ * table rebuild — it can run on every sync and converge. The tables are standalone
+ * (the monitor_* pattern), so they carry no foreign keys into the canonical model
+ * and are safe to create whether or not the canonical tables are populated.
+ */
+async function ensureLicenceSchema(): Promise<void> {
+  const file = path.join(root, 'data/d1/migrations/0007_licence_exchange.sql');
+  const statements = splitStatements(fs.readFileSync(file, 'utf8'))
+    .filter(statement => !/^\s*PRAGMA\b/i.test(statement));
+  await runBatched(statements, 'licence-ddl');
+}
+
+/**
+ * Rows for the licence layer, rendered from the served JSON.
+ *
+ * public/licence_exchange.json stays the source of truth — it is version-controlled
+ * and is what the site actually fetches. These tables are its indexed projection, so
+ * "which agreements cover Paraguay" and "which states hold a bilateral agreement
+ * with anyone" become queries rather than a client-side scan of a 184KB blob.
+ */
+function renderLicenceSql(): string[] {
+  const data = JSON.parse(
+    fs.readFileSync(path.join(root, 'public/licence_exchange.json'), 'utf8'),
+  ) as {
+    agreements?: Array<Record<string, unknown>>;
+    destinations: Array<Record<string, unknown>>;
+  };
+  const q = (value: unknown): string => {
+    if (value === null || value === undefined) return 'NULL';
+    if (typeof value === 'boolean') return value ? '1' : '0';
+    if (typeof value === 'number') return String(value);
+    return `'${String(value).replace(/'/g, "''")}'`;
+  };
+  const out: string[] = [
+    'DELETE FROM licence_exchange_index;',
+    'DELETE FROM licence_agreement_participants;',
+    'DELETE FROM licence_agreement_index;',
+  ];
+  for (const a of data.agreements ?? []) {
+    out.push(
+      'INSERT INTO licence_agreement_index (agreement_id, name, kind, directionality, instrument, source_url, grants, basis, kind_verified, superseded_from) VALUES ('
+      + [a.id, a.name, a.kind, a.directionality, a.instrument, a.source_url, a.grants ?? null,
+        a.basis ?? null, a.kind_verified ? 1 : 0, a.superseded_from ?? null].map(q).join(', ')
+      + ');',
+    );
+    for (const [role, key] of [['destination', 'destinations'], ['beneficiary', 'beneficiaries']] as const) {
+      for (const iso of (a[key] as string[] | undefined) ?? []) {
+        out.push(`INSERT OR IGNORE INTO licence_agreement_participants (agreement_id, iso_n3, role) VALUES (${q(a.id)}, ${q(iso)}, ${q(role)});`);
+      }
+    }
+  }
+  for (const dest of data.destinations) {
+    for (const e of (dest.entries as Array<Record<string, unknown>>) ?? []) {
+      out.push(
+        'INSERT INTO licence_exchange_index (destination_iso_n3, agreement_id, origin_iso_n3, subnational_label, origin_label_en, classes, theory_test_required, practical_test_required) VALUES ('
+        + [dest.iso_n3, dest.agreement_id ?? null, e.origin_iso_n3 ?? null, e.subnational_label ?? null,
+          e.origin_label_en, e.classes ?? null, e.theory_test_required ?? null, e.practical_test_required ?? null].map(q).join(', ')
+        + ');',
+      );
+    }
+  }
+  return out;
+}
+
 async function verify(): Promise<void> {
   const counts = (await query(
     `SELECT (SELECT COUNT(*) FROM canonical_entities) AS entities,
             (SELECT COUNT(*) FROM canonical_revisions) AS revisions,
             (SELECT COUNT(*) FROM evidence_links) AS evidence,
             (SELECT COUNT(*) FROM route_index) AS routes,
+            (SELECT COUNT(*) FROM licence_agreement_index) AS licence_agreements,
+            (SELECT COUNT(*) FROM licence_exchange_index) AS licence_rows,
             (SELECT COUNT(*) FROM monitor_pages) AS monitor_pages,
             (SELECT COUNT(*) FROM monitor_posts) AS monitor_posts;`,
   ))[0];
@@ -259,6 +328,11 @@ if (cmd === 'verify') {
     await migrateRemoteSchema();
     console.log('== 5. import ==');
     await runBatched(statements, 'import');
+    console.log('== 5b. licence exchange ==');
+    await ensureLicenceSchema();
+    const licence = renderLicenceSql();
+    console.log(`  ${licence.length} statements`);
+    await runBatched(licence, 'licence');
   } catch (error) {
     console.error('\n!! sync FAILED mid-write — remote canonical tables may be PARTIAL.');
     console.error('   Recover: re-run `bun run data:sync -- sync` (imports are idempotent upserts and converge),');

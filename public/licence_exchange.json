@@ -5215,10 +5215,10 @@
     {
       "id": "licence-portugal",
       "name": "Portugal — IMT / gov.pt",
-      "kind": "unknown",
-      "directionality": "unknown",
-      "instrument": "IMT / gov.pt — Troca de título de condução estrangeiro (OECD/CPLP and bilateral reciprocity)",
-      "source_url": "https://www.gov.pt/servicos/trocar-carta-de-conducao-estrangeira-por-portuguesa",
+      "kind": "unilateral_recognition",
+      "directionality": "asymmetric",
+      "instrument": "Decreto-Lei n.º 46/2022 de 12 de julho, amending Código da Estrada arts. 125.º and 128.º",
+      "source_url": "https://dre.pt/application/conteudo/185971761",
       "destinations": [
         "620"
       ],
@@ -5241,8 +5241,9 @@
         "826",
         "840"
       ],
-      "basis": "",
-      "kind_verified": false
+      "basis": "CORRECTION: our record described this as \"OECD/CPLP and bilaterals\", which implies a CPLP instrument. There is none — the CPLP Secretariat's own register of 39 intra-CPLP agreements contains nothing on driving licences or road traffic. Portugal's treatment is unilateral domestic law. DL 46/2022 in fact DISPENSES with exchange for these states: \"promove-se a dispensa das trocas de cartas de condução, habilitando-se a condução no território nacional com títulos emitidos naqueles Estados, através do reconhecimento\" — recognition replaces the swap. Where a holder does choose to exchange, art. 128.º(2)(a) waives the driving test. Recognition under art. 125.º(1)(c) is itself conditional on the issuing state being party to Geneva 1949 or Vienna 1968, or holding a bilateral with Portugal — and IMT names only Angola, Cabo Verde, Mozambique and São Tomé e Príncipe as having such a bilateral.",
+      "kind_verified": true,
+      "grants": "recognition_and_exchange"
     }
   ]
 }
