@@ -153,8 +153,54 @@ describe('agreement layer: three legally different things, no longer one list', 
     for (const dest of seed.destinations) {
       expect(ids, `${dest.name} has no agreement`).toContain(dest.agreement_id!);
     }
-    for (const agreement of listAgreements(seed)) {
-      for (const iso of agreement.destinations) expect(destIsos).toContain(iso);
+    // Deliberately NOT asserting the converse. A multilateral instrument covers
+    // states we hold no annex for — Directive 2006/126/EC binds 30, of which we
+    // have seeded lists for six. Requiring every agreement destination to be a
+    // seeded destination would forbid exactly the bloc-shaped data this layer
+    // exists to hold.
+    const multilateral = listAgreements(seed).filter(a => a.kind === 'multilateral_instrument');
+    for (const agreement of multilateral) {
+      expect(agreement.destinations.length, `${agreement.id} should span a bloc`).toBeGreaterThan(destIsos.size);
     }
+  });
+});
+
+describe('the EU/EEA instrument, and the arbitrage it forecloses', () => {
+  const eea = () => agreementById(seed, 'licence-eea-directive')!;
+
+  test('scope is 30 states, and Switzerland is not one of them', () => {
+    // Our eu_eea bloc has 32 members. Directive 2006/126/EC binds the EU-27 plus
+    // Iceland, Liechtenstein and Norway. Switzerland is not a party to the EEA
+    // Agreement (art. 126(1) lists three EFTA states; art. 128 still records
+    // Switzerland as one that may apply), so its licences travel on national
+    // third-country law — Germany files it in Anlage 11, the list of states
+    // OUTSIDE the EEA. Deriving the set from the bloc unchecked over-claims.
+    expect(eea().destinations).toHaveLength(30);
+    expect(eea().destinations).not.toContain('756'); // Switzerland
+    expect(eea().destinations).not.toContain('826'); // United Kingdom, third country since 2020
+  });
+
+  test('it grants recognition, which is not exchange', () => {
+    // Art. 2(1) is mutual RECOGNITION — you may drive on the licence you hold.
+    // Exchange is art. 11(1) and is a right to REQUEST. Treating them as one
+    // would overstate every EU row in the atlas.
+    expect(eea().grants).toBe('recognition');
+    expect(eea().exchange_article).toContain('11(1)');
+    expect(eea().exchange_article).toContain('request');
+  });
+
+  test('a third-country licence cannot be laundered into bloc-wide validity', () => {
+    // The finding that answers the arbitrage question. Under art. 11(6) a
+    // third-country exchange is recorded on the new licence, the original is
+    // surrendered, and a later member state "need not apply the principle of
+    // mutual recognition". So Paraguay -> Spain does not yield an EEA-wide licence,
+    // and the atlas must not imply that it does.
+    expect(eea().third_country_carve_out).toContain('11(6)');
+    expect(eea().third_country_carve_out).toContain('need not apply the principle of mutual recognition');
+  });
+
+  test('the successor directive is dated, not silently assumed away', () => {
+    expect(eea().superseded_from).toBe('2029-11-26');
+    expect(eea().superseded_note).toContain('2025/2205');
   });
 });

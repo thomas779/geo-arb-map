@@ -74,6 +74,28 @@ export interface LicenceAgreement {
    * arrangement is doubtful. Mirrors BLOC_RIGHTS.verified in the canonical corpus.
    */
   kind_verified?: boolean;
+  /**
+   * What the instrument actually confers. Recognition (you may drive on the licence
+   * you hold) and exchange (you may swap it for a domestic one) are different
+   * rights, and Directive 2006/126/EC puts them in different articles — 2(1) and 11
+   * respectively. Conflating them would overstate every EU row.
+   */
+  grants?: 'recognition' | 'exchange' | 'recognition_and_exchange';
+  /** The provision governing exchange, where it differs from the recognition one. */
+  exchange_article?: string;
+  /** The residence test, which gates almost every exchange in practice. */
+  residence_condition?: string;
+  /**
+   * The rule that stops a third-country licence being laundered into bloc-wide
+   * validity by swapping it in one member state. Under art. 11(6) the exchange is
+   * recorded on the new licence, the original is surrendered, and a later member
+   * state "need not apply the principle of mutual recognition". Without this the
+   * atlas would imply an arbitrage the Directive explicitly forecloses.
+   */
+  third_country_carve_out?: string;
+  /** ISO date from which a successor instrument replaces this one. */
+  superseded_from?: string;
+  superseded_note?: string;
 }
 
 export interface LicenceExchangeDisclaimer {
