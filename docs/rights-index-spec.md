@@ -1,8 +1,10 @@
 # Rights Index — Locked Design Decisions
 
 Status: **criteria locked, data programme open.** No index is computed or published
-yet. Run `bun run index:audit` for live coverage; at the time of writing 3 of 13
-dimensions carry enough structured data to score.
+yet. `bun run index:audit` is the authority for coverage and every figure below is
+copied from it, never hand-typed. Read as of 2026-08-09: **5 of 15 dimensions are
+scoreable**, split Axis A 0 of 7 and Axis B 5 of 8. Re-run the audit before quoting
+any of these numbers; they move with the corpus.
 
 This file records decisions locked on 2026-08-04 so the feature lands cleanly when the
 inputs exist. Concepts win over naming: where a future proposal's field names differ
@@ -51,8 +53,10 @@ the corpus can produce that nobody else is producing.
 
 | # | Dimension | Measure |
 |---|---|---|
-| B1 | Jus soli | unconditional / conditional / none, plus the severity of the condition (a parent's settled status is a higher bar than a parent's lawful presence). |
-| B2 | Descent depth | the maximum qualifying ancestral degree, plus any cutoff, whether generational or a date. |
+| B1 | Jus soli | unconditional / conditional / none. |
+| B1b | Jus soli condition | the severity of the condition on the conditional third (a parent's settled status is a higher bar than a parent's lawful presence). Audited separately from B1 because the tri-state can be complete while the condition is not. |
+| B2 | Descent depth | the qualifying ancestral relation recorded per route. |
+| B2b | Descent ceiling | how deep descent runs: the stated generational or date cutoff. Separate from B2 because absence of a cutoff is unknown, never a cutoff, so it cannot be derived from B2 and must be sourced. |
 | B3 | Naturalisation period | the ordinary residence requirement in months. Ordinary track only, never the marriage or merit variant. |
 | B4 | Investment | the lowest qualifying price. |
 | B5 | Family | spouse and partner routes, and their duration requirement. |
@@ -64,8 +68,11 @@ These rules, not the dimension list, are what makes the index defensible.
 
 1. **Unrecorded is never zero.** A `null` propagates as *not scored*. It never becomes a
    0, and it never becomes a favourable default. This is the most important rule in the
-   file: four schemas in this repo are fully built and carry no rows, so a scorer that
-   read absence as zero would rank every country identically low while looking precise.
+   file: the three route-level rights schemas, `transmission_abroad`,
+   `parent_residence_right` and `nationality_eligibility`, are validated, projected,
+   documented and tested, and each is populated on **0 of the 876 routes**. A scorer that
+   read that absence as zero would rank every country identically low while looking
+   precise. The audit reports this as A3 `EMPTY`.
 2. **Completeness is published beside every score.** A rank resting on 3 of 7 dimensions
    must be visibly weaker than one resting on 7. Without this the index cannot be
    published honestly before the sourcing programme finishes, and with it, it can.
@@ -82,8 +89,8 @@ These rules, not the dimension list, are what makes the index defensible.
    to primary law is the opaque number this index exists to replace.
 7. **Weights are deferred, not undecided.** The rule is locked: weights are explicit,
    published, and sum to 1 within each axis. The numbers stay open until the inputs
-   exist, because weights chosen now would be fitted to whichever three dimensions
-   happen to be populated today.
+   exist, because weights chosen now would be fitted to whichever five dimensions
+   happen to be populated today, all five of them on Axis B.
 
 ## Deliberately excluded
 
@@ -109,26 +116,49 @@ dimension, one of:
 - `EMPTY` schema exists and validates, zero rows
 - `ABSENT` no schema; the field must be designed before sourcing
 
+It then runs the composite model over dimension *availability* to answer whether either
+axis could be published at all. That check is programme readiness, not a country score:
+the input is whether a dimension is scoreable, not any country's value, and the weights
+are equal because the real weights are deferred under rule 7. At 2026-08-09 it reports
+Axis A 0 of 7 (0%, NOT RANKABLE) and Axis B 5 of 8 (63%, RANKABLE against the
+`MIN_RANKABLE_COMPLETENESS = 0.5` floor in `scripts/lib/rights-score.ts`). Axis B
+clearing the floor is an availability result only. It says the dimensions exist, not
+that a per-country composite carries them.
+
 ### The A1 provenance problem
 
-Dimension A1 is the centre of the index, and it currently rests on data that cannot
-satisfy rule 6. Only **3 of 46 published arrangements are canonical** (`eu_eea`,
-`mercosur`, `spain_iberoamerican`). The other 43 are legacy passthrough: no
-`directionality`, no `destinations`/`beneficiaries` split, no evidence links. **Not one
-of the 24 blocs carries a `sources` field.**
+Dimension A1 is the centre of the index, and rule 6 is what it has to satisfy. The
+migration is most of the way done and the sourcing is not: **34 of 46 arrangements are
+canonical** (12 blocs, 22 lanes) and 12 remain legacy passthrough with no
+`directionality`, no `destinations`/`beneficiaries` split and no evidence links. Of the
+34 canonical, only **13 carry `source_refs`**. Migrating is not sourcing, and the audit
+reports the two counts separately so they cannot be confused again.
 
-So the settle-by-right peer counts that make the thesis look good, Ireland at 35 peers
-and the Nordic group at 33, are computed from unsourced membership lists. That is fine
-for a prototype and unacceptable for a published index. Migrating arrangements into
-canonical is therefore a prerequisite for A1, not an improvement to it, and it is
-sequenced ahead of structuring the rights text.
+Blocs are the sourced half: all **12 canonical blocs carry `source_refs`**, so the
+settle-by-right peer counts that make the thesis work, Ireland at 35 peers and the
+Nordic group at 33, now trace to instruments rather than to unsourced membership lists.
+The 12 blocs still legacy are the `closed`, `one_way`, `hub_spoke` and `proto`
+categories, which confer no settlement, so they are the cheap remainder rather than the
+blocker. Lanes are the unsourced half: 15 of 22 carry a `sources` array and **not one
+entry is a URL**, they are prose, so they cannot become source entities.
 
-It also reports three **structural blockers** that are code fixes rather than sourcing,
-and which would silently corrupt the index if left in place: arrangement directionality
-is dropped in projection, `eligibility[]` is dropped in projection (taking descent
-degree with it), and `willing_child_abroad` is hard-coded unsatisfiable in
-`src/lib/pathfinder.ts`, so three child-birth accelerator edges exist in the graph and
-can never fire.
+A1 is therefore no longer blocked on provenance for the settlement blocs. It is blocked
+on `rights_by_status` still being free text: the audit reads A1 as `THIN` at 12 of 24
+and A2 at 11 of 24 off the structured rights matrix, and only 8 of the 12 rows were read
+against the instrument, the rest being prose-derived and marked `UNVERIFIED` in their
+detail. A1 can be scored over the sourced subset, never over the full set.
+
+The audit also reports three **structural blockers** that are code fixes rather than
+sourcing, and which would silently corrupt the index if left in place:
+
+1. **Directionality served.** `projectBloc` now carries `directionality` and the
+   destinations/beneficiaries split (2026-08-08), so the pipe is correct. Still blocked
+   because `public/blocs_data.json` is the legacy source the browser reads, not a
+   projection output. It clears when the remaining arrangements reach canonical and the
+   served file is generated from the projection.
+2. **`eligibility[]` is dropped in projection**, taking descent degree with it.
+3. **`willing_child_abroad` is hard-coded unsatisfiable** in `src/lib/pathfinder.ts`, so
+   three child-birth accelerator edges exist in the graph and can never fire.
 
 Do not hand-type coverage figures into issues or copy. Regenerate them:
 `bun run index:audit -- --json`.
