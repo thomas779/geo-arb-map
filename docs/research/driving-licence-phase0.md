@@ -91,12 +91,22 @@ Primary:
 Harvest: `docs/research/uk-exchangeable-licences.json` (26 designated origins).  
 **Note:** Great Britain only; Northern Ireland is a separate regime. Designation = exchange without driving test when resident in GB; class maps not invented.
 
+## Additional annexes (continuation)
+
+| Destination | Source | Rows |
+|---|---|---:|
+| **Netherlands** | [RDW](https://www.rdw.nl/en/driving-licence/foreign-driving-licence/exchanging-a-foreign-driving-licence) | 16 third-country (+ explicit 185-day residence rule) |
+| **Ireland** | [NDLS](https://www.ndls.ie/licensed-driver/exchange-my-foreign-driving-licence.html) / RSA / citizensinformation | 16 recognised non-EU states |
+| **France** | [Sécurité routière PDF 1 May 2026](https://www.securite-routiere.gouv.fr/sites/default/files/2026-04/liste_reciprocite_hors_ue_et_eee_au_1er_mai_2026.pdf) | ~109 (national + US/CA subnational) |
+
+Research dumps: `nl-rdw-exchange.json`, `ie-recognised-states.json`, `fr-reciprocite-mai-2026.json`.
+
 ## Product decision for UI v1
 
 | Choice | Decision |
 |---|---|
 | Primary UX | Origin → destinations that list it (exchange lookup) |
-| Seed destinations | **Germany** + **Great Britain** |
+| Seed destinations | **DE, GB, NL, IE, FR** (five annexes) |
 | Framing | Reference / convertibility tool + residence disclaimer |
 | Pathfinder | No multi-hop |
 | Rights index | Out of scope |
@@ -104,7 +114,9 @@ Harvest: `docs/research/uk-exchangeable-licences.json` (26 designated origins).
 
 ## Next after this branch
 
-1. More destination annexes (IE, FR, NL, AU, …)  
+1. More destination annexes (AU, BE, ES, …)  
 2. Optional formal `licence_routes` in canonical pilot  
 3. Origin acquisition ranked by annex frequency  
+4. Tighten France class columns where PDF left null  
+
 

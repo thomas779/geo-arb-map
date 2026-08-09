@@ -15,17 +15,27 @@ const seed = JSON.parse(
 ) as LicenceExchangeData;
 
 describe('licence exchange seed (#171)', () => {
-  test('seed has Germany and Great Britain destinations plus disclaimer', () => {
+  test('seed has five destination annexes plus disclaimer', () => {
     expect(seed.schema_version).toBe(1);
     expect(seed.disclaimer.normal_residence).toMatch(/185 days/i);
     expect(seed.disclaimer.scope).toMatch(/not a guide to licence tourism/i);
-    expect(seed.destinations.map(d => d.iso_n3).sort()).toEqual(['276', '826']);
+    expect(seed.destinations.map(d => d.iso_n3).sort()).toEqual([
+      '250', '276', '372', '528', '826',
+    ]);
     const de = seed.destinations.find(d => d.iso_n3 === '276')!;
     const uk = seed.destinations.find(d => d.iso_n3 === '826')!;
+    const nl = seed.destinations.find(d => d.iso_n3 === '528')!;
+    const fr = seed.destinations.find(d => d.iso_n3 === '250')!;
+    const ie = seed.destinations.find(d => d.iso_n3 === '372')!;
     expect(de.source_url).toContain('fev_2010/anlage_11');
     expect(de.entries.length).toBeGreaterThan(50);
     expect(uk.source_url).toContain('legislation.gov.uk');
     expect(uk.entries.length).toBeGreaterThanOrEqual(20);
+    expect(nl.source_url).toContain('rdw.nl');
+    expect(nl.entries.some(e => e.origin_label_en === 'Japan')).toBe(true);
+    expect(fr.source_url).toContain('securite-routiere.gouv.fr');
+    expect(fr.entries.length).toBeGreaterThan(80);
+    expect(ie.source_url).toContain('ndls.ie');
   });
 
   test('Switzerland is no retest in Germany; Connecticut requires theory', () => {
@@ -68,11 +78,21 @@ describe('licence exchange seed (#171)', () => {
     expect(de.entries.every(e => e.subnational)).toBe(true);
   });
 
-  test('Japan matches both Germany and UK without practical test', () => {
+  test('Japan matches all five seeded destinations without practical retest', () => {
     const matches = matchesForOrigin(seed, 'nat:392');
-    expect(matches.map(m => m.destination.iso_n3).sort()).toEqual(['276', '826']);
+    expect(matches.map(m => m.destination.iso_n3).sort()).toEqual([
+      '250', '276', '372', '528', '826',
+    ]);
     expect(matches.every(m => m.any_no_retest)).toBe(true);
     expect(matches.every(m => !m.any_practical)).toBe(true);
+  });
+
+  test('Netherlands lists Alberta/Québec as subnational; France lists Paraguay', () => {
+    const nl = seed.destinations.find(d => d.iso_n3 === '528')!;
+    expect(nl.entries.some(e => e.subnational_label === 'Alberta')).toBe(true);
+    expect(nl.entries.some(e => e.subnational_label === 'Québec')).toBe(true);
+    const fr = seed.destinations.find(d => d.iso_n3 === '250')!;
+    expect(fr.entries.some(e => e.origin_iso_n3 === '600' || e.origin_label_en === 'Paraguay')).toBe(true);
   });
 
   test('country summary for Germany and Japan', () => {
@@ -83,7 +103,9 @@ describe('licence exchange seed (#171)', () => {
     const jp = summariseCountry(seed, '392');
     expect(countryHasLicenceData(jp)).toBe(true);
     expect(jp.as_destination).toBeNull();
-    expect(jp.as_origin_destinations.map(d => d.iso_n3).sort()).toEqual(['276', '826']);
+    expect(jp.as_origin_destinations.map(d => d.iso_n3).sort()).toEqual([
+      '250', '276', '372', '528', '826',
+    ]);
   });
 
   test('testLabel wording', () => {
