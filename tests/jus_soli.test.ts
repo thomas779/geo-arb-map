@@ -82,14 +82,35 @@ describe('dependent territories defer rather than score', () => {
 });
 
 describe('what it refuses to decide', () => {
-  test('a terse condition it cannot read returns needs_review, not a guess', () => {
-    // Costa Rica's `registration`. Guessing here is what produced the mislabels
-    // this module exists to find.
+  test('a terse condition it has not read returns needs_review, not a guess', () => {
+    // The guard, restated on a label nobody has read against the statute. It used to
+    // be Costa Rica's `registration`; that one has since been read, so leaving it here
+    // would test the reading rather than the refusal.
+    const finding = classifyJusSoli('conditional', 'declaration',
+      'Nationality by birth is available to certain children born in the territory.');
+    expect(finding.family).toBe('needs_review');
+    expect(finding.basis).toContain('declaration');
+  });
+
+  test('Costa Rica classifies once the instrument has actually been read', () => {
+    // Constitution art. 13(3) confers a right of OPTION, not an entitlement: the child
+    // is Costa Rican "que se inscriba como costarricense", on a parent's volition during
+    // minority or by their own act to 25, and art. 16 makes that cut-off incoherent
+    // unless what lapses is an unexercised option rather than a held nationality. So
+    // nothing vests at birth — the France and Australia shape, not Chile's.
     const finding = classifyJusSoli('conditional', 'registration',
       'Article 13 nationality by birth rules: Costa Rican parentage, birth in Costa Rica with '
       + 'registration for foreign parents, birth abroad with registration, and foundlings.');
-    expect(finding.family).toBe('needs_review');
-    expect(finding.basis).toContain('registration');
+    expect(finding.family).toBe('later_acquisition_not_birth');
+    expect(finding.openness).toBe(FAMILY_OPENNESS.later_acquisition_not_birth);
+  });
+
+  test('the registration reading does not generalise from the label alone', () => {
+    // A future jurisdiction using the same word for an automatic entitlement with a
+    // recording formality must not inherit Costa Rica's reading. The summary is the
+    // corroboration; without it the label decides nothing.
+    expect(family('conditional', 'registration',
+      'Every child born in the territory is a citizen from birth.')).toBe('needs_review');
   });
 
   test('the tri-state is trusted where it is not contradicted', () => {

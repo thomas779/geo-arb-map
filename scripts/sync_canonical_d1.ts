@@ -259,9 +259,17 @@ function renderLicenceSql(): string[] {
   }
   for (const dest of data.destinations) {
     for (const e of (dest.entries as Array<Record<string, unknown>>) ?? []) {
+      // subnational_label is carried in the JSON only where it DIFFERS from the English
+      // label — the same deduplication origin_label already gets, and worth ~3.6KB of a
+      // 200KB public surface. The projection must not lose the marker to that, so it
+      // falls back the way every reader of this field already does (listOrigins,
+      // entryMatchesKey, public/licence-exchange.js). Also keeps the natural key on
+      // licence_exchange_index stable: it COALESCEs this column.
+      const subnationalLabel = e.subnational_label
+        ?? (e.subnational ? e.origin_label_en : null);
       out.push(
         'INSERT INTO licence_exchange_index (destination_iso_n3, agreement_id, origin_iso_n3, subnational_label, origin_label_en, classes, theory_test_required, practical_test_required) VALUES ('
-        + [dest.iso_n3, dest.agreement_id ?? null, e.origin_iso_n3 ?? null, e.subnational_label ?? null,
+        + [dest.iso_n3, dest.agreement_id ?? null, e.origin_iso_n3 ?? null, subnationalLabel,
           e.origin_label_en, e.classes ?? null, e.theory_test_required ?? null, e.practical_test_required ?? null].map(q).join(', ')
         + ');',
       );

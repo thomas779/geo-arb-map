@@ -4,7 +4,7 @@
   "disclaimer": {
     "normal_residence": "Exchange almost always requires that you were normally resident in the issuing country when (and often while) you held the licence, and that you are resident in the destination when you exchange. EU law defines normal residence as living in a place for at least 185 days in each calendar year (Directive 2006/126/EC Art. 12). Several national authorities (e.g. Netherlands RDW) restate the same 185-day rule for non-EU licences. A licence obtained without meeting that condition is often void in the destination.",
     "scope": "Lawful exchange conditions only. This is not a guide to licence tourism, and the one-licence rule means there is no stacking to be done: you end up holding exactly one, from where you reside.",
-    "coverage": "Seeded destinations (11): Germany, Great Britain, Netherlands, Ireland, France, Spain, Austria, New Zealand, Australia, Denmark, Portugal. EU/EEA mutual recognition is not expanded as third-country annex rows. Sub-national variance is flagged for US/CA/AU where instruments are state/province-level.",
+    "coverage": "Seeded destinations (13): Germany, Great Britain, Netherlands, Ireland, France, Spain, Austria, New Zealand, Australia, Denmark, Portugal, Switzerland, South Korea. EU/EEA mutual recognition is not expanded as third-country annex rows. Sub-national variance is flagged for US/CA/AU where instruments are state/province-level. Under the Swiss bilaterals the counterparty ITSELF is sub-national in eight cases — seven Canadian provinces and the US state of Louisiana — and those rows are listed in the table but are DELIBERATELY NOT PAINTED on the map: Canada and the United States have no Swiss licence treaty at federal level, and colouring them, even partially, would claim a federal arrangement that does not exist. Read the eight rows, not the map, for those.",
     "what_a_licence_evidences": "A driving licence is best read as a RESIDENCE ARTEFACT, not a collectible. Under Directive 2006/126/EC the three rules lock together: issuance requires normal residence in the issuing state (art. 7(1)(e)); \"No person may hold more than one driving licence\" and a state \"shall refuse to issue a licence where it establishes that the applicant already holds\" one, verifying with other Member States through the EU driving licence network (art. 7(5)(a)-(d)); and on exchange the original is surrendered and the swap is recorded on the new licence (art. 11(6)). So the licence you hold is single, exclusive and anchored to where you actually live, which is why in practice it is widely accepted as evidence of address. That exclusivity is the point of this layer, not a limitation of it: the exchange network shows which residence histories convert into which documents."
   },
   "destinations": [
@@ -25,7 +25,6 @@
         {
           "origin_label": "Albanien",
           "origin_iso_n3": "008",
-          "parent_iso_n3": "008",
           "subnational": false,
           "classes": "A1 , A2, A, B , BE, C1, C1E, C, CE, D1, D1E, D und DE",
           "theory_test_required": false,
@@ -36,7 +35,6 @@
         {
           "origin_label": "Albanien",
           "origin_iso_n3": "008",
-          "parent_iso_n3": "008",
           "subnational": false,
           "classes": "AM",
           "theory_test_required": false,
@@ -46,7 +44,6 @@
         },
         {
           "origin_iso_n3": "020",
-          "parent_iso_n3": "020",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -57,7 +54,6 @@
         {
           "origin_label": "Bosnien und Herzegowina",
           "origin_iso_n3": "070",
-          "parent_iso_n3": "070",
           "subnational": false,
           "classes": "A1, A, B",
           "theory_test_required": false,
@@ -68,7 +64,6 @@
         {
           "origin_label": "Französisch-Polynesien",
           "origin_iso_n3": "258",
-          "parent_iso_n3": "258",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -78,7 +73,6 @@
         },
         {
           "origin_iso_n3": "292",
-          "parent_iso_n3": "292",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -88,7 +82,6 @@
         },
         {
           "origin_iso_n3": "831",
-          "parent_iso_n3": "831",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -99,7 +92,6 @@
         {
           "origin_label": "Insel Man",
           "origin_iso_n3": "833",
-          "parent_iso_n3": "833",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -109,7 +101,6 @@
         },
         {
           "origin_iso_n3": "376",
-          "parent_iso_n3": "376",
           "subnational": false,
           "classes": "B",
           "theory_test_required": false,
@@ -119,7 +110,6 @@
         },
         {
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -129,7 +119,6 @@
         },
         {
           "origin_iso_n3": "832",
-          "parent_iso_n3": "832",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -139,7 +128,6 @@
         },
         {
           "origin_iso_n3": "383",
-          "parent_iso_n3": "383",
           "subnational": false,
           "classes": "AM, A1, A2, A, B, BE, C1, C1E, C, CE, D1, D1E, D und DE",
           "theory_test_required": false,
@@ -150,7 +138,6 @@
         {
           "origin_label": "Moldau",
           "origin_iso_n3": "498",
-          "parent_iso_n3": "498",
           "subnational": false,
           "classes": "A1, A2, A, B, BE, C1, C1E, C, CE, D1, D1E, D und DE",
           "theory_test_required": false,
@@ -161,7 +148,6 @@
         {
           "origin_label": "Republik Nordmazedonien",
           "origin_iso_n3": "807",
-          "parent_iso_n3": "807",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -171,7 +157,6 @@
         },
         {
           "origin_iso_n3": "492",
-          "parent_iso_n3": "492",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -181,7 +166,6 @@
         },
         {
           "origin_iso_n3": "516",
-          "parent_iso_n3": "516",
           "subnational": false,
           "classes": "A1, A, B, BE, C1 , C1E, C , CE",
           "theory_test_required": false,
@@ -192,7 +176,6 @@
         {
           "origin_label": "Neukaledonien",
           "origin_iso_n3": "540",
-          "parent_iso_n3": "540",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -203,7 +186,6 @@
         {
           "origin_label": "Neuseeland",
           "origin_iso_n3": "554",
-          "parent_iso_n3": "554",
           "subnational": false,
           "classes": "1, 6",
           "theory_test_required": false,
@@ -214,7 +196,6 @@
         {
           "origin_label": "Republik Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "classes": "1, 2",
           "theory_test_required": false,
@@ -224,7 +205,6 @@
         },
         {
           "origin_iso_n3": "674",
-          "parent_iso_n3": "674",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -235,7 +215,6 @@
         {
           "origin_label": "Schweiz",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -246,7 +225,6 @@
         {
           "origin_label": "Serbien",
           "origin_iso_n3": "688",
-          "parent_iso_n3": "688",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -257,7 +235,6 @@
         {
           "origin_label": "Singapur",
           "origin_iso_n3": "702",
-          "parent_iso_n3": "702",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -268,7 +245,6 @@
         {
           "origin_label": "Südafrika",
           "origin_iso_n3": "710",
-          "parent_iso_n3": "710",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -279,7 +255,6 @@
         {
           "origin_label": "Vereinigtes Königreich",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "classes": "alle",
           "theory_test_required": false,
@@ -291,7 +266,6 @@
           "origin_iso_n3": "036",
           "parent_iso_n3": "036",
           "subnational": true,
-          "subnational_label": "Australian Capital Territory",
           "classes": "C , R",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -303,7 +277,6 @@
           "origin_iso_n3": "036",
           "parent_iso_n3": "036",
           "subnational": true,
-          "subnational_label": "New South Wales",
           "classes": "C, R",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -315,7 +288,6 @@
           "origin_iso_n3": "036",
           "parent_iso_n3": "036",
           "subnational": true,
-          "subnational_label": "Northern Territory",
           "classes": "C , R",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -327,7 +299,6 @@
           "origin_iso_n3": "036",
           "parent_iso_n3": "036",
           "subnational": true,
-          "subnational_label": "Queensland",
           "classes": "C , R",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -339,7 +310,6 @@
           "origin_iso_n3": "036",
           "parent_iso_n3": "036",
           "subnational": true,
-          "subnational_label": "South Australia",
           "classes": "C , R",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -351,7 +321,6 @@
           "origin_iso_n3": "036",
           "parent_iso_n3": "036",
           "subnational": true,
-          "subnational_label": "Tasmania",
           "classes": "C , R",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -363,7 +332,6 @@
           "origin_iso_n3": "036",
           "parent_iso_n3": "036",
           "subnational": true,
-          "subnational_label": "Victoria",
           "classes": "C , CAR, R",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -375,7 +343,6 @@
           "origin_iso_n3": "036",
           "parent_iso_n3": "036",
           "subnational": true,
-          "subnational_label": "Western Australia",
           "classes": "C , R",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -387,7 +354,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Alabama",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -399,7 +365,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Arizona",
           "classes": "G, D, 2",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -411,7 +376,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Arkansas",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -423,7 +387,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Colorado",
           "classes": "C, R",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -435,7 +398,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Connecticut",
           "classes": "D, 1, 2",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -447,7 +409,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Delaware",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -459,7 +420,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "District of Columbia",
           "classes": "D",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -471,7 +431,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Florida",
           "classes": "E",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -483,7 +442,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Idaho",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -495,7 +453,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Illinois",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -507,7 +464,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Indiana",
           "classes": "Operator License, Chauffeur License , Public Passenger Chauffeur License , Commercial Driver License, Probationary Operator´s License",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -519,7 +475,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Iowa",
           "classes": "C (Noncommercial Operator´s License) , A (Commercial Driver´s License) , B (Commercial Driver´s License) , C (Commercial Driver´s License) , D (Noncommercial Chauffeur Driver´s License mit Endorsement 1, 2 oder 3) , Intermediate Driver´s License",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -531,7 +486,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Kansas",
           "classes": "C",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -543,7 +497,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Kentucky",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -555,7 +508,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Louisiana",
           "classes": "E",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -567,7 +519,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Maryland",
           "classes": "C (Full License und Provisional License)",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -579,7 +530,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Massachusetts",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -591,7 +541,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Michigan",
           "classes": "operator",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -603,7 +552,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Minnesota",
           "classes": "D",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -615,7 +563,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Mississippi",
           "classes": "operator, R",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -627,7 +574,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Missouri",
           "classes": "F",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -639,7 +585,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Nebraska",
           "classes": "O",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -651,7 +596,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "New Mexico",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -663,7 +607,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "North Carolina",
           "classes": "C",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -675,7 +618,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Ohio",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -687,7 +629,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Oklahoma",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -699,7 +640,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Oregon",
           "classes": "C",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -711,7 +651,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Pennsylvania",
           "classes": "C",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -723,7 +662,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Puerto Rico",
           "classes": "3",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -735,7 +673,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "South Carolina",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -747,7 +684,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "South Dakota",
           "classes": "1 und 2",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -759,7 +695,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Tennessee",
           "classes": "D",
           "theory_test_required": true,
           "practical_test_required": false,
@@ -771,7 +706,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Texas",
           "classes": "C , A , B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -783,7 +717,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Utah",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -795,7 +728,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Virginia",
           "classes": "D, M , A , B , C",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -807,7 +739,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Washington State",
           "classes": "Driver License Intermediate Driver License",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -819,7 +750,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "West Virginia",
           "classes": "E",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -831,7 +761,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Wisconsin",
           "classes": "D",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -843,7 +772,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Wyoming",
           "classes": "C",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -855,7 +783,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Alberta",
           "classes": "5",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -867,7 +794,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "British Columbia",
           "classes": "5, 6, 7 (Novice Driver´s Licence)",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -879,7 +805,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Manitoba",
           "classes": "5 , 4 Stage F , 3 Stage F , 2 Stage F , 1 Stage F",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -891,7 +816,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "New Brunswick",
           "classes": "5, 7 Stufe 2",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -903,7 +827,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Newfoundland",
           "classes": "5",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -915,7 +838,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Northwest Territories",
           "classes": "5",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -927,7 +849,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Nova Scotia",
           "classes": "5",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -939,7 +860,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Ontario",
           "classes": "G",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -951,7 +871,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Prince Edward Island",
           "classes": "5",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -963,7 +882,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Québec",
           "classes": "5",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -975,7 +893,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Saskatchewan",
           "classes": "1 und 5",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -987,7 +904,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Yukon",
           "classes": "5",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1020,7 +936,6 @@
         {
           "origin_label_en": "Andorra",
           "origin_iso_n3": "020",
-          "parent_iso_n3": "020",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1029,7 +944,6 @@
         {
           "origin_label_en": "Australia",
           "origin_iso_n3": "036",
-          "parent_iso_n3": "036",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1038,7 +952,6 @@
         {
           "origin_label_en": "Barbados",
           "origin_iso_n3": "052",
-          "parent_iso_n3": "052",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1047,7 +960,6 @@
         {
           "origin_label_en": "British Virgin Islands",
           "origin_iso_n3": "092",
-          "parent_iso_n3": "092",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1056,7 +968,6 @@
         {
           "origin_label_en": "Canada",
           "origin_iso_n3": "124",
-          "parent_iso_n3": "124",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1067,7 +978,6 @@
         {
           "origin_label_en": "Cayman Islands",
           "origin_iso_n3": "136",
-          "parent_iso_n3": "136",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1076,7 +986,6 @@
         {
           "origin_label_en": "Republic of Cyprus",
           "origin_iso_n3": "196",
-          "parent_iso_n3": "196",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1085,7 +994,6 @@
         {
           "origin_label_en": "Falkland Islands",
           "origin_iso_n3": "238",
-          "parent_iso_n3": "238",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1094,7 +1002,6 @@
         {
           "origin_label_en": "Faroe Islands",
           "origin_iso_n3": "234",
-          "parent_iso_n3": "234",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1103,7 +1010,6 @@
         {
           "origin_label_en": "Guernsey",
           "origin_iso_n3": "831",
-          "parent_iso_n3": "831",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1112,7 +1018,6 @@
         {
           "origin_label_en": "Hong Kong",
           "origin_iso_n3": "344",
-          "parent_iso_n3": "344",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1121,7 +1026,6 @@
         {
           "origin_label_en": "Isle of Man",
           "origin_iso_n3": "833",
-          "parent_iso_n3": "833",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1130,7 +1034,6 @@
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1139,7 +1042,6 @@
         {
           "origin_label_en": "Jersey",
           "origin_iso_n3": "832",
-          "parent_iso_n3": "832",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1148,7 +1050,6 @@
         {
           "origin_label_en": "Malta",
           "origin_iso_n3": "470",
-          "parent_iso_n3": "470",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1157,7 +1058,6 @@
         {
           "origin_label_en": "Monaco",
           "origin_iso_n3": "492",
-          "parent_iso_n3": "492",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1166,7 +1066,6 @@
         {
           "origin_label_en": "New Zealand",
           "origin_iso_n3": "554",
-          "parent_iso_n3": "554",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1175,7 +1074,6 @@
         {
           "origin_label_en": "Republic of Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1184,7 +1082,6 @@
         {
           "origin_label_en": "North Macedonia",
           "origin_iso_n3": "807",
-          "parent_iso_n3": "807",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1193,7 +1090,6 @@
         {
           "origin_label_en": "Singapore",
           "origin_iso_n3": "702",
-          "parent_iso_n3": "702",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1202,7 +1098,6 @@
         {
           "origin_label_en": "South Africa",
           "origin_iso_n3": "710",
-          "parent_iso_n3": "710",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1211,7 +1106,6 @@
         {
           "origin_label_en": "Switzerland",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1220,7 +1114,6 @@
         {
           "origin_label_en": "Taiwan",
           "origin_iso_n3": "158",
-          "parent_iso_n3": "158",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1229,7 +1122,6 @@
         {
           "origin_label_en": "Ukraine",
           "origin_iso_n3": "804",
-          "parent_iso_n3": "804",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1238,7 +1130,6 @@
         {
           "origin_label_en": "United Arab Emirates",
           "origin_iso_n3": "784",
-          "parent_iso_n3": "784",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1247,7 +1138,6 @@
         {
           "origin_label_en": "Zimbabwe",
           "origin_iso_n3": "716",
-          "parent_iso_n3": "716",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1274,7 +1164,6 @@
         {
           "origin_label_en": "Andorra",
           "origin_iso_n3": "020",
-          "parent_iso_n3": "020",
           "subnational": false,
           "classes": "B",
           "theory_test_required": false,
@@ -1286,7 +1175,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Alberta",
           "classes": "B (class 5)",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1298,7 +1186,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Québec",
           "classes": "B (class 5)",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1308,7 +1195,6 @@
         {
           "origin_label_en": "Gibraltar",
           "origin_iso_n3": "292",
-          "parent_iso_n3": "292",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1318,7 +1204,6 @@
         {
           "origin_label_en": "Great Britain",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "classes": "all (BE only with separate exam)",
           "theory_test_required": false,
@@ -1329,7 +1214,6 @@
         {
           "origin_label_en": "Guernsey",
           "origin_iso_n3": "831",
-          "parent_iso_n3": "831",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1339,7 +1223,6 @@
         {
           "origin_label_en": "Isle of Man",
           "origin_iso_n3": "833",
-          "parent_iso_n3": "833",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1349,7 +1232,6 @@
         {
           "origin_label_en": "Israel",
           "origin_iso_n3": "376",
-          "parent_iso_n3": "376",
           "subnational": false,
           "classes": "B",
           "theory_test_required": false,
@@ -1359,7 +1241,6 @@
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "classes": "A and B (1B; motorcycles >400 cm³)",
           "theory_test_required": false,
@@ -1369,7 +1250,6 @@
         {
           "origin_label_en": "Jersey",
           "origin_iso_n3": "832",
-          "parent_iso_n3": "832",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1379,7 +1259,6 @@
         {
           "origin_label_en": "Monaco",
           "origin_iso_n3": "492",
-          "parent_iso_n3": "492",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1389,7 +1268,6 @@
         {
           "origin_label_en": "Northern Ireland",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1400,7 +1278,6 @@
         {
           "origin_label_en": "Singapore",
           "origin_iso_n3": "702",
-          "parent_iso_n3": "702",
           "subnational": false,
           "classes": "A (class 2 >400cc), B (class 3)",
           "theory_test_required": false,
@@ -1410,7 +1287,6 @@
         {
           "origin_label_en": "Taiwan",
           "origin_iso_n3": "158",
-          "parent_iso_n3": "158",
           "subnational": false,
           "classes": "B",
           "theory_test_required": false,
@@ -1421,7 +1297,6 @@
         {
           "origin_label_en": "Former Netherlands Antilles",
           "origin_iso_n3": "530",
-          "parent_iso_n3": "530",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1432,7 +1307,6 @@
         {
           "origin_label_en": "South Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "classes": "B (1st and 2nd class ordinary)",
           "theory_test_required": false,
@@ -1462,7 +1336,6 @@
         {
           "origin_label_en": "Australia",
           "origin_iso_n3": "036",
-          "parent_iso_n3": "036",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1471,7 +1344,6 @@
         {
           "origin_label_en": "Canada",
           "origin_iso_n3": "124",
-          "parent_iso_n3": "124",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1482,7 +1354,6 @@
         {
           "origin_label_en": "Georgia",
           "origin_iso_n3": "268",
-          "parent_iso_n3": "268",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1491,7 +1362,6 @@
         {
           "origin_label_en": "Gibraltar",
           "origin_iso_n3": "292",
-          "parent_iso_n3": "292",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1500,7 +1370,6 @@
         {
           "origin_label_en": "Guernsey",
           "origin_iso_n3": "831",
-          "parent_iso_n3": "831",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1509,7 +1378,6 @@
         {
           "origin_label_en": "Isle of Man",
           "origin_iso_n3": "833",
-          "parent_iso_n3": "833",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1518,7 +1386,6 @@
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1527,7 +1394,6 @@
         {
           "origin_label_en": "Jersey",
           "origin_iso_n3": "832",
-          "parent_iso_n3": "832",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1536,7 +1402,6 @@
         {
           "origin_label_en": "Moldova",
           "origin_iso_n3": "498",
-          "parent_iso_n3": "498",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1545,7 +1410,6 @@
         {
           "origin_label_en": "South Africa",
           "origin_iso_n3": "710",
-          "parent_iso_n3": "710",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1554,7 +1418,6 @@
         {
           "origin_label_en": "Republic of Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1563,7 +1426,6 @@
         {
           "origin_label_en": "Switzerland",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1572,7 +1434,6 @@
         {
           "origin_label_en": "New Zealand",
           "origin_iso_n3": "554",
-          "parent_iso_n3": "554",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1581,7 +1442,6 @@
         {
           "origin_label_en": "Northern Ireland",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1591,7 +1451,6 @@
         {
           "origin_label_en": "Taiwan",
           "origin_iso_n3": "158",
-          "parent_iso_n3": "158",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1600,7 +1459,6 @@
         {
           "origin_label_en": "United Kingdom",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1629,7 +1487,6 @@
         {
           "origin_label_en": "South Africa",
           "origin_iso_n3": "710",
-          "parent_iso_n3": "710",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1639,7 +1496,6 @@
         {
           "origin_label_en": "Algeria",
           "origin_iso_n3": "012",
-          "parent_iso_n3": "012",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1649,7 +1505,6 @@
         {
           "origin_label_en": "Andorra",
           "origin_iso_n3": "020",
-          "parent_iso_n3": "020",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1659,7 +1514,6 @@
         {
           "origin_label_en": "Antigua and Barbuda",
           "origin_iso_n3": "028",
-          "parent_iso_n3": "028",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1669,7 +1523,6 @@
         {
           "origin_label_en": "Saudi Arabia",
           "origin_iso_n3": "682",
-          "parent_iso_n3": "682",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1678,7 +1531,6 @@
         {
           "origin_label_en": "Australia",
           "origin_iso_n3": "036",
-          "parent_iso_n3": "036",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1687,7 +1539,6 @@
         {
           "origin_label_en": "Bahrain",
           "origin_iso_n3": "048",
-          "parent_iso_n3": "048",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1696,7 +1547,6 @@
         {
           "origin_label_en": "Belize",
           "origin_iso_n3": "084",
-          "parent_iso_n3": "084",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1705,7 +1555,6 @@
         {
           "origin_label_en": "Bhutan",
           "origin_iso_n3": "064",
-          "parent_iso_n3": "064",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1714,7 +1563,6 @@
         {
           "origin_label_en": "Myanmar",
           "origin_iso_n3": "104",
-          "parent_iso_n3": "104",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1723,7 +1571,6 @@
         {
           "origin_label_en": "Bosnia and Herzegovina",
           "origin_iso_n3": "070",
-          "parent_iso_n3": "070",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1732,7 +1579,6 @@
         {
           "origin_label_en": "Botswana",
           "origin_iso_n3": "072",
-          "parent_iso_n3": "072",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1741,7 +1587,6 @@
         {
           "origin_label_en": "Brazil",
           "origin_iso_n3": "076",
-          "parent_iso_n3": "076",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1750,7 +1595,6 @@
         {
           "origin_label_en": "Brunei",
           "origin_iso_n3": "096",
-          "parent_iso_n3": "096",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1759,7 +1603,6 @@
         {
           "origin_label_en": "Cabo Verde",
           "origin_iso_n3": "132",
-          "parent_iso_n3": "132",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1768,7 +1611,6 @@
         {
           "origin_label_en": "China",
           "origin_iso_n3": "156",
-          "parent_iso_n3": "156",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1778,7 +1620,6 @@
         {
           "origin_label_en": "South Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1787,7 +1628,6 @@
         {
           "origin_label_en": "Costa Rica",
           "origin_iso_n3": "188",
-          "parent_iso_n3": "188",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1796,7 +1636,6 @@
         {
           "origin_label_en": "Côte d'Ivoire",
           "origin_iso_n3": "384",
-          "parent_iso_n3": "384",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1805,7 +1644,6 @@
         {
           "origin_label_en": "Cuba",
           "origin_iso_n3": "192",
-          "parent_iso_n3": "192",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1814,7 +1652,6 @@
         {
           "origin_label_en": "Djibouti",
           "origin_iso_n3": "262",
-          "parent_iso_n3": "262",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1823,7 +1660,6 @@
         {
           "origin_label_en": "Dominica",
           "origin_iso_n3": "212",
-          "parent_iso_n3": "212",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1832,7 +1668,6 @@
         {
           "origin_label_en": "United Arab Emirates",
           "origin_iso_n3": "784",
-          "parent_iso_n3": "784",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -1841,7 +1676,6 @@
         {
           "origin_label_en": "Eswatini",
           "origin_iso_n3": "748",
-          "parent_iso_n3": "748",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1851,7 +1685,6 @@
         {
           "origin_label_en": "Ethiopia",
           "origin_iso_n3": "231",
-          "parent_iso_n3": "231",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1861,7 +1694,6 @@
         {
           "origin_label_en": "Gabon",
           "origin_iso_n3": "266",
-          "parent_iso_n3": "266",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1871,7 +1703,6 @@
         {
           "origin_label_en": "Gibraltar",
           "origin_iso_n3": "292",
-          "parent_iso_n3": "292",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1881,7 +1712,6 @@
         {
           "origin_label_en": "Grenada",
           "origin_iso_n3": "308",
-          "parent_iso_n3": "308",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1891,7 +1721,6 @@
         {
           "origin_label_en": "Guatemala",
           "origin_iso_n3": "320",
-          "parent_iso_n3": "320",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1901,7 +1730,6 @@
         {
           "origin_label_en": "Guyana",
           "origin_iso_n3": "328",
-          "parent_iso_n3": "328",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1911,7 +1739,6 @@
         {
           "origin_label_en": "Honduras",
           "origin_iso_n3": "340",
-          "parent_iso_n3": "340",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1921,7 +1748,6 @@
         {
           "origin_label_en": "Hong Kong",
           "origin_iso_n3": "344",
-          "parent_iso_n3": "344",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1931,7 +1757,6 @@
         {
           "origin_label_en": "Iran",
           "origin_iso_n3": "364",
-          "parent_iso_n3": "364",
           "subnational": false,
           "classes": "B",
           "theory_test_required": false,
@@ -1941,7 +1766,6 @@
         {
           "origin_label_en": "Jamaica",
           "origin_iso_n3": "388",
-          "parent_iso_n3": "388",
           "subnational": false,
           "classes": "A and B",
           "theory_test_required": false,
@@ -1951,7 +1775,6 @@
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1961,7 +1784,6 @@
         {
           "origin_label_en": "Jordan",
           "origin_iso_n3": "400",
-          "parent_iso_n3": "400",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1971,7 +1793,6 @@
         {
           "origin_label_en": "Kenya",
           "origin_iso_n3": "404",
-          "parent_iso_n3": "404",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1981,7 +1802,6 @@
         {
           "origin_label_en": "Kosovo",
           "origin_iso_n3": "383",
-          "parent_iso_n3": "383",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -1991,7 +1811,6 @@
         {
           "origin_label_en": "Kuwait",
           "origin_iso_n3": "414",
-          "parent_iso_n3": "414",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2001,7 +1820,6 @@
         {
           "origin_label_en": "Lebanon",
           "origin_iso_n3": "422",
-          "parent_iso_n3": "422",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2011,7 +1829,6 @@
         {
           "origin_label_en": "Macao",
           "origin_iso_n3": "446",
-          "parent_iso_n3": "446",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2021,7 +1838,6 @@
         {
           "origin_label_en": "North Macedonia",
           "origin_iso_n3": "807",
-          "parent_iso_n3": "807",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2031,7 +1847,6 @@
         {
           "origin_label_en": "Malawi",
           "origin_iso_n3": "454",
-          "parent_iso_n3": "454",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2041,7 +1856,6 @@
         {
           "origin_label_en": "Morocco",
           "origin_iso_n3": "504",
-          "parent_iso_n3": "504",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2051,7 +1865,6 @@
         {
           "origin_label_en": "Mauritius",
           "origin_iso_n3": "480",
-          "parent_iso_n3": "480",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2061,7 +1874,6 @@
         {
           "origin_label_en": "Moldova",
           "origin_iso_n3": "498",
-          "parent_iso_n3": "498",
           "subnational": false,
           "classes": "B",
           "theory_test_required": false,
@@ -2072,7 +1884,6 @@
         {
           "origin_label_en": "Mauritania",
           "origin_iso_n3": "478",
-          "parent_iso_n3": "478",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2082,7 +1893,6 @@
         {
           "origin_label_en": "Monaco",
           "origin_iso_n3": "492",
-          "parent_iso_n3": "492",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2092,7 +1902,6 @@
         {
           "origin_label_en": "Montenegro",
           "origin_iso_n3": "499",
-          "parent_iso_n3": "499",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2102,7 +1911,6 @@
         {
           "origin_label_en": "Mozambique",
           "origin_iso_n3": "508",
-          "parent_iso_n3": "508",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2112,7 +1920,6 @@
         {
           "origin_label_en": "Namibia",
           "origin_iso_n3": "516",
-          "parent_iso_n3": "516",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2122,7 +1929,6 @@
         {
           "origin_label_en": "Nepal",
           "origin_iso_n3": "524",
-          "parent_iso_n3": "524",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2132,7 +1938,6 @@
         {
           "origin_label_en": "Nicaragua",
           "origin_iso_n3": "558",
-          "parent_iso_n3": "558",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2142,7 +1947,6 @@
         {
           "origin_label_en": "New Zealand",
           "origin_iso_n3": "554",
-          "parent_iso_n3": "554",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2152,7 +1956,6 @@
         {
           "origin_label_en": "Oman",
           "origin_iso_n3": "512",
-          "parent_iso_n3": "512",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2162,7 +1965,6 @@
         {
           "origin_label_en": "Panama",
           "origin_iso_n3": "591",
-          "parent_iso_n3": "591",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2172,7 +1974,6 @@
         {
           "origin_label_en": "Paraguay",
           "origin_iso_n3": "600",
-          "parent_iso_n3": "600",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2182,7 +1983,6 @@
         {
           "origin_label_en": "Philippines",
           "origin_iso_n3": "608",
-          "parent_iso_n3": "608",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2192,7 +1992,6 @@
         {
           "origin_label_en": "Qatar",
           "origin_iso_n3": "634",
-          "parent_iso_n3": "634",
           "subnational": false,
           "classes": "A and B",
           "theory_test_required": false,
@@ -2202,7 +2001,6 @@
         {
           "origin_label_en": "United Kingdom",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2212,7 +2010,6 @@
         {
           "origin_label_en": "Russia",
           "origin_iso_n3": "643",
-          "parent_iso_n3": "643",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2222,7 +2019,6 @@
         {
           "origin_label_en": "Saint Kitts and Nevis",
           "origin_iso_n3": "659",
-          "parent_iso_n3": "659",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2232,7 +2028,6 @@
         {
           "origin_label_en": "Saint Lucia",
           "origin_iso_n3": "662",
-          "parent_iso_n3": "662",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2242,7 +2037,6 @@
         {
           "origin_label_en": "San Marino",
           "origin_iso_n3": "674",
-          "parent_iso_n3": "674",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2252,7 +2046,6 @@
         {
           "origin_label_en": "Saint Vincent and the Grenadines",
           "origin_iso_n3": "670",
-          "parent_iso_n3": "670",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2262,7 +2055,6 @@
         {
           "origin_label_en": "El Salvador",
           "origin_iso_n3": "222",
-          "parent_iso_n3": "222",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2272,7 +2064,6 @@
         {
           "origin_label_en": "Samoa",
           "origin_iso_n3": "882",
-          "parent_iso_n3": "882",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2282,7 +2073,6 @@
         {
           "origin_label_en": "São Tomé and Príncipe",
           "origin_iso_n3": "678",
-          "parent_iso_n3": "678",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2292,7 +2082,6 @@
         {
           "origin_label_en": "Serbia",
           "origin_iso_n3": "688",
-          "parent_iso_n3": "688",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2302,7 +2091,6 @@
         {
           "origin_label_en": "Seychelles",
           "origin_iso_n3": "690",
-          "parent_iso_n3": "690",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2312,7 +2100,6 @@
         {
           "origin_label_en": "Singapore",
           "origin_iso_n3": "702",
-          "parent_iso_n3": "702",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2322,7 +2109,6 @@
         {
           "origin_label_en": "Switzerland",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2332,7 +2118,6 @@
         {
           "origin_label_en": "Suriname",
           "origin_iso_n3": "740",
-          "parent_iso_n3": "740",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2342,7 +2127,6 @@
         {
           "origin_label_en": "Taiwan",
           "origin_iso_n3": "158",
-          "parent_iso_n3": "158",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2352,7 +2136,6 @@
         {
           "origin_label_en": "Chad",
           "origin_iso_n3": "148",
-          "parent_iso_n3": "148",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2362,7 +2145,6 @@
         {
           "origin_label_en": "Togo",
           "origin_iso_n3": "768",
-          "parent_iso_n3": "768",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2372,7 +2154,6 @@
         {
           "origin_label_en": "Tunisia",
           "origin_iso_n3": "788",
-          "parent_iso_n3": "788",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2382,7 +2163,6 @@
         {
           "origin_label_en": "Türkiye",
           "origin_iso_n3": "792",
-          "parent_iso_n3": "792",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2392,7 +2172,6 @@
         {
           "origin_label_en": "Vanuatu",
           "origin_iso_n3": "548",
-          "parent_iso_n3": "548",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2402,7 +2181,6 @@
         {
           "origin_label_en": "Vietnam",
           "origin_iso_n3": "704",
-          "parent_iso_n3": "704",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2412,7 +2190,6 @@
         {
           "origin_label_en": "Jersey",
           "origin_iso_n3": "832",
-          "parent_iso_n3": "832",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2422,7 +2199,6 @@
         {
           "origin_label_en": "Guernsey",
           "origin_iso_n3": "831",
-          "parent_iso_n3": "831",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2432,7 +2208,6 @@
         {
           "origin_label_en": "Isle of Man",
           "origin_iso_n3": "833",
-          "parent_iso_n3": "833",
           "subnational": false,
           "classes": "all",
           "theory_test_required": false,
@@ -2444,7 +2219,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Alberta",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2456,7 +2230,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "British Columbia",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2468,7 +2241,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Prince Edward Island",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2480,7 +2252,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Manitoba",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2492,7 +2263,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "New Brunswick",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2504,7 +2274,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Ontario",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2516,7 +2285,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Québec",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2528,7 +2296,6 @@
           "origin_iso_n3": "124",
           "parent_iso_n3": "124",
           "subnational": true,
-          "subnational_label": "Newfoundland and Labrador",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2540,7 +2307,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Arkansas",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2552,7 +2318,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "South Carolina",
           "classes": "all",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2564,7 +2329,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Colorado",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2576,7 +2340,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Connecticut",
           "classes": "A and B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2588,7 +2351,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Delaware",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2600,7 +2362,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Florida",
           "classes": "A and B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2612,7 +2373,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Illinois",
           "classes": "all",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2624,7 +2384,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Iowa",
           "classes": "all",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2636,7 +2395,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Maryland",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2648,7 +2406,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Massachusetts",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2660,7 +2417,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Michigan",
           "classes": "all",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2672,7 +2428,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "New Hampshire",
           "classes": "all",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2684,7 +2439,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Ohio",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2696,7 +2450,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Oklahoma",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2708,7 +2461,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Pennsylvania",
           "classes": "A and B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2720,7 +2472,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Texas",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2732,7 +2483,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Virginia",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2744,7 +2494,6 @@
           "origin_iso_n3": "840",
           "parent_iso_n3": "840",
           "subnational": true,
-          "subnational_label": "Wisconsin",
           "classes": "B",
           "theory_test_required": false,
           "practical_test_required": false,
@@ -2766,371 +2515,306 @@
         "EU/EEA mutual exchange separate (no exam).",
         "For third-country convenios, moto/coche (A/B) generally SIN PRUEBAS; C/D often require additional tests — see DGT table.",
         "Not exchangeable if licence obtained while already legally resident in Spain (except limited Korea rule).",
-        "Residence in Spain required for canje."
+        "Residence in Spain required for canje.",
+        "Applies to every row in this list: Truck/bus (C/D) often require additional aptitude tests per DGT table"
       ],
       "entries": [
         {
           "origin_label_en": "Andorra",
           "origin_iso_n3": "020",
-          "parent_iso_n3": "020",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Algeria",
           "origin_iso_n3": "012",
-          "parent_iso_n3": "012",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Argentina",
           "origin_iso_n3": "032",
-          "parent_iso_n3": "032",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Bolivia",
           "origin_iso_n3": "068",
-          "parent_iso_n3": "068",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Brazil",
           "origin_iso_n3": "076",
-          "parent_iso_n3": "076",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Chile",
           "origin_iso_n3": "152",
-          "parent_iso_n3": "152",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Colombia",
           "origin_iso_n3": "170",
-          "parent_iso_n3": "170",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "South Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Costa Rica",
           "origin_iso_n3": "188",
-          "parent_iso_n3": "188",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Ecuador",
           "origin_iso_n3": "218",
-          "parent_iso_n3": "218",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Philippines",
           "origin_iso_n3": "608",
-          "parent_iso_n3": "608",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Georgia",
           "origin_iso_n3": "268",
-          "parent_iso_n3": "268",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Guatemala",
           "origin_iso_n3": "320",
-          "parent_iso_n3": "320",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Honduras",
           "origin_iso_n3": "340",
-          "parent_iso_n3": "340",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "North Macedonia",
           "origin_iso_n3": "807",
-          "parent_iso_n3": "807",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Morocco",
           "origin_iso_n3": "504",
-          "parent_iso_n3": "504",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Moldova",
           "origin_iso_n3": "498",
-          "parent_iso_n3": "498",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Monaco",
           "origin_iso_n3": "492",
-          "parent_iso_n3": "492",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Nicaragua",
           "origin_iso_n3": "558",
-          "parent_iso_n3": "558",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "New Zealand",
           "origin_iso_n3": "554",
-          "parent_iso_n3": "554",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Panama",
           "origin_iso_n3": "591",
-          "parent_iso_n3": "591",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Paraguay",
           "origin_iso_n3": "600",
-          "parent_iso_n3": "600",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Peru",
           "origin_iso_n3": "604",
-          "parent_iso_n3": "604",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "United Kingdom",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Dominican Republic",
           "origin_iso_n3": "214",
-          "parent_iso_n3": "214",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "El Salvador",
           "origin_iso_n3": "222",
-          "parent_iso_n3": "222",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Serbia",
           "origin_iso_n3": "688",
-          "parent_iso_n3": "688",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Switzerland",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Tunisia",
           "origin_iso_n3": "788",
-          "parent_iso_n3": "788",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Türkiye",
           "origin_iso_n3": "792",
-          "parent_iso_n3": "792",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Ukraine",
           "origin_iso_n3": "804",
-          "parent_iso_n3": "804",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         },
         {
           "origin_label_en": "Uruguay",
           "origin_iso_n3": "858",
-          "parent_iso_n3": "858",
           "subnational": false,
           "classes": "A and B (moto/coche)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Truck/bus (C/D) often require additional aptitude tests per DGT table"
+          "no_retest": true
         }
       ],
       "agreement_id": "licence-spain"
@@ -3153,7 +2837,6 @@
         {
           "origin_label_en": "Albania",
           "origin_iso_n3": "008",
-          "parent_iso_n3": "008",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3163,7 +2846,6 @@
         {
           "origin_label_en": "Andorra",
           "origin_iso_n3": "020",
-          "parent_iso_n3": "020",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3173,7 +2855,6 @@
         {
           "origin_label_en": "Gibraltar",
           "origin_iso_n3": "292",
-          "parent_iso_n3": "292",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3183,7 +2864,6 @@
         {
           "origin_label_en": "Guernsey",
           "origin_iso_n3": "831",
-          "parent_iso_n3": "831",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3193,7 +2873,6 @@
         {
           "origin_label_en": "Isle of Man",
           "origin_iso_n3": "833",
-          "parent_iso_n3": "833",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3203,7 +2882,6 @@
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3213,7 +2891,6 @@
         {
           "origin_label_en": "Jersey",
           "origin_iso_n3": "832",
-          "parent_iso_n3": "832",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3223,7 +2900,6 @@
         {
           "origin_label_en": "Kosovo",
           "origin_iso_n3": "383",
-          "parent_iso_n3": "383",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3233,7 +2909,6 @@
         {
           "origin_label_en": "Monaco",
           "origin_iso_n3": "492",
-          "parent_iso_n3": "492",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3243,7 +2918,6 @@
         {
           "origin_label_en": "Montenegro",
           "origin_iso_n3": "499",
-          "parent_iso_n3": "499",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3253,7 +2927,6 @@
         {
           "origin_label_en": "San Marino",
           "origin_iso_n3": "674",
-          "parent_iso_n3": "674",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3263,7 +2936,6 @@
         {
           "origin_label_en": "Switzerland",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3273,7 +2945,6 @@
         {
           "origin_label_en": "Serbia",
           "origin_iso_n3": "688",
-          "parent_iso_n3": "688",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3283,7 +2954,6 @@
         {
           "origin_label_en": "United Kingdom",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "classes": "all categories",
           "theory_test_required": false,
@@ -3293,7 +2963,6 @@
         {
           "origin_label_en": "Australia",
           "origin_iso_n3": "036",
-          "parent_iso_n3": "036",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3305,7 +2974,6 @@
         {
           "origin_label_en": "Bosnia and Herzegovina",
           "origin_iso_n3": "070",
-          "parent_iso_n3": "070",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3315,7 +2983,6 @@
         {
           "origin_label_en": "Hong Kong",
           "origin_iso_n3": "344",
-          "parent_iso_n3": "344",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3325,7 +2992,6 @@
         {
           "origin_label_en": "Israel",
           "origin_iso_n3": "376",
-          "parent_iso_n3": "376",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3335,7 +3001,6 @@
         {
           "origin_label_en": "Canada",
           "origin_iso_n3": "124",
-          "parent_iso_n3": "124",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3347,7 +3012,6 @@
         {
           "origin_label_en": "North Macedonia",
           "origin_iso_n3": "807",
-          "parent_iso_n3": "807",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3357,7 +3021,6 @@
         {
           "origin_label_en": "New Zealand",
           "origin_iso_n3": "554",
-          "parent_iso_n3": "554",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3367,7 +3030,6 @@
         {
           "origin_label_en": "South Africa",
           "origin_iso_n3": "710",
-          "parent_iso_n3": "710",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3377,7 +3039,6 @@
         {
           "origin_label_en": "South Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3387,7 +3048,6 @@
         {
           "origin_label_en": "United States",
           "origin_iso_n3": "840",
-          "parent_iso_n3": "840",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3399,7 +3059,6 @@
         {
           "origin_label_en": "United Arab Emirates",
           "origin_iso_n3": "784",
-          "parent_iso_n3": "784",
           "subnational": false,
           "classes": "B only",
           "theory_test_required": false,
@@ -3420,286 +3079,237 @@
       "notes": [
         "Exempt-country conversion typically without theory/practical if full licence held long enough (often 2+ years) — re-check NZTA for current conditions.",
         "Non-exempt countries require theory and practical tests.",
-        "US/CA/AU treated as country-level on NZTA exempt list; may still vary by state/province in practice."
+        "US/CA/AU treated as country-level on NZTA exempt list; may still vary by state/province in practice.",
+        "Applies to every row in this list: Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
       ],
       "entries": [
         {
           "origin_label_en": "Australia",
           "origin_iso_n3": "036",
-          "parent_iso_n3": "036",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "varies_by_subnational": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "varies_by_subnational": true
         },
         {
           "origin_label_en": "Austria",
           "origin_iso_n3": "040",
-          "parent_iso_n3": "040",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Belgium",
           "origin_iso_n3": "056",
-          "parent_iso_n3": "056",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Canada",
           "origin_iso_n3": "124",
-          "parent_iso_n3": "124",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "varies_by_subnational": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "varies_by_subnational": true
         },
         {
           "origin_label_en": "Croatia",
           "origin_iso_n3": "191",
-          "parent_iso_n3": "191",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Denmark",
           "origin_iso_n3": "208",
-          "parent_iso_n3": "208",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Finland",
           "origin_iso_n3": "246",
-          "parent_iso_n3": "246",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "France",
           "origin_iso_n3": "250",
-          "parent_iso_n3": "250",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Germany",
           "origin_iso_n3": "276",
-          "parent_iso_n3": "276",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Greece",
           "origin_iso_n3": "300",
-          "parent_iso_n3": "300",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Hong Kong",
           "origin_iso_n3": "344",
-          "parent_iso_n3": "344",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Ireland",
           "origin_iso_n3": "372",
-          "parent_iso_n3": "372",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Italy",
           "origin_iso_n3": "380",
-          "parent_iso_n3": "380",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Luxembourg",
           "origin_iso_n3": "442",
-          "parent_iso_n3": "442",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Netherlands",
           "origin_iso_n3": "528",
-          "parent_iso_n3": "528",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Norway",
           "origin_iso_n3": "578",
-          "parent_iso_n3": "578",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Portugal",
           "origin_iso_n3": "620",
-          "parent_iso_n3": "620",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "South Africa",
           "origin_iso_n3": "710",
-          "parent_iso_n3": "710",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "South Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Spain",
           "origin_iso_n3": "724",
-          "parent_iso_n3": "724",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Sweden",
           "origin_iso_n3": "752",
-          "parent_iso_n3": "752",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "Switzerland",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "United Kingdom",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "no_retest": true
         },
         {
           "origin_label_en": "United States",
           "origin_iso_n3": "840",
-          "parent_iso_n3": "840",
           "subnational": false,
           "classes": "car (typical conversion)",
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "varies_by_subnational": true,
-          "note": "Exempt country: full licence usually ≥2 years for test-free conversion; confirm NZTA conditions"
+          "varies_by_subnational": true
         }
       ],
       "agreement_id": "licence-new-zealand"
@@ -3724,7 +3334,6 @@
         {
           "origin_label_en": "Austria",
           "origin_iso_n3": "040",
-          "parent_iso_n3": "040",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3735,7 +3344,6 @@
         {
           "origin_label_en": "Belgium",
           "origin_iso_n3": "056",
-          "parent_iso_n3": "056",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3746,7 +3354,6 @@
         {
           "origin_label_en": "Bosnia and Herzegovina",
           "origin_iso_n3": "070",
-          "parent_iso_n3": "070",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3757,7 +3364,6 @@
         {
           "origin_label_en": "Canada",
           "origin_iso_n3": "124",
-          "parent_iso_n3": "124",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3769,7 +3375,6 @@
         {
           "origin_label_en": "Croatia",
           "origin_iso_n3": "191",
-          "parent_iso_n3": "191",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3780,7 +3385,6 @@
         {
           "origin_label_en": "Denmark",
           "origin_iso_n3": "208",
-          "parent_iso_n3": "208",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3791,7 +3395,6 @@
         {
           "origin_label_en": "Finland",
           "origin_iso_n3": "246",
-          "parent_iso_n3": "246",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3802,7 +3405,6 @@
         {
           "origin_label_en": "France",
           "origin_iso_n3": "250",
-          "parent_iso_n3": "250",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3813,7 +3415,6 @@
         {
           "origin_label_en": "Germany",
           "origin_iso_n3": "276",
-          "parent_iso_n3": "276",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3824,7 +3425,6 @@
         {
           "origin_label_en": "Greece",
           "origin_iso_n3": "300",
-          "parent_iso_n3": "300",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3835,7 +3435,6 @@
         {
           "origin_label_en": "Guernsey",
           "origin_iso_n3": "831",
-          "parent_iso_n3": "831",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3846,7 +3445,6 @@
         {
           "origin_label_en": "Ireland",
           "origin_iso_n3": "372",
-          "parent_iso_n3": "372",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3857,7 +3455,6 @@
         {
           "origin_label_en": "Isle of Man",
           "origin_iso_n3": "833",
-          "parent_iso_n3": "833",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3868,7 +3465,6 @@
         {
           "origin_label_en": "Italy",
           "origin_iso_n3": "380",
-          "parent_iso_n3": "380",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3879,7 +3475,6 @@
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3890,7 +3485,6 @@
         {
           "origin_label_en": "Jersey",
           "origin_iso_n3": "832",
-          "parent_iso_n3": "832",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3901,7 +3495,6 @@
         {
           "origin_label_en": "Luxembourg",
           "origin_iso_n3": "442",
-          "parent_iso_n3": "442",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3912,7 +3505,6 @@
         {
           "origin_label_en": "Malta",
           "origin_iso_n3": "470",
-          "parent_iso_n3": "470",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3923,7 +3515,6 @@
         {
           "origin_label_en": "Netherlands",
           "origin_iso_n3": "528",
-          "parent_iso_n3": "528",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3934,7 +3525,6 @@
         {
           "origin_label_en": "New Zealand",
           "origin_iso_n3": "554",
-          "parent_iso_n3": "554",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3945,7 +3535,6 @@
         {
           "origin_label_en": "Norway",
           "origin_iso_n3": "578",
-          "parent_iso_n3": "578",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3956,7 +3545,6 @@
         {
           "origin_label_en": "Portugal",
           "origin_iso_n3": "620",
-          "parent_iso_n3": "620",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3967,7 +3555,6 @@
         {
           "origin_label_en": "Singapore",
           "origin_iso_n3": "702",
-          "parent_iso_n3": "702",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3978,7 +3565,6 @@
         {
           "origin_label_en": "Spain",
           "origin_iso_n3": "724",
-          "parent_iso_n3": "724",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -3989,7 +3575,6 @@
         {
           "origin_label_en": "Sweden",
           "origin_iso_n3": "752",
-          "parent_iso_n3": "752",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -4000,7 +3585,6 @@
         {
           "origin_label_en": "Switzerland",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -4011,7 +3595,6 @@
         {
           "origin_label_en": "United Kingdom",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -4022,7 +3605,6 @@
         {
           "origin_label_en": "United States",
           "origin_iso_n3": "840",
-          "parent_iso_n3": "840",
           "subnational": false,
           "classes": "car",
           "theory_test_required": false,
@@ -4034,7 +3616,6 @@
         {
           "origin_label_en": "Bulgaria",
           "origin_iso_n3": "100",
-          "parent_iso_n3": "100",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4045,7 +3626,6 @@
         {
           "origin_label_en": "Czech Republic",
           "origin_iso_n3": "203",
-          "parent_iso_n3": "203",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4056,7 +3636,6 @@
         {
           "origin_label_en": "Estonia",
           "origin_iso_n3": "233",
-          "parent_iso_n3": "233",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4067,7 +3646,6 @@
         {
           "origin_label_en": "Hong Kong",
           "origin_iso_n3": "344",
-          "parent_iso_n3": "344",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4078,7 +3656,6 @@
         {
           "origin_label_en": "Hungary",
           "origin_iso_n3": "348",
-          "parent_iso_n3": "348",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4089,7 +3666,6 @@
         {
           "origin_label_en": "Latvia",
           "origin_iso_n3": "428",
-          "parent_iso_n3": "428",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4100,7 +3676,6 @@
         {
           "origin_label_en": "Lithuania",
           "origin_iso_n3": "440",
-          "parent_iso_n3": "440",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4111,7 +3686,6 @@
         {
           "origin_label_en": "Poland",
           "origin_iso_n3": "616",
-          "parent_iso_n3": "616",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4122,7 +3696,6 @@
         {
           "origin_label_en": "Cyprus",
           "origin_iso_n3": "196",
-          "parent_iso_n3": "196",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4133,7 +3706,6 @@
         {
           "origin_label_en": "South Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4144,7 +3716,6 @@
         {
           "origin_label_en": "Serbia",
           "origin_iso_n3": "688",
-          "parent_iso_n3": "688",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4155,7 +3726,6 @@
         {
           "origin_label_en": "Romania",
           "origin_iso_n3": "642",
-          "parent_iso_n3": "642",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4166,7 +3736,6 @@
         {
           "origin_label_en": "Slovakia",
           "origin_iso_n3": "703",
-          "parent_iso_n3": "703",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4177,7 +3746,6 @@
         {
           "origin_label_en": "Slovenia",
           "origin_iso_n3": "705",
-          "parent_iso_n3": "705",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4188,7 +3756,6 @@
         {
           "origin_label_en": "South Africa",
           "origin_iso_n3": "710",
-          "parent_iso_n3": "710",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4199,7 +3766,6 @@
         {
           "origin_label_en": "Taiwan",
           "origin_iso_n3": "158",
-          "parent_iso_n3": "158",
           "subnational": false,
           "classes": "car",
           "theory_test_required": true,
@@ -4228,7 +3794,6 @@
           "origin_iso_n3": "036",
           "parent_iso_n3": "036",
           "subnational": true,
-          "subnational_label": "Australian Capital Territory",
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
@@ -4238,7 +3803,6 @@
         {
           "origin_label_en": "Brazil",
           "origin_iso_n3": "076",
-          "parent_iso_n3": "076",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4248,7 +3812,6 @@
         {
           "origin_label_en": "Taiwan",
           "origin_iso_n3": "158",
-          "parent_iso_n3": "158",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4258,7 +3821,6 @@
         {
           "origin_label_en": "Gibraltar",
           "origin_iso_n3": "292",
-          "parent_iso_n3": "292",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4268,7 +3830,6 @@
         {
           "origin_label_en": "Great Britain",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4278,7 +3839,6 @@
         {
           "origin_label_en": "Guernsey",
           "origin_iso_n3": "831",
-          "parent_iso_n3": "831",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4288,7 +3848,6 @@
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4298,7 +3857,6 @@
         {
           "origin_label_en": "Jersey",
           "origin_iso_n3": "832",
-          "parent_iso_n3": "832",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4308,7 +3866,6 @@
         {
           "origin_label_en": "Northern Ireland",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4318,7 +3875,6 @@
         {
           "origin_label_en": "Russia",
           "origin_iso_n3": "643",
-          "parent_iso_n3": "643",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4328,7 +3884,6 @@
         {
           "origin_label_en": "Ukraine",
           "origin_iso_n3": "804",
-          "parent_iso_n3": "804",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4338,7 +3893,6 @@
         {
           "origin_label_en": "South Korea",
           "origin_iso_n3": "410",
-          "parent_iso_n3": "410",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4348,7 +3902,6 @@
         {
           "origin_label_en": "Switzerland",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4370,7 +3923,6 @@
         {
           "origin_label_en": "Bosnia and Herzegovina",
           "origin_iso_n3": "070",
-          "parent_iso_n3": "070",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4380,7 +3932,6 @@
         {
           "origin_label_en": "Canada",
           "origin_iso_n3": "124",
-          "parent_iso_n3": "124",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4391,7 +3942,6 @@
         {
           "origin_label_en": "Chile",
           "origin_iso_n3": "152",
-          "parent_iso_n3": "152",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4401,7 +3951,6 @@
         {
           "origin_label_en": "Isle of Man",
           "origin_iso_n3": "833",
-          "parent_iso_n3": "833",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4411,7 +3960,6 @@
         {
           "origin_label_en": "Israel",
           "origin_iso_n3": "376",
-          "parent_iso_n3": "376",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4421,7 +3969,6 @@
         {
           "origin_label_en": "New Zealand",
           "origin_iso_n3": "554",
-          "parent_iso_n3": "554",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4431,7 +3978,6 @@
         {
           "origin_label_en": "United States",
           "origin_iso_n3": "840",
-          "parent_iso_n3": "840",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4442,7 +3988,6 @@
         {
           "origin_label_en": "Serbia",
           "origin_iso_n3": "688",
-          "parent_iso_n3": "688",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4452,7 +3997,6 @@
         {
           "origin_label_en": "Singapore",
           "origin_iso_n3": "702",
-          "parent_iso_n3": "702",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4462,7 +4006,6 @@
         {
           "origin_label_en": "North Macedonia",
           "origin_iso_n3": "807",
-          "parent_iso_n3": "807",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
@@ -4484,184 +4027,527 @@
       "notes": [
         "EU/EEA separate registration/exchange rules.",
         "Bilateral/reciprocity and convention-adherent tracks differ; this seed lists commonly cited OECD/CPLP bilateral partners from official gov.pt/IMT framing — re-check IMT bilateral PDF for full instrument.",
-        "Residence in Portugal required for exchange (statutory deadlines apply)."
+        "Residence in Portugal required for exchange (statutory deadlines apply).",
+        "Applies to every row in this list: OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
       ],
       "entries": [
         {
           "origin_label_en": "Angola",
           "origin_iso_n3": "024",
-          "parent_iso_n3": "024",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "Australia",
           "origin_iso_n3": "036",
-          "parent_iso_n3": "036",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "varies_by_subnational": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "varies_by_subnational": true
         },
         {
           "origin_label_en": "Brazil",
           "origin_iso_n3": "076",
-          "parent_iso_n3": "076",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "Cabo Verde",
           "origin_iso_n3": "132",
-          "parent_iso_n3": "132",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "Canada",
           "origin_iso_n3": "124",
-          "parent_iso_n3": "124",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "varies_by_subnational": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "varies_by_subnational": true
         },
         {
           "origin_label_en": "Chile",
           "origin_iso_n3": "152",
-          "parent_iso_n3": "152",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "United States",
           "origin_iso_n3": "840",
-          "parent_iso_n3": "840",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "varies_by_subnational": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "varies_by_subnational": true
         },
         {
           "origin_label_en": "Iceland",
           "origin_iso_n3": "352",
-          "parent_iso_n3": "352",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "Israel",
           "origin_iso_n3": "376",
-          "parent_iso_n3": "376",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "Japan",
           "origin_iso_n3": "392",
-          "parent_iso_n3": "392",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "Mozambique",
           "origin_iso_n3": "508",
-          "parent_iso_n3": "508",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "New Zealand",
           "origin_iso_n3": "554",
-          "parent_iso_n3": "554",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "United Kingdom",
           "origin_iso_n3": "826",
-          "parent_iso_n3": "826",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "Czech Republic",
           "origin_iso_n3": "203",
-          "parent_iso_n3": "203",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "São Tomé and Príncipe",
           "origin_iso_n3": "678",
-          "parent_iso_n3": "678",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "Switzerland",
           "origin_iso_n3": "756",
-          "parent_iso_n3": "756",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
-          "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "no_retest": true
         },
         {
           "origin_label_en": "Türkiye",
           "origin_iso_n3": "792",
-          "parent_iso_n3": "792",
+          "subnational": false,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true
+        }
+      ],
+      "agreement_id": "licence-portugal"
+    },
+    {
+      "iso_n3": "756",
+      "name": "Switzerland",
+      "instrument": "Fedlex, SR 0.741.531.* — fifteen bilateral driving-licence instruments (exchanges of notes, departmental arrangements and accords)",
+      "source_url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2021/361/20210612/fr/html/fedlex-data-admin-ch-eli-cc-2021-361-20210612-fr-html.html",
+      "source_urls": [
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/1972/765_773_697/19710701/fr/html/fedlex-data-admin-ch-eli-cc-1972-765_773_697-19710701-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/1980/1023_1023_1023/19801001/fr/html/fedlex-data-admin-ch-eli-cc-1980-1023_1023_1023-19801001-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/1972/767_775_699/19710930/fr/html/fedlex-data-admin-ch-eli-cc-1972-767_775_699-19710930-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2021/361/20210612/fr/html/fedlex-data-admin-ch-eli-cc-2021-361-20210612-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2015/473/20220101/fr/html/fedlex-data-admin-ch-eli-cc-2015-473-20220101-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/1973/638_638_638/19730301/fr/html/fedlex-data-admin-ch-eli-cc-1973-638_638_638-19730301-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2001/367/19980702/fr/html/fedlex-data-admin-ch-eli-cc-2001-367-19980702-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2004/509/20010930/fr/html/fedlex-data-admin-ch-eli-cc-2004-509-20010930-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2003/548/20010701/fr/html/fedlex-data-admin-ch-eli-cc-2003-548-20010701-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2006/92/20050502/fr/html/fedlex-data-admin-ch-eli-cc-2006-92-20050502-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2005/79/20041102/fr/html/fedlex-data-admin-ch-eli-cc-2005-79-20041102-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2002/190/20001201/fr/html/fedlex-data-admin-ch-eli-cc-2002-190-20001201-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2004/290/20010717/fr/html/fedlex-data-admin-ch-eli-cc-2004-290-20010717-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2006/504/20060601/fr/html/fedlex-data-admin-ch-eli-cc-2006-504-20060601-fr-html.html",
+        "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2004/289/20010405/fr/html/fedlex-data-admin-ch-eli-cc-2004-289-20010405-fr-html.html"
+      ],
+      "notes": [
+        "There is no single Swiss list. Every row is its own instrument; its SR number and operative wording are in the row note, and all fifteen Fedlex texts are in source_urls.",
+        "SUB-NATIONAL PARTNERS: seven Canadian provinces and the US state of Louisiana concluded these instruments themselves. No Swiss-Canada or Swiss-USA federal licence treaty exists in the series, so those eight rows carry no country ISO and neither federation is painted on the map.",
+        "The six Canadian letter-exchanges quote the Switzerland-to-province leg and are expressly conditional on Swiss reciprocity: the instrument is bilateral, but the inbound examination treatment is not established from the cited text and is left unrecorded.",
+        "Where an instrument waives only the «examen de conduite» (Luxembourg, Spain), the practical test is recorded as waived and the theory field is left unrecorded rather than assumed. Exchange still runs through the Swiss residence and licensing procedure."
+      ],
+      "entries": [
+        {
+          "origin_label_en": "Belgium",
+          "origin_iso_n3": "056",
+          "subnational": false,
+          "classes": "light motor cars and motorcycles",
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "note": "SR 0.741.531.917.2 (exchange of notes, 1971): a corresponding licence «sans avoir à subir un examen». An exam is reserved for doubt as to fitness, circumvention of competence rules, or professional transport. Extends to Liechtenstein by mandate."
+        },
+        {
+          "origin_label_en": "Greece",
+          "origin_iso_n3": "300",
           "subnational": false,
           "theory_test_required": false,
           "practical_test_required": false,
           "no_retest": true,
-          "note": "OECD/CPLP or bilateral reciprocity track per IMT/gov.pt; confirm simulator and bilateral PDF"
+          "note": "SR 0.741.531.937.2 (exchange of notes, 1980): recognition for one year from entry, then exchange without examination after a year's stay unbroken by three consecutive months away. Extends to Liechtenstein by mandate."
+        },
+        {
+          "origin_label_en": "Hungary",
+          "origin_iso_n3": "348",
+          "subnational": false,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "note": "SR 0.741.531.941.8 (exchange of notes, 1971): recognition for one year, then exchange «sans avoir à subir un examen». Professional drivers may always be required to sit a driving test. Extends to Liechtenstein by mandate."
+        },
+        {
+          "origin_label_en": "Italy",
+          "origin_iso_n3": "380",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "SR 0.741.531.945.4 (accord of 2021-05-13, in force 2021-06-12): «Chaque Partie reconnaît, aux fins de l'échange, les permis de conduire en cours de validité» — exchange, and recognition only for its purposes. Supersedes the 2015 Lugano accord under the same SR number. The text says nothing about an examination, so the test fields stay unrecorded. Not SR 0.741.531.945.41, which covers test drives."
+        },
+        {
+          "origin_label_en": "Liechtenstein",
+          "origin_iso_n3": "438",
+          "subnational": false,
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "note": "SR 0.741.531.951.4 (accord of 2015-06-18): art. 2 recognition, art. 4(2) «La nouvelle autorité compétente délivre le permis de conduire sans examen» on change of domicile. Supersedes the 1978 and 1954 notes filed under the same SR number."
+        },
+        {
+          "origin_label_en": "Luxembourg",
+          "origin_iso_n3": "442",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": false,
+          "no_retest": false,
+          "note": "SR 0.741.531.951.8 (arrangement of 1973-02-15; the Swiss party is the Federal Department of Justice and Police, not the Confederation): art. 1 recognition, art. 2 headed «Renonciation à l'examen de conduire». What is waived is the driving test; there is no theory statement, so that field stays unrecorded."
+        },
+        {
+          "origin_label_en": "Spain",
+          "origin_iso_n3": "724",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": false,
+          "no_retest": false,
+          "note": "SR 0.741.531.933.2 (exchange of notes, 1998): exchange for an equivalent licence on establishing normal residence «sans devoir se soumettre à un examen de conduite». An exam may exceptionally be required for doubt as to fitness or circumvention. The 1968 Vienna Convention is a cited precondition, not the operative instrument."
+        },
+        {
+          "origin_label_en": "Alberta",
+          "origin_iso_n3": null,
+          "subnational": true,
+          "parent_iso_n3": null,
+          "classes": "Swiss B/C/C1/D/D1/D2 to Class 5, Swiss A/A1 to Class 6",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "SUB-NATIONAL: the Province of Alberta, not Canada. SR 0.741.531.923.24 (letters, 2001, DETEC and Alberta Transportation): «Alberta Transportation dispense des tests de connaissances et des examens de conduite» — the Switzerland-to-Alberta leg, so the inbound exam treatment is not established. The waiver fails if the Swiss licence carries area, speed or hours restrictions."
+        },
+        {
+          "origin_label_en": "Louisiana",
+          "origin_iso_n3": null,
+          "subnational": true,
+          "parent_iso_n3": null,
+          "classes": "private passenger cars only",
+          "theory_test_required": false,
+          "practical_test_required": false,
+          "no_retest": true,
+          "note": "SUB-NATIONAL: the State of Louisiana, not the United States — no Swiss-USA federal licence treaty exists. SR 0.741.531.933.61 (accord of 2001-04-23 with the Office of Motor Vehicles, under La. R.S. 32:404(F)): exchange «sans que la personne concernée soit soumise à un examen pratique ou écrit». Scope is private passenger cars, so class matching is not established. Renews yearly, terminable on 60 days' notice."
+        },
+        {
+          "origin_label_en": "Manitoba",
+          "origin_iso_n3": null,
+          "subnational": true,
+          "parent_iso_n3": null,
+          "classes": "Swiss B to Class 5 Level F, Swiss A to Class 6 Level F",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "SUB-NATIONAL: the Province of Manitoba, not Canada. SR 0.741.531.923.26 (letters, 2005-05-02; the Swiss party is OFROU/ASTRA): «délivrera un permis du Manitoba de catégorie 5 et de niveau F (intégral)» — the outbound leg. Requires surrender of the Swiss licence or a Swiss replacement attestation."
+        },
+        {
+          "origin_label_en": "Newfoundland and Labrador",
+          "origin_iso_n3": null,
+          "subnational": true,
+          "parent_iso_n3": null,
+          "classes": "Swiss B or higher to Class 5; motorcycle endorsement 06 after a vision test",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "SUB-NATIONAL: the Province of Newfoundland and Labrador, not Canada. SR 0.741.531.923.25 (letters, 2004, DETEC and the provincial Director of Motor Registration): Swiss licences accepted «pour un échange de permis, dans une classe équivalente», oral/written tests and the learner period waived — the outbound leg. Expressly conditional on Swiss reciprocity."
+        },
+        {
+          "origin_label_en": "Ontario",
+          "origin_iso_n3": null,
+          "subnational": true,
+          "parent_iso_n3": null,
+          "classes": "Swiss B/C1/D2/E to Class G where held 24 of the last 36 months, otherwise G2",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "SUB-NATIONAL: the Province of Ontario, not Canada. SR 0.741.531.923.21 (arrangement of 2000-11-13; the Swiss party is DETEC): art. 2, headed «Echange des permis de conduire délivrés en Suisse», gives exchange «sans entraînement à la conduite supplémentaire ni heures de théorie et examen de conduite». That is the outbound leg, so the inbound exam treatment is not established. A vision check is required."
+        },
+        {
+          "origin_label_en": "Prince Edward Island",
+          "origin_iso_n3": null,
+          "subnational": true,
+          "parent_iso_n3": null,
+          "classes": "Swiss B or higher to Class 5; motorcycle holders gain Class 6",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "SUB-NATIONAL: the Province of Prince Edward Island, not Canada. SR 0.741.531.923.23 (letters, 2001-07-17, DETEC and the provincial Minister of Transportation and Public Works): a Swiss licence «est reconnu comme pouvant être échangé contre un permis de catégorie équivalente», theory and practical waived — the outbound leg. Expressly conditional on Swiss reciprocity."
+        },
+        {
+          "origin_label_en": "Quebec",
+          "origin_iso_n3": null,
+          "subnational": true,
+          "parent_iso_n3": null,
+          "classes": "category correspondence set out in art. 1.2",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "SUB-NATIONAL: the Province of Quebec, not Canada. SR 0.741.531.923.27 (entente de réciprocité, 2004-04-01) is the only government-to-government instrument of the seven Canadian ones — «le Gouvernement de la Confédération suisse et le Gouvernement du Québec», the SAAQ against the cantonal Services des automobiles. It undertakes to «assurer la reconnaissance des permis de conduire et en faciliter l'échange» and states no examination waiver, so the test fields stay unrecorded."
+        },
+        {
+          "origin_label_en": "Saskatchewan",
+          "origin_iso_n3": null,
+          "subnational": true,
+          "parent_iso_n3": null,
+          "classes": "Swiss B or higher to Class 5; motorcycle entitlement adds endorsement M",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "SUB-NATIONAL: the Province of Saskatchewan, not Canada. SR 0.741.531.923.22 (letters, 2001, DETEC and the Minister responsible for Saskatchewan Government Insurance): «notre décision d'autoriser l'échange d'un permis de conduire délivré en Suisse contre un permis de conduire de même catégorie» — the outbound leg. Expressly conditional on Swiss reciprocity."
         }
       ],
-      "agreement_id": "licence-portugal"
+      "agreement_id": "licence-switzerland-bilaterals"
+    },
+    {
+      "iso_n3": "410",
+      "name": "South Korea",
+      "instrument": "MOFA treaty register, 운전면허 상호인정 category — nineteen 고시-numbered bilateral instruments",
+      "source_url": "https://treatyweb.mofa.go.kr/usr/search/selectTotalSearchResult.do?fieldnDeptId=TOPIC_0054&pageUnit=100",
+      "source_urls": [
+        "https://treatyweb.mofa.go.kr/usr/search/selectTotalSearchResult.do?fieldnDeptId=TOPIC_0054&pageUnit=100"
+      ],
+      "notes": [
+        "One register listing, nineteen instruments: the cited page proves that each instrument exists and what it is called, not what its articles say. So grants is TITLE-DERIVED and the test fields are null throughout — null meaning NOT RECORDED, never 'no test required'.",
+        "Class matching is shown only where the issuing authority states it. KoRoad names five countries — Belgium, Poland, Spain, Italy, Ireland — as obtaining exchange into the corresponding class; for every other partner the class field is left unrecorded rather than asserted.",
+        "Chile is listed but suspended by 고시 630 (in force 2007-11-07) and is deliberately not a beneficiary, so it is not painted as a live treaty partner.",
+        "Separate from these treaties, the 경찰청 고시 list of 2026-04-06 admits 133 jurisdictions to exchange, but into 2종 보통 only. That administrative route is not this agreement. Statutory basis is 도로교통법 s.84(2)'s final proviso, which buys exemption from part of the driving test; the exchange itself is issuance of a Korean licence under s.84(1)3 and s.84(3)."
+      ],
+      "entries": [
+        {
+          "origin_label_en": "Azerbaijan",
+          "origin_iso_n3": "031",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 823 — title: recognition and exchange. Signed 2013-10-23 Baku, in force 2014-02-23."
+        },
+        {
+          "origin_label_en": "Belgium",
+          "origin_iso_n3": "056",
+          "subnational": false,
+          "classes": "corresponding class (KoRoad names five countries)",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 180 — title: recognition. Signed 1990-01-08/10 Brussels. The register's 발효일 gives 1990-01-10 while the document text states 1991-01-10; the discrepancy is in the source."
+        },
+        {
+          "origin_label_en": "Bulgaria",
+          "origin_iso_n3": "100",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 761 — title: recognition and exchange. Signed 2011-09-27 Sofia, in force 2012-01-07."
+        },
+        {
+          "origin_label_en": "Chile",
+          "origin_iso_n3": "152",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 615 — title: recognition. SUSPENDED, and carried here for that reason rather than dropped. 고시 630, «for the temporary suspension of the agreement», was exchanged 2007-10-30 and 2007-11-07 at Santiago and entered into force 2007-11-07; no resumption instrument exists in the MOFA 운전면허상호인정 category, so Chile is NOT a beneficiary of this agreement and is not painted. Absence of a resumption instrument is not positive proof the suspension still stands. The register's 발효일 (2008-05-23) conflicts with the text (2007-07-02). Chile does remain on the 133-jurisdiction 경찰청 고시 list, which the suspension does not touch."
+        },
+        {
+          "origin_label_en": "Colombia",
+          "origin_iso_n3": "170",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 911 — title: recognition or exchange. Signed 2018-08-01, in force 2018-10-31. The title says 인정 또는 교환 (recognition OR exchange), not 및 (and)."
+        },
+        {
+          "origin_label_en": "Guatemala",
+          "origin_iso_n3": "320",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 861 — title: recognition and exchange. Signed 2015-05-14 Guatemala City, in force 2015-09-16."
+        },
+        {
+          "origin_label_en": "Honduras",
+          "origin_iso_n3": "340",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 884 — title: recognition and exchange. Signed 2015-07-20 Seoul, in force 2016-05-11."
+        },
+        {
+          "origin_label_en": "Hungary",
+          "origin_iso_n3": "348",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 857 — title: recognition and exchange. Signed 2014-11-28 Seoul, in force 2015-05-16."
+        },
+        {
+          "origin_label_en": "Israel",
+          "origin_iso_n3": "376",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 876 — title: recognition and exchange. Signed 2014-12-22 Jerusalem, in force 2016-02-19."
+        },
+        {
+          "origin_label_en": "Italy",
+          "origin_iso_n3": "380",
+          "subnational": false,
+          "classes": "corresponding class (KoRoad names five countries)",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 448 — title: recognition. Notes exchanged 2002-02-07 and 2002-03-05 Rome, in force 2002-05-04."
+        },
+        {
+          "origin_label_en": "Kyrgyzstan",
+          "origin_iso_n3": "417",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 829 — title: recognition and exchange. Signed 2013-11-19 Seoul, in force 2014-05-11."
+        },
+        {
+          "origin_label_en": "Latvia",
+          "origin_iso_n3": "428",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 738 — title: recognition and exchange. Signed 2011-03-08 Riga, in force 2011-05-28."
+        },
+        {
+          "origin_label_en": "Lithuania",
+          "origin_iso_n3": "440",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 852 — title: recognition and exchange. Signed 2014-10-14 Seoul, in force 2015-01-22."
+        },
+        {
+          "origin_label_en": "Mozambique",
+          "origin_iso_n3": "508",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 913 — title: recognition and exchange. Signed 2018-04-30, in force 2018-12-01."
+        },
+        {
+          "origin_label_en": "Nicaragua",
+          "origin_iso_n3": "558",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 895 — title: recognition and exchange. Signed 2016-11-04 Managua, in force 2017-04-05."
+        },
+        {
+          "origin_label_en": "Peru",
+          "origin_iso_n3": "604",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 791 — title: recognition and exchange. Signed 2012-12-17 Lima, in force 2013-04-03."
+        },
+        {
+          "origin_label_en": "Poland",
+          "origin_iso_n3": "616",
+          "subnational": false,
+          "classes": "corresponding class (KoRoad names five countries)",
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 358 — title: recognition and exchange. Signed 1998-11-25 Warsaw, in force 1999-01-24. Covers international and domestic licences."
+        },
+        {
+          "origin_label_en": "Slovakia",
+          "origin_iso_n3": "703",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 628 — title: recognition and exchange. Notes exchanged 2007-10-23/24 Bratislava, in force 2007-11-23."
+        },
+        {
+          "origin_label_en": "Uzbekistan",
+          "origin_iso_n3": "860",
+          "subnational": false,
+          "theory_test_required": null,
+          "practical_test_required": null,
+          "no_retest": false,
+          "note": "고시 871 — title: recognition and exchange. Signed 2015-05-28 Seoul, in force 2015-12-24."
+        }
+      ],
+      "agreement_id": "licence-korea-treaties"
     }
   ],
   "agreements": [
@@ -5269,6 +5155,63 @@
       "basis": "CORRECTION: our record described this as \"OECD/CPLP and bilaterals\", which implies a CPLP instrument. There is none — the CPLP Secretariat's own register of 39 intra-CPLP agreements contains nothing on driving licences or road traffic. Portugal's treatment is unilateral domestic law. DL 46/2022 in fact DISPENSES with exchange for these states: \"promove-se a dispensa das trocas de cartas de condução, habilitando-se a condução no território nacional com títulos emitidos naqueles Estados, através do reconhecimento\" — recognition replaces the swap. Where a holder does choose to exchange, art. 128.º(2)(a) waives the driving test. Recognition under art. 125.º(1)(c) is itself conditional on the issuing state being party to Geneva 1949 or Vienna 1968, or holding a bilateral with Portugal — and IMT names only Angola, Cabo Verde, Mozambique and São Tomé e Príncipe as having such a bilateral.",
       "kind_verified": true,
       "grants": "recognition_and_exchange"
+    },
+    {
+      "id": "licence-switzerland-bilaterals",
+      "name": "Switzerland — bilateral licence agreements (SR 0.741.531.*)",
+      "kind": "bilateral_agreement",
+      "directionality": "symmetric",
+      "instrument": "Fifteen instruments in the Fedlex classified compilation, SR 0.741.531.917.2 through SR 0.741.531.951.8",
+      "source_url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2021/361/20210612/fr/html/fedlex-data-admin-ch-eli-cc-2021-361-20210612-fr-html.html",
+      "destinations": [
+        "756"
+      ],
+      "beneficiaries": [
+        "056",
+        "300",
+        "348",
+        "380",
+        "438",
+        "442",
+        "724"
+      ],
+      "basis": "Fifteen separate instruments read one by one against their own Fedlex texts, not one list: exchanges of notes (Belgium 1971, Hungary 1971, Greece 1980, Spain 1998), departmental arrangements (Luxembourg 1973 with the Federal Department of Justice and Police; Ontario, Saskatchewan, Prince Edward Island, Alberta and Newfoundland with DETEC; Manitoba with OFROU/ASTRA) and full accords (Louisiana 2001, Quebec 2004, Liechtenstein 2015, Italy 2021). Two things fall out of reading them. First, the Belgian, Greek, Hungarian and Luxembourg notes were reported as recognition-only and are not: each also grants exchange without an examination, in Luxembourg under an article headed «Renonciation à l'examen de conduire». Second, and the reason this agreement paints seven countries out of fifteen partners: EIGHT PARTNERS ARE SUB-NATIONAL. Seven Canadian provinces and the US state of Louisiana concluded these instruments themselves — Louisiana under the state-law power in La. R.S. 32:404(F), the provinces through their own ministers and insurers — and nowhere in the SR 0.741.531 series is there a Swiss treaty with Canada or with the United States. Those rows carry no country ISO and no parent ISO, and are not beneficiaries; painting Canada or the USA, even partially, would claim a federal arrangement that does not exist on the strength of eight sub-units. They are readable in the table instead, which is where a partner that is not a country belongs. The six Canadian letter-exchanges quote the Switzerland-to-province leg and are expressly conditional on Swiss reciprocity, so the instrument is bilateral while the inbound examination treatment stays unrecorded. grants is recorded at the FLOOR, not the maximum: all fifteen grant exchange and fourteen also grant recognition, Italy's 2021 accord recognising licences only «aux fins de l'échange». A field that sits on the agreement cannot carry a family that varies, so it carries the value true of every member and the upgrades are named on the rows.",
+      "kind_verified": true,
+      "grants": "exchange"
+    },
+    {
+      "id": "licence-korea-treaties",
+      "name": "South Korea — bilateral licence treaties (MOFA register)",
+      "kind": "bilateral_agreement",
+      "directionality": "symmetric",
+      "instrument": "Nineteen 고시-numbered instruments in the MOFA treaty register, 운전면허 상호인정 category",
+      "source_url": "https://treatyweb.mofa.go.kr/usr/search/selectTotalSearchResult.do?fieldnDeptId=TOPIC_0054&pageUnit=100",
+      "destinations": [
+        "410"
+      ],
+      "beneficiaries": [
+        "031",
+        "056",
+        "100",
+        "170",
+        "320",
+        "340",
+        "348",
+        "376",
+        "380",
+        "417",
+        "428",
+        "440",
+        "508",
+        "558",
+        "604",
+        "616",
+        "703",
+        "860"
+      ],
+      "basis": "The KIND is what this source establishes, and it establishes it well: nineteen instruments published in the MOFA treaty register under their own 고시 numbers, simplified-form international agreements concluded without National Assembly consent. 도로교통법 s.84(2)'s final proviso speaks of an 약정 (arrangement) rather than a 조약 (treaty), but that is drafting breadth, not a downgrade, so bilateral_agreement is the right type. GRANTS IS READ FROM THE TITLE, NOT THE OPERATIVE TEXT. All nineteen rows cite the same register listing, which proves each instrument exists and what it is called and carries none of its articles; fifteen titles say 상호 인정 및 교환 (mutual recognition and exchange), Colombia's says 인정 또는 교환 (recognition OR exchange), and Belgium's, Italy's and Chile's say recognition alone. grants is therefore recorded at the FLOOR shared by all nineteen — recognition — rather than the widest value, which would overstate three rows; the floor is also the substantively right reading, since the exchange itself is issuance of a Korean licence under s.84(1)3 and s.84(3), a domestic act the treaty does not perform. Class matching is asserted for three rows only — Belgium, Italy and Poland — because KoRoad, the issuing authority, names exactly five countries (Belgium, Poland, Spain, Italy, Ireland) as obtaining exchange into the corresponding class; for the other sixteen the class field is null, meaning NOT RECORDED rather than not matched. Test requirements are null throughout for the same reason: the proviso buys exemption from part of the driving test and the title does not say which part. Chile is carried as a row but is NOT a beneficiary — 고시 630 suspended the agreement in 2007 and no resumption instrument exists in the category, so painting it would show a live treaty that is not one, while dropping it would assert an absence the register does not support. Vietnam and Sweden are excluded outright: their instruments are international-driving-permit arrangements, not domestic licence recognition.",
+      "kind_verified": true,
+      "grants": "recognition"
     }
   ]
 }

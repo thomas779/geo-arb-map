@@ -268,6 +268,33 @@ export function classifyJusSoli(
     case 'residence_and_school':
       add('residence_plus_integration', 'parent_condition: residence_and_school');
       break;
+    case 'registration':
+      // Costa Rica, and read from the instrument rather than from the label — the
+      // label alone stayed `needs_review` for exactly as long as nobody had read it.
+      //
+      // Constitution art. 13(3) confers on a child born in Costa Rica to foreign
+      // parents only a right of OPTION: they are Costa Rican "que se inscriba como
+      // costarricense", on a parent's volition during minority or by their own act up
+      // to 25. The structure of art. 13 settles it — incisos 1) and 4) are flat
+      // statements with no further requirement, and the subjunctive "que se inscriba"
+      // is attached to 2) and 3) alone. On a formality reading it would be redundant
+      // everywhere or required nowhere. Ley 1155 art. 10 then has the Registrar draw
+      // up a SEPARATE acta "con vista de la certificación de nacimiento", so birth
+      // registration is not nationality inscription, and calls the person "quien
+      // optare por la nacionalidad". Art. 16 makes the age-25 cut-off incoherent
+      // unless what lapses is an unexercised option rather than a held nationality.
+      //
+      // So it is not Chile (nothing vests at birth) and not Germany (the option
+      // carries no residence, status, integration or discretion condition). It is the
+      // France and Australia shape: a right that vests on a later act.
+      //
+      // Guarded on the summary, not on the label. `registration` is a terse singleton,
+      // and a future jurisdiction using the same word for an automatic entitlement
+      // with a recording formality must NOT inherit this reading.
+      if (/registration|inscri/i.test(summary)) {
+        add('later_acquisition_not_birth', 'parent_condition: registration, as a right of option (art. 13(3))');
+      }
+      break;
     default:
       break;
   }
