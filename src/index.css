@@ -441,3 +441,22 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Driving licence exchange lookup (progressive-enhancement badges in licence-exchange.js) */
+.licence-badge {
+  display: inline-block;
+  border-radius: 0.25rem;
+  border: 1px solid var(--border);
+  padding: 0.1rem 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.licence-badge--ok {
+  border-color: color-mix(in oklab, var(--verified) 45%, var(--border));
+  background: color-mix(in oklab, var(--verified) 12%, transparent);
+}
+.licence-badge--warn {
+  border-color: color-mix(in oklab, #d97706 45%, var(--border));
+  background: color-mix(in oklab, #d97706 12%, transparent);
+}

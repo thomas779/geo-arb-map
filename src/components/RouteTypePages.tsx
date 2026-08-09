@@ -4,6 +4,7 @@ import {
   ArrowRight,
   Award,
   Banknote,
+  Car,
   Fingerprint,
   Home,
   Hourglass,
@@ -181,6 +182,7 @@ const DIRECTORY_PAGE_BY_CLASS: Record<string, string> = {
   retirement: '/routes/retirement-visas/',
   talent: '/routes/talent-skilled-visas/',
   'digital-identity': '/routes/digital-identities/',
+  'driving-licences': '/routes/driving-licences/',
 };
 
 export function routeClassCounts(data: CitizenshipRoutesData): Map<string, number> {
@@ -223,6 +225,13 @@ const DIGITAL_IDENTITY: HubRoute = {
   label: 'Access services remotely',
   detail: 'Digital identity — not a visa',
   icon: Fingerprint,
+};
+
+const DRIVING_LICENCES: HubRoute = {
+  id: 'driving-licences',
+  label: 'Exchange a driving licence',
+  detail: 'Where a foreign licence converts — and which tests remain',
+  icon: Car,
 };
 
 function RouteChoice({ route, count }: { route: HubRoute; count: number }) {
@@ -278,6 +287,15 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
         </h2>
         <div className="max-w-[calc(50%-0.75rem)] max-md:max-w-none">
           <RouteChoice route={DIGITAL_IDENTITY} count={counts.get(DIGITAL_IDENTITY.id) ?? 0} />
+        </div>
+      </section>
+      <section className="mt-8 border-t pt-6">
+        <h2 className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+          Other leverage
+        </h2>
+        <div className="max-w-[calc(50%-0.75rem)] max-md:max-w-none">
+          {/* Count is destination annexes seeded, not citizenship isos */}
+          <RouteChoice route={DRIVING_LICENCES} count={11} />
         </div>
       </section>
     </main>
