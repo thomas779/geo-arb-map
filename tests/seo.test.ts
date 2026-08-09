@@ -74,7 +74,7 @@ describe('public SEO contract', () => {
     const files = ['url.ts', 'components/SiteHeader.tsx', 'components/CountriesList.tsx',
       'components/RightsProfile.tsx', 'components/CountryProfile.tsx',
       'components/DetailPanel.tsx', 'components/RouteDetailPanel.tsx',
-      'components/RouteTypePages.tsx'];
+      'components/RouteTypePages.tsx', 'components/DrivingLicencesPage.tsx'];
     const offenders: string[] = [];
     for (const file of files) {
       const src = readFileSync(new URL(`../src/${file}`, import.meta.url), 'utf8');
