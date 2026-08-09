@@ -11,6 +11,10 @@ import { AlertTriangle, Car, ExternalLink } from 'lucide-react';
 export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
   const origins = listOrigins(data);
   const destCount = data.destinations.length;
+  // Derived, not written out. The prose used to carry a hand-typed "(DE, GB, NL, …)"
+  // beside a live count, so adding Switzerland and Korea left the page claiming 13
+  // annexes and then naming 11 of them.
+  const destNames = data.destinations.map(destination => destination.name).join(', ');
 
   return (
     <main className="mx-auto max-w-[960px] px-4 py-8 sm:px-6">
@@ -33,7 +37,7 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
         See which destinations will exchange a foreign driving licence — and whether a theory
         or practical test is still required. Currently seeded with{' '}
         <strong className="font-semibold text-foreground">{destCount} destination annexes</strong>
-        {' '}(DE, GB, NL, IE, FR, ES, AT, NZ, AU, DK, PT).
+        {' '}({destNames}).
       </p>
 
       <aside
