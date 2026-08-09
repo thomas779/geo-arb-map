@@ -4747,6 +4747,31 @@
       "exclusivity": "Art. 7(5)(a): \"No person may hold more than one driving licence\". Art. 7(5)(b): a Member State \"shall refuse to issue a licence where it establishes that the applicant already holds a driving licence\", and art. 7(5)(c)-(d) require verification with other Member States via the EU driving licence network. Exclusivity is enforced and cross-checked, not merely asserted."
     },
     {
+      "id": "licence-nordic-1985",
+      "name": "Nordic agreement on mutual recognition and exchange of driving licences (1985)",
+      "kind": "multilateral_instrument",
+      "directionality": "symmetric",
+      "instrument": "Overenskomst 1985 om gjensidig godkjennelse av førerkort og registrering av kjøretøyer, arts. 1 and 3 (Norwegian implementation FOR-1986-07-01-3055)",
+      "source_url": "https://lovdata.no/dokument/SF/forskrift/1986-07-01-3055",
+      "destinations": [
+        "208",
+        "246",
+        "578",
+        "752"
+      ],
+      "beneficiaries": [
+        "208",
+        "246",
+        "578",
+        "752"
+      ],
+      "grants": "recognition_and_exchange",
+      "basis": "The only true multilateral EXCHANGE instrument found outside the EU. Art. 1 gives recognition: \"Et førerkort som er utstedt i det ene landet er gyldig i de øvrige land i samsvar med sitt innhold.\" Art. 3 gives exchange without re-testing: a holder \"kan søke om å få byttet sitt førerkort med et tilsvarende førerkort i det land hvor han er innmeldt i folkeregisteret uten å avlegge ny førerprøve\" — may apply to exchange for a corresponding licence in the country where they are registered, without taking a new driving test. Both quote-checked against Lovdata 2026-08-09.",
+      "exchange_article": "Art. 3, and note the trigger: exchange is available in the country where the holder is REGISTERED IN THE POPULATION REGISTER (innmeldt i folkeregisteret), which is a residence test in the same family as the EU normal-residence rule.",
+      "kind_verified": true,
+      "membership_note": "ICELAND IS NOT A PARTY. The text names Danmark, Finland, Norge and Sverige and does not mention Island at all — verified by absence, not assumed. This matters because Iceland IS in the Nordic Passport Union and the Nordic common labour market, so a Nordic member list assembled for movement purposes is wrong here. Iceland is instead covered via the EEA route into Directive 2006/126/EC."
+    },
+    {
       "id": "licence-germany",
       "name": "Germany — Anlage 11 FeV (zu § 31)",
       "kind": "unilateral_recognition",
@@ -5079,8 +5104,8 @@
     {
       "id": "licence-new-zealand",
       "name": "New Zealand — Waka Kotahi NZTA",
-      "kind": "unknown",
-      "directionality": "unknown",
+      "kind": "unilateral_recognition",
+      "directionality": "asymmetric",
       "instrument": "Waka Kotahi NZTA — Converting to a New Zealand driver licence (exempt countries)",
       "source_url": "https://www.nzta.govt.nz/driver-licences/new-residents-and-visitors/converting-to-nz-driver-licence",
       "destinations": [
@@ -5113,14 +5138,14 @@
         "826",
         "840"
       ],
-      "basis": "",
-      "kind_verified": false
+      "basis": "No trans-Tasman or bilateral licence instrument exists. The Trans-Tasman Mutual Recognition Arrangement does NOT cover driver licensing — its 41 titles cover occupations, patents, banking and accounting, and the Federal Register of Legislation returns no Commonwealth driver-licence instrument at all. Each side recognises the other unilaterally, and the asymmetry is itself the proof: Queensland gives New Zealand a bespoke statutory category (Transport Operations (Road Use Management-Driver Licensing) Regulation 2021), Western Australia lists it among 35 in a DEPARTMENTAL list, and Victoria has no list in legislation at all. Three architectures for one relationship is not an agreement. NOTE: the NZTA exempt-country list could not be re-verified — legislation.govt.nz is behind an AWS WAF and the NZTA page returns 403 to automated fetches, so the underlying entries remain as originally seeded.",
+      "kind_verified": true
     },
     {
       "id": "licence-australia",
       "name": "Australia — Austroads",
-      "kind": "unknown",
-      "directionality": "unknown",
+      "kind": "unilateral_recognition",
+      "directionality": "asymmetric",
       "instrument": "Austroads — Recognised overseas jurisdictions for Australian driver licences",
       "source_url": "https://austroads.gov.au/drivers-and-vehicles/overseas-drivers/applying-for-a-licence",
       "destinations": [
@@ -5172,8 +5197,8 @@
         "833",
         "840"
       ],
-      "basis": "",
-      "kind_verified": false
+      "basis": "No trans-Tasman or bilateral licence instrument exists. The Trans-Tasman Mutual Recognition Arrangement does NOT cover driver licensing — its 41 titles cover occupations, patents, banking and accounting, and the Federal Register of Legislation returns no Commonwealth driver-licence instrument at all. Each side recognises the other unilaterally, and the asymmetry is itself the proof: Queensland gives New Zealand a bespoke statutory category (Transport Operations (Road Use Management-Driver Licensing) Regulation 2021), Western Australia lists it among 35 in a DEPARTMENTAL list, and Victoria has no list in legislation at all. Three architectures for one relationship is not an agreement. Australian licensing is state-level, so \"Australia\" here is an aggregate of state instruments rather than one federal list.",
+      "kind_verified": true
     },
     {
       "id": "licence-denmark",

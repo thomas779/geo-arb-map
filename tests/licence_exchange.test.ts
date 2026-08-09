@@ -158,9 +158,18 @@ describe('agreement layer: three legally different things, no longer one list', 
     // have seeded lists for six. Requiring every agreement destination to be a
     // seeded destination would forbid exactly the bloc-shaped data this layer
     // exists to hold.
+    // What makes an instrument multilateral is that it binds a GROUP, not that the
+    // group is larger than our seed set. The Nordic 1985 agreement has four parties,
+    // fewer than our eleven seeded destination lists, and is unambiguously
+    // multilateral — the earlier "bigger than destIsos" proxy was wrong.
     const multilateral = listAgreements(seed).filter(a => a.kind === 'multilateral_instrument');
+    expect(multilateral.length).toBeGreaterThan(0);
     for (const agreement of multilateral) {
-      expect(agreement.destinations.length, `${agreement.id} should span a bloc`).toBeGreaterThan(destIsos.size);
+      expect(agreement.destinations.length, `${agreement.id} binds a group`).toBeGreaterThan(1);
+      // Symmetric means both sides are the same set: everyone grants and receives.
+      if (agreement.directionality === 'symmetric') {
+        expect([...agreement.destinations].sort()).toEqual([...agreement.beneficiaries].sort());
+      }
     }
   });
 });
@@ -276,5 +285,48 @@ describe('typing each list against its own instrument (#171)', () => {
     const local = germany.entries.filter(e => e.origin_label && e.origin_label !== e.origin_label_en);
     expect(local.length).toBeGreaterThan(0);
     expect(local.some(e => e.origin_label === 'Albanien')).toBe(true);
+  });
+});
+
+describe('the Nordic instrument, and the membership trap it sets', () => {
+  const nordic = () => agreementById(seed, 'licence-nordic-1985')!;
+
+  test('it is the only true multilateral EXCHANGE bloc outside the EU', () => {
+    // Art. 1 gives recognition; art. 3 gives exchange WITHOUT a new driving test.
+    // Every other non-EU arrangement found grants recognition only, or is a
+    // unilateral domestic list.
+    expect(nordic().kind).toBe('multilateral_instrument');
+    expect(nordic().grants).toBe('recognition_and_exchange');
+    expect(nordic().basis).toContain('uten å avlegge ny førerprøve');
+  });
+
+  test('Iceland is NOT a party, though it is in every other Nordic arrangement', () => {
+    // Verified by absence in the Lovdata text, not assumed. Iceland IS in the Nordic
+    // Passport Union and the common labour market, so a Nordic member list assembled
+    // for movement is wrong here — the fourth time this session a list built for one
+    // purpose proved wrong for another. Iceland reaches the same place via the EEA.
+    expect(nordic().destinations.sort()).toEqual(['208', '246', '578', '752']);
+    expect(nordic().destinations).not.toContain('352'); // Iceland
+    expect(nordic().membership_note).toContain('NOT A PARTY');
+  });
+});
+
+describe('every arrangement is now typed against its instrument', () => {
+  test('nothing is left as an unproven guess', () => {
+    for (const agreement of listAgreements(seed)) {
+      expect(agreement.kind, `${agreement.id} is still unknown`).not.toBe('unknown');
+      expect(agreement.kind_verified, `${agreement.id} is unverified`).toBe(true);
+    }
+  });
+
+  test('Australia and New Zealand are unilateral, because no instrument binds them', () => {
+    // The TTMRA does not cover driver licensing, and there is no Commonwealth
+    // driver-licence instrument at all. The proof is the asymmetry: Queensland gives
+    // NZ a bespoke statutory category, WA lists it in a departmental list, Victoria
+    // has no list in legislation. Three architectures for one relationship.
+    for (const id of ['licence-australia', 'licence-new-zealand']) {
+      expect(agreementById(seed, id)!.kind).toBe('unilateral_recognition');
+      expect(agreementById(seed, id)!.basis).toContain('Trans-Tasman Mutual');
+    }
   });
 });

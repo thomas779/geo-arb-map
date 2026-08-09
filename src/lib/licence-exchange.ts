@@ -101,6 +101,13 @@ export interface LicenceAgreement {
   third_country_carve_out?: string;
   /** The one-licence rule and how it is enforced between member states. */
   exclusivity?: string;
+  /**
+   * Who is and is not a party, where that is counterintuitive. The Nordic 1985
+   * agreement excludes Iceland even though Iceland is in the Nordic Passport Union
+   * and the common labour market — a member list assembled for movement is wrong
+   * for licences.
+   */
+  membership_note?: string;
   /** ISO date from which a successor instrument replaces this one. */
   superseded_from?: string;
   superseded_note?: string;
