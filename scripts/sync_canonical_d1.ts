@@ -270,6 +270,209 @@ function renderLicenceSql(): string[] {
   return out;
 }
 
+/**
+ * Create the reference-data tables if they are absent.
+ *
+ * Same shape as ensureLicenceSchema and for the same reason: pure CREATE IF NOT
+ * EXISTS with no table rebuild, so it converges on every sync. The tables are
+ * standalone (the monitor_* pattern) and carry no foreign keys into the canonical
+ * model, so they are safe to create whether or not the canonical tables hold rows.
+ */
+async function ensureReferenceSchema(): Promise<void> {
+  const file = path.join(root, 'data/d1/migrations/0008_reference_data.sql');
+  const statements = splitStatements(fs.readFileSync(file, 'utf8'))
+    .filter(statement => !/^\s*PRAGMA\b/i.test(statement));
+  await runBatched(statements, 'reference-ddl');
+}
+
+/** SQL literal. Escapes single quotes; NULL means NOT RECORDED, never a default. */
+function sqlValue(value: unknown): string {
+  if (value === null || value === undefined) return 'NULL';
+  if (typeof value === 'boolean') return value ? '1' : '0';
+  if (typeof value === 'number') return String(value);
+  return `'${String(value).replace(/'/g, "''")}'`;
+}
+
+/** JSON payload literal, or NULL when there is nothing to record. */
+function sqlJson(value: unknown): string {
+  if (value === null || value === undefined) return 'NULL';
+  return sqlValue(JSON.stringify(value));
+}
+
+/**
+ * Rows for the reference layer, rendered from the three files that had no D1
+ * representation at all: public/blocs_data.json, data/registry.json and
+ * monitor/sources/manifest.json.
+ *
+ * The files stay the source of truth — they are version-controlled and the browser
+ * fetches blocs_data.json directly. These tables are their durable, queryable
+ * projection, so that "which blocs still list Mali" or "which jurisdictions have no
+ * verification-tier source" stop being scans of an 85KB / 199KB blob.
+ *
+ * Exported so tests/reference_data.test.ts can execute this against a real in-memory
+ * SQLite and assert the row counts match the files. A count below the source is a
+ * silent drop, which is the class of defect this render must not have.
+ */
+export function renderReferenceDataSql(): string[] {
+  const read = (file: string) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
+  const blocs = read('public/blocs_data.json') as {
+    blocs: Array<Record<string, any>>;
+    bilateral_lanes: Array<Record<string, any>>;
+    stacking_plays: Array<Record<string, any>>;
+    pending_verification: Array<Record<string, any>>;
+    generational_events: Array<Record<string, any>>;
+    dual_citizenship: {
+      countries: Record<string, Record<string, any>>;
+      treaty_exceptions: Array<Record<string, any>>;
+    };
+  };
+  const registry = read('data/registry.json') as {
+    sovereigns: Array<Record<string, any>>;
+    territories: Array<Record<string, any>>;
+    special: Array<Record<string, any>>;
+  };
+  const manifest = read('monitor/sources/manifest.json') as {
+    sources: Array<Record<string, any>>;
+  };
+
+  const q = sqlValue;
+  const insert = (table: string, columns: string[], values: unknown[][]): string[] =>
+    values.map(row => `INSERT INTO ${table} (${columns.join(', ')}) VALUES (${row.join(', ')});`);
+
+  // Children before parents, so the deletes stand up under D1's foreign keys.
+  const out: string[] = [
+    'DELETE FROM bloc_members;',
+    'DELETE FROM bloc_rights;',
+    'DELETE FROM bloc_index;',
+    'DELETE FROM bilateral_lane_beneficiaries;',
+    'DELETE FROM bilateral_lane_index;',
+    'DELETE FROM dual_nationality_policy;',
+    'DELETE FROM dual_nationality_treaty_parties;',
+    'DELETE FROM dual_nationality_treaty_exception;',
+    'DELETE FROM jurisdiction_registry;',
+    'DELETE FROM monitor_source_jurisdictions;',
+    'DELETE FROM monitor_source_manifest;',
+    'DELETE FROM stacking_play_index;',
+    'DELETE FROM generational_event_index;',
+    'DELETE FROM pending_verification_index;',
+  ];
+
+  for (const bloc of blocs.blocs) {
+    out.push(...insert(
+      'bloc_index',
+      ['id', 'name', 'category', 'strength', 'color', 'fastest_entry', 'notes', 'sub_bloc'],
+      [[q(bloc.id), q(bloc.name), q(bloc.category), q(bloc.strength), q(bloc.color),
+        q(bloc.fastest_entry ?? null), q(bloc.notes ?? null), sqlJson(bloc.sub_bloc ?? null)]],
+    ));
+    for (const tier of ['TR', 'PR', 'CIT'] as const) {
+      const text = bloc.rights?.[tier];
+      if (text === undefined || text === null) continue;
+      out.push(...insert('bloc_rights', ['bloc_id', 'tier', 'text'],
+        [[q(bloc.id), q(tier), q(text)]]));
+    }
+    // `former` is derived from WHICH array the entry came from, so it is never
+    // unknown — see the column comment in 0008. ECOWAS keeps three withdrawn
+    // members here and flattening the arrays would readmit them.
+    for (const [members, former] of [[bloc.members, 0], [bloc.former_members, 1]] as const) {
+      for (const member of (members as Array<Record<string, any>> | undefined) ?? []) {
+        out.push(...insert('bloc_members', ['bloc_id', 'iso_n3', 'name', 'former'],
+          [[q(bloc.id), q(member.iso_n3), q(member.name), q(former)]]));
+      }
+    }
+  }
+
+  for (const lane of blocs.bilateral_lanes) {
+    out.push(...insert(
+      'bilateral_lane_index',
+      ['id', 'name', 'color', 'destination_iso_n3', 'destination_name', 'grants', 'limits',
+        'leads_to_settlement', 'allocation', 'beneficiaries_note', 'confidence', 'volatility',
+        'renounces_previous', 'sources'],
+      [[q(lane.id), q(lane.name), q(lane.color), q(lane.destination.iso_n3),
+        q(lane.destination.name), q(lane.grants), q(lane.limits), q(lane.leads_to_settlement),
+        q(lane.allocation ?? null), q(lane.beneficiaries_note ?? null), q(lane.confidence ?? null),
+        q(lane.volatility ?? null), q(lane.renounces_previous ?? null), sqlJson(lane.sources ?? null)]],
+    ));
+    for (const beneficiary of lane.beneficiaries ?? []) {
+      out.push(...insert('bilateral_lane_beneficiaries', ['lane_id', 'iso_n3', 'name'],
+        [[q(lane.id), q(beneficiary.iso_n3), q(beneficiary.name)]]));
+    }
+  }
+
+  for (const [iso, policy] of Object.entries(blocs.dual_citizenship.countries)) {
+    // `status` is written through untouched: the file says 'banned' where the
+    // canonical corpus says 'prohibited', and recording the divergence is the point
+    // (#144). Do not map it here.
+    out.push(...insert(
+      'dual_nationality_policy', ['iso_n3', 'status', 'note', 'volatility', 'sources'],
+      [[q(iso), q(policy.status), q(policy.note ?? null), q(policy.volatility ?? null),
+        sqlJson(policy.sources ?? null)]],
+    ));
+  }
+
+  for (const exception of blocs.dual_citizenship.treaty_exceptions) {
+    out.push(...insert(
+      'dual_nationality_treaty_exception',
+      ['id', 'name', 'effect', 'status', 'confidence', 'last_checked', 'sources'],
+      [[q(exception.id), q(exception.name), q(exception.effect), q(exception.status),
+        q(exception.confidence ?? null), q(exception.last_checked ?? null),
+        sqlJson(exception.sources ?? null)]],
+    ));
+    for (const party of exception.parties ?? []) {
+      out.push(...insert('dual_nationality_treaty_parties', ['exception_id', 'iso_n3', 'name'],
+        [[q(exception.id), q(party.iso_n3), q(party.name)]]));
+    }
+  }
+
+  // `special` entries key on `id`, not `iso_n3` — Kosovo has no M49 numeric code at
+  // all and is carried as 'XKX'. Reading iso_n3 blindly would drop both rows.
+  for (const [key, entries] of [
+    ['sovereign', registry.sovereigns], ['territory', registry.territories],
+    ['special', registry.special],
+  ] as const) {
+    for (const entry of entries) {
+      out.push(...insert('jurisdiction_registry', ['iso_n3', 'name', 'class', 'note'],
+        [[q(entry.iso_n3 ?? entry.id), q(entry.name), q(key), q(entry.note ?? null)]]));
+    }
+  }
+
+  for (const source of manifest.sources) {
+    out.push(...insert(
+      'monitor_source_manifest', ['id', 'tier', 'adapter', 'status', 'url', 'notes'],
+      [[q(source.id), q(source.tier), q(source.adapter), q(source.status),
+        q(source.url ?? null), q(source.notes ?? null)]],
+    ));
+    for (const jurisdiction of source.jurisdictions ?? []) {
+      out.push(...insert('monitor_source_jurisdictions', ['source_id', 'jurisdiction'],
+        [[q(source.id), q(jurisdiction)]]));
+    }
+  }
+
+  for (const play of blocs.stacking_plays) {
+    // No id in the file; `passport` is its only identifier, and it is not always a
+    // country ('Falklands-born', 'Dominica (CBI)').
+    out.push(...insert('stacking_play_index', ['passport', 'timeline', 'payload'],
+      [[q(play.passport), q(play.timeline), sqlJson({ blocs: play.blocs, footprint: play.footprint })]]));
+  }
+
+  for (const event of blocs.generational_events) {
+    out.push(...insert(
+      'generational_event_index', ['id', 'country_iso_n3', 'country_name', 'payload'],
+      [[q(event.id), q(event.country.iso_n3), q(event.country.name),
+        sqlJson({ child: event.child, parent: event.parent, sources: event.sources })]],
+    ));
+  }
+
+  for (const pending of blocs.pending_verification) {
+    out.push(...insert(
+      'pending_verification_index', ['id', 'name', 'confidence', 'volatility', 'payload'],
+      [[q(pending.id), q(pending.name), q(pending.confidence ?? null), q(pending.volatility ?? null),
+        sqlJson({ proposed_shape: pending.proposed_shape, reason: pending.reason, sources: pending.sources })]],
+    ));
+  }
+
+  return out;
+}
+
 async function verify(): Promise<void> {
   const counts = (await query(
     `SELECT (SELECT COUNT(*) FROM canonical_entities) AS entities,
@@ -278,6 +481,11 @@ async function verify(): Promise<void> {
             (SELECT COUNT(*) FROM route_index) AS routes,
             (SELECT COUNT(*) FROM licence_agreement_index) AS licence_agreements,
             (SELECT COUNT(*) FROM licence_exchange_index) AS licence_rows,
+            (SELECT COUNT(*) FROM bloc_index) AS blocs,
+            (SELECT COUNT(*) FROM bilateral_lane_index) AS bilateral_lanes,
+            (SELECT COUNT(*) FROM dual_nationality_policy) AS dual_nationality,
+            (SELECT COUNT(*) FROM jurisdiction_registry) AS registry,
+            (SELECT COUNT(*) FROM monitor_source_manifest) AS monitor_sources,
             (SELECT COUNT(*) FROM monitor_pages) AS monitor_pages,
             (SELECT COUNT(*) FROM monitor_posts) AS monitor_posts;`,
   ))[0];
@@ -333,6 +541,11 @@ if (cmd === 'verify') {
     const licence = renderLicenceSql();
     console.log(`  ${licence.length} statements`);
     await runBatched(licence, 'licence');
+    console.log('== 5c. reference data ==');
+    await ensureReferenceSchema();
+    const reference = renderReferenceDataSql();
+    console.log(`  ${reference.length} statements`);
+    await runBatched(reference, 'reference');
   } catch (error) {
     console.error('\n!! sync FAILED mid-write — remote canonical tables may be PARTIAL.');
     console.error('   Recover: re-run `bun run data:sync -- sync` (imports are idempotent upserts and converge),');
