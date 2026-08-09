@@ -36,9 +36,11 @@ import {
   RetirementVisaPage,
   TalentSkilledVisaPage,
 } from '../src/components/RouteTypePages';
+import { DrivingLicencesPage } from '../src/components/DrivingLicencesPage';
 import { buildCountrySlugMap } from '../src/lib/slug';
 import { isNonApplicableJurisdiction } from '../src/lib/country';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
+import type { LicenceExchangeData } from '../src/lib/licence-exchange';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://flagpaths.com';
@@ -525,15 +527,31 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
       description: 'Browse government digital identity and e-residency programmes for non-residents, without confusing them with residence or citizenship rights.',
       el: createElement(DigitalIdentityPage, { data: citizenship }),
     },
+    {
+      path: 'routes/driving-licences',
+      title: 'Driving Licence Exchange Lookup | Flag Paths',
+      description:
+        'Look up which destinations exchange a foreign driving licence and whether theory or practical tests are required. Seeded with Germany Anlage 11 FeV; normal-residence rules apply.',
+      el: createElement(DrivingLicencesPage, {
+        data: JSON.parse(
+          fs.readFileSync(path.join(root, 'public/licence_exchange.json'), 'utf8'),
+        ) as LicenceExchangeData,
+      }),
+    },
   ];
   const routeUrls: string[] = [];
   for (const page of ROUTES_ENABLED ? routePages : []) {
     const url = `${SITE}/${page.path}/`;
-    const bodyHtml = renderToStaticMarkup(createElement(
+    let bodyHtml = renderToStaticMarkup(createElement(
       Fragment, null,
       staticHeader('routes'),
       page.el,
     ));
+    // Progressive enhancement for the licence exchange lookup (script is
+    // public/licence-exchange.js, allowed by script-src 'self').
+    if (page.path === 'routes/driving-licences') {
+      bodyHtml += '<script src="/licence-exchange.js" defer></script>';
+    }
     const headExtra = [
       `<meta property="og:type" content="website"><meta property="og:site_name" content="Flag Paths">`,
       `<meta property="og:url" content="${url}"><meta property="og:title" content="${esc(page.title)}">`,
