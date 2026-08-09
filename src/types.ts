@@ -177,6 +177,15 @@ export interface DescentRelations {
   deepest_recorded_degree: number | null;
   maximum_degree: number | null;
   limit_recorded: boolean;
+  /**
+   * Qualifies on ethnic or national ORIGIN rather than descent from a citizen.
+   * Not a degree, because it is not a generation: the Law of Return and
+   * Spätaussiedler recognition ask what you are, not how many generations back a
+   * citizen sits. See scripts/lib/descent-relations.ts.
+   */
+  origin_based?: boolean;
+  /** Set when part of the finding was authored from prose rather than derived. */
+  authored_basis?: string;
 }
 
 export interface JurisdictionDualNationality {

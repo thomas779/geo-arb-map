@@ -1179,9 +1179,15 @@ describe('descent depth is recorded positively, never as a cutoff', () => {
   });
 
   test('ethnic-origin claims carry lineage but no generation', () => {
-    // Spätaussiedler, Kandas, Kairylman, Armenian origin and the Spanish
-    // democratic-memory option are lineage claims with no ancestral degree, so
-    // null is the correct answer rather than a coverage gap to be filled.
+    // Spätaussiedler, Kandas and the Spanish democratic-memory option are lineage
+    // claims with no ancestral degree. They must never acquire a generation.
+    //
+    // What changed (#191): null used to be the answer, and it was too blunt. A
+    // route deriving to null is invisible to every ancestry facet, which is how an
+    // ethnic-descent route conferring German nationality automatically ended up
+    // unreachable in the UI. Where the origin basis has now been authored, the
+    // route records `origin_based: true` with NO degree — the same fact, made
+    // visible. Unauthored ones legitimately stay null.
     for (const id of [
       'germany-spaetaussiedler',
       'kazakhstan-citizenship-by-kandas-status',
@@ -1189,7 +1195,13 @@ describe('descent depth is recorded positively, never as a cutoff', () => {
     ]) {
       const route = ancestry.find(candidate => candidate.id === id);
       expect(route).toBeDefined();
-      expect(route?.descent ?? null).toBeNull();
+      const descent = route?.descent ?? null;
+      if (descent === null) continue;
+      // The invariant that actually matters, unchanged: an origin claim is not a
+      // generation.
+      expect(descent.origin_based, id).toBe(true);
+      expect(descent.deepest_recorded_degree, id).toBeNull();
+      expect(descent.maximum_degree, id).toBeNull();
     }
   });
 
