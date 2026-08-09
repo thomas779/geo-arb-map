@@ -1332,3 +1332,63 @@ describe('Curaçao multi-year residence layer, August 2026', () => {
     expect(cit.length).toBeGreaterThanOrEqual(1);
   });
 });
+
+// Aruba + BES multi-year layers (same filter: renew beyond 1 year → PR / Dutch nat).
+describe('Aruba and Caribbean Netherlands multi-year residence, August 2026', () => {
+  test('Aruba retiree/interest-rate earner is 1y renewable with Afl 50k floor', () => {
+    const r = (citizenshipRoutes.residence_routes ?? []).find(
+      x => x.id === 'aruba-retiree-interest-rate-earner',
+    );
+    expect(r).toBeDefined();
+    expect(r?.country.iso_n3).toBe('533');
+    expect(r?.category).toBe('retirement_pension');
+    expect(r?.confidence).toBe('high');
+    expect(r?.permit_duration_months).toBe(12);
+    expect(r?.permit_renewable).toBe(true);
+    expect(r?.work_rights).toBe('none');
+    expect(r?.min_income_monthly).toEqual({ amount: 4166.67, currency: 'AWG' });
+    expect(r?.counts_toward_permanent_residence).toBe(true);
+    expect(r?.counts_toward_naturalization).toBe(true);
+    expect(r?.summary).toMatch(/50[, ]?000/);
+    expect(r?.summary).toMatch(/100[, ]?000/);
+    expect(r?.sources.some(s => s.url.includes('dimasaruba.aw') && s.url.includes('retiree'))).toBe(true);
+  });
+
+  test('Aruba indefinite residence is 120 months temporary ladder', () => {
+    const r = (citizenshipRoutes.residence_routes ?? []).find(
+      x => x.id === 'aruba-indefinite-residence',
+    );
+    expect(r?.outcome).toBe('permanent_residence');
+    expect(r?.pathways?.[0]?.eligibility_months).toBe(120);
+    expect(r?.confidence).toBe('high');
+    expect(r?.sources.some(s => s.url.includes('indefinite'))).toBe(true);
+  });
+
+  test('Aruba director/shareholder has Afl 125k equity floor; no CBI negative present', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    const inv = byId.get('aruba-director-shareholder-residence');
+    expect(inv?.min_investment).toEqual({ amount: 125_000, currency: 'AWG' });
+    expect(inv?.confidence).toBe('medium');
+    expect(byId.get('aruba-no-cbi')?.status).toBe('verified_negative');
+  });
+
+  test('BES retired/independent means is renewable 1y with 120% MW means test; indefinite at 5y', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    const ret = byId.get('caribbean-netherlands-retired-independent-means');
+    expect(ret?.country.iso_n3).toBe('535');
+    expect(ret?.category).toBe('retirement_pension');
+    expect(ret?.confidence).toBe('high');
+    expect(ret?.permit_duration_months).toBe(12);
+    expect(ret?.permit_renewable).toBe(true);
+    expect(ret?.min_income_monthly?.currency).toBe('USD');
+    expect(ret?.summary).toMatch(/120\s*%/);
+    expect(ret?.counts_toward_naturalization).toBe(true);
+    // Winter visitor (max 6 months) not modelled.
+    expect(byId.has('caribbean-netherlands-winter-visitor')).toBe(false);
+
+    const pr = byId.get('caribbean-netherlands-indefinite-residence');
+    expect(pr?.outcome).toBe('permanent_residence');
+    expect(pr?.pathways?.[0]?.eligibility_months).toBe(60);
+    expect(byId.get('caribbean-netherlands-no-cbi')?.status).toBe('verified_negative');
+  });
+});
