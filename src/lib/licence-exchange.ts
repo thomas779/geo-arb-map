@@ -93,6 +93,8 @@ export interface LicenceAgreement {
    * atlas would imply an arbitrage the Directive explicitly forecloses.
    */
   third_country_carve_out?: string;
+  /** The one-licence rule and how it is enforced between member states. */
+  exclusivity?: string;
   /** ISO date from which a successor instrument replaces this one. */
   superseded_from?: string;
   superseded_note?: string;
@@ -102,6 +104,13 @@ export interface LicenceExchangeDisclaimer {
   normal_residence: string;
   scope: string;
   coverage: string;
+  /**
+   * What holding a licence actually tells you. The one-licence rule, residence-gated
+   * issuance and surrender-on-exchange together make a licence a residence artefact
+   * rather than something to accumulate — which is why it is widely accepted as proof
+   * of address. Framed as the layer's purpose, not as a caveat.
+   */
+  what_a_licence_evidences?: string;
 }
 
 export interface LicenceExchangeData {

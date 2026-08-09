@@ -204,3 +204,31 @@ describe('the EU/EEA instrument, and the arbitrage it forecloses', () => {
     expect(eea().superseded_note).toContain('2025/2205');
   });
 });
+
+describe('a licence is a residence artefact, and the data says so', () => {
+  // The owner's reframe, and it is the right one: exclusivity is the POINT of this
+  // layer, not a limitation of it. You cannot accumulate licences, so the one you
+  // hold evidences where you actually live — which is why it is widely accepted as
+  // proof of address. The layer maps which residence histories convert into which
+  // documents, not how to collect them.
+  test('the exclusivity chain is recorded, not just the exchange rows', () => {
+    const eea = agreementById(seed, 'licence-eea-directive')!;
+    expect(eea.exclusivity).toContain('No person may hold more than one driving licence');
+    // Enforced and cross-checked between states, not merely asserted.
+    expect(eea.exclusivity).toContain('shall refuse to issue');
+  });
+
+  test('the framing leads with what a licence evidences', () => {
+    const said = seed.disclaimer.what_a_licence_evidences ?? '';
+    expect(said).toContain('RESIDENCE ARTEFACT');
+    // The three provisions that make the claim true must be cited, so the framing
+    // is traceable rather than a slogan.
+    for (const article of ['7(1)(e)', '7(5)(a)', '11(6)']) {
+      expect(said, `should cite art. ${article}`).toContain(article);
+    }
+  });
+
+  test('scope says there is nothing to stack', () => {
+    expect(seed.disclaimer.scope).toContain('one-licence rule');
+  });
+});

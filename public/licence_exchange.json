@@ -3,8 +3,9 @@
   "generated_at": "2026-08-09",
   "disclaimer": {
     "normal_residence": "Exchange almost always requires that you were normally resident in the issuing country when (and often while) you held the licence, and that you are resident in the destination when you exchange. EU law defines normal residence as living in a place for at least 185 days in each calendar year (Directive 2006/126/EC Art. 12). Several national authorities (e.g. Netherlands RDW) restate the same 185-day rule for non-EU licences. A licence obtained without meeting that condition is often void in the destination.",
-    "scope": "Lawful exchange conditions only. This is not a guide to licence tourism.",
-    "coverage": "Seeded destinations (11): Germany, Great Britain, Netherlands, Ireland, France, Spain, Austria, New Zealand, Australia, Denmark, Portugal. EU/EEA mutual recognition is not expanded as third-country annex rows. Sub-national variance is flagged for US/CA/AU where instruments are state/province-level."
+    "scope": "Lawful exchange conditions only. This is not a guide to licence tourism, and the one-licence rule means there is no stacking to be done: you end up holding exactly one, from where you reside.",
+    "coverage": "Seeded destinations (11): Germany, Great Britain, Netherlands, Ireland, France, Spain, Austria, New Zealand, Australia, Denmark, Portugal. EU/EEA mutual recognition is not expanded as third-country annex rows. Sub-national variance is flagged for US/CA/AU where instruments are state/province-level.",
+    "what_a_licence_evidences": "A driving licence is best read as a RESIDENCE ARTEFACT, not a collectible. Under Directive 2006/126/EC the three rules lock together: issuance requires normal residence in the issuing state (art. 7(1)(e)); \"No person may hold more than one driving licence\" and a state \"shall refuse to issue a licence where it establishes that the applicant already holds\" one, verifying with other Member States through the EU driving licence network (art. 7(5)(a)-(d)); and on exchange the original is surrendered and the swap is recorded on the new licence (art. 11(6)). So the licence you hold is single, exclusive and anchored to where you actually live, which is why in practice it is widely accepted as evidence of address. That exclusivity is the point of this layer, not a limitation of it: the exchange network shows which residence histories convert into which documents."
   },
   "destinations": [
     {
@@ -5146,7 +5147,8 @@
       "residence_condition": "Art. 12: normal residence means where a person usually lives \"at least 185 days in each calendar year\". It gates issuance (art. 7(1)(e)) and triggers the exchange right, and art. 7(5)(a) bars holding more than one licence.",
       "third_country_carve_out": "Art. 11(6) is the provision that forecloses licence laundering. Where a Member State exchanges a THIRD-COUNTRY licence for a Community model, the exchange \"shall be recorded on the Community model driving licence\", the original \"has been surrendered\", and if the holder then moves to another Member State \"the latter need not apply the principle of mutual recognition set out in Article 2\". So a non-EEA licence swapped in one member state does not reliably become EEA-wide.",
       "superseded_from": "2029-11-26",
-      "superseded_note": "Directive (EU) 2025/2205 repeals 2006/126/EC with effect from 26 November 2029; mutual recognition moves to its art. 3(6) and the residence test becomes a rolling \"185 days of the previous 365 days\" (art. 20(1)) rather than a calendar-year test."
+      "superseded_note": "Directive (EU) 2025/2205 repeals 2006/126/EC with effect from 26 November 2029; mutual recognition moves to its art. 3(6) and the residence test becomes a rolling \"185 days of the previous 365 days\" (art. 20(1)) rather than a calendar-year test.",
+      "exclusivity": "Art. 7(5)(a): \"No person may hold more than one driving licence\". Art. 7(5)(b): a Member State \"shall refuse to issue a licence where it establishes that the applicant already holds a driving licence\", and art. 7(5)(c)-(d) require verification with other Member States via the EU driving licence network. Exclusivity is enforced and cross-checked, not merely asserted."
     },
     {
       "id": "licence-germany",
