@@ -1403,3 +1403,30 @@ describe('Aruba and Caribbean Netherlands multi-year residence, August 2026', ()
     expect(pr?.pathways?.[0]?.eligibility_months).toBe(60);
   });
 });
+
+describe('the atlas publishes no negatives', () => {
+  /**
+   * Silence is how this atlas says a thing does not exist.
+   *
+   * A route earns a row by being a programme: one that is open, or one that really
+   * ran and ended. A row asserting that some country has no golden visa is not a
+   * programme, it is an absence dressed as data, and it invites a reader to treat
+   * every country WITHOUT such a row as unchecked rather than as unremarkable.
+   *
+   * `inactive` is the line's other side and stays: the UK Tier 1 investor visa was
+   * real, applicants held it, and its closure is a fact about a programme. That is
+   * why this asserts on `verified_negative` alone and nothing broader.
+   *
+   * An invariant rather than a convention because the corpus is authored by several
+   * people and agents at once, and the cheapest way to record "I checked and found
+   * nothing" has always been to store the nothing.
+   */
+  test('stores no verified_negative rows in either family', () => {
+    for (const family of ['routes', 'residence_routes'] as const) {
+      const negatives = (citizenshipRoutes[family] ?? [])
+        .filter((route: { status?: string }) => route.status === 'verified_negative')
+        .map((route: { id: string }) => route.id);
+      expect(negatives, `${family} must record programmes, not their absence`).toEqual([]);
+    }
+  });
+});

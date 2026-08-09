@@ -262,7 +262,7 @@ export const RouteCostsSchema = z.strictObject({
 export const RouteSchema = z.strictObject({
   id: EntityId,
   mode: AcquisitionModeSchema,
-  status: z.enum(['active', 'inactive', 'verified_negative', 'pending_verification']),
+  status: z.enum(['active', 'inactive', 'pending_verification']),
   title: z.string().min(1),
   summary: z.string().min(1),
   effective: z.strictObject({
@@ -369,7 +369,7 @@ export const ResidenceCategorySchema = z.enum([
 export const ResidenceRouteSchema = z.strictObject({
   id: EntityId,
   category: ResidenceCategorySchema,
-  status: z.enum(['active', 'inactive', 'verified_negative', 'pending_verification']),
+  status: z.enum(['active', 'inactive', 'pending_verification']),
   title: z.string().min(1),
   summary: z.string().min(1),
   effective: z.strictObject({
