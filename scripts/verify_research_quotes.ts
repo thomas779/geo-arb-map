@@ -40,8 +40,15 @@ interface Finding {
 }
 
 const VERDICTS = new Set(['territorial_limb_present', 'no_territorial_limb', 'cannot_determine']);
+// `foundling` is deliberately NOT a qualifying limb. A rule for a child FOUND on the
+// territory of unknown parentage is near-universal (a 1961 Statelessness Convention
+// obligation) and does nothing for an ordinary child born there to known foreign
+// parents. Counting it would flip almost every jurisdiction and bury the real
+// corrections in noise. Kenya art. 14 is the worked example: art. 14(1) confers
+// citizenship "whether or not the person is born in Kenya", and the only territorial
+// text is a foundling presumption. Slovakia § 5 is what a real limb looks like.
 const LIMBS = new Set(['stateless_safeguard', 'double_jus_soli', 'parent_residence',
-  'foundling', 'presumption', 'unconditional']);
+  'presumption', 'unconditional']);
 /** Aggregators and mirrors that may not stand as the cited authority. */
 const BANNED_HOST = /constituteproject|refworld|natlex|ilo\.org|wikipedia|\blii\.org|constitutionnet/i;
 
@@ -106,9 +113,12 @@ for (const f of findings) {
   });
 
   if (!f.verdict || !VERDICTS.has(f.verdict)) { fail(`bad verdict: ${f.verdict}`); continue; }
-  for (const limb of f.limb_types ?? []) {
-    if (!LIMBS.has(limb)) { fail(`unknown limb_type: ${limb}`); continue; }
-  }
+  // Must skip the whole ENTRY, not just this limb. A `continue` inside the loop
+  // only advanced the inner iteration, so a rejected entry fell through and ALSO
+  // recorded an OK row. A failing finding that reads as verified is the single
+  // outcome this script exists to prevent.
+  const badLimb = (f.limb_types ?? []).find(limb => !LIMBS.has(limb));
+  if (badLimb) { fail(`unknown limb_type: ${badLimb}`); continue; }
   if (f.verdict === 'territorial_limb_present' && !(f.limb_types ?? []).length) {
     fail('claims a territorial limb but names no limb_types'); continue;
   }
