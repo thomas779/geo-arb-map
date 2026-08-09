@@ -17,7 +17,7 @@ import { countryFlag } from '@/lib/country';
 import { displayRouteTitle } from '@/lib/display-title';
 import { dataCorrectionUrl } from '@/lib/trust';
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
-import { RESIDENCE_CATEGORY_SHORT, derivedResidenceAbsences, residenceCardRoutes, residenceLadderBadges, verifiedResidenceNegatives } from '@/lib/residence';
+import { RESIDENCE_CATEGORY_SHORT, residenceCardRoutes, residenceLadderBadges } from '@/lib/residence';
 
 /*
  * The country panel is a SUMMARY companion to the map — a quick look that funnels
@@ -89,7 +89,6 @@ function CoverageStrip({
  */
 function statusLabel(route: CitizenshipRouteSummary): string | null {
   if (route.status === 'inactive') return 'ended';
-  if (route.status === 'verified_negative') return 'does not qualify';
   if (route.status === 'pending_verification') return 'verification pending';
   return route.confidence === 'high' ? null : `${route.confidence} confidence`;
 }
@@ -289,17 +288,6 @@ export function DetailPanel({
           <div className="space-y-1.5">
             {residenceCardRoutes(residenceRoutes).map(route => <ResidenceRow key={route.id} route={route} countrySlug={countrySlug} />)}
           </div>
-          {verifiedResidenceNegatives(residenceRoutes).length > 0 && (
-            <p className="mt-1.5 text-[0.7rem] leading-snug text-muted-foreground">
-              Verified absent: {verifiedResidenceNegatives(residenceRoutes)
-                .map(route => RESIDENCE_CATEGORY_SHORT[route.category].toLowerCase()).join('; ')} — details on the country page.
-            </p>
-          )}
-          {derivedResidenceAbsences(residenceRoutes).length > 0 && (
-            <p className="mt-1.5 text-[0.7rem] leading-snug text-muted-foreground">
-              Not recorded here: {derivedResidenceAbsences(residenceRoutes).join('; ')}.
-            </p>
-          )}
         </>
       )}
 

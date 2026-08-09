@@ -300,7 +300,7 @@ describe('data migration shadow', () => {
       jurisdictions: 233,
       // 12 blocs + 22 bilateral lanes. Was 24 (2 + 22) before the #162 second batch.
       arrangements: 34,
-      citizenship_routes: 255,
+      citizenship_routes: 254,
     });
   });
 

@@ -5,8 +5,8 @@ type Coverage = Record<string, string>;
 
 export interface PromotionArtifact {
   jurisdictions: Array<{ iso_n3: string; coverage: Coverage }>;
-  routes: Array<{ id: string }>;
-  residence_routes?: Array<{ id: string }>;
+  routes: Array<{ id: string; status?: string }>;
+  residence_routes?: Array<{ id: string; status?: string }>;
 }
 
 export interface PromotionRegression {
@@ -32,12 +32,19 @@ export function promotionRegressions(
   const candidateCitizenship = new Set(candidate.routes.map(route => route.id));
   const candidateResidence = new Set((candidate.residence_routes ?? []).map(route => route.id));
 
+  // Product inventory only: active / inactive (ended real programmes) / pending.
+  // verified_negative rows are absence notes, not programmes — they may be dropped
+  // when cleaning the corpus (positives-only rule).
   for (const route of committed.routes) {
+    if (route.status === 'verified_negative') continue;
     if (!candidateCitizenship.has(route.id)) {
       regressions.push({ kind: 'citizenship_route_removed', id: route.id });
     }
   }
   for (const route of committed.residence_routes ?? []) {
+    if (route.status === 'verified_negative') continue;
+    // Withdrawn "no CBI" shells were never programmes.
+    if (route.id.endsWith('-no-cbi') || route.id.endsWith('-no-golden-visa')) continue;
     if (!candidateResidence.has(route.id)) {
       regressions.push({ kind: 'residence_route_removed', id: route.id });
     }
