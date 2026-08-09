@@ -560,8 +560,12 @@ describe('monitor-lead verifications, July 2026', () => {
     expect(cbi).toHaveLength(0);
   });
 
-  // #190 talent / extraordinary ability expansion — P0+P1 high-conf products plus
-  // Ireland Critical Skills at medium. Quote-checked 2026-08-09 against official portals.
+  // #190 talent / extraordinary ability expansion. Nine products at high, each
+  // re-read verbatim against its instrument or derived from it; Ireland Critical
+  // Skills and Canada Global Talent Stream at medium, for the reasons pinned
+  // below. Several guards here assert the SUPERSEDED value is gone rather than
+  // only the new one, because the defects this test exists to catch were fields
+  // that quietly contradicted their own route summary.
   test('#190 talent_skilled expansion pins flagship products and taxonomy guards', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
     const high = [
@@ -575,7 +579,6 @@ describe('monitor-lead verifications, July 2026', () => {
       'hong-kong-qmas',
       'germany-eu-blue-card',
       'netherlands-highly-skilled-migrant',
-      'canada-global-talent-stream',
     ] as const;
     for (const id of high) {
       const r = byId.get(id);
@@ -584,10 +587,33 @@ describe('monitor-lead verifications, July 2026', () => {
       expect(r?.status).toBe('active');
       expect(r?.confidence).toBe('high');
     }
+    // Medium, each for a recorded reason. Ireland: the Critical Skills
+    // Occupations List is not transcribed. Canada: canada.ca returns 403 to
+    // automated fetch, so the CAD 80,000 / 150,000 pair could not be re-read and
+    // has no independent official corroboration, unlike every `high` figure above.
+    for (const id of [
+      'ireland-critical-skills-employment-permit',
+      'canada-global-talent-stream',
+    ] as const) {
+      const r = byId.get(id);
+      expect(r, id).toBeTruthy();
+      expect(r?.category).toBe('talent_skilled');
+      expect(r?.status).toBe('active');
+      expect(r?.confidence, id).toBe('medium');
+    }
+
+    // Ireland: Stamp 4 arrives about two years in, but it is a renewable
+    // two-year permission, NOT permanent residence, and no Irish limb reaches PR
+    // at 24 months. eligibility_months therefore carries the ordinary five-year
+    // reckonable-residence clock. The superseded value is guarded explicitly.
     const ie = byId.get('ireland-critical-skills-employment-permit');
-    expect(ie).toBeTruthy();
-    expect(ie?.category).toBe('talent_skilled');
-    expect(ie?.confidence).toBe('medium');
+    expect(ie?.pathways?.[0]?.eligibility_months).toBe(60);
+    expect(ie?.pathways?.[0]?.eligibility_months).not.toBe(24);
+    expect(ie?.summary).toMatch(/not permanent residence/i);
+    // Three floors apply (EUR 40,904 / 36,848 / 68,911), so no single monthly
+    // scalar is honest; the figures live in the summary instead.
+    expect(ie?.min_income_monthly).toBeNull();
+    expect(ie?.summary).toMatch(/40,904/);
 
     // US: immigrant EB-1A is permanent; O-1 remains temporary nonimmigrant.
     expect(byId.get('us-eb1a-extraordinary-ability')?.outcome).toBe('permanent_residence');
@@ -596,12 +622,39 @@ describe('monitor-lead verifications, July 2026', () => {
     expect(byId.get('us-o1-extraordinary-ability')?.counts_toward_permanent_residence).toBe(false);
 
     // Canada GTS is TFWP temporary — not a PR product.
-    expect(byId.get('canada-global-talent-stream')?.counts_toward_permanent_residence).toBe(false);
-    expect(byId.get('canada-global-talent-stream')?.counts_toward_naturalization).toBe(false);
+    const ca = byId.get('canada-global-talent-stream');
+    expect(ca?.counts_toward_permanent_residence).toBe(false);
+    expect(ca?.counts_toward_naturalization).toBe(false);
+    expect(ca?.pathways?.[0]?.eligibility_months).toBeNull();
+    // Exact twelfth of the CAD 80,000 Category A floor. Rounding up to 6667
+    // overstates the threshold a shortlist filters on.
+    expect(ca?.min_income_monthly).toEqual({ amount: 6666.67, currency: 'CAD' });
+
+    // Germany: eligibility_months is a MINIMUM, so it carries the shortest
+    // AufenthG §18c(2) limb — 21 months with ausreichende German ("verkürzt sich
+    // auf 21 Monate"), not the 27 that applies with einfache German only. Both
+    // limbs belong in the summary, and §18c must be cited, since §18g grants the
+    // Blue Card but says nothing about settlement.
+    const de = byId.get('germany-eu-blue-card');
+    expect(de?.pathways?.[0]?.eligibility_months).toBe(21);
+    expect(de?.summary).toMatch(/21 Monate|21 months/);
+    expect(de?.summary).toMatch(/27 months/);
+    expect(de?.sources.map(s => s.url).some(u => u.includes('__18c'))).toBe(true);
 
     // HK TTPS is not permanent at grant; 7-year ordinary residence for right of abode.
-    expect(byId.get('hong-kong-ttps')?.outcome).toBe('residence');
-    expect(byId.get('hong-kong-ttps')?.min_income_monthly).toEqual({ amount: 208333, currency: 'HKD' });
+    const hk = byId.get('hong-kong-ttps');
+    expect(hk?.outcome).toBe('residence');
+    expect(hk?.pathways?.[0]?.eligibility_months).toBe(84);
+    // Category A asks what the applicant EARNED in the preceding year, not what
+    // they will be paid monthly. An earlier revision recorded 2.5M/12 = 208,333,
+    // which ResidenceCard renders as an "HKD 208,333/mo" chip and so restated a
+    // retrospective income test as a forward salary floor. Genuine periodic
+    // salary conditions (FR, DE, CA below) do convert; this one must not.
+    expect(hk?.min_income_monthly).toBeNull();
+    expect(hk?.summary).toMatch(/2\.5 million/);
+    expect(hk?.summary).toMatch(/immediately preceding|preceding the date of application/i);
+    // Not sourced on the cited IMMD page, so not recorded.
+    expect(hk?.min_age).toBeNull();
 
     // France non-investment talent limbs; investment porteur-de-projet stay in investment.
     expect(byId.get('france-talent-investor')?.category).toBe('investment');
