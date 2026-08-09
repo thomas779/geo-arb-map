@@ -1321,13 +1321,12 @@ describe('Curaçao multi-year residence layer, August 2026', () => {
     expect(ret?.sources.some(s => s.url.includes('immigrationcur.org') && s.url.includes('rentenier'))).toBe(true);
   });
 
-  test('no CBI negative is recorded; short-stay products are not atlas primaries', () => {
+  test('short-stay products are not atlas primaries; no-cbi row is inactive not a product', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
-    expect(byId.get('curacao-no-cbi')?.status).toBe('verified_negative');
-    expect(byId.get('curacao-no-cbi')?.confidence).toBe('high');
+    // No-CBI is coverage material — keep the id inactive so promote does not drop a shipped row.
+    expect(byId.get('curacao-no-cbi')?.status).toBe('inactive');
     expect(byId.has('curacao-remote-worker-short-stay')).toBe(false);
     expect(byId.has('curacao-snowbird-short-stay')).toBe(false);
-    // Citizenship stubs remain.
     const cit = citizenshipRoutes.routes.filter(r => r.country?.iso_n3 === '531');
     expect(cit.length).toBeGreaterThanOrEqual(1);
   });
@@ -1364,12 +1363,12 @@ describe('Aruba and Caribbean Netherlands multi-year residence, August 2026', ()
     expect(r?.sources.some(s => s.url.includes('indefinite'))).toBe(true);
   });
 
-  test('Aruba director/shareholder has Afl 125k equity floor; no CBI negative present', () => {
+  test('Aruba director/shareholder has Afl 125k equity floor; no-cbi row inactive', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
     const inv = byId.get('aruba-director-shareholder-residence');
     expect(inv?.min_investment).toEqual({ amount: 125_000, currency: 'AWG' });
     expect(inv?.confidence).toBe('medium');
-    expect(byId.get('aruba-no-cbi')?.status).toBe('verified_negative');
+    expect(byId.get('aruba-no-cbi')?.status).toBe('inactive');
   });
 
   test('BES retired/independent means is renewable 1y with 120% MW means test; indefinite at 5y', () => {
@@ -1385,10 +1384,10 @@ describe('Aruba and Caribbean Netherlands multi-year residence, August 2026', ()
     expect(ret?.counts_toward_naturalization).toBe(true);
     // Winter visitor (max 6 months) not modelled.
     expect(byId.has('caribbean-netherlands-winter-visitor')).toBe(false);
+    expect(byId.get('caribbean-netherlands-no-cbi')?.status).toBe('inactive');
 
     const pr = byId.get('caribbean-netherlands-indefinite-residence');
     expect(pr?.outcome).toBe('permanent_residence');
     expect(pr?.pathways?.[0]?.eligibility_months).toBe(60);
-    expect(byId.get('caribbean-netherlands-no-cbi')?.status).toBe('verified_negative');
   });
 });
