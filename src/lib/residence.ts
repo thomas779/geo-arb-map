@@ -25,68 +25,32 @@ export const RESIDENCE_CATEGORY_SHORT: Record<ResidenceCategory, string> = {
 };
 
 /**
- * Categories a reader will actively look for on any country. When a reviewed
- * jurisdiction simply has no row in one of these, the page derives a one-line
- * "not recorded" statement instead of storing a negative route.
+ * Product inventory for the atlas: programmes that exist (or existed).
  *
- * Why derived: stored negatives had become an arbitrary signal — Germany had a
- * "no golden visa" row while Sweden (same fact) had silence, and silence reads
- * as "unchecked". Stored `verified_negative` rows are reserved for CONTESTED
- * absences — every one of the 27 investment negatives is a country the IMC
- * industry map claims has an RBI programme — while the default case is computed
- * here, so it is consistent by construction.
- */
-export const HEADLINE_CATEGORIES: ReadonlyArray<{ category: ResidenceCategory; absenceLabel: string }> = [
-  { category: 'investment', absenceLabel: 'golden visa / residence-by-investment' },
-  { category: 'digital_nomad', absenceLabel: 'digital-nomad programme' },
-];
-
-/**
- * Headline categories with no row of ANY status for this jurisdiction.
- * Fires only when the jurisdiction has residence coverage at all — deriving
- * "no golden visa recorded" for a country whose residence layer was never
- * reviewed would claim more than we know. Categories whose absence was
- * VERIFIED (a verified_negative row exists) are excluded here: they get the
- * stronger sourced statement from verifiedResidenceNegatives instead.
- */
-export function derivedResidenceAbsences(residence: ResidenceRouteSummary[]): string[] {
-  if (!residence.length) return [];
-  const present = new Set(residence.map(route => route.category));
-  return HEADLINE_CATEGORIES.filter(h => !present.has(h.category)).map(h => h.absenceLabel);
-}
-
-/**
- * Verified non-existence, presented as a quiet sourced line rather than a card.
+ * - `active` — live route
+ * - `inactive` — ended real programme (keep the story + dates)
+ * - `pending_verification` — claimed product still under review
  *
- * Owner rule: never give a card to something that never existed. A card titled
- * "No dedicated digital nomad visa" reads with the same visual weight as a real
- * programme; the checked fact belongs in a footnote with its official source.
- * Cards are reserved for things with a story — active routes and lapsed
- * programmes (`inactive`, which carry their run dates).
+ * Absences are not stored and not footnoted. If we have no golden visa row for
+ * a country, silence is enough — writing "not recorded / verified absent" is
+ * just another way of publishing a negative.
  */
-export function verifiedResidenceNegatives<T extends ResidenceRouteSummary>(residence: T[]): T[] {
-  return residence.filter(route => route.status === 'verified_negative');
-}
-
-/** Everything that should render as a card: active, lapsed, pending. */
 export function residenceCardRoutes<T extends ResidenceRouteSummary>(residence: T[]): T[] {
-  return residence.filter(route => route.status !== 'verified_negative');
+  return residence.filter(route =>
+    route.status === 'active'
+    || route.status === 'inactive'
+    || route.status === 'pending_verification',
+  );
 }
 
 export const RESIDENCE_STATUS_ORDER = [
   'active',
   'pending_verification',
   'inactive',
-  'verified_negative',
 ] as const;
 
 export const RESIDENCE_STATUS_LABELS: Record<string, string> = {
   inactive: 'ended',
-  // Not "closed": a verified negative means the programme was checked and does
-  // not exist (every stored one is a contested claim, usually the IMC map).
-  // "closed" implied a programme once ran and ended — the wrong story on
-  // Germany, which never had a golden visa. Lapsed programmes use `inactive`.
-  verified_negative: 'does not exist',
   pending_verification: 'unverified',
 };
 

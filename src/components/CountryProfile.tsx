@@ -17,9 +17,7 @@ import {
   RESIDENCE_STATUS_LABELS,
   RESIDENCE_STATUS_ORDER,
   residenceLadderBadges,
-  derivedResidenceAbsences,
   residenceCardRoutes,
-  verifiedResidenceNegatives,
 } from '@/lib/residence';
 
 // Shared per-country page derivation + labels, used by the interactive app
@@ -224,10 +222,8 @@ function ResidenceCard({ route }: { route: ResidenceRoute }) {
 }
 
 function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
-  // Verified negatives render as sourced footnotes, never cards — a card titled
-  // "No dedicated X" carries the same weight as a programme. See residence.ts.
+  // Active + inactive (+ pending) programmes only. Absences stay silent.
   const cards = useMemo(() => residenceCardRoutes(residence), [residence]);
-  const negatives = useMemo(() => verifiedResidenceNegatives(residence), [residence]);
   const categories = useMemo(() => {
     const present = [...new Set(cards.map(r => r.category))];
     // Prefer nomad / identity early so the filter showcases long-stay & digital ID.
@@ -310,21 +306,6 @@ function ResidenceSection({ residence }: { residence: ResidenceRoute[] }) {
             </p>
           )}
       </div>
-      {filter === 'all' && negatives.length > 0 && (
-        <div className="mt-3 space-y-1">
-          {negatives.map(r => (
-            <p key={r.id} className="text-xs text-muted-foreground">
-              Verified — {RESIDENCE_CATEGORY_LABELS[r.category].toLowerCase()}: {r.summary}{' '}
-              {r.sources[0] && <ExternalSourceLink href={r.sources[0].url}>{r.sources[0].title}</ExternalSourceLink>}
-            </p>
-          ))}
-        </div>
-      )}
-      {filter === 'all' && derivedResidenceAbsences(residence).length > 0 && (
-        <p className="mt-2 text-xs text-muted-foreground">
-          Not recorded here: {derivedResidenceAbsences(residence).join('; ')}.
-        </p>
-      )}
     </section>
   );
 }
