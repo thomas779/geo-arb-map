@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Armchair, Award, Banknote, Check, ChevronDown, Fingerprint, Home, Hourglass, Laptop, Search, Users } from 'lucide-react';
-import { ROUTE_CLASSES } from '@/lib/route-classes';
+import { Armchair, Award, Banknote, Check, ChevronDown, Dna, Fingerprint, Home, Hourglass, Laptop, Search, TreeDeciduous, Users } from 'lucide-react';
+import { QUICK_ROUTE_CLASSES, ROUTE_CLASSES } from '@/lib/route-classes';
 import type { AppState, BilateralLane, Bloc, BlocsData, AtlasIndexData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -56,9 +56,13 @@ const rowSelected = 'bg-accent';
 // Route-class rows have no color identity (selection paints the map one hue),
 // so a muted glyph stands where bloc rows put their color swatch.
 const ROUTE_CLASS_ICONS: Record<string, typeof Users> = {
+  // The three ancestry classes sit next to each other in the quick grid, so they
+  // get three glyphs: family for a named relative, a strand for ethnic origin,
+  // a tree for a limb with no stated end. One Users icon three times read as one
+  // repeated row.
   ancestry: Users,
-  'ancestry-origin': Users,
-  'ancestry-unlimited': Users,
+  'ancestry-origin': Dna,
+  'ancestry-unlimited': TreeDeciduous,
   cbi: Banknote,
   naturalization: Hourglass,
   'golden-visa': Home,
@@ -67,15 +71,6 @@ const ROUTE_CLASS_ICONS: Record<string, typeof Users> = {
   talent: Award,
   'digital-identity': Fingerprint,
 };
-
-const QUICK_ROUTES = [
-  // Was "Through family", which painted 232 of 240 countries and so said nothing.
-  // The reach-scoped class answers the question people actually arrive with.
-  { id: 'ancestry', label: 'Through a grandparent' },
-  { id: 'cbi', label: 'Invest for citizenship' },
-  { id: 'golden-visa', label: 'Invest for residence' },
-  { id: 'digital-nomad', label: 'Work remotely' },
-] as const;
 
 interface Props {
   data: BlocsData;
@@ -183,7 +178,10 @@ export function Sidebar({
   const countryMatches = citizenshipRoutes
     ? findJurisdictions(citizenshipRoutes.jurisdictions, q)
     : [];
-  const quickRouteClasses = QUICK_ROUTES.flatMap(quick => {
+  // Tile copy and the promotion decision live in route-classes.ts, beside the
+  // classes themselves; an id that no longer resolves drops its tile silently, so
+  // the test pins the list.
+  const quickRouteClasses = QUICK_ROUTE_CLASSES.flatMap(quick => {
     const routeClass = ROUTE_CLASSES.find(candidate => candidate.id === quick.id);
     return routeClass ? [{ ...quick, routeClass }] : [];
   });
@@ -191,6 +189,9 @@ export function Sidebar({
     !q
     || routeClass.label.toLowerCase().includes(q)
     || routeClass.description.toLowerCase().includes(q)
+    // "ancestry", "heritage" and "blood" match no ancestry label or description;
+    // typing them used to return nothing at all.
+    || (routeClass.keywords ?? []).some(keyword => keyword.includes(q))
   ));
 
   const blocMatches = (bloc: Bloc) => {
@@ -409,8 +410,11 @@ export function Sidebar({
                     type="button"
                     className={cn(
                       'flex min-h-11 items-center gap-2 bg-sidebar px-2.5 text-left text-xs font-medium transition-colors hover:bg-accent focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                      // Two columns: right border on every left cell, bottom
+                      // border on every row but the last. Was hard-coded to the
+                      // four-tile grid.
                       index % 2 === 0 && 'border-r border-sidebar-border',
-                      index < 2 && 'border-b border-sidebar-border',
+                      index < quickRouteClasses.length - 2 && 'border-b border-sidebar-border',
                       selected && 'bg-accent text-foreground',
                     )}
                     aria-pressed={selected}

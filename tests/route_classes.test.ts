@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 import type { CitizenshipRoutesData } from '../src/types';
 import {
+  QUICK_ROUTE_CLASSES,
   ROUTE_CLASSES,
   isosForRouteClass,
   residenceCategoryPageHref,
@@ -120,6 +121,47 @@ describe('route-class painted sets', () => {
     // (buy residence). New Zealand has an active golden visa and no CBI.
     expect(isos('golden-visa').has('554')).toBe(true);
     expect(isos('cbi').has('554')).toBe(false);
+  });
+
+  // The quick tiles are the only ancestry surface most visitors ever see: the
+  // "Route types" accordion is collapsed by default. Promoting one reach and
+  // hiding the other two is the bug these pin.
+  test('every promoted quick-route tile resolves to a class', () => {
+    for (const quick of QUICK_ROUTE_CLASSES) {
+      // Sidebar drops an unresolved id silently — a typo would just lose a tile.
+      expect(routeClassById(quick.id), quick.id).not.toBeNull();
+      expect(quick.label.length, quick.id).toBeGreaterThan(0);
+    }
+    // Two-column grid: an odd count leaves a hole in the last row.
+    expect(QUICK_ROUTE_CLASSES.length % 2).toBe(0);
+  });
+
+  test('all three ancestry reaches are promoted, origin first', () => {
+    const promoted = QUICK_ROUTE_CLASSES.map(quick => quick.id);
+    const ancestryClasses = ROUTE_CLASSES.filter(cls => cls.match === 'ancestry');
+    for (const cls of ancestryClasses) expect(promoted, cls.id).toContain(cls.id);
+    // Origin needs no ancestor who ever held the citizenship, so it reaches people
+    // no degree facet does; it must not sit below the narrower grandparent tile.
+    expect(promoted.indexOf('ancestry-origin')).toBeLessThan(promoted.indexOf('ancestry'));
+    expect(ROUTE_CLASSES.findIndex(cls => cls.id === 'ancestry-origin'))
+      .toBeLessThan(ROUTE_CLASSES.findIndex(cls => cls.id === 'ancestry'));
+  });
+
+  test('the words people type reach the ancestry classes', () => {
+    // Neither label nor description contains "ancestry", "heritage" or "blood" —
+    // the owner's own words for this returned nothing in the sidebar search.
+    const matches = (q: string) => ROUTE_CLASSES.filter(cls => (
+      cls.label.toLowerCase().includes(q)
+      || cls.description.toLowerCase().includes(q)
+      || (cls.keywords ?? []).some(keyword => keyword.includes(q))
+    )).map(cls => cls.id);
+    for (const query of ['ancestry', 'heritage', 'blood']) {
+      expect(matches(query), query).toContain('ancestry-origin');
+      expect(matches(query), query).toContain('ancestry');
+      expect(matches(query), query).toContain('ancestry-unlimited');
+    }
+    // A keyword is a search alias, not a second painted set: it never widens one.
+    expect(matches('jewish')).toEqual(['ancestry-origin']);
   });
 
   test('country and category browse paths point to the same nested route indexes', () => {

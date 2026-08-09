@@ -23,30 +23,46 @@ export interface RouteClass {
    * "everywhere", which is both useless and, worse, true.
    */
   descent_reach?: readonly DescentReach[];
+  /**
+   * Extra words the sidebar search matches, for classes whose label and
+   * description use the legal term rather than the one people type. "Ancestry",
+   * "heritage" and "blood" appear in no ancestry label — the owner's own words
+   * for this returned nothing — so they are recorded here rather than smuggled
+   * into a description, which is prose the UI shows and must stay readable.
+   */
+  keywords?: readonly string[];
 }
 
 /**
  * Ancestry is deliberately absent as a single flat class.
  *
- * The buckets below are the axis people actually search on — can I qualify through
- * a GRANDPARENT, or through ethnic/diaspora ties — and each selects a set small
+ * The three buckets below are the axis people actually search on — can I qualify
+ * through ethnic/diaspora ORIGIN, through a GRANDPARENT, or through an ancestor
+ * with no generation limit stated — and each selects a set small
  * enough to read. `parent_only` and `not_recorded` get no facet at all: the first
  * is near-universal and carries no information, and the second is an absence of
  * evidence that must never be painted as a finding. Both remain visible on the
  * country and route pages, where a route is read rather than compared.
  */
 export const ROUTE_CLASSES: readonly RouteClass[] = [
+  // Origin leads the three. It is the class that does not require an ancestor who
+  // held the citizenship at all — the Law of Return, Spätaussiedler, the Armenian
+  // and Kyrgyz origin routes — so it qualifies people no degree facet reaches, and
+  // it must not sit below the narrower grandparent bucket.
+  { id: 'ancestry-origin', label: 'Ethnic or diaspora origin', kind: 'citizenship', match: 'ancestry',
+    descent_reach: ['origin_based'],
+    keywords: ['ancestry', 'heritage', 'blood', 'bloodline', 'ethnicity', 'right of return', 'repatriation', 'jewish', 'aliyah'],
+    description: 'Qualifies on ethnic or national origin rather than descent from a citizen — the Law of Return, Spätaussiedler, the Armenian and Kyrgyz origin routes.' },
   // Keeps the `ancestry` id so existing /?class=ancestry links stay live; what
   // changed is what the id MEANS, from "has any descent route" to "reaches past a
   // parent", which is the question the old facet was failing to answer.
   { id: 'ancestry', label: 'Grandparent or deeper', kind: 'citizenship', match: 'ancestry',
     descent_reach: ['grandparent_or_deeper'],
+    keywords: ['ancestry', 'heritage', 'blood', 'bloodline', 'descent', 'family'],
     description: 'A grandparent or further back qualifies, as recorded in the instrument.' },
-  { id: 'ancestry-origin', label: 'Ethnic or diaspora origin', kind: 'citizenship', match: 'ancestry',
-    descent_reach: ['origin_based'],
-    description: 'Qualifies on ethnic or national origin rather than descent from a citizen — the Law of Return, Spätaussiedler, the Armenian and Kyrgyz origin routes.' },
   { id: 'ancestry-unlimited', label: 'No stated generation limit', kind: 'citizenship', match: 'ancestry',
     descent_reach: ['unlimited'],
+    keywords: ['ancestry', 'heritage', 'blood', 'bloodline', 'great-grandparent', 'distant ancestor'],
     description: 'The instrument names an ancestor without fixing a generation, and states no cutoff.' },
   { id: 'cbi', label: 'Citizenship by investment', kind: 'citizenship', match: 'investment',
     description: 'Direct citizenship for a qualifying investment or contribution.' },
@@ -67,6 +83,33 @@ export const ROUTE_CLASSES: readonly RouteClass[] = [
 export function routeClassById(id: string | null | undefined): RouteClass | null {
   return ROUTE_CLASSES.find(c => c.id === id) ?? null;
 }
+
+/**
+ * The promoted classes: the sidebar's "Start with a route" tiles, above the
+ * collapsed "Route types" accordion.
+ *
+ * It was four tiles and only one was ancestry — "Through a grandparent", the
+ * NARROWEST of the three reaches — which left the origin route reachable only by
+ * expanding an accordion. Someone arriving for the Law of Return or the Armenian
+ * or Kyrgyz origin route saw a grandparent tile and concluded the atlas did not
+ * cover them. All three reaches are promoted now, origin first, because the split
+ * IS the answer: they are three different questions, not three depths of one, and
+ * a single "Through ancestry" tile could only be honest by re-merging them into
+ * the 232-of-240 paint the reach split exists to prevent.
+ *
+ * Labels are the words someone types, not the reach terms the accordion rows
+ * carry: heritage before "origin_based", a distant ancestor before "no stated
+ * generation limit". The tile's tooltip is the class `description`, which stays
+ * the precise sentence. Keep the count even — the grid is two columns.
+ */
+export const QUICK_ROUTE_CLASSES: ReadonlyArray<{ id: string; label: string }> = [
+  { id: 'ancestry-origin', label: 'Through ethnic heritage' },
+  { id: 'ancestry', label: 'Through a grandparent' },
+  { id: 'ancestry-unlimited', label: 'Through a distant ancestor' },
+  { id: 'cbi', label: 'Invest for citizenship' },
+  { id: 'golden-visa', label: 'Invest for residence' },
+  { id: 'digital-nomad', label: 'Work remotely' },
+];
 
 const ROUTE_CLASS_PAGE: Record<string, string> = {
   cbi: '/routes/citizenship-by-investment/',
