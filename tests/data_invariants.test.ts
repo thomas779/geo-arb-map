@@ -1158,6 +1158,34 @@ describe('descent depth is recorded positively, never as a cutoff', () => {
     }
   });
 
+  test('the reach bucket ships beside the finding, and absence never reads as parent', () => {
+    // The facet paints from this one enum, because the generation it summarises
+    // lived only in `eligibility`, which never leaves the build (#191).
+    const buckets = new Map<string, number>();
+    for (const route of ancestry) {
+      const reach = route.descent_reach ?? 'MISSING';
+      buckets.set(reach, (buckets.get(reach) ?? 0) + 1);
+    }
+    expect(buckets.get('MISSING') ?? 0).toBe(0);
+    // A route with no descent finding at all is `not_recorded`, never `parent_only`.
+    for (const route of ancestry) {
+      if (!route.descent) expect(route.descent_reach, route.id).toBe('not_recorded');
+    }
+    // The two routes that forced the model: an origin test is not a generation.
+    const reachOf = (id: string) => ancestry.find(route => route.id === id)?.descent_reach;
+    expect(reachOf('israel-citizenship-by-return-or-parent')).toBe('origin_based');
+    expect(reachOf('germany-spaetaussiedler')).toBe('origin_based');
+    // And the facet's whole point: the informative buckets stay a small minority.
+    const beyondParent = ancestry.filter(route => route.descent_reach === 'origin_based'
+      || route.descent_reach === 'grandparent_or_deeper'
+      || route.descent_reach === 'unlimited');
+    expect(beyondParent.length).toBeLessThan(ancestry.length * 0.2);
+    expect(beyondParent.length).toBeGreaterThan(0);
+    for (const route of citizenshipRoutes.routes) {
+      if (route.mode !== 'ancestry') expect(route.descent_reach ?? null).toBeNull();
+    }
+  });
+
   test('Ireland records the grandparent it actually allows', () => {
     // Two variants: an Irish-born parent, and the foreign birth register for a
     // grandparent. The planner used to collapse both into one flat 18-month path.
@@ -1178,10 +1206,34 @@ describe('descent depth is recorded positively, never as a cutoff', () => {
 
     // Corpus-wide, almost nothing records a ceiling. That is the honest state of
     // the data and the measure of what #155-adjacent sourcing still owes.
+    //
+    // Every entry below is a cutoff the instrument STATES, arriving one of two
+    // ways: Bulgaria as a numeric `lte` bound the eligibility conditions already
+    // carried, the rest authored from the provision because they are written as
+    // prose no field name can express. Nothing here came from an enumeration that
+    // merely stops — Slovakia and Ukraine both name a great-grandparent and are
+    // deliberately absent, because each carries a second limb reaching an
+    // unspecified ancestor with no cutoff written anywhere.
     const withLimit = ancestry.filter(route => route.descent?.limit_recorded);
-    expect(withLimit.length).toBe(1);
-    expect(withLimit[0]!.id).toBe('bulgaria-bulgarian-origin-naturalization');
-    expect(withLimit[0]!.descent?.maximum_degree).toBe(3);
+    expect(withLimit.map(route => route.id).sort()).toEqual([
+      'bulgaria-bulgarian-origin-naturalization',
+      'cabo-verde-citizenship-by-parent',
+      'poland-citizenship-by-parent',
+      'uk-citizenship-by-parent',
+    ]);
+    for (const route of withLimit) {
+      expect(route.descent?.maximum_degree ?? 0, route.id).toBeGreaterThanOrEqual(1);
+      // Traceable, never asserted: an authored ceiling cites its provision, and
+      // the one derived ceiling comes from a real numeric bound instead.
+      if (route.id !== 'bulgaria-bulgarian-origin-naturalization') {
+        expect(route.descent?.authored_basis, route.id).toBeTruthy();
+      }
+    }
+    // Cabo Verde names a `trineto`, one generation past the deepest relation the
+    // enum can express, so the ceiling must not be clamped to the relation list.
+    const caboVerde = ancestry.find(route => route.id === 'cabo-verde-citizenship-by-parent');
+    expect(caboVerde?.descent?.maximum_degree).toBe(4);
+    expect(caboVerde?.descent?.deepest_recorded_degree).toBe(3);
   });
 
   test('ethnic-origin claims carry lineage but no generation', () => {

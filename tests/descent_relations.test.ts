@@ -1,6 +1,7 @@
 import { describe, test, expect } from 'bun:test';
-import { descentReach, deriveDescentRelations } from '../scripts/lib/descent-relations';
+import { DESCENT_REACH, descentReach, deriveDescentRelations } from '../scripts/lib/descent-relations';
 import { descentRelationLabel, DESCENT_PATHS } from '../src/lib/timeline-rules';
+import type { DescentReach } from '../src/types';
 
 const cond = (field: string, operator = 'eq', value: unknown = true) => ({ field, operator, value });
 
@@ -73,6 +74,70 @@ describe('descent relation derivation', () => {
     expect(
       deriveDescentRelations([cond('a.degree', 'lte', 4), cond('b.degree', 'lte', 2)])?.maximum_degree,
     ).toBe(2);
+  });
+
+  test('a ceiling stated in prose is authored, and the tightest bound still wins', () => {
+    // Poland writes its cutoff as words, not as a degree field: "at least one of
+    // her parents or grandparents, or two great-grandparents". The derivation reads
+    // only lte/lt operators, so before this field the corpus recorded exactly one
+    // ceiling across 238 ancestry routes and B2b could never move.
+    const poland = deriveDescentRelations(
+      [cond('parent.citizenship.iso_n3', 'eq', '616')],
+      {
+        relations: ['parent', 'grandparent', 'great_grandparent'],
+        origin_based: true,
+        maximum_degree: 3,
+        basis: 'Ustawa o repatriacji art. 5 ust. 1 pkt 1',
+      },
+    );
+    expect(poland?.maximum_degree).toBe(3);
+    expect(poland?.limit_recorded).toBe(true);
+
+    // Cabo Verde names a trineto — a great-great-grandchild — a generation the
+    // relation enum cannot express. The numeric ceiling must not be clamped to the
+    // deepest nameable relation, or the map understates the route by a generation.
+    const caboVerde = deriveDescentRelations(
+      [cond('parent.citizenship.iso_n3', 'eq', '132')],
+      {
+        relations: ['parent', 'grandparent', 'great_grandparent'],
+        maximum_degree: 4,
+        basis: 'Lei 33/X/2023 art. 8 n. 1 al. e)',
+      },
+    );
+    expect(caboVerde?.maximum_degree).toBe(4);
+    expect(caboVerde?.deepest_recorded_degree).toBe(3);
+
+    // An authored ceiling and a derived one are the same kind of claim, so the
+    // tighter of the two wins rather than whichever was read last.
+    expect(
+      deriveDescentRelations([cond('x.degree', 'lte', 2)], { maximum_degree: 4, basis: 'x' })?.maximum_degree,
+    ).toBe(2);
+  });
+
+  test('a ceiling and no-limit cannot both be authored', () => {
+    // The two say opposite things about one provision, so one of them was read
+    // wrong. Failing at build time beats publishing either.
+    expect(() => deriveDescentRelations(
+      [cond('parent.citizenship.iso_n3', 'eq', '616')],
+      { unlimited: true, maximum_degree: 3, basis: 'contradictory' },
+    )).toThrow(/unlimited and capped/);
+  });
+
+  test('a stated ceiling is never taken from a list that merely stops', () => {
+    // Slovakia and Ukraine each state a great-grandparent tier on ONE limb while a
+    // second instrument reaches an unspecified ancestor with no cutoff. Recording
+    // maximum_degree 3 there would cap a limb the statute leaves open — the exact
+    // inversion this module exists to prevent — so neither authors a ceiling.
+    const ukraine = deriveDescentRelations(
+      [cond('parent.citizenship.iso_n3', 'eq', '804')],
+      {
+        relations: ['parent', 'grandparent', 'great_grandparent', 'ancestor_unspecified'],
+        origin_based: true,
+        basis: 'stattia 8 names the generations; the foreign-Ukrainian limb states no cutoff',
+      },
+    );
+    expect(ukraine?.maximum_degree).toBeNull();
+    expect(ukraine?.limit_recorded).toBe(false);
   });
 
   test('non-ancestral and opaque conditions contribute nothing', () => {
@@ -222,6 +287,17 @@ describe('reach: what the ancestry facet should actually show (#191)', () => {
       { field: 'grandparent.birth.island_of_ireland', operator: 'eq', value: true },
     ]);
     expect(descentReach(ireland)).toBe('grandparent_or_deeper');
+  });
+
+  test('the browser copy of the reach union has not drifted', () => {
+    // src/ never imports from scripts/, so `DescentReach` is duplicated in
+    // src/types.ts and the facet paints from that copy. Both assignments below are
+    // compile-time checks, one in each direction: a bucket added to the derivation
+    // and never listed for the browser would silently paint nothing.
+    const forBrowser: DescentReach[] = [...DESCENT_REACH];
+    const forDerivation: (typeof DESCENT_REACH)[number] = 'not_recorded' as DescentReach;
+    expect(forBrowser).toHaveLength(DESCENT_REACH.length);
+    expect(forDerivation).toBe('not_recorded');
   });
 
   test('unlimited is authored, never inferred from silence', () => {

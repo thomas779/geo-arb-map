@@ -19,9 +19,12 @@
  * recorded, which `canonical-schema.ts` forbids: "omission means not recorded and
  * must never be treated as a negative finding".
  *
- * So `relations` is positive-only, and `maximum_degree` is populated ONLY from an
- * authored numeric bound (an `lte`/`lt` operator on a degree field). Corpus-wide
- * exactly one route has that today: Bulgaria's `ancestor.bulgarian_origin_degree lte 3`.
+ * So `relations` is positive-only, and `maximum_degree` is populated ONLY from a
+ * bound the instrument states: either a numeric `lte`/`lt` operator on a degree
+ * field (corpus-wide, only Bulgaria's `ancestor.bulgarian_origin_degree lte 3`), or
+ * an explicitly authored `maximum_degree` for a cutoff written in prose, which is
+ * the shape most instruments use. Both are readings of a stated rule; neither may
+ * come from an enumeration that merely stops.
  */
 
 export const DESCENT_RELATIONS = [
@@ -84,6 +87,25 @@ export interface AuthoredDescent {
   origin_based?: boolean;
   /** The instrument states no generational limit. Never inferred from silence. */
   unlimited?: boolean;
+  /**
+   * A ceiling the instrument STATES, expressed as a generation count where the
+   * applicant is 0. The derivation can only see a numeric bound written as an
+   * `lte`/`lt` operator on a degree field — corpus-wide exactly one route, Bulgaria.
+   * A cutoff written in prose ("at least one of her parents or grandparents, or two
+   * great-grandparents") is invisible to it, which is why `B2b Descent CEILING` sat
+   * at 1 of 238.
+   *
+   * Same positive-only rule as everything else here, and this field is where it
+   * bites hardest: set it ONLY where the instrument closes the list. Never from an
+   * enumeration that merely stops, never from silence, and never on a route that
+   * also carries an unbounded limb — Slovakia and Ukraine each state a
+   * great-grandparent ceiling on one limb while a second instrument reaches an
+   * unspecified ancestor with no cutoff, so neither records a maximum.
+   *
+   * May exceed the `DESCENT_RELATIONS` enum: Cabo Verde names `trineto`, a
+   * great-great-grandchild, which is a generation the relation list cannot express.
+   */
+  maximum_degree?: number;
   /** Why, citing the provision. Required, so an authored value is always traceable. */
   basis: string;
 }
@@ -176,7 +198,14 @@ export function deriveDescentRelations(
   authored?: AuthoredDescent,
 ): DescentRelationsFinding | null {
   const relations = new Set<DescentRelation>();
-  let maximumDegree: number | null = null;
+  // An authored ceiling and a derived one are the same kind of fact — a bound the
+  // instrument states — so they share one slot and the tightest wins below.
+  let maximumDegree: number | null = authored?.maximum_degree ?? null;
+  if (authored?.unlimited && maximumDegree !== null) {
+    throw new Error(
+      `authored descent cannot be both unlimited and capped at ${maximumDegree}: ${authored.basis}`,
+    );
+  }
   for (const relation of authored?.relations ?? []) relations.add(relation);
   // An instrument stating no cutoff is an open-ended ancestor claim, which is what
   // `ancestor_unspecified` with no ceiling already means. Reuse it rather than add a

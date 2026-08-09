@@ -45,7 +45,7 @@ type Route = {
   parent_residence_right?: unknown;
   nationality_eligibility?: unknown;
   pathways?: Pathway[];
-  descent?: { limit_recorded: boolean } | null;
+  descent?: { limit_recorded: boolean; authored_basis?: string } | null;
   jus_soli_condition?: { family: string; families?: string[]; openness: number | null } | null;
   summary?: string;
 };
@@ -257,7 +257,10 @@ const dimensions: Dimension[] = [
     status: nonNull(ancestry, r => r.descent) >= ancestry.length * 0.9 ? 'ready' : 'thin',
     have: nonNull(ancestry, r => r.descent),
     total: ancestry.length,
-    note: 'derived from authored eligibility field names; the 6 nulls are ethnic-origin claims with no degree',
+    note: `derived from authored eligibility field names, plus ${ancestry.filter(r => r.descent?.authored_basis).length} `
+      + `authored from prose the field names never carried; the `
+      + `${ancestry.length - nonNull(ancestry, r => r.descent)} nulls record neither an ancestral relation nor an `
+      + 'origin claim',
   },
   {
     id: 'B2b',
@@ -266,6 +269,10 @@ const dimensions: Dimension[] = [
     status: 'thin',
     have: ancestry.filter(r => r.descent?.limit_recorded).length,
     total: ancestry.length,
+    // Only a STATED cutoff counts, whether written as a numeric bound in the
+    // eligibility conditions or authored from the provision. A list that merely
+    // stops at a grandparent is not a ceiling, and scoring it as one would tell a
+    // qualifying applicant they do not qualify.
     note: 'how DEEP descent runs. Absence is unknown, never a cutoff, so this cannot be derived and must be sourced',
   },
   {

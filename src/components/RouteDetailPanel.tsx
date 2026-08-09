@@ -65,7 +65,13 @@ function RouteClassDetail({
       <p className="text-xs leading-relaxed text-muted-foreground">
         {routeClass.id === 'digital-identity'
           ? 'The map shows countries with an active government digital credential. These programmes do not grant residence rights.'
-          : 'The map shows the best recorded outcome for each country. A citizenship result means the route itself or its residence clock can lead there; open the country guide for conditions.'}
+          : routeClass.descent_reach
+            // Absence here is unrecorded, not ruled out, and saying so is the whole
+            // point: most countries sit at parent level because nobody sourced a
+            // deeper limb. Italy is the standing example — it transmits with no
+            // stated generational limit and still paints nothing on this facet.
+            ? 'The map shows countries whose instrument records this reach. A country not shown has not been recorded at this depth, which is not the same as being ruled out — most have never been sourced past a parent.'
+            : 'The map shows the best recorded outcome for each country. A citizenship result means the route itself or its residence clock can lead there; open the country guide for conditions.'}
       </p>
       {pageHref && (
         <Button asChild className="w-full" size="sm">

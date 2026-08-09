@@ -1,4 +1,4 @@
-import type { AtlasIndexData, ResidenceCategory } from '@/types';
+import type { AtlasIndexData, DescentReach, ResidenceCategory } from '@/types';
 
 /**
  * Route-class browse (issue #129): paint jurisdictions that have at least one
@@ -15,11 +15,39 @@ export interface RouteClass {
   kind: 'citizenship' | 'residence';
   match: string; // mode (citizenship) or category (residence)
   description: string;
+  /**
+   * Narrows a citizenship class to routes of a given reach (#191). Only the
+   * ancestry classes set it, and it is the whole fix: `mode: 'ancestry'` alone
+   * matched 232 of 240 jurisdictions, because every country transmits citizenship
+   * to the child of a citizen. A facet that selects 97% of the map renders as
+   * "everywhere", which is both useless and, worse, true.
+   */
+  descent_reach?: readonly DescentReach[];
 }
 
+/**
+ * Ancestry is deliberately absent as a single flat class.
+ *
+ * The buckets below are the axis people actually search on — can I qualify through
+ * a GRANDPARENT, or through ethnic/diaspora ties — and each selects a set small
+ * enough to read. `parent_only` and `not_recorded` get no facet at all: the first
+ * is near-universal and carries no information, and the second is an absence of
+ * evidence that must never be painted as a finding. Both remain visible on the
+ * country and route pages, where a route is read rather than compared.
+ */
 export const ROUTE_CLASSES: readonly RouteClass[] = [
-  { id: 'ancestry', label: 'Ancestry & descent', kind: 'citizenship', match: 'ancestry',
-    description: 'Citizenship through parents, grandparents, or ethnic/diaspora ties.' },
+  // Keeps the `ancestry` id so existing /?class=ancestry links stay live; what
+  // changed is what the id MEANS, from "has any descent route" to "reaches past a
+  // parent", which is the question the old facet was failing to answer.
+  { id: 'ancestry', label: 'Grandparent or deeper', kind: 'citizenship', match: 'ancestry',
+    descent_reach: ['grandparent_or_deeper'],
+    description: 'A grandparent or further back qualifies, as recorded in the instrument.' },
+  { id: 'ancestry-origin', label: 'Ethnic or diaspora origin', kind: 'citizenship', match: 'ancestry',
+    descent_reach: ['origin_based'],
+    description: 'Qualifies on ethnic or national origin rather than descent from a citizen — the Law of Return, Spätaussiedler, the Armenian and Kyrgyz origin routes.' },
+  { id: 'ancestry-unlimited', label: 'No stated generation limit', kind: 'citizenship', match: 'ancestry',
+    descent_reach: ['unlimited'],
+    description: 'The instrument names an ancestor without fixing a generation, and states no cutoff.' },
   { id: 'cbi', label: 'Citizenship by investment', kind: 'citizenship', match: 'investment',
     description: 'Direct citizenship for a qualifying investment or contribution.' },
   { id: 'naturalization', label: 'Naturalization', kind: 'citizenship', match: 'naturalization',
@@ -95,7 +123,13 @@ export function isosForRouteClass(
   };
   if (routeClass.kind === 'citizenship') {
     for (const route of data.routes) {
-      if (route.mode === routeClass.match && route.status === 'active') raise(route.country.iso_n3, 'cit');
+      if (route.mode !== routeClass.match || route.status !== 'active') continue;
+      // An unprojected reach reads as `not_recorded`, never as a match: a reach
+      // facet must paint a recorded finding, and an older index that predates the
+      // field should paint nothing rather than everything.
+      if (routeClass.descent_reach
+        && !routeClass.descent_reach.includes(route.descent_reach ?? 'not_recorded')) continue;
+      raise(route.country.iso_n3, 'cit');
     }
   } else {
     for (const route of data.residence_routes ?? []) {

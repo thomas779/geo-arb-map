@@ -25,7 +25,7 @@ import {
   readCanonicalProjections,
   type CanonicalProjections,
 } from './canonical-store';
-import { deriveDescentRelations } from './descent-relations';
+import { descentReach, deriveDescentRelations } from './descent-relations';
 import { classifyJusSoli } from './jus-soli';
 import { effectiveConfidence } from './claim-confidence';
 
@@ -1000,6 +1000,16 @@ function projectFrontendCitizenship(
 
     for (const route of jurisdiction.routes) {
       const legacyRoute = legacyRouteIndex.get(route.id);
+      // Derived once and projected twice: the finding for detail, and the reach
+      // bucket the ancestry facet selects on. The bucket has to ship, because the
+      // facet lives in the browser and `eligibility` — the only place the degree
+      // was ever written down — is dropped a few lines below.
+      const descent = route.mode === 'ancestry'
+        ? deriveDescentRelations(
+          route.variants.flatMap(variant => variant.eligibility ?? []),
+          (route as { authored_descent?: Parameters<typeof deriveDescentRelations>[1] }).authored_descent,
+        )
+        : null;
       frontend.routes.push({
         id: route.id,
         country: { iso_n3: iso, name: jurisdiction.jurisdiction.name },
@@ -1044,12 +1054,11 @@ function projectFrontendCitizenship(
             route.summary ?? '',
           )
           : null,
-        descent: route.mode === 'ancestry'
-          ? deriveDescentRelations(
-            route.variants.flatMap(variant => variant.eligibility ?? []),
-            (route as { authored_descent?: Parameters<typeof deriveDescentRelations>[1] }).authored_descent,
-          )
-          : null,
+        descent,
+        // What the facet buckets on (#191). `not_recorded` is a first-class answer
+        // and must never collapse into `parent_only`: 223 routes sit at degree 1
+        // because nobody authored a deeper limb, not because one was ruled out.
+        descent_reach: route.mode === 'ancestry' ? descentReach(descent) : null,
         pathways: route.variants.map(variant => ({
           id: variant.id,
           label: variant.label,

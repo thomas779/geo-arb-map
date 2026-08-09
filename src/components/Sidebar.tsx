@@ -57,6 +57,8 @@ const rowSelected = 'bg-accent';
 // so a muted glyph stands where bloc rows put their color swatch.
 const ROUTE_CLASS_ICONS: Record<string, typeof Users> = {
   ancestry: Users,
+  'ancestry-origin': Users,
+  'ancestry-unlimited': Users,
   cbi: Banknote,
   naturalization: Hourglass,
   'golden-visa': Home,
@@ -67,7 +69,9 @@ const ROUTE_CLASS_ICONS: Record<string, typeof Users> = {
 };
 
 const QUICK_ROUTES = [
-  { id: 'ancestry', label: 'Through family' },
+  // Was "Through family", which painted 232 of 240 countries and so said nothing.
+  // The reach-scoped class answers the question people actually arrive with.
+  { id: 'ancestry', label: 'Through a grandparent' },
   { id: 'cbi', label: 'Invest for citizenship' },
   { id: 'golden-visa', label: 'Invest for residence' },
   { id: 'digital-nomad', label: 'Work remotely' },

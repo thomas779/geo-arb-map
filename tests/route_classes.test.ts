@@ -49,10 +49,55 @@ describe('route-class painted sets', () => {
     expect(set.has('470')).toBe(false); // Malta — programme ended (inactive route)
   });
 
-  test('ancestry includes the folded diaspora programmes', () => {
+  // #191: the ancestry facet used to match on mode alone and highlighted 232 of
+  // 240 jurisdictions, because every country transmits to the child of a citizen.
+  // These pin the split by reach, which is the axis people actually search on.
+  test('the ancestry facets stay small enough to carry information', () => {
+    const total = new Set(data.routes.map(route => route.country.iso_n3)).size;
+    const everyAncestryCountry = new Set(
+      data.routes.filter(route => route.mode === 'ancestry' && route.status === 'active')
+        .map(route => route.country.iso_n3),
+    );
+    // The bug, still true of the underlying data: mode alone is near-universal.
+    expect(everyAncestryCountry.size / total).toBeGreaterThan(0.9);
+    // The fix: no ancestry facet paints anything close to that.
+    for (const cls of ROUTE_CLASSES.filter(candidate => candidate.match === 'ancestry')) {
+      expect(isosForRouteClass(cls, data).all.size / total, cls.id).toBeLessThan(0.2);
+    }
+  });
+
+  test('grandparent-or-deeper is the reach people ask for, and excludes parent-only', () => {
     const set = isos('ancestry');
-    expect(set.has('380')).toBe(true); // Italy jure sanguinis
-    expect(set.has('376')).toBe(true); // Israel — Law of Return folded into the ancestry route
+    expect(set.has('372')).toBe(true);  // Ireland — grandparent born on the island
+    expect(set.has('826')).toBe(true);  // UK — s.3(2) registration through a grandparent
+    expect(set.has('132')).toBe(true);  // Cabo Verde — grandchild to great-great-grandchild
+    // Italy transmits without a stated generational limit, but the corpus records
+    // only a parent condition. It must NOT paint here: doing so would publish a
+    // finding nobody authored. It reads as parent_only until the limb is sourced.
+    expect(set.has('380')).toBe(false);
+  });
+
+  test('ethnic and diaspora origin is its own axis, not a generation', () => {
+    const set = isos('ancestry-origin');
+    expect(set.has('376')).toBe(true);  // Israel — Law of Return, previously parent-only
+    expect(set.has('276')).toBe(true);  // Germany — Spätaussiedler, previously no descent at all
+    expect(set.has('051')).toBe(true);  // Armenia
+    expect(set.has('417')).toBe(true);  // Kyrgyzstan
+    expect(set.has('616')).toBe(true);  // Poland — narodowość polska, not an ancestor's citizenship
+    // An origin route never doubles into a degree facet: origin wins the bucket.
+    expect(isos('ancestry').has('376')).toBe(false);
+  });
+
+  test('nothing paints on an index that predates the reach projection', () => {
+    // The field ships in atlas-index.json. A cached older index carries no reach at
+    // all, and the facet must then paint an empty map rather than the whole world.
+    const stale = {
+      ...data,
+      routes: data.routes.map(({ descent_reach: _dropped, ...route }) => route),
+    };
+    for (const cls of ROUTE_CLASSES.filter(candidate => candidate.match === 'ancestry')) {
+      expect(isosForRouteClass(cls, stale).all.size, cls.id).toBe(0);
+    }
   });
 
   test('three tiers, two colours + hatch: best outcome per country', () => {

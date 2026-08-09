@@ -297,9 +297,20 @@ export const RouteSchema = z.strictObject({
     relations: z.array(z.enum(['parent', 'grandparent', 'great_grandparent', 'ancestor_unspecified'])).default([]),
     origin_based: z.boolean().default(false),
     unlimited: z.boolean().default(false),
+    /**
+     * A ceiling the instrument STATES, as a generation count with the applicant at 0.
+     * Poland caps at a great-grandparent and Cabo Verde at a great-great-grandparent
+     * in prose, and the derivation reads only numeric `lte`/`lt` bounds, so without
+     * this those cutoffs go unrecorded. Never set from a list that merely stops, and
+     * never on a route that also carries an unbounded limb.
+     */
+    maximum_degree: z.number().int().min(1).optional(),
     /** Cite the provision, so an authored value is always traceable. */
     basis: z.string().min(1),
-  }).optional(),
+  }).refine(
+    descent => !(descent.unlimited && descent.maximum_degree !== undefined),
+    { message: 'Authored descent cannot state both no generational limit and a maximum degree' },
+  ).optional(),
 }).superRefine((route, context) => {
   if (route.authored_descent && route.mode !== 'ancestry') {
     context.addIssue({

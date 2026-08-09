@@ -188,6 +188,26 @@ export interface DescentRelations {
   authored_basis?: string;
 }
 
+/**
+ * How far back a descent route reaches, as one bucket — the axis the ancestry
+ * facet selects on (#191). A flat "has an ancestry route" filter highlighted 232
+ * of 240 jurisdictions, because every country transmits to the child of a citizen.
+ *
+ * `not_recorded` is first-class and must never be shown as `parent_only`: most
+ * routes sit at degree 1 because nobody authored a deeper limb, not because one
+ * was checked for and ruled out.
+ *
+ * The union is duplicated from `DESCENT_REACH` in scripts/lib/descent-relations.ts,
+ * which is the source of truth — src never imports from scripts. The two are pinned
+ * together by a test in tests/descent_relations.test.ts.
+ */
+export type DescentReach =
+  | 'origin_based'
+  | 'unlimited'
+  | 'grandparent_or_deeper'
+  | 'parent_only'
+  | 'not_recorded';
+
 export interface JurisdictionDualNationality {
   status: 'allowed' | 'conditional' | 'prohibited' | 'unknown';
   detail: string;
@@ -287,6 +307,13 @@ export interface CitizenshipRouteSummary {
   mode: CitizenshipAcquisitionMode;
   status: CitizenshipRouteStatus;
   title: string;
+  /**
+   * How far the route reaches, for the ancestry facet. Ancestry routes only; null
+   * or absent on every other mode. It rides in the index because the degree itself
+   * only ever existed in `eligibility`, which the build drops before publication —
+   * without this projection the browser cannot tell Ireland from Italy.
+   */
+  descent_reach?: DescentReach | null;
   confidence: 'high' | 'medium' | 'low';
   last_checked: string;
 }

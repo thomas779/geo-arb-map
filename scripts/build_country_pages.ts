@@ -292,6 +292,10 @@ export function buildAtlasIndex(citizenship: CitizenshipRoutesData, releaseId?: 
       mode: route.mode,
       title: route.title,
       status: route.status,
+      // Not a body field: one enum the ancestry facet paints from (#191). The
+      // generation it summarises lived only in `eligibility`, which never leaves
+      // the build, so without this the browser cannot tell Ireland from Italy.
+      descent_reach: route.descent_reach ?? null,
       confidence: route.confidence,
       last_checked: route.last_checked,
     })),
