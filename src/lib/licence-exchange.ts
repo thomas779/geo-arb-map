@@ -6,7 +6,13 @@
  */
 
 export interface LicenceExchangeEntry {
-  origin_label: string;
+  /**
+   * The authority's own name for the origin, in its language ("Albanien",
+   * "Bosnien und Herzegowina"). Present ONLY when it differs from the English
+   * label — carrying both for all 419 rows duplicated ~12KB and pushed the served
+   * file past the 200KB public-surface cap. Read through `originLabel()`.
+   */
+  origin_label?: string;
   origin_label_en: string;
   origin_iso_n3: string | null;
   parent_iso_n3: string | null;
@@ -141,13 +147,18 @@ export interface ExchangeMatch {
   varies_by_subnational: boolean;
 }
 
+/** The local-language label where the authority gives one, else the English name. */
+export function originLabel(entry: LicenceExchangeEntry): string {
+  return entry.origin_label ?? entry.origin_label_en;
+}
+
 /** Unique origins across all destinations, sorted by English label. */
 export function listOrigins(data: LicenceExchangeData): OriginOption[] {
   const map = new Map<string, OriginOption>();
   for (const dest of data.destinations) {
     for (const e of dest.entries) {
       const key = e.subnational
-        ? `sub:${e.parent_iso_n3 ?? 'x'}:${e.subnational_label ?? e.origin_label}`
+        ? `sub:${e.parent_iso_n3 ?? 'x'}:${e.subnational_label ?? originLabel(e)}`
         : `nat:${e.origin_iso_n3 ?? e.origin_label}`;
       // Group subnational under parent for the picker when parent iso known.
       const pickerKey = e.subnational && e.parent_iso_n3
@@ -277,14 +288,14 @@ function entryMatchesKey(e: LicenceExchangeEntry, originKey: string): boolean {
   if (originKey.startsWith('nat:')) {
     const id = originKey.slice(4);
     if (e.subnational) return e.parent_iso_n3 === id;
-    return e.origin_iso_n3 === id || e.origin_label === id || e.origin_label_en === id;
+    return e.origin_iso_n3 === id || originLabel(e) === id || e.origin_label_en === id;
   }
   if (originKey.startsWith('sub:')) {
     const parts = originKey.split(':');
     const parent = parts[1];
     const sub = parts.slice(2).join(':');
     return e.subnational && (e.parent_iso_n3 === parent || parent === 'x')
-      && (e.subnational_label === sub || e.origin_label === sub);
+      && (e.subnational_label === sub || originLabel(e) === sub);
   }
   return false;
 }

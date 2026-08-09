@@ -48,7 +48,7 @@
         if (originKey.indexOf('nat:') === 0) {
           var id = originKey.slice(4);
           if (e.subnational) return e.parent_iso_n3 === id;
-          return e.origin_iso_n3 === id || e.origin_label === id || e.origin_label_en === id;
+          return e.origin_iso_n3 === id || (e.origin_label || e.origin_label_en) === id || e.origin_label_en === id;
         }
         return false;
       });
@@ -129,7 +129,7 @@
             key = 'nat:' + e.parent_iso_n3;
             label = PARENT[e.parent_iso_n3] || e.origin_label_en;
           } else {
-            key = 'nat:' + (e.origin_iso_n3 || e.origin_label);
+            key = 'nat:' + (e.origin_iso_n3 || e.origin_label || e.origin_label_en);
             label = e.origin_label_en;
           }
           if (!map[key]) map[key] = { key: key, label: label };

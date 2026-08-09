@@ -232,3 +232,49 @@ describe('a licence is a residence artefact, and the data says so', () => {
     expect(seed.disclaimer.scope).toContain('one-licence rule');
   });
 });
+
+describe('typing each list against its own instrument (#171)', () => {
+  const kind = (id: string) => agreementById(seed, id)!.kind;
+
+  test('the Netherlands is not an agreement, despite how we described it', () => {
+    // Our record said "countries outside EU/EFTA WITH AGREEMENT". There is no
+    // negotiated arrangement anywhere in the chain: the Regeling designates a list,
+    // and its art. 2 lets RDW exchange any licence "om redenen, aan het algemeen
+    // belang ontleend" — a discretionary domestic power with no counterparty.
+    expect(kind('licence-netherlands')).toBe('unilateral_recognition');
+    expect(agreementById(seed, 'licence-netherlands')!.basis).toContain('CORRECTION');
+  });
+
+  test('Denmark looks bilateral and is not', () => {
+    // The sharpest case for why `kind` earns its place. The foreign state APPLIES
+    // to join the scheme, so a counterparty initiates — but no agreement is
+    // concluded, Faerdselsstyrelsen decides alone, and the decision is unappealable.
+    // Initiation by a counterparty is not reciprocity.
+    expect(kind('licence-denmark')).toBe('unilateral_recognition');
+    expect(agreementById(seed, 'licence-denmark')!.basis).toContain('ansøgning fra det pågældende land');
+  });
+
+  test('Ireland is bilateral in substance even though the instrument is unilateral', () => {
+    // Two-layered: a negotiated reciprocal MoU creates the entry, and a ministerial
+    // order delivers it. Recorded by what creates the entry, with the mechanism
+    // noted, because forcing either single label would lose the point.
+    expect(kind('licence-ireland')).toBe('bilateral_agreement');
+    expect(agreementById(seed, 'licence-ireland')!.basis).toContain('unilateral');
+  });
+
+  test('Austria is not pulled to multilateral by the treaties in its enabling act', () => {
+    // FSG s.23(1) and (5) cite Paris 1930, Geneva 1955 and Vienna 1982 — but those
+    // govern DRIVING ON a foreign licence as a visitor, not exchange. Exchange runs
+    // solely through s.23(3) Z 5 and the FSG-DV s.9 list.
+    expect(kind('licence-austria')).toBe('unilateral_recognition');
+  });
+
+  test('local-language labels survive the deduplication', () => {
+    // origin_label is dropped where it duplicated the English name, but the
+    // authority's own wording must not be lost where it differs.
+    const germany = seed.destinations.find(d => d.iso_n3 === '276')!;
+    const local = germany.entries.filter(e => e.origin_label && e.origin_label !== e.origin_label_en);
+    expect(local.length).toBeGreaterThan(0);
+    expect(local.some(e => e.origin_label === 'Albanien')).toBe(true);
+  });
+});
