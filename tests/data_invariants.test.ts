@@ -1274,3 +1274,61 @@ describe('per-claim confidence', () => {
     }
   });
 });
+
+// Curaçao multi-year residence layer (monitor #194 follow-up, 2026-08-09).
+// Atlas priority: renewable / multi-year tracks that ladder toward PR + Dutch
+// naturalisation. ≤6-month short-stay remote/snowbird deliberately omitted.
+describe('Curaçao multi-year residence layer, August 2026', () => {
+  test('wealthy investor is XCG 500k floor with 3y renewable term; higher bands in summary', () => {
+    const inv = (citizenshipRoutes.residence_routes ?? []).find(
+      r => r.id === 'curacao-wealthy-investor-residence',
+    );
+    expect(inv).toBeDefined();
+    expect(inv?.country.iso_n3).toBe('531');
+    expect(inv?.category).toBe('investment');
+    expect(inv?.status).toBe('active');
+    expect(inv?.confidence).toBe('high');
+    expect(inv?.min_investment).toEqual({ amount: 500_000, currency: 'XCG' });
+    expect(inv?.permit_duration_months).toBe(36);
+    expect(inv?.permit_renewable).toBe(true);
+    expect(inv?.outcome).toBe('residence');
+    expect(inv?.counts_toward_permanent_residence).toBe(true);
+    expect(inv?.counts_toward_naturalization).toBe(true);
+    expect(inv?.pathways?.[0]?.eligibility_months).toBe(60);
+    expect(inv?.summary).toMatch(/500[, ]?000/);
+    expect(inv?.summary).toMatch(/750[, ]?000/);
+    expect(inv?.summary).toMatch(/1[, ]?500[, ]?000|1\.5/);
+    expect(inv?.summary.toLowerCase()).toMatch(/not citizenship-by-investment|naturalisation|naturalization/);
+    expect(inv?.sources.some(s => s.url.includes('immigrationcur.org') && s.url.includes('investeer'))).toBe(true);
+    expect(inv?.last_checked).toBe('2026-08-09');
+  });
+
+  test('rentier/retired is renewable multi-year with no invented principal income floor', () => {
+    const ret = (citizenshipRoutes.residence_routes ?? []).find(
+      r => r.id === 'curacao-rentier-retired-residence',
+    );
+    expect(ret).toBeDefined();
+    expect(ret?.category).toBe('retirement_pension');
+    expect(ret?.status).toBe('active');
+    expect(ret?.confidence).toBe('high');
+    expect(ret?.permit_renewable).toBe(true);
+    expect(ret?.counts_toward_permanent_residence).toBe(true);
+    expect(ret?.counts_toward_naturalization).toBe(true);
+    expect(ret?.pathways?.[0]?.eligibility_months).toBe(60);
+    // TO only publishes family co-admission floors, not a principal passive-income product threshold.
+    expect(ret?.min_income_monthly).toBeNull();
+    expect(ret?.min_investment).toBeNull();
+    expect(ret?.sources.some(s => s.url.includes('immigrationcur.org') && s.url.includes('rentenier'))).toBe(true);
+  });
+
+  test('no CBI negative is recorded; short-stay products are not atlas primaries', () => {
+    const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
+    expect(byId.get('curacao-no-cbi')?.status).toBe('verified_negative');
+    expect(byId.get('curacao-no-cbi')?.confidence).toBe('high');
+    expect(byId.has('curacao-remote-worker-short-stay')).toBe(false);
+    expect(byId.has('curacao-snowbird-short-stay')).toBe(false);
+    // Citizenship stubs remain.
+    const cit = citizenshipRoutes.routes.filter(r => r.country?.iso_n3 === '531');
+    expect(cit.length).toBeGreaterThanOrEqual(1);
+  });
+});
