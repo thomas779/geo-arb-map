@@ -388,13 +388,13 @@ describe('citizenship route database', () => {
   test('education residence rules preserve the France/Colombia distinction', () => {
     const france = citizenshipRoutes.routes.find(route =>
       route.id === 'france-study-naturalization-residence');
-    const colombia = citizenshipRoutes.routes.find(route =>
+    // Colombia study-time absence is coverage note material, not a negative product row.
+    const colombiaCredit = citizenshipRoutes.routes.find(route =>
       route.id === 'colombia-study-permanent-residence-credit');
     expect(france?.facts.residence_credit).toBe('full_if_lawful_habitual_and_continuous');
     expect(france?.facts.reduced_residence_years).toBe(2);
     expect(france?.facts.automatic).toBe(false);
-    expect(colombia?.status).toBe('verified_negative');
-    expect(colombia?.facts.residence_credit).toBe('none');
+    expect(colombiaCredit).toBeUndefined();
   });
 
   test('active CBI list is explicit and excludes pending statutory leads', () => {
@@ -781,8 +781,8 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(byId.get('ukraine-uresidency')?.status).toBe('inactive');
     expect(byId.get('portugal-e-residency-announced')?.category).toBe('digital_identity');
     expect(byId.get('portugal-e-residency-announced')?.status).toBe('pending_verification');
-    expect(byId.get('georgia-e-residency-verified-negative')?.status).toBe('verified_negative');
-    expect(byId.get('georgia-e-residency-verified-negative')?.category).toBe('digital_identity');
+    // Georgia has no e-residency product — absences are not stored as product rows.
+    expect(byId.has('georgia-e-residency-verified-negative')).toBe(false);
     expect(byId.get('kazakhstan-e-residency')?.min_investment?.amount).toBe(120);
     expect(byId.get('kazakhstan-e-residency')?.summary).toMatch(/not.*eGov|not.*visa|not a visa/i);
   });
@@ -800,31 +800,34 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(pa?.min_income_monthly?.amount).toBe(3000);
   });
 
-  test('residence batch 7 British islands HNW/business routes + golden-visa negatives', () => {
+  test('residence batch 7 British islands HNW/business routes (no golden-visa negative rows)', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
     for (const id of [
       'gibraltar-hnw-residence',
-      'gibraltar-passive-golden-visa-verified-negative',
       'isle-of-man-entrepreneur-investor-residence',
-      'isle-of-man-golden-visa-verified-negative',
       'jersey-business-high-value-residence',
-      'jersey-golden-visa-verified-negative',
     ]) {
       expect(byId.has(id), id).toBe(true);
+      expect(byId.get(id)?.status, id).toBe('active');
     }
-    expect(byId.get('gibraltar-passive-golden-visa-verified-negative')?.status).toBe('verified_negative');
-    expect(byId.get('isle-of-man-golden-visa-verified-negative')?.status).toBe('verified_negative');
+    // Absences are not product rows.
+    for (const id of [
+      'gibraltar-passive-golden-visa-verified-negative',
+      'isle-of-man-golden-visa-verified-negative',
+      'jersey-golden-visa-verified-negative',
+    ]) {
+      expect(byId.has(id), id).toBe(false);
+    }
   });
 
-  test('digital nomad N1 Europe/Black Sea batch (CY RO + GE/DE/TR negatives)', () => {
+  test('digital nomad N1 Europe/Black Sea batch (CY RO + TR; DE absence not stored)', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
     expect(byId.get('cyprus-digital-nomad-visa')?.category).toBe('digital_nomad');
     expect(byId.get('cyprus-digital-nomad-visa')?.counts_toward_permanent_residence).toBe(false);
     expect(byId.get('romania-digital-nomad-visa')?.counts_toward_naturalization).toBe(false);
-    // 2026-07-30 audit of every stored nomad negative against official sources:
-    // Germany's negative held; Türkiye's was WRONG (TGA runs the Dijital Göçebe
-    // scheme since April 2024); Georgia's hid the lapsed pandemic programme.
-    expect(byId.get('germany-digital-nomad-verified-negative')?.status).toBe('verified_negative');
+    // Absences are not product rows; Türkiye is a live programme; Georgia's lapsed
+    // pandemic scheme remains inactive (ended real programme).
+    expect(byId.has('germany-digital-nomad-verified-negative')).toBe(false);
     expect(byId.get('turkey-digital-nomad-visa')?.status).toBe('active');
     expect(byId.get('turkey-digital-nomad-visa')?.min_income_monthly).toEqual({ amount: 3000, currency: 'USD' });
     expect(byId.get('georgia-remotely-from-georgia-ended')?.status).toBe('inactive');
@@ -847,23 +850,25 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(byId.get('croatia-digital-nomad-temporary-stay')?.min_income_monthly?.amount).toBe(3622.5);
   });
 
-  test('residence batch 5 records Nordics/Baltics startup tracks and golden-visa negatives', () => {
+  test('residence batch 5 records Nordics/Baltics startup tracks (no golden-visa negative rows)', () => {
     const ids = new Set(citizenshipRoutes.residence_routes?.map(r => r.id) ?? []);
     for (const id of [
       'denmark-startup-denmark',
-      'denmark-golden-visa-verified-negative',
       'finland-startup-entrepreneur',
       'finland-specialist',
-      'finland-golden-visa-verified-negative',
       'lithuania-startup-visa',
-      'lithuania-golden-visa-verified-negative',
       'romania-commercial-activity-long-stay',
-      'romania-golden-visa-verified-negative',
     ]) {
       expect(ids.has(id), id).toBe(true);
     }
-    const neg = citizenshipRoutes.residence_routes?.find(r => r.id === 'denmark-golden-visa-verified-negative');
-    expect(neg?.status).toBe('verified_negative');
+    for (const id of [
+      'denmark-golden-visa-verified-negative',
+      'finland-golden-visa-verified-negative',
+      'lithuania-golden-visa-verified-negative',
+      'romania-golden-visa-verified-negative',
+    ]) {
+      expect(ids.has(id), id).toBe(false);
+    }
     const fi = citizenshipRoutes.residence_routes?.find(r => r.id === 'finland-specialist');
     expect(fi?.min_income_monthly?.amount).toBe(3937);
   });
@@ -921,12 +926,11 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(withJs.length).toBe(230);
   });
 
-  test('digital nomad residual negatives + Korea workcation (PR/cit no)', () => {
+  test('digital nomad live programmes + Korea workcation; absences not stored', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
-    // Post-audit split (2026-07-30): Mexico, Jamaica and the UK negatives were
-    // CONFIRMED against official taxonomies. Namibia's was wrong (NIPDB visa is
-    // live); Antigua's and the Bahamas' hid lapsed programmes and are now
-    // inactive rows carrying their run dates.
+    // Live programmes only. Mexico/Jamaica/UK have no branded nomad product —
+    // that absence is derived UI, not a stored negative row. Antigua/Bahamas
+    // lapsed programmes stay inactive (ended real programmes).
     expect(byId.get('namibia-digital-nomad-visa')?.status).toBe('active');
     expect(byId.get('south-africa-remote-work-visa')?.status).toBe('active');
     expect(byId.get('indonesia-remote-worker-visa')?.status).toBe('active');
@@ -939,17 +943,15 @@ describe('monitor-lead verifications, 30 July 2026', () => {
       'jamaica-digital-nomad-verified-negative',
       'uk-digital-nomad-verified-negative',
     ]) {
-      expect(byId.get(id)?.status, id).toBe('verified_negative');
-      expect(byId.get(id)?.category, id).toBe('digital_nomad');
-      expect(byId.get(id)?.counts_toward_permanent_residence, id).toBe(false);
-      expect(byId.get(id)?.counts_toward_naturalization, id).toBe(false);
+      expect(byId.has(id), id).toBe(false);
     }
     const kr = byId.get('korea-digital-nomad-workcation');
     expect(kr?.category).toBe('digital_nomad');
     expect(kr?.counts_toward_permanent_residence).toBe(false);
     expect(kr?.counts_toward_naturalization).toBe(false);
     const nomads = (citizenshipRoutes.residence_routes ?? []).filter(r => r.category === 'digital_nomad');
-    expect(nomads.length).toBeGreaterThanOrEqual(38);
+    // Count is live + inactive (ended) programmes only — absences not stored.
+    expect(nomads.length).toBeGreaterThanOrEqual(34);
   });
 
   test('digital nomad gap fill: Costa Rica Ley 10008, Slovenia 2025 permit, Brazil VITEM XIV', () => {
@@ -970,15 +972,19 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(byId.get('brazil-vitem-xiv-digital-nomad')?.min_income_monthly?.amount).toBe(1500);
   });
 
-  test('residence IMC remainder batches 8–10 cover former gap ISOs', () => {
+  test('residence IMC remainder batches 8–10 cover former gap ISOs with positive products', () => {
+    // Pure absences (Maldives 462, Malawi 454) are no longer stored as negative
+    // product rows — they drop off this set by design (positives-only rule).
     const isos = new Set((citizenshipRoutes.residence_routes ?? []).map(r => r.country.iso_n3));
     for (const iso of [
       '100', '804', '031', '674', // R8
-      '818', '462', '690', '144', // R9
-      '340', '558', '242', '116', '417', '454', // R10
+      '818', '690', '144', // R9 (Maldives 462: no positive product)
+      '340', '558', '242', '116', '417', // R10 (Malawi 454: no positive product)
     ]) {
       expect(isos.has(iso), iso).toBe(true);
     }
+    expect(isos.has('462')).toBe(false);
+    expect(isos.has('454')).toBe(false);
   });
 
   test('US birthright records unconditional jus soli after Trump v. Barbara', () => {
@@ -1321,14 +1327,20 @@ describe('Curaçao multi-year residence layer, August 2026', () => {
     expect(ret?.sources.some(s => s.url.includes('immigrationcur.org') && s.url.includes('rentenier'))).toBe(true);
   });
 
-  test('short-stay products are not atlas primaries; no-cbi row is inactive not a product', () => {
+  test('short-stay and no-cbi absences are not stored as product rows', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
-    // No-CBI is coverage material — keep the id inactive so promote does not drop a shipped row.
-    expect(byId.get('curacao-no-cbi')?.status).toBe('inactive');
+    expect(byId.has('curacao-no-cbi')).toBe(false);
     expect(byId.has('curacao-remote-worker-short-stay')).toBe(false);
     expect(byId.has('curacao-snowbird-short-stay')).toBe(false);
     const cit = citizenshipRoutes.routes.filter(r => r.country?.iso_n3 === '531');
     expect(cit.length).toBeGreaterThanOrEqual(1);
+  });
+
+  test('corpus has no active verified_negative residence product rows', () => {
+    const negs = (citizenshipRoutes.residence_routes ?? []).filter(
+      r => r.status === 'verified_negative',
+    );
+    expect(negs.map(r => r.id)).toEqual([]);
   });
 });
 
@@ -1363,12 +1375,12 @@ describe('Aruba and Caribbean Netherlands multi-year residence, August 2026', ()
     expect(r?.sources.some(s => s.url.includes('indefinite'))).toBe(true);
   });
 
-  test('Aruba director/shareholder has Afl 125k equity floor; no-cbi row inactive', () => {
+  test('Aruba director/shareholder has Afl 125k equity floor', () => {
     const byId = new Map((citizenshipRoutes.residence_routes ?? []).map(r => [r.id, r]));
     const inv = byId.get('aruba-director-shareholder-residence');
     expect(inv?.min_investment).toEqual({ amount: 125_000, currency: 'AWG' });
     expect(inv?.confidence).toBe('medium');
-    expect(byId.get('aruba-no-cbi')?.status).toBe('inactive');
+    expect(byId.has('aruba-no-cbi')).toBe(false);
   });
 
   test('BES retired/independent means is renewable 1y with 120% MW means test; indefinite at 5y', () => {
@@ -1384,7 +1396,7 @@ describe('Aruba and Caribbean Netherlands multi-year residence, August 2026', ()
     expect(ret?.counts_toward_naturalization).toBe(true);
     // Winter visitor (max 6 months) not modelled.
     expect(byId.has('caribbean-netherlands-winter-visitor')).toBe(false);
-    expect(byId.get('caribbean-netherlands-no-cbi')?.status).toBe('inactive');
+    expect(byId.has('caribbean-netherlands-no-cbi')).toBe(false);
 
     const pr = byId.get('caribbean-netherlands-indefinite-residence');
     expect(pr?.outcome).toBe('permanent_residence');

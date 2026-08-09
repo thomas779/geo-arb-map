@@ -27,15 +27,13 @@ describe('route-class painted sets', () => {
     }
   });
 
-  test('golden visa paints active RBI countries, never verified negatives', () => {
+  test('golden visa paints active RBI countries only', () => {
     const set = isos('golden-visa');
     expect(set.has('620')).toBe(true);  // Portugal ARI — active
-    // Germany PAINTS despite its no-golden-visa verified negative, because the
-    // investment category also holds its active §21 entrepreneur permit — the
-    // class is category-faithful, and the country page footnote explains the
-    // distinction. Malawi is the pure case: a verified negative and nothing else.
+    // Germany paints via active entrepreneur investment category, not a negative.
     expect(set.has('276')).toBe(true);
-    expect(set.has('454')).toBe(false); // Malawi — verified_negative only
+    // Malawi has no active investment residence product (absences not stored).
+    expect(set.has('454')).toBe(false);
   });
 
   test('digital nomad paints live programmes, not audited negatives or lapsed ones', () => {
