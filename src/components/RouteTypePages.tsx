@@ -208,12 +208,9 @@ const HUB_SECTIONS: Array<{ title: string; routes: HubRoute[] }> = [
     routes: [
       // Split by reach (#191). "Through family" counted every country that
       // transmits to the child of a citizen — nearly all of them — so the count
-      // beside it was noise. These three are the limbs worth crossing a border
-      // for, origin first: it is the one that needs no citizen ancestor at all.
-      // Labels match the sidebar quick tiles.
-      { id: 'ancestry-origin', label: 'Through ethnic heritage', detail: 'Origin, not descent from a citizen', icon: Dna },
-      { id: 'ancestry', label: 'Through a grandparent', detail: 'A grandparent or further back qualifies', icon: Users },
-      { id: 'ancestry-unlimited', label: 'Through a distant ancestor', detail: 'No generation limit stated in the instrument', icon: TreeDeciduous },
+      // beside it was noise. Excluding that one bucket leaves the limbs worth
+      // crossing a border for. Label matches the sidebar quick tile.
+      { id: 'ancestry', label: 'Through ancestry', detail: 'Beyond a citizen parent: a grandparent or deeper, an unfixed ancestor, or ethnic origin', icon: Users },
       { id: 'naturalization', label: 'After living there', detail: 'Qualifying years of residence', icon: Hourglass },
       { id: 'cbi', label: 'Through investment', detail: 'Direct citizenship programmes', icon: Banknote },
     ],

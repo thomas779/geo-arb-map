@@ -78,15 +78,34 @@ describe('route-class painted sets', () => {
     expect(set.has('380')).toBe(false);
   });
 
-  test('ethnic and diaspora origin is its own axis, not a generation', () => {
-    const set = isos('ancestry-origin');
-    expect(set.has('376')).toBe(true);  // Israel — Law of Return, previously parent-only
-    expect(set.has('276')).toBe(true);  // Germany — Spätaussiedler, previously no descent at all
-    expect(set.has('051')).toBe(true);  // Armenia
-    expect(set.has('417')).toBe(true);  // Kyrgyzstan
-    expect(set.has('616')).toBe(true);  // Poland — narodowość polska, not an ancestor's citizenship
-    // An origin route never doubles into a degree facet: origin wins the bucket.
-    expect(isos('ancestry').has('376')).toBe(false);
+  test('one ancestry facet spans origin, grandparent and unfixed ancestor', () => {
+    // The three reaches are one front door. They stay separate in the DATA, as
+    // descent_reach, and are read per country; they are not three facets.
+    const set = isos('ancestry');
+    expect(set.has('376')).toBe(true);  // Israel — Law of Return, origin
+    expect(set.has('276')).toBe(true);  // Germany — Spätaussiedler, origin
+    expect(set.has('051')).toBe(true);  // Armenia — origin
+    expect(set.has('616')).toBe(true);  // Poland — narodowość polska, origin
+    expect(set.has('372')).toBe(true);  // Ireland — grandparent
+    expect(set.has('826')).toBe(true);  // United Kingdom — grandparent
+    expect(set.has('894')).toBe(true);  // Zambia — no stated limit
+  });
+
+  test('the facet excludes parent-only, which is the whole reason it is useful', () => {
+    // Including it painted 232 of 240: "this country has citizenship by descent" is
+    // true nearly everywhere and answers nothing. Excluding it leaves the countries
+    // where something OTHER than a citizen parent qualifies you.
+    const set = isos('ancestry');
+    expect(set.size).toBeGreaterThan(4);
+    expect(set.size).toBeLessThan(60);
+    const parentOnly = data.routes.filter(route => route.descent_reach === 'parent_only');
+    expect(parentOnly.length).toBeGreaterThan(100);
+    for (const route of parentOnly) {
+      if (!data.routes.some(other => other.country.iso_n3 === route.country.iso_n3
+        && other.descent_reach && other.descent_reach !== 'parent_only')) {
+        expect(set.has(route.country.iso_n3), route.id).toBe(false);
+      }
+    }
   });
 
   test('nothing paints on an index that predates the reach projection', () => {
@@ -136,15 +155,11 @@ describe('route-class painted sets', () => {
     expect(QUICK_ROUTE_CLASSES.length % 2).toBe(0);
   });
 
-  test('all three ancestry reaches are promoted, origin first', () => {
+  test('ancestry is exactly one promoted tile, not one per reach', () => {
     const promoted = QUICK_ROUTE_CLASSES.map(quick => quick.id);
     const ancestryClasses = ROUTE_CLASSES.filter(cls => cls.match === 'ancestry');
-    for (const cls of ancestryClasses) expect(promoted, cls.id).toContain(cls.id);
-    // Origin needs no ancestor who ever held the citizenship, so it reaches people
-    // no degree facet does; it must not sit below the narrower grandparent tile.
-    expect(promoted.indexOf('ancestry-origin')).toBeLessThan(promoted.indexOf('ancestry'));
-    expect(ROUTE_CLASSES.findIndex(cls => cls.id === 'ancestry-origin'))
-      .toBeLessThan(ROUTE_CLASSES.findIndex(cls => cls.id === 'ancestry'));
+    expect(ancestryClasses.map(cls => cls.id)).toEqual(['ancestry']);
+    expect(promoted.filter(id => id === 'ancestry')).toHaveLength(1);
   });
 
   test('the words people type reach the ancestry classes', () => {
@@ -155,13 +170,9 @@ describe('route-class painted sets', () => {
       || cls.description.toLowerCase().includes(q)
       || (cls.keywords ?? []).some(keyword => keyword.includes(q))
     )).map(cls => cls.id);
-    for (const query of ['ancestry', 'heritage', 'blood']) {
-      expect(matches(query), query).toContain('ancestry-origin');
+    for (const query of ['ancestry', 'heritage', 'blood', 'jewish', 'grandparent']) {
       expect(matches(query), query).toContain('ancestry');
-      expect(matches(query), query).toContain('ancestry-unlimited');
     }
-    // A keyword is a search alias, not a second painted set: it never widens one.
-    expect(matches('jewish')).toEqual(['ancestry-origin']);
   });
 
   test('country and category browse paths point to the same nested route indexes', () => {

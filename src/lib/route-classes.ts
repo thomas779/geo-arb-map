@@ -45,25 +45,26 @@ export interface RouteClass {
  * country and route pages, where a route is read rather than compared.
  */
 export const ROUTE_CLASSES: readonly RouteClass[] = [
-  // Origin leads the three. It is the class that does not require an ancestor who
-  // held the citizenship at all — the Law of Return, Spätaussiedler, the Armenian
-  // and Kyrgyz origin routes — so it qualifies people no degree facet reaches, and
-  // it must not sit below the narrower grandparent bucket.
-  { id: 'ancestry-origin', label: 'Ethnic or diaspora origin', kind: 'citizenship', match: 'ancestry',
-    descent_reach: ['origin_based'],
-    keywords: ['ancestry', 'heritage', 'blood', 'bloodline', 'ethnicity', 'right of return', 'repatriation', 'jewish', 'aliyah'],
-    description: 'Qualifies on ethnic or national origin rather than descent from a citizen — the Law of Return, Spätaussiedler, the Armenian and Kyrgyz origin routes.' },
-  // Keeps the `ancestry` id so existing /?class=ancestry links stay live; what
-  // changed is what the id MEANS, from "has any descent route" to "reaches past a
-  // parent", which is the question the old facet was failing to answer.
-  { id: 'ancestry', label: 'Grandparent or deeper', kind: 'citizenship', match: 'ancestry',
-    descent_reach: ['grandparent_or_deeper'],
-    keywords: ['ancestry', 'heritage', 'blood', 'bloodline', 'descent', 'family'],
-    description: 'A grandparent or further back qualifies, as recorded in the instrument.' },
-  { id: 'ancestry-unlimited', label: 'No stated generation limit', kind: 'citizenship', match: 'ancestry',
-    descent_reach: ['unlimited'],
-    keywords: ['ancestry', 'heritage', 'blood', 'bloodline', 'great-grandparent', 'distant ancestor'],
-    description: 'The instrument names an ancestor without fixing a generation, and states no cutoff.' },
+  // ONE ancestry class, and what it excludes is the whole point.
+  //
+  // The old facet painted 232 of 240 because it included every route whose only
+  // recorded condition is a citizen parent — which is just "this country has
+  // citizenship by descent", true nearly everywhere and useful nowhere. Drop that one
+  // bucket and the same facet answers the question people actually arrive with:
+  // roughly 20 countries where something OTHER than a parent qualifies you.
+  //
+  // Splitting the remainder into three tiles was a mistake in the other direction.
+  // Origin, grandparent-or-deeper and no-stated-limit are real distinctions and they
+  // stay in the data as `descent_reach`, shown per country where a route is read
+  // rather than compared. They are not three separate front doors.
+  //
+  // Keeps the `ancestry` id so existing /?class=ancestry links stay live.
+  { id: 'ancestry', label: 'Through ancestry', kind: 'citizenship', match: 'ancestry',
+    descent_reach: ['origin_based', 'grandparent_or_deeper', 'unlimited'],
+    keywords: ['ancestry', 'heritage', 'blood', 'bloodline', 'ethnicity', 'descent', 'family',
+      'right of return', 'repatriation', 'jewish', 'aliyah', 'grandparent', 'great-grandparent',
+      'distant ancestor'],
+    description: 'Ancestry beyond a citizen parent: a grandparent or further back, an ancestor with no generation fixed, or ethnic and national origin with no citizen ancestor required at all.' },
   { id: 'cbi', label: 'Citizenship by investment', kind: 'citizenship', match: 'investment',
     description: 'Direct citizenship for a qualifying investment or contribution.' },
   { id: 'naturalization', label: 'Naturalization', kind: 'citizenship', match: 'naturalization',
@@ -103,9 +104,7 @@ export function routeClassById(id: string | null | undefined): RouteClass | null
  * the precise sentence. Keep the count even — the grid is two columns.
  */
 export const QUICK_ROUTE_CLASSES: ReadonlyArray<{ id: string; label: string }> = [
-  { id: 'ancestry-origin', label: 'Through ethnic heritage' },
-  { id: 'ancestry', label: 'Through a grandparent' },
-  { id: 'ancestry-unlimited', label: 'Through a distant ancestor' },
+  { id: 'ancestry', label: 'Through ancestry' },
   { id: 'cbi', label: 'Invest for citizenship' },
   { id: 'golden-visa', label: 'Invest for residence' },
   { id: 'digital-nomad', label: 'Work remotely' },

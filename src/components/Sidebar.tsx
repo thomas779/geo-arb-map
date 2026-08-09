@@ -61,8 +61,6 @@ const ROUTE_CLASS_ICONS: Record<string, typeof Users> = {
   // a tree for a limb with no stated end. One Users icon three times read as one
   // repeated row.
   ancestry: Users,
-  'ancestry-origin': Dna,
-  'ancestry-unlimited': TreeDeciduous,
   cbi: Banknote,
   naturalization: Hourglass,
   'golden-visa': Home,
