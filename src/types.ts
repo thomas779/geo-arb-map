@@ -368,6 +368,12 @@ export interface AppState {
   lane: string | null;
   /** Route-class browse (#129): paints jurisdictions with an active route of the class. */
   routeClass: string | null;
+  /**
+   * Selected driving-licence exchange arrangement (#171). Paints its member set on
+   * the map the way a bloc or route class does, keeping destinations and
+   * beneficiaries visually distinct so a unilateral annex never reads as a treaty.
+   */
+  licenceAgreement: string | null;
   country: string | null;
   countryName: string | null;
 }

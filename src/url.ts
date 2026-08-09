@@ -93,6 +93,8 @@ export function read(): Partial<AppState> {
 
   const routeClass = params.get('class');
   if (routeClass) state.routeClass = routeClass;
+  const licence = params.get('licence');
+  if (licence) state.licenceAgreement = licence;
 
   const country = params.get('country');
   if (country) state.country = country;
@@ -124,6 +126,7 @@ export function paramsForState(current: URLSearchParams, state: AppState): URLSe
     if (state.blocs.length) params.set('blocs', state.blocs.join(','));
     if (state.lane) params.set('lane', state.lane);
     if (state.routeClass) params.set('class', state.routeClass);
+    if (state.licenceAgreement) params.set('licence', state.licenceAgreement);
     if (state.country) params.set('country', state.country);
   }
   return params;

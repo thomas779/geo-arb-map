@@ -330,3 +330,40 @@ describe('every arrangement is now typed against its instrument', () => {
     }
   });
 });
+
+describe('the atlas fold-in: agreements paint like blocs (#171)', () => {
+  test('a shareable URL param round-trips', async () => {
+    // The point of folding this into the atlas rather than leaving it on a
+    // standalone page is a selection you can send someone.
+    const { paramsForState } = await import('../src/url');
+    const base: Record<string, unknown> = {
+      view: 'map', blocs: [], lane: null, routeClass: null,
+      licenceAgreement: 'licence-nordic-1985', country: null, countryName: null,
+    };
+    const params = paramsForState(new URLSearchParams(), base as never);
+    expect(params.get('licence')).toBe('licence-nordic-1985');
+  });
+
+  test('direction survives into the paint sets', async () => {
+    const { isosForAgreement } = await import('../src/lib/licence-exchange');
+    // Symmetric instrument: both sides identical, so the map reads as one bloc.
+    const nordic = isosForAgreement(agreementById(seed, 'licence-nordic-1985')!);
+    expect([...nordic.destinations].sort()).toEqual([...nordic.beneficiaries].sort());
+
+    // Unilateral annex: Germany grants, the others receive. Painting these the
+    // same colour would show a reciprocity that does not exist, which is exactly
+    // what the flat pre-agreement data did.
+    const germany = isosForAgreement(agreementById(seed, 'licence-germany')!);
+    expect([...germany.destinations]).toEqual(['276']);
+    expect(germany.beneficiaries.has('276')).toBe(false);
+    expect(germany.beneficiaries.size).toBeGreaterThan(20);
+  });
+
+  test('Spain paints Latin America, which is the case that started this', () => {
+    const spain = isosForAgreement(agreementById(seed, 'licence-spain')!);
+    for (const iso of ['600', '032', '170', '604', '858', '218']) {
+      expect(spain.beneficiaries, `Spain should paint ${iso}`).toContain(iso);
+    }
+    expect([...spain.destinations]).toEqual(['724']);
+  });
+});

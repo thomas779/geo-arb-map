@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { Sidebar } from '@/components/Sidebar';
 import { ROUTE_CLASSES, isosForRouteClass, routeClassById } from '@/lib/route-classes';
+import { agreementById, isosForAgreement, listAgreements } from '@/lib/licence-exchange';
 import { WorldMap } from '@/components/WorldMap';
 import { DetailPanel } from '@/components/DetailPanel';
 import { RouteDetailPanel } from '@/components/RouteDetailPanel';
@@ -68,6 +69,7 @@ const initialState: AppState = {
   blocs: [],
   lane: null,
   routeClass: null,
+  licenceAgreement: null,
   country: null,
   countryName: null,
   ...url.read(),
@@ -230,6 +232,7 @@ export default function App() {
         : s.blocs.includes(id) ? s.blocs.filter(b => b !== id) : [...s.blocs, id],
       lane: null,
       routeClass: null,
+      licenceAgreement: null,
       country: null,
       countryName: null,
     }));
@@ -237,7 +240,7 @@ export default function App() {
   const selectLane = useCallback((id: string | null) => {
     setMobileList(false);
     if (id !== null) setRoutePanelOpen(true);
-    patch({ view: 'map', lane: id, blocs: [], routeClass: null, country: null, countryName: null });
+    patch({ view: 'map', lane: id, blocs: [], routeClass: null, licenceAgreement: null, country: null, countryName: null });
   }, [patch]);
   /** Route-class browse (#129). Single-select; re-picking the active class clears it. */
   const selectRouteClass = useCallback((id: string | null) => {
@@ -255,7 +258,7 @@ export default function App() {
   }, []);
   const clearMapSelection = useCallback(() => {
     setRoutePanelOpen(false);
-    patch({ blocs: [], lane: null, routeClass: null, country: null, countryName: null });
+    patch({ blocs: [], lane: null, routeClass: null, licenceAgreement: null, country: null, countryName: null });
   }, [patch]);
   const selectView = useCallback((v: AppState['view']) =>
     patch({ view: v }), [patch]);
@@ -294,7 +297,20 @@ export default function App() {
     return new Map(ROUTE_CLASSES.map(cls => [cls.id, isosForRouteClass(cls, citizenshipRoutes).all.size]));
   }, [citizenshipRoutes]);
 
-  const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane) || Boolean(state.routeClass);
+  // Licence-agreement browse (#171): which states have an exchange arrangement with
+  // which. Same shape as the route-class derivation above — a declarative list, an
+  // ISO set, the existing paint path.
+  const licenceAgreementIsos = useMemo(() => {
+    const agreement = licenceExchange ? agreementById(licenceExchange, state.licenceAgreement) : null;
+    return agreement ? isosForAgreement(agreement) : null;
+  }, [state.licenceAgreement, licenceExchange]);
+  const licenceAgreements = useMemo(
+    () => (licenceExchange ? listAgreements(licenceExchange) : []),
+    [licenceExchange],
+  );
+
+  const hasRouteSelection = state.blocs.length > 0 || Boolean(state.lane)
+    || Boolean(state.routeClass) || Boolean(state.licenceAgreement);
   const rightPanelOpen = state.country ? detailPanelOpen : hasRouteSelection && routePanelOpen;
   const startCountrySearch = useCallback(() => {
     setLeftPanelOpen(true);
@@ -435,6 +451,7 @@ export default function App() {
             profile={profile}
             onSelect={selectCountry}
             routeClassIsos={routeClassIsos}
+            licenceAgreementIsos={licenceAgreementIsos}
             dataUpdatedAt={dataStatus.updatedAt}
             onOpenInfo={() => changeInfo('methodology')}
           />

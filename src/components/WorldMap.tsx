@@ -3,7 +3,7 @@ import { ChevronDown } from 'lucide-react';
 import type { AppState, BlocsData } from '../types';
 import { routeClassById, type RouteClassIsos } from '../lib/route-classes';
 import type { Profile } from '../lib/planner';
-import { init as initMap, render as renderMap, setRouteClassIsos } from '../map';
+import { init as initMap, render as renderMap, setLicenceAgreementIsos, setRouteClassIsos } from '../map';
 import { cn } from '../lib/utils';
 import { Card, CardFooter } from '@/components/ui/card';
 
@@ -16,6 +16,11 @@ interface Props {
   onSelect: (iso: string, name: string) => void;
   /** Route-class browse (#129): painted sets; null when no class selected. */
   routeClassIsos?: RouteClassIsos | null;
+  /**
+   * Licence-agreement browse (#171): destinations and beneficiaries kept apart so a
+   * unilateral annex does not paint as a reciprocal treaty. Null when none selected.
+   */
+  licenceAgreementIsos?: { destinations: Set<string>; beneficiaries: Set<string> } | null;
   /** Last-verified date, shown in the map key footer (consolidates the old pill). */
   dataUpdatedAt?: string;
   /** Opens the methodology / trust panel from the map key footer. */
@@ -49,7 +54,7 @@ const ACCESS_LEVELS = [
  * (by the ids map.ts expects), forwards state changes to its render(),
  * and renders the map legend (driven by AppState, not by the D3 layer).
  */
-export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos = null, dataUpdatedAt, onOpenInfo }: Props) {
+export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos = null, dataUpdatedAt, onOpenInfo, licenceAgreementIsos = null }: Props) {
   const inited = useRef(false);
   const onSelectRef = useRef(onSelect);
   onSelectRef.current = onSelect;
@@ -62,6 +67,7 @@ export function WorldMap({ data, state, theme, profile, onSelect, routeClassIsos
     inited.current = true;
     const cleanup = initMap(data, (iso, name) => onSelectRef.current(iso, name));
     setRouteClassIsos(routeClassIsos);
+    setLicenceAgreementIsos(licenceAgreementIsos);
     renderMap(state, data, profile);
     return () => {
       cleanup();

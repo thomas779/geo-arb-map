@@ -531,6 +531,23 @@ function idleBucket(lookupIso: string): IdleBucket {
 }
 
 let _classIsos: { cit: Set<string>; pr: Set<string>; tr: Set<string> } | null = null;
+let _licenceIsos: { destinations: Set<string>; beneficiaries: Set<string> } | null = null;
+
+/**
+ * Licence-agreement paint sets (#171); owned by render(), read by colorForIso.
+ *
+ * Two sets rather than one on purpose. Under a symmetric instrument (the EU/EEA
+ * directive, the Nordic 1985 agreement) both sides are the same states and the map
+ * reads as a single bloc. Under a unilateral annex — Germany's Anlage 11, Denmark's
+ * scheme — one state grants and the others receive, and painting them identically
+ * would show a reciprocity that does not exist. Mirrors how a bilateral lane already
+ * distinguishes destination from beneficiaries.
+ */
+export function setLicenceAgreementIsos(
+  isos: { destinations: Set<string>; beneficiaries: Set<string> } | null,
+): void {
+  _licenceIsos = isos;
+}
 
 /** Route-class browse paint sets (#129); owned by render(), read by colorForIso. */
 export function setRouteClassIsos(
@@ -542,6 +559,13 @@ export function setRouteClassIsos(
 function colorForIso(iso: string, state: AppState, data: BlocsData): string {
   const lookupIso = mobilityIso(iso);
   const dark = isDarkTheme();
+  if (state.licenceAgreement && _licenceIsos) {
+    // Destination strong, beneficiary light — the same visual grammar bilateral
+    // lanes use, so direction is legible without a legend.
+    if (_licenceIsos.destinations.has(lookupIso)) return 'var(--map-strong)';
+    if (_licenceIsos.beneficiaries.has(lookupIso)) return 'var(--map-limited)';
+    return 'var(--map-land)';
+  }
   if (state.routeClass && _classIsos) {
     // Three tiers, two colours: CIT solid strong, PR strong with a 45-degree
     // hatch (texture as the secondary channel — the palette cannot carry a
