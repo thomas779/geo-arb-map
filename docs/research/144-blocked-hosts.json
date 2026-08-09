@@ -1,0 +1,146 @@
+[
+  {
+    "host": "riigiteataja.ee",
+    "jurisdiction": "EE",
+    "failure": "HTTP 403 on every path, including via a second independent fetcher stack. Flat WAF block, not the metadata-only paywall shape the brief predicted for this host.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; full Chrome header set (sec-ch-ua, sec-ch-ua-mobile, sec-ch-ua-platform, Sec-Fetch-Dest/Mode/Site/User, Upgrade-Insecure-Requests, Accept, Accept-Language); www and non-www; /en/eli/504112021001/consolide, /en/eli/ee/504112021001/consolide/current and /akt/104112021001; WebFetch as a different fetcher stack, which also returned 403 with no body. Also tried politsei.ee as an alternative official channel: likewise 403."
+  },
+  {
+    "host": "e-tar.lt",
+    "jurisdiction": "LT",
+    "failure": "HTTP 403 on the legal act path.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; full Chrome header set; /portal/lt/legalAct/TAR.C8F1E44E9B76/asr and /portal/legalAct.html?documentId=TAR.C8F1E44E9B76."
+  },
+  {
+    "host": "e-seimas.lrs.lt",
+    "jurisdiction": "LT",
+    "failure": "Connection timeout on every attempt to the legalAct path (45s, 60s, 90s). The PDF export path returned 404. The document id used (TAIS.148745) may itself be wrong and could not be confirmed.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; full Chrome header set; Referer header; cookie jar primed from a successful www.lrs.lt request (which itself serves only a cookie-consent gate and sets TS01525250 and Seimas cookies); /portal/legalAct/lt/TAD/TAIS.148745/asr and /rs/legalact/TAD/TAIS.148745/format/OO3_PDF/. Could not verify the document id: the session's WebSearch budget (200 calls) was already exhausted before this task began, so no search was available to confirm the identifier."
+  },
+  {
+    "host": "laws.boe.gov.sa",
+    "jurisdiction": "SA",
+    "failure": "TCP-level connection timeout, not an HTTP status. \"Failed to connect ... port 443 after 75153 ms\". Host appears unroutable from this network.",
+    "tried": "Four attempts at 45s, 50s, 60s and 110s timeouts; browser User-Agent; --compressed; --http1.1; full Chrome header set. Also tried moi.gov.sa as an alternative official channel: likewise unreachable at the TCP level."
+  },
+  {
+    "host": "sso.agc.gov.sg",
+    "jurisdiction": "SG",
+    "failure": "Serves a 513-555 KB table-of-contents shell with no provision text. The AJAX provision loader returns HTTP 202 with a zero-byte body. Anti-automation gate that appears to require real JS execution.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; ?WholeDoc=1; ?ProvIds=pr134-; ?ProvIds=pr134-&ViewType=Advance; /Print?ProvIds=pr134- (returns 24 KB with no article text and no PDF link); the lazy-load endpoint /Details/GetLazyLoadContent discovered by grepping the shell's embedded JSON config, called with and without X-Requested-With: XMLHttpRequest and a Referer, and with a cookie jar (the site sets no cookies at all); a POST to /Details/Print with PrintType=Pdf, which returned 115 bytes. Also probed ica.gov.sg for a ministry page as a fallback: all guessed paths 404. Constitution arts. 134-135 remain unread, so nothing was quoted and no row was written."
+  },
+  {
+    "host": "peraturan.bpk.go.id",
+    "jurisdiction": "ID",
+    "failure": "HTTP 403 on both the detail page and the direct PDF download.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; full Chrome header set; /Details/40174/uu-no-12-tahun-2006 and /Download/28448/UU%20Nomor%2012%20Tahun%202006.pdf."
+  },
+  {
+    "host": "peraturan.go.id",
+    "jurisdiction": "ID",
+    "failure": "Connection timeout (60s and 40s attempts, zero bytes received).",
+    "tried": "Browser User-Agent; --compressed; --http1.1; /id/uu-no-12-tahun-2006 and /files/uu12-2006.pdf."
+  },
+  {
+    "host": "jdih.setneg.go.id",
+    "jurisdiction": "ID",
+    "failure": "HTTP 404 on the product path.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; /Produk/40174."
+  },
+  {
+    "host": "dpr.go.id",
+    "jurisdiction": "ID",
+    "failure": "HTTP 403 on the direct PDF path.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; /dokjdih/document/uu/UU_2006_12.pdf."
+  },
+  {
+    "host": "jdihn.go.id",
+    "jurisdiction": "ID",
+    "failure": "Connection timeout.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; search path with a query string."
+  },
+  {
+    "host": "parlzim.gov.zw",
+    "jurisdiction": "ZW",
+    "failure": "NOT BLOCKED, but the document is unusable. The official Constitution PDF was located and fetched successfully (3.5 MB) but is a scan with no text layer: pdftotext extracts 151 bytes from 3.5 MB. It needs OCR. The HTML page carries no links to it at all; the file was found via the WordPress REST endpoint. Zimbabwe's s.42 / s.39 birth-versus-registration asymmetry is probably the most valuable unclaimed row on the Tier 1 list and is one OCR pass away.",
+    "tried": "Initial HTTP 403 with a bare browser User-Agent; resolved to HTTP 200 by adding --http1.1 plus the full Chrome header set. HTML page yielded no document links, so enumerated media via /wp-json/wp/v2/media?search=constitution&per_page=20, which returned https://www.parlzim.gov.zw/wp-content/uploads/2025/05/Constitution-of-Zimbabwe-Amendment_No_20_-_14-05-2013.pdf. Fetched OK. pdftotext -layout produced no usable text."
+  },
+  {
+    "host": "almeezan.qa",
+    "jurisdiction": "QA",
+    "failure": "Partial render plus a self-disqualifying disclaimer. The correct instrument (Law No. 38 of 2005 on Qatari Nationality, LawID 2591) is served and articles 1, 2, 7, 12 and 14 render, but the loss articles 10 and 11 render as empty bodies. Separately the page footer states the material displayed should not be treated as official, which on its face disqualifies it under the official-sources rule even where text does render.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; LawView.aspx?opt&LawID=2570 (wrong instrument: a 2008 law on rationalising electricity and water consumption); located the correct LawID via LawPage.aspx?id=2591; fetched LawView.aspx?opt&LawID=2591&language=ar; two different HTML-to-text extraction strategies, both of which showed articles 10 and 11 as empty. Owner decision needed on whether Al Meezan counts as official given its own disclaimer."
+  },
+  {
+    "host": "qanoon.om",
+    "jurisdiction": "OM",
+    "failure": "Fetches fine and serves Royal Decree 38/2014 issuing the Omani Nationality Law, but carries an explicit disclaimer that the displayed material is not official. Disqualified under the official-sources rule, so not used.",
+    "tried": "Browser User-Agent; --compressed; /p/2014/rd2014038/ fetched OK at 26 KB. The official alternative mjla.gov.om was not reached."
+  },
+  {
+    "host": "e-qanun.az",
+    "jurisdiction": "AZ",
+    "failure": "Next.js client-rendered shell (17 KB) with no __NEXT_DATA__ payload in the served HTML. No text without executing JS.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; full Chrome header set; /framework/9066; grepped the shell for an embedded JSON payload or an alpidata document path, found neither."
+  },
+  {
+    "host": "lex.uz",
+    "jurisdiction": "UZ",
+    "failure": "HTTP 404 on every document id tried. Correct identifier unknown and unconfirmable without search.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; /docs/-4562264 and /docs/-5960443."
+  },
+  {
+    "host": "legalaffairs.gov.bh",
+    "jurisdiction": "BH",
+    "failure": "TLS certificate does not match the hostname on the www form (\"no alternative certificate subject name matches target host name 'www.legalaffairs.gov.bh'\"); the non-www form returns HTTP 404 on the legislation paths tried.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; www and non-www; LegislationSearchDetails.aspx?id=6003 and AdvancedSearchDetails.aspx?id=6003. Certificate verification was not disabled."
+  },
+  {
+    "host": "elaws.gov.bw",
+    "jurisdiction": "BW",
+    "failure": "DNS does not resolve (\"Could not resolve host\").",
+    "tried": "www and non-www; /desplay.php?id=192."
+  },
+  {
+    "host": "mip.gov.mm",
+    "jurisdiction": "MM",
+    "failure": "DNS does not resolve.",
+    "tried": "Direct fetch. mohs.gov.mm returned HTTP 522 (origin unreachable behind Cloudflare)."
+  },
+  {
+    "host": "lawcommission.gov.np",
+    "jurisdiction": "NP",
+    "failure": "Site root and category pages return HTTP 200, but every guessed path to the Constitution or the Nepal Citizenship Act returned 404, and the category listing reached did not surface them. Not blocked, just not navigated to in the time available.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; /en/?cat=487, /en/documents/category/prevailing-laws, /en/archives/category/documents/prevailing-law/acts, /en/wp-content/uploads/2021/03/Nepal-Citizenship-Act-2063-2006.pdf, /?s=citizenship, /category/1817; enumerated hrefs from the site root and from a category page."
+  },
+  {
+    "host": "gov.sz",
+    "jurisdiction": "SZ",
+    "failure": "Site serves HTML fine, but the Constitution PDF was not located. Direct guess /images/CONSTITUTION.pdf returned 404; enumerating PDF hrefs on the reached page surfaced only finance and HR documents.",
+    "tried": "Browser User-Agent; --compressed; --http1.1; /images/CONSTITUTION.pdf; /index.php/component/content/article?id=384; grepped all hrefs for constitution and .pdf."
+  },
+  {
+    "host": "gacetaoficial.gob.cu",
+    "jurisdiction": "CU",
+    "failure": "Partial. The HTML index paths timed out or 404'd, but the direct Gaceta PDF path worked and is the source used for the Cuba row. Recorded here only so the index-path failure is not rediscovered.",
+    "tried": "/es/constitucion and /es/constitucion-de-la-republica-de-cuba-proclamada-el-10-de-abril-de-2019 both failed (timeout and 404). /sites/default/files/goc-2019-ex5.pdf fetched OK at 420 KB with a full text layer."
+  },
+  {
+    "host": "npc.gov.cn and gov.cn (Chinese-language paths)",
+    "jurisdiction": "CN",
+    "failure": "The Chinese-language text of the Nationality Law was not obtained; the paths tried 404'd or redirected to the site index. The official NPC English translation was obtained and is the source used for the China row.",
+    "tried": "http://www.npc.gov.cn/npc/c2/c30834/201905/t20190521_37141.html (redirected to /npc/index.html); https://www.gov.cn/ziliao/flfg/2005-09/12/content_31121.htm (404); browser User-Agent; --compressed."
+  },
+  {
+    "host": "mcp__cloudflare-browser__*",
+    "jurisdiction": "(tooling)",
+    "failure": "Every call to the Cloudflare browser MCP tool returns \"Error POSTing to endpoint (HTTP 404): Not Found\". The tool is currently unusable as a JS-rendering fallback. This is the single missing capability that would have unblocked Singapore and Azerbaijan, and possibly Estonia and Indonesia.",
+    "tried": "get_url_markdown and get_url_html_content, against sso.agc.gov.sg and riigiteataja.ee. Both 404 at the endpoint, i.e. the failure is in the MCP server, not the target site."
+  },
+  {
+    "host": "(general finding) full Chrome header set plus --http1.1",
+    "jurisdiction": "(infrastructure)",
+    "failure": "Not a failure. Recording the escalation step that worked, because the brief's ladder currently stops at 'try a browser User-Agent' and that was not sufficient.",
+    "tried": "Two of the four hosts that first returned HTTP 403 to a browser User-Agent alone went to HTTP 200 once --http1.1 was forced AND the full Chrome header set was sent: uaelegislation.gov.ae (403 -> 200, 72 KB) and parlzim.gov.zw (403 -> 200, 26 KB). The header set that made the difference: sec-ch-ua, sec-ch-ua-mobile, sec-ch-ua-platform, Upgrade-Insecure-Requests, Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site, Sec-Fetch-User, a realistic Accept, and Accept-Language. The same escalation did NOT rescue riigiteataja.ee or peraturan.bpk.go.id. Recommendation: add 'full Chrome header set plus --http1.1, not just the UA string' as step 1b of the ladder, before declaring a host blocked. Two further reusable tricks found in this batch: (1) zakon.rada.gov.ua serves only a record card at /laws/show/ID but the full consolidated text at /laws/show/ID/print; (2) laws.e-gov.go.jp is an SPA shell, but elaws.e-gov.go.jp/api/1/lawdata/LAWID returns the full statute as XML."
+  }
+]

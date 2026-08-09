@@ -23,6 +23,7 @@
  * Exit code is non-zero if any entry fails, so it can gate a merge.
  */
 import fs from 'node:fs';
+import { fetchText, norm } from './lib/quote-gate.ts';
 
 interface Finding {
   iso?: string;
@@ -52,49 +53,9 @@ const LIMBS = new Set(['stateless_safeguard', 'double_jus_soli', 'parent_residen
 /** Aggregators and mirrors that may not stand as the cited authority. */
 const BANNED_HOST = /constituteproject|refworld|natlex|ilo\.org|wikipedia|\blii\.org|constitutionnet/i;
 
-const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 '
-  + '(KHTML, like Gecko) Chrome/120 Safari/537.36';
 
-/**
- * Compare on collapsed whitespace and NFC, and nothing else.
- *
- * Deliberately NOT fuzzy. Accent-stripping or case-folding would let a
- * paraphrase through, which is the whole thing being tested. Whitespace is
- * normalised only because PDF and HTML extraction legitimately reflow it.
- */
-const norm = (s: string) => s.normalize('NFC').replace(/\s+/g, ' ').trim();
 
-/** Strip tags/scripts; decode the few entities that matter for legal text. */
-function textOf(html: string): string {
-  return html
-    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
-    .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'")
-    .replace(/&laquo;|&raquo;/g, '"');
-}
 
-async function fetchText(url: string): Promise<{ ok: boolean; status: number; text: string; note: string }> {
-  try {
-    const res = await fetch(url, { headers: { 'User-Agent': UA }, redirect: 'follow' });
-    const buf = new Uint8Array(await res.arrayBuffer());
-    // Some official publishers serve UTF-16 (bdlaws.minlaw.gov.bd). Decoding as
-    // UTF-8 yields a space between every character and every search fails silently.
-    let decoded: string;
-    if (buf[0] === 0xfe && buf[1] === 0xff) decoded = new TextDecoder('utf-16be').decode(buf);
-    else if (buf[0] === 0xff && buf[1] === 0xfe) decoded = new TextDecoder('utf-16le').decode(buf);
-    else decoded = new TextDecoder('utf-8').decode(buf);
-    const isPdf = decoded.slice(0, 5) === '%PDF-';
-    return {
-      ok: res.ok,
-      status: res.status,
-      text: isPdf ? '' : textOf(decoded),
-      note: isPdf ? 'PDF — extract with pdftotext and re-check by hand' : '',
-    };
-  } catch (error) {
-    return { ok: false, status: 0, text: '', note: `fetch failed: ${(error as Error).message}` };
-  }
-}
 
 const path = process.argv[2];
 const asJson = process.argv.includes('--json');
