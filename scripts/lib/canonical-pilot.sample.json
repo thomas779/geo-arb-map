@@ -1,5 +1,5 @@
 {
-  "shadow_release_id": "d35f913f2267c8b4",
+  "shadow_release_id": "6a8b83d278927664",
   "sources": [
     {
       "schema_version": 1,
@@ -77,7 +77,7 @@
       ],
       "language": "en",
       "published_at": null,
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-23",
       "monitoring": {
         "source_id": "afghanistan-citizenship-law",
         "method": "http",
@@ -98,7 +98,7 @@
       ],
       "language": "en",
       "published_at": null,
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-22",
       "monitoring": {
         "source_id": "andorra-citizenship-law",
         "method": "http",
@@ -119,7 +119,7 @@
       ],
       "language": "en",
       "published_at": null,
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-22",
       "monitoring": {
         "source_id": "angola-citizenship-law",
         "method": "http",
@@ -140,7 +140,7 @@
       ],
       "language": "en",
       "published_at": null,
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-22",
       "monitoring": {
         "source_id": "albania-citizenship-law",
         "method": "http",
@@ -161,13 +161,28 @@
       ],
       "language": "en",
       "published_at": null,
-      "last_checked": "2026-07-21",
+      "last_checked": "2026-07-22",
       "monitoring": {
         "source_id": "algeria-citizenship-law",
         "method": "http",
         "url": "https://data.globalcit.eu/NationalDB/docs/Algeria_Loi_No.70-86_ENGLISH.pdf",
         "status": "active"
       }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:govern_ad:424ec092d9",
+      "title": "Govern d'Andorra — Residència per a nòmada digital (D.3)",
+      "url": "https://www.govern.ad/ca/tematiques/immigracio/residencia/residencia-per-a-nomada-digital",
+      "publisher": "govern.ad",
+      "source_type": "official_guidance",
+      "jurisdictions": [
+        "020"
+      ],
+      "language": "ca",
+      "published_at": null,
+      "last_checked": "2026-07-30"
     },
     {
       "schema_version": 1,
@@ -252,6 +267,51 @@
         "url": "https://www.legislation.gov.uk/uksi/1981/1106/contents/made",
         "status": "active"
       }
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:nomad_gov_ag:89f6d922f3",
+      "title": "Antigua and Barbuda — Nomad Digital Residence (official site, ended banner)",
+      "url": "https://nomad.gov.ag/ui/",
+      "publisher": "nomad.gov.ag",
+      "source_type": "official_guidance",
+      "jurisdictions": [
+        "028"
+      ],
+      "language": "en",
+      "published_at": null,
+      "last_checked": "2026-07-30"
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:portaljuridicandorra_ad:7ba1d3746f",
+      "title": "Llei 9/2012 qualificada d'immigració, arts. 98-99 (text consolidat, Portal Jurídic d'Andorra)",
+      "url": "https://portaljuridicandorra.ad/L2012009_12",
+      "publisher": "portaljuridicandorra.ad",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "020"
+      ],
+      "language": "ca",
+      "published_at": null,
+      "last_checked": "2026-07-30"
+    },
+    {
+      "schema_version": 1,
+      "entity_type": "source",
+      "id": "source:portaljuridicandorra_ad:a304c28b2d",
+      "title": "Llei 2/2026, del 22 de gener (BOPA núm. 15, 12-2-2026) — Portal Jurídic d'Andorra",
+      "url": "https://www.portaljuridicandorra.ad/L2026002",
+      "publisher": "portaljuridicandorra.ad",
+      "source_type": "primary_law",
+      "jurisdictions": [
+        "020"
+      ],
+      "language": "ca",
+      "published_at": null,
+      "last_checked": "2026-07-30"
     }
   ],
   "jurisdictions": [
@@ -464,7 +524,7 @@
           },
           "review": {
             "state": "reviewed",
-            "confidence": "high",
+            "confidence": "low",
             "last_checked": "2026-07-23"
           },
           "variants": [
@@ -489,7 +549,7 @@
               "timeline": {
                 "eligibility_minimum_months": 0,
                 "processing_typical_months": null,
-                "confidence": "high"
+                "confidence": "low"
               },
               "source_refs": [
                 {
@@ -715,7 +775,7 @@
           },
           "review": {
             "state": "reviewed",
-            "confidence": "high",
+            "confidence": "low",
             "last_checked": "2026-07-22"
           },
           "variants": [
@@ -740,7 +800,7 @@
               "timeline": {
                 "eligibility_minimum_months": 0,
                 "processing_typical_months": null,
-                "confidence": "high"
+                "confidence": "low"
               },
               "source_refs": [
                 {
@@ -1380,7 +1440,7 @@
           },
           "review": {
             "state": "reviewed",
-            "confidence": "high",
+            "confidence": "low",
             "last_checked": "2026-07-22"
           },
           "variants": [
@@ -1405,7 +1465,7 @@
               "timeline": {
                 "eligibility_minimum_months": 0,
                 "processing_typical_months": null,
-                "confidence": "high"
+                "confidence": "low"
               },
               "source_refs": [
                 {
@@ -1416,6 +1476,250 @@
                     "/routes/andorra-citizenship-at-birth-by-parent/variants/andorra-citizenship-at-birth-by-parent-principal/timeline"
                   ]
                 }
+              ]
+            }
+          ]
+        }
+      ],
+      "residence_routes": [
+        {
+          "id": "andorra-passive-residence",
+          "category": "investment",
+          "status": "active",
+          "title": "Residència sense activitat lucrativa (passive residence)",
+          "summary": "Non-lucrative (passive) residence for non-nationals residing at least 90 days/year without working in Andorra.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-30",
+            "note": "Verified verbatim in BOPA núm. 15 (12-2-2026): Llei 2/2026, del 22 de gener, art. 10 (nova redacció de l'art. 96 de la Llei 9/2012 qualificada d'immigració); in force 13-2-2026. REPLACES the pre-2026 regime of EUR 600,000 total including a refundable AFA deposit of EUR 47,500 + 9,500 — the deposit is now a non-refundable 'ingrés' of EUR 50,000 + 12,000 and no longer counts toward the investment (refunded only if the initial authorization is denied). Transitional: applications filed before the law's approval follow old rules. Quota: Decret 74/2026 (BOPA 13-3-2026) fixes 163 passive-residence authorizations within a 200-permit residence-without-work quota, strict chronological order. Presence: 90 days/year (art. 95, unchanged). CAVEAT: the official e-tramits D.1 page still displayed the old EUR 600,000/47,500/9,500 figures in July 2026 — the BOPA law text prevails. Nationality requires ~20 years' residence (no dual citizenship), so countsTowardNat is formal only."
+          },
+          "counts_toward_permanent_residence": true,
+          "counts_toward_naturalization": true,
+          "min_investment": {
+            "amount": 1000000,
+            "currency": "EUR"
+          },
+          "min_income_monthly": null,
+          "physical_presence_days_per_year": 90,
+          "work_rights": null,
+          "permit_duration_months": null,
+          "permit_renewable": null,
+          "min_age": null,
+          "max_age": null,
+          "variants": [
+            {
+              "id": "andorra-passive-residence-principal",
+              "label": "Residència sense activitat lucrativa (passive residence)",
+              "outcome": "residence",
+              "allocation": "quota_queue",
+              "eligibility": [],
+              "milestones": [
+                {
+                  "status": "permanent_residence",
+                  "minimum_months": null
+                },
+                {
+                  "status": "naturalization",
+                  "minimum_months": null
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": null,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:portaljuridicandorra_ad:a304c28b2d",
+                  "supports_fields": [
+                    "/residence_routes/andorra-passive-residence/summary",
+                    "/residence_routes/andorra-passive-residence/variants/andorra-passive-residence-principal/eligibility",
+                    "/residence_routes/andorra-passive-residence/variants/andorra-passive-residence-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "andorra-international-professionals",
+          "category": "talent_skilled",
+          "status": "active",
+          "title": "Residència per a professionals amb projecció internacional",
+          "summary": "Residence for self-employed professionals based in Andorra whose services are consumed abroad: at least 85% of services used outside Andorra, maximum one employee, 90 days/year effective residence.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-30",
+            "note": "Arts. 98-99, Llei 9/2012 qualificada d'immigració (consolidated text, Portal Jurídic). Llei 2/2026 modified art. 96 (passive residence) but NOT arts. 98-99: the EUR 47,500 + 9,500 deposit remains refundable on de-registration (minus AFA fees). Quota: 10 authorizations within the 200-permit Decret 74/2026 quota. Reglament of 12-11-2025 governs residence-without-work authorizations."
+          },
+          "counts_toward_permanent_residence": true,
+          "counts_toward_naturalization": true,
+          "min_investment": null,
+          "min_income_monthly": null,
+          "physical_presence_days_per_year": 90,
+          "work_rights": null,
+          "permit_duration_months": null,
+          "permit_renewable": null,
+          "min_age": null,
+          "max_age": null,
+          "variants": [
+            {
+              "id": "andorra-international-professionals-principal",
+              "label": "Residència per a professionals amb projecció internacional",
+              "outcome": "residence",
+              "allocation": "quota_queue",
+              "eligibility": [],
+              "milestones": [
+                {
+                  "status": "permanent_residence",
+                  "minimum_months": null
+                },
+                {
+                  "status": "naturalization",
+                  "minimum_months": null
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": null,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:portaljuridicandorra_ad:7ba1d3746f",
+                  "supports_fields": [
+                    "/residence_routes/andorra-international-professionals/summary",
+                    "/residence_routes/andorra-international-professionals/variants/andorra-international-professionals-principal/eligibility",
+                    "/residence_routes/andorra-international-professionals/variants/andorra-international-professionals-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "andorra-digital-nomad",
+          "category": "digital_nomad",
+          "status": "active",
+          "title": "Residència per a nòmada digital",
+          "summary": "Distinct nomad category under Llei 42/2022 (arts. 33 bis and 101 quater-quinquies of the immigration law) for work performed remotely via technology for entities outside Andorra: NO deposit and NO investment — the EUR 47,500 AFA deposit and EUR 600,000 investment belong to the separate passive-residence route. Means test is regulatory: annual resources above 300% of the annual minimum salary plus 100% per dependant. Two-year authorization renewing 2+3 then 10-year periods; Andorra has no separate PR, so the successive ten-year authorization is the settlement endpoint, and years count toward the 20-year naturalization as amended by Llei 8/2026.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-30",
+            "note": "Verified against Portal Jurídic: Llei 42/2022 (L2022042), the Reglament of 12-11-2025 art. 2 (300% benchmark, applied subsidiarily), and Llei 8/2026 (L2026008) which lets interrupted residence periods aggregate toward the 20-year naturalization while requiring principal-and-effective residence in the final five years. Caveat recorded deliberately: the permit’s own 90-day/year presence floor sits well below the “residència principal i permanent” standard of art. 11 — a nomad actually living in Andorra accrues naturalization time; one doing only ~90 days a year realistically does not. Duration ladder from art. 32.2-32.5 via art. 33 bis; nomads sit under an annual quota (art. 23.10 bis); fee EUR 224.61."
+          },
+          "counts_toward_permanent_residence": true,
+          "counts_toward_naturalization": true,
+          "min_investment": null,
+          "min_income_monthly": null,
+          "physical_presence_days_per_year": 90,
+          "work_rights": "remote_only",
+          "permit_duration_months": 24,
+          "permit_renewable": true,
+          "min_age": null,
+          "max_age": null,
+          "variants": [
+            {
+              "id": "andorra-digital-nomad-principal",
+              "label": "Residència per a nòmada digital",
+              "outcome": "residence",
+              "allocation": "quota_queue",
+              "eligibility": [],
+              "milestones": [
+                {
+                  "status": "permanent_residence",
+                  "minimum_months": null
+                },
+                {
+                  "status": "naturalization",
+                  "minimum_months": null
+                }
+              ],
+              "timeline": {
+                "eligibility_minimum_months": null,
+                "processing_typical_months": 2,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:govern_ad:424ec092d9",
+                  "supports_fields": [
+                    "/residence_routes/andorra-digital-nomad/summary",
+                    "/residence_routes/andorra-digital-nomad/variants/andorra-digital-nomad-principal/eligibility",
+                    "/residence_routes/andorra-digital-nomad/variants/andorra-digital-nomad-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "residence_coverage": [
+        {
+          "category": "investment",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-30"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:portaljuridicandorra_ad:a304c28b2d",
+              "supports_fields": [
+                "/residence_coverage/investment"
+              ]
+            }
+          ]
+        },
+        {
+          "category": "talent_skilled",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-30"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:portaljuridicandorra_ad:7ba1d3746f",
+              "supports_fields": [
+                "/residence_coverage/talent_skilled"
+              ]
+            }
+          ]
+        },
+        {
+          "category": "digital_nomad",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-30"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:govern_ad:424ec092d9",
+              "supports_fields": [
+                "/residence_coverage/digital_nomad"
               ]
             }
           ]
@@ -1630,7 +1934,7 @@
           },
           "review": {
             "state": "reviewed",
-            "confidence": "high",
+            "confidence": "low",
             "last_checked": "2026-07-22"
           },
           "variants": [
@@ -1655,7 +1959,7 @@
               "timeline": {
                 "eligibility_minimum_months": 0,
                 "processing_typical_months": null,
-                "confidence": "high"
+                "confidence": "low"
               },
               "source_refs": [
                 {
@@ -2150,6 +2454,80 @@
                     "/routes/antigua-barbuda-citizenship-by-marriage/variants/antigua-barbuda-citizenship-by-marriage-principal/timeline"
                   ]
                 }
+              ]
+            }
+          ]
+        }
+      ],
+      "residence_routes": [
+        {
+          "id": "antigua-nomad-digital-residence-ended",
+          "category": "digital_nomad",
+          "status": "inactive",
+          "title": "Nomad Digital Residence (NDR) — ended",
+          "summary": "Antigua and Barbuda ran a two-year remote-work residence visa from November 2020 for applicants earning USD 50,000 per year; the official programme site now carries a \"This program has ended\" banner.",
+          "effective": {
+            "from": null,
+            "to": null,
+            "supersedes": []
+          },
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-30",
+            "note": "Replaces a bare \"no branded digital-nomad permit\" negative, which hid that a programme demonstrably ran. The banner first appeared on nomad.gov.ag between Wayback captures of 4 and 26 November 2025; the site still serves the full programme content behind it. Administered by the Department of Immigration. No closing instrument identified."
+          },
+          "counts_toward_permanent_residence": false,
+          "counts_toward_naturalization": false,
+          "min_investment": null,
+          "min_income_monthly": null,
+          "physical_presence_days_per_year": null,
+          "work_rights": null,
+          "permit_duration_months": null,
+          "permit_renewable": null,
+          "min_age": null,
+          "max_age": null,
+          "variants": [
+            {
+              "id": "antigua-nomad-digital-residence-ended-principal",
+              "label": "Nomad Digital Residence (NDR) — ended",
+              "outcome": "residence",
+              "allocation": "right",
+              "eligibility": [],
+              "milestones": [],
+              "timeline": {
+                "eligibility_minimum_months": null,
+                "processing_typical_months": null,
+                "confidence": "high"
+              },
+              "source_refs": [
+                {
+                  "source_id": "source:nomad_gov_ag:89f6d922f3",
+                  "supports_fields": [
+                    "/residence_routes/antigua-nomad-digital-residence-ended/summary",
+                    "/residence_routes/antigua-nomad-digital-residence-ended/variants/antigua-nomad-digital-residence-ended-principal/eligibility",
+                    "/residence_routes/antigua-nomad-digital-residence-ended/variants/antigua-nomad-digital-residence-ended-principal/timeline"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "residence_coverage": [
+        {
+          "category": "digital_nomad",
+          "finding": "present",
+          "review": {
+            "state": "reviewed",
+            "confidence": "high",
+            "last_checked": "2026-07-30"
+          },
+          "source_refs": [
+            {
+              "source_id": "source:nomad_gov_ag:89f6d922f3",
+              "supports_fields": [
+                "/residence_coverage/digital_nomad"
               ]
             }
           ]
