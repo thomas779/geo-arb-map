@@ -1236,6 +1236,13 @@ describe('descent depth is recorded positively, never as a cutoff', () => {
       // reaching an unspecified ancestor, so nothing reopens the list.
       'nepal-citizenship-by-descent',
       'poland-citizenship-by-parent',
+      // Legea 21/1991 art. 11 reaches "descendenţii acestora până la gradul III"
+      // and the neighbouring art. 10 a shallower "gradul II inclusiv". Both limbs
+      // state their own cutoff and the republished act contains no ethnic limb
+      // and no unspecified ancestor anywhere — "origine", "etnic" and
+      // "naţionalit" do not occur in it — so nothing reopens the list the way
+      // Slovakia's osvedčenie and Ukraine's zakordonnyi ukrainets do.
+      'romania-citizenship-by-parent',
       'uk-citizenship-by-parent',
     ]);
     for (const route of withLimit) {
