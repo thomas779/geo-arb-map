@@ -137,8 +137,18 @@ export function descentReach(finding: DescentRelationsFinding | null): DescentRe
   if (finding.relations.includes('ancestor_unspecified') && finding.maximum_degree === null) {
     return 'unlimited';
   }
-  const deepest = finding.deepest_recorded_degree;
-  if (deepest !== null && deepest >= 2) return 'grandparent_or_deeper';
+  // A stated ceiling is positive evidence of DEPTH, not only of a limit. An
+  // instrument that says descent runs "до трето коляно" is telling us a
+  // great-grandparent qualifies, so the ceiling is the deepest degree the law
+  // reaches, even where no named relation carries a degree of its own.
+  //
+  // Bulgaria is why this exists. Its route records `ancestor_unspecified` (degree
+  // null) plus an authored ceiling of 3, so the degree list was empty, the ceiling
+  // disqualified it from `unlimited`, and it fell through to `not_recorded` — a
+  // route whose reach we know precisely, reporting that we do not know it, and
+  // painting nothing on a facet built to surface exactly this.
+  const deepest = Math.max(finding.deepest_recorded_degree ?? 0, finding.maximum_degree ?? 0);
+  if (deepest >= 2) return 'grandparent_or_deeper';
   if (deepest === 1) return 'parent_only';
   return 'not_recorded';
 }
