@@ -89,10 +89,225 @@ export const TransmissionAbroadSchema = z.strictObject({
   source_refs: z.array(SourceReferenceSchema).min(1),
 });
 
+const PluralityConditionId = z.string().regex(
+  /^[a-z][a-z0-9_]*$/,
+  'Plurality conditions use stable lowercase identifiers',
+);
+
+/**
+ * The OUTBOUND limb: what holding a second nationality does to THIS one.
+ *
+ * Separate from the inbound limb below for the same reason `RightsGrantSchema`
+ * separates `reside` from `work` — they are different questions and a single
+ * value cannot answer both. A state can strip its own nationals for naturalising
+ * abroad while imposing no renunciation condition on incomers, and the reverse.
+ *
+ * `unknown` is first-class and means the instrument was not read or does not say.
+ * It is never "no restriction".
+ */
+export const PluralityRetentionSchema = z.strictObject({
+  /**
+   * permitted           — plurality may be held; no loss provision, no permission step
+   * non_recognition     — the state simply does not recognise the other nationality
+   *                       (no loss rule stated), e.g. PRC art. 3, Kazakhstan art. 3
+   * automatic_loss      — this nationality is lost by operation of law
+   * discretionary_loss  — an authority MAY deprive; nothing happens automatically
+   *                       (Malaysia art. 24(1) — the practical difference from the
+   *                       Japan-shaped rule it is usually grouped with)
+   * permission_required — retained only on a prior retention permission
+   * designated_list     — the outcome turns on WHICH other nationality, on a list
+   *                       set outside the Act (Pakistan by Gazette, Ukraine by
+   *                       Cabinet decision, Spain by the art. 24.1 country list)
+   * non_exercise        — nationality is KEPT, but the other may not be used inside
+   *                       the territory (Cuba art. 36). Neither allowed nor
+   *                       prohibited, and the reason a two-ended enum cannot hold it.
+   * unknown             — not read, or the instrument does not say
+   */
+  effect: z.enum([
+    'permitted',
+    'non_recognition',
+    'automatic_loss',
+    'discretionary_loss',
+    'permission_required',
+    'designated_list',
+    'non_exercise',
+    'unknown',
+  ]),
+  /** Machine-readable gates on the limb, e.g. `retention_permission`. */
+  conditions: z.array(PluralityConditionId),
+  /** Free text kept alongside, so the legal nuance is not lost to the enum. */
+  detail: z.string(),
+});
+
+/**
+ * The INBOUND limb: what this jurisdiction demands of someone ACQUIRING its
+ * nationality. This is the limb a planner needs — "if I naturalise here, do I
+ * lose what I hold?" — and it is routinely conflated with the outbound rule.
+ */
+export const PluralityAcquisitionSchema = z.strictObject({
+  effect: z.enum([
+    'no_renunciation',
+    'renunciation_required',
+    'renunciation_with_exceptions',
+    'unknown',
+  ]),
+  conditions: z.array(PluralityConditionId),
+  detail: z.string(),
+});
+
+/**
+ * Whether the rule splits by class of person, and on what axis.
+ *
+ * Six of the first sixteen sourced rows carry a split, and they do not all split
+ * on the same thing. Spain, Norway and Paraguay split on how THIS nationality was
+ * acquired; Japan splits on how the PLURALITY arose (art. 11(1) strips any
+ * national who naturalises abroad, while art. 14's election duty binds only those
+ * dual from birth and its sanction bites a month after a ministerial demand);
+ * Cuba splits only for public office. So the axis is recorded explicitly rather
+ * than inferred from the limbs.
+ *
+ * `present: 'unknown'` means the question was not examined — the limbs then carry
+ * the general rule as read, not a finding that no split exists.
+ */
+export const PluralityAsymmetrySchema = z.strictObject({
+  present: z.enum(['yes', 'no', 'unknown']),
+  basis: z.array(z.enum([
+    'birth_vs_naturalised',
+    'plurality_at_birth_vs_acquired',
+    'other_nationality_designated',
+    'residence_history',
+    'public_office',
+    'retention_route',
+  ])),
+  note: z.string(),
+});
+
+/**
+ * A jurisdiction's position on plural nationality.
+ *
+ * The field used to be a flat four-value enum plus prose. It could not express
+ * what the instruments actually do, and #144 records the case that broke it:
+ * the same act — voluntarily acquiring another nationality — costs a naturalised
+ * Paraguayan their status and costs a natural-born Paraguayan nothing, so a
+ * single value is half true whichever way it is set.
+ *
+ * ABSENCE AND `unknown` ARE DIFFERENT THINGS. The field is optional on the
+ * jurisdiction record: omitted means NOT RECORDED and renders nothing. A recorded
+ * `unknown` means the question was reached and not answered. Neither ever reads
+ * as "no restriction".
+ *
+ * `status` is retained as a deliberately LOSSY headline for consumers that need
+ * one value. It is gated below so it can never assert more than the limbs support.
+ */
 export const DualNationalitySchema = z.strictObject({
   status: z.enum(['allowed', 'conditional', 'prohibited', 'unknown']),
+  /**
+   * `instrument` — read against the instrument; carries source_refs.
+   * `legacy_import` — carried over from the retired `dual_citizenship` model in
+   * public/blocs_data.json, which cited instruments in prose but held no source
+   * record and no URL. Such a row may carry its headline claim and its prose, and
+   * NOTHING else: every limb is forced to `unknown` below. It is not evidence, it
+   * is a queue of work, and it must never be counted as coverage.
+   */
+  provenance: z.enum(['instrument', 'legacy_import']),
+  /** Outbound, split by how THIS nationality is held. */
+  retention: z.strictObject({
+    by_birth: PluralityRetentionSchema,
+    by_naturalisation: PluralityRetentionSchema,
+  }),
+  /** Inbound: the renunciation condition, if any, on acquiring this nationality. */
+  acquisition: PluralityAcquisitionSchema,
+  asymmetry: PluralityAsymmetrySchema,
   detail: z.string().min(1),
-  source_refs: z.array(SourceReferenceSchema).min(1),
+  source_refs: z.array(SourceReferenceSchema),
+}).superRefine((value, context) => {
+  const limbs = [
+    value.retention.by_birth.effect,
+    value.retention.by_naturalisation.effect,
+    value.acquisition.effect,
+  ];
+  const restrictive = new Set([
+    'non_recognition', 'automatic_loss', 'discretionary_loss', 'permission_required',
+    'designated_list', 'non_exercise', 'renunciation_required', 'renunciation_with_exceptions',
+  ]);
+
+  if (value.provenance === 'instrument' && value.source_refs.length === 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['source_refs'],
+      message: 'An instrument-read plurality row must cite at least one source',
+    });
+  }
+  if (value.provenance === 'legacy_import') {
+    if (value.source_refs.length > 0) {
+      context.addIssue({
+        code: 'custom',
+        path: ['source_refs'],
+        message: 'A legacy import has no source record; it must not carry source_refs',
+      });
+    }
+    if (limbs.some(effect => effect !== 'unknown') || value.asymmetry.present !== 'unknown') {
+      context.addIssue({
+        code: 'custom',
+        path: ['provenance'],
+        message: 'A legacy import may carry a headline status and prose only; every limb stays unknown',
+      });
+    }
+  }
+
+  if (value.asymmetry.present === 'yes' && value.asymmetry.basis.length === 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['asymmetry', 'basis'],
+      message: 'A recorded asymmetry must name the axis it splits on',
+    });
+  }
+  if (value.asymmetry.present !== 'yes' && value.asymmetry.basis.length > 0) {
+    context.addIssue({
+      code: 'custom',
+      path: ['asymmetry', 'basis'],
+      message: 'Only a recorded asymmetry carries a basis',
+    });
+  }
+  const byBirth = value.retention.by_birth.effect;
+  const byNaturalisation = value.retention.by_naturalisation.effect;
+  if (
+    byBirth !== 'unknown' && byNaturalisation !== 'unknown'
+    && byBirth !== byNaturalisation && value.asymmetry.present !== 'yes'
+  ) {
+    context.addIssue({
+      code: 'custom',
+      path: ['asymmetry', 'present'],
+      message: 'Retention limbs that differ ARE an asymmetry and must be recorded as one',
+    });
+  }
+
+  // A status is a summary of the limbs, so it may not outrun them. The exception
+  // is a legacy import, whose whole content IS a bare status with no limbs — the
+  // provenance field is what stops that from reading as evidence.
+  if (value.provenance === 'instrument') {
+    if (limbs.every(effect => effect === 'unknown') && value.status !== 'unknown') {
+      context.addIssue({
+        code: 'custom',
+        path: ['status'],
+        message: 'A row whose every limb is unknown cannot claim a status',
+      });
+    }
+    if (value.status === 'allowed' && limbs.some(effect => restrictive.has(effect))) {
+      context.addIssue({
+        code: 'custom',
+        path: ['status'],
+        message: 'A restrictive limb contradicts a status of allowed',
+      });
+    }
+    if (value.status === 'prohibited' && !limbs.some(effect => restrictive.has(effect))) {
+      context.addIssue({
+        code: 'custom',
+        path: ['status'],
+        message: 'A status of prohibited needs a limb that restricts',
+      });
+    }
+  }
 });
 
 export const SourceRecordSchema = z.strictObject({
@@ -668,6 +883,9 @@ export type ResidenceCoverage = z.infer<typeof ResidenceCoverageSchema>;
 export type NationalityEligibility = z.infer<typeof NationalityEligibilitySchema>;
 export type ParentResidenceRight = z.infer<typeof ParentResidenceRightSchema>;
 export type TransmissionAbroad = z.infer<typeof TransmissionAbroadSchema>;
+export type PluralityRetention = z.infer<typeof PluralityRetentionSchema>;
+export type PluralityAcquisition = z.infer<typeof PluralityAcquisitionSchema>;
+export type PluralityAsymmetry = z.infer<typeof PluralityAsymmetrySchema>;
 export type DualNationality = z.infer<typeof DualNationalitySchema>;
 export type JurisdictionRecordV1 = z.infer<typeof JurisdictionRecordV1Schema>;
 export type JurisdictionRecord = z.infer<typeof JurisdictionRecordSchema>;

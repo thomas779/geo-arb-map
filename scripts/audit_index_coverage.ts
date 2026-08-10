@@ -59,7 +59,14 @@ type ResidenceRoute = {
   counts_toward_permanent_residence?: boolean;
   counts_toward_naturalization?: boolean;
 };
-type Jurisdiction = { iso_n3: string; dual_nationality?: { status: string } | null };
+type Jurisdiction = {
+  iso_n3: string;
+  dual_nationality?: {
+    status: string;
+    provenance: 'instrument' | 'legacy_import';
+    asymmetry: { present: string };
+  } | null;
+};
 
 const corpus = JSON.parse(fs.readFileSync(corpusPath, 'utf8')) as {
   jurisdictions: Jurisdiction[];
@@ -69,7 +76,8 @@ const corpus = JSON.parse(fs.readFileSync(corpusPath, 'utf8')) as {
 const blocs = JSON.parse(fs.readFileSync(`${root}public/blocs_data.json`, 'utf8')) as {
   blocs: Array<{ id: string; category: string; rights?: Record<string, string> }>;
   bilateral_lanes: Array<{ id: string; sources?: string[] }>;
-  dual_citizenship?: { countries?: Record<string, unknown> };
+  // No `dual_citizenship.countries` any more: the rival plurality model was
+  // migrated into the canonical field and retired by #144.
 };
 
 const routes = corpus.routes;
@@ -84,6 +92,12 @@ const naturalization = byMode('naturalization');
 const blocsRaw = fs.readFileSync(`${root}public/blocs_data.json`, 'utf8');
 const nonNull = <T>(xs: T[], pick: (x: T) => unknown) =>
   xs.filter(x => pick(x) !== null && pick(x) !== undefined).length;
+
+const pluralityRows = jurisdictions
+  .map(j => j.dual_nationality)
+  .filter((row): row is NonNullable<Jurisdiction['dual_nationality']> => Boolean(row));
+const pluralityLegacy = pluralityRows.filter(row => row.provenance === 'legacy_import').length;
+const pluralityAsymmetric = pluralityRows.filter(row => row.asymmetry.present === 'yes').length;
 
 /**
  * `absent`  — no schema exists; the field has to be designed before sourcing.
@@ -211,11 +225,16 @@ const dimensions: Dimension[] = [
     axis: 'A',
     label: 'Plurality (dual nationality)',
     status: 'thin',
-    have: jurisdictions.filter(j => j.dual_nationality).length,
+    // Instrument-read rows only. A `legacy_import` carries a headline claim and
+    // the prose it arrived with, and no limbs at all — counting it as coverage
+    // would report the retired blocs_data model back as progress.
+    have: pluralityRows.filter(row => row.provenance === 'instrument').length,
     total: jurisdictions.length,
-    note: `rival model in blocs_data covers ${
-      Object.keys(blocs.dual_citizenship?.countries ?? {}).length
-    } with a different enum (banned vs prohibited)`,
+    note: `one model now: the blocs_data rival (banned vs prohibited) is retired and its `
+      + `rows migrated. ${pluralityLegacy} unsourced import(s) carried as legacy_import — `
+      + `a status and prose, every limb unknown — and excluded from this count. `
+      + `${pluralityAsymmetric} row(s) record a birth-vs-naturalised or equivalent split `
+      + `structurally`,
   },
   { id: 'A5', axis: 'A', label: 'Security of status', status: 'absent', have: 0, total: jurisdictions.length, note: 'no field for revocation, loss by absence, or birth-vs-acquired asymmetry' },
   { id: 'A6', axis: 'A', label: 'Obligations', status: 'absent', have: 0, total: jurisdictions.length, note: 'no field for conscription, citizenship-based tax, exit tax, or retention residence' },

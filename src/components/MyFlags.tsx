@@ -4,7 +4,7 @@ import {
 } from 'lucide-react';
 import type { BlocsData, CitizenshipRoutesData } from '../types';
 import {
-  computeUnlocks, countryOptions, goalKey, householdExtraCountries, profileHasInput, recommend, HERITAGE_OPTIONS,
+  computeUnlocks, countryOptions, goalKey, householdExtraCountries, pluralityIndex, profileHasInput, recommend, HERITAGE_OPTIONS,
   type CountryOption, type FlagStatus, type GoalIntent, type Profile, type Recommendation,
 } from '@/lib/planner';
 import { describePath, recommendPaths, solveGoals, type GraphEdge, type PathRec } from '@/lib/pathfinder';
@@ -212,11 +212,15 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
     [profileKey, data],
   );
   const hasInput = profileHasInput(profile);
+  // The canonical plurality field, read from the compiled corpus rather than the
+  // retired blocs_data model (#144), so the renunciation warning and the coverage
+  // audit are looking at the same rows.
+  const plurality = useMemo(() => pluralityIndex(citizenshipRoutes), [citizenshipRoutes]);
   const recs = useMemo(() => {
     if (!hasInput) return [] as PlannerPath[];
     // Multi-hop pathfinder + single-hop candidates (which assume ordinary
     // relocation), deduped by destination keeping the better score.
-    const single: PlannerPath[] = recommend(profile, data, 30).map(r => ({
+    const single: PlannerPath[] = recommend(profile, data, 30, plurality).map(r => ({
       ...r,
       plan: null,
       hops: 1,
@@ -237,7 +241,7 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
     );
     return candidates.filter(r => !r.isInvestment).slice(0, 5);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [profileKey, data, edges]);
+  }, [profileKey, data, edges, plurality]);
   const investmentPrograms = useMemo(
     () => citizenshipRoutes?.routes
       .filter(route => route.mode === 'investment' && route.status === 'active')

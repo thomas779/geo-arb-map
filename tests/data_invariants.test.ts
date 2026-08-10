@@ -86,16 +86,25 @@ function memberOk(m: { name: string; iso_n3: string }, ctx: string) {
 }
 
 describe('regression: Russia dual-citizenship correction', () => {
-  test('dual_citizenship.countries["586"] is conditional on the DGIP 22-country list', () => {
-    const pk = data.dual_citizenship?.countries['586'];
+  // These used to read public/blocs_data.json. #144 retired that model; the same
+  // two regressions are now asserted against the canonical field the product reads.
+  const plurality = (iso: string) =>
+    citizenshipRoutes.jurisdictions.find(j => j.iso_n3 === iso)?.dual_nationality;
+
+  test('Pakistan is conditional on the DGIP 22-country list', () => {
+    const pk = plurality('586');
     expect(pk?.status).toBe('conditional');
-    expect(pk?.note).toContain('s.14(3)');
-    expect(pk?.note).toContain('22');
-    expect(pk?.sources?.join(' ')).toContain('dgip.gov.pk/immigration/dual_nationality.php');
+    expect(pk?.provenance).toBe('instrument');
+    expect(pk?.retention.by_birth.effect).toBe('designated_list');
+    expect(pk?.retention.by_birth.detail).toContain('S.14(3)');
+    expect(pk?.retention.by_birth.detail).toContain('22-country');
+    expect(pk?.retention.by_birth.conditions).toContain('gazette_designated_country');
   });
 
-  test('dual_citizenship.countries["643"].status is "allowed"', () => {
-    expect(data.dual_citizenship?.countries['643']?.status).toBe('allowed');
+  test('Russia is allowed, and says so on the inbound limb too', () => {
+    const ru = plurality('643');
+    expect(ru?.status).toBe('allowed');
+    expect(ru?.acquisition.effect).toBe('no_renunciation');
   });
 
   test('no bloc claims Russia requires renunciation', () => {
@@ -153,12 +162,12 @@ describe('schema conformance (mirrors src/types.ts)', () => {
     }
   });
 
-  test('dual_citizenship block', () => {
+  test('dual_citizenship block carries treaties only', () => {
     const dc = data.dual_citizenship!;
-    for (const [iso, policy] of Object.entries(dc.countries)) {
-      expect(iso, `dual_citizenship country key`).toMatch(ISO_RE);
-      expect(['allowed', 'banned', 'conditional'], `policy ${iso}`).toContain(policy.status);
-    }
+    // The per-country map was the rival model of the canonical `dual_nationality`
+    // field, on its own enum. #144 migrated it out; if it comes back, so does the
+    // divergence.
+    expect(dc).not.toHaveProperty('countries');
     for (const t of dc.treaty_exceptions) {
       t.parties.forEach(p => memberOk(p, `treaty ${t.id}`));
     }

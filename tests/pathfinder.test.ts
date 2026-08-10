@@ -26,7 +26,12 @@ const data = (await Bun.file(
   new URL('../public/blocs_data.json', import.meta.url),
 ).json()) as BlocsData;
 const manual = await Bun.file(new URL('../data/manual_edges.json', import.meta.url)).json();
-const generatedEdges = buildEdges(data, manual);
+// The renunciation flag is read from the canonical `dual_nationality` field in the
+// compiled corpus since #144, not from the retired blocs_data model.
+const corpus = await Bun.file(
+  new URL('../data/compiled/citizenship_routes.json', import.meta.url),
+).json();
+const generatedEdges = buildEdges(data, manual, corpus);
 const edges: GraphEdge[] = generatedEdges.edges;
 
 const profileOf = (over: Partial<Profile>): Profile => ({ ...EMPTY_PROFILE, ...over });

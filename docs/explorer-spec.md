@@ -12,7 +12,9 @@ naming: where the research doc's field names differ from the repo's, the repo's 
 
 - `public/blocs_data.json` — blocs, bilateral_lanes, stacking_plays, meta.excluded,
   `pending_verification` (below-high confidence, never rendered/never in graph),
-  `dual_citizenship` (per-country policies + treaty_exceptions).
+  `dual_citizenship` — `treaty_exceptions` ONLY. The per-country policy map that used
+  to live here was a rival model of the canonical `dual_nationality` field on its own
+  enum (`banned` vs `prohibited`); #144 migrated it out and retired it.
 - `data/registry.json` — canonical jurisdiction registry: M49-style core sovereigns
   plus the territory and special-jurisdiction supplement.
 - `data/manual_edges.json` — retained prototype inputs pending migration into D1.
@@ -52,11 +54,20 @@ in a separate "chance-based routes" panel with explicit non-guarantee badges.
 
 ## Dual citizenship (locked, incl. Russia correction)
 
-- Renunciation-required set: Japan, India, Kazakhstan, DR Congo, China, Andorra.
+- Source of truth since #144: `jurisdictions[].dual_nationality` in the compiled corpus,
+  which the planner reads via `pluralityIndex()`. It is not a flat enum: retention splits
+  into `by_birth` / `by_naturalisation`, the inbound renunciation condition is a separate
+  `acquisition` limb, and `asymmetry` names the axis a rule splits on. `provenance:
+  'legacy_import'` marks the seventeen rows inherited unsourced from the retired model —
+  they carry a status and prose and no limbs at all.
+- The renunciation flag reads the INBOUND limb only, and only `renunciation_required`
+  sets it. `renunciation_with_exceptions` (Spain, the Netherlands, Ukraine) does not,
+  because whether it bites depends on which nationality the applicant already holds and
+  the model cannot evaluate that; the exceptions are in the limb's detail.
 - **Russia is NOT in that set**: requirement eliminated 2020; 138-FZ (2023) needs only
   an unverified declaration. Caveat carried in data: naturalized citizens face broad
   revocation grounds (138-FZ art. 22–24, expanded July 2025) — acquired citizenship is
-  legally weaker than birth citizenship. `volatility: high`.
+  legally weaker than birth citizenship.
 - Russia–Tajikistan treaty = conflict-of-laws record in `dual_citizenship.treaty_exceptions`,
   not a mobility lane and not the thing that permits keeping both.
 - Renunciation math: applied AFTER a path reaches a naturalization edge, BEFORE the

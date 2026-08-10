@@ -146,9 +146,9 @@ describe('typed legal dimensions', () => {
     expect(result.success).toBe(true);
   });
 
-  test('records dual-nationality policy at jurisdiction level', () => {
+  const jurisdictionWith = (dual_nationality: unknown) => {
     const modes = ['ancestry', 'naturalization', 'birth', 'investment'] as const;
-    const result = JurisdictionRecordSchema.safeParse({
+    return JurisdictionRecordSchema.safeParse({
       schema_version: 2,
       entity_type: 'jurisdiction',
       id: 'jurisdiction:999',
@@ -161,12 +161,89 @@ describe('typed legal dimensions', () => {
         source_refs: [],
       })),
       routes: [],
-      dual_nationality: {
-        status: 'conditional',
-        detail: 'Retention depends on the acquisition pathway.',
-        source_refs: [sourceRef],
-      },
+      dual_nationality,
     });
-    expect(result.success).toBe(true);
+  };
+
+  const silentLimb = { effect: 'unknown', conditions: [], detail: '' };
+  const plurality = (overrides: Record<string, unknown> = {}) => ({
+    status: 'conditional',
+    provenance: 'instrument',
+    retention: {
+      by_birth: { effect: 'permitted', conditions: [], detail: 'Cannot be deprived.' },
+      by_naturalisation: { effect: 'automatic_loss', conditions: [], detail: 'Loses on acquisition.' },
+    },
+    acquisition: { effect: 'unknown', conditions: [], detail: 'Not read.' },
+    asymmetry: {
+      present: 'yes',
+      basis: ['birth_vs_naturalised'],
+      note: 'The same act costs one class their status and the other nothing.',
+    },
+    detail: 'Retention depends on how the nationality is held.',
+    source_refs: [sourceRef],
+    ...overrides,
+  });
+
+  test('records dual-nationality policy at jurisdiction level, split by limb', () => {
+    expect(jurisdictionWith(plurality()).success).toBe(true);
+  });
+
+  test('retention limbs that differ must be recorded as an asymmetry', () => {
+    // The Paraguay case: natural-born and naturalised sit under opposite regimes.
+    // Writing the split into the limbs and then claiming there is none is the exact
+    // half-truth the flat enum used to force.
+    const result = jurisdictionWith(plurality({
+      asymmetry: { present: 'no', basis: [], note: 'No split.' },
+    }));
+    expect(result.success).toBe(false);
+  });
+
+  test('a status may not outrun the limbs that support it', () => {
+    // Every limb unknown is a row that says nothing, and it must not be able to
+    // claim a finding — absence and `unknown` are not a negative finding.
+    expect(jurisdictionWith(plurality({
+      status: 'prohibited',
+      retention: { by_birth: silentLimb, by_naturalisation: silentLimb },
+      acquisition: silentLimb,
+      asymmetry: { present: 'unknown', basis: [], note: 'Not examined.' },
+    })).success).toBe(false);
+
+    // And `allowed` cannot sit on top of a restrictive limb.
+    expect(jurisdictionWith(plurality({ status: 'allowed' })).success).toBe(false);
+  });
+
+  test('Cuba-shaped non-exercise is expressible without being forced to an end', () => {
+    const limb = {
+      effect: 'non_exercise',
+      conditions: ['inside_national_territory'],
+      detail: 'Citizenship is kept; the foreign one may not be used in the territory.',
+    };
+    expect(jurisdictionWith(plurality({
+      retention: { by_birth: limb, by_naturalisation: limb },
+      asymmetry: { present: 'yes', basis: ['public_office'], note: 'Office-holding only.' },
+    })).success).toBe(true);
+  });
+
+  test('an unsourced legacy import may carry a status and prose, and nothing else', () => {
+    const legacy = {
+      status: 'prohibited',
+      provenance: 'legacy_import',
+      retention: { by_birth: silentLimb, by_naturalisation: silentLimb },
+      acquisition: silentLimb,
+      asymmetry: { present: 'unknown', basis: [], note: 'Never examined.' },
+      detail: 'UNVERIFIED import from the retired blocs_data model.',
+      source_refs: [],
+    };
+    expect(jurisdictionWith(legacy).success).toBe(true);
+
+    // It must not be able to grow limbs it never read...
+    expect(jurisdictionWith({
+      ...legacy,
+      acquisition: { effect: 'renunciation_required', conditions: [], detail: 'Asserted.' },
+    }).success).toBe(false);
+    // ...nor borrow a source record it does not have.
+    expect(jurisdictionWith({ ...legacy, source_refs: [sourceRef] }).success).toBe(false);
+    // And an instrument row without a source is not a row.
+    expect(jurisdictionWith(plurality({ source_refs: [] })).success).toBe(false);
   });
 });

@@ -16,8 +16,8 @@
  *   - naturalization:         pr/settle_full/settle_partial:X → cit:X using
  *                             dataset-parsed years, with audited ordinary +
  *                             nationality-gated edges where the fastest track
- *                             is conditional; renounces_previous set from
- *                             dual_citizenship
+ *                             is conditional; renounces_previous set from the
+ *                             canonical dual_nationality field (#144)
  *   - child-birth events:     conditional edges gated by needs
  *                             ['willing_child_abroad'] (from manual_edges)
  */
@@ -25,6 +25,8 @@
 import fs from 'node:fs';
 import {
   acquisitionYears,
+  pluralityIndex,
+  renouncesOnAcquiring,
 } from '../src/lib/planner.ts';
 import {
   CBI_YEARS,
@@ -34,10 +36,20 @@ import {
   timelineBeneficiaryIsos,
 } from '../src/lib/timeline-rules.ts';
 
-export function buildEdges(data, manualEdges) {
+/**
+ * @param data        public/blocs_data.json
+ * @param manualEdges data/manual_edges.json
+ * @param corpus      data/compiled/citizenship_routes.json — the canonical
+ *                    projection carrying `jurisdictions[].dual_nationality`.
+ *                    Before #144 this flag came from a rival 25-row model inside
+ *                    blocs_data on its own enum (`banned`); that model is retired,
+ *                    so the flag now comes from the field the coverage audit
+ *                    measures and the planner reads.
+ */
+export function buildEdges(data, manualEdges, corpus) {
   const edges = [];
-  const bans = data.dual_citizenship?.countries ?? {};
-  const renounces = (iso) => bans[iso]?.status === 'banned';
+  const plurality = pluralityIndex(corpus ?? null);
+  const renounces = (iso) => renouncesOnAcquiring(plurality.get(iso));
 
   const push = (e) => edges.push({
     allocation: 'right', confidence: 'high', needs: [], years: 0, ...e,
@@ -139,7 +151,7 @@ export function buildEdges(data, manualEdges) {
   return {
     meta: {
       description: 'Status-graph edges for the strategy explorer. Nodes: cit:ISO, pr:ISO, work:ISO (terminal), settle_full:ISO, settle_partial:ISO. Wildcard from "*" = conditional edge gated entirely by needs.',
-      generated_from: 'blocs_data.json + data/manual_edges.json + data/timeline_rules.json via scripts/build_edges.js',
+      generated_from: 'blocs_data.json + data/manual_edges.json + data/timeline_rules.json + data/compiled/citizenship_routes.json (dual_nationality) via scripts/build_edges.js',
       rules: 'docs/explorer-spec.md',
       counts: { edges: edges.length },
     },
@@ -150,7 +162,8 @@ export function buildEdges(data, manualEdges) {
 if (import.meta.main) {
   const data = JSON.parse(fs.readFileSync('public/blocs_data.json', 'utf8'));
   const manual = JSON.parse(fs.readFileSync('data/manual_edges.json', 'utf8'));
-  const out = buildEdges(data, manual);
+  const corpus = JSON.parse(fs.readFileSync('data/compiled/citizenship_routes.json', 'utf8'));
+  const out = buildEdges(data, manual, corpus);
   out.meta.counts.edges = out.edges.length;
   fs.writeFileSync('data/compiled/edges.json', JSON.stringify(out) + '\n');
   const byMech = {};

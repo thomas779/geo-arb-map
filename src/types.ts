@@ -66,13 +66,6 @@ export interface BilateralLane {
   sources?: string[];
 }
 
-export interface DualCitizenshipPolicy {
-  status: 'allowed' | 'banned' | 'conditional';
-  volatility?: string;
-  note?: string;
-  sources?: string[];
-}
-
 export interface DualCitizenshipTreaty {
   id: string;
   name: string;
@@ -123,9 +116,15 @@ export interface BlocsData {
   }>;
   /** Researched but below confidence bar - stored, never rendered. */
   pending_verification?: PendingArrangement[];
+  /**
+   * Conflict-of-laws treaties only. The per-country `countries` map that used to
+   * sit here was a rival model of the same fact the canonical corpus records on
+   * `jurisdictions[].dual_nationality`, on its own enum (`banned` where canonical
+   * says `prohibited`), and it was the copy the product actually read. #144
+   * retired it: every row was migrated to the canonical field and the product
+   * repointed there, so there is one vocabulary for one fact.
+   */
   dual_citizenship?: {
-    /** Keyed by iso_n3. Countries absent from the map are unverified, not 'allowed'. */
-    countries: Record<string, DualCitizenshipPolicy>;
     treaty_exceptions: DualCitizenshipTreaty[];
   };
 }
@@ -208,8 +207,40 @@ export type DescentReach =
   | 'parent_only'
   | 'not_recorded';
 
+/**
+ * Browser-side projection of the canonical `dual_nationality` field. Mirrors
+ * DualNationalitySchema in scripts/lib/canonical-schema.ts minus `source_refs`.
+ *
+ * `status` is the lossy headline; the limbs are what a consumer should read.
+ * A jurisdiction with no row at all renders nothing — absence is NOT RECORDED,
+ * never "no restriction".
+ */
+export type PluralityRetentionEffect =
+  | 'permitted'
+  | 'non_recognition'
+  | 'automatic_loss'
+  | 'discretionary_loss'
+  | 'permission_required'
+  | 'designated_list'
+  | 'non_exercise'
+  | 'unknown';
+
+export type PluralityAcquisitionEffect =
+  | 'no_renunciation'
+  | 'renunciation_required'
+  | 'renunciation_with_exceptions'
+  | 'unknown';
+
 export interface JurisdictionDualNationality {
   status: 'allowed' | 'conditional' | 'prohibited' | 'unknown';
+  /** `legacy_import` rows carry a headline and prose only; every limb is unknown. */
+  provenance: 'instrument' | 'legacy_import';
+  retention: {
+    by_birth: { effect: PluralityRetentionEffect; conditions: string[]; detail: string };
+    by_naturalisation: { effect: PluralityRetentionEffect; conditions: string[]; detail: string };
+  };
+  acquisition: { effect: PluralityAcquisitionEffect; conditions: string[]; detail: string };
+  asymmetry: { present: 'yes' | 'no' | 'unknown'; basis: string[]; note: string };
   detail: string;
 }
 

@@ -329,8 +329,11 @@ export function renderReferenceDataSql(): string[] {
     stacking_plays: Array<Record<string, any>>;
     pending_verification: Array<Record<string, any>>;
     generational_events: Array<Record<string, any>>;
+    // Conflict-of-laws treaties only since #144. The per-country policy map that
+    // used to sit here was a rival model of the canonical `dual_nationality`
+    // field on its own enum; it was migrated into the canonical corpus and the
+    // `dual_nationality_policy` mirror dropped in migration 0009.
     dual_citizenship: {
-      countries: Record<string, Record<string, any>>;
       treaty_exceptions: Array<Record<string, any>>;
     };
   };
@@ -354,7 +357,6 @@ export function renderReferenceDataSql(): string[] {
     'DELETE FROM bloc_index;',
     'DELETE FROM bilateral_lane_beneficiaries;',
     'DELETE FROM bilateral_lane_index;',
-    'DELETE FROM dual_nationality_policy;',
     'DELETE FROM dual_nationality_treaty_parties;',
     'DELETE FROM dual_nationality_treaty_exception;',
     'DELETE FROM jurisdiction_registry;',
@@ -406,17 +408,12 @@ export function renderReferenceDataSql(): string[] {
     }
   }
 
-  for (const [iso, policy] of Object.entries(blocs.dual_citizenship.countries)) {
-    // `status` is written through untouched: the file says 'banned' where the
-    // canonical corpus says 'prohibited', and recording the divergence is the point
-    // (#144). Do not map it here.
-    out.push(...insert(
-      'dual_nationality_policy', ['iso_n3', 'status', 'note', 'volatility', 'sources'],
-      [[q(iso), q(policy.status), q(policy.note ?? null), q(policy.volatility ?? null),
-        sqlJson(policy.sources ?? null)]],
-    ));
-  }
-
+  // No per-country plurality rows here any more. #144 resolved the divergence this
+  // mirror existed to record: the 25 rows moved into the canonical
+  // `dual_nationality` field, `banned` became `prohibited`, and the product reads
+  // the canonical projection. The treaty exceptions below are a different fact —
+  // conflict-of-laws treatment between two named states — and have no canonical
+  // home yet, so they stay.
   for (const exception of blocs.dual_citizenship.treaty_exceptions) {
     out.push(...insert(
       'dual_nationality_treaty_exception',
@@ -491,7 +488,7 @@ async function verify(): Promise<void> {
             (SELECT COUNT(*) FROM licence_exchange_index) AS licence_rows,
             (SELECT COUNT(*) FROM bloc_index) AS blocs,
             (SELECT COUNT(*) FROM bilateral_lane_index) AS bilateral_lanes,
-            (SELECT COUNT(*) FROM dual_nationality_policy) AS dual_nationality,
+            (SELECT COUNT(*) FROM dual_nationality_treaty_exception) AS dual_nationality_treaties,
             (SELECT COUNT(*) FROM jurisdiction_registry) AS registry,
             (SELECT COUNT(*) FROM monitor_source_manifest) AS monitor_sources,
             (SELECT COUNT(*) FROM monitor_pages) AS monitor_pages,

@@ -38,8 +38,6 @@ describe('reference data mirrors into D1 without dropping rows', () => {
   test('every list arrives at full length', () => {
     expect(count('bloc_index')).toBe(blocsData.blocs.length);
     expect(count('bilateral_lane_index')).toBe(blocsData.bilateral_lanes.length);
-    expect(count('dual_nationality_policy'))
-      .toBe(Object.keys(blocsData.dual_citizenship.countries).length);
     expect(count('dual_nationality_treaty_exception'))
       .toBe(blocsData.dual_citizenship.treaty_exceptions.length);
     expect(count('jurisdiction_registry'))
@@ -56,7 +54,6 @@ describe('reference data mirrors into D1 without dropping rows', () => {
     // still satisfies "matches the file".
     expect(count('bloc_index')).toBe(24);
     expect(count('bilateral_lane_index')).toBe(22);
-    expect(count('dual_nationality_policy')).toBe(25);
     expect(count('dual_nationality_treaty_exception')).toBe(3);
     expect(count('jurisdiction_registry')).toBe(240);
     expect(count('monitor_source_manifest')).toBe(289);
@@ -81,34 +78,37 @@ describe('reference data mirrors into D1 without dropping rows', () => {
   });
 });
 
-describe('the divergence this table exists to record (#144)', () => {
-  test("blocs_data.json says 'banned' and the mirror keeps saying 'banned'", () => {
-    // The canonical corpus says 'prohibited' for the same concept
-    // (scripts/lib/canonical-schema.ts), and src/types.ts carries BOTH enums — one
-    // per model. They are rival vocabularies over the same question, and #144 is
-    // where the reconciliation gets decided. Harmonising them here would silently
-    // pick a winner and destroy the evidence that the divergence is real, so this
-    // test exists to make a tidy-up fail loudly rather than pass quietly.
-    const banned = db.query(
-      "SELECT COUNT(*) AS n FROM dual_nationality_policy WHERE status = 'banned';",
-    ).get() as { n: number };
-    expect(banned.n).toBeGreaterThan(0);
+describe('the divergence this table used to record, now resolved (#144)', () => {
+  // The predecessor of this test asserted that the mirror kept saying 'banned'
+  // while the canonical corpus said 'prohibited', because harmonising the two
+  // would have silently picked a winner before the reconciliation was decided.
+  // It has been decided: canonical wins, the 25 rows were migrated into
+  // `jurisdictions[].dual_nationality`, the product reads that projection, and
+  // migration 0009 drops the mirror. What has to be guarded now is the reverse —
+  // that a second vocabulary does not quietly reappear.
+  test('the rival per-country model is gone from both the file and the mirror', () => {
+    expect(blocsData.dual_citizenship).not.toHaveProperty('countries');
+
+    const built = renderReferenceDataSql().join('\n');
+    expect(built).not.toContain('dual_nationality_policy');
+
+    const table = db.query(
+      "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'dual_nationality_policy';",
+    ).get();
+    // 0008 still creates it; 0009 drops it. Applying both in order is what a fresh
+    // D1 sees, and after that the table must not exist.
+    const drop = readFileSync(
+      join(root, 'data/d1/migrations/0009_retire_dual_nationality_policy.sql'), 'utf8');
+    expect(drop).toContain('DROP TABLE IF EXISTS dual_nationality_policy;');
+    for (const statement of splitStatements(drop)) db.exec(statement);
     expect(db.query(
-      "SELECT COUNT(*) AS n FROM dual_nationality_policy WHERE status = 'prohibited';",
-    ).get()).toEqual({ n: 0 });
+      "SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'dual_nationality_policy';",
+    ).get()).toBeNull();
+    expect(table).not.toBeNull();
+  });
 
-    // China (156) is the unambiguous case: the PRC Nationality Law art. 3 does not
-    // recognise dual nationality at all.
-    const china = db.query(
-      "SELECT status FROM dual_nationality_policy WHERE iso_n3 = '156';",
-    ).get() as { status: string };
-    expect(china.status).toBe('banned');
-
-    // And the CHECK constraint must reject the canonical word outright, so the
-    // schema cannot drift into accepting both spellings.
-    expect(() => db.exec(
-      "INSERT INTO dual_nationality_policy (iso_n3, status) VALUES ('999', 'prohibited');",
-    )).toThrow();
+  test('the treaty exceptions are a different fact and survive', () => {
+    expect(count('dual_nationality_treaty_exception')).toBe(3);
   });
 });
 

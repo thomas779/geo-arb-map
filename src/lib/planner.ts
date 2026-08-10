@@ -1,4 +1,4 @@
-import type { BilateralLane, Bloc, BlocsData } from '../types';
+import type { BilateralLane, Bloc, BlocsData, JurisdictionDualNationality } from '../types';
 import {
   CBI_YEARS,
   DESCENT_PATHS,
@@ -337,10 +337,58 @@ export function acquisitionYears(_data: BlocsData): Map<string, number> {
   return naturalizationYears();
 }
 
+/**
+ * Plurality positions the planner reads, keyed by iso_n3.
+ *
+ * Built from `jurisdictions[].dual_nationality` in the compiled corpus — the
+ * canonical field the coverage audit measures. Until #144 the planner read a
+ * rival 25-row model in public/blocs_data.json on its own enum (`banned`), so the
+ * audit measured one thing and the product served another. That model is retired.
+ */
+export type PluralityIndex = Map<string, JurisdictionDualNationality>;
+
+export function pluralityIndex(
+  routes: { jurisdictions: Array<{ iso_n3: string; dual_nationality?: JurisdictionDualNationality | null }> } | null,
+): PluralityIndex {
+  const index: PluralityIndex = new Map();
+  for (const jurisdiction of routes?.jurisdictions ?? []) {
+    if (jurisdiction.dual_nationality) index.set(jurisdiction.iso_n3, jurisdiction.dual_nationality);
+  }
+  return index;
+}
+
+/**
+ * Does taking this citizenship cost you the ones you hold?
+ *
+ * Reads the INBOUND limb, which is the one the question is actually about; the
+ * outbound retention limbs describe what happens to THIS nationality when its
+ * holder acquires another and answer a different question entirely.
+ *
+ * A `legacy_import` row has no limbs at all — it is an unsourced claim carried
+ * over from the retired model — so its headline `prohibited` is the only thing it
+ * can offer, and it is honoured rather than dropped, because dropping it would
+ * silently remove a renunciation warning the product has been showing. No row,
+ * or a row that says `unknown` both ways, warns nobody: absence is NOT RECORDED,
+ * never "no restriction".
+ */
+export function renouncesOnAcquiring(row: JurisdictionDualNationality | undefined): boolean {
+  if (!row) return false;
+  if (row.acquisition.effect === 'renunciation_required') return true;
+  // `renunciation_with_exceptions` deliberately does NOT flag. Whether it bites
+  // depends on which nationality the applicant already holds — Spain's art. 23(b)
+  // exempts the Ibero-American states, the Netherlands exempts Second Protocol
+  // states and spouses — and this model has no way to evaluate that. The planner's
+  // renunciation branch DELETES the user's other citizenships from the footprint,
+  // so guessing wrong here tells someone they will lose a passport they would keep.
+  // The exceptions are spelled out in the limb's detail.
+  return row.acquisition.effect === 'unknown' && row.status === 'prohibited';
+}
+
 export function recommend(
   profile: Profile,
   data: BlocsData,
   limit = 5,
+  plurality: PluralityIndex = new Map(),
 ): Recommendation[] {
   const heldIsos = profile.flags.filter(f => f.status === 'cit').map(f => f.iso_n3);
   const current = computeUnlocks(profile, data);
@@ -348,7 +396,6 @@ export function recommend(
   const currentBlocIds = new Set(current.blocs.map(b => b.id));
   const held = new Set(heldIsos);
   const durations = acquisitionYears(data);
-  const bans = data.dual_citizenship?.countries ?? {};
   const yearsForProfile = (iso: string): number | null => {
     const rule = naturalizationRule(iso);
     if (!rule) return durations.get(iso) ?? null;
@@ -377,7 +424,7 @@ export function recommend(
     via: Recommendation['via'],
   ): Recommendation | null => {
     if (held.has(iso)) return null;
-    const renounces = bans[iso]?.status === 'banned';
+    const renounces = renouncesOnAcquiring(plurality.get(iso));
     // Renunciation destinations: net footprint per explorer-spec part B.
     const next = computeUnlocks(renounces ? onlyCitizenship(iso) : withCitizenship(iso), data);
     const nextCountries = new Set(next.countries);

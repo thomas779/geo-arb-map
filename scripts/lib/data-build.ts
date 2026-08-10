@@ -991,9 +991,16 @@ function projectFrontendCitizenship(
       item.mode,
       coverageState(item.review.state),
     ])) as Record<CitizenshipAcquisitionMode, CitizenshipCoverageState>;
+    // Everything but source_refs. The limbs are the point of the field after #144:
+    // dropping them here is what left the product reading a rival enum in
+    // blocs_data instead of the canonical answer.
     row.dual_nationality = jurisdiction.dual_nationality
       ? {
           status: jurisdiction.dual_nationality.status,
+          provenance: jurisdiction.dual_nationality.provenance,
+          retention: jurisdiction.dual_nationality.retention,
+          acquisition: jurisdiction.dual_nationality.acquisition,
+          asymmetry: jurisdiction.dual_nationality.asymmetry,
           detail: jurisdiction.dual_nationality.detail,
         }
       : null;

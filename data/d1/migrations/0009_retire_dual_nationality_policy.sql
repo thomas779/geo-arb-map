@@ -1,0 +1,21 @@
+-- #144: retire the rival dual-nationality model.
+--
+-- `dual_nationality_policy` mirrored `dual_citizenship.countries` from
+-- public/blocs_data.json: 25 rows on the enum ('allowed', 'banned', 'conditional'),
+-- while the canonical corpus recorded the same fact on
+-- `jurisdictions[].dual_nationality` with ('allowed', 'conditional', 'prohibited',
+-- 'unknown'). Two vocabularies for one question, and the served product read the
+-- one the coverage audit did not measure.
+--
+-- The 25 rows were migrated into the canonical field (see DUAL_NATIONALITY in
+-- scripts/lib/canonical-pilot.ts): 'banned' maps to 'prohibited'; eight rows that
+-- collided with an instrument-read canonical row were folded into its detail
+-- rather than overwriting it; the seventeen that had no source record are carried
+-- as `provenance: 'legacy_import'`, which may hold a headline status and prose and
+-- nothing else. src/lib/planner.ts now reads the canonical projection.
+--
+-- The treaty tables are NOT dropped. A conflict-of-laws treaty between two named
+-- states is a different fact from a jurisdiction's own plurality rule, and it has
+-- no canonical home yet.
+
+DROP TABLE IF EXISTS dual_nationality_policy;

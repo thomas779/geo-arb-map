@@ -52,7 +52,11 @@ For every jurisdiction in `data/migration-pilot.json`:
    treaty-list, or exclusions. Never infer openness from a silent page.
 9. Record the jurisdiction's `dual_nationality` position independently of its
    acquisition routes. Conditional retention or renunciation rules are not the
-   same as a blanket prohibition.
+   same as a blanket prohibition, and neither is the outbound rule the same as the
+   inbound one: a state can strip its own nationals for naturalising abroad while
+   imposing no renunciation condition on incomers, and the reverse. Fill the limbs
+   (`retention.by_birth`, `retention.by_naturalisation`, `acquisition`) and say on
+   which axis, if any, the rule splits. A limb you did not read stays `unknown`.
 10. Report disagreements using the canonical record ID, JSON pointer, source
    URL, proposed correction, and the date the source was checked.
 

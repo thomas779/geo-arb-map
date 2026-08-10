@@ -126,6 +126,14 @@ Do **not** transcribe these lists by hand. Regenerate them from the built pilot
   jurisdiction-level `dual_nationality` finding. Each object carries its own
   `source_refs`; omission means not recorded and must never be treated as a
   negative finding.
+- `dual_nationality` rows live in one table, `DUAL_NATIONALITY` in
+  `scripts/lib/canonical-pilot.ts`, not on the record builders. Fill the limbs, not
+  just the headline: `retention.by_birth` and `retention.by_naturalisation` for what
+  holding a second nationality does to this one, `acquisition` for what this state
+  demands of a naturalising foreigner, and `asymmetry` for the axis a split runs on.
+  The schema rejects a status the limbs do not support, and rejects limbs that differ
+  while claiming no asymmetry. If you did not read a limb, leave it `unknown` — that
+  is a recorded gap, not a permission.
 
 ## Command sequence
 
