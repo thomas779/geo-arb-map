@@ -1225,8 +1225,16 @@ describe('descent depth is recorded positively, never as a cutoff', () => {
     // unspecified ancestor with no cutoff written anywhere.
     const withLimit = ancestry.filter(route => route.descent?.limit_recorded);
     expect(withLimit.map(route => route.id).sort()).toEqual([
+      // Закон о гражданстве art. 14 enumerates the descendants it reaches and then
+      // closes the list in the same breath — "их потомков (дети, внуки, правнуки)".
+      // A parenthetical that names every generation it covers is a stated cutoff.
+      'belarus-citizenship-by-parent',
       'bulgaria-bulgarian-origin-naturalization',
       'cabo-verde-citizenship-by-parent',
+      // Constitution art. 14 lists "father or mother, grandfather or grandmother"
+      // and stops. Unlike Slovakia and Ukraine, Nepal carries no second limb
+      // reaching an unspecified ancestor, so nothing reopens the list.
+      'nepal-citizenship-by-descent',
       'poland-citizenship-by-parent',
       'uk-citizenship-by-parent',
     ]);
