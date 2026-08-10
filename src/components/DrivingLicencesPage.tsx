@@ -1,6 +1,6 @@
 import type { LicenceExchangeData } from '@/lib/licence-exchange';
 import { listOrigins, testLabel } from '@/lib/licence-exchange';
-import { AlertTriangle, Car, ExternalLink } from 'lucide-react';
+import { ArrowRight, Car, ExternalLink, Home, Info, ShieldCheck } from 'lucide-react';
 
 /**
  * /routes/driving-licences/ — exchange lookup hub (#171).
@@ -11,13 +11,9 @@ import { AlertTriangle, Car, ExternalLink } from 'lucide-react';
 export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
   const origins = listOrigins(data);
   const destCount = data.destinations.length;
-  // Derived, not written out. The prose used to carry a hand-typed "(DE, GB, NL, …)"
-  // beside a live count, so adding Switzerland and Korea left the page claiming 13
-  // annexes and then naming 11 of them.
-  const destNames = data.destinations.map(destination => destination.name).join(', ');
 
   return (
-    <main className="mx-auto max-w-[960px] px-4 py-8 sm:px-6">
+    <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
       <nav className="mb-4 font-mono text-[0.7rem] text-muted-foreground">
         <a href="/" className="underline underline-offset-2">Flag Paths</a>
         {' › '}
@@ -27,55 +23,112 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
       </nav>
 
       <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-        Driving licences
+        Driving licence exchange
       </p>
       <h1 className="mt-2 flex items-center gap-3 font-heading text-3xl font-bold tracking-[-0.02em] sm:text-4xl">
         <Car className="size-8 shrink-0 text-primary" aria-hidden />
-        Licence exchange lookup
+        Where can I exchange my licence?
       </h1>
-      <p className="mb-6 mt-3 max-w-[68ch] leading-relaxed text-muted-foreground">
-        See which destinations will exchange a foreign driving licence — and whether a theory
-        or practical test is still required. Currently seeded with{' '}
-        <strong className="font-semibold text-foreground">{destCount} destination annexes</strong>
-        {' '}({destNames}).
+      <p className="mt-3 max-w-[62ch] leading-relaxed text-muted-foreground">
+        Choose where your current licence was issued. We’ll show the mapped destinations
+        that accept it and whether their official list still requires a theory or practical test.
       </p>
 
-      <aside
-        className="mb-8 rounded-lg border border-amber-500/35 bg-amber-500/10 px-4 py-3 text-sm leading-relaxed"
-        role="note"
-      >
-        <p className="flex gap-2 font-semibold text-foreground">
-          <AlertTriangle className="mt-0.5 size-4 shrink-0 text-amber-600 dark:text-amber-400" aria-hidden />
-          Normal residence is the real gate
-        </p>
-        <p className="mt-2 text-muted-foreground">{data.disclaimer.normal_residence}</p>
-        <p className="mt-2 text-muted-foreground">{data.disclaimer.scope}</p>
-        <p className="mt-2 text-xs text-muted-foreground">{data.disclaimer.coverage}</p>
-      </aside>
-
-      <section
-        id="licence-exchange-live"
-        className="mb-10 rounded-xl border bg-card p-4 sm:p-5"
-        hidden
-      >
-        <h2 className="font-heading text-lg font-semibold">I hold a licence from…</h2>
-        <p id="licence-exchange-status" className="mt-1 text-xs text-muted-foreground" />
-        <label className="mt-4 block text-sm font-medium" htmlFor="licence-exchange-origin">
-          Issuing country
-        </label>
-        <select
-          id="licence-exchange-origin"
-          className="mt-1.5 w-full max-w-md rounded-md border bg-background px-3 py-2 text-sm"
-          disabled
-          defaultValue=""
+      <div className="mt-7 grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <section
+          id="licence-exchange-live"
+          className="overflow-hidden rounded-xl border bg-card shadow-sm"
+          hidden
         >
-          <option value="">Loading…</option>
-        </select>
-        <div id="licence-exchange-results" className="mt-5 space-y-4" />
-      </section>
+          <div className="border-b bg-accent/45 p-4 sm:p-5">
+            <p className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-primary">
+              Start here
+            </p>
+            <h2 className="mt-1 font-heading text-xl font-semibold">My licence was issued in…</h2>
+            <label className="sr-only" htmlFor="licence-exchange-origin">
+              Issuing country or territory
+            </label>
+            <select
+              id="licence-exchange-origin"
+              className="mt-4 min-h-12 w-full rounded-lg border bg-background px-3.5 text-base font-medium shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              disabled
+              defaultValue=""
+            >
+              <option value="">Loading countries…</option>
+            </select>
+          </div>
+          <div className="p-4 sm:p-5">
+            <p
+              id="licence-exchange-status"
+              className="mb-4 text-sm text-muted-foreground"
+              role="status"
+              aria-live="polite"
+            />
+            <div id="licence-exchange-results">
+              <div className="licence-empty-state">
+                <span className="licence-empty-mark" aria-hidden><ArrowRight className="size-4" /></span>
+                <div>
+                  <p className="font-semibold text-foreground">Choose the issuing country</p>
+                  <p className="mt-0.5 text-sm text-muted-foreground">
+                    Your mapped exchange destinations will appear here.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-      <section id="licence-exchange-fallback">
-        <h2 className="font-heading text-lg font-semibold">Seeded destinations</h2>
+        <aside className="rounded-xl border bg-card p-4 sm:p-5" aria-label="Before you exchange">
+          <p className="font-mono text-[0.65rem] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+            Before you exchange
+          </p>
+          <div className="mt-4 space-y-4">
+            <div className="flex gap-3">
+              <Home className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+              <div>
+                <p className="text-sm font-semibold">Residence comes first</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                  You normally need to live in the destination and to have been resident where the licence was issued.
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <ShieldCheck className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+              <div>
+                <p className="text-sm font-semibold">The original is replaced</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                  Exchange gives you one local licence; it is not an extra document to stack.
+                </p>
+              </div>
+            </div>
+          </div>
+          <details className="group mt-5 border-t pt-4">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold">
+              How the rules work
+              <Info className="size-4 text-muted-foreground" aria-hidden />
+            </summary>
+            <div className="mt-3 space-y-3 text-xs leading-relaxed text-muted-foreground">
+              <p>{data.disclaimer.normal_residence}</p>
+              <p>{data.disclaimer.scope}</p>
+            </div>
+          </details>
+          <details className="group mt-3 border-t pt-4">
+            <summary className="cursor-pointer list-none text-sm font-semibold">
+              Coverage notes · {destCount} destinations
+            </summary>
+            <p className="mt-3 text-xs leading-relaxed text-muted-foreground">{data.disclaimer.coverage}</p>
+            <a
+              href="https://github.com/thomas779/geo-arb-map/issues/171"
+              className="mt-3 inline-flex items-center gap-1 text-xs text-primary underline-offset-2 hover:underline"
+            >
+              Research notes <ExternalLink className="size-3" aria-hidden />
+            </a>
+          </details>
+        </aside>
+      </div>
+
+      <section id="licence-exchange-fallback" className="mt-8">
+        <h2 className="font-heading text-xl font-semibold">Mapped destinations</h2>
         <p className="mt-1 max-w-[60ch] text-sm text-muted-foreground">
           Each annex is destination-led: what that country accepts from foreign issuers.
           Enable JavaScript for the interactive origin → destination lookup above.
@@ -86,7 +139,7 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
             const unique = [...new Map(noRetest.map(e => [e.origin_label_en, e])).values()]
               .sort((a, b) => a.origin_label_en.localeCompare(b.origin_label_en));
             return (
-              <article key={dest.iso_n3} className="rounded-lg border bg-card p-4">
+              <article key={dest.iso_n3} className="rounded-xl border bg-card p-4">
                 <header className="flex flex-wrap items-baseline justify-between gap-2">
                   <h3 className="font-heading text-base font-semibold">{dest.name}</h3>
                   <a
@@ -157,21 +210,9 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
         </details>
       </section>
 
-      <section className="mt-10 border-t pt-6 text-sm text-muted-foreground">
-        <h2 className="font-heading text-base font-semibold text-foreground">What this is not</h2>
-        <ul className="mt-2 list-disc space-y-1 pl-5">
-          <li>Not a guide to obtaining a licence without meeting residence conditions.</li>
-          <li>Not a rights-index score and not a citizenship or residence route.</li>
-          <li>Not multi-hop planning — one destination annex at a time.</li>
-        </ul>
-        <p className="mt-4">
-          Research notes:{' '}
-          <a href="https://github.com/thomas779/geo-arb-map/issues/171" className="underline underline-offset-2">
-            issue #171
-          </a>
-          .
-        </p>
-      </section>
+      <p className="mt-8 border-t pt-5 text-xs leading-relaxed text-muted-foreground">
+        Exchange eligibility is destination-specific. A mapped listing is a starting point—not approval—and does not replace the destination authority’s residence, validity, class, or deadline checks.
+      </p>
     </main>
   );
 }

@@ -308,11 +308,11 @@ function entryMatchesKey(e: LicenceExchangeEntry, originKey: string): boolean {
 }
 
 export function testLabel(theory: boolean | null, practical: boolean | null): string {
-  if (theory === false && practical === false) return 'No retest';
-  if (theory === true && practical === false) return 'Theory only';
-  if (theory === false && practical === true) return 'Practical only';
-  if (theory === true && practical === true) return 'Theory + practical';
-  return 'Tests unknown';
+  if (theory === false && practical === false) return 'No tests required';
+  if (theory === true && practical === false) return 'Theory test required';
+  if (theory === false && practical === true) return 'Practical test required';
+  if (theory === true && practical === true) return 'Theory + practical required';
+  return 'Confirm test requirements';
 }
 
 

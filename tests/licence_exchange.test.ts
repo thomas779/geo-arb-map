@@ -121,8 +121,8 @@ describe('licence exchange seed (#171)', () => {
   });
 
   test('testLabel wording', () => {
-    expect(testLabel(false, false)).toBe('No retest');
-    expect(testLabel(true, false)).toBe('Theory only');
+    expect(testLabel(false, false)).toBe('No tests required');
+    expect(testLabel(true, false)).toBe('Theory test required');
   });
 });
 

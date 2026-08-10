@@ -17,6 +17,7 @@ import {
 import { buildCountrySlugMap } from '@/lib/slug';
 import { countryFlag } from '@/lib/country';
 import { isosForRouteClass, ROUTE_CLASSES } from '@/lib/route-classes';
+import type { LicenceExchangeData } from '@/lib/licence-exchange';
 
 /**
  * Prerendered route discovery pages under /routes/. Country guides answer
@@ -200,6 +201,7 @@ interface HubRoute {
   label: string;
   detail: string;
   icon: LucideIcon;
+  countNoun?: string;
 }
 
 const HUB_SECTIONS: Array<{ title: string; routes: HubRoute[] }> = [
@@ -238,6 +240,7 @@ const DRIVING_LICENCES: HubRoute = {
   label: 'Exchange a driving licence',
   detail: 'Where a foreign licence converts — and which tests remain',
   icon: Car,
+  countNoun: 'destinations',
 };
 
 function RouteChoice({ route, count }: { route: HubRoute; count: number }) {
@@ -256,14 +259,16 @@ function RouteChoice({ route, count }: { route: HubRoute; count: number }) {
         <span className="mt-0.5 block text-xs leading-snug text-muted-foreground">{route.detail}</span>
       </span>
       <span className="flex shrink-0 items-center gap-2">
-        <span className="hidden font-mono text-[0.64rem] text-muted-foreground min-[420px]:inline">{count} countries</span>
+        <span className="hidden font-mono text-[0.64rem] text-muted-foreground min-[420px]:inline">
+          {count} {route.countNoun ?? 'countries'}
+        </span>
         <ArrowRight className="size-3.5 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" aria-hidden />
       </span>
     </a>
   );
 }
 
-export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
+export function RouteTypesHub({ data, licenceData }: { data: CitizenshipRoutesData; licenceData: LicenceExchangeData }) {
   const counts = routeClassCounts(data);
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
@@ -289,19 +294,11 @@ export function RouteTypesHub({ data }: { data: CitizenshipRoutesData }) {
       </div>
       <section className="mt-8 border-t pt-6">
         <h2 className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-          I need digital access
+          I need practical access
         </h2>
-        <div className="max-w-[calc(50%-0.75rem)] max-md:max-w-none">
+        <div className="grid gap-2 md:grid-cols-2">
           <RouteChoice route={DIGITAL_IDENTITY} count={counts.get(DIGITAL_IDENTITY.id) ?? 0} />
-        </div>
-      </section>
-      <section className="mt-8 border-t pt-6">
-        <h2 className="mb-3 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-          Other leverage
-        </h2>
-        <div className="max-w-[calc(50%-0.75rem)] max-md:max-w-none">
-          {/* Count is destination annexes seeded, not citizenship isos */}
-          <RouteChoice route={DRIVING_LICENCES} count={11} />
+          <RouteChoice route={DRIVING_LICENCES} count={licenceData.destinations.length} />
         </div>
       </section>
     </main>

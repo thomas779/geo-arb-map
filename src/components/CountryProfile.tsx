@@ -1,4 +1,5 @@
 import { useMemo, useState, type ReactNode } from 'react';
+import { ArrowRight, Car, MapPin } from 'lucide-react';
 import type { BlocsData, CitizenshipRoute, CitizenshipRoutesData, ResidenceCategory, ResidenceRoute } from '@/types';
 import { buildCountrySlugMap, entitySlug } from '@/lib/slug';
 import { provenanceLabel, routeProvenance } from '@/lib/trust';
@@ -318,60 +319,85 @@ function Eyebrow({ children, divider = true }: { children: ReactNode; divider?: 
   );
 }
 
-function LicenceSection({ licence, iso }: { licence: CountryLicenceSummary; iso: string }) {
+function LicenceSection({ licence, iso, name }: { licence: CountryLicenceSummary; iso: string; name: string }) {
+  const destinationCount = licence.as_origin_destinations.length;
   return (
     <section id="licences" className="mt-8 scroll-mt-20">
-      <Eyebrow>Driving licence exchange</Eyebrow>
+      <Eyebrow>Driving licence</Eyebrow>
       <p className="mb-3 max-w-[60ch] text-sm text-muted-foreground">
-        Lawful exchange conditions from seeded destination annexes. Exchange almost always
-        requires normal residence — not a fly-in product.{' '}
+        Where a licence connected to {name} can be exchanged, based on mapped official lists.{' '}
         <a href="/routes/driving-licences/" className="text-primary underline-offset-2 hover:underline">
-          Full lookup
+          Search every issuing country
         </a>
         .
       </p>
-      {licence.as_destination && (
-        <div className="mb-3 rounded-lg border bg-card p-3.5">
-          <p className="text-sm font-semibold">As a destination</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Official annex lists {licence.as_destination.origin_count} origin rows
-            ({licence.as_destination.no_retest_count} with no theory and no practical in the seed).
-          </p>
-          <p className="mt-1 font-mono text-[0.7rem] text-muted-foreground">
-            {licence.as_destination.instrument}
-          </p>
-          <a
-            href={licence.as_destination.source_url}
-            className="mt-2 inline-block font-mono text-xs text-primary underline-offset-2 hover:underline"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Primary source
-          </a>
-        </div>
-      )}
       {licence.as_origin_destinations.length > 0 && (
-        <div className="rounded-lg border bg-card p-3.5">
-          <p className="text-sm font-semibold">As an issuing origin</p>
-          <ul className="mt-2 space-y-2">
+        <div className="overflow-hidden rounded-xl border bg-card">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b bg-accent/35 px-4 py-3">
+            <p className="flex items-center gap-2 text-sm font-semibold">
+              <Car className="size-4 text-primary" aria-hidden />
+              Licence issued in {name}
+            </p>
+            <span className="font-mono text-[0.65rem] text-muted-foreground">
+              {destinationCount} mapped destination{destinationCount === 1 ? '' : 's'}
+            </span>
+          </div>
+          <ul className="divide-y">
             {licence.as_origin_destinations.map(d => (
-              <li key={d.iso_n3} className="text-sm">
-                <span className="font-medium">{d.name}</span>
-                <span className="ml-2 font-mono text-[0.7rem] text-muted-foreground">
-                  {testLabel(d.theory_test_required, d.practical_test_required)}
-                  {d.varies_by_subnational ? ' · varies by subnational unit' : ''}
-                </span>
+              <li key={d.iso_n3} className="px-4 py-3.5">
+                <div className="grid grid-cols-[auto_auto_auto_minmax(0,1fr)] items-center gap-3">
+                  <span className="shrink-0 text-lg" aria-hidden>{countryFlag(iso)}</span>
+                  <ArrowRight className="size-3.5 shrink-0 text-primary" aria-hidden />
+                  <span className="shrink-0 text-lg" aria-hidden>{countryFlag(d.iso_n3)}</span>
+                  <span className="min-w-0 font-semibold">{d.name}</span>
+                </div>
+                <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 pl-16">
+                  <span className={`rounded-full border px-2 py-1 text-[0.68rem] font-semibold ${d.no_retest ? 'border-verified/40 bg-verified/10 text-foreground' : 'bg-muted text-muted-foreground'}`}>
+                    {testLabel(d.theory_test_required, d.practical_test_required)}
+                  </span>
+                  <ExternalSourceLink href={d.source_url}>Official exchange list</ExternalSourceLink>
+                </div>
+                {d.varies_by_subnational && (
+                  <p className="mt-2 pl-16 text-xs text-muted-foreground">Rules vary by state, province, or territory.</p>
+                )}
               </li>
             ))}
           </ul>
           <a
             href={'/routes/driving-licences/' + `?from=${iso}`}
-            className="mt-3 inline-block font-mono text-xs text-primary underline-offset-2 hover:underline"
+            className="flex items-center justify-between gap-3 border-t px-4 py-3 text-sm font-semibold text-primary hover:bg-accent/45"
           >
-            Look up this origin →
+            Check the full exchange conditions
+            <ArrowRight className="size-4" aria-hidden />
           </a>
         </div>
       )}
+      {licence.as_destination && (
+        <div className={`${licence.as_origin_destinations.length > 0 ? 'mt-3' : ''} rounded-xl border bg-card p-4`}>
+          <div className="flex items-start gap-3">
+            <span className="grid size-9 shrink-0 place-items-center rounded-md bg-accent text-primary">
+              <MapPin className="size-4" aria-hidden />
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold">Exchanging a foreign licence in {name}</p>
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                The mapped official list contains {licence.as_destination.origin_count} issuing origins;
+                {' '}{licence.as_destination.no_retest_count} are listed without theory or practical tests.
+              </p>
+              <p className="mt-2 font-mono text-[0.65rem] leading-relaxed text-muted-foreground">
+                {licence.as_destination.instrument}
+              </p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                <ExternalSourceLink href={licence.as_destination.source_url}>Official exchange list</ExternalSourceLink>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+      <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+        Exchange normally requires residence in the destination and replaces the original licence.
+        The official authority still decides validity, deadlines, classes, and any extra checks.
+      </p>
     </section>
   );
 }
@@ -384,7 +410,12 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
     ...(residence.length ? [['Residence programmes', String(residence.length)] as [string, string]] : []),
     ...(cheapest ? [['Residence by investment from', money(cheapest)!] as [string, string]] : []),
     ...(blocs.length ? [['Regional systems', String(blocs.length)] as [string, string]] : []),
-    ...(licence ? [['Licence exchange seed', 'mapped'] as [string, string]] : []),
+    ...(licence ? [[
+      'Licence exchange',
+      licence.as_origin_destinations.length > 0
+        ? `${licence.as_origin_destinations.length} destination${licence.as_origin_destinations.length === 1 ? '' : 's'}`
+        : `${licence.as_destination?.origin_count ?? 0} origins accepted`,
+    ] as [string, string]] : []),
   ];
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
@@ -439,7 +470,7 @@ export function CountryProfile({ data }: { data: CountryProfileData }) {
             </div>
           </section>
           {residence.length > 0 && <ResidenceSection residence={residence} />}
-          {licence && <LicenceSection licence={licence} iso={iso} />}
+          {licence && <LicenceSection licence={licence} iso={iso} name={name} />}
           {blocs.length > 0 && (
             <section id="regional" className="mt-8 scroll-mt-20">
               <Eyebrow>Regional rights</Eyebrow>

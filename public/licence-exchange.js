@@ -13,11 +13,11 @@
   if (!resultsEl || !selectEl) return;
 
   function testLabel(theory, practical) {
-    if (theory === false && practical === false) return 'No retest';
-    if (theory === true && practical === false) return 'Theory only';
-    if (theory === false && practical === true) return 'Practical only';
-    if (theory === true && practical === true) return 'Theory + practical';
-    return 'Tests unknown';
+    if (theory === false && practical === false) return 'No tests required';
+    if (theory === true && practical === false) return 'Theory test required';
+    if (theory === false && practical === true) return 'Practical test required';
+    if (theory === true && practical === true) return 'Theory + practical required';
+    return 'Confirm test requirements';
   }
 
   function badgeClass(theory, practical) {
@@ -38,7 +38,10 @@
     resultsEl.innerHTML = '';
     if (!originKey) {
       resultsEl.innerHTML =
-        '<p class="text-sm text-muted-foreground">Choose the country (or territory group) that issued your licence.</p>';
+        '<div class="licence-empty-state"><span class="licence-empty-mark" aria-hidden="true">→</span>' +
+        '<div><p class="font-semibold text-foreground">Choose the issuing country</p>' +
+        '<p class="mt-0.5 text-sm text-muted-foreground">Your mapped exchange destinations will appear here.</p></div></div>';
+      if (statusEl) statusEl.textContent = '';
       return;
     }
 
@@ -57,8 +60,18 @@
 
     if (!matches.length) {
       resultsEl.innerHTML =
-        '<p class="text-sm text-muted-foreground">No seeded destination annex lists this origin yet. Coverage is Germany-only in v1.</p>';
+        '<div class="licence-empty-state"><span class="licence-empty-mark" aria-hidden="true">—</span>' +
+        '<div><p class="font-semibold text-foreground">No mapped exchange found yet</p>' +
+        '<p class="mt-0.5 text-sm text-muted-foreground">This is a coverage gap, not proof that exchange is unavailable.</p></div></div>';
+      if (statusEl) statusEl.textContent = 'No destination in the current dataset lists this licence.';
       return;
+    }
+
+    var selected = selectEl.options[selectEl.selectedIndex];
+    var originLabel = selected ? selected.textContent : 'This licence';
+    if (statusEl) {
+      statusEl.textContent = matches.length + ' mapped destination' + (matches.length === 1 ? '' : 's') +
+        ' for a licence issued in ' + originLabel + '.';
     }
 
     var html = '';
@@ -66,46 +79,49 @@
       var varies = m.entries.some(function (e) {
         return e.subnational || e.varies_by_subnational;
       });
-      html += '<article class="licence-result rounded-lg border bg-card p-4">';
-      html += '<header class="mb-3 flex flex-wrap items-baseline justify-between gap-2">';
-      html += '<h3 class="font-heading text-lg font-semibold">' + escapeHtml(m.dest.name) + '</h3>';
-      html +=
-        '<a class="font-mono text-xs text-primary underline-offset-2 hover:underline" href="' +
-        escapeHtml(m.dest.source_url) +
-        '" rel="noopener noreferrer" target="_blank">Primary source</a>';
-      html += '</header>';
-      html +=
-        '<p class="mb-3 text-xs text-muted-foreground">' +
-        escapeHtml(m.dest.instrument) +
-        '</p>';
+      var theory = m.entries.some(function (e) { return e.theory_test_required === true; })
+        ? true
+        : m.entries.every(function (e) { return e.theory_test_required === false; }) ? false : null;
+      var practical = m.entries.some(function (e) { return e.practical_test_required === true; })
+        ? true
+        : m.entries.every(function (e) { return e.practical_test_required === false; }) ? false : null;
+      html += '<article class="licence-result-card">';
+      html += '<div class="licence-route-line">';
+      html += '<span class="licence-route-place"><small>Issued in</small>' + escapeHtml(originLabel) + '</span>';
+      html += '<span class="licence-route-arrow" aria-hidden="true">→</span>';
+      html += '<span class="licence-route-place"><small>Exchange in</small>' + escapeHtml(m.dest.name) + '</span>';
+      html += '</div>';
+      html += '<div class="licence-result-meta">';
+      html += '<span class="' + badgeClass(theory, practical) + '">' +
+        escapeHtml(testLabel(theory, practical)) + '</span>';
+      html += '<a class="licence-source-link" href="' + escapeHtml(m.dest.source_url) +
+        '" rel="noopener noreferrer" target="_blank">Official source ↗</a>';
+      html += '</div>';
       if (varies) {
         html +=
-          '<p class="mb-3 rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs">' +
-          'Conditions <strong>vary by state / province / territory</strong>. Do not treat this as a single country-wide rule.' +
+          '<p class="licence-variation-note">' +
+          'Conditions <strong>vary by state, province, or territory</strong>. Open the rows below before relying on this result.' +
           '</p>';
       }
-      html += '<div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b text-xs text-muted-foreground">';
-      html += '<th class="py-2 pr-3 font-medium">Origin unit</th><th class="py-2 pr-3 font-medium">Classes</th><th class="py-2 font-medium">Tests</th>';
-      html += '</tr></thead><tbody>';
-      m.entries.forEach(function (e) {
-        var unit = e.subnational
-          ? e.subnational_label || e.origin_label_en
-          : e.origin_label_en;
-        html += '<tr class="border-b border-border/60">';
-        html += '<td class="py-2 pr-3">' + escapeHtml(unit) + '</td>';
-        html +=
-          '<td class="py-2 pr-3 font-mono text-xs">' +
-          escapeHtml(e.classes || '—') +
-          '</td>';
-        html +=
-          '<td class="py-2"><span class="' +
-          badgeClass(e.theory_test_required, e.practical_test_required) +
-          '">' +
-          escapeHtml(testLabel(e.theory_test_required, e.practical_test_required)) +
-          '</span></td>';
-        html += '</tr>';
-      });
-      html += '</tbody></table></div></article>';
+      if (m.entries.length > 1 || varies || (m.entries[0].classes && m.entries[0].classes !== 'all')) {
+        html += '<details class="licence-row-details"><summary>Licence classes and local units</summary>';
+        html += '<div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr class="border-b text-xs text-muted-foreground">';
+        html += '<th class="py-2 pr-3 font-medium">Origin unit</th><th class="py-2 pr-3 font-medium">Classes</th><th class="py-2 font-medium">Tests</th>';
+        html += '</tr></thead><tbody>';
+        m.entries.forEach(function (e) {
+          var unit = e.subnational
+            ? e.subnational_label || e.origin_label_en
+            : e.origin_label_en;
+          html += '<tr class="border-b border-border/60">';
+          html += '<td class="py-2 pr-3">' + escapeHtml(unit) + '</td>';
+          html += '<td class="py-2 pr-3 font-mono text-xs">' + escapeHtml(e.classes || 'All') + '</td>';
+          html += '<td class="py-2">' + escapeHtml(testLabel(e.theory_test_required, e.practical_test_required)) + '</td>';
+          html += '</tr>';
+        });
+        html += '</tbody></table></div></details>';
+      }
+      html += '<p class="licence-instrument">' + escapeHtml(m.dest.instrument) + '</p>';
+      html += '</article>';
     });
     resultsEl.innerHTML = html;
   }
@@ -147,7 +163,7 @@
         selectEl.appendChild(opt);
       });
       selectEl.disabled = false;
-      if (statusEl) statusEl.textContent = '';
+      if (statusEl) statusEl.textContent = 'Choose an issuing country to check the mapped destinations.';
 
       // Hide static fallback once live UI is ready
       var fallback = document.getElementById('licence-exchange-fallback');

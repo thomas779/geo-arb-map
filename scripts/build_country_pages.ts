@@ -516,7 +516,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
       path: 'routes',
       title: 'Routes — Citizenship & Residence Paths | Flag Paths',
       description: 'Browse citizenship and residence route families, including investment, ancestry, naturalization, digital nomad, retirement, and talent paths.',
-      el: createElement(RouteTypesHub, { data: citizenship }),
+      el: createElement(RouteTypesHub, { data: citizenship, licenceData: licenceExchange }),
     },
     {
       path: 'routes/citizenship-by-investment',
