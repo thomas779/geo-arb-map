@@ -1235,6 +1235,15 @@ describe('descent depth is recorded positively, never as a cutoff', () => {
       // and stops. Unlike Slovakia and Ukraine, Nepal carries no second limb
       // reaching an unspecified ancestor, so nothing reopens the list.
       'nepal-citizenship-by-descent',
+      // Constitution 1999 s.25 does not merely stop at a grandparent, it excludes
+      // anything deeper in terms: "Provided that a person shall not become a
+      // citizen of Nigeria by virtue of this section if neither of his parents nor
+      // any of his grandparents was born in Nigeria." The second limb authored on
+      // this route, s.26(2)(b), names a grandparent as its own deepest ancestor,
+      // and no limb anywhere in Chapter III reaches an unspecified ancestor, so
+      // nothing reopens the list the way Slovakia's and Ukraine's second
+      // instruments do.
+      'nigeria-citizenship-by-parent',
       'poland-citizenship-by-parent',
       // Legea 21/1991 art. 11 reaches "descendenţii acestora până la gradul III"
       // and the neighbouring art. 10 a shallower "gradul II inclusiv". Both limbs
@@ -1243,6 +1252,14 @@ describe('descent depth is recorded positively, never as a cutoff', () => {
       // "naţionalit" do not occur in it — so nothing reopens the list the way
       // Slovakia's osvedčenie and Ukraine's zakordonnyi ukrainets do.
       'romania-citizenship-by-parent',
+      // Citizenship Act 1973 s.1(1) defines "person of negro African descent" in
+      // the exhaustive "means" form — "a person whose father and father's father
+      // are or were negroes of African origin" — so the provision closes its own
+      // list at a parent and that parent's parent rather than trailing off. The
+      // 2006 amendment widens the line to either parent and any grandparent and
+      // leaves the depth at two, and no limb of the Act reaches an unspecified
+      // ancestor.
+      'sierra-leone-citizenship-by-parent',
       'uk-citizenship-by-parent',
     ]);
     for (const route of withLimit) {
