@@ -233,15 +233,28 @@ async function ensureLicenceSchema(): Promise<void> {
     String(master.find(row => row.name === name)?.sql ?? '');
   const hasGate = /nationality_gate/i.test(ddl('licence_exchange_index'));
   const hasNotEstablished = /not_established/i.test(ddl('licence_agreement_index'));
-  if (hasGate && hasNotEstablished) {
-    console.log('  licence schema up to date (nationality_gate + grants not_established)');
+  const hasSubnationalDestination =
+    /destination_subnational_label/i.test(ddl('licence_exchange_index'));
+  if (hasGate && hasNotEstablished && hasSubnationalDestination) {
+    console.log('  licence schema up to date (nationality_gate + grants not_established'
+      + ' + sub-national destinations)');
     return;
   }
-  const migration = path.join(root, 'data/d1/migrations/0010_licence_nationality_gate.sql');
-  const upgrade = splitStatements(fs.readFileSync(migration, 'utf8'))
-    .filter(statement => !/^\s*PRAGMA\b/i.test(statement));
-  console.log(`  applying 0010_licence_nationality_gate (${upgrade.length} statements)`);
-  await runBatched(upgrade, 'licence-migrate');
+  // Applied in order and by inspection, each one only when its shape is absent: 0011
+  // rebuilds the table 0010 altered, so running them the other way round would drop
+  // the columns 0010 had just added.
+  const pending: Array<[string, boolean]> = [
+    ['0010_licence_nationality_gate.sql', hasGate && hasNotEstablished],
+    ['0011_licence_subnational_destination.sql', hasSubnationalDestination],
+  ];
+  for (const [name, applied] of pending) {
+    if (applied) continue;
+    const upgrade = splitStatements(
+      fs.readFileSync(path.join(root, 'data/d1/migrations', name), 'utf8'),
+    ).filter(statement => !/^\s*PRAGMA\b/i.test(statement));
+    console.log(`  applying ${name.replace(/\.sql$/, '')} (${upgrade.length} statements)`);
+    await runBatched(upgrade, 'licence-migrate');
+  }
 }
 
 /**
@@ -308,8 +321,13 @@ export function renderLicenceSql(): string[] {
       const deadline = e.exchange_deadline_months ?? dest.exchange_deadline_months ?? null;
       const grace = e.foreign_licence_grace_months ?? dest.foreign_licence_grace_months ?? null;
       out.push(
-        'INSERT INTO licence_exchange_index (destination_iso_n3, agreement_id, origin_iso_n3, subnational_label, origin_label_en, classes, theory_test_required, practical_test_required, nationality_gate, exchange_deadline_months, foreign_licence_grace_months) VALUES ('
-        + [dest.iso_n3, dest.agreement_id ?? null, e.origin_iso_n3 ?? null, subnationalLabel,
+        'INSERT INTO licence_exchange_index (destination_iso_n3, destination_subnational_label, agreement_id, origin_iso_n3, subnational_label, origin_label_en, classes, theory_test_required, practical_test_required, nationality_gate, exchange_deadline_months, foreign_licence_grace_months) VALUES ('
+        // A sub-national destination writes NULL here and its own name in the next
+        // column. Substituting the parent federation's ISO would answer "which states
+        // grant an exchange" with "Canada" and "the United States", which is the
+        // arrangement that does not exist.
+        + [dest.iso_n3 ?? null, dest.subnational_label ?? null,
+          dest.agreement_id ?? null, e.origin_iso_n3 ?? null, subnationalLabel,
           e.origin_label_en, e.classes ?? null, e.theory_test_required ?? null, e.practical_test_required ?? null,
           e.nationality_gate ?? null, deadline, grace].map(q).join(', ')
         + ');',

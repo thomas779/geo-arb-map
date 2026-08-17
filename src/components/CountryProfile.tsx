@@ -347,11 +347,14 @@ function LicenceSection({ licence, iso, name }: { licence: CountryLicenceSummary
           </div>
           <ul className="divide-y">
             {licence.as_origin_destinations.map(d => (
-              <li key={d.iso_n3} className="px-4 py-3.5">
+              // Keyed and flagged by name where there is no ISO: a province or state
+              // that runs its own list is a destination in its own right, and has no
+              // flag of its own to show.
+              <li key={d.iso_n3 ?? d.name} className="px-4 py-3.5">
                 <div className="grid grid-cols-[auto_auto_auto_minmax(0,1fr)] items-center gap-3">
                   <span className="shrink-0 text-lg" aria-hidden>{countryFlag(iso)}</span>
                   <ArrowRight className="size-3.5 shrink-0 text-primary" aria-hidden />
-                  <span className="shrink-0 text-lg" aria-hidden>{countryFlag(d.iso_n3)}</span>
+                  <span className="shrink-0 text-lg" aria-hidden>{d.iso_n3 ? countryFlag(d.iso_n3) : '🏳️'}</span>
                   <span className="min-w-0 font-semibold">{d.name}</span>
                 </div>
                 <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2 pl-16">

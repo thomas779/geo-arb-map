@@ -78,7 +78,19 @@ export interface LicenceExchangeEntry {
 }
 
 export interface LicenceExchangeDestination {
-  iso_n3: string;
+  /**
+   * NULL where the destination is a SUB-UNIT that runs its own list.
+   *
+   * Thirteen of them do: Alberta, British Columbia and Ontario each publish their own
+   * recognised-jurisdiction list, and so do ten US states. There is no Canadian or US
+   * federal driving licence and no federal exchange list, so a row for Canada or for
+   * the United States would be an arrangement nobody concluded — the same finding the
+   * Swiss bilaterals forced on the ORIGIN side, arriving here on the destination side.
+   * A null ISO can never enter a painted set, which is exactly the property wanted.
+   */
+  iso_n3: string | null;
+  /** The sub-unit's own name, set only where `iso_n3` is null. */
+  subnational_label?: string | null;
   name: string;
   instrument: string;
   source_url: string;
@@ -330,7 +342,8 @@ export interface CountryLicenceSummary {
     no_retest_count: number;
   } | null;
   as_origin_destinations: Array<{
-    iso_n3: string;
+    /** Null where the destination is a province or state, not a country. */
+    iso_n3: string | null;
     name: string;
     no_retest: boolean;
     theory_test_required: boolean | null;
@@ -512,7 +525,11 @@ export interface LicenceAgreementIsos {
   beneficiaries: Set<string>;
 }
 
-export function isosForAgreement(agreement: LicenceAgreement): LicenceAgreementIsos {
+export function isosForAgreement(
+  // Takes the two ISO lists and nothing else, so it works on the corpus record and on
+  // the slimmed summary the index serves. Painting never needed the prose.
+  agreement: Pick<LicenceAgreement, 'destinations' | 'beneficiaries'>,
+): LicenceAgreementIsos {
   const destinations = new Set(agreement.destinations);
   const beneficiaries = new Set(agreement.beneficiaries);
   return { all: new Set([...destinations, ...beneficiaries]), destinations, beneficiaries };
@@ -525,16 +542,18 @@ export function isosForAgreement(agreement: LicenceAgreement): LicenceAgreementI
  * the browser — because the map facet is the one part of this layer that reads the
  * whole world at once and must work from the small file.
  */
-export function listAgreements(data: { agreements?: LicenceAgreement[] }): LicenceAgreement[] {
+export function listAgreements<T extends { name: string; beneficiaries: string[] }>(
+  data: { agreements?: T[] },
+): T[] {
   return [...(data.agreements ?? [])].sort(
     (a, b) => b.beneficiaries.length - a.beneficiaries.length || a.name.localeCompare(b.name),
   );
 }
 
-export function agreementById(
-  data: { agreements?: LicenceAgreement[] },
+export function agreementById<T extends { id: string }>(
+  data: { agreements?: T[] },
   id: string | null | undefined,
-): LicenceAgreement | null {
+): T | null {
   if (!id) return null;
   return (data.agreements ?? []).find(agreement => agreement.id === id) ?? null;
 }
@@ -563,7 +582,9 @@ export function agreementKindLabel(kind: LicenceAgreementKind): string {
 
 /** A destination without its entries: what the index and the slice headers carry. */
 export interface LicenceDestinationSummary {
-  iso_n3: string;
+  /** Null for a sub-national destination; see LicenceExchangeDestination.iso_n3. */
+  iso_n3: string | null;
+  subnational_label?: string | null;
   name: string;
   instrument: string;
   source_url: string;
@@ -582,15 +603,52 @@ export interface LicenceOriginIndexEntry extends OriginOption {
   slice: string;
 }
 
+/**
+ * What the map facet needs to paint an agreement, and nothing else.
+ *
+ * The prose fields — `basis`, `residence_condition`, `exclusivity`, the carve-outs —
+ * are what a reader consults ONCE, about ONE arrangement, and they are 79KB across 47
+ * agreements. Carrying them in the index made every first paint of the atlas download
+ * every instrument's reasoning, and pushed index-plus-largest-slice past the 200KB a
+ * single lookup is allowed to cost. They ship in full at `agreements_detail`; nothing
+ * is dropped, it is moved to the file a reader who asked for it fetches.
+ */
+export type LicenceAgreementSummary = Pick<
+  LicenceAgreement,
+  'id' | 'name' | 'kind' | 'directionality' | 'destinations' | 'beneficiaries'
+> & Pick<LicenceAgreement, 'grants' | 'kind_verified' | 'superseded_from'>;
+
 export interface LicenceExchangeIndex {
   schema_version: number;
   generated_at: string;
   shape: 'licence-exchange-index';
   detail: string;
   disclaimer: LicenceExchangeDisclaimer;
-  agreements: LicenceAgreement[];
+  agreements: LicenceAgreementSummary[];
+  /** Where the full agreement records live, prose and all. */
+  agreements_detail: string;
   destinations: LicenceDestinationSummary[];
   origins: LicenceOriginIndexEntry[];
+}
+
+export interface LicenceAgreementsFile {
+  shape: 'licence-agreements';
+  index: string;
+  agreements: LicenceAgreement[];
+}
+
+export const LICENCE_AGREEMENTS_PATH = '/licence-exchange/agreements.json';
+
+/** The full agreement records, as one served file. Bounded by instruments, not rows. */
+export function buildAgreementsFile(
+  data: LicenceExchangeData,
+  indexPath = '/licence_exchange.json',
+): LicenceAgreementsFile {
+  return {
+    shape: 'licence-agreements',
+    index: indexPath,
+    agreements: [...(data.agreements ?? [])],
+  };
 }
 
 export interface LicenceOriginMatch {
@@ -621,9 +679,24 @@ export function originSlicePath(key: string): string {
   return `/licence-exchange/${originSliceSlug(key)}.json`;
 }
 
+function summariseAgreement(agreement: LicenceAgreement): LicenceAgreementSummary {
+  return {
+    id: agreement.id,
+    name: agreement.name,
+    kind: agreement.kind,
+    directionality: agreement.directionality,
+    destinations: agreement.destinations,
+    beneficiaries: agreement.beneficiaries,
+    ...(agreement.grants ? { grants: agreement.grants } : {}),
+    ...(agreement.kind_verified != null ? { kind_verified: agreement.kind_verified } : {}),
+    ...(agreement.superseded_from ? { superseded_from: agreement.superseded_from } : {}),
+  };
+}
+
 function summariseDestination(dest: LicenceExchangeDestination): LicenceDestinationSummary {
   return {
     iso_n3: dest.iso_n3,
+    ...(dest.subnational_label ? { subnational_label: dest.subnational_label } : {}),
     name: dest.name,
     instrument: dest.instrument,
     source_url: dest.source_url,
@@ -641,11 +714,12 @@ function summariseDestination(dest: LicenceExchangeDestination): LicenceDestinat
 /**
  * The served index.
  *
- * Carries the agreements in full because the atlas map facet paints from them on
- * first load, and they are bounded by the number of instruments (tens), not by the
- * number of rows (hundreds). Destination `notes` are NOT here: they are per-list
- * caveats, sometimes several KB, and they belong beside the rows they qualify — so
- * they travel on the slices instead, where a reader who has actually asked about a
+ * Carries every agreement, but only the fields the atlas map facet paints from — the
+ * two ISO lists, the kind and the direction. The reasoning behind each typing is
+ * prose a reader consults once, about one arrangement, so it ships at
+ * `agreements_detail` instead. Destination `notes` are likewise not here: they are
+ * per-list caveats, sometimes several KB, and they belong beside the rows they
+ * qualify, so they travel on the slices where a reader who has actually asked about a
  * destination will see them.
  */
 export function buildLicenceIndex(data: LicenceExchangeData): LicenceExchangeIndex {
@@ -663,7 +737,8 @@ export function buildLicenceIndex(data: LicenceExchangeData): LicenceExchangeInd
     shape: 'licence-exchange-index',
     detail: 'Per-origin detail: /licence-exchange/<origin>.json (see origins[].slice)',
     disclaimer: data.disclaimer,
-    agreements: [...(data.agreements ?? [])],
+    agreements: (data.agreements ?? []).map(summariseAgreement),
+    agreements_detail: LICENCE_AGREEMENTS_PATH,
     destinations: data.destinations.map(summariseDestination),
     origins: origins.map(origin => ({
       ...origin,

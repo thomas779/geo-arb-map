@@ -28,6 +28,9 @@ country's full routes, summaries, sources, confidence and last-checked dates.
 - Country slice (JSON): `https://flagpaths.com/country/<slug>/data.json` — one jurisdiction's full detail, beside its human page at `/country/<slug>/`. Slugs come from the index or the sitemap (e.g. `/country/portugal/data.json`).
 - [Regional blocs (JSON)](https://flagpaths.com/blocs_data.json): bloc membership and rights lanes
 - [Data release manifest (JSON)](https://flagpaths.com/data_release.json): release id and provenance
+- [Driving licence exchange index (JSON)](https://flagpaths.com/licence_exchange.json): 45 destination lists and 208 issuing origins in compact form — disclaimer, destination summaries, the origin picker and the agreement ISO sets the map paints from. No rows.
+- Licence origin slice (JSON): `https://flagpaths.com/licence-exchange/<origin>.json` — every destination that lists one issuing origin, with its rows, test requirements, nationality gates and the destination's caveats. Paths come from `origins[].slice` in the index (e.g. `/licence-exchange/nat-392.json`).
+- [Licence agreements (JSON)](https://flagpaths.com/licence-exchange/agreements.json): the full record behind each arrangement — how it is legally constituted, what it grants, the residence condition, and why it was typed that way.
 - [Source code & corrections](https://github.com/thomas779/geo-arb-map): AGPL-3.0 code, CC BY-NC 4.0 dataset; corrections ship with tests
 
 ## Updates

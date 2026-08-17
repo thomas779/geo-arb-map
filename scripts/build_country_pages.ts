@@ -42,6 +42,8 @@ import { isNonApplicableJurisdiction } from '../src/lib/country';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 import type { LicenceExchangeData } from '../src/lib/licence-exchange';
 import {
+  LICENCE_AGREEMENTS_PATH,
+  buildAgreementsFile,
   buildLicenceIndex,
   buildOriginSlices,
   countryHasLicenceData,
@@ -747,6 +749,13 @@ immigration lawyer in the specific country before acting on anything shown here.
   );
   const originSlices = buildOriginSlices(licenceExchange);
   fs.mkdirSync(path.join(distDir, 'licence-exchange'), { recursive: true });
+  // The agreements in full, prose and all. Split out of the index because the map
+  // facet paints from the ISO lists alone, while `basis` and `residence_condition`
+  // are read once about one arrangement — 79KB that every first paint was paying for.
+  fs.writeFileSync(
+    path.join(distDir, LICENCE_AGREEMENTS_PATH.replace(/^\//, '')),
+    `${JSON.stringify(buildAgreementsFile(licenceExchange), null, 2)}\n`,
+  );
   for (const [servedPath, slice] of originSlices) {
     fs.writeFileSync(
       path.join(distDir, servedPath.replace(/^\//, '')),
@@ -762,7 +771,7 @@ immigration lawyer in the specific country before acting on anything shown here.
       return `  <url><loc>${u}</loc>${when ? `<lastmod>${when}</lastmod>` : ''}</url>`;
     }).join('\n')}\n</urlset>\n`);
 
-  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap + atlas-index and ${isos.length} slices + licence index and ${originSlices.size} origin slices -> ${distDir}`);
+  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap + atlas-index and ${isos.length} slices + licence index and ${originSlices.size} origin slices + agreements -> ${distDir}`);
 }
 
 if (import.meta.main) {

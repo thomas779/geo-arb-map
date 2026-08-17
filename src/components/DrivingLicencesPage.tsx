@@ -167,7 +167,9 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
             const unique = [...new Map(noRetest.map(e => [e.origin_label_en, e])).values()]
               .sort((a, b) => a.origin_label_en.localeCompare(b.origin_label_en));
             return (
-              <article key={dest.iso_n3} className="rounded-xl border bg-card p-4">
+              // Keyed on the name, not the ISO: thirteen destinations are provinces and
+              // states that carry no ISO at all, and null keys would collide.
+              <article key={dest.name} className="rounded-xl border bg-card p-4">
                 <header className="flex flex-wrap items-baseline justify-between gap-2">
                   <h3 className="font-heading text-base font-semibold">{dest.name}</h3>
                   <a
@@ -189,7 +191,7 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
                 ))}
                 <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
                   {unique.slice(0, 24).map(e => (
-                    <li key={`${dest.iso_n3}-${e.origin_label_en}`} className="text-sm">
+                    <li key={`${dest.name}-${e.origin_label_en}`} className="text-sm">
                       <span className="font-medium">{e.origin_label_en}</span>
                       <span className="ml-1 font-mono text-[0.65rem] text-muted-foreground">
                         {testLabel(e.theory_test_required, e.practical_test_required)}

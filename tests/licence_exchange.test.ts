@@ -6,6 +6,7 @@ import {
   agreementById,
   agreementGrantsLabel,
   agreementKindLabel,
+  buildAgreementsFile,
   buildLicenceIndex,
   buildOriginSlices,
   isosForAgreement,
@@ -40,15 +41,22 @@ const ANNEX_ISOS = [
 const DEST_ISOS = [...ANNEX_ISOS, '410', '756', '784'];
 
 describe('licence exchange seed (#171)', () => {
-  test('seed has fourteen destination lists plus disclaimer', () => {
+  test('every seeded list survives the regional batches, and every list is sourced', () => {
     expect(seed.schema_version).toBe(1);
     expect(seed.disclaimer.normal_residence).toMatch(/185 days/i);
     expect(seed.disclaimer.scope).toMatch(/not a guide to licence tourism/i);
-    expect(seed.destinations.map(d => d.iso_n3).sort()).toEqual([...DEST_ISOS].sort());
-    expect(seed.destinations.length).toBe(14);
+    // The fourteen seeded lists are a floor, not the set: the four regional research
+    // batches add 31 destinations on top. Asserted as a subset so a batch can land
+    // without rewriting this test, and so a DROPPED seed list still fails it.
+    const isos = new Set(seed.destinations.map(d => d.iso_n3));
+    for (const iso of DEST_ISOS) expect(isos, `seeded list ${iso} is missing`).toContain(iso);
     for (const d of seed.destinations) {
       expect(d.entries.length).toBeGreaterThan(0);
       expect(d.source_url).toMatch(/^https?:\/\//);
+      // A destination either has an ISO or names the sub-unit it is. Nothing may be
+      // anonymous, because a null ISO is what keeps a province out of the paint.
+      expect(d.iso_n3 ?? d.subnational_label, `${d.name} is neither a country nor a sub-unit`)
+        .toBeTruthy();
     }
   });
 
@@ -92,12 +100,16 @@ describe('licence exchange seed (#171)', () => {
 
   test('Japan matches every seeded annex without practical retest', () => {
     const matches = matchesForOrigin(seed, 'nat:392');
-    // The eleven annexes plus Dubai, not all fourteen destinations: neither the Swiss
+    const matched = new Set(matches.map(m => m.destination.iso_n3));
+    // The eleven annexes plus Dubai, not every destination: neither the Swiss
     // SR 0.741.531 series nor the Korean MOFA register contains a Japanese instrument,
     // and a country-shaped list must not be assumed to cover a country it omits. RTA
     // does list Japan, on its widest gate ("All countries"), so it belongs here.
-    expect(matches.map(m => m.destination.iso_n3).sort()).toEqual([...ANNEX_ISOS, '784'].sort());
-    expect(matches.every(m => m.any_no_retest || !m.any_practical)).toBe(true);
+    for (const iso of [...ANNEX_ISOS, '784']) {
+      expect(matched, `Japan should match ${iso}`).toContain(iso);
+    }
+    expect(matched).not.toContain('756'); // Switzerland
+    expect(matched).not.toContain('410'); // South Korea
     expect(matches.every(m => !m.any_practical)).toBe(true);
   });
 
@@ -111,10 +123,12 @@ describe('licence exchange seed (#171)', () => {
   test('country summary for Paraguay and Japan', () => {
     const py = summariseCountry(seed, '600');
     expect(countryHasLicenceData(py)).toBe(true);
-    expect(py.as_origin_destinations.map(d => d.iso_n3).sort()).toEqual(['250', '724']);
+    // France and Spain from the seed; Finland's Traficom list is the batch that added
+    // the third. A Paraguayan licence has no other mapped destination.
+    expect(py.as_origin_destinations.map(d => d.iso_n3).sort()).toEqual(['246', '250', '724']);
 
     const jp = summariseCountry(seed, '392');
-    expect(jp.as_origin_destinations).toHaveLength(12);
+    expect(jp.as_origin_destinations.length).toBeGreaterThanOrEqual(12);
   });
 
   test('listOrigins is non-empty and sorted', () => {
@@ -880,14 +894,20 @@ describe('the corpus is a build input; the index and the slices are the surface 
 describe('the D1 projection carries the gate, not a note about it (#210)', () => {
   /**
    * Built in memory exactly as D1 will see it: 0007's DDL, then 0010's ALTER path,
-   * then the rendered inserts. 0010 is the migration that has to exist because
-   * ensureLicenceSchema's CREATE IF NOT EXISTS cannot touch a table that already
-   * exists — the same reason 0006 exists for arrangement_index.
+   * then 0011's rebuild for sub-national destinations, then the rendered inserts.
+   * 0010 and 0011 are the migrations that have to exist because ensureLicenceSchema's
+   * CREATE IF NOT EXISTS cannot touch a table that already exists — the same reason
+   * 0006 exists for arrangement_index. Order matters: 0011 rebuilds the table 0010
+   * altered, so running them the other way round drops the columns 0010 added.
    */
   const db = (() => {
     const database = new Database(':memory:');
     database.exec('PRAGMA foreign_keys = ON;');
-    for (const file of ['0007_licence_exchange.sql', '0010_licence_nationality_gate.sql']) {
+    for (const file of [
+      '0007_licence_exchange.sql',
+      '0010_licence_nationality_gate.sql',
+      '0011_licence_subnational_destination.sql',
+    ]) {
       const ddl = readFileSync(join(root, 'data/d1/migrations', file), 'utf8');
       for (const statement of splitStatements(ddl)) database.exec(statement);
     }
@@ -936,5 +956,339 @@ describe('the D1 projection carries the gate, not a note about it (#210)', () =>
       "INSERT INTO licence_agreement_index (agreement_id, name, kind, directionality, instrument, source_url, grants)"
       + " VALUES ('u', 'u', 'unknown', 'unknown', 'u', 'u', 'probably');",
     )).toThrow();
+  });
+});
+
+describe('the four regional batches, and the distinctions that had to survive authoring', () => {
+  const byName = (name: string) => seed.destinations.find(d => d.name === name)!;
+  const byIso = (iso: string) => seed.destinations.find(d => d.iso_n3 === iso)!;
+  const rowsOf = (dest: ReturnType<typeof byIso>) => new Map(
+    dest.entries.map(e => [e.origin_label_en, e] as const),
+  );
+
+  test('the corpus is complete: 45 destinations, 909 rows, 47 agreements', () => {
+    // Pinned, not derived. These are the four research files fully authored — 19
+    // confirmed Americas destinations, 7 European, 4 Asian and Türkiye, on top of the
+    // fourteen seeded. A number that moves without a batch landing is a silent edit.
+    expect(seed.destinations).toHaveLength(45);
+    expect(seed.destinations.reduce((n, d) => n + d.entries.length, 0)).toBe(909);
+    expect(seed.agreements).toHaveLength(47);
+    // Nothing was authored from a cannot_determine row: the six destinations whose
+    // authority could not be read assert nothing, so they have no list here.
+    for (const absent of ['Belgium', 'Saudi Arabia', 'Qatar', 'Malaysia', 'Thailand', 'Mexico']) {
+      expect(seed.destinations.map(d => d.name)).not.toContain(absent);
+    }
+  });
+
+  test('there is NO Canada row and NO United States row, at destination or in the paint', () => {
+    // Driver licensing is provincial in Canada and state-level in the US: thirteen of
+    // these destinations are sub-units running their own lists, and a federal row
+    // would be an arrangement nobody concluded. The null ISO is what enforces it —
+    // a null can never enter a painted set.
+    for (const d of seed.destinations) {
+      expect(d.iso_n3, `${d.name} must not be a federation`).not.toBe('124');
+      expect(d.iso_n3, `${d.name} must not be a federation`).not.toBe('840');
+    }
+    for (const agreement of listAgreements(seed)) {
+      const painted = isosForAgreement(agreement);
+      expect(painted.destinations.has('124'), `${agreement.id} paints Canada`).toBe(false);
+      expect(painted.destinations.has('840'), `${agreement.id} paints the USA`).toBe(false);
+    }
+    const subs = seed.destinations.filter(d => d.iso_n3 === null);
+    expect(subs.map(d => d.subnational_label).sort()).toEqual([
+      'Alberta', 'British Columbia', 'Connecticut', 'Delaware', 'Georgia', 'Indiana',
+      'Kentucky', 'Louisiana', 'Ontario', 'Oregon', 'Vermont', 'Virginia', 'Wisconsin',
+    ]);
+    for (const d of subs) {
+      // Their agreements grant, but paint no destination at all: there is no ISO to
+      // paint, and borrowing the parent's would claim the federal list.
+      expect(agreementById(seed, d.agreement_id)!.destinations, d.name).toEqual([]);
+    }
+  });
+
+  test("Türkiye's clock is the opposite of everyone else's", () => {
+    const tr = byIso('792');
+    // m.88(b): six months FROM ENTRY during which the foreign licence may still be
+    // driven on, at the end of which exchange becomes COMPULSORY. Nothing lapses.
+    expect(tr.foreign_licence_grace_months).toBe(6);
+    expect(tr.exchange_deadline_months ?? null).toBeNull();
+    const labels = exchangeWindowLabels(resolveExchangeWindow(tr));
+    expect(labels).toHaveLength(1);
+    expect(labels[0]).toMatch(/compulsory/);
+    expect(labels[0]).not.toMatch(/lapses/);
+    // And no row claims a test-free exchange: neither m.88 nor the NVİ checklist
+    // addresses examinations, and a checklist that omits a step is not a waiver.
+    for (const e of tr.entries) {
+      expect(e.theory_test_required, e.origin_label_en).toBeNull();
+      expect(e.practical_test_required, e.origin_label_en).toBeNull();
+      expect(e.no_retest).toBe(false);
+    }
+  });
+
+  test('Italy varies BY ORIGIN, so the window sits on the entry and not on the list', () => {
+    const it = byIso('380');
+    expect(it.exchange_deadline_months ?? null).toBeNull();
+    const rows = rowsOf(it);
+    // Four years, refused outright after: Albania, Argentina, Switzerland, Ukraine.
+    for (const label of ['Albania', 'Argentina', 'Switzerland', 'Ukraine']) {
+      expect(rows.get(label)!.exchange_deadline_months, label).toBe(48);
+    }
+    // Six years on the same refused-outright terms for the named group.
+    expect(rows.get('United Kingdom')!.exchange_deadline_months).toBe(72);
+    expect(rows.get('Morocco')!.exchange_deadline_months).toBe(72);
+    // And no deadline at all for the rest: after six years Italy still issues the
+    // licence, subject to a revisione under art. 128. Recording 72 here would tell a
+    // reader the right lapses when the ministry says it does not.
+    expect(rows.get('Japan')!.exchange_deadline_months ?? null).toBeNull();
+    expect(resolveExchangeWindow(it, rows.get('Albania')!).deadline_months).toBe(48);
+    expect(resolveExchangeWindow(it, rows.get('Japan')!).deadline_months).toBeNull();
+    expect((it.notes ?? []).join(' ')).toMatch(/three regimes/);
+  });
+
+  test('Italy\'s four restricted rows say so in the label, and are not painted', () => {
+    const it = byIso('380');
+    const restricted = it.entries.filter(e => (e.note ?? '').startsWith('RESTRICTED CATEGORY'));
+    expect(restricted.map(e => e.origin_iso_n3).sort()).toEqual(['124', '152', '840', '894']);
+    for (const e of restricted) {
+      // The restriction must survive in a label, because a country page renders labels
+      // and not notes — otherwise "United States → Italy, no tests required".
+      expect(e.origin_label_en, e.origin_iso_n3 ?? '').toMatch(/diplomatic|government mission/);
+    }
+    const painted = isosForAgreement(agreementById(seed, 'licence-italy')!);
+    for (const iso of ['124', '152', '840', '894']) {
+      expect(painted.beneficiaries.has(iso), `Italy must not paint ${iso}`).toBe(false);
+    }
+  });
+
+  test('Norway: the same list, opposite outcomes, which only per-row flags can say', () => {
+    const rows = rowsOf(byIso('578'));
+    for (const label of ['Australia', 'Canada', 'Israel', 'Monaco', 'New Zealand',
+      'San Marino', 'South Korea', 'United States']) {
+      const e = rows.get(label)!;
+      expect(e.theory_test_required, label).toBe(true);
+      expect(e.practical_test_required, label).toBe(true);
+      expect(e.no_retest, label).toBe(false);
+    }
+    for (const label of ['United Kingdom', 'Switzerland']) {
+      const e = rows.get(label)!;
+      expect(e.theory_test_required, label).toBe(false);
+      expect(e.practical_test_required, label).toBe(false);
+    }
+    // Japan converts class B only, with no test, and is the ONLY Norwegian route with
+    // a deadline — which is why the deadline is on the row.
+    expect(rows.get('Japan')!.exchange_deadline_months).toBe(12);
+    expect(byIso('578').exchange_deadline_months ?? null).toBeNull();
+    // Greenland: a practical test is stated, a theory test is not mentioned at all.
+    expect(rows.get('Greenland')!.theory_test_required).toBeNull();
+    expect(rows.get('Greenland')!.practical_test_required).toBe(true);
+  });
+
+  test('Sweden and Greece are null, not false — and only the Swiss Greek row escapes', () => {
+    for (const e of byIso('752').entries) {
+      // Transportstyrelsen enumerates a procedure with no examination step and never
+      // says a test is not required. false would be a waiver nobody granted.
+      expect(e.theory_test_required, `SE/${e.origin_label_en}`).toBeNull();
+      expect(e.practical_test_required, `SE/${e.origin_label_en}`).toBeNull();
+      expect(e.no_retest).toBe(false);
+    }
+    const greece = byIso('300');
+    for (const e of greece.entries) {
+      if (e.origin_iso_n3 === '756') continue;
+      expect(e.theory_test_required, `GR/${e.origin_label_en}`).toBeNull();
+      expect(e.practical_test_required, `GR/${e.origin_label_en}`).toBeNull();
+    }
+    // Only procedure 02.11's title carries «ΧΩΡΙΣ ΘΕΩΡΗΤΙΚΗ ΕΞΕΤΑΣΗ».
+    const swiss = greece.entries.find(e => e.origin_iso_n3 === '756')!;
+    expect(swiss.no_retest).toBe(true);
+    expect(swiss.note ?? '').toContain('ΧΩΡΙΣ ΘΕΩΡΗΤΙΚΗ ΕΞΕΤΑΣΗ');
+    // Sweden's one-year clock binds two of the four; the UK and the Faroes are carved
+    // out on the page itself, so it cannot sit on the destination.
+    const sweden = rowsOf(byIso('752'));
+    expect(sweden.get('Switzerland')!.foreign_licence_grace_months).toBe(12);
+    expect(sweden.get('Japan')!.foreign_licence_grace_months).toBe(12);
+    expect(sweden.get('United Kingdom')!.foreign_licence_grace_months ?? null).toBeNull();
+  });
+
+  test('Singapore sits EVERY origin on the Basic Theory Test', () => {
+    const sg = byIso('702');
+    for (const e of sg.entries) {
+      expect(e.theory_test_required, e.origin_label_en).toBe(true);
+      // Recorded false, not inferred: the Traffic Police state the criteria
+      // exhaustively and add a practical test only for the work-pass class upgrade.
+      expect(e.practical_test_required, e.origin_label_en).toBe(false);
+      expect(e.no_retest).toBe(false);
+    }
+    // The gate is the applicant, not the issuing state: one open row plus three
+    // origins that merely owe an extra document.
+    expect(sg.entries.some(e => e.origin_iso_n3 === null)).toBe(true);
+    expect(sg.foreign_licence_grace_months).toBe(3);
+  });
+
+  test('Japan exchanges from everywhere; the 29-country list is only the confirmations', () => {
+    const jp = byIso('392');
+    const open = jp.entries.find(e => e.origin_label_en.startsWith('Any other country'))!;
+    // 施行令 art. 34-4(2) waives the STATUTORY tests for any foreign Class 1 licence;
+    // what an unlisted origin still sits is the administrative 知識確認 and 技能確認.
+    // So the open row is "both confirmations required", not "no route".
+    expect(open.theory_test_required).toBe(true);
+    expect(open.practical_test_required).toBe(true);
+    expect((jp.notes ?? []).join(' ')).toMatch(/NOT THE LIST OF COUNTRIES IT EXCHANGES FROM/);
+
+    // Seven named states plus Indiana, carried as rows under the US so a US lookup
+    // answers — and the United States deliberately NOT painted, because forty-three
+    // states are outside the exemption.
+    const states = jp.entries.filter(e => e.parent_iso_n3 === '840');
+    expect(states.map(e => e.subnational_label).sort()).toEqual([
+      'Colorado', 'Hawaii', 'Indiana', 'Maryland', 'Ohio', 'Oregon', 'Virginia', 'Washington',
+    ]);
+    for (const e of states) expect(e.origin_iso_n3, e.origin_label_en).toBeNull();
+    expect(states.find(e => e.subnational_label === 'Indiana')!.theory_test_required).toBe(true);
+    expect(isosForAgreement(agreementById(seed, 'licence-japan')!).all.has('840')).toBe(false);
+    expect(matchesForOrigin(seed, 'nat:840').some(m => m.destination.iso_n3 === '392')).toBe(true);
+
+    // Hong Kong is the contrast, and the two patterns must not be normalised: Cap.
+    // 374B Schedule 4 lists the United States and Canada whole.
+    const hk = rowsOf(byIso('344'));
+    expect(hk.get('United States of America')!.subnational).toBe(false);
+    expect(hk.get('Canada')!.origin_iso_n3).toBe('124');
+    expect(isosForAgreement(agreementById(seed, 'licence-hong-kong')!).beneficiaries.has('840'))
+      .toBe(true);
+  });
+
+  test('Latin America is modelled as the open arrangement it is, not as an invented list', () => {
+    // Brazil, Chile, Costa Rica and Panama's main route accept any foreign licence on
+    // residence and documentation. The honest shape is a row with no ISO and an
+    // agreement with no beneficiaries — not a country list nobody published.
+    for (const [id, iso] of [['licence-brazil', '076'], ['licence-chile', '152'],
+      ['licence-costa-rica', '188']] as const) {
+      expect(agreementById(seed, id)!.beneficiaries, id).toEqual([]);
+      expect(byIso(iso).entries.every(e => e.origin_iso_n3 === null), iso).toBe(true);
+    }
+    // Panama has both: a universal homologación and a Spain-only canje.
+    expect(agreementById(seed, 'licence-panama')!.beneficiaries).toEqual(['724']);
+    // Uruguay carries the treaty that is in force and refuses to carry the one that
+    // expired in 2019, which would have painted a live instrument that is not one.
+    expect(agreementById(seed, 'licence-uruguay')!.beneficiaries).toEqual(['724']);
+    expect(byIso('858').entries.map(e => e.origin_label_en)).not.toContain('Italy');
+    // Brazil's 180 days is the recognition period art. 2 §4 turns into an obligation,
+    // so it is the grace clock and it sits on the row that article governs.
+    const recognised = byIso('076').entries.find(e => e.origin_label_en.includes('IS recognised'))!;
+    expect(recognised.foreign_licence_grace_months).toBe(6);
+    expect(recognised.practical_test_required).toBe(false);
+    expect(byIso('076').entries.find(e => e.origin_label_en.includes('NOT recognised'))!
+      .practical_test_required).toBe(true);
+  });
+
+  test('Kentucky is null because its page contradicts itself; B.C. carries its caveat', () => {
+    const ky = byName('Kentucky (United States)');
+    for (const e of ky.entries) {
+      expect(e.theory_test_required, e.origin_label_en).toBeNull();
+      expect(e.practical_test_required, e.origin_label_en).toBeNull();
+    }
+    expect((ky.notes ?? []).join(' ')).toMatch(/CONTRADICTS ITSELF/);
+    // The B.C. list ships inside an RSC payload the quote gate strips, so the verified
+    // quote proves the regime and not the membership. That has to be said in the row.
+    const bc = byName('British Columbia (Canada)');
+    expect((bc.notes ?? []).join(' ')).toMatch(/PROVENANCE WARNING/);
+    expect((bc.notes ?? []).join(' ')).toMatch(/THE QUOTE PROVES THE REGIME, NOT THE LIST/);
+    // ICBC waives KNOWLEDGE testing only for the foreign origins; false on the road
+    // test would be inferred rather than sourced.
+    const japan = bc.entries.find(e => e.origin_iso_n3 === '392')!;
+    expect(japan.theory_test_required).toBe(false);
+    expect(japan.practical_test_required).toBeNull();
+    expect(japan.no_retest).toBe(false);
+  });
+
+  test('null survives authoring: 84 rows unrecorded on theory, 94 on practical', () => {
+    // The count is pinned because the failure mode is silent and one-directional: a
+    // later pass that "tidies" a null into a false turns a silence into a waiver, and
+    // nothing else in this file would notice.
+    const all = seed.destinations.flatMap(d => d.entries);
+    expect(all.filter(e => (e.theory_test_required ?? null) === null)).toHaveLength(84);
+    expect(all.filter(e => (e.practical_test_required ?? null) === null)).toHaveLength(94);
+    // And no_retest stays derived from both fields everywhere, so an unknown can never
+    // be laundered into a right.
+    for (const d of seed.destinations) {
+      for (const e of d.entries) {
+        expect(e.no_retest, `${d.name}/${e.origin_label_en}`)
+          .toBe(e.theory_test_required === false && e.practical_test_required === false);
+      }
+    }
+  });
+
+  test('the nationality gate is still Dubai\'s alone, across all 45 lists', () => {
+    const gated = seed.destinations.flatMap(d => d.entries)
+      .filter(e => (e.nationality_gate ?? null) !== null);
+    expect(gated).toHaveLength(60);
+    for (const d of seed.destinations) {
+      if (d.iso_n3 === '784') continue;
+      for (const e of d.entries) {
+        expect(e.nationality_gate ?? null, `${d.name}/${e.origin_label_en}`).toBeNull();
+      }
+    }
+  });
+
+  test('the two typings that were changed from the research, and why', () => {
+    // Poland and Czechia arrived typed multilateral_instrument because their annexes
+    // are defined by the Geneva 1949 / Vienna 1968 conventions. Austria settled this:
+    // the conventions govern DRIVING ON a foreign licence, and here they only define
+    // which DOCUMENT escapes an extra examination — the exchange is domestic law.
+    for (const id of ['licence-poland', 'licence-czechia']) {
+      const agreement = agreementById(seed, id)!;
+      expect(agreement.kind).toBe('unilateral_recognition');
+      expect(agreement.basis).toContain('AUSTRIA PRECEDENT');
+    }
+    // Greece arrived typed bilateral_agreement; a KYA is a domestic ministerial
+    // decision with no counterparty, which is the Dutch shape.
+    expect(agreementById(seed, 'licence-greece')!.kind).toBe('unilateral_recognition');
+    expect(agreementById(seed, 'licence-greece')!.basis).toContain('deliberate re-typing');
+  });
+});
+
+describe('the served surface after the batches: prose moved, nothing dropped (#210)', () => {
+  const index = buildLicenceIndex(seed);
+  const slices = buildOriginSlices(seed);
+  const bytes = (value: unknown) => Buffer.byteLength(`${JSON.stringify(value, null, 2)}\n`);
+
+  test('the index paints from ISO lists; the reasoning ships beside it', () => {
+    // 47 agreements' worth of `basis` and `residence_condition` is 79KB that every
+    // first paint of the atlas was downloading to colour a map from two ISO arrays.
+    // It is not trimmed — it is moved to the file a reader who asked for it fetches.
+    expect(index.agreements).toHaveLength(seed.agreements!.length);
+    expect(JSON.stringify(index)).not.toContain('"basis"');
+    expect(JSON.stringify(index)).not.toContain('residence_condition');
+    expect(index.agreements_detail).toBe('/licence-exchange/agreements.json');
+    const detail = buildAgreementsFile(seed);
+    expect(detail.agreements).toHaveLength(seed.agreements!.length);
+    expect(detail.agreements.every(a => Boolean(a.basis))).toBe(true);
+    expect(detail.agreements.every(a => Boolean(a.instrument && a.source_url))).toBe(true);
+    expect(bytes(detail), `agreements file is ${Math.round(bytes(detail) / 1024)}KB`)
+      .toBeLessThan(200_000);
+    // The map facet still has everything it paints from.
+    for (const summary of index.agreements) {
+      const full = agreementById(seed, summary.id)!;
+      expect(summary.destinations).toEqual(full.destinations);
+      expect(summary.beneficiaries).toEqual(full.beneficiaries);
+      expect(summary.kind).toBe(full.kind);
+    }
+  });
+
+  test('every index origin still resolves to a shard, and there are 208 of them', () => {
+    expect(index.origins).toHaveLength(208);
+    expect(slices.size).toBe(208);
+    for (const origin of index.origins) {
+      expect(slices.has(origin.slice), `${origin.label} has no slice`).toBe(true);
+    }
+  });
+
+  test('the worst-case lookup, and how little room is left', () => {
+    // 111KB of index plus an 81KB slice for a South Korean licence — 192KB of a
+    // 200KB budget, with the corpus now fully authored. The next thing to move out is
+    // the destination `notes`, which are per-list caveats duplicated into every slice
+    // that matches the list (45KB of that same 81KB). Recorded here so the next batch
+    // reads the number before it adds to it.
+    const largest = Math.max(...[...slices.values()].map(bytes));
+    expect(bytes(index) + largest).toBeLessThan(200_000);
+    expect(bytes(index) + largest).toBeGreaterThan(180_000);
   });
 });
