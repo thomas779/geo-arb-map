@@ -1,0 +1,1765 @@
+[
+  {
+    "destination_iso_n3": "380",
+    "destination_name": "Italy",
+    "authority": "Ministero delle Infrastrutture e dei Trasporti (Dipartimento per la mobilità sostenibile) — Uffici della Motorizzazione civile",
+    "instrument": "Accordi di reciprocità per la conversione delle patenti di guida estere (art. 136 Codice della Strada, D.Lgs. 285/1992); condizioni di decadenza fissate dalla circolare prot. 31762 del 24 ottobre 2023",
+    "source_url": "https://www.mit.gov.it/conversione-patente-estera",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Applicant must be resident in Italy, and the foreign licence must have been obtained BEFORE acquiring Italian residence. A non-EU/EEA licence may be used in Italy for one year from acquisition of residence; after that year the licence must be converted to keep driving.",
+    "exchange_window_months": null,
+    "medical_certificate_required": true,
+    "quote_original": "Stati non appartenenti all'Unione europea/Spazio economico europeo che rilasciano patenti convertibili in Italia:",
+    "quote_translation": "States not belonging to the European Union / European Economic Area that issue driving licences convertible in Italy:",
+    "entries": [
+      {
+        "origin_label_en": "Albania",
+        "origin_iso_n3": "008",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Albania (nuovo accordo valido fino al 12 luglio 2026 ...)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 4 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Algeria",
+        "origin_iso_n3": "012",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Algeria (nuovo accordo valido dal 5 aprile 2026 al 4 aprile 2031)\". No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "Andorra",
+        "origin_iso_n3": "020",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Andorra (accordo valido fino al 31 agosto 2029)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Argentina",
+        "origin_iso_n3": "032",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed without an agreement expiry. Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 4 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Bosnia and Herzegovina",
+        "origin_iso_n3": "070",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Bosnia ed Erzegovina (accordo valido fino al 17 marzo 2030)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Brazil",
+        "origin_iso_n3": "076",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Brasile (nuovo accordo valido fino al 28 aprile 2030)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "El Salvador",
+        "origin_iso_n3": "222",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"El Salvador (accordo valido fino al 4 agosto 2021)\" — the expiry printed on the ministry page is already past, yet the state remains on the convertible list. No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "Philippines",
+        "origin_iso_n3": "608",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Filippine\", without an agreement expiry. No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Giappone\", without an agreement expiry. No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "Israel",
+        "origin_iso_n3": "376",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Israele (accordo valido fino al 22 agosto 2028)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Kosovo",
+        "origin_iso_n3": "383",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Kosovo (accordo valido fino al 29 gennaio 2030)\". Kosovo has no ISO 3166-1 code; 383 is the user-assigned code this dataset already uses for it. Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Lebanon",
+        "origin_iso_n3": "422",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Libano\", without an agreement expiry. No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "North Macedonia",
+        "origin_iso_n3": "807",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Macedonia (aggiornamento settembre 2012 dei modelli di patente successivi all'accordo entrato in vigore il 23 gennaio 1998)\". No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "Morocco",
+        "origin_iso_n3": "504",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Marocco (nuovo accordo valido fino al 3 giugno 2030)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Moldova",
+        "origin_iso_n3": "498",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Moldova (nuovo accordo valido fino all'8 novembre 2030)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Monaco",
+        "origin_iso_n3": "492",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Principato di Monaco\", without an agreement expiry. No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "United Kingdom",
+        "origin_iso_n3": "826",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Gran Bretagna e Irlanda del nord (applicabile a Gibilterra, Baliato di Guernsey, Isola di Man, Baliato di Jersey) (accordo valido fino al 30 marzo 2028, prorogabile con consultazioni)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Gibraltar",
+        "origin_iso_n3": "292",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Covered by the same UK agreement, which the ministry page states is applicable to Gibilterra. Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Guernsey",
+        "origin_iso_n3": "831",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Covered by the same UK agreement, which the ministry page states is applicable to the Baliato di Guernsey. Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Isle of Man",
+        "origin_iso_n3": "833",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Covered by the same UK agreement, which the ministry page states is applicable to the Isola di Man. Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Jersey",
+        "origin_iso_n3": "832",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Covered by the same UK agreement, which the ministry page states is applicable to the Baliato di Jersey. Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Repubblica di Corea\", without an agreement expiry. No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "San Marino",
+        "origin_iso_n3": "674",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Repubblica di San Marino\", without an agreement expiry. No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "Serbia",
+        "origin_iso_n3": "688",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Serbia (accordo valido fino al 17 dicembre 2028)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Sri Lanka",
+        "origin_iso_n3": "144",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Sri Lanka (accordo valido dal 10 aprile 2026 al 9 aprile 2031)\". No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "Switzerland",
+        "origin_iso_n3": "756",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Svizzera (accordo valido fino al 12 giugno 2026 - accordo di proroga in vigore dal 13 giugno 2026 al 12 giugno 2031)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 4 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Taiwan\", without an agreement expiry. No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "Tunisia",
+        "origin_iso_n3": "788",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Tunisia (nuovo accordo valido fino al 20 luglio 2030)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Türkiye",
+        "origin_iso_n3": "792",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Turchia (accordo valido fino al 18 luglio 2028)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 6 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Ukraine",
+        "origin_iso_n3": "804",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Ucraina (accordo valido fino al 24 gennaio 2027)\". Circolare prot. 31762 del 24 ottobre 2023: conversion must be applied for within 4 years of taking up residence in Italy; after that the application is refused outright."
+      },
+      {
+        "origin_label_en": "Uruguay",
+        "origin_iso_n3": "858",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Uruguay (accordo valido fino al 17 maggio 2020)\" — the expiry printed on the ministry page is already past, yet the state remains on the convertible list. No time limit is set in the bilateral agreement itself; per circolare prot. 31762 del 24 ottobre 2023 a residence of more than 6 years means the Italian licence is issued but immediately subject to a revisione (re-examination) under art. 128 Codice della Strada."
+      },
+      {
+        "origin_label_en": "Canada",
+        "origin_iso_n3": "124",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "RESTRICTED CATEGORY. Listed under the separate heading \"Stati esteri che rilasciano patenti convertibili in Italia solo ad alcune categorie di cittadini\" — NOT a general exchange arrangement and must not be painted on a map as one. Italy lists \"Canada (personale diplomatico e consolare)\" — diplomatic and consular staff only."
+      },
+      {
+        "origin_label_en": "Chile",
+        "origin_iso_n3": "152",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "RESTRICTED CATEGORY. Listed under the separate heading \"Stati esteri che rilasciano patenti convertibili in Italia solo ad alcune categorie di cittadini\" — NOT a general exchange arrangement and must not be painted on a map as one. Italy lists \"Cile (personale diplomatico e loro familiari)\" — diplomatic staff and their families only."
+      },
+      {
+        "origin_label_en": "United States",
+        "origin_iso_n3": "840",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "RESTRICTED CATEGORY. Listed under the separate heading \"Stati esteri che rilasciano patenti convertibili in Italia solo ad alcune categorie di cittadini\" — NOT a general exchange arrangement and must not be painted on a map as one. Italy lists \"Stati Uniti (personale diplomatico e loro familiari)\" — diplomatic staff and their families only. US licences are state-issued; Italy names the country."
+      },
+      {
+        "origin_label_en": "Zambia",
+        "origin_iso_n3": "894",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "RESTRICTED CATEGORY. Listed under the separate heading \"Stati esteri che rilasciano patenti convertibili in Italia solo ad alcune categorie di cittadini\" — NOT a general exchange arrangement and must not be painted on a map as one. Italy lists \"Zambia (cittadini in missione governativa e loro familiari)\" — citizens on government mission and their families only."
+      }
+    ],
+    "notes": "Italy's third-country annex, verbatim from the ministry's own conversion page (last modified 13/07/2026). Two further sentences on the same page carry the operative rules: \"Ciò è possibile se lo Stato che ha rilasciato l'abilitazione alla guida ha sottoscritto accordi di reciprocità con l'Italia.\" and \"La conversione è possibile, senza altre prove o esami, solo se\" — which is why every listed origin is recorded with no theory and no practical test. exchange_window_months is left null at destination level because it is NOT uniform: per circolare prot. 31762 del 24 ottobre 2023 it is 4 years for Albania, Argentina, Switzerland and Ukraine; 6 years for Andorra, Bosnia and Herzegovina, Brazil, Kosovo, Israel, the United Kingdom, Serbia, Tunisia, Türkiye, Morocco and Moldova (application refused outright after that, with no re-examination available); and 6 years for every other listed state, after which the Italian licence is issued but immediately subject to a revisione under art. 128 Codice della Strada. Each entry carries its own window in its note. The original is surrendered: the page states that where a revisione is failed the Italian licence is revoked and the converted foreign licence cannot be returned because it has been sent back to the issuing authority. A licence itself obtained by converting another foreign licence that is not convertible in Italy cannot be converted (\"Non possono essere convertite patenti estere ottenute per conversione di altra patente estera non convertibile in Italia.\"). The four RESTRICTED rows (Canada, Chile, United States, Zambia) sit under a separate heading covering only diplomatic/consular staff, their families, or citizens on government mission — they are recorded because they are genuinely part of the annex, but they are NOT a general exchange arrangement and must not be painted as one. EU/EEA mutual recognition under Directive 2006/126/EC is deliberately not expanded here."
+  },
+  {
+    "destination_iso_n3": "578",
+    "destination_name": "Norway",
+    "authority": "Statens vegvesen",
+    "instrument": "Statens vegvesen — Innbytte av førerkort fra land utenfor EU/EØS (national exchange scheme; the eligible origins are enumerated by the authority, not by treaty)",
+    "source_url": "https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "unilateral_recognition",
+    "residence_condition": "Applicant must have fast bopel (settled residence) in Norway, documented by a bostedsattest from Skatteetaten. If the licence was obtained while the holder was registered as resident in Norway, the holder must show either that they had fast bopel in the issuing country when it was issued, or that it was obtained during a temporary stay abroad lasting at least six months. Full førerrett is required on moving to Norway and valid førerrett when applying.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "Du kan få norsk førerkort hvis du har førerkort fra et av de landene utenfor EU/EØS som vi har nevnt her.",
+    "quote_translation": "You can get a Norwegian driving licence if you have a driving licence from one of the countries outside the EU/EEA that we have named here.",
+    "entries": [
+      {
+        "origin_label_en": "Australia",
+        "origin_iso_n3": "036",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": true,
+        "note": "Statens vegvesen groups these eight origins on one sub-page, https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/australia-canada-og-flere/ , which states that once the exchange application is granted the holder must pass both the theory test and the practical driving test (\"Får du innvilget søknaden din, må du bestå teoriprøve og oppkjøring\"); for BE and the truck/bus classes only the practical test in the highest class is required. Two attempts at the practical test; two years from the grant to pass. No deadline to apply for the exchange. Australian licences are state/territory-issued; Statens vegvesen names the country."
+      },
+      {
+        "origin_label_en": "Canada",
+        "origin_iso_n3": "124",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": true,
+        "note": "Statens vegvesen groups these eight origins on one sub-page, https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/australia-canada-og-flere/ , which states that once the exchange application is granted the holder must pass both the theory test and the practical driving test (\"Får du innvilget søknaden din, må du bestå teoriprøve og oppkjøring\"); for BE and the truck/bus classes only the practical test in the highest class is required. Two attempts at the practical test; two years from the grant to pass. No deadline to apply for the exchange. Canadian licences are province/territory-issued; Statens vegvesen names the country."
+      },
+      {
+        "origin_label_en": "Israel",
+        "origin_iso_n3": "376",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": true,
+        "note": "Statens vegvesen groups these eight origins on one sub-page, https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/australia-canada-og-flere/ , which states that once the exchange application is granted the holder must pass both the theory test and the practical driving test (\"Får du innvilget søknaden din, må du bestå teoriprøve og oppkjøring\"); for BE and the truck/bus classes only the practical test in the highest class is required. Two attempts at the practical test; two years from the grant to pass. No deadline to apply for the exchange."
+      },
+      {
+        "origin_label_en": "Monaco",
+        "origin_iso_n3": "492",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": true,
+        "note": "Statens vegvesen groups these eight origins on one sub-page, https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/australia-canada-og-flere/ , which states that once the exchange application is granted the holder must pass both the theory test and the practical driving test (\"Får du innvilget søknaden din, må du bestå teoriprøve og oppkjøring\"); for BE and the truck/bus classes only the practical test in the highest class is required. Two attempts at the practical test; two years from the grant to pass. No deadline to apply for the exchange."
+      },
+      {
+        "origin_label_en": "New Zealand",
+        "origin_iso_n3": "554",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": true,
+        "note": "Statens vegvesen groups these eight origins on one sub-page, https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/australia-canada-og-flere/ , which states that once the exchange application is granted the holder must pass both the theory test and the practical driving test (\"Får du innvilget søknaden din, må du bestå teoriprøve og oppkjøring\"); for BE and the truck/bus classes only the practical test in the highest class is required. Two attempts at the practical test; two years from the grant to pass. No deadline to apply for the exchange."
+      },
+      {
+        "origin_label_en": "San Marino",
+        "origin_iso_n3": "674",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": true,
+        "note": "Statens vegvesen groups these eight origins on one sub-page, https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/australia-canada-og-flere/ , which states that once the exchange application is granted the holder must pass both the theory test and the practical driving test (\"Får du innvilget søknaden din, må du bestå teoriprøve og oppkjøring\"); for BE and the truck/bus classes only the practical test in the highest class is required. Two attempts at the practical test; two years from the grant to pass. No deadline to apply for the exchange."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": true,
+        "note": "Statens vegvesen groups these eight origins on one sub-page, https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/australia-canada-og-flere/ , which states that once the exchange application is granted the holder must pass both the theory test and the practical driving test (\"Får du innvilget søknaden din, må du bestå teoriprøve og oppkjøring\"); for BE and the truck/bus classes only the practical test in the highest class is required. Two attempts at the practical test; two years from the grant to pass. No deadline to apply for the exchange."
+      },
+      {
+        "origin_label_en": "United States",
+        "origin_iso_n3": "840",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": true,
+        "note": "Statens vegvesen groups these eight origins on one sub-page, https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/australia-canada-og-flere/ , which states that once the exchange application is granted the holder must pass both the theory test and the practical driving test (\"Får du innvilget søknaden din, må du bestå teoriprøve og oppkjøring\"); for BE and the truck/bus classes only the practical test in the highest class is required. Two attempts at the practical test; two years from the grant to pass. No deadline to apply for the exchange. US licences are state-issued; Statens vegvesen names the country."
+      },
+      {
+        "origin_label_en": "United Kingdom",
+        "origin_iso_n3": "826",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Sub-page https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/storbritannia/ : \"Du kan bytte det britiske førerkortet ditt til et norsk førerkort. Reglene er de samme som for førerkort fra EØS-land.\" Applies whether the licence was issued before or after Brexit. Sub-page states \"Reglene er de samme som for førerkort fra EØS-land\" — the same rules as for an EEA licence, i.e. exchange without a test."
+      },
+      {
+        "origin_label_en": "Switzerland",
+        "origin_iso_n3": "756",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Sub-page https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/sveits/ : \"Du kan bytte det sveitsiske førerkortet ditt til et norsk førerkort. Reglene er de samme som for førerkort fra EØS-land.\" Sub-page states \"Reglene er de samme som for førerkort fra EØS-land\" — the same rules as for an EEA licence, i.e. exchange without a test."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": "B",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Sub-page https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/japan/ : \"Klasse B kan byttes inn uten å måtte bestå noen prøver. Du får ikke byttet inn andre klasser enn klasse B.\" Class B only, no test. The application must be made within one year of taking up fast bopel in Norway (unlike the other Norwegian exchange routes, which have no deadline)."
+      },
+      {
+        "origin_label_en": "Greenland",
+        "origin_iso_n3": "304",
+        "subnational_label": null,
+        "classes": "B",
+        "theory_test_required": null,
+        "practical_test_required": true,
+        "note": "Sub-page https://www.vegvesen.no/forerkort/har-forerkort/utenlandsk-forerkort-i-norge/innbytte-av-forerkort-fra-land-utenfor-eu-eos/gronland/ : class B only, and only if the licence was issued after 1 January 1995 (\"Førerkortet kan ikke byttes til norsk hvis det er utstedt før 2. januar 1995\"). The page requires an oppkjøring (practical driving test) with two attempts but sets out no theory-test step, so theory is recorded as not stated rather than as waived. No deadline to apply."
+      }
+    ],
+    "notes": "Norway's annex is closed and the same page says so: a licence from an unlisted non-EU/EEA country cannot be exchanged at all. The rules differ sharply WITHIN the annex, which is the whole value of the row: eight origins (Australia, Canada, Israel, Monaco, New Zealand, San Marino, South Korea, United States) require passing BOTH the theory test and the practical driving test after the exchange application is granted; the United Kingdom and Switzerland are treated exactly as EEA licences and need no test; Japan converts class B only, with no test; Greenland converts class B only and requires a practical test. Detail for each group comes from the authority's own sub-pages, which are cited inside the entry notes. exchange_window_months is null at destination level because it varies: no deadline at all for the eight-country group and for Greenland, but 12 months from taking up fast bopel for Japan. medical_certificate_required is left unrecorded because it is conditional, not general: a synsattest is required only where eyesight is impaired, and a helseattest only for the heavy classes or where health may affect road safety. The original licence is surrendered with the application. EEA mutual recognition under Directive 2006/126/EC (which Norway applies via the EEA Agreement) is deliberately not expanded here."
+  },
+  {
+    "destination_iso_n3": "752",
+    "destination_name": "Sweden",
+    "authority": "Transportstyrelsen",
+    "instrument": "Transportstyrelsen — Byta ut körkort från Förenade kungariket, Färöarna, Japan eller Schweiz",
+    "source_url": "https://www.transportstyrelsen.se/sv/vagtrafik/korkort/har-korkort/utlandska-korkort/korkort-fran-lander-utanfor-ees/",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "unilateral_recognition",
+    "residence_condition": "Applicant must be permanently resident in Sweden (permanent bosatt i Sverige), hold a valid licence, and meet the personal and medical requirements applying to a Swedish licence.",
+    "exchange_window_months": 12,
+    "medical_certificate_required": true,
+    "quote_original": "Du kan byta ut ditt körkort från Förenade kungariket Storbritannien och Nordirland (Förenade kungariket), Färöarna, Schweiz eller Japan mot ett svenskt. Körkort från andra länder utanför EES kan inte bytas ut mot ett svenskt körkort.",
+    "quote_translation": "You can exchange your driving licence from the United Kingdom of Great Britain and Northern Ireland (the United Kingdom), the Faroe Islands, Switzerland or Japan for a Swedish one. Driving licences from other countries outside the EEA cannot be exchanged for a Swedish driving licence.",
+    "entries": [
+      {
+        "origin_label_en": "United Kingdom",
+        "origin_iso_n3": "826",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Named as \"Förenade kungariket Storbritannien och Nordirland\". Unlike the other three, a UK licence stays usable in Sweden beyond one year of folkbokföring, so there is no one-year exchange deadline. Transportstyrelsen's page sets out the whole application (application form, health declaration and eyesight certificate for the light classes or a medical certificate for the heavy classes, the original foreign licence, and a certificate of validity from the issuing authority) and contains no driving-test step — but it does not say in terms that no test is required, so both test fields are left unrecorded rather than written as false."
+      },
+      {
+        "origin_label_en": "Faroe Islands",
+        "origin_iso_n3": "234",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Named as \"Färöarna\". Like the UK licence, a Faroese licence stays usable beyond one year of folkbokföring, so there is no one-year exchange deadline. Transportstyrelsen's page sets out the whole application (application form, health declaration and eyesight certificate for the light classes or a medical certificate for the heavy classes, the original foreign licence, and a certificate of validity from the issuing authority) and contains no driving-test step — but it does not say in terms that no test is required, so both test fields are left unrecorded rather than written as false."
+      },
+      {
+        "origin_label_en": "Switzerland",
+        "origin_iso_n3": "756",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Named as \"Schweiz\". Subject to the one-year deadline from folkbokföring. The surrendered licence is sent back to the issuing authority. Transportstyrelsen's page sets out the whole application (application form, health declaration and eyesight certificate for the light classes or a medical certificate for the heavy classes, the original foreign licence, and a certificate of validity from the issuing authority) and contains no driving-test step — but it does not say in terms that no test is required, so both test fields are left unrecorded rather than written as false."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Named as \"Japan\". Subject to the one-year deadline from folkbokföring. The validity certificate must be obtained from the Japanese embassy in Stockholm, and the surrendered licence is sent there. Transportstyrelsen's page sets out the whole application (application form, health declaration and eyesight certificate for the light classes or a medical certificate for the heavy classes, the original foreign licence, and a certificate of validity from the issuing authority) and contains no driving-test step — but it does not say in terms that no test is required, so both test fields are left unrecorded rather than written as false."
+      }
+    ],
+    "notes": "Sweden's third-country annex is four entries long and the page states its own exhaustiveness: licences from any other non-EEA country cannot be exchanged. exchange_window_months is 12 because a non-EEA licence ceases to be valid in Sweden one year from the day of folkbokföring — but the page carves out the UK and the Faroe Islands, whose licences remain usable beyond that year, so the 12-month figure binds only Switzerland and Japan. Medical evidence is required in every case: a Hälsodeklaration plus an Intyg om synprövning for AM/A1/A2/A/B/BE, or a Läkarintyg for C1/C1E/C/CE/D1/D1E/D/DE. The original is surrendered — Japanese licences are returned to the Japanese embassy in Stockholm and UK, Faroese and Swiss licences to the issuing licensing authority. The test fields are null, not false: the page enumerates the entire procedure and contains no examination step, but it never states that no test is required, and writing false would invent a waiver. Page last updated 2025-08-14. EEA mutual recognition is handled on a separate Transportstyrelsen page and is deliberately not expanded here."
+  },
+  {
+    "destination_iso_n3": "246",
+    "destination_name": "Finland",
+    "authority": "Liikenne- ja viestintävirasto Traficom",
+    "instrument": "Traficom — Ulkomaisen ajokortin vaihtaminen suomalaiseen ajokorttiin; list of \"Sopimusvaltiot ja niihin rinnastettavat valtiot\" (contracting states and states equated with them)",
+    "source_url": "https://www.traficom.fi/fi/autoilijat/ajokortit/ulkomaisen-ajokortin-vaihtaminen-suomalaiseen-ajokorttiin",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "unilateral_recognition",
+    "residence_condition": "Applicant must be permanently resident in Finland (\"Jotta voit saada suomalaisen ajokortin, sinun tulee asua vakituisesti Suomessa\"). A licence first obtained while already living in Finland cannot be exchanged, though one renewed abroad while living in Finland can.",
+    "exchange_window_months": 24,
+    "medical_certificate_required": true,
+    "quote_original": "Jos olet asunut Suomessa vakinaisesti yli 2 vuotta, ajo-oikeutesi on päättynyt tai vaihdat BE-luokan tai kuorma- ja/tai linja-auton ajokorttia, sinun pitää suorittaa kuljettajantutkinto.",
+    "quote_translation": "If you have lived permanently in Finland for more than 2 years, if your driving entitlement has expired, or if you are exchanging a BE-class or a truck and/or bus licence, you must take the driver's examination.",
+    "entries": [
+      {
+        "origin_label_en": "Albania",
+        "origin_iso_n3": "008",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Algeria",
+        "origin_iso_n3": "012",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Andorra",
+        "origin_iso_n3": "020",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Added to the Traficom list with effect from 25.9.2025. Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "United Arab Emirates",
+        "origin_iso_n3": "784",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Argentina",
+        "origin_iso_n3": "032",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Armenia",
+        "origin_iso_n3": "051",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Australia",
+        "origin_iso_n3": "036",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Azerbaijan",
+        "origin_iso_n3": "031",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Bahamas",
+        "origin_iso_n3": "044",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Bahrain",
+        "origin_iso_n3": "048",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Bangladesh",
+        "origin_iso_n3": "050",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Barbados",
+        "origin_iso_n3": "052",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Benin",
+        "origin_iso_n3": "204",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Bosnia and Herzegovina",
+        "origin_iso_n3": "070",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Botswana",
+        "origin_iso_n3": "072",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Brazil",
+        "origin_iso_n3": "076",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Brunei Darussalam",
+        "origin_iso_n3": "096",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Burkina Faso",
+        "origin_iso_n3": "854",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Chile",
+        "origin_iso_n3": "152",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Dominican Republic",
+        "origin_iso_n3": "214",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Ecuador",
+        "origin_iso_n3": "218",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Egypt",
+        "origin_iso_n3": "818",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "El Salvador",
+        "origin_iso_n3": "222",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Added to the Traficom list with effect from 27.8.2025. Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "South Africa",
+        "origin_iso_n3": "710",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Ethiopia",
+        "origin_iso_n3": "231",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Fiji",
+        "origin_iso_n3": "242",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Philippines",
+        "origin_iso_n3": "608",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Georgia",
+        "origin_iso_n3": "268",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Ghana",
+        "origin_iso_n3": "288",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Guyana",
+        "origin_iso_n3": "328",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed by Traficom as \"Guayana\"; read as Guyana (the Finnish exonym is normally \"Guyana\", so the spelling is unusual and the mapping is inferred, not stated). Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Guatemala",
+        "origin_iso_n3": "320",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Haiti",
+        "origin_iso_n3": "332",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Honduras",
+        "origin_iso_n3": "340",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Hong Kong",
+        "origin_iso_n3": "344",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "India",
+        "origin_iso_n3": "356",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Iraq",
+        "origin_iso_n3": "368",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Iran",
+        "origin_iso_n3": "364",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Israel",
+        "origin_iso_n3": "376",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Jamaica",
+        "origin_iso_n3": "388",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Jordan",
+        "origin_iso_n3": "400",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Yugoslavia",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed by Traficom as \"Jugoslavia\". A defunct state with no current ISO 3166 code; not mapped. Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Cambodia",
+        "origin_iso_n3": "116",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Canada",
+        "origin_iso_n3": "124",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Cabo Verde",
+        "origin_iso_n3": "132",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Kazakhstan",
+        "origin_iso_n3": "398",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Kenya",
+        "origin_iso_n3": "404",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Central African Republic",
+        "origin_iso_n3": "140",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Kyrgyzstan",
+        "origin_iso_n3": "417",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Democratic Republic of the Congo",
+        "origin_iso_n3": "180",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Republic of the Congo",
+        "origin_iso_n3": "178",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Kurdistan",
+        "origin_iso_n3": null,
+        "subnational_label": "Kurdistan",
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed by Traficom as \"Kurdistan\", which is not a sovereign state and has no ISO 3166 code; the Traficom page does not say which issuing authority is meant. Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Cuba",
+        "origin_iso_n3": "192",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Kuwait",
+        "origin_iso_n3": "414",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Laos",
+        "origin_iso_n3": "418",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Lesotho",
+        "origin_iso_n3": "426",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Lebanon",
+        "origin_iso_n3": "422",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Liberia",
+        "origin_iso_n3": "430",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Macao",
+        "origin_iso_n3": "446",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Madagascar",
+        "origin_iso_n3": "450",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Malawi",
+        "origin_iso_n3": "454",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Malaysia",
+        "origin_iso_n3": "458",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Maldives",
+        "origin_iso_n3": "462",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Mali",
+        "origin_iso_n3": "466",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Morocco",
+        "origin_iso_n3": "504",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Moldova",
+        "origin_iso_n3": "498",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Monaco",
+        "origin_iso_n3": "492",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Mongolia",
+        "origin_iso_n3": "496",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Montenegro",
+        "origin_iso_n3": "499",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Myanmar",
+        "origin_iso_n3": "104",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Namibia",
+        "origin_iso_n3": "516",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Niger",
+        "origin_iso_n3": "562",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Nigeria",
+        "origin_iso_n3": "566",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Côte d'Ivoire",
+        "origin_iso_n3": "384",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Oman",
+        "origin_iso_n3": "512",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Pakistan",
+        "origin_iso_n3": "586",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "State of Palestine",
+        "origin_iso_n3": "275",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Papua New Guinea",
+        "origin_iso_n3": "598",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Paraguay",
+        "origin_iso_n3": "600",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Peru",
+        "origin_iso_n3": "604",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "North Macedonia",
+        "origin_iso_n3": "807",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Qatar",
+        "origin_iso_n3": "634",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Rwanda",
+        "origin_iso_n3": "646",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "San Marino",
+        "origin_iso_n3": "674",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Saudi Arabia",
+        "origin_iso_n3": "682",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Senegal",
+        "origin_iso_n3": "686",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Serbia",
+        "origin_iso_n3": "688",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Seychelles",
+        "origin_iso_n3": "690",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Sierra Leone",
+        "origin_iso_n3": "694",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Singapore",
+        "origin_iso_n3": "702",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Sri Lanka",
+        "origin_iso_n3": "144",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Switzerland",
+        "origin_iso_n3": "756",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Syria",
+        "origin_iso_n3": "760",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Tajikistan",
+        "origin_iso_n3": "762",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Thailand",
+        "origin_iso_n3": "764",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Togo",
+        "origin_iso_n3": "768",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Trinidad and Tobago",
+        "origin_iso_n3": "780",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Tunisia",
+        "origin_iso_n3": "788",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Türkiye",
+        "origin_iso_n3": "792",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Turkmenistan",
+        "origin_iso_n3": "795",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Uganda",
+        "origin_iso_n3": "800",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Ukraine",
+        "origin_iso_n3": "804",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Uruguay",
+        "origin_iso_n3": "858",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "New Zealand",
+        "origin_iso_n3": "554",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Uzbekistan",
+        "origin_iso_n3": "860",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Belarus",
+        "origin_iso_n3": "112",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Holy See",
+        "origin_iso_n3": "336",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Venezuela",
+        "origin_iso_n3": "862",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Russian Federation",
+        "origin_iso_n3": "643",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Viet Nam",
+        "origin_iso_n3": "704",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "United Kingdom and its dependent territories",
+        "origin_iso_n3": "826",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Listed as \"Yhdistynyt kuningaskunta ja siihen kuuluvat alusmaat\" — the United Kingdom together with its dependent territories, which Traficom does not enumerate. Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "United States",
+        "origin_iso_n3": "840",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      },
+      {
+        "origin_label_en": "Zimbabwe",
+        "origin_iso_n3": "716",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Contracting/equated state on the Traficom list. No driver's test if the exchange is made while resident in Finland for 2 years or less, the entitlement is still valid, and the class is not BE, truck or bus; otherwise a kuljettajantutkinto (theory + driving test) is required."
+      }
+    ],
+    "notes": "This is by far the widest third-country annex in the region: Traficom publishes a named list of roughly 115 \"sopimusvaltiot ja niihin rinnastettavat valtiot\" whose licences can be exchanged, and the operative distinction is timing rather than origin. A contracting-state licence may be driven on for 2 years after moving permanently to Finland, and if the exchange is applied for inside that window, for a class other than BE/truck/bus, and while the entitlement is still valid, no driver's examination is required. Outside those bounds a full kuljettajantutkinto — theory AND driving test — is required, which is why exchange_window_months is 24: the window is what buys the test waiver. A medical certificate (lääkärinlausunto, valid 6 months) is required for every contracting-state exchange. The foreign licence is retained by Traficom and is returned only if the holder moves out of the country; a temporary Finnish licence is issued in the interim. Three list entries are not mappable to ISO 3166: \"Jugoslavia\" (a defunct state), \"Kurdistan\" (not a sovereign state, and Traficom does not say which issuing authority is meant), and \"Yhdistynyt kuningaskunta ja siihen kuuluvat alusmaat\", where the dependent territories are not enumerated. \"Guayana\" is read as Guyana, but the Finnish exonym is normally spelled \"Guyana\", so that mapping is inferred rather than stated. Classes are not recorded per origin because the page does not map them per country. Page last updated 25.6.2026. The EU/EEA list on the same page is deliberately not expanded here."
+  },
+  {
+    "destination_iso_n3": "616",
+    "destination_name": "Poland",
+    "authority": "Minister właściwy do spraw transportu; licences issued by the starosta",
+    "instrument": "Ustawa z dnia 5 stycznia 2011 r. o kierujących pojazdami, art. 14 ust. 1 — consolidated text announced by Obwieszczenie Marszałka Sejmu z dnia 1 września 2025 r., Dz.U. 2025 poz. 1226",
+    "source_url": "https://api.sejm.gov.pl/eli/acts/DU/2025/1226/text.pdf",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "multilateral_instrument",
+    "residence_condition": null,
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "Jeżeli prawo jazdy wydane za granicą nie jest określone w konwencjach o ruchu drogowym, o których mowa w art. 4 ust. 1 pkt 2 lit. a i b, dodatkowym warunkiem otrzymania polskiego prawa jazdy jest złożenie z wynikiem pozytywnym części teoretycznej egzaminu państwowego i przedstawienie uwierzytelnionego tłumaczenia zagranicznego dokumentu.",
+    "quote_translation": "If the driving licence issued abroad is not one defined in the road traffic conventions referred to in art. 4(1)(2)(a) and (b), an additional condition for obtaining a Polish driving licence is passing the theoretical part of the state examination and producing a certified translation of the foreign document.",
+    "entries": [
+      {
+        "origin_label_en": "States whose national driving licence is defined in the 1949 Geneva or 1968 Vienna Road Traffic Convention",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Art. 14 ust. 1 imposes the theory-exam condition only where the foreign licence \"nie jest określone w konwencjach o ruchu drogowym\" (is not one defined in the road traffic conventions). A licence that is so defined is therefore exchanged on surrender of the foreign document, with no exam. Poland does not publish an enumerated country annex; the class is defined by convention membership, which is why no ISO code is given."
+      },
+      {
+        "origin_label_en": "Any other state (licence not defined in the road traffic conventions)",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": false,
+        "note": "Art. 14 ust. 1: the additional condition is passing the THEORY part of the state examination and producing a certified translation. The statute names only \"części teoretycznej egzaminu państwowego\", so the practical part is recorded as not required on the face of the provision."
+      }
+    ],
+    "notes": "Poland's third-country annex is defined by treaty membership, not by an enumerated country list, so it is recorded as two classes rather than as country rows — inventing a list of convention parties from a different instrument would be fabricating the annex. Art. 4 ust. 1 pkt 2 lit. a and b of the same act identify the two conventions: the Geneva Road Traffic Convention of 19 September 1949 (Dz. U. z 1959 r. Nr 54, poz. 321 i 322) and the Vienna Road Traffic Convention of 8 November 1968 (Dz. U. z 1988 r. Nr 5, poz. 40 i 44). Every exchange requires surrender of the foreign document to the issuing authority (\"po zwrocie zagranicznego dokumentu organowi wydającemu prawo jazdy\"). Only the THEORY part of the state examination is imposed on non-convention licences; the practical part is not, on the face of the provision. residence_condition, exchange_window_months and medical_certificate_required are left unrecorded because art. 14 itself is silent on all three — the general issuance conditions sit in art. 11, which was not read for this row. Art. 14 ust. 3-5 additionally allow the transport minister to set different, reciprocity-based conditions for the citizens of particular states by regulation; no such regulation was located, so no bilateral rows are claimed. The EU/Switzerland/EFTA-EEA carve-out in the same sentence is the mutual-recognition rule and is deliberately not expanded as annex rows."
+  },
+  {
+    "destination_iso_n3": "203",
+    "destination_name": "Czechia",
+    "authority": "Ministerstvo dopravy ČR; applications lodged at any obecní úřad obce s rozšířenou působností",
+    "instrument": "Ministerstvo dopravy — Výměna řidičského průkazu vydaného nečlenským státem EU, který svým provedením neodpovídá Úmluvám o silničním provozu (Ženeva 1949, Vídeň 1968)",
+    "source_url": "https://www.mdcr.cz/Zivotni-situace/Ridicske-prukazy/Vymena-ridicskeho-prukazu-vydaneho-neclenskym-stat",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "multilateral_instrument",
+    "residence_condition": "Holder of a valid non-EU licence with trvalý pobyt in Czechia, or přechodný pobyt for more than 1 year, is OBLIGED to apply for exchange. Where trvalý pobyt is absent, documents proving obvyklé bydliště in Czechia must be produced.",
+    "exchange_window_months": 3,
+    "medical_certificate_required": null,
+    "quote_original": "Při výměně řidičských průkazů vydaných státem Japonsko, Korejská republika a Spojené arabské emiráty",
+    "quote_translation": "When exchanging driving licences issued by the States of Japan, the Republic of Korea and the United Arab Emirates",
+    "entries": [
+      {
+        "origin_label_en": "States whose licence conforms to the Vienna 1968 or Geneva 1949 Road Traffic Convention model",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Sibling ministry page https://www.mdcr.cz/Zivotni-situace/Ridicske-prukazy/vymena-RP-mimoEU-CZ : \"Řidičský průkaz vydaný cizím státem může být uznán k výměně za český řidičský průkaz pouze za předpokladu, že svým provedením bude odpovídat požadavkům (vzoru řidičského průkazu) stanovených Úmluvou o silničním provozu (Vídeň 1968) nebo Úmluvou o silničním provozu (Ženeva 1949).\" That page lists only a valid identity document and the valid foreign licence — no examination and no medical certificate. Czechia publishes no enumerated country annex for this branch, which is why no ISO code is given."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Named exception on the non-conforming-licence page: for Japan only documents 1, 2, 3 and 6 are required (identity, proof of obvyklé bydliště, the valid foreign licence, and the medical certificate), plus a translation if needed — i.e. the přezkoušení z odborné způsobilosti is not required."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Named exception (\"Korejská republika\") on the non-conforming-licence page: only documents 1, 2, 3 and 6 are required, plus a translation if needed — no přezkoušení z odborné způsobilosti."
+      },
+      {
+        "origin_label_en": "United Arab Emirates",
+        "origin_iso_n3": "784",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Named exception (\"Spojené arabské emiráty\") on the non-conforming-licence page: only documents 1, 2, 3 and 6 are required, plus a translation if needed — no přezkoušení z odborné způsobilosti."
+      },
+      {
+        "origin_label_en": "Any other non-EU state whose licence does not conform to the conventions",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Exchange is available but the applicant must produce a \"přezkoušení z odborné způsobilosti k řízení motorových vozidel\" no older than 30 days, plus a medical certificate no older than 30 days. The ministry page does not split that re-examination into theory and practical components, so both fields are left unrecorded rather than guessed."
+      }
+    ],
+    "notes": "Czechia's annex has two limbs and a named exception list, which is what makes it worth recording. Limb one: a non-EU licence whose FORM conforms to the Vienna 1968 or Geneva 1949 model is exchanged on production of an identity document and the licence alone — sibling ministry page https://www.mdcr.cz/Zivotni-situace/Ridicske-prukazy/vymena-RP-mimoEU-CZ . Limb two: a non-conforming licence is still exchangeable, but requires a přezkoušení z odborné způsobilosti k řízení motorových vozidel no older than 30 days plus a medical certificate no older than 30 days. Japan, the Republic of Korea and the United Arab Emirates are named as exceptions to limb two and need neither the re-examination nor the extra documents — only identity, proof of residence, the licence and the medical certificate. exchange_window_months is 3: the application must be made within 3 months of the day a Czech citizen returns to Czechia, or of the day trvalý pobyt or přechodný pobyt for more than 1 year is granted. medical_certificate_required is null at destination level because it is not uniform — required on the non-conforming limb and for the three named states, but not listed among the documents on the conforming limb. The original is surrendered on collection of the Czech licence and is sent to the issuing state, or held by the municipal office at the holder's request. A document marked \"Provisional driving licence\" is expressly not exchangeable, and an expired foreign licence cannot be exchanged at all. Non-conforming-licence page dated 02.08.2024; conforming-licence page dated 01.10.2020. EU mutual recognition is handled on a separate page and is deliberately not expanded here."
+  },
+  {
+    "destination_iso_n3": "300",
+    "destination_name": "Greece",
+    "authority": "Υπουργείο Υποδομών και Μεταφορών — Διευθύνσεις Μεταφορών και Επικοινωνιών των Περιφερειακών Ενοτήτων",
+    "instrument": "ΚΥΑ 24058/2653/2004 (Β΄1119) «Καθορισμός όρων και προϋποθέσεων, διαδικασίας ... για τη μετατροπή, σε ελληνικές, αδειών οδήγησης που εκδόθηκαν από κράτη μη μέλη της Ε.Ε. ή από χώρες της τέως Σοβιετικής Ένωσης», as implemented through ministry procedures 02.10 and 02.11; π.δ. 51/2012 (Α΄101)",
+    "source_url": "https://www.yme.gov.gr/metafores/adeies-odigisis/analytiki-parousiasi-kathe-diadikasias-xorigisis-a-o",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Applicant must have συνήθης διαμονή (normal residence) in Greece, or have been a student or pupil in Greece for at least six months before applying. A non-Greek national must produce a residence document issued at least 185 days before the application. The applicant must hold no other Greek, EU/EEA or third-country licence.",
+    "exchange_window_months": null,
+    "medical_certificate_required": true,
+    "quote_original": "ΜΕΤΑΤΡΟΠΗ ΙΣΧΥΟΥΣΑΣ ΑΔΕΙΑΣ ΟΔΗΓΗΣΗΣ ΑΠΟ Η.Π.Α., ΚΑΝΑΔΑ, ΑΥΣΤΡΑΛΙΑ, ΙΑΠΩΝΙΑ, ΝΟΤΙΑ ΑΦΡΙΚΗ ΚΑΙ ΝΟΤΙΑ ΚΟΡΕΑ ΣΕ ΑΝΤΙΣΤΟΙΧΗ ΕΛΛΗΝΙΚΗ",
+    "quote_translation": "CONVERSION OF A VALID DRIVING LICENCE FROM THE U.S.A., CANADA, AUSTRALIA, JAPAN, SOUTH AFRICA AND SOUTH KOREA INTO THE CORRESPONDING GREEK ONE",
+    "entries": [
+      {
+        "origin_label_en": "United States",
+        "origin_iso_n3": "840",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Procedure 02.10 of the ministry's list of driving-licence procedures. Unlike the parallel Swiss procedure 02.11, the title of 02.10 does NOT carry the words \"χωρίς θεωρητική εξέταση και δοκιμασία προσόντων και συμπεριφοράς\" (without theory examination and practical test), and the procedure sheet itself sets out only documents, fees and preconditions. Whether a test applies is therefore not recorded here rather than written as waived. Greece names the country (\"Η.Π.Α.\"); US licences are in fact state-issued."
+      },
+      {
+        "origin_label_en": "Canada",
+        "origin_iso_n3": "124",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Procedure 02.10 of the ministry's list of driving-licence procedures. Unlike the parallel Swiss procedure 02.11, the title of 02.10 does NOT carry the words \"χωρίς θεωρητική εξέταση και δοκιμασία προσόντων και συμπεριφοράς\" (without theory examination and practical test), and the procedure sheet itself sets out only documents, fees and preconditions. Whether a test applies is therefore not recorded here rather than written as waived. Greece names the country (\"ΚΑΝΑΔΑ\"); Canadian licences are in fact province/territory-issued."
+      },
+      {
+        "origin_label_en": "Australia",
+        "origin_iso_n3": "036",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Procedure 02.10 of the ministry's list of driving-licence procedures. Unlike the parallel Swiss procedure 02.11, the title of 02.10 does NOT carry the words \"χωρίς θεωρητική εξέταση και δοκιμασία προσόντων και συμπεριφοράς\" (without theory examination and practical test), and the procedure sheet itself sets out only documents, fees and preconditions. Whether a test applies is therefore not recorded here rather than written as waived. Greece names the country (\"ΑΥΣΤΡΑΛΙΑ\"); Australian licences are in fact state/territory-issued."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Procedure 02.10 of the ministry's list of driving-licence procedures. Unlike the parallel Swiss procedure 02.11, the title of 02.10 does NOT carry the words \"χωρίς θεωρητική εξέταση και δοκιμασία προσόντων και συμπεριφοράς\" (without theory examination and practical test), and the procedure sheet itself sets out only documents, fees and preconditions. Whether a test applies is therefore not recorded here rather than written as waived."
+      },
+      {
+        "origin_label_en": "South Africa",
+        "origin_iso_n3": "710",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Procedure 02.10 of the ministry's list of driving-licence procedures. Unlike the parallel Swiss procedure 02.11, the title of 02.10 does NOT carry the words \"χωρίς θεωρητική εξέταση και δοκιμασία προσόντων και συμπεριφοράς\" (without theory examination and practical test), and the procedure sheet itself sets out only documents, fees and preconditions. Whether a test applies is therefore not recorded here rather than written as waived."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Procedure 02.10 of the ministry's list of driving-licence procedures. Unlike the parallel Swiss procedure 02.11, the title of 02.10 does NOT carry the words \"χωρίς θεωρητική εξέταση και δοκιμασία προσόντων και συμπεριφοράς\" (without theory examination and practical test), and the procedure sheet itself sets out only documents, fees and preconditions. Whether a test applies is therefore not recorded here rather than written as waived."
+      },
+      {
+        "origin_label_en": "Switzerland",
+        "origin_iso_n3": "756",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Procedure 02.11, whose title states in terms that the conversion is made \"ΧΩΡΙΣ ΘΕΩΡΗΤΙΚΗ ΕΞΕΤΑΣΗ ΚΑΙ ΔΟΚΙΜΑΣΙΑ ΠΡΟΣΟΝΤΩΝ ΚΑΙ ΣΥΜΠΕΡΙΦΟΡΑΣ\" — without theory examination and without the practical qualification-and-behaviour test. The Swiss sheet also drops the requirement, imposed on the 02.10 origins, for a certificate from the issuing authority routed through consular channels."
+      }
+    ],
+    "notes": "The Greek annex surfaces as two named procedures in the ministry's own catalogue of driving-licence procedures: 02.10 covers the U.S.A., Canada, Australia, Japan, South Africa and South Korea, and 02.11 covers Switzerland. The difference between the two titles is the finding: only the Swiss title says the conversion happens \"ΧΩΡΙΣ ΘΕΩΡΗΤΙΚΗ ΕΞΕΤΑΣΗ ΚΑΙ ΔΟΚΙΜΑΣΙΑ ΠΡΟΣΟΝΤΩΝ ΚΑΙ ΣΥΜΠΕΡΙΦΟΡΑΣ\", so Switzerland is recorded as needing no test while the other six are left unrecorded rather than assumed. Both procedure sheets (downloadable from the same page as /getfile.php?id=6756 and id=6757) require at least two medical certificates under Annex III of π.δ. 51/2012 plus proof of fees. The 02.10 route additionally requires a certificate from the issuing authority confirming the licence is not withheld for any penalty, which must reach the Greek transport directorate through consular channels only — a materially heavier route than the Swiss one. The governing third-country instrument named on the sheets is ΚΥΑ 24058/2653/2004 (Β΄1119); that KYA also covers licences from former Soviet Union states, but no procedure sheet for that class was located on this page, so no such rows are claimed. exchange_window_months is not recorded: neither sheet states a deadline running from the acquisition of residence. EU mutual recognition is procedure 02.09 on the same page and is deliberately not expanded here."
+  },
+  {
+    "destination_iso_n3": "056",
+    "destination_name": "Belgium",
+    "authority": "SPF Mobilité et Transports / FOD Mobiliteit en Vervoer",
+    "instrument": "Arrêté royal du 23 mars 1998 relatif au permis de conduire, art. 27, 2° (consolidated to 06-07-2026); the recognised-licence class is defined by art. 23, § 2, 1° of the loi relative à la police de la circulation routière",
+    "source_url": "https://www.ejustice.just.fgov.be/cgi_loi/change_lg.pl?language=fr&la=F&cn=1998032331&table_name=loi",
+    "verdict": "cannot_determine",
+    "grants": "exchange",
+    "kind": "unknown",
+    "residence_condition": "Art. 27, 2° a) and b) of the AR: the foreign licence must have been issued by the country where the holder had their normal residence at the time of issue, and must have been obtained BEFORE registration in the population/foreigners' register or the waiting register of a Belgian commune. Those two conditions do not apply to someone who proves they had student status for at least six months in the issuing country.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "2° être titulaire d'un permis de conduire européen ou d'un permis de conduire étranger, visé à l'article 23, § 2, 1° de la loi; cette dispense ne vaut que pour la même catégorie",
+    "quote_translation": "2° hold a European driving licence or a foreign driving licence, referred to in article 23, § 2, 1° of the Act; this exemption is valid only for the same category",
+    "entries": [],
+    "notes": "What is established: the Belgian royal decree of 23 March 1998, read in its consolidated Justel version (dossier 1998-03-23/31, numac 1998014078, updated to 06-07-2026), exempts the holder of a foreign licence \"visé à l'article 23, § 2, 1° de la loi\" from BOTH the theory and the practical examination, for the same or an equivalent category, subject to the normal-residence and pre-registration conditions recorded above. Art. 25, § 2 of the same decree confirms the foreign document is handed over to the issuing authority and returned only against surrender of the Belgian licence. What could NOT be established: WHICH third countries fall inside art. 23, § 2, 1° of the loi. The decree itself carries no country annex — it delegates the definition to the loi relative à la police de la circulation routière, and the operative list is published by the SPF Mobilité et Transports rather than in the decree. What was tried: mobilit.belgium.be/fr/route/permis-de-conduire and .../permis-de-conduire-etranger, and belgium.be/fr/mobilite/permis_de_conduire/permis_de_conduire_etranger — all three sit behind an F5/Shape JavaScript bot challenge that returns HTTP 200 with a challenge shell and a \"support ID\" instead of content, so nothing quotable can be fetched and any URL cited from them would fail re-verification. vlaanderen.be has no page at the obvious path. The Justel copy of the loi itself was not retrieved. This is NOT an assertion that Belgium has no third-country exchange arrangement — the exemption in art. 27, 2° proves that it does. The annex membership is simply unlocated, and no origin rows are claimed. Note also that the ejustice host serves ISO-8859-1, so a UTF-8 fetch of this URL will mangle accented characters; the quote above is from a correctly decoded read."
+  }
+]

@@ -30,15 +30,41 @@ const SPA_SHELL = /<title>\s*Casemates\s*<\/title>/i;
 export const norm = (s: string) => s.normalize('NFC').replace(/\s+/g, ' ').trim();
 
 /**
- * Currency symbols are the ones that bite. Gibraltar and Jersey serve `&pound;`, so
- * three correct quotes containing `£` looked fabricated. Numeric references are
- * decoded generically; only the named ones HTML actually requires are listed.
+ * Currency symbols bit first: Gibraltar and Jersey serve `&pound;`, so three correct
+ * quotes containing `£` looked fabricated. The fix at the time was a hand-picked
+ * table, with a comment warning that hand-picked tables fail on the next symbol.
+ * They did — vegvesen.no serves `&oslash;` and `&aring;`, and four correct Norwegian
+ * quotes failed until a researcher worked around them by choosing different text.
+ *
+ * So the accented Latin-1 range is generated rather than typed. Those are exactly the
+ * characters European legal text is made of, and listing them by hand is how this
+ * breaks again on the first Icelandic or Turkish source.
  */
+const LATIN1_NAMES = [
+  'Agrave', 'Aacute', 'Acirc', 'Atilde', 'Auml', 'Aring', 'AElig', 'Ccedil',
+  'Egrave', 'Eacute', 'Ecirc', 'Euml', 'Igrave', 'Iacute', 'Icirc', 'Iuml',
+  'ETH', 'Ntilde', 'Ograve', 'Oacute', 'Ocirc', 'Otilde', 'Ouml',
+  // times and divide sit INSIDE the accented run, at D7 and F7. Leaving them out
+  // shifts every later letter by one and silently decodes Ø as ö — which is worse
+  // than not decoding at all, because the quote still fails but now looks like a
+  // fabrication rather than a tooling gap.
+  'times', 'Oslash',
+  'Ugrave', 'Uacute', 'Ucirc', 'Uuml', 'Yacute', 'THORN', 'szlig',
+  'agrave', 'aacute', 'acirc', 'atilde', 'auml', 'aring', 'aelig', 'ccedil',
+  'egrave', 'eacute', 'ecirc', 'euml', 'igrave', 'iacute', 'icirc', 'iuml',
+  'eth', 'ntilde', 'ograve', 'oacute', 'ocirc', 'otilde', 'ouml',
+  'divide', 'oslash',
+  'ugrave', 'uacute', 'ucirc', 'uuml', 'yacute', 'thorn', 'yuml',
+] as const;
+
+/** Latin-1 named entities occupy U+00C0..U+00FF in exactly this order. */
 const NAMED: Record<string, string> = {
   nbsp: ' ', amp: '&', lt: '<', gt: '>', quot: '"', apos: "'",
   pound: '£', euro: '€', yen: '¥', cent: '¢',
   laquo: '"', raquo: '"', ldquo: '"', rdquo: '"', lsquo: '’', rsquo: '’',
   ndash: '–', mdash: '—', hellip: '…', deg: '°', sect: '§', para: '¶',
+  middot: '·', times: '×', divide: '÷', ordm: 'º', ordf: 'ª', iexcl: '¡', iquest: '¿',
+  ...Object.fromEntries(LATIN1_NAMES.map((name, i) => [name, String.fromCodePoint(0xc0 + i)])),
 };
 
 export function textOf(html: string): string {
@@ -47,7 +73,10 @@ export function textOf(html: string): string {
     .replace(/<[^>]+>/g, ' ')
     .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(parseInt(hex, 16)))
     .replace(/&#(\d+);/g, (_, dec) => String.fromCodePoint(Number(dec)))
-    .replace(/&([a-z]+);/gi, (whole, name) => NAMED[name.toLowerCase()] ?? whole);
+    // Case is significant: &Oslash; is Ø and &oslash; is ø. Falling straight to a
+    // lowercased lookup silently downcased every capital, so quotes still failed and
+    // now looked like the researcher had mistyped the source.
+    .replace(/&([a-z]+);/gi, (whole, name) => NAMED[name] ?? NAMED[name.toLowerCase()] ?? whole);
 }
 
 /**
