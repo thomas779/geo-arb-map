@@ -1,0 +1,791 @@
+[
+ {
+  "destination_iso_n3": "784",
+  "destination_name": "United Arab Emirates",
+  "authority": "Roads and Transport Authority (RTA), Government of Dubai — Licensing Agency. Emirate-level, not federal.",
+  "instrument": "RTA service \"Apply for a New Driving Licence or a New Category Based on Exchanging Licences\", serviceId=121 (\"Other Countries\" variant), published service card; page states \"Updated on: 22-July-2026\". The sibling serviceId=122 is the separate Singapore variant.",
+  "source_url": "https://www.rta.ae/wps/portal/rta/ae/home/rta-services/service-details?serviceId=121",
+  "verdict": "confirmed",
+  "grants": "exchange",
+  "kind": "unilateral_recognition",
+  "residence_condition": "RTA states the eligible category as \"Residents with a valid Driving Licence issued in one of the countries eligible for exchange\", and the Service Requirements for \"Exchange Licence - Resident with Dubai visa\" are a valid Emirates ID, a valid electronic eye test and the original licence. A resident whose residence visa was issued by another emirate is served under \"Exchange Licence - Resident with visa issued in another emirate\", which additionally requires a copy of the trade licence for the Dubai branch and an employment verification letter; the FAQ answers that such an applicant may exchange in Dubai \"provided that your company has a branch in Dubai\", and otherwise \"can exchange your licence in the emirate where your residence is issued\". No minimum prior-residence period is published.",
+  "exchange_window_months": null,
+  "medical_certificate_required": true,
+  "quote_original": "Exchange a Driving Licence issued outside the UAE and get a new one in Dubai, according to the list of countries eligible for exchange",
+  "quote_translation": null,
+  "entries": [
+   {
+    "origin_label_en": "Albania",
+    "origin_iso_n3": "008",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Armenia",
+    "origin_iso_n3": "051",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Australia",
+    "origin_iso_n3": "036",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Austria",
+    "origin_iso_n3": "040",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Azerbaijan",
+    "origin_iso_n3": "031",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Bahrain",
+    "origin_iso_n3": "048",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All exception countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"Yes, from all GCC nationalities only\"."
+   },
+   {
+    "origin_label_en": "Belarus",
+    "origin_iso_n3": "112",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Belgium",
+    "origin_iso_n3": "056",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Britain",
+    "origin_iso_n3": "826",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Bulgaria",
+    "origin_iso_n3": "100",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Canada",
+    "origin_iso_n3": "124",
+    "subnational_label": null,
+    "classes": "Restricted Driving Licences with categories G1 and G2 can't be exchanged",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Croatia",
+    "origin_iso_n3": "191",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Cyprus",
+    "origin_iso_n3": "196",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Denmark",
+    "origin_iso_n3": "208",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Estonia",
+    "origin_iso_n3": "233",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Finland",
+    "origin_iso_n3": "246",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "France",
+    "origin_iso_n3": "250",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Germany",
+    "origin_iso_n3": "276",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Greece",
+    "origin_iso_n3": "300",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes / embassy\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Hong Kong",
+    "origin_iso_n3": "344",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Hungary",
+    "origin_iso_n3": "348",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Iceland",
+    "origin_iso_n3": "352",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Ireland",
+    "origin_iso_n3": "372",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Israel",
+    "origin_iso_n3": "376",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Italy",
+    "origin_iso_n3": "380",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Japan",
+    "origin_iso_n3": "392",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Kosovo",
+    "origin_iso_n3": null,
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Kuwait",
+    "origin_iso_n3": "414",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All exception countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"Yes, from all GCC nationalities only\"."
+   },
+   {
+    "origin_label_en": "Kyrgyzstan",
+    "origin_iso_n3": "417",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Latvia",
+    "origin_iso_n3": "428",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Lithuania",
+    "origin_iso_n3": "440",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Luxembourg",
+    "origin_iso_n3": "442",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Malta",
+    "origin_iso_n3": "470",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Moldova",
+    "origin_iso_n3": "498",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Montenegro",
+    "origin_iso_n3": "499",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Netherlands",
+    "origin_iso_n3": "528",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "New Zealand",
+    "origin_iso_n3": "554",
+    "subnational_label": null,
+    "classes": "Restricted Driving Licences can't be exchanged",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "North Macedonia",
+    "origin_iso_n3": "807",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Norway",
+    "origin_iso_n3": "578",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Oman",
+    "origin_iso_n3": "512",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All exception countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"Yes, from all GCC nationalities only\"."
+   },
+   {
+    "origin_label_en": "People's Republic of China",
+    "origin_iso_n3": "156",
+    "subnational_label": null,
+    "classes": "Light vehicle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Poland",
+    "origin_iso_n3": "616",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Portugal",
+    "origin_iso_n3": "620",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Qatar",
+    "origin_iso_n3": "634",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All exception countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"Yes, from all GCC nationalities only\"."
+   },
+   {
+    "origin_label_en": "Republic of Kazakhstan",
+    "origin_iso_n3": "398",
+    "subnational_label": null,
+    "classes": "Light vehicle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Romania",
+    "origin_iso_n3": "642",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Saudi Arabia",
+    "origin_iso_n3": "682",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All exception countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"Yes, from all GCC nationalities only\"."
+   },
+   {
+    "origin_label_en": "Serbia",
+    "origin_iso_n3": "688",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Slovakia",
+    "origin_iso_n3": "703",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Slovenia",
+    "origin_iso_n3": "705",
+    "subnational_label": null,
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "South Africa",
+    "origin_iso_n3": "710",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "South Korea",
+    "origin_iso_n3": "410",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "Spain",
+    "origin_iso_n3": "724",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Sweden",
+    "origin_iso_n3": "752",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Switzerland",
+    "origin_iso_n3": "756",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Texas (United States of America)",
+    "origin_iso_n3": null,
+    "subnational_label": "Texas",
+    "classes": "Light vehicle only",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange. Sub-national row: RTA lists Texas separately from the rest of the United States and gives it narrower categories, so it is not flattened to the US row."
+   },
+   {
+    "origin_label_en": "Turkey",
+    "origin_iso_n3": "792",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"Yes/embassy or consulate\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Ukraine",
+    "origin_iso_n3": "804",
+    "subnational_label": null,
+    "classes": "Light vehicle and motorcycle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"Yes/legalised\"; the foreign licence must be withdrawn = \"Yes\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   },
+   {
+    "origin_label_en": "United States of America (with the exception of the State of Texas)",
+    "origin_iso_n3": "840",
+    "subnational_label": null,
+    "classes": "All categories",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"All countries\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\"."
+   },
+   {
+    "origin_label_en": "Uzbekistan",
+    "origin_iso_n3": "860",
+    "subnational_label": null,
+    "classes": "Light vehicle",
+    "theory_test_required": false,
+    "practical_test_required": false,
+    "note": "RTA exchange table: nationality accepted = \"Nationals only\"; licence requires translation = \"No\"; the foreign licence must be withdrawn = \"No\". Nationality must match the issuing country: RTA's Service Requirements list \"Knowledge Test results\" and \"Road Test results\" only for the variant \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\", so a mismatched nationality is a tested route, not an exchange."
+   }
+  ],
+  "notes": [
+   "AUTHORITY IS EMIRATE-LEVEL. This row is Dubai's RTA list and nothing else. UAE driving licences are issued by each emirate's traffic authority, so the 60-origin annex here is not a federal instrument and must not be presented as one. The federal Ministry of Interior page that u.ae links for this service (https://moi.gov.ae/en/eservices/replacement.foreign.license.322.aspx) sits behind an F5 JavaScript/CAPTCHA gate and returns 311 bytes of challenge text to a plain fetch, so the federal list could not be read and is NOT asserted here. Abu Dhabi routes its equivalent service (\"Replacement of Driving License of Another Countries\") through TAMM, which serves a 4.6 KB SPA shell for every path, so Abu Dhabi Police's list could not be read either. ICP (icp.gov.ae) publishes no driving-licence service at all — it covers identity, nationality, customs and ports — so treating ICP as the federal licence-exchange authority would be wrong.",
+   "TEST FIELDS, AND WHY false RATHER THAN null. RTA publishes Service Requirements per service type on this page. For \"Exchange Licence - Resident with Dubai visa\" they are: \"Valid Emirates ID\", \"Valid electronic eye test\", \"Original Driving Licence issued in the exception country\" — no test. For \"Exchange Licence - Holder of a Licence from an exception country different from my nationality\" they are: \"Knowledge Test results\", \"Road Test results\", plus documents. The Steps for the exchange list submit / verify / open traffic file / pay / receive, with no test step; the sibling Singapore service (serviceId=122) by contrast lists \"Book an appointment for the Knowledge Test\", \"Pass the Knowledge Test\" and \"Knowledge Test results\". The false values therefore rest on RTA stating where a test applies and stating a different requirement set where it does not — not on silence. A reviewer who reads that contrast as insufficient should downgrade all 60 entries to null; the basis is recorded here so that judgement can be made rather than inherited.",
+   "SURRENDER VARIES BY ORIGIN and is carried per entry, from RTA's column \"The Foreign Licence Must be Withdrawn (yes/no)\". It is \"Yes\" for Albania, Bulgaria, Croatia, Cyprus, Estonia, Greece, Hong Kong (no), Hungary, Iceland, Latvia, Lithuania, Luxembourg, Malta, Serbia, Slovakia, Slovenia and Ukraine, and \"Yes, from all GCC nationalities only\" for the five GCC origins. RTA separately states of the GCC: \"If you're a GCC national, your GCC Driving Licence must be valid to replace it, and you must surrender it.\"",
+   "NATIONALITY GATE. RTA's table has a \"Nationality\" column with three values: \"All countries\" (17 origins — the licence alone qualifies), \"Nationals only\" (38 origins — you must hold the nationality of the issuing country) and \"All exception countries\" (the five GCC states). This is the sharpest planning fact in the row and is why a German licence held by an Indian national exchanges while a Portuguese one held by the same person does not.",
+   "MEDICAL. medical_certificate_required is true on the strength of \"Valid electronic eye test\" appearing in every Service Requirements variant, with the fee stated as \"Eye test fee varies between AED 140 and AED 180, according to the test centre\". That is a vision test, not a full medical certificate; no general fitness certificate is published for this service.",
+   "EXCLUSIONS RTA PUBLISHES. \"You can't replace your Driving Licence if it's issued by the countries listed below: Guam island / Jersey island / Liechtenstein / Monaco / North Mariana / Puerto Rico / Andorra.\" Recorded as an exclusion note, not as rows.",
+   "TURKEY CARRIES AN EXTRA STEP: \"The Driving Licence issued in the Republic of Turkey requires a Driving Licence Data Certificate from the consulate or embassy, certified by the Ministry of Foreign Affairs, in accordance with the approved form.\"",
+   "NOT AN IDP INSTRUMENT. This is exchange for residents. RTA's separate answer that a GCC national on a visit visa may drive on the GCC licence, and that residents must exchange, is recognition and is not modelled here.",
+   "A SECOND, NARROWER RTA SERVICE EXISTS: serviceId=122 covers Singapore alone and does require a Knowledge Test (\"You must be a Singapore national to exchange your licence\", \"You don't need to surrender your original Driving Licence when you exchange it\"). Singapore is deliberately NOT in the 60 entries, because it is not on the serviceId=121 list."
+  ]
+ },
+ {
+  "destination_iso_n3": "634",
+  "destination_name": "Qatar",
+  "authority": "Ministry of Interior — General Directorate of Traffic (إدارة المرور)",
+  "instrument": "اللائحة التنفيذية لقانون المرور الصادرة بقرار وزير الداخلية رقم (6) لسنة 2010، المادة 47 (Executive Regulation of the Traffic Law, issued by Minister of Interior Decision No. 6 of 2010, art. 47), made under Decree-Law No. 19 of 2007 (the Traffic Law), art. 31",
+  "source_url": "https://www.almeezan.qa/LawView.aspx?opt&LawID=3856&language=ar",
+  "verdict": "cannot_determine",
+  "grants": "exchange",
+  "kind": "unilateral_recognition",
+  "residence_condition": "Art. 41(4) of the Executive Regulation: an expatriate applicant must hold lawful residence in the country — \"أن يكون لطالب الترخيص الوافد إقامة قانونية بالبلاد\". No minimum period is stated.",
+  "exchange_window_months": null,
+  "medical_certificate_required": true,
+  "quote_original": "وإذا كان لدى الطالب رخصة سوق صادرة من سلطة قانونية غير قطرية، جاز لإدارة المرور أن تعفيه من الاختبار.",
+  "quote_translation": "And if the applicant holds a driving licence issued by a non-Qatari legal authority, the Traffic Department may exempt him from the test.",
+  "entries": [
+   {
+    "origin_label_en": "Any non-Qatari licensing authority (\"سلطة قانونية غير قطرية\") — the instrument names no countries",
+    "origin_iso_n3": null,
+    "subnational_label": null,
+    "classes": null,
+    "theory_test_required": null,
+    "practical_test_required": null,
+    "note": "The exemption is discretionary (\"جاز\" — may), and the instrument publishes no annex of qualifying states, so neither test field can be resolved from it. Art. 48 confirms the test the exemption bites on has two stages, theory then practical (\"على مرحلتين، الأولى نظرية والثانية عملية\"), so an exercised exemption covers both; whether it is exercised for a given origin is set administratively and is not in the regulation."
+   },
+   {
+    "origin_label_en": "Gulf Cooperation Council member states (citizens of)",
+    "origin_iso_n3": null,
+    "subnational_label": null,
+    "classes": null,
+    "theory_test_required": null,
+    "practical_test_required": null,
+    "note": "Separate limb, and it sits in the parent statute rather than this regulation: Traffic Law No. 19 of 2007 art. 29(2) exempts \"Citizens of the Gulf Cooperation Community states holding valid driving licenses issued by the competent authorities of their respective States, which are to be replaced on expiry and if the holders are still in the country, with Qatari driving licenses\" (Al Meezan, https://www.almeezan.qa/LawView.aspx?opt&LawID=3993&language=en). Recognition until expiry, then replacement — the statute does not say whether a test applies at replacement, so both fields stay null."
+   }
+  ],
+  "notes": [
+   "GATE-BLOCKED, NOT UNREAD — read this before treating the row as empty. The instrument was retrieved in full (557,698 bytes) and every quote below was confirmed present using the repo's own textOf()/norm() path. What fails is the fetch, not the reading: almeezan.qa serves an INCOMPLETE certificate chain (leaf C=QA, O=Ministry Of Justice, CN=almeezan.qa, issued by DigiCert Global G2 TLS RSA SHA256 2020 CA1, with no intermediate presented), so Bun's fetch throws UNABLE_TO_VERIFY_LEAF_SIGNATURE and verify_licence_quotes.ts scores it HTTP 0. curl succeeds because it chases the AIA extension; Bun does not. The verdict is cannot_determine because the row cannot be gated, not because the law is unclear. Flip it to confirmed if the gate is ever given an AIA-chasing or NODE_EXTRA_CA_CERTS path, or if Al Meezan fixes its chain. The apex domain and plain http were both tried and both end at the same certificate.",
+   "WHAT THE INSTRUMENT ACTUALLY SAYS. Executive Regulation art. 47: the applicant must prove ability to drive by passing the test the Traffic Department conducts, \"وإذا كان لدى الطالب رخصة سوق صادرة من سلطة قانونية غير قطرية، جاز لإدارة المرور أن تعفيه من الاختبار\" — if the applicant holds a driving licence issued by a non-Qatari legal authority, the Department MAY exempt him from the test. It is a discretion, not an entitlement, and it names no countries. Art. 48 defines the test it bites on as two stages, theory then practical (\"على مرحلتين، الأولى نظرية والثانية عملية\"), so an exercised exemption covers both.",
+   "The country list Qatar's Traffic Department applies in practice is not in the Traffic Law and not in the Executive Regulation — art. 47 hands the decision to the Department. Anything naming specific countries for Qatar comes from a departmental circular that is not on Al Meezan, and no MOI channel renders it to a plain fetch: portal.moi.gov.qa answers 200 but with \"Javascript is disabled in this browser. This page requires Javascript.\" as its only body text, and hukoomi.gov.qa is client-rendered (\"Loading component...\") with no service content in the HTML, having earlier served a 403 \"Maintenance Page\".",
+   "RESIDENCE: Executive Regulation art. 41(4) requires an expatriate applicant to hold lawful residence in the country — \"أن يكون لطالب الترخيص الوافد إقامة قانونية بالبلاد\". No minimum period is stated. Verified present in the fetched document.",
+   "MEDICAL: art. 41(2) makes medical fitness a condition of grant, art. 44 defines it (body, vision, fundus, visual acuity, colour vision), art. 45 sets the form and the designated medical authority, art. 46 requires the examination on first application for any class; Traffic Law art. 31(2) says the same at statute level. The art. 47 exemption is from the DRIVING TEST only and does not touch the medical.",
+   "GCC LIMB, DIFFERENT INSTRUMENT: Traffic Law No. 19 of 2007 art. 29(2) exempts \"Citizens of the Gulf Cooperation Community states holding valid driving licenses issued by the competent authorities of their respective States, which are to be replaced on expiry and if the holders are still in the country, with Qatari driving licenses\" (Al Meezan LawID 3993, English translation). Recognition until expiry, then replacement; silent on any test at replacement.",
+   "IDP EXCLUDED. Executive Regulation art. 56 recognises international driving permits issued under the 1968 Vienna Convention for tourists, visitors and persons in transit, and art. 55 lets visitors have a non-Qatari licence endorsed by the Department within fifteen days of entry. Both are visitor recognition, not exchange, and neither is modelled as an entry.",
+   "Instrument currency: Al Meezan records the Executive Regulation (Minister of Interior Decision No. 6 of 2010) as amended by Decisions No. 9 of 2018 and No. 39 of 2025, and the Traffic Law itself as in force."
+  ]
+ },
+ {
+  "destination_iso_n3": "792",
+  "destination_name": "Türkiye",
+  "authority": "Nüfus ve Vatandaşlık İşleri Genel Müdürlüğü (NVİ), T.C. İçişleri Bakanlığı — the body Karayolları Trafik Yönetmeliği m.88 names as fixing the documents, and to which the application is made at any nüfus müdürlüğü",
+  "instrument": "NVİ, \"Sürücü Belgeleri Hizmetleri Sıkça Sorulan Sorular\", item (4) — documents required to exchange a driving licence obtained abroad. The rule it implements is Karayolları Trafik Yönetmeliği m.88 (heading and text as amended RG 17/04/2015-29329 and RG 05/06/2020-31146; original RG 18/07/1997-23053 mükerrer).",
+  "source_url": "https://www.nvi.gov.tr/sss-surucu-belgeleri-hizmetleri",
+  "verdict": "confirmed",
+  "grants": "recognition_and_exchange",
+  "kind": "unilateral_recognition",
+  "residence_condition": "Karayolları Trafik Yönetmeliği m.88 keys the obligation to the date of entry to Türkiye rather than to residence; m.92 extends the same exchange rules to foreign nationals resident on a residence permit, stateless persons and accredited foreign staff, while barring them from driving Turkish-registered vehicles for gain.",
+  "exchange_window_months": 6,
+  "medical_certificate_required": true,
+  "quote_original": "Dış Ülkelerden Alınan Sürücü Belgesi Değiştirme İşlemlerinde İstenilen kontrol edilecek bilgiler/belgeler.",
+  "quote_translation": "Information/documents required and to be checked in operations exchanging a driving licence obtained from foreign countries.",
+  "entries": [
+   {
+    "origin_label_en": "Any foreign country (\"dış ülkelerden alınan sürücü belgeleri\") — neither the regulation nor NVİ publishes a list of qualifying states",
+    "origin_iso_n3": null,
+    "subnational_label": null,
+    "classes": null,
+    "theory_test_required": null,
+    "practical_test_required": null,
+    "note": "Karayolları Trafik Yönetmeliği m.88 opens \"İlgili kanunlar ile ikili ve çok taraflı anlaşma hükümleri saklı kalmak üzere\" (without prejudice to the relevant laws and to bilateral and multilateral agreements) and then applies to foreign licences generally, with no annex. On procedure it says only that the application may be made at any nüfus müdürlüğü and that the documents are fixed by NVİ. Neither m.88 nor the NVİ document list mentions a theory or practical test, and NVİ lists the driving-school certificate (\"motorlu taşıt sürücüsü sertifikası\") as a requirement for ORIGINAL issue and not in the exchange list — but silence on tests in a document checklist is not a waiver, so both fields stay null."
+   },
+   {
+    "origin_label_en": "Spain",
+    "origin_iso_n3": "724",
+    "subnational_label": null,
+    "classes": null,
+    "theory_test_required": null,
+    "practical_test_required": null,
+    "note": "Named bilateral, listed by NVİ under Mevzuat > Milletlerarası Sözleşmeler as \"Türkiye Cumhuriyeti İle İspanya Krallığı Arasında Ulusal Sürücü Belgelerinin Karşılıklı Tanınması ve Değişimine İlişkin Anlaşma\" (mutual recognition AND exchange) at https://www.nvi.gov.tr/surucu-belgelerinin-karsilikli — that title verifies character-for-character at that URL. The agreement text itself (served as a PDF from that page) was not read, so its terms, classes and any test are unrecorded."
+   },
+   {
+    "origin_label_en": "Tunisia",
+    "origin_iso_n3": "788",
+    "subnational_label": null,
+    "classes": null,
+    "theory_test_required": null,
+    "practical_test_required": null,
+    "note": "Named bilateral: \"Türkiye Cumhuriyeti İle Tunus Cumhuriyeti Hükümeti Arasında Ulusal Sürücü Belgelerinin Karşılıklı Kullanımı ve Değişimi Anlaşması\", listed at https://www.nvi.gov.tr/surucu-belgelerinin-karsilikli and verified there. Agreement text not read."
+   },
+   {
+    "origin_label_en": "Turkish Republic of Northern Cyprus (Kuzey Kıbrıs Türk Cumhuriyeti)",
+    "origin_iso_n3": null,
+    "subnational_label": null,
+    "classes": null,
+    "theory_test_required": null,
+    "practical_test_required": null,
+    "note": "Named bilateral: \"Türkiye Cumhuriyeti Hükümeti İle Kuzey Kıbrıs Türk Cumhuriyeti Hükümeti Arasında Ulusal Sürücü Belgelerinin/Sürüş Ehliyetlerinin Karşılıklı Olarak Tanınması ve Değişimi Anlaşması\", listed at https://www.nvi.gov.tr/surucu-belgelerinin-karsilikli and verified there. origin_iso_n3 is null because the TRNC has no ISO 3166-1 numeric code — it must not be mapped to Cyprus (196), which is a different state and a different licence. Agreement text not read."
+   }
+  ],
+  "notes": [
+   "SOURCE SWAP, AND WHY. The governing text is Karayolları Trafik Yönetmeliği m.88, whose consolidated PDF is at https://www.mevzuat.gov.tr/MevzuatMetin/yonetmelik/7.5.8182.pdf. That PDF was read in full and the article quoted below appears in it verbatim — but mevzuat.gov.tr serves an INCOMPLETE certificate chain (leaf CN=*.tccb.gov.tr issued by GeoTrust TLS RSA CA G1, no intermediate presented), so Bun's fetch fails with UNABLE_TO_VERIFY_LEAF_SIGNATURE and the quote gate scores it HTTP 0. curl succeeds because it chases the AIA; the gate does not. The row is therefore anchored on NVİ, which the gate fetches cleanly (295,196 bytes) and which is the authority m.88 itself points to for the documents.",
+   "THE ARTICLE, FOR THE RECORD. m.88(b): \"Yabancıların dış ülkelerden aldıkları sürücü belgeleri ile ülkemizde araç kullanmaları; 1) Dış ülkelerden alınan sürücü belgeleri ile ülkemize giriş yapıldığı tarihten itibaren en fazla altı ay süreyle araç kullanılabilir. 2) Altı ayın sonunda ülkemizde araç kullanılabilmesi için dış ülkelerden alınan sürücü belgelerinin ülkemiz sürücü belgesi ile değiştirilmesi zorunludur.\" All three sentences were confirmed present in the mevzuat PDF using the repo's own norm() and pdftotext path; they will pass the gate the moment that host serves a full chain.",
+   "exchange_window_months = 6 RUNS THE OTHER WAY from most annexes in this layer. It is the period a foreign national may keep driving on the foreign licence from the DATE OF ENTRY, at the end of which exchange becomes compulsory — not a deadline after which exchange is refused. Turkish citizens get 2 years on the same article (m.88/a/1 and a/3) and must carry a notarised or consulate-certified Turkish translation once they have been in the country more than six months (m.88/a/2).",
+   "MEDICAL IS TRUE ON THE FACE OF THE SOURCE: NVİ's exchange list is \"Yabancı sürücü belgesinin aslı ve renkli fotokopisi\", \"Noter veya konsolosluk onaylı Türkçe tercümesi\", \"Kimlik belgesi\", \"Sürücü sağlık raporu\", the fee, one biometric photograph taken within six months, blood group, an education certificate with a notarised translation if obtained abroad, and a criminal record certificate. The health report is taken from a health institution authorised by the Ministry of Health, against the Sürücü Adayları ve Sürücülerde Aranacak Sağlık Şartları ile Muayenelerine Dair Yönetmelik (RG 26/09/2006-26301).",
+   "SURRENDER: not stated for the exchange case. NVİ requires the ORIGINAL foreign licence plus a colour photocopy, which implies deposit but does not say so; m.88 is silent. Not recorded as a finding.",
+   "RESIDENCE: m.88 keys the clock to date of entry, not to residence. m.92 separately provides that foreign nationals residing on a residence permit (\"ikamet tezkeresi ile ikamet eden yabancı uyruklular\"), stateless persons, diplomats and foreign technical and administrative staff have their foreign licences exchanged for the equivalent Turkish licence under the m.88 rules, but may not drive Turkish-registered vehicles for gain or commercially.",
+   "Türkiye also appears as an ORIGIN on the Dubai row in this file, where RTA accepts Turkish licences from holders of any nationality but requires a Driving Licence Data Certificate from the Turkish consulate or embassy, certified by the Ministry of Foreign Affairs."
+  ]
+ },
+ {
+  "destination_iso_n3": "682",
+  "destination_name": "Saudi Arabia",
+  "authority": "Ministry of Interior — General Department of Traffic (الإدارة العامة للمرور); services delivered through Absher",
+  "instrument": null,
+  "source_url": null,
+  "verdict": "cannot_determine",
+  "grants": null,
+  "kind": "unknown",
+  "residence_condition": null,
+  "exchange_window_months": null,
+  "medical_certificate_required": null,
+  "quote_original": null,
+  "quote_translation": null,
+  "entries": [],
+  "notes": [
+   "Saudi hosts are unreachable from this network at the transport layer, so nothing could be read and nothing is asserted. www.moi.gov.sa resolves (78.93.109.51 via Google DNS, matching the local resolver) but every TLS connection timed out at 20s and 30s, on IPv4 and with full browser headers. laws.boe.gov.sa, the Bureau of Experts legislation database that carries نظام المرور and its اللائحة التنفيذية, resolves to 66.9.136.215 and times out identically, over both https and http. www.saudi.gov.sa times out; www.my.gov.sa and absher.sa both answer HTTP 403 to a plain fetch (Akamai bot rejection, 5,483 and 318 bytes). That is a fetch problem, not evidence about Saudi law: Saudi Arabia is widely operated as an exchanging state and appears as an ORIGIN on the Dubai row in this file (\"All exception countries\" nationality, surrender required from GCC nationals, all categories). What could not be established is which origins Saudi Arabia exchanges FROM, on what terms, and whether a test survives. Any Saudi row will need either a source reachable from the verifier's network or an official PDF mirrored on a reachable host. Note also that the same host set is what the quote gate would have to re-fetch, so citing them would produce a failing row even if the content were correct."
+  ]
+ },
+ {
+  "destination_iso_n3": "414",
+  "destination_name": "Kuwait",
+  "authority": "Ministry of Interior — General Traffic Department (الإدارة العامة للمرور)",
+  "instrument": null,
+  "source_url": null,
+  "verdict": "cannot_determine",
+  "grants": null,
+  "kind": "unknown",
+  "residence_condition": null,
+  "exchange_window_months": null,
+  "medical_certificate_required": null,
+  "quote_original": null,
+  "quote_translation": null,
+  "entries": [],
+  "notes": [
+   "The instrument is reachable but the exchange provision is not readable in it. Kuwait's MOI publishes the consolidated traffic code as https://www.moi.gov.kw/gdt/KuwaitTrafficLaw.pdf (\"التنظيم القانوني للمرور في دولة الكويت\", 60.2 MB, HTTP 200). pdftotext extracts 143 KB, and the extractable pages carry the licence-grant conditions of the Executive Regulation — art. 85 (licence types and validity: 15 years for Kuwaitis and GCC nationals, 3 years for non-Kuwaitis on a private licence) and the conditions article, whose paragraph (د) requires a non-Kuwaiti applicant for a private or public licence to hold lawful residence of at least two years, to earn not less than KD 600 a month, and to hold a university degree, with three schedules of exempted categories. But a large run of pages in that PDF has no text layer at all (they extract as bare page numbers, e.g. 101-122 and 129-135), and no article granting or governing the exchange of a foreign licence appears anywhere in the extractable text: searches for أجنبية, تبديل, استبدال رخصة and إعفاء من الاختبار return nothing on point. So Kuwait's exchange terms are either on a scanned page or in a ministerial decision not in this compilation. The one foreign-licence mention found is an exemption criterion, not an exchange: government drivers and delegates are exempted from the residence and salary conditions \"فقط ممن لديهم رخص سوق قانونية صادرة من بلدهم أو أي بلد آخر سارية المفعول\". Kuwait appears as an ORIGIN on the Dubai row. Next step is OCR of the missing pages of that PDF, or the ministerial decision itself."
+  ]
+ },
+ {
+  "destination_iso_n3": "048",
+  "destination_name": "Bahrain",
+  "authority": "Ministry of Interior — General Directorate of Traffic",
+  "instrument": null,
+  "source_url": null,
+  "verdict": "cannot_determine",
+  "grants": null,
+  "kind": "unknown",
+  "residence_condition": null,
+  "exchange_window_months": null,
+  "medical_certificate_required": null,
+  "quote_original": null,
+  "quote_translation": null,
+  "entries": [],
+  "notes": [
+   "The statute is readable and delegates the answer to an instrument that could not be retrieved. Bahrain's Traffic Law is Law No. 23 of 2014 (قانون رقم (23) لسنة 2014 بإصدار قانون المرور), served in full by the Legislation and Legal Opinion Commission at https://legalaffairs.gov.bh/Legislation/HTM/K2314 (249,634 bytes). Art. 22 hands the whole subject to the Executive Regulation: \"تحدد اللائحة التنفيذية شروط وإجراءات استعمال الرخص الدولية في المملكة، ومنح حامليها رخص قيادة طبقاً لأحكام هذا القانون\" — the Regulation sets the conditions and procedures for using international licences in the Kingdom and for granting their holders driving licences under this Law. Two reasons that is not a destination row. First, the article as drafted runs international driving permits and the grant of a Bahraini licence together, and this layer excludes IDP instruments; treating art. 22 as the exchange basis would import exactly that conflation. Second, the Executive Regulation itself could not be located: LLOC's legislation search is an AJAX form whose endpoint is not discoverable from the page source, GET variants of /Legislation/Search and /Legislation/Latest return HTTP 404, and the host is intermittent — /Legislation/HTM/K2314 alternated between 200 and 404 within minutes on the same URL, which is also a reliability risk for any future citation. www.legalaffairs.gov.bh (with www) fails TLS: \"no alternative certificate subject name matches target host name\". gdt.gov.bh does not resolve; traffic.gov.bh and www.interior.gov.bh time out; www.bahrain.bh returns a client-rendered portal with no licence content in the HTML. Bahrain appears as an ORIGIN on the Dubai row."
+  ]
+ },
+ {
+  "destination_iso_n3": "512",
+  "destination_name": "Oman",
+  "authority": "Royal Oman Police — Directorate General of Traffic",
+  "instrument": null,
+  "source_url": null,
+  "verdict": "cannot_determine",
+  "grants": null,
+  "kind": "unknown",
+  "residence_condition": null,
+  "exchange_window_months": null,
+  "medical_certificate_required": null,
+  "quote_original": null,
+  "quote_translation": null,
+  "entries": [],
+  "notes": [
+   "No official Omani source carrying exchange terms could be read. The Royal Oman Police site is reachable in Arabic (https://www.rop.gov.om/arabic/) but its traffic section is a list of e-service links only, its English tree serves a 1,960-byte shell for every path tried, and its FAQ page covers licence issue conditions (age 18 light / 21 heavy, freedom from disqualifying conditions, eye test, two photographs, ID or passport copy) with nothing about foreign licences. The published service guide https://www.rop.gov.om/pdfs/services/ServicesGuide.pdf is 9.2 MB and is a scan with no text layer — pdftotext returns 305 bytes — so it cannot be quoted or gated without OCR. The Traffic Law itself (المرسوم السلطاني رقم 28/93) is served in full text at qanoon.om, but that site is EXPLICITLY NOT OFFICIAL: its own about page states \"موقع Qanoon.om لا يعد مصدرا رسميا للقوانين، وننصح المستخدمين بالرجوع إلى الجريدة الرسمية العمانية\" (Qanoon.om is not an official source for laws; users are advised to refer to the Omani Official Gazette). It is therefore not cited here even though it resolves cleanly, and any Oman row must come from the Official Gazette via mjla.gov.om or from ROP itself. Oman appears as an ORIGIN on the Dubai row."
+  ]
+ },
+ {
+  "destination_iso_n3": "376",
+  "destination_name": "Israel",
+  "authority": "משרד התחבורה והבטיחות בדרכים / רשות הרישוי (Ministry of Transport and Road Safety, Licensing Authority)",
+  "instrument": null,
+  "source_url": null,
+  "verdict": "cannot_determine",
+  "grants": null,
+  "kind": "unknown",
+  "residence_condition": null,
+  "exchange_window_months": null,
+  "medical_certificate_required": null,
+  "quote_original": null,
+  "quote_translation": null,
+  "entries": [],
+  "notes": [
+   "Every Israeli government source is blocked to a plain fetch, which is the same fetch the quote gate makes. www.gov.il, mot.gov.il and www.mot.gov.il all return HTTP 403 to a plain request — tested with the gate's own Chrome user-agent, with a Windows Chrome user-agent, with curl's default user-agent, with no user-agent, over HTTP/2, with full navigation headers (Accept, Accept-Language, Sec-Fetch-*) and on IPv4. Israel publishes its conversion rules (המרת רישיון נהיגה זר) and the Traffic Regulations only under gov.il, so no quotable text could be obtained and no annex is asserted. Israel appears as an ORIGIN on the Dubai row (\"Nationals only\", legalised translation required, original not withdrawn, light vehicle and motorcycle), and Israel is already an origin on the German Anlage 11 row in the shipped corpus — but that says nothing about what Israel exchanges from. A future pass needs a route to gov.il that a plain fetch can reach."
+  ]
+ },
+ {
+  "destination_iso_n3": "400",
+  "destination_name": "Jordan",
+  "authority": "Public Security Directorate — Drivers and Vehicles Licensing Department (دائرة ترخيص السواقين والمركبات)",
+  "instrument": null,
+  "source_url": null,
+  "verdict": "cannot_determine",
+  "grants": null,
+  "kind": "unknown",
+  "residence_condition": null,
+  "exchange_window_months": null,
+  "medical_certificate_required": null,
+  "quote_original": null,
+  "quote_translation": null,
+  "entries": [],
+  "notes": [
+   "The licensing authority's hosts are unreachable and the legislation host is behind a JavaScript challenge. dvld.gov.jo and www.dvld.gov.jo time out at the transport layer (both https and http); www.psd.gov.jo resolves to 193.188.66.200 and times out. lob.gov.jo, the legislation site, answers HTTP 200 but with 5,648 bytes of F5 TSPD JavaScript challenge (\"bobcmn\" bootstrap), not content — a plain fetch cannot get past it, and neither could the gate. www.mot.gov.jo is reachable (528 KB) but the Ministry of Transport is not the licensing authority for drivers in Jordan; the Drivers and Vehicles Licensing Department under the Public Security Directorate is, so citing MoT for a licence-exchange rule would attribute the rule to the wrong body. Nothing about Jordan's exchange terms is asserted. Jordan is not on the Dubai list either, which is a fact about Dubai and not about Jordan."
+  ]
+ }
+]
