@@ -24,6 +24,7 @@ interface Row {
   family?: string;
   partner_label_en?: string;
   name?: string;
+  destination_name?: string;
   iso?: string;
   verdict?: string;
   partner_iso_n3?: string | null;
@@ -33,7 +34,14 @@ interface Row {
   grants?: string;
   classes_matched?: boolean | null;
   in_force?: boolean;
-  notes?: string;
+  notes?: unknown;
+}
+
+/** `notes` is a string in some findings files and an array of strings in others. */
+function reasonText(notes: unknown): string {
+  if (typeof notes === 'string') return notes;
+  if (Array.isArray(notes)) return notes.filter(n => typeof n === 'string').join(' ');
+  return '';
 }
 
 const GRANTS = new Set(['recognition', 'exchange', 'recognition_and_exchange']);
@@ -60,17 +68,21 @@ const results: Array<{ label: string; ok: boolean; detail: string }> = [];
 for (const row of rows) {
   // Falls back through the sibling findings schemas so this doubles as a generic
   // quote gate for any file carrying source_url + quote_original.
-  const label = row.partner_label_en ?? row.name ?? row.iso ?? '(unnamed)';
+  const label = row.partner_label_en ?? row.name ?? row.destination_name ?? row.iso ?? '(unnamed)';
   const push = (ok: boolean, detail: string) => results.push({ label, ok, detail });
 
   // An undetermined row is the researcher declining to claim something, which is the
   // outcome we ask for when a source cannot be reached. Failing it for having no
   // quote would punish exactly the honesty the brief demands. It still has to say WHY.
   if (/cannot_determine/.test(row.verdict ?? '')) {
+    // `notes` arrives as a string from some briefs and an array of strings from
+    // others, and a researcher writing a careful list of what they tried should not
+    // crash the gate that is meant to reward exactly that.
+    const reason = reasonText(row.notes).trim();
     results.push({
-      label, ok: true, detail: (row.notes ?? '').trim() ? 'undetermined, reason given' : 'UNDETERMINED WITH NO REASON',
+      label, ok: reason.length > 0,
+      detail: reason ? 'undetermined, reason given' : 'UNDETERMINED WITH NO REASON',
     });
-    if (!(row.notes ?? '').trim()) results[results.length - 1].ok = false;
     continue;
   }
 
