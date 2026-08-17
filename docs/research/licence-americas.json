@@ -1,0 +1,1634 @@
+[
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Alberta",
+    "destination_name": "Alberta (Canada)",
+    "authority": "Alberta Transportation and Economic Corridors (registry agents)",
+    "instrument": "Exchange a licence from outside Alberta — Alberta-recognized jurisdictions; Operator Licensing and Vehicle Control Regulation (Traffic Safety Act)",
+    "source_url": "https://www.alberta.ca/exchange-non-alberta-licences",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Applicant must provide proof of residence in Alberta and proof of legal status in Canada, and must be living in Alberta permanently — temporary residents (students, visitors, Seasonal Agricultural Worker Program workers) cannot get an Alberta licence.",
+    "exchange_window_months": 3,
+    "medical_certificate_required": null,
+    "quote_original": "If you are exchanging a valid driver’s licence from one of the jurisdictions in the list below, you can get your Alberta licence without taking a knowledge or road test: Australia (Class 5 and 6) Austria (Class 5) Belgium (Class 5) Bulgaria (Class 5) Croatia (Class 5) Cyprus (Class 5) Czech Republic (Class 5) Estonia (Class 5) Finland (Class 5) France (Class 5) Germany (Class 5) Greece (Class 5) Guernsey (Class 5) Hungary (Class 5) Iceland (Class 5) Isle of Man (Class 5 and 6) Italy (Class 5) Jersey (Class 5) Japan (Class 5) Kingdom of Denmark (Class 5) Latvia (Class 5) Liechtenstein (Class 5) Lithuania (Class 5) Luxembourg (Class 5) Malta (Class 5) Netherlands (Class 5) New Zealand (Class 5) Norway (Class 5) Poland (Class 5) Portugal (Class 5) Republic of Ireland (Class 5 and 6) Republic of Korea (Class 5) Romania (Class 5) Slovakia (Class 5) Slovenia (Class 5) Spain (Class 5) Switzerland (Class 5 and 6) Sweden (Class 5) Taiwan (Class 5) United Kingdom (Northern Ireland – Class 5 and 6) United Kingdom (England, Scotland and Wales – Class 5)",
+    "quote_translation": null,
+    "entries": [
+      {
+        "origin_label_en": "Canadian provinces and territories",
+        "origin_iso_n3": null,
+        "subnational_label": "any other Canadian province or territory",
+        "classes": "Class 3, 4, 5 or 6 issued equal to the class surrendered",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Alberta states \"You do not need to do a knowledge test or road test.\" Class 1 (truck) licences may not be exchangeable depending on when and where they were issued."
+      },
+      {
+        "origin_label_en": "Australia",
+        "origin_iso_n3": "036",
+        "subnational_label": null,
+        "classes": "Class 5 and 6",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Austria",
+        "origin_iso_n3": "040",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Belgium",
+        "origin_iso_n3": "056",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Bulgaria",
+        "origin_iso_n3": "100",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Croatia",
+        "origin_iso_n3": "191",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Cyprus",
+        "origin_iso_n3": "196",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Czech Republic",
+        "origin_iso_n3": "203",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Estonia",
+        "origin_iso_n3": "233",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Finland",
+        "origin_iso_n3": "246",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "France",
+        "origin_iso_n3": "250",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Germany",
+        "origin_iso_n3": "276",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Greece",
+        "origin_iso_n3": "300",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Guernsey",
+        "origin_iso_n3": "831",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Hungary",
+        "origin_iso_n3": "348",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Iceland",
+        "origin_iso_n3": "352",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Isle of Man",
+        "origin_iso_n3": "833",
+        "subnational_label": null,
+        "classes": "Class 5 and 6",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Italy",
+        "origin_iso_n3": "380",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Jersey",
+        "origin_iso_n3": "832",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Kingdom of Denmark",
+        "origin_iso_n3": "208",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Latvia",
+        "origin_iso_n3": "428",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Liechtenstein",
+        "origin_iso_n3": "438",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Lithuania",
+        "origin_iso_n3": "440",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Luxembourg",
+        "origin_iso_n3": "442",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Malta",
+        "origin_iso_n3": "470",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Netherlands",
+        "origin_iso_n3": "528",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "New Zealand",
+        "origin_iso_n3": "554",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Norway",
+        "origin_iso_n3": "578",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Poland",
+        "origin_iso_n3": "616",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Portugal",
+        "origin_iso_n3": "620",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Republic of Ireland",
+        "origin_iso_n3": "372",
+        "subnational_label": null,
+        "classes": "Class 5 and 6",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Republic of Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Romania",
+        "origin_iso_n3": "642",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Slovakia",
+        "origin_iso_n3": "703",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Slovenia",
+        "origin_iso_n3": "705",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Spain",
+        "origin_iso_n3": "724",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Switzerland",
+        "origin_iso_n3": "756",
+        "subnational_label": null,
+        "classes": "Class 5 and 6",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Sweden",
+        "origin_iso_n3": "752",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "United Kingdom (Northern Ireland)",
+        "origin_iso_n3": null,
+        "subnational_label": "Northern Ireland (United Kingdom)",
+        "classes": "Class 5 and 6",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "United Kingdom (England, Scotland and Wales)",
+        "origin_iso_n3": "826",
+        "subnational_label": null,
+        "classes": "Class 5",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "On the Alberta-recognized jurisdictions list: licence issued without a knowledge or road test. Proof of 2 or more years of driving experience is needed for a full Class 5; otherwise the holder enters the Graduated Driver Licensing programme."
+      },
+      {
+        "origin_label_en": "United States",
+        "origin_iso_n3": null,
+        "subnational_label": "U.S. states",
+        "classes": "Class 5, 6 or 7",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Alberta makes a country-wide statement here — \"Licence holders from the United States, can exchange their class 5, 6 or 7 without additional testing requirements.\" Any other class requires all testing. Alberta asserts this itself; it is not a US federal arrangement."
+      },
+      {
+        "origin_label_en": "Ukraine",
+        "origin_iso_n3": "804",
+        "subnational_label": null,
+        "classes": "Class B or BE",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Alberta: class B or BE exchanged without additional testing requirements; any other class must complete all testing requirements."
+      }
+    ],
+    "notes": "Destination is sub-national: Alberta runs its own reciprocity list. There is no Canadian federal driving licence and no federal exchange agreement, so no row is created for Canada. The original is surrendered and not returned: the Operator Licensing and Vehicle Control Regulation requires surrender of any and all out-of-Alberta issued driver's licences, including expired ones and an International Driving Permit, before an Alberta licence is issued. exchange_window_months is 3 because the page states the deadline as 90 days from becoming a resident, and says this applies even if you travel outside Alberta during those 90 days. medical_certificate_required is null: the page does not address medical or vision certificates, so recording false would invent a waiver. Jurisdictions with no agreement are not a negative row here — Alberta simply requires a Class 7 knowledge test, surrender of all licences, and a Class 5 road test, with a GDL Exemption Program that can credit previous driving history."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "British Columbia",
+    "destination_name": "British Columbia (Canada)",
+    "authority": "Insurance Corporation of British Columbia (ICBC), under the Motor Vehicle Act",
+    "instrument": "Moving from outside Canada — licence exchange jurisdictions",
+    "source_url": "https://www.icbc.com/driver-licensing/moving-bc/moving-from-another-country",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "ICBC states you need to be a B.C. resident to apply for or hold a B.C. driver’s licence; tourists, exempt students and people ordinarily resident outside B.C. are outside the regime.",
+    "exchange_window_months": 3,
+    "medical_certificate_required": null,
+    "quote_original": "With some licences, you can exchange your current licence for a B.C. licence without additional testing.",
+    "quote_translation": null,
+    "entries": [
+      {
+        "origin_label_en": "Canadian provinces and territories",
+        "origin_iso_n3": null,
+        "subnational_label": "every Canadian province and territory",
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "ICBC: \"B.C. waives knowledge and road testing with every Canadian province and territory\"."
+      },
+      {
+        "origin_label_en": "United States",
+        "origin_iso_n3": null,
+        "subnational_label": "most U.S. states (plus Washington DC and Puerto Rico)",
+        "classes": "passenger and motorcycle",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "ICBC says testing is waived for passenger and motorcycle licences with MOST US states, and separately lists \"United States (includes Washington DC and Puerto Rico)\" among exchange jurisdictions. It does not publish which states are excluded, so \"most\" is carried through rather than flattened to all."
+      },
+      {
+        "origin_label_en": "Austria",
+        "origin_iso_n3": "040",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences."
+      },
+      {
+        "origin_label_en": "Australia",
+        "origin_iso_n3": "036",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences."
+      },
+      {
+        "origin_label_en": "Belgium",
+        "origin_iso_n3": "056",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences."
+      },
+      {
+        "origin_label_en": "France",
+        "origin_iso_n3": "250",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences."
+      },
+      {
+        "origin_label_en": "Germany",
+        "origin_iso_n3": "276",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences."
+      },
+      {
+        "origin_label_en": "Guernsey",
+        "origin_iso_n3": "831",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences. ICBC lists Guernsey, Isle of Man and Jersey as one line."
+      },
+      {
+        "origin_label_en": "Isle of Man",
+        "origin_iso_n3": "833",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences. ICBC lists Guernsey, Isle of Man and Jersey as one line."
+      },
+      {
+        "origin_label_en": "Jersey",
+        "origin_iso_n3": "832",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences. ICBC lists Guernsey, Isle of Man and Jersey as one line."
+      },
+      {
+        "origin_label_en": "Ireland",
+        "origin_iso_n3": "372",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences."
+      },
+      {
+        "origin_label_en": "Netherlands",
+        "origin_iso_n3": "528",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences. ICBC excludes the former territories in the Antilles: Aruba, Bonaire, Curacao, Saba, St. Eustatius and St. Maarten."
+      },
+      {
+        "origin_label_en": "New Zealand",
+        "origin_iso_n3": "554",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": "passenger only (not motorcycles)",
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences. ICBC annotates the entry \"not motorcycles\"."
+      },
+      {
+        "origin_label_en": "Switzerland",
+        "origin_iso_n3": "756",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": "passenger vehicle licence only (not motorcycles)",
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences. ICBC requires the Taiwanese licence card, a verification certificate with red seal stamp, and a translation by the Taipei Economic and Cultural Office in Vancouver."
+      },
+      {
+        "origin_label_en": "United Kingdom",
+        "origin_iso_n3": "826",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": null,
+        "note": "On ICBC's licence-exchange jurisdiction list: knowledge testing waived for passenger and most motorcycle licences. ICBC states this includes England, Wales, Scotland and Northern Ireland."
+      }
+    ],
+    "notes": "Destination is sub-national: ICBC runs B.C.'s own exchange list. There is no Canadian federal driving licence and no federal exchange agreement, so no row is created for Canada. PROVENANCE WARNING on the entries: the quoted sentence and the 90-day rule are in the served HTML body and verify normally, but ICBC ships the jurisdiction list itself inside the page's Next.js RSC payload (a <script> block). The quote gate strips <script>, so the list cannot be quoted from this URL even though it is published there. The entries below were read from that payload at this same URL on 2026-08-17; the quote proves the exchange regime, not the list. theory_test_required is false and practical_test_required is null for the foreign jurisdictions because ICBC's specific wording waives KNOWLEDGE testing only (\"B.C. will also waive knowledge testing for those exchanging passenger driver's licences and most motorcycle driver's licences from the following jurisdictions\"), while the page intro speaks more loosely of exchange \"without additional testing\". The narrower statement is the one recorded; false on the road test would be inferred, not sourced. For Canadian provinces and US states ICBC does say both are waived, so both are false there. The original is surrendered: applicants must surrender any driver's licence(s) they hold, and B.C. law permits holding only one driver's licence. If a road test is required and failed, the previous licence is not returned. exchange_window_months is 3 because ICBC states you have 90 days after moving to switch. That 90 days doubles as the recognition period, and does not apply to tourists, exempt students, people ordinarily resident outside B.C., or Seasonal Agricultural Worker Program workers (12 months). Proof of more than two years of non-learner driving experience is needed to be exempt from B.C.'s Graduated Licensing Program. Commercial licences from outside Canada always require the applicable knowledge and road tests."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Connecticut",
+    "destination_name": "Connecticut (United States)",
+    "authority": "Connecticut Department of Motor Vehicles",
+    "instrument": "Transfer Your Out-of-State License to CT — Special situations",
+    "source_url": "https://portal.ct.gov/dmv/licenses-permits-ids/transfer-out-of-state-license",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Applies to new Connecticut residents transferring a licence; full-time students keeping an out-of-country permanent residence, active-duty military and visitors on a visitor’s visa are not required to transfer.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "If you have a valid license from Canada, Germany, or France: The requirements for an out-of-state license apply.",
+    "quote_translation": "If you have a valid license from Canada, Germany, or France: The requirements for an out-of-state license apply.",
+    "entries": [
+      {
+        "origin_label_en": "Canada",
+        "origin_iso_n3": "124",
+        "subnational_label": null,
+        "classes": "Non-commercial",
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "The page routes these holders through the out-of-state transfer process and lists no tests in that process, but it does not state that any test is waived, so the test treatment is not recorded."
+      },
+      {
+        "origin_label_en": "Germany",
+        "origin_iso_n3": "276",
+        "subnational_label": null,
+        "classes": "Non-commercial",
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "The page routes these holders through the out-of-state transfer process and lists no tests in that process, but it does not state that any test is waived, so the test treatment is not recorded."
+      },
+      {
+        "origin_label_en": "France",
+        "origin_iso_n3": "250",
+        "subnational_label": null,
+        "classes": "Non-commercial",
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "The page routes these holders through the out-of-state transfer process and lists no tests in that process, but it does not state that any test is waived, so the test treatment is not recorded."
+      }
+    ],
+    "notes": "The out-of-state transfer process described on the same page requires the current licence \"which is not expired for more than two years\", acceptable identification, form R-229 and fees, followed by an appointment; no knowledge or road test appears in the listed steps, but the page nowhere says tests are waived, so both test fields are left unrecorded. If the licence is expired more than two years the applicant must get a Connecticut learner’s permit, complete an eight-hour safe-driving course and take a skills test. The page also notes that a visitor may drive for one year on a valid out-of-country licence plus an IDP; that is a visitor rule, not an exchange, and is not recorded. Nothing is said about surrendering the foreign licence or about medical certification."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Delaware",
+    "destination_name": "Delaware (United States)",
+    "authority": "Delaware Division of Motor Vehicles",
+    "instrument": "Driver License Transfer (18 and over)",
+    "source_url": "https://www.dmv.de.gov/DriverServices/drivers_license/index.shtml?dc=dr_lic_trsfr_ov18",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Page states: \"Sixty days after the non-resident driver becomes a Delaware resident, he/she must apply for a Delaware driver license.\"",
+    "exchange_window_months": 2,
+    "medical_certificate_required": null,
+    "quote_original": "Delaware has a reciprocity agreement with Germany, Taiwan (Republic of China) and France thereby exempting these drivers from the knowledge and road exams for a Class D license only. Endorsements are not included in reciprocity agreements.",
+    "quote_translation": "Delaware has a reciprocity agreement with Germany, Taiwan (Republic of China) and France thereby exempting these drivers from the knowledge and road exams for a Class D license only. Endorsements are not included in reciprocity agreements.",
+    "entries": [
+      {
+        "origin_label_en": "Germany",
+        "origin_iso_n3": "276",
+        "subnational_label": null,
+        "classes": "Class D only; endorsements not covered",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": null
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": "Class D only; endorsements not covered",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Page names it \"Taiwan (Republic of China)\"."
+      },
+      {
+        "origin_label_en": "France",
+        "origin_iso_n3": "250",
+        "subnational_label": null,
+        "classes": "Class D only; endorsements not covered",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": null
+      }
+    ],
+    "notes": "The reciprocity sentence is framed as an exception to the general rule on the same page: \"All drivers licensed in other countries and U.S. Territories must pass both the knowledge and road exams.\" On surrender: \"Drivers from other countries may retain their foreign licenses.\" exchange_window_months is set to 2 to represent the stated 60-day deadline to apply after becoming a Delaware resident. Nothing is said about vision or medical requirements specific to the reciprocal countries."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Georgia",
+    "destination_name": "Georgia (United States)",
+    "authority": "Georgia Department of Driver Services",
+    "instrument": "Drivers From Other Nations",
+    "source_url": "https://dds.georgia.gov/georgia-licenses-ids-and-permits/new-license-id-or-permit/new-georgia-residents-and-out-state-1",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Drivers with foreign licences do not need a Georgia licence unless they become a resident of Georgia.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "Driver licenses issued by the Republic of South Korea and accompanied by a License Certification Letter from the South Korean Consulate are exempt from taking the Georgia knowledge (written) and road tests. You will be required to take and pass a vision exam.",
+    "quote_translation": "Driver licenses issued by the Republic of South Korea and accompanied by a License Certification Letter from the South Korean Consulate are exempt from taking the Georgia knowledge (written) and road tests. You will be required to take and pass a vision exam.",
+    "entries": [
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": "Foreign licence must be equivalent to a Georgia Class C Regular License",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "A License Certification Letter from the South Korean Consulate must accompany the licence. Vision exam still required."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "The page states only \"Georgia also has reciprocity with Taiwan.\" and gives no test-waiver detail for Taiwan, so the test treatment is not recorded."
+      }
+    ],
+    "notes": "Page states \"Georgia recognizes driver licenses issued by countries that have a reciprocal agreement with the Georgia DDS\" and \"The driver’s license must be equivalent to a Georgia Class C Regular License.\" Drivers from nations without a reciprocal agreement must pass Georgia’s written, road and vision tests. On surrender: \"All Foreign/International Licenses will be returned with the following exceptions: You are applying for a Commercial License or Permit. You are a US Citizens with a license, permit, or ID card issued by any foreign jurisdiction or US Territory.\" All applicants must provide a Social Security number or a Certification of Social Security Denial Status."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Indiana",
+    "destination_name": "Indiana (United States)",
+    "authority": "Indiana Bureau of Motor Vehicles",
+    "instrument": "Residents with Out-of-Country Licenses — Reciprocal Driver’s License Agreement with Foreign Countries",
+    "source_url": "https://www.in.gov/bmv/licenses-permits-ids/learners-permits-and-drivers-licenses-overview/out-of-country-licenses",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Applies to residents holding an out-of-country licence who wish to obtain an Indiana licence; applicant must be 18 or older for the skills-exam waiver.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "The Indiana Bureau of Motor Vehicles has an agreement with the following countries for the reciprocal exchange of driver's licenses: Japan Taiwan This agreement allows residents of jurisdictions with established reciprocal agreements to obtain a driver's license after satisfying the appropriate requirements. If an applicant 18 years of age or older presents a driver’s license from a participating country, and the out-of-country license is either active or expired less than three years, the BMV will waive the vehicle skills exam. These applicants must still take and pass both the written knowledge exam and vision exam.",
+    "quote_translation": "The Indiana Bureau of Motor Vehicles has an agreement with the following countries for the reciprocal exchange of driver's licenses: Japan Taiwan This agreement allows residents of jurisdictions with established reciprocal agreements to obtain a driver's license after satisfying the appropriate requirements. If an applicant 18 years of age or older presents a driver’s license from a participating country, and the out-of-country license is either active or expired less than three years, the BMV will waive the vehicle skills exam. These applicants must still take and pass both the written knowledge exam and vision exam.",
+    "entries": [
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": "Non-commercial only; CDL applicants must pass all exams",
+        "theory_test_required": true,
+        "practical_test_required": false,
+        "note": "Foreign licence must be active or expired less than three years. A Reciprocal Driver’s License Agreement Letter must be brought to the branch."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": "Non-commercial only; CDL applicants must pass all exams",
+        "theory_test_required": true,
+        "practical_test_required": false,
+        "note": "Foreign licence must be active or expired less than three years. A Reciprocal Driver’s License Agreement Letter must be brought to the branch."
+      }
+    ],
+    "notes": "General rule on the same page is to provide identification, pass the vision screening, pass the knowledge exam and pass the driving skills exam, and \"The skills exam may be waived if you qualify under a Reciprocal Driver’s License Agreement.\" Only the skills exam is waived: knowledge and vision exams remain mandatory. \"Commercial Driver’s License (CDL) applicants are required to complete and pass all exams for the CDL they wish to obtain.\" The three-year expiry tolerance is a condition on the foreign licence, not a deadline for exchanging, so exchange_window_months is left null. Nothing is said about surrendering the foreign licence."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Kentucky",
+    "destination_name": "Kentucky (United States)",
+    "authority": "Kentucky Transportation Cabinet, Division of Driver Licensing",
+    "instrument": "Non-U.S. Citizen Driver Licensing — Step One: Testing",
+    "source_url": "https://drive.ky.gov/Drivers/Pages/Non-US-Citizen.aspx",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Page states \"A Kentucky license is required within 30 days of establishing Kentucky residency.\"",
+    "exchange_window_months": 1,
+    "medical_certificate_required": null,
+    "quote_original": "Holds a valid license from a reciprocity country (Taiwan & South Korea) Vision Testing is scheduled through the Kentucky State Police website .",
+    "quote_translation": "Holds a valid license from a reciprocity country (Taiwan & South Korea) Vision Testing is scheduled through the Kentucky State Police website .",
+    "entries": [
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Kentucky confirms this is a reciprocity country, but the page states the testing consequence twice and inconsistently, so neither test field is recorded. Foreign licences must include a notarised translated statement."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Kentucky confirms this is a reciprocity country, but the page states the testing consequence twice and inconsistently, so neither test field is recorded. Foreign licences must include a notarised translated statement."
+      }
+    ],
+    "notes": "The page carries two testing tables (Permanent Residents and Non-U.S. Citizens); both list \"Holds a valid license from a reciprocity country (Taiwan & South Korea)\" against \"Vision\" only, while a licence from a U.S.-accepted foreign country that is not a reciprocity country draws Vision & Written (permanent residents) or Vision, Written & Road (other non-U.S. citizens). CAVEAT: a trailing orphaned form-data block at the very bottom of the same HTML (\"REQUIRED DOCUMENTATION Select Code select one\") contradicts the tables by saying a holder of \"a valid license from a Foreign License Reciprocity Country\" needs written, vision and road tests. The two statements cannot both be true, so theory_test_required and practical_test_required are left null for both origins: the reciprocity relationship is confirmed by the quote, the test consequence is not. Recording false on the strength of the tables alone would assert a waiver the same document denies. The page also carries a note that \"These statuses are subject to review and change\". All testing is scheduled through the Kentucky State Police. Nothing is said about surrendering the foreign licence or about medical certification."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Louisiana",
+    "destination_name": "Louisiana (United States)",
+    "authority": "Louisiana Department of Public Safety and Corrections, Office of Motor Vehicles",
+    "instrument": "OMV License Transfers — Transferring an Out-of-Country Driver’s License",
+    "source_url": "https://www.expresslane.org/drivers/personal-driver-s-licenses/license-transfers/",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Applicant must be establishing Louisiana residency; visitors to the United States are not eligible for a Louisiana driver’s licence.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "First-time applicants from Germany, Switzerland, South Korea and Taiwan* (due to a reciprocal agreement with the Department), in addition to the U.S. Territories of American Samoa, Guam, Mariana Islands, Marshall Islands, Palau, Micronesia, Puerto Rico, and the Virgin Islands are exempt from the driver education training requirement, knowledge and road skills tests but are required to pass the vision test.",
+    "quote_translation": "First-time applicants from Germany, Switzerland, South Korea and Taiwan* (due to a reciprocal agreement with the Department), in addition to the U.S. Territories of American Samoa, Guam, Mariana Islands, Marshall Islands, Palau, Micronesia, Puerto Rico, and the Virgin Islands are exempt from the driver education training requirement, knowledge and road skills tests but are required to pass the vision test.",
+    "entries": [
+      {
+        "origin_label_en": "Germany",
+        "origin_iso_n3": "276",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Also exempt from the driver-education training requirement; vision test still required."
+      },
+      {
+        "origin_label_en": "Switzerland",
+        "origin_iso_n3": "756",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Also exempt from the driver-education training requirement; vision test still required."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Also exempt from the driver-education training requirement; vision test still required."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Page footnote: notarised translations must be authenticated by the Taipei Economic and Cultural Office in Houston or provided by a translator acceptable to the OMV."
+      }
+    ],
+    "notes": "The same page states that applicants from countries WITHOUT a reciprocal agreement must furnish proof of driver-education training and pass the knowledge, vision and road-skills tests. The named reciprocal jurisdictions are exempt from driver education, the knowledge test and the road-skills test but must still pass the vision test (the page describes a vision test, not a medical certificate, so medical_certificate_required is left unrecorded). The page says nothing about surrendering the foreign licence. Immigration documents must be verified by the OMV before issuance. The same sentence also lists US territories, which are omitted here because they are not foreign."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Maryland",
+    "destination_name": "Maryland (United States)",
+    "authority": "Maryland Motor Vehicle Administration",
+    "instrument": "Reciprocal Agreements (page not retrievable)",
+    "source_url": "https://mva.maryland.gov/drivers/Pages/reciprocal-agreements.aspx",
+    "verdict": "cannot_determine",
+    "grants": "exchange",
+    "kind": "unknown",
+    "residence_condition": null,
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": null,
+    "quote_translation": null,
+    "entries": [],
+    "notes": "mva.maryland.gov returns HTTP 403 to the extraction pipeline (4.5 KB challenge body, ~1.3 KB of boilerplate text, none of it policy content), so no quote can be verified. Tried https://mva.maryland.gov/drivers/Pages/reciprocal-agreements.aspx. This row asserts nothing about whether Maryland has a foreign-licence exchange arrangement."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "New York",
+    "destination_name": "New York (United States)",
+    "authority": "New York State Department of Motor Vehicles",
+    "instrument": "Exchange a foreign driver license (page not retrievable)",
+    "source_url": "https://dmv.ny.gov/driver-license/exchange-foreign-drivers-license",
+    "verdict": "cannot_determine",
+    "grants": "exchange",
+    "kind": "unknown",
+    "residence_condition": null,
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": null,
+    "quote_translation": null,
+    "entries": [],
+    "notes": "dmv.ny.gov returns HTTP 403 to the extraction pipeline (4–6 KB bot-challenge body, ~84 characters of text), so no sentence of the real page can be quoted or verified. Tried https://dmv.ny.gov/driver-license/exchange-foreign-drivers-license. No alternative New York State host publishing the same reciprocity list was found without a search engine. The existence and contents of any New York foreign-licence reciprocity list are therefore NOT established by this pass — this row asserts nothing about whether New York has such an arrangement."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Ontario",
+    "destination_name": "Ontario (Canada)",
+    "authority": "Ministry of Transportation of Ontario (ServiceOntario / DriveTest)",
+    "instrument": "Exchange an out-of-province driver’s licence — licence exchange agreements",
+    "source_url": "https://www.ontario.ca/page/exchange-out-province-drivers-licence",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "As of 11 May 2026 an applicant for a class G or class M licence must declare that Ontario is their primary place of residence and that their presence in Canada is legal.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "You can exchange an out-of-province licence for an Ontario licence, if you are re-locating from: any Canadian province or territory Canadian Armed Forces U.S. States (does not include U.S. protectorates or U.S. territories) Australia, Austria, Belgium, Croatia, France, Germany, Great Britain, Hungary, Denmark, the Isle of Man, Japan, South Korea, Kosovo, New Zealand, Northern Ireland, Republic of Ireland, Switzerland, Taiwan or Ukraine",
+    "quote_translation": null,
+    "entries": [
+      {
+        "origin_label_en": "Canadian provinces and territories",
+        "origin_iso_n3": null,
+        "subnational_label": "any Canadian province or territory",
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario names the whole set of Canadian provinces and territories; there is no federal Canadian licence."
+      },
+      {
+        "origin_label_en": "Canadian Armed Forces",
+        "origin_iso_n3": null,
+        "subnational_label": "Canadian Armed Forces",
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists the Canadian Armed Forces as an issuing jurisdiction in its own right."
+      },
+      {
+        "origin_label_en": "United States",
+        "origin_iso_n3": null,
+        "subnational_label": "U.S. states (excludes U.S. protectorates and U.S. territories)",
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario exchanges state licences, not a federal one; protectorates and territories are expressly excluded."
+      },
+      {
+        "origin_label_en": "Australia",
+        "origin_iso_n3": "036",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Austria",
+        "origin_iso_n3": "040",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Belgium",
+        "origin_iso_n3": "056",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Croatia",
+        "origin_iso_n3": "191",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "France",
+        "origin_iso_n3": "250",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Germany",
+        "origin_iso_n3": "276",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Great Britain",
+        "origin_iso_n3": "826",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Hungary",
+        "origin_iso_n3": "348",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Denmark",
+        "origin_iso_n3": "208",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Isle of Man",
+        "origin_iso_n3": "833",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Kosovo",
+        "origin_iso_n3": "383",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "New Zealand",
+        "origin_iso_n3": "554",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Northern Ireland",
+        "origin_iso_n3": null,
+        "subnational_label": "Northern Ireland (United Kingdom)",
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Listed separately from Great Britain by Ontario. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Republic of Ireland",
+        "origin_iso_n3": "372",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Switzerland",
+        "origin_iso_n3": "756",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      },
+      {
+        "origin_label_en": "Ukraine",
+        "origin_iso_n3": "804",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Ontario lists this jurisdiction among those whose motorcycle licence class cannot be exchanged. A commercial licence class issued outside Canada cannot be exchanged; a Class G or GM may be issued instead."
+      }
+    ],
+    "notes": "Destination is sub-national: Ontario runs its own reciprocity list. There is no Canadian federal driving licence and no federal exchange agreement, so no row is created for Canada. theory_test_required and practical_test_required are null for every origin because the page says only \"You might also need to take a knowledge or road tests, before you get a full licence. It depends on your circumstances.\" — the outcome turns on proven driving experience, which the page does not tabulate per jurisdiction. Recording false would invent a waiver. A vision test is taken when applying. No medical certificate is mentioned, so medical_certificate_required is null rather than false. Learner permits cannot be exchanged from any jurisdiction, nor driving-instructor or school-bus (Class B or E) licences. New residents may drive on the licence from their former jurisdiction for 60 days. That is a recognition grace period, not an exchange deadline, so exchange_window_months is left null. From 1 July 2026 holders of a licence from a jurisdiction with NO exchange agreement can obtain credit for up to one year of driving experience with an authentication letter, but must still pass the vision, knowledge, G2 and G tests. Detail on class mapping is published by DriveTest (the ministry's contracted delivery agent) at drivetest.ca, which returned HTTP 403 to automated fetches on 2026-08-17 and is therefore not cited."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Oregon",
+    "destination_name": "Oregon (United States)",
+    "authority": "Oregon Department of Transportation, Driver and Motor Vehicle Services Division",
+    "instrument": "Get a Driver License (testing waiver for new Oregon residents)",
+    "source_url": "https://www.oregon.gov/odot/DMV/pages/driverid/licenseget.aspx",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Waiver applies to a person \"new to Oregon\" who surrenders the foreign licence.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "You may not have to take a knowledge test or drive test if: You are new to Oregon and surrender your license from another state, the District of Columbia, U.S. Territory, the U.S. Department of State, Canada, Germany, Japan, South Korea or Taiwan. Your driver license cannot be expired more than 1 year.",
+    "quote_translation": "You may not have to take a knowledge test or drive test if: You are new to Oregon and surrender your license from another state, the District of Columbia, U.S. Territory, the U.S. Department of State, Canada, Germany, Japan, South Korea or Taiwan. Your driver license cannot be expired more than 1 year.",
+    "entries": [
+      {
+        "origin_label_en": "Canada",
+        "origin_iso_n3": "124",
+        "subnational_label": null,
+        "classes": "Non-commercial; motorcycle endorsement also transferable without testing",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Licence must be surrendered and not expired more than 1 year."
+      },
+      {
+        "origin_label_en": "Germany",
+        "origin_iso_n3": "276",
+        "subnational_label": null,
+        "classes": "Non-commercial; motorcycle endorsement NOT transferable without testing",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Licence must be surrendered and not expired more than 1 year."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": "Non-commercial; motorcycle endorsement also transferable without testing",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Licence must be surrendered and not expired more than 1 year."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": "Non-commercial; motorcycle endorsement NOT transferable without testing",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Licence must be surrendered and not expired more than 1 year."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": "Non-commercial; motorcycle endorsement NOT transferable without testing",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Licence must be surrendered and not expired more than 1 year."
+      }
+    ],
+    "notes": "Surrender of the foreign licence is an explicit condition of the waiver. The same page states the knowledge test IS required if \"Your license is from a country other than Canada, Germany, Japan, South Korea or Taiwan\" or if a licence from one of those countries \"has been expired for over 1 year\", which is what makes the waiver for the listed countries unambiguous. ODOT’s companion page (https://www.oregon.gov/odot/DMV/Pages/New2or/moving.aspx) puts it as \"Most people can transfer their license without testing if it was issued by: Any U.S. state, territory or the District of Columbia. Canada, Japan, South Korea, Germany and Taiwan.\" and adds that only Canada and Japan carry the motorcycle endorsement across without testing. No medical certificate is mentioned."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Quebec",
+    "destination_name": "Quebec (Canada)",
+    "authority": "Société de l’assurance automobile du Québec (SAAQ)",
+    "instrument": "Ententes de réciprocité en matière d’échange de permis de conduire (not retrieved)",
+    "source_url": "https://saaq.gouv.qc.ca/en/drivers-licences/obtaining-licence/exchanging-driver-licence-issued-outside-quebec",
+    "verdict": "cannot_determine",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": null,
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": null,
+    "quote_translation": null,
+    "entries": [],
+    "notes": "Quebec is known to run its own reciprocity ententes and is therefore listed as a sub-national destination with destination_iso_n3 null, but nothing is asserted about its contents because the source could not be read. saaq.gouv.qc.ca served a 303 redirect to https://messages.saaq.gouv.qc.ca/erreur/ for EVERY path attempted on 2026-08-17 — including the site root — under both a plain fetch and a full browser header set (Chrome UA, Accept, Accept-Language fr-CA, Sec-Fetch-*, cookie jar). This is a blanket bot or geo block, not a bad URL. Fallbacks tried and rejected: LégisQuébec Règlement C-24.2, r. 34 (fetched, 123k characters, contains no enumeration of exchange partners and is served in a legacy encoding that mangles accented characters under UTF-8 decoding); quebec.ca (its full sitemap, 9,770 URLs across ten sitemap pages, contains no driver-licence page — SAAQ owns that content); the MRIF register of Québec international agreements at mrif.gouv.qc.ca, which does carry a \"Permis de conduire\" subject filter but builds its result list client-side, so no agreement text is reachable without a browser. This row must NOT be read as Quebec having no exchange arrangements. It is a fetch failure, not a finding. A browser-driven fetch or a Gazette officielle du Québec citation of the individual ententes would close it."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Vermont",
+    "destination_name": "Vermont (United States)",
+    "authority": "Vermont Department of Motor Vehicles",
+    "instrument": "Foreign Driver’s License Reciprocity",
+    "source_url": "https://dmv.vermont.gov/licenses/foreign-licenses/foreign-license-reciprocity",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Proof of Vermont residency and proof of lawful status in the United States are required; applicant must be at least 18.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "Foreign motorists from Taiwan (Republic of China) who apply for a Vermont Class D Driver's License may be eligible to have the knowledge and skills tests waived. The Vermont DMV has a reciprocal agreement for driver licensing with Taiwan.",
+    "quote_translation": "Foreign motorists from Taiwan (Republic of China) who apply for a Vermont Class D Driver's License may be eligible to have the knowledge and skills tests waived. The Vermont DMV has a reciprocal agreement for driver licensing with Taiwan.",
+    "entries": [
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": "Class D",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Requires a notarised translation of the licence issued by Taiwan’s Directorate General of Highways; a basic vision exam must be passed."
+      }
+    ],
+    "notes": "Eligibility: \"Must be at least 18 years of age\" and \"The foreign license must not be expired\". The applicant must present proof of name and date of birth, lawful status, identity, Vermont residency, SSN if eligible, the Taiwan licence and a notarised translation, then \"Pass a basic vision exam\", complete the application and pay the fee. The page does not say whether the Taiwan licence is surrendered. A separate Vermont page lists countries whose licences visitors may drive on under the 1949 Road Traffic Convention; that is visitor recognition, not exchange, and is deliberately not recorded here."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Virginia",
+    "destination_name": "Virginia (United States)",
+    "authority": "Virginia Department of Motor Vehicles",
+    "instrument": "Exchange a Foreign Driver’s License (form DL 7)",
+    "source_url": "https://www.dmv.virginia.gov/licenses-ids/license/applying/exchange-foreign-dl",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Applicant must meet Virginia’s residency and identity requirements for a driver’s licence or driver privilege card; applicants under 18 are not eligible to exchange.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "Reciprocal Countries Virginia has agreements with some countries that allow holders of those licenses to skip certain steps in the process. These countries have proven to Virginia that their license was issued according to a process similar to Virginia’s secure licensing process. This is called “reciprocal” status. Countries with a reciprocal status include: Canada France Germany South Korea Taiwan (knowledge test required) Japan",
+    "quote_translation": "Reciprocal Countries Virginia has agreements with some countries that allow holders of those licenses to skip certain steps in the process. These countries have proven to Virginia that their license was issued according to a process similar to Virginia’s secure licensing process. This is called “reciprocal” status. Countries with a reciprocal status include: Canada France Germany South Korea Taiwan (knowledge test required) Japan",
+    "entries": [
+      {
+        "origin_label_en": "Canada",
+        "origin_iso_n3": "124",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Canadians do not need the DL 7 pre-verification step; vision screening required."
+      },
+      {
+        "origin_label_en": "France",
+        "origin_iso_n3": "250",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "DMV must verify the licence with the issuing country via form DL 7 before issuance; vision screening required."
+      },
+      {
+        "origin_label_en": "Germany",
+        "origin_iso_n3": "276",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "DMV must verify the licence with the issuing country via form DL 7 before issuance; vision screening required."
+      },
+      {
+        "origin_label_en": "Japan",
+        "origin_iso_n3": "392",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "DMV must verify the licence with the issuing country via form DL 7 before issuance; vision screening required."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "DMV must verify the licence with the issuing country via form DL 7 before issuance; vision screening required."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": true,
+        "practical_test_required": false,
+        "note": "The country list annotates Taiwan \"(knowledge test required)\"; the page separately states Taiwan licence holders must pass a vision screening and the two-part knowledge exam, and need not take the road skills test."
+      }
+    ],
+    "notes": "Same page: \"Steps You May Skip For applicants 18 years and older who are exchanging a valid license from one of the reciprocal countries listed above, you may not be required to complete the knowledge or road skills tests.\" Holders of licences from countries other than Canada, France, Germany, Japan, South Korea or Taiwan are \"not eligible for foreign reciprocity and must pass the two-part knowledge exam, road skills test and a vision screening.\" Applicants under 18 are not eligible. Applicants who hold a reciprocal-country licence but choose not to submit the DL 7 must meet all knowledge and road-skills testing requirements. Vision screening is required for all; the page does not mention a medical certificate. The page does not state whether the foreign licence is surrendered."
+  },
+  {
+    "destination_iso_n3": null,
+    "destination_subnational_label": "Wisconsin",
+    "destination_name": "Wisconsin (United States)",
+    "authority": "Wisconsin Department of Transportation, Division of Motor Vehicles",
+    "instrument": "Foreign driver license reciprocity",
+    "source_url": "https://wisconsindot.gov/Pages/dmv/license-drvs/how-to-apply/dl-reciprocity.aspx",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Proof of Wisconsin residency and proof of legal presence in the United States are required; applicant must be at least 21 with 3 years of driving experience.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "Foreign motorists from France, Germany, the Republic of Korea (South Korea) or Taiwan (Republic of China) who apply for a class D Regular Wisconsin driver license may be eligible to have the knowledge and skills tests waived. The Wisconsin Department of Transportation has reciprocal agreements for driver licensing with these countries. To be eligible under the reciprocal agreement, all persons must meet the following requirements: Must be at least 21 years of age and have 3 years driving experience Foreign license must not be expired",
+    "quote_translation": "Foreign motorists from France, Germany, the Republic of Korea (South Korea) or Taiwan (Republic of China) who apply for a class D Regular Wisconsin driver license may be eligible to have the knowledge and skills tests waived. The Wisconsin Department of Transportation has reciprocal agreements for driver licensing with these countries. To be eligible under the reciprocal agreement, all persons must meet the following requirements: Must be at least 21 years of age and have 3 years driving experience Foreign license must not be expired",
+    "entries": [
+      {
+        "origin_label_en": "France",
+        "origin_iso_n3": "250",
+        "subnational_label": null,
+        "classes": "Class D Regular",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Requires an approval letter obtained via the French Consulate. The French licence is collected and sent to the French Consulate on completion."
+      },
+      {
+        "origin_label_en": "Germany",
+        "origin_iso_n3": "276",
+        "subnational_label": null,
+        "classes": "Class D Regular",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "The German licence is returned to the applicant on completion."
+      },
+      {
+        "origin_label_en": "South Korea",
+        "origin_iso_n3": "410",
+        "subnational_label": null,
+        "classes": "Class D Regular",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Requires an English translation certified by the Consulate of the Republic of Korea in Chicago, unless the licence was issued after 16 September 2019 and already carries an English translation on the card. The Korean licence is returned to the applicant."
+      },
+      {
+        "origin_label_en": "Taiwan",
+        "origin_iso_n3": "158",
+        "subnational_label": null,
+        "classes": "Class D Regular",
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Requires an International Driving Permit or a notarised translation issued by the Taipei Economic and Cultural Office in Chicago. The Taiwan licence is returned to the applicant."
+      }
+    ],
+    "notes": "Eligibility for all four: at least 21 years of age, 3 years of driving experience, foreign licence not expired. Each country’s procedure ends with \"Pass a basic vision exam\", the MV3001 application and the fee; no medical certificate is mentioned. Surrender differs by country: the French licence is collected and forwarded to the French Consulate, while the German, Korean and Taiwanese licences are returned to the applicant."
+  },
+  {
+    "destination_iso_n3": "032",
+    "destination_subnational_label": null,
+    "destination_name": "Argentina",
+    "authority": "Agencia Nacional de Seguridad Vial (ANSV), Ministerio de Economía / Transporte — Licencia Nacional de Conducir",
+    "instrument": "Bilateral agreements on reciprocal recognition and exchange of driving licences listed by the ANSV ('Consulta sobre los Acuerdos Internacionales de Licencias de Conducir'); the domestic licence framework is Ley 24.449 / Licencia Nacional de Conducir",
+    "source_url": "https://www.argentina.gob.ar/seguridadvial/licencianacional/consulta-sobre-los-acuerdos-internacionales-de-licencias-de-conducir",
+    "verdict": "confirmed",
+    "grants": "recognition_and_exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Holder must be resident in Argentina and hold a foreign licence that was valid and issued BEFORE residence was obtained (Chile and Bolivia pages). The Chile page requires the application within the first year of residence; the Colombia page states 'El trámite debe realizarse dentro de los 365 días desde la adquisición de la condición de residente en el territorio argentino.'",
+    "exchange_window_months": 12,
+    "medical_certificate_required": true,
+    "quote_original": "Acuerdo entre Argentina y Bolivia sobre Reconocimiento y Canje de Licencias de Conducir Acuerdo entre Argentina y Chile sobre Reconocimiento y Canje de Licencias de Conducir Acuerdo entre Colombia y Argentina sobre Reconocimiento y Expedición de Licencias de Conducir por Equivalencia Acuerdo entre el Reino de España y la República de Argentina sobre Reconocimiento Recíproco y Canje de Licencias de Conducir Acuerdo entre Italia y la República de Argentina sobre Reconocimiento Recíproco y Canje de Licencias de Conducir",
+    "quote_translation": "Agreement between Argentina and Bolivia on Recognition and Exchange of Driving Licences; Agreement between Argentina and Chile on Recognition and Exchange of Driving Licences; Agreement between Colombia and Argentina on Recognition and Issuance of Driving Licences by Equivalence; Agreement between the Kingdom of Spain and the Republic of Argentina on Reciprocal Recognition and Exchange of Driving Licences; Agreement between Italy and the Republic of Argentina on Reciprocal Recognition and Exchange of Driving Licences.",
+    "entries": [
+      {
+        "origin_label_en": "Chile",
+        "origin_iso_n3": "152",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Agreement signed 26 January 2021. ANSV page https://www.argentina.gob.ar/servicio/acuerdo-entre-la-republica-argentina-y-la-republica-de-chile-sobre-reconocimiento-reciproco states the applicant must be a Chilean 'dentro del primer año de residencia en la Argentina' holding a valid Chilean licence issued before residence, and at the Centro Emisor de Licencias: 'Realizá el examen psicofísico, estando exento de los realizar los exámenes teóricos ni prácticos.' A practical competence test IS required for the Argentine equivalents of classes B2, E2, G1, G2 and G3; professional licences used commercially are excluded from the recognition limb. The Chilean licence is surrendered."
+      },
+      {
+        "origin_label_en": "Bolivia",
+        "origin_iso_n3": "068",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Agreement signed 4 July 2023 at the LXII Mercosur Common Market Council meeting. ANSV page https://www.argentina.gob.ar/servicio/acuerdo-entre-la-republica-de-argentina-y-el-estado-plurinacional-de-bolivia-sobre requires the Bolivian licence to be valid and issued before residence was obtained, and lists 'Realizá el examen psicofísico' at the Centro Emisor de Licencias. That page does not state whether theory or practical examinations apply, so both are left unrecorded. The Bolivian licence is surrendered."
+      },
+      {
+        "origin_label_en": "Colombia",
+        "origin_iso_n3": "170",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": false,
+        "practical_test_required": false,
+        "note": "Issued 'por equivalencia' rather than 'por canje'. ANSV page https://www.argentina.gob.ar/servicio/acuerdo-entre-la-republica-de-colombia-y-la-republica-argentina-sobre-reconocimiento: 'Realizar el examen psicofísico sin estar obligados a realizar los exámenes teóricos y prácticos.' Open to Colombians resident in Argentina aged over 17 with a valid licence; the trámite must be done within 365 days of acquiring resident status; the Colombian licence is NOT surrendered ('No se retendrá la licencia otorgada por las autoridades colombianas')."
+      },
+      {
+        "origin_label_en": "Spain",
+        "origin_iso_n3": "724",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "ANSV page https://www.argentina.gob.ar/servicio/acuerdo-entre-el-reino-de-espana-y-la-republica-de-argentina confirms the exchange limb ('Sobre el Canje de Licencias de Conducir ... Titulares de Licencia de Conducir españolas vigentes con residencia en la Argentina') but the published page carries no procedural detail beyond that, so exam requirements are unrecorded."
+      },
+      {
+        "origin_label_en": "Italy",
+        "origin_iso_n3": "380",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "ANSV page https://www.argentina.gob.ar/servicio/acuerdo-entre-italia-y-la-republica-de-argentina confirms the exchange limb ('Sobre el Canje de licencias de conducir ... Titulares de Licencia de Conducir italianas vigentes con residencia en la Argentina') but carries no procedural detail, so exam requirements are unrecorded."
+      }
+    ],
+    "notes": "Argentina's Licencia Nacional de Conducir is issued by municipal/provincial Centros Emisores de Licencias (CEL) but the exchange authorisation certificate is issued centrally by the ANSV, so the arrangement is national. Process for all agreements: e-mail the ANSV with scans, ANSV verifies validity with the issuing authority, ANSV issues a 'Certificado para otorgamiento de Licencia Nacional de Conducir por Canje' (valid 90 days; 60 days in the Colombian equivalence route), then the applicant attends the CEL for their domicile, pays the CENAT, sits the examen psicofísico and collects the Argentine licence. medical_certificate_required is recorded true because the Chile, Bolivia and Colombia pages each require the examen psicofísico; the Spain and Italy pages do not detail the procedure. The ANSV agreements index lists exactly these five instruments; no general (non-treaty) exchange route for other nationalities was found on argentina.gob.ar — that is an absence of evidence, not evidence that none exists."
+  },
+  {
+    "destination_iso_n3": "076",
+    "destination_subnational_label": null,
+    "destination_name": "Brazil",
+    "authority": "Conselho Nacional de Trânsito (CONTRAN) — Ministério da Infraestrutura; published in the Diário Oficial da União (Imprensa Nacional)",
+    "instrument": "Resolução CONTRAN nº 933, de 28 de março de 2022 (DOU 01/04/2022, Seção 1, p. 122), issued under art. 142 of the Código de Trânsito Brasileiro (Lei nº 9.503/1997)",
+    "source_url": "https://www.in.gov.br/en/web/dou/-/resolucao-contran-n-933-de-28-de-marco-de-2022-390332383",
+    "verdict": "confirmed",
+    "grants": "recognition_and_exchange",
+    "kind": "unilateral_recognition",
+    "residence_condition": "Regular stay (estada regular) in Brazil. Under art. 2 §4, a driver whose foreign licence is recognised by Brazil (convention/agreement/reciprocity) who wishes to keep driving after 180 days of regular stay must obtain a CNH by passing the physical/mental aptitude exam and the psychological assessment. Under art. 3, a holder of a licence NOT recognised by Brazil may, while in regular stay, swap it for the Brazilian equivalent at the state/DF transit authority.",
+    "exchange_window_months": null,
+    "medical_certificate_required": true,
+    "quote_original": "O condutor de veículo automotor, oriundo de país estrangeiro e nele habilitado, em estada regular, desde que penalmente imputável no Brasil, detentor de habilitação não reconhecida pelo Governo brasileiro, poderá dirigir no território nacional mediante a troca da sua habilitação de origem pela equivalente nacional junto ao órgão ou entidade executiva de trânsito dos Estados ou do Distrito Federal e ser aprovado nos Exames de Aptidão Física e Mental, Avaliação Psicológica e de Direção Veicular, respeitada a sua categoria, com vistas à obtenção da CNH.",
+    "quote_translation": "A motor-vehicle driver originating from a foreign country and licensed there, in regular stay, provided he is criminally liable in Brazil, holding a licence not recognised by the Brazilian Government, may drive in the national territory by exchanging his licence of origin for the national equivalent at the transit body or entity of the States or the Federal District, and by passing the Physical and Mental Aptitude Examination, the Psychological Assessment and the Driving Examination, respecting his category, with a view to obtaining the CNH.",
+    "entries": [
+      {
+        "origin_label_en": "Any foreign licence-issuing country whose licence is NOT recognised by Brazil",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": true,
+        "note": "Art. 3 of Resolução CONTRAN 933/2022 (the quoted text). Exchange ('troca da sua habilitação de origem pela equivalente nacional') is done at the state/Federal District transit authority (DETRAN) and requires passing the Exame de Aptidão Física e Mental, the Avaliação Psicológica and the Exame de Direção Veicular (practical). The article enumerates no written/theory examination, but it does not state that one is waived, so theory_test_required is left unrecorded."
+      },
+      {
+        "origin_label_en": "Any foreign licence-issuing country whose licence IS recognised by Brazil (international convention, bilateral agreement, or the principle of reciprocity)",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": false,
+        "note": "Art. 2 §4 of the same Resolution, verbatim: 'O condutor estrangeiro, após o prazo de 180 (cento e oitenta) dias de estada regular no Brasil, pretendendo continuar a dirigir veículo automotor no âmbito territorial brasileiro, deverá submeter-se aos Exames de Aptidão Física e Mental e Avaliação Psicológica, nos termos do art. 147 do Código de Trânsito Brasileiro (CTB), respeitada a sua categoria, com vistas à obtenção da Carteira Nacional de Habilitação (CNH).' practical_test_required is recorded false because art. 3 expressly adds 'e de Direção Veicular' for the non-recognised case while art. 2 §4 omits it — a deliberate contrast inside the same instrument. No theory examination is mentioned in either article, so theory_test_required is left unrecorded. The list of countries to which art. 2 applies is not in the Resolution: art. 2 §2 says 'O órgão máximo executivo de trânsito da União informará aos demais órgãos ou entidades do Sistema Nacional de Trânsito (SNT) a que países se aplica o disposto neste artigo' — that SENATRAN country list was not located, so no per-country ISO codes are recorded."
+      }
+    ],
+    "notes": "Legal chain: CTB (Lei 9.503/1997) art. 142 — 'O reconhecimento de habilitação obtida em outro país está subordinado às condições estabelecidas em convenções e acordos internacionais e às normas do CONTRAN' (verified in the Planalto consolidated text at https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm; note that page is served in ISO-8859-1 and the extraction pipeline renders its accented characters as mojibake, which is why the DOU page was used as source_url). CTB art. 129/129-A concern vehicle registration, not licences. Resolução CONTRAN 933/2022 revoked Resoluções CONTRAN 360/2010 and 671/2017. A DOU full-text search for later instruments citing 'Resolução CONTRAN nº 933' returned no amending act. Resolução CONTRAN 789/2020 (https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-contran/resolucoes/resolucao7892020.pdf) independently confirms the exchange route: art. 5º IV lists 'substituição do documento de habilitação obtido em país estrangeiro' among the cases requiring the Exame de Aptidão Física e Mental, and art. 5º §2º III lists it among the cases requiring the Avaliação Psicológica. The 180-day figure in art. 2 is a recognition period for driving on the foreign licence (out of scope as a grace period); it is recorded here only because it is the trigger after which the CNH must be obtained. There is no fixed application deadline, so exchange_window_months is null."
+  },
+  {
+    "destination_iso_n3": "152",
+    "destination_subnational_label": null,
+    "destination_name": "Chile",
+    "authority": "Ley de Tránsito (national statute); licences are issued by the Departamento de Tránsito y Transporte Público Municipal of the applicant's comuna, under standards set by the Ministerio de Transportes y Telecomunicaciones",
+    "instrument": "DFL Nº 1 de 2007 (Ministerio de Transportes y Telecomunicaciones), Fija texto refundido, coordinado y sistematizado de la Ley de Tránsito Nº 18.290 — art. 15 (originally art. 14 bis of Ley 18.290)",
+    "source_url": "https://www.bcn.cl/leychile/Consulta/obtxml?opt=7&idNorma=1007469",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "unilateral_recognition",
+    "residence_condition": "Must be a resident in Chile ('los residentes en Chile') holding a foreign licence; the licence is granted by the municipality of the applicant's comuna of residence.",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "A los residentes en Chile que estén en posesión de LEY Nº18.290 licencias extranjeras, se les podrá otorgar la que Art. 14 bis soliciten, siempre que acrediten, en su caso, la antigüedad D.O. 07.02.1984 requerida en la Clase correspondiente y cumplan con los LEY Nº19.495 demás requisitos aplicables a la licencia de conducir de Art. 1º Nº 11 que se trate.",
+    "quote_translation": "Residents in Chile who hold foreign driving licences may be granted the licence they apply for, provided that they prove, where applicable, the seniority required in the corresponding Class and that they meet the other requirements applicable to the driving licence in question. (The interleaved fragments 'LEY Nº18.290 / Art. 14 bis / D.O. 07.02.1984 / LEY Nº19.495 / Art. 1º Nº 11' are the marginal amendment citations of the official consolidated text and are reproduced verbatim because they sit inside the same text block.)",
+    "entries": [
+      {
+        "origin_label_en": "Any foreign licence-issuing country",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "The statute is open to all residents holding any foreign licence, with no country list and no treaty condition. It does not itself waive or impose the examinations: it says the applicant must 'cumplan con los demás requisitos aplicables', which under art. 13 of the same law include 'Acreditar conocimientos teóricos y prácticos de conducción, así como de las disposiciones legales y reglamentarias que rigen al tránsito público'. Because that is an inference across articles rather than an explicit statement about exchange applicants, theory_test_required and practical_test_required are left unrecorded. The concession the article does grant is that the foreign licence can be used to prove the seniority ('antigüedad') normally required in the lower class."
+      }
+    ],
+    "notes": "The bcn.cl / leychile navegar page (https://www.bcn.cl/leychile/navegar?idNorma=1007469) is a JavaScript single-page app and yields no extractable text, so the official XML rendering of the same consolidated norm (obtxml, idNorma=1007469) is used as source_url. In that official text the marginal amendment citations are physically interleaved with the operative sentence, which is why the quote contains them; it was copy-pasted from the pipeline output and verified as a contiguous substring. Separately, the Chilean side of the 26 January 2021 Chile–Argentina agreement on reciprocal recognition and exchange is administered by the Subsecretaría de Transportes (page https://subtrans.gob.cl/canrelicex/, linked from the Municipalidad de Las Condes trámite page https://www.lascondes.cl/tramites/transito/licencias-de-conducir/extranjeros/); that host refused all connections from this environment (ECONNREFUSED on 163.247.52.179:443) so nothing from it is recorded here. Diplomatic and consular agents accredited in Chile have a stronger entitlement under the same article ('tendrán derecho a que se les otorgue licencia de conductor chilena, bastando que para ello exhiban una licencia vigente'), which is out of scope for a residence data layer. Art. 5 of the same law lets tourists drive on their home licence for the duration of their tourist authorisation — a grace period, deliberately excluded."
+  },
+  {
+    "destination_iso_n3": "170",
+    "destination_subnational_label": null,
+    "destination_name": "Colombia",
+    "authority": "Ministerio de Transporte — Oficina Jurídica Asesora",
+    "instrument": "Concepto/Memorando MT-1350-1-68225 de 13 de noviembre de 2007 (Concepto 0976), interpretando el artículo 25 de la Ley 769 de 2002 (Código Nacional de Tránsito) y el artículo 65 del Acuerdo 051 de 1993",
+    "source_url": "https://web.mintransporte.gov.co/jspui/bitstream/001/1236/1/Concepto_0976.pdf",
+    "verdict": "cannot_determine",
+    "grants": "exchange",
+    "kind": "unilateral_recognition",
+    "residence_condition": "Extranjeros residentes en Colombia y colombianos domiciliados en el exterior residenciados temporalmente en Colombia; la licencia extranjera debe haber sido expedida por un país con el que Colombia tenga relaciones diplomáticas o comerciales",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "Ahora bien, los colombianos domiciliados en el exterior y residenciados temporalmente en Colombia y los extranjeros residentes en nuestro país que demuestren ser titulares de una licencia de conducción legalmente expedida en otro país, que tengan relaciones diplomáticas o comerciales, podrán obtener licencia de conducción en la categoría equivalente a la otorgada en el exterior;",
+    "quote_translation": "That said, Colombians domiciled abroad and temporarily resident in Colombia, and foreigners resident in our country who show that they hold a driving licence lawfully issued in another country having diplomatic or commercial relations, may obtain a driving licence in the category equivalent to the one granted abroad;",
+    "entries": [
+      {
+        "origin_label_en": "Any foreign licence-issuing country",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": "Colombian category equivalent to the foreign licence held (\"la categoría equivalente a la otorgada en el exterior\"); the concepto does not publish an equivalence table",
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Restricted to licences issued by countries with which Colombia has diplomatic or commercial relations. The concepto states this is grounded in article 65 of Acuerdo 051 de 1993 (INTRA), which it says stays in force only \"mientras no se produzca reglamentación al respecto\"."
+      }
+    ],
+    "notes": "NOT CONFIRMED as a currently operating exchange. Ley 769 de 2002 art. 25 (verified at https://web.mintransporte.gov.co/jspui/bitstream/001/407/1/Ley_769_2002.pdf) covers only tourists and persons in transit — a visitor-driving rule, expressly out of scope here — and the Código Nacional de Tránsito contains no exchange/homologación article for residents. The only official statement of an exchange found is this 2007 Ministry of Transport legal opinion, which rests on art. 65 of Acuerdo 051 de 1993 and is self-limited to the period before any superseding regulation; Resolución 1500 de 2005 (categories, checked: no mention of foreign licences), Resolución 1555 de 2005 and Resolución 12379 de 2012 (trámites; its official 75-question circular MT 20134000260551 was checked and contains nothing on foreign licences) have since been issued, so whether the Acuerdo 051 art. 65 route is still applied in 2026 could not be established. URLs tried: runt.gov.co/tramites-y-servicios/licencia-de-conduccion (JS-only, extraction returns 0 characters, then timed out); www.runt.gov.co (timeout); www.mintransporte.gov.co (200 but no foreign-licence page found); mintransporte institutional repository searches for \"homologación licencia conducción extranjera\", \"canje licencia conducción\", \"reciprocidad licencia conducción\", \"convenio permisos de conducción\", \"Acuerdo 051 de 1993\" (Acuerdo 051 de 1993 itself is not in the repository). No published country list or bilateral exchange treaty was found on a Colombian official source; a Spain–Colombia canje convenio was NOT verified and is deliberately not recorded."
+  },
+  {
+    "destination_iso_n3": "188",
+    "destination_subnational_label": null,
+    "destination_name": "Costa Rica",
+    "authority": "Ministerio de Obras Públicas y Transportes (MOPT) — Consejo de Seguridad Vial (Cosevi) / Dirección General de Educación Vial; enacted by the Asamblea Legislativa",
+    "instrument": "Ley N.º 9078, Ley de Tránsito por Vías Públicas Terrestres y Seguridad Vial, artículo 91 (\"Homologación de las licencias expedidas en el extranjero\"), inciso b), publicada en La Gaceta, Alcance N.º 165 de 26 de octubre de 2012",
+    "source_url": "https://www.imprentanacional.go.cr/pub/2012/10/26/ALCA165_26_10_2012.pdf",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "unilateral_recognition",
+    "residence_condition": "Uninterrupted stay in Costa Rica of more than three months, and proof of lawful residence under immigration law (\"Acreditar su permanencia legal en el país, al amparo de la legislación migratoria vigente\")",
+    "exchange_window_months": null,
+    "medical_certificate_required": true,
+    "quote_original": "b) Los conductores acreditados con licencia de conducir en el extranjero, con permanencia ininterrumpida en el país superior a tres meses, podrán conducir siempre que obtengan la licencia de conducir costarricense, previo cumplimiento de los siguientes requisitos: i. La licencia que se pretende homologar debe estar vigente. ii. Cumplir lo dispuesto en esta ley para la clase y el tipo de licencia que se pretende homologar, excepto la obligación de atender el curso básico de educación vial y de realizar el examen práctico de manejo. iii. Acreditar su permanencia legal en el país, al amparo de la legislación migratoria vigente.",
+    "quote_translation": "b) Drivers holding a driving licence issued abroad, with an uninterrupted stay in the country of more than three months, may drive provided they obtain the Costa Rican driving licence, having first met the following requirements: i. The licence to be homologated must be valid. ii. Comply with what this law provides for the class and type of licence to be homologated, except for the obligation to attend the basic road-safety course and to sit the practical driving test. iii. Prove lawful residence in the country, under the immigration legislation in force.",
+    "entries": [
+      {
+        "origin_label_en": "Any foreign licence-issuing country",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": "The Costa Rican class/type equivalent to the foreign licence held. For professional classes B-4 and C, article 91(c) additionally allows prior experience on the equivalent foreign licence to be credited, but the applicant must take the specific course for that vehicle type.",
+        "theory_test_required": null,
+        "practical_test_required": false,
+        "note": "The practical driving test is expressly waived by article 91(b)(ii). No standalone theory examination appears in article 84's list of requirements — the theory content sits inside the \"curso básico de educación vial\", which article 91(b)(ii) also waives — but the law does not state in terms whether a theory test applies to homologación, so this is left unrecorded rather than written as waived."
+      }
+    ],
+    "notes": "Article 91(a) — the three-month tourist/transit allowance — is a visitor-driving rule and is deliberately not recorded as an exchange. The exchange itself is 91(b): open to holders of any valid foreign licence, no country list and no reciprocity condition, conditioned only on lawful residence. medical_certificate_required is true because article 91(b)(ii) requires compliance with every other requirement of the law and article 84(c) requires \"un dictamen médico general realizado por un profesional en ciencias médicas, autorizado por el Colegio de Médicos y Cirujanos\"; only the course and the practical test are carved out. Source is the Imprenta Nacional gazette PDF of the law as enacted; www.pgrweb.go.cr (SCIJ, the consolidated text) could not be used because its TLS chain fails verification in the repo's fetch pipeline (\"unable to verify the first certificate\"), and www.educacionvial.go.cr and www.csv.go.cr both return Cloudflare 403 to the pipeline, so the consolidated post-2012 text of article 91 could not be cross-checked for later amendments."
+  },
+  {
+    "destination_iso_n3": "484",
+    "destination_subnational_label": null,
+    "destination_name": "Mexico",
+    "authority": "Congreso de la Unión (federal framework law); driving licences are issued by the entidades federativas",
+    "instrument": "Ley General de Movilidad y Seguridad Vial, artículos 34 fracción XI y 51, publicada en el Diario Oficial de la Federación el 17 de mayo de 2022",
+    "source_url": "https://dof.gob.mx/nota_detalle.php?codigo=5652187&fecha=17/05/2022",
+    "verdict": "cannot_determine",
+    "grants": "exchange",
+    "kind": "unknown",
+    "residence_condition": null,
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "La Federación, las entidades federativas y los municipios, establecerán en su normativa aplicable que todas las personas que realicen el trámite para obtener o renovar una licencia o permiso de conducir, deberán acreditar el examen de valoración integral que demuestre su aptitud para ello, así como el examen teórico y práctico de conocimientos y habilidades necesarias, antes de la fecha de expedición o renovación de la licencia o permiso.",
+    "quote_translation": "The Federation, the federal entities and the municipalities shall establish in their applicable rules that every person carrying out the procedure to obtain or renew a driving licence or permit must pass the comprehensive assessment examination demonstrating their fitness for it, as well as the theoretical and practical examination of the necessary knowledge and skills, before the date the licence or permit is issued or renewed.",
+    "entries": [
+      {
+        "origin_label_en": "Any foreign licence-issuing country",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "No exchange concept was located at federal level. The federal framework law contemplates only obtaining or renewing a licence, in both cases on passing a fitness assessment plus theoretical and practical examinations; it does not contemplate converting a foreign licence."
+      }
+    ],
+    "notes": "Recorded as cannot_determine at national level, on purpose. Driving licences in Mexico are not federal: article 34 fracción XI of the Ley General de Movilidad y Seguridad Vial assigns to the entidades federativas the power to \"Otorgar licencias y permisos para conducir, en las modalidades de su competencia, para el transporte de pasajeros, de carga y de uso particular\". The only federally issued licence is the Licencia Federal de Conductor for federal-jurisdiction commercial transport, which is not a residence route. The federal framework (article 51, quoted) speaks solely of obtaining or renewing a licence on passing exams; the word \"extranjer-\" appears once in the entire law and is unrelated (goods in transit). Nothing in it recognises or converts a foreign licence, and there is no federal reciprocity list. Whether any individual state operates something that is genuinely an exchange — as opposed to simply issuing its own licence to any resident who applies, which is not an exchange — could not be established here: www.semovi.cdmx.gob.mx and tramites.cdmx.gob.mx did not respond (connection timeouts), www.gob.mx serves a bot-challenge page to the extraction pipeline, and www.diputados.gob.mx was unreachable. If a specific state is later documented, it must be recorded as its own row with destination_iso_n3 null and destination_subnational_label set. No national arrangement is asserted."
+  },
+  {
+    "destination_iso_n3": "591",
+    "destination_subnational_label": null,
+    "destination_name": "Panama",
+    "authority": "Autoridad del Tránsito y Transporte Terrestre (ATTT), through its licensing concessionaire SERTRACEN",
+    "instrument": "Trámite de \"Homologación de licencia\" (ATTT/SERTRACEN); requirements cite Ley 146 de 15 de abril de 2020 and article 113 acápite b.1 of the reglamento de tránsito",
+    "source_url": "https://www.sertracen.com.pa/homologacion-de-licencia/",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "unilateral_recognition",
+    "residence_condition": "Foreign applicants must present an original carné de migración (or cédula E for permanent residents) plus passport; foreigners on temporary residence get a licence valid until the carné de migración expires or up to four years",
+    "exchange_window_months": null,
+    "medical_certificate_required": null,
+    "quote_original": "La homologación de una licencia extranjera es permitida en una ocasión y debe ser al momento en que se solicite por primera vez una licencia de conducir panameña.",
+    "quote_translation": "Homologation of a foreign licence is permitted once only, and must take place at the moment a Panamanian driving licence is applied for for the first time.",
+    "entries": [
+      {
+        "origin_label_en": "Any foreign licence-issuing country",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": "Panamanian equivalents of categories A, B, C and D. Public-transport categories are excluded (article 113 acápite b.1); foreigners on a limited migratory status may only obtain A, B and C. International driving permits and minors' permits are not homologated.",
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "No country list or reciprocity condition is published for the homologación route: the gate is documentary — the physical foreign licence plus a certification and cotejo issued by the issuing authority or by that country's consulate/embassy in Panama, authenticated by apostille, consular refrendo or diplomatic mission. A visual and auditory validation is done at the branch; a blood type/RH lab result is required only if the foreign licence does not show it; a general medical certificate is required only from age 70; a practical skills test is required only from age 85 and for category-D-equivalent categories. Because these are conditional, theory/practical/medical are left unrecorded rather than asserted either way."
+      },
+      {
+        "origin_label_en": "Spain",
+        "origin_iso_n3": "724",
+        "subnational_label": null,
+        "classes": "Published equivalence table: Spanish A2→Panamanian B, B→C, C1→D, C→F, C+E→G, D1→E2 (not available to foreigners), D→E3 and F (foreigners only F). Panamanian categories A, E1, H and I are not exchangeable.",
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Separate bilateral route documented at https://www.sertracen.com.pa/canje-de-licencia-de-conducir-espanola/ under the \"Convenio entre el Reino de España y República de Panamá\": one-time canje, the Spanish licence must be surrendered, and the certification/cotejo must come from the Spanish embassy or consulate in Panama. That page states that applicants moving up to the categories equivalent to Spanish C1 (Panamanian D) and C (Panamanian F) must sit the theoretical and practical test for those vehicles; for the ordinary car categories it states practical validation is required only for types D, E2, E3, F and G. Quote not taken from that URL because this dataset carries one row per destination; the quote above is from the homologación page."
+      }
+    ],
+    "notes": "Panama runs two distinct conversion routes, both operated by SERTRACEN on behalf of the ATTT: (1) a universal \"homologación\" open to holders of any foreign national driving licence — no reciprocity list is published, contrary to the working assumption — and (2) a bilateral \"canje\" under the Spain–Panama convenio with a published category equivalence table. The universal route is one-time-only and must be used at the moment of first applying for a Panamanian licence. transito.gob.pa (the ATTT's own site) did not respond at all during this research (connection timeout on both http and https), so SERTRACEN, the ATTT's licensing concessionaire whose pages state ATTT procedures and cite the reglamento de tránsito, is the source used. medical_certificate_required is null, not false: medical documentation requirements exist but are conditional (blood type if absent from the licence, drug screen for category D, full medical certificate from age 70)."
+  },
+  {
+    "destination_iso_n3": "858",
+    "destination_subnational_label": null,
+    "destination_name": "Uruguay",
+    "authority": "Intendencia de Canelones — Dirección General de Tránsito, publishing on gub.uy, the official national services portal of the Oriental Republic of Uruguay (driving licences in Uruguay are issued by the departmental Intendencias under the national Permiso Único Nacional de Conducir framework)",
+    "instrument": "gub.uy trámite 'Canje de permiso de conducir extranjero de países con convenio - Canelones' (treaty route) and 'Revalida de permiso de conducir extranjero - Canelones' (general route)",
+    "source_url": "https://www.gub.uy/tramites/canje-permiso-conducir-extranjero-paises-convenio-canelones",
+    "verdict": "confirmed",
+    "grants": "exchange",
+    "kind": "bilateral_agreement",
+    "residence_condition": "Applicant must hold a Uruguayan identity document (cédula de identidad) or a valid Uruguayan passport, and must surrender any Uruguayan licences already held. No separate minimum-residence period is stated.",
+    "exchange_window_months": null,
+    "medical_certificate_required": true,
+    "quote_original": "Trámite mediante el cual se gestiona el canje de permisos de conducir extranjeros por la correspondiente en nuestro país previa aprobación de los exámenes correspondientes.",
+    "quote_translation": "Procedure by which the exchange of foreign driving permits for the corresponding one in our country is handled, subject to prior approval of the corresponding examinations.",
+    "entries": [
+      {
+        "origin_label_en": "Spain",
+        "origin_iso_n3": "724",
+        "subnational_label": null,
+        "classes": null,
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "The only treaty exchange currently in force. Same page, verbatim: 'Países con convenio: España. Actualmente en vigencia. Italia. Venció en el año 2019.' The Spanish permit is surrendered and returned to the Dirección General de Tráfico de España. Requirements listed are identity document, surrender of the permit, no unpaid fines, no active disqualification, and an 'Examen psicofísico de aptitud para conducir'. The page's opening sentence refers to 'previa aprobación de los exámenes correspondientes' without saying which, and the requirement list names only the psychophysical examination, so theory and practical are left unrecorded. The Intendencia de Maldonado publishes the same route in more detail (https://www.gub.uy/tramites/licencia-conducir-canje-espana-maldonado): categories A, B, C, D, E, F, H, G1, G2 and G3 are admitted, a Certificado de Aptitud Psicofísica is required, a judicial-record certificate is required for professional categories, and a practical examination is compulsory only from age 75 (amateur categories) or age 69 (professional categories)."
+      },
+      {
+        "origin_label_en": "Any foreign licence-issuing country",
+        "origin_iso_n3": null,
+        "subnational_label": null,
+        "classes": "Converted only into categories A, G1 or G2",
+        "theory_test_required": null,
+        "practical_test_required": null,
+        "note": "Separate 'revalida' route, open to any valid foreign permit regardless of treaty: https://www.gub.uy/tramites/revalida-permiso-conducir-extranjero-canelones — 'Trámite mediante el cual se gestiona la conversión de permisos de conducir extranjeros que se encuentren en vigencia, con la previa aprobación de los exámenes necesarios.' Requirements: Uruguayan cédula or passport; a driver-record certificate issued and legalised/apostilled by the authority that issued the permit (notarial certification is expressly not accepted); sworn translation of any non-Spanish document; surrender of any Uruguayan permit held; no unpaid fines; no active disqualification; Certificado de Aptitud Psicofísica. Scope limit, verbatim: 'En el trámite de revalida se le otorgará permiso de conducir en categorías A, G1 o G2 según corresponda a la conversión sobre el permiso que posee en el extranjero. No se otorga mediante este trámites categorías superiores a las indicadas.' The page says examinations are required but does not identify them, so theory and practical are left unrecorded."
+      }
+    ],
+    "notes": "Uruguay issues driving permits through the 19 departmental Intendencias, so there is no single national counter; gub.uy is the official national portal that publishes each Intendencia's trámite and was used as the source. The Canelones pages were chosen because they state both the treaty route and the general conversion route. The treaty with Italy is recorded on the same page as having expired in 2019 ('Venció en el año 2019. Puede realizar revalida por el mecanismo correspondiente para ese trámite'), so Italy is deliberately NOT recorded as an exchange entry. kind is recorded as bilateral_agreement because the row's quoted instrument is the treaty route; the second entry (revalida) is a unilateral domestic conversion and is flagged as such in its note. No national gazette instrument (IMPO/parlamento.gub.uy) for the Uruguay–Spain agreement was located: impo.com.uy's law base has no full-text search reachable by URL and parlamento.gub.uy returned HTTP 403 to this environment."
+  }
+]
