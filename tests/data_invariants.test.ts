@@ -1523,3 +1523,39 @@ describe('the atlas publishes no negatives', () => {
     }
   });
 });
+
+// Monitor leads #201 / #205 (17 August 2026)
+describe('monitor-lead verifications, 17 August 2026', () => {
+  test('monitor #205 Gibraltar Category 2 is £5m net wealth for new applicants', () => {
+    const r = (citizenshipRoutes.residence_routes ?? []).find(
+      route => route.id === 'gibraltar-hnw-residence',
+    );
+    expect(r).toBeDefined();
+    expect(r?.country.iso_n3).toBe('292');
+    expect(r?.category).toBe('investment');
+    expect(r?.status).toBe('active');
+    expect(r?.confidence).toBe('high');
+    expect(r?.min_investment).toEqual({ amount: 5_000_000, currency: 'GBP' });
+    expect(r?.summary).toMatch(/5[, ]?million|£5[, ]?m|GBP 5/i);
+    expect(r?.summary).toMatch(/5[, ]?000/);
+    expect(r?.summary.toLowerCase()).toMatch(/grandfather/);
+    expect(r?.last_checked).toBe('2026-08-17');
+    expect(r?.sources.some(s =>
+      s.url.includes('gibraltar.gov.gi') && s.url.includes('category-2'))).toBe(true);
+  });
+
+  test('monitor #201 France naturalisation records B2 + civic exam from 1 Jan 2026', () => {
+    const r = citizenshipRoutes.routes.find(
+      route => route.id === 'france-study-naturalization-residence',
+    );
+    expect(r).toBeDefined();
+    expect(r?.confidence).toBe('high');
+    expect(r?.last_checked).toBe('2026-08-17');
+    expect(r?.summary).toMatch(/B2/);
+    expect(r?.summary.toLowerCase()).toMatch(/civic exam|examen civique/);
+    expect(r?.summary).toMatch(/1 January 2026|2026-01-01|1er janvier 2026/i);
+    // Marriage track already carried B2; keep it explicit.
+    const marriage = citizenshipRoutes.routes.find(route => route.id === 'france-citizenship-by-marriage');
+    expect(marriage?.summary).toMatch(/B2/);
+  });
+});
