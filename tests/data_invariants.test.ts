@@ -1559,3 +1559,44 @@ describe('monitor-lead verifications, 17 August 2026', () => {
     expect(marriage?.summary).toMatch(/B2/);
   });
 });
+
+describe('monitor leads #192-#193, carried forward from data/monitor-leads-192-194', () => {
+  // Salvaged from commit 0289064, which was never merged and whose branch also
+  // rolled the release pointer back to a superseded id. The pointer stayed behind;
+  // these two regressions came across.
+  //
+  // The third invariant on that commit — "#194 Curaçao still has no residence
+  // routes until primary" — is deliberately NOT carried. It asserts an absence,
+  // which the atlas no longer stores, and it is now simply false: Curaçao has two
+  // residence routes.
+  test('monitor #192 Trinidad & Tobago descent asserts grandparent + including by descent', () => {
+    const route = citizenshipRoutes.routes.find(r => r.id === 'trinidad-and-tobago-citizenship-by-parent');
+    expect(route).toBeDefined();
+    expect(route?.confidence).toBe('high');
+    expect(route?.status).toBe('active');
+    expect(route?.summary).toMatch(/grandparent/i);
+    // Act 6 of 2025 s.4(b)-(c) replaced "otherwise than by descent" with "including by descent".
+    expect(route?.summary.toLowerCase()).toMatch(/including.*by descent|by descent/);
+    const urls = (route?.sources ?? []).map(s => s.url);
+    expect(urls.some(u => u.includes('ttparliament.org') || u.includes('printery.gov.tt'))).toBe(true);
+  });
+
+  test('monitor #193 Uzbekistan investment residence is PF-67 at high confidence', () => {
+    const route = (citizenshipRoutes.residence_routes ?? []).find(
+      r => r.id === 'uzbekistan-investment-residence',
+    );
+    expect(route).toBeDefined();
+    expect(route?.country.iso_n3).toBe('860');
+    expect(route?.category).toBe('investment');
+    expect(route?.status).toBe('active');
+    expect(route?.confidence).toBe('high');
+    expect(route?.min_investment).toEqual({ amount: 250000, currency: 'USD' });
+    // PR/naturalisation are not asserted from PF-67 alone.
+    expect(route?.counts_toward_permanent_residence).toBe(false);
+    expect(route?.counts_toward_naturalization).toBe(false);
+    const urls = (route?.sources ?? []).map(s => s.url);
+    expect(urls.some(u => u.includes('lex.uz') && u.includes('7483820'))).toBe(true);
+    // The wrong discovery URL from the lead must never become the primary cite.
+    expect(urls.some(u => u.includes('7378737'))).toBe(false);
+  });
+});
