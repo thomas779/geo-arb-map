@@ -110,6 +110,30 @@ export interface Fetched {
   note: string;
 }
 
+/** A TLS chain that Bun rejects but a chain-chasing client can complete. */
+const INCOMPLETE_CHAIN = /unable to verify the first certificate|UNABLE_TO_VERIFY_LEAF_SIGNATURE/i;
+
+/**
+ * Some official publishers serve a LEAF certificate with no intermediate. Bun's fetch
+ * refuses, while curl completes the chain by following the AIA URI in the leaf and
+ * still validates it. Measured on this project: almeezan.qa and adilet.zan.kz both
+ * answer curl and both fail Bun.
+ *
+ * That is a real cost — Qatar's Executive Regulation art. 47 and four sourced Kazakh
+ * rows were all marked cannot_determine on a tooling limit rather than on anything
+ * about the law.
+ *
+ * Note this does NOT disable verification. `curl` without -k validates normally; it
+ * is simply better at finding the missing link. Skipping verification would defeat
+ * the point of a provenance tool, which is knowing you reached the real publisher.
+ */
+function fetchViaCurl(url: string): Uint8Array | null {
+  const out = Bun.spawnSync([
+    'curl', '-sSL', '--max-time', '45', '--compressed', '-A', UA, url,
+  ]);
+  return out.success && out.stdout.length > 0 ? new Uint8Array(out.stdout) : null;
+}
+
 /**
  * A dropped socket is not a verdict. Government hosts close connections under load,
  * and a transient failure rendered as "unverified" reads identically to a fabricated
@@ -119,32 +143,40 @@ export interface Fetched {
 export async function fetchText(url: string): Promise<Fetched> {
   const first = await fetchOnce(url);
   if (first.status !== 0) return first;
+  if (INCOMPLETE_CHAIN.test(first.note)) {
+    const body = fetchViaCurl(url);
+    if (body) return decodeBody(body, 200, ' (chain completed via curl)');
+  }
   await new Promise(resolve => setTimeout(resolve, 1500));
   return fetchOnce(url);
+}
+
+/** Decode a fetched body the same way whichever client retrieved it. */
+function decodeBody(buf: Uint8Array, status: number, noteSuffix = ''): Fetched {
+  // Some official publishers serve UTF-16 (bdlaws.minlaw.gov.bd). Decoding as UTF-8
+  // yields a space between every character and every search fails silently.
+  let decoded: string;
+  if (buf[0] === 0xfe && buf[1] === 0xff) decoded = new TextDecoder('utf-16be').decode(buf);
+  else if (buf[0] === 0xff && buf[1] === 0xfe) decoded = new TextDecoder('utf-16le').decode(buf);
+  else decoded = new TextDecoder('utf-8').decode(buf);
+
+  const isPdf = decoded.slice(0, 5) === '%PDF-';
+  const text = isPdf ? pdfText(buf) : textOf(decoded);
+  return {
+    ok: status >= 200 && status < 400,
+    status,
+    bytes: buf.length,
+    shell: SPA_SHELL.test(decoded),
+    isPdf,
+    text,
+    note: (isPdf && !text ? 'PDF with no text layer — needs OCR, cannot be gated' : '') + noteSuffix,
+  };
 }
 
 async function fetchOnce(url: string): Promise<Fetched> {
   try {
     const res = await fetch(url, { headers: { 'User-Agent': UA }, redirect: 'follow' });
-    const buf = new Uint8Array(await res.arrayBuffer());
-    // Some official publishers serve UTF-16 (bdlaws.minlaw.gov.bd). Decoding as UTF-8
-    // yields a space between every character and every search fails silently.
-    let decoded: string;
-    if (buf[0] === 0xfe && buf[1] === 0xff) decoded = new TextDecoder('utf-16be').decode(buf);
-    else if (buf[0] === 0xff && buf[1] === 0xfe) decoded = new TextDecoder('utf-16le').decode(buf);
-    else decoded = new TextDecoder('utf-8').decode(buf);
-
-    const isPdf = decoded.slice(0, 5) === '%PDF-';
-    const text = isPdf ? pdfText(buf) : textOf(decoded);
-    return {
-      ok: res.ok,
-      status: res.status,
-      bytes: buf.length,
-      shell: SPA_SHELL.test(decoded),
-      isPdf,
-      text,
-      note: isPdf && !text ? 'PDF with no text layer — needs OCR, cannot be gated' : '',
-    };
+    return decodeBody(new Uint8Array(await res.arrayBuffer()), res.status);
   } catch (error) {
     return {
       ok: false, status: 0, bytes: 0, shell: false, isPdf: false, text: '',
