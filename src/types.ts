@@ -1,3 +1,5 @@
+import type { CountryLicenceSummary } from '@/lib/licence-exchange';
+
 export interface Member {
   name: string;
   iso_n3: string;
@@ -370,6 +372,13 @@ export interface CountrySliceData {
   jurisdiction: CitizenshipRoutesData['jurisdictions'][number] | null;
   routes: CitizenshipRoute[];
   residence_routes: ResidenceRoute[];
+  /**
+   * Precomputed driving-licence summary, null when this country appears in no
+   * exchange list. It rides on the slice because the corpus stopped being served
+   * (#210) — the panel must not have to fetch 45 destinations of annex to draw one
+   * card. Optional so a cached older slice still parses.
+   */
+  licence?: CountryLicenceSummary | null;
 }
 
 /** The shape served at /atlas-index.json: a strict projection of the corpus. */

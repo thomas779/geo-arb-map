@@ -204,31 +204,64 @@ async function migrateRemoteSchema(): Promise<void> {
 }
 
 /**
- * Create the licence-exchange tables if they are absent.
+ * Create the licence-exchange tables if they are absent, then bring an EXISTING one
+ * up to the current shape.
  *
- * Separate from migrateRemoteSchema because it is pure CREATE IF NOT EXISTS with no
- * table rebuild — it can run on every sync and converge. The tables are standalone
- * (the monitor_* pattern), so they carry no foreign keys into the canonical model
- * and are safe to create whether or not the canonical tables are populated.
+ * The first half is pure CREATE IF NOT EXISTS (0007) and converges on every sync.
+ * The second half exists because that is exactly what CREATE IF NOT EXISTS cannot
+ * do: 0007 is already applied to the live database, so a column added to it would
+ * never arrive, and the next sync would fail mid-write inserting `nationality_gate`
+ * into a table that has no such column. 0010 is therefore applied by inspection —
+ * read the live DDL, run it only when the new shape is absent — which is the same
+ * shape as migrateRemoteSchema and equally idempotent.
+ *
+ * The tables are standalone (the monitor_* pattern), so they carry no foreign keys
+ * into the canonical model and are safe to touch whether or not the canonical tables
+ * are populated.
  */
 async function ensureLicenceSchema(): Promise<void> {
   const file = path.join(root, 'data/d1/migrations/0007_licence_exchange.sql');
   const statements = splitStatements(fs.readFileSync(file, 'utf8'))
     .filter(statement => !/^\s*PRAGMA\b/i.test(statement));
   await runBatched(statements, 'licence-ddl');
+
+  const master = await query(
+    "SELECT name, sql FROM sqlite_master WHERE type = 'table' "
+    + "AND name IN ('licence_exchange_index', 'licence_agreement_index');",
+  );
+  const ddl = (name: string) =>
+    String(master.find(row => row.name === name)?.sql ?? '');
+  const hasGate = /nationality_gate/i.test(ddl('licence_exchange_index'));
+  const hasNotEstablished = /not_established/i.test(ddl('licence_agreement_index'));
+  if (hasGate && hasNotEstablished) {
+    console.log('  licence schema up to date (nationality_gate + grants not_established)');
+    return;
+  }
+  const migration = path.join(root, 'data/d1/migrations/0010_licence_nationality_gate.sql');
+  const upgrade = splitStatements(fs.readFileSync(migration, 'utf8'))
+    .filter(statement => !/^\s*PRAGMA\b/i.test(statement));
+  console.log(`  applying 0010_licence_nationality_gate (${upgrade.length} statements)`);
+  await runBatched(upgrade, 'licence-migrate');
 }
 
 /**
- * Rows for the licence layer, rendered from the served JSON.
+ * Rows for the licence layer, rendered from the corpus.
  *
- * public/licence_exchange.json stays the source of truth — it is version-controlled
- * and is what the site actually fetches. These tables are its indexed projection, so
- * "which agreements cover Paraguay" and "which states hold a bilateral agreement
- * with anyone" become queries rather than a client-side scan of a 184KB blob.
+ * data/compiled/licence_exchange.json stays the source of truth — it is
+ * version-controlled, and since #210 it is a BUILD INPUT rather than a served file:
+ * the site is served an index plus one slice per origin, emitted from this same
+ * corpus by scripts/build_country_pages.ts. These tables are its indexed projection,
+ * so "which agreements cover Paraguay", "which lists are gated on nationality" and
+ * "which states hold a bilateral agreement with anyone" are queries rather than a
+ * scan of every slice.
+ *
+ * Exported so tests/licence_exchange.test.ts can execute it against a real in-memory
+ * SQLite and assert the row and gate counts match the corpus. A count below the
+ * source is a silent drop, which is the class of defect this render must not have.
  */
-function renderLicenceSql(): string[] {
+export function renderLicenceSql(): string[] {
   const data = JSON.parse(
-    fs.readFileSync(path.join(root, 'public/licence_exchange.json'), 'utf8'),
+    fs.readFileSync(path.join(root, 'data/compiled/licence_exchange.json'), 'utf8'),
   ) as {
     agreements?: Array<Record<string, unknown>>;
     destinations: Array<Record<string, unknown>>;
@@ -267,10 +300,18 @@ function renderLicenceSql(): string[] {
       // licence_exchange_index stable: it COALESCEs this column.
       const subnationalLabel = e.subnational_label
         ?? (e.subnational ? e.origin_label_en : null);
+      // The two windows are RESOLVED here (entry value, else the destination's)
+      // because the projection is entry-level and Italy's deadline varies by origin.
+      // `?? null` throughout: an absent field is NOT RECORDED, never a zero and never
+      // an "open to all" — which is the whole point of nationality_gate being NULL on
+      // the 44 destinations that publish no nationality rule.
+      const deadline = e.exchange_deadline_months ?? dest.exchange_deadline_months ?? null;
+      const grace = e.foreign_licence_grace_months ?? dest.foreign_licence_grace_months ?? null;
       out.push(
-        'INSERT INTO licence_exchange_index (destination_iso_n3, agreement_id, origin_iso_n3, subnational_label, origin_label_en, classes, theory_test_required, practical_test_required) VALUES ('
+        'INSERT INTO licence_exchange_index (destination_iso_n3, agreement_id, origin_iso_n3, subnational_label, origin_label_en, classes, theory_test_required, practical_test_required, nationality_gate, exchange_deadline_months, foreign_licence_grace_months) VALUES ('
         + [dest.iso_n3, dest.agreement_id ?? null, e.origin_iso_n3 ?? null, subnationalLabel,
-          e.origin_label_en, e.classes ?? null, e.theory_test_required ?? null, e.practical_test_required ?? null].map(q).join(', ')
+          e.origin_label_en, e.classes ?? null, e.theory_test_required ?? null, e.practical_test_required ?? null,
+          e.nationality_gate ?? null, deadline, grace].map(q).join(', ')
         + ');',
       );
     }

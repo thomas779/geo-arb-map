@@ -1,6 +1,12 @@
 import type { LicenceExchangeData } from '@/lib/licence-exchange';
-import { listOrigins, testLabel } from '@/lib/licence-exchange';
-import { ArrowRight, Car, ExternalLink, Home, Info, ShieldCheck } from 'lucide-react';
+import {
+  exchangeWindowLabels,
+  listOrigins,
+  nationalityGateLabel,
+  resolveExchangeWindow,
+  testLabel,
+} from '@/lib/licence-exchange';
+import { ArrowRight, Car, ExternalLink, Home, Info, ShieldCheck, UserCheck } from 'lucide-react';
 
 /**
  * /routes/driving-licences/ — exchange lookup hub (#171).
@@ -11,6 +17,11 @@ import { ArrowRight, Car, ExternalLink, Home, Info, ShieldCheck } from 'lucide-r
 export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
   const origins = listOrigins(data);
   const destCount = data.destinations.length;
+  // Destinations that gate any listing on the holder's nationality. Derived, never
+  // hardcoded: the moment a second annex records one, the copy below says so.
+  const gatedDestinations = data.destinations.filter(
+    dest => dest.entries.some(entry => (entry.nationality_gate ?? null) !== null),
+  );
 
   return (
     <main className="mx-auto max-w-[1060px] px-4 py-8 sm:px-6">
@@ -101,6 +112,23 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
                 </p>
               </div>
             </div>
+            <div className="flex gap-3">
+              <UserCheck className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden />
+              <div>
+                <p className="text-sm font-semibold">Some lists check your passport, not your licence</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                  {gatedDestinations.length > 0 && (
+                    <>
+                      {gatedDestinations.map(d => d.name).join(', ')}
+                      {' '}gate listed origins on the holder’s nationality, so a listed licence
+                      is not on its own an answer there.{' '}
+                    </>
+                  )}
+                  Where no nationality rule is shown, none was published — that is silence,
+                  not permission.
+                </p>
+              </div>
+            </div>
           </div>
           <details className="group mt-5 border-t pt-4">
             <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-semibold">
@@ -156,6 +184,9 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
                 <p className="mt-2 text-xs text-muted-foreground">
                   {dest.entries.length} origin rows · {unique.length} national-level no-retest listings shown below
                 </p>
+                {exchangeWindowLabels(resolveExchangeWindow(dest)).map(line => (
+                  <p key={line} className="mt-1 text-xs text-muted-foreground">{line}</p>
+                ))}
                 <ul className="mt-3 grid gap-1.5 sm:grid-cols-2">
                   {unique.slice(0, 24).map(e => (
                     <li key={`${dest.iso_n3}-${e.origin_label_en}`} className="text-sm">
@@ -163,6 +194,17 @@ export function DrivingLicencesPage({ data }: { data: LicenceExchangeData }) {
                       <span className="ml-1 font-mono text-[0.65rem] text-muted-foreground">
                         {testLabel(e.theory_test_required, e.practical_test_required)}
                       </span>
+                      {/* Only where the authority published one. A row with no gate prints
+                          nothing here rather than an implied "anyone" — the null case is the
+                          whole reason this field exists. */}
+                      {e.nationality_gate && (
+                        <span
+                          className="ml-1 font-mono text-[0.65rem] text-primary"
+                          data-nationality-gate={e.nationality_gate}
+                        >
+                          {nationalityGateLabel(e.nationality_gate)}
+                        </span>
+                      )}
                       {e.origin_iso_n3 && (
                         <a
                           className="ml-1 font-mono text-[0.65rem] text-primary underline-offset-2 hover:underline"

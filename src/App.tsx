@@ -32,7 +32,7 @@ import {
 } from '@/components/RightsProfile';
 import { buildSlugToIso, buildEntitySlugToId } from '@/lib/slug';
 import { isNonApplicableJurisdiction } from '@/lib/country';
-import type { LicenceExchangeData } from '@/lib/licence-exchange';
+import type { LicenceExchangeIndex } from '@/lib/licence-exchange';
 import { TrustCenter } from '@/components/TrustCenter';
 import { useTheme } from '@/components/theme-provider';
 import { EMPTY_PROFILE, normalizeProfile, type Profile } from '@/lib/planner';
@@ -78,7 +78,9 @@ const initialState: AppState = {
 export default function App() {
   const [state, setState] = useState<AppState>(initialState);
   const [data, setData] = useState<BlocsData | null>(null);
-  const [licenceExchange, setLicenceExchange] = useState<LicenceExchangeData | null>(null);
+  // The INDEX, not the corpus (#210): the map facet paints from `agreements`, and
+  // the origin → destination rows now live in per-origin slices nobody needs here.
+  const [licenceExchange, setLicenceExchange] = useState<LicenceExchangeIndex | null>(null);
   const [profile, setProfile] = useState<Profile>(initialProfile);
   const [citizenshipRoutes, setCitizenshipRoutes] = useState<AtlasIndexData | null>(null);
   const [countrySlice, setCountrySlice] = useState<CountrySliceData | null>(null);
@@ -177,7 +179,7 @@ export default function App() {
     fetchJson<DataReleaseMeta>('data_release.json')
       .then((release) => setDataRelease(release))
       .catch(err => { console.error('Failed to load data_release.json:', err); setLoadError(true); });
-    fetchJson<LicenceExchangeData>('licence_exchange.json')
+    fetchJson<LicenceExchangeIndex>('licence_exchange.json')
       .then((licences) => setLicenceExchange(licences))
       .catch(err => { console.error('Failed to load licence_exchange.json:', err); /* optional layer */ });
   }, []);
@@ -527,7 +529,7 @@ export default function App() {
                   jurisdictions: [jurisdiction],
                   routes: countrySlice!.routes,
                   residence_routes: countrySlice!.residence_routes,
-                }, data, licenceExchange)
+                }, data, countrySlice?.licence ?? null)
               : null;
             return (
               <div className="absolute inset-0 z-30 overflow-y-auto bg-background">

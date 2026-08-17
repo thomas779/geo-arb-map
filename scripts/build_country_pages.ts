@@ -41,6 +41,12 @@ import { buildCountrySlugMap } from '../src/lib/slug';
 import { isNonApplicableJurisdiction } from '../src/lib/country';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 import type { LicenceExchangeData } from '../src/lib/licence-exchange';
+import {
+  buildLicenceIndex,
+  buildOriginSlices,
+  countryHasLicenceData,
+  summariseCountry,
+} from '../src/lib/licence-exchange';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const SITE = 'https://flagpaths.com';
@@ -321,8 +327,13 @@ export function buildCountrySlice(
   slug: string,
   citizenship: CitizenshipRoutesData,
   releaseId?: string,
+  licence?: LicenceExchangeData | null,
 ) {
   const jurisdiction = citizenship.jurisdictions.find(item => item.iso_n3 === iso);
+  // The licence layer arrives here as a SUMMARY, not as rows: the in-app country
+  // panel needs the same card the prerendered page shows, and this slice is already
+  // the one request it makes. Absent when this iso appears in no list at all.
+  const licenceSummary = licence ? summariseCountry(licence, iso) : null;
   return {
     meta: {
       shape: 'country-slice',
@@ -336,6 +347,7 @@ export function buildCountrySlice(
     routes: citizenship.routes.filter(route => route.country.iso_n3 === iso),
     residence_routes: (citizenship.residence_routes ?? []).filter(
       route => route.country.iso_n3 === iso),
+    licence: licenceSummary && countryHasLicenceData(licenceSummary) ? licenceSummary : null,
   };
 }
 
@@ -362,10 +374,12 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   const isos = citizenship.jurisdictions
     .map(j => j.iso_n3)
     .filter(iso => !isNonApplicableJurisdiction(iso));
+  // A BUILD INPUT, not a served file (#210). The corpus is 45 destinations of annex;
+  // the browser gets the index plus the one origin slice it asked for, emitted below.
   const licenceExchange = (() => {
     try {
       return JSON.parse(
-        fs.readFileSync(path.join(root, 'public/licence_exchange.json'), 'utf8'),
+        fs.readFileSync(path.join(root, 'data/compiled/licence_exchange.json'), 'utf8'),
       ) as LicenceExchangeData;
     } catch {
       return null;
@@ -373,7 +387,10 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   })();
 
   for (const iso of isos) {
-    const data = deriveCountryProfile(iso, citizenship, mobility, licenceExchange);
+    const data = deriveCountryProfile(
+      iso, citizenship, mobility,
+      licenceExchange ? summariseCountry(licenceExchange, iso) : null,
+    );
     if (!data) continue;
     const url = `${SITE}/country/${data.slug}/`;
     const bodyHtml = renderToStaticMarkup(createElement(
@@ -428,7 +445,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
     // agent that lands on the HTML finds the data one path away.
     fs.writeFileSync(
       path.join(dir, 'data.json'),
-      `${JSON.stringify(buildCountrySlice(iso, data.slug, citizenship, releaseId), null, 2)}\n`,
+      `${JSON.stringify(buildCountrySlice(iso, data.slug, citizenship, releaseId, licenceExchange), null, 2)}\n`,
     );
   }
 
@@ -509,7 +526,7 @@ export function generateCountryPages(distDir: string = path.join(root, 'dist')):
   // Browse pages narrow the field by country and outcome. Country guides own
   // programme conditions and evidence; Planner will eventually own ranking.
   if (!licenceExchange) {
-    throw new Error('public/licence_exchange.json is required to prerender driving-licence routes');
+    throw new Error('data/compiled/licence_exchange.json is required to prerender driving-licence routes');
   }
   const routePages: Array<{ path: string; title: string; description: string; el: ReturnType<typeof createElement> }> = [
     {
@@ -719,6 +736,24 @@ immigration lawyer in the specific country before acting on anything shown here.
     `${JSON.stringify(buildAtlasIndex(citizenship, releaseId), null, 2)}\n`,
   );
 
+  // ── Licence exchange: index + one slice per origin (#210) ──
+  // The corpus stopped being a served file when the four regional research batches
+  // took it past the 200KB public-surface cap. Nothing was trimmed: the whole of it
+  // is reachable, one origin at a time, which is also the only shape the question
+  // "where can I swap the licence I hold" actually has.
+  fs.writeFileSync(
+    path.join(distDir, 'licence_exchange.json'),
+    `${JSON.stringify(buildLicenceIndex(licenceExchange), null, 2)}\n`,
+  );
+  const originSlices = buildOriginSlices(licenceExchange);
+  fs.mkdirSync(path.join(distDir, 'licence-exchange'), { recursive: true });
+  for (const [servedPath, slice] of originSlices) {
+    fs.writeFileSync(
+      path.join(distDir, servedPath.replace(/^\//, '')),
+      `${JSON.stringify(slice, null, 2)}\n`,
+    );
+  }
+
   const urls = buildSitemapUrls(citizenship, mobility);
   const lastmod = buildSitemapLastmod(citizenship, mobility);
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'),
@@ -727,7 +762,7 @@ immigration lawyer in the specific country before acting on anything shown here.
       return `  <url><loc>${u}</loc>${when ? `<lastmod>${when}</lastmod>` : ''}</url>`;
     }).join('\n')}\n</urlset>\n`);
 
-  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap + atlas-index and ${isos.length} slices -> ${distDir}`);
+  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap + atlas-index and ${isos.length} slices + licence index and ${originSlices.size} origin slices -> ${distDir}`);
 }
 
 if (import.meta.main) {

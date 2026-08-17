@@ -1,52 +1,55 @@
 import { describe, expect, test } from 'bun:test';
-import { readFileSync, statSync } from 'node:fs';
+import { Database } from 'bun:sqlite';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import {
   agreementById,
+  agreementGrantsLabel,
   agreementKindLabel,
+  buildLicenceIndex,
+  buildOriginSlices,
   isosForAgreement,
   listAgreements,
   countryHasLicenceData,
+  exchangeWindowLabels,
   listOrigins,
   matchesForOrigin,
+  nationalityGateLabel,
+  originSlicePath,
+  resolveExchangeWindow,
   summariseCountry,
   testLabel,
   type LicenceExchangeData,
 } from '../src/lib/licence-exchange';
+import { renderLicenceSql, splitStatements } from '../scripts/sync_canonical_d1';
 
+const root = join(import.meta.dir, '..');
+
+// A BUILD INPUT since #210, not a served file. The four regional research batches
+// take this layer to 45 destinations and 909 entries; what ships is the index plus
+// one slice per origin, both built from here.
 const seed = JSON.parse(
-  readFileSync(join(import.meta.dir, '../public/licence_exchange.json'), 'utf8'),
+  readFileSync(join(root, 'data/compiled/licence_exchange.json'), 'utf8'),
 ) as LicenceExchangeData;
 
 /** The eleven originally seeded annexes, before the bilateral families were added. */
 const ANNEX_ISOS = [
   '036', '040', '208', '250', '276', '372', '528', '554', '620', '724', '826',
 ];
-/** Every destination now: the eleven annexes plus Switzerland and South Korea. */
-const DEST_ISOS = [...ANNEX_ISOS, '410', '756'];
+/** Every destination now: the eleven annexes, Switzerland, South Korea and Dubai. */
+const DEST_ISOS = [...ANNEX_ISOS, '410', '756', '784'];
 
 describe('licence exchange seed (#171)', () => {
-  test('seed has thirteen destination lists plus disclaimer', () => {
+  test('seed has fourteen destination lists plus disclaimer', () => {
     expect(seed.schema_version).toBe(1);
     expect(seed.disclaimer.normal_residence).toMatch(/185 days/i);
     expect(seed.disclaimer.scope).toMatch(/not a guide to licence tourism/i);
     expect(seed.destinations.map(d => d.iso_n3).sort()).toEqual([...DEST_ISOS].sort());
-    expect(seed.destinations.length).toBe(13);
+    expect(seed.destinations.length).toBe(14);
     for (const d of seed.destinations) {
       expect(d.entries.length).toBeGreaterThan(0);
       expect(d.source_url).toMatch(/^https?:\/\//);
     }
-  });
-
-  test('the served file stays under the 200KB public-surface cap', () => {
-    // Enforced generically over public/*.json by tests/seo.test.ts; asserted here too
-    // because this is the file that grows, and the failure it guards against is a
-    // silent one — the atlas fetches the whole thing on first paint. When it next runs
-    // out of room, reduce redundancy before dropping rows: three passes already have
-    // (duplicate origin_label, a note repeated on every row of a list, subnational_label
-    // and parent_iso_n3 restating the fields beside them) and there is more of it.
-    const bytes = statSync(join(import.meta.dir, '../public/licence_exchange.json')).size;
-    expect(bytes, `licence_exchange.json is ${Math.round(bytes / 1024)}KB`).toBeLessThan(200_000);
   });
 
   test('core instruments remain wired', () => {
@@ -89,10 +92,11 @@ describe('licence exchange seed (#171)', () => {
 
   test('Japan matches every seeded annex without practical retest', () => {
     const matches = matchesForOrigin(seed, 'nat:392');
-    // The eleven annexes, not the thirteen destinations: neither the Swiss SR
-    // 0.741.531 series nor the Korean MOFA register contains a Japanese instrument,
-    // and a country-shaped list must not be assumed to cover a country it omits.
-    expect(matches.map(m => m.destination.iso_n3).sort()).toEqual([...ANNEX_ISOS].sort());
+    // The eleven annexes plus Dubai, not all fourteen destinations: neither the Swiss
+    // SR 0.741.531 series nor the Korean MOFA register contains a Japanese instrument,
+    // and a country-shaped list must not be assumed to cover a country it omits. RTA
+    // does list Japan, on its widest gate ("All countries"), so it belongs here.
+    expect(matches.map(m => m.destination.iso_n3).sort()).toEqual([...ANNEX_ISOS, '784'].sort());
     expect(matches.every(m => m.any_no_retest || !m.any_practical)).toBe(true);
     expect(matches.every(m => !m.any_practical)).toBe(true);
   });
@@ -110,7 +114,7 @@ describe('licence exchange seed (#171)', () => {
     expect(py.as_origin_destinations.map(d => d.iso_n3).sort()).toEqual(['250', '724']);
 
     const jp = summariseCountry(seed, '392');
-    expect(jp.as_origin_destinations).toHaveLength(11);
+    expect(jp.as_origin_destinations).toHaveLength(12);
   });
 
   test('listOrigins is non-empty and sorted', () => {
@@ -609,5 +613,328 @@ describe('the invariants that keep a missing field from reading as a permission'
       .not.toContain('756');
     expect(summariseCountry(seed, '840').as_origin_destinations.map(d => d.iso_n3))
       .not.toContain('756');
+  });
+});
+
+describe('the nationality gate: who may use a listing, not only which licence (#210)', () => {
+  const dubai = () => seed.destinations.find(d => d.iso_n3 === '784')!;
+  const gateOf = (label: string) =>
+    dubai().entries.find(e => e.origin_label_en === label)!.nationality_gate ?? null;
+
+  test('RTA Dubai carries all sixty rows and all three gate values', () => {
+    const entries = dubai().entries;
+    expect(entries).toHaveLength(60);
+    const counts = entries.reduce<Record<string, number>>((acc, e) => {
+      const gate = e.nationality_gate ?? 'null';
+      acc[gate] = (acc[gate] ?? 0) + 1;
+      return acc;
+    }, {});
+    // The split the annex actually has, transcribed row by row. Pinned because the
+    // destination's own prose states 17/38 — a figure that does not match its table,
+    // and the rows are what the atlas serves.
+    expect(counts).toEqual({ all: 20, nationals_only: 35, gcc: 5 });
+  });
+
+  test('the case that made the field necessary', () => {
+    // A German licence held by an Indian national exchanges in Dubai. A Portuguese
+    // one held by the same person does not. Same holder, same emirate, same service
+    // — and before this field the difference survived only in free-text prose.
+    expect(gateOf('Germany')).toBe('all');
+    expect(gateOf('Portugal')).toBe('nationals_only');
+    expect(gateOf('Saudi Arabia')).toBe('gcc');
+  });
+
+  test('null NEVER renders as open to all', () => {
+    // The whole point of the field. Silence in a source is not a permission, so the
+    // label says "not recorded" and nothing downstream may improve on that.
+    expect(nationalityGateLabel(null)).toBe('Nationality rule not recorded');
+    expect(nationalityGateLabel(undefined)).toBe('Nationality rule not recorded');
+    expect(nationalityGateLabel(null)).not.toBe(nationalityGateLabel('all'));
+    expect(nationalityGateLabel(null)).not.toMatch(/any|all/i);
+    expect(nationalityGateLabel('all')).toBe('Any nationality');
+    expect(nationalityGateLabel('nationals_only')).toMatch(/only/i);
+    expect(nationalityGateLabel('gcc')).toMatch(/exception countries/i);
+  });
+
+  test('the thirteen other destinations record no gate, and record it as null', () => {
+    // Not "all". None of them publishes a nationality rule, and inventing one from
+    // that silence would mint a right for thirteen annexes at once.
+    for (const dest of seed.destinations) {
+      if (dest.iso_n3 === '784') continue;
+      for (const e of dest.entries) {
+        expect(e.nationality_gate ?? null, `${dest.name}/${e.origin_label_en}`).toBeNull();
+      }
+    }
+  });
+
+  test('a match surfaces every distinct gate, so a mixed list cannot read as open', () => {
+    // RTA lists the USA "with the exception of the State of Texas" on the open gate
+    // and Texas separately on the narrow one. Collapsing the two into one answer
+    // would be wrong for whichever half of the readers it was not chosen for.
+    const usa = matchesForOrigin(seed, 'nat:840').find(m => m.destination.iso_n3 === '784')!;
+    expect(usa.entries.map(e => e.origin_label_en).sort()).toEqual([
+      'Texas (United States of America)',
+      'United States of America (with the exception of the State of Texas)',
+    ]);
+    expect([...usa.nationality_gates].sort()).toEqual(['all', 'nationals_only']);
+    expect(usa.nationality_restricted).toBe(true);
+
+    // And a destination that records nothing is not "restricted" — it is unrecorded,
+    // which the match reports as a single null gate rather than as a permission.
+    const germany = matchesForOrigin(seed, 'nat:392').find(m => m.destination.iso_n3 === '276')!;
+    expect(germany.nationality_gates).toEqual([null]);
+    expect(germany.nationality_restricted).toBe(false);
+  });
+
+  test('the gate reaches the prerendered page, and the null rows print no badge', () => {
+    const { DrivingLicencesPage } = require('../src/components/DrivingLicencesPage');
+    const { renderToStaticMarkup } = require('react-dom/server');
+    const { createElement } = require('react');
+    const html = renderToStaticMarkup(createElement(DrivingLicencesPage, { data: seed }));
+    const text = html.replace(/\s+/g, ' ');
+    expect(html).toContain('data-nationality-gate="nationals_only"');
+    expect(html).toContain('Nationals of the issuing country only');
+    // The no-JS path must not be where a reader learns a gate exists only for Dubai.
+    expect(text).toMatch(/gate listed origins on the holder’s nationality/);
+    expect(text).toMatch(/silence, not permission/);
+    // No row anywhere is labelled as open on the strength of an absent field.
+    expect(html).not.toContain('data-nationality-gate="null"');
+    expect(html).not.toContain('data-nationality-gate="undefined"');
+  });
+});
+
+describe('two clocks, and neither can be read as the other (#210)', () => {
+  test('a deadline to claim and a grace period before compulsion are different fields', () => {
+    // Türkiye's m.88(b) six months runs from ENTRY and ends in an obligation; every
+    // other window in this layer runs from residence and ends in a lapse. One
+    // `exchange_window_months` carrying both is a number that cannot be read without
+    // reading its prose, so there is no such field.
+    const lapses = resolveExchangeWindow({ exchange_deadline_months: 6 });
+    const compels = resolveExchangeWindow({ foreign_licence_grace_months: 6 });
+    expect(lapses).not.toEqual(compels);
+    expect(exchangeWindowLabels(lapses)[0]).toMatch(/lapses/);
+    expect(exchangeWindowLabels(compels)[0]).toMatch(/compulsory/);
+    expect(exchangeWindowLabels(lapses)[0]).not.toMatch(/compulsory/);
+    expect(exchangeWindowLabels(compels)[0]).not.toMatch(/lapses/);
+  });
+
+  test('an entry window overrides its destination, which is how Italy varies by origin', () => {
+    expect(resolveExchangeWindow(
+      { exchange_deadline_months: 72 },
+      { exchange_deadline_months: 48 },
+    ).deadline_months).toBe(48);
+    expect(resolveExchangeWindow({ exchange_deadline_months: 72 }, {}).deadline_months).toBe(72);
+  });
+
+  test('nothing recorded says nothing at all', () => {
+    const nothing = resolveExchangeWindow({});
+    expect(nothing).toEqual({ deadline_months: null, grace_months: null });
+    expect(exchangeWindowLabels(nothing)).toEqual([]);
+  });
+});
+
+describe('grants can decline to assert (#210)', () => {
+  test('not_established is a value, not an absence dressed as recognition', () => {
+    // Six destinations came back cannot_determine — the authority's own list could
+    // not be read at all. With three affirmative values the row had to pick one and
+    // then contradict it in a note; the label now says the true thing.
+    expect(agreementGrantsLabel('not_established')).toBe('Not established');
+    expect(agreementGrantsLabel(null)).toBe('Not recorded');
+    expect(agreementGrantsLabel('recognition')).not.toBe(agreementGrantsLabel('not_established'));
+  });
+
+  test('a destination that declines to assert is never rendered as granting anything', () => {
+    // The failure mode this replaces: a cannot_determine row carried `grants:
+    // 'exchange'` and a note saying nothing was asserted, so every reader of the
+    // structured field saw a right that had not been established. Neither label may
+    // name a right.
+    for (const grants of ['not_established', null, undefined] as const) {
+      expect(agreementGrantsLabel(grants), String(grants))
+        .not.toMatch(/recognition|exchange/i);
+    }
+    // And the two that DO name a right still do.
+    expect(agreementGrantsLabel('exchange')).toMatch(/exchange/i);
+    expect(agreementGrantsLabel('recognition_and_exchange')).toMatch(/recognition and exchange/i);
+  });
+
+  test('nothing currently in the corpus is hiding behind an affirmative value', () => {
+    for (const agreement of listAgreements(seed)) {
+      expect(['recognition', 'exchange', 'recognition_and_exchange', 'not_established', undefined])
+        .toContain(agreement.grants);
+    }
+  });
+});
+
+describe('the corpus is a build input; the index and the slices are the surface (#210)', () => {
+  const index = buildLicenceIndex(seed);
+  const slices = buildOriginSlices(seed);
+  const bytes = (value: unknown) => Buffer.byteLength(`${JSON.stringify(value, null, 2)}\n`);
+
+  test('the corpus is no longer served, the way the citizenship corpus is not', () => {
+    expect(existsSync(join(root, 'public/licence_exchange.json'))).toBe(false);
+    expect(existsSync(join(root, 'data/compiled/licence_exchange.json'))).toBe(true);
+    // And it is already past the cap that forced the split, which is the point: the
+    // fix cannot be "trim it again".
+    expect(bytes(seed)).toBeGreaterThan(200_000);
+  });
+
+  test('the index carries the map facet and the picker, not the rows', () => {
+    expect(index.shape).toBe('licence-exchange-index');
+    expect(index.agreements).toHaveLength(seed.agreements!.length);
+    expect(index.destinations).toHaveLength(seed.destinations.length);
+    expect(index.origins.length).toBe(listOrigins(seed).length);
+    // No entries anywhere in it — that is what keeps it small as destinations land.
+    expect(JSON.stringify(index)).not.toContain('theory_test_required');
+    expect(bytes(index), `index is ${Math.round(bytes(index) / 1024)}KB`).toBeLessThan(200_000);
+  });
+
+  test('every origin is reachable, and every row in the corpus lands in exactly one slice', () => {
+    const totalRows = seed.destinations.reduce((n, d) => n + d.entries.length, 0);
+    const sliced = [...slices.values()].reduce(
+      (n, slice) => n + slice.matches.reduce((m, match) => m + match.entries.length, 0), 0,
+    );
+    // Sub-national rows are answered under their parent AND under themselves where
+    // there is no parent, so the slice total is bounded below by the corpus: the
+    // guarantee that matters is that nothing is missing.
+    expect(sliced).toBeGreaterThanOrEqual(totalRows);
+    for (const origin of index.origins) {
+      expect(slices.has(origin.slice), `${origin.label} has no slice`).toBe(true);
+      expect(origin.destination_count).toBeGreaterThan(0);
+    }
+    // …and nothing is emitted that the index cannot reach. An orphan slice is a
+    // published file no reader can arrive at, and a leading indicator that the two
+    // halves of the split have drifted apart.
+    const reachable = new Set(index.origins.map(o => o.slice));
+    for (const path of slices.keys()) {
+      expect(reachable.has(path), `${path} is orphaned: no index origin points at it`).toBe(true);
+    }
+    expect(reachable.size).toBe(slices.size);
+  });
+
+  test('index plus one slice says exactly what the monolith said', () => {
+    // The equivalence the split has to preserve. For every origin, the slice's
+    // answer must be the same answer matchesForOrigin gives over the whole corpus —
+    // same destinations, same rows, same derived flags. Anything less and the served
+    // surface has quietly become a different dataset from the one under test.
+    for (const origin of listOrigins(seed)) {
+      const fromCorpus = matchesForOrigin(seed, origin.key);
+      const fromSlice = slices.get(originSlicePath(origin.key))!.matches;
+      expect(fromSlice.map(m => m.destination.iso_n3), origin.label)
+        .toEqual(fromCorpus.map(m => m.destination.iso_n3));
+      fromSlice.forEach((match, i) => {
+        const corpusMatch = fromCorpus[i];
+        expect(match.entries, `${origin.label} → ${match.destination.name}`)
+          .toEqual(corpusMatch.entries);
+        expect(match.any_no_retest).toBe(corpusMatch.any_no_retest);
+        expect(match.any_theory).toBe(corpusMatch.any_theory);
+        expect(match.any_practical).toBe(corpusMatch.any_practical);
+        expect(match.varies_by_subnational).toBe(corpusMatch.varies_by_subnational);
+        expect(match.nationality_gates).toEqual(corpusMatch.nationality_gates);
+        expect(match.nationality_restricted).toBe(corpusMatch.nationality_restricted);
+      });
+    }
+  });
+
+  test('what a reader downloads for one lookup stays under the cap', () => {
+    // The cap the split exists to satisfy: tests/seo.test.ts holds every served JSON
+    // under 200,000 bytes, and the corpus is 231KB before the other 31 destinations
+    // land. The worst case a reader ever pays is the index plus the largest single
+    // slice, so that is what is asserted — not just the average.
+    const largest = Math.max(...[...slices.values()].map(bytes));
+    expect(bytes(index)).toBeLessThan(200_000);
+    expect(largest).toBeLessThan(200_000);
+    expect(bytes(index) + largest,
+      `worst-case lookup is ${Math.round((bytes(index) + largest) / 1024)}KB`)
+      .toBeLessThan(200_000);
+  });
+
+  test('no slice is anywhere near the cap, and the biggest is the one to watch', () => {
+    const biggest = [...slices.entries()]
+      .map(([path, slice]) => ({ path, size: bytes(slice) }))
+      .sort((a, b) => b.size - a.size)[0];
+    expect(biggest.size, `${biggest.path} is ${Math.round(biggest.size / 1024)}KB`)
+      .toBeLessThan(200_000);
+  });
+
+  test('slice paths are stable, URL-safe and unique', () => {
+    expect(originSlicePath('nat:840')).toBe('/licence-exchange/nat-840.json');
+    for (const path of slices.keys()) {
+      expect(path).toMatch(/^\/licence-exchange\/[a-z0-9-]+\.json$/);
+    }
+    expect(new Set(slices.keys()).size).toBe(slices.size);
+  });
+
+  test('a slice answers the whole question for one origin', () => {
+    const slice = slices.get(originSlicePath('nat:620'))!; // Portugal
+    expect(slice.shape).toBe('licence-origin-slice');
+    expect(slice.origin.label).toBe('Portugal');
+    const dubai = slice.matches.find(m => m.destination.iso_n3 === '784')!;
+    expect(dubai.entries[0].nationality_gate).toBe('nationals_only');
+    expect(dubai.nationality_restricted).toBe(true);
+    // The destination's caveats travel with the rows they qualify.
+    expect((dubai.destination.notes ?? []).join(' ')).toMatch(/EMIRATE-LEVEL/);
+    expect(dubai.destination.source_url).toContain('rta.ae');
+  });
+});
+
+describe('the D1 projection carries the gate, not a note about it (#210)', () => {
+  /**
+   * Built in memory exactly as D1 will see it: 0007's DDL, then 0010's ALTER path,
+   * then the rendered inserts. 0010 is the migration that has to exist because
+   * ensureLicenceSchema's CREATE IF NOT EXISTS cannot touch a table that already
+   * exists — the same reason 0006 exists for arrangement_index.
+   */
+  const db = (() => {
+    const database = new Database(':memory:');
+    database.exec('PRAGMA foreign_keys = ON;');
+    for (const file of ['0007_licence_exchange.sql', '0010_licence_nationality_gate.sql']) {
+      const ddl = readFileSync(join(root, 'data/d1/migrations', file), 'utf8');
+      for (const statement of splitStatements(ddl)) database.exec(statement);
+    }
+    for (const statement of renderLicenceSql()) database.exec(statement);
+    return database;
+  })();
+
+  const one = (sql: string): number => (db.query(sql).get() as { n: number }).n;
+
+  test('every corpus row arrives; nothing is dropped by the natural key', () => {
+    const rows = seed.destinations.reduce((n, d) => n + d.entries.length, 0);
+    expect(one('SELECT COUNT(*) AS n FROM licence_exchange_index;')).toBe(rows);
+    expect(one('SELECT COUNT(*) AS n FROM licence_agreement_index;'))
+      .toBe(seed.agreements!.length);
+  });
+
+  test('the gate is queryable, which is what holding it structurally buys', () => {
+    const gates = db.query(
+      `SELECT nationality_gate AS gate, COUNT(*) AS n FROM licence_exchange_index
+       WHERE destination_iso_n3 = '784' GROUP BY nationality_gate;`,
+    ).all() as Array<{ gate: string | null; n: number }>;
+    expect(Object.fromEntries(gates.map(g => [g.gate ?? 'null', g.n])))
+      .toEqual({ all: 20, nationals_only: 35, gcc: 5 });
+  });
+
+  test('every other destination stores NULL, and NULL is not a value the CHECK invented', () => {
+    expect(one(
+      "SELECT COUNT(*) AS n FROM licence_exchange_index WHERE destination_iso_n3 != '784' AND nationality_gate IS NOT NULL;",
+    )).toBe(0);
+    // The column rejects anything outside the three published values, so a future
+    // import cannot smuggle in a fourth meaning (least of all an empty string, which
+    // is the classic way a NULL becomes an "all").
+    expect(() => db.exec(
+      "INSERT INTO licence_exchange_index (destination_iso_n3, origin_label_en, nationality_gate) VALUES ('999', 'Nowhere', '');",
+    )).toThrow();
+  });
+
+  test('grants accepts not_established after the rebuild, and still rejects nonsense', () => {
+    db.exec(
+      "INSERT INTO licence_agreement_index (agreement_id, name, kind, directionality, instrument, source_url, grants)"
+      + " VALUES ('t', 't', 'unknown', 'unknown', 't', 't', 'not_established');",
+    );
+    expect(one("SELECT COUNT(*) AS n FROM licence_agreement_index WHERE grants = 'not_established';"))
+      .toBe(1);
+    expect(() => db.exec(
+      "INSERT INTO licence_agreement_index (agreement_id, name, kind, directionality, instrument, source_url, grants)"
+      + " VALUES ('u', 'u', 'unknown', 'unknown', 'u', 'u', 'probably');",
+    )).toThrow();
   });
 });

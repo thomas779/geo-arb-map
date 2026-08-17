@@ -11,7 +11,8 @@
 --
 -- What this buys by living in D1 at all: durability beyond a served static file,
 -- coverage by the backup-d1 job, and queryability. The source of truth stays
--- public/licence_exchange.json, which is version-controlled; these tables are its
+-- data/compiled/licence_exchange.json (public/licence_exchange.json until #210 moved
+-- it out of the served directory), which is version-controlled; these tables are its
 -- indexed projection, wiped and re-imported on each sync exactly like the canonical
 -- indexes.
 

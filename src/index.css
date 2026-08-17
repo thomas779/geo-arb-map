@@ -595,6 +595,29 @@
   border-color: color-mix(in oklab, #d97706 45%, var(--border));
   background: color-mix(in oklab, #d97706 12%, transparent);
 }
+/* Nationality gate. Never styled as an "ok" state: the two values it can carry are
+   a restriction (nationals only / listed exception countries) and an absence of any
+   published rule, and neither is a green light. */
+.licence-badge--gate {
+  border-color: color-mix(in oklab, var(--primary) 45%, var(--border));
+  background: color-mix(in oklab, var(--primary) 10%, transparent);
+}
+
+.licence-gate-note {
+  margin: 0 1.15rem 0.85rem;
+  border-left: 2px solid var(--primary);
+  padding-left: 0.7rem;
+  color: var(--muted-foreground);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.licence-dest-note {
+  margin: 0 1.15rem 0.6rem;
+  color: var(--muted-foreground);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
 
 @media (max-width: 420px) {
   .licence-route-line {

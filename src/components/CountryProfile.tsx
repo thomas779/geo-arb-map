@@ -9,8 +9,6 @@ import {
   countryHasLicenceData,
   testLabel,
   type CountryLicenceSummary,
-  type LicenceExchangeData,
-  summariseCountry,
 } from '@/lib/licence-exchange';
 import { ExternalSourceLink } from '@/components/ExternalSourceLink';
 import {
@@ -53,7 +51,13 @@ export function deriveCountryProfile(
   iso: string,
   citizenshipRoutes: CitizenshipRoutesData,
   mobility: BlocsData,
-  licenceData?: LicenceExchangeData | null,
+  /**
+   * The country's PRECOMPUTED licence summary, not the corpus (#210). The corpus is
+   * a build input now, so the in-app panel reads this off the country slice exactly
+   * as it already reads routes and residence — passing the whole exchange layer here
+   * would have put 45 destinations of annex back in the browser to render one card.
+   */
+  licenceSummary?: CountryLicenceSummary | null,
 ): CountryProfileData | null {
   const jur = citizenshipRoutes.jurisdictions.find(j => j.iso_n3 === iso);
   if (!jur) return null;
@@ -76,7 +80,6 @@ export function deriveCountryProfile(
     + `${routes.length} citizenship route${routes.length === 1 ? '' : 's'}`
     + (residence.length ? ` and ${residence.length} residence programme${residence.length === 1 ? '' : 's'} (${residenceCats.join(', ')})` : '')
     + `, with official sources. Part of the Flag Paths atlas.`;
-  const licenceSummary = licenceData ? summariseCountry(licenceData, iso) : null;
   const licence = licenceSummary && countryHasLicenceData(licenceSummary) ? licenceSummary : null;
   return {
     iso, name: jur.name, slug: buildCountrySlugMap(citizenshipRoutes.jurisdictions).get(iso)!,
