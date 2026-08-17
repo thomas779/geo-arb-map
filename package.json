@@ -16,6 +16,7 @@
     "data:review": "bun scripts/build_data_review.ts",
     "data:stage": "bun scripts/stage_canonical_database.ts",
     "data:sync": "bun scripts/sync_canonical_d1.ts",
+    "data:source": "bun scripts/sync_canonical_source.ts",
     "data:timelines": "bun scripts/build_timeline_rules.js",
     "monitor:collect": "bun monitor/collectors/run.ts",
     "monitor:audit": "bun monitor/sources/audit.ts",
@@ -34,7 +35,7 @@
     "monitor:test": "bun test tests/monitor.test.ts",
     "preview": "vite preview",
     "test": "bun test",
-    "data:publish": "bun scripts/publish_data_repo.ts",
+    "data:publish": "bun scripts/sync_canonical_source.ts check && bun scripts/publish_data_repo.ts",
     "index:audit": "bun scripts/audit_index_coverage.ts",
     "research:verify": "bun scripts/verify_research_quotes.ts",
     "research:verify:quotes": "bun scripts/verify_licence_quotes.ts"
