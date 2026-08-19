@@ -18,8 +18,14 @@
  *                             nationality-gated edges where the fastest track
  *                             is conditional; renounces_previous set from the
  *                             canonical dual_nationality field (#144)
- *   - child-birth events:     conditional edges gated by needs
- *                             ['willing_child_abroad'] (from manual_edges)
+ *   - child-birth events:     conditional edges gated on the self-attested
+ *                             `child_abroad` intent (from manual_edges)
+ *
+ * Every edge carries BOTH the legacy `needs: string[]` gate and the typed
+ * `predicates: Predicate[]` one (src/lib/predicates.ts). Predicates are derived
+ * from `needs` unless an emitter supplies them, and validated on emission, so an
+ * unknown attribute/op/subject fails this build instead of silently deleting the
+ * edge at solve time.
  */
 
 import fs from 'node:fs';
@@ -35,6 +41,30 @@ import {
   naturalizationRule,
   timelineBeneficiaryIsos,
 } from '../src/lib/timeline-rules.ts';
+import {
+  predicatesFromNeeds,
+  validatePredicates,
+} from '../src/lib/predicates.ts';
+
+/**
+ * Build-time gate: every emitted edge must carry predicates the solver can
+ * actually answer. Throws (naming the edge) on an unknown attribute, an op the
+ * attribute does not support, a subject nothing can read yet, or a malformed
+ * value.
+ *
+ * This is the loud half of the contract in src/lib/predicates.ts. Before it,
+ * `needsSatisfied` answered `false` for anything it did not recognise, so a new
+ * gate in the data deleted its edge from the graph in silence.
+ */
+export function validateBuiltEdges(edges) {
+  for (const edge of edges) {
+    validatePredicates(
+      edge.predicates ?? [],
+      `edge ${edge.mechanism} ${edge.from} -> ${edge.to}`,
+    );
+  }
+  return edges;
+}
 
 /**
  * @param data        public/blocs_data.json
@@ -51,9 +81,17 @@ export function buildEdges(data, manualEdges, corpus) {
   const plurality = pluralityIndex(corpus ?? null);
   const renounces = (iso) => renouncesOnAcquiring(plurality.get(iso));
 
-  const push = (e) => edges.push({
-    allocation: 'right', confidence: 'high', needs: [], years: 0, ...e,
-  });
+  // Every edge is validated as it is emitted, so a bad gate fails the build at
+  // the line that produced it rather than surfacing as a quieter graph later.
+  const push = (e) => {
+    const edge = { allocation: 'right', confidence: 'high', needs: [], years: 0, ...e };
+    edge.predicates = edge.predicates ?? predicatesFromNeeds(edge.needs);
+    validatePredicates(
+      edge.predicates,
+      `edge ${edge.mechanism} ${edge.from} -> ${edge.to}`,
+    );
+    edges.push(edge);
+  };
 
   // ── Bloc edges ──
   for (const b of data.blocs) {
@@ -89,7 +127,14 @@ export function buildEdges(data, manualEdges, corpus) {
       : path.gate.startsWith('claim:')
         ? `heritage:${path.gate.slice(6)}`
         : null;
-    if (!need) continue;
+    // An unrecognised gate used to `continue`, dropping the route from the graph
+    // without a word. A descent rule that cannot be gated is a data bug.
+    if (!need) {
+      throw new Error(
+        `Descent path ${path.route_id} (${iso}) has unrecognised gate ${JSON.stringify(path.gate)} `
+        + '— expected "ancestor" or "claim:<id>"',
+      );
+    }
     push({
       from: '*',
       to: `cit:${iso}`,
@@ -138,6 +183,13 @@ export function buildEdges(data, manualEdges, corpus) {
   for (const ev of manualEdges?.edges ?? []) {
     if (ev.reason_code !== 'event_accelerator') continue;
     for (const grant of ev.grants) {
+      // STEP 4 (blocked on the household solver): `who: 'child'` grants are
+      // dropped here, so the jus-soli half of every accelerator — the child's
+      // own citizenship — never reaches the graph. Emitting them needs an edge
+      // whose subject is the child (`{subject: 'child', …}`), which the
+      // predicate model can now EXPRESS but nothing can yet evaluate: the
+      // registry rejects that subject on purpose rather than answering false.
+      // Lift this line once step 2 lands, not before.
       if (grant.who !== 'parent') continue;
       push({
         from: '*', to: grant.node.replace(':', ':').startsWith('cit') ? grant.node : grant.node,
@@ -150,7 +202,7 @@ export function buildEdges(data, manualEdges, corpus) {
 
   return {
     meta: {
-      description: 'Status-graph edges for the strategy explorer. Nodes: cit:ISO, pr:ISO, work:ISO (terminal), settle_full:ISO, settle_partial:ISO. Wildcard from "*" = conditional edge gated entirely by needs.',
+      description: 'Status-graph edges for the strategy explorer. Nodes: cit:ISO, pr:ISO, work:ISO (terminal), settle_full:ISO, settle_partial:ISO. Wildcard from "*" = conditional edge gated entirely by its predicates. Each edge carries typed `predicates` (subject/attribute/op/value/provenance) plus the frozen legacy `needs` strings they were derived from.',
       generated_from: 'blocs_data.json + data/manual_edges.json + data/timeline_rules.json + data/compiled/citizenship_routes.json (dual_nationality) via scripts/build_edges.js',
       rules: 'docs/explorer-spec.md',
       counts: { edges: edges.length },
@@ -164,7 +216,9 @@ if (import.meta.main) {
   const manual = JSON.parse(fs.readFileSync('data/manual_edges.json', 'utf8'));
   const corpus = JSON.parse(fs.readFileSync('data/compiled/citizenship_routes.json', 'utf8'));
   const out = buildEdges(data, manual, corpus);
+  validateBuiltEdges(out.edges);
   out.meta.counts.edges = out.edges.length;
+  out.meta.counts.gated_edges = out.edges.filter(e => e.predicates.length > 0).length;
   fs.writeFileSync('data/compiled/edges.json', JSON.stringify(out) + '\n');
   const byMech = {};
   for (const e of out.edges) byMech[e.mechanism] = (byMech[e.mechanism] ?? 0) + 1;

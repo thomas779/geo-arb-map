@@ -62,6 +62,14 @@ export interface Profile {
   heritages: string[];
   /** partner's citizenships — household footprint derives from either spouse */
   partnerCitizenships: string[];
+  /**
+   * Self-attested intentions the graph may gate on, e.g. `child_abroad` for the
+   * child-birth accelerator edges. Read by the `intent` predicate attribute
+   * (src/lib/predicates.ts); before it existed those edges were gated by a
+   * `willing_child_abroad` string the interpreter hard-answered `false`, so
+   * they could never fire.
+   */
+  intents: string[];
   /** declared destinations: what you WANT, path-solved by the engine */
   goals: Goal[];
   /** Stable goal keys (`intent:iso_n3`) selected for future rule-change monitoring. */
@@ -73,7 +81,7 @@ export interface Profile {
 export const EMPTY_PROFILE: Profile = {
   version: 2,
   flags: [], birthplace: null, ancestors: [], heritages: [],
-  partnerCitizenships: [], goals: [],
+  partnerCitizenships: [], intents: [], goals: [],
   watchedRoutes: [],
   alerts: { channel: 'none', verifiedOnly: true },
 };
@@ -99,6 +107,9 @@ export function normalizeProfile(raw: unknown): Profile {
     ancestors: Array.isArray(value.ancestors) ? value.ancestors : [],
     heritages: Array.isArray(value.heritages) ? value.heritages : [],
     partnerCitizenships: Array.isArray(value.partnerCitizenships) ? value.partnerCitizenships : [],
+    intents: Array.isArray(value.intents)
+      ? value.intents.filter(intent => typeof intent === 'string')
+      : [],
     goals,
     watchedRoutes: [...new Set(watchedRoutes)],
     alerts: {

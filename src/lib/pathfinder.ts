@@ -1,5 +1,10 @@
 import type { BlocsData } from '../types';
 import { computeUnlocks, type Goal, type Profile } from './planner';
+import {
+  predicatesFromNeeds,
+  predicatesSatisfied,
+  type Predicate,
+} from './predicates';
 
 /**
  * Multi-hop pathfinder over the status graph (data/compiled/edges.json, compiled at build time), per
@@ -19,7 +24,18 @@ export interface GraphEdge {
   years: number;
   allocation: 'right' | 'ballot' | 'quota_queue' | 'discretionary';
   confidence: string;
+  /**
+   * Legacy flat gate vocabulary. Still emitted and still honoured (see
+   * `edgeGate`), but frozen: new gates are expressed as `predicates`, which can
+   * name a subject other than the applicant and record where the fact came from.
+   */
   needs: string[];
+  /**
+   * Typed gate. Present on every edge scripts/build_edges.js emits; absent only
+   * on hand-built edges (tests, older compiled files), where it is derived from
+   * `needs` by the shim.
+   */
+  predicates?: Predicate[];
   renounces_previous?: boolean;
 }
 
@@ -88,21 +104,32 @@ export interface PathRec {
  */
 const MAX_HOPS = 8;
 
-function needsSatisfied(
+/**
+ * The gate an edge imposes, as typed predicates.
+ *
+ * `predicates` wins when present; otherwise the legacy `needs` strings are
+ * translated by the shim, which throws on any form it does not know. That
+ * throw is the point of the change: the previous interpreter answered `false`
+ * for an unrecognised gate, so an unmodelled requirement in the data removed
+ * the edge from the graph without a word.
+ */
+export function edgeGate(edge: GraphEdge): Predicate[] {
+  return edge.predicates ?? predicatesFromNeeds(edge.needs ?? []);
+}
+
+/**
+ * Legacy-shaped entry point, kept so callers (and the tests that pin the
+ * locked semantics) can evaluate a `needs` array directly. Identical to the
+ * old interpreter on the four known forms, with two deliberate differences:
+ * `willing_child_abroad` now reads `profile.intents` instead of hard-returning
+ * false, and an unknown string throws instead of silently failing the edge.
+ */
+export function needsSatisfied(
   needs: string[],
   profile: Profile,
   citizenships: ReadonlySet<string>,
 ): boolean {
-  return needs.every(n => {
-    if (n.startsWith('ancestor:')) return profile.ancestors.includes(n.slice(9));
-    if (n.startsWith('heritage:')) return profile.heritages.includes(n.slice(9));
-    if (n.startsWith('citizenship_any:')) {
-      return n.slice(16).split(',').some(iso => citizenships.has(iso));
-    }
-    // Not modeled as a user-checkable fact yet (child events render editorially)
-    if (n === 'willing_child_abroad') return false;
-    return false;
-  });
+  return predicatesSatisfied(predicatesFromNeeds(needs), { profile, citizenships });
 }
 
 interface State extends PathInfo {
@@ -221,10 +248,18 @@ export function shortestPaths(
 ): Map<string, PathInfo> {
   const usable = edges.filter(e => (e.allocation ?? 'right') === 'right');
   const byFrom = new Map<string, GraphEdge[]>();
+  // Resolved once per search rather than per visit: cheap (thousands of edges
+  // against millions of relaxations), and it makes an unreadable gate throw
+  // deterministically at the start of the search instead of only if the edge
+  // happens to be reached.
+  const gates = new Map<GraphEdge, Predicate[]>();
   for (const e of usable) {
     if (!byFrom.has(e.from)) byFrom.set(e.from, []);
     byFrom.get(e.from)!.push(e);
+    gates.set(e, edgeGate(e));
   }
+  const gateSatisfied = (e: GraphEdge, citizenships: ReadonlySet<string>): boolean =>
+    predicatesSatisfied(gates.get(e) ?? edgeGate(e), { profile, citizenships });
 
   const initialCitizenships = profile.flags
     .filter(f => f.status === 'cit')
@@ -251,7 +286,7 @@ export function shortestPaths(
   }
   // Wildcard-from edges (identity lanes) are available directly when gated-in
   for (const e of byFrom.get('*') ?? []) {
-    if (needsSatisfied(e.needs ?? [], profile, new Set(base.citizenships))) {
+    if (gateSatisfied(e, new Set(base.citizenships))) {
       queue.push(transition(base, e));
     }
   }
@@ -273,7 +308,7 @@ export function shortestPaths(
     if (cur.hops >= MAX_HOPS) continue;
     const held = new Set(cur.citizenships);
     for (const e of byFrom.get(cur.node) ?? []) {
-      if (needsSatisfied(e.needs ?? [], profile, held)) {
+      if (gateSatisfied(e, held)) {
         queue.push(transition(cur, e));
       }
     }

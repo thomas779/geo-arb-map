@@ -39,6 +39,8 @@ export function readProfile(params = new URLSearchParams(window.location.search)
       .split(',')
       .filter(Boolean)
       .map(iso => iso.padStart(3, '0')),
+    // Not URL-shared: an intention is a private self-attestation, not route context.
+    intents: [],
     goals: (params.get('goals') ?? '')
       .split(',')
       .filter(Boolean)

@@ -38,8 +38,17 @@ Derivation rules (conservative):
 - Work-only lanes (`leads_to_settlement: false`) terminate at `work:ISO`, no successors —
   they can never chain into naturalization.
 - Identity lanes (empty beneficiaries) → conditional edges gated by a machine-readable
-  `needs` array (e.g. `["irish_ancestry"]`, `["jewish_heritage"]`,
-  `["spouse_nationality:724"]`, `["willing_to_have_child_abroad"]`).
+  predicate list: `{subject, attribute, op, value, provenance}` per
+  `src/lib/predicates.ts`. `subject` (`self` | `partner` | `parent` | `child`) is what
+  lets a gate name someone other than the applicant; `provenance` keeps "the law says"
+  (`sourced`) apart from "you told us" (`self_attested`). The older flat
+  `needs: string[]` vocabulary (`ancestor:ISO`, `heritage:<claimId>`,
+  `citizenship_any:<CSV>`, `willing_child_abroad`) is frozen but still honoured: every
+  edge carries both, the strings translated by a shim.
+- **An unrecognised gate must fail loudly.** Unknown attribute, unsupported op,
+  unreadable subject or malformed value is a `build_edges.js` failure; at solve time
+  the pathfinder throws. It must never evaluate to false, because a false gate deletes
+  the edge from the graph without an error and the only symptom is a quieter planner.
 - Naturalization edges into `cit:Y` only from high-confidence records or audited
   overrides. `pending_verification` records generate no edges.
 

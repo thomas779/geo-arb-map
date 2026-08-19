@@ -157,8 +157,13 @@ sourcing, and which would silently corrupt the index if left in place:
    projection output. It clears when the remaining arrangements reach canonical and the
    served file is generated from the projection.
 2. **`eligibility[]` is dropped in projection**, taking descent degree with it.
-3. **`willing_child_abroad` is hard-coded unsatisfiable** in `src/lib/pathfinder.ts`, so
-   three child-birth accelerator edges exist in the graph and can never fire.
+3. ~~**`willing_child_abroad` is hard-coded unsatisfiable**~~ — CLEARED. The gate is now
+   the typed predicate `{subject: self, attribute: intent, op: eq, value: child_abroad,
+   provenance: self_attested}` read off `Profile.intents`, so the three child-birth
+   accelerator edges fire once the intent is declared. The remaining half of those
+   events — the `who: 'child'` grants, i.e. the child's own jus-soli citizenship — is
+   still dropped by `build_edges.js`, because a `subject: 'child'` predicate is
+   expressible but not yet evaluable. That waits on the household solver.
 
 Do not hand-type coverage figures into issues or copy. Regenerate them:
 `bun run index:audit -- --json`.

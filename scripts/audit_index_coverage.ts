@@ -424,7 +424,12 @@ const blockers = [
     ok: !fs
       .readFileSync(`${root}src/lib/pathfinder.ts`, 'utf8')
       .includes("if (n === 'willing_child_abroad') return false"),
-    detail: 'needsSatisfied hard-returns false, so the 3 child-birth accelerator edges can never fire',
+    detail:
+      'CLEARED: the gate is now the typed predicate {subject: self, attribute: intent, '
+      + 'op: eq, value: child_abroad, provenance: self_attested}, evaluated against '
+      + 'Profile.intents, so the 3 child-birth accelerator edges fire when the intent is '
+      + 'declared. What remains is the CHILD half of those events (manual_edges grants '
+      + "with who: 'child'), which build_edges.js still drops pending the household solver.",
   },
 ];
 
