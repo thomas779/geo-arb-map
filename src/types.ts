@@ -210,6 +210,69 @@ export type DescentReach =
   | 'not_recorded';
 
 /**
+ * What a marriage route asks of the couple, re-encoded from the spouse limb that
+ * `pathways` drops. 139 routes record one; none of them published it, so a route
+ * titled "naturalisation as the spouse of a citizen" said neither whose spouse
+ * nor for how long. See scripts/lib/eligibility-facts.ts.
+ *
+ * Positive-only throughout. Every null means NOT RECORDED — never "no minimum",
+ * never "no residence requirement".
+ */
+export interface MarriageRequirement {
+  /**
+   * Qualifying spouse nationalities. Legitimately empty when the limb is
+   * recorded as a boolean (the UK's `partner.british_citizenship`), which is not
+   * the same as "any nationality qualifies".
+   */
+  qualifying_spouse_iso_n3: string[];
+  marriage_minimum_months: number | null;
+  /**
+   * Read from the variant timeline rather than the `residence.years` condition:
+   * the authoring generator rounds months to whole years, so the Dominican
+   * Republic's six-month rule is stored as one year and Israel's 54 months as
+   * five. Present only where the variant records a residence condition at all.
+   */
+  residence_minimum_months: number | null;
+  /** One clock where the instrument runs marriage and residence together (Nauru). */
+  combined_minimum_months: number | null;
+  variants: string[];
+}
+
+/**
+ * What a route's conditions price it at. Same `{amount, currency}` shape as
+ * `ResidenceRoute.min_investment`, deliberately: a fee is a fee.
+ *
+ * The amount and currency are exactly as recorded. The corpus spans 29
+ * currencies with no rate layer, so nothing here is converted, and a route whose
+ * limbs are priced in different currencies publishes no figure rather than an
+ * arbitrary one. null = NOT RECORDED, never free.
+ */
+export interface InvestmentPrice {
+  amount: number;
+  currency: string;
+  /** The eligibility field the figure came from: a donation and a property buy differ. */
+  basis: string;
+  /** The author's caveat on that condition, carried verbatim so a hedged figure stays hedged. */
+  note: string | null;
+}
+
+/**
+ * Days of physical presence, which is not the residence clock. A five-year
+ * residence route that wants 1,095 days inside it and one that wants 5 are
+ * indistinguishable once `eligibility` is dropped. Applicant-side only:
+ * presence tests on an ANCESTOR belong to a descent claim, not to a plan.
+ */
+export interface PhysicalPresenceRequirement {
+  minimum_days: number | null;
+  /** Where the instrument counts in months (the US: 30 of the previous 60). Not converted to days. */
+  minimum_months: number | null;
+  window_months: number | null;
+  /** A per-year floor, which a total cannot express: NZ 240 a year, Taiwan 183. */
+  days_per_year: number | null;
+  basis: string[];
+}
+
+/**
  * Browser-side projection of the canonical `dual_nationality` field. Mirrors
  * DualNationalitySchema in scripts/lib/canonical-schema.ts minus `source_refs`.
  *
@@ -268,6 +331,12 @@ export interface CitizenshipRoute extends CitizenshipRouteSummary {
   } | null;
   /** Ancestral relations recorded as qualifying. Ancestry routes only. */
   descent?: DescentRelations | null;
+  /** The spouse limb, where one is recorded. null = no marriage condition exists. */
+  marriage?: MarriageRequirement | null;
+  /** The threshold the route's conditions price it at. null = NOT RECORDED, never free. */
+  min_investment?: InvestmentPrice | null;
+  /** Days you must be in-country, distinct from the residence clock. */
+  physical_presence?: PhysicalPresenceRequirement | null;
   pathways?: CitizenshipRoutePathway[];
   confidence: 'high' | 'medium' | 'low';
   /**

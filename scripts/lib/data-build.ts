@@ -26,6 +26,11 @@ import {
   type CanonicalProjections,
 } from './canonical-store';
 import { descentReach, deriveDescentRelations } from './descent-relations';
+import {
+  deriveInvestmentPrice,
+  deriveMarriageRequirement,
+  derivePhysicalPresence,
+} from './eligibility-facts';
 import { classifyJusSoli } from './jus-soli';
 import { effectiveConfidence } from './claim-confidence';
 
@@ -1062,6 +1067,19 @@ function projectFrontendCitizenship(
           )
           : null,
         descent,
+        // Three more facts that only ever existed inside `eligibility` and died
+        // at the allow-list below. Same discipline as `descent`: a re-encoding of
+        // authored conditions, positive-only, null meaning NOT RECORDED rather
+        // than "no requirement". See scripts/lib/eligibility-facts.ts.
+        marriage: deriveMarriageRequirement(route.variants),
+        // Named to match ResidenceRouteSchema.min_investment so a country page
+        // costing a route need not branch on which family it belongs to. Recorded
+        // currency only — the corpus has no FX layer and none is invented here.
+        min_investment: deriveInvestmentPrice(route.variants),
+        // Days you must BE there, which is not the residence clock: a five-year
+        // route wanting 1,095 days inside it and one wanting 5 read identically
+        // once `eligibility` is gone.
+        physical_presence: derivePhysicalPresence(route.variants),
         // What the facet buckets on (#191). `not_recorded` is a first-class answer
         // and must never collapse into `parent_only`: 223 routes sit at degree 1
         // because nobody authored a deeper limb, not because one was ruled out.
