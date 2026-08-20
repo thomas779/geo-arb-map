@@ -1,0 +1,149 @@
+name: Weekly web discovery
+
+# Broad web discovery via Exa + Tavily + Firecrawl. Complements daily monitor.yml
+# (RSS + Gemini sweep). Discovery only — never ships data or Telegram.
+#
+# Free-tier defaults (per weekly run, 7 regions):
+#   Exa deep × 7, Tavily basic × 7 (~7 credits), Firecrawl search × 7 (~14 credits)
+# Cap further with workflow_dispatch inputs if a month is running hot.
+
+on:
+  schedule:
+    # Monday 07:17 UTC — offset from the daily monitor cron (06:17).
+    - cron: "17 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      open_issue:
+        description: Open one umbrella GitHub issue with the lead table
+        required: false
+        default: true
+        type: boolean
+      providers:
+        description: "Comma-separated providers (exa,tavily,firecrawl)"
+        required: false
+        default: "exa,tavily,firecrawl"
+        type: string
+      regions:
+        description: "Optional comma-separated region packs (europe,gulf,caribbean,latam,africa,asia,anglosphere_north)"
+        required: false
+        type: string
+      search_type:
+        description: Exa search type for this run
+        required: false
+        default: deep
+        type: choice
+        options: [deep-lite, deep, deep-reasoning]
+      lookback_days:
+        description: Published-date lookback window in days
+        required: false
+        default: "7"
+        type: string
+      max_results:
+        description: Max Tavily/Firecrawl results per region (keep low on free tiers)
+        required: false
+        default: "5"
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: weekly-web-discovery
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    env:
+      EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      EXA_SEARCH_TYPE: ${{ inputs.search_type || vars.EXA_SEARCH_TYPE || 'deep' }}
+      WEB_DISCOVER_LOOKBACK_DAYS: ${{ inputs.lookback_days || vars.WEB_DISCOVER_LOOKBACK_DAYS || '7' }}
+      WEB_DISCOVER_MAX_RESULTS: ${{ inputs.max_results || vars.WEB_DISCOVER_MAX_RESULTS || '5' }}
+      WEB_DISCOVER_PROVIDERS: ${{ inputs.providers || vars.WEB_DISCOVER_PROVIDERS || 'exa,tavily,firecrawl' }}
+      EXA_TIMEOUT_MS: ${{ vars.EXA_TIMEOUT_MS || '180000' }}
+      TAVILY_TIMEOUT_MS: ${{ vars.TAVILY_TIMEOUT_MS || '60000' }}
+      FIRECRAWL_TIMEOUT_MS: ${{ vars.FIRECRAWL_TIMEOUT_MS || '90000' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Fetch compiled dataset
+        uses: ./.github/actions/fetch-data
+        with:
+          deploy-key: ${{ secrets.FLAG_PATHS_DATA_DEPLOY_KEY }}
+
+      - name: Require at least one provider key
+        run: |
+          set -euo pipefail
+          ok=0
+          echo "$WEB_DISCOVER_PROVIDERS" | tr ',' '\n' | while read -r p; do
+            p=$(echo "$p" | tr -d '[:space:]')
+            [ -z "$p" ] && continue
+            case "$p" in
+              exa)
+                if [ -z "${EXA_API_KEY:-}" ]; then echo "::warning::EXA_API_KEY missing"; else ok=1; fi
+                ;;
+              tavily)
+                if [ -z "${TAVILY_API_KEY:-}" ]; then echo "::warning::TAVILY_API_KEY missing"; else ok=1; fi
+                ;;
+              firecrawl)
+                if [ -z "${FIRECRAWL_API_KEY:-}" ]; then echo "::warning::FIRECRAWL_API_KEY missing"; else ok=1; fi
+                ;;
+            esac
+          done
+          # Bash while-in-pipe subshell cannot set ok; re-check explicitly:
+          has=0
+          echo "$WEB_DISCOVER_PROVIDERS" | grep -q 'exa' && [ -n "${EXA_API_KEY:-}" ] && has=1
+          echo "$WEB_DISCOVER_PROVIDERS" | grep -q 'tavily' && [ -n "${TAVILY_API_KEY:-}" ] && has=1
+          echo "$WEB_DISCOVER_PROVIDERS" | grep -q 'firecrawl' && [ -n "${FIRECRAWL_API_KEY:-}" ] && has=1
+          if [ "$has" -ne 1 ]; then
+            echo "::error::No usable provider API keys for selected providers ($WEB_DISCOVER_PROVIDERS)"
+            exit 1
+          fi
+
+      - name: Run multi-provider discovery
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p .out
+          ARGS=(--providers "$WEB_DISCOVER_PROVIDERS")
+          if [ -n "${{ inputs.regions }}" ]; then
+            ARGS+=(--regions "${{ inputs.regions }}")
+          fi
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.open_issue }}" = "true" ]; then
+            ARGS+=(--open-issue)
+          fi
+          bun run monitor:web-discover -- "${ARGS[@]}"
+
+      - name: Summary
+        if: always()
+        run: |
+          if [ -f .out/web-leads.md ]; then
+            cat .out/web-leads.md >> "$GITHUB_STEP_SUMMARY"
+          elif [ -f .out/exa-leads.md ]; then
+            cat .out/exa-leads.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No summary file produced." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload leads
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-web-leads
+          path: |
+            .out/web-leads.json
+            .out/web-leads.md
+            .out/exa-leads.json
+            .out/exa-leads.md
+          if-no-files-found: warn

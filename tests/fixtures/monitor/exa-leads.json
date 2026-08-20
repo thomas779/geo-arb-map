@@ -1,0 +1,40 @@
+{
+  "leads": [
+    {
+      "jurisdiction": "GD",
+      "iso_n3": "308",
+      "claim_summary": "Grenada CBI amendment bill would add a 30-day genuine-link stay within five years.",
+      "change_kind": "eligibility",
+      "timing": "announced_not_yet_in_force",
+      "effective_or_announced_date": "2026-07-27",
+      "horizon": "upcoming_6_12_months",
+      "primary_url": "https://grenadaparliament.gd/wp-content/uploads/2026/07/Grenada-Citizenship-by-Investment-Amendment-Bill-2026-1.pdf",
+      "discovery_url": "https://immigrantinvest.com/insider/grenada-cbi-law-changes/",
+      "quote": "being physically present, within Grenada for an aggregate of at least thirty (30) days",
+      "confidence": "high",
+      "affects_dataset": true,
+      "recommended_disposition": "pending_enactment",
+      "why_not_noise": "Parliament bill amends CBI Act presence conditions.",
+      "notes": "Commencement by ministerial Gazette order — do not ship until published."
+    }
+  ],
+  "coverage_backfill": [
+    {
+      "jurisdiction": "KR",
+      "iso_n3": "410",
+      "claim_summary": "South Korea made the digital nomad / workation visa permanent and extended maximum stay.",
+      "change_kind": "eligibility",
+      "timing": "in_force",
+      "effective_or_announced_date": "2026-06-30",
+      "horizon": "upcoming_6_12_months",
+      "primary_url": "https://www.moj.go.kr/bbs/immigration/214/608294/artclView.do",
+      "discovery_url": "https://en.sedaily.com/society/2026/07/07/korea-formally-adopts-digital-nomad-visa-eases-income",
+      "quote": "디지털노마드(워케이션) 비자를 ’26년 6월 30일(화)부터 정식 운영",
+      "confidence": "high",
+      "affects_dataset": true,
+      "recommended_disposition": "verify_and_author",
+      "why_not_noise": "MOJ notice changes long-stay digital-nomad visa status and duration.",
+      "notes": "Older than 7 days — coverage refresh candidate."
+    }
+  ]
+}

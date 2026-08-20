@@ -52,6 +52,13 @@ bun run monitor:email:dispatch --event tests/fixtures/monitor/newsletter-dispatc
 bun run monitor:sources:record                                    # log the sweep's cited outlets to the D1 citation ledger
 bun run monitor:sources:candidates -- --state-db <d1-export.sql>  # rank cited outlets worth subscribing to (+ probe feeds)
 bun run monitor:sources:x-seed -- --mode directory                # propose X watchlist accounts (evidence-required, review-first)
+
+# Weekly multi-provider web discovery (Exa + Tavily + Firecrawl). Discovery only.
+EXA_API_KEY=… TAVILY_API_KEY=… FIRECRAWL_API_KEY=… bun run monitor:web-discover
+bun run monitor:web-discover -- --providers tavily,firecrawl --regions caribbean
+bun run monitor:web-discover -- --fixture tests/fixtures/monitor/exa-leads.json
+# Exa-only alias still works: bun run monitor:exa-discover
+# GitHub: .github/workflows/exa-weekly-discovery.yml (Mon 07:17 UTC + workflow_dispatch)
 ```
 
 Offline: `monitor:sweep --fixture-response <array.json>` and `monitor:collect --fixture-dir …`
@@ -70,6 +77,11 @@ Provider-neutral; do not commit keys.
 | `MONITOR_LLM_API_KEY` | Credential (secret) |
 | `MONITOR_XAI_API_KEY` | xAI key for X (Twitter) discovery via the Agent Tools `x_search` (secret; optional — X skips cleanly without it) |
 | `MONITOR_XAI_MODEL` / `_LOOKBACK_HOURS` / `_TIMEOUT_MS` | X search model (default `grok-4.3`), lookback window (24h), request timeout |
+| `EXA_API_KEY` | Exa key for weekly deep structured discovery (GitHub secret) |
+| `TAVILY_API_KEY` | Tavily key — basic search, ~1 credit/region (GitHub secret) |
+| `FIRECRAWL_API_KEY` | Firecrawl key — search without scrape by default (GitHub secret) |
+| `EXA_SEARCH_TYPE` / `WEB_DISCOVER_LOOKBACK_DAYS` / `WEB_DISCOVER_MAX_RESULTS` | Optional vars (defaults: `deep`, `7`, `5`) |
+| `WEB_DISCOVER_PROVIDERS` | Default `exa,tavily,firecrawl`; slim to save free-tier credits |
 
 Grounding uses the **native Gemini Interactions API** (`/v1beta/interactions`, `tools:[{type:google_search}]`);
 the OpenAI-compatible endpoint cannot ground. The sweep asks for a few targeted searches to keep cost low.
