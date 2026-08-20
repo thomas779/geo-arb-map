@@ -6,6 +6,7 @@
  */
 
 import {
+  NOISE_EXCLUDE_DOMAINS,
   mobilityQuery,
   searchHitToLead,
   type DiscoverLead,
@@ -43,18 +44,25 @@ export async function searchFirecrawlRegion(opts: {
       ? 'qdr:w'
       : 'qdr:m';
 
+  // Firecrawl: search costs 2 credits per 10 results. limit is PER source type, so
+  // requesting web+news doubles result volume for the same credit band and adds noise.
+  // Prefer a single source; use web+tbs for dated law pages (tbs does not filter news).
   const body: Record<string, unknown> = {
     query,
-    limit: Math.min(Math.max(opts.maxResults, 1), 10),
-    // Top-level tbs applies across sources; keep scrape off unless explicitly enabled.
+    limit: Math.min(Math.max(opts.maxResults, 1), 5),
     tbs,
-    sources: [{ type: 'news' }, { type: 'web' }],
+    sources: [{ type: 'web' }],
+    excludeDomains: NOISE_EXCLUDE_DOMAINS,
     ignoreInvalidURLs: true,
+    // Default highlights are fine; full scrape is the expensive path — keep off.
   };
   if (opts.scrape) {
+    // Two-step is preferred by Firecrawl docs when you filter first; one-step scrape
+    // bills 1 credit per result on top of search. Only enable deliberately.
     body.scrapeOptions = {
       formats: [{ type: 'markdown' }],
       onlyMainContent: true,
+      parsers: [], // skip PDF page billing unless we explicitly want PDFs
     };
   }
 

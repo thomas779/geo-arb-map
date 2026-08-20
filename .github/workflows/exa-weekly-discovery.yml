@@ -3,8 +3,9 @@ name: Weekly web discovery
 # Broad web discovery via Exa + Tavily + Firecrawl. Complements daily monitor.yml
 # (RSS + Gemini sweep). Discovery only — never ships data or Telegram.
 #
-# Free-tier defaults (per weekly run, 7 regions):
-#   Exa deep × 7, Tavily basic × 7 (~7 credits), Firecrawl search × 7 (~14 credits)
+# Free-tier defaults (per weekly run, 7 regions) — see monitor/prompts/web-discover-efficiency.md:
+#   Exa deep-lite × 7, Tavily basic × 7 (~7 credits), Firecrawl web-search × 7 (~14 credits)
+#   No Firecrawl scrape, no Tavily raw_content, social domains excluded.
 # Cap further with workflow_dispatch inputs if a month is running hot.
 
 on:
@@ -28,9 +29,9 @@ on:
         required: false
         type: string
       search_type:
-        description: Exa search type for this run
+        description: Exa search type for this run (deep-lite is cheapest structured mode)
         required: false
-        default: deep
+        default: deep-lite
         type: choice
         options: [deep-lite, deep, deep-reasoning]
       lookback_days:
@@ -41,7 +42,7 @@ on:
       max_results:
         description: Max Tavily/Firecrawl results per region (keep low on free tiers)
         required: false
-        default: "5"
+        default: "3"
         type: string
 
 permissions:
@@ -59,9 +60,9 @@ jobs:
       EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
       TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
       FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
-      EXA_SEARCH_TYPE: ${{ inputs.search_type || vars.EXA_SEARCH_TYPE || 'deep' }}
+      EXA_SEARCH_TYPE: ${{ inputs.search_type || vars.EXA_SEARCH_TYPE || 'deep-lite' }}
       WEB_DISCOVER_LOOKBACK_DAYS: ${{ inputs.lookback_days || vars.WEB_DISCOVER_LOOKBACK_DAYS || '7' }}
-      WEB_DISCOVER_MAX_RESULTS: ${{ inputs.max_results || vars.WEB_DISCOVER_MAX_RESULTS || '5' }}
+      WEB_DISCOVER_MAX_RESULTS: ${{ inputs.max_results || vars.WEB_DISCOVER_MAX_RESULTS || '3' }}
       WEB_DISCOVER_PROVIDERS: ${{ inputs.providers || vars.WEB_DISCOVER_PROVIDERS || 'exa,tavily,firecrawl' }}
       EXA_TIMEOUT_MS: ${{ vars.EXA_TIMEOUT_MS || '180000' }}
       TAVILY_TIMEOUT_MS: ${{ vars.TAVILY_TIMEOUT_MS || '60000' }}

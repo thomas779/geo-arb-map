@@ -80,8 +80,9 @@ function readArgs(argv: string[]): CliOptions {
     providers: parseProviders(process.env.WEB_DISCOVER_PROVIDERS),
     regions: null,
     lookbackDays: Number(process.env.WEB_DISCOVER_LOOKBACK_DAYS ?? process.env.EXA_LOOKBACK_DAYS ?? 7),
-    exaType: process.env.EXA_SEARCH_TYPE || 'deep',
-    maxResults: Number(process.env.WEB_DISCOVER_MAX_RESULTS ?? 5),
+    // deep-lite is the free-tier-friendly structured default; override to deep when needed.
+    exaType: process.env.EXA_SEARCH_TYPE || 'deep-lite',
+    maxResults: Number(process.env.WEB_DISCOVER_MAX_RESULTS ?? 3),
     firecrawlScrape: process.env.FIRECRAWL_SCRAPE === '1',
     compiled: process.env.WEB_DISCOVER_COMPILED || DEFAULT_COMPILED,
     output: path.join(ROOT, '.out', 'web-leads.json'),

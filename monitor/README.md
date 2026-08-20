@@ -83,6 +83,8 @@ Provider-neutral; do not commit keys.
 | `EXA_SEARCH_TYPE` / `WEB_DISCOVER_LOOKBACK_DAYS` / `WEB_DISCOVER_MAX_RESULTS` | Optional vars (defaults: `deep`, `7`, `5`) |
 | `WEB_DISCOVER_PROVIDERS` | Default `exa,tavily,firecrawl`; slim to save free-tier credits |
 
+Efficiency notes: [`monitor/prompts/web-discover-efficiency.md`](prompts/web-discover-efficiency.md).
+
 Grounding uses the **native Gemini Interactions API** (`/v1beta/interactions`, `tools:[{type:google_search}]`);
 the OpenAI-compatible endpoint cannot ground. The sweep asks for a few targeted searches to keep cost low.
 

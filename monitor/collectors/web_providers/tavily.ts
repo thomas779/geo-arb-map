@@ -1,6 +1,7 @@
 /** Tavily search provider — basic depth (1 credit / call) for free-tier longevity. */
 
 import {
+  NOISE_EXCLUDE_DOMAINS,
   mobilityQuery,
   searchHitToLead,
   type DiscoverLead,
@@ -8,11 +9,15 @@ import {
   type RegionPack,
 } from './shared';
 
+/** Drop weak hits — Tavily docs recommend score filtering to cut noise/tokens. */
+const MIN_SCORE = 0.45;
+
 interface TavilyResult {
   title?: string;
   url?: string;
   content?: string;
   published_date?: string;
+  score?: number;
 }
 
 interface TavilyResponse {
@@ -39,14 +44,18 @@ export async function searchTavilyRegion(opts: {
       },
       body: JSON.stringify({
         query,
-        search_depth: 'basic', // 1 credit; avoid advanced (2) on free plan
+        // 1 credit. Never leave search_depth unset with auto_parameters — that can
+        // bump to advanced (2 credits). See Tavily credits docs.
+        search_depth: 'basic',
+        auto_parameters: false,
         topic: 'news',
         time_range: opts.lookbackDays <= 1 ? 'day' : opts.lookbackDays <= 7 ? 'week' : 'month',
-        max_results: Math.min(Math.max(opts.maxResults, 1), 10),
+        max_results: Math.min(Math.max(opts.maxResults, 1), 8),
         include_answer: false,
-        include_raw_content: false,
+        include_raw_content: false, // extract later only for shortlisted URLs
         include_images: false,
         include_usage: true,
+        exclude_domains: NOISE_EXCLUDE_DOMAINS,
       }),
       signal: controller.signal,
     });
@@ -64,6 +73,7 @@ export async function searchTavilyRegion(opts: {
     }
     const body = JSON.parse(text) as TavilyResponse;
     const leads = (body.results ?? [])
+      .filter(hit => (hit.score ?? 1) >= MIN_SCORE)
       .map(hit => searchHitToLead({
         provider: 'tavily',
         region: opts.pack.id,

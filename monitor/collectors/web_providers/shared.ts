@@ -114,14 +114,31 @@ export interface CompiledCorpus {
   residence_routes?: Array<{ id: string; summary?: string; country?: { iso_n3?: string } }>;
 }
 
+/**
+ * Keep queries short (Tavily recommends <1500 chars; shorter also ranks better).
+ * Do not stuff long prompts here — Exa gets the long system prompt separately.
+ */
 export function mobilityQuery(pack: RegionPack, lookbackDays: number): string {
   return (
-    `Citizenship, residency, golden visa, CBI/RBI, naturalisation, dual nationality, `
-    + `or investment-migration law changes in the last ${lookbackDays} days for: ${pack.queryHint}. `
-    + `Prefer official gazette, ministry, CIP unit, or parliament sources. `
-    + `Also note bills/cabinet decisions announced for the next 6–12 months.`
+    `Official citizenship residency golden visa CBI RBI naturalisation dual nationality `
+    + `law change last ${lookbackDays} days: ${pack.queryHint}`
   );
 }
+
+/** Domains that burn free-tier credits without yielding atlas-grade primaries. */
+export const NOISE_EXCLUDE_DOMAINS = [
+  'facebook.com',
+  'www.facebook.com',
+  'm.facebook.com',
+  'instagram.com',
+  'twitter.com',
+  'x.com',
+  'tiktok.com',
+  'youtube.com',
+  'reddit.com',
+  'pinterest.com',
+  'linkedin.com',
+];
 
 export function leadKey(lead: DiscoverLead): string {
   const url = (lead.primary_url || lead.discovery_url).toLowerCase().replace(/\/$/, '');
