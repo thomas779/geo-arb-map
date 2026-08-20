@@ -71,6 +71,13 @@ export interface DiscoverLead {
    * Absent means the ordinary open pass, which is the default everywhere.
    */
   source_pass?: 'open_web' | 'official_allowlist';
+  /**
+   * Every pass that surfaced this change, set by `dedupeLeads` from the rows it
+   * collapsed. `source_pass` says which representation SURVIVED; this says who
+   * FOUND it, which is the only way to measure the constrained pass's unique
+   * yield — see the note in `dedupeLeads`.
+   */
+  passes_seen?: Array<'open_web' | 'official_allowlist'>;
 }
 
 export interface RegionPack {
@@ -413,12 +420,32 @@ export function dedupeLeads(leads: DiscoverLead[]): DiscoverLead[] {
     if (lead.source_pass === 'official_allowlist') score += 1;
     return score;
   };
+  // Which passes saw each change, recorded BEFORE the winner is picked.
+  //
+  // Without this the constrained pass cannot be evaluated. `official_allowlist`
+  // wins ties by the +1 above, so a change found by BOTH passes survives labelled
+  // as constrained — and a naive count of surviving constrained rows therefore
+  // conflates "only the gazette pass found this" with "both did", systematically
+  // overstating the pass's unique yield. Unique yield is the whole question:
+  // it is what decides whether this pass earns local-language terms or Exa credit.
+  const passesByKey = new Map<string, Set<NonNullable<DiscoverLead['source_pass']>>>();
+  for (const lead of leads) {
+    if (!lead.source_pass) continue;
+    const key = leadChangeKey(lead);
+    const seen = passesByKey.get(key) ?? new Set();
+    seen.add(lead.source_pass);
+    passesByKey.set(key, seen);
+  }
+
   for (const lead of leads) {
     const key = leadChangeKey(lead);
     const existing = byUrl.get(key);
     if (!existing || rank(lead) > rank(existing)) byUrl.set(key, lead);
   }
-  return [...byUrl.values()];
+  return [...byUrl.entries()].map(([key, lead]) => {
+    const seen = passesByKey.get(key);
+    return seen ? { ...lead, passes_seen: [...seen].sort() } : lead;
+  });
 }
 
 export function annotateAlreadyHeld(
@@ -563,8 +590,13 @@ export function renderMarkdown(report: {
   gazette_pass?: boolean;
   gazette_pass_skipped?: string[];
 }): string {
-  const gazetteLeads = [...report.leads, ...report.coverage_backfill]
-    .filter(lead => lead.source_pass === 'official_allowlist').length;
+  const allLeads = [...report.leads, ...report.coverage_backfill];
+  const gazetteLeads = allLeads.filter(lead => lead.source_pass === 'official_allowlist').length;
+  // The number that decides whether the constrained pass is worth its credits:
+  // changes NO open query found. A surviving `official_allowlist` row may simply
+  // have out-ranked an open-pass duplicate, so counting those overstates it.
+  const gazetteOnly = allLeads.filter(lead =>
+    lead.passes_seen?.length === 1 && lead.passes_seen[0] === 'official_allowlist').length;
   const lines: string[] = [
     `# Weekly web discovery — ${report.retrieved_at.slice(0, 10)}`,
     '',
@@ -575,7 +607,7 @@ export function renderMarkdown(report: {
     // The whole point of the constrained pass is that its yield is measurable
     // against the open pass, so the count is stated even when it is zero.
     `- Official-publisher pass: ${report.gazette_pass === false ? '**off**' : '**on**'}`
-    + ` · rows from it: **${gazetteLeads}**`
+    + ` · rows from it: **${gazetteLeads}** (of which **${gazetteOnly}** found ONLY there)`
     + (report.gazette_pass_skipped?.length
       ? ` · skipped (no manifest hosts): ${report.gazette_pass_skipped.join(', ')}`
       : ''),

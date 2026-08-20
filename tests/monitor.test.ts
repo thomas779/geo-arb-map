@@ -1848,3 +1848,62 @@ describe('weekly web discovery (Exa / Tavily / Firecrawl)', () => {
       .toMatchObject({ includeDomains: ['gov.mt'], userLocation: 'MT' });
   });
 });
+
+describe('constrained-pass unique yield', () => {
+  // The number that decides whether the gazette pass earns local-language terms
+  // or Exa credit is how many changes it found that NO open query did. Counting
+  // surviving `official_allowlist` rows cannot answer that: those rows win ties
+  // in dedupeLeads, so a change found by BOTH passes also survives labelled
+  // constrained, and a naive count overstates the pass's unique yield.
+  const base = {
+    jurisdiction: 'PT', iso_n3: '620', change_kind: 'threshold' as const,
+    timing: 'in_force' as const, confidence: 'low' as const,
+    affects_dataset: null, recommended_disposition: 'needs_primary' as const,
+    why_not_noise: '', notes: '', primary_url: null, provider: 'tavily' as const,
+    effective_or_announced_date: null, horizon: 'past_7_days' as const, quote: null,
+  };
+
+  test('a change both passes found is not counted as unique to the gazette pass', async () => {
+    const { dedupeLeads } = await import('../monitor/collectors/web_providers/shared');
+    const deduped = dedupeLeads([
+      { ...base, instrument: 'Lei 1268/2026', claim_summary: 'a',
+        discovery_url: 'https://news.example/a', source_pass: 'open_web' },
+      { ...base, instrument: 'Lei 1268/2026', claim_summary: 'a',
+        discovery_url: 'https://dre.pt/a', source_pass: 'official_allowlist' },
+    ]);
+    expect(deduped).toHaveLength(1);
+    // The constrained representation survives — provenance is the better record.
+    expect(deduped[0].source_pass).toBe('official_allowlist');
+    // But both passes are recorded, so it cannot be miscounted as unique.
+    expect(deduped[0].passes_seen).toEqual(['official_allowlist', 'open_web']);
+  });
+
+  test('a change only the gazette pass found records exactly one pass', async () => {
+    const { dedupeLeads } = await import('../monitor/collectors/web_providers/shared');
+    const deduped = dedupeLeads([
+      { ...base, instrument: 'Lei 999/2026', claim_summary: 'b',
+        discovery_url: 'https://dre.pt/b', source_pass: 'official_allowlist' },
+    ]);
+    expect(deduped[0].passes_seen).toEqual(['official_allowlist']);
+  });
+
+  test('the report separates rows-from-the-pass from found-only-there', async () => {
+    const { renderMarkdown } = await import('../monitor/collectors/web_providers/shared');
+    const md = renderMarkdown({
+      retrieved_at: '2026-08-21T00:00:00.000Z', lookback_days: 7,
+      providers: ['tavily'], regions: ['europe'], lead_count: 2, backfill_count: 0,
+      cost_dollars_total: null, credits_used: {},
+      leads: [
+        { ...base, instrument: 'Lei 1268/2026', claim_summary: 'a',
+          discovery_url: 'https://dre.pt/a', source_pass: 'official_allowlist',
+          passes_seen: ['official_allowlist', 'open_web'] },
+        { ...base, instrument: 'Lei 999/2026', claim_summary: 'b',
+          discovery_url: 'https://dre.pt/b', source_pass: 'official_allowlist',
+          passes_seen: ['official_allowlist'] },
+      ],
+      coverage_backfill: [], provider_errors: [], gazette_pass: true,
+    });
+    // Two rows came from it; only one is a change no open query surfaced.
+    expect(md).toContain('rows from it: **2** (of which **1** found ONLY there)');
+  });
+});
