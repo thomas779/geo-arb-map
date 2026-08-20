@@ -1525,6 +1525,49 @@ describe('the atlas publishes no negatives', () => {
 });
 
 // Monitor leads #201 / #205 (17 August 2026)
+describe('monitor-lead verifications, 20 August 2026', () => {
+  test('monitor #212 Nicaragua dual nationality is instrument-read prohibited after Ley 1268', () => {
+    const ni = citizenshipRoutes.jurisdictions.find(j => j.iso_n3 === '558')?.dual_nationality;
+    expect(ni).toBeDefined();
+    expect(ni?.provenance).toBe('instrument');
+    expect(ni?.status).toBe('prohibited');
+    expect(ni?.retention.by_birth.effect).toBe('automatic_loss');
+    expect(ni?.retention.by_naturalisation.effect).toBe('automatic_loss');
+    expect(ni?.acquisition.effect).toBe('renunciation_with_exceptions');
+    const naturalization = citizenshipRoutes.routes.find(
+      route => route.id === 'nicaragua-naturalization',
+    );
+    expect(naturalization?.summary.toLowerCase()).toMatch(/renounc|renuncia/);
+    expect(naturalization?.last_checked).toBe('2026-08-20');
+    const ca = citizenshipRoutes.routes.find(
+      route => route.id === 'nicaragua-central-american-option',
+    );
+    expect(ca?.summary.toLowerCase()).toMatch(/without renounc|art\.?\s*23/);
+    // Constitute Project must not remain the authority cite.
+    for (const route of [naturalization, ca]) {
+      const urls = (route?.sources ?? []).map(s => s.url);
+      expect(urls.some(u => u.includes('constituteproject.org'))).toBe(false);
+      expect(urls.some(u => u.includes('digesto.asamblea.gob.ni'))).toBe(true);
+    }
+  });
+
+  test('monitor #219 Jordan investor citizenship prices listed shares at JOD 1.5m', () => {
+    const r = citizenshipRoutes.routes.find(
+      route => route.id === 'jordan-investor-citizenship',
+    );
+    expect(r).toBeDefined();
+    expect(r?.mode).toBe('investment');
+    expect(r?.confidence).toBe('high');
+    expect(r?.last_checked).toBe('2026-08-20');
+    expect(r?.min_investment?.amount).toBe(1_500_000);
+    expect(r?.min_investment?.currency).toBe('JOD');
+    expect(r?.min_investment?.basis).toBe('investment.minimum_jod');
+    expect(r?.summary).toMatch(/1\.5 million|1,?500,?000/i);
+    const urls = (r?.sources ?? []).map(s => s.url);
+    expect(urls.some(u => u.includes('invest.jo') || u.includes('petra.gov.jo'))).toBe(true);
+  });
+});
+
 describe('monitor-lead verifications, 17 August 2026', () => {
   test('monitor #205 Gibraltar Category 2 is £5m net wealth for new applicants', () => {
     const r = (citizenshipRoutes.residence_routes ?? []).find(
