@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import countries from 'i18n-iso-countries';
 import {
   type DiscoverLead,
   type ProviderPackResult,
@@ -17,6 +18,10 @@ const PROMPT_PATH = path.resolve(
   'exa-weekly-discovery.md',
 );
 
+/**
+ * Exa caps outputSchema objects at 10 properties. Keep the lead shape ≤10 and
+ * derive disposition / horizon / affects_dataset locally after the call.
+ */
 const LEAD_SCHEMA = {
   type: 'object',
   required: ['leads', 'coverage_backfill'],
@@ -28,18 +33,21 @@ const LEAD_SCHEMA = {
 } as const;
 
 function leadItemSchema() {
+  // Exactly 10 properties — Exa rejects schemas with more than 10 per object.
   return {
     type: 'object',
     additionalProperties: false,
     required: [
-      'jurisdiction', 'iso_n3', 'claim_summary', 'change_kind', 'timing',
-      'effective_or_announced_date', 'horizon', 'primary_url', 'discovery_url',
-      'quote', 'confidence', 'affects_dataset', 'recommended_disposition',
-      'why_not_noise', 'notes',
+      'jurisdiction',
+      'claim_summary',
+      'change_kind',
+      'timing',
+      'discovery_url',
+      'confidence',
+      'disposition',
     ],
     properties: {
-      jurisdiction: { type: 'string' },
-      iso_n3: { type: ['string', 'null'] },
+      jurisdiction: { type: 'string', description: 'ISO alpha-2 or country name' },
       claim_summary: { type: 'string' },
       change_kind: {
         type: 'string',
@@ -53,21 +61,17 @@ function leadItemSchema() {
         enum: ['in_force', 'announced_not_yet_in_force', 'rumour', 'unclear'],
       },
       effective_or_announced_date: { type: ['string', 'null'] },
-      horizon: { type: 'string', enum: ['past_7_days', 'upcoming_6_12_months'] },
       primary_url: { type: ['string', 'null'] },
       discovery_url: { type: 'string' },
-      quote: { type: ['string', 'null'] },
+      quote: { type: ['string', 'null'], description: 'Verbatim ≤40 words; caveats may follow after — ' },
       confidence: { type: 'string', enum: ['high', 'medium', 'low'] },
-      affects_dataset: { type: 'boolean' },
-      recommended_disposition: {
+      disposition: {
         type: 'string',
         enum: [
           'verify_and_author', 'pending_enactment', 'needs_primary',
           'not_newsworthy', 'already_held',
         ],
       },
-      why_not_noise: { type: 'string' },
-      notes: { type: 'string' },
     },
   };
 }
@@ -76,28 +80,45 @@ function normalizeLead(raw: Record<string, unknown>, region: string): DiscoverLe
   const claim = String(raw.claim_summary ?? '').trim();
   const discovery = String(raw.discovery_url ?? '').trim();
   if (!claim || !discovery) return null;
+  const timing = (raw.timing as DiscoverLead['timing']) || 'unclear';
+  const confidence = (raw.confidence as DiscoverLead['confidence']) || 'low';
+  const primary = raw.primary_url ? String(raw.primary_url) : null;
+  const disposition = (raw.disposition as DiscoverLead['recommended_disposition'])
+    || (raw.recommended_disposition as DiscoverLead['recommended_disposition'])
+    || (timing === 'rumour' || timing === 'announced_not_yet_in_force'
+      ? 'pending_enactment'
+      : primary
+        ? 'verify_and_author'
+        : 'needs_primary');
+  const jurisdiction = String(raw.jurisdiction ?? '').trim() || 'unknown';
   return {
-    jurisdiction: String(raw.jurisdiction ?? '').trim() || 'unknown',
-    iso_n3: raw.iso_n3 == null || raw.iso_n3 === '' ? null : String(raw.iso_n3).padStart(3, '0'),
+    jurisdiction,
+    iso_n3: alpha2ToN3(jurisdiction),
     claim_summary: claim,
     change_kind: (raw.change_kind as DiscoverLead['change_kind']) || 'other',
-    timing: (raw.timing as DiscoverLead['timing']) || 'unclear',
+    timing,
     effective_or_announced_date: raw.effective_or_announced_date
       ? String(raw.effective_or_announced_date).slice(0, 10)
       : null,
-    horizon: (raw.horizon as DiscoverLead['horizon']) || 'past_7_days',
-    primary_url: raw.primary_url ? String(raw.primary_url) : null,
+    horizon: timing === 'in_force' ? 'past_7_days' : 'upcoming_6_12_months',
+    primary_url: primary,
     discovery_url: discovery,
     quote: raw.quote ? String(raw.quote) : null,
-    confidence: (raw.confidence as DiscoverLead['confidence']) || 'low',
-    affects_dataset: Boolean(raw.affects_dataset),
-    recommended_disposition:
-      (raw.recommended_disposition as DiscoverLead['recommended_disposition']) || 'needs_primary',
-    why_not_noise: String(raw.why_not_noise ?? ''),
+    confidence,
+    affects_dataset: disposition !== 'not_newsworthy',
+    recommended_disposition: disposition,
+    why_not_noise: 'Exa structured mobility-law lead',
     notes: String(raw.notes ?? ''),
     region,
     provider: 'exa',
   };
+}
+
+function alpha2ToN3(jurisdiction: string): string | null {
+  const code = jurisdiction.trim().toUpperCase();
+  if (!/^[A-Z]{2}$/.test(code)) return null;
+  const n = countries.alpha2ToNumeric(code);
+  return n ? String(n).padStart(3, '0') : null;
 }
 
 function extractPack(content: unknown, region: string): { leads: DiscoverLead[]; backfill: DiscoverLead[] } {
