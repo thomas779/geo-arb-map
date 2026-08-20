@@ -72,7 +72,12 @@ rumours). Treat as:
 
 1. Discovery lead (`needs_primary_source: true`)
 2. Verify only with official gazette / ministry / CIP unit
-3. Public brief only after confirmation (or explicit “proposal only, not in force”)
+3. Public brief after confirmation — **including** primary-verified bills / cabinet
+   decisions that are **not yet in force**, if the brief explicitly says so
+   (`not yet in force`, `effective DATE`, `awaits Gazette`). Label the issue
+   `pending-enactment`. Do not Telegram rumours or secondary-only tips.
+4. When the Gazette / commencement order lands, update the dataset and optionally
+   a short “now in force” follow-up (dedup against the earlier post).
 
 ### Email intake test (no publisher required)
 

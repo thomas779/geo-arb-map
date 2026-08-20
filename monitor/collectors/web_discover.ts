@@ -60,6 +60,8 @@ interface CliOptions {
   output: string;
   summary: string;
   openIssue: boolean;
+  /** When opening issues, also file filtered per-lead monitor-leads (Exa quality only). */
+  openLeadIssues: boolean;
   dryRun: boolean;
 }
 
@@ -88,6 +90,7 @@ function readArgs(argv: string[]): CliOptions {
     output: path.join(ROOT, '.out', 'web-leads.json'),
     summary: path.join(ROOT, '.out', 'web-leads.md'),
     openIssue: false,
+    openLeadIssues: process.env.WEB_DISCOVER_OPEN_LEADS !== '0',
     dryRun: false,
   };
   for (let i = 0; i < argv.length; i += 1) {
@@ -104,6 +107,8 @@ function readArgs(argv: string[]): CliOptions {
     else if (arg === '--output') options.output = path.resolve(argv[++i]!);
     else if (arg === '--summary') options.summary = path.resolve(argv[++i]!);
     else if (arg === '--open-issue') options.openIssue = true;
+    else if (arg === '--open-leads') options.openLeadIssues = true;
+    else if (arg === '--no-open-leads') options.openLeadIssues = false;
     else if (arg === '--dry-run') options.dryRun = true;
     else throw new Error(`Unknown option: ${arg}`);
   }
@@ -121,6 +126,103 @@ function runGh(args: string[]): string {
   return result.stdout.toString().trim();
 }
 
+function ensureMonitorLabels(): void {
+  runGh([
+    'label', 'create', 'monitor-lead',
+    '--color', 'BFDADC',
+    '--description', 'Automated, unverified monitoring lead',
+    '--force',
+  ]);
+  runGh([
+    'label', 'create', 'pending-enactment',
+    '--color', 'FBCA04',
+    '--description', 'Verified as tabled/announced but not yet law; re-surface on gazette',
+    '--force',
+  ]);
+}
+
+/**
+ * Only Exa-structured (or rare high-conf) rows become their own issues.
+ * Raw Tavily/Firecrawl hits stay on the umbrella table.
+ */
+export function shouldOpenLeadIssue(lead: DiscoverLead): boolean {
+  if (lead.already_held) return false;
+  if (lead.recommended_disposition === 'not_newsworthy') return false;
+  if (lead.confidence === 'low') return false;
+  const actionable = lead.recommended_disposition === 'verify_and_author'
+    || lead.recommended_disposition === 'pending_enactment';
+  if (!actionable) return false;
+  // Prefer Exa synthesis; allow non-Exa only if a primary URL is already attached.
+  if (lead.provider !== 'exa' && !lead.primary_url) return false;
+  return true;
+}
+
+function buildLeadIssueBody(lead: DiscoverLead, reportDate: string): string {
+  const primary = lead.primary_url
+    ? `[Primary](${lead.primary_url})`
+    : '_None yet — locate gazette / ministry / CIP PDF before authoring._';
+  const pendingNote = lead.recommended_disposition === 'pending_enactment'
+    ? `
+### Pending enactment / Telegram
+If primary-verified but **not yet in force**, you may still publish to Telegram:
+write the Public brief with explicit wording (\`not yet in force\`, \`effective DATE\`,
+or \`bill / cabinet decision — awaits Gazette\`), then \`publish-approved\`.
+Keep the \`pending-enactment\` label so the monitor re-surfaces on commencement.
+`
+    : '';
+  return `## Possible change
+
+${lead.claim_summary}
+
+| Field | Discovery result |
+| --- | --- |
+| Jurisdiction | ${lead.jurisdiction}${lead.iso_n3 ? ` (${lead.iso_n3})` : ''} |
+| Provider | ${lead.provider ?? 'unknown'} |
+| Change kind | ${lead.change_kind} |
+| Timing | ${lead.timing} |
+| Effective / announced | ${lead.effective_or_announced_date ?? '_unknown_'} |
+| Confidence | ${lead.confidence} |
+| Disposition hint | \`${lead.recommended_disposition}\` |
+| Region pack | ${lead.region ?? '_n/a_'} |
+| Weekly run | ${reportDate} |
+
+## Discovery source
+
+[Discovery](${lead.discovery_url})
+
+${lead.quote ? lead.quote.split('\n').map(line => `> ${line}`).join('\n') : '> No quote supplied.'}
+
+## Primary
+
+${primary}
+
+${pendingNote}
+## Reviewer checklist
+
+- [ ] Locate and cite the current primary legal or government source.
+- [ ] Classify this as editorial/navigation, operational guidance, or a substantive legal change.
+- [ ] Confirm the effective date and any transition / commencement rules.
+- [ ] Identify the exact dataset entities and fields affected (or confirm pending-only).
+- [ ] Add or update a regression invariant with any data correction.
+- [ ] Cross-check every sentence in the public brief against the evidence below.
+- [ ] If publishing while not yet in force: brief explicitly says so.
+
+## Verified evidence
+
+<!-- Add the primary source URL, effective date, and the relevant passage. -->
+
+## Public brief
+
+<!-- Replace this with the exact concise text that may be published to Telegram. -->
+
+This issue is an unverified monitoring lead. It must not be copied into the public
+dataset until the reviewer checklist is satisfied. See
+\`monitor/README.md\`.
+
+<!-- web-discover:${lead.provider}:${lead.discovery_url} -->
+`;
+}
+
 function openUmbrellaIssue(report: WebDiscoverReport, summaryMd: string): string {
   const date = report.retrieved_at.slice(0, 10);
   const title = `[Web weekly] ${date} discovery (${report.lead_count} leads · ${report.providers.join('+')})`;
@@ -129,14 +231,10 @@ function openUmbrellaIssue(report: WebDiscoverReport, summaryMd: string): string
 ---
 
 Automated multi-provider discovery (Exa / Tavily / Firecrawl). Unverified.
+Filtered Exa leads may also be filed as separate \`monitor-lead\` issues.
 See \`monitor/README.md\` and \`monitor/prompts/exa-weekly-discovery.md\`.
 `;
-  runGh([
-    'label', 'create', 'monitor-lead',
-    '--color', 'BFDADC',
-    '--description', 'Automated, unverified monitoring lead',
-    '--force',
-  ]);
+  ensureMonitorLabels();
   const tmp = path.join(ROOT, '.out', `web-issue-body-${date}.md`);
   fs.mkdirSync(path.dirname(tmp), { recursive: true });
   fs.writeFileSync(tmp, body);
@@ -146,6 +244,32 @@ See \`monitor/README.md\` and \`monitor/prompts/exa-weekly-discovery.md\`.
     '--body-file', tmp,
     '--label', 'monitor-lead',
   ]);
+}
+
+function openFilteredLeadIssues(report: WebDiscoverReport): string[] {
+  ensureMonitorLabels();
+  const date = report.retrieved_at.slice(0, 10);
+  const urls: string[] = [];
+  const candidates = [...report.leads, ...report.coverage_backfill].filter(shouldOpenLeadIssue);
+  for (const lead of candidates) {
+    const title = `[Monitor lead] ${lead.jurisdiction}: ${lead.claim_summary}`.slice(0, 200);
+    const tmp = path.join(ROOT, '.out', `web-lead-${date}-${urls.length}.md`);
+    fs.writeFileSync(tmp, buildLeadIssueBody(lead, date));
+    const labels = ['monitor-lead'];
+    if (lead.recommended_disposition === 'pending_enactment') {
+      labels.push('pending-enactment');
+    }
+    const args = [
+      'issue', 'create',
+      '--title', title,
+      '--body-file', tmp,
+    ];
+    for (const label of labels) {
+      args.push('--label', label);
+    }
+    urls.push(runGh(args));
+  }
+  return urls;
 }
 
 async function runProviderRegion(
@@ -332,7 +456,12 @@ if (import.meta.main) {
         console.log('skipping --open-issue in dry-run/fixture mode');
       } else {
         const url = openUmbrellaIssue(report, markdown);
-        console.log(`opened ${url}`);
+        console.log(`opened umbrella ${url}`);
+        if (options.openLeadIssues) {
+          const leadUrls = openFilteredLeadIssues(report);
+          console.log(`opened ${leadUrls.length} filtered lead issue(s)`);
+          leadUrls.forEach(u => console.log(u));
+        }
       }
     }
     if (

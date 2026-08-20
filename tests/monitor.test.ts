@@ -1262,6 +1262,7 @@ describe('weekly web discovery (Exa / Tavily / Firecrawl)', () => {
       output: '/tmp/web-leads-test.json',
       summary: '/tmp/web-leads-test.md',
       openIssue: false,
+      openLeadIssues: true,
       dryRun: false,
     });
     expect(report.fixture_mode).toBe(true);
@@ -1325,5 +1326,35 @@ describe('weekly web discovery (Exa / Tavily / Firecrawl)', () => {
     });
     expect(hit?.recommended_disposition).toBe('needs_primary');
     expect(hit?.provider).toBe('firecrawl');
+  });
+
+  test('shouldOpenLeadIssue only keeps Exa actionable medium/high rows', async () => {
+    const { shouldOpenLeadIssue } = await import('../monitor/collectors/web_discover');
+    const base = {
+      jurisdiction: 'GD',
+      iso_n3: '308',
+      claim_summary: 'CBI bill adds 30-day presence',
+      change_kind: 'eligibility' as const,
+      timing: 'announced_not_yet_in_force' as const,
+      effective_or_announced_date: '2026-07-27',
+      horizon: 'upcoming_6_12_months' as const,
+      primary_url: 'https://example.test/bill.pdf',
+      discovery_url: 'https://example.test/news',
+      quote: '30 days',
+      confidence: 'high' as const,
+      affects_dataset: true,
+      recommended_disposition: 'pending_enactment' as const,
+      why_not_noise: 'bill',
+      notes: '',
+      provider: 'exa' as const,
+    };
+    expect(shouldOpenLeadIssue(base)).toBe(true);
+    expect(shouldOpenLeadIssue({ ...base, confidence: 'low' })).toBe(false);
+    expect(shouldOpenLeadIssue({ ...base, provider: 'tavily', primary_url: null })).toBe(false);
+    expect(shouldOpenLeadIssue({ ...base, already_held: true })).toBe(false);
+    expect(shouldOpenLeadIssue({
+      ...base,
+      recommended_disposition: 'needs_primary',
+    })).toBe(false);
   });
 });

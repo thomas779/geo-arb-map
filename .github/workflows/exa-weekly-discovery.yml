@@ -15,7 +15,12 @@ on:
   workflow_dispatch:
     inputs:
       open_issue:
-        description: Open one umbrella GitHub issue with the lead table
+        description: Open umbrella issue (+ filtered Exa lead issues unless disabled)
+        required: false
+        default: true
+        type: boolean
+      open_lead_issues:
+        description: Also open separate monitor-lead issues for Exa medium/high actionable rows
         required: false
         default: true
         type: boolean
@@ -123,6 +128,11 @@ jobs:
           fi
           if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.open_issue }}" = "true" ]; then
             ARGS+=(--open-issue)
+            if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.open_lead_issues }}" = "true" ]; then
+              ARGS+=(--open-leads)
+            else
+              ARGS+=(--no-open-leads)
+            fi
           fi
           bun run monitor:web-discover -- "${ARGS[@]}"
 

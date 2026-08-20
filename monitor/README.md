@@ -131,6 +131,13 @@ neither is present:
   start it.
 - **Deciding not to.** Add the **`not-newsworthy`** label. No further prompting.
 
+**Pending enactment (announced, not yet in force):** yes, Telegram is allowed
+when the primary is verified **and** the Public brief explicitly says the change
+is not yet live (`not yet in force`, `effective DATE`, or `awaits Gazette`). Keep
+the **`pending-enactment`** label so the monitor can re-surface on commencement.
+Do **not** publish rumours or firm-only tips without a gazette/ministry/CIP PDF.
+Late coverage of old announcements stays `not-newsworthy` for the channel.
+
 Note the headline comes from the **issue title**, not the brief. Lead titles are
 written by the sweep and are sometimes wrong: the Gibraltar lead's title asserted
 that ordinary permanent residency rose from five years to ten, which is not in

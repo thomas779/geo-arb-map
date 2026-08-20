@@ -52,5 +52,7 @@ Practical rules baked into `monitor:web-discover`. Credits reset monthly and do
 1. Weekly cron: all three providers, 7 regions, defaults above.
 2. Mid-month pinch: `--providers tavily,firecrawl` or fewer `--regions`.
 3. Hard fact-check: Exa `deep` on one region, or Firecrawl scrape of 1–3 primaries.
-4. Never open N issues from raw Tavily/Firecrawl hits — umbrella issue only;
-   Exa-structured rows with `primary_url` are the ones worth authoring.
+4. Issues: umbrella table for everything; **separate `monitor-lead` issues only** for
+   Exa medium/high `verify_and_author` / `pending_enactment` rows (`--open-leads`).
+5. Telegram for pending enactment: allowed **only** with a primary cite and a brief
+   that says the change is not yet in force; keep `pending-enactment` label.
