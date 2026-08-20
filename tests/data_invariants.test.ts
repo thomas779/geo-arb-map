@@ -385,7 +385,15 @@ describe('citizenship route database', () => {
         // thing #127 exists to stop, so the weaker transport is the lesser harm.
         // Keep this list tiny and justified: every entry is a host we verified is
         // http-only, not a host we could not be bothered to check.
-        const HTTP_ONLY_OFFICIAL = ['bdlaws.minlaw.gov.bd'];
+        const HTTP_ONLY_OFFICIAL = [
+          'bdlaws.minlaw.gov.bd',
+          // Nicaragua's legislative digest. Verified 2026-08-20: https returns
+          // nothing at all (curl exit, no response) while http serves 200. It is
+          // the only publisher of Ley N°. 1268, so the alternative to an http URL
+          // is no citation for the amendment that strips nationality on acquiring
+          // another — the most consequential fact in the Nicaraguan record.
+          'digesto.asamblea.gob.ni',
+        ];
         const host = (/^https?:\/\/([^/]+)/.exec(source.url)?.[1] ?? '').toLowerCase();
         if (!HTTP_ONLY_OFFICIAL.includes(host)) {
           expect(source.url, route.id).toMatch(/^https:\/\//);
@@ -1047,7 +1055,10 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     const note = jordan?.pathways?.[0]?.note ?? '';
     expect(note).toContain('JOD 150,000');
     expect(note).toContain('five-year hold');
-    expect(jordan?.last_checked).toBe('2026-07-30');
+    // Re-checked 2026-08-20 against the JOD 1.5m listed-shares threshold (monitor
+    // lead #219). The 15 July 2026 decision this test pins is unchanged; only the
+    // verification date moved.
+    expect(jordan?.last_checked).toBe('2026-08-20');
   });
 });
 
