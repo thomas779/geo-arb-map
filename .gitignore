@@ -38,3 +38,4 @@ Thumbs.db
 # .github/actions/fetch-data; maintainers publish with `bun run data:publish`.
 data/compiled/citizenship_routes.json
 data/citizenship_routes.json
+.out/

@@ -1,0 +1,107 @@
+name: Exa weekly discovery
+
+# Broad web discovery via Exa deep search. Complements the daily monitor.yml
+# (RSS + Gemini sweep). Discovery only — never ships data or Telegram.
+
+on:
+  schedule:
+    # Monday 07:17 UTC — offset from the daily monitor cron (06:17).
+    - cron: "17 7 * * 1"
+  workflow_dispatch:
+    inputs:
+      open_issue:
+        description: Open one umbrella GitHub issue with the lead table
+        required: false
+        default: true
+        type: boolean
+      regions:
+        description: "Optional comma-separated region packs (europe,gulf,caribbean,latam,africa,asia,anglosphere_north)"
+        required: false
+        type: string
+      search_type:
+        description: Exa search type for this run
+        required: false
+        default: deep
+        type: choice
+        options: [deep-lite, deep, deep-reasoning]
+      lookback_days:
+        description: Published-date lookback window in days
+        required: false
+        default: "7"
+        type: string
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: exa-weekly-discovery
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    env:
+      EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
+      EXA_SEARCH_TYPE: ${{ inputs.search_type || vars.EXA_SEARCH_TYPE || 'deep' }}
+      EXA_LOOKBACK_DAYS: ${{ inputs.lookback_days || vars.EXA_LOOKBACK_DAYS || '7' }}
+      EXA_TIMEOUT_MS: ${{ vars.EXA_TIMEOUT_MS || '180000' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # Corpus hinting marks already_held overlaps for triage.
+      - name: Fetch compiled dataset
+        uses: ./.github/actions/fetch-data
+        with:
+          deploy-key: ${{ secrets.FLAG_PATHS_DATA_DEPLOY_KEY }}
+
+      - name: Require Exa API key
+        run: |
+          if [ -z "$EXA_API_KEY" ]; then
+            echo "::error::EXA_API_KEY secret is not set"
+            exit 1
+          fi
+
+      - name: Run Exa discovery
+        id: exa
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p .out
+          ARGS=()
+          if [ -n "${{ inputs.regions }}" ]; then
+            ARGS+=(--regions "${{ inputs.regions }}")
+          fi
+          # Scheduled runs open an umbrella issue; dispatch can opt out.
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.open_issue }}" = "true" ]; then
+            ARGS+=(--open-issue)
+          fi
+          bun run monitor:exa-discover -- "${ARGS[@]}"
+          echo "leads=$(bun -e 'const d=await Bun.file(".out/exa-leads.json").json(); console.log(d.lead_count)')" >> "$GITHUB_OUTPUT"
+
+      - name: Summary
+        if: always()
+        run: |
+          if [ -f .out/exa-leads.md ]; then
+            cat .out/exa-leads.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No summary file produced." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload leads
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exa-weekly-leads
+          path: |
+            .out/exa-leads.json
+            .out/exa-leads.md
+          if-no-files-found: warn

@@ -1246,3 +1246,60 @@ describe('future-dated changes do not auto-publish as current news', () => {
     expect(commencesInFuture('2026-01-01T00:00:00Z', today)).toBe(false);
   });
 });
+
+describe('Exa weekly discovery', () => {
+  test('fixture mode writes structured leads without calling Exa', async () => {
+    const { runExaDiscover } = await import('../monitor/collectors/exa_discover');
+    const report = await runExaDiscover({
+      fixture: new URL('./fixtures/monitor/exa-leads.json', import.meta.url).pathname,
+      regions: ['caribbean'],
+      lookbackDays: 7,
+      searchType: 'fixture',
+      compiled: new URL('../data/compiled/citizenship_routes.json', import.meta.url).pathname,
+      output: '/tmp/exa-leads-test.json',
+      summary: '/tmp/exa-leads-test.md',
+      openIssue: false,
+      dryRun: false,
+    });
+    expect(report.fixture_mode).toBe(true);
+    expect(report.lead_count).toBe(1);
+    expect(report.backfill_count).toBe(1);
+    expect(report.leads[0]?.jurisdiction).toBe('GD');
+    expect(report.leads[0]?.recommended_disposition).toBe('pending_enactment');
+    expect(report.coverage_backfill[0]?.iso_n3).toBe('410');
+  });
+
+  test('annotateAlreadyHeld flags overlapping corpus summaries', async () => {
+    const { annotateAlreadyHeld } = await import('../monitor/collectors/exa_discover');
+    const annotated = annotateAlreadyHeld(
+      [{
+        jurisdiction: 'NZ',
+        iso_n3: '554',
+        claim_summary: 'Resident visa for investors placing at least NZD 10 million into balanced investments',
+        change_kind: 'threshold',
+        timing: 'in_force',
+        effective_or_announced_date: '2026-01-01',
+        horizon: 'past_7_days',
+        primary_url: null,
+        discovery_url: 'https://example.test/nz',
+        quote: null,
+        confidence: 'high',
+        affects_dataset: true,
+        recommended_disposition: 'verify_and_author',
+        why_not_noise: 'test',
+        notes: '',
+      }],
+      {
+        routes: [],
+        residence_routes: [{
+          id: 'nz-active-investor-plus-balanced',
+          country: { iso_n3: '554' },
+          summary: 'Resident visa for investors placing at least NZD 10 million into mixed/lower-risk Balanced acceptable investments',
+        }],
+      },
+    );
+    expect(annotated[0]?.already_held).toBe(true);
+    expect(annotated[0]?.recommended_disposition).toBe('already_held');
+    expect(annotated[0]?.matched_route_ids).toContain('nz-active-investor-plus-balanced');
+  });
+});
