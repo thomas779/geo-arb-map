@@ -1247,17 +1247,20 @@ describe('future-dated changes do not auto-publish as current news', () => {
   });
 });
 
-describe('Exa weekly discovery', () => {
-  test('fixture mode writes structured leads without calling Exa', async () => {
-    const { runExaDiscover } = await import('../monitor/collectors/exa_discover');
-    const report = await runExaDiscover({
+describe('weekly web discovery (Exa / Tavily / Firecrawl)', () => {
+  test('fixture mode writes structured leads without calling providers', async () => {
+    const { runWebDiscover } = await import('../monitor/collectors/web_discover');
+    const report = await runWebDiscover({
       fixture: new URL('./fixtures/monitor/exa-leads.json', import.meta.url).pathname,
+      providers: ['exa', 'tavily', 'firecrawl'],
       regions: ['caribbean'],
       lookbackDays: 7,
-      searchType: 'fixture',
+      exaType: 'deep',
+      maxResults: 5,
+      firecrawlScrape: false,
       compiled: new URL('../data/compiled/citizenship_routes.json', import.meta.url).pathname,
-      output: '/tmp/exa-leads-test.json',
-      summary: '/tmp/exa-leads-test.md',
+      output: '/tmp/web-leads-test.json',
+      summary: '/tmp/web-leads-test.md',
       openIssue: false,
       dryRun: false,
     });
@@ -1270,7 +1273,7 @@ describe('Exa weekly discovery', () => {
   });
 
   test('annotateAlreadyHeld flags overlapping corpus summaries', async () => {
-    const { annotateAlreadyHeld } = await import('../monitor/collectors/exa_discover');
+    const { annotateAlreadyHeld } = await import('../monitor/collectors/web_providers/shared');
     const annotated = annotateAlreadyHeld(
       [{
         jurisdiction: 'NZ',
@@ -1288,6 +1291,7 @@ describe('Exa weekly discovery', () => {
         recommended_disposition: 'verify_and_author',
         why_not_noise: 'test',
         notes: '',
+        provider: 'exa',
       }],
       {
         routes: [],
@@ -1301,5 +1305,25 @@ describe('Exa weekly discovery', () => {
     expect(annotated[0]?.already_held).toBe(true);
     expect(annotated[0]?.recommended_disposition).toBe('already_held');
     expect(annotated[0]?.matched_route_ids).toContain('nz-active-investor-plus-balanced');
+  });
+
+  test('searchHitToLead drops irrelevant hits and keeps mobility ones', async () => {
+    const { searchHitToLead } = await import('../monitor/collectors/web_providers/shared');
+    expect(searchHitToLead({
+      provider: 'tavily',
+      region: 'europe',
+      title: 'Football transfer rumours',
+      url: 'https://example.test/sports',
+      snippet: 'Club signs striker',
+    })).toBeNull();
+    const hit = searchHitToLead({
+      provider: 'firecrawl',
+      region: 'caribbean',
+      title: 'Grenada citizenship by investment bill advances',
+      url: 'https://example.test/grenada-cbi',
+      snippet: 'Parliament debated residency requirements for CBI applicants',
+    });
+    expect(hit?.recommended_disposition).toBe('needs_primary');
+    expect(hit?.provider).toBe('firecrawl');
   });
 });

@@ -33,6 +33,7 @@
     "monitor:sources:candidates": "bun monitor/discovery/candidates.ts",
     "monitor:sources:x-seed": "bun monitor/discovery/x_seed.ts",
     "monitor:exa-discover": "bun monitor/collectors/exa_discover.ts",
+    "monitor:web-discover": "bun monitor/collectors/web_discover.ts",
     "monitor:test": "bun test tests/monitor.test.ts",
     "preview": "vite preview",
     "test": "bun test",
