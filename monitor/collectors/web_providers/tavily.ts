@@ -1,29 +1,13 @@
-/** Tavily search provider — basic depth (1 credit / call) for free-tier longevity. */
+/** Tavily discovery adapter — maps reusable client hits → DiscoverLead. */
 
+import { tavilySearch } from '../../lib/web-clients';
 import {
-  NOISE_EXCLUDE_DOMAINS,
   mobilityQuery,
   searchHitToLead,
   type DiscoverLead,
   type ProviderPackResult,
   type RegionPack,
 } from './shared';
-
-/** Drop weak hits — Tavily docs recommend score filtering to cut noise/tokens. */
-const MIN_SCORE = 0.45;
-
-interface TavilyResult {
-  title?: string;
-  url?: string;
-  content?: string;
-  published_date?: string;
-  score?: number;
-}
-
-interface TavilyResponse {
-  results?: TavilyResult[];
-  usage?: { credits?: number };
-}
 
 export async function searchTavilyRegion(opts: {
   apiKey: string;
@@ -32,77 +16,43 @@ export async function searchTavilyRegion(opts: {
   maxResults: number;
   timeoutMs: number;
 }): Promise<ProviderPackResult> {
-  const query = mobilityQuery(opts.pack, opts.lookbackDays);
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), opts.timeoutMs);
-  try {
-    const res = await fetch('https://api.tavily.com/search', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${opts.apiKey}`,
-      },
-      body: JSON.stringify({
-        query,
-        // 1 credit. Never leave search_depth unset with auto_parameters — that can
-        // bump to advanced (2 credits). See Tavily credits docs.
-        search_depth: 'basic',
-        auto_parameters: false,
-        topic: 'news',
-        time_range: opts.lookbackDays <= 1 ? 'day' : opts.lookbackDays <= 7 ? 'week' : 'month',
-        max_results: Math.min(Math.max(opts.maxResults, 1), 8),
-        include_answer: false,
-        include_raw_content: false, // extract later only for shortlisted URLs
-        include_images: false,
-        include_usage: true,
-        exclude_domains: NOISE_EXCLUDE_DOMAINS,
-      }),
-      signal: controller.signal,
-    });
-    const text = await res.text();
-    if (!res.ok) {
-      return {
-        provider: 'tavily',
-        region: opts.pack.id,
-        leads: [],
-        backfill: [],
-        credits_used: null,
-        cost_dollars: null,
-        error: `HTTP ${res.status}: ${text.slice(0, 400)}`,
-      };
-    }
-    const body = JSON.parse(text) as TavilyResponse;
-    const leads = (body.results ?? [])
-      .filter(hit => (hit.score ?? 1) >= MIN_SCORE)
-      .map(hit => searchHitToLead({
-        provider: 'tavily',
-        region: opts.pack.id,
-        title: hit.title ?? '',
-        url: hit.url ?? '',
-        snippet: hit.content ?? null,
-        published: hit.published_date ?? null,
-      }))
-      .filter((lead): lead is DiscoverLead => lead !== null);
-
-    return {
-      provider: 'tavily',
-      region: opts.pack.id,
-      leads,
-      backfill: [],
-      credits_used: body.usage?.credits ?? 1,
-      cost_dollars: null,
-    };
-  } catch (error) {
+  const result = await tavilySearch({
+    apiKey: opts.apiKey,
+    query: mobilityQuery(opts.pack, opts.lookbackDays),
+    searchDepth: 'basic',
+    topic: 'news',
+    timeRange: opts.lookbackDays <= 1 ? 'day' : opts.lookbackDays <= 7 ? 'week' : 'month',
+    maxResults: opts.maxResults,
+    timeoutMs: opts.timeoutMs,
+  });
+  if (result.error) {
     return {
       provider: 'tavily',
       region: opts.pack.id,
       leads: [],
       backfill: [],
-      credits_used: null,
+      credits_used: result.credits_used,
       cost_dollars: null,
-      error: error instanceof Error ? error.message : String(error),
+      error: result.error,
     };
-  } finally {
-    clearTimeout(timer);
   }
+  const leads = result.hits
+    .map(hit => searchHitToLead({
+      provider: 'tavily',
+      region: opts.pack.id,
+      title: hit.title,
+      url: hit.url,
+      snippet: hit.snippet,
+      published: hit.published,
+    }))
+    .filter((lead): lead is DiscoverLead => lead !== null);
+
+  return {
+    provider: 'tavily',
+    region: opts.pack.id,
+    leads,
+    backfill: [],
+    credits_used: result.credits_used,
+    cost_dollars: null,
+  };
 }

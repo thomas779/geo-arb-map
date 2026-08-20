@@ -59,6 +59,9 @@ bun run monitor:web-discover -- --providers tavily,firecrawl --regions caribbean
 bun run monitor:web-discover -- --fixture tests/fixtures/monitor/exa-leads.json
 # Exa-only alias still works: bun run monitor:exa-discover
 # GitHub: .github/workflows/exa-weekly-discovery.yml (Mon 07:17 UTC + workflow_dispatch)
+#
+# Reusable HTTP clients (import elsewhere — quote enrichment, one-off scripts):
+#   monitor/lib/web-clients/  →  exaSearch, tavilySearch, firecrawlSearch, firecrawlScrape
 ```
 
 Offline: `monitor:sweep --fixture-response <array.json>` and `monitor:collect --fixture-dir …`

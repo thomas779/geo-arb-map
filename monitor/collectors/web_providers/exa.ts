@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import countries from 'i18n-iso-countries';
+import { exaSearch } from '../../lib/web-clients';
 import {
   type DiscoverLead,
   type ProviderPackResult,
@@ -163,62 +164,36 @@ export async function searchExaRegion(opts: {
     + `Return structured leads for the last ${opts.lookbackDays} days and upcoming `
     + `announced/rumoured changes (next 6–12 months). Prefer gazette/ministry/CIP primaries.`;
 
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), opts.timeoutMs);
-  try {
-    const res = await fetch('https://api.exa.ai/search', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'x-api-key': opts.apiKey,
-      },
-      body: JSON.stringify({
-        query,
-        type: opts.searchType,
-        numResults: 12,
-        systemPrompt: opts.systemPrompt,
-        outputSchema: LEAD_SCHEMA,
-        startPublishedDate: startPublishedIso(opts.lookbackDays),
-        contents: { highlights: { maxCharacters: 2000 } },
-      }),
-      signal: controller.signal,
-    });
-    const text = await res.text();
-    if (!res.ok) {
-      return {
-        provider: 'exa',
-        region: opts.pack.id,
-        leads: [],
-        backfill: [],
-        credits_used: null,
-        cost_dollars: null,
-        error: `HTTP ${res.status}: ${text.slice(0, 400)}`,
-      };
-    }
-    const body = JSON.parse(text) as {
-      output?: { content?: unknown };
-      costDollars?: { total?: number };
-    };
-    const packOut = extractPack(body.output?.content, opts.pack.id);
-    return {
-      provider: 'exa',
-      region: opts.pack.id,
-      leads: packOut.leads,
-      backfill: packOut.backfill,
-      credits_used: null,
-      cost_dollars: typeof body.costDollars?.total === 'number' ? body.costDollars.total : null,
-    };
-  } catch (error) {
+  const result = await exaSearch({
+    apiKey: opts.apiKey,
+    query,
+    systemPrompt: opts.systemPrompt,
+    type: opts.searchType as 'deep-lite' | 'deep' | 'deep-reasoning' | 'auto',
+    outputSchema: LEAD_SCHEMA as unknown as Record<string, unknown>,
+    numResults: 12,
+    startPublishedDate: startPublishedIso(opts.lookbackDays),
+    timeoutMs: opts.timeoutMs,
+  });
+
+  if (result.error) {
     return {
       provider: 'exa',
       region: opts.pack.id,
       leads: [],
       backfill: [],
       credits_used: null,
-      cost_dollars: null,
-      error: error instanceof Error ? error.message : String(error),
+      cost_dollars: result.cost_dollars,
+      error: result.error,
     };
-  } finally {
-    clearTimeout(timer);
   }
+
+  const packOut = extractPack(result.structured, opts.pack.id);
+  return {
+    provider: 'exa',
+    region: opts.pack.id,
+    leads: packOut.leads,
+    backfill: packOut.backfill,
+    credits_used: null,
+    cost_dollars: result.cost_dollars,
+  };
 }

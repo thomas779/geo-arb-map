@@ -126,19 +126,7 @@ export function mobilityQuery(pack: RegionPack, lookbackDays: number): string {
 }
 
 /** Domains that burn free-tier credits without yielding atlas-grade primaries. */
-export const NOISE_EXCLUDE_DOMAINS = [
-  'facebook.com',
-  'www.facebook.com',
-  'm.facebook.com',
-  'instagram.com',
-  'twitter.com',
-  'x.com',
-  'tiktok.com',
-  'youtube.com',
-  'reddit.com',
-  'pinterest.com',
-  'linkedin.com',
-];
+export { SOCIAL_NOISE_DOMAINS as NOISE_EXCLUDE_DOMAINS } from '../../lib/web-clients';
 
 export function leadKey(lead: DiscoverLead): string {
   const url = (lead.primary_url || lead.discovery_url).toLowerCase().replace(/\/$/, '');

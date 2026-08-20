@@ -1536,6 +1536,36 @@ describe('the atlas publishes no negatives', () => {
 });
 
 // Monitor leads #201 / #205 (17 August 2026)
+describe('monitor-lead verifications, 20 August 2026 (web discovery follow-through)', () => {
+  test('Korea F-1-D digital nomad is formalised with GNI-tier income and 3-year max stay', () => {
+    const r = (citizenshipRoutes.residence_routes ?? []).find(
+      route => route.id === 'korea-digital-nomad-workcation',
+    );
+    expect(r).toBeDefined();
+    expect(r?.status).toBe('active');
+    expect(r?.confidence).toBe('high');
+    expect(r?.last_checked).toBe('2026-08-20');
+    expect(r?.permit_duration_months).toBe(36);
+    expect(r?.work_rights).toBe('remote_only');
+    expect(r?.min_income_monthly?.currency).toBe('KRW');
+    expect(r?.summary.toLowerCase()).toMatch(/gni|digital.?nomad|workation|f-1-d/);
+    expect(r?.summary).toMatch(/30 June 2026|2026-06-30|6월 30/);
+    const urls = (r?.sources ?? []).map(s => s.url);
+    expect(urls.some(u => u.includes('immigration.go.kr') || u.includes('moj.go.kr'))).toBe(true);
+  });
+
+  test('Finland naturalisation records citizenship-test limb for applications from 1 Mar 2027', () => {
+    const r = citizenshipRoutes.routes.find(route => route.id === 'finland-naturalization');
+    expect(r).toBeDefined();
+    expect(r?.confidence).toBe('high');
+    expect(r?.last_checked).toBe('2026-08-20');
+    expect(r?.summary.toLowerCase()).toMatch(/citizenship test|knowledge of finnish society|civic/);
+    expect(r?.summary).toMatch(/1 March 2027|2027-03-01/);
+    const urls = (r?.sources ?? []).map(s => s.url);
+    expect(urls.some(u => u.includes('migri.fi'))).toBe(true);
+  });
+});
+
 describe('monitor-lead verifications, 20 August 2026', () => {
   test('monitor #212 Nicaragua dual nationality is instrument-read prohibited after Ley 1268', () => {
     const ni = citizenshipRoutes.jurisdictions.find(j => j.iso_n3 === '558')?.dual_nationality;
