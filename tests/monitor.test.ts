@@ -1258,6 +1258,7 @@ describe('weekly web discovery (Exa / Tavily / Firecrawl)', () => {
       exaType: 'deep',
       maxResults: 5,
       firecrawlScrape: false,
+      gazettePass: true,
       compiled: new URL('../data/compiled/citizenship_routes.json', import.meta.url).pathname,
       output: '/tmp/web-leads-test.json',
       summary: '/tmp/web-leads-test.md',
@@ -1615,10 +1616,10 @@ describe('weekly web discovery (Exa / Tavily / Firecrawl)', () => {
   });
 
   test('no generated query asks a keyword engine for what to exclude', async () => {
-    const { REGION_PACKS, mobilityQuery } = await import('../monitor/collectors/web_providers/shared');
+    const { REGION_PACKS, mobilityQuery, gazetteQuery } = await import('../monitor/collectors/web_providers/shared');
     const { buildExaQuery } = await import('../monitor/collectors/web_providers/exa');
     for (const pack of REGION_PACKS) {
-      for (const query of [mobilityQuery(pack, 7), buildExaQuery(pack, 7)]) {
+      for (const query of [mobilityQuery(pack, 7), buildExaQuery(pack, 7), gazetteQuery(pack, 7)]) {
         // Keyword search has no negation: "exclude student F/J" searched for
         // student visas. Topical exclusions live in the Exa system prompt.
         expect(query.toLowerCase()).not.toContain('exclude');
@@ -1658,5 +1659,192 @@ describe('weekly web discovery (Exa / Tavily / Firecrawl)', () => {
     expect(split.leads.map(lead => lead.effective_or_announced_date)).toEqual(['2026-08-19', null]);
     expect(split.backfill.length).toBe(1);
     expect(split.backfill[0]?.notes).toMatch(/older than the 7-day window/);
+  });
+
+  // The region → ISO map is the only hand-authored data in the constrained pass,
+  // so it is the only part that can be wrong in a way nothing else notices: an
+  // invented or mistyped code silently contributes no hosts and no error.
+  test('every region pack names real registry jurisdictions and nothing twice', async () => {
+    const { REGION_PACKS } = await import('../monitor/collectors/web_providers/shared');
+    const registry = JSON.parse(
+      fs.readFileSync(path.resolve(import.meta.dir, '..', 'data', 'registry.json'), 'utf8'),
+    ) as {
+      sovereigns: Array<{ iso_n3: string }>;
+      territories: Array<{ iso_n3: string }>;
+      special: Array<{ id: string }>;
+    };
+    const known = new Set([
+      ...registry.sovereigns.map(entry => entry.iso_n3),
+      ...registry.territories.map(entry => entry.iso_n3),
+      ...registry.special.map(entry => entry.id),
+    ]);
+    const owner = new Map<string, string>();
+    for (const pack of REGION_PACKS) {
+      expect(pack.isos.length).toBeGreaterThan(0);
+      for (const iso of pack.isos) {
+        expect(known.has(iso)).toBe(true);
+        // Two packs claiming one jurisdiction would search it twice and bill it
+        // twice, which is the kind of waste a weekly free-tier budget notices.
+        expect(owner.get(iso)).toBeUndefined();
+        owner.set(iso, pack.id);
+      }
+    }
+    // The packs' prose already names these, so the codes must be present.
+    const byId = new Map(REGION_PACKS.map(pack => [pack.id, pack]));
+    expect(byId.get('europe')!.isos).toContain('292'); // Gibraltar
+    expect(byId.get('europe')!.isos).toContain('470'); // Malta
+    expect(byId.get('gulf')!.isos).toContain('784'); // UAE
+    expect(byId.get('caribbean')!.isos).toContain('659'); // St Kitts and Nevis
+    expect(byId.get('anglosphere_north')!.isos).toEqual(['840', '124']);
+  });
+
+  test('the official-publisher allowlist derives from the manifest, not a second map', async () => {
+    const { REGION_PACKS, regionOfficialHosts } = await import('../monitor/collectors/web_providers/shared');
+    const byId = new Map(REGION_PACKS.map(pack => [pack.id, pack]));
+    const europe = regionOfficialHosts(byId.get('europe')!);
+    const gulf = regionOfficialHosts(byId.get('gulf')!);
+    expect(europe.length).toBeGreaterThan(20);
+    expect(gulf.length).toBeGreaterThan(5);
+    // Bare hostnames, deduped, no scheme and no leading www. — what an
+    // include_domains filter takes.
+    for (const host of [...europe, ...gulf]) {
+      expect(host).not.toContain('://');
+      expect(host).not.toMatch(/^www\./);
+      expect(host).toBe(host.toLowerCase());
+    }
+    expect(new Set(europe).size).toBe(europe.length);
+    // Aggregators are pointers, never authority. officialSourcesByJurisdiction
+    // already drops them; this asserts the property survives the host flattening,
+    // because an allowlisted query is a claim about who we trust.
+    const all = REGION_PACKS.flatMap(pack => regionOfficialHosts(pack));
+    expect(all).not.toContain('constituteproject.org');
+    expect(all).not.toContain('refworld.org');
+    // Packs partition the world, so no pack may reach every host.
+    expect(europe.length).toBeLessThan(new Set(all).size);
+  });
+
+  test('a region with no manifest hosts skips the pass instead of querying unconstrained', async () => {
+    const { regionOfficialHosts } = await import('../monitor/collectors/web_providers/shared');
+    const { searchTavilyGazetteRegion } = await import('../monitor/collectors/web_providers/tavily');
+    // 004 (Afghanistan) has no active verification-tier manifest source.
+    const barren = {
+      id: 'barren',
+      label: 'Nowhere',
+      queryHint: 'nowhere',
+      isos: ['004'],
+    };
+    expect(regionOfficialHosts(barren)).toEqual([]);
+    // null, not a call: an empty include_domains is read by Tavily as NO filter,
+    // so the alternative to skipping is an open query billed and reported as a
+    // constrained one. A real key is irrelevant — this must return before fetch.
+    const skipped = await searchTavilyGazetteRegion({
+      apiKey: 'unused',
+      pack: barren,
+      lookbackDays: 7,
+      maxResults: 3,
+      timeoutMs: 1,
+      hosts: [],
+    });
+    expect(skipped).toBeNull();
+  });
+
+  test('a constrained-pass hit is marked, still unverified, and dedupes against the open pass', async () => {
+    const { searchHitToLead, dedupeLeads } = await import('../monitor/collectors/web_providers/shared');
+    const args = {
+      provider: 'tavily' as const,
+      region: 'europe',
+      title: 'Decree amending the citizenship regulation',
+      url: 'https://diariodelarepublica.test/decreto-2026-14',
+      snippet: 'Naturalisation residence requirement amended',
+    };
+    const open = searchHitToLead(args)!;
+    const constrained = searchHitToLead({ ...args, pass: 'official_allowlist' })!;
+    expect(open.source_pass).toBe('open_web');
+    expect(constrained.source_pass).toBe('official_allowlist');
+    // A gov domain raises provenance, not verification. Nothing has been fetched.
+    expect(constrained.confidence).toBe('low');
+    expect(constrained.recommended_disposition).toBe('needs_primary');
+    expect(constrained.primary_url).toBeNull();
+    expect(constrained.affects_dataset).toBeNull();
+    expect(constrained.notes).toMatch(/provenance and not verification/);
+    // One change found by both passes is one lead, and the surviving row is the
+    // one that records where it came from.
+    const deduped = dedupeLeads([open, constrained]);
+    expect(deduped.length).toBe(1);
+    expect(deduped[0]?.source_pass).toBe('official_allowlist');
+    expect(dedupeLeads([constrained, open]).length).toBe(1);
+    // …and it must not outrank an Exa-structured row for the same change.
+    const fromExa = { ...open, provider: 'exa' as const, confidence: 'high' as const };
+    expect(dedupeLeads([constrained, fromExa])[0]?.provider).toBe('exa');
+  });
+
+  test('the constrained pass is visible in the report, separately from the open pass', async () => {
+    const { searchHitToLead, renderMarkdown } = await import('../monitor/collectors/web_providers/shared');
+    const { buildLeadIssueBody } = await import('../monitor/collectors/web_discover');
+    const constrained = searchHitToLead({
+      provider: 'tavily',
+      region: 'gulf',
+      title: 'Cabinet resolution on golden residency',
+      url: 'https://uaelegislation.test/resolution',
+      snippet: 'residency visa amendments',
+      pass: 'official_allowlist',
+    })!;
+    const markdown = renderMarkdown({
+      retrieved_at: '2026-08-21T00:00:00Z',
+      lookback_days: 7,
+      providers: ['tavily'],
+      regions: ['gulf'],
+      lead_count: 1,
+      backfill_count: 0,
+      cost_dollars_total: null,
+      credits_used: { tavily: 2 },
+      leads: [constrained],
+      coverage_backfill: [],
+      provider_errors: [],
+      gazette_pass: true,
+      gazette_pass_skipped: ['barren'],
+    });
+    expect(markdown).toContain('Official-publisher pass: **on**');
+    expect(markdown).toContain('rows from it: **1**');
+    expect(markdown).toContain('skipped (no manifest hosts): barren');
+    expect(markdown).toContain('**official publisher**');
+    // The per-lead issue says it too, so a reviewer reading only the issue knows
+    // the host is trusted and the claim is not.
+    const body = buildLeadIssueBody(constrained, '2026-08-21', null);
+    expect(body).toMatch(/Discovery pass \| official publishers/);
+    expect(body).toContain('not verified');
+  });
+
+  test('new client options change nothing when absent', async () => {
+    const { buildExaRequestBody, buildTavilyRequestBody, SOCIAL_NOISE_DOMAINS } =
+      await import('../monitor/lib/web-clients');
+    const exa = buildExaRequestBody({ query: 'q' });
+    expect('includeDomains' in exa).toBe(false);
+    expect('userLocation' in exa).toBe(false);
+    expect(exa.type).toBe('deep-lite');
+    expect(exa.numResults).toBe(12);
+    // Exa had no domain filtering at all, so the workflow's "social domains
+    // excluded" note was false for one provider in three. Now it holds.
+    expect(exa.excludeDomains).toEqual([...SOCIAL_NOISE_DOMAINS]);
+
+    const tavily = buildTavilyRequestBody({ query: 'q' });
+    expect('include_domains' in tavily).toBe(false);
+    // Tavily applies `country` only under topic 'general' and this repo runs
+    // 'news', so the option exists and no caller sets it.
+    expect('country' in tavily).toBe(false);
+    expect(tavily.topic).toBe('news');
+    expect(tavily.time_range).toBe('week');
+    expect(tavily.search_depth).toBe('basic');
+    expect(tavily.auto_parameters).toBe(false);
+    expect(tavily.exclude_domains).toEqual([...SOCIAL_NOISE_DOMAINS]);
+
+    // An empty array is not an empty allowlist — both providers would read it as
+    // no filter, i.e. an unconstrained search dressed as a constrained one.
+    expect('include_domains' in buildTavilyRequestBody({ query: 'q', includeDomains: [] })).toBe(false);
+    expect('includeDomains' in buildExaRequestBody({ query: 'q', includeDomains: [] })).toBe(false);
+    expect(buildTavilyRequestBody({ query: 'q', includeDomains: ['gov.mt'] }).include_domains)
+      .toEqual(['gov.mt']);
+    expect(buildExaRequestBody({ query: 'q', includeDomains: ['gov.mt'], userLocation: 'MT' }))
+      .toMatchObject({ includeDomains: ['gov.mt'], userLocation: 'MT' });
   });
 });

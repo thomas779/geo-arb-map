@@ -17,13 +17,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { searchExaRegion, loadExaSystemPrompt } from './web_providers/exa';
-import { searchTavilyRegion } from './web_providers/tavily';
+import { searchTavilyRegion, searchTavilyGazetteRegion } from './web_providers/tavily';
 import { searchFirecrawlRegion } from './web_providers/firecrawl';
 import {
   REGION_PACKS,
   annotateAlreadyHeld,
   dedupeLeads,
   leadChangeKey,
+  regionOfficialHosts,
   renderMarkdown,
   type CompiledCorpus,
   type DiscoverLead,
@@ -49,6 +50,15 @@ export interface WebDiscoverReport {
   backfill_count: number;
   /** Provider rows that arrived without a claim or a usable discovery URL. */
   dropped_incomplete: number;
+  /** Whether the extra allowlisted Tavily pass over official publishers ran. */
+  gazette_pass: boolean;
+  /**
+   * Regions the constrained pass skipped because the manifest names no official
+   * publisher for any jurisdiction in the pack. Reported, not logged away: it is
+   * a coverage gap in the source manifest, and the alternative to skipping is an
+   * empty allowlist, which providers read as no filter at all.
+   */
+  gazette_pass_skipped: string[];
   leads: DiscoverLead[];
   coverage_backfill: DiscoverLead[];
   provider_errors: Array<{ provider: string; region: string; error: string }>;
@@ -62,6 +72,13 @@ export interface CliOptions {
   exaType: string;
   maxResults: number;
   firecrawlScrape: boolean;
+  /**
+   * One extra Tavily call per region, allowlisted to that region's official
+   * publishers. Additive to the open query, not a replacement for it. ~1 credit
+   * per region (~7 a week), which is why it is Tavily and not Exa: the point is
+   * to measure whether constrained recall helps before paying more for the idea.
+   */
+  gazettePass: boolean;
   compiled: string;
   output: string;
   summary: string;
@@ -96,6 +113,8 @@ function readArgs(argv: string[]): CliOptions {
     exaType: process.env.EXA_SEARCH_TYPE || 'deep-lite',
     maxResults: Number(process.env.WEB_DISCOVER_MAX_RESULTS ?? 3),
     firecrawlScrape: process.env.FIRECRAWL_SCRAPE === '1',
+    // On by default, including for the scheduled run; set to 0 to switch off.
+    gazettePass: process.env.WEB_DISCOVER_GAZETTE_PASS !== '0',
     compiled: process.env.WEB_DISCOVER_COMPILED || DEFAULT_COMPILED,
     output: path.join(ROOT, '.out', 'web-leads.json'),
     summary: path.join(ROOT, '.out', 'web-leads.md'),
@@ -115,6 +134,8 @@ function readArgs(argv: string[]): CliOptions {
     else if (arg === '--exa-type') options.exaType = String(argv[++i]);
     else if (arg === '--max-results') options.maxResults = Number(argv[++i]);
     else if (arg === '--firecrawl-scrape') options.firecrawlScrape = true;
+    else if (arg === '--gazette-pass') options.gazettePass = true;
+    else if (arg === '--no-gazette-pass') options.gazettePass = false;
     else if (arg === '--compiled') options.compiled = path.resolve(argv[++i]!);
     else if (arg === '--output') options.output = path.resolve(argv[++i]!);
     else if (arg === '--summary') options.summary = path.resolve(argv[++i]!);
@@ -283,6 +304,9 @@ ${lead.claim_summary}
 | --- | --- |
 | Jurisdiction | ${lead.jurisdiction}${lead.iso_n3 ? ` (${lead.iso_n3})` : ''} |
 | Provider | ${lead.provider ?? 'unknown'} |
+| Discovery pass | ${lead.source_pass === 'official_allowlist'
+  ? 'official publishers (allowlisted to this region\'s manifest hosts) — provenance only, not verified'
+  : 'open web'} |
 | Change kind | ${lead.change_kind} |
 | Timing | ${lead.timing} |
 | Instrument | ${lead.instrument || '_none cited_'} |
@@ -554,6 +578,8 @@ export async function runWebDiscover(options: CliOptions): Promise<WebDiscoverRe
       lead_count: leads.length,
       backfill_count: backfill.length,
       dropped_incomplete: 0,
+      gazette_pass: false,
+      gazette_pass_skipped: [],
       leads,
       coverage_backfill: backfill,
       provider_errors: [],
@@ -596,6 +622,64 @@ export async function runWebDiscover(options: CliOptions): Promise<WebDiscoverRe
     }
   }
 
+  // The constrained pass, second and separate. It asks a different question of
+  // the same week — "what did the official publishers we already trust put out"
+  // — so it runs alongside the open query above and never in place of it.
+  const gazetteSkipped: string[] = [];
+  // Gated on tavily being a selected provider: `--providers exa` is how an
+  // operator says "do not spend Tavily credits this run", and a pass that
+  // ignored that would be spending them anyway.
+  const gazettePassRan = options.gazettePass && options.providers.includes('tavily');
+  if (gazettePassRan) {
+    const key = process.env.TAVILY_API_KEY;
+    for (const pack of packs) {
+      const hosts = regionOfficialHosts(pack);
+      if (!hosts.length) {
+        // Not an error and not silence: an empty allowlist would be billed as a
+        // constrained query and answered as an open one.
+        console.log(
+          `web-discover: tavily-gazette/${pack.id} skipped — the manifest names no official `
+          + 'publisher for any jurisdiction in this pack',
+        );
+        gazetteSkipped.push(pack.id);
+        continue;
+      }
+      if (options.dryRun) {
+        console.log(`[dry-run] would run tavily-gazette/${pack.id} over ${hosts.length} host(s)`);
+        continue;
+      }
+      if (!key) {
+        providerErrors.push({ provider: 'tavily-gazette', region: pack.id, error: 'TAVILY_API_KEY missing' });
+        continue;
+      }
+      console.log(`web-discover: tavily-gazette/${pack.id} (${hosts.length} hosts)…`);
+      const result = await searchTavilyGazetteRegion({
+        apiKey: key,
+        pack,
+        lookbackDays: options.lookbackDays,
+        maxResults: options.maxResults,
+        timeoutMs: Number(process.env.TAVILY_TIMEOUT_MS ?? 60_000),
+        hosts,
+      });
+      // null only happens for an empty allowlist, already handled above.
+      if (!result) continue;
+      if (result.error) {
+        console.error(`web-discover: tavily-gazette/${pack.id} failed: ${result.error}`);
+        providerErrors.push({ provider: 'tavily-gazette', region: pack.id, error: result.error });
+      } else {
+        console.log(
+          `web-discover: tavily-gazette/${pack.id} → ${result.leads.length} leads`
+          + (result.backfill.length ? `, ${result.backfill.length} backfill` : ''),
+        );
+      }
+      allLeads.push(...result.leads);
+      allBackfill.push(...result.backfill);
+      if (typeof result.credits_used === 'number') {
+        credits.tavily = (credits.tavily ?? 0) + result.credits_used;
+      }
+    }
+  }
+
   const leads = annotateAlreadyHeld(dedupeLeads(allLeads), corpus);
   const backfill = annotateAlreadyHeld(dedupeLeads(allBackfill), corpus);
   return {
@@ -609,6 +693,8 @@ export async function runWebDiscover(options: CliOptions): Promise<WebDiscoverRe
     lead_count: leads.length,
     backfill_count: backfill.length,
     dropped_incomplete: droppedIncomplete,
+    gazette_pass: gazettePassRan,
+    gazette_pass_skipped: gazetteSkipped,
     leads,
     coverage_backfill: backfill,
     provider_errors: providerErrors,
@@ -638,12 +724,19 @@ if (import.meta.main) {
     // Decided BEFORE anything is filed. The check used to run last, so a run in
     // which every provider and region failed still opened an umbrella issue
     // announcing a quiet week, and only then failed the job.
+    //
+    // The denominator counts every call the run actually attempted, the
+    // constrained pass included. Leaving it at providers × regions would let a
+    // quiet week in which only the gazette passes errored trip the alarm: seven
+    // gazette failures alone would have met a seven-call threshold.
+    const attemptedCalls = options.providers.length * report.regions.length
+      + (report.gazette_pass ? report.regions.length - report.gazette_pass_skipped.length : 0);
     const everythingFailed = !options.fixture
       && !options.dryRun
       && report.lead_count === 0
       && report.backfill_count === 0
       && report.provider_errors.length > 0
-      && report.provider_errors.length >= options.providers.length * report.regions.length;
+      && report.provider_errors.length >= attemptedCalls;
     if (options.openIssue) {
       if (options.dryRun || options.fixture) {
         console.log('skipping --open-issue in dry-run/fixture mode');

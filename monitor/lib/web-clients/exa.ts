@@ -1,6 +1,6 @@
 /** Reusable Exa Search client — structured synthesis via outputSchema. */
 
-import type { WebSearchResult } from './types';
+import { SOCIAL_NOISE_DOMAINS, type WebSearchResult } from './types';
 
 export interface ExaSearchOptions {
   apiKey?: string;
@@ -11,7 +11,49 @@ export interface ExaSearchOptions {
   outputSchema?: Record<string, unknown>;
   numResults?: number;
   startPublishedDate?: string | null;
+  /**
+   * RESTRICTS results to these hosts — it is an allowlist, not a preference. A
+   * caller that sets it can only ever re-find the hosts it names, so it belongs
+   * on a deliberately constrained pass and never on an open discovery query.
+   * Absent or empty means unconstrained, which is the default.
+   */
+  includeDomains?: string[];
+  /**
+   * Defaults to SOCIAL_NOISE_DOMAINS so this client matches the Tavily and
+   * Firecrawl ones. Until this existed, Exa had no domain filtering at all and
+   * the weekly workflow's "social domains excluded" note was true for two of the
+   * three providers.
+   */
+  excludeDomains?: string[];
+  /**
+   * Two-letter country code Exa localises ranking to. Absent means unset — Exa
+   * decides — which is the existing behaviour.
+   */
+  userLocation?: string;
   timeoutMs?: number;
+}
+
+/**
+ * The request body, split out so the defaults are assertable without a network
+ * call: the load-bearing property of a new option is that an absent one changes
+ * nothing about the request we were already sending.
+ */
+export function buildExaRequestBody(opts: ExaSearchOptions): Record<string, unknown> {
+  const body: Record<string, unknown> = {
+    query: opts.query,
+    type: opts.type ?? 'deep-lite',
+    numResults: opts.numResults ?? 12,
+    contents: { highlights: { maxCharacters: 2000 } },
+    excludeDomains: opts.excludeDomains ?? [...SOCIAL_NOISE_DOMAINS],
+  };
+  if (opts.systemPrompt) body.systemPrompt = opts.systemPrompt;
+  if (opts.outputSchema) body.outputSchema = opts.outputSchema;
+  if (opts.startPublishedDate) body.startPublishedDate = opts.startPublishedDate;
+  // An empty array is NOT an empty allowlist — Exa would read it as no filter at
+  // all, which is the opposite of what a caller asking for one wants.
+  if (opts.includeDomains?.length) body.includeDomains = opts.includeDomains;
+  if (opts.userLocation) body.userLocation = opts.userLocation;
+  return body;
 }
 
 export async function exaSearch(opts: ExaSearchOptions): Promise<WebSearchResult> {
@@ -28,15 +70,7 @@ export async function exaSearch(opts: ExaSearchOptions): Promise<WebSearchResult
     };
   }
 
-  const body: Record<string, unknown> = {
-    query: opts.query,
-    type: opts.type ?? 'deep-lite',
-    numResults: opts.numResults ?? 12,
-    contents: { highlights: { maxCharacters: 2000 } },
-  };
-  if (opts.systemPrompt) body.systemPrompt = opts.systemPrompt;
-  if (opts.outputSchema) body.outputSchema = opts.outputSchema;
-  if (opts.startPublishedDate) body.startPublishedDate = opts.startPublishedDate;
+  const body = buildExaRequestBody(opts);
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), opts.timeoutMs ?? 180_000);

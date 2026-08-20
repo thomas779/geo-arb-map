@@ -1,5 +1,5 @@
-export { exaSearch, type ExaSearchOptions } from './exa';
-export { tavilySearch, type TavilySearchOptions } from './tavily';
+export { exaSearch, buildExaRequestBody, type ExaSearchOptions } from './exa';
+export { tavilySearch, buildTavilyRequestBody, type TavilySearchOptions } from './tavily';
 export { firecrawlSearch, firecrawlScrape, type FirecrawlSearchOptions } from './firecrawl';
 export {
   SOCIAL_NOISE_DOMAINS,

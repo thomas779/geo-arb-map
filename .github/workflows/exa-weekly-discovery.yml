@@ -5,7 +5,13 @@ name: Weekly web discovery
 #
 # Free-tier defaults (per weekly run, 7 regions) — see monitor/prompts/web-discover-efficiency.md:
 #   Exa deep-lite × 7, Tavily basic × 7 (~7 credits), Firecrawl web-search × 7 (~14 credits)
-#   No Firecrawl scrape, no Tavily raw_content, social domains excluded.
+#   plus one allowlisted Tavily pass per region over that region's official
+#   publishers (~7 more credits; skipped for a region the manifest has no source
+#   for). It is ADDITIVE: an allowlist can only return hosts we already watch, so
+#   it answers "what did the gazettes publish" while the open query above keeps
+#   asking "what changed anywhere".
+#   No Firecrawl scrape, no Tavily raw_content, social domains excluded on all
+#   three providers (Exa had no domain filter at all until the gazette pass landed).
 # Cap further with workflow_dispatch inputs if a month is running hot.
 
 on:
@@ -54,6 +60,11 @@ on:
         required: false
         default: "10"
         type: string
+      gazette_pass:
+        description: Extra allowlisted Tavily pass per region over official publishers (~1 credit/region)
+        required: false
+        default: true
+        type: boolean
 
 permissions:
   contents: read
@@ -147,6 +158,12 @@ jobs:
           ARGS=(--providers "$WEB_DISCOVER_PROVIDERS")
           if [ -n "${{ inputs.regions }}" ]; then
             ARGS+=(--regions "${{ inputs.regions }}")
+          fi
+          # On for the scheduled run, and for a manual run unless switched off.
+          if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.gazette_pass }}" != "false" ]; then
+            ARGS+=(--gazette-pass)
+          else
+            ARGS+=(--no-gazette-pass)
           fi
           if [ "${{ github.event_name }}" = "schedule" ] || [ "${{ inputs.open_issue }}" = "true" ]; then
             ARGS+=(--open-issue)

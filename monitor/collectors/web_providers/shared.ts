@@ -1,6 +1,8 @@
 /** Shared types + helpers for weekly web discovery providers (Exa / Tavily / Firecrawl). */
 
-import { changeKey, normalizeInstrument } from '../../sweep/run';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { changeKey, normalizeInstrument, officialSourcesByJurisdiction } from '../../sweep/run';
 
 export type ChangeKind =
   | 'threshold'
@@ -60,24 +62,120 @@ export interface DiscoverLead {
   matched_route_ids?: string[];
   region?: string;
   provider?: DiscoverProvider;
+  /**
+   * Which weekly pass surfaced the lead. `official_allowlist` means the query
+   * was restricted to the region's known official publishers, so the hit came
+   * from a gazette/ministry host we already trust — a stronger PROVENANCE signal
+   * than a bare web hit, and nothing more. It has not been fetched or
+   * quote-checked, so the confidence and disposition are unchanged by it.
+   * Absent means the ordinary open pass, which is the default everywhere.
+   */
+  source_pass?: 'open_web' | 'official_allowlist';
 }
 
 export interface RegionPack {
   id: string;
   label: string;
   queryHint: string;
+  /**
+   * M49 codes for the jurisdictions this pack covers, used to look the pack's
+   * official publishers up in monitor/sources/manifest.json. The prose above is
+   * what a search engine reads; this is what the manifest can be joined on.
+   *
+   * Every code here is derived from a jurisdiction the label or queryHint
+   * already names — either directly ("Gibraltar") or by enumerating a named
+   * grouping ("EU member states", "African countries", "OECS"). Nothing is added
+   * because it seemed adjacent: the constrained pass is meant to cover the same
+   * ground as the open query, and widening one without the other would make the
+   * two passes answer different questions.
+   *
+   * Known gaps, stated rather than quietly filled: no pack names Russia,
+   * Belarus, Turkey or the Caucasus, and none names the non-CIP Caribbean or
+   * most of the Pacific, so no constrained pass reaches them. Widening the
+   * packs' prose is the way to fix that, not widening this list alone.
+   */
+  isos: string[];
 }
+
+// EU-27, by accession, so a reviewer can check the list against a single fact.
+const EU_MEMBER_STATES = [
+  '056', // Belgium
+  '250', // France
+  '276', // Germany
+  '380', // Italy
+  '442', // Luxembourg
+  '528', // Netherlands
+  '208', // Denmark
+  '372', // Ireland
+  '300', // Greece
+  '620', // Portugal
+  '724', // Spain
+  '040', // Austria
+  '246', // Finland
+  '752', // Sweden
+  '196', // Cyprus
+  '203', // Czechia
+  '233', // Estonia
+  '348', // Hungary
+  '428', // Latvia
+  '440', // Lithuania
+  '470', // Malta
+  '616', // Poland
+  '703', // Slovakia
+  '705', // Slovenia
+  '100', // Bulgaria
+  '642', // Romania
+  '191', // Croatia
+];
+
+/**
+ * The 54 UN member states in Africa. "African countries" in the pack's
+ * queryHint is a category, so it is enumerated in full rather than sampled —
+ * most of these have no manifest source yet, which costs nothing here (they
+ * simply contribute no hosts) and means the allowlist grows on its own as the
+ * official-source programme fills them in.
+ *
+ * Excludes Western Sahara (a disputed M49 "special" entry) and Somaliland (in
+ * the registry, unrecognised), and excludes African territories of European
+ * states (Saint Helena, Mayotte, Réunion) — a pack of sovereign nationality
+ * regimes stays easier to reason about than one mixing in metropolitan law.
+ */
+const AFRICAN_STATES = [
+  '012', '024', '072', '108', '120', '132', '140', '148', '174', '178',
+  '180', '204', '226', '231', '232', '262', '266', '270', '288', '324',
+  '384', '404', '426', '430', '434', '450', '454', '466', '478', '480',
+  '504', '508', '516', '562', '566', '624', '646', '678', '686', '690',
+  '694', '706', '710', '716', '728', '729', '748', '768', '788', '800',
+  '818', '834', '854', '894',
+];
 
 export const REGION_PACKS: RegionPack[] = [
   {
     id: 'europe',
     label: 'Europe + UK + Gibraltar + Malta + Cyprus',
     queryHint: 'Europe, United Kingdom, Gibraltar, Malta, Cyprus, EU member states',
+    // EU-27 (Malta and Cyprus among them), plus the rest of what "Europe" means
+    // for mobility law: EFTA/EEA, the UK with its Crown Dependencies and
+    // Gibraltar, the four microstates, the Western Balkans and the eastern
+    // neighbourhood, and the three Nordic autonomies that legislate their own
+    // right of residence (Åland, Faroes, Greenland) and carry their own
+    // manifest sources.
+    isos: [
+      ...EU_MEMBER_STATES,
+      '352', '578', '438', '756', // Iceland, Norway, Liechtenstein, Switzerland
+      '826', '292', '831', '832', '833', // UK, Gibraltar, Guernsey, Jersey, Isle of Man
+      '020', '492', '674', '336', // Andorra, Monaco, San Marino, Vatican
+      '008', '070', '499', '807', '688', 'XKX', // Albania, Bosnia, Montenegro, N. Macedonia, Serbia, Kosovo
+      '498', '804', // Moldova, Ukraine
+      '248', '234', '304', // Åland, Faroe Islands, Greenland
+    ],
   },
   {
     id: 'gulf',
     label: 'Gulf + Levant',
     queryHint: 'UAE, Saudi Arabia, Bahrain, Qatar, Oman, Kuwait, Jordan, Lebanon, Israel',
+    // Exactly the nine states the queryHint names, in that order.
+    isos: ['784', '682', '048', '634', '512', '414', '400', '422', '376'],
   },
   {
     id: 'caribbean',
@@ -85,16 +183,32 @@ export const REGION_PACKS: RegionPack[] = [
     queryHint:
       'Antigua and Barbuda, Dominica, Grenada, Saint Kitts and Nevis, Saint Lucia, '
       + 'Caribbean citizenship by investment',
+    // The five named CIP states, plus the rest of the OECS the label names:
+    // Montserrat and St Vincent complete the full membership, Anguilla and the
+    // BVI are associate members. Barbados, the Bahamas and Trinidad are neither
+    // CIP nor OECS and no pack names them.
+    isos: ['028', '212', '308', '659', '662', '500', '670', '660', '092'],
   },
   {
     id: 'latam',
     label: 'Latin America',
     queryHint: 'Latin America, Mexico, Central America, South America residency citizenship',
+    // Mexico, the seven Central American states (Belize included — the pack is
+    // geographic, not linguistic), the twelve South American states, and the
+    // Greater Antilles republics, which sit here because the Caribbean pack is
+    // scoped to CIP/OECS and would otherwise leave them in no pack at all.
+    isos: [
+      '484', // Mexico
+      '084', '188', '222', '320', '340', '558', '591', // Central America
+      '032', '068', '076', '152', '170', '218', '328', '600', '604', '740', '858', '862',
+      '192', '214', '332', // Cuba, Dominican Republic, Haiti
+    ],
   },
   {
     id: 'africa',
     label: 'Africa',
     queryHint: 'African countries residency citizenship golden visa investment migration',
+    isos: [...AFRICAN_STATES],
   },
   {
     id: 'asia',
@@ -102,6 +216,12 @@ export const REGION_PACKS: RegionPack[] = [
     queryHint:
       'Asia Pacific residency citizenship: Japan, South Korea, Indonesia, Thailand, '
       + 'Singapore, Malaysia, Philippines, India, China, Kazakhstan, Australia, New Zealand',
+    // The twelve the queryHint names and no more. "Asia-Pacific" is the label,
+    // but the hint is an explicit list, so Hong Kong, Macao, Taiwan, Vietnam and
+    // the Pacific states stay out even though several have manifest sources —
+    // the constrained pass should not quietly search jurisdictions the open pass
+    // never asks about.
+    isos: ['392', '410', '360', '764', '702', '458', '608', '356', '156', '398', '036', '554'],
   },
   {
     id: 'anglosphere_north',
@@ -115,6 +235,10 @@ export const REGION_PACKS: RegionPack[] = [
     queryHint:
       'United States Canada residency citizenship: EB-5, E-2, extraordinary ability, '
       + 'investor immigration, nationality law',
+    // The two the queryHint names. US insular areas are left out because the
+    // nationality and immigration law that moves for them is federal and
+    // published on the same federal hosts this pack already allows.
+    isos: ['840', '124'],
   },
 ];
 
@@ -190,6 +314,64 @@ export function mobilityQuery(pack: RegionPack, lookbackDays: number): string {
 /** Domains that burn free-tier credits without yielding atlas-grade primaries. */
 export { SOCIAL_NOISE_DOMAINS as NOISE_EXCLUDE_DOMAINS } from '../../lib/web-clients';
 
+const MONITOR_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+
+/** One manifest read per process, not one per region. */
+let officialSourceCache: Map<string, Array<{ title: string; url: string }>> | null = null;
+let officialSourceCacheRoot: string | null = null;
+
+function officialSources(root: string): Map<string, Array<{ title: string; url: string }>> {
+  if (officialSourceCache && officialSourceCacheRoot === root) return officialSourceCache;
+  officialSourceCache = officialSourcesByJurisdiction(root);
+  officialSourceCacheRoot = root;
+  return officialSourceCache;
+}
+
+/**
+ * The official publishers we already trust for a region, as bare hostnames.
+ *
+ * DERIVED, never authored. There is exactly one list of official sources in this
+ * repo — monitor/sources/manifest.json — and officialSourcesByJurisdiction
+ * already does the hard parts: active verification-tier rows only, aggregator
+ * hosts (constituteproject and friends) dropped, six sources per jurisdiction
+ * max. A second hand-maintained domain map would drift from it within a month.
+ *
+ * citations.ts::manifestHosts flattens the same manifest but has no jurisdiction
+ * dimension and keeps every tier including the aggregators, so it answers "do we
+ * already subscribe to this host" and not "which hosts speak for this region".
+ *
+ * An empty result is meaningful: it means we know of no official publisher for
+ * any jurisdiction in the pack, and the caller must skip the constrained pass
+ * rather than send an empty allowlist, which every provider reads as no filter.
+ */
+export function regionOfficialHosts(pack: RegionPack, root: string = MONITOR_ROOT): string[] {
+  const byIso = officialSources(root);
+  const hosts = new Set<string>();
+  for (const iso of pack.isos) {
+    for (const source of byIso.get(iso) ?? []) {
+      const host = hostOf(source.url);
+      if (host) hosts.add(host);
+    }
+  }
+  return [...hosts].sort();
+}
+
+/**
+ * The constrained pass's query. Positive terms only — same rule as
+ * mobilityQuery: the allowlist does the narrowing, so the words never need to
+ * say what to leave out.
+ *
+ * Shorter than the open query because the domain filter is already carrying most
+ * of the specificity: on a gazette host, "citizenship residence permit
+ * naturalisation decree" is the whole question.
+ */
+export function gazetteQuery(pack: RegionPack, lookbackDays: number): string {
+  return (
+    `Citizenship nationality residence permit naturalisation visa decree, law, `
+    + `regulation or notice published in the last ${lookbackDays} days — ${pack.label}`
+  );
+}
+
 /**
  * The identity of the CHANGE a lead reports, shared by dedupe and the issue
  * fingerprint so both agree on what "the same thing" is.
@@ -223,6 +405,12 @@ export function dedupeLeads(leads: DiscoverLead[]): DiscoverLead[] {
     if (lead.confidence === 'high') score += 2;
     if (lead.confidence === 'medium') score += 1;
     if (lead.quote) score += 1;
+    // Ranks the REPRESENTATION, not the claim: when the open and constrained
+    // passes return the same URL, the surviving row should be the one that says
+    // it came off a publisher we already trust. Deliberately the smallest
+    // increment — provenance is not verification, and this must not lift a
+    // keyword hit above an Exa-structured row.
+    if (lead.source_pass === 'official_allowlist') score += 1;
     return score;
   };
   for (const lead of leads) {
@@ -275,6 +463,13 @@ export function searchHitToLead(opts: {
   url: string;
   snippet: string | null;
   published?: string | null;
+  /**
+   * Defaults to the open pass. Setting `official_allowlist` records HOW the hit
+   * was found and changes nothing else: the row still comes back `low` /
+   * `needs_primary`, because a gazette host that has not been fetched and
+   * quote-matched is a better pointer, not a verified one.
+   */
+  pass?: 'open_web' | 'official_allowlist';
 }): DiscoverLead | null {
   const title = opts.title.trim();
   const url = opts.url.trim();
@@ -285,6 +480,8 @@ export function searchHitToLead(opts: {
   const relevant = /(citizen|nationalit|residenc|visa|immigra|naturalis|naturaliz|passport|golden|cbi|rbi|dual.?nation)/i
     .test(lower);
   if (!relevant) return null;
+  const pass = opts.pass ?? 'open_web';
+  const constrained = pass === 'official_allowlist';
   return {
     jurisdiction: 'multi',
     iso_n3: null,
@@ -301,12 +498,19 @@ export function searchHitToLead(opts: {
     // modelled field moves; only a reviewer or a structured provider can answer.
     affects_dataset: null,
     recommended_disposition: 'needs_primary',
-    why_not_noise: `Search hit from ${opts.provider}; mobility keywords matched title/snippet.`,
-    notes:
-      `Raw ${opts.provider} search hit — not Exa-structured. Verify primary before authoring.`,
+    why_not_noise: constrained
+      ? `Search hit from ${opts.provider} restricted to ${opts.region}'s known official `
+        + `publishers (${hostOf(url) || 'unknown host'}); mobility keywords matched title/snippet.`
+      : `Search hit from ${opts.provider}; mobility keywords matched title/snippet.`,
+    notes: constrained
+      ? `Raw ${opts.provider} search hit from the official-publisher pass — the host is one the `
+        + 'manifest already trusts for this region, which raises provenance and not verification. '
+        + 'Nothing here has been fetched or quote-matched; verify the primary before authoring.'
+      : `Raw ${opts.provider} search hit — not Exa-structured. Verify primary before authoring.`,
     instrument: null,
     region: opts.region,
     provider: opts.provider,
+    source_pass: pass,
   };
 }
 
@@ -356,7 +560,11 @@ export function renderMarkdown(report: {
   coverage_backfill: DiscoverLead[];
   provider_errors: Array<{ provider: string; region: string; error: string }>;
   dropped_incomplete?: number;
+  gazette_pass?: boolean;
+  gazette_pass_skipped?: string[];
 }): string {
+  const gazetteLeads = [...report.leads, ...report.coverage_backfill]
+    .filter(lead => lead.source_pass === 'official_allowlist').length;
   const lines: string[] = [
     `# Weekly web discovery — ${report.retrieved_at.slice(0, 10)}`,
     '',
@@ -364,6 +572,13 @@ export function renderMarkdown(report: {
     `- Lookback: **${report.lookback_days}** days`,
     `- Regions: ${report.regions.join(', ') || '(none)'}`,
     `- Leads: **${report.lead_count}** · backfill: **${report.backfill_count}**`,
+    // The whole point of the constrained pass is that its yield is measurable
+    // against the open pass, so the count is stated even when it is zero.
+    `- Official-publisher pass: ${report.gazette_pass === false ? '**off**' : '**on**'}`
+    + ` · rows from it: **${gazetteLeads}**`
+    + (report.gazette_pass_skipped?.length
+      ? ` · skipped (no manifest hosts): ${report.gazette_pass_skipped.join(', ')}`
+      : ''),
     // A row the provider returned and we could not use is a different fact from
     // a quiet week, so it is stated rather than left to the logs.
     `- Dropped as incomplete (no claim / no usable discovery URL): **${report.dropped_incomplete ?? 0}**`,
@@ -389,8 +604,8 @@ export function renderMarkdown(report: {
       return;
     }
     lines.push(
-      '| Provider | Disposition | Conf | Jur | Claim | Link |',
-      '| --- | --- | --- | --- | --- | --- |',
+      '| Provider | Pass | Disposition | Conf | Jur | Claim | Link |',
+      '| --- | --- | --- | --- | --- | --- | --- |',
     );
     for (const lead of leads) {
       const claim = lead.claim_summary.replace(/\|/g, '\\|').slice(0, 120);
@@ -398,9 +613,13 @@ export function renderMarkdown(report: {
         ? `[primary](${lead.primary_url})`
         : `[discovery](${lead.discovery_url})`;
       const held = lead.already_held ? ' · held?' : '';
+      // The provenance of the row, in its own column: "official publisher" says
+      // the host is one the manifest already trusts for this region. It does not
+      // say the claim is verified — the disposition column still does that.
+      const pass = lead.source_pass === 'official_allowlist' ? '**official publisher**' : 'open web';
       lines.push(
-        `| ${lead.provider ?? '?'} | \`${lead.recommended_disposition}\`${held} | ${lead.confidence}`
-        + ` | ${lead.jurisdiction} | ${claim} | ${link} |`,
+        `| ${lead.provider ?? '?'} | ${pass} | \`${lead.recommended_disposition}\`${held}`
+        + ` | ${lead.confidence} | ${lead.jurisdiction} | ${claim} | ${link} |`,
       );
     }
     lines.push('');
@@ -413,7 +632,10 @@ export function renderMarkdown(report: {
     '',
     '1. Prefer Exa-structured high/medium rows with primary_url.',
     '2. Treat Tavily/Firecrawl raw hits as pointers — fetch primary before authoring.',
-    '3. Park pending_enactment; ignore not_newsworthy / thin process noise.',
+    '3. An **official publisher** row is a better pointer, not a verified one: the host is',
+    '   already in the manifest, so the primary is usually one click away — but it has not',
+    '   been fetched or quote-matched, so it still needs one.',
+    '4. Park pending_enactment; ignore not_newsworthy / thin process noise.',
     '',
   );
   return `${lines.join('\n')}\n`;

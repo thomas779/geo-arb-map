@@ -60,6 +60,16 @@ bun run monitor:web-discover -- --fixture tests/fixtures/monitor/exa-leads.json
 # Exa only: bun run monitor:web-discover -- --providers exa
 # GitHub: .github/workflows/exa-weekly-discovery.yml (Mon 07:17 UTC + workflow_dispatch)
 #
+# Two passes per region, not one. The open query asks what changed anywhere; a second
+# Tavily call (--gazette-pass, default on; --no-gazette-pass to skip) asks the same
+# week of that region's official publishers, allowlisted to the hosts already in
+# monitor/sources/manifest.json. The allowlist is DERIVED from the manifest via
+# officialSourcesByJurisdiction — there is no second domain map to keep in sync —
+# and it never goes on the open query, which would then only re-find hosts we watch.
+# Its rows are marked `official publisher` in the report: better provenance, not
+# verification, so they are still `low` / `needs_primary` until a primary is fetched.
+# A region the manifest has no source for is skipped, never sent an empty allowlist.
+#
 # Issue hygiene: per-lead issues carry `<!-- signal:<12 hex> -->`, keyed on the legal
 # instrument where one is cited, and are deduped against `gh issue list --state all`.
 # WEB_DISCOVER_MAX_ISSUES (default 10) caps them; anything over the cap is logged.
@@ -88,11 +98,12 @@ Provider-neutral; do not commit keys.
 | `MONITOR_XAI_API_KEY` | xAI key for X (Twitter) discovery via the Agent Tools `x_search` (secret; optional — X skips cleanly without it) |
 | `MONITOR_XAI_MODEL` / `_LOOKBACK_HOURS` / `_TIMEOUT_MS` | X search model (default `grok-4.3`), lookback window (24h), request timeout |
 | `EXA_API_KEY` | Exa key for weekly deep structured discovery (GitHub secret) |
-| `TAVILY_API_KEY` | Tavily key — basic search, ~1 credit/region (GitHub secret) |
+| `TAVILY_API_KEY` | Tavily key — basic search, ~1 credit/region, ×2 with the official-publisher pass (GitHub secret) |
 | `FIRECRAWL_API_KEY` | Firecrawl key — search without scrape by default (GitHub secret) |
 | `EXA_SEARCH_TYPE` / `WEB_DISCOVER_LOOKBACK_DAYS` / `WEB_DISCOVER_MAX_RESULTS` | Optional vars (defaults: `deep`, `7`, `5`) |
 | `WEB_DISCOVER_PROVIDERS` | Default `exa,tavily,firecrawl`; slim to save free-tier credits |
 | `WEB_DISCOVER_MAX_ISSUES` | Per-run cap on per-lead issues (default `10`; positive integer) |
+| `WEB_DISCOVER_GAZETTE_PASS` | `0` disables the allowlisted official-publisher pass (default on, ~7 credits/week) |
 
 Efficiency notes: [`monitor/prompts/web-discover-efficiency.md`](prompts/web-discover-efficiency.md).
 
