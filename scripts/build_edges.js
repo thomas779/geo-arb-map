@@ -167,6 +167,10 @@ export function buildEdges(data, manualEdges, corpus) {
         from: `${fromKind}:${iso}`, to: `cit:${iso}`, mechanism: 'naturalization',
         years: ordinaryYears,
         confidence: rule?.confidence === 'high' ? 'audited-ordinary' : 'legacy-canonical',
+        // The corpus's allocation, not a hardcoded 'right'. Discretionary stays in
+        // deterministic plans (see isRationed) but must not be silently relabelled
+        // as a guarantee — 338 of 412 pathways reserve a refusal.
+        allocation: rule?.allocation ?? 'right',
         renounces_previous: renounces(iso) || undefined,
       });
       for (const conditional of rule?.conditional ?? []) {
@@ -178,6 +182,7 @@ export function buildEdges(data, manualEdges, corpus) {
           from: `${fromKind}:${iso}`, to: `cit:${iso}`, mechanism: 'naturalization',
           years: conditional.minimum_months / 12,
           confidence: 'audited-conditional',
+          allocation: rule?.allocation ?? 'right',
           needs: [`citizenship_any:${beneficiaries.join(',')}`],
           renounces_previous: renounces(iso) || undefined,
         });

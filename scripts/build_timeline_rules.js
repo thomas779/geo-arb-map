@@ -58,6 +58,11 @@ export function deriveOrdinaryNaturalization(pilot) {
           iso_n3: iso,
           ordinary_months: months,
           confidence: 'high',
+          // Carried so the graph stops flattening every naturalisation to `right`.
+          // It is NOT an exclusion filter — see `isRationed` in pathfinder.ts for
+          // why formal discretion cannot be one. It is here so the UI can say the
+          // grant is not automatic, which is true of 338 of 412 pathways.
+          allocation: ordinary.allocation ?? 'right',
           derived_from: `${route.id}#${ordinary.id}`,
         });
       }

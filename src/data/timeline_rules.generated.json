@@ -12,18 +12,21 @@
       "iso_n3": "012",
       "ordinary_months": 84,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "algeria-naturalization#algeria-naturalization-principal"
     },
     {
       "iso_n3": "024",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "angola-naturalization#angola-naturalization-principal"
     },
     {
       "iso_n3": "028",
       "ordinary_months": 96,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "antigua-barbuda-naturalization#antigua-barbuda-naturalization-principal"
     },
     {
@@ -40,6 +43,7 @@
       "iso_n3": "044",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "bahamas-naturalization#bahamas-naturalization-principal"
     },
     {
@@ -71,6 +75,7 @@
       "iso_n3": "072",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "botswana-naturalization#botswana-naturalization-principal"
     },
     {
@@ -82,6 +87,7 @@
       "iso_n3": "090",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "solomon-islands-naturalization#solomon-islands-naturalization-principal"
     },
     {
@@ -103,30 +109,35 @@
       "iso_n3": "116",
       "ordinary_months": 84,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "cambodia-naturalization#cambodia-naturalization-principal"
     },
     {
       "iso_n3": "120",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "cameroon-naturalization#cameroon-naturalization-principal"
     },
     {
       "iso_n3": "124",
       "ordinary_months": 36,
       "confidence": "high",
+      "allocation": "right",
       "derived_from": "canada-citizenship-grant#adult_standard"
     },
     {
       "iso_n3": "132",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "cabo-verde-naturalization#cabo-verde-naturalization-principal"
     },
     {
       "iso_n3": "136",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "cayman-botc-naturalization#cayman-botc-naturalization-principal"
     },
     {
@@ -138,18 +149,21 @@
       "iso_n3": "188",
       "ordinary_months": 84,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "costa-rica-naturalization-by-residence#ordinary_seven_years"
     },
     {
       "iso_n3": "196",
       "ordinary_months": 96,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "cyprus-naturalization-by-residence#cyprus-naturalization-by-residence-principal"
     },
     {
       "iso_n3": "203",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "czechia-naturalization#czechia-naturalization-principal"
     },
     {
@@ -161,6 +175,7 @@
       "iso_n3": "212",
       "ordinary_months": 84,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "dominica-naturalization-after-residence#dominica-naturalization-after-residence-principal"
     },
     {
@@ -172,12 +187,14 @@
       "iso_n3": "222",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "el-salvador-naturalization-by-residence#ordinary_five_years"
     },
     {
       "iso_n3": "242",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "fiji-naturalization#fiji-naturalization-principal"
     },
     {
@@ -194,18 +211,21 @@
       "iso_n3": "268",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "georgia-ordinary-naturalization#georgia-ordinary-naturalization-principal"
     },
     {
       "iso_n3": "276",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "right",
       "derived_from": "germany-naturalization-by-residence#ordinary"
     },
     {
       "iso_n3": "288",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "ghana-naturalization#ghana-naturalization-principal"
     },
     {
@@ -217,18 +237,21 @@
       "iso_n3": "320",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "guatemala-naturalization-by-residence#ordinary_five_years"
     },
     {
       "iso_n3": "340",
       "ordinary_months": 36,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "honduras-naturalization-by-residence#ordinary_three_years"
     },
     {
       "iso_n3": "348",
       "ordinary_months": 96,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "hungary-ordinary-naturalization#hungary-ordinary-naturalization-principal"
     },
     {
@@ -250,36 +273,42 @@
       "iso_n3": "380",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "italy-naturalization-by-residence#ordinary"
     },
     {
       "iso_n3": "384",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "cote-divoire-naturalization#cote-divoire-naturalization-principal"
     },
     {
       "iso_n3": "398",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "kazakhstan-naturalization#kazakhstan-naturalization-principal"
     },
     {
       "iso_n3": "404",
       "ordinary_months": 84,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "kenya-registration-by-residence#kenya-registration-by-residence-principal"
     },
     {
       "iso_n3": "410",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "korea-general-naturalization#korea-general-naturalization-principal"
     },
     {
       "iso_n3": "428",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "latvia-naturalization#latvia-naturalization-principal"
     },
     {
@@ -291,24 +320,28 @@
       "iso_n3": "470",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "malta-residence-naturalization#malta-residence-naturalization-principal"
     },
     {
       "iso_n3": "484",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "mexico-naturalization-by-residence#ordinary_five_years"
     },
     {
       "iso_n3": "504",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "morocco-naturalization#morocco-naturalization-principal"
     },
     {
       "iso_n3": "508",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "mozambique-naturalization#mozambique-naturalization-principal"
     },
     {
@@ -330,12 +363,14 @@
       "iso_n3": "548",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "vanuatu-naturalization#vanuatu-naturalization-principal"
     },
     {
       "iso_n3": "554",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "nz-citizenship-by-grant#standard_presence"
     },
     {
@@ -347,24 +382,28 @@
       "iso_n3": "583",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "micronesia-naturalization#micronesia-naturalization-principal"
     },
     {
       "iso_n3": "586",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "pakistan-naturalization#pakistan-naturalization-principal"
     },
     {
       "iso_n3": "591",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "panama-ordinary-naturalization#panama-ordinary-naturalization-principal"
     },
     {
       "iso_n3": "598",
       "ordinary_months": 96,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "papua-new-guinea-naturalization#papua-new-guinea-naturalization-principal"
     },
     {
@@ -376,12 +415,14 @@
       "iso_n3": "608",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "philippines-naturalization#philippines-naturalization-principal"
     },
     {
       "iso_n3": "616",
       "ordinary_months": 36,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "poland-recognition-by-residence#poland-recognition-by-residence-principal"
     },
     {
@@ -410,18 +451,21 @@
       "iso_n3": "626",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "timor-leste-naturalization#timor-leste-naturalization-principal"
     },
     {
       "iso_n3": "642",
       "ordinary_months": 96,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "romania-naturalization#romania-naturalization-principal"
     },
     {
       "iso_n3": "643",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "russia-naturalization#russia-naturalization-principal"
     },
     {
@@ -433,66 +477,77 @@
       "iso_n3": "659",
       "ordinary_months": 180,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "st-kitts-nevis-naturalization#st-kitts-nevis-naturalization-principal"
     },
     {
       "iso_n3": "662",
       "ordinary_months": 84,
       "confidence": "high",
+      "allocation": "right",
       "derived_from": "saint-lucia-naturalization#saint-lucia-naturalization-principal"
     },
     {
       "iso_n3": "674",
       "ordinary_months": 240,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "san-marino-naturalization#san-marino-naturalization-principal"
     },
     {
       "iso_n3": "678",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "sao-tome-naturalization#sao-tome-naturalization-principal"
     },
     {
       "iso_n3": "686",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "senegal-naturalization#senegal-naturalization-principal"
     },
     {
       "iso_n3": "688",
       "ordinary_months": 36,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "serbia-admission-after-permanent-residence#serbia-admission-after-permanent-residence-principal"
     },
     {
       "iso_n3": "690",
       "ordinary_months": 180,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "seychelles-naturalization#seychelles-naturalization-principal"
     },
     {
       "iso_n3": "702",
       "ordinary_months": 24,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "singapore-citizenship-after-pr#adult_pr"
     },
     {
       "iso_n3": "703",
       "ordinary_months": 96,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "slovakia-naturalization#slovakia-naturalization-principal"
     },
     {
       "iso_n3": "710",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "south-africa-naturalization#south-africa-naturalization-principal"
     },
     {
       "iso_n3": "716",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "zimbabwe-naturalization#zimbabwe-naturalization-principal"
     },
     {
@@ -516,36 +571,42 @@
       "iso_n3": "756",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "switzerland-ordinary-naturalization#ordinary"
     },
     {
       "iso_n3": "764",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "thailand-naturalization#thailand-naturalization-principal"
     },
     {
       "iso_n3": "776",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "tonga-naturalization#tonga-naturalization-principal"
     },
     {
       "iso_n3": "788",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "tunisia-naturalization#tunisia-naturalization-principal"
     },
     {
       "iso_n3": "792",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "turkiye-naturalization-by-residence#turkiye-naturalization-by-residence-principal"
     },
     {
       "iso_n3": "798",
       "ordinary_months": 84,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "tuvalu-naturalization#tuvalu-naturalization-principal"
     },
     {
@@ -557,18 +618,21 @@
       "iso_n3": "807",
       "ordinary_months": 84,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "north-macedonia-naturalization#north-macedonia-naturalization-principal"
     },
     {
       "iso_n3": "818",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "egypt-naturalization#egypt-naturalization-principal"
     },
     {
       "iso_n3": "826",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "uk-naturalization-after-settlement#ordinary"
     },
     {
@@ -580,30 +644,35 @@
       "iso_n3": "840",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "right",
       "derived_from": "us-naturalization-after-lpr#standard_five_year"
     },
     {
       "iso_n3": "858",
       "ordinary_months": 36,
       "confidence": "high",
+      "allocation": "right",
       "derived_from": "uruguay-legal-citizenship-by-residence#uruguay-legal-citizenship-by-residence-principal"
     },
     {
       "iso_n3": "862",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "venezuela-naturalization-by-residence#ordinary_ten_years"
     },
     {
       "iso_n3": "882",
       "ordinary_months": 60,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "samoa-naturalization#samoa-naturalization-principal"
     },
     {
       "iso_n3": "894",
       "ordinary_months": 120,
       "confidence": "high",
+      "allocation": "discretionary",
       "derived_from": "zambia-naturalization#zambia-naturalization-principal"
     }
   ],

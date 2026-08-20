@@ -22,12 +22,41 @@ import {
  * Multi-hop pathfinder over the status graph (data/compiled/edges.json, compiled at build time), per
  * docs/explorer-spec.md:
  *  - legal logic decides which edges EXIST for this profile (needs gating,
- *    allocation === 'right' only — ballot/quota/discretionary never enter
- *    deterministic plans); graph logic only ranks among eligible edges
+ *    and RATIONED allocations never enter deterministic plans — see
+ *    `isRationed`); graph logic only ranks among eligible edges
  *  - Dijkstra by years from all held statuses, max hop budget
  *  - work:* nodes are terminal by construction (no outgoing edges)
  *  - renunciation flags propagate onto the resulting path
  */
+
+/**
+ * Is entry to this route RATIONED — can a fully qualifying applicant be turned
+ * away because the places ran out or the draw went against them?
+ *
+ * This replaces an `allocation === 'right'` test, and the difference matters
+ * because `allocation` answers a narrower question than the filter needed.
+ *
+ * The corpus marks 338 of 412 naturalisation pathways `discretionary`, and it is
+ * correct to: almost every naturalisation statute on earth lets the minister
+ * refuse an otherwise-qualifying applicant. Filtering on that removed 96 of every
+ * 100 naturalisation routes from the planner. But formal discretion is not what
+ * makes an outcome uncertain — as the owner put it, a state that reserves the
+ * right to refuse and then refuses almost nobody has not given you a lottery. The
+ * thing that actually stops a qualifying person is RATIONING: a ballot, a queue,
+ * a numeric cap.
+ *
+ * So `ballot` and `quota_queue` are rationed and stay out of deterministic plans.
+ * `discretionary` is not, and stays in — carrying its allocation so the UI can say
+ * the grant is not automatic, which is true and worth saying.
+ *
+ * The honest signal would be an approval rate. The corpus holds none: zero uses of
+ * approval_rate, refusal_rate or grants_per_year across 1,139 routes. Until that is
+ * sourced, rationing is the best available proxy and this is where to change it.
+ */
+export function isRationed(edge: Pick<GraphEdge, 'allocation'>): boolean {
+  const allocation = edge.allocation ?? 'right';
+  return allocation === 'ballot' || allocation === 'quota_queue';
+}
 
 export interface GraphEdge {
   from: string;
@@ -331,8 +360,7 @@ export function shortestPaths(
 ): Map<string, PathInfo> {
   const actor: ActorId = options.actor ?? 'self';
   const household = options.household;
-  const usable = edges.filter(e =>
-    (e.allocation ?? 'right') === 'right' && (e.actor ?? actor) === actor);
+  const usable = edges.filter(e => !isRationed(e) && (e.actor ?? actor) === actor);
   const byFrom = new Map<string, GraphEdge[]>();
   // Resolved once per search rather than per visit: cheap (thousands of edges
   // against millions of relaxations), and it makes an unreadable gate throw

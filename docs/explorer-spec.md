@@ -58,8 +58,24 @@ Derivation rules (conservative):
 - `ballot`: Australia PEV, NZ Samoan Quota, NZ Pacific Access.
 - `quota_queue`: Japan EPA lanes; Mainland→HK/Macau one-way permit (150/day, score-based).
 - `discretionary`: Falklands→Argentina recognition, Russia Compatriot programme.
-Non-`right` edges NEVER appear in deterministic plans or footprint counts — they render
-in a separate "chance-based routes" panel with explicit non-guarantee badges.
+**Amended 2026-08-20 — the filter is RATIONING, not formal discretion.** The rule above
+read `allocation === 'right'` as the test for a deterministic plan. Measured against the
+corpus that removes 96 of every 100 naturalisation routes, because 338 of 412 pathways
+are `discretionary` and correctly so: almost every naturalisation statute lets the
+minister refuse an otherwise-qualifying applicant.
+
+Owner's ruling: a state that reserves a refusal and then refuses almost nobody has not
+given you a lottery, so formal discretion is a poor discriminator. What actually stops a
+qualifying person is rationing — a ballot, a queue, a cap.
+
+So `ballot` and `quota_queue` are rationed and NEVER appear in deterministic plans or
+footprint counts; they render in the chance-based panel with non-guarantee badges.
+`discretionary` stays in plans and carries its allocation, so the UI can say the grant
+is not automatic. See `isRationed` in `src/lib/pathfinder.ts`.
+
+The signal we would rather have is an approval rate. The corpus holds none — zero uses
+of `approval_rate`, `refusal_rate` or `grants_per_year` across 1,139 routes — so
+rationing is a proxy, and sourcing refusal rates would replace it.
 
 ## Dual citizenship (locked, incl. Russia correction)
 
