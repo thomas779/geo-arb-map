@@ -44,6 +44,18 @@ const corpus = await Bun.file(
 ).json();
 const edges: GraphEdge[] = buildEdges(data, manual, corpus).edges;
 
+/**
+ * Bun allows 5s per test, which is tight for the checks that solve the whole
+ * shipped graph — the bijection test alone runs ten searches, and CI's runner is
+ * slower than a laptop.
+ *
+ * This is NOT the problem hoisting solved. There, one answer was recomputed across
+ * four tests and sharing it was the fix. Here the computation IS the assertion, so
+ * it gets room. Reach for this only when the work is genuinely the test; if two
+ * tests want the same answer, hoist instead.
+ */
+const FULL_GRAPH_TIMEOUT_MS = 30_000;
+
 const profileOf = (over: Partial<Profile>): Profile => ({ ...EMPTY_PROFILE, ...over });
 const citizen = (iso: string, name = iso) =>
   profileOf({ flags: [{ iso_n3: iso, name, status: 'cit' }] });
@@ -64,7 +76,7 @@ describe('a household of one is the single-actor search, unchanged', () => {
         expect(self.paths.get(node), `${iso} -> ${node}`).toEqual(info);
       }
     }
-  });
+  }, FULL_GRAPH_TIMEOUT_MS);
 
   test('no step in the shipped graph acquires a wait or a cross-actor gate on its own', () => {
     // A lone search has nobody else's timeline to wait for, so these fields must
@@ -76,7 +88,7 @@ describe('a household of one is the single-actor search, unchanged', () => {
         expect(step.viaHousehold).toBeUndefined();
       }
     }
-  });
+  }, FULL_GRAPH_TIMEOUT_MS);
 });
 
 describe('the partner leak', () => {
@@ -107,11 +119,12 @@ describe('the partner leak', () => {
     partnerCitizenships: ['724'],
   });
 
-  // Solved once and shared. A full household solve over the shipped graph is
-  // seconds, and three of the tests below only read different fields of the same
-  // answer — recomputing it per test pushed one of them past Bun's 5s default on
-  // CI's slower runner while passing locally.
+  // Solved once and shared, because the tests below read different fields of the
+  // same two answers. Hoisting `solveHousehold` alone was not enough — the leak
+  // test still ran its own `solveGoals`, a second full solve, and timed out on CI
+  // at 5.8s against Bun's 5s default while passing locally. Both live out here now.
   const leakySolved = solveHousehold(leaky, edges).members.get('partner')!;
+  const leakyGoals = solveGoals(leaky, data, edges);
 
   test('a synthetic partner starts from their own facts and nothing else', () => {
     const partner = partnerProfileOf(leaky);
@@ -131,7 +144,7 @@ describe('the partner leak', () => {
 
     // AFTER: nothing in the profile says the partner has any claim on Israel.
     expect(leakySolved.paths.has('cit:376')).toBe(false);
-    expect(solveGoals(leaky, data, edges)[0].viaPartner).toBe(false);
+    expect(leakyGoals[0].viaPartner).toBe(false);
   });
 
   test('a partner keeps the routes that are genuinely theirs', () => {
@@ -154,7 +167,7 @@ describe('the partner leak', () => {
     const solved = solveHousehold(withClaims, edges);
     expect(solved.members.get('self')!.paths.has('cit:398')).toBe(true);
     expect(solved.members.get('partner')!.paths.has('cit:398')).toBe(false);
-  });
+  }, FULL_GRAPH_TIMEOUT_MS);
 });
 
 describe('renunciation stays per actor', () => {
@@ -176,7 +189,7 @@ describe('renunciation stays per actor', () => {
     expect(theirs.paths.get('cit:724')!.citizenships).toEqual(['724']);
     expect(theirs.paths.get('cit:724')!.lostCitizenships).toEqual([]);
     expect(theirs.citizenshipAt.get('724')).toBe(0);
-  });
+  }, FULL_GRAPH_TIMEOUT_MS);
 
   test('a nationality a member renounces on the way is not offered to the others', () => {
     // Availability is what one member can HOLD, not what they passed through.
