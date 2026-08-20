@@ -143,10 +143,20 @@ function fetchViaCurl(url: string): Uint8Array | null {
 export async function fetchText(url: string): Promise<Fetched> {
   const first = await fetchOnce(url);
   if (first.status !== 0) return first;
-  if (INCOMPLETE_CHAIN.test(first.note)) {
-    const body = fetchViaCurl(url);
-    if (body) return decodeBody(body, 200, ' (chain completed via curl)');
+
+  // ANY transport-level failure gets one curl attempt, not just a cert chain.
+  // The narrower rule cost a real finding: asamblea.gob.sv hangs Bun's fetch
+  // while curl retrieves it fine, so El Salvador's 90-day presence reform came
+  // back HTTP 0 — reported as unverifiable when the quote was actually good.
+  // Bun's fetch and curl fail on different things; when they disagree, the one
+  // that reached the publisher is right.
+  const body = fetchViaCurl(url);
+  if (body) {
+    return decodeBody(body, 200, INCOMPLETE_CHAIN.test(first.note)
+      ? ' (chain completed via curl)'
+      : ' (retrieved via curl after a transport failure)');
   }
+
   await new Promise(resolve => setTimeout(resolve, 1500));
   return fetchOnce(url);
 }
@@ -160,8 +170,15 @@ function decodeBody(buf: Uint8Array, status: number, noteSuffix = ''): Fetched {
   else if (buf[0] === 0xff && buf[1] === 0xfe) decoded = new TextDecoder('utf-16le').decode(buf);
   else decoded = new TextDecoder('utf-8').decode(buf);
 
-  const isPdf = decoded.slice(0, 5) === '%PDF-';
-  const text = isPdf ? pdfText(buf) : textOf(decoded);
+  // Scan for the header rather than demanding it at byte 0. asamblea.gob.sv serves
+  // its decretos with eight bytes of junk in front of `%PDF-1.5`, so an offset-0
+  // test read a real PDF as HTML, extracted nothing usable, and reported the quote
+  // as absent — a false accusation of fabrication caused by the reader, not the
+  // publisher. The PDF spec expects a reader to scan for the header, and real
+  // servers prepend BOMs and whitespace all the time.
+  const headerAt = decoded.indexOf('%PDF-');
+  const isPdf = headerAt >= 0 && headerAt < 1024;
+  const text = isPdf ? pdfText(headerAt > 0 ? buf.subarray(headerAt) : buf) : textOf(decoded);
   return {
     ok: status >= 200 && status < 400,
     status,
