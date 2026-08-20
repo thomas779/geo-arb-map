@@ -4,6 +4,7 @@ import { firecrawlScrape as scrapeClient, firecrawlSearch } from '../../lib/web-
 import {
   mobilityQuery,
   searchHitToLead,
+  splitByLookback,
   type DiscoverLead,
   type ProviderPackResult,
   type RegionPack,
@@ -45,7 +46,7 @@ export async function searchFirecrawlRegion(opts: {
     };
   }
 
-  const leads = result.hits
+  const mapped = result.hits
     .map(hit => searchHitToLead({
       provider: 'firecrawl',
       region: opts.pack.id,
@@ -55,12 +56,14 @@ export async function searchFirecrawlRegion(opts: {
       published: hit.published,
     }))
     .filter((lead): lead is DiscoverLead => lead !== null);
+  // `tbs` is as coarse as Tavily's time_range — same split, same reason.
+  const split = splitByLookback(mapped, opts.lookbackDays);
 
   return {
     provider: 'firecrawl',
     region: opts.pack.id,
-    leads,
-    backfill: [],
+    leads: split.leads,
+    backfill: split.backfill,
     credits_used: result.credits_used,
     cost_dollars: null,
   };

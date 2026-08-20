@@ -33,6 +33,11 @@ query.
 - Tax-residency, company formation, or banking news with no immigration status change
 - Vague “considering” chatter with no ministry / cabinet / gazette / CIP unit signal
 - “Country X has no golden visa” absences — we do not record negatives
+- For the US / Canada pack specifically: student F/J routes, B-1/B-2 visitor ops,
+  consular fees, public-charge screens and litigation status. Report only the
+  product routes we model (EB-5, E-2, extraordinary ability, investor immigration,
+  nationality law). These exclusions live here rather than in the search query
+  because a keyword query has no negation — naming them there searched for them.
 
 ## Source hierarchy (prefer in order)
 
@@ -54,11 +59,20 @@ query.
 6. Put items whose first public signal is older than 7 days into coverage_backfill,
    not past_7_days — even if they remain operationally relevant.
 7. Set affects_dataset false for pure process / competent-authority / political-rights
-   changes unless a modelled eligibility field would move.
+   changes unless a modelled eligibility field would move. Leave it empty ("") if you
+   cannot tell — an empty answer is recorded as "not stated", and is a better answer
+   than a guess.
+8. Set instrument to the official identifier of the law/decree/act when one is cited
+   ("1/2026", "PF-67", "20.446") and "" when none is. It is what makes one gazette act
+   reported by three outlets one lead instead of three.
 
 ## Output rules
 
 - Never invent URLs, law numbers, or thresholds.
+- primary_url must be an http(s) URL on an official publisher (or a state agency
+  restating a gazette act). Leave it "" if you have none — a trade-press, firm or
+  agency link there is discarded by the collector and the lead is demoted to
+  needs_primary, so putting one in loses information rather than adding it.
 - If a page 200s but content is a homepage shell / WAF / empty SPA, say so in notes
   and do not mark confidence high.
 - Enabling clauses that only order a ministry to legislate later =

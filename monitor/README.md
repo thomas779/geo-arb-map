@@ -57,8 +57,15 @@ bun run monitor:sources:x-seed -- --mode directory                # propose X wa
 EXA_API_KEY=… TAVILY_API_KEY=… FIRECRAWL_API_KEY=… bun run monitor:web-discover
 bun run monitor:web-discover -- --providers tavily,firecrawl --regions caribbean
 bun run monitor:web-discover -- --fixture tests/fixtures/monitor/exa-leads.json
-# Exa-only alias still works: bun run monitor:exa-discover
+# Exa only: bun run monitor:web-discover -- --providers exa
 # GitHub: .github/workflows/exa-weekly-discovery.yml (Mon 07:17 UTC + workflow_dispatch)
+#
+# Issue hygiene: per-lead issues carry `<!-- signal:<12 hex> -->`, keyed on the legal
+# instrument where one is cited, and are deduped against `gh issue list --state all`.
+# WEB_DISCOVER_MAX_ISSUES (default 10) caps them; anything over the cap is logged.
+# `pending-enactment` — the label that authorises Telegram publication of a change
+# that is not yet in force — is attached ONLY if the lead's quote re-fetches and
+# matches its cited primary character-for-character (scripts/lib/quote-gate.ts).
 #
 # Reusable HTTP clients (import elsewhere — quote enrichment, one-off scripts):
 #   monitor/lib/web-clients/  →  exaSearch, tavilySearch, firecrawlSearch, firecrawlScrape
@@ -85,6 +92,7 @@ Provider-neutral; do not commit keys.
 | `FIRECRAWL_API_KEY` | Firecrawl key — search without scrape by default (GitHub secret) |
 | `EXA_SEARCH_TYPE` / `WEB_DISCOVER_LOOKBACK_DAYS` / `WEB_DISCOVER_MAX_RESULTS` | Optional vars (defaults: `deep`, `7`, `5`) |
 | `WEB_DISCOVER_PROVIDERS` | Default `exa,tavily,firecrawl`; slim to save free-tier credits |
+| `WEB_DISCOVER_MAX_ISSUES` | Per-run cap on per-lead issues (default `10`; positive integer) |
 
 Efficiency notes: [`monitor/prompts/web-discover-efficiency.md`](prompts/web-discover-efficiency.md).
 

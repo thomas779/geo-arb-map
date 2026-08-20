@@ -131,11 +131,22 @@ export function buildUserPrompt(hours: number, watchlist: string[] = []): string
 // Resolve a jurisdiction hint (M49 numeric, ISO alpha-2/3, or a country name)
 // to a UN M49 numeric code so the sweep can flag it; '' when unresolved.
 export function resolveIso(value: unknown): string {
-  const raw = String(value ?? '').trim();
+  const raw = String(value ?? '').trim().replace(/\s+/g, ' ');
   if (!raw) return '';
   if (/^\d{3}$/.test(raw)) return raw;
-  if (/^[A-Za-z]{2}$/.test(raw)) return countries.alpha2ToNumeric(raw.toUpperCase()) ?? '';
-  if (/^[A-Za-z]{3}$/.test(raw)) return countries.alpha3ToNumeric(raw.toUpperCase()) ?? '';
+  // A failed code lookup falls THROUGH to the name lookup rather than returning
+  // ''. Short country nicknames are shaped exactly like codes: "UAE" is not a
+  // valid alpha-3 (that is ARE) and "UK" is not a valid alpha-2 (GB), so the
+  // early return resolved both to '' — which silently disabled every downstream
+  // step keyed on iso_n3. getAlpha2Code knows both.
+  if (/^[A-Za-z]{2}$/.test(raw)) {
+    const numeric = countries.alpha2ToNumeric(raw.toUpperCase());
+    if (numeric) return numeric;
+  }
+  if (/^[A-Za-z]{3}$/.test(raw)) {
+    const numeric = countries.alpha3ToNumeric(raw.toUpperCase());
+    if (numeric) return String(numeric);
+  }
   const alpha2 = countries.getAlpha2Code(raw, 'en');
   return alpha2 ? (countries.alpha2ToNumeric(alpha2) ?? '') : '';
 }

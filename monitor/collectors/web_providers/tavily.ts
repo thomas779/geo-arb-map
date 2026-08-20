@@ -4,6 +4,7 @@ import { tavilySearch } from '../../lib/web-clients';
 import {
   mobilityQuery,
   searchHitToLead,
+  splitByLookback,
   type DiscoverLead,
   type ProviderPackResult,
   type RegionPack,
@@ -36,7 +37,7 @@ export async function searchTavilyRegion(opts: {
       error: result.error,
     };
   }
-  const leads = result.hits
+  const mapped = result.hits
     .map(hit => searchHitToLead({
       provider: 'tavily',
       region: opts.pack.id,
@@ -46,12 +47,16 @@ export async function searchTavilyRegion(opts: {
       published: hit.published,
     }))
     .filter((lead): lead is DiscoverLead => lead !== null);
+  // time_range is coarse, so older items do come back. They are coverage-refresh
+  // material, not this week's news; the backfill list existed for them and was
+  // never filled.
+  const split = splitByLookback(mapped, opts.lookbackDays);
 
   return {
     provider: 'tavily',
     region: opts.pack.id,
-    leads,
-    backfill: [],
+    leads: split.leads,
+    backfill: split.backfill,
     credits_used: result.credits_used,
     cost_dollars: null,
   };

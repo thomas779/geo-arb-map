@@ -49,6 +49,11 @@ on:
         required: false
         default: "3"
         type: string
+      max_issues:
+        description: Hard cap on per-lead monitor-lead issues filed by this run
+        required: false
+        default: "10"
+        type: string
 
 permissions:
   contents: read
@@ -61,6 +66,12 @@ concurrency:
 jobs:
   discover:
     runs-on: ubuntu-latest
+    # The provider calls are serial: 7 regions x (Exa 180s + Tavily 60s +
+    # Firecrawl 90s) is ~39 minutes of API waiting in the worst case, all of it
+    # inside GitHub's 6-hour default. A hung provider would have burned six
+    # hours of runner time before anyone saw it. 60 leaves headroom for install
+    # and the dataset fetch without hiding a real hang.
+    timeout-minutes: 60
     env:
       EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
       TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
@@ -69,6 +80,7 @@ jobs:
       WEB_DISCOVER_LOOKBACK_DAYS: ${{ inputs.lookback_days || vars.WEB_DISCOVER_LOOKBACK_DAYS || '7' }}
       WEB_DISCOVER_MAX_RESULTS: ${{ inputs.max_results || vars.WEB_DISCOVER_MAX_RESULTS || '3' }}
       WEB_DISCOVER_PROVIDERS: ${{ inputs.providers || vars.WEB_DISCOVER_PROVIDERS || 'exa,tavily,firecrawl' }}
+      WEB_DISCOVER_MAX_ISSUES: ${{ inputs.max_issues || vars.WEB_DISCOVER_MAX_ISSUES || '10' }}
       EXA_TIMEOUT_MS: ${{ vars.EXA_TIMEOUT_MS || '180000' }}
       TAVILY_TIMEOUT_MS: ${{ vars.TAVILY_TIMEOUT_MS || '60000' }}
       FIRECRAWL_TIMEOUT_MS: ${{ vars.FIRECRAWL_TIMEOUT_MS || '90000' }}
@@ -86,6 +98,16 @@ jobs:
         uses: ./.github/actions/fetch-data
         with:
           deploy-key: ${{ secrets.FLAG_PATHS_DATA_DEPLOY_KEY }}
+
+      # Same step as monitor.yml: `--state all` matters, because a lead that was
+      # filed and CLOSED is still a lead we have seen, and refiling it weekly is
+      # exactly what the fingerprint exists to stop.
+      - name: Read existing issue markers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p .out
+          gh issue list --state all --limit 1000 --json number,body > .out/existing-issues.json
 
       - name: Require at least one provider key
         run: |

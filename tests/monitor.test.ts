@@ -1263,6 +1263,8 @@ describe('weekly web discovery (Exa / Tavily / Firecrawl)', () => {
       summary: '/tmp/web-leads-test.md',
       openIssue: false,
       openLeadIssues: true,
+      maxIssues: 10,
+      existingIssues: '/tmp/web-discover-existing-issues-absent.json',
       dryRun: false,
     });
     expect(report.fixture_mode).toBe(true);
@@ -1356,5 +1358,305 @@ describe('weekly web discovery (Exa / Tavily / Firecrawl)', () => {
       ...base,
       recommended_disposition: 'needs_primary',
     })).toBe(false);
+  });
+
+  // A JSON parse failure, a non-object, or a renamed wrapper key used to return
+  // {leads: []} — indistinguishable from a genuinely quiet week, so the run
+  // logged "0 leads" and exited 0 having learned nothing.
+  test('a malformed Exa payload is an error, not a quiet week', async () => {
+    const { extractPack } = await import('../monitor/collectors/web_providers/exa');
+    expect(extractPack('{not json', 'europe').error).toMatch(/not JSON/i);
+    expect(extractPack(42, 'europe').error).toMatch(/not a JSON object/i);
+    expect(extractPack([], 'europe').error).toMatch(/not a JSON object/i);
+    expect(extractPack(null, 'europe').error).toMatch(/no structured output/i);
+    expect(extractPack({ results: [] }, 'europe').error).toMatch(/no "leads" key/i);
+    expect(extractPack({ leads: 'nope' }, 'europe').error).toMatch(/non-array "leads"/i);
+    // A well-formed empty week is NOT an error.
+    const quiet = extractPack({ leads: [] }, 'europe');
+    expect(quiet.error).toBeUndefined();
+    expect(quiet.leads).toEqual([]);
+  });
+
+  test('extractPack counts rows dropped for missing required fields', async () => {
+    const { extractPack } = await import('../monitor/collectors/web_providers/exa');
+    const pack = extractPack({
+      leads: [
+        { jurisdiction: 'PT', claim_summary: 'ok', discovery_url: 'https://example.test/a', confidence: 'high' },
+        { jurisdiction: 'PT', claim_summary: '', discovery_url: 'https://example.test/b' },
+        { jurisdiction: 'PT', claim_summary: 'no link', discovery_url: 'N/A' },
+      ],
+    }, 'europe');
+    expect(pack.leads.length).toBe(1);
+    expect(pack.dropped_incomplete).toBe(2);
+  });
+
+  // The old alpha-2-only test resolved "Portugal", "UAE" and "United Kingdom" to
+  // null, which silently disabled annotateAlreadyHeld and pushed dedupe onto the
+  // raw jurisdiction string.
+  test('iso_n3 resolves names, alpha-3 and nicknames, not just alpha-2', async () => {
+    const { extractPack } = await import('../monitor/collectors/web_providers/exa');
+    const pack = extractPack({
+      leads: ['Portugal', 'UAE', 'United Kingdom', 'PRT', 'PT'].map((jurisdiction, index) => ({
+        jurisdiction,
+        claim_summary: `claim ${index}`,
+        discovery_url: `https://example.test/${index}`,
+        confidence: 'medium',
+      })),
+    }, 'europe');
+    expect(pack.leads.map(lead => lead.iso_n3)).toEqual(['620', '784', '826', '620', '620']);
+  });
+
+  test('dedupeLeads collapses one instrument reported twice under different country names', async () => {
+    const { extractPack } = await import('../monitor/collectors/web_providers/exa');
+    const { dedupeLeads } = await import('../monitor/collectors/web_providers/shared');
+    const fromExa = extractPack({
+      leads: [{
+        jurisdiction: 'Portugal',
+        claim_summary: 'Nationality law amended: naturalisation residence period raised',
+        discovery_url: 'https://example.test/outlet-one',
+        primary_url: 'https://diariodarepublica.pt/lei-1-2026',
+        instrument: 'Lei Orgânica n.º 1/2026',
+        confidence: 'high',
+      }],
+    }, 'europe').leads[0]!;
+    const fromOtherProvider = {
+      ...extractPack({
+        leads: [{
+          jurisdiction: 'PRT',
+          claim_summary: 'Portugal raises naturalisation residence requirement',
+          discovery_url: 'https://example.test/outlet-two',
+          instrument: 'Organic Law 1/2026',
+          confidence: 'low',
+        }],
+      }, 'africa').leads[0]!,
+      provider: 'tavily' as const,
+    };
+    const deduped = dedupeLeads([fromExa, fromOtherProvider]);
+    expect(deduped.length).toBe(1);
+    // The Exa row with the primary survives; ranking is unchanged.
+    expect(deduped[0]?.provider).toBe('exa');
+    expect(deduped[0]?.primary_url).toBe('https://diariodarepublica.pt/lei-1-2026');
+  });
+
+  test('affects_dataset is null unless the provider states it', async () => {
+    const { extractPack } = await import('../monitor/collectors/web_providers/exa');
+    const { searchHitToLead } = await import('../monitor/collectors/web_providers/shared');
+    const pack = extractPack({
+      leads: [
+        { jurisdiction: 'PT', claim_summary: 'unstated', discovery_url: 'https://example.test/1', confidence: 'high' },
+        { jurisdiction: 'PT', claim_summary: 'empty', discovery_url: 'https://example.test/2', confidence: 'high', affects_dataset: '' },
+        { jurisdiction: 'PT', claim_summary: 'process only', discovery_url: 'https://example.test/3', confidence: 'high', affects_dataset: 'false' },
+        { jurisdiction: 'PT', claim_summary: 'real change', discovery_url: 'https://example.test/4', confidence: 'high', affects_dataset: 'true' },
+      ],
+    }, 'europe');
+    expect(pack.leads.map(lead => lead.affects_dataset)).toEqual([null, null, false, true]);
+    // A keyword hit never asserts a dataset impact either.
+    expect(searchHitToLead({
+      provider: 'tavily',
+      region: 'europe',
+      title: 'Portugal citizenship rules change',
+      url: 'https://example.test/hit',
+      snippet: null,
+    })?.affects_dataset).toBeNull();
+  });
+
+  test('an unusable primary_url never yields verify_and_author', async () => {
+    const { extractPack } = await import('../monitor/collectors/web_providers/exa');
+    const pack = extractPack({
+      leads: [
+        {
+          jurisdiction: 'PT', claim_summary: 'threshold raised', discovery_url: 'https://example.test/1',
+          confidence: 'high', timing: 'in_force', primary_url: 'N/A', disposition: 'verify_and_author',
+        },
+        {
+          jurisdiction: 'PT', claim_summary: 'threshold raised', discovery_url: 'https://example.test/2',
+          confidence: 'high', timing: 'in_force', primary_url: 'https://www.fragomen.com/insights/alert.html',
+          disposition: 'verify_and_author',
+        },
+        {
+          jurisdiction: 'PT', claim_summary: 'threshold raised', discovery_url: 'https://example.test/3',
+          confidence: 'high', timing: 'in_force', primary_url: 'https://diariodarepublica.pt/lei-1-2026',
+        },
+      ],
+    }, 'europe');
+    expect(pack.leads[0]?.recommended_disposition).toBe('needs_primary');
+    expect(pack.leads[0]?.primary_url).toBeNull();
+    expect(pack.leads[0]?.notes).toMatch(/not an http\(s\) URL/);
+    expect(pack.leads[1]?.recommended_disposition).toBe('needs_primary');
+    expect(pack.leads[1]?.primary_url).toBeNull();
+    expect(pack.leads[1]?.notes).toMatch(/fragomen\.com/);
+    // A real official primary still gets there.
+    expect(pack.leads[2]?.recommended_disposition).toBe('verify_and_author');
+    // why_not_noise describes the row instead of asserting a verdict.
+    expect(pack.leads[2]?.why_not_noise).toMatch(/primary cited on diariodarepublica\.pt/);
+    expect(pack.leads[0]?.why_not_noise).toMatch(/no usable primary cited/);
+  });
+
+  test('pending-enactment is withheld unless the quote matches the cited primary', async () => {
+    const { gateLeadQuote, leadIssueLabels, buildLeadIssueBody } =
+      await import('../monitor/collectors/web_discover');
+    const lead = {
+      jurisdiction: 'GD',
+      iso_n3: '308',
+      claim_summary: 'CBI bill adds 30-day presence',
+      change_kind: 'eligibility' as const,
+      timing: 'announced_not_yet_in_force' as const,
+      effective_or_announced_date: '2026-07-27',
+      horizon: 'upcoming_6_12_months' as const,
+      primary_url: 'https://example.test/bill.pdf',
+      discovery_url: 'https://example.test/news',
+      quote: 'physically present, within Grenada for an aggregate of at least thirty (30) days',
+      confidence: 'high' as const,
+      affects_dataset: true,
+      recommended_disposition: 'pending_enactment' as const,
+      why_not_noise: 'bill',
+      notes: '',
+      instrument: 'Bill 2026',
+      provider: 'exa' as const,
+    };
+    const fetched = (text: string, over: Partial<{ ok: boolean; status: number; shell: boolean }> = {}) =>
+      async () => ({
+        ok: true, status: 200, bytes: text.length, shell: false, isPdf: false, text, note: '', ...over,
+      });
+
+    // Whitespace reflow is tolerated (norm), paraphrase is not.
+    const passing = await gateLeadQuote(lead, fetched(
+      'AN ACT … being   physically present, within Grenada\nfor an aggregate of at least thirty (30) days …',
+    ));
+    expect(passing.ok).toBe(true);
+    expect(leadIssueLabels(lead, passing)).toContain('pending-enactment');
+
+    const paraphrased = await gateLeadQuote(lead, fetched('applicants must spend at least 30 days in Grenada'));
+    expect(paraphrased.ok).toBe(false);
+    expect(paraphrased.reason).toMatch(/not present in the fetched primary/);
+    // Still a lead, just not a publication-authorising one.
+    expect(leadIssueLabels(lead, paraphrased)).toEqual(['monitor-lead']);
+    expect(buildLeadIssueBody(lead, '2026-08-20', paraphrased))
+      .toMatch(/NOT publication-authorised[\s\S]*not present in the fetched primary/);
+
+    const shell = await gateLeadQuote(lead, fetched('whatever', { shell: true }));
+    expect(shell.ok).toBe(false);
+    expect(shell.reason).toMatch(/SPA shell/);
+
+    const dead = await gateLeadQuote(lead, fetched('', { ok: false, status: 403 }));
+    expect(dead.reason).toMatch(/HTTP 403/);
+
+    // No primary and no quote can never pass, and cost no fetch.
+    expect((await gateLeadQuote({ ...lead, primary_url: null })).reason).toMatch(/no primary source cited/);
+    expect((await gateLeadQuote({ ...lead, quote: null })).reason).toMatch(/no verbatim quote/);
+    expect(leadIssueLabels({ ...lead, primary_url: null }, null)).toEqual(['monitor-lead']);
+  });
+
+  test('the issue fingerprint round-trips through the reader that dedupes it', async () => {
+    const { buildLeadIssueBody, leadSignalId, selectLeadIssues } =
+      await import('../monitor/collectors/web_discover');
+    const { seenSignalIds } = await import('../monitor/triage/triage');
+    const lead = {
+      jurisdiction: 'Portugal',
+      iso_n3: '620',
+      claim_summary: 'Naturalisation residence period raised',
+      change_kind: 'naturalisation' as const,
+      timing: 'in_force' as const,
+      effective_or_announced_date: '2026-08-01',
+      horizon: 'past_7_days' as const,
+      primary_url: 'https://diariodarepublica.pt/lei-1-2026',
+      discovery_url: 'https://example.test/outlet',
+      quote: null,
+      confidence: 'high' as const,
+      affects_dataset: true,
+      recommended_disposition: 'verify_and_author' as const,
+      why_not_noise: 'test',
+      notes: '',
+      instrument: 'Lei 1/2026',
+      provider: 'exa' as const,
+    };
+    const body = buildLeadIssueBody(lead, '2026-08-20', null);
+    expect(leadSignalId(lead)).toMatch(/^[a-f0-9]{12}$/);
+    expect(seenSignalIds([{ body }])).toContain(leadSignalId(lead));
+    // The same act reported by another outlet next week is not filed again.
+    const reReported = { ...lead, discovery_url: 'https://example.test/other-outlet', primary_url: null };
+    const selection = selectLeadIssues(
+      { leads: [reReported], coverage_backfill: [] },
+      10,
+      seenSignalIds([{ body }]),
+    );
+    expect(selection.selected).toEqual([]);
+    expect(selection.alreadyFiled.length).toBe(1);
+  });
+
+  test('the issue cap holds at 50 candidates and reports what it dropped', async () => {
+    const { selectLeadIssues, capDropWarnings } = await import('../monitor/collectors/web_discover');
+    const candidates = Array.from({ length: 50 }, (_, index) => ({
+      jurisdiction: 'PT',
+      iso_n3: '620',
+      claim_summary: `Change number ${index}`,
+      change_kind: 'threshold' as const,
+      timing: 'in_force' as const,
+      effective_or_announced_date: '2026-08-01',
+      horizon: 'past_7_days' as const,
+      primary_url: `https://diariodarepublica.pt/lei-${index}`,
+      discovery_url: `https://example.test/${index}`,
+      quote: 'x',
+      confidence: 'high' as const,
+      affects_dataset: true,
+      recommended_disposition: 'verify_and_author' as const,
+      why_not_noise: 'test',
+      notes: '',
+      provider: 'exa' as const,
+    }));
+    const selection = selectLeadIssues({ leads: candidates, coverage_backfill: [] }, 10);
+    expect(selection.selected.length).toBe(10);
+    expect(selection.dropped.length).toBe(40);
+    const warnings = capDropWarnings(selection.dropped, 10);
+    expect(warnings[0]).toMatch(/40 lead\(s\) over WEB_DISCOVER_MAX_ISSUES=10 were NOT filed/);
+    expect(warnings.length).toBe(41);
+    expect(warnings.some(line => line.includes('Change number 49'))).toBe(true);
+    expect(capDropWarnings([], 10)).toEqual([]);
+  });
+
+  test('no generated query asks a keyword engine for what to exclude', async () => {
+    const { REGION_PACKS, mobilityQuery } = await import('../monitor/collectors/web_providers/shared');
+    const { buildExaQuery } = await import('../monitor/collectors/web_providers/exa');
+    for (const pack of REGION_PACKS) {
+      for (const query of [mobilityQuery(pack, 7), buildExaQuery(pack, 7)]) {
+        // Keyword search has no negation: "exclude student F/J" searched for
+        // student visas. Topical exclusions live in the Exa system prompt.
+        expect(query.toLowerCase()).not.toContain('exclude');
+        expect(query.toLowerCase()).not.toContain('litigation');
+        expect(query.toLowerCase()).not.toContain('public charge');
+      }
+    }
+    // The pack still says what it DOES want.
+    const us = REGION_PACKS.find(pack => pack.id === 'anglosphere_north')!;
+    expect(mobilityQuery(us, 7)).toContain('EB-5');
+    // …and the prompt now carries the exclusions.
+    const { loadExaSystemPrompt } = await import('../monitor/collectors/web_providers/exa');
+    expect(loadExaSystemPrompt()).toContain('public-charge');
+  });
+
+  test('coverage_backfill is filled rather than always empty', async () => {
+    const { extractPack } = await import('../monitor/collectors/web_providers/exa');
+    const { splitByLookback } = await import('../monitor/collectors/web_providers/shared');
+    // Exa: the prompt asks for coverage_backfill and it was being discarded.
+    const pack = extractPack({
+      leads: [{ jurisdiction: 'PT', claim_summary: 'fresh', discovery_url: 'https://example.test/1', confidence: 'high' }],
+      coverage_backfill: [{ jurisdiction: 'KR', claim_summary: 'older', discovery_url: 'https://example.test/2', confidence: 'high' }],
+    }, 'europe');
+    expect(pack.leads.length).toBe(1);
+    expect(pack.backfill.length).toBe(1);
+    expect(pack.backfill[0]?.iso_n3).toBe('410');
+    // Keyword providers: coarse time filters do return older items.
+    const now = Date.parse('2026-08-20T00:00:00Z');
+    const hit = (date: string | null) => ({
+      jurisdiction: 'multi', iso_n3: null, claim_summary: 'c', change_kind: 'other' as const,
+      timing: 'unclear' as const, effective_or_announced_date: date, horizon: 'past_7_days' as const,
+      primary_url: null, discovery_url: `https://example.test/${date}`, quote: null,
+      confidence: 'low' as const, affects_dataset: null, recommended_disposition: 'needs_primary' as const,
+      why_not_noise: 'w', notes: '', provider: 'tavily' as const,
+    });
+    const split = splitByLookback([hit('2026-08-19'), hit('2026-01-02'), hit(null)], 7, now);
+    expect(split.leads.map(lead => lead.effective_or_announced_date)).toEqual(['2026-08-19', null]);
+    expect(split.backfill.length).toBe(1);
+    expect(split.backfill[0]?.notes).toMatch(/older than the 7-day window/);
   });
 });

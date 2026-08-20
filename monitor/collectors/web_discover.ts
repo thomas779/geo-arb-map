@@ -23,12 +23,16 @@ import {
   REGION_PACKS,
   annotateAlreadyHeld,
   dedupeLeads,
+  leadChangeKey,
   renderMarkdown,
   type CompiledCorpus,
   type DiscoverLead,
   type DiscoverProvider,
   type RegionPack,
 } from './web_providers/shared';
+import { signalId } from '../schema/signal';
+import { seenSignalIds } from '../triage/triage';
+import { fetchText, norm, type Fetched } from '../../scripts/lib/quote-gate';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const DEFAULT_COMPILED = path.join(ROOT, 'data', 'compiled', 'citizenship_routes.json');
@@ -43,12 +47,14 @@ export interface WebDiscoverReport {
   credits_used: Partial<Record<DiscoverProvider, number | null>>;
   lead_count: number;
   backfill_count: number;
+  /** Provider rows that arrived without a claim or a usable discovery URL. */
+  dropped_incomplete: number;
   leads: DiscoverLead[];
   coverage_backfill: DiscoverLead[];
   provider_errors: Array<{ provider: string; region: string; error: string }>;
 }
 
-interface CliOptions {
+export interface CliOptions {
   fixture: string | null;
   providers: DiscoverProvider[];
   regions: string[] | null;
@@ -62,6 +68,10 @@ interface CliOptions {
   openIssue: boolean;
   /** When opening issues, also file filtered per-lead monitor-leads (Exa quality only). */
   openLeadIssues: boolean;
+  /** Hard ceiling on per-lead issues per run, in the style of MONITOR_MAX_LEADS. */
+  maxIssues: number;
+  /** `gh issue list --state all --json number,body` output, for signal-marker dedupe. */
+  existingIssues: string;
   dryRun: boolean;
 }
 
@@ -91,6 +101,8 @@ function readArgs(argv: string[]): CliOptions {
     summary: path.join(ROOT, '.out', 'web-leads.md'),
     openIssue: false,
     openLeadIssues: process.env.WEB_DISCOVER_OPEN_LEADS !== '0',
+    maxIssues: Number(process.env.WEB_DISCOVER_MAX_ISSUES ?? 10),
+    existingIssues: path.join(ROOT, '.out', 'existing-issues.json'),
     dryRun: false,
   };
   for (let i = 0; i < argv.length; i += 1) {
@@ -109,11 +121,16 @@ function readArgs(argv: string[]): CliOptions {
     else if (arg === '--open-issue') options.openIssue = true;
     else if (arg === '--open-leads') options.openLeadIssues = true;
     else if (arg === '--no-open-leads') options.openLeadIssues = false;
+    else if (arg === '--max-issues') options.maxIssues = Number(argv[++i]);
+    else if (arg === '--existing-issues') options.existingIssues = path.resolve(argv[++i]!);
     else if (arg === '--dry-run') options.dryRun = true;
     else throw new Error(`Unknown option: ${arg}`);
   }
   if (!Number.isFinite(options.lookbackDays) || options.lookbackDays < 1) {
     throw new Error('--lookback-days must be a positive number');
+  }
+  if (!Number.isInteger(options.maxIssues) || options.maxIssues < 1) {
+    throw new Error('--max-issues / WEB_DISCOVER_MAX_ISSUES must be a positive integer');
   }
   return options;
 }
@@ -157,18 +174,106 @@ export function shouldOpenLeadIssue(lead: DiscoverLead): boolean {
   return true;
 }
 
-function buildLeadIssueBody(lead: DiscoverLead, reportDate: string): string {
+/** The verdict of re-fetching a lead's cited primary and looking for its quote. */
+export interface LeadQuoteGate {
+  ok: boolean;
+  reason: string;
+}
+
+/**
+ * `pending-enactment` is what authorises Telegram publication of a change that is
+ * not yet in force, so discovery may attach it only when the lead's quote has
+ * been re-fetched and matched character-for-character against the primary it
+ * cites. It used to follow from `timing === 'rumour'` alone, which meant an
+ * unsourced rumour arrived in a publish-authorising queue by default.
+ *
+ * A 200 proves nothing: the shell check, the PDF header scan and the curl
+ * fallback all live in scripts/lib/quote-gate.ts and are not re-litigated here.
+ */
+export async function gateLeadQuote(
+  lead: DiscoverLead,
+  fetcher: (url: string) => Promise<Fetched> = fetchText,
+): Promise<LeadQuoteGate> {
+  if (!lead.primary_url) return { ok: false, reason: 'no primary source cited' };
+  if (!lead.quote) return { ok: false, reason: 'no verbatim quote supplied' };
+  let fetched: Fetched;
+  try {
+    fetched = await fetcher(lead.primary_url);
+  } catch (error) {
+    return { ok: false, reason: `fetch threw: ${error instanceof Error ? error.message : String(error)}` };
+  }
+  if (!fetched.ok) {
+    return { ok: false, reason: `primary returned HTTP ${fetched.status}${fetched.note ? ` — ${fetched.note}` : ''}` };
+  }
+  if (fetched.shell) {
+    return { ok: false, reason: 'primary served an SPA shell, not the instrument text' };
+  }
+  if (!fetched.text.trim()) {
+    return { ok: false, reason: fetched.note || 'primary had no extractable text' };
+  }
+  if (!norm(fetched.text).includes(norm(lead.quote))) {
+    return {
+      ok: false,
+      reason: `quote not present in the fetched primary (${fetched.bytes} bytes`
+        + `${fetched.isPdf ? ', PDF' : ''}) — paraphrase, wrong page, or fabrication`,
+    };
+  }
+  return {
+    ok: true,
+    reason: `quote matched character-for-character in the fetched primary (${fetched.bytes} bytes`
+      + `${fetched.isPdf ? ', PDF' : ''})${fetched.note ? `${fetched.note}` : ''}`,
+  };
+}
+
+/**
+ * The label set for a lead issue. `pending-enactment` requires a passing gate;
+ * everything else still files as a plain `monitor-lead`, because a failed gate is
+ * a reason to withhold publication authority, not to hide the lead.
+ */
+export function leadIssueLabels(lead: DiscoverLead, gate: LeadQuoteGate | null): string[] {
+  const labels = ['monitor-lead'];
+  if (lead.recommended_disposition === 'pending_enactment' && gate?.ok) {
+    labels.push('pending-enactment');
+  }
+  return labels;
+}
+
+/**
+ * The issue fingerprint, in the ONE format the reader understands
+ * (`seenSignalIds` matches `<!-- signal:([a-f0-9]{12}) -->`). The previous marker
+ * — `<!-- web-discover:provider:url -->` — could never match that pattern, so
+ * nothing read it and every week re-filed the same leads.
+ */
+export function leadSignalId(lead: DiscoverLead): string {
+  return signalId('web-discover', leadChangeKey(lead));
+}
+
+export function buildLeadIssueBody(
+  lead: DiscoverLead,
+  reportDate: string,
+  gate: LeadQuoteGate | null,
+): string {
   const primary = lead.primary_url
     ? `[Primary](${lead.primary_url})`
     : '_None yet — locate gazette / ministry / CIP PDF before authoring._';
   const pendingNote = lead.recommended_disposition === 'pending_enactment'
-    ? `
+    ? (gate?.ok
+      ? `
 ### Pending enactment / Telegram
-If primary-verified but **not yet in force**, you may still publish to Telegram:
-write the Public brief with explicit wording (\`not yet in force\`, \`effective DATE\`,
-or \`bill / cabinet decision — awaits Gazette\`), then \`publish-approved\`.
-Keep the \`pending-enactment\` label so the monitor re-surfaces on commencement.
+Quote gate: **passed** — ${gate.reason}.
+This lead is **not yet in force** but primary-verified, so it may be published to
+Telegram: write the Public brief with explicit wording (\`not yet in force\`,
+\`effective DATE\`, or \`bill / cabinet decision — awaits Gazette\`), then
+\`publish-approved\`. Keep the \`pending-enactment\` label so the monitor
+re-surfaces on commencement.
 `
+      : `
+### Pending enactment — NOT publication-authorised
+Quote gate: **failed** — ${gate?.reason ?? 'not run'}.
+The \`pending-enactment\` label is withheld, so this lead carries no Telegram
+publication authority. To restore it, cite the primary instrument and a verbatim
+quote from it, re-run the gate, then add the label by hand.
+`)
     : '';
   return `## Possible change
 
@@ -180,8 +285,12 @@ ${lead.claim_summary}
 | Provider | ${lead.provider ?? 'unknown'} |
 | Change kind | ${lead.change_kind} |
 | Timing | ${lead.timing} |
+| Instrument | ${lead.instrument || '_none cited_'} |
 | Effective / announced | ${lead.effective_or_announced_date ?? '_unknown_'} |
 | Confidence | ${lead.confidence} |
+| Affects dataset | ${lead.affects_dataset === null || lead.affects_dataset === undefined
+  ? '_not stated by the provider_'
+  : String(lead.affects_dataset)} |
 | Disposition hint | \`${lead.recommended_disposition}\` |
 | Region pack | ${lead.region ?? '_n/a_'} |
 | Weekly run | ${reportDate} |
@@ -196,7 +305,7 @@ ${lead.quote ? lead.quote.split('\n').map(line => `> ${line}`).join('\n') : '> N
 
 ${primary}
 
-${pendingNote}
+${lead.notes ? `${lead.notes}\n` : ''}${pendingNote}
 ## Reviewer checklist
 
 - [ ] Locate and cite the current primary legal or government source.
@@ -219,7 +328,7 @@ This issue is an unverified monitoring lead. It must not be copied into the publ
 dataset until the reviewer checklist is satisfied. See
 \`monitor/README.md\`.
 
-<!-- web-discover:${lead.provider}:${lead.discovery_url} -->
+<!-- signal:${leadSignalId(lead)} -->
 `;
 }
 
@@ -246,25 +355,92 @@ See \`monitor/README.md\` and \`monitor/prompts/exa-weekly-discovery.md\`.
   ]);
 }
 
-function openFilteredLeadIssues(report: WebDiscoverReport): string[] {
+/** Issue markers already on GitHub, so a lead is filed once and not every week. */
+function loadSeenSignalIds(file: string): Set<string> {
+  if (!fs.existsSync(file)) {
+    console.warn(`web-discover: no existing-issues file at ${file} — cannot dedupe against open issues`);
+    return new Set();
+  }
+  const parsed: unknown = JSON.parse(fs.readFileSync(file, 'utf8'));
+  if (!Array.isArray(parsed)) throw new Error(`${file} must contain a JSON array of issues`);
+  return seenSignalIds(parsed as Array<{ body?: string | null }>);
+}
+
+/**
+ * Choose which leads become issues: filter, drop what is already filed, then cap.
+ *
+ * Split out from the opening loop so the selection is testable without gh, and so
+ * the truncation is REPORTED. A silent slice reads as "that was everything",
+ * which is the same failure mode as a swallowed parse error.
+ */
+export function selectLeadIssues(
+  report: Pick<WebDiscoverReport, 'leads' | 'coverage_backfill'>,
+  maxIssues: number,
+  seen: Set<string> = new Set(),
+): { selected: DiscoverLead[]; alreadyFiled: DiscoverLead[]; dropped: DiscoverLead[] } {
+  const candidates = [...report.leads, ...report.coverage_backfill].filter(shouldOpenLeadIssue);
+  const alreadyFiled = candidates.filter(lead => seen.has(leadSignalId(lead)));
+  const fresh = candidates.filter(lead => !seen.has(leadSignalId(lead)));
+  return {
+    selected: fresh.slice(0, maxIssues),
+    alreadyFiled,
+    dropped: fresh.slice(maxIssues),
+  };
+}
+
+/**
+ * What the cap threw away, as log lines. Returned rather than printed so the
+ * truncation is verifiable in a test: the point of the cap is that it is never
+ * silent, and "we logged it" is only a claim until something reads the line.
+ */
+export function capDropWarnings(dropped: DiscoverLead[], maxIssues: number): string[] {
+  if (!dropped.length) return [];
+  return [
+    `::warning title=web-discover cap::${dropped.length} lead(s) over `
+    + `WEB_DISCOVER_MAX_ISSUES=${maxIssues} were NOT filed`,
+    ...dropped.map(lead =>
+      `web-discover: dropped by cap (signal ${leadSignalId(lead)}): `
+      + `${lead.jurisdiction} — ${lead.claim_summary.slice(0, 90)}`),
+  ];
+}
+
+async function openFilteredLeadIssues(
+  report: WebDiscoverReport,
+  options: Pick<CliOptions, 'maxIssues' | 'existingIssues'>,
+): Promise<string[]> {
   ensureMonitorLabels();
   const date = report.retrieved_at.slice(0, 10);
   const urls: string[] = [];
-  const candidates = [...report.leads, ...report.coverage_backfill].filter(shouldOpenLeadIssue);
-  for (const lead of candidates) {
+  const seen = loadSeenSignalIds(options.existingIssues);
+  const { selected, alreadyFiled, dropped } = selectLeadIssues(report, options.maxIssues, seen);
+  for (const lead of alreadyFiled) {
+    console.log(
+      `web-discover: already filed (signal ${leadSignalId(lead)}): `
+      + `${lead.jurisdiction} — ${lead.claim_summary.slice(0, 90)}`,
+    );
+  }
+  for (const line of capDropWarnings(dropped, options.maxIssues)) console.warn(line);
+  for (const lead of selected) {
+    // The gate only runs on the leads that actually become issues — a small set,
+    // so one re-fetch each is proportionate.
+    const gate = lead.recommended_disposition === 'pending_enactment'
+      ? await gateLeadQuote(lead)
+      : null;
+    if (gate && !gate.ok) {
+      console.warn(
+        `web-discover: pending-enactment withheld (${gate.reason}): `
+        + `${lead.jurisdiction} — ${lead.claim_summary.slice(0, 90)}`,
+      );
+    }
     const title = `[Monitor lead] ${lead.jurisdiction}: ${lead.claim_summary}`.slice(0, 200);
     const tmp = path.join(ROOT, '.out', `web-lead-${date}-${urls.length}.md`);
-    fs.writeFileSync(tmp, buildLeadIssueBody(lead, date));
-    const labels = ['monitor-lead'];
-    if (lead.recommended_disposition === 'pending_enactment') {
-      labels.push('pending-enactment');
-    }
+    fs.writeFileSync(tmp, buildLeadIssueBody(lead, date, gate));
     const args = [
       'issue', 'create',
       '--title', title,
       '--body-file', tmp,
     ];
-    for (const label of labels) {
+    for (const label of leadIssueLabels(lead, gate)) {
       args.push('--label', label);
     }
     urls.push(runGh(args));
@@ -283,6 +459,7 @@ async function runProviderRegion(
   credits: number | null;
   dollars: number | null;
   error?: string;
+  droppedIncomplete?: number;
 }> {
   if (provider === 'exa') {
     const key = process.env.EXA_API_KEY;
@@ -301,6 +478,7 @@ async function runProviderRegion(
       credits: result.credits_used,
       dollars: result.cost_dollars,
       error: result.error,
+      droppedIncomplete: result.dropped_incomplete,
     };
   }
   if (provider === 'tavily') {
@@ -375,6 +553,7 @@ export async function runWebDiscover(options: CliOptions): Promise<WebDiscoverRe
       credits_used: { exa: 0, tavily: 0, firecrawl: 0 },
       lead_count: leads.length,
       backfill_count: backfill.length,
+      dropped_incomplete: 0,
       leads,
       coverage_backfill: backfill,
       provider_errors: [],
@@ -387,6 +566,7 @@ export async function runWebDiscover(options: CliOptions): Promise<WebDiscoverRe
   const providerErrors: Array<{ provider: string; region: string; error: string }> = [];
   const credits: Partial<Record<DiscoverProvider, number>> = {};
   let dollars = 0;
+  let droppedIncomplete = 0;
 
   for (const provider of options.providers) {
     for (const pack of packs) {
@@ -402,9 +582,11 @@ export async function runWebDiscover(options: CliOptions): Promise<WebDiscoverRe
       } else {
         console.log(
           `web-discover: ${provider}/${pack.id} → ${result.leads.length} leads`
-          + (result.backfill.length ? `, ${result.backfill.length} backfill` : ''),
+          + (result.backfill.length ? `, ${result.backfill.length} backfill` : '')
+          + (result.droppedIncomplete ? `, ${result.droppedIncomplete} dropped as incomplete` : ''),
         );
       }
+      droppedIncomplete += result.droppedIncomplete ?? 0;
       allLeads.push(...result.leads);
       allBackfill.push(...result.backfill);
       if (typeof result.credits === 'number') {
@@ -426,6 +608,7 @@ export async function runWebDiscover(options: CliOptions): Promise<WebDiscoverRe
     credits_used: credits,
     lead_count: leads.length,
     backfill_count: backfill.length,
+    dropped_incomplete: droppedIncomplete,
     leads,
     coverage_backfill: backfill,
     provider_errors: providerErrors,
@@ -447,33 +630,39 @@ if (import.meta.main) {
     console.log(`wrote ${options.summary}`);
     console.log(
       `leads=${report.lead_count} backfill=${report.backfill_count} `
+      + `dropped=${report.dropped_incomplete} `
       + `errors=${report.provider_errors.length} `
       + `credits=${JSON.stringify(report.credits_used)} `
       + `exa$=${report.cost_dollars_total ?? 'n/a'}`,
     );
+    // Decided BEFORE anything is filed. The check used to run last, so a run in
+    // which every provider and region failed still opened an umbrella issue
+    // announcing a quiet week, and only then failed the job.
+    const everythingFailed = !options.fixture
+      && !options.dryRun
+      && report.lead_count === 0
+      && report.backfill_count === 0
+      && report.provider_errors.length > 0
+      && report.provider_errors.length >= options.providers.length * report.regions.length;
     if (options.openIssue) {
       if (options.dryRun || options.fixture) {
         console.log('skipping --open-issue in dry-run/fixture mode');
+      } else if (everythingFailed) {
+        console.error(
+          '::error title=web-discover::every provider/region failed — no issue opened, '
+          + 'because "0 leads" here means the run learned nothing, not that nothing happened',
+        );
       } else {
         const url = openUmbrellaIssue(report, markdown);
         console.log(`opened umbrella ${url}`);
         if (options.openLeadIssues) {
-          const leadUrls = openFilteredLeadIssues(report);
+          const leadUrls = await openFilteredLeadIssues(report, options);
           console.log(`opened ${leadUrls.length} filtered lead issue(s)`);
           leadUrls.forEach(u => console.log(u));
         }
       }
     }
-    if (
-      !options.fixture
-      && !options.dryRun
-      && report.lead_count === 0
-      && report.backfill_count === 0
-      && report.provider_errors.length > 0
-      && report.provider_errors.length >= options.providers.length * report.regions.length
-    ) {
-      process.exitCode = 1;
-    }
+    if (everythingFailed) process.exitCode = 1;
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));
     process.exitCode = 1;
