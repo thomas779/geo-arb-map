@@ -107,6 +107,12 @@ describe('the partner leak', () => {
     partnerCitizenships: ['724'],
   });
 
+  // Solved once and shared. A full household solve over the shipped graph is
+  // seconds, and three of the tests below only read different fields of the same
+  // answer — recomputing it per test pushed one of them past Bun's 5s default on
+  // CI's slower runner while passing locally.
+  const leakySolved = solveHousehold(leaky, edges).members.get('partner')!;
+
   test('a synthetic partner starts from their own facts and nothing else', () => {
     const partner = partnerProfileOf(leaky);
     expect(partner.flags).toEqual([{ iso_n3: '724', name: '724', status: 'cit' }]);
@@ -124,8 +130,7 @@ describe('the partner leak', () => {
     expect(oldPartnerCountries(leaky).has('376')).toBe(true);
 
     // AFTER: nothing in the profile says the partner has any claim on Israel.
-    const partner = solveHousehold(leaky, edges).members.get('partner')!;
-    expect(partner.paths.has('cit:376')).toBe(false);
+    expect(leakySolved.paths.has('cit:376')).toBe(false);
     expect(solveGoals(leaky, data, edges)[0].viaPartner).toBe(false);
   });
 
@@ -133,9 +138,8 @@ describe('the partner leak', () => {
     // Not a blanket suppression: a Spaniard really can reach Irish citizenship
     // through EU free movement and ordinary naturalisation. What changed is the
     // REASON — five years of residence, not your grandparent.
-    const partner = solveHousehold(leaky, edges).members.get('partner')!;
-    expect(partner.paths.get('cit:372')!.years).toBeGreaterThan(0);
-    expect(partner.paths.get('cit:372')!.steps.length).toBeGreaterThan(1);
+    expect(leakySolved.paths.get('cit:372')!.years).toBeGreaterThan(0);
+    expect(leakySolved.paths.get('cit:372')!.steps.length).toBeGreaterThan(1);
   });
 
   test('the solver never reads one member\'s claims for another', () => {
