@@ -44,10 +44,19 @@ export function readProfile(params = new URLSearchParams(window.location.search)
     goals: (params.get('goals') ?? '')
       .split(',')
       .filter(Boolean)
-      .map(tok => ({
-        iso_n3: tok.slice(0, -1).padStart(3, '0'),
-        intent: ({ w: 'work', l: 'live', c: 'cit' } as const)[tok.slice(-1) as 'w' | 'l' | 'c'] ?? 'live',
-      })),
+      .map(tok => {
+        // Optional actor prefix: `p` = partner, `h` = household, bare = self.
+        // An ISO n3 is digits, so a leading letter is unambiguous, and the bare
+        // form is left untouched — links shared before goals had an actor
+        // continue to parse to exactly what they parsed to before.
+        const actor = ({ p: 'partner', h: 'household' } as const)[tok[0] as 'p' | 'h'];
+        const body = actor ? tok.slice(1) : tok;
+        return {
+          iso_n3: body.slice(0, -1).padStart(3, '0'),
+          intent: ({ w: 'work', l: 'live', c: 'cit' } as const)[body.slice(-1) as 'w' | 'l' | 'c'] ?? 'live',
+          ...(actor ? { actor } : {}),
+        };
+      }),
     watchedRoutes: [],
     alerts: { channel: 'none', verifiedOnly: true },
   };

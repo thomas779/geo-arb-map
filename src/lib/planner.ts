@@ -36,9 +36,35 @@ export interface PlantedFlag {
 
 export type GoalIntent = 'live' | 'work' | 'cit';
 
+/**
+ * Household members the solver gives their own status set to. Not a subject
+ * vocabulary — `parent` is a predicate SUBJECT (a fact about someone) whereas
+ * these are the people a search is run FOR.
+ */
+export type ActorId = 'self' | 'partner' | 'child';
+
+/**
+ * Whose goal this is. `household` means every declared member must reach it —
+ * "we all need to be able to live there" — which was unsayable while a Goal
+ * carried only a destination and an intent.
+ */
+export type GoalActor = 'self' | 'partner' | 'household';
+
+export const GOAL_ACTORS: readonly GoalActor[] = ['self', 'partner', 'household'];
+
 export interface Goal {
   iso_n3: string;
   intent: GoalIntent;
+  /**
+   * Absent means `self`. Kept optional rather than defaulted so every profile
+   * and share URL written before the household solver round-trips byte for
+   * byte, and so `goalKey` stays `intent:iso` for the common case.
+   */
+  actor?: GoalActor;
+}
+
+export function goalActor(goal: Goal): GoalActor {
+  return goal.actor ?? 'self';
 }
 
 export type AlertChannel = 'none' | 'telegram';
@@ -86,8 +112,13 @@ export const EMPTY_PROFILE: Profile = {
   alerts: { channel: 'none', verifiedOnly: true },
 };
 
+/**
+ * Stable identity for watch lists and dedupe. The actor is prefixed only when
+ * it is not `self`, so keys stored before goals had actors still match.
+ */
 export function goalKey(goal: Goal): string {
-  return `${goal.intent}:${goal.iso_n3}`;
+  const actor = goalActor(goal);
+  return `${actor === 'self' ? '' : `${actor}:`}${goal.intent}:${goal.iso_n3}`;
 }
 
 /** Defensive localStorage/URL migration: older partial profiles become schema-v2 profiles. */
@@ -95,7 +126,15 @@ export function normalizeProfile(raw: unknown): Profile {
   if (!raw || typeof raw !== 'object') return { ...EMPTY_PROFILE, alerts: { ...EMPTY_PROFILE.alerts } };
   const value = raw as Partial<Profile>;
   const flags = Array.isArray(value.flags) ? value.flags : [];
-  const goals = Array.isArray(value.goals) ? value.goals : [];
+  // An unrecognised actor becomes `self` rather than a fourth kind of person the
+  // solver has no member for. The property omits itself when self, so a profile
+  // stored before actors existed comes back out unchanged.
+  const goals = (Array.isArray(value.goals) ? value.goals : []).map((goal: Goal) => {
+    const actor = GOAL_ACTORS.includes(goal?.actor as GoalActor) ? goal.actor : undefined;
+    return actor && actor !== 'self'
+      ? { iso_n3: goal.iso_n3, intent: goal.intent, actor }
+      : { iso_n3: goal.iso_n3, intent: goal.intent };
+  });
   const validGoalKeys = new Set(goals.map(goalKey));
   const watchedRoutes = Array.isArray(value.watchedRoutes)
     ? value.watchedRoutes.filter(key => typeof key === 'string' && validGoalKeys.has(key))
@@ -311,19 +350,77 @@ export function computeUnlocks(profile: Profile, data: BlocsData): UnlockResult 
   return { blocs, asymmetric, lanes, workLanes, chanceLanes, ancestryPaths, birthHints, countries };
 }
 
-/** Additional jurisdictions available through a partner, without double-counting either spouse's flags. */
-export function householdExtraCountries(profile: Profile, data: BlocsData): number {
-  if (!profile.partnerCitizenships.length) return 0;
-  const partnerProfile: Profile = {
-    ...profile,
+/**
+ * The partner as their OWN person.
+ *
+ * What this replaces was a `{...profile}` spread, which handed the synthetic
+ * partner the applicant's `ancestors`, `heritages`, `birthplace` and `goals`.
+ * Your Irish grandparent and your Law of Return claim were therefore credited to
+ * your partner, and every "+N countries via your partner" figure was inflated by
+ * your own facts — the same person's claims counted twice, once as yours and
+ * once as theirs. A partner starts from EMPTY_PROFILE and receives exactly the
+ * one thing the profile records about them: their nationalities.
+ *
+ * `intents` is the deliberate exception. `child_abroad` is a plan about a child
+ * who is both partners' child, not a personal claim belonging to one of them, so
+ * carrying it is what makes the event accelerators available to both parents
+ * rather than only to whoever ticked the box.
+ */
+export function partnerProfileOf(profile: Profile): Profile {
+  return {
+    ...EMPTY_PROFILE,
     flags: profile.partnerCitizenships.map(iso => ({
       iso_n3: iso,
       name: iso,
       status: 'cit' as const,
     })),
-    partnerCitizenships: [],
-    goals: [],
+    intents: [...profile.intents],
+    alerts: { ...EMPTY_PROFILE.alerts },
   };
+}
+
+/**
+ * A prospective child, holding nothing.
+ *
+ * Jus sanguinis from the parents is deliberately NOT seeded: which nationalities
+ * a child inherits is a per-country descent question about a person who does not
+ * exist yet, and guessing would manufacture passports. The child's routes come
+ * from `actor: 'child'` edges — the jus-soli half of the event accelerators —
+ * gated on a parent's declared intent.
+ */
+export function childProfileOf(_profile: Profile): Profile {
+  return { ...EMPTY_PROFILE, alerts: { ...EMPTY_PROFILE.alerts } };
+}
+
+export interface HouseholdMember {
+  actor: ActorId;
+  /** That member's own facts. Never the applicant's, unless they are the applicant. */
+  profile: Profile;
+}
+
+/**
+ * Who the solver runs a search for. Self always; a partner once nationalities
+ * are declared for one; a child once a parent declares `child_abroad`, which is
+ * the only fact in the profile that asserts a child into existence.
+ *
+ * A one-member household is the overwhelmingly common case and costs exactly one
+ * search, which is what keeps the pre-household behaviour intact.
+ */
+export function householdMembers(profile: Profile): HouseholdMember[] {
+  const members: HouseholdMember[] = [{ actor: 'self', profile }];
+  if (profile.partnerCitizenships.length) {
+    members.push({ actor: 'partner', profile: partnerProfileOf(profile) });
+  }
+  if (profile.intents.includes('child_abroad')) {
+    members.push({ actor: 'child', profile: childProfileOf(profile) });
+  }
+  return members;
+}
+
+/** Additional jurisdictions available through a partner, without double-counting either spouse's flags. */
+export function householdExtraCountries(profile: Profile, data: BlocsData): number {
+  if (!profile.partnerCitizenships.length) return 0;
+  const partnerProfile = partnerProfileOf(profile);
   const ours = new Set(computeUnlocks(profile, data).countries);
   profile.flags
     .filter(f => f.status === 'cit')

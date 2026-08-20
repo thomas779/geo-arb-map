@@ -42,7 +42,9 @@ import {
   timelineBeneficiaryIsos,
 } from '../src/lib/timeline-rules.ts';
 import {
+  edgeSubjectProblem,
   predicatesFromNeeds,
+  UnknownPredicateError,
   validatePredicates,
 } from '../src/lib/predicates.ts';
 
@@ -58,10 +60,14 @@ import {
  */
 export function validateBuiltEdges(edges) {
   for (const edge of edges) {
-    validatePredicates(
-      edge.predicates ?? [],
-      `edge ${edge.mechanism} ${edge.from} -> ${edge.to}`,
-    );
+    const label = `edge ${edge.mechanism} ${edge.from} -> ${edge.to}`;
+    validatePredicates(edge.predicates ?? [], label);
+    // Second half of the contract: the gate must be legal AND answerable by the
+    // member who will evaluate it. A `parent` gate on an edge that is not the
+    // child's would land in the applicant's own search, where nothing can read
+    // it, and throw mid-solve instead of failing here.
+    const mismatch = edgeSubjectProblem(edge.actor, edge.predicates ?? []);
+    if (mismatch) throw new UnknownPredicateError(`${label}: ${mismatch}`);
   }
   return edges;
 }
@@ -86,10 +92,10 @@ export function buildEdges(data, manualEdges, corpus) {
   const push = (e) => {
     const edge = { allocation: 'right', confidence: 'high', needs: [], years: 0, ...e };
     edge.predicates = edge.predicates ?? predicatesFromNeeds(edge.needs);
-    validatePredicates(
-      edge.predicates,
-      `edge ${edge.mechanism} ${edge.from} -> ${edge.to}`,
-    );
+    const label = `edge ${edge.mechanism} ${edge.from} -> ${edge.to}`;
+    validatePredicates(edge.predicates, label);
+    const mismatch = edgeSubjectProblem(edge.actor, edge.predicates);
+    if (mismatch) throw new UnknownPredicateError(`${label}: ${mismatch}`);
     edges.push(edge);
   };
 
@@ -180,23 +186,66 @@ export function buildEdges(data, manualEdges, corpus) {
   }
 
   // ── Child-birth event accelerators (hand-audited manual edges) ──
+  //
+  // Both halves of every accelerator now reach the graph. What used to happen
+  // here: `who: 'child'` grants were skipped, so the jus-soli half — the child's
+  // own citizenship, the fact the whole accelerator turns on — was dropped, and
+  // `grant.via` was ignored, so a parent walked straight into a nationality
+  // without ever holding the residence the statute counts the year from.
   for (const ev of manualEdges?.edges ?? []) {
     if (ev.reason_code !== 'event_accelerator') continue;
+    const allocation = ev.allocation ?? 'right';
+    const confidence = ev.confidence ?? 'high';
     for (const grant of ev.grants) {
-      // STEP 4 (blocked on the household solver): `who: 'child'` grants are
-      // dropped here, so the jus-soli half of every accelerator — the child's
-      // own citizenship — never reaches the graph. Emitting them needs an edge
-      // whose subject is the child (`{subject: 'child', …}`), which the
-      // predicate model can now EXPRESS but nothing can yet evaluate: the
-      // registry rejects that subject on purpose rather than answering false.
-      // Lift this line once step 2 lands, not before.
-      if (grant.who !== 'parent') continue;
-      push({
-        from: '*', to: grant.node.replace(':', ':').startsWith('cit') ? grant.node : grant.node,
-        mechanism: ev.id, years: grant.years,
-        needs: ['willing_child_abroad'],
-        confidence: ev.confidence ?? 'high',
-      });
+      if (grant.who === 'parent') {
+        // `via` is the intermediate status the accelerator actually runs
+        // through. Brazil's one-year clock runs from residence, so the shape is
+        // `* -> pr:076 -> cit:076`, not one free-standing edge into citizenship.
+        // Splitting it also makes the intermediate status reachable in its own
+        // right, which is what Argentina's grant (family PR and nothing more)
+        // has always been.
+        const hops = grant.via
+          ? [
+            { from: '*', to: grant.via, years: 0 },
+            { from: grant.via, to: grant.node, years: grant.years },
+          ]
+          : [{ from: '*', to: grant.node, years: grant.years }];
+        for (const hop of hops) {
+          push({
+            ...hop,
+            mechanism: ev.id,
+            needs: ['willing_child_abroad'],
+            allocation,
+            confidence,
+          });
+        }
+      } else if (grant.who === 'child') {
+        // The child is their OWN actor with their own status set, so this is an
+        // `actor: 'child'` edge gated on a PARENT's declared intent — the child
+        // does not intend their own birth. Expressing that needed per-actor
+        // state; until it existed the only honest thing to do was drop the edge.
+        push({
+          from: '*', to: grant.node,
+          mechanism: ev.id, years: grant.years,
+          actor: 'child',
+          predicates: [{
+            subject: 'parent',
+            attribute: 'intent',
+            op: 'eq',
+            value: 'child_abroad',
+            provenance: 'self_attested',
+          }],
+          allocation,
+          confidence,
+        });
+      } else {
+        // Not a `continue`: an unmodelled grantee is a data bug, and skipping it
+        // is how the child grants stayed invisible for a month.
+        throw new Error(
+          `Event accelerator ${ev.id} has grant for unknown who=${JSON.stringify(grant.who)} `
+          + '— expected "parent" or "child"',
+        );
+      }
     }
   }
 

@@ -642,6 +642,14 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                             {a.goal.intent === 'work' ? 'Work in' : a.goal.intent === 'cit' ? 'Citizenship of' : 'Live in'}{' '}
                             {countryLabel(nameOf(a.goal.iso_n3), a.goal.iso_n3)}
                           </span>
+                          {/* Whose goal this is. A household answer is the BINDING
+                              member's plan, not necessarily yours, so it has to
+                              say so — a shared link can carry an actor. */}
+                          {a.goal.actor && a.goal.actor !== 'self' && (
+                            <span className="rounded bg-muted px-1.5 py-0.5 text-[0.65rem] uppercase tracking-wide text-muted-foreground">
+                              {a.goal.actor === 'partner' ? 'your partner' : 'everyone'}
+                            </span>
+                          )}
                           {a.best && (
                             <span className="text-xs text-muted-foreground">
                               {a.best.years === 0 ? 'available now' : `about ${a.best.years} years`}
@@ -661,6 +669,8 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                         {a.best ? (
                           a.best.steps.length > 0 ? (
                             <p className="mt-1 pl-5 text-xs leading-relaxed text-muted-foreground">
+                              {a.goal.actor === 'household' && a.perActor.length > 1
+                                && `slowest of ${a.perActor.length}: `}
                               {describePath(a.best.steps, data)}
                               {a.reached?.startsWith('work:') && ' — work access (not settlement)'}
                               {a.best.renounces && ' · ⚠ requires renouncing'}
@@ -673,6 +683,8 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                         ) : (
                           <p className="mt-1 pl-5 text-xs leading-relaxed text-muted-foreground">
                             No deterministic path with your current facts
+                            {a.blockedActors.length > 0 && a.goal.actor === 'household'
+                              && <> for {a.blockedActors.join(' and ')}</>}
                             {a.chance.length > 0 && <> — chance-based: {a.chance.join(', ')}</>}
                             {a.viaPartner && <> — but your partner's citizenship covers it (family derivation)</>}.
                           </p>

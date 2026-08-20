@@ -89,6 +89,10 @@ in a separate "chance-based routes" panel with explicit non-guarantee badges.
 - Mexico: child born there → child `cit:484`; parent naturalization at 2 yrs (SRE source).
 - Argentina: child `cit:032`; parent gets family-based `pr:032` ONLY — no verified
   parent citizenship fast-track. Parent then uses the ordinary 2-yr track.
+- Both halves reach the graph. The child grant is an `actor: 'child'` edge gated on a
+  PARENT's declared intent (the child does not intend their own birth); the parent
+  grant runs through `grant.via`, the residence the statute counts its clock from,
+  rather than landing on the nationality directly.
 
 ## Greater China (locked, permanent)
 
@@ -111,6 +115,46 @@ Multi-source Dijkstra from active citizenships carries the citizenship set throu
 each state so later nationality-gated edges and renunciation are evaluated correctly;
 max 4 edges. Ranking is currently years then hops; money and physical presence remain
 future lexicographic dimensions.
+
+## Household solving (locked)
+
+The unit of planning is a household, not an applicant. Members are `self`, `partner`
+(once nationalities are declared for one) and `child` (once a parent declares
+`child_abroad` — the only fact that asserts a child into existence). Each has its
+own status set, so renunciation, acquisition and loss are per member: one member
+renouncing never strips another's citizenship.
+
+- **Bounded by construction.** A joint search over the product of two members'
+  states is what explodes, so members are solved SEPARATELY and communicate only
+  through a summary of each other: nationality → earliest year they can hold it.
+  Cost is members × rounds single-actor searches (≤ 6, and exactly one for a
+  profile with no partner and no declared child), never the product. Two rounds,
+  because the second is what turns an ACQUIRED nationality into a gate and nothing
+  in the corpus gates on a nationality that itself needed a cross-actor gate.
+- **A cross-actor gate costs time.** An edge unlocked by another member's status
+  cannot fire before that status exists, so the step starts at
+  `max(now, availableAt)`. Charging nothing would invent years the household does
+  not have.
+- **Absence of a member is loud.** A `HouseholdView` entry that is EMPTY means "we
+  know there is nobody", which may fail a gate. An entry that is MISSING means the
+  solve never modelled that person, and that throws. `parent` resolves only in a
+  child's search, so an edge naming it must declare `actor: 'child'`
+  (`edgeSubjectProblem`, enforced by build_edges) — otherwise it lands in a search
+  that cannot answer it.
+- **Availability is what a member can HOLD**, not what they passed through: a path
+  that renounces on the way cannot lend the surrendered nationality to anyone.
+  Known bound: the year comes from that member's own cheapest path, so a gate
+  naming TWO of one member's nationalities at once is not verified against a
+  single path of theirs. `eq` names one and `in` is a disjunction, so nothing in
+  the corpus reaches that case.
+- **Goals carry an actor**: `self` (absent = self, so old profiles and share URLs
+  round-trip), `partner`, or `household` — which is answered by the BINDING member,
+  the slowest or an unsolved one, because "we can all live there" is only true when
+  the last of us can. `viaPartner` is intent-aware and present-tense: a partner who
+  can only work somewhere does not cover a citizenship goal, their settlement
+  rights do not pass as citizenship coverage, and their own multi-year
+  naturalisation route is a plan in `perActor` rather than a badge saying the
+  problem is solved.
 
 ## Build order (locked)
 

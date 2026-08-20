@@ -11,11 +11,12 @@ import type { Profile } from './planner';
  * Two properties the string form could not carry:
  *
  *  - `subject` — WHOSE fact this is. A household is a set of people, and the
- *    step-2 solver has to reason about a partner's nationality or a child's
- *    birthplace as separate variables. `self` and `partner` are evaluable
- *    today; `parent` and `child` are declared here so the corpus can be
- *    written against them, and REJECTED at build time until the household
- *    solver can read them (see UNSUPPORTED_SUBJECTS below).
+ *    step-2 solver reasons about a partner's nationality or a parent's declared
+ *    intent as separate variables. `self` and `partner` are evaluable from a
+ *    lone profile; `parent` resolves only inside a household solve (see
+ *    `PredicateContext.household` and `SUBJECT_REQUIRES_ACTOR`); `child` is
+ *    declared so the corpus can be written against it and REJECTED at build
+ *    time until something reads it (see UNSUPPORTED_SUBJECTS below).
  *
  *  - `provenance` — WHERE the fact comes from. "the law says" (`sourced`,
  *    derived from a statute or the canonical corpus) versus "you told us"
@@ -51,6 +52,33 @@ export interface Predicate {
 }
 
 /**
+ * One household member's solved state, as seen by ANOTHER member's search.
+ *
+ * `citizenshipAt` is the whole reason this is not a plain set: a partner who
+ * will be Spanish in ten years is not a partner who is Spanish today, and an
+ * edge unlocked by their nationality cannot fire before it exists. The map
+ * records, per nationality, the earliest year that member can HOLD it — 0 for a
+ * declared one — and the pathfinder turns that into a wait (`gateWait`).
+ */
+export interface ActorState {
+  citizenshipAt: ReadonlyMap<string, number>;
+  /** Self-attested intents that member declared. */
+  intents: ReadonlySet<string>;
+}
+
+/**
+ * Other household members' solved state, keyed by the subject naming them,
+ * relative to whoever is searching. A `partner` entry in the SELF search is the
+ * partner; in the PARTNER's own search it is the applicant.
+ *
+ * Presence is authoritative. When this map is supplied, a subject a predicate
+ * names but the map does not carry is an ERROR — never false. An entry with an
+ * empty `citizenshipAt` is the opposite: a KNOWN "that person holds nothing",
+ * which may legitimately evaluate false.
+ */
+export type HouseholdView = Partial<Record<PredicateSubject, ActorState>>;
+
+/**
  * What a predicate is evaluated against: the stored profile plus the
  * citizenships held at THIS point in the search, which diverge as soon as a
  * path acquires one (see pathfinder `transition`).
@@ -58,6 +86,8 @@ export interface Predicate {
 export interface PredicateContext {
   profile: Profile;
   citizenships: ReadonlySet<string>;
+  /** Absent for a lone-profile evaluation; supplied by the household solver. */
+  household?: HouseholdView;
 }
 
 /**
@@ -66,9 +96,14 @@ export interface PredicateContext {
  * apply to sets; `gte`/`lte` apply to ordinals. Keeping the two kinds apart is
  * what lets validation reject `citizenship gte 3` instead of quietly
  * coercing it.
+ *
+ * `availableAt` is optional timing on a set reading: present only when the
+ * values belong to another household member, whose statuses exist from a year
+ * rather than from the start. Absent means "held now", which is every
+ * single-actor reading.
  */
 export type AttributeReading =
-  | { kind: 'set'; values: ReadonlySet<string> }
+  | { kind: 'set'; values: ReadonlySet<string>; availableAt?: ReadonlyMap<string, number> }
   | { kind: 'ordinal'; value: number | null };
 
 export interface AttributeSpec {
@@ -99,6 +134,28 @@ const setOf = (values: Iterable<string>): AttributeReading => ({
 });
 
 /**
+ * Read another household member's state, or explain loudly why it cannot be.
+ *
+ * Three cases, and the middle one is the whole rule of this module:
+ *  - no `household` at all → a lone-profile evaluation; return null so the
+ *    attribute can fall back to the flat profile field (`partnerCitizenships`).
+ *  - `household` present but missing this subject → THROW. The solver knows
+ *    which members it modelled, so an unmodelled one is a gap in the model, not
+ *    a fact about the world, and answering false would delete the edge silently.
+ *  - present → use it, empty or not. Empty is a real answer ("no partner").
+ */
+function householdState(subject: PredicateSubject, ctx: PredicateContext): ActorState | null {
+  if (!ctx.household) return null;
+  const state = ctx.household[subject];
+  if (state) return state;
+  throw new UnknownPredicateError(
+    `this household solve carries no state for subject ${subject} `
+    + `(it modelled ${Object.keys(ctx.household).sort().join(', ') || 'nothing'}) `
+    + '— an unmodelled member is a gap in the solve, not a false fact',
+  );
+}
+
+/**
  * The attribute vocabulary. Adding an entry here is what makes a new gate
  * legal; until then the data cannot use it, because build_edges.js refuses to
  * emit an edge carrying an attribute this map does not contain.
@@ -108,10 +165,22 @@ export const PREDICATE_ATTRIBUTES: AttributeRegistry = {
     kind: 'set',
     subjects: ['self', 'partner'],
     ops: SET_OPS,
-    describe: 'nationalities held (self = held at this point in the path)',
-    read: (subject, ctx) => subject === 'partner'
-      ? setOf(ctx.profile.partnerCitizenships)
-      : setOf(ctx.citizenships),
+    describe: 'nationalities held (self = held at this point in the path; '
+      + 'partner = declared, or SOLVED once the household solver runs)',
+    read: (subject, ctx) => {
+      if (subject !== 'partner') return setOf(ctx.citizenships);
+      // Inside a household solve the partner's ACQUIRED nationalities count
+      // too, with the year they arrive: "partner naturalises, then sponsors
+      // you" is a real route and reading only their declared passports made it
+      // unreachable.
+      const state = householdState('partner', ctx);
+      if (!state) return setOf(ctx.profile.partnerCitizenships);
+      return {
+        kind: 'set',
+        values: new Set(state.citizenshipAt.keys()),
+        availableAt: state.citizenshipAt,
+      };
+    },
   },
   ancestry: {
     kind: 'set',
@@ -132,22 +201,49 @@ export const PREDICATE_ATTRIBUTES: AttributeRegistry = {
   },
   intent: {
     kind: 'set',
-    subjects: ['self'],
+    subjects: ['self', 'parent'],
     ops: SET_OPS,
-    describe: 'declared intentions the planner may gate on (e.g. child_abroad)',
-    read: (_subject, ctx) => setOf(ctx.profile.intents),
+    describe: 'declared intentions the planner may gate on (e.g. child_abroad); '
+      + 'readable for `parent` inside a child actor\'s search',
+    read: (subject, ctx) => {
+      if (subject !== 'parent') return setOf(ctx.profile.intents);
+      // A child's own edges are gated on what their PARENTS declared — the
+      // jus-soli half of an event accelerator exists because the parents intend
+      // the birth, not because the (unborn) child intends anything.
+      const state = householdState('parent', ctx);
+      if (!state) {
+        throw new UnknownPredicateError(
+          'intent for subject parent needs a household solve that models the parents '
+          + '— an edge gated on a parent must declare `actor: "child"` so it only '
+          + 'ever reaches the child\'s search (see SUBJECT_REQUIRES_ACTOR)',
+        );
+      }
+      return { kind: 'set', values: state.intents };
+    },
   },
 };
 
 /**
- * Subjects the model can EXPRESS but nothing can yet READ. Rejected at build
+ * Subjects that only resolve inside one household member's search, and which
+ * member that is. `parent` is a person only from a child's point of view: in the
+ * applicant's own search there is nobody for it to name, so an edge carrying a
+ * parent gate must declare itself the child's edge (`GraphEdge.actor`). Without
+ * that rule such an edge lands in every member's search and throws mid-solve.
+ */
+export const SUBJECT_REQUIRES_ACTOR: Partial<Record<PredicateSubject, string>> = {
+  parent: 'child',
+};
+
+/**
+ * Subjects the model can EXPRESS but no attribute can READ. Rejected at build
  * time with a pointer rather than silently evaluating false — that silence is
- * exactly the failure mode this change exists to remove. The household solver
- * (step 2) is what clears these.
+ * exactly the failure mode this change exists to remove.
  */
 const UNSUPPORTED_SUBJECTS: Record<string, string> = {
-  parent: 'no parent facts are modelled yet — the household solver (step 2) introduces them',
-  child: 'no child facts are modelled yet — the household solver (step 2) introduces them',
+  parent: 'the household solver reads a parent only for attributes a child\'s search models '
+    + '(`intent` today); this one is not among them',
+  child: 'the household solver models the child as its OWN actor rather than as a fact about '
+    + 'someone else, so read it with `subject: "self"` on an `actor: "child"` edge',
 };
 
 function describePredicate(p: Predicate): string {
@@ -203,6 +299,27 @@ export function predicateProblem(
   }
   if ((op === 'gte' || op === 'lte') && typeof p.value !== 'number') {
     return `op ${op} needs a numeric value, got ${JSON.stringify(p.value)}`;
+  }
+  return null;
+}
+
+/**
+ * Structural check on the pairing of an edge's declared actor with the subjects
+ * its gate names. Returns a reason or null. Build-time companion to
+ * `predicateProblem`: that one asks "is this predicate legal?", this one asks
+ * "can the member who will evaluate it answer it?".
+ */
+export function edgeSubjectProblem(
+  actor: string | undefined,
+  predicates: readonly Predicate[],
+): string | null {
+  for (const p of predicates) {
+    const required = SUBJECT_REQUIRES_ACTOR[p.subject as PredicateSubject];
+    if (required && actor !== required) {
+      return `subject ${p.subject} only resolves in a ${required} actor's search, but this edge `
+        + `declares actor ${actor ?? 'self (the default)'} — set actor: ${JSON.stringify(required)} `
+        + 'or the edge will throw in every other member\'s solve';
+    }
   }
   return null;
 }
@@ -269,6 +386,59 @@ export function predicatesSatisfied(
   registry: AttributeRegistry = PREDICATE_ATTRIBUTES,
 ): boolean {
   return predicates.every(p => evaluatePredicate(p, ctx, registry));
+}
+
+/**
+ * The earliest year a SATISFIED predicate is actually true.
+ *
+ * Zero for every fact about the searching actor: a ticked heritage box or a
+ * passport in a drawer is true from the start. Non-zero only when the reading
+ * belongs to another household member who has to acquire the status first —
+ * "sponsored by your partner once they naturalise" is not available today, and
+ * charging nothing for it would invent time the household does not have.
+ *
+ * Call only on a predicate `evaluatePredicate` already answered true; an
+ * unmatched value contributes nothing rather than Infinity.
+ */
+export function predicateWait(
+  predicate: Predicate,
+  ctx: PredicateContext,
+  registry: AttributeRegistry = PREDICATE_ATTRIBUTES,
+): number {
+  const spec = registry[predicate.attribute];
+  if (!spec) {
+    throw new UnknownPredicateError(
+      `cannot time predicate ${describePredicate(predicate)}: unknown attribute`,
+    );
+  }
+  const reading = spec.read(predicate.subject, ctx);
+  if (reading.kind !== 'set' || !reading.availableAt) return 0;
+  const at = reading.availableAt;
+  const candidates = predicate.op === 'eq'
+    ? [String(predicate.value)]
+    : predicate.op === 'in'
+      ? (predicate.value as unknown[]).map(String)
+      : [...at.keys()];
+  let earliest = Infinity;
+  for (const key of candidates) {
+    const year = at.get(key);
+    if (year !== undefined && year < earliest) earliest = year;
+  }
+  return Number.isFinite(earliest) ? earliest : 0;
+}
+
+/**
+ * When the whole conjunction becomes true: the LAST of its parts to arrive.
+ * The pathfinder adds this as a wait before the edge's own duration.
+ */
+export function gateWait(
+  predicates: readonly Predicate[],
+  ctx: PredicateContext,
+  registry: AttributeRegistry = PREDICATE_ATTRIBUTES,
+): number {
+  let wait = 0;
+  for (const p of predicates) wait = Math.max(wait, predicateWait(p, ctx, registry));
+  return wait;
 }
 
 /**
