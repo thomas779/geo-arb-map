@@ -1,13 +1,18 @@
 import { useMemo, useRef, useState } from 'react';
 import {
-  Baby, Bell, Check, ChevronDown, CircleDollarSign, Flag, Heart, LockKeyhole, MapPin, Send, Target, X,
+  Baby, Bell, Check, ChevronDown, CircleDollarSign, CircleHelp, Flag, Gavel, Heart, LockKeyhole,
+  MapPin, Send, Target, Users, X,
 } from 'lucide-react';
-import type { BlocsData, CitizenshipRoutesData } from '../types';
+import type { AtlasIndexData, BlocsData } from '../types';
 import {
   computeUnlocks, countryOptions, goalKey, householdExtraCountries, pluralityIndex, profileHasInput, recommend, HERITAGE_OPTIONS,
   type CountryOption, type FlagStatus, type GoalIntent, type Profile, type Recommendation,
 } from '@/lib/planner';
-import { describePath, recommendPaths, solveGoals, type GraphEdge, type PathRec } from '@/lib/pathfinder';
+import {
+  describePath, mechanismLabel, pathCaveats, recommendPaths, solveGoals,
+  type GraphEdge, type PathCaveats, type PathRec, type PathStep,
+} from '@/lib/pathfinder';
+import { buildCountrySlugMap } from '@/lib/slug';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -30,7 +35,14 @@ interface Props {
   profile: Profile;
   onChange: (profile: Profile) => void;
   onOpenPrivacy: () => void;
-  citizenshipRoutes: CitizenshipRoutesData | null;
+  /**
+   * The atlas INDEX, which is what the app actually fetches — not the corpus.
+   * Typing this as the full corpus is how `pluralityIndex()` came to be called
+   * on data that has no `dual_nationality` field: it compiled, and returned an
+   * empty Map for every profile. The index now carries the inbound plurality
+   * limb, and this type is the thing that keeps the two facts in agreement.
+   */
+  citizenshipRoutes: AtlasIndexData | null;
 }
 
 const STATUS_LABELS: Record<FlagStatus, string> = {
@@ -51,7 +63,114 @@ type PlannerPath = {
   plan: string | null;
   hops: number;
   isInvestment: boolean;
+  /** Empty for the single-hop candidates, which have no step list to caveat. */
+  steps: PathStep[];
 };
+
+/* ── What a plan rests on ──────────────────────────────────────────────────── */
+
+const SUBJECT_LABELS: Record<string, string> = {
+  self: 'you',
+  partner: 'your partner',
+  parent: 'a parent',
+  child: 'your child',
+};
+
+/** Household members, as the person reading would name them. */
+const ACTOR_LABELS: Record<string, string> = {
+  self: 'You',
+  partner: 'Your partner',
+  child: 'A child born on the route',
+};
+
+const ATTRIBUTE_LABELS: Record<string, string> = {
+  citizenship: 'nationality',
+  ancestry: 'ancestry',
+  heritage: 'personal claim',
+  intent: 'declared intention',
+};
+
+const humanize = (value: string) => value.replace(/_/g, ' ');
+
+/**
+ * Read a predicate value back out as prose. Heritage claim ids have a curated
+ * label already (the same one the checkbox shows), nationalities are ISO n3
+ * codes nobody reads, and everything else is a snake_case token.
+ */
+function describeValue(
+  attribute: string,
+  value: unknown,
+  nameOf: (iso: string) => string,
+): string {
+  const one = (item: unknown): string => {
+    const text = String(item);
+    if (attribute === 'heritage') {
+      return HERITAGE_OPTIONS.find(option => option.claimId === text)?.label ?? humanize(text);
+    }
+    if (attribute === 'citizenship' || attribute === 'ancestry') return nameOf(text);
+    return humanize(text);
+  };
+  return Array.isArray(value) ? value.map(one).join(' or ') : one(value);
+}
+
+/**
+ * The three ways a plan can be arithmetically right and still not a legal
+ * finding. A plan that looks like one while resting on a checkbox is the exact
+ * failure this panel exists to prevent, so it renders whenever any of the three
+ * is present and takes no space when none is.
+ */
+function PlanCaveats({ caveats, data, nameOf, className }: {
+  caveats: PathCaveats;
+  data: BlocsData;
+  nameOf: (iso: string) => string;
+  className?: string;
+}) {
+  const { discretionary, household, attested } = caveats;
+  if (!discretionary.length && !household.length && !attested.length) return null;
+  return (
+    <ul className={cn('space-y-0.5 text-xs leading-relaxed text-muted-foreground', className)}>
+      {discretionary.length > 0 && (
+        <li className="flex items-start gap-1.5">
+          <Gavel className="mt-0.5 size-3 shrink-0" aria-hidden />
+          <span>
+            <b className="font-semibold text-foreground">Not automatic.</b>{' '}
+            {discretionary.map(id => mechanismLabel(id, data)).join(', ')} —{' '}
+            the grant is discretionary, so meeting every requirement qualifies you to be
+            considered, not to receive.
+          </span>
+        </li>
+      )}
+      {household.length > 0 && (
+        <li className="flex items-start gap-1.5">
+          <Users className="mt-0.5 size-3 shrink-0" aria-hidden />
+          <span>
+            <b className="font-semibold text-foreground">Unlocked by someone else.</b>{' '}
+            {household
+              .map(gate => `${SUBJECT_LABELS[gate.subject] ?? gate.subject}: `
+                + `${ATTRIBUTE_LABELS[gate.attribute] ?? gate.attribute} `
+                + `${describeValue(gate.attribute, gate.value, nameOf)}`)
+              .join(' · ')}
+            . This step cannot start before that status exists.
+          </span>
+        </li>
+      )}
+      {attested.length > 0 && (
+        <li className="flex items-start gap-1.5">
+          <CircleHelp className="mt-0.5 size-3 shrink-0" aria-hidden />
+          <span>
+            <b className="font-semibold text-foreground">Rests on what you told us.</b>{' '}
+            {attested
+              .map(fact => `${SUBJECT_LABELS[fact.subject] ?? fact.subject}: `
+                + `${describeValue(fact.attribute, fact.value, nameOf)}`)
+              .join(' · ')}
+            . The route is sourced; your eligibility under it is not — we have only your
+            answer, and the authority will want documents.
+          </span>
+        </li>
+      )}
+    </ul>
+  );
+}
 
 function FieldLabel({ htmlFor, children }: { htmlFor?: string; children: React.ReactNode }) {
   return (
@@ -204,6 +323,13 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
   }, [citizenshipRoutes, data]);
   const heldIsos = new Set(profile.flags.map(f => f.iso_n3));
   const nameOf = (iso: string) => options.find(o => o.iso_n3 === iso)?.name ?? iso;
+  // Same derivation the static page generator uses, so a link from here can
+  // never point at a slug the build did not emit.
+  const slugByIso = useMemo(
+    () => buildCountrySlugMap(citizenshipRoutes?.jurisdictions ?? []),
+    [citizenshipRoutes],
+  );
+  const slugOf = (iso: string) => slugByIso.get(iso) ?? '';
 
   const profileKey = JSON.stringify(profile);
   const unlocked = useMemo(
@@ -225,6 +351,9 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
       plan: null,
       hops: 1,
       isInvestment: r.via === 'cbi',
+      // The single-hop recommender does not walk the graph, so there are no
+      // steps to caveat. Empty, not fabricated.
+      steps: [],
     }));
     const multi: PlannerPath[] = edges ? recommendPaths(profile, data, edges, 30).map(r => ({
       ...r,
@@ -285,6 +414,51 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
       : path.via === 'ancestry'
         ? 'via ancestry / diaspora claim'
         : null;
+
+  /**
+   * Nationalities whose naturalisation grant the graph records as discretionary.
+   *
+   * Needed because the ranked list is mostly SINGLE-HOP rows, which come from
+   * `recommend()` — a code path that never walks the graph and therefore has no
+   * steps and no allocation. Poland ranks first for most profiles on that path,
+   * and "Residence followed by ordinary naturalization" into a country whose
+   * statute lets the minister refuse must not read as a guarantee merely because
+   * a cheaper derivation produced the row. This is a lookup of the same fact the
+   * multi-hop steps carry, not a second opinion — and with no graph loaded there
+   * is no claim either way, which is the honest answer rather than "automatic".
+   */
+  const discretionaryGrants = useMemo(() => {
+    const isos = new Set<string>();
+    for (const edge of edges ?? []) {
+      if (edge.mechanism === 'naturalization' && edge.allocation === 'discretionary'
+        && edge.to.startsWith('cit:')) {
+        isos.add(edge.to.slice(4));
+      }
+    }
+    return isos;
+  }, [edges]);
+
+  const caveatsFor = (path: PlannerPath): PathCaveats => {
+    const walked = pathCaveats(path.steps);
+    if (path.steps.length > 0 || path.via === 'ancestry' || path.isInvestment) return walked;
+    return discretionaryGrants.has(path.iso_n3)
+      ? { ...walked, discretionary: ['naturalization'] }
+      : walked;
+  };
+
+  /**
+   * The collapsed row has to carry the warning too. A plan whose "not automatic"
+   * label only appears after a click reads as a guarantee until then, and the
+   * ranked list is what most readers will look at.
+   */
+  const caveatChips = (path: PlannerPath): string[] => {
+    const { discretionary, household, attested } = caveatsFor(path);
+    return [
+      discretionary.length ? 'not automatic' : '',
+      household.length ? 'needs your household' : '',
+      attested.length ? 'your own answer' : '',
+    ].filter(Boolean);
+  };
 
   const routeLabel = (path: PlannerPath) =>
     path.plan
@@ -694,6 +868,46 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                             Also coverable via your partner (family derivation).
                           </p>
                         )}
+                        {a.best && a.best.steps.length > 0 && (
+                          <PlanCaveats
+                            caveats={pathCaveats(a.best.steps)}
+                            data={data}
+                            nameOf={nameOf}
+                            className="mt-1.5 pl-5"
+                          />
+                        )}
+                        {/* Each member's own plan. The card above is the BINDING
+                            member's, and for a household goal that hides the very
+                            thing household solving produced: a child's route
+                            exists only because a parent declared the birth, and
+                            that step lives in nobody's plan but the child's. */}
+                        {a.perActor.length > 1 && (
+                          <div className="mt-2 ml-5 flex flex-col gap-1.5 border-l pl-3">
+                            {a.perActor.map(member => (
+                              <div key={member.actor}>
+                                <p className="text-xs leading-relaxed text-muted-foreground">
+                                  <b className="font-semibold text-foreground">
+                                    {ACTOR_LABELS[member.actor] ?? member.actor}
+                                  </b>
+                                  {': '}
+                                  {member.best === null
+                                    ? 'no deterministic path with the declared facts'
+                                    : member.best.steps.length === 0
+                                      ? 'already covered by a status they hold'
+                                      : `${describePath(member.best.steps, data)} (${member.best.years === 0 ? 'now' : `~${member.best.years} yrs`})`}
+                                </p>
+                                {member.best && member.best.steps.length > 0 && (
+                                  <PlanCaveats
+                                    caveats={pathCaveats(member.best.steps)}
+                                    data={data}
+                                    nameOf={nameOf}
+                                    className="mt-0.5"
+                                  />
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        )}
                         {a.best && (a.best.lostCitizenships.length > 0 || a.best.lostBlocs.length > 0) && (
                           <p className="mt-1 pl-5 text-xs text-destructive">
                             Lose:{' '}
@@ -841,6 +1055,9 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                           {top.renouncesPrevious && (
                             <span className="text-destructive">requires renouncing</span>
                           )}
+                          {caveatChips(top).map(chip => (
+                            <span key={chip} className="rounded bg-muted px-1.5 py-0.5 text-xs">{chip}</span>
+                          ))}
                         </div>
                       </div>
                       <Badge className="shrink-0 text-xs font-semibold uppercase">Best fit</Badge>
@@ -860,6 +1077,7 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                             Loses: {[...top.lostCitizenships, ...top.lostBlocs].join(' · ')}
                           </p>
                         )}
+                        <PlanCaveats caveats={caveatsFor(top)} data={data} nameOf={nameOf} />
                       </div>
                     </details>
                   </div>
@@ -874,6 +1092,9 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                             <span className="font-medium">{countryLabel(r.name, r.iso_n3)}</span>
                             {viaLabel(r) && <span className="text-xs text-muted-foreground">{viaLabel(r)}</span>}
                             {r.renouncesPrevious && <span className="text-xs text-destructive">renounce</span>}
+                            {caveatChips(r).map(chip => (
+                              <span key={chip} className="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">{chip}</span>
+                            ))}
                           </span>
                           <span className="flex items-center gap-2 text-right text-xs whitespace-nowrap text-muted-foreground">
                             +{r.marginal} · {r.years !== null ? `~${r.years}y` : '?'}
@@ -890,6 +1111,7 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                               Loses: {[...r.lostCitizenships, ...r.lostBlocs].join(' · ')}
                             </p>
                           )}
+                          <PlanCaveats caveats={caveatsFor(r)} data={data} nameOf={nameOf} />
                         </div>
                       </details>
                     ))}
@@ -918,14 +1140,19 @@ export function MyFlags({ data, edges, profile, onChange, onOpenPrivacy, citizen
                                 <span className="ml-1.5 font-normal text-muted-foreground">needs stronger primary evidence</span>
                               )}
                             </span>
-                            <a
-                              href={route.sources[0]?.url}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="shrink-0 text-muted-foreground underline underline-offset-2 hover:text-foreground"
-                            >
-                              Source
-                            </a>
+                            {/* The index carries no `sources` — those live in the
+                                country slice — so this links to the page that
+                                renders them rather than inventing a URL, and
+                                renders nothing at all when there is no slug to
+                                link to. */}
+                            {slugOf(route.country.iso_n3) && (
+                              <a
+                                href={`/country/${slugOf(route.country.iso_n3)}/`}
+                                className="shrink-0 text-muted-foreground underline underline-offset-2 hover:text-foreground"
+                              >
+                                Sources
+                              </a>
+                            )}
                           </div>
                         ))}
                       </div>

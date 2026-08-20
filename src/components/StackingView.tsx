@@ -1,4 +1,5 @@
-import type { BlocsData, CitizenshipRoutesData } from '../types';
+import { FlaskConical } from 'lucide-react';
+import type { AtlasIndexData, BlocsData } from '../types';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,8 +22,13 @@ interface Props {
   profile: Profile;
   onProfileChange: (profile: Profile) => void;
   onOpenPrivacy: () => void;
+  /** The status graph. null = still loading, or the fetch failed (see graphFailed). */
   edges: GraphEdge[] | null;
-  citizenshipRoutes: CitizenshipRoutesData | null;
+  /** The graph fetch failed. Distinguished from loading so the empty state is honest. */
+  graphFailed?: boolean;
+  citizenshipRoutes: AtlasIndexData | null;
+  /** Return to the preview page. An opt-in the reader cannot leave is a trap. */
+  onLeaveBeta: () => void;
 }
 
 export function StackingView({
@@ -32,7 +38,9 @@ export function StackingView({
   onProfileChange,
   onOpenPrivacy,
   edges,
+  graphFailed = false,
   citizenshipRoutes,
+  onLeaveBeta,
 }: Props) {
   const dark = useTheme().theme === 'dark';
   const blocById = new Map(data.blocs.map(b => [b.id, b]));
@@ -40,9 +48,37 @@ export function StackingView({
   return (
     <div className="cartographic-surface absolute inset-0 overflow-y-auto px-3 py-4 pb-[max(2rem,env(safe-area-inset-bottom))] sm:px-7 sm:py-6">
       <div className="mb-4 sm:mb-6">
-        <h2 className="text-xl font-bold">Mobility planner</h2>
-        <p className="mt-1 text-sm text-muted-foreground">Build a private profile, find a path, and watch the rules that affect it.</p>
+        <div className="flex flex-wrap items-center gap-2">
+          <h2 className="text-xl font-bold">Mobility planner</h2>
+          <Badge variant="outline" className="gap-1 text-xs font-semibold uppercase tracking-wide">
+            <FlaskConical className="size-2.5" aria-hidden />
+            Prototype
+          </Badge>
+          <Button variant="ghost" size="xs" className="ml-auto text-xs text-muted-foreground" onClick={onLeaveBeta}>
+            Leave the prototype
+          </Button>
+        </div>
+        <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
+          Build a private profile, find a path, and watch the rules that affect it. Routes are
+          solved over the mapped graph, so the answer is only as complete as the map: every step
+          says whether the grant is automatic, whose status unlocked it, and which facts came from
+          you rather than from a source. Not legal advice.
+        </p>
       </div>
+
+      {/* An empty planner has two very different causes and must not present them
+          as one. A graph that failed to load produces the same silence as a
+          profile with no mapped route, and only one of those is about the user. */}
+      {edges === null && (
+        <div
+          role={graphFailed ? 'alert' : undefined}
+          className="mb-4 rounded-lg border border-dashed px-3 py-2.5 text-xs leading-relaxed text-muted-foreground sm:mb-6"
+        >
+          {graphFailed
+            ? 'The route graph failed to load, so multi-step plans are unavailable. Single-hop suggestions below still work; reload to try again.'
+            : 'Loading the route graph — multi-step plans appear once it arrives.'}
+        </div>
+      )}
 
       <MyFlags
         data={data}

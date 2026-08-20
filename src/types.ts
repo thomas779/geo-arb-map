@@ -296,6 +296,24 @@ export type PluralityAcquisitionEffect =
   | 'renunciation_with_exceptions'
   | 'unknown';
 
+/**
+ * The plurality limbs the ATLAS INDEX carries — the ones the planner reads.
+ *
+ * Why a narrower row exists at all: the planner's renunciation warning reads the
+ * inbound `acquisition` limb and the `status` headline, and nothing else. The
+ * index omitted the field entirely, so `pluralityIndex()` returned an empty Map
+ * against shipped data and the warning could never fire — a fact the tests
+ * missed because they read the full corpus. Rather than ship all four limbs of
+ * prose to every atlas visitor (+46KB, most of it outbound-retention detail no
+ * shipped surface reads), the index carries this projection: +8.4KB, and the
+ * warning works. Outbound retention and asymmetry stay slice-only, on the
+ * country page that actually renders them.
+ */
+export type JurisdictionPlurality = Pick<
+  JurisdictionDualNationality,
+  'status' | 'provenance' | 'acquisition'
+>;
+
 export interface JurisdictionDualNationality {
   status: 'allowed' | 'conditional' | 'prohibited' | 'unknown';
   /** `legacy_import` rows carry a headline and prose only; every limb is unknown. */
@@ -457,6 +475,11 @@ export interface AtlasIndexData {
     iso_n3: string;
     name: string;
     coverage: Record<CitizenshipAcquisitionMode, CitizenshipCoverageState>;
+    /**
+     * Present only on the 34 jurisdictions that have a recorded row. Absent is
+     * NOT RECORDED, never "no restriction" — see JurisdictionPlurality.
+     */
+    dual_nationality?: JurisdictionPlurality | null;
   }>;
   routes: CitizenshipRouteSummary[];
   residence_routes?: ResidenceRouteSummary[];

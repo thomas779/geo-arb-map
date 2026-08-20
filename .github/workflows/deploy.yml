@@ -66,8 +66,18 @@ jobs:
             fi
           done
           test -f dist/atlas-index.json
+          # The planner graph is served as a PROJECTION under its own name, which
+          # is why dist/edges.json above still means what it said: the 319KB raw
+          # artifact stays a build input. Assert the projection ships and stays
+          # inside the same 200KB public-surface budget the corpus slicing set.
+          test -f dist/planner-graph.json
+          graph=$(wc -c < dist/planner-graph.json)
+          if [ "$graph" -ge 200000 ]; then
+            echo "::error::dist/planner-graph.json is ${graph} bytes, over the 200KB public-surface budget"
+            exit 1
+          fi
           slices=$(ls dist/country/*/data.json | wc -l)
-          echo "served surface: atlas-index.json + $slices country slices"
+          echo "served surface: atlas-index.json + $slices country slices + planner-graph.json (${graph} bytes)"
 
       - name: Deploy
         if: env.HAS_DEPLOY_TOKEN == 'true'

@@ -1,4 +1,4 @@
-import type { BilateralLane, Bloc, BlocsData, JurisdictionDualNationality } from '../types';
+import type { BilateralLane, Bloc, BlocsData, JurisdictionPlurality } from '../types';
 import {
   CBI_YEARS,
   DESCENT_PATHS,
@@ -453,10 +453,10 @@ export function acquisitionYears(_data: BlocsData): Map<string, number> {
  * rival 25-row model in public/blocs_data.json on its own enum (`banned`), so the
  * audit measured one thing and the product served another. That model is retired.
  */
-export type PluralityIndex = Map<string, JurisdictionDualNationality>;
+export type PluralityIndex = Map<string, JurisdictionPlurality>;
 
 export function pluralityIndex(
-  routes: { jurisdictions: Array<{ iso_n3: string; dual_nationality?: JurisdictionDualNationality | null }> } | null,
+  routes: { jurisdictions: Array<{ iso_n3: string; dual_nationality?: JurisdictionPlurality | null }> } | null,
 ): PluralityIndex {
   const index: PluralityIndex = new Map();
   for (const jurisdiction of routes?.jurisdictions ?? []) {
@@ -479,7 +479,7 @@ export function pluralityIndex(
  * or a row that says `unknown` both ways, warns nobody: absence is NOT RECORDED,
  * never "no restriction".
  */
-export function renouncesOnAcquiring(row: JurisdictionDualNationality | undefined): boolean {
+export function renouncesOnAcquiring(row: JurisdictionPlurality | undefined): boolean {
   if (!row) return false;
   if (row.acquisition.effect === 'renunciation_required') return true;
   // `renunciation_with_exceptions` deliberately does NOT flag. Whether it bites

@@ -2,6 +2,13 @@ import { describe, expect, test } from 'bun:test';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { buildSitemapLastmod, buildSitemapUrls, RESIDENCE_FILTER_JS, ROUTE_PATHS, ROUTES_ENABLED, THEME_BOOT_JS } from '../scripts/build_country_pages';
+import {
+  buildPlannerGraph,
+  isRationed,
+  PLANNER_GRAPH_BUDGET_BYTES,
+  PLANNER_GRAPH_FILE,
+  type EdgesFile,
+} from '../src/lib/pathfinder';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 
 const canonicalUrl = 'https://flagpaths.com/';
@@ -176,6 +183,37 @@ describe('public surface is index-plus-slices, not a bulk download', () => {
       expect(bytes, `public/${entry.name} is ${Math.round(bytes / 1024)}KB; bulk data belongs in data/compiled`)
         .toBeLessThan(200_000);
     }
+  });
+
+  test('the planner graph ships as a projection that fits the same budget', () => {
+    // The graph was compiled for three days and never served, so the planner
+    // could not exist in the browser. It ships now — but the raw artifact is
+    // 319KB, over the cap, and every atlas visitor would have paid for it if it
+    // were fetched eagerly or copied into public/. Two things are asserted:
+    // the RAW file stays a build input, and the PROJECTION fits.
+    const raw = new URL('../data/compiled/edges.json', import.meta.url);
+    expect(existsSync(raw)).toBe(true);
+    expect(existsSync(new URL(`../public/${PLANNER_GRAPH_FILE}`, import.meta.url))).toBe(false);
+
+    const edges = JSON.parse(readFileSync(raw, 'utf8')) as EdgesFile;
+    const served = JSON.stringify(buildPlannerGraph(edges));
+    expect(served.length).toBeLessThan(PLANNER_GRAPH_BUDGET_BYTES);
+    // The projection is a saving, not a trim: no edge may be dropped, or the
+    // planner quietly stops finding routes that exist.
+    expect(buildPlannerGraph(edges).edges).toHaveLength(edges.edges.length);
+    expect(statSync(raw).size).toBeGreaterThan(PLANNER_GRAPH_BUDGET_BYTES);
+
+    // Gates survive projection. A predicate lost here is an edge that vanishes
+    // from the graph with no error — the exact silence src/lib/predicates.ts
+    // exists to make impossible.
+    const gated = (file: EdgesFile) =>
+      file.edges.filter(e => (e.predicates ?? []).length || (e.needs ?? []).length).length;
+    expect(gated(buildPlannerGraph(edges))).toBe(gated(edges));
+    // Rationed edges survive too: the chance-based panel names them, even though
+    // no deterministic plan may contain one.
+    const rationed = (file: EdgesFile) => file.edges.filter(isRationed).length;
+    expect(rationed(buildPlannerGraph(edges))).toBe(rationed(edges));
+    expect(rationed(edges)).toBeGreaterThan(0);
   });
 
   test('llms.txt points agents at the index and the slice pattern', () => {

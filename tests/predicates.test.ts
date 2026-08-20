@@ -72,14 +72,14 @@ describe('predicate validation fails the build', () => {
     // The gated minority. Every gate derived from a legacy string still matches
     // the shim exactly — that equivalence is the migration's guarantee.
     const gated = edges.filter(e => (e.predicates ?? []).length > 0);
-    for (const edge of gated.filter(e => e.needs.length > 0)) {
-      expect(edge.predicates).toEqual(predicatesFromNeeds(edge.needs));
+    for (const edge of gated.filter(e => (e.needs ?? []).length > 0)) {
+      expect(edge.predicates).toEqual(predicatesFromNeeds(edge.needs ?? []));
     }
     // …and the gates that are NOT derived from one are exactly the cross-actor
     // gates, which have no string form because the frozen vocabulary could only
     // ever describe the applicant. Three today: the jus-soli half of each event
     // accelerator, gated on a parent's intent rather than the child's.
-    const native = gated.filter(e => e.needs.length === 0);
+    const native = gated.filter(e => (e.needs ?? []).length === 0);
     expect(native.length).toBe(3);
     for (const edge of native) {
       expect(edge.actor).toBe('child');

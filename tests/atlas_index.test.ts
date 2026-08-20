@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import { buildAtlasIndex, buildCountrySlice } from '../scripts/build_country_pages';
 import { buildCountrySlugMap } from '../src/lib/slug';
 import { isNonApplicableJurisdiction } from '../src/lib/country';
+import { pluralityIndex, renouncesOnAcquiring } from '../src/lib/planner';
 import type { CitizenshipRoutesData } from '../src/types';
 
 const citizenship = JSON.parse(readFileSync(
@@ -75,5 +76,34 @@ describe('atlas index and country slices', () => {
     expect(portugal.meta.index).toContain('/atlas-index.json');
     expect(portugal.routes[0]).toHaveProperty('summary');
     expect(portugal.routes[0]).toHaveProperty('sources');
+  });
+
+  test('the index carries the plurality limb the renunciation warning reads', () => {
+    // The bug this pins: the index projected iso_n3/name/coverage only, so
+    // `pluralityIndex(atlasIndex)` returned an EMPTY Map against shipped data and
+    // the planner's renunciation warning could never fire for anyone. The tests
+    // did not catch it because they all read the full corpus, where the field is
+    // present. Assert against the INDEX, which is what the browser fetches.
+    const index = buildAtlasIndex(citizenship);
+    const plurality = pluralityIndex(index);
+    expect(plurality.size).toBeGreaterThan(0);
+    // …and it must agree with the corpus row-for-row: a projection that drops
+    // jurisdictions is the same failure one step quieter.
+    const inCorpus = pluralityIndex(citizenship);
+    expect(plurality.size).toBe(inCorpus.size);
+    for (const [iso, row] of inCorpus) {
+      expect(plurality.get(iso)?.status).toBe(row.status);
+      expect(plurality.get(iso)?.acquisition.effect).toBe(row.acquisition.effect);
+    }
+    // The warning itself fires, which is the thing the user sees.
+    const flagged = [...plurality].filter(([, row]) => renouncesOnAcquiring(row));
+    expect(flagged.length).toBeGreaterThan(0);
+
+    // The projection is the INBOUND limb only. Outbound retention and asymmetry
+    // are prose the country page renders from its own slice; shipping them here
+    // would put 46KB of unread detail on every atlas first paint.
+    const projected = index.jurisdictions.find(j => j.dual_nationality)!;
+    expect(Object.keys(projected.dual_nationality!).sort())
+      .toEqual(['acquisition', 'provenance', 'status']);
   });
 });

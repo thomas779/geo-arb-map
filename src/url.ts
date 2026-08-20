@@ -113,6 +113,57 @@ export function read(): Partial<AppState> {
   return state;
 }
 
+/* ── The planner gate ──────────────────────────────────────────────────────── */
+
+/**
+ * The planner engine is finished and tested; the DATA under it is uneven —
+ * naturalisation durations are audited for some jurisdictions and inferred for
+ * others, and 192 of the naturalisation edges are discretionary grants. So
+ * /planner/ still shows the preview by default and the working planner is behind
+ * an explicit opt-in, chosen over a build-time flag for two reasons: a build flag
+ * cannot be turned on by the person who wants to look at it, and it cannot be
+ * turned off by someone who opened it by accident.
+ *
+ * `?planner=beta` opts in, `?planner=off` opts out, and the choice persists so
+ * it survives the pathname rewrite `sync()` does on every state change.
+ */
+export const PLANNER_PARAM = 'planner';
+export const PLANNER_BETA_KEY = 'geo-arb-planner-beta';
+
+export function readPlannerBeta(
+  params = new URLSearchParams(window.location.search),
+  storage: Pick<Storage, 'getItem'> | null = safeStorage(),
+): boolean {
+  const requested = params.get(PLANNER_PARAM);
+  if (requested === 'beta' || requested === '1') return true;
+  if (requested === 'off' || requested === '0') return false;
+  try {
+    return storage?.getItem(PLANNER_BETA_KEY) === 'true';
+  } catch {
+    return false;
+  }
+}
+
+/** Persist the choice and reflect it in the URL, so the state is shareable. */
+export function setPlannerBeta(on: boolean): void {
+  try {
+    localStorage.setItem(PLANNER_BETA_KEY, on ? 'true' : 'false');
+  } catch { /* private mode: the URL parameter still carries the session */ }
+  const params = new URLSearchParams(window.location.search);
+  if (on) params.set(PLANNER_PARAM, 'beta');
+  else params.delete(PLANNER_PARAM);
+  const qs = params.toString();
+  history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
+}
+
+function safeStorage(): Pick<Storage, 'getItem'> | null {
+  try {
+    return typeof localStorage === 'undefined' ? null : localStorage;
+  } catch {
+    return null;
+  }
+}
+
 export function readInfo(params = new URLSearchParams(window.location.search)): TrustSection | null {
   const value = params.get('info');
   return TRUST_SECTIONS.includes(value as TrustSection) ? value as TrustSection : null;

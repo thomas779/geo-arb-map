@@ -1,9 +1,15 @@
 # Strategy Explorer — Locked Design Decisions
 
-Status: **deferred with the planner. The experimental pathfinder remains covered by
-acceptance tests, but no graph artifact is shipped to the Atlas. A future planner
-should derive its graph from canonical D1 records rather than committing a second
-public data source.**
+Status: **shipped behind an opt-in (2026-08-20).** The graph IS served now, as
+`/planner-graph.json` — a projection of `data/compiled/edges.json` that drops
+defaults and the unread `confidence` field to fit the 200KB public-surface cap
+(319KB → 172KB, `buildPlannerGraph` in `src/lib/pathfinder.ts`). It is fetched
+lazily, only when `/planner/` is opened with the opt-in on, so no atlas visit pays
+for it. `/planner/` still renders `PlannerPreview` by default; `?planner=beta`
+(or the page's own button) mounts `StackingView`. The remaining debt is unchanged:
+the graph is compiled from `blocs_data.json` + `manual_edges.json` +
+`timeline_rules.json` + the corpus rather than from canonical D1 records, so it is
+still a second derived data source and should be moved onto D1.
 This file records decisions locked on 2026-07-16 (from batch-3 external research review
 plus owner rulings) so the feature lands cleanly when requested. Concepts win over
 naming: where the research doc's field names differ from the repo's, the repo's win.
@@ -176,8 +182,35 @@ renouncing never strips another's citizenship.
 
 1. ~~normalizer~~ → 2. ~~coverage registry~~ → 3. ~~build_edges.js~~ →
 4. ~~renunciation + allocation semantics~~ → 5. ~~pathfinder + footprint engine~~
-(all done 2026-07-17) → 6. explorer page → 7. coverage page → 8. map-panel
+(all done 2026-07-17) → 6. ~~explorer page~~ (graph served + `StackingView` mounted
+behind `?planner=beta`, 2026-08-20) → 7. coverage page → 8. map-panel
 indicators + Greater China card renderer.
+
+## What a plan must disclose (added 2026-08-20)
+
+Three facts the engine computed and the UI dropped. Each is a way a plan can be
+arithmetically right and still not a legal finding, so each rides on the
+`PathStep` that produced it and renders through `pathCaveats`:
+
+- `allocation: 'discretionary'` on a step → **not automatic**. 192 naturalisation
+  edges carry it. They stay in plans (they are not RATIONED) exactly so this can
+  be said: meeting every requirement qualifies you to be considered.
+  The single-hop recommender never walks the graph, so its rows get the same fact
+  by looking the destination up in the served edges — the same claim, not a
+  second opinion. With no graph loaded there is no claim either way.
+- `viaHousehold` on a step → **unlocked by someone else**, and it cannot start
+  before that status exists. Only the CHILD's search produces these today (the
+  three event-accelerator edges gated on a parent's intent), and the household
+  card renders the binding member — so the per-actor plans are rendered too, or
+  the one thing household solving produced would be invisible.
+- `attested` on a step → **rests on what you told us**. The route is sourced; the
+  reader's eligibility under it is a checkbox. Twelve edges are gated this way
+  (Law of Return, Spätaussiedler, Qandas, the Russian compatriot programme, and
+  the `child_abroad` intents).
+
+Nothing in the corpus gates on a PARTNER's nationality, so the cross-actor panel
+is empty for every profile without a declared child. That is a data fact, not a
+missing feature: no row asserts it, so nothing renders.
 
 Nationality-conditioned naturalization is represented as a general ordinary edge
 plus a faster edge gated by `citizenship_any:<ISO,...>`. Spain therefore uses the

@@ -1,10 +1,16 @@
-import { Send } from 'lucide-react';
+import { FlaskConical, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { GlobeRouteField } from '@/components/GlobeRouteField';
 import type { BlocsData } from '@/types';
 
 interface Props {
   data: BlocsData;
+  /**
+   * Opt into the working planner. The engine is finished; the corpus underneath
+   * it is uneven, so this page stays the default and the prototype is one
+   * deliberate click away rather than a build flag nobody can reach.
+   */
+  onOpenBeta: () => void;
 }
 
 const futureCapabilities = [
@@ -24,7 +30,7 @@ const futureCapabilities = [
 
 const CARTOGRAPHIC_BLOCS = new Set(['eu_eea', 'mercosur', 'asean']);
 
-export function PlannerPreview({ data }: Props) {
+export function PlannerPreview({ data, onOpenBeta }: Props) {
   const regionIsos = data.blocs
     .filter(bloc => CARTOGRAPHIC_BLOCS.has(bloc.id))
     .flatMap(bloc => bloc.members.map(member => member.iso_n3));
@@ -50,7 +56,7 @@ export function PlannerPreview({ data }: Props) {
               rules. A later planner release will turn the facts you choose to share
               into source-backed routes worth investigating.
             </p>
-            <div className="planner-preview-actions mt-8">
+            <div className="planner-preview-actions mt-8 flex flex-wrap gap-2">
               <Button asChild size="lg" className="min-h-11 gap-2">
                 <a
                   href="https://t.me/flagpaths"
@@ -61,10 +67,25 @@ export function PlannerPreview({ data }: Props) {
                   Join for updates
                 </a>
               </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="min-h-11 gap-2 bg-background/70"
+                onClick={onOpenBeta}
+              >
+                <FlaskConical aria-hidden />
+                Open the prototype
+              </Button>
             </div>
             <p className="planner-preview-note mt-3 max-w-md text-xs leading-relaxed text-muted-foreground">
               Reviewed changes to citizenship, residence, visa, and tax-residence rules,
               delivered on Telegram. No account is needed to use the atlas today.
+            </p>
+            <p className="planner-preview-note mt-2 max-w-md text-xs leading-relaxed text-muted-foreground">
+              The prototype solves real routes over the mapped graph, and its coverage is
+              uneven: some naturalisation clocks are read from the statute, others are
+              inferred, and most naturalisation grants are discretionary. It labels which
+              is which, and it is not advice.
             </p>
           </div>
 

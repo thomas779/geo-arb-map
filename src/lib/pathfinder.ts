@@ -58,19 +58,35 @@ export function isRationed(edge: Pick<GraphEdge, 'allocation'>): boolean {
   return allocation === 'ballot' || allocation === 'quota_queue';
 }
 
+export type EdgeAllocation = 'right' | 'ballot' | 'quota_queue' | 'discretionary';
+
 export interface GraphEdge {
   from: string;
   to: string;
   mechanism: string;
   years: number;
-  allocation: 'right' | 'ballot' | 'quota_queue' | 'discretionary';
-  confidence: string;
+  /**
+   * Optional because the SERVED projection omits it when it is `right` — the
+   * default, and 1,953 of 2,164 edges (see `buildPlannerGraph`). Every reader
+   * must therefore go through `edge.allocation ?? 'right'`, which `isRationed`
+   * and `transition` both do.
+   */
+  allocation?: EdgeAllocation;
+  /**
+   * Research grade of the underlying record. Compiled in, but the solver never
+   * reads it, so the served projection drops it rather than shipping 2,164
+   * copies of a string the browser cannot use.
+   */
+  confidence?: string;
   /**
    * Legacy flat gate vocabulary. Still emitted and still honoured (see
    * `edgeGate`), but frozen: new gates are expressed as `predicates`, which can
    * name a subject other than the applicant and record where the fact came from.
+   *
+   * Optional because an empty gate is the common case and `[]` on every edge is
+   * 26KB of the served graph. `edgeGate` reads `?? []`.
    */
-  needs: string[];
+  needs?: string[];
   /**
    * Typed gate. Present on every edge scripts/build_edges.js emits; absent only
    * on hand-built edges (tests, older compiled files), where it is derived from
@@ -99,6 +115,63 @@ export interface EdgesFile {
   edges: GraphEdge[];
 }
 
+/* ── Publishing the graph ──────────────────────────────────────────────────── */
+
+/**
+ * Where the browser fetches the graph from, relative to BASE_URL.
+ *
+ * Deliberately NOT `edges.json`. `data/compiled/edges.json` is a 319KB build
+ * input and the deploy asserts it is never served (see .github/workflows/deploy.yml);
+ * what ships is the projection below, under its own name, so the guard on the
+ * raw artifact keeps meaning what it said.
+ */
+export const PLANNER_GRAPH_FILE = 'planner-graph.json';
+
+/**
+ * The public-surface cap, the same 200KB tests/seo.test.ts enforces on public/.
+ * The projection exists to get under it: an atlas page must not pay a
+ * third-of-a-megabyte tax for a planner the reader may never open.
+ */
+export const PLANNER_GRAPH_BUDGET_BYTES = 200_000;
+
+/**
+ * The served graph: every edge, fewer fields.
+ *
+ * A projection rather than a shard, because a shard has to be keyed on
+ * something and this graph has no origin to key on — the planner Dijkstras from
+ * the user's whole status set at once, and one profile with two EU passports
+ * touches nearly a thousand edges. Splitting by origin would mean fetching most
+ * of the shards anyway. So the saving comes from dropping what the solver does
+ * not read (`confidence`), and from omitting defaults (`allocation: 'right'`,
+ * `needs: []`) instead of shipping 2,164 copies of each: 319KB → 172KB, under
+ * the cap in one request that only the planner view makes.
+ *
+ * NOTHING semantic is dropped. Rationed edges stay in, because the chance-based
+ * panel names them; predicates stay in, because a gate that vanishes is an edge
+ * that silently disappears.
+ */
+export function buildPlannerGraph(file: EdgesFile): EdgesFile {
+  return {
+    meta: file.meta,
+    edges: file.edges.map((edge) => {
+      const projected: GraphEdge = {
+        from: edge.from,
+        to: edge.to,
+        mechanism: edge.mechanism,
+        years: edge.years,
+      };
+      if ((edge.allocation ?? 'right') !== 'right') projected.allocation = edge.allocation;
+      if (edge.renounces_previous) projected.renounces_previous = true;
+      if (edge.actor) projected.actor = edge.actor;
+      // The typed gate wins; `needs` rides along only where nothing derived a
+      // typed one, so the shim still has something to read.
+      if (edge.predicates?.length) projected.predicates = edge.predicates;
+      else if (edge.needs?.length) projected.needs = edge.needs;
+      return projected;
+    }),
+  };
+}
+
 /**
  * A gate on someone other than the searching actor, carried onto the step it
  * unlocked. Composition is where provenance usually dies: the reason a step
@@ -114,11 +187,34 @@ export interface HouseholdGate {
   provenance: PredicateProvenance;
 }
 
+/**
+ * A fact the user asserted, carried onto the step it unlocked.
+ *
+ * The distinction the UI has to be able to draw: an edge gated on
+ * `heritage eq israel_law_of_return` is real law, but whether the person ticking
+ * the box is covered by it is not something we know. A plan built on a checkbox
+ * must not read as a legal finding, so the checkbox travels with the plan.
+ */
+export interface StepAttestation {
+  subject: PredicateSubject;
+  attribute: string;
+  value: unknown;
+}
+
 export interface PathStep {
   mechanism: string;
   to: string;
   years: number;
   renouncesPrevious?: boolean;
+  /**
+   * The edge's allocation, carried ONLY when it is something other than
+   * `right`. Rationed allocations never reach a step at all (`isRationed` keeps
+   * them out of the search), so in practice this says `discretionary`: 192
+   * naturalisation edges qualify you to be CONSIDERED, not to receive, and a UI
+   * that renders them like a bloc entitlement is claiming a guarantee the
+   * statute withholds.
+   */
+  allocation?: EdgeAllocation;
   /**
    * Years spent waiting for another member's status to come into existence,
    * before this step's own duration starts. Absent when zero, which is every
@@ -127,6 +223,50 @@ export interface PathStep {
   waitYears?: number;
   /** Cross-actor gates this step rests on. Absent when there are none. */
   viaHousehold?: HouseholdGate[];
+  /** Self-attested facts this step rests on. Absent when it rests on none. */
+  attested?: StepAttestation[];
+}
+
+/**
+ * What a plan depends on beyond its own arithmetic, deduplicated across steps.
+ *
+ * Extracted rather than left to each caller because all three of these are ways
+ * a plan can be true on paper and wrong for the reader, and every surface that
+ * renders a plan needs the same three.
+ */
+export interface PathCaveats {
+  /** Mechanisms on the path whose grant is discretionary, not automatic. */
+  discretionary: string[];
+  /** Gates naming another household member. */
+  household: HouseholdGate[];
+  /** Facts the user told us, which no source verifies. */
+  attested: StepAttestation[];
+}
+
+export function pathCaveats(steps: readonly PathStep[]): PathCaveats {
+  const discretionary: string[] = [];
+  const household: HouseholdGate[] = [];
+  const attested: StepAttestation[] = [];
+  const seenHousehold = new Set<string>();
+  const seenAttested = new Set<string>();
+  for (const step of steps) {
+    if (step.allocation === 'discretionary' && !discretionary.includes(step.mechanism)) {
+      discretionary.push(step.mechanism);
+    }
+    for (const gate of step.viaHousehold ?? []) {
+      const key = `${gate.subject}|${gate.attribute}|${JSON.stringify(gate.value)}`;
+      if (seenHousehold.has(key)) continue;
+      seenHousehold.add(key);
+      household.push(gate);
+    }
+    for (const fact of step.attested ?? []) {
+      const key = `${fact.subject}|${fact.attribute}|${JSON.stringify(fact.value)}`;
+      if (seenAttested.has(key)) continue;
+      seenAttested.add(key);
+      attested.push(fact);
+    }
+  }
+  return { discretionary, household, attested };
 }
 
 export interface PathInfo {
@@ -241,6 +381,7 @@ function transition(
   edge: GraphEdge,
   wait = 0,
   via: HouseholdGate[] = [],
+  attested: StepAttestation[] = [],
 ): State {
   const citizenships = new Set(cur.citizenships);
   const acquired = new Set(cur.acquiredCitizenships);
@@ -270,8 +411,12 @@ function transition(
       to: edge.to,
       years: edge.years,
       renouncesPrevious: edge.renounces_previous,
+      // Only when it is not the default. `right` on a step would be noise on
+      // 1,953 of 2,164 edges, and absence already means "an entitlement".
+      ...((edge.allocation ?? 'right') !== 'right' ? { allocation: edge.allocation } : {}),
       ...(waited > 0 ? { waitYears: waited } : {}),
       ...(via.length ? { viaHousehold: via } : {}),
+      ...(attested.length ? { attested } : {}),
     }],
     renounces: cur.renounces || !!edge.renounces_previous,
     citizenships: [...citizenships].sort(),
@@ -370,6 +515,9 @@ export function shortestPaths(
   // The cross-actor half of each gate, precomputed so the provenance can be
   // attached to the step without re-walking the predicate list per relaxation.
   const crossActor = new Map<GraphEdge, HouseholdGate[]>();
+  // The self-attested half, same reason: a plan that rests on a ticked box has
+  // to be able to say so, and the box is known here and nowhere later.
+  const attestations = new Map<GraphEdge, StepAttestation[]>();
   for (const e of usable) {
     if (!byFrom.has(e.from)) byFrom.set(e.from, []);
     byFrom.get(e.from)!.push(e);
@@ -384,6 +532,10 @@ export function shortestPaths(
         provenance: p.provenance,
       }));
     if (via.length) crossActor.set(e, via);
+    const attested = gate
+      .filter(p => p.provenance === 'self_attested')
+      .map(p => ({ subject: p.subject, attribute: p.attribute, value: p.value }));
+    if (attested.length) attestations.set(e, attested);
   }
   const gateSatisfied = (e: GraphEdge, citizenships: ReadonlySet<string>): boolean =>
     predicatesSatisfied(gates.get(e) ?? edgeGate(e), { profile, citizenships, household });
@@ -421,7 +573,7 @@ export function shortestPaths(
   const baseHeld = new Set(base.citizenships);
   for (const e of byFrom.get('*') ?? []) {
     if (gateSatisfied(e, baseHeld)) {
-      queue.push(transition(base, e, waitFor(e, baseHeld), crossActor.get(e)));
+      queue.push(transition(base, e, waitFor(e, baseHeld), crossActor.get(e), attestations.get(e)));
     }
   }
 
@@ -443,7 +595,7 @@ export function shortestPaths(
     const held = new Set(cur.citizenships);
     for (const e of byFrom.get(cur.node) ?? []) {
       if (gateSatisfied(e, held)) {
-        queue.push(transition(cur, e, waitFor(e, held), crossActor.get(e)));
+        queue.push(transition(cur, e, waitFor(e, held), crossActor.get(e), attestations.get(e)));
       }
     }
   }
@@ -894,14 +1046,17 @@ export function solveGoals(
  * missing would be exactly the ones spent waiting on somebody else — the part a
  * household plan most needs to say out loud.
  */
+/** A mechanism id as a reader would say it. Shared so no surface renders a raw id. */
+export function mechanismLabel(id: string, data: BlocsData): string {
+  if (id === 'naturalization') return 'naturalize';
+  if (id === 'cbi') return 'citizenship by investment';
+  return data.blocs.find(b => b.id === id)?.name
+    ?? data.bilateral_lanes.find(l => l.id === id)?.name
+    ?? id;
+}
+
 export function describePath(steps: PathStep[], data: BlocsData): string {
-  const mechName = (id: string): string => {
-    if (id === 'naturalization') return 'naturalize';
-    if (id === 'cbi') return 'citizenship by investment';
-    return data.blocs.find(b => b.id === id)?.name
-      ?? data.bilateral_lanes.find(l => l.id === id)?.name
-      ?? id;
-  };
+  const mechName = (id: string): string => mechanismLabel(id, data);
   const yrs = (n: number) => `~${n} yr${n !== 1 ? 's' : ''}`;
   const waitFor = (step: PathStep): string => {
     if (!step.waitYears) return '';

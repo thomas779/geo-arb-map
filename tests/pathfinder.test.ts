@@ -10,8 +10,8 @@ import {
   recommend,
   type Profile,
 } from '../src/lib/planner';
-import { shortestPaths, recommendPaths, type GraphEdge } from '../src/lib/pathfinder';
-import { paramsForState, readProfile } from '../src/url';
+import { pathCaveats, shortestPaths, recommendPaths, type GraphEdge } from '../src/lib/pathfinder';
+import { paramsForState, readPlannerBeta, readProfile } from '../src/url';
 import { clearStoredProfile, LEGACY_FLAGS_KEY, PROFILE_KEY } from '../src/lib/profile-storage';
 import { dataCorrectionUrl, sourceUrl } from '../src/lib/trust';
 // @ts-expect-error — plain-JS bun script, imported for its exported builder
@@ -105,6 +105,75 @@ describe('explorer-spec acceptance tests', () => {
 
   test('(e) Greater China generates no edges at all', () => {
     expect(edges.some(e => e.mechanism === 'greater_china')).toBe(false);
+  });
+});
+
+describe('a plan says what it rests on', () => {
+  // The three things the engine knew and the UI could not show. Each is a way a
+  // plan can be arithmetically right and still not a legal finding, so each has
+  // to reach the step it belongs to — a caveat computed in the solver and
+  // dropped before render is a caveat that does not exist.
+
+  test('a discretionary grant is carried onto the step, and a right is not', () => {
+    // 192 naturalisation edges are discretionary: the minister may refuse an
+    // otherwise-qualifying applicant. They stay in plans (they are not RATIONED,
+    // see isRationed) precisely so the UI can say the grant is not automatic.
+    const discretionary = edges.filter(e => e.allocation === 'discretionary');
+    expect(discretionary.length).toBeGreaterThan(100);
+
+    const paths = shortestPaths(citizen('840', 'United States'), edges);
+    const steps = [...paths.values()].flatMap(info => info.steps);
+    const marked = steps.filter(step => step.allocation === 'discretionary');
+    expect(marked.length).toBeGreaterThan(0);
+    // Absence means entitlement, so `right` must never be spelled out — a step
+    // labelled 'right' would read as an extra assurance rather than the default.
+    expect(steps.some(step => step.allocation === 'right')).toBe(false);
+    // Every marked step corresponds to an edge that really is discretionary.
+    for (const step of marked) {
+      expect(edges.some(e =>
+        e.to === step.to && e.mechanism === step.mechanism && e.allocation === 'discretionary',
+      )).toBe(true);
+    }
+    expect(pathCaveats(marked).discretionary.length).toBeGreaterThan(0);
+  });
+
+  test('a self-attested gate is carried onto the step it unlocked', () => {
+    // Ticking "Jewish heritage" is not evidence of anything; it is an answer.
+    // The route is sourced, the applicant's eligibility under it is not, and the
+    // plan has to be able to draw that line.
+    const p = profileOf({
+      flags: [{ iso_n3: '840', name: 'United States', status: 'cit' }],
+      heritages: ['israel_law_of_return'],
+    });
+    const israel = shortestPaths(p, edges).get('cit:376');
+    expect(israel).toBeDefined();
+    const attested = israel!.steps.flatMap(step => step.attested ?? []);
+    expect(attested).toEqual([
+      { subject: 'self', attribute: 'heritage', value: 'israel_law_of_return' },
+    ]);
+    expect(pathCaveats(israel!.steps).attested).toHaveLength(1);
+
+    // An ordinary naturalisation path rests on no attestation at all, so the
+    // caveat must not appear where it does not apply.
+    const ordinary = shortestPaths(citizen('076', 'Brazil'), edges);
+    for (const info of ordinary.values()) {
+      for (const step of info.steps) expect(step.attested).toBeUndefined();
+    }
+  });
+
+  test('pathCaveats deduplicates and separates the three kinds', () => {
+    const gate = { subject: 'partner' as const, attribute: 'citizenship', value: '724', provenance: 'sourced' as const };
+    const fact = { subject: 'self' as const, attribute: 'heritage', value: 'israel_law_of_return' };
+    const caveats = pathCaveats([
+      { mechanism: 'naturalization', to: 'cit:724', years: 1, allocation: 'discretionary', viaHousehold: [gate], attested: [fact] },
+      { mechanism: 'naturalization', to: 'cit:620', years: 5, allocation: 'discretionary', viaHousehold: [gate], attested: [fact] },
+      { mechanism: 'eu_eea', to: 'settle_full:276', years: 0 },
+    ]);
+    expect(caveats.discretionary).toEqual(['naturalization']);
+    expect(caveats.household).toEqual([gate]);
+    expect(caveats.attested).toEqual([fact]);
+    expect(pathCaveats([{ mechanism: 'eu_eea', to: 'settle_full:276', years: 0 }]))
+      .toEqual({ discretionary: [], household: [], attested: [] });
   });
 
   test('multi-hop: Uruguayan reaches Spanish citizenship via Mercosur→Argentina? No — direct 2-yr lane wins', () => {
@@ -390,6 +459,26 @@ describe('profile and URL regressions', () => {
     expect(params.get('info')).toBe('privacy');
     expect(params.get('bloc')).toBeNull();
     expect(params.get('blocs')).toBe('eu_eea');
+  });
+
+  test('the planner gate is opt-in, reversible, and survives the URL rewrite', () => {
+    const store = (value: string | null) => ({ getItem: () => value });
+    // Default: the preview. The engine ships, the launch does not.
+    expect(readPlannerBeta(new URLSearchParams(''), store(null))).toBe(false);
+    expect(readPlannerBeta(new URLSearchParams('planner=beta'), store(null))).toBe(true);
+    // A stored opt-in carries across navigations, because sync() rewrites the
+    // pathname on every state change and a query-only gate would not survive it.
+    expect(readPlannerBeta(new URLSearchParams(''), store('true'))).toBe(true);
+    // …and an explicit opt-out in the URL beats the stored one, so a shared
+    // "?planner=off" link is a way back out rather than a no-op.
+    expect(readPlannerBeta(new URLSearchParams('planner=off'), store('true'))).toBe(false);
+    // The gate is not a private profile parameter: it must ride along through a
+    // map state sync, or opening the atlas from the planner silently revokes it.
+    const params = paramsForState(new URLSearchParams('planner=beta'), {
+      view: 'map', blocs: [], lane: null, routeClass: null,
+      licenceAgreement: null, country: null, countryName: null,
+    });
+    expect(params.get('planner')).toBe('beta');
   });
 
   test('clearing a profile removes both current and legacy browser records', () => {

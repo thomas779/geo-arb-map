@@ -23,6 +23,8 @@ import { DetailPanel } from '@/components/DetailPanel';
 import { RouteDetailPanel } from '@/components/RouteDetailPanel';
 import { MobileDetailSheet } from '@/components/MobileDetailSheet';
 import { PlannerPreview } from '@/components/PlannerPreview';
+import { StackingView } from '@/components/StackingView';
+import { PLANNER_GRAPH_FILE, type EdgesFile, type GraphEdge } from '@/lib/pathfinder';
 import { CountriesList } from '@/components/CountriesList';
 import { CountryProfile, deriveCountryProfile } from '@/components/CountryProfile';
 import {
@@ -95,6 +97,15 @@ export default function App() {
     Boolean(initialState.lane) || Boolean(initialState.routeClass) || initialState.blocs.length > 0,
   );
   const [tourOpen, setTourOpen] = useState(false);
+  // The planner gate (see url.readPlannerBeta): /planner/ shows the preview
+  // unless the reader has opted in.
+  const [plannerBeta, setPlannerBeta] = useState<boolean>(() => url.readPlannerBeta());
+  // The status graph, fetched ONLY when the planner is actually opened. It is
+  // 172KB and no other view solves over it, so an atlas visit must not pay for
+  // it; null therefore means "not loaded yet OR failed", and the planner says so
+  // rather than rendering an empty result list as though the answer were "none".
+  const [edges, setEdges] = useState<GraphEdge[] | null>(null);
+  const [edgesFailed, setEdgesFailed] = useState(false);
   // Portrait phones browse a LIST first; the map is on demand. Shared links
   // with a selection land straight on the framed map.
   const [mobileList, setMobileList] = useState<boolean>(
@@ -146,6 +157,21 @@ export default function App() {
     clearStoredProfile(localStorage);
     url.clearProfileParams();
     setProfile(EMPTY_PROFILE);
+  }, []);
+
+  /**
+   * Profile edits, persisted. The planner's own copy says "your profile stays in
+   * this browser", which was only half true while nothing mounted that could
+   * change it: `initialProfile` READ localStorage and nothing ever wrote it, so a
+   * profile built in the planner evaporated on reload. A user edit also takes
+   * ownership from a tooling/demo `?flags=` URL, same as clearProfile does.
+   */
+  const changeProfile = useCallback((next: Profile) => {
+    setProfile(next);
+    url.clearProfileParams();
+    try {
+      localStorage.setItem(PROFILE_KEY, JSON.stringify(next));
+    } catch { /* private mode: the session keeps it, the next visit does not */ }
   }, []);
 
   useEffect(() => {
@@ -206,6 +232,31 @@ export default function App() {
       .catch(err => { if (!cancelled) { console.error('Failed to load country slice:', err); setCountrySlice(null); } });
     return () => { cancelled = true; };
   }, [countrySlug]);
+
+  // The planner graph, fetched on demand. Same status + content-type check as the
+  // eager artifacts above, for the same reason: the SPA fallback answers a missing
+  // JSON with index.html and HTTP 200, so `res.ok` alone would hand the solver an
+  // HTML document and the planner would report "no path" for every profile.
+  const needsGraph = state.view === 'stacking' && plannerBeta;
+  useEffect(() => {
+    if (!needsGraph || edges !== null) return;
+    let cancelled = false;
+    fetch(import.meta.env.BASE_URL + PLANNER_GRAPH_FILE)
+      .then(res => {
+        const type = res.headers.get('content-type') ?? '';
+        if (!res.ok || !type.includes('json')) {
+          throw new Error(`${PLANNER_GRAPH_FILE}: ${res.status} (${type || 'no content-type'})`);
+        }
+        return res.json() as Promise<EdgesFile>;
+      })
+      .then(file => { if (!cancelled) setEdges(file.edges); })
+      .catch(err => {
+        if (cancelled) return;
+        console.error('Failed to load the planner graph:', err);
+        setEdgesFailed(true);
+      });
+    return () => { cancelled = true; };
+  }, [needsGraph, edges]);
 
   useEffect(() => {
     url.sync(state);
@@ -517,7 +568,30 @@ export default function App() {
             </div>
           )}
           {data && state.view === 'stacking' && (
-            <PlannerPreview data={data} />
+            plannerBeta ? (
+              <StackingView
+                data={data}
+                onBlocSelect={toggleBloc}
+                profile={profile}
+                onProfileChange={changeProfile}
+                onOpenPrivacy={() => changeInfo('privacy')}
+                edges={edges}
+                graphFailed={edgesFailed}
+                citizenshipRoutes={citizenshipRoutes}
+                onLeaveBeta={() => {
+                  url.setPlannerBeta(false);
+                  setPlannerBeta(false);
+                }}
+              />
+            ) : (
+              <PlannerPreview
+                data={data}
+                onOpenBeta={() => {
+                  url.setPlannerBeta(true);
+                  setPlannerBeta(true);
+                }}
+              />
+            )
           )}
           {state.view === 'countries' && (() => {
             // Rebuild the corpus shape deriveCountryProfile expects from the

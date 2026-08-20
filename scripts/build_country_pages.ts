@@ -42,6 +42,12 @@ import { isNonApplicableJurisdiction } from '../src/lib/country';
 import type { BlocsData, CitizenshipRoutesData } from '../src/types';
 import type { LicenceExchangeData } from '../src/lib/licence-exchange';
 import {
+  buildPlannerGraph,
+  PLANNER_GRAPH_BUDGET_BYTES,
+  PLANNER_GRAPH_FILE,
+  type EdgesFile,
+} from '../src/lib/pathfinder';
+import {
   LICENCE_AGREEMENTS_PATH,
   buildAgreementsFile,
   buildLicenceIndex,
@@ -289,6 +295,21 @@ export function buildAtlasIndex(citizenship: CitizenshipRoutesData, releaseId?: 
       iso_n3: jurisdiction.iso_n3,
       name: jurisdiction.name,
       coverage: jurisdiction.coverage,
+      // The inbound plurality limb, and only that limb. `pluralityIndex()` in
+      // the planner reads `status` + `acquisition.effect` to decide whether
+      // taking a nationality costs you the ones you hold; with the field omitted
+      // it returned an empty Map against shipped data and the renunciation
+      // warning could never fire. Outbound retention and asymmetry are prose the
+      // country page renders from its own slice, so they stay out of here.
+      ...(jurisdiction.dual_nationality
+        ? {
+            dual_nationality: {
+              status: jurisdiction.dual_nationality.status,
+              provenance: jurisdiction.dual_nationality.provenance,
+              acquisition: jurisdiction.dual_nationality.acquisition,
+            },
+          }
+        : {}),
     })),
     // A strict PROJECTION of the corpus: identical field names and nesting,
     // fewer fields. Titles are included so the atlas panel needs no extra
@@ -763,6 +784,24 @@ immigration lawyer in the specific country before acting on anything shown here.
     );
   }
 
+  // ── Planner graph (#219) ──
+  // The status graph the multi-hop pathfinder solves over. It was compiled for
+  // three days and never served, so `StackingView` had no edges and the planner
+  // could not exist in the browser at all. Served MINIFIED and under its own
+  // name: `data/compiled/edges.json` stays a build input the deploy asserts is
+  // never published, and what ships is `buildPlannerGraph`'s projection of it.
+  const edgesFile = JSON.parse(
+    fs.readFileSync(path.join(root, 'data/compiled/edges.json'), 'utf8'),
+  ) as EdgesFile;
+  const plannerGraph = JSON.stringify(buildPlannerGraph(edgesFile));
+  if (plannerGraph.length > PLANNER_GRAPH_BUDGET_BYTES) {
+    throw new Error(
+      `${PLANNER_GRAPH_FILE} is ${plannerGraph.length} bytes, over the ${PLANNER_GRAPH_BUDGET_BYTES}`
+      + ' public-surface budget. Shard it or drop a field; do not raise the cap.',
+    );
+  }
+  fs.writeFileSync(path.join(distDir, PLANNER_GRAPH_FILE), `${plannerGraph}\n`);
+
   const urls = buildSitemapUrls(citizenship, mobility);
   const lastmod = buildSitemapLastmod(citizenship, mobility);
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'),
@@ -771,7 +810,7 @@ immigration lawyer in the specific country before acting on anything shown here.
       return `  <url><loc>${u}</loc>${when ? `<lastmod>${when}</lastmod>` : ''}</url>`;
     }).join('\n')}\n</urlset>\n`);
 
-  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap + atlas-index and ${isos.length} slices + licence index and ${originSlices.size} origin slices + agreements -> ${distDir}`);
+  console.log(`build_country_pages: ${isos.length} country + ${rightsUrls.length} rights + ${routeUrls.length} route pages + hubs + about + sitemap + atlas-index and ${isos.length} slices + licence index and ${originSlices.size} origin slices + agreements + ${PLANNER_GRAPH_FILE} (${edgesFile.edges.length} edges, ${Math.round(plannerGraph.length / 1024)}KB) -> ${distDir}`);
 }
 
 if (import.meta.main) {
