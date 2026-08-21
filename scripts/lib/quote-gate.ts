@@ -100,6 +100,76 @@ export function pdfText(buf: Uint8Array): string {
   }
 }
 
+/**
+ * Legislatures publish bills as RTF. parliament.bg serves its National Assembly
+ * bills that way, and the raw markup is what the gate was matching against — so a
+ * correct Bulgarian quote was reported as ABSENT, which reads as fabrication when
+ * it is a reader that cannot read the format. Third instance of that shape after
+ * the entity table and the PDF header offset.
+ *
+ * Deliberately minimal: strip groups and control words, and decode the two escapes
+ * that carry the actual text. `\uNNNN` is how RTF carries non-Latin characters —
+ * Cyrillic legal text is almost entirely those — and `\'XX` is a codepage byte,
+ * which for `ansicpg1251` is Windows-1251. Anything fancier belongs in a library,
+ * and a quote that needs more than this should be taken from a cleaner rendering.
+ */
+/**
+ * cp1251 (Cyrillic) 0x80-0xFF. Spelled out because Bun's TextDecoder rejects the
+ * `windows-1251` label outright — and its `windows-1252` fallback is worse than
+ * useless here: it decodes Bulgarian into Latin accented letters, which `norm`
+ * then strips, so the body silently came back with no Cyrillic at all rather than
+ * with visible mojibake. The punctuation in the 0x80-0xBF run is the reason this
+ * is a full table and not just the А-я arithmetic: „ " – — № appear inside quoted
+ * legal text, and mapping them to spaces breaks the match just as surely.
+ */
+const CP1251_HIGH =
+  'ЂЃ‚ѓ„…†‡€‰Љ‹ЊЌЋЏ' +
+  'ђ‘’“”•–—�™љ›њќћџ' +
+  ' ЎўЈ¤Ґ¦§Ё©Є«¬­®Ї' +
+  '°±Іігµ¶·ё№є»јЅѕї' +
+  'АБВГДЕЖЗИЙКЛМНОП' +
+  'РСТУФХЦЧШЩЪЫЬЭЮЯ' +
+  'абвгдежзийклмноп' +
+  'рстуфхцчшщъыьэюя';
+
+export function rtfText(raw: string): string {
+  // `\'XX` is a byte in the codepage the header declares. Only Cyrillic is worth a
+  // table; for anything else Latin-1 is close enough that a quote either matches or
+  // the row stays cannot_determine, which is a fine answer.
+  const cyrillic = raw.match(/\\ansicpg(\d+)/)?.[1] === '1251';
+
+  return raw
+    // Destination groups whose content is never body text.
+    .replace(/\{\\\*[\s\S]*?\}/g, ' ')
+    // A bare CR/LF in an RTF body is ignorable whitespace, NOT text. This file
+    // hard-wraps mid-word ("Отказ\r\nва се"), so keeping the break — even as a
+    // space — split words and the quote missed by exactly those two spaces. Only
+    // \par carries a real line break, and it is substituted below.
+    .replace(/\r?\n/g, '')
+    .replace(/\\u(-?\d+)\s*\??/g, (_, code) => {
+      const n = Number(code);
+      return String.fromCodePoint(n < 0 ? n + 65536 : n);
+    })
+    .replace(/\\'([0-9a-f]{2})/gi, (_, hex) => {
+      const byte = parseInt(hex, 16);
+      // Low escapes are ordinary ASCII — `\'2e` is a full stop, and an earlier
+      // version of this that blanked everything under 0xC0 ate the punctuation
+      // that article numbers are made of.
+      if (byte < 0x80) return String.fromCharCode(byte);
+      return cyrillic ? CP1251_HIGH[byte - 0x80] : String.fromCharCode(byte);
+    })
+    .replace(/\\par[d]?\b/g, '\n')
+    .replace(/\\tab\b/g, '\t')
+    // Remaining control words and their group braces vanish, they do NOT become
+    // spaces. RTF restarts a control run at every formatting change, including
+    // mid-word (`\hich\af0\loch\f0` between two letters), so substituting a space
+    // split "пребиваване" into "пребивава не" and the quote missed by two spaces.
+    // A control word carries no whitespace; the one trailing delimiter space that
+    // does belong to it is consumed by `\s?` here, and real spaces are literal.
+    .replace(/\\[a-z]+-?\d*\s?/gi, '')
+    .replace(/[{}\\]/g, '');
+}
+
 export interface Fetched {
   ok: boolean;
   status: number;
@@ -178,7 +248,12 @@ function decodeBody(buf: Uint8Array, status: number, noteSuffix = ''): Fetched {
   // servers prepend BOMs and whitespace all the time.
   const headerAt = decoded.indexOf('%PDF-');
   const isPdf = headerAt >= 0 && headerAt < 1024;
-  const text = isPdf ? pdfText(headerAt > 0 ? buf.subarray(headerAt) : buf) : textOf(decoded);
+  // RTF is ASCII on the wire — non-Latin text rides in \uNNNN and \'XX escapes — so
+  // the UTF-8 decode above is safe and only the markup needs stripping.
+  const isRtf = !isPdf && decoded.startsWith('{\\rtf');
+  const text = isPdf
+    ? pdfText(headerAt > 0 ? buf.subarray(headerAt) : buf)
+    : isRtf ? rtfText(decoded) : textOf(decoded);
   return {
     ok: status >= 200 && status < 400,
     status,
