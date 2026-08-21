@@ -1032,7 +1032,10 @@ describe('monitor-lead verifications, 30 July 2026', () => {
     expect(cip?.summary).toContain('1 January 2026');
     expect(cip?.summary).toContain('not yet been published');
     expect(cip?.sources.map(s => s.title).join(' ')).toMatch(/\(Amendment\) Act 2025/);
-    expect(cip?.last_checked).toBe('2026-07-30');
+    // A floor, not an equality. The invariant this test is named for is that no day
+    // count was invented; pinning the exact date made a legitimate re-verification
+    // fail the suite, which is a false alarm that trains you to edit the assertion.
+    expect((cip?.last_checked ?? '') >= '2026-07-30').toBe(true);
   });
 
   test('Sweden naturalization records the 6 June 2026 eight-year and self-support rules', () => {
