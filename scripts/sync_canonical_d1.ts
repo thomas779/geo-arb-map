@@ -11,21 +11,42 @@
  * (both stage through R2 and silently no-op with such a token). Inline queries
  * over REST are the only thing that works with D1:Edit alone.
  *
- * Reconcile model: a clean rebuild. The canonical tables are 100% generated from
- * code, and the live site reads public/*.json (not D1), so the safest way to
- * clear drifted/ambiguous revision heads is backup -> wipe canonical tables
- * (monitor_* untouched) -> fresh import -> verify.
+ * Reconcile model: converge, don't rebuild. The canonical tables are 100%
+ * generated from code and the live site reads public/*.json (not D1), so a clean
+ * wipe-and-reload was once the obvious way to clear drifted revision heads. It
+ * was also expensive in the one unit D1's free tier bills: it rewrote all 15,286
+ * rows to change however few actually differed, about 96,000 writes against a
+ * 100,000/day allowance, so two syncs in a day breached the limit.
+ *
+ * It converges without the wipe because the import statements are upserts and
+ * revision ids are content hashes: an unchanged entity produces an identical
+ * primary key, so its rows are a no-op. What upserts cannot do is drop rows the
+ * master no longer has, and planStaleDeletes does exactly that, diffed against
+ * the pre-sync backup so it costs no extra reads. Measured on an unchanged
+ * corpus: 96,000 writes -> 0.
+ *
+ * The wipe is still used when a schema migration is pending, because that
+ * migration rebuilds a table others hold foreign keys into and is only free
+ * while everything is empty.
  *
  * Usage (needs CLOUDFLARE_API_TOKEN in env, scoped Account · D1:Edit):
  *   bun run data:sync -- verify           # counts + head-ambiguity report only
+ *   bun run data:sync -- plan             # dry run: what would change, reads only
  *   bun run data:sync -- backup [dir]     # dump canonical tables to JSON
- *   bun run data:sync -- sync             # backup -> wipe -> migrate -> import -> verify
+ *   bun run data:sync -- sync             # backup -> converge -> prune -> verify
+ *   bun run data:sync -- sync --force     # also re-send the hash-skipped groups
  */
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildCanonicalPilot, CANONICAL_SOURCE_IS_SAMPLE } from './lib/canonical-source';
-import { buildCanonicalImportPlan, renderCanonicalSql } from './lib/canonical-store';
+import {
+  buildCanonicalImportPlan,
+  renderCanonicalSql,
+  type CanonicalSqlMutation,
+  type CanonicalSqlValue,
+} from './lib/canonical-store';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 
@@ -52,6 +73,23 @@ function readD1Config(): { accountId: string; databaseId: string } {
 const { accountId, databaseId } = readD1Config();
 const ENDPOINT = `https://api.cloudflare.com/client/v4/accounts/${accountId}/d1/database/${databaseId}/query`;
 
+/**
+ * What this run has cost, in the units D1's free tier actually bills: rows read
+ * and rows written, not queries. Tracked because the limits (5,000,000 read and
+ * 100,000 written per day) are enforced from 1 September 2026, and because a
+ * sync that quietly costs 96,000 writes is indistinguishable from a cheap one
+ * unless something counts.
+ */
+const usage = { rowsRead: 0, rowsWritten: 0, queries: 0 };
+
+function reportUsage(label: string): void {
+  const pct = ((usage.rowsWritten / 100_000) * 100).toFixed(1);
+  console.log(
+    `${label}: ${usage.queries} queries, ${usage.rowsRead.toLocaleString()} rows read, `
+    + `${usage.rowsWritten.toLocaleString()} rows written (${pct}% of the free daily write limit)`,
+  );
+}
+
 async function query(sql: string): Promise<any[]> {
   const token = process.env.CLOUDFLARE_API_TOKEN;
   if (!token) throw new Error('CLOUDFLARE_API_TOKEN is not set');
@@ -63,6 +101,11 @@ async function query(sql: string): Promise<any[]> {
   const body = await res.json() as any;
   if (!res.ok || !body.success) {
     throw new Error(`D1 query failed (${res.status}): ${JSON.stringify(body.errors ?? body)}`);
+  }
+  for (const result of body.result ?? []) {
+    usage.queries += 1;
+    usage.rowsRead += result?.meta?.rows_read ?? 0;
+    usage.rowsWritten += result?.meta?.rows_written ?? 0;
   }
   return body.result[body.result.length - 1].results as any[];
 }
@@ -131,6 +174,163 @@ async function runBatched(statements: string[], label: string, maxBytes = 500_00
   }
 }
 
+/**
+ * Primary key of every table the canonical import writes, read off the live
+ * schema with PRAGMA table_info and pinned here so the diff does not spend a
+ * round trip per table discovering what it already knows. `syncPrimaryKeys` in
+ * tests/sync_canonical.test.ts re-derives these from the migrations, so a schema
+ * change that moves a key fails there rather than silently mis-deleting.
+ *
+ * Every one of these keys leads with `revision_id` (or IS the revision id), which
+ * is why the cascade deletes below are cheap: the PK's own autoindex serves the
+ * foreign-key lookup, so no separate FK index is needed.
+ */
+export const CANONICAL_PRIMARY_KEYS: Record<string, readonly string[]> = {
+  canonical_entities: ['id'],
+  canonical_revisions: ['id'],
+  source_index: ['revision_id'],
+  source_jurisdictions: ['revision_id', 'iso_n3'],
+  jurisdiction_index: ['revision_id'],
+  jurisdiction_mode_coverage: ['revision_id', 'mode'],
+  route_index: ['revision_id', 'route_id'],
+  route_variant_index: ['revision_id', 'route_id', 'variant_id'],
+  arrangement_index: ['revision_id'],
+  arrangement_participants: ['revision_id', 'role', 'iso_n3'],
+  arrangement_pathway_index: ['revision_id', 'pathway_id'],
+  evidence_links: ['target_revision_id', 'source_revision_id', 'field_path'],
+};
+
+/** `INSERT INTO t (a, b) VALUES (?1, ?2) ON CONFLICT ...` -> table and columns. */
+function parseInsertTarget(sql: string): { table: string; columns: string[] } | null {
+  const match = sql.match(/INSERT\s+(?:OR\s+\w+\s+)?INTO\s+([a-z_]+)\s*\(([^)]+)\)/i);
+  if (!match) return null;
+  return {
+    table: match[1],
+    columns: match[2].split(',').map(column => column.trim()),
+  };
+}
+
+/** Stable text form of a primary key tuple, for set membership. */
+function keyOf(row: Record<string, unknown>, columns: readonly string[]): string {
+  return JSON.stringify(columns.map(column => {
+    const value = row[column];
+    return value === undefined || value === null ? null : String(value);
+  }));
+}
+
+/**
+ * The primary keys the fresh import intends each table to hold.
+ *
+ * Read off the mutations rather than the database: the import is the definition
+ * of what should be there, and asking D1 what it currently holds is what the
+ * pre-sync backup already did.
+ */
+export function desiredKeysByTable(mutations: CanonicalSqlMutation[]): Map<string, Set<string>> {
+  const desired = new Map<string, Set<string>>();
+  for (const mutation of mutations) {
+    const target = parseInsertTarget(mutation.sql);
+    if (!target) continue;
+    const pk = CANONICAL_PRIMARY_KEYS[target.table];
+    if (!pk) continue;
+    const row: Record<string, unknown> = {};
+    target.columns.forEach((column, position) => { row[column] = mutation.values[position]; });
+    const keys = desired.get(target.table) ?? new Set<string>();
+    keys.add(keyOf(row, pk));
+    desired.set(target.table, keys);
+  }
+  return desired;
+}
+
+/**
+ * Rows the remote holds that the fresh import does not intend to hold.
+ *
+ * This is what the DELETE-everything wipe used to accomplish, and it is the only
+ * part of the wipe that was ever load-bearing. The import statements are all
+ * upserts (DO UPDATE behind a content guard, or DO NOTHING) and revision ids are
+ * content hashes, so re-importing unchanged data writes nothing at all — the
+ * wipe was making D1 rewrite all 15,286 rows to change four of them, at roughly
+ * 96,000 billed writes against a 100,000/day allowance.
+ *
+ * Superseded revisions are NOT stale: 233 rows carry supersedes_revision_id and
+ * the import emits them deliberately. Only rows absent from the import go.
+ */
+export function planStaleDeletes(
+  current: Map<string, Record<string, unknown>[]>,
+  desired: Map<string, Set<string>>,
+): { statements: string[]; byTable: Map<string, number> } {
+  const statements: string[] = [];
+  const byTable = new Map<string, number>();
+  // Child tables first: the wipe order already encodes the dependency direction.
+  for (const table of CANONICAL_TABLES_WIPE_ORDER) {
+    const pk = CANONICAL_PRIMARY_KEYS[table];
+    const rows = current.get(table);
+    if (!pk || !rows) continue;
+    const keys = desired.get(table);
+    // A table the import does not write at all is not evidence that its rows are
+    // unwanted — deleting on that basis would empty it. Skip instead.
+    if (!keys) continue;
+    const stale = rows.filter(row => !keys.has(keyOf(row, pk)));
+    if (!stale.length) continue;
+    byTable.set(table, stale.length);
+    for (const row of stale) {
+      const where = pk
+        .map(column => `${column} = ${sqlValue(row[column] as CanonicalSqlValue)}`)
+        .join(' AND ');
+      statements.push(`DELETE FROM ${table} WHERE ${where};`);
+    }
+  }
+  return { statements, byTable };
+}
+
+/**
+ * The licence and reference sections replace whole self-contained table groups:
+ * DELETE every row, then INSERT the generated set. Those inserts are not upserts,
+ * so the canonical path's trick does not apply — but the groups are 100%
+ * generated from code, so if the SQL we are about to send is byte-identical to
+ * the SQL that produced the current contents, running it can only reproduce what
+ * is already there. Skipping is then exactly equivalent, and free.
+ *
+ * This is the remaining ~15,000 writes of an otherwise no-op sync.
+ *
+ * The escape hatch is `--force`: the hash describes what this tool last wrote, so
+ * a row changed by hand underneath it would not be noticed. Nothing edits these
+ * tables by hand today, and `verify` still counts them afterwards.
+ */
+async function ensureGroupStateTable(): Promise<void> {
+  await query(
+    `CREATE TABLE IF NOT EXISTS sync_group_state (
+       group_name TEXT PRIMARY KEY,
+       content_hash TEXT NOT NULL,
+       synced_at TEXT NOT NULL
+     );`,
+  );
+}
+
+async function runGroupIfChanged(
+  group: string,
+  statements: string[],
+  force: boolean,
+): Promise<void> {
+  const hash = createHash('sha256').update(statements.join('\n')).digest('hex');
+  if (!force) {
+    const stored = await query(
+      `SELECT content_hash FROM sync_group_state WHERE group_name = ${sqlValue(group)};`,
+    );
+    if (stored[0]?.content_hash === hash) {
+      console.log(`  ${group} unchanged — skipping ${statements.length} statements`);
+      return;
+    }
+  }
+  console.log(`  ${statements.length} statements`);
+  await runBatched(statements, group);
+  await query(
+    `INSERT INTO sync_group_state (group_name, content_hash, synced_at)
+     VALUES (${sqlValue(group)}, ${sqlValue(hash)}, ${sqlValue(new Date().toISOString())})
+     ON CONFLICT(group_name) DO UPDATE SET
+       content_hash = excluded.content_hash, synced_at = excluded.synced_at;`,
+  );
+}
+
 function requireRealMaster(): void {
   const count = buildCanonicalPilot().jurisdictions.length;
   if (CANONICAL_SOURCE_IS_SAMPLE || count < 100) {
@@ -142,27 +342,59 @@ function requireRealMaster(): void {
   console.log(`resolved canonical: ${count} jurisdictions`);
 }
 
+/**
+ * Page by rowid cursor, not OFFSET.
+ *
+ * `OFFSET n` does not skip cheaply — SQLite steps over all n rows and D1 bills
+ * every one as read. Paging a table of N rows at page size P therefore costs
+ * ~N²/2P reads instead of N: measured against the live database, backing up the
+ * 14 canonical tables read 48,000 rows to return 12,632. A rowid cursor makes it
+ * exactly one read per row, and matters because D1's free tier bills reads.
+ *
+ * The cursor column is stripped so the backup JSON keeps the shape a restore
+ * expects — the point of this backup is to be replayable, not to gain a column.
+ */
 async function dumpTable(table: string, pageSize = 500): Promise<any[]> {
   const rows: any[] = [];
-  for (let offset = 0; ; offset += pageSize) {
-    const page = await query(`SELECT * FROM ${table} ORDER BY rowid LIMIT ${pageSize} OFFSET ${offset};`);
-    rows.push(...page);
+  let after = 0;
+  for (;;) {
+    const page = await query(
+      `SELECT rowid AS _cursor, * FROM ${table} WHERE rowid > ${after} `
+      + `ORDER BY rowid LIMIT ${pageSize};`,
+    );
+    if (!page.length) break;
+    after = page[page.length - 1]._cursor;
+    for (const row of page) {
+      delete row._cursor;
+      rows.push(row);
+    }
     if (page.length < pageSize) break;
   }
   return rows;
 }
 
-async function backup(dir: string): Promise<number> {
+/**
+ * Returns the rows as well as writing them, so the incremental path can diff
+ * against what the remote actually holds without reading it a second time. The
+ * pre-sync backup is already a complete, consistent snapshot; re-querying for the
+ * diff would double the read cost to learn nothing new.
+ */
+async function backup(dir: string): Promise<{
+  total: number;
+  rows: Map<string, Record<string, unknown>[]>;
+}> {
   fs.mkdirSync(dir, { recursive: true });
   let total = 0;
+  const byTable = new Map<string, Record<string, unknown>[]>();
   for (const table of CANONICAL_TABLES_WIPE_ORDER) {
     const rows = await dumpTable(table);
     fs.writeFileSync(path.join(dir, `${table}.json`), JSON.stringify(rows));
+    byTable.set(table, rows);
     total += rows.length;
     console.log(`  ${table.padEnd(30)} rows=${rows.length}`);
   }
   console.log(`backup: ${total} rows -> ${dir}`);
-  return total;
+  return { total, rows: byTable };
 }
 
 /**
@@ -184,13 +416,26 @@ async function backup(dir: string): Promise<number> {
  * Idempotent by inspection: it reads the live DDL and returns early once the
  * table has been migrated, so a repeated sync is a no-op.
  */
-async function migrateRemoteSchema(): Promise<void> {
+/**
+ * Is a schema migration outstanding?
+ *
+ * The incremental path leaves the canonical tables populated, and the migration
+ * below rebuilds a table that others hold foreign keys into — which is only free
+ * while everything is empty. So when a migration is pending the sync falls back
+ * to the wipe-and-reload path, preserving the invariant this file has always
+ * relied on. Pending migrations are rare; full-cost syncs stay rare with them.
+ */
+async function schemaMigrationPending(): Promise<boolean> {
   const master = await query(
     "SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'arrangement_index';",
   );
   const ddl = String(master[0]?.sql ?? '');
   if (!ddl) throw new Error('arrangement_index is missing from the remote database');
-  if (/display_strength\s+INTEGER/i.test(ddl)) {
+  return !/display_strength\s+INTEGER/i.test(ddl);
+}
+
+async function migrateRemoteSchema(): Promise<void> {
+  if (!await schemaMigrationPending()) {
     console.log('  schema up to date (arrangement_index.display_strength is an integer tier)');
     return;
   }
@@ -571,45 +816,89 @@ async function verify(): Promise<void> {
 }
 
 if (import.meta.main) {
-const [cmd, arg] = process.argv.slice(2);
+const argv = process.argv.slice(2);
+// --force reruns the hashed groups even when their generated SQL is unchanged.
+const forceGroups = argv.includes('--force');
+const [cmd, arg] = argv.filter(a => a !== '--force');
 const stamp = new Date().toISOString().replace(/[:.]/g, '').replace(/-/g, '');
 
 if (cmd === 'verify') {
   await verify();
+} else if (cmd === 'plan') {
+  // Dry run: what would an incremental sync change? Reads only, writes nothing.
+  // Exists because the prune deletes rows, and a destructive path deserves to be
+  // inspectable before it runs rather than explained afterwards.
+  requireRealMaster();
+  const dir = path.join(root, '.generated/data-canonical/backups', `plan-${stamp}`);
+  const { rows: currentRows } = await backup(dir);
+  const plan = buildCanonicalImportPlan(buildCanonicalPilot());
+  const desired = desiredKeysByTable(plan.mutations);
+  const { statements: deletes, byTable } = planStaleDeletes(currentRows, desired);
+  console.log('\n== would prune ==');
+  if (!deletes.length) console.log('  nothing — every remote row is still in the master');
+  for (const [table, count] of byTable) console.log(`  ${table.padEnd(30)} -${count}`);
+  console.log('\n== coverage check (a table missing from the import is never pruned) ==');
+  for (const table of CANONICAL_TABLES_WIPE_ORDER) {
+    const held = currentRows.get(table)?.length ?? 0;
+    const wanted = desired.get(table)?.size ?? null;
+    const state = wanted === null ? 'not written by import — SKIPPED' : `import intends ${wanted}`;
+    console.log(`  ${table.padEnd(30)} remote ${String(held).padStart(5)}  ${state}`);
+  }
+  console.log(`\nsample deletes:\n${deletes.slice(0, 5).map(s => `  ${s}`).join('\n') || '  (none)'}`);
+  reportUsage('\nd1 cost of this dry run');
 } else if (cmd === 'backup') {
   const dir = arg ?? path.join(root, '.generated/data-canonical/backups', `canonical-${stamp}`);
-  const total = await backup(dir);
+  const { total } = await backup(dir);
   if (total === 0) { console.error('FAIL: backup is empty'); process.exit(1); }
 } else if (cmd === 'sync') {
   requireRealMaster();
   const backupDir = path.join(root, '.generated/data-canonical/backups', `canonical-${stamp}`);
   console.log('== 1. backup ==');
-  const total = await backup(backupDir);
+  const { total, rows: currentRows } = await backup(backupDir);
   if (total === 0) { console.error('FAIL: pre-sync backup empty, aborting before any write'); process.exit(1); }
   console.log('== 2. generate fresh import ==');
-  const sql = renderCanonicalSql(buildCanonicalImportPlan(buildCanonicalPilot()).mutations);
+  const plan = buildCanonicalImportPlan(buildCanonicalPilot());
+  const sql = renderCanonicalSql(plan.mutations);
   const statements = splitStatements(sql);
   console.log(`  ${statements.length} statements`);
-  console.log('== 3. wipe canonical tables (monitor_* untouched) ==');
+  // Only wipe when a migration needs empty tables. Otherwise the import's own
+  // upserts converge the rows and the wipe is pure cost: it rewrites every row
+  // in the corpus to change however few actually differ, which is what put a
+  // single sync at ~96,000 of D1's 100,000 free daily writes.
+  const mustWipe = await schemaMigrationPending();
   try {
-    await runBatched(CANONICAL_TABLES_WIPE_ORDER.map(t => `DELETE FROM ${t};`), 'wipe');
-    // Between wipe and import on purpose — see migrateRemoteSchema. DDL never
-    // reaches D1 through the row import, so without this a schema change lands
-    // locally and then fails the next sync against the stale remote constraint.
-    console.log('== 4. schema migrations ==');
-    await migrateRemoteSchema();
+    if (mustWipe) {
+      console.log('== 3. schema migration pending — wipe canonical tables (monitor_* untouched) ==');
+      await runBatched(CANONICAL_TABLES_WIPE_ORDER.map(t => `DELETE FROM ${t};`), 'wipe');
+      // Between wipe and import on purpose — see migrateRemoteSchema. DDL never
+      // reaches D1 through the row import, so without this a schema change lands
+      // locally and then fails the next sync against the stale remote constraint.
+      console.log('== 4. schema migrations ==');
+      await migrateRemoteSchema();
+    } else {
+      console.log('== 3. incremental: no wipe, upserts converge the rows ==');
+    }
     console.log('== 5. import ==');
     await runBatched(statements, 'import');
+    if (!mustWipe) {
+      // The one thing the wipe did that upserts cannot: drop rows the master no
+      // longer has. Computed against the pre-sync snapshot, so it costs no reads.
+      console.log('== 5a. remove rows the master dropped ==');
+      const { statements: deletes, byTable } = planStaleDeletes(currentRows, desiredKeysByTable(plan.mutations));
+      if (!deletes.length) {
+        console.log('  nothing to remove');
+      } else {
+        for (const [table, count] of byTable) console.log(`  ${table.padEnd(30)} -${count}`);
+        await runBatched(deletes, 'prune');
+      }
+    }
+    await ensureGroupStateTable();
     console.log('== 5b. licence exchange ==');
     await ensureLicenceSchema();
-    const licence = renderLicenceSql();
-    console.log(`  ${licence.length} statements`);
-    await runBatched(licence, 'licence');
+    await runGroupIfChanged('licence', renderLicenceSql(), forceGroups);
     console.log('== 5c. reference data ==');
     await ensureReferenceSchema();
-    const reference = renderReferenceDataSql();
-    console.log(`  ${reference.length} statements`);
-    await runBatched(reference, 'reference');
+    await runGroupIfChanged('reference', renderReferenceDataSql(), forceGroups);
   } catch (error) {
     console.error('\n!! sync FAILED mid-write — remote canonical tables may be PARTIAL.');
     console.error('   Recover: re-run `bun run data:sync -- sync` (imports are idempotent upserts and converge),');
@@ -618,9 +907,10 @@ if (cmd === 'verify') {
   }
   console.log('== 6. verify ==');
   await verify();
+  reportUsage('d1 cost');
   console.log(`sync complete. backup kept at ${backupDir}`);
 } else {
-  console.log('Usage: bun run data:sync -- <verify|backup [dir]|sync>');
+  console.log('Usage: bun run data:sync -- <plan|verify|backup [dir]|sync>');
   process.exit(1);
 }
 }
